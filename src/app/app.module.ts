@@ -5,6 +5,7 @@ import localeDa from '@angular/common/locales/da';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ],
     imports: [
       BrowserModule,
-      AppRoutingModule
+      AppRoutingModule,
+      DashboardModule
     ],
     providers: [],
     bootstrap: [AppComponent],
