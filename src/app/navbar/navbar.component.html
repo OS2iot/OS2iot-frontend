@@ -7,14 +7,20 @@
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a routerLink="/home" routerLinkActive="active" class="nav-link" i18n="Dashboard page">Dashboard</a>
+                <a routerLink="/home" routerLinkActive="active" class="nav-link">{{ 'NAV.DASHBOARD' | translate }}</a>
             </li>
             <li class="nav-item">
-                <a routerLink="/mine-applikationer" class="nav-link" i18n="My applications page">Mine applikationer</a>
+                <a routerLink="/mine-applikationer" class="nav-link">{{ 'NAV.MY-APPLICATIONS' | translate }}</a>
             </li>
             <li class="nav-item">
-                <a routerLink="/alle-iot-enheder" class="nav-link" i18n="All IoT devices page">Alle IoT enheder</a>
+                <a routerLink="/alle-iot-enheder" class="nav-link">{{ 'NAV.ALL-IOT-DEVICES' | translate }}</a>
             </li>
         </ul>
+        <!-- <ng-container *ngIf="users">
+            <h4>Brugernavn</h4>
+            <ul *ngFor="let d of users">
+              <li>{{ d.firstName }} {{ d.lastName }}</li>
+            </ul>
+          </ng-container> -->
     </div>
 </nav>

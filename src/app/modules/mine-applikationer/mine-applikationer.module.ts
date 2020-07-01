@@ -5,11 +5,12 @@ import { MineApplikationerComponent } from './mine-applikationer/mine-applikatio
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationsTableComponent } from './applications-table/applications-table.component';
 
-
 @NgModule({
-  declarations: [MineApplikationerComponent, ApplicationComponent, ApplicationsTableComponent],
-  imports: [
-    CommonModule
-  ]
+    declarations: [
+        MineApplikationerComponent,
+        ApplicationComponent,
+        ApplicationsTableComponent,
+    ],
+    imports: [CommonModule],
 })
-export class MineApplikationerModule { }
+export class MineApplikationerModule {}
