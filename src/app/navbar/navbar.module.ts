@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Components
 import { NavbarComponent } from './navbar.component';
@@ -10,19 +11,18 @@ import { SharedModule } from '../modules/shared/shared.module';
 // Services
 import { RestService } from '../modules/shared/services/rest.service';
 
-
-
 @NgModule({
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule,
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ],
   providers: [
-    RestService
+    RestService,
   ]
 })
 export class NavbarModule { }

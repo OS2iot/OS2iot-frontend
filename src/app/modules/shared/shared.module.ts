@@ -11,19 +11,19 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     TopBarComponent, 
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   exports: [
     TopBarComponent,
     AlertComponent,
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
   ]
 })
 export class SharedModule { }
