@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
-import { MineApplikationerComponent } from './modules/mine-applikationer/mine-applikationer/mine-applikationer.component';
-import { AlleIotEnhederComponent } from './modules/alle-iot-enheder/alle-iot-enheder/alle-iot-enheder.component';
+import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
+import { MineApplikationerComponent } from './views/mine-applikationer/mine-applikationer/mine-applikationer.component';
+import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enheder/alle-iot-enheder.component';
+
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent},

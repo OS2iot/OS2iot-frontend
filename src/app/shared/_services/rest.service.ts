@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { AlertService } from './alert.service';
 import { Alert } from 'src/app/models/alert';
+
+import { environment } from '../../../environments/environment'
 
 interface IHttpOptions {
     headers?: HttpHeaders;
@@ -23,6 +25,7 @@ export class RestService {
     }
 
     private readonly options: IHttpOptions;
+    private baseUrl = environment.baseUrl;
 
     public get(
         url: string,
@@ -48,7 +51,7 @@ export class RestService {
         const httpParams = this.buildParams(params);
 
         return this.http
-            .post(url, object, {
+            .post(this.baseUrl + url, object, {
                 ...this.options,
                 params: httpParams,
             })
@@ -64,7 +67,7 @@ export class RestService {
         params?: { [index: string]: any }
     ): Observable<any> {
         const httpParams = this.buildParams(params);
-        const path = this.createResourceUrl(url);
+        const path = this.createResourceUrl(this.baseUrl + url);
 
         return this.http
             .post(path, object, { ...this.options, params: httpParams })
@@ -79,7 +82,7 @@ export class RestService {
         object: any,
         id?: string | number
     ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(url, id);
+        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
         return this.http.put(resourceUrl, object, this.options).pipe(
             tap((_) => this.log({message: 'Succesfully updated', type: 'success'})),
             catchError(this.handleError<any>('replace', []))
@@ -92,7 +95,7 @@ export class RestService {
         id?: string | number,
         params?: { [index: string]: any }
     ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(url, id);
+        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
         const httpParams = this.buildParams(params);
 
         return this.http
@@ -112,7 +115,7 @@ export class RestService {
         params?: { [index: string]: any },
         options?: any
     ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(url, id);
+        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
         const httpParams = this.buildParams(params);
         const httpOptions = options
             ? Object.assign({}, this.options, options)
@@ -137,7 +140,7 @@ export class RestService {
         const httpParams = this.buildParams(params);
 
         return this.http
-            .post(url, body, {
+            .post(this.baseUrl + url, body, {
                 ...this.options,
                 params: httpParams,
             })
@@ -148,7 +151,7 @@ export class RestService {
     }
 
     private createResourceUrl(url: string, id?: string | number) {
-        let resourceUrl = url;
+        let resourceUrl = this.baseUrl + url;
 
         if (id != null) {
             resourceUrl += '/' + id;

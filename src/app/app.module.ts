@@ -6,13 +6,12 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { MineApplikationerModule } from './modules/mine-applikationer/mine-applikationer.module';
-import { AlleIotEnhederModule } from './modules/alle-iot-enheder/alle-iot-enheder.module';
-import { SharedModule } from './modules/shared/shared.module';
-import { NavbarModule } from './navbar/navbar.module';
-
 import { AppComponent } from './app.component';
+
+import { DashboardModule } from './views/dashboard/dashboard.module';
+import { MineApplikationerModule } from './views/mine-applikationer/mine-applikationer.module';
+import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -20,7 +19,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
     declarations: [
-      AppComponent
+      AppComponent,
     ],
     imports: [
       BrowserModule,
@@ -29,7 +28,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       DashboardModule,
       MineApplikationerModule,
       AlleIotEnhederModule,
-      SharedModule,
       NavbarModule,
       TranslateModule.forRoot({
         defaultLanguage: 'da',
@@ -38,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
     ],
     providers: [],
     bootstrap: [AppComponent],

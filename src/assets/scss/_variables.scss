@@ -1,0 +1,28 @@
+// Bootstrap
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Widths
+$navWidth: 267px;
+
+// Colors
+$white: #fff;
+$grey-light: #e5e5e5;
+$grey-highlight: #f2f4f7;
+$grey-dark: #738a94;
+$black: #3e4b50;
+
+// Bootstrap overrides
+$theme-colors: (
+    'primary': $white,
+);
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);

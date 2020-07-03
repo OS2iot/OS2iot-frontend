@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+// Bootstrap
+@import '~bootstrap/scss/bootstrap.scss';
+
+// Fonts
+@font-face {
+    font-family: 'roboto';
+    src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'roboto-bold';
+    src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+
+// Variables
+@import 'assets/scss/variables';
+
+// Assets
+@import 'assets/scss/buttons';
+@import 'assets/scss/base';

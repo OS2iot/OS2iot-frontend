@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar.component';
 
 // Modules
-import { SharedModule } from '../modules/shared/shared.module';
+import { SharedModule } from '../shared.module';
 
 // Services
-import { RestService } from '../modules/shared/services/rest.service';
+import { RestService } from '../_services/rest.service';
 
 @NgModule({
   declarations: [NavbarComponent],
