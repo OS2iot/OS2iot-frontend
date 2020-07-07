@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // Components
 import { NavbarComponent } from './navbar.component';
@@ -10,6 +9,8 @@ import { SharedModule } from '../shared.module';
 
 // Services
 import { RestService } from '../_services/rest.service';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -17,6 +18,7 @@ import { RestService } from '../_services/rest.service';
     CommonModule,
     SharedModule,
     RouterModule,
+    TranslateModule,
   ],
   exports: [
     NavbarComponent,

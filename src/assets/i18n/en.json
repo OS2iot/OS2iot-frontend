@@ -1,8 +1,31 @@
 {
+  "GEN": {
+    "CANCEL": "Cancel"
+  },
     "NAV": {
       "DASHBOARD": "Dashboard",
       "MY-APPLICATIONS": "My Applications",
       "ALL-IOT-DEVICES": "All IoT Devices"
+    },
+    "APPLICATION": {
+      "CREATE": "Opret applikation"
+    },
+    "APPLICATION-TABLE": {
+      "NAME": "NAME",
+      "IOT-DEVICES": "IOT DEVICES",
+      "UPDATED": "LATEST UPDATE"
+    },
+    "APPLICATION-TABLE-ROW": {
+      "DELETE": "Delete"
+    },
+    "FORM": {
+      "CREATE-NEW-APPLICATION": "Create new application"
+    },
+    "QUESTION": {
+      "GIVE-APPLICATION-NAME": "Name application",
+      "APPLICATION-NAME-PLACEHOLDER": "Name of the application",
+      "GIVE-APPLICATION-DESCRIPTION": "Describe application",
+      "APPLICATION-DESCRIPTION-PLACEHOLDER": "Short description of the application"
     }
 }
   

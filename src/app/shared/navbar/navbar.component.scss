@@ -4,6 +4,7 @@
     top: 0;
     bottom: 0;
     background-color: $white;
+    border-right: $grey-border solid 1px;
     
     @include media-breakpoint-up(md) {  
         width: $navWidth;

@@ -1,0 +1,37 @@
+@import '~src/assets/scss/variables';
+
+.dropdown {
+    right: 3rem;
+    top: 18px;
+
+    .applicationRow__edit {
+        width: 10px;
+        height: 22px;
+        background-image: radial-gradient(circle, $black 2px, transparent 2px);
+        background-size: 100% 33.33%;
+        padding: 10px;
+        cursor: pointer;
+
+        &:after {
+            display: none;
+        }
+    }
+
+    .dropdown-menu {
+        min-width: 90px !important;
+        left: -35px !important;
+
+        li {
+            a {
+                font-family: roboto-bold;
+                color: $black;
+                font-size: 12px;
+                line-height: 14px;
+            }
+
+            &:hover {
+                background-color: $grey-highlight;
+            }
+        }
+    }
+}

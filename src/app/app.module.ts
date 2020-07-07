@@ -12,6 +12,7 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { MineApplikationerModule } from './views/mine-applikationer/mine-applikationer.module';
 import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             deps: [HttpClient]
         }
     }),
+      NgbModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

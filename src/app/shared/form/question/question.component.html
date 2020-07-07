@@ -1,0 +1,31 @@
+<div [formGroup]="form">
+  <label [attr.for]="question.key" class="form-label">{{ question.label | translate }}</label>
+
+  <div [ngSwitch]="question.controlType">
+
+    <input *ngSwitchCase="'textboxsmall'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="30" class="form-control">
+
+    <input *ngSwitchCase="'textboxmedium'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="50" class="form-control">
+
+    <input *ngSwitchCase="'textboxlarge'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="130" class="form-control">
+
+    <textarea *ngSwitchCase="'textareaboxsmall'" [formControlName]="question.key" [id]="question.key"
+      [placeholder]="question.placeholder | translate" [maxLength]="254" [rows]="4" class="form-control"></textarea>
+
+    <textarea *ngSwitchCase="'textareaboxmedium'" [formControlName]="question.key" [id]="question.key"
+      [placeholder]="question.placeholder | translate" [maxLength]="1024" [rows]="6" class="form-control"></textarea>
+
+    <textarea *ngSwitchCase="'textareaboxlarge'" [formControlName]="question.key" [id]="question.key"
+     [placeholder]="question.placeholder | translate" [maxLength]="10000" [rows]="10" class="form-control"></textarea>
+
+    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div>
+
+  <!-- <div class="errorMessage" *ngIf="!isValid">{{ question.label | translate }} is required</div> -->
+</div>

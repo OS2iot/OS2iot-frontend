@@ -4,14 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Components
-import { TopBarComponent } from './top-bar/top-bar.component';
 import { AlertComponent } from './alert/alert.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
-    TopBarComponent, 
     AlertComponent,
+    SearchBarComponent,
   ],
   imports: [
     CommonModule,
@@ -19,11 +18,9 @@ import { TranslateModule } from '@ngx-translate/core';
     BrowserAnimationsModule,
   ],
   exports: [
-    TopBarComponent,
     AlertComponent,
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslateModule,
   ]
 })
 export class SharedModule { }

@@ -5,6 +5,11 @@ import { MineApplikationerComponent } from './mine-applikationer/mine-applikatio
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationsTableComponent } from './applications-table/applications-table.component';
 import { ApplicationsTableRowComponent } from './applications-table-row/applications-table-row.component';
+import { CreateApplicationComponent } from './create-application/create-application.component';
+import { RouterModule } from '@angular/router';
+import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormModule } from 'src/app/shared/form/form.module';
 
 @NgModule({
     declarations: [
@@ -12,7 +17,21 @@ import { ApplicationsTableRowComponent } from './applications-table-row/applicat
         ApplicationComponent,
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,
+        CreateApplicationComponent,
     ],
-    imports: [CommonModule],
+    exports: [
+        MineApplikationerComponent,
+        ApplicationComponent,
+        ApplicationsTableComponent,
+        ApplicationsTableRowComponent,
+        CreateApplicationComponent,
+    ],
+    imports: [
+        CommonModule,
+        TopBarModule,
+        RouterModule,
+        TranslateModule,
+        FormModule,
+    ]
 })
 export class MineApplikationerModule {}

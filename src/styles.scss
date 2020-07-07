@@ -3,6 +3,11 @@
 
 // Fonts
 @font-face {
+    font-family: 'roboto-light';
+    src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'roboto';
     src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
@@ -17,5 +22,8 @@
 @import 'assets/scss/variables';
 
 // Assets
-@import 'assets/scss/buttons';
 @import 'assets/scss/base';
+@import 'assets/scss/buttons';
+@import 'assets/scss/tables';
+@import 'assets/scss/forms';
+

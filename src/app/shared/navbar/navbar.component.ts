@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-import { RestService } from '../_services/rest.service';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -16,7 +14,6 @@ export class NavbarComponent {
     constructor(
         public translate: TranslateService
     ) {
-        translate.setDefaultLang('en');
         translate.use('da');
     }
 }

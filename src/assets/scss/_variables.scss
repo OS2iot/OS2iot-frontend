@@ -8,15 +8,28 @@ $navWidth: 267px;
 
 // Colors
 $white: #fff;
+
 $grey-light: #e5e5e5;
+$grey-tablehead: #f8fafc;
 $grey-highlight: #f2f4f7;
+$grey-border: #e5e9ef;
+$grey-text: #9baeb8;
 $grey-dark: #738a94;
+
 $black: #3e4b50;
+
+$blue: #49b3ee;
+
+$green-light: #54a758;
+$green: #43a047;
+
+$orange: #f4792f;
 
 // Bootstrap overrides
 $theme-colors: (
-    'primary': $white,
-);
+    'primary': $blue,
+    'success': $green,
+) !default;
 
 $grid-breakpoints: (
     xs: 0,
@@ -26,3 +39,13 @@ $grid-breakpoints: (
     xl: 1200px,
     xxl: 1400px,
 );
+
+.btn {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+}
+
+.btn-primary{
+    border: 1px solid #3DA9E6;
+}

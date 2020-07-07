@@ -7,7 +7,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { Alert } from 'src/app/models/alert';
 
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 interface IHttpOptions {
     headers?: HttpHeaders;
@@ -20,8 +21,15 @@ interface IHttpOptions {
 
 @Injectable()
 export class RestService {
-    constructor(private http: HttpClient, private alertService: AlertService) {
-        this.options = { responseType: 'json', headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    constructor(
+        private http: HttpClient,
+        private alertService: AlertService,
+        private router: Router
+    ) {
+        this.options = {
+            responseType: 'json',
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        };
     }
 
     private readonly options: IHttpOptions;
@@ -38,7 +46,7 @@ export class RestService {
         return this.http
             .get(resourceUrl, { ...this.options, params: httpParams })
             .pipe(
-                tap((_) => this.log({message: 'Success', type: 'success'})),
+                tap((_) => this.log({ message: 'Success', type: 'success' })),
                 catchError(this.handleError<any>('get', []))
             );
     }
@@ -56,7 +64,17 @@ export class RestService {
                 params: httpParams,
             })
             .pipe(
-                tap((_) => this.log({message: 'Succesfully created', type: 'success'})),
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully created',
+                        type: 'success',
+                    })
+                ),
+                tap((_) =>
+                    setTimeout(() => {
+                        this.router.navigateByUrl('/mine-applikationer')
+                    }, 500)
+                ),
                 catchError(this.handleError<any>('create', []))
             );
     }
@@ -72,7 +90,12 @@ export class RestService {
         return this.http
             .post(path, object, { ...this.options, params: httpParams })
             .pipe(
-                tap((_) => this.log({message: 'Succesfully created', type: 'success'})),
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully created',
+                        type: 'success',
+                    })
+                ),
                 catchError(this.handleError<any>('createAt', []))
             );
     }
@@ -84,7 +107,9 @@ export class RestService {
     ): Observable<any> {
         const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
         return this.http.put(resourceUrl, object, this.options).pipe(
-            tap((_) => this.log({message: 'Succesfully updated', type: 'success'})),
+            tap((_) =>
+                this.log({ message: 'Succesfully updated', type: 'success' })
+            ),
             catchError(this.handleError<any>('replace', []))
         );
     }
@@ -104,9 +129,14 @@ export class RestService {
                 params: httpParams,
             })
             .pipe(
-                tap((_) => this.log({message: 'Succesfully patched', type: 'success'})),
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully patched',
+                        type: 'success',
+                    })
+                ),
                 catchError(this.handleError<any>('patch', []))
-                );
+            );
     }
 
     public delete(
@@ -127,9 +157,14 @@ export class RestService {
                 params: httpParams,
             })
             .pipe(
-                tap((_) => this.log({message: 'Succesfully deleted', type: 'success'})),
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully deleted',
+                        type: 'success',
+                    })
+                ),
                 catchError(this.handleError<any>('delete', []))
-                );
+            );
     }
 
     public post(
@@ -145,9 +180,11 @@ export class RestService {
                 params: httpParams,
             })
             .pipe(
-                tap((_) => this.log({message: 'Succesfully added', type: 'success'})),
+                tap((_) =>
+                    this.log({ message: 'Succesfully added', type: 'success' })
+                ),
                 catchError(this.handleError<any>('post', []))
-                );
+            );
     }
 
     private createResourceUrl(url: string, id?: string | number) {
@@ -193,7 +230,10 @@ export class RestService {
             console.error(error); // log to console instead
 
             // TODO: better job of transforming error for user consumption
-            this.log({message: `${operation} failed: ${error.message}`, type: 'danger'});
+            this.log({
+                message: `${operation} failed: ${error.message}`,
+                type: 'danger',
+            });
 
             // Let the app keep running by returning an empty result.
             return of(result as T);

@@ -1,0 +1,25 @@
+.os2-form {
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    @include media-breakpoint-up(lg) {
+        width: 1000px;
+        margin-left: calc((100% - 1000px) / 2);
+        margin-right: calc((100% - 1000px) / 2);
+    }
+}
+
+.form-label {
+    font-family: roboto-bold;
+    line-height: 19px;
+}
+
+.form-control {
+    border: $grey-border solid 1px;
+    color: $grey-text;
+}
+
+textarea {
+    resize: none;
+  }

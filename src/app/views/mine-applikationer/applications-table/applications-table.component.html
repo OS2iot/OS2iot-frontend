@@ -1,8 +1,14 @@
 <table class="table">
-    <thead>
-
-    </thead>
-    <tbody>
-        <app-applications-table-row *ngFor="let application of applications" [application]="application"></app-applications-table-row>
-    </tbody>
+  <thead>
+    <tr>
+      <th>{{ 'APPLICATION-TABLE.NAME' | translate }}</th>
+      <th>{{ 'APPLICATION-TABLE.IOT-DEVICES' | translate }}</th>
+      <th>{{ 'APPLICATION-TABLE.UPDATED' | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let application of applications" class="py-3"
+      app-applications-table-row [application]="application">
+    </tr>
+  </tbody>
 </table>

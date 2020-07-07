@@ -1,1 +1,7 @@
-<p>top-bar works!</p>
+<div class="col pb-5 d-flex">
+  <h3>{{title}}</h3>
+  <div class="ml-auto">
+    <a [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-create" tabindex="-1"
+      role="button">{{ctaLabel}}</a>
+  </div>
+</div>

@@ -1,1 +1,18 @@
-<tr>applications-table-row works!</tr>
+    <td class="position-relative">{{application.name}}</td>
+    <ng-container *ngIf="application.iotDevices; else iotZero">
+      <td class="position-relative">{{application.iotDevices.length}}</td>
+    </ng-container>
+    <ng-template #iotZero>
+      <td class="position-relative">0</td>
+    </ng-template>
+    <td class="position-relative pr-3">
+      {{application.updatedAt}}
+      <div class="dropdown position-absolute">
+        <div id="tableRowDropdown-{{application.id}}" class="applicationRow__edit dropdown-toggle" data-toggle="dropdown"
+          aria-expanded="false"></div>
+        <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{application.id}}">
+          <!-- <li><a class="dropdown-item" href="#">Slet</a></li> -->
+          <li><a class="dropdown-item" href="#">{{ 'APPLICATION-TABLE-ROW.DELETE' | translate }}</a></li>
+        </ul>
+      </div>
+    </td>

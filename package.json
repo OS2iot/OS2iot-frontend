@@ -21,10 +21,13 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "@fortawesome/fontawesome-free": "^5.13.1",
+    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^5.0.0-alpha1",
     "moment": "^2.27.0",
+    "popper.js": "^1.16.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

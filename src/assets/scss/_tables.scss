@@ -1,0 +1,39 @@
+.table {
+    background-color: $white;
+    // -webkit-border-radius: .25rem;
+    // -moz-border-radius: .25rem;
+    // border-radius: .25rem;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.01), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.01), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.01), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.12);
+    
+    * {
+        * {
+            border-bottom-width: 0 !important;
+        }
+    }
+
+    thead {
+        font-family: roboto-light;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 24px;
+        color: $grey-dark;
+        background-color: $grey-tablehead;
+    }
+
+    tbody {
+        color: $black;
+        font-family: roboto;
+
+        tr {
+            border-top: $grey-border solid 1px;
+            line-height: 40px;
+            color: $black;
+
+            &:hover {
+                background-color: $grey-highlight;
+            }
+        }
+    }
+}
