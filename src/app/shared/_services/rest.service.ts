@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of, from } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { AlertService } from './alert.service';
 import { Alert } from 'src/app/models/alert';
 
 import { environment } from '../../../environments/environment';
-import { Router } from '@angular/router';
 
 interface IHttpOptions {
     headers?: HttpHeaders;
@@ -23,8 +22,7 @@ interface IHttpOptions {
 export class RestService {
     constructor(
         private http: HttpClient,
-        private alertService: AlertService,
-        private router: Router
+        private alertService: AlertService
     ) {
         this.options = {
             responseType: 'json',
@@ -62,6 +60,7 @@ export class RestService {
             .post(this.baseUrl + url, object, {
                 ...this.options,
                 params: httpParams,
+                observe: 'response'
             })
             .pipe(
                 tap((_) =>
@@ -69,11 +68,6 @@ export class RestService {
                         message: 'Succesfully created',
                         type: 'success',
                     })
-                ),
-                tap((_) =>
-                    setTimeout(() => {
-                        this.router.navigateByUrl('/mine-applikationer')
-                    }, 500)
                 ),
                 catchError(this.handleError<any>('create', []))
             );
@@ -85,10 +79,10 @@ export class RestService {
         params?: { [index: string]: any }
     ): Observable<any> {
         const httpParams = this.buildParams(params);
-        const path = this.createResourceUrl(this.baseUrl + url);
+        const path = this.baseUrl + url;
 
         return this.http
-            .post(path, object, { ...this.options, params: httpParams })
+            .post(path, object, { ...this.options, params: httpParams, observe: 'response' })
             .pipe(
                 tap((_) =>
                     this.log({
@@ -105,13 +99,18 @@ export class RestService {
         object: any,
         id?: string | number
     ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
-        return this.http.put(resourceUrl, object, this.options).pipe(
-            tap((_) =>
-                this.log({ message: 'Succesfully updated', type: 'success' })
-            ),
-            catchError(this.handleError<any>('replace', []))
-        );
+        const resourceUrl = this.createResourceUrl(url, id);
+        return this.http
+            .put(resourceUrl, object, { ...this.options, observe: 'response', })
+            .pipe(
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully updated',
+                        type: 'success',
+                    })
+                ),
+                catchError(this.handleError<any>('replace', []))
+            );
     }
 
     public update(
@@ -120,13 +119,14 @@ export class RestService {
         id?: string | number,
         params?: { [index: string]: any }
     ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
+        const resourceUrl = this.createResourceUrl(url, id);
         const httpParams = this.buildParams(params);
 
         return this.http
             .patch(resourceUrl, object, {
                 ...this.options,
                 params: httpParams,
+                observe: 'response',
             })
             .pipe(
                 tap((_) =>
@@ -139,32 +139,18 @@ export class RestService {
             );
     }
 
-    public delete(
-        url: string,
-        id: string | number,
-        params?: { [index: string]: any },
-        options?: any
-    ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(this.baseUrl + url, id);
-        const httpParams = this.buildParams(params);
-        const httpOptions = options
-            ? Object.assign({}, this.options, options)
-            : this.options;
+    public delete(url: string, id: string | number): Observable<any> {
+        const resourceUrl = this.createResourceUrl(url, id);
 
-        return this.http
-            .delete(resourceUrl, {
-                ...httpOptions,
-                params: httpParams,
-            })
-            .pipe(
-                tap((_) =>
-                    this.log({
-                        message: 'Succesfully deleted',
-                        type: 'success',
-                    })
-                ),
-                catchError(this.handleError<any>('delete', []))
-            );
+        return this.http.delete(resourceUrl, { observe: 'response' }).pipe(
+            tap((_) =>
+                this.log({
+                    message: 'Succesfully deleted',
+                    type: 'success',
+                })
+            ),
+            catchError(this.handleError<any>('delete', []))
+        );
     }
 
     public post(
@@ -226,16 +212,13 @@ export class RestService {
      */
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
+            console.error(error);
 
-            // TODO: better job of transforming error for user consumption
             this.log({
                 message: `${operation} failed: ${error.message}`,
                 type: 'danger',
             });
 
-            // Let the app keep running by returning an empty result.
             return of(result as T);
         };
     }

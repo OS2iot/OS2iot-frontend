@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormBodyIotDevicesComponent implements OnInit {
   @Input() questions: QuestionBase<string>[] = [];
+  @Input() submitButton: string;
   form: FormGroup;
   payLoad = '';
 

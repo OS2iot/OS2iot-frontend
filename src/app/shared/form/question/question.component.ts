@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { QuestionBase } from '../question-base';
 import { TranslateService } from '@ngx-translate/core';
+import { Application } from 'src/app/models/application';
 
 @Component({
     selector: 'app-question',
@@ -14,14 +15,13 @@ export class QuestionComponent implements OnInit {
 
     placeholder: string;
 
-    constructor(public translate: TranslateService) {
-    }
+    constructor(public translate: TranslateService) {}
 
     ngOnInit() {
         this.translate.use('da');
-      }
-      
-      get isValid() {
-          return this.form.controls[this.question.key].valid;
-      }
+    }
+
+    get isValid() {
+        return this.form.controls[this.question.key].valid;
+    }
 }

@@ -7,6 +7,7 @@ import { QuestionService } from '../_services/question.service';
 import { QuestionBase } from './question-base';
 
 import { BackButton } from 'src/app/models/back-button';
+import { Application } from 'src/app/models/application';
 
 @Component({
   selector: 'app-form',
@@ -18,6 +19,7 @@ export class FormComponent implements OnInit {
   @Input() backButton: BackButton;
   @Input() formType: 'application' | 'iotDevice';
   @Input() title: string;
+  @Input() submitButton: string;
 
   applicationQuestions$: Observable<QuestionBase<any>[]>;
   iotDeviceQuestions$: Observable<QuestionBase<any>[]>;
@@ -28,6 +30,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,7 +1,19 @@
 <div class="col pb-5 d-flex">
   <h3>{{title}}</h3>
-  <div class="ml-auto">
-    <a [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-create" tabindex="-1"
-      role="button">{{ctaLabel}}</a>
+  <div class="ml-auto d-flex">
+    <div class="d-flex per-page">
+      {{ 'GEN.SHOW' | translate }}
+      <select name="my-applications-table_length" aria-controls="my-applications-table" class="select-box">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      {{ 'GEN.PER-PAGE' | translate }}
+    </div>
+    <div>
+      <button [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-primary"
+        type="button">{{ctaLabel}}</button>
+    </div>
   </div>
 </div>

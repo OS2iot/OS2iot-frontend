@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-bar',
@@ -13,8 +13,10 @@ export class TopBarComponent implements OnInit {
   @Input() sort: any;
 
   constructor(
-
-  ) { }
+    public translate: TranslateService
+) {
+    translate.use('da');
+}
 
   ngOnInit(): void {
 

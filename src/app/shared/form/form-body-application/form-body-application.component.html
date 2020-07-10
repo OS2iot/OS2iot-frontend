@@ -6,7 +6,8 @@
     </div>
 
     <div class="form-row mt-5">
-      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{ 'APPLICATION.CREATE' | translate }}</button>
+      <button class="btn btn-dark" type="submit" [disabled]="!form.valid">{{ submitButton }}</button>
+      <button (click)="routeBack()" class="btn btn-light ml-2" type="button">{{ 'GEN.CANCEL' | translate}}</button>
     </div>
   </form>
 </div>

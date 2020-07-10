@@ -1,6 +1,8 @@
 {
   "GEN": {
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "SHOW": "Show",
+    "PER-PAGE": "Per page"
   },
     "NAV": {
       "DASHBOARD": "Dashboard",
@@ -8,7 +10,8 @@
       "ALL-IOT-DEVICES": "All IoT Devices"
     },
     "APPLICATION": {
-      "CREATE": "Opret applikation"
+      "CREATE": "Create application",
+      "SAVE": "Save application"
     },
     "APPLICATION-TABLE": {
       "NAME": "NAME",
@@ -16,10 +19,12 @@
       "UPDATED": "LATEST UPDATE"
     },
     "APPLICATION-TABLE-ROW": {
-      "DELETE": "Delete"
+      "DELETE": "Delete",
+      "EDIT": "Edit"
     },
     "FORM": {
-      "CREATE-NEW-APPLICATION": "Create new application"
+      "CREATE-NEW-APPLICATION": "Create new application",
+      "EDIT-NEW-APPLICATION": "Edit application"
     },
     "QUESTION": {
       "GIVE-APPLICATION-NAME": "Name application",

@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from 'src/app/shared/form/form.module';
+import { EditApplicationComponent } from './edit-application/edit-application.component';
+import { ListApplicationsComponent } from './list-applications/list-applications.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { FormModule } from 'src/app/shared/form/form.module';
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,
         CreateApplicationComponent,
+        EditApplicationComponent,
+        ListApplicationsComponent,
     ],
     exports: [
         MineApplikationerComponent,

@@ -3,3 +3,65 @@
     background-color: $green !important;
     border: $green-light 1px solid;
 }
+
+.btn {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+
+        font-size: 16px;
+        line-height: 19px;
+        padding: .5rem .75rem;
+
+    &:active:focus {
+        box-shadow: 0 0 0 0.2rem $grey-outline;
+    }
+}
+
+.btn-primary {
+    border: 1px solid $orange;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background: linear-gradient(180deg, $orange-light 0%, $orange 100%);
+    border-color: $orange;
+
+    &:disabled {
+        background-color: $orange-outline;
+        border-color: $orange-outline;
+    }
+}
+
+.btn-dark,
+.btn-dark:hover,
+.btn-dark:active,
+.btn-dark:visited,
+.btn-dark:focus {
+    background: linear-gradient(180deg, $black-light 0%, $black 100%);
+    border-color: $black;
+    color: $white;
+}
+
+.btn-light,
+.btn-primary {
+    &:focus {
+        box-shadow: 0 0 0 0.2rem $grey-outline;
+    }
+}
+
+.btn-light,
+.btn-light:hover,
+.btn-light:active,
+.btn-light:visited,
+.btn-light:focus {
+    background-color: transparent;
+    border-color: $black;
+    color: $black;
+}

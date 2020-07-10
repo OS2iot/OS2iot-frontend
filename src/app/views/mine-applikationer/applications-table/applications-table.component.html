@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let application of applications" class="py-3"
-      app-applications-table-row [application]="application">
+      app-applications-table-row [application]="application" (deleteApplication)="deleteApplication($event)">
     </tr>
   </tbody>
 </table>

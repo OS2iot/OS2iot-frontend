@@ -1,6 +1,6 @@
 <app-form-header [backButton]="backButton" [title]="title" [formType]="formType"></app-form-header>
 
 
-<app-form-body-application *ngIf="formType == 'application'" [questions]="applicationQuestions$ | async"></app-form-body-application>
+<app-form-body-application *ngIf="formType == 'application'" [submitButton]="submitButton" [questions]="applicationQuestions$ | async"></app-form-body-application>
 
-<app-form-body-iot-devices *ngIf="formType == 'iotDevice'" [questions]="iotDeviceQuestions$ | async"></app-form-body-iot-devices>
+<app-form-body-iot-devices *ngIf="formType == 'iotDevice'" [submitButton]="submitButton" [questions]="iotDeviceQuestions$ | async"></app-form-body-iot-devices>

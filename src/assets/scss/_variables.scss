@@ -1,7 +1,7 @@
 // Bootstrap
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
 // Widths
 $navWidth: 267px;
@@ -9,13 +9,15 @@ $navWidth: 267px;
 // Colors
 $white: #fff;
 
-$grey-light: #e5e5e5;
+$grey-light: #f8f8f8;
 $grey-tablehead: #f8fafc;
 $grey-highlight: #f2f4f7;
-$grey-border: #e5e9ef;
+$grey-border: #b3b3b3;
 $grey-text: #9baeb8;
 $grey-dark: #738a94;
+$grey-outline: rgba(179, 179, 179, 0.85);
 
+$black-light: #555f63;
 $black: #3e4b50;
 
 $blue: #49b3ee;
@@ -23,12 +25,15 @@ $blue: #49b3ee;
 $green-light: #54a758;
 $green: #43a047;
 
+$orange-light: #fa8842;
 $orange: #f4792f;
+$orange-outline: rgba(244, 121, 47, 0.6);
 
 // Bootstrap overrides
 $theme-colors: (
-    'primary': $blue,
+    'primary': $orange,
     'success': $green,
+    'dark': $black
 ) !default;
 
 $grid-breakpoints: (
@@ -39,13 +44,3 @@ $grid-breakpoints: (
     xl: 1200px,
     xxl: 1400px,
 );
-
-.btn {
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-    -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-}
-
-.btn-primary{
-    border: 1px solid #3DA9E6;
-}

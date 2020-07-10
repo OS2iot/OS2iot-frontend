@@ -12,16 +12,18 @@ export class CreateApplicationComponent implements OnInit {
   public multiPage: boolean = false;
   public title: string = '';
   public sectionTitle: string = '';
+  public submitButton: string = '';
 
   constructor(public translate: TranslateService) {
     translate.use('da');
   }
   
   ngOnInit(): void {
-    this.translate.get(['NAV.MY-APPLICATIONS', 'FORM.CREATE-NEW-APPLICATION'])
+    this.translate.get(['NAV.MY-APPLICATIONS', 'FORM.CREATE-NEW-APPLICATION', 'APPLICATION.CREATE'])
     .subscribe(translations => {
       this.backButton.label = translations['NAV.MY-APPLICATIONS'];
       this.title = translations['FORM.CREATE-NEW-APPLICATION'];
+      this.submitButton = translations['APPLICATION.CREATE'];
     });
   }
 

@@ -20,7 +20,7 @@ export class ApplicationsTableComponent implements OnInit, OnDestroy {
         private restService: RestService,
         public translate: TranslateService
     ) {
-      translate.use('da');
+        translate.use('da');
     }
 
     ngOnInit() {
@@ -36,6 +36,14 @@ export class ApplicationsTableComponent implements OnInit, OnDestroy {
             .subscribe((applications) => {
                 this.applications = applications.data;
             });
+    }
+
+    deleteApplication(id: number) {
+        this.restService.delete('application', id).subscribe((response) => {
+            if (response.ok && response.body.affected > 0) {
+                this.getApplications();
+            }
+        });
     }
 
     ngOnDestroy() {
