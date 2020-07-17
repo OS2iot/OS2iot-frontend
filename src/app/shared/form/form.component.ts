@@ -4,10 +4,9 @@ import { Observable } from 'rxjs';
 
 import { QuestionService } from '../_services/question.service';
 
-import { QuestionBase } from './question-base';
+import { QuestionBase, QuestionBaseMulti } from './question-base';
 
 import { BackButton } from 'src/app/models/back-button';
-import { Application } from 'src/app/models/application';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +21,7 @@ export class FormComponent implements OnInit {
   @Input() submitButton: string;
 
   applicationQuestions$: Observable<QuestionBase<any>[]>;
-  iotDeviceQuestions$: Observable<QuestionBase<any>[]>;
+  iotDeviceQuestions$: Observable<QuestionBaseMulti<any>[]>;
 
   constructor(service: QuestionService) { 
     this.applicationQuestions$ = service.getApplicationQuestions();

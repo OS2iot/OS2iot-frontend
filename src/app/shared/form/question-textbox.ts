@@ -59,3 +59,23 @@ export class TextareaLargeQuestion extends QuestionBase<string> {
     this.type = options['type'] || '';
   }
 }
+
+export class NumberboxSmallQuestion extends QuestionBase<string> {
+  controlType = 'decimalbox';
+  type: string;
+
+  constructor(options: {} = {}) {
+    super(options);
+    this.type = options['type'] || '';
+  }
+}
+
+export class NumberboxLargeQuestion extends QuestionBase<string> {
+  controlType = 'coordinatebox';
+  type: string;
+
+  constructor(options: {} = {}) {
+    super(options);
+    this.type = options['type'] || '';
+  }
+}

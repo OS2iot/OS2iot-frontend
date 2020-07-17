@@ -1,5 +1,8 @@
 @import '~src/assets/scss/variables';
 
 #content {
-    padding-left: $navWidth;
+
+    @include media-breakpoint-up(sm) {
+        padding-left: $navWidth;
+    }
 }

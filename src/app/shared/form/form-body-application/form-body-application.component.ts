@@ -9,7 +9,6 @@ import { RestService } from '../../_services/rest.service';
 import { QuestionBase } from '../question-base';
 import { Application } from 'src/app/models/application';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-form-body-application',
@@ -33,25 +32,27 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         private router: Router
     ) {}
 
-    ngOnInit() {
-      this.translate.use('da');
-        this.id = +this.route.snapshot.paramMap.get('id');
+    ngOnInit(): void {
+        this.translate.use('da');
         this.form = this.qcs.toFormGroup(this.questions);
+        this.id = +this.route.snapshot.paramMap.get('id');
         if (this.id) {
-            this.getApplications(this.id);
+            this.getApplication(this.id);
         }
     }
 
-    getApplications(id: number): void {
+    getApplication(id: number): void {
         this.applicationsSubscription = this.restService
             .get('application', {}, id)
             .subscribe((application: Application) => {
                 this.form.controls['name'].setValue(application.name);
-                this.form.controls['description'].setValue(application.description);
+                this.form.controls['description'].setValue(
+                    application.description
+                );
             });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         this.payLoad = JSON.stringify(this.form.getRawValue());
 
         if (this.id) {
@@ -61,29 +62,29 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         }
     }
 
-    updateApplication(id: number) {
+    updateApplication(id: number): void {
         this.restService
             .replace('application', JSON.stringify(this.form.getRawValue()), id)
             .subscribe((response) => {
-              if (response.ok) {
-                this.router.navigateByUrl('/mine-applikationer');
-              }
+                if (response.ok) {
+                    this.router.navigateByUrl('/mine-applikationer');
+                }
             });
     }
 
-    postApplication() {
+    postApplication(): void {
         this.restService
             .create('application', JSON.stringify(this.form.getRawValue()))
             .subscribe((response) => {
-              console.log(response);
-              if (response.ok) {
-                this.router.navigateByUrl('/mine-applikationer');
-              }
+                console.log(response);
+                if (response.ok) {
+                    this.router.navigateByUrl('/mine-applikationer');
+                }
             });
     }
 
-    routeBack() {
-      this.router.navigateByUrl('/mine-applikationer');
+    routeBack(): void {
+        this.router.navigateByUrl('/mine-applikationer');
     }
 
     ngOnDestroy() {
@@ -93,5 +94,3 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         }
     }
 }
-
-//TODO: navigate to mine applikatione rafter succesfull create or update

@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {TranslateModule, TranslateLoader, } from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,30 +15,28 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-    declarations: [
-      AppComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
-      BrowserModule,
-      HttpClientModule,
-      AppRoutingModule,
-      DashboardModule,
-      MineApplikationerModule,
-      AlleIotEnhederModule,
-      NavbarModule,
-      TranslateModule.forRoot({
-        defaultLanguage: 'da',
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
-    }),
-      NgbModule,
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        DashboardModule,
+        MineApplikationerModule,
+        AlleIotEnhederModule,
+        NavbarModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'da',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
+        NgbModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

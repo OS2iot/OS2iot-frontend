@@ -6,16 +6,25 @@ import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enhed
 import { CreateApplicationComponent } from './views/mine-applikationer/create-application/create-application.component';
 import { EditApplicationComponent } from './views/mine-applikationer/edit-application/edit-application.component';
 import { ListApplicationsComponent } from './views/mine-applikationer/list-applications/list-applications.component';
+import { ListIotDevicesComponent } from './views/alle-iot-enheder/list-iot-devices/list-iot-devices.component';
+import { CreateIotDevicesComponent } from './views/alle-iot-enheder/create-iot-devices/create-iot-devices.component';
+import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
     { path: 'mine-applikationer', component: MineApplikationerComponent,
     children: [
         {path: '', component: ListApplicationsComponent},
+        {path: 'application/:id', component: ApplicationComponent},
         {path: 'create-application', component: CreateApplicationComponent},
         {path: 'edit-application/:id', component: EditApplicationComponent},
       ] },
-    { path: 'alle-iot-enheder', component: AlleIotEnhederComponent },
+    { path: 'alle-iot-enheder', component: AlleIotEnhederComponent,
+    children: [
+        {path: '', component: ListIotDevicesComponent},
+        {path: 'create-iot-device', component: CreateIotDevicesComponent},
+        // {path: 'edit-application/:id', component: },
+      ] },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

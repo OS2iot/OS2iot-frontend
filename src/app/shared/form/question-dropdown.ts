@@ -9,3 +9,13 @@ export class DropdownQuestion extends QuestionBase<string> {
     this.options = options['options'] || [];
   }
 }
+
+export class DropdownQuestionGetOptions extends QuestionBase<string> {
+  controlType = 'dropdownGetOptions';
+  options: {key: string, value: string}[] = [];
+
+  constructor(options: {} = {}) {
+    super(options);
+    this.options = options['options'] || [];
+  }
+}

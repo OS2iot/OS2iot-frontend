@@ -18,7 +18,7 @@ export class CreateApplicationComponent implements OnInit {
     translate.use('da');
   }
   
-  ngOnInit(): void {
+  ngOnInit() {
     this.translate.get(['NAV.MY-APPLICATIONS', 'FORM.CREATE-NEW-APPLICATION', 'APPLICATION.CREATE'])
     .subscribe(translations => {
       this.backButton.label = translations['NAV.MY-APPLICATIONS'];

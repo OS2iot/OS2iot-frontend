@@ -1,1 +1,18 @@
-<p>form-body-iot-devices works!</p>
+<div class="row">
+  <ng-container *ngFor="let form of questions; let i = index; trackBy: trackByFn">
+    <form (ngSubmit)="onSubmit()" action="" [formGroup]="forms[i]" *ngIf="i === activeStepIndex || forms.length === 1"
+      class="os2-form py-5">
+
+      <div *ngFor="let question of questions" class="form-row mb-3">
+        <app-question [question]="question" [form]="form"></app-question>
+      </div>
+
+      <div class="form-row mt-5">
+        <ng-container *ngFor="let button of form.buttons">
+          <button (click)="routeBack()" class="btn btn-light ml-2" type="button">{{ button.text | translate}}</button>
+          <button class="btn btn-dark" type="submit" [disabled]="!forms[i].valid">{{ button.text | translate}} }}</button>
+        </ng-container>
+      </div>
+    </form>
+  </ng-container>
+</div>

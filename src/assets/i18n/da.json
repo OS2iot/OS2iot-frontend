@@ -2,7 +2,10 @@
     "GEN": {
       "CANCEL": "Annuller",
       "SHOW": "Vis",
-      "PER-PAGE": "Per side"
+      "PER-PAGE": "Per side",
+      "BACK": "Tilbage",
+      "EDIT": "Redigér",
+      "APPLICATION": "Applikation"
     },
     "NAV": {
       "DASHBOARD": "Dashboard",
@@ -11,25 +14,67 @@
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
-      "SAVE": "Gem applikation"
+      "SAVE": "Gem applikation",
+      "DELETE": "Slet applikation",
+      "NAME": "Applikationens navn",
+      "DESCRIPTION": "Applikationens beskrivelse",
+      "ATTACHED-IOT": "Tilknyttede IoT enheder"
+    },
+    "IOT-DEVICE": {
+      "CREATE": "Opret IoT enhed",
+      "SAVE": "Gem IoT enhed",
+      "DELETE": "Slet IoT enhed",
+      "RESTART": "Genstart IoT enhed"
     },
     "APPLICATION-TABLE": {
       "NAME": "NAVN",
       "IOT-DEVICES": "IOT ENHEDER",
       "UPDATED": "SENEST OPDATERET"
     },
+    "IOT-TABLE": {
+      "APPLICATION": "APPLIKATION",
+      "NETWORK-TECHNOLOGY": "NETVÆRKSTEKNOLOGI",
+      "ALARM": "ALARM",
+      "BATTERY": "BATTERI",
+      "ACTIVE": "AKTIV",
+      "DATA": "DATA(24 TIMER)"
+    },
+    "TABLE": {
+      "PAGINATION": "Navigér tabel"
+    },
     "APPLICATION-TABLE-ROW": {
       "DELETE": "Slet",
-      "EDIT": "Redigér"
+      "EDIT": "Redigér",
+      "SHOW-OPTIONS": "Vis muligheder"
     },
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
-      "EDIT-NEW-APPLICATION": "Redigér applikation"
+      "EDIT-NEW-APPLICATION": "Redigér applikation",
+      "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
+      "TRANSMISSION_PROTOCOL_TEXT": "Sigfox er en fransk global netværksoperatør, der blev grundlagt i 2010, og som bygger trådløse netværk til at forbinde objekter med lav effekt som elektricitetsmålere og smartwatches, som kontinuerligt skal være på og udsende små mængder data"
     },
     "QUESTION": {
       "GIVE-APPLICATION-NAME": "Navngiv applikation",
       "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
       "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
-      "APPLICATION-DESCRIPTION-PLACEHOLDER": "Kort beskrivelse af applikationen"
+      "APPLICATION-DESCRIPTION-PLACEHOLDER": "Kort beskrivelse af applikationen",
+      "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
+      "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
+      "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
+      "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
+      "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed"
+    },
+    "SORT": {
+      "SORT": "Sortér",
+      "UPDATED-ASCENDING": "Senest opdateret: stigende",
+      "UPDATED-DESCENDING": "Senest opdateret: faldende",
+      "CREATED-ASCENDING": "Oprettet: stigende",
+      "CREATED-DESCENDING": "Oprettet: faldende",
+      "NAME-ASCENDING": "Navn: stigende",
+      "NAME-DESCENDING": "Navn: faldende",
+      "APPLICATION-ASCENDING": "Applikation: stigende",
+      "APPLICATION-DESCENDING": "Applikation: faldende",
+      "BATTERY-ASCENDING": "Batteri: stigende",
+      "BATTERY-DESCENDING": "Batteri: faldende"
     }
 }

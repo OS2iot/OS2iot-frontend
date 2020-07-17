@@ -1,9 +1,4 @@
-export interface ApplicationDevices {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    name: string;
-}
+import { IotDevice } from './iot-device';
 
 export interface Application {
     id: number;
@@ -11,5 +6,5 @@ export interface Application {
     updatedAt: string;
     name: string;
     description: string;
-    iotDevices: ApplicationDevices[];
+    iotDevice: IotDevice[];
 }
