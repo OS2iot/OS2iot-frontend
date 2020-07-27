@@ -6,5 +6,5 @@ export interface Application {
     updatedAt: string;
     name: string;
     description: string;
-    iotDevice: IotDevice[];
+    iotDevices: IotDevice[];
 }
