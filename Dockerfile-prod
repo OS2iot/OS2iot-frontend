@@ -25,18 +25,18 @@ COPY . /app
 # Build the project and copy the files
 RUN npm run ng build -- --deploy-url=/ --prod
 
-FROM nginx:alpine
+FROM bitnami/nginx:latest
 
 #!/bin/sh
 
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+# COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+# RUN rm -rf /app/*
 
 # Copy from the stahg 1
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist/OS2IoT-frontend /app
 
-EXPOSE 4200 80
+EXPOSE 8080
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
