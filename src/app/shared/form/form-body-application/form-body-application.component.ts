@@ -9,6 +9,7 @@ import { RestService } from '../../_services/rest.service';
 import { QuestionBase } from '../question-base';
 import { Application } from 'src/app/models/application';
 import { TranslateService } from '@ngx-translate/core';
+import { ApplicationService } from '../../_services/application.service';
 
 @Component({
     selector: 'app-form-body-application',
@@ -26,10 +27,10 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
 
     constructor(
         private qcs: QuestionControlService,
-        private restService: RestService,
         private route: ActivatedRoute,
         public translate: TranslateService,
-        private router: Router
+        private router: Router,
+        private applicationService: ApplicationService,
     ) {}
 
     ngOnInit(): void {
@@ -40,10 +41,9 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
             this.getApplication(this.id);
         }
     }
-
+    
     getApplication(id: number): void {
-        this.applicationsSubscription = this.restService
-            .get('application', {}, id)
+        this.applicationService.get(id)
             .subscribe((application: Application) => {
                 this.form.controls['name'].setValue(application.name);
                 this.form.controls['description'].setValue(
@@ -58,13 +58,12 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         if (this.id) {
             this.updateApplication(this.id);
         } else {
-            this.postApplication();
+            this.postApplication(this.payLoad);
         }
     }
 
     updateApplication(id: number): void {
-        this.restService
-            .replace('application', JSON.stringify(this.form.getRawValue()), id)
+        this.applicationService.update(this.payLoad, id)
             .subscribe((response) => {
                 if (response.ok) {
                     this.router.navigateByUrl('/mine-applikationer');
@@ -72,9 +71,8 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
             });
     }
 
-    postApplication(): void {
-        this.restService
-            .create('application', JSON.stringify(this.form.getRawValue()))
+    postApplication(payload): void {
+        this.applicationService.post(payload)
             .subscribe((response) => {
                 console.log(response);
                 if (response.ok) {
