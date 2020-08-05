@@ -39,6 +39,12 @@
       "ACTIVE": "AKTIV",
       "DATA": "DATA(24 TIMER)"
     },
+    "IOT-DEVICE-TYPES": {
+      "GENERIC_HTTP": "Generisk HTTP"
+    },
+    "ACTIVITY": {
+      "NEVER": "Aldrig set"
+    },
     "TABLE": {
       "PAGINATION": "Navigér tabel"
     },

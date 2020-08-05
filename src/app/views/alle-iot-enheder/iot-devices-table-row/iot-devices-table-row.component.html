@@ -1,1 +1,6 @@
-<p>iot-devices-table-row works!</p>
+<td class="position-relative"><a [routerLink]="['device', device.id]" routerLinkActive="active"
+        class="device-link">{{device.name}}</a></td>
+<td>{{"IOT-DEVICE-TYPES." + device.type | translate}}</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>{{lastActive()}}</td>
