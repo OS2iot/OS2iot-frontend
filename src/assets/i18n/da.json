@@ -57,7 +57,8 @@
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "EDIT-NEW-APPLICATION": "Redigér applikation",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
-      "TRANSMISSION_PROTOCOL_TEXT": "Sigfox er en fransk global netværksoperatør, der blev grundlagt i 2010, og som bygger trådløse netværk til at forbinde objekter med lav effekt som elektricitetsmålere og smartwatches, som kontinuerligt skal være på og udsende små mængder data"
+      "TRANSMISSION_PROTOCOL_TEXT": "Transmission Protokol",
+      "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT"
     },
     "QUESTION": {
       "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -82,5 +83,18 @@
       "APPLICATION-DESCENDING": "Applikation: faldende",
       "BATTERY-ASCENDING": "Batteri: stigende",
       "BATTERY-DESCENDING": "Batteri: faldende"
+    },
+    "IOTDEVICE": {
+      "HEADING": {
+        "PROTOCOL": "Transmission Protokol",
+        "BASIC": "Basis info",
+        "OPTIONAL": "Yderligere info"
+      },
+      "NAME": "Navn",
+      "APPLICATION": "Applikation",
+      "LONGITUDE": "Længdegrad",
+      "LATITUDE": "Breddegrad",
+      "COMMENTONLOCATION": "Kommentar om placering",
+      "COMMENT": "Kommentar"
     }
 }

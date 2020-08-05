@@ -34,8 +34,8 @@ export class IotDevicesTableRowComponent implements OnInit {
   }
 
   lastActive() {
-    const arr = this.device.receivedMessagesMetadata;
-    if (arr.length == 0) {
+    const arr = this.device?.receivedMessagesMetadata;
+    if (!arr || arr.length == 0) {
       return this.translate.instant("ACTIVITY.NEVER")
     } else {
       const lastActive = arr[arr.length - 1].sentTime;
