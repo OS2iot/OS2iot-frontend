@@ -53,6 +53,11 @@
       "EDIT": "Redigér",
       "SHOW-OPTIONS": "Vis muligheder"
     },
+    "IOTDEVICE-TABLE-ROW": {
+      "DELETE": "Slet",
+      "EDIT": "Redigér",
+      "SHOW-OPTIONS": "Vis muligheder"
+    },
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "EDIT-NEW-APPLICATION": "Redigér applikation",

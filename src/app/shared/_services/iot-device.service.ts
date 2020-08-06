@@ -18,4 +18,8 @@ export class IoTDeviceService {
     getIoTDevice(id: number): Observable<IotDevice> {
         return this.restService.get('iot-device', {}, id);
     }
+
+    deleteIoTDevice(id: number) {
+        return this.restService.delete('iot-device', id);
+    }
 }
