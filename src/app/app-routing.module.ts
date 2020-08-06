@@ -7,6 +7,7 @@ import { EditApplicationComponent } from './views/mine-applikationer/edit-applic
 import { ListApplicationsComponent } from './views/mine-applikationer/list-applications/list-applications.component';
 import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
 import { CreateIoTDeviceComponent } from './views/iot-device/create-iot-device/create-iot-device.component';
+import { IoTDeviceComponent } from './views/iot-device/iot-device/iot-device.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -22,6 +23,10 @@ const routes: Routes = [
                     {
                         path: 'create-iot-device',
                         component: CreateIoTDeviceComponent,
+                    },
+                    {
+                        path: 'iot-device/:deviceId',
+                        component: IoTDeviceComponent,
                     },
                 ],
             },

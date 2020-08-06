@@ -91,10 +91,19 @@
         "OPTIONAL": "Yderligere info"
       },
       "NAME": "Navn",
+      "TYPE": "Enhedstype",
       "APPLICATION": "Applikation",
+      "LOCATION": "Placering",
       "LONGITUDE": "Længdegrad",
       "LATITUDE": "Breddegrad",
       "COMMENTONLOCATION": "Kommentar om placering",
-      "COMMENT": "Kommentar"
+      "COMMENT": "Kommentar",      
+      "NOCOMMENT": "Ingen kommentar er angivet.",
+      "NOLOCATION": "Ingen placering er angivet",
+      "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",
+      "GENERIC_HTTP": {
+        "APIKEY": "API kald",
+        "INSTRUCTIONS": "Du kalder denne url:"
+      }
     }
 }

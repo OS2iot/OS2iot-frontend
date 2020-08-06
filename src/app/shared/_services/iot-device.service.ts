@@ -14,4 +14,8 @@ export class IoTDeviceService {
         body['applicationId'] = applicationId;
         return this.restService.post('iot-device', body);
     }
+
+    getIoTDevice(id: number): Observable<IotDevice> {
+        return this.restService.get('iot-device', {}, id);
+    }
 }

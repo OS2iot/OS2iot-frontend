@@ -9,9 +9,10 @@ import { CreateIoTDeviceComponent } from './create-iot-device/create-iot-device.
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { IoTDeviceComponent } from './iot-device/iot-device.component';
 
 @NgModule({
-    declarations: [CreateIoTDeviceComponent],
+    declarations: [CreateIoTDeviceComponent, IoTDeviceComponent],
     imports: [
         SharedModule,
         ReactiveFormsModule,
