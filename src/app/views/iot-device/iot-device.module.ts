@@ -8,11 +8,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { CreateIoTDeviceComponent } from './create-iot-device/create-iot-device.component';
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [CreateIoTDeviceComponent],
     imports: [
-        CommonModule,
+        SharedModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         FormlyBootstrapModule,
@@ -23,7 +24,6 @@ import { TranslateModule } from '@ngx-translate/core';
             ],
         }),
         TopBarModule,
-        TranslateModule,
     ],
 })
 export class IoTDeviceModule {}

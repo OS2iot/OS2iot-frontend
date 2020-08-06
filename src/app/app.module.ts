@@ -18,13 +18,14 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { IoTDeviceModule } from './views/iot-device/iot-device.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IotDeviceComponent } from './iot-device/iot-device.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, IotDeviceComponent],
     imports: [
         BrowserModule,
         HttpClientModule,
@@ -54,5 +55,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     providers: [],
     bootstrap: [AppComponent],
+    exports: [TranslateModule],
 })
 export class AppModule {}
