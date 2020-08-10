@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 import { QuestionBase, QuestionBaseMulti } from '../form/question-base';
 import { DropdownQuestion, DropdownQuestionGetOptions } from '../form/question-dropdown';
 import { TextareaMediumQuestion, TextboxMediumQuestion, NumberboxSmallQuestion } from '../form/question-textbox';
-import { TranslateService } from '@ngx-translate/core';
 import { RadioQuestion } from '../form/question-radiobutton';
 
 @Injectable()

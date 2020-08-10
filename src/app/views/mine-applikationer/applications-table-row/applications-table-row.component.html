@@ -13,7 +13,6 @@
       data-toggle="dropdown" aria-expanded="false"
       [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{application.id}}">
-      <!-- <li><a class="dropdown-item" href="#">Slet</a></li> -->
       <li><a (click)="clickDelete()" class="dropdown-item"
           [routerLink]="">{{ 'APPLICATION-TABLE-ROW.DELETE' | translate }}</a></li>
       <li><a class="dropdown-item" [routerLink]="['edit-application', application.id]"
