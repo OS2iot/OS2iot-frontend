@@ -13,6 +13,7 @@ import { MineApplikationerModule } from './views/mine-applikationer/mine-applika
 import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             },
         }),
         NgbModule,
+        AdministrationGatewayModule
     ],
     providers: [],
     bootstrap: [AppComponent],

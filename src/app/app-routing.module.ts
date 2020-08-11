@@ -9,6 +9,8 @@ import { ListApplicationsComponent } from './views/mine-applikationer/list-appli
 import { ListIotDevicesComponent } from './views/alle-iot-enheder/list-iot-devices/list-iot-devices.component';
 import { CreateIotDevicesComponent } from './views/alle-iot-enheder/create-iot-devices/create-iot-devices.component';
 import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
+import { MineLoraGatewaysComponent } from './views/administration-gateway/mine-lora-gateways/mine-lora-gateways.component';
+import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -25,6 +27,9 @@ const routes: Routes = [
         {path: 'create-iot-device', component: CreateIotDevicesComponent},
         // {path: 'edit-application/:id', component: },
       ] },
+    { path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
+    children: [
+        {path: '', component: ListLoraGatewayComponent}]},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
