@@ -11,7 +11,8 @@
     "NAV": {
       "DASHBOARD": "Dashboard",
       "MY-APPLICATIONS": "Mine applikationer",
-      "ALL-IOT-DEVICES": "Alle IoT enheder"
+      "ALL-IOT-DEVICES": "Alle IoT enheder",
+      "MINE-LORA-GATEWAYS": "Mine LoRaWan Gateways"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
