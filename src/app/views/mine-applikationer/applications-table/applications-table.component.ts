@@ -5,6 +5,7 @@ import { RestService } from 'src/app/shared/_services/rest.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';
+import { ApplicationService } from 'src/app/shared/_services/application.service';
 
 @Component({
     selector: 'app-applications-table',
@@ -22,7 +23,8 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
 
     constructor(
         private restService: RestService,
-        public translate: TranslateService
+        public translate: TranslateService,
+        private applicationService: ApplicationService
     ) {
         translate.use('da');
     }
@@ -37,8 +39,8 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     getApplications(): void {
-        this.applicationsSubscription = this.restService
-            .get('application', {
+        this.applicationsSubscription = this.applicationService
+            .get(null, {
                 limit: this.pageLimit,
                 offset: this.pageOffset * this.pageLimit,
                 sort: this.selectedSortObject.dir,
@@ -54,11 +56,12 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     deleteApplication(id: number) {
-        this.restService.delete('application', id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.getApplications();
-            }
-        });
+        this.applicationService.delete(id)
+            .subscribe((response) => {
+                if (response.ok && response.body.affected > 0) {
+                    this.getApplications();
+                }
+            });
     }
 
     prevPage() {
