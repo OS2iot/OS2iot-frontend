@@ -1,1 +1,10 @@
-<p>list-lora-gateway works!</p>
+<div class="px-5 py-4">
+    <div class="row mb-5">
+      <app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
+        [title]="'NAV.MINE-LORA-GATEWAYS' | translate" (updatePageLimit)="updatePageLimit($event)"
+        (selectedSortChange)="changeSort($event)"></app-top-bar>
+    </div>
+    <div class="row">
+      <app-admin-lora-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-admin-lora-table>
+    </div>
+  </div>

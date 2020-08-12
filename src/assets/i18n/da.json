@@ -41,6 +41,9 @@
       "ACTIVE": "AKTIV",
       "DATA": "DATA(24 TIMER)"
     },
+    "LORA-GATEWAY-TABLE": {
+      "NAME": "Navn"
+    },
     "IOT-DEVICE-TYPES": {
       "GENERIC_HTTP": "Generisk HTTP"
     },

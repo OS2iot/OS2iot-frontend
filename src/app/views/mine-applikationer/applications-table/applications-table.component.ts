@@ -22,8 +22,8 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     private applicationsSubscription: Subscription;
 
     constructor(
-        private applicationService: ApplicationService,
-        public translate: TranslateService
+        public translate: TranslateService,
+        private applicationService: ApplicationService
     ) {
         translate.use('da');
     }
