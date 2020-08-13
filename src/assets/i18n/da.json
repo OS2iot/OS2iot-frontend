@@ -64,7 +64,8 @@
       "EDIT-NEW-APPLICATION": "Redigér applikation",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
       "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
-      "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT"
+      "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
+      "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
     },
     "QUESTION": {
       "GIVE-APPLICATION-NAME": "Navngiv applikation",
