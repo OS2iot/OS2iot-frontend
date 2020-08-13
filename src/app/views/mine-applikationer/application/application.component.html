@@ -15,7 +15,7 @@
         [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'create-iot-device'"
         (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
       <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"
-        [applicationDevices]="iotDevices" [application]="application"></app-iot-devices-table>
+        [application]="application"></app-iot-devices-table>
     </div>
   </div>
 </div>

@@ -44,7 +44,7 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
             });
     }
     
-    deleteDevice(): void {
+    deleteDevice(id: number): void {
         this.getDevices();
     }
 

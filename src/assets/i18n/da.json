@@ -5,7 +5,8 @@
       "PER-PAGE": "Per side",
       "BACK": "Tilbage",
       "EDIT": "Redigér",
-      "APPLICATION": "Applikation"
+      "APPLICATION": "Applikation",
+      "HTTP": "Generisk HTTP"
     },
     "NAV": {
       "DASHBOARD": "Dashboard",
@@ -62,7 +63,7 @@
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "EDIT-NEW-APPLICATION": "Redigér applikation",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
-      "TRANSMISSION_PROTOCOL_TEXT": "Transmission Protokol",
+      "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
       "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT"
     },
     "QUESTION": {
@@ -74,7 +75,13 @@
       "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
       "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
       "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
-      "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed"
+      "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed",
+      "DEVICE-NAME-PLACEHOLDER": "Enhedsnavn",
+      "GIVE-DEVICE-NAME": "Navngiv enhed",
+      "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
+      "LOCATION-DESCRIPTION": "Beskrivelse af placering",
+      "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
+      "CHOOSE-APPLICATION": "Vælg applikation"
     },
     "SORT": {
       "SORT": "Sortér",

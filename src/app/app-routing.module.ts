@@ -6,8 +6,8 @@ import { CreateApplicationComponent } from './views/mine-applikationer/create-ap
 import { EditApplicationComponent } from './views/mine-applikationer/edit-application/edit-application.component';
 import { ListApplicationsComponent } from './views/mine-applikationer/list-applications/list-applications.component';
 import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
-import { CreateIoTDeviceComponent } from './views/iot-device/create-iot-device/create-iot-device.component';
-import { IoTDeviceComponent } from './views/iot-device/iot-device/iot-device.component';
+import { CreateIotDevicesComponent } from './views/alle-iot-enheder/create-iot-devices/create-iot-devices.component';
+import { IoTDeviceComponent } from './views/alle-iot-enheder/iot-device/iot-device.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -22,7 +22,7 @@ const routes: Routes = [
                     { path: '', component: ApplicationComponent },
                     {
                         path: 'create-iot-device',
-                        component: CreateIoTDeviceComponent,
+                        component: CreateIotDevicesComponent,
                     },
                     {
                         path: 'iot-device/:deviceId',

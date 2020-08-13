@@ -2,6 +2,13 @@
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
+    background-color: $white;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
+        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
 
     @include media-breakpoint-up(md) {
         width: 510px;
@@ -82,4 +89,92 @@ textarea {
 
 .select-box-md {
     max-width: 32rem;
+}
+
+.mat-horizontal-stepper-header-container {
+    .mat-step-header {
+        .mat-step-icon {
+            background-color: $grey-border;
+
+            &.mat-step-icon-selected {
+                background-color: $orange;
+            }
+        }
+
+        .mat-step-label {
+            color: $grey-border;
+
+            &.mat-step-label-selected {
+                color: $black;
+            }
+        }
+    }
+    .mat-stepper-horizontal-line {
+        border-top-color: $grey-border;
+    }
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $grey-text !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $grey-text !important;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $grey-text !important;
+}
+
+.form-check-input:checked {
+    background-color: $orange;
+    border-color: $orange;
+
+    &:focus {
+        box-shadow: 0 0 0 0.2rem $orange-outline;
+    }
+}
+
+.form-check-inline {
+    margin: 0 1rem;
+}
+
+.radio-image {
+    width: 150px;
+    text-align: center;
+
+    .image-container {
+        width: 150px;
+        height: 150px;
+        border-radius: 0.25rem;
+        border: solid 1px $grey-border;
+        line-height: 150px;
+
+        img {
+            max-width: 120px;
+        }
+    }
+
+    input {
+        margin: 1rem auto 0rem;
+    }
+
+    .form-check-input:checked + .image-container {
+        border: solid 1px $orange;
+        box-shadow: 0 0 0 0.2rem $orange;
+    }
+}
+
+.error-messages {
+    border-radius: .25rem;
+    border: solid 1px $red;
+    background-color: $red-light;
+}
+
+.form-group.is-invalid {
+    border-color: #dc3545;
 }

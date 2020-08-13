@@ -12,6 +12,7 @@ import { IotDevicesTableRowComponent } from './iot-devices-table-row/iot-devices
 import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
 import { ListIotDevicesComponent } from './list-iot-devices/list-iot-devices.component';
 import { CreateIotDevicesComponent } from './create-iot-devices/create-iot-devices.component';
+import { IoTDeviceComponent } from './iot-device/iot-device.component';
 
 @NgModule({
     declarations: [
@@ -20,12 +21,14 @@ import { CreateIotDevicesComponent } from './create-iot-devices/create-iot-devic
         ListIotDevicesComponent,
         CreateIotDevicesComponent,
         IotDevicesTableRowComponent,
+        IoTDeviceComponent
     ],
     exports: [
         AlleIotEnhederComponent,
         IotDevicesTableComponent,
         ListIotDevicesComponent,
         CreateIotDevicesComponent,
+        IoTDeviceComponent
     ],
     imports: [
         CommonModule,

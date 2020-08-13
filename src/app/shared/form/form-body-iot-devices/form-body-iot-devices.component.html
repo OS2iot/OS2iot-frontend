@@ -1,18 +1,21 @@
 <div class="row">
-  <ng-container *ngFor="let form of questions; let i = index; trackBy: trackByFn">
-    <form (ngSubmit)="onSubmit()" action="" [formGroup]="forms[i]" *ngIf="i === activeStepIndex || forms.length === 1"
-      class="os2-form py-5">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="os2-form p-3 mt-4">
 
-      <div *ngFor="let question of questions" class="form-row mb-3">
-        <app-question [question]="question" [form]="form"></app-question>
-      </div>
+    <div *ngIf="errorMessages" class="error-messages p-3">
+      <ul class="mb-0">
+        <li *ngFor="let error of errorMessages">
+          {{error}}
+        </li>
+      </ul>
+    </div>
 
-      <div class="form-row mt-5">
-        <ng-container *ngFor="let button of form.buttons">
-          <button (click)="routeBack()" class="btn btn-light ml-2" type="button">{{ button.text | translate}}</button>
-          <button class="btn btn-dark" type="submit" [disabled]="!forms[i].valid">{{ button.text | translate}} }}</button>
-        </ng-container>
-      </div>
-    </form>
-  </ng-container>
+    <div *ngFor="let questionGroup of questions" class="row mb-5">
+      <div app-question *ngFor="let question of questionGroup.data" [question]="question" [form]="form" [applicationId]="id" [className]="question.controlType === 'coordinatebox' ? 'col-6' : '-col-12'"></div>
+    </div>
+
+    <div class="form-row mt-5">
+      <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+      <button class="btn btn-dark ml-2" type="submit">{{ submitButton }}</button>
+    </div>
+  </form>
 </div>

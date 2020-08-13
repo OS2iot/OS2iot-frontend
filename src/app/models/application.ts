@@ -8,3 +8,9 @@ export interface Application {
     description: string;
     iotDevices?: IotDevice[];
 }
+
+export interface ApplicationData {
+    data: Application[];
+    ok?: boolean;
+    count?: number;
+}

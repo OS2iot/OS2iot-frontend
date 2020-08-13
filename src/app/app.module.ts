@@ -14,11 +14,7 @@ import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import { IoTDeviceModule } from './views/iot-device/iot-device.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IoTDeviceComponent } from './views/iot-device/iot-device/iot-device.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         DashboardModule,
         MineApplikationerModule,
         AlleIotEnhederModule,
-        IoTDeviceModule,
         NavbarModule,
         TranslateModule.forRoot({
             defaultLanguage: 'da',
@@ -45,12 +40,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         }),
         NgbModule,
         ReactiveFormsModule,
-        FormlyModule.forRoot({
-            validationMessages: [
-                { name: 'required', message: 'This field is required' },
-            ],
-        }),
-        FormlyBootstrapModule,
         BrowserAnimationsModule,
     ],
     providers: [],

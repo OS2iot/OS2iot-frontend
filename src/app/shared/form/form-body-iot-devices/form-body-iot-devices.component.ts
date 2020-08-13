@@ -1,83 +1,91 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { QuestionControlService } from '../../_services/question-control.service';
-import { QuestionBaseMulti } from '../question-base';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { RestService } from '../../_services/rest.service';
-
-import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { TranslateService } from '@ngx-translate/core';
+import { QuestionControlService } from '../../_services/question-control.service';
+
+import { Application } from 'src/app/models/application';
+import { IotDevice } from 'src/app/models/iot-device';
+import { QuestionBaseMulti } from 'src/app/models/question-base';
+import { Subscription } from 'rxjs';
+import { IoTDeviceService } from '../../_services/iot-device.service';
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
-  selector: 'app-form-body-iot-devices',
-  templateUrl: './form-body-iot-devices.component.html',
-  styleUrls: ['./form-body-iot-devices.component.scss'],
-  providers: [QuestionControlService],
+    selector: 'app-form-body-iot-devices',
+    templateUrl: './form-body-iot-devices.component.html',
+    styleUrls: ['./form-body-iot-devices.component.scss'],
+    providers: [QuestionControlService],
 })
-export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
-  @Input() questions: QuestionBaseMulti<any>[] = [];
-  public forms: FormGroup[] = [];
-  public payLoad = '';
-  public iotDevicesSubscription: Subscription;
-  public activeStepIndex: number;
-  public formData: any;
-  public formFields: Array<Array<string>>;
-  public masterFormFields: Array<string>;
-  public stepItems: Array<any>;
-  public currentFormContent: Array<any>;
-  private id: number;
+export class FormBodyIotDevicesComponent implements OnInit {
+    @Input() questions: QuestionBaseMulti<any>[] = [];
+    @Input() submitButton: string;
+    @Input() application: Application;
+    public form: FormGroup;
+    public payLoad = '';
+    public deviceSubscription: Subscription;
+    public id: number;
+    public errorMessages: any;
+    public errorFields: string[];
 
-  constructor(
-    private qcs: QuestionControlService,
-    private restService: RestService,
-    private route: ActivatedRoute,
-    public translate: TranslateService,
-    private router: Router
-  ) {  }
+    constructor(
+        private qcs: QuestionControlService,
+        private route: ActivatedRoute,
+        public translate: TranslateService,
+        private router: Router,
+        private iotDeviceService: IoTDeviceService
+    ) {}
 
-  ngOnInit() {
-    this.activeStepIndex = 0;
-    this.currentFormContent = [];
-    this.formFields = [];
-    this.stepItems = this.questions;
-
-    console.log('questions', this.questions);
-    this.translate.use('da');
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.questions.forEach(question => {
-      this.forms.push(this.qcs.toFormGroup(question.data));
-    });
-    if (this.id) {
-      this.getApplications(this.id);
+    ngOnInit(): void {
+        this.translate.use('da');
+        this.form = this.qcs.toFormGroupMulti(this.questions);
+        this.id = +this.route.snapshot.paramMap.get('id');
+        if (this.id) {
+            this.getDevice(this.id);
+        }
     }
-    console.log('forms', this.forms);
-  }
 
-  getApplications(id: number): void {
-      this.iotDevicesSubscription = this.restService
-          .get('iot-device', {}, id)
-          .subscribe((iotDevice) => {
-              // this.form.controls['name'].setValue(iotDevice.name);
-              // this.form.controls['description'].setValue(iotDevice.description);
-          });
-  }
-
-  onSubmit() {
-    // this.payLoad = JSON.stringify(this.form.getRawValue());
-  }
-  
-  routeBack() {
-    this.router.navigateByUrl('/alle-iot-enheder');
-  }
-
-  trackByFn(index: number): number {
-    return index;
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.iotDevicesSubscription) {
-        this.iotDevicesSubscription.unsubscribe();
+    getDevice(id: number): void {
+        this.deviceSubscription = this.iotDeviceService
+            .getIoTDevice(id)
+            .subscribe((device: IotDevice) => {
+                // TODO: fill out fields
+            });
     }
-}
+
+    onSubmit(): void {
+        const createdIOTDevice = this.iotDeviceService.createIoTDevice(
+            this.form.getRawValue(),
+            this.application.id
+        );
+        createdIOTDevice.subscribe(
+            () => {
+                this.router.navigate([
+                    'mine-applikationer/application',
+                    this.application.id,
+                ]);
+            },
+            (error: HttpErrorResponse) => {
+                this.errorFields = [];
+                this.errorMessages = [];
+                error.error.message.forEach((err) => {
+                    this.errorFields.push(err.property);
+                    this.errorMessages = this.errorMessages.concat(
+                        Object.values(err.constraints)
+                    );
+                });
+
+                this.questions.forEach((questionField) => {
+                    questionField.data.forEach((question) => {
+                        this.errorFields.includes(question.key) ? (question.error = true) : (question.error = false);
+                    });
+                });
+            }
+        );
+    }
+
+    routeBack(): void {
+        this.router.navigateByUrl('/mine-applikationer');
+    }
 }

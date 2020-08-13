@@ -2,12 +2,5 @@
   <div class="col forms-header d-flex">
     <a [routerLink]="backButton.routerLink" routerLinkActive="active" class="back-button">{{backButton.label}}</a>
     <div class="form-title">{{title}}</div>
-    <div *ngIf="formType == 'iotDevice'" class="ml-auto d-flex py-0">
-      <div class="form-step-title mr-3">{{stepTitle | translate}}</div>
-      <ng-template ngFor let-item [ngForOf]="steps">
-        <div class="btn-step mr-2 rounded" [ngClass]="{'active': activeStep === item.id}" id="{{item.id}}">
-          {{item.step}}</div>
-      </ng-template>
-    </div>
   </div>
 </div>

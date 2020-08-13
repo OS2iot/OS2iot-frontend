@@ -169,7 +169,7 @@ export class RestService {
                 tap((_) =>
                     this.log({ message: 'Succesfully added', type: 'success' })
                 ),
-                catchError(this.handleError<any>('post', []))
+                // catchError(this.handleError<any>('post', []))
             );
     }
 

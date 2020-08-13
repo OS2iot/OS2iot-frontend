@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { IotDevice } from '../../models/iot-device';
+import { IotDevice, IotDeviceData } from '../../models/iot-device';
 
 @Injectable({
     providedIn: 'root',
@@ -9,9 +9,11 @@ import { IotDevice } from '../../models/iot-device';
 export class IoTDeviceService {
     constructor(private restService: RestService) {}
 
-    createIoTDevice(body: any, applicationId: number): Observable<IotDevice> {
+    createIoTDevice(body: any, applicationId?: number): Observable<IotDeviceData> {
         console.log('Lav iot enhed!');
-        body['applicationId'] = applicationId;
+        applicationId ? body['applicationId'] = applicationId : null;
+        body['longitude'] ? body['longitude'] = +body['longitude'] : null;
+        body['latitude'] ? body['latitude'] = +body['latitude'] : null;
         return this.restService.post('iot-device', body);
     }
 

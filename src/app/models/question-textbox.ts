@@ -61,7 +61,7 @@ export class TextareaLargeQuestion extends QuestionBase<string> {
 }
 
 export class NumberboxSmallQuestion extends QuestionBase<string> {
-  controlType = 'decimalbox';
+  controlType = 'coordinatebox';
   type: string;
 
   constructor(options: {} = {}) {
@@ -71,7 +71,7 @@ export class NumberboxSmallQuestion extends QuestionBase<string> {
 }
 
 export class NumberboxLargeQuestion extends QuestionBase<string> {
-  controlType = 'coordinatebox';
+  controlType = 'decimalbox';
   type: string;
 
   constructor(options: {} = {}) {
