@@ -14,6 +14,8 @@ export class ApplicationsTableRowComponent implements OnInit {
 
     @Output() deleteApplication = new EventEmitter();
 
+    private alertMessage: string;
+
     constructor(
       public translate: TranslateService,
       private router: Router
@@ -24,7 +26,18 @@ export class ApplicationsTableRowComponent implements OnInit {
     ngOnInit(): void {}
 
     clickDelete() {
-        this.deleteApplication.emit(this.application.id);
+        if (this.application.iotDevices.length) {
+            this.deleteApplication.emit(this.application.id);
+        } else {
+            this.translate
+            .get([
+                'FORM.ALERT-NO-DELETE-DEVICES',
+            ])
+            .subscribe((translations) => {
+                this.alertMessage = translations['FORM.ALERT-NO-DELETE-DEVICES'];
+                alert(this.alertMessage);
+            });
+        }
     }
 
     navigateToEditPage() {

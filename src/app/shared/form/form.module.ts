@@ -11,7 +11,6 @@ import { FormBodyIotDevicesComponent } from './form-body-iot-devices/form-body-i
 import { TranslateModule } from '@ngx-translate/core';
 
 
-
 @NgModule({
   declarations: [
     FormComponent,

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment'; 
 import 'moment/locale/da';
+import { IoTDeviceService } from '../../../shared/_services/iot-device.service';
 
 @Component({
   selector: 'tr[app-iot-devices-table-row]',
@@ -16,6 +17,7 @@ export class IotDevicesTableRowComponent implements OnInit {
   @Output() deleteDevice = new EventEmitter();
 
   constructor(
+    public iotDeviceService: IoTDeviceService,
     public translate: TranslateService,
     private router: Router
     ) {
@@ -26,7 +28,12 @@ export class IotDevicesTableRowComponent implements OnInit {
   ngOnInit(): void {}
 
   clickDelete() {
-      this.deleteDevice.emit(this.device.id);
+    const id = this.device.id;
+    this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
+        if (response.ok && response.body.affected > 0) {
+          this.deleteDevice.emit(id);
+        }
+    });
   }
 
   navigateToEditPage() {
@@ -34,8 +41,8 @@ export class IotDevicesTableRowComponent implements OnInit {
   }
 
   lastActive() {
-    const arr = this.device.receivedMessagesMetadata;
-    if (arr.length == 0) {
+    const arr = this.device?.receivedMessagesMetadata;
+    if (!arr || arr.length == 0) {
       return this.translate.instant("ACTIVITY.NEVER")
     } else {
       const lastActive = arr[arr.length - 1].sentTime;

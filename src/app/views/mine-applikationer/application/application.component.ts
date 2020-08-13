@@ -10,6 +10,7 @@ import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { IotDevice } from 'src/app/models/iot-device';
+import { ApplicationService } from '../../../shared/_services/application.service';
 
 @Component({
     selector: 'app-application',
@@ -18,7 +19,7 @@ import { IotDevice } from 'src/app/models/iot-device';
 })
 export class ApplicationComponent implements OnInit {
     public applicationsSubscription: Subscription;
-    public application: Observable<Application>;
+    public application: Application;
     private id: number;
     public pageLimit: number = 10;
     public selectedSortId: number = 6;
@@ -91,14 +92,14 @@ export class ApplicationComponent implements OnInit {
         },
     ];
     public buttons: QuickActionButton[] = [
-      {
-        label: 'APPLICATION.DELETE',
-        type: 'delete'
-      },
-      {
-        label: 'GEN.EDIT',
-        type: 'edit'
-      }
+        {
+            label: 'APPLICATION.DELETE',
+            type: 'delete',
+        },
+        {
+            label: 'GEN.EDIT',
+            type: 'edit',
+        },
     ];
     public description: string;
     public name: string;
@@ -107,6 +108,7 @@ export class ApplicationComponent implements OnInit {
     public iotDevices: IotDevice[] = [];
 
     constructor(
+        private applicationService: ApplicationService,
         private restService: RestService,
         private route: ActivatedRoute,
         public translate: TranslateService
@@ -115,21 +117,20 @@ export class ApplicationComponent implements OnInit {
     ngOnInit(): void {
         this.id = +this.route.snapshot.paramMap.get('id');
         if (this.id) {
-            this.getApplication(this.id);
+            this.bindApplication(this.id);
         }
     }
 
-    getApplication(id: number): void {
-      this.applicationsSubscription = this.restService
-          .get('application', {}, id)
-          .subscribe((application) => {
-              this.application = application;
-              this.name = application.name;
-              this.description = application.description;
-              if (application.iotDevices) this.iotDevices = application.iotDevices;
-              console.log('application', this.application);
-          });
-  }
+    bindApplication(id: number): void {
+        this.applicationService.getApplication(id).subscribe((application) => {
+            this.application = application;
+            this.name = application.name;
+            this.description = application.description;
+            if (application.iotDevices)
+                this.iotDevices = application.iotDevices;
+            console.log('application', this.application);
+        });
+    }
 
     updatePageLimit(limit: any) {
         console.log(limit);

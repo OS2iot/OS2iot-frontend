@@ -7,6 +7,7 @@ import { RestService } from 'src/app/shared/_services/rest.service';
 
 import { IotDevice } from 'src/app/models/iot-device';
 import { Sort } from 'src/app/models/sort';
+import { Application } from 'src/app/models/application';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -16,9 +17,9 @@ import { Sort } from 'src/app/models/sort';
 export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
     @Input() pageLimit: number;
     @Input() selectedSortObject: Sort;
-    @Input() applicationDevices?: Observable<IotDevice[]>;
-    private iotDeviceSubscription: Subscription;
-    public iotDevices: Observable<IotDevice[]>;
+    @Input() application: Application;
+    private applicationSubscription: Subscription;
+    public iotDevices: IotDevice[];
     public pageOffset: number = 0;
     public pageTotal: number;
 
@@ -32,37 +33,19 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit(): void {}
 
     ngOnChanges() {
-        console.log('pageLimit', this.pageLimit);
-        console.log('selectedSortId', this.selectedSortObject);
-        !this.applicationDevices
-            ? this.getDevices()
-            : (this.iotDevices = this.applicationDevices);
+        this.getDevices();
     }
 
     getDevices(): void {
-        this.iotDeviceSubscription = this.restService
-            .get('iot-device', {
-                limit: this.pageLimit,
-                offset: this.pageOffset,
-                sort: this.selectedSortObject.dir,
-                orderOn: this.selectedSortObject.col,
-            })
-            .subscribe((applications) => {
-                this.iotDevices = applications.data;
-                if (this.pageLimit) {
-                    this.pageTotal = Math.ceil(
-                        applications.count / this.pageLimit
-                    );
-                }
+        this.applicationSubscription = this.restService
+            .get('application', {}, this.application.id)
+            .subscribe((application: Application) => {
+                this.iotDevices = application.iotDevices;
             });
     }
-
-    deleteDevice(id: number) {
-        this.restService.delete('iot-device', id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.getDevices();
-            }
-        });
+    
+    deleteDevice(id: number): void {
+        this.getDevices();
     }
 
     prevPage() {
@@ -77,8 +60,8 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
-        if (this.iotDeviceSubscription) {
-            this.iotDeviceSubscription.unsubscribe();
+        if (this.applicationSubscription) {
+            this.applicationSubscription.unsubscribe();
         }
     }
 }

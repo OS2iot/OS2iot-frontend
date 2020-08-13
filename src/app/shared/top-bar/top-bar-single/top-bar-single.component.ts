@@ -13,7 +13,7 @@ import { QuickActionButton } from 'src/app/models/quick-action-button';
 })
 export class TopBarSingleComponent implements OnInit, OnChanges {
   @Input() data: Application | IotDevice;
-  @Input() buttons: QuickActionButton[];
+  @Input() buttons?: QuickActionButton[];
   public title: string;
 
   // @Output() selectedSortChange = new EventEmitter();

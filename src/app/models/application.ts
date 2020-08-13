@@ -6,5 +6,11 @@ export interface Application {
     updatedAt: string;
     name: string;
     description: string;
-    iotDevices: IotDevice[];
+    iotDevices?: IotDevice[];
+}
+
+export interface ApplicationData {
+    data: Application[];
+    ok?: boolean;
+    count?: number;
 }

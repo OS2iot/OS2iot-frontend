@@ -8,7 +8,9 @@ export class QuestionBase<T> {
     controlType: string;
     type: string;
     placeholder: string;
-    options: { key: string; value: string }[];
+    error: boolean;
+    errorMessage: string;
+    options: { key: string; value: string, selected: boolean, image?: string }[];
 
     constructor(
         options: {
@@ -21,6 +23,8 @@ export class QuestionBase<T> {
             controlType?: string;
             type?: string;
             placeholder?: string;
+            error?: boolean;
+            errorMessage?: string;
         } = {}
     ) {
         this.value = options.value;
@@ -32,6 +36,8 @@ export class QuestionBase<T> {
         this.controlType = options.controlType || '';
         this.type = options.type || '';
         this.placeholder = options.placeholder || '';
+        this.error = options.error || false;
+        this.errorMessage = options.errorMessage || '';
     }
 }
 
@@ -44,5 +50,4 @@ export class QuestionBaseMultiButton {
 export class QuestionBaseMulti<T> {
     label: string;
     data: QuestionBase<T>[];
-    buttons: QuestionBaseMultiButton[];
 }
