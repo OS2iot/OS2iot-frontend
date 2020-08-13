@@ -26,7 +26,7 @@ export class ApplicationsTableRowComponent implements OnInit {
     ngOnInit(): void {}
 
     clickDelete() {
-        if (this.application.iotDevices.length) {
+        if (!this.application.iotDevices.length) {
             this.deleteApplication.emit(this.application.id);
         } else {
             this.translate
