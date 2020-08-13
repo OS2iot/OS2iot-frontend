@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
-import { ApplicationsTableRowComponent } from '../applications-table-row/applications-table-row.component';
 import { Subscription, Observable } from 'rxjs';
-import { RestService } from 'src/app/shared/_services/rest.service';
+
 import { TranslateService } from '@ngx-translate/core';
+import { ApplicationService } from 'src/app/shared/_services/application.service';
+
 import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';
-import { ApplicationService } from 'src/app/shared/_services/application.service';
 
 @Component({
     selector: 'app-applications-table',
@@ -15,16 +15,15 @@ import { ApplicationService } from 'src/app/shared/_services/application.service
 export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy {
     @Input() pageLimit: number;
     @Input() selectedSortObject: Sort;
-    public applications: Observable<Application[]>;
+    public applications: Application[];
     public pageOffset: number = 0;
     public pageTotal: number;
 
     private applicationsSubscription: Subscription;
 
     constructor(
-        private restService: RestService,
-        public translate: TranslateService,
-        private applicationService: ApplicationService
+        private applicationService: ApplicationService,
+        public translate: TranslateService
     ) {
         translate.use('da');
     }
@@ -33,35 +32,31 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     ngOnChanges() {
-        console.log('pageLimit', this.pageLimit);
-        console.log('selectedSortId', this.selectedSortObject);
         this.getApplications();
     }
 
     getApplications(): void {
         this.applicationsSubscription = this.applicationService
-            .get(null, {
-                limit: this.pageLimit,
-                offset: this.pageOffset * this.pageLimit,
-                sort: this.selectedSortObject.dir,
-                orderOn: this.selectedSortObject.col
-            })
+            .getApplications(
+                this.pageLimit,
+                this.pageOffset * this.pageLimit,
+                this.selectedSortObject.dir,
+                this.selectedSortObject.col
+            )
             .subscribe((applications) => {
                 this.applications = applications.data;
                 if (this.pageLimit) {
-                    console.log(applications.data);
                     this.pageTotal = Math.ceil(applications.count / this.pageLimit);
                 }
             });
     }
 
     deleteApplication(id: number) {
-        this.applicationService.delete(id)
-            .subscribe((response) => {
-                if (response.ok && response.body.affected > 0) {
-                    this.getApplications();
-                }
-            });
+        this.applicationService.deleteApplication(id).subscribe((response) => {
+            if (response.ok && response.body.affected > 0) {
+                this.getApplications();
+            }
+        });
     }
 
     prevPage() {
@@ -76,6 +71,8 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
-        this.applicationsSubscription.unsubscribe();
+        if (this.applicationsSubscription) {
+            this.applicationsSubscription.unsubscribe();
+        }
     }
 }

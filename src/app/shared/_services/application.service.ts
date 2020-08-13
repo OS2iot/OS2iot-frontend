@@ -1,35 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Application, ApplicationData } from 'src/app/models/application';
 import { RestService } from './rest.service';
-import { Application } from 'src/app/models/application';
+import { Observable } from 'rxjs';
+import { SortDir, SortCol } from 'src/app/models/sort';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ApplicationService {
+    constructor(private restService: RestService) {}
 
-  public applicationsSubscription: Subscription;  
-  private applicaitonUrl: string = 'application'
+    createApplication(body: any): Observable<ApplicationData> {
+        return this.restService.post('application', body, {observe: 'response'});
+    }
 
-  constructor(
-    private restService: RestService,
-    
-  ) { }
+    getApplication(id: number): Observable<Application> {
+        return this.restService.get('application', {}, id);
+    }
 
-  public get(id: number = null, params = {}): Observable<any> {
-    return this.restService.get(this.applicaitonUrl, params, id)
-  }
+    getApplications(
+        limit: number,
+        offset: number,
+        sort: SortDir,
+        orderOn: SortCol
+    ): Observable<ApplicationData> {
+        const body = {
+            limit: limit,
+            offset: offset,
+            sort: sort,
+            orderOn: orderOn,
+        };
+        return this.restService.get('application', body);
+    }
 
-  public update(json, id: number): Observable<any> {
-    return this.restService.replace(this.applicaitonUrl, json, id)
-  }
-
-  public post(json): Observable<any> {
-    return this.restService.post(this.applicaitonUrl, json)
-  }
-
-  public delete(id: number): Observable<any> {
-    return this.restService.delete(this.applicaitonUrl, id)
-  }
-  
+    deleteApplication(id: number) {
+        return this.restService.delete('application', id);
+    }
 }
