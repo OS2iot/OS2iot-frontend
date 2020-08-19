@@ -14,3 +14,9 @@ export interface Gateway {
     firstSeenAt?: string;
     lastSeenAt?: string;
 }
+
+export interface GatewayData {
+    date: Gateway[];
+    ok?: boolean;
+    count?: number;
+}

@@ -9,6 +9,10 @@ import { IoTDeviceComponent } from './views/alle-iot-enheder/iot-device/iot-devi
 import { EditIotDeviceComponent } from './views/alle-iot-enheder/edit-iot-device/edit-iot-device.component';
 import { MineLoraGatewaysComponent } from './views/administration-gateway/mine-lora-gateways/mine-lora-gateways.component';
 import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
+import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enheder/alle-iot-enheder.component';
+import { ListIotDevicesComponent } from './views/alle-iot-enheder/list-iot-devices/list-iot-devices.component';
+import { CreateIotDevicesComponent } from './views/alle-iot-enheder/create-iot-devices/create-iot-devices.component';
+import { CreateLoraGatewayComponent } from './views/administration-gateway/create-lora-gateway/create-lora-gateway.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -46,8 +50,10 @@ const routes: Routes = [
         ],
     },
     { path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
-        children: [
-            {path: '', component: ListLoraGatewayComponent}]},
+    children: [
+        {path: '', component: ListLoraGatewayComponent},
+        {path: 'create-lora-gateway', component: CreateLoraGatewayComponent},
+    ]},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
