@@ -7,22 +7,29 @@ import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminLoraTableComponent } from './admin-lora-table/admin-lora-table.component';
 import { AdminLoraTableRowComponent } from './admin-lora-table-row/admin-lora-table-row.component';
+import { CreateLoraGatewayComponent } from './create-lora-gateway/create-lora-gateway.component';
+import { FormModule } from 'src/app/shared/form/form.module';
 
 
 @NgModule({
   declarations: [
     MineLoraGatewaysComponent, 
-    ListLoraGatewayComponent, AdminLoraTableComponent, AdminLoraTableRowComponent
+    ListLoraGatewayComponent, 
+    AdminLoraTableComponent, 
+    AdminLoraTableRowComponent, 
+    CreateLoraGatewayComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     TopBarModule,
-    TranslateModule
+    TranslateModule,
+    FormModule
   ],
   exports: [
     MineLoraGatewaysComponent,
-    ListLoraGatewayComponent
+    ListLoraGatewayComponent,
+    CreateLoraGatewayComponent
   ]
 })
 export class AdministrationGatewayModule { }

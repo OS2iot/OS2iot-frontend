@@ -44,6 +44,9 @@
     "LORA-GATEWAY-TABLE": {
       "NAME": "Navn"
     },
+    "LORA-GATEWAY": {
+      "CREATE":"Opret LoRaWan Gateway"
+    },
     "IOT-DEVICE-TYPES": {
       "GENERIC_HTTP": "Generisk HTTP"
     },
@@ -65,6 +68,7 @@
     },
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
+      "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
       "EDIT-NEW-APPLICATION": "Redigér applikation",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
       "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
@@ -87,6 +91,10 @@
       "LOCATION-DESCRIPTION": "Beskrivelse af placering",
       "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
       "CHOOSE-APPLICATION": "Vælg applikation"
+    },
+    "QUESTION-LORA-GATEWAY": {
+      "NAME": "Navngiv LoRaWAN Gateway",
+      "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn"
     },
     "SORT": {
       "SORT": "Sortér",

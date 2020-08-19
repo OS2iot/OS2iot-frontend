@@ -9,6 +9,7 @@ import { QuestionComponent } from './question/question.component';
 import { FormBodyApplicationComponent } from './form-body-application/form-body-application.component';
 import { FormBodyIotDevicesComponent } from './form-body-iot-devices/form-body-iot-devices.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body-lora-gateway.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     QuestionComponent,
     FormBodyApplicationComponent,
     FormBodyIotDevicesComponent,
+    FormBodyLoraGatewayComponent,
   ],
   imports: [
     CommonModule,
