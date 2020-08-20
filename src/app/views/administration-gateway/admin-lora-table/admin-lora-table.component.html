@@ -1,8 +1,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>name</th>
-            <th>table</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.NAME' | translate }}</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.LOCATION' | translate }}</th>
         </tr>
     </thead>
     <tbody>
@@ -11,6 +12,7 @@
             class="py-3"
             app-admin-lora-table-row
             [gateway]="gateway"
+            (deleteGateway)="deleteGateway($event)"
             >
         </tr>
     </tbody>

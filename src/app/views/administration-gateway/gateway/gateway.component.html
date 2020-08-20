@@ -1,0 +1,28 @@
+<div *ngIf="gateway">
+    <app-top-bar-single [data]="gateway"></app-top-bar-single>
+    <div class="application-component">
+      <div class="col-12 mb-4 py-3 bottom-separator">
+        <div class="col-12 col-sm-4">
+          <h4>{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+          <p>{{gateway.description}}</p>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+            <p>{{gateway.id}}</p>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+          <p>{{gateway.location.altitude}}</p>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+          <p>{{gateway.location.latitude}}</p>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+          <p>{{gateway.location.longitude}}</p>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+          <p>{{gateway.tags}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

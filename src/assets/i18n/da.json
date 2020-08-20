@@ -22,6 +22,10 @@
       "DESCRIPTION": "Applikationens beskrivelse",
       "ATTACHED-IOT": "Tilknyttede IoT enheder"
     },
+    "GATEWAY": {
+      "DESCRIPTION":"LoRaWAN Gateway beskrivelse"
+
+    },
     "IOT-DEVICE": {
       "CREATE": "Gem IoT enhed",
       "SAVE": "Gem IoT enhed",
@@ -42,7 +46,14 @@
       "DATA": "DATA(24 TIMER)"
     },
     "LORA-GATEWAY-TABLE": {
-      "NAME": "Navn"
+      "NAME": "Navn",
+      "GATEWAYID": "Gateway ID",
+      "LOCATION": "Placering"
+    },
+    "LORA-GATEWAY-TABLE-ROW": {
+      "DELETE": "Slet Gateway",
+      "EDIT": "Redigér",
+      "SHOW-OPTIONS": "Vis muligheder"
     },
     "LORA-GATEWAY": {
       "CREATE":"Opret LoRaWan Gateway"
@@ -69,8 +80,9 @@
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
-      "EDIT-NEW-APPLICATION": "Redigér applikation",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
+      "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
+      "EDIT-NEW-APPLICATION": "Redigér applikation",
       "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
       "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
       "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
