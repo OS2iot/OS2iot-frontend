@@ -94,7 +94,19 @@
     },
     "QUESTION-LORA-GATEWAY": {
       "NAME": "Navngiv LoRaWAN Gateway",
-      "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn"
+      "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn",
+      "DESCRIPTION":"LoRaWAN Gateway beskrivelse",
+      "DESCRIPTION-PLACEHOLDER":"beskrivelse af LoRaWAN Gateway",
+      "GATEWAYID": "Gateway ID",
+      "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
+      "METADATA": "Gateway metadata",
+      "METADATA-PLACEHOLDER": "Angiv JSON her",
+      "ALTITUDE": "Højde",
+      "ALTITUDE-PLACEHOLDER": "00",
+      "LONGITUDE":"Længdegrad",
+      "LONGITUDE-PLACEHOLDER": "00",
+      "LATITUDE": "Breddegrad",
+      "LATITUDE-PLACEHOLDER": "00"
     },
     "SORT": {
       "SORT": "Sortér",
