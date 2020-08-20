@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
 import { MineApplikationerComponent } from './views/mine-applikationer/mine-applikationer/mine-applikationer.component';
@@ -12,6 +12,8 @@ import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enhed
 import { ListIotDevicesComponent } from './views/alle-iot-enheder/list-iot-devices/list-iot-devices.component';
 import { CreateIotDevicesComponent } from './views/alle-iot-enheder/create-iot-devices/create-iot-devices.component';
 import { CreateLoraGatewayComponent } from './views/administration-gateway/create-lora-gateway/create-lora-gateway.component';
+import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
+import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
     children: [
         {path: '', component: ListLoraGatewayComponent},
         {path: 'create-lora-gateway', component: CreateLoraGatewayComponent},
+        {path: 'edit-gateway/:id', component: EditGatewayComponent},
+        {path: 'gateway/:id', component: GatewayComponent}
     ]},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },

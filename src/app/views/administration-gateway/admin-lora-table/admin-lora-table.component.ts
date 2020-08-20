@@ -54,8 +54,13 @@ export class AdminLoraTableComponent implements OnInit, OnChanges, OnDestroy {
       )
   }
 
-  deleteGateway():void {
+  deleteGateway(id: string) {
     console.log('delete')
+    this.chirpstackGatewayService.delete(id).subscribe((response) => {
+      if (response.ok && response.body.affected > 0) {
+          this.getLoraGateways();
+      }
+  });
   }
 
   prevPage() {
