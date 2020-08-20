@@ -1,0 +1,9 @@
+<div class="px-5 py-4">
+    <div class="row mb-5">
+      <app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit" [title]="'NAV.MY-APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
+        [ctaRouterLink]="'create-application'" (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
+    </div>
+    <div class="row">
+      <app-applications-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-applications-table>
+    </div>
+  </div>

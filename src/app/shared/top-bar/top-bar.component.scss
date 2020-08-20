@@ -1,0 +1,10 @@
+@import '~src/assets/scss/variables';
+
+.per-page {
+    line-height: 40px;
+    margin-right: 8px;
+}
+
+.top-bar {
+    border-bottom: $grey-border solid 1px;
+}

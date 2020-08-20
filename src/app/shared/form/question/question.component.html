@@ -1,0 +1,79 @@
+<div [formGroup]="form" class="mb-3">
+  <label [attr.for]="question.key" class="form-label">{{ question.label | translate }}<ng-container
+      *ngIf="question.required">*</ng-container></label>
+
+  <ng-container [ngSwitch]="question.controlType">
+
+    <input *ngSwitchCase="'textboxsmall'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="30" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error">
+
+    <input *ngSwitchCase="'textboxmedium'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="50" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error">
+
+    <input *ngSwitchCase="'textboxlarge'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [maxLength]="130" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error">
+
+    <textarea *ngSwitchCase="'textareaboxsmall'" [formControlName]="question.key" [id]="question.key"
+      [placeholder]="question.placeholder | translate" [maxLength]="254" [rows]="4" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error"></textarea>
+
+    <textarea *ngSwitchCase="'textareaboxmedium'" [formControlName]="question.key" [id]="question.key"
+      [placeholder]="question.placeholder | translate" [maxLength]="1024" [rows]="6" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error"></textarea>
+
+    <textarea *ngSwitchCase="'textareaboxlarge'" [formControlName]="question.key" [id]="question.key"
+      [placeholder]="question.placeholder | translate" [maxLength]="10000" [rows]="10" class="form-control"
+      [required]="question.required" [class.is-invalid]="question.error"></textarea>
+
+    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="form-select" [class.is-invalid]="question.error">
+      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+    <select [id]="question.key" *ngSwitchCase="'applicationsDropdown'" [formControlName]="question.key"
+      class="form-select" [(ngModel)]="selectedDropdownId" [class.is-invalid]="question.error">
+      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+    <!-- <ng-select *ngSwitchCase="'applicationsDropdown'" [items]="question.options" bindLabel="name" placeholder="Select item"
+    appendTo="body" multiple="true" [(ngModel)]="selectedDropdownId">
+  </ng-select> -->
+
+    <ng-container *ngSwitchCase="'radio'">
+      <div *ngFor="let opt of question.options" class="form-check">
+        <label class="form-check-label">
+          <input type="radio" [name]="question.key" [formControlName]="question.key" [value]="opt.key"
+            class="form-check-input" [required]="question.required">{{opt.value | translate}}
+        </label>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'radioImage'">
+      <div class="form-group d-flex justify-content-center p-3">
+        <div *ngFor="let opt of question.options" class="form-check-inline radio-image" [class.is-invalid]="question.error">
+          <label class="form-check-label d-flex flex-column-reverse">
+            <input [attr.aria-label]="opt.value | translate" type="radio" [name]="question.key"
+              [formControlName]="question.key" [value]="opt.key" class="form-check-input"
+              [required]="question.required">
+              <div class="image-container">
+                <img [src]="opt.image" alt="{{opt.value | translate}}">
+              </div>
+          </label>
+        </div>
+      </div>
+    </ng-container>
+
+    <input *ngSwitchCase="'coordinatebox'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" [step]=".00001" min="0" max="180" class="form-control"
+      [ngClass]="question.controlType" [required]="question.required" [class.is-invalid]="question.error">
+
+    <input *ngSwitchCase="'decimalbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+      [placeholder]="question.placeholder | translate" class="form-control" [ngClass]="question.controlType"
+      [required]="question.required" [class.is-invalid]="question.error">
+
+  </ng-container>
+
+  <!-- <div class="errorMessage" *ngIf="!isValid">{{ question.label | translate }} is required</div> -->
+</div>

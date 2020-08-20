@@ -1,0 +1,19 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="os2-form p-3 mt-4">
+
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngFor="let question of questions" class="row mb-5">
+    <div app-question [question]="question" [form]="form"></div>
+  </div>
+
+  <div class="form-row mt-5">
+    <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+    <button class="btn btn-dark ml-2" type="submit" [disabled]="!form.valid">{{ submitButton }}</button>
+  </div>
+</form>

@@ -1,0 +1,47 @@
+{
+  "GEN": {
+    "CANCEL": "Cancel",
+    "SHOW": "Show",
+    "PER-PAGE": "Per page"
+  },
+    "NAV": {
+      "DASHBOARD": "Dashboard",
+      "MY-APPLICATIONS": "My Applications",
+      "ALL-IOT-DEVICES": "All IoT Devices"
+    },
+    "APPLICATION": {
+      "CREATE": "Create application",
+      "SAVE": "Save application"
+    },
+    "APPLICATION-TABLE": {
+      "NAME": "NAME",
+      "IOT-DEVICES": "IOT DEVICES",
+      "UPDATED": "LAST UPDATED"
+    },
+    "APPLICATION-TABLE-ROW": {
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "SHOW-OPTIONS": "Show options"
+    },
+    "FORM": {
+      "CREATE-NEW-APPLICATION": "Create new application",
+      "EDIT-NEW-APPLICATION": "Edit application",
+      "CREATE-NEW-IOT-DEVICE": "Add IoT unit"
+    },
+    "QUESTION": {
+      "GIVE-APPLICATION-NAME": "Name application",
+      "APPLICATION-NAME-PLACEHOLDER": "Name of the application",
+      "GIVE-APPLICATION-DESCRIPTION": "Describe application",
+      "APPLICATION-DESCRIPTION-PLACEHOLDER": "Short description of the application"
+    },
+    "SORT": {
+      "SORT": "Sort by",
+      "UPDATED-ASCENDING": "Last updated: acsending",
+      "UPDATED-DESCENDING": "Last updated: faldende",
+      "CREATED-ASCENDING": "Created: acsending",
+      "CREATED-DESCENDING": "Created: faldende",
+      "NAME-ASCENDING": "Name: acsending",
+      "NAME-DESCENDING": "Name: faldende"
+    }
+}
+  

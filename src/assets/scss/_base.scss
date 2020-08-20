@@ -1,0 +1,21 @@
+body {
+    background-color: $grey-light;
+    font-family: roboto;
+    color: $black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+    font-family: roboto;
+    margin-bottom: 0;
+}
+
+.row {
+    margin-left: -1rem;
+    margin-right: -1rem;
+}

@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:12
+FROM node:12-alpine as DEV
 
 # removed this for now
 # install chrome for protractor tests
@@ -24,3 +24,8 @@ COPY . /app
 
 # start app
 CMD ng serve --host 0.0.0.0
+
+
+FROM DEV as PROD
+CMD ng serve --host 0.0.0.0 --configuration=production
+

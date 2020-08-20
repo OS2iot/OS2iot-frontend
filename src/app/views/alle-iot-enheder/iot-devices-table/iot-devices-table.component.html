@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>{{ 'APPLICATION-TABLE.NAME' | translate }}</th>
+      <th>{{ 'IOT-TABLE.NETWORK-TECHNOLOGY' | translate }}</th>
+      <th>{{ 'IOT-TABLE.ALARM' | translate }}</th>
+      <th>{{ 'IOT-TABLE.BATTERY' | translate }}</th>
+      <th>{{ 'IOT-TABLE.ACTIVE' | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let device of iotDevices" class="py-3" app-iot-devices-table-row [device]="device"
+      (deleteDevice)="deleteDevice($event)">
+    </tr>
+  </tbody>
+</table>
+
+
+<nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
+  <ul class="pagination justify-content-center mt-5">
+    <li class="page-item"><a class="page-link" [routerLink]="" (click)="prevPage()">Previous</a></li>
+    <li class="page-item disabled">
+      <div class="page-link" [routerLink]="">{{ pageOffset + 1 }} / {{ pageTotal }}</div>
+    </li>
+    <li class="page-item"><a class="page-link" [routerLink]="" (click)="nextPage()">Next</a></li>
+  </ul>
+</nav>
