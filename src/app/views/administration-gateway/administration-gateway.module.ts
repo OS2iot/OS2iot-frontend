@@ -9,6 +9,8 @@ import { AdminLoraTableComponent } from './admin-lora-table/admin-lora-table.com
 import { AdminLoraTableRowComponent } from './admin-lora-table-row/admin-lora-table-row.component';
 import { CreateLoraGatewayComponent } from './create-lora-gateway/create-lora-gateway.component';
 import { FormModule } from 'src/app/shared/form/form.module';
+import { EditGatewayComponent } from './edit-gateway/edit-gateway.component';
+import { GatewayComponent } from './gateway/gateway.component';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { FormModule } from 'src/app/shared/form/form.module';
     ListLoraGatewayComponent, 
     AdminLoraTableComponent, 
     AdminLoraTableRowComponent, 
-    CreateLoraGatewayComponent
+    CreateLoraGatewayComponent, 
+    EditGatewayComponent, GatewayComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { FormModule } from 'src/app/shared/form/form.module';
   exports: [
     MineLoraGatewaysComponent,
     ListLoraGatewayComponent,
-    CreateLoraGatewayComponent
+    CreateLoraGatewayComponent,
+    EditGatewayComponent
   ]
 })
 export class AdministrationGatewayModule { }

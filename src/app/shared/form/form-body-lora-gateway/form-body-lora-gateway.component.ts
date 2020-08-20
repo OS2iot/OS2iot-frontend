@@ -46,7 +46,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
 
   getGateway(id: number): void {
     this.gatewaySubscription = this.loraGatewayService
-        .get(id)
+        .get()
         .subscribe((gateway: any) => {
           this.form.controls['name'].setValue(gateway.name);
           this.form.controls['description'].setValue(

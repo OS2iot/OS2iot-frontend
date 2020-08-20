@@ -12,7 +12,7 @@ export class ChirpstackGatewayService {
 
   constructor(private restService: RestService) { }
 
-  public get(id: number = null, params = {}): Observable<any> {
+  public get(id: string = null, params = {}): Observable<any> {
     return this.restService.get(this.chripstackGatewayUrl, params, id)
   }
 
@@ -22,5 +22,9 @@ export class ChirpstackGatewayService {
 
   public put(body: any, id: number): Observable<GatewayData> {
     return this.restService.replace(this.chripstackGatewayUrl, body, id)
+  }
+
+  public delete(id: string): Observable<any> {
+    return this.restService.delete(this.chripstackGatewayUrl, id);
   }
 }

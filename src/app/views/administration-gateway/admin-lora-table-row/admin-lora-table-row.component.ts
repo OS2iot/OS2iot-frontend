@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Gateway } from 'src/app/models/gateway';
-import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'tr[app-admin-lora-table-row]',
@@ -13,7 +12,9 @@ export class AdminLoraTableRowComponent implements OnInit {
 
   @Input() gateway: Gateway;
 
-  //@Output() deleteGateway = new EventEmitter();
+  @Output() deleteGateway = new EventEmitter();
+  
+  private alertMessage: string;
 
   constructor(
     public translate: TranslateService,
@@ -26,12 +27,10 @@ export class AdminLoraTableRowComponent implements OnInit {
   }
 
   clickDelete() {
-    //this.deleteGateway.emit(this.gateway.id);
+    this.deleteGateway.emit(this.gateway.id);
   }
 
   navigateToEditPage(){
-    //this.router.navigate([])
+    this.router.navigate(['edit-gateway', this.gateway.id])
   }
-  
-
 }

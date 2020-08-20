@@ -7,6 +7,7 @@ export interface Gateway {
     organizationID: string;
     networkServerID: string;
     location: CommonLocation;
+    tags?: string;
     
     networkServerName?: string;
     createdAt?: string;
