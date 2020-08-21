@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
 import { BackButton } from 'src/app/models/back-button';
 
 @Component({

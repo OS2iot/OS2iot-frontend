@@ -1,22 +1,6 @@
 @import '~src/assets/scss/variables';
 
 .application-component {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-
-    @include media-breakpoint-up(sm) {
-        max-width: 960px;
-    }
-
-    @include media-breakpoint-up(md) {
-        max-width: 1040px;
-    }
-
-    @include media-breakpoint-up(xl) {
-        max-width: 1200px;
-    }
-
     .bottom-separator {
         min-height: 60px;
         border-bottom: $grey-separator solid 1px;

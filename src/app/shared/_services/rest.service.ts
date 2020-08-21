@@ -94,25 +94,6 @@ export class RestService {
             );
     }
 
-    public replace(
-        url: string,
-        object: any,
-        id?: string | number
-    ): Observable<any> {
-        const resourceUrl = this.createResourceUrl(url, id);
-        return this.http
-            .put(resourceUrl, object, { ...this.options, observe: 'response', })
-            .pipe(
-                tap((_) =>
-                    this.log({
-                        message: 'Succesfully updated',
-                        type: 'success',
-                    })
-                ),
-                catchError(this.handleError<any>('replace', []))
-            );
-    }
-
     public update(
         url: string,
         object: any,
@@ -151,6 +132,30 @@ export class RestService {
             ),
             catchError(this.handleError<any>('delete', []))
         );
+    }
+    
+    public replace(
+        url: string,
+        object: any,
+        id?: string | number,
+        params?: { [index: string]: any }
+    ): Observable<any> {
+        const resourceUrl = this.createResourceUrl(url, id);
+        const httpParams = this.buildParams(params);
+        return this.http
+            .put(resourceUrl, object, {
+                ...this.options,
+                params: httpParams,
+            })
+            .pipe(
+                tap((_) =>
+                    this.log({
+                        message: 'Succesfully updated',
+                        type: 'success',
+                    })
+                ),
+                // catchError(this.handleError<any>('replace', []))
+            );
     }
 
     public post(

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
 import { IotDevice } from 'src/app/models/iot-device';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
+import { BackButton } from 'src/app/models/back-button';
 
 @Component({
   selector: 'app-top-bar-single',
@@ -14,6 +15,7 @@ import { QuickActionButton } from 'src/app/models/quick-action-button';
 export class TopBarSingleComponent implements OnInit, OnChanges {
   @Input() data: Application | IotDevice;
   @Input() buttons?: QuickActionButton[];
+  @Input() backButton: BackButton;
   public title: string;
 
   // @Output() selectedSortChange = new EventEmitter();

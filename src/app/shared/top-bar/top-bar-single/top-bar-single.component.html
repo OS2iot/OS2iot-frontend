@@ -1,5 +1,6 @@
-<div class="row py-3 top-bar-wrapper">
+<div class="row top-bar-wrapper">
   <div class="col d-flex top-bar">
-    <h3>{{title}}</h3>
+    <a [routerLink]="backButton.routerLink" routerLinkActive="active" class="back-button py-3">{{backButton.label}}</a>
+    <h3 class="py-3">{{title}}</h3>
   </div>
 </div>

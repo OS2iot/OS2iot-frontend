@@ -1,37 +1,41 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { QuestionControlService } from '../../_services/question-control.service';
 import { RestService } from '../../_services/rest.service';
 
 import { Application } from 'src/app/models/application';
-import { QuestionBase } from 'src/app/models/question-base';
 import { ApplicationService } from '../../_services/application.service';
 import { HttpErrorResponse } from '@angular/common/http';
+
+export class User {
+    public name: string;
+    public email: string;
+    public password: string;
+    public hobbies: string;
+  }
 
 @Component({
     selector: 'app-form-body-application',
     templateUrl: './form-body-application.component.html',
-    styleUrls: ['./form-body-application.component.scss'],
-    providers: [QuestionControlService],
+    styleUrls: ['./form-body-application.component.scss']
 })
 export class FormBodyApplicationComponent implements OnInit, OnDestroy {
-    @Input() questions: QuestionBase<string>[] = [];
     @Input() submitButton: string;
-    public form: FormGroup;
     public payLoad = '';
     public applicationsSubscription: Subscription;
     public errorMessage: string;
     public errorMessages: any;
     public errorFields: string[];
+    public formFailedSubmit: boolean = false;
     private id: number;
 
+    application = new Application();
+    model = new User();
+
     constructor(
-        private qcs: QuestionControlService,
         private restService: RestService,
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
@@ -41,7 +45,6 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.translate.use('da');
-        this.form = this.qcs.toFormGroup(this.questions);
         this.id = +this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.getApplication(this.id);
@@ -52,16 +55,11 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.applicationsSubscription = this.restService
             .get('application', {}, id)
             .subscribe((application: Application) => {
-                this.form.controls['name'].setValue(application.name);
-                this.form.controls['description'].setValue(
-                    application.description
-                );
+                this.application = application;
             });
     }
 
     onSubmit(): void {
-        this.payLoad = JSON.stringify(this.form.getRawValue());
-
         if (this.id) {
             this.updateApplication(this.id);
         } else {
@@ -70,42 +68,45 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
 
     updateApplication(id: number): void {
-        this.restService
-            .replace('application', JSON.stringify(this.form.getRawValue()), id)
-            .subscribe((response) => {
-                if (response.ok) {
-                    this.router.navigateByUrl('/mine-applikationer');
-                } else {
-                    // TODO: MESSAGE SHOW ERRORS
-                }
-            });
-    }
-
-    postApplication(): void {
         this.applicationService
-            .createApplication(JSON.stringify(this.form.getRawValue()))
+            .updateApplication(this.application, id)
             .subscribe(
                 (response) => {
                     console.log(response);
                     this.router.navigateByUrl('/mine-applikationer');
                 },
                 (error: HttpErrorResponse) => {
-                    console.log('not ok', error.error);
                     this.errorFields = [];
                     this.errorMessages = [];
                     error.error.message.forEach((err) => {
                         this.errorFields.push(err.property);
-                        console.log('is array', Object.values(err.constraints));
                         this.errorMessages = this.errorMessages.concat(
                             Object.values(err.constraints)
                         );
                     });
+                    this.formFailedSubmit = true;
+                }
+            );
+    }
 
-                    console.log('questions', this.questions);
-                    this.questions.forEach((question) => {
-                        this.errorFields.includes(question.key) ? (question.error = true) : (question.error = false);
+    postApplication(): void {
+        this.applicationService
+            .createApplication(this.application)
+            .subscribe(
+                (response) => {
+                    console.log(response);
+                    this.router.navigateByUrl('/mine-applikationer');
+                },
+                (error: HttpErrorResponse) => {
+                    this.errorFields = [];
+                    this.errorMessages = [];
+                    error.error.message.forEach((err) => {
+                        this.errorFields.push(err.property);
+                        this.errorMessages = this.errorMessages.concat(
+                            Object.values(err.constraints)
+                        );
                     });
-                    console.log('errorFields', this.errorFields);
+                    this.formFailedSubmit = true;
                 }
             );
     }

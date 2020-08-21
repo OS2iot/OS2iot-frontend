@@ -1,6 +1,6 @@
-<div *ngIf="application">
-    <app-top-bar-single [data]="application"></app-top-bar-single>
-</div>
+<ng-container *ngIf="application">
+    <app-top-bar-single [data]="application" [backButton]="backButton"></app-top-bar-single>
+</ng-container>
 <div class="iot-device-component">
     <div class="bottom-separator">
         <div class="col-12 py-4">
