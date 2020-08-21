@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
-
-import { RestService } from 'src/app/shared/_services/rest.service';
 
 import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { IotDevice } from 'src/app/models/iot-device';
 import { ApplicationService } from '../../../shared/_services/application.service';
+import { BackButton } from 'src/app/models/back-button';
 
 @Component({
     selector: 'app-application',
@@ -20,6 +19,7 @@ import { ApplicationService } from '../../../shared/_services/application.servic
 export class ApplicationComponent implements OnInit {
     public applicationsSubscription: Subscription;
     public application: Application;
+    public backButton: BackButton = {label: '', routerLink: '/mine-applikationer'};
     private id: number;
     public pageLimit: number = 10;
     public selectedSortId: number = 6;
@@ -109,7 +109,6 @@ export class ApplicationComponent implements OnInit {
 
     constructor(
         private applicationService: ApplicationService,
-        private restService: RestService,
         private route: ActivatedRoute,
         public translate: TranslateService
     ) {}
@@ -119,16 +118,19 @@ export class ApplicationComponent implements OnInit {
         if (this.id) {
             this.bindApplication(this.id);
         }
+        this.translate.get(['NAV.MY-APPLICATIONS'])
+        .subscribe(translations => {
+          this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+        });
     }
 
     bindApplication(id: number): void {
-        this.applicationService.getApplication(id).subscribe((application) => {
+        this.applicationsSubscription = this.applicationService.getApplication(id).subscribe((application) => {
             this.application = application;
             this.name = application.name;
             this.description = application.description;
             if (application.iotDevices)
                 this.iotDevices = application.iotDevices;
-            console.log('application', this.application);
         });
     }
 

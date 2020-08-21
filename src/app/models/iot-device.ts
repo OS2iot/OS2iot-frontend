@@ -2,9 +2,9 @@ import { ReceivedMessageMetadata } from './received-message-metadata';
 import { Application } from './application';
 import { JsonLocation } from './Json-location';
 
-export interface IotDevice {
+export class IotDevice {
     name: string;
-    application: Application;
+    application?: Application;
     location: JsonLocation;
     commentOnLocation: string;
     comment: string;
@@ -15,6 +15,9 @@ export interface IotDevice {
     id: number;
     createdAt: Date;
     updatedAt: Date;
+    applicationId: number;
+    longitude: number;
+    latitude: number;
 }
 
 export interface IotDeviceData {

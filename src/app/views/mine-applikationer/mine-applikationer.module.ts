@@ -11,7 +11,6 @@ import { MineApplikationerComponent } from './mine-applikationer/mine-applikatio
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationsTableComponent } from './applications-table/applications-table.component';
 import { ApplicationsTableRowComponent } from './applications-table-row/applications-table-row.component';
-import { CreateApplicationComponent } from './create-application/create-application.component';
 import { EditApplicationComponent } from './edit-application/edit-application.component';
 import { ListApplicationsComponent } from './list-applications/list-applications.component';
 import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.module';
@@ -22,7 +21,6 @@ import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.modul
         ApplicationComponent,
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,
-        CreateApplicationComponent,
         EditApplicationComponent,
         ListApplicationsComponent,
     ],
@@ -31,7 +29,6 @@ import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.modul
         ApplicationComponent,
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,
-        CreateApplicationComponent,
     ],
     imports: [
         CommonModule,

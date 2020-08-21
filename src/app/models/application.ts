@@ -1,12 +1,12 @@
 import { IotDevice } from './iot-device';
 
-export interface Application {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    name: string;
-    description: string;
-    iotDevices?: IotDevice[];
+export class Application {
+    public id: number;
+    public createdAt: string;
+    public updatedAt: string;
+    public name: string;
+    public description: string;
+    public iotDevices?: IotDevice[];
 }
 
 export interface ApplicationData {

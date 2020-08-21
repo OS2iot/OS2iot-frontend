@@ -11,23 +11,22 @@ import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.
 import { IotDevicesTableRowComponent } from './iot-devices-table-row/iot-devices-table-row.component';
 import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
 import { ListIotDevicesComponent } from './list-iot-devices/list-iot-devices.component';
-import { CreateIotDevicesComponent } from './create-iot-devices/create-iot-devices.component';
 import { IoTDeviceComponent } from './iot-device/iot-device.component';
+import { EditIotDeviceComponent } from './edit-iot-device/edit-iot-device.component';
 
 @NgModule({
     declarations: [
         AlleIotEnhederComponent,
         IotDevicesTableComponent,
         ListIotDevicesComponent,
-        CreateIotDevicesComponent,
         IotDevicesTableRowComponent,
-        IoTDeviceComponent
+        IoTDeviceComponent,
+        EditIotDeviceComponent
     ],
     exports: [
         AlleIotEnhederComponent,
         IotDevicesTableComponent,
         ListIotDevicesComponent,
-        CreateIotDevicesComponent,
         IoTDeviceComponent
     ],
     imports: [
