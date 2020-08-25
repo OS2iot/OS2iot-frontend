@@ -19,7 +19,7 @@ import { BackButton } from 'src/app/models/back-button';
 export class ApplicationComponent implements OnInit {
     public applicationsSubscription: Subscription;
     public application: Application;
-    public backButton: BackButton = {label: '', routerLink: '/mine-applikationer'};
+    public backButton: BackButton = { label: '', routerLink: '/my-applications' };
     private id: number;
     public pageLimit: number = 10;
     public selectedSortId: number = 6;
@@ -111,7 +111,7 @@ export class ApplicationComponent implements OnInit {
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
         public translate: TranslateService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.id = +this.route.snapshot.paramMap.get('id');
@@ -119,9 +119,9 @@ export class ApplicationComponent implements OnInit {
             this.bindApplication(this.id);
         }
         this.translate.get(['NAV.MY-APPLICATIONS'])
-        .subscribe(translations => {
-          this.backButton.label = translations['NAV.MY-APPLICATIONS'];
-        });
+            .subscribe(translations => {
+                this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+            });
     }
 
     bindApplication(id: number): void {

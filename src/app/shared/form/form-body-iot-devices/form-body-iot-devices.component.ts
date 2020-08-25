@@ -38,7 +38,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         private router: Router,
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.translate.use('da');
@@ -80,7 +80,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
             () => {
                 this.router.navigate([
-                    'mine-applikationer/application',
+                    'my-applications/application',
                     this.iotDevice.applicationId,
                 ]);
             },
@@ -102,7 +102,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.iotDeviceService.updateIoTDevice(this.iotDevice, id).subscribe(
             () => {
                 this.router.navigate([
-                    'mine-applikationer/application',
+                    'my-applications/application',
                     this.application.id,
                 ]);
             },
@@ -121,7 +121,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     routeBack(): void {
-        this.router.navigateByUrl('/mine-applikationer');
+        this.router.navigateByUrl('/my-applications');
     }
 
     onCoordinateKey(event: any) {

@@ -8,7 +8,7 @@ import { BackButton } from 'src/app/models/back-button';
   styleUrls: ['./edit-application.component.scss']
 })
 export class EditApplicationComponent implements OnInit {
-  public backButton: BackButton = {label: '', routerLink: '/mine-applikationer'};
+  public backButton: BackButton = { label: '', routerLink: '/my-applications' };
   public multiPage: boolean = false;
   public title: string = '';
   public sectionTitle: string = '';
@@ -16,16 +16,16 @@ export class EditApplicationComponent implements OnInit {
 
   constructor(
     public translate: TranslateService
-    ) {
+  ) {
     translate.use('da');
   }
-  
+
   ngOnInit(): void {
     this.translate.get(['NAV.MY-APPLICATIONS', 'FORM.EDIT-NEW-APPLICATION', 'APPLICATION.SAVE'])
-    .subscribe(translations => {
-      this.backButton.label = translations['NAV.MY-APPLICATIONS'];
-      this.title = translations['FORM.EDIT-NEW-APPLICATION'];
-      this.submitButton = translations['APPLICATION.SAVE'];
-    });
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+        this.title = translations['FORM.EDIT-NEW-APPLICATION'];
+        this.submitButton = translations['APPLICATION.SAVE'];
+      });
   }
 }

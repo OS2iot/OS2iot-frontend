@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { FormModule } from 'src/app/shared/form/form.module';
 
-import { MineApplikationerComponent } from './mine-applikationer.component';
+import { MyApplicationsComponent } from './my-applications.component';
 import { ApplicationComponent } from './application/application.component';
 import { ApplicationsTableComponent } from './applications-table/applications-table.component';
 import { ApplicationsTableRowComponent } from './applications-table/applications-table-row/applications-table-row.component';
@@ -17,7 +17,7 @@ import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.modul
 
 @NgModule({
     declarations: [
-        MineApplikationerComponent,
+        MyApplicationsComponent,
         ApplicationComponent,
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,
@@ -25,7 +25,7 @@ import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.modul
         ListApplicationsComponent,
     ],
     exports: [
-        MineApplikationerComponent,
+        MyApplicationsComponent,
         ApplicationComponent,
         ApplicationsTableComponent,
         ApplicationsTableRowComponent,

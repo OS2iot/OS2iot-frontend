@@ -15,12 +15,12 @@ import { BackButton } from 'src/app/models/back-button';
 })
 export class IoTDeviceComponent implements OnInit, OnDestroy {
     public deviceId: number;
-    public backButton: BackButton = {label: '', routerLink: '/mine-applikationer'};
+    public backButton: BackButton = { label: '', routerLink: '/my-applications' };
     public application: Application;
     public latitude: number;
     public longitude: number;
     public iotDeviceSubscription: Subscription;
-    
+
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
@@ -31,7 +31,7 @@ export class IoTDeviceComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
@@ -41,9 +41,9 @@ export class IoTDeviceComponent implements OnInit, OnDestroy {
         }
 
         this.translate.get(['NAV.MY-APPLICATIONS'])
-        .subscribe(translations => {
-          this.backButton.label = translations['NAV.MY-APPLICATIONS'];
-        });
+            .subscribe(translations => {
+                this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+            });
     }
 
     bindIoTDeviceAndApplication(deviceId: number) {

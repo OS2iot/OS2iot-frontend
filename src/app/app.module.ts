@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { DashboardModule } from './views/dashboard/dashboard.module';
-import { MineApplikationerModule } from './views/mine-applikationer/mine-applikationer.module';
+import { MineApplikationerModule } from './views/my-applications/my-applications.module';
 import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,4 +46,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     bootstrap: [AppComponent],
     exports: [TranslateModule],
 })
-export class AppModule {}
+export class AppModule { }
