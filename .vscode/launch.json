@@ -1,13 +1,19 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "firefox",
-            "request": "launch",
-            "reAttach": true,
-            "name": "Launch localhost",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [{
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "name": "Launch localhost with Firefox",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch localhost with Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+  ]
 }

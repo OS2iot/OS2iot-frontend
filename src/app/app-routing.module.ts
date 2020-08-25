@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
-import { MineApplikationerComponent } from './views/mine-applikationer/mine-applikationer/mine-applikationer.component';
+import { MineApplikationerComponent } from './views/mine-applikationer/mine-applikationer.component';
 import { EditApplicationComponent } from './views/mine-applikationer/edit-application/edit-application.component';
 import { ListApplicationsComponent } from './views/mine-applikationer/list-applications/list-applications.component';
 import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
@@ -51,4 +51,4 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
