@@ -7,28 +7,15 @@ import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminLoraTableComponent } from './admin-lora-table/admin-lora-table.component';
 import { AdminLoraTableRowComponent } from './admin-lora-table-row/admin-lora-table-row.component';
-<<<<<<< HEAD
 import { FormModule } from 'src/app/shared/form/form.module';
 import { EditGatewayComponent } from './edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './gateway/gateway.component';
-=======
-import { CreateLoraGatewayComponent } from './create-lora-gateway/create-lora-gateway.component';
-import { FormModule } from 'src/app/shared/form/form.module';
-import { EditGatewayComponent } from './edit-gateway/edit-gateway.component';
-import { GatewayComponent } from './gateway/gateway.component';
-
-
->>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
 @NgModule({
   declarations: [
     MineLoraGatewaysComponent, 
     ListLoraGatewayComponent, 
     AdminLoraTableComponent, 
     AdminLoraTableRowComponent, 
-<<<<<<< HEAD
-=======
-    CreateLoraGatewayComponent, 
->>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
     EditGatewayComponent, GatewayComponent
   ],
   imports: [
@@ -41,10 +28,6 @@ import { GatewayComponent } from './gateway/gateway.component';
   exports: [
     MineLoraGatewaysComponent,
     ListLoraGatewayComponent,
-<<<<<<< HEAD
-=======
-    CreateLoraGatewayComponent,
->>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
     EditGatewayComponent
   ]
 })

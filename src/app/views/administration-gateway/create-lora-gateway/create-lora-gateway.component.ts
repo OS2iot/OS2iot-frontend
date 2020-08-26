@@ -20,9 +20,9 @@ export class CreateLoraGatewayComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.translate.get(['NAV.MINE-LORA-GATEWAYS', 'FORM.CREATE-NEW-LORA-GATEWAY', 'LORA-GATEWAY.CREATE'])
+    this.translate.get(['NAV.MY-LORA-GATEWAYS', 'FORM.CREATE-NEW-LORA-GATEWAY', 'LORA-GATEWAY.CREATE'])
     .subscribe( translations => {
-      this.backButton.label = translations['NAV.MINE-LORA-GATEWAYS']
+      this.backButton.label = translations['NAV.MY-LORA-GATEWAYS']
       this.title = translations['FORM.CREATE-NEW-LORA-GATEWAY']
       this.submitButton = translations['LORA-GATEWAY.CREATE']
     });
