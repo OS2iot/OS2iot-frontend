@@ -1,6 +1,6 @@
 import { CommonLocation } from './common-location';
 
-export interface Gateway {
+export class Gateway {
     id: string;
     name: string;
     description: string;
@@ -16,8 +16,8 @@ export interface Gateway {
     lastSeenAt?: string;
 }
 
-export interface GatewayData {
-    date: Gateway[];
+export class GatewayData {
+    data: Gateway[];
     ok?: boolean;
     count?: number;
 }
