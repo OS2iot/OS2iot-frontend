@@ -4,9 +4,15 @@
         [sort]="sort" 
         [(selectedSortId)]="selectedSortId" 
         [pageLimit]="pageLimit"
+<<<<<<< HEAD
         [title]="'NAV.MY-LORA-GATEWAYS' | translate" 
         [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate"
         [ctaRouterLink]="'edit-gateway'"
+=======
+        [title]="'NAV.MINE-LORA-GATEWAYS' | translate" 
+        [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate"
+        [ctaRouterLink]="'create-lora-gateway'"
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
         (updatePageLimit)="updatePageLimit($event)"
         (selectedSortChange)="changeSort($event)">
       </app-top-bar>
@@ -14,4 +20,8 @@
     <div class="row">
       <app-admin-lora-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-admin-lora-table>
     </div>
+<<<<<<< HEAD
   </div>
+=======
+  </div>
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20

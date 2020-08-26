@@ -1,7 +1,7 @@
 export class CommonLocation {
-    longitude: number = 0;
-    latitude: number = 0;
-    altitude: number = 0;
+    longitude?: number;
+    latitude?: number;
+    altitude?: number;
     source?:
         | "UNKNOWN"
         | "GPS"

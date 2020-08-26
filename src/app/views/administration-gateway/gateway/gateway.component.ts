@@ -5,8 +5,11 @@ import { Sort } from 'src/app/models/sort';
 import { ChirpstackGatewayService } from 'src/app/shared/_services/chirpstack-gateway.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+<<<<<<< HEAD
 import { BackButton } from 'src/app/models/back-button';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
+=======
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
 
 @Component({
   selector: 'app-gateway',
@@ -17,7 +20,10 @@ export class GatewayComponent implements OnInit {
 
   public gatewaySubscription: Subscription;
   public gateway: Gateway;
+<<<<<<< HEAD
   public backButton: BackButton = {label: '', routerLink: '/mine-lora-gateways'};
+=======
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
   private id: string;
   public pageLimit: number = 10;
   public pageOffset: number = 0;
@@ -91,12 +97,15 @@ export class GatewayComponent implements OnInit {
         label: 'SORT.BATTERY-DESCENDING',
     },
   ];
+<<<<<<< HEAD
   public buttons: QuickActionButton[] = [
     {
         label: 'GEN.EDIT',
         type: 'edit',
     },
 ];
+=======
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
 
   constructor(
       private gatewayService: ChirpstackGatewayService,
@@ -109,6 +118,7 @@ export class GatewayComponent implements OnInit {
         if (this.id) {
             this.bindGateway(this.id);
         }
+<<<<<<< HEAD
     this.translate.get(['NAV.MY-LORA-GATEWAYS'])
     .subscribe(translations => {
         this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
@@ -118,6 +128,13 @@ export class GatewayComponent implements OnInit {
   bindGateway(id: string): void {
     this.gatewayService.get(id).subscribe((result: any) => {
         this.gateway = result.result[0];
+=======
+  }
+
+  bindGateway(id: string): void {
+    this.gatewayService.get(id).subscribe((gateway) => {
+        this.gateway = gateway.gateway;
+>>>>>>> 3ee7b3c843dc961636720e3d5594eb6b515a1f20
         console.log('gateway', this.gateway);
     });
   }
