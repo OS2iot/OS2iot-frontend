@@ -6,7 +6,7 @@ export class Gateway {
     description: string;
     organizationID: string;
     networkServerID: string;
-    location: CommonLocation;
+    location: CommonLocation = new CommonLocation;
     tags?: string;
     
     networkServerName?: string;
