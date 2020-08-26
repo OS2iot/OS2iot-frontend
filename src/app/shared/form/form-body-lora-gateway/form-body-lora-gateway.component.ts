@@ -45,8 +45,8 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   getGateway(id: string): void {
     this.gatewaySubscription = this.loraGatewayService
         .get()
-        .subscribe((gateway: Gateway) => {
-          this.gateway = gateway.result[0]
+        .subscribe((result: any) => {
+          this.gateway = result.result[0]
         });
   }
 
