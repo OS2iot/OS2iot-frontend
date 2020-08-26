@@ -5,6 +5,8 @@ import { Sort } from 'src/app/models/sort';
 import { ChirpstackGatewayService } from 'src/app/shared/_services/chirpstack-gateway.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BackButton } from 'src/app/models/back-button';
+import { QuickActionButton } from 'src/app/models/quick-action-button';
 
 @Component({
   selector: 'app-gateway',
@@ -15,6 +17,7 @@ export class GatewayComponent implements OnInit {
 
   public gatewaySubscription: Subscription;
   public gateway: Gateway;
+  public backButton: BackButton = {label: '', routerLink: '/mine-lora-gateways'};
   private id: string;
   public pageLimit: number = 10;
   public pageOffset: number = 0;
@@ -88,6 +91,12 @@ export class GatewayComponent implements OnInit {
         label: 'SORT.BATTERY-DESCENDING',
     },
   ];
+  public buttons: QuickActionButton[] = [
+    {
+        label: 'GEN.EDIT',
+        type: 'edit',
+    },
+];
 
   constructor(
       private gatewayService: ChirpstackGatewayService,
@@ -100,6 +109,10 @@ export class GatewayComponent implements OnInit {
         if (this.id) {
             this.bindGateway(this.id);
         }
+    this.translate.get(['NAV.MY-LORA-GATEWAYS'])
+    .subscribe(translations => {
+        this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
+    });
   }
 
   bindGateway(id: string): void {

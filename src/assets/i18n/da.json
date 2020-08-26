@@ -12,7 +12,7 @@
       "DASHBOARD": "Dashboard",
       "MY-APPLICATIONS": "Mine applikationer",
       "ALL-IOT-DEVICES": "Alle IoT enheder",
-      "MINE-LORA-GATEWAYS": "Mine LoRaWan Gateways"
+      "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
@@ -23,8 +23,10 @@
       "ATTACHED-IOT": "Tilknyttede IoT enheder"
     },
     "GATEWAY": {
-      "DESCRIPTION":"LoRaWAN Gateway beskrivelse"
-
+      "DESCRIPTION":"LoRaWAN Gateway beskrivelse",
+      "LONGITUDE": "Længdegrad",
+      "LATITUDE":"Breddegrad",
+      "ALTITUDE":"Højde"
     },
     "IOT-DEVICE": {
       "CREATE": "Opret IoT enhed",

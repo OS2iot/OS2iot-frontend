@@ -4,9 +4,9 @@
         [sort]="sort" 
         [(selectedSortId)]="selectedSortId" 
         [pageLimit]="pageLimit"
-        [title]="'NAV.MINE-LORA-GATEWAYS' | translate" 
+        [title]="'NAV.MY-LORA-GATEWAYS' | translate" 
         [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate"
-        [ctaRouterLink]="'create-lora-gateway'"
+        [ctaRouterLink]="'edit-gateway'"
         (updatePageLimit)="updatePageLimit($event)"
         (selectedSortChange)="changeSort($event)">
       </app-top-bar>

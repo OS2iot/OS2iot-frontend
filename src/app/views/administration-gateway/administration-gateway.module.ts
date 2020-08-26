@@ -7,19 +7,15 @@ import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminLoraTableComponent } from './admin-lora-table/admin-lora-table.component';
 import { AdminLoraTableRowComponent } from './admin-lora-table-row/admin-lora-table-row.component';
-import { CreateLoraGatewayComponent } from './create-lora-gateway/create-lora-gateway.component';
 import { FormModule } from 'src/app/shared/form/form.module';
 import { EditGatewayComponent } from './edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './gateway/gateway.component';
-
-
 @NgModule({
   declarations: [
     MineLoraGatewaysComponent, 
     ListLoraGatewayComponent, 
     AdminLoraTableComponent, 
     AdminLoraTableRowComponent, 
-    CreateLoraGatewayComponent, 
     EditGatewayComponent, GatewayComponent
   ],
   imports: [
@@ -32,7 +28,6 @@ import { GatewayComponent } from './gateway/gateway.component';
   exports: [
     MineLoraGatewaysComponent,
     ListLoraGatewayComponent,
-    CreateLoraGatewayComponent,
     EditGatewayComponent
   ]
 })
