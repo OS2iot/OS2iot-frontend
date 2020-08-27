@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBodyApplicationComponent } from './form-body-application/form-body-application.component';
 import { FormBodyIotDevicesComponent } from './form-body-iot-devices/form-body-iot-devices.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormBodyDatatargetComponent } from './form-body-datatarget/form-body-datatarget.component';
 import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body-lora-gateway.component';
 
 
@@ -17,6 +18,7 @@ import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body
     FormBodyApplicationComponent,
     FormBodyIotDevicesComponent,
     FormBodyLoraGatewayComponent,
+    FormBodyDatatargetComponent,
   ],
   imports: [
     CommonModule,

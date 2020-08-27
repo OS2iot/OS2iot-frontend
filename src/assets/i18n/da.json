@@ -12,7 +12,8 @@
       "DASHBOARD": "Dashboard",
       "MY-APPLICATIONS": "Mine applikationer",
       "ALL-IOT-DEVICES": "Alle IoT enheder",
-      "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways"
+      "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
+      "DATATARGET": "Datatarget"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
@@ -33,6 +34,9 @@
       "SAVE": "Gem IoT enhed",
       "DELETE": "Slet IoT enhed",
       "RESTART": "Genstart IoT enhed"
+    },
+    "DATATARGET": {
+      "CREATE": "Opret datatarget"
     },
     "APPLICATION-TABLE": {
       "NAME": "NAVN",
@@ -60,6 +64,10 @@
     "LORA-GATEWAY": {
       "CREATE":"Opret LoRaWan Gateway"
     },
+    "DATATARGET-TABLE": {
+      "NAME": "Navn",
+      "TYPE": "Type"
+    },
     "IOT-DEVICE-TYPES": {
       "GENERIC_HTTP": "Generisk HTTP"
     },
@@ -82,6 +90,7 @@
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
+      "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
       "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
       "EDIT-NEW-APPLICATION": "Redigér applikation",
@@ -104,7 +113,12 @@
       "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
       "LOCATION-DESCRIPTION": "Beskrivelse af placering",
       "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
-      "CHOOSE-APPLICATION": "Vælg applikation"
+      "CHOOSE-APPLICATION": "Vælg applikation",
+      "GIVE-DATATARGET-NAME": "Navngiv datatarget",
+      "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
+      "GIVE-DATATARGET-TIMEOUT": "Timeout",
+      "GIVE-DATATARGET-URL": "Angiv datatargets URL",
+      "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data"
     },
     "QUESTION-LORA-GATEWAY": {
       "NAME": "Navngiv LoRaWAN Gateway",

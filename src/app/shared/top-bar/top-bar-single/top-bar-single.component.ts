@@ -6,6 +6,7 @@ import { Application } from 'src/app/models/application';
 import { IotDevice } from 'src/app/models/iot-device';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { BackButton } from 'src/app/models/back-button';
+import { Datatarget } from 'src/app/models/datatarget';
 
 @Component({
   selector: 'app-top-bar-single',
@@ -13,7 +14,7 @@ import { BackButton } from 'src/app/models/back-button';
   styleUrls: ['./top-bar-single.component.scss']
 })
 export class TopBarSingleComponent implements OnInit, OnChanges {
-  @Input() data: Application | IotDevice;
+  @Input() data: Application | IotDevice | Datatarget;
   @Input() buttons?: QuickActionButton[];
   @Input() backButton: BackButton;
   public title: string;

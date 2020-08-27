@@ -1,0 +1,19 @@
+<div class="px-5 py-4">
+  <div class="row mb-5">
+    <app-top-bar 
+      [sort]="sort" 
+      [(selectedSortId)]="selectedSortId" 
+      [pageLimit]="pageLimit"
+      [title]="'NAV.DATATARGET' | translate" 
+      [ctaLabel]="'FORM.CREATE-NEW-DATATARGET' | translate"
+      [ctaRouterLink]="'datatarget-edit'" 
+      (updatePageLimit)="updatePageLimit($event)"
+      (selectedSortChange)="changeSort($event)"></app-top-bar>
+  </div>
+  <div class="row">
+    <app-datatarget-table 
+      [selectedSortObject]="selectedSortObject" 
+      [pageLimit]="pageLimit">
+    </app-datatarget-table>
+  </div>
+</div>
