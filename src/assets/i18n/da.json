@@ -13,7 +13,8 @@
       "MY-APPLICATIONS": "Mine applikationer",
       "ALL-IOT-DEVICES": "Alle IoT enheder",
       "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
-      "DATATARGET": "Datatarget"
+      "DATATARGET": "Datatarget",
+      "MY-DATATARGET": "Tilbage"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
@@ -36,7 +37,8 @@
       "RESTART": "Genstart IoT enhed"
     },
     "DATATARGET": {
-      "CREATE": "Opret datatarget"
+      "CREATE": "Opret datatarget",
+      "DESCRIPTION": "Beskrivelse"
     },
     "APPLICATION-TABLE": {
       "NAME": "NAVN",

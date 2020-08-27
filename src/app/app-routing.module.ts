@@ -13,6 +13,7 @@ import { EditGatewayComponent } from './views/administration-gateway/edit-gatewa
 import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
 import { DatatargetEditComponent } from './views/datatarget/datatarget-edit/datatarget-edit.component';
+import { DatatargetComponent } from './views/datatarget/datatarget/datatarget.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -41,10 +42,11 @@ const routes: Routes = [
                         component: IoTDeviceComponent,
                     },
                     {
-                        path: 'datatarget', 
+                        path: 'datatarget-list', 
                         children: [
-                            {path: '', component: DatatargetListComponent},
-                            {path: 'datatarget-edit', component: DatatargetEditComponent}
+                            { path: '', component: DatatargetListComponent},
+                            { path: 'datatarget-edit', component: DatatargetEditComponent},
+                            { path: 'datatarget/:id', component: DatatargetComponent}
                         ]
                         
                     }

@@ -1,1 +1,27 @@
-<p>datatarget works!</p>
+<ng-container *ngIf="datatarget">
+    <app-top-bar-single [data]="datatarget" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+    <div class="px-5">
+      <div class="application-component">
+        <div class="col-12 mb-4 py-3 bottom-separator">
+          <div class="col-12 col-sm-4">
+            <h4>{{ 'DATATARGET.DESCRIPTION' | translate }}</h4>
+          </div>
+          <div class="col-12 pt-2 col-sm-8">
+            <p>{{datatarget.name}}</p>
+          </div>
+          <div class="col-12 pt-2 col-sm-8">
+            <p>{{datatarget.name}}</p>
+          </div>
+          <div class="col-12 pt-2 col-sm-8">
+            <p>{{datatarget.url}}</p>
+          </div>
+          <div class="col-12 pt-2 col-sm-8">
+            <p>{{datatarget.timeout}}</p>
+          </div>
+          <div class="col-12 pt-2 col-sm-8">
+            <p>{{datatarget.type}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>

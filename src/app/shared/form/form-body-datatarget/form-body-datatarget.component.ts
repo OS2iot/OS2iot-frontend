@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatargetService } from '../../_services/datatarget.service';
 import { Location } from '@angular/common';
+import { DatatargetResponse } from 'src/app/models/datatarget-response';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -68,7 +69,7 @@ export class FormBodyDatatargetComponent implements OnInit {
   }
 
   routeBack(): void {
-    this.router.navigateByUrl('/mine-applikationer/');
+    this.location.back()
   }
 
   onCoordinateKey(event: any) {
@@ -84,8 +85,8 @@ export class FormBodyDatatargetComponent implements OnInit {
   getDatatarget(id: number){
     this.datatargetSubscription = this.datatargetService
       .getDatatarget(id)
-      .subscribe((datatargetData: DatatargetData) => {
-        this.datatarget = datatargetData.data[0];
+      .subscribe((datatargetResponse: DatatargetResponse) => {
+        //this.datatarget = datatargetResponse.data[0];
       });
   }
 

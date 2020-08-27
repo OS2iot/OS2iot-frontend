@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { DatatargetData, Datatarget } from 'src/app/models/datatarget';
 import { SortDir, SortCol } from 'src/app/models/sort';
 import { RestService } from './rest.service';
+import { DatatargetResponse } from 'src/app/models/datatarget-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class DatatargetService {
 
   constructor(private restService: RestService) { }
 
-  getDatatarget(id: number): Observable<DatatargetData> {
+  getDatatarget(id: number): Observable<DatatargetResponse> {
     return this.restService.get(this.url, null, id);
   }
 
