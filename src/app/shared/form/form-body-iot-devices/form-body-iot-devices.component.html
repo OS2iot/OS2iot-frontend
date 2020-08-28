@@ -70,7 +70,7 @@
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="comment">{{'IOTDEVICE.COMMENT' | translate}}</label>
       <input type="text" class="form-control" id="comment" name="comment"
-        [placeholder]="'QUESTION.EXTRA-COMMENT-PLACEHOLDER' | translate" maxLength="50" [(ngModel)]="iotDevice.comment"
+        [placeholder]="'QUESTION.EXTRA-COMMENT-PLACEHOLDER' | translate" maxLength="1024" [(ngModel)]="iotDevice.comment"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('comment'), 'is-valid' : formFailedSubmit && !errorFields.includes('comment')}">
     </div>
 
