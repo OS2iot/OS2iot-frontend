@@ -43,4 +43,8 @@ export class DatatargetService {
     return this.restService.post(this.url,datatarget);
   }
 
+  delete(id: number) {
+    return this.restService.delete(this.url,id);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { Datatarget, DatatargetData } from 'src/app/models/datatarget';
 import { Sort } from 'src/app/models/sort';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './datatarget-table.component.html',
   styleUrls: ['./datatarget-table.component.scss']
 })
-export class DatatargetTableComponent implements OnInit {
+export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
   
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
@@ -22,23 +22,15 @@ export class DatatargetTableComponent implements OnInit {
   private datatargetSubscription: Subscription;
 
   constructor(
-        private datatargetService: DatatargetService, 
-        public translate: TranslateService) {
-            translate.use('da');
-         }
+    private datatargetService: DatatargetService, 
+    public translate: TranslateService) {
+        translate.use('da');
+    }
 
   ngOnInit(): void {
   }
 
   ngOnChanges() {
-      this.datatargets = [{
-        name: "ert", 
-        id: '123', 
-        applicationId: 2, 
-        type: DataTargetType.HttpPush, 
-        url:'',
-        authorizationHeader:'',
-        timeout: 2}]
     this.getDatatarget();
   }
 
@@ -59,11 +51,11 @@ export class DatatargetTableComponent implements OnInit {
   }
 
   deleteDatatarget(id: number) {
-     /*  this.applicationService.deleteApplication(id).subscribe((response) => {
+      this.datatargetService.delete(id).subscribe((response) => {
           if (response.ok && response.body.affected > 0) {
               this.getDatatarget();
           }
-      }); */
+      });
   }
 
   prevPage() {

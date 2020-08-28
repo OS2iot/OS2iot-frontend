@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 export class DatatargetTableRowComponent implements OnInit {
 
   @Input() datatarget: Datatarget;
-  //@Output() deleteDatatarget = new EventEmitter();
+  @Output() deleteDatatarget = new EventEmitter();
 
   private alertMessage: string;
 
-  constructor(private translate: TranslateService, 
+  constructor(
+    private translate: TranslateService, 
     private router: Router) { 
       translate.use('da');
     }
@@ -24,11 +25,12 @@ export class DatatargetTableRowComponent implements OnInit {
   }
 
   clickDelete() {
-    console.log('delete datatarget')
+    //console.log('delete datatarget')
+    this.deleteDatatarget.emit(this.datatarget.id);
   }
 
   navigateToEditPage() {
-    //this.router.navigate(['edit-datatarget', this.detatarget.id]);
-}
+    //this.router.navigate(['edit-datatarget', this.detatarget.id]);  
+  }
 
 }
