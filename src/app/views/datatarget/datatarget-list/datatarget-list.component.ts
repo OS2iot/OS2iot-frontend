@@ -12,7 +12,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DatatargetListComponent implements OnInit {
 
-  public applicationId: number;
   public pageLimit: number = 10;
   public sort: Sort[] = [
       {
@@ -59,6 +58,7 @@ export class DatatargetListComponent implements OnInit {
       col: 'name',
       label: 'SORT.NAME-DESCENDING',
   };
+  public title: string;
 
   public backButton: BackButton = {label: '', routerLink: '/mine-applikationer'};
   public datatarget: Datatarget;
@@ -70,7 +70,13 @@ export class DatatargetListComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    const applikationName: string = this.route.snapshot.paramMap.get('name'); 
+    this.translate.get(["NAV.DATATARGET"])
+        .subscribe((translate) => {
+            this.title = translate['NAV.DATATARGET'] + ' - ' + applikationName
+        })
   }
+
   updatePageLimit(limit: any) {
     console.log(limit);
   }

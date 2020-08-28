@@ -42,7 +42,7 @@ const routes: Routes = [
                         component: IoTDeviceComponent,
                     },
                     {
-                        path: 'datatarget-list', 
+                        path: 'datatarget-list/:name', 
                         children: [
                             { path: '', component: DatatargetListComponent},
                             { path: 'datatarget-edit', component: DatatargetEditComponent},

@@ -30,10 +30,10 @@ export class DatatargetEditComponent implements OnInit {
 
   ngOnInit() {
     this.translate
-      .get(['FORM.CREATE-NEW-DATATARGET', 'DATATARGET.CREATE'])
+      .get(['FORM.CREATE-NEW-DATATARGET', 'DATATARGET.SAVE'])
       .subscribe((translations) => {
           this.title = translations['FORM.CREATE-NEW-DATATARGET'];
-          this.submitButton = translations['DATATARGET.CREATE'];
+          this.submitButton = translations['DATATARGET.SAVE'];
       });
   }
 

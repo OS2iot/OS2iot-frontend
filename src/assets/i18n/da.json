@@ -14,7 +14,8 @@
       "ALL-IOT-DEVICES": "Alle IoT enheder",
       "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
       "DATATARGET": "Datatarget",
-      "MY-DATATARGET": "Tilbage"
+      "MY-DATATARGET": "Tilbage",
+      "DATATARGET-APPLIKATION": "for applikation:"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
@@ -37,7 +38,7 @@
       "RESTART": "Genstart IoT enhed"
     },
     "DATATARGET": {
-      "CREATE": "Opret datatarget",
+      "SAVE": "Gem datatarget",
       "DESCRIPTION": "Beskrivelse"
     },
     "APPLICATION-TABLE": {

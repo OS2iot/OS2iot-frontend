@@ -19,9 +19,9 @@
           [application]="application"></app-iot-devices-table>
       </div>
     </div>
-  </div>
-  <div>
-    <a [routerLink]="['datatarget-list']" 
-      routerLinkActive="active" class="application-link">datatarget</a>
+    <div class="ml-auto d-flex">
+      <button class='btn btn-primary' type="button" [routerLink]="['datatarget-list', application.name]" 
+        routerLinkActive="active" class="application-link">datatarget</button>
+    </div>
   </div>
 </ng-container>
