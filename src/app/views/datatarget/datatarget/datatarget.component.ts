@@ -118,7 +118,7 @@ export class DatatargetComponent implements OnInit {
   }
 
   getDatatarget(id: number) {
-    this.datatargetService.getDatatarget(id)
+    this.datatargetService.get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = datatargetResponse;
       });

@@ -89,6 +89,10 @@
       "EDIT": "Redigér",
       "SHOW-OPTIONS": "Vis muligheder"
     },
+    "DATATARGET-TABLE-ROW": {
+      "DELETE":"Slet datatarget",
+      "EDIT": "Redigér"
+    },
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
       "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",

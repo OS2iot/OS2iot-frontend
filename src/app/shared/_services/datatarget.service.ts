@@ -14,15 +14,12 @@ export class DatatargetService {
 
   constructor(private restService: RestService) { }
 
-  getDatatarget(id: number): Observable<DatatargetResponse> {
+  get(id: number): Observable<DatatargetResponse> {
     return this.restService.get(this.url, null, id);
   }
 
-  getDatatargets(
-    limit: number,
-    offset: number,
-    sort: SortDir,
-    orderOn: SortCol
+  getMulitple(
+    limit: number,offset: number, sort: SortDir, orderOn: SortCol
   ): Observable<DatatargetData> {
     const body = {
       limit: limit,
@@ -34,7 +31,7 @@ export class DatatargetService {
     return this.restService.get(this.url, body)
   }
 
-  update(datatarget: Datatarget): Observable<DatatargetData> {
+  update(datatarget: Datatarget): Observable<DatatargetResponse> {
     return this.restService.replace(this.url,datatarget,datatarget.id,{observe: 'response'});
 
   }

@@ -46,6 +46,7 @@ const routes: Routes = [
                         children: [
                             { path: '', component: DatatargetListComponent},
                             { path: 'datatarget-edit', component: DatatargetEditComponent},
+                            { path: 'datatarget-edit/:id', component: DatatargetEditComponent},
                             { path: 'datatarget/:id', component: DatatargetComponent}
                         ]
                         

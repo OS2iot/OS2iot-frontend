@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DatatargetService } from '../../_services/datatarget.service';
 import { Location } from '@angular/common';
 import { DatatargetResponse } from 'src/app/models/datatarget-response';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -36,9 +37,9 @@ export class FormBodyDatatargetComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.id = +this.route.snapshot.paramMap.get('datatargetID');
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.applicationId = +this.route.parent.parent.snapshot.paramMap.get('id');
-    if (this.id) {
+    if (this.id != 0) {
       this.getDatatarget(this.id)
     }
   }
@@ -54,9 +55,22 @@ export class FormBodyDatatargetComponent implements OnInit {
 
   updateDatatarget() {
     this.datatargetService.update(this.datatarget)
-      .subscribe((datatargetData: DatatargetData) => {
-        this.datatarget = datatargetData.data[0]
-      })
+      .subscribe(
+        (datatargetResponse: DatatargetResponse) => {
+        this.datatarget = this.mapToDatatarget(datatargetResponse)
+        },
+        (error: HttpErrorResponse) => {
+          this.errorFields = [];
+          this.errorMessages = [];
+          error.error.message.forEach((err) => {
+              this.errorFields.push(err.property);
+              this.errorMessages = this.errorMessages.concat(
+                  Object.values(err.constraints)
+              );
+          });
+          this.formFailedSubmit = true;
+        }
+      )
   }
 
   createDatatarget() {
@@ -84,10 +98,22 @@ export class FormBodyDatatargetComponent implements OnInit {
 
   getDatatarget(id: number){
     this.datatargetSubscription = this.datatargetService
-      .getDatatarget(id)
+      .get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
-        //this.datatarget = datatargetResponse.data[0];
+        this.datatarget = this.mapToDatatarget(datatargetResponse);
       });
+  }
+
+  private mapToDatatarget(data: DatatargetResponse): Datatarget {
+    const dt: Datatarget = {
+      id: data.id, 
+      name: data.name,
+      timeout: data.timeout,
+      type: data.type,
+      url: data.url,
+      authorizationHeader: null,
+      applicationId: data.application.id}
+    return dt
   }
 
 }

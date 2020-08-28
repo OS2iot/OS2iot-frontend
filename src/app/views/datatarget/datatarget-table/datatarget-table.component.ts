@@ -36,7 +36,7 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
 
   getDatatarget(): void {
       this.datatargetSubscription = this.datatargetService
-          .getDatatargets(
+          .getMulitple(
               this.pageLimit,
               this.pageOffset * this.pageLimit,
               this.selectedSortObject.dir,
