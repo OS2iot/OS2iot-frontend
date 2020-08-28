@@ -92,7 +92,7 @@
 
   <div class="form-group mt-5">
     <label class="form-label" for="commentOnLocation">{{'QUESTION.LOCATION-DESCRIPTION' | translate}}</label>
-    <input type="text" id="commentOnLocation" name="commentOnLocation"
+    <input type="text" id="commentOnLocation" name="commentOnLocation" maxLength="1024"
       [placeholder]="'QUESTION.LOCATION-DESCRIPTION-PLACEHOLDER' | translate" class="form-control"
       [(ngModel)]="iotDevice.commentOnLocation"
       [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('commentOnLocation'), 'is-valid' : formFailedSubmit && !errorFields.includes('commentOnLocation')}">
