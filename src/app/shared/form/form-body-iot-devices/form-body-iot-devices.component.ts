@@ -27,6 +27,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     public formFailedSubmit: boolean = false;
     public applications: Application[];
     private id: number;
+    public disableChoseApplication: boolean = true;
 
     private applicationsSubscription: Subscription;
 
@@ -47,6 +48,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
 
         if (this.iotDevice.applicationId && this.id) {
             this.getDevice(this.iotDevice.applicationId);
+            this.disableChoseApplication = false;
         }
 
         this.getApplications();
