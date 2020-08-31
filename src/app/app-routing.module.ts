@@ -7,6 +7,7 @@ import { ListApplicationsComponent } from './views/my-applications/list-applicat
 import { ApplicationComponent } from './views/my-applications/application/application.component';
 import { IoTDeviceComponent } from './views/alle-iot-enheder/iot-device/iot-device.component';
 import { EditIotDeviceComponent } from './views/alle-iot-enheder/edit-iot-device/edit-iot-device.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
             },
         ],
     },
+    { path: 'profiles', component: ProfilesComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

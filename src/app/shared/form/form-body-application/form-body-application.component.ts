@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { RestService } from '../../_services/rest.service';
+import { RestService } from '../../services/rest.service';
 
 import { Application } from 'src/app/models/application';
-import { ApplicationService } from '../../_services/application.service';
+import { ApplicationService } from '../../services/application.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export class User {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IoTDeviceService } from 'src/app/shared/_services/iot-device.service';
+import { IoTDeviceService } from 'src/app/shared/services/iot-device.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
 import { IotDevice } from '../../../models/iot-device';

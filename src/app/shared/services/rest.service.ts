@@ -18,7 +18,7 @@ interface IHttpOptions {
     withCredentials?: boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RestService {
     constructor(
         private http: HttpClient,
@@ -133,7 +133,7 @@ export class RestService {
             catchError(this.handleError<any>('delete', []))
         );
     }
-    
+
     public replace(
         url: string,
         object: any,

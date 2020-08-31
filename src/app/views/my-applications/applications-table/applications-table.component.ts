@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationService } from 'src/app/shared/_services/application.service';
+import { ApplicationService } from 'src/app/shared/services/application.service';
 
 import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';

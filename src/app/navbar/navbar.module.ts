@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar.component';
 
 // Modules
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 // Services
-import { RestService } from '../_services/rest.service';
+import { RestService } from '../shared/services/rest.service';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 

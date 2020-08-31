@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IotDevice } from 'src/app/models/iot-device';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import * as moment from 'moment'; 
+import * as moment from 'moment';
 import 'moment/locale/da';
-import { IoTDeviceService } from '../../../shared/_services/iot-device.service';
+import { IoTDeviceService } from '../../../shared/services/iot-device.service';
 
 @Component({
   selector: 'tr[app-iot-devices-table-row]',
@@ -20,24 +20,24 @@ export class IotDevicesTableRowComponent implements OnInit {
     public iotDeviceService: IoTDeviceService,
     public translate: TranslateService,
     private router: Router
-    ) {
-      translate.use('da');
-      moment.locale('da')
+  ) {
+    translate.use('da');
+    moment.locale('da')
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   clickDelete() {
     const id = this.device.id;
     this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
-        if (response.ok && response.body.affected > 0) {
-          this.deleteDevice.emit(id);
-        }
+      if (response.ok && response.body.affected > 0) {
+        this.deleteDevice.emit(id);
+      }
     });
   }
 
   navigateToEditPage() {
-      this.router.navigate(['edit-iot-device', this.device.id]);
+    this.router.navigate(['edit-iot-device', this.device.id]);
   }
 
   lastActive() {
