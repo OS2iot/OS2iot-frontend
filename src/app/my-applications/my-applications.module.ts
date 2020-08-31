@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
-import { FormModule } from 'src/app/shared/form/form.module';
+import { TopBarModule } from '../shared/top-bar/top-bar.module';
+import { FormModule } from '../shared/form/form.module';
 
 import { MyApplicationsComponent } from './my-applications.component';
 import { ApplicationComponent } from './application/application.component';
@@ -13,7 +13,7 @@ import { ApplicationsTableComponent } from './applications-table/applications-ta
 import { ApplicationsTableRowComponent } from './applications-table/applications-table-row/applications-table-row.component';
 import { EditApplicationComponent } from './edit-application/edit-application.component';
 import { ListApplicationsComponent } from './list-applications/list-applications.component';
-import { AlleIotEnhederModule } from '../alle-iot-enheder/alle-iot-enheder.module';
+import { AlleIotEnhederModule } from '../views/alle-iot-enheder/alle-iot-enheder.module';
 
 @NgModule({
     declarations: [
