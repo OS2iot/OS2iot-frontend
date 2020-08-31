@@ -59,7 +59,8 @@
     </div>
 
     <div class="form-group mt-3 col-12">
-      <select id="applicationId" class="form-select" name="applicationId" [(ngModel)]="iotDevice.applicationId" required
+      <label class="form-label" for="name">{{'QUESTION.CHOOSE-APPLICATION' | translate}}</label>*
+      <select id="applicationId" class="form-select" name="applicationId" [(ngModel)]="iotDevice.applicationId" required [disabled]="disableChoseApplication"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationId')}">
         <option *ngFor="let app of applications" [value]="app.id">{{app.name}}</option>
       </select>
@@ -70,7 +71,7 @@
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="comment">{{'IOTDEVICE.COMMENT' | translate}}</label>
       <input type="text" class="form-control" id="comment" name="comment"
-        [placeholder]="'QUESTION.EXTRA-COMMENT-PLACEHOLDER' | translate" maxLength="50" [(ngModel)]="iotDevice.comment"
+        [placeholder]="'QUESTION.EXTRA-COMMENT-PLACEHOLDER' | translate" maxLength="1024" [(ngModel)]="iotDevice.comment"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('comment'), 'is-valid' : formFailedSubmit && !errorFields.includes('comment')}">
     </div>
 
@@ -91,7 +92,7 @@
 
   <div class="form-group mt-5">
     <label class="form-label" for="commentOnLocation">{{'QUESTION.LOCATION-DESCRIPTION' | translate}}</label>
-    <input type="text" id="commentOnLocation" name="commentOnLocation"
+    <input type="text" id="commentOnLocation" name="commentOnLocation" maxLength="1024"
       [placeholder]="'QUESTION.LOCATION-DESCRIPTION-PLACEHOLDER' | translate" class="form-control"
       [(ngModel)]="iotDevice.commentOnLocation"
       [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('commentOnLocation'), 'is-valid' : formFailedSubmit && !errorFields.includes('commentOnLocation')}">
