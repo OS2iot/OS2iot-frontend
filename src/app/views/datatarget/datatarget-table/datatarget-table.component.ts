@@ -32,6 +32,7 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
       this.applicationId = +Number(this.route.parent.parent.snapshot.paramMap.get('id'));
       console.log(this.applicationId)
+      this.getDatatarget();
   }
 
   ngOnChanges() {
@@ -39,13 +40,13 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getDatatarget(): void {
-    const appId = this.applicationId;  
-    this.datatargetSubscription = this.datatargetService
-        .getMulitple(
+    const appId: number = this.applicationId;  
+    if (appId) {
+        this.datatargetSubscription = this.datatargetService
+        .getByApplicationId(
             this.pageLimit,
             this.pageOffset * this.pageLimit,
-            this.selectedSortObject.dir,
-            this.selectedSortObject.col
+            appId
         )
         .subscribe((datatargets: DatatargetData) => {
             this.datatargets = datatargets.data
@@ -53,6 +54,8 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
                 this.pageTotal = Math.ceil(datatargets.count / this.pageLimit);
             }
         });
+    }
+    
   }
 
   deleteDatatarget(id: number) {

@@ -107,7 +107,7 @@ export class DatatargetComponent implements OnInit {
     public translate: TranslateService) { }
 
   ngOnInit(): void {
-    var id:number = +this.route.snapshot.paramMap.get('id');
+    var id:number = +this.route.snapshot.paramMap.get('datatargetId');
     if (id) {
         this.getDatatarget(id);
     }

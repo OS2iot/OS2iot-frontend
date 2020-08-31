@@ -18,12 +18,13 @@ export class DatatargetService {
     return this.restService.get(this.url, null, id);
   }
 
-  getMulitple(
-    limit: number,offset: number, sort: SortDir, orderOn: SortCol
+  getByApplicationId(
+    limit: number,offset: number, applicationId: number
   ): Observable<DatatargetData> {
     const body = {
       limit: limit,
       offset: offset,
+      applicationId: applicationId
       //sort: sort,
       //orderOn: orderOn,
       //todo tilføj når iot-314 er tilføjet
