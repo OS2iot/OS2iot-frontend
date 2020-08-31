@@ -42,7 +42,7 @@
         id="id" 
         name="id"
         [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" 
-        maxlength="50" 
+        maxlength="16" 
         required
         [(ngModel)]="gateway.id"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
