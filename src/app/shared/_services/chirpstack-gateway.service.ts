@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { GatewayData, Gateway } from 'src/app/models/gateway';
+import { GatewayData, Gateway, GatewayRequest } from 'src/app/models/gateway';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,9 @@ export class ChirpstackGatewayService {
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {
-    var gatewayData = new GatewayData();
-    gatewayData.data = [gateway];
-     
-    return this.restService.post(this.chripstackGatewayUrl, gateway, {observe: 'response'});
+    var gatewayRequest: GatewayRequest = new GatewayRequest;
+    gatewayRequest.gateway = gateway
+    return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, {observe: 'response'});
   }
 
   public put(gateway: Gateway, id: string): Observable<GatewayData> {
