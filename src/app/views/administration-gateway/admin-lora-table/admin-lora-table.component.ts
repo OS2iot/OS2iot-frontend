@@ -3,7 +3,7 @@ import { Sort } from 'src/app/models/sort';
 import { Subscribable, Subscription, Observable } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/_services/chirpstack-gateway.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Gateway } from 'src/app/models/gateway';
+import { Gateway, GatewayResponse } from 'src/app/models/gateway';
 
 @Component({
   selector: 'app-admin-lora-table',
