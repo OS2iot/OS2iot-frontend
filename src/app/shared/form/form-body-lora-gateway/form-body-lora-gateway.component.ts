@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Gateway } from '../../../../app/models/gateway'
+import { Gateway, GatewayResponse } from '../../../../app/models/gateway'
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChirpstackGatewayService } from '../../_services/chirpstack-gateway.service';
@@ -44,9 +44,9 @@ export class FormBodyLoraGatewayComponent implements OnInit {
 
   getGateway(id: string): void {
     this.gatewaySubscription = this.loraGatewayService
-        .get()
-        .subscribe((result: any) => {
-          this.gateway = result.result[0]
+        .get(id)
+        .subscribe((result: GatewayResponse) => {
+          this.gateway = result.gateway
         });
   }
 
@@ -55,7 +55,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          this.router.navigateByUrl('/mine-lora-gateways')
+          this.routeBack()
         },
         (error: HttpErrorResponse) => {
           this.showError(error)
@@ -68,8 +68,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       .put(this.gateway, this.id)
       .subscribe(
         (response) => {
-          
-            this.router.navigateByUrl('/mine-applikationer');
+            this.routeBack()
         },
         (error) => {
           this.showError(error)
