@@ -1,6 +1,6 @@
 <div class="row top-bar-wrapper">
   <div class="col d-flex top-bar">
-    <a [routerLink]="backButton.routerLink" routerLinkActive="active" class="back-button py-3">{{backButton.label}}</a>
+    <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
     <h3 class="py-3">{{title}}</h3>
   </div>
 </div>

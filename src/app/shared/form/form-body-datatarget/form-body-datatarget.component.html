@@ -14,7 +14,7 @@
                 class="form-control" 
                 id="name" 
                 name="name"
-                [placeholder]="'QUESTION.DATATARGET-NAME-PLACEHOLDER' | translate" 
+                [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate" 
                 maxlength="50" 
                 required
                 [(ngModel)]="datatarget.name"
@@ -29,10 +29,10 @@
                 class="form-control" 
                 id="url" 
                 name="url"
-                [placeholder]="'QUESTION.DATATARGET-URL-PLACEHOLDER' | translate"  
+                [placeholder]="'QUESTION.GIVE-DATATARGET-URL-PLACEHOLDER' | translate"
                 required
                 [(ngModel)]="datatarget.url"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('url')}">
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('url'), 'is-valid' : formFailedSubmit && !errorFields.includes('url')}">
         </div>
     </div>
 

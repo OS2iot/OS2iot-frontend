@@ -58,16 +58,10 @@ export class FormBodyDatatargetComponent implements OnInit {
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse)
+        this.routeBack()
         },
         (error: HttpErrorResponse) => {
-          this.errorFields = [];
-          this.errorMessages = [];
-          error.error.message.forEach((err) => {
-              this.errorFields.push(err.property);
-              this.errorMessages = this.errorMessages.concat(
-                  Object.values(err.constraints)
-              );
-          });
+          this.handleError(error)
           this.formFailedSubmit = true;
         }
       )
@@ -78,8 +72,24 @@ export class FormBodyDatatargetComponent implements OnInit {
     //var data: DatatargetData = {data: [this.datatarget]}
     this.datatargetService.create(this.datatarget)
       .subscribe((datatargetData: DatatargetData) => {
-        this.location.back();
+        this.routeBack()
+      },
+      (error: HttpErrorResponse) => {
+        this.handleError(error)
+        this.formFailedSubmit = true;
       })
+      
+  }
+
+  handleError(error: HttpErrorResponse) {
+    this.errorFields = [];
+    this.errorMessages = [];
+    error.error.message.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+            Object.values(err.constraints)
+        );
+    });
   }
 
   routeBack(): void {

@@ -7,6 +7,7 @@ import { IotDevice } from 'src/app/models/iot-device';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { BackButton } from 'src/app/models/back-button';
 import { Datatarget } from 'src/app/models/datatarget';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-top-bar-single',
@@ -22,7 +23,9 @@ export class TopBarSingleComponent implements OnInit, OnChanges {
   // @Output() selectedSortChange = new EventEmitter();
   // @Output() updatePageLimit = new EventEmitter();
 
-  constructor(public translate: TranslateService) {
+  constructor(
+    public translate: TranslateService, 
+    private location: Location) {
       translate.use('da');
   }
 
@@ -37,5 +40,9 @@ export class TopBarSingleComponent implements OnInit, OnChanges {
 
   changeSort(id: number) {
       // this.selectedSortChange.emit(id);
+  }
+
+  routeBack(): void {
+    this.location.back()
   }
 }
