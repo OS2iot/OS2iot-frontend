@@ -46,6 +46,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     this.gatewaySubscription = this.loraGatewayService
         .get(id)
         .subscribe((result: GatewayResponse) => {
+          result.gateway.tagsString = JSON.stringify(result.gateway.tags)
           this.gateway = result.gateway
         });
   }
@@ -106,12 +107,16 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
-    error.error.message.forEach((err) => {
+    if (error.error?.message?.length > 0) {
+      error.error.message[0].children.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(
             Object.values(err.constraints)
         );
     });
+    } else {
+      this.errorMessage = error.message
+    }
     this.formFailedSubmit = true;
   }
 }

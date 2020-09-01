@@ -7,8 +7,8 @@ export class Gateway {
     location: CommonLocation = new CommonLocation;
     discoveryEnabled: boolean = false;
     gatewayProfileID: string = null;
-    tags?: string;
-    metadata?: string;
+    tagsString?: string;
+    tags?: JSON;
 }
 
 export class GatewayData {

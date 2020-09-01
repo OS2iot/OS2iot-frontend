@@ -36,8 +36,8 @@ export class AdminLoraTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getLoraGateways(): void {
-      this.gatewaySubscription = this.chirpstackGatewayService.get(
-        null, {
+      this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
+        {
             limit: this.pageLimit,
             offset: this.pageOffset * this.pageLimit,
             sort: this.selectedSortObject.dir,
