@@ -45,7 +45,7 @@
         maxlength="16" 
         required
         [(ngModel)]="gateway.id"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
     </div>
 
     <div class="row mb-5">
@@ -104,17 +104,17 @@
       </div>
     </div>
     <div class="form-group mt-3">
-      <label class="form-label" for="name">{{'QUESTION-LORA-GATEWAY.METADATA' | translate}}</label>*
+      <label class="form-label" for="tagsString">{{'QUESTION-LORA-GATEWAY.METADATA' | translate}}</label>*
       <input 
         type="text" 
         class="form-control" 
-        id="metadata" 
-        name="metadata"
+        id="tagsString" 
+        name="tagsString"
         [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate" 
         maxlength="50" 
         required
-        [(ngModel)]="gateway.tags"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        [(ngModel)]="gateway.tagsString"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('tagsString'), 'is-valid' : formFailedSubmit && !errorFields.includes('tagsString')}">
     </div>
 
   </div>

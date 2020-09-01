@@ -117,7 +117,8 @@ export class GatewayComponent implements OnInit {
 
   bindGateway(id: string): void {
     this.gatewayService.get(id).subscribe((result: any) => {
-        this.gateway = result.result[0];
+        result.gateway.tagsString = JSON.stringify(result.gateway.tags)
+        this.gateway = result.gateway;
         console.log('gateway', this.gateway);
     });
   }

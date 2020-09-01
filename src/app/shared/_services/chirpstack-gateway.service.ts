@@ -12,8 +12,12 @@ export class ChirpstackGatewayService {
 
   constructor(private restService: RestService) { }
 
-  public get(id: string = null, params = {}): Observable<any> {
-    return this.restService.get(this.chripstackGatewayUrl, params, id);
+  public get(id: string, params = {}): Observable<GatewayResponse> {
+    return  this.restService.get(this.chripstackGatewayUrl, params, id);
+  }
+
+  public getMultiple(params = {}): Observable<any> {
+    return this.restService.get(this.chripstackGatewayUrl, params);
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {
