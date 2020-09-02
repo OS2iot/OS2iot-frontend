@@ -110,8 +110,7 @@
         class="form-control" 
         id="tagsString" 
         name="tagsString"
-        [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate" 
-        maxlength="50" 
+        [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"  
         required
         [(ngModel)]="gateway.tagsString"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('tagsString'), 'is-valid' : formFailedSubmit && !errorFields.includes('tagsString')}">

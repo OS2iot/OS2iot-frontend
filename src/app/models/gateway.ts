@@ -7,7 +7,7 @@ export class Gateway {
     location: CommonLocation = new CommonLocation;
     discoveryEnabled: boolean = false;
     gatewayProfileID: string = null;
-    tagsString?: string;
+    tagsString?: string = '{"key":"value"}';
     tags?: JSON;
 }
 
