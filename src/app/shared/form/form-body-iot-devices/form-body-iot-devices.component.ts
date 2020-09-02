@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { IoTDeviceService } from '../../_services/iot-device.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApplicationService } from '../../_services/application.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -38,7 +39,8 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         public translate: TranslateService,
         private router: Router,
         private applicationService: ApplicationService,
-        private iotDeviceService: IoTDeviceService
+        private iotDeviceService: IoTDeviceService,
+        private location: Location
     ) {}
 
     ngOnInit(): void {
@@ -67,6 +69,9 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
             .getIoTDevice(id)
             .subscribe((device: IotDevice) => {
                 this.iotDevice = device;
+                if (this.iotDevice?.application?.id) {
+                    this.iotDevice.applicationId = device.application?.id
+                }
             });
     }
 
@@ -101,12 +106,10 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     updateIoTDevice(id: number) {
+        this.iotDevice.applicationId = Number(this.iotDevice.applicationId)
         this.iotDeviceService.updateIoTDevice(this.iotDevice, id).subscribe(
             () => {
-                this.router.navigate([
-                    'mine-applikationer/application',
-                    this.application.id,
-                ]);
+                this.routeBack()
             },
             (error: HttpErrorResponse) => {
                 this.errorFields = [];
@@ -123,7 +126,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     routeBack(): void {
-        this.router.navigateByUrl('/mine-applikationer');
+        this.location.back()
     }
 
     onCoordinateKey(event: any) {

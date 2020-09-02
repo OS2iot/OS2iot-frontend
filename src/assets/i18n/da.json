@@ -22,7 +22,7 @@
       "ATTACHED-IOT": "Tilknyttede IoT enheder"
     },
     "IOT-DEVICE": {
-      "CREATE": "Opret IoT enhed",
+      "CREATE": "Gem IoT enhed",
       "SAVE": "Gem IoT enhed",
       "DELETE": "Slet IoT enhed",
       "RESTART": "Genstart IoT enhed"

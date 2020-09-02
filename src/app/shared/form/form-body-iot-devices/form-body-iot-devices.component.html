@@ -61,8 +61,9 @@
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="name">{{'QUESTION.CHOOSE-APPLICATION' | translate}}</label>*
       <select id="applicationId" class="form-select" name="applicationId" [(ngModel)]="iotDevice.applicationId" required [disabled]="disableChoseApplication"
+        [value]="iotDevice.applicationId"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationId')}">
-        <option *ngFor="let app of applications" [value]="app.id">{{app.name}}</option>
+        <option *ngFor="let app of applications" [value]="app.id" [selected]="app.id === iotDevice.applicationId">{{app.name}}</option>
       </select>
     </div>
   </div>
