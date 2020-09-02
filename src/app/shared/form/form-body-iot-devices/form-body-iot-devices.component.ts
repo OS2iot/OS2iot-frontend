@@ -96,14 +96,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                 ]);
             },
             (error: HttpErrorResponse) => {
-                this.errorFields = [];
-                this.errorMessages = [];
-                error.error.message.forEach((err) => {
-                    this.errorFields.push(err.property);
-                    this.errorMessages = this.errorMessages.concat(
-                        Object.values(err.constraints)
-                    );
-                });
+                this.handleError(error)
                 this.formFailedSubmit = true;
             }
         );
@@ -116,14 +109,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                 this.routeBack()
             },
             (error: HttpErrorResponse) => {
-                this.errorFields = [];
-                this.errorMessages = [];
-                error.error.message.forEach((err) => {
-                    this.errorFields.push(err.property);
-                    this.errorMessages = this.errorMessages.concat(
-                        Object.values(err.constraints)
-                    );
-                });
+                this.handleError(error)
                 this.formFailedSubmit = true;
             }
         );
@@ -131,6 +117,17 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
 
     routeBack(): void {
         this.location.back()
+    }
+
+    handleError(error: HttpErrorResponse) {
+        this.errorFields = [];
+        this.errorMessages = [];
+        error.error.message.forEach((err) => {
+            this.errorFields.push(err.property);
+            this.errorMessages = this.errorMessages.concat(
+                Object.values(err.constraints)
+            );
+        });
     }
 
     onCoordinateKey(event: any) {
