@@ -5,6 +5,7 @@ import { ServiceProfile } from '../service-profile.model';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -21,6 +22,8 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   public pageOffset: number = 0;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private store: Store<fromApp.AppState>
   ) { }
 
@@ -32,16 +35,10 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
         this.serviceProfiles = serviceProfiles;
       });
   }
-  private fetchServiceProfiles() {
-    // this.shouldLoadNewHold = false;
-    // this.isFetching = true;
-    this.pageCount = this.pageCount + 1;
-    this.store.dispatch('serviceProfiles' ({limit: this.pageLimit}));
-  }
 
-  // onNewServiceProfile() {
-  //   this.router.navigate(['new'], { relativeTo: this.route });
-  // }
+  onNewServiceProfile() {
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

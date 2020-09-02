@@ -11,7 +11,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { appReducer } from './store/app.reducer';
+import { appReducer, metaReducers } from './store/app.reducer';
 import { ServiceProfileEffects } from './profiles/service-profiles/store/service-profile.effects';
 import { environment } from '../environments/environment';
 
@@ -40,10 +40,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         AlleIotEnhederModule,
         NavbarModule,
         ProfilesModule,
-        StoreModule.forRoot(appReducer, { runtimeChecks: {} }),
+        StoreModule.forRoot(appReducer, { metaReducers }),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
         EffectsModule.forRoot([ServiceProfileEffects]),
-        StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-        StoreRouterConnectingModule.forRoot(),
+        StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         TranslateModule.forRoot({
             defaultLanguage: 'da',
             loader: {
@@ -55,7 +55,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        StoreModule.forRoot({}, {}),
     ],
     providers: [LoggingService],
     bootstrap: [AppComponent],

@@ -11,32 +11,31 @@ import { of } from 'rxjs';
 
 import { ServiceProfile } from './service-profile.model';
 import * as fromApp from '../../store/app.reducer';
-import * as ServiceProfileActions from './store/service-profile.actions';
-import { LoggingService } from 'src/app/logging.service';
+import * as ServiceProfilesActions from '../service-profiles/store/service-profile.actions';
 
 @Injectable({ providedIn: 'root' })
-export class RecipesResolverService implements Resolve<ServiceProfile[]> {
+export class ServiceProfilesResolverService implements Resolve<{ serviceProfiles: ServiceProfile[] }> {
     constructor(
         private store: Store<fromApp.AppState>,
-        private actions$: Actions,
-        private loggingService: LoggingService,
+        private actions$: Actions
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
         return this.store.select('serviceProfiles').pipe(
             take(1),
-            map(serviceProfileState => {
-                return serviceProfileState.serviceProfiles;
+            map(serviceProfilesState => {
+                return serviceProfilesState.serviceProfiles;
             }),
             switchMap(serviceProfiles => {
                 if (serviceProfiles.length === 0) {
-                    this.store.dispatch(ServiceProfileActions.fetchServiceProfiles());
+                    this.store.dispatch(ServiceProfilesActions.fetchServiceProfiles());
                     return this.actions$.pipe(
-                        ofType(ServiceProfileActions.setServiceProfiles),
+                        ofType(ServiceProfilesActions.setServiceProfiles),
                         take(1)
                     );
                 } else {
-                    return of(serviceProfiles);
+                    return of({ serviceProfiles });
                 }
             })
         );
