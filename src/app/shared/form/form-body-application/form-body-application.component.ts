@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ErrorHandler } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { RestService } from '../../_services/rest.service';
 
 import { Application } from 'src/app/models/application';
 import { ApplicationService } from '../../_services/application.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpDownloadProgressEvent } from '@angular/common/http';
 
 export class User {
     public name: string;
@@ -76,15 +76,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
                     this.router.navigateByUrl('/mine-applikationer');
                 },
                 (error: HttpErrorResponse) => {
-                    this.errorFields = [];
-                    this.errorMessages = [];
-                    error.error.message.forEach((err) => {
-                        this.errorFields.push(err.property);
-                        this.errorMessages = this.errorMessages.concat(
-                            Object.values(err.constraints)
-                        );
-                    });
-                    this.formFailedSubmit = true;
+                    this.handleError(error)
                 }
             );
     }
@@ -98,17 +90,41 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
                     this.router.navigateByUrl('/mine-applikationer');
                 },
                 (error: HttpErrorResponse) => {
-                    this.errorFields = [];
-                    this.errorMessages = [];
-                    error.error.message.forEach((err) => {
-                        this.errorFields.push(err.property);
-                        this.errorMessages = this.errorMessages.concat(
-                            Object.values(err.constraints)
-                        );
-                    });
-                    this.formFailedSubmit = true;
+                    this.handleError(error)
                 }
             );
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        this.errorFields = [];
+        this.errorMessages = [];
+        
+        // Temp fix till we standardise backend error handling
+        if(error.error?.message[0]?.property) {
+            this.externalError(error)
+        } else {
+            this.backendError(error)
+        }
+        
+        this.formFailedSubmit = true;
+    }
+
+    externalError(error: HttpErrorResponse) {
+        error.error.message.forEach((err) => {
+            this.errorFields.push(err.property);    
+            this.errorMessages = this.errorMessages.concat(
+                Object.values(err.constraints)
+            );
+        });
+        this.formFailedSubmit = true;
+    }
+
+    backendError(error: HttpErrorResponse) {
+        this.translate.get([error.error.message])
+        .subscribe(translations => {
+          this.errorMessages.push(translations[error.error.message]);
+        });
+        this.errorFields.push('name')
     }
 
     routeBack(): void {

@@ -118,5 +118,8 @@
         "APIKEY": "API kald",
         "INSTRUCTIONS": "Du kalder denne url:"
       }
+    },
+    "MESSAGE": {
+      "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
     }
 }
