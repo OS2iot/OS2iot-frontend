@@ -135,7 +135,7 @@
       "DESCRIPTION-PLACEHOLDER":"beskrivelse af LoRaWAN Gateway",
       "GATEWAYID": "Gateway ID",
       "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
-      "METADATA": "Gateway metadata",
+      "METADATA": "Gateway Tags",
       "METADATA-PLACEHOLDER": "Angiv JSON her",
       "ALTITUDE": "Højde",
       "ALTITUDE-PLACEHOLDER": "00",
