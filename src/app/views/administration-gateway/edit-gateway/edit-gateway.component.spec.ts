@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
 
-describe('AlleIotEnhederComponent', () => {
-  let component: AlleIotEnhederComponent;
-  let fixture: ComponentFixture<AlleIotEnhederComponent>;
+import { EditGatewayComponent } from './edit-gateway.component';
+
+describe('EditGatewayComponent', () => {
+  let component: EditGatewayComponent;
+  let fixture: ComponentFixture<EditGatewayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlleIotEnhederComponent ]
+      declarations: [ EditGatewayComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlleIotEnhederComponent);
+    fixture = TestBed.createComponent(EditGatewayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

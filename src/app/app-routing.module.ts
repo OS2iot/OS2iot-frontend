@@ -7,42 +7,37 @@ import { ListApplicationsComponent } from './views/mine-applikationer/list-appli
 import { ApplicationComponent } from './views/mine-applikationer/application/application.component';
 import { IoTDeviceComponent } from './views/alle-iot-enheder/iot-device/iot-device.component';
 import { EditIotDeviceComponent } from './views/alle-iot-enheder/edit-iot-device/edit-iot-device.component';
+import { MineLoraGatewaysComponent } from './views/administration-gateway/mine-lora-gateways/mine-lora-gateways.component';
+import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
+import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
+import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
-    {
-        path: 'mine-applikationer',
-        component: MineApplikationerComponent,
+    { path: 'mine-applikationer', component: MineApplikationerComponent,
         children: [
             { path: '', component: ListApplicationsComponent },
-            {
-                path: 'application/:id',
+            { path: 'application/:id',
                 children: [
                     { path: '', component: ApplicationComponent },
-                    {
-                        path: 'edit-iot-device',
-                        component: EditIotDeviceComponent,
-                    },
-                    {
-                        path: 'edit-iot-device/:deviceId',
-                        component: EditIotDeviceComponent,
-                    },
-                    {
-                        path: 'iot-device/:deviceId',
-                        component: IoTDeviceComponent,
-                    },
+                    { path: 'edit-iot-device', component: EditIotDeviceComponent,},
+                    { path: 'edit-iot-device/:deviceId', component: EditIotDeviceComponent,},
+                    { path: 'iot-device/:deviceId', component: IoTDeviceComponent, },
                 ],
             },
-            {
-                path: 'edit-application',
-                component: EditApplicationComponent,
-            },
-            {
-                path: 'edit-application/:id',
-                component: EditApplicationComponent,
-            },
+            { path: 'edit-application', component: EditApplicationComponent,},
+            { path: 'edit-application/:id', component: EditApplicationComponent,},  
         ],
     },
+    { path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
+        children: [
+            { path: '', component: ListLoraGatewayComponent},
+            { path: 'edit-gateway/:id', component: EditGatewayComponent},
+            { path: 'edit-gateway', component: EditGatewayComponent},
+            { path: 'gateway/:id', component: GatewayComponent}
+            ],
+            
+        },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

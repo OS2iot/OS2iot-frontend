@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
 
-describe('AlleIotEnhederComponent', () => {
-  let component: AlleIotEnhederComponent;
-  let fixture: ComponentFixture<AlleIotEnhederComponent>;
+import { AdminLoraTableComponent } from './admin-lora-table.component';
+
+describe('AdminLoraTableComponent', () => {
+  let component: AdminLoraTableComponent;
+  let fixture: ComponentFixture<AdminLoraTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlleIotEnhederComponent ]
+      declarations: [ AdminLoraTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlleIotEnhederComponent);
+    fixture = TestBed.createComponent(AdminLoraTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

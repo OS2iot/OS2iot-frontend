@@ -1,23 +1,24 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ 'APPLICATION-TABLE.NAME' | translate }}</th>
-            <th>{{ 'APPLICATION-TABLE.IOT-DEVICES' | translate }}</th>
-            <th>{{ 'APPLICATION-TABLE.UPDATED' | translate }}</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.NAME' | translate }}</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
+            <th>{{ 'LORA-GATEWAY-TABLE.LOCATION' | translate }}</th>
         </tr>
     </thead>
     <tbody>
         <tr
-            *ngFor="let application of applications"
+            *ngFor="let gateway of gateways"
             class="py-3"
-            app-applications-table-row
-            [application]="application"
-            (deleteApplication)="deleteApplication($event)"
-        ></tr>
+            app-admin-lora-table-row
+            [gateway]="gateway"
+            (deleteGateway)="deleteGateway($event)"
+            >
+        </tr>
     </tbody>
 </table>
 
-<nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
+<!-- <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
     <ul class="pagination justify-content-center mt-5">
         <li class="page-item">
             <a class="page-link" [routerLink]="" (click)="prevPage()"
@@ -33,4 +34,4 @@
             <a class="page-link" [routerLink]="" (click)="nextPage()">Next</a>
         </li>
     </ul>
-</nav>
+</nav> -->

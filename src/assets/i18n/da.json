@@ -11,7 +11,8 @@
     "NAV": {
       "DASHBOARD": "Dashboard",
       "MY-APPLICATIONS": "Mine applikationer",
-      "ALL-IOT-DEVICES": "Alle IoT enheder"
+      "ALL-IOT-DEVICES": "Alle IoT enheder",
+      "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways"
     },
     "APPLICATION": {
       "CREATE": "Opret applikation",
@@ -20,6 +21,12 @@
       "NAME": "Applikationens navn",
       "DESCRIPTION": "Applikationens beskrivelse",
       "ATTACHED-IOT": "Tilknyttede IoT enheder"
+    },
+    "GATEWAY": {
+      "DESCRIPTION":"LoRaWAN Gateway beskrivelse",
+      "LONGITUDE": "Længdegrad",
+      "LATITUDE":"Breddegrad",
+      "ALTITUDE":"Højde"
     },
     "IOT-DEVICE": {
       "CREATE": "Gem IoT enhed",
@@ -39,6 +46,19 @@
       "BATTERY": "BATTERI",
       "ACTIVE": "AKTIV",
       "DATA": "DATA(24 TIMER)"
+    },
+    "LORA-GATEWAY-TABLE": {
+      "NAME": "Navn",
+      "GATEWAYID": "Gateway ID",
+      "LOCATION": "Placering"
+    },
+    "LORA-GATEWAY-TABLE-ROW": {
+      "DELETE": "Slet Gateway",
+      "EDIT": "Redigér",
+      "SHOW-OPTIONS": "Vis muligheder"
+    },
+    "LORA-GATEWAY": {
+      "CREATE":"Opret LoRaWan Gateway"
     },
     "IOT-DEVICE-TYPES": {
       "GENERIC_HTTP": "Generisk HTTP"
@@ -61,8 +81,10 @@
     },
     "FORM": {
       "CREATE-NEW-APPLICATION": "Opret ny applikation",
-      "EDIT-NEW-APPLICATION": "Redigér applikation",
+      "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
       "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
+      "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
+      "EDIT-NEW-APPLICATION": "Redigér applikation",
       "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
       "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
       "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
@@ -83,6 +105,22 @@
       "LOCATION-DESCRIPTION": "Beskrivelse af placering",
       "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
       "CHOOSE-APPLICATION": "Vælg applikation"
+    },
+    "QUESTION-LORA-GATEWAY": {
+      "NAME": "Navngiv LoRaWAN Gateway",
+      "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn",
+      "DESCRIPTION":"LoRaWAN Gateway beskrivelse",
+      "DESCRIPTION-PLACEHOLDER":"beskrivelse af LoRaWAN Gateway",
+      "GATEWAYID": "Gateway ID",
+      "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
+      "METADATA": "Gateway metadata",
+      "METADATA-PLACEHOLDER": "Angiv JSON her",
+      "ALTITUDE": "Højde",
+      "ALTITUDE-PLACEHOLDER": "00",
+      "LONGITUDE":"Længdegrad",
+      "LONGITUDE-PLACEHOLDER": "00",
+      "LATITUDE": "Breddegrad",
+      "LATITUDE-PLACEHOLDER": "00"
     },
     "SORT": {
       "SORT": "Sortér",
