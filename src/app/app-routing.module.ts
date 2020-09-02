@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
 import { MineApplikationerComponent } from './views/mine-applikationer/mine-applikationer/mine-applikationer.component';
@@ -11,6 +11,9 @@ import { MineLoraGatewaysComponent } from './views/administration-gateway/mine-l
 import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
 import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
+import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
+import { DatatargetEditComponent } from './views/datatarget/datatarget-edit/datatarget-edit.component';
+import { DatatargetComponent } from './views/datatarget/datatarget/datatarget.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -23,6 +26,31 @@ const routes: Routes = [
                     { path: 'edit-iot-device', component: EditIotDeviceComponent,},
                     { path: 'edit-iot-device/:deviceId', component: EditIotDeviceComponent,},
                     { path: 'iot-device/:deviceId', component: IoTDeviceComponent, },
+                    { path: '', component: ApplicationComponent, 
+                        
+                    },
+                    {
+                        path: 'edit-iot-device',
+                        component: EditIotDeviceComponent,
+                    },
+                    {
+                        path: 'edit-iot-device/:deviceId',
+                        component: EditIotDeviceComponent,
+                    },
+                    {
+                        path: 'iot-device/:deviceId',
+                        component: IoTDeviceComponent,
+                    },
+                    {
+                        path: 'datatarget-list/:name', 
+                        children: [
+                            { path: '', component: DatatargetListComponent},
+                            { path: 'datatarget-edit', component: DatatargetEditComponent},
+                            { path: 'datatarget-edit/:datatargetId', component: DatatargetEditComponent},
+                            { path: 'datatarget/:datatargetId', component: DatatargetComponent}
+                        ]
+                        
+                    }
                 ],
             },
             { path: 'edit-application', component: EditApplicationComponent,},
@@ -38,6 +66,7 @@ const routes: Routes = [
             ],
             
         },
+    { path: 'datatarget', component: DatatargetListComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

@@ -1,4 +1,7 @@
 <div class="col pb-3 d-flex top-bar">
+  <ng-template [ngIf]="backButtonTitle">
+    <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
+  </ng-template>
   <ng-template [ngIf]="title">
     <h4 *ngIf="component; else notComponent">{{title}}</h4>
     <ng-template #notComponent>

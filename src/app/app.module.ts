@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
+import { DatatargetModule } from './views/datatarget/datatarget.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DashboardModule,
         MineApplikationerModule,
         AlleIotEnhederModule,
+        DatatargetModule,
         NavbarModule,
         TranslateModule.forRoot({
             defaultLanguage: 'da',

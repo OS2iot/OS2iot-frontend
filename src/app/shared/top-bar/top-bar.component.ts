@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Sort } from 'src/app/models/sort';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-top-bar',
@@ -16,11 +17,12 @@ export class TopBarComponent implements OnInit {
     @Input() pageLimit: number;
     @Input() selectedSortId: number;
     @Input() component: boolean = false;
-
+    @Input() backButtonTitle: string;
     @Output() selectedSortChange = new EventEmitter();
     @Output() updatePageLimit = new EventEmitter();
 
-    constructor(public translate: TranslateService) {
+    constructor(public translate: TranslateService, 
+        private location: Location) {
         translate.use('da');
     }
 
@@ -29,6 +31,10 @@ export class TopBarComponent implements OnInit {
     changeSort(id: number) {
         this.selectedSortChange.emit(id);
     }
+
+    routeBack(): void {
+        this.location.back()
+      }
 
     // pageLimitUpdate(value) {
     //     console.log('page limit', value);

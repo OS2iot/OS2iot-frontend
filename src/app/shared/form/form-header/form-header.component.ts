@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from 'src/app/models/back-button';
 
 import { Step } from 'src/app/models/step';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-header',
@@ -18,11 +19,15 @@ export class FormHeaderComponent implements OnInit {
   public stepTitle: string = '';
   public activeStep: string = '';
 
-  constructor(public translate: TranslateService) {
+  constructor(public translate: TranslateService, public location: Location) {
     translate.use('da');
   }
 
   ngOnInit(): void {
+  }
+
+  routeBack(): void {
+    this.location.back()
   }
 
 }
