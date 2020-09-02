@@ -72,6 +72,10 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                 if (this.iotDevice?.application?.id) {
                     this.iotDevice.applicationId = device.application?.id
                 }
+                if (device.location) {
+                    this.iotDevice.longitude = device.location.coordinates[0];
+                    this.iotDevice.latitude = device.location.coordinates[1];
+                }
             });
     }
 

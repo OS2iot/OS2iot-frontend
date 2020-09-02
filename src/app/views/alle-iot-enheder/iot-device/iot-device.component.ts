@@ -52,8 +52,8 @@ export class IoTDeviceComponent implements OnInit, OnDestroy {
             this.application = device.application;
 
             if (this.device.location) {
-                this.latitude = this.device.location.coordinates[0];
-                this.longitude = this.device.location.coordinates[1];
+                this.longitude = this.device.location.coordinates[0];
+                this.latitude = this.device.location.coordinates[1];
             }
         });
     }
