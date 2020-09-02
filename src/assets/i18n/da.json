@@ -29,7 +29,8 @@
       "DESCRIPTION":"LoRaWAN Gateway beskrivelse",
       "LONGITUDE": "Længdegrad",
       "LATITUDE":"Breddegrad",
-      "ALTITUDE":"Højde"
+      "ALTITUDE":"Højde",
+      "SAVE": "Gem gateway"
     },
     "IOT-DEVICE": {
       "CREATE": "Gem IoT enhed",
