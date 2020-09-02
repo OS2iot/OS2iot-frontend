@@ -30,7 +30,6 @@ export class FormBodyDatatargetComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       public translate: TranslateService,
-      private router: Router,
       private datatargetService: DatatargetService,
       private location: Location
   ) { }

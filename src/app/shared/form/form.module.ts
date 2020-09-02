@@ -31,7 +31,8 @@ import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body
     FormHeaderComponent,
     FormBodyApplicationComponent,
     FormBodyIotDevicesComponent,
-    FormBodyLoraGatewayComponent
+    FormBodyLoraGatewayComponent,
+    FormBodyDatatargetComponent
   ],
   providers: [
   ]
