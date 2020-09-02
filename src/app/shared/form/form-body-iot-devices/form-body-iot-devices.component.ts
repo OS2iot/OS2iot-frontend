@@ -47,7 +47,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.id = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.iotDevice.applicationId && this.id) {
-            this.getDevice(this.iotDevice.applicationId);
+            this.getDevice(this.id);
             this.disableChoseApplication = false;
         }
 

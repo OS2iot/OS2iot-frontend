@@ -16,8 +16,8 @@ export class IotDevice {
     createdAt: Date;
     updatedAt: Date;
     applicationId: number;
-    longitude: number;
-    latitude: number;
+    longitude: number = 0;
+    latitude: number = 0;
 }
 
 export interface IotDeviceData {
