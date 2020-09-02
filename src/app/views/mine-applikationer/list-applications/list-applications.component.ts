@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from 'src/app/models/sort';
-import { SortTable } from 'src/app/models/sorttable';
 
 @Component({
     selector: 'app-list-applications',

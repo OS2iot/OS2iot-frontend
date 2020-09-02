@@ -1,5 +1,5 @@
 import { Application } from './application';
-import { DataTargetType } from './datatarget-type';
+import { DataTargetType } from '../shared/enums/datatarget-type';
 
 export class DatatargetResponse {
     application: Application

@@ -1,4 +1,4 @@
-import { DataTargetType } from './datatarget-type';
+import { DataTargetType } from '../shared/enums/datatarget-type';
 
 export class Datatarget {
     id: number;
