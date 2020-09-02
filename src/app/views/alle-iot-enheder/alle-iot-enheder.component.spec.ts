@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AlleIotEnhederComponent } from './alle-iot-enheder.component';
+import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
 
 describe('AlleIotEnhederComponent', () => {
   let component: AlleIotEnhederComponent;
