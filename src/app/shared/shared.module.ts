@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from './alert/alert.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoggingService } from '../logging.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule
-  ]
+  ],
+  providers: [LoggingService]
 })
 export class SharedModule { }

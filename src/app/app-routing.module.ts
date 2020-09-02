@@ -8,6 +8,7 @@ import { ApplicationComponent } from './my-applications/application/application.
 import { IoTDeviceComponent } from './views/alle-iot-enheder/iot-device/iot-device.component';
 import { EditIotDeviceComponent } from './views/alle-iot-enheder/edit-iot-device/edit-iot-device.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enheder/alle-iot-enheder.component';
 
 const routes: Routes = [
     { path: 'home', component: DashboardComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
             },
         ],
     },
-    { path: 'profiles', component: ProfilesComponent },
+    { path: 'iot-devices', component: AlleIotEnhederComponent },
+    { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

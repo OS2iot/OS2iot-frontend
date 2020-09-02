@@ -7,14 +7,14 @@ import { IotDevice, IotDeviceData } from '../../models/iot-device';
     providedIn: 'root',
 })
 export class IoTDeviceService {
-    constructor(private restService: RestService) {}
+    constructor(private restService: RestService) { }
 
     createIoTDevice(body: IotDevice): Observable<IotDeviceData> {
         return this.restService.post('iot-device', body);
     }
 
     updateIoTDevice(body: IotDevice, id: number): Observable<IotDeviceData> {
-        return this.restService.replace('iot-device', body, id, {observe: 'response'});
+        return this.restService.replace('iot-device', body, id, { observe: 'response' });
     }
 
     getIoTDevice(id: number): Observable<IotDevice> {
