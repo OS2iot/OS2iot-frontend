@@ -7,10 +7,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
 import { IotDevice } from 'src/app/models/iot-device';
 import { Subscription } from 'rxjs';
-import { IoTDeviceService } from '../../_services/iot-device.service';
+import { IoTDeviceService } from '../../services/iot-device.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ApplicationService } from '../../_services/application.service';
 import { Location } from '@angular/common';
+import { ApplicationService } from '../../services/application.service';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -41,7 +41,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService,
         private location: Location
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.translate.use('da');
@@ -91,7 +91,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
             () => {
                 this.router.navigate([
-                    'mine-applikationer/application',
+                    'my-applications/application',
                     this.iotDevice.applicationId,
                 ]);
             },

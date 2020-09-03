@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Gateway, GatewayResponse } from '../../../../app/models/gateway'
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChirpstackGatewayService } from '../../_services/chirpstack-gateway.service';
+import { ChirpstackGatewayService } from '../../services/chirpstack-gateway.service';
 
 @Component({
   selector: 'app-form-body-lora-gateway',
@@ -38,17 +38,17 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     this.translate.use('da');
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-        this.getGateway(this.id);
+      this.getGateway(this.id);
     }
   }
 
   getGateway(id: string): void {
     this.gatewaySubscription = this.loraGatewayService
-        .get(id)
-        .subscribe((result: GatewayResponse) => {
-          result.gateway.tagsString = JSON.stringify(result.gateway.tags)
-          this.gateway = result.gateway
-        });
+      .get(id)
+      .subscribe((result: GatewayResponse) => {
+        result.gateway.tagsString = JSON.stringify(result.gateway.tags)
+        this.gateway = result.gateway
+      });
   }
 
   createGateway(): void {
@@ -69,7 +69,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       .put(this.gateway, this.id)
       .subscribe(
         (response) => {
-            this.routeBack()
+          this.routeBack()
         },
         (error) => {
           this.showError(error)
@@ -78,9 +78,9 @@ export class FormBodyLoraGatewayComponent implements OnInit {
 
   onSubmit(): void {
     if (this.id) {
-        this.updateGateway();
+      this.updateGateway();
     } else {
-        this.createGateway();
+      this.createGateway();
     }
   }
 
@@ -89,20 +89,20 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   }
 
   ngOnDestroy() {
-      if (this.gatewaySubscription) {
-          this.gatewaySubscription.unsubscribe();
-      }
+    if (this.gatewaySubscription) {
+      this.gatewaySubscription.unsubscribe();
+    }
   }
 
   onCoordinateKey(event: any) {
     console.log(event.target.value);
     console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength)
-        event.target.value = event.target.value.slice(
-            0,
-            event.target.maxLength
-        );
-}
+      event.target.value = event.target.value.slice(
+        0,
+        event.target.maxLength
+      );
+  }
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
@@ -111,9 +111,9 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       error.error.message[0].children.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(
-            Object.values(err.constraints)
+          Object.values(err.constraints)
         );
-    });
+      });
     } else {
       this.errorMessage = error.message
     }

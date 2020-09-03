@@ -10,23 +10,30 @@
         },
         "array-type": false,
         "arrow-return-shorthand": true,
+        "callable-types": true,
+        "class-name": true,
+        "comment-format": [true, "check-space"],
+        "component-class-suffix": true,
+        "component-selector": [true, "element", "app", "kebab-case"],
         "curly": true,
         "deprecation": {
             "severity": "warning"
         },
-        "component-class-suffix": true,
         "contextual-lifecycle": true,
         "directive-class-suffix": true,
         "directive-selector": [true, "attribute", "app", "camelCase"],
-        "component-selector": [true, "element", "app", "kebab-case"],
         "eofline": true,
+        "forin": true,
+        "interface-over-type-literal": true,
         "import-blacklist": [true, "rxjs/Rx"],
         "import-spacing": true,
         "indent": {
             "options": ["spaces"]
         },
+        "label-position": true,
         "max-classes-per-file": false,
-        "max-line-length": [true, 140],
+        "max-line-length": [true, 200],
+        "member-access": false,
         "member-ordering": [
             true,
             {
@@ -50,6 +57,51 @@
         "semicolon": {
             "options": ["always"]
         },
+        "no-conflicting-lifecycle": true,
+        "no-host-metadata-property": true,
+        "no-input-rename": true,
+        "no-inputs-metadata-property": true,
+        "no-output-native": true,
+        "no-output-on-prefix": true,
+        "no-output-rename": true,
+        "no-outputs-metadata-property": true,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-construct": true,
+        "no-debugger": true,
+        "no-duplicate-super": true,
+        "no-empty-interface": true,
+        "no-eval": true,
+        "no-misused-new": true,
+        "no-shadowed-variable": [
+            false,
+            {
+                "class": true,
+                "enum": true,
+                "function": true,
+                "interface": false,
+                "namespace": true,
+                "typeAlias": false,
+                "typeParameter": false
+            }
+        ],
+        "no-string-literal": false,
+        "no-string-throw": true,
+        "no-trailing-whitespace": true,
+        "no-unnecessary-initializer": true,
+        "no-unused-expression": true,
+        "no-use-before-declare": true,
+        "no-var-keyword": true,
+        "object-literal-sort-keys": false,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-catch",
+            "check-else",
+            "check-whitespace"
+        ],
+        "prefer-const": true,
+        "radix": true,
         "space-before-function-paren": {
             "options": {
                 "anonymous": "never",
@@ -59,6 +111,9 @@
                 "named": "never"
             }
         },
+        "template-banana-in-box": true,
+        "template-no-negated-async": true,
+        "triple-equals": [true, "allow-null-check"],
         "typedef-whitespace": {
             "options": [
                 {
@@ -67,16 +122,12 @@
                     "parameter": "nospace",
                     "property-declaration": "nospace",
                     "variable-declaration": "nospace"
-                },
-                {
-                    "call-signature": "onespace",
-                    "index-signature": "onespace",
-                    "parameter": "onespace",
-                    "property-declaration": "onespace",
-                    "variable-declaration": "onespace"
                 }
             ]
         },
+        "unified-signatures": true,
+        "use-lifecycle-interface": true,
+        "use-pipe-transform-interface": true,
         "variable-name": {
             "options": ["ban-keywords", "check-format", "allow-pascal-case"]
         },
@@ -87,21 +138,10 @@
                 "check-operator",
                 "check-separator",
                 "check-type",
-                "check-typecast"
+                "check-typecast",
+                "check-module"
             ]
-        },
-        "no-conflicting-lifecycle": true,
-        "no-host-metadata-property": true,
-        "no-input-rename": true,
-        "no-inputs-metadata-property": true,
-        "no-output-native": true,
-        "no-output-on-prefix": true,
-        "no-output-rename": true,
-        "no-outputs-metadata-property": true,
-        "template-banana-in-box": true,
-        "template-no-negated-async": true,
-        "use-lifecycle-interface": true,
-        "use-pipe-transform-interface": true
+        }
     },
     "rulesDirectory": ["codelyzer"]
 }

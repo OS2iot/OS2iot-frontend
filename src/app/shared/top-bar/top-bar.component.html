@@ -5,7 +5,7 @@
   <ng-template [ngIf]="title">
     <h4 *ngIf="component; else notComponent">{{title}}</h4>
     <ng-template #notComponent>
-      <h3 >{{title}}</h3>
+      <h3>{{title}}</h3>
     </ng-template>
   </ng-template>
   <div class="ml-auto d-flex">
@@ -19,8 +19,8 @@
       </select>
       {{ 'GEN.PER-PAGE' | translate }} -->
       <label class="form-label d-none" for="myApplicationsTableSort">{{ 'SORT.SORT' | translate }}</label>
-      <select id="myApplicationsTableSort" name="myApplicationsTableSort" [(ngModel)]="selectedSortId" (ngModelChange)="changeSort($event)"
-        class="select-box select-box-md">
+      <select *ngIf="showSelectedSort" id="myApplicationsTableSort" name="myApplicationsTableSort"
+        [(ngModel)]="selectedSortId" (ngModelChange)="changeSort($event)" class="select-box select-box-md">
         <option [value]="option.id" *ngFor="let option of sort">{{ option.label | translate }}</option>
       </select>
     </div>
