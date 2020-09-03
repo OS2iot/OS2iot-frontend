@@ -30,7 +30,11 @@
       "LONGITUDE": "Længdegrad",
       "LATITUDE":"Breddegrad",
       "ALTITUDE":"Højde",
-      "SAVE": "Gem gateway"
+      "SAVE": "Gem gateway",
+      "ID": "Gateway ID",
+      "LOCATION": "Placering",
+      "TAGS": "Tags",
+      "NAME": "Gatewayens navn"
     },
     "IOT-DEVICE": {
       "CREATE": "Gem IoT enhed",
