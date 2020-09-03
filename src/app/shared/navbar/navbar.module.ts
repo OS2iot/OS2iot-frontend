@@ -11,6 +11,7 @@ import { SharedModule } from '../shared.module';
 import { RestService } from '../_services/rest.service';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     RouterModule,
     TranslateModule,
+    FontAwesomeModule
   ],
   exports: [
     NavbarComponent,
