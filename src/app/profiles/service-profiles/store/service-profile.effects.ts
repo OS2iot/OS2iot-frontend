@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 
 import * as ServiceProfileActions from './service-profile.actions';
-import { ServiceProfile } from '../service-profile.model';
+import { ServiceProfile, ServiceProfileData } from '../service-profile.model';
 import * as fromApp from '../../../store/app.reducer';
 
 import { environment } from 'src/environments/environment';
@@ -18,17 +18,22 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceProfileEffects {
-    restService: RestService;
+
     @Effect()
     fetchServiceProfiles = this.actions$.pipe(
         ofType(ServiceProfileActions.FETCH_SERVICEPROFILES),
-        switchMap(() => {
-            return this.http.get<ServiceProfile[]>(
-                'http://[::1]:3000/api/v1/chirpstack/service-profiles?limit=100&offset=0'
-            );
+        switchMap((): Observable<ServiceProfileData> => {
+            const body = {
+                limit: 10,
+                offset: 0,
+            };
+            const result = this.restService.get(
+                'chirpstack/service-profiles', body);
+            console.log(result)
+            return result
         }),
         map(serviceProfiles => {
-            return serviceProfiles.map(serviceProfile => {
+            return serviceProfiles.result.map(serviceProfile => {
                 return {
                     ...serviceProfile,
                 };
@@ -44,15 +49,19 @@ export class ServiceProfileEffects {
     storeServiceProfiles = this.actions$.pipe(
         ofType(ServiceProfileActions.STORE_SERVICEPROFILES),
         withLatestFrom(this.store.select('serviceProfiles')),
-        switchMap(([actionData, serviceProfileState]) => {
-            return this.http.post(
-                'http://[::1]:3000/api/v1/chirpstack/service-profiles',
-                serviceProfileState.serviceProfiles
+        switchMap(([actionData, serviceProfileState]): Observable<ServiceProfileData> => {
+            const result = this.restService.post(
+                'chirpstack/service-profiles',
+                serviceProfileState.serviceProfiles,
+                { observe: 'response' }
             );
+            console.log(result)
+            return result
         })
     );
 
     constructor(
+        private restService: RestService,
         private actions$: Actions,
         private http: HttpClient,
         private store: Store<fromApp.AppState>

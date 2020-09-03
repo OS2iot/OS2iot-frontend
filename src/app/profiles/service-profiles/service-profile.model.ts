@@ -73,8 +73,7 @@ export class ServiceProfile {
     }
 }
 
-// export interface ServiceProfileData {
-//     data: ServiceProfile[];
-//     ok?: boolean;
-//     count?: number;
-// }
+export interface ServiceProfileData {
+    result: ServiceProfile[];
+    totalCount?: string;
+}
