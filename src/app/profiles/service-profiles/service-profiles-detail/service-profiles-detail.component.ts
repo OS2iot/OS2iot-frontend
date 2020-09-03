@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ServiceProfilesDetailComponent implements OnInit {
   public backButton: BackButton = { label: 'Go back', routerLink: '/profiles' };
-  public title: string = '';
+  public title: '';
   serviceProfile: ServiceProfile;
   id: number;
 

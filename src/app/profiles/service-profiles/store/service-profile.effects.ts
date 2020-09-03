@@ -29,8 +29,8 @@ export class ServiceProfileEffects {
             };
             const result = this.restService.get(
                 'chirpstack/service-profiles', body);
-            console.log(result)
-            return result
+            console.log(result);
+            return result;
         }),
         map(serviceProfiles => {
             return serviceProfiles.result.map(serviceProfile => {

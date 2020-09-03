@@ -13,6 +13,7 @@ import { FormModule } from 'src/app/shared/form/form.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { MaterialModule } from 'src/app/shared/Modules/material.module';
 
 
 
@@ -35,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     FormModule,
     TranslateModule,
+    MaterialModule,
     StoreModule.forFeature('serviceProfiles', fromServiceProfiles.serviceProfileReducer),
   ]
 })

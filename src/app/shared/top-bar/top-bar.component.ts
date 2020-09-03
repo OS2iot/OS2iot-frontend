@@ -15,7 +15,7 @@ export class TopBarComponent implements OnInit {
     @Input() sort: Sort[];
     @Input() pageLimit: number;
     @Input() selectedSortId: number;
-    @Input() component: boolean = false;
+    @Input() component: false;
     @Input() showSelectedSort = true;
 
     @Output() selectedSortChange = new EventEmitter();

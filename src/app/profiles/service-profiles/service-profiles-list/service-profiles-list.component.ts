@@ -18,8 +18,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   serviceProfiles: ServiceProfile[];
   subscription: Subscription;
-  public pageLimit: number = 10;
-  public pageOffset: number = 0;
+  public pageLimit: 10;
+  public pageOffset: 0;
 
   constructor(
     private router: Router,

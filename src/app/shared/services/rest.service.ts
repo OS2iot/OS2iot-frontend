@@ -228,7 +228,7 @@ export class RestService {
         };
     }
 
-    /** Use the AlertService to notify of the request*/
+    // Use the AlertService to notify of the request
     private log(alert: Alert) {
         this.alertService.add(alert);
     }

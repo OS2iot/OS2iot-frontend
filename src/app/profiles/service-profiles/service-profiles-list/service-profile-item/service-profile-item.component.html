@@ -3,10 +3,11 @@
     <div class="col-6 pull-left"> <a [routerLink]="[index]">
         <h4 class="application-link">{{ serviceProfile.name }}</h4>
       </a></div>
-    <div class="col-6 text-right application-link">
+    <div class="col-6 text-right ">
       <!-- TODO: skal skiftes ud med Ikoner -->
-      <a style="cursor: pointer;" (click)="onEditServiceProfile()">Edit ServiceProfile</a>
-      <a style="cursor: pointer;" class="pl-3" (click)="onDeleteServiceProfile()">Delete ServiceProfile</a>
+      <a style="cursor: pointer;" class="application-link" (click)="onEditServiceProfile()">Edit ServiceProfile</a>
+      <a style="cursor: pointer;" class="application-link pl-3" (click)="onDeleteServiceProfile()">Delete
+        ServiceProfile</a>
     </div>
   </div>
 </div>

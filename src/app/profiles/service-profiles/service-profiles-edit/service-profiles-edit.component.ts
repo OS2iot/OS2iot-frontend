@@ -7,25 +7,29 @@ import { map } from 'rxjs/operators';
 import * as fromApp from '../../../store/app.reducer';
 import * as ServiceProfilesActions from '../store/service-profile.actions';
 import { BackButton } from 'src/app/models/back-button';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-service-profiles-edit',
   templateUrl: './service-profiles-edit.component.html',
+  styleUrls: ['./service-profiles-edit.component.scss']
 
 })
 export class ServiceProfilesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
-  public title: string = 'Service Profile Edit';
+  public title: 'Service Profile';
   id: number;
   editMode = false;
   serviceProfileForm: FormGroup;
+  GWvalues: string[] = ['true', 'false'];
 
   private storeSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -34,6 +38,12 @@ export class ServiceProfilesEditComponent implements OnInit {
       this.editMode = params['id'] != null;
       this.initForm();
     });
+    this.translate.get(['PROFILES.SERVICE_PROFILE.GOBACK', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE',])
+      .subscribe(translations => {
+        this.backButton.label = translations['PROFILES.SERVICE_PROFILE.GOBACK'];
+        this.title = translations['PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE'];
+
+      });
   }
 
   onSubmit() {
@@ -55,15 +65,15 @@ export class ServiceProfilesEditComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  ngOnDestroy() {
+  ngDestroy() {
     if (this.storeSub) {
       this.storeSub.unsubscribe();
     }
   }
 
   private initForm() {
-    let serviceProfileName = '';
-    let serviceProfileGWData = '{"Json":{"data":1}}';
+    let serviceProfileName = 'Navngiv din profil';
+    let serviceProfileGWData = false;
     let serviceProfileBatteryStatus = true;
     let serviceProfileMinDateRate = 2000;
     let serviceProfileMaxDateRate = 2000;
@@ -81,6 +91,7 @@ export class ServiceProfilesEditComponent implements OnInit {
         )
         .subscribe(serviceProfile => {
           serviceProfileName = serviceProfile.name;
+          serviceProfileGWData = serviceProfile.addGWMetaData;
           serviceProfileBatteryStatus = serviceProfile.reportDevStatusBattery;
           serviceProfileMinDateRate = serviceProfile.drMin;
           serviceProfileMaxDateRate = serviceProfile.drMax;
@@ -91,6 +102,7 @@ export class ServiceProfilesEditComponent implements OnInit {
 
     this.serviceProfileForm = new FormGroup({
       name: new FormControl(serviceProfileName, Validators.required),
+      addGWMetaData: new FormControl(serviceProfileGWData, Validators.required),
       reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),
       drMin: new FormControl(serviceProfileMinDateRate, Validators.required),
       drMax: new FormControl(serviceProfileMaxDateRate, Validators.required),
