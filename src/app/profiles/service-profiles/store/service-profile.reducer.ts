@@ -6,7 +6,31 @@ export interface State {
 }
 
 const initialState: State = {
-    serviceProfiles: [],
+    serviceProfiles: [{
+        id: 'ID',
+        name: 'Vandmåler',
+        networkServerID: 'networkserverID',
+        addGWMetaData: true,
+        channelMask: 'channelmask',
+        devStatusReqFreq: 789,
+        dlBucketSize: 123,
+        dlRate: 456,
+        dlRatePolicy: 'dlRatePolicy',
+        drMax: 789,
+        drMin: 132,
+        hrAllowed: true,
+        minGWDiversity: 123,
+        nwkGeoLoc: true,
+        organizationID: 'organizationID',
+        prAllowed: true,
+        raAllowed: true,
+        reportDevStatusBattery: true,
+        reportDevStatusMargin: true,
+        targetPER: 123,
+        ulBucketSize: 456,
+        ulRate: 789,
+        ulRatePolicy: 'ulRatePolicy'
+    }],
 };
 
 export function serviceProfileReducer(

@@ -1,40 +1,37 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ServiceProfilesListComponent } from './service-profiles/service-profiles-list/service-profiles-list.component';
 import { ProfilesComponent } from './profiles.component';
-import { ProfilesRoutingModule } from './service-profiles/service-profiles-routing.module';
+import { ProfilesRoutingModule } from './profiles-routing.module';
 import { LoggingService } from '../logging.service';
-import { ServiceProfilesComponent } from './service-profiles/service-profiles.component';
-import { ServiceProfileService } from './service-profiles/service-profile.service';
-import { ServiceProfileItemComponent } from './service-profiles/service-profiles-list/service-profile-item/service-profile-item.component';
-import { ServiceProfilesDetailComponent } from './service-profiles/service-profiles-detail/service-profiles-detail.component';
-import { ServiceProfilesEditComponent } from './service-profiles/service-profiles-edit/service-profiles-edit.component';
-import { ServiceProfilesStartComponent } from './service-profiles/service-profiles-start/service-profiles-start.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
-import * as fromServiceProfiles from './service-profiles/store/service-profile.reducer';
+import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
+import { ProfilesListComponent } from './profiles-list/profiles-list.component';
+import { SharedModule } from '../shared/shared.module';
+import { TopBarModule } from '../shared/top-bar/top-bar.module';
+import { FormModule } from '../shared/form/form.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @NgModule({
   declarations: [
     ProfilesComponent,
-    ServiceProfilesListComponent,
-    ServiceProfileItemComponent,
-    ServiceProfilesComponent,
-    ServiceProfilesDetailComponent,
-    ServiceProfilesEditComponent,
-    ServiceProfilesStartComponent],
+    ProfilesListComponent,
+  ],
   exports: [],
   imports: [
-    RouterModule,
-    ReactiveFormsModule,
-    CommonModule,
+    ServiceProfilesModule,
     ProfilesRoutingModule,
-    StoreModule.forFeature('serviceProfiles', fromServiceProfiles.serviceProfileReducer),
+    RouterModule,
+    TopBarModule,
+    SharedModule,
+    FormModule,
+    TranslateModule
+
   ],
-  providers: [LoggingService, ServiceProfileService]
+  providers: [
+    LoggingService,
+  ]
 })
 export class ProfilesModule { }

@@ -8,6 +8,7 @@ import { AlertComponent } from './alert/alert.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoggingService } from '../logging.service';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -15,15 +16,12 @@ import { LoggingService } from '../logging.service';
     SearchBarComponent,
   ],
   imports: [
+    DirectivesModule,
     CommonModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
   ],
   exports: [
     AlertComponent,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    TranslateModule
+    TranslateModule,
   ],
   providers: [LoggingService]
 })

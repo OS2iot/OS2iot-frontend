@@ -5,12 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 
 import * as ServiceProfileActions from './service-profile.actions';
-import { ServiceProfile, ServiceProfileData } from '../service-profile.model';
+import { ServiceProfile } from '../service-profile.model';
 import * as fromApp from '../../../store/app.reducer';
 
 import { environment } from 'src/environments/environment';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 
@@ -20,13 +22,10 @@ export class ServiceProfileEffects {
     @Effect()
     fetchServiceProfiles = this.actions$.pipe(
         ofType(ServiceProfileActions.FETCH_SERVICEPROFILES),
-        switchMap((limit: number, offset: number): Observable<ServiceProfile[]> => {
-            const body = {
-                limit: limit,
-                offset: offset,
-            };
-            return this.restService.get('chirpstack/service-profiles', body);
-
+        switchMap(() => {
+            return this.http.get<ServiceProfile[]>(
+                'http://[::1]:3000/api/v1/chirpstack/service-profiles?limit=100&offset=0'
+            );
         }),
         map(serviceProfiles => {
             return serviceProfiles.map(serviceProfile => {
@@ -37,18 +36,18 @@ export class ServiceProfileEffects {
         }),
         map(serviceProfiles => {
             return new ServiceProfileActions.SetServiceProfiles(serviceProfiles);
-        })
+        }),
+        catchError(() => of({ type: ' Loaded Error' }))
     );
 
     @Effect({ dispatch: false })
     storeServiceProfiles = this.actions$.pipe(
         ofType(ServiceProfileActions.STORE_SERVICEPROFILES),
         withLatestFrom(this.store.select('serviceProfiles')),
-        switchMap((body: any): Observable<ServiceProfileData> => {
-            return this.restService.post(
-                'chirpstack/service-profiles',
-                body,
-                { observe: 'response' }
+        switchMap(([actionData, serviceProfileState]) => {
+            return this.http.post(
+                'http://[::1]:3000/api/v1/chirpstack/service-profiles',
+                serviceProfileState.serviceProfiles
             );
         })
     );

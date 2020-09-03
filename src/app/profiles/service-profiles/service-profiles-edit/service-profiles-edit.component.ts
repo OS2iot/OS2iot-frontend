@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-
 import * as fromApp from '../../../store/app.reducer';
 import * as ServiceProfilesActions from '../store/service-profile.actions';
+import { BackButton } from 'src/app/models/back-button';
 
 @Component({
   selector: 'app-service-profiles-edit',
@@ -14,6 +14,8 @@ import * as ServiceProfilesActions from '../store/service-profile.actions';
 
 })
 export class ServiceProfilesEditComponent implements OnInit {
+  public backButton: BackButton = { label: '', routerLink: '/profiles' };
+  public title: string = 'Service Profile Edit';
   id: number;
   editMode = false;
   serviceProfileForm: FormGroup;
@@ -36,9 +38,14 @@ export class ServiceProfilesEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      this.store.dispatch(ServiceProfilesActions.updateServiceProfile({ index: this.id, serviceProfile: this.serviceProfileForm.value }));
+      this.store.dispatch(
+        new ServiceProfilesActions.UpdateServiceProfile({
+          index: this.id,
+          updateServiceProfile: this.serviceProfileForm.value
+        })
+      );
     } else {
-      this.store.dispatch(ServiceProfilesActions.addServiceProfile({ serviceProfile: this.serviceProfileForm.value }));
+      this.store.dispatch(new ServiceProfilesActions.AddServiceProfile(this.serviceProfileForm.value));
     }
     this.onCancel();
   }
@@ -56,7 +63,11 @@ export class ServiceProfilesEditComponent implements OnInit {
 
   private initForm() {
     let serviceProfileName = '';
-    let serviceProfileId = '';
+    let serviceProfileGWData = '{"Json":{"data":1}}';
+    let serviceProfileBatteryStatus = true;
+    let serviceProfileMinDateRate = 2000;
+    let serviceProfileMaxDateRate = 2000;
+    let serviceProfileReportEndDevice = 2000;
 
     if (this.editMode) {
       this.storeSub = this.store
@@ -70,13 +81,21 @@ export class ServiceProfilesEditComponent implements OnInit {
         )
         .subscribe(serviceProfile => {
           serviceProfileName = serviceProfile.name;
-          serviceProfileId = serviceProfile.id;
+          serviceProfileBatteryStatus = serviceProfile.reportDevStatusBattery;
+          serviceProfileMinDateRate = serviceProfile.drMin;
+          serviceProfileMaxDateRate = serviceProfile.drMax;
+          serviceProfileReportEndDevice = serviceProfile.targetPER;
+
         });
     }
 
     this.serviceProfileForm = new FormGroup({
       name: new FormControl(serviceProfileName, Validators.required),
-      id: new FormControl(serviceProfileId, Validators.required),
+      reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),
+      drMin: new FormControl(serviceProfileMinDateRate, Validators.required),
+      drMax: new FormControl(serviceProfileMaxDateRate, Validators.required),
+      targetPER: new FormControl(serviceProfileReportEndDevice, Validators.required)
+
 
     });
   }

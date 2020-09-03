@@ -1,16 +1,8 @@
 <div class="row">
     <div class="col-xs-12">
+        <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
         <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success" [disabled]="!serviceProfileForm.valid">
-                        Save
-                    </button>
-                    <button type="button" class="btn btn-danger" (click)="onCancel()">
-                        Cancel
-                    </button>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
@@ -19,16 +11,65 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <!-- <div class="row">
                 <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">GW metadata som json</label>
+                        <input type="text" id="addGWMetaData" formControlName="addGWMetaData" class="form-control" />
+                    </div>
                 </div>
-            </div>
+            </div> -->
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="description">ID</label>
-                        <textarea type="text" id="id" class="form-control" formControlName="id" rows="6"></textarea>
+                        <label for="name">Report Battery Status</label>
+                        <input type="text" id="reportDevStatusBattery" formControlName="reportDevStatusBattery"
+                            class="form-control" />
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="name">Min date rate</label>
+                        <input type="text" id="drMin" formControlName="drMin" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="name">Max date rate</label>
+                        <input type="text" id="drMax" formControlName="drMax" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="name">Report End-Device margin</label>
+                        <input type="text" id="targetPER" formControlName="targetPER" class="form-control" />
+                    </div>
+                </div>
+                <!-- <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" formControlName="name" class="form-control" />
+                    </div>
+                </div> -->
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="!serviceProfileForm.valid">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="onCancel()">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </form>

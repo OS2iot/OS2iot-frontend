@@ -1,5 +1,7 @@
-<td class="position-relative"><a [routerLink]="['application', application.id]"
-    routerLinkActive="active" class="application-link">{{application.name}}</a></td>
+<td class="position-relative">
+  <a [routerLink]="['application', application.id]" routerLinkActive="active"
+    class="application-link">{{application.name}}</a>
+</td>
 <ng-container *ngIf="application.iotDevices; else iotZero">
   <td class="position-relative">{{application.iotDevices.length}}</td>
 </ng-container>

@@ -1,35 +1,49 @@
 <div class="row">
-    <div class="col-xs-12">
-
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <h1>{{ serviceProfile.name }}</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="btn-group" appDropdown>
-            <button type="button" class="btn btn-primary dropdown-toggle">
-                Manage ServiceProfile <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a style="cursor: pointer;" (click)="onEditServiceProfile()">Edit ServiceProfile</a></li>
-                <li><a style="cursor: pointer;" (click)="onDeleteServiceProfile()">Delete ServiceProfile</a></li>
-            </ul>
+    <div class="bottom-separator">
+        <div class="col-xs-12">
+            <app-form-header [backButton]="backButton" [title]="serviceProfile.name"></app-form-header>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        {{ serviceProfile.id }}
+    <div class="row my-3">
+        <div class="col-xs-12">
+            <div class="btn-group float-right" appDropdown>
+                <button type="button" class="btn btn-primary dropdown-toggle">
+                    Manage ServiceProfile <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a style="cursor: pointer;" (click)="onEditServiceProfile()">Edit ServiceProfile</a></li>
+                    <li><a style="cursor: pointer;" (click)="onDeleteServiceProfile()">Delete ServiceProfile</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <ul class="list-group">
+    <div class="col-12 py-4">
+        <div class="col-12 col-sm-4">
+            <h4>{{ 'IOTDEVICE.NAME'  }}</h4>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+            <p>{{serviceProfile.name}}</p>
+        </div>
+    </div>
+    <div class="col-12 py-4">
+        <div class="col-12 col-sm-4">
+            <h4>{{ 'IOTDEVICE.TYPE'  }}</h4>
+        </div>
+        <div class="col-12 pt-2 col-sm-8">
+            <p>{{ 'IOT-DEVICE-TYPES.' + serviceProfile.drMin }}</p>
+        </div>
+    </div>
+    {{ serviceProfile.addGWMetaData }}
+    {{ serviceProfile.drMin }}
+    {{ serviceProfile.drMax }}
+    {{ serviceProfile.targetPER }}
 
-        </ul>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-group">
+
+            </ul>
+        </div>
     </div>
 </div>

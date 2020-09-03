@@ -33,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         DashboardModule,
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AlleIotEnhederModule,
         NavbarModule,
         ProfilesModule,
+        TranslateModule,
         StoreModule.forRoot(appReducer, { metaReducers }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         EffectsModule.forRoot([ServiceProfileEffects]),
