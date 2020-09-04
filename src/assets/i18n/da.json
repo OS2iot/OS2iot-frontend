@@ -47,7 +47,7 @@
     "SAVE": "Gem datatarget",
     "DESCRIPTION": "Beskrivelse",
     "URL": "URL",
-    "TIMEOUT": "Timeout",	
+    "TIMEOUT": "Timeout",
     "TYPE": "Type",
     "NAME": "Datatarget navn"
   },
@@ -194,19 +194,19 @@
   "PROFILES": {
     "NAME": "Profiler",
     "SERVICE_PROFILE": {
-      "DROPDOWN": "HÃ¥ndter service profil",
+      "DROPDOWN": "Håndter service profil",
       "EDIT": "Editer service profil",
       "DELETE": "Slet service profil",
       "NAME": "Navn",
       "REPORTBATTERYSTATUS": "Report battery status",
-      "ADDGWMETADATA": "TilfÃ¸jet GW meta data",
+      "ADDGWMETADATA": "Tilføjet GW meta data",
       "DRRATEMIN": "Min date rate",
       "DRRATEMAX": "Max date rate",
       "REPORT_END_DEVICE": "Report end-device margin",
       "SAVE": "Gem",
       "CANCEL": "Annuller",
-      "GOBACK": "GÃ¥ tilbage",
-      "ADDSERVICEPROFILE": "TilfÃ¸j eller editer service profil"
+      "GOBACK": "Gå tilbage",
+      "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
     }
   }
 }
