@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 import * as fromServiceProfiles from './../service-profiles/store/service-profile.reducer';
 import { RouterModule } from '@angular/router';
 import { FormModule } from 'src/app/shared/form/form.module';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from 'src/app/shared/Modules/material.module';

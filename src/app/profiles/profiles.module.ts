@@ -11,6 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 import { TopBarModule } from '../shared/top-bar/top-bar.module';
 import { FormModule } from '../shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProfilesDetailComponent } from './profiles-detail/profiles-detail.component';
+import { ProfilesEditComponent } from './profiles-edit/profiles-edit.component';
 
 
 
@@ -18,6 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
   declarations: [
     ProfilesComponent,
     ProfilesListComponent,
+    ProfilesDetailComponent,
+    ProfilesEditComponent,
   ],
   exports: [],
   imports: [
