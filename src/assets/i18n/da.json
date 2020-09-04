@@ -1,208 +1,212 @@
 {
-    "GEN": {
-        "CANCEL": "Annuller",
-        "SHOW": "Vis",
-        "PER-PAGE": "Per side",
-        "BACK": "Tilbage",
-        "EDIT": "Redigér",
-        "APPLICATION": "Applikation",
-        "HTTP": "Generisk HTTP"
+  "GEN": {
+    "CANCEL": "Annuller",
+    "SHOW": "Vis",
+    "PER-PAGE": "Per side",
+    "BACK": "Tilbage",
+    "EDIT": "Redigér",
+    "APPLICATION": "Applikation",
+    "HTTP": "Generisk HTTP"
+  },
+  "NAV": {
+    "DASHBOARD": "Dashboard",
+    "MY-APPLICATIONS": "Mine applikationer",
+    "ALL-IOT-DEVICES": "Alle IoT enheder",
+    "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
+    "DATATARGET": "Datatarget",
+    "MY-DATATARGET": "Tilbage",
+    "DATATARGET-APPLIKATION": "for applikation:",
+    "PROFILES": "Profiler"
+  },
+  "APPLICATION": {
+    "CREATE": "Opret applikation",
+    "SAVE": "Gem applikation",
+    "DELETE": "Slet applikation",
+    "NAME": "Applikationens navn",
+    "DESCRIPTION": "Applikationens beskrivelse",
+    "ATTACHED-IOT": "Tilknyttede IoT enheder"
+  },
+  "GATEWAY": {
+    "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
+    "LONGITUDE": "Længdegrad",
+    "LATITUDE": "Breddegrad",
+    "ALTITUDE": "Højde",
+    "SAVE": "Gem gateway",
+    "ID": "Gateway ID",
+    "LOCATION": "Placering",
+    "TAGS": "Tags",
+    "NAME": "Gatewayens navn"
+  },
+  "IOT-DEVICE": {
+    "CREATE": "Gem IoT enhed",
+    "SAVE": "Gem IoT enhed",
+    "DELETE": "Slet IoT enhed",
+    "RESTART": "Genstart IoT enhed"
+  },
+  "DATATARGET": {
+    "SAVE": "Gem datatarget",
+    "DESCRIPTION": "Beskrivelse",
+    "URL": "URL",
+    "TIMEOUT": "Timeout",
+    "TYPE": "Type",
+    "NAME": "Datatarget navn"
+  },
+  "APPLICATION-TABLE": {
+    "NAME": "NAVN",
+    "IOT-DEVICES": "IOT ENHEDER",
+    "UPDATED": "SENEST OPDATERET"
+  },
+  "IOT-TABLE": {
+    "APPLICATION": "APPLIKATION",
+    "NETWORK-TECHNOLOGY": "NETVÆRKSTEKNOLOGI",
+    "ALARM": "ALARM",
+    "BATTERY": "BATTERI",
+    "ACTIVE": "AKTIV",
+    "DATA": "DATA(24 TIMER)"
+  },
+  "LORA-GATEWAY-TABLE": {
+    "NAME": "Navn",
+    "GATEWAYID": "Gateway ID",
+    "LOCATION": "Placering"
+  },
+  "LORA-GATEWAY-TABLE-ROW": {
+    "DELETE": "Slet Gateway",
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Vis muligheder"
+  },
+  "LORA-GATEWAY": {
+    "CREATE": "Opret LoRaWan Gateway"
+  },
+  "DATATARGET-TABLE": {
+    "NAME": "Navn",
+    "TYPE": "Type"
+  },
+  "IOT-DEVICE-TYPES": {
+    "GENERIC_HTTP": "Generisk HTTP"
+  },
+  "ACTIVITY": {
+    "NEVER": "Aldrig set"
+  },
+  "TABLE": {
+    "PAGINATION": "Navigér tabel"
+  },
+  "APPLICATION-TABLE-ROW": {
+    "DELETE": "Slet",
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Vis muligheder"
+  },
+  "IOTDEVICE-TABLE-ROW": {
+    "DELETE": "Slet",
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Vis muligheder"
+  },
+  "DATATARGET-TABLE-ROW": {
+    "DELETE": "Slet datatarget",
+    "EDIT": "Redigér"
+  },
+  "FORM": {
+    "CREATE-NEW-APPLICATION": "Opret ny applikation",
+    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
+    "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
+    "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
+    "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
+    "EDIT-NEW-APPLICATION": "Redigér applikation",
+    "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
+    "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
+    "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
+  },
+  "QUESTION": {
+    "GIVE-APPLICATION-NAME": "Navngiv applikation",
+    "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
+    "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
+    "APPLICATION-DESCRIPTION-PLACEHOLDER": "Kort beskrivelse af applikationen",
+    "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
+    "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
+    "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
+    "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
+    "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed",
+    "DEVICE-NAME-PLACEHOLDER": "Enhedsnavn",
+    "GIVE-DEVICE-NAME": "Navngiv enhed",
+    "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
+    "LOCATION-DESCRIPTION": "Beskrivelse af placering",
+    "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
+    "CHOOSE-APPLICATION": "Vælg applikation",
+    "GIVE-DATATARGET-NAME": "Navngiv datatarget",
+    "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
+    "GIVE-DATATARGET-TIMEOUT": "Timeout",
+    "GIVE-DATATARGET-URL": "Angiv datatargets URL",
+    "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data"
+  },
+  "QUESTION-LORA-GATEWAY": {
+    "NAME": "Navngiv LoRaWAN Gateway",
+    "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn",
+    "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
+    "DESCRIPTION-PLACEHOLDER": "beskrivelse af LoRaWAN Gateway",
+    "GATEWAYID": "Gateway ID",
+    "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
+    "METADATA": "Gateway Tags",
+    "METADATA-PLACEHOLDER": "Angiv JSON her",
+    "ALTITUDE": "Højde",
+    "ALTITUDE-PLACEHOLDER": "00",
+    "LONGITUDE": "Længdegrad",
+    "LONGITUDE-PLACEHOLDER": "00",
+    "LATITUDE": "Breddegrad",
+    "LATITUDE-PLACEHOLDER": "00"
+  },
+  "SORT": {
+    "SORT": "Sortér",
+    "UPDATED-ASCENDING": "Senest opdateret: stigende",
+    "UPDATED-DESCENDING": "Senest opdateret: faldende",
+    "CREATED-ASCENDING": "Oprettet: stigende",
+    "CREATED-DESCENDING": "Oprettet: faldende",
+    "NAME-ASCENDING": "Navn: stigende",
+    "NAME-DESCENDING": "Navn: faldende",
+    "APPLICATION-ASCENDING": "Applikation: stigende",
+    "APPLICATION-DESCENDING": "Applikation: faldende",
+    "BATTERY-ASCENDING": "Batteri: stigende",
+    "BATTERY-DESCENDING": "Batteri: faldende"
+  },
+  "IOTDEVICE": {
+    "HEADING": {
+      "PROTOCOL": "Transmission Protokol",
+      "BASIC": "Basis info",
+      "OPTIONAL": "Yderligere info"
     },
-    "NAV": {
-        "DASHBOARD": "Dashboard",
-        "MY-APPLICATIONS": "Mine applikationer",
-        "ALL-IOT-DEVICES": "Alle IoT enheder",
-        "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
-        "DATATARGET": "Datatarget",
-        "MY-DATATARGET": "Tilbage",
-        "DATATARGET-APPLIKATION": "for applikation:",
-        "PROFILES": "Profiler"
-    },
-    "APPLICATION": {
-        "CREATE": "Opret applikation",
-        "SAVE": "Gem applikation",
-        "DELETE": "Slet applikation",
-        "NAME": "Applikationens navn",
-        "DESCRIPTION": "Applikationens beskrivelse",
-        "ATTACHED-IOT": "Tilknyttede IoT enheder"
-    },
-    "GATEWAY": {
-        "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
-        "LONGITUDE": "Længdegrad",
-        "LATITUDE": "Breddegrad",
-        "ALTITUDE": "Højde",
-        "SAVE": "Gem gateway",
-        "ID": "Gateway ID",
-        "LOCATION": "Placering",
-        "TAGS": "Tags",
-        "NAME": "Gatewayens navn"
-    },
-    "IOT-DEVICE": {
-        "CREATE": "Gem IoT enhed",
-        "SAVE": "Gem IoT enhed",
-        "DELETE": "Slet IoT enhed",
-        "RESTART": "Genstart IoT enhed"
-    },
-    "DATATARGET": {
-        "SAVE": "Gem datatarget",
-        "DESCRIPTION": "Beskrivelse"
-    },
-    "APPLICATION-TABLE": {
-        "NAME": "NAVN",
-        "IOT-DEVICES": "IOT ENHEDER",
-        "UPDATED": "SENEST OPDATERET"
-    },
-    "IOT-TABLE": {
-        "APPLICATION": "APPLIKATION",
-        "NETWORK-TECHNOLOGY": "NETVÆRKSTEKNOLOGI",
-        "ALARM": "ALARM",
-        "BATTERY": "BATTERI",
-        "ACTIVE": "AKTIV",
-        "DATA": "DATA(24 TIMER)"
-    },
-    "LORA-GATEWAY-TABLE": {
-        "NAME": "Navn",
-        "GATEWAYID": "Gateway ID",
-        "LOCATION": "Placering"
-    },
-    "LORA-GATEWAY-TABLE-ROW": {
-        "DELETE": "Slet Gateway",
-        "EDIT": "Redigér",
-        "SHOW-OPTIONS": "Vis muligheder"
-    },
-    "LORA-GATEWAY": {
-        "CREATE": "Opret LoRaWan Gateway"
-    },
-    "DATATARGET-TABLE": {
-        "NAME": "Navn",
-        "TYPE": "Type"
-    },
-    "IOT-DEVICE-TYPES": {
-        "GENERIC_HTTP": "Generisk HTTP"
-    },
-    "ACTIVITY": {
-        "NEVER": "Aldrig set"
-    },
-    "TABLE": {
-        "PAGINATION": "Navigér tabel"
-    },
-    "APPLICATION-TABLE-ROW": {
-        "DELETE": "Slet",
-        "EDIT": "Redigér",
-        "SHOW-OPTIONS": "Vis muligheder"
-    },
-    "IOTDEVICE-TABLE-ROW": {
-        "DELETE": "Slet",
-        "EDIT": "Redigér",
-        "SHOW-OPTIONS": "Vis muligheder"
-    },
-    "DATATARGET-TABLE-ROW": {
-        "DELETE": "Slet datatarget",
-        "EDIT": "Redigér"
-    },
-    "FORM": {
-        "CREATE-NEW-APPLICATION": "Opret ny applikation",
-        "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
-        "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
-        "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
-        "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
-        "EDIT-NEW-APPLICATION": "Redigér applikation",
-        "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
-        "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
-        "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
-    },
-    "QUESTION": {
-        "GIVE-APPLICATION-NAME": "Navngiv applikation",
-        "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
-        "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
-        "APPLICATION-DESCRIPTION-PLACEHOLDER": "Kort beskrivelse af applikationen",
-        "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
-        "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
-        "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
-        "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
-        "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed",
-        "DEVICE-NAME-PLACEHOLDER": "Enhedsnavn",
-        "GIVE-DEVICE-NAME": "Navngiv enhed",
-        "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
-        "LOCATION-DESCRIPTION": "Beskrivelse af placering",
-        "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
-        "CHOOSE-APPLICATION": "Vælg applikation",
-        "GIVE-DATATARGET-NAME": "Navngiv datatarget",
-        "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
-        "GIVE-DATATARGET-TIMEOUT": "Timeout",
-        "GIVE-DATATARGET-URL": "Angiv datatargets URL",
-        "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data"
-    },
-    "QUESTION-LORA-GATEWAY": {
-        "NAME": "Navngiv LoRaWAN Gateway",
-        "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn",
-        "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
-        "DESCRIPTION-PLACEHOLDER": "beskrivelse af LoRaWAN Gateway",
-        "GATEWAYID": "Gateway ID",
-        "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
-        "METADATA": "Gateway Tags",
-        "METADATA-PLACEHOLDER": "Angiv JSON her",
-        "ALTITUDE": "Højde",
-        "ALTITUDE-PLACEHOLDER": "00",
-        "LONGITUDE": "Længdegrad",
-        "LONGITUDE-PLACEHOLDER": "00",
-        "LATITUDE": "Breddegrad",
-        "LATITUDE-PLACEHOLDER": "00"
-    },
-    "SORT": {
-        "SORT": "Sortér",
-        "UPDATED-ASCENDING": "Senest opdateret: stigende",
-        "UPDATED-DESCENDING": "Senest opdateret: faldende",
-        "CREATED-ASCENDING": "Oprettet: stigende",
-        "CREATED-DESCENDING": "Oprettet: faldende",
-        "NAME-ASCENDING": "Navn: stigende",
-        "NAME-DESCENDING": "Navn: faldende",
-        "APPLICATION-ASCENDING": "Applikation: stigende",
-        "APPLICATION-DESCENDING": "Applikation: faldende",
-        "BATTERY-ASCENDING": "Batteri: stigende",
-        "BATTERY-DESCENDING": "Batteri: faldende"
-    },
-    "IOTDEVICE": {
-        "HEADING": {
-            "PROTOCOL": "Transmission Protokol",
-            "BASIC": "Basis info",
-            "OPTIONAL": "Yderligere info"
-        },
-        "NAME": "Navn",
-        "TYPE": "Enhedstype",
-        "APPLICATION": "Applikation",
-        "LOCATION": "Placering",
-        "LONGITUDE": "Længdegrad",
-        "LATITUDE": "Breddegrad",
-        "COMMENTONLOCATION": "Kommentar om placering",
-        "COMMENT": "Kommentar",
-        "NOCOMMENT": "Ingen kommentar er angivet.",
-        "NOLOCATION": "Ingen placering er angivet",
-        "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",
-        "GENERIC_HTTP": {
-            "APIKEY": "API kald",
-            "INSTRUCTIONS": "Du kalder denne url:"
-        }
-    },
-    "MESSAGE": {
-        "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
-    },
-    "PROFILES": {
-        "NAME": "Profiler",
-        "SERVICE_PROFILE": {
-            "DROPDOWN": "Håndter service profil",
-            "EDIT": "Editer service profil",
-            "DELETE": "Slet service profil",
-            "NAME": "Navn",
-            "REPORTBATTERYSTATUS": "Report battery status",
-            "ADDGWMETADATA": "Tilføjet GW meta data",
-            "DRRATEMIN": "Min date rate",
-            "DRRATEMAX": "Max date rate",
-            "REPORT_END_DEVICE": "Report end-device margin",
-            "SAVE": "Gem",
-            "CANCEL": "Annuller",
-            "GOBACK": "Gå tilbage",
-            "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
-        }
+    "NAME": "Navn",
+    "TYPE": "Enhedstype",
+    "APPLICATION": "Applikation",
+    "LOCATION": "Placering",
+    "LONGITUDE": "Længdegrad",
+    "LATITUDE": "Breddegrad",
+    "COMMENTONLOCATION": "Kommentar om placering",
+    "COMMENT": "Kommentar",
+    "NOCOMMENT": "Ingen kommentar er angivet.",
+    "NOLOCATION": "Ingen placering er angivet",
+    "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",
+    "GENERIC_HTTP": {
+      "APIKEY": "API kald",
+      "INSTRUCTIONS": "Du kalder denne url:"
     }
+  },
+  "MESSAGE": {
+    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
+  },
+  "PROFILES": {
+    "NAME": "Profiler",
+    "SERVICE_PROFILE": {
+      "DROPDOWN": "Håndter service profil",
+      "EDIT": "Editer service profil",
+      "DELETE": "Slet service profil",
+      "NAME": "Navn",
+      "REPORTBATTERYSTATUS": "Report battery status",
+      "ADDGWMETADATA": "Tilføjet GW meta data",
+      "DRRATEMIN": "Min date rate",
+      "DRRATEMAX": "Max date rate",
+      "REPORT_END_DEVICE": "Report end-device margin",
+      "SAVE": "Gem",
+      "CANCEL": "Annuller",
+      "GOBACK": "Gå tilbage",
+      "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
+    }
+  }
 }
