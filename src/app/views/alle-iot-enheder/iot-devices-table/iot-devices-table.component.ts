@@ -3,7 +3,7 @@ import { Subscription, Observable } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { RestService } from 'src/app/shared/_services/rest.service';
+import { RestService } from 'src/app/shared/services/rest.service';
 
 import { IotDevice } from 'src/app/models/iot-device';
 import { Sort } from 'src/app/models/sort';
@@ -30,7 +30,7 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
         translate.use('da');
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     ngOnChanges() {
         this.getDevices();
@@ -43,7 +43,7 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
                 this.iotDevices = application.iotDevices;
             });
     }
-    
+
     deleteDevice(id: number): void {
         this.getDevices();
     }

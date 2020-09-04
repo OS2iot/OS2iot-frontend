@@ -1,20 +1,41 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "sourceMap": true,
-        "declaration": false,
-        "downlevelIteration": true,
-        "experimentalDecorators": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "target": "es2015",
-        "lib": ["es2018", "dom"]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": ["es2018", "dom"],
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@store/*": [
+        "app/store/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ],
+      "@Material": [
+        "app/shared/modules/material.module"
+      ],
+      "@Shared-Bootstrap": [
+        "app/shared/modules/shared-bootstrap.module"
+      ]
     },
-    "angularCompilerOptions": {
-        "fullTemplateTypeCheck": true,
-        "strictInjectionParameters": true
-    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }

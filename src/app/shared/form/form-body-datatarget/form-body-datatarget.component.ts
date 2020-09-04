@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DatatargetService } from '../../_services/datatarget.service';
+import { DatatargetService } from '../../services/datatarget.service';
 import { Location } from '@angular/common';
 import { DatatargetResponse } from 'src/app/models/datatarget-response';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -28,10 +28,10 @@ export class FormBodyDatatargetComponent implements OnInit {
   private applicationId: number;
 
   constructor(
-      private route: ActivatedRoute,
-      public translate: TranslateService,
-      private datatargetService: DatatargetService,
-      private location: Location
+    private route: ActivatedRoute,
+    public translate: TranslateService,
+    private datatargetService: DatatargetService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +45,9 @@ export class FormBodyDatatargetComponent implements OnInit {
 
   onSubmit(): void {
     if (this.id) {
-        this.updateDatatarget();
+      this.updateDatatarget();
     } else {
-        this.createDatatarget();
+      this.createDatatarget();
 
     }
   }
@@ -56,8 +56,8 @@ export class FormBodyDatatargetComponent implements OnInit {
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
-        this.datatarget = this.mapToDatatarget(datatargetResponse)
-        this.routeBack()
+          this.datatarget = this.mapToDatatarget(datatargetResponse)
+          this.routeBack()
         },
         (error: HttpErrorResponse) => {
           this.handleError(error)
@@ -73,21 +73,21 @@ export class FormBodyDatatargetComponent implements OnInit {
       .subscribe((datatargetData: DatatargetData) => {
         this.routeBack()
       },
-      (error: HttpErrorResponse) => {
-        this.handleError(error)
-        this.formFailedSubmit = true;
-      })
-      
+        (error: HttpErrorResponse) => {
+          this.handleError(error)
+          this.formFailedSubmit = true;
+        })
+
   }
 
   handleError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
     error.error.message.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-            Object.values(err.constraints)
-        );
+      this.errorFields.push(err.property);
+      this.errorMessages = this.errorMessages.concat(
+        Object.values(err.constraints)
+      );
     });
   }
 
@@ -99,13 +99,13 @@ export class FormBodyDatatargetComponent implements OnInit {
     console.log(event.target.value);
     console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength)
-        event.target.value = event.target.value.slice(
-            0,
-            event.target.maxLength
-        );
-}
+      event.target.value = event.target.value.slice(
+        0,
+        event.target.maxLength
+      );
+  }
 
-  getDatatarget(id: number){
+  getDatatarget(id: number) {
     this.datatargetSubscription = this.datatargetService
       .get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
@@ -115,13 +115,14 @@ export class FormBodyDatatargetComponent implements OnInit {
 
   private mapToDatatarget(data: DatatargetResponse): Datatarget {
     const dt: Datatarget = {
-      id: data.id, 
+      id: data.id,
       name: data.name,
       timeout: data.timeout,
       type: data.type,
       url: data.url,
       authorizationHeader: null,
-      applicationId: data.application.id}
+      applicationId: data.application.id
+    }
     return dt
   }
 

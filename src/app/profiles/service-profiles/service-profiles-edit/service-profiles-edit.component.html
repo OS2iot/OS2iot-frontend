@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-xs-12">
+        <app-form-header [backButton]="backButton" [title]="title">
+        </app-form-header>
+        <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.NAME' | translate}}</label>
+                        <input type="text" id="name" formControlName="name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}
+                        </label>
+                        <mat-radio-group aria-label="Select an option" class="pl-5" id="serviceProfileGWData"
+                            formControlName="serviceProfileGWData">
+                            <mat-radio-button class="px-2" *ngFor="let GWvalue of GWvalues" [value]="GWvalue">
+                                {{GWvalue}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name"
+                            class="form-label">{{'PROFILES.SERVICE_PROFILE.REPORTBATTERYSTATUS' | translate}}</label>
+                        <input type="text" id="reportDevStatusBattery" formControlName="reportDevStatusBattery"
+                            class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name"
+                            class="form-label">{{'PROFILES.SERVICE_PROFILE.DRRATEMIN' | translate}}</label>
+                        <input type="text" id="drMin" formControlName="drMin" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name"
+                            class="form-label">{{'PROFILES.SERVICE_PROFILE.DRRATEMAX' | translate}}</label>
+                        <input type="text" id="drMax" formControlName="drMax" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="name"
+                            class="form-label">{{'PROFILES.SERVICE_PROFILE.REPORT_END_DEVICE' | translate}}</label>
+                        <input type="text" id="targetPER" formControlName="targetPER" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-light" (click)="onCancel()">
+                        {{'PROFILES.SERVICE_PROFILE.CANCEL' | translate}}
+                    </button>
+                    <button type="submit" class="btn btn-dark pl-3" [disabled]="!serviceProfileForm.valid">
+                        {{'PROFILES.SERVICE_PROFILE.SAVE' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

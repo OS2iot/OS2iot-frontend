@@ -16,7 +16,8 @@ export class TopBarComponent implements OnInit {
     @Input() sort: Sort[];
     @Input() pageLimit: number;
     @Input() selectedSortId: number;
-    @Input() component: boolean = false;
+    @Input() component: false;
+    @Input() showSelectedSort = true;
     @Input() backButtonTitle: string;
     @Output() selectedSortChange = new EventEmitter();
     @Output() updatePageLimit = new EventEmitter();
@@ -26,7 +27,8 @@ export class TopBarComponent implements OnInit {
         translate.use('da');
     }
 
-    ngOnInit(): void {}
+
+    ngOnInit(): void { }
 
     changeSort(id: number) {
         this.selectedSortChange.emit(id);

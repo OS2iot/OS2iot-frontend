@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { RestService } from '../../_services/rest.service';
+import { RestService } from '../../services/rest.service';
 
 import { Application } from 'src/app/models/application';
-import { ApplicationService } from '../../_services/application.service';
+import { ApplicationService } from '../../services/application.service';
 import { HttpErrorResponse, HttpDownloadProgressEvent } from '@angular/common/http';
 
 export class User {
@@ -15,7 +15,7 @@ export class User {
     public email: string;
     public password: string;
     public hobbies: string;
-  }
+}
 
 @Component({
     selector: 'app-form-body-application',
@@ -41,7 +41,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         public translate: TranslateService,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.translate.use('da');
@@ -73,7 +73,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
             .subscribe(
                 (response) => {
                     console.log(response);
-                    this.router.navigateByUrl('/mine-applikationer');
+                    this.router.navigateByUrl('/my-applications');
                 },
                 (error: HttpErrorResponse) => {
                     this.handleError(error)
@@ -87,7 +87,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
             .subscribe(
                 (response) => {
                     console.log(response);
-                    this.router.navigateByUrl('/mine-applikationer');
+                    this.router.navigateByUrl('/my-applications');
                 },
                 (error: HttpErrorResponse) => {
                     this.handleError(error)
@@ -128,7 +128,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
 
     routeBack(): void {
-        this.router.navigateByUrl('/mine-applikationer');
+        this.router.navigateByUrl('/my-applications');
     }
 
     ngOnDestroy() {
