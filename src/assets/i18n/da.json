@@ -45,7 +45,11 @@
   },
   "DATATARGET": {
     "SAVE": "Gem datatarget",
-    "DESCRIPTION": "Beskrivelse"
+    "DESCRIPTION": "Beskrivelse",
+    "URL": "URL",
+    "TIMEOUT": "Timeout",	
+    "TYPE": "Type",
+    "NAME": "Datatarget navn"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",
