@@ -22,8 +22,8 @@ const routes: Routes = [
     },
     { path: 'datatarget', component: DatatargetListComponent },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
-    { path: '', redirectTo: '/profiles', pathMatch: 'full' },
-    { path: '**', redirectTo: '/profiles', pathMatch: 'full' },
+    { path: '', redirectTo: '/my-applications', pathMatch: 'full' },
+    { path: '**', redirectTo: '/my-applications', pathMatch: 'full' },
 ];
 
 @NgModule({

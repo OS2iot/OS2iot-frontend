@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { IotDevice, IotDeviceData } from '../../models/iot-device';
+import { IotDevice, IotDeviceData } from './iot-device.model';
+import { RestService } from 'src/app/shared/services/rest.service';
 
 @Injectable({
     providedIn: 'root',

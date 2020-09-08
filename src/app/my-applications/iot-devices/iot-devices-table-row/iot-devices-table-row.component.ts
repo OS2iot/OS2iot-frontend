@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IotDevice } from 'src/app/models/iot-device';
+import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'moment/locale/da';
-import { IoTDeviceService } from '../../../shared/services/iot-device.service';
+import { IoTDeviceService } from '../iot-device.service';
+
 
 @Component({
   selector: 'tr[app-iot-devices-table-row]',

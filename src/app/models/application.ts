@@ -1,4 +1,4 @@
-import { IotDevice } from './iot-device';
+import { IotDevice } from '../my-applications/iot-devices/iot-device.model';
 
 export class Application {
     public id: number;

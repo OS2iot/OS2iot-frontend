@@ -1,6 +1,7 @@
-import { ReceivedMessageMetadata } from './received-message-metadata';
-import { Application } from './application';
-import { JsonLocation } from './Json-location';
+import { Application } from 'src/app/models/application';
+import { JsonLocation } from 'src/app/models/Json-location';
+import { ReceivedMessageMetadata } from 'src/app/models/received-message-metadata';
+
 
 export class IotDevice {
     name: string;

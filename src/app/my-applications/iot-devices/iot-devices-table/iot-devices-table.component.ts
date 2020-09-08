@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { RestService } from 'src/app/shared/services/rest.service';
 
-import { IotDevice } from 'src/app/models/iot-device';
+import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 import { Sort } from 'src/app/models/sort';
 import { Application } from 'src/app/models/application';
 

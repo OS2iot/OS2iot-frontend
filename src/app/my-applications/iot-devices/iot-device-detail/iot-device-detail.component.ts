@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IoTDeviceService } from 'src/app/shared/services/iot-device.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
-import { IotDevice } from '../../../models/iot-device';
 import { environment } from 'src/environments/environment';
 import { BackButton } from 'src/app/models/back-button';
+import { IoTDeviceService } from '../iot-device.service';
+import { IotDevice } from '../iot-device.model';
 
 @Component({
     selector: 'app-iot-device',

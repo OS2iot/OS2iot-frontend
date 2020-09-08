@@ -17,7 +17,7 @@
       <div class="col-12 mb-5 application-table-header">
         <app-top-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [sort]="sort"
           [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
-          [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="''"
+          [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'new-iot-device'"
           (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
         <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"
           [application]="application"></app-iot-devices-table>
