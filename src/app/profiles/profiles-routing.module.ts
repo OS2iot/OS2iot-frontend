@@ -7,13 +7,13 @@ import { ProfilesComponent } from './profiles.component';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
 
 
-const routes: Routes = [
+const profilesRoutes: Routes = [
     {
         path: '',
         component: ProfilesComponent,
         children: [
             { path: '', component: ProfilesListComponent },
-            { path: 'new', component: ServiceProfilesEditComponent },
+            { path: 'new-profile', component: ServiceProfilesEditComponent },
             {
                 path: ':id',
                 component: ServiceProfilesDetailComponent,
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(profilesRoutes)],
     exports: [RouterModule]
 })
 export class ProfilesRoutingModule { }

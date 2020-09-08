@@ -10,14 +10,14 @@
           <p>{{description}}</p>
         </div>
         <div class="ml-auto d-flex">
-          <button class='btn btn-primary' type="button" [routerLink]="['datatarget-list', application.name]" 
+          <button class='btn btn-primary' type="button" [routerLink]="['datatarget-list', application.name]"
             routerLinkActive="active" class="application-link">datatarget</button>
         </div>
       </div>
       <div class="col-12 mb-5 application-table-header">
         <app-top-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [sort]="sort"
           [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
-          [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'edit-iot-device'"
+          [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="''"
           (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
         <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"
           [application]="application"></app-iot-devices-table>

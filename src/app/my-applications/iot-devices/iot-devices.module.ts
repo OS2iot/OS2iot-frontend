@@ -9,25 +9,24 @@ import { FormModule } from 'src/app/shared/form/form.module';
 
 import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.component';
 import { IotDevicesTableRowComponent } from './iot-devices-table-row/iot-devices-table-row.component';
-import { AlleIotEnhederComponent } from './alle-iot-enheder/alle-iot-enheder.component';
-import { ListIotDevicesComponent } from './list-iot-devices/list-iot-devices.component';
-import { IoTDeviceComponent } from './iot-device/iot-device.component';
-import { EditIotDeviceComponent } from './edit-iot-device/edit-iot-device.component';
+import { IotDevicesListComponent } from './iot-devices-list/iot-devices-list.component';
+import { IoTDeviceDetailComponent } from './iot-device-detail/iot-device-detail.component';
+import { IotDeviceEditComponent } from './iot-device-edit/iot-device-edit.component';
 
 @NgModule({
     declarations: [
-        AlleIotEnhederComponent,
+
         IotDevicesTableComponent,
-        ListIotDevicesComponent,
+        IotDevicesListComponent,
         IotDevicesTableRowComponent,
-        IoTDeviceComponent,
-        EditIotDeviceComponent
+        IoTDeviceDetailComponent,
+        IotDeviceEditComponent
     ],
     exports: [
-        AlleIotEnhederComponent,
+
         IotDevicesTableComponent,
-        ListIotDevicesComponent,
-        IoTDeviceComponent
+        IotDevicesListComponent,
+        IoTDeviceDetailComponent
     ],
     imports: [
         CommonModule,
@@ -37,4 +36,4 @@ import { EditIotDeviceComponent } from './edit-iot-device/edit-iot-device.compon
         FormModule,
     ],
 })
-export class AlleIotEnhederModule {}
+export class IotDevicesModule { }

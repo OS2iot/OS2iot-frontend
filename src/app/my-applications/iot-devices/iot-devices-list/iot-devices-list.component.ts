@@ -3,11 +3,11 @@ import { Sort } from 'src/app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-list-iot-devices',
-    templateUrl: './list-iot-devices.component.html',
-    styleUrls: ['./list-iot-devices.component.scss'],
+    selector: 'app-iot-devices-list',
+    templateUrl: './iot-devices-list.component.html',
+    styleUrls: ['./iot-devices-list.component.scss'],
 })
-export class ListIotDevicesComponent implements OnInit {
+export class IotDevicesListComponent implements OnInit {
     public pageLimit: number = 10;
     public sort: Sort[] = [
         {
@@ -83,7 +83,7 @@ export class ListIotDevicesComponent implements OnInit {
         translate.use('da');
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     updatePageLimit(limit: any) {
         console.log(limit);

@@ -10,10 +10,10 @@ import { BackButton } from 'src/app/models/back-button';
 
 @Component({
     selector: 'app-iot-device',
-    templateUrl: './iot-device.component.html',
-    styleUrls: ['./iot-device.component.scss'],
+    templateUrl: './iot-device-detail.component.html',
+    styleUrls: ['./iot-device-detail.component.scss'],
 })
-export class IoTDeviceComponent implements OnInit, OnDestroy {
+export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public deviceId: number;
     public backButton: BackButton = { label: '', routerLink: '/my-applications' };
     public application: Application;

@@ -37,7 +37,7 @@ export class IotDevicesTableRowComponent implements OnInit {
   }
 
   navigateToEditPage() {
-    this.router.navigate(['edit-iot-device', this.device.id]);
+    this.router.navigate(['iot-device-edit', this.device.id]);
   }
 
   lastActive() {

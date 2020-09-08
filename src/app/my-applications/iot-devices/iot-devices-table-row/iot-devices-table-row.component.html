@@ -4,14 +4,14 @@
 <td>N/A</td>
 <td>N/A</td>
 <td class="position-relative pr-3">{{lastActive()}}<div class="dropdown position-absolute">
-                <a href="#" role="button" id="tableRowDropdown-{{device.id}}" class="applicationRow__edit dropdown-toggle"
-                        data-toggle="dropdown" aria-expanded="false"
+                <a href="#" role="button" id="tableRowDropdown-{{device.id}}"
+                        class="applicationRow__edit dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                         [attr.aria-label]="'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
                 <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{device.id}}">
                         <!-- <li><a class="dropdown-item" href="#">Slet</a></li> -->
                         <li><a (click)="clickDelete()" class="dropdown-item"
                                         [routerLink]="">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['edit-iot-device', device.id]"
+                        <li><a class="dropdown-item" [routerLink]="['iot-device-edit', device.id]"
                                         routerLinkActive="active">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}</a></li>
                 </ul>
         </div>

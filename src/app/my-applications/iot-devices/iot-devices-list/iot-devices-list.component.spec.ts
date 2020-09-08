@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListIotDevicesComponent } from './list-iot-devices.component';
+import { IotDevicesListComponent } from './iot-devices-list.component';
 
 describe('ListIotDevicesComponent', () => {
-  let component: ListIotDevicesComponent;
-  let fixture: ComponentFixture<ListIotDevicesComponent>;
+  let component: IotDevicesListComponent;
+  let fixture: ComponentFixture<IotDevicesListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListIotDevicesComponent ]
+      declarations: [IotDevicesListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListIotDevicesComponent);
+    fixture = TestBed.createComponent(IotDevicesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

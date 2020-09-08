@@ -6,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApplicationService } from 'src/app/shared/services/application.service';
 
 @Component({
-    selector: 'app-edit-iot-device',
-    templateUrl: './edit-iot-device.component.html',
-    styleUrls: ['./edit-iot-device.component.scss'],
+    selector: 'app-iot-device-edit',
+    templateUrl: './iot-device-edit.component.html',
+    styleUrls: ['./iot-device-edit.component.scss'],
 })
-export class EditIotDeviceComponent implements OnInit {
+export class IotDeviceEditComponent implements OnInit {
     public backButton: BackButton = {
         label: '',
         routerLink: '',

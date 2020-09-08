@@ -16,8 +16,8 @@ import { ServiceProfileEffects } from './profiles/service-profiles/store/service
 import { environment } from '../environments/environment';
 
 import { DashboardModule } from './views/dashboard/dashboard.module';
-import { MineApplikationerModule } from './my-applications/my-applications.module';
-import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
+import { MyApplicationsModule } from './my-applications/my-applications.module';
+
 import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -39,8 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         HttpClientModule,
         AppRoutingModule,
         DashboardModule,
-        MineApplikationerModule,
-        AlleIotEnhederModule,
+        MyApplicationsModule,
         DatatargetModule,
         NavbarModule,
         ProfilesModule,

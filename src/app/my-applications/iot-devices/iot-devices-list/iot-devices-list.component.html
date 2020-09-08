@@ -2,7 +2,8 @@
   <div class="row mb-5">
     <app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
       [title]="'NAV.ALL-IOT-DEVICES' | translate" (updatePageLimit)="updatePageLimit($event)"
-      (selectedSortChange)="changeSort($event)"></app-top-bar>
+      (selectedSortChange)="changeSort($event)" [ctaLabel]="'CREATE-NEW-IOT-DEVICE' | translate"
+      [ctaRouterLink]="'new-iot-device'"></app-top-bar>
   </div>
   <div class="row">
     <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-iot-devices-table>
