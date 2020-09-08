@@ -21,7 +21,6 @@ export class ServiceProfilesEditComponent implements OnInit {
   id: number;
   editMode = false;
   serviceProfileForm: FormGroup;
-  GWvalues: string[] = ['true', 'false'];
 
   private storeSub: Subscription;
 
@@ -102,7 +101,7 @@ export class ServiceProfilesEditComponent implements OnInit {
 
     this.serviceProfileForm = new FormGroup({
       name: new FormControl(serviceProfileName, Validators.required),
-      addGWMetaData: new FormControl(serviceProfileGWData, Validators.required),
+      addGWMetaData: new FormControl(serviceProfileGWData),
       reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),
       drMin: new FormControl(serviceProfileMinDateRate, Validators.required),
       drMax: new FormControl(serviceProfileMaxDateRate, Validators.required),
