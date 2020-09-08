@@ -37,7 +37,7 @@ export class FormBodyDatatargetComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('da');
     this.id = +this.route.snapshot.paramMap.get('datatargetId');
-    this.applicationId = +this.route.parent.parent.snapshot.paramMap.get('id');
+    this.applicationId = +this.route.snapshot.paramMap.get('id');
     if (this.id != 0) {
       this.getDatatarget(this.id)
     }
