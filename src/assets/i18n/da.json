@@ -16,7 +16,8 @@
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "Profiler"
+    "PROFILES": "Profiler",
+    "PAYLOAD-DECODER": "Payload Decoder"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
