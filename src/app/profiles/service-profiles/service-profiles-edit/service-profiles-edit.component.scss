@@ -1,3 +1,7 @@
 .form-group {
   margin-top: 25px;
 }
+
+.asterisk-if-mandatory::after {
+  content: " *";
+}

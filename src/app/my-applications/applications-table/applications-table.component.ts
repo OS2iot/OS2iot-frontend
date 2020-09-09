@@ -16,7 +16,7 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     @Input() pageLimit: number;
     @Input() selectedSortObject: Sort;
     public applications: Application[];
-    public pageOffset: number = 0;
+    public pageOffset = 0;
     public pageTotal: number;
 
     private applicationsSubscription: Subscription;
@@ -60,12 +60,12 @@ export class ApplicationsTableComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     prevPage() {
-        if (this.pageOffset) this.pageOffset--;
+        if (this.pageOffset) { this.pageOffset--; }
         this.getApplications();
     }
 
     nextPage() {
-        if (this.pageOffset < this.pageTotal) this.pageOffset++;
+        if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
         this.getApplications();
     }
 

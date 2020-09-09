@@ -3,11 +3,11 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angu
 import { TranslateService } from '@ngx-translate/core';
 
 import { Application } from 'src/app/models/application';
-import { IotDevice } from 'src/app/models/iot-device';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { BackButton } from 'src/app/models/back-button';
 import { Datatarget } from 'src/app/models/datatarget';
 import { Location } from '@angular/common';
+import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 
 @Component({
   selector: 'app-top-bar-single',
@@ -24,9 +24,9 @@ export class TopBarSingleComponent implements OnInit, OnChanges {
   // @Output() updatePageLimit = new EventEmitter();
 
   constructor(
-    public translate: TranslateService, 
+    public translate: TranslateService,
     private location: Location) {
-      translate.use('da');
+    translate.use('da');
   }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class TopBarSingleComponent implements OnInit, OnChanges {
   }
 
   changeSort(id: number) {
-      // this.selectedSortChange.emit(id);
+    // this.selectedSortChange.emit(id);
   }
 
   routeBack(): void {

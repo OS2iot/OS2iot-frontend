@@ -7,9 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Application } from 'src/app/models/application';
 import { Sort } from 'src/app/models/sort';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
-import { IotDevice } from 'src/app/models/iot-device';
 import { ApplicationService } from '../../shared/services/application.service';
 import { BackButton } from 'src/app/models/back-button';
+import { IotDevice } from '../iot-devices/iot-device.model';
 
 @Component({
     selector: 'app-application',

@@ -5,12 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Application } from 'src/app/models/application';
-import { IotDevice } from 'src/app/models/iot-device';
 import { Subscription } from 'rxjs';
-import { IoTDeviceService } from '../../services/iot-device.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { ApplicationService } from '../../services/application.service';
+import { ApplicationService } from 'src/app/shared/services/application.service';
+import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
+import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
+
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -91,7 +92,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
             () => {
                 this.router.navigate([
-                    'my-applications/application',
+                    'my-applications/',
                     this.iotDevice.applicationId,
                 ]);
             },

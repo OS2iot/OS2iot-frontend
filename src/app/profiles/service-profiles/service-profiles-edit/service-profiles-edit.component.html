@@ -1,30 +1,41 @@
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 ">
         <app-form-header [backButton]="backButton" [title]="title">
         </app-form-header>
-        <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()">
-
+        <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()" class="px-5 py-4">
+            <!-- Tilføj Navn -->
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.NAME' | translate}}</label>
+                        <label for="name"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.NAME' | translate}}</label>
                         <input type="text" id="name" formControlName="name" class="form-control" />
                     </div>
                 </div>
             </div>
-
-            <div class="row">
+            <!-- Tilføj Device statur request Frequency -->
+            <!-- <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}
-                        </label>
-                        <mat-radio-group aria-label="Select an option" class="pl-5" id="serviceProfileGWData"
+                        <mat-checkbox class="example-margin" [value]="'serviceProfileGWData'" id="serviceProfileGWData"
                             formControlName="serviceProfileGWData">
-                            <mat-radio-button class="px-2" *ngFor="let GWvalue of GWvalues" [value]="GWvalue">
-                                {{GWvalue}}
-                            </mat-radio-button>
-                        </mat-radio-group>
+                        </mat-checkbox>
+
+                        <label for="name"
+                            class="form-label pl-3">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}
+                        </label>
                     </div>
+                </div>
+            </div> -->
+
+            <div class="row mt-5">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-light" (click)="onCancel()">
+                        {{'PROFILES.SERVICE_PROFILE.CANCEL' | translate}}
+                    </button>
+                    <button type="submit" class="btn btn-dark pl-3" [disabled]="!serviceProfileForm.valid">
+                        {{'PROFILES.SERVICE_PROFILE.SAVE' | translate}}
+                    </button>
                 </div>
             </div>
 
@@ -38,7 +49,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Tilføj Date rate  -->
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -55,25 +66,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="name"
-                            class="form-label">{{'PROFILES.SERVICE_PROFILE.REPORT_END_DEVICE' | translate}}</label>
-                        <input type="text" id="targetPER" formControlName="targetPER" class="form-control" />
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-xs-12">
-                    <button type="button" class="btn btn-light" (click)="onCancel()">
-                        {{'PROFILES.SERVICE_PROFILE.CANCEL' | translate}}
-                    </button>
-                    <button type="submit" class="btn btn-dark pl-3" [disabled]="!serviceProfileForm.valid">
-                        {{'PROFILES.SERVICE_PROFILE.SAVE' | translate}}
-                    </button>
-                </div>
-            </div>
+
+
         </form>
     </div>
 </div>

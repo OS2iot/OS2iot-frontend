@@ -13,7 +13,8 @@ import { ApplicationsTableComponent } from './applications-table/applications-ta
 import { ApplicationsTableRowComponent } from './applications-table/applications-table-row/applications-table-row.component';
 import { EditApplicationComponent } from './edit-application/edit-application.component';
 import { ListApplicationsComponent } from './list-applications/list-applications.component';
-import { AlleIotEnhederModule } from '../views/alle-iot-enheder/alle-iot-enheder.module';
+import { IotDevicesModule } from './iot-devices/iot-devices.module';
+import { MyApplicaitonsRoutingModule } from './my-applications-routing.module';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { AlleIotEnhederModule } from '../views/alle-iot-enheder/alle-iot-enheder
         ListApplicationsComponent,
     ],
     exports: [
+        MyApplicaitonsRoutingModule,
         MyApplicationsComponent,
         ApplicationComponent,
         ApplicationsTableComponent,
@@ -36,7 +38,7 @@ import { AlleIotEnhederModule } from '../views/alle-iot-enheder/alle-iot-enheder
         RouterModule,
         TranslateModule,
         FormModule,
-        AlleIotEnhederModule
+        IotDevicesModule
     ]
 })
-export class MineApplikationerModule { }
+export class MyApplicationsModule { }

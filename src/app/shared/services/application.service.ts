@@ -8,14 +8,14 @@ import { SortDir, SortCol } from 'src/app/models/sort';
     providedIn: 'root',
 })
 export class ApplicationService {
-    constructor(private restService: RestService) {}
+    constructor(private restService: RestService) { }
 
     createApplication(body: any): Observable<ApplicationData> {
-        return this.restService.post('application', body, {observe: 'response'});
+        return this.restService.post('application', body, { observe: 'response' });
     }
 
     updateApplication(body: any, id: number): Observable<ApplicationData> {
-        return this.restService.replace('application', body, id, {observe: 'response'});
+        return this.restService.replace('application', body, id, { observe: 'response' });
     }
 
     getApplication(id: number): Observable<Application> {
