@@ -1,7 +1,8 @@
-import { Application } from 'src/app/models/application';
-import { JsonLocation } from 'src/app/models/Json-location';
-import { ReceivedMessageMetadata } from 'src/app/models/received-message-metadata';
-
+import { ReceivedMessageMetadata } from './received-message-metadata';
+import { Application } from './application';
+import { JsonLocation } from './Json-location';
+import { DeviceType } from '../shared/enums/device-type';
+import { LorawanSettings } from './lorawan-settings';
 
 export class IotDevice {
     name: string;
@@ -9,7 +10,7 @@ export class IotDevice {
     location: JsonLocation;
     commentOnLocation: string;
     comment: string;
-    type: string = "GENERIC_HTTP";
+    type: DeviceType = DeviceType.GENERICHTTP;
     receivedMessagesMetadata: ReceivedMessageMetadata[];
     metadata?: JSON;
     apiKey?: string;
@@ -17,8 +18,9 @@ export class IotDevice {
     createdAt: Date;
     updatedAt: Date;
     applicationId: number;
-    longitude: number = 0;
-    latitude: number = 0;
+    longitude = 0;
+    latitude = 0;
+    lorawanSettings = new LorawanSettings();
 }
 
 export interface IotDeviceData {

@@ -4,7 +4,7 @@ export class Datatarget {
     id: number;
     name: string;
     applicationId: number;
-    type: DataTargetType = DataTargetType.HttpPush;
+    type: DataTargetType = DataTargetType.HTTPPUSH;
     url: string;
     //default 30 sec
     timeout: number = 30000;

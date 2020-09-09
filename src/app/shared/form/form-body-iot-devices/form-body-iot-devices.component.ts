@@ -8,10 +8,9 @@ import { Application } from 'src/app/models/application';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { ApplicationService } from 'src/app/shared/services/application.service';
-import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
-import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
-
+import { ApplicationService } from '../../services/application.service';
+import { DeviceType } from '../../enums/device-type';
+import { LorawanSettings } from 'src/app/models/lorawan-settings';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -26,10 +25,11 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     public deviceSubscription: Subscription;
     public errorMessages: any;
     public errorFields: string[];
-    public formFailedSubmit: boolean = false;
+    public formFailedSubmit = false;
     public applications: Application[];
     private id: number;
-    public disableChoseApplication: boolean = true;
+    public disableChoseApplication = true;
+    public loraDevice = DeviceType.LORAWAN;
 
     private applicationsSubscription: Subscription;
 
@@ -71,7 +71,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
             .subscribe((device: IotDevice) => {
                 this.iotDevice = device;
                 if (this.iotDevice?.application?.id) {
-                    this.iotDevice.applicationId = device.application?.id
+                    this.iotDevice.applicationId = device.application?.id;
                 }
                 if (device.location) {
                     this.iotDevice.longitude = device.location.coordinates[0];
@@ -81,10 +81,19 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
+        this.cleanModelBasedOnType();
         if (this.id) {
             this.updateIoTDevice(this.id);
         } else {
             this.postIoTDevice();
+        }
+    }
+
+    private cleanModelBasedOnType() {
+        switch (this.iotDevice.type) {
+            case DeviceType.GENERICHTTP: {
+                this.iotDevice.lorawanSettings = null;
+            }
         }
     }
 
@@ -97,27 +106,27 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                 ]);
             },
             (error: HttpErrorResponse) => {
-                this.handleError(error)
+                this.handleError(error);
                 this.formFailedSubmit = true;
             }
         );
     }
 
     updateIoTDevice(id: number) {
-        this.iotDevice.applicationId = Number(this.iotDevice.applicationId)
+        this.iotDevice.applicationId = Number(this.iotDevice.applicationId);
         this.iotDeviceService.updateIoTDevice(this.iotDevice, id).subscribe(
             () => {
-                this.routeBack()
+                this.routeBack();
             },
             (error: HttpErrorResponse) => {
-                this.handleError(error)
+                this.handleError(error);
                 this.formFailedSubmit = true;
             }
         );
     }
 
     routeBack(): void {
-        this.location.back()
+        this.location.back();
     }
 
     handleError(error: HttpErrorResponse) {
@@ -134,11 +143,12 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     onCoordinateKey(event: any) {
         console.log(event.target.value);
         console.log(event.target.maxLength);
-        if (event.target.value.length > event.target.maxLength)
+        if (event.target.value.length > event.target.maxLength) {
             event.target.value = event.target.value.slice(
                 0,
                 event.target.maxLength
             );
+        }
     }
 
     ngOnDestroy() {

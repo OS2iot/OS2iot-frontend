@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Gateway, GatewayResponse } from '../../../../app/models/gateway'
+import { Gateway, GatewayResponse } from '../../../../app/models/gateway';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChirpstackGatewayService } from '../../services/chirpstack-gateway.service';
@@ -22,7 +22,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   public errorMessage: string;
   public errorMessages: any;
   public errorFields: string[];
-  public formFailedSubmit: boolean = false;
+  public formFailedSubmit = false;
   private id: string;
 
   gateway = new Gateway();
@@ -46,8 +46,8 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     this.gatewaySubscription = this.loraGatewayService
       .get(id)
       .subscribe((result: GatewayResponse) => {
-        result.gateway.tagsString = JSON.stringify(result.gateway.tags)
-        this.gateway = result.gateway
+        result.gateway.tagsString = JSON.stringify(result.gateway.tags);
+        this.gateway = result.gateway;
       });
   }
 
@@ -56,12 +56,12 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
-          this.routeBack()
+          this.routeBack();
         },
         (error: HttpErrorResponse) => {
-          this.showError(error)
+          this.showError(error);
         }
-      )
+      );
   }
 
   updateGateway(): void {
@@ -69,11 +69,11 @@ export class FormBodyLoraGatewayComponent implements OnInit {
       .put(this.gateway, this.id)
       .subscribe(
         (response) => {
-          this.routeBack()
+          this.routeBack();
         },
         (error) => {
-          this.showError(error)
-        })
+          this.showError(error);
+        });
   }
 
   onSubmit(): void {
@@ -97,11 +97,9 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   onCoordinateKey(event: any) {
     console.log(event.target.value);
     console.log(event.target.maxLength);
-    if (event.target.value.length > event.target.maxLength)
-      event.target.value = event.target.value.slice(
-        0,
-        event.target.maxLength
-      );
+    if (event.target.value.length > event.target.maxLength) {
+      event.target.value = event.target.value.slice( 0, event.target.maxLength);
+    }
   }
 
   private showError(error: HttpErrorResponse) {
@@ -115,7 +113,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
         );
       });
     } else {
-      this.errorMessage = error.message
+      this.errorMessage = error.message;
     }
     this.formFailedSubmit = true;
   }

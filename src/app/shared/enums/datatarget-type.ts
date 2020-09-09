@@ -1,3 +1,3 @@
 export enum DataTargetType {
-    HttpPush = "HTTP_PUSH",
+    HTTPPUSH = 'HTTP_PUSH',
 }

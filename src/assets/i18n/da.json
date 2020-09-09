@@ -152,7 +152,25 @@
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
     "GIVE-PAYLOADDECODER-NAME": "NAvngiv Payload Decoder",
     "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
-    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion"
+    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
+    "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+    "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
+    "DEVADDR": "Device adress",
+    "DEVADDR-PLACEHOLDER": "Indtast Device adress",
+    "NETWORKSESSIONKEY": "Networksessionkey",
+    "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
+    "APPLICATIONSESSIONKEY": "Applicationsessionkey",
+    "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
+    "ISDISABLED": "Enheden skal deaktiveres",
+    "ISDISABLED-NO": "Nej",
+    "ISDISABLED-YES": "Ja",
+    "DEVEUI": "Enheds EUI",
+    "DEVEUI-PLACEHOLDER": "Enheds EUI",
+    "SKIPFCNTCHECK": "SkipFCntCheck",
+    "SKIPFCNTCHECK-NO": "Nej",
+    "SKIPFCNTCHECK-YES": "Ja",
+    "OTAA": "Over The Air Activation",
+    "ABP": "Activation By Personalisation"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
@@ -203,7 +221,8 @@
     "GENERIC_HTTP": {
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
-    }
+    },
+    "LORAWANSETUP": "LoRaWAN Specifik opsætning"
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"

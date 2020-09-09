@@ -25,5 +25,8 @@
     @include media-breakpoint-up(md) {
       min-height: 150px;
     }
-  }
 }
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
