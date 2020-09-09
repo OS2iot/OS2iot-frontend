@@ -1,1 +1,34 @@
-<p>payload-decoder-table works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'PAYLOAD-DECODER.NAME' | translate }}</th>
+            <th>{{ 'PAYLOAD-DECODER.ID' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr
+            *ngFor="let payloadDecoder of payloadDecoders"
+            class="py-3"
+            app-payload-decoder-row
+            [payloadDecoder]="payloadDecoder"
+        ></tr>
+    </tbody>
+</table>
+
+<!-- <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
+    <ul class="pagination justify-content-center mt-5">
+        <li class="page-item">
+            <a class="page-link" [routerLink]="" (click)="prevPage()"
+                >Previous</a
+            >
+        </li>
+        <li class="page-item disabled">
+            <div class="page-link" [routerLink]="">
+                {{ pageOffset + 1 }} / {{ pageTotal }}
+            </div>
+        </li>
+        <li class="page-item">
+            <a class="page-link" [routerLink]="" (click)="nextPage()">Next</a>
+        </li>
+    </ul>
+</nav> -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Sort } from 'src/app/models/sort';
 
 @Component({
   selector: 'app-payload-decoder',
@@ -11,5 +12,4 @@ export class PayloadDecoderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

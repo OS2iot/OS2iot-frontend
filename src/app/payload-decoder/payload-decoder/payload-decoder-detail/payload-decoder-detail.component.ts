@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PayloadDecoder } from '../../../models/payload-decoder';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payload-decoder-detail',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayloadDecoderDetailComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(public translate: TranslateService) { }
 
   ngOnInit(): void {
+    this.translate.use('da');
   }
 
 }

@@ -11,6 +11,8 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { AlleIotEnhederComponent } from './views/alle-iot-enheder/alle-iot-enheder/alle-iot-enheder.component';
 import { MyApplicationsComponent } from './my-applications/my-applications.component';
 import { PayloadDecoderComponent } from './payload-decoder/payload-decoder/payload-decoder.component';
+import { PayloadDecoderEditComponent } from './payload-decoder/payload-decoder/payload-decoder-edit/payload-decoder-edit.component';
+import { PayloadDecoderDetailComponent } from './payload-decoder/payload-decoder/payload-decoder-detail/payload-decoder-detail.component';
 
 const routes: Routes = [
 
@@ -28,10 +30,12 @@ const routes: Routes = [
     },
     { path: 'datatarget', component: DatatargetListComponent },
     { path: 'iot-devices', component: AlleIotEnhederComponent },
-    { path: 'payload-decoder', component: PayloadDecoderComponent },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
     { path: '', redirectTo: '/my-applications', pathMatch: 'full' },
     { path: '**', redirectTo: '/my-applications', pathMatch: 'full' },
+    { path: 'payload-decoder', loadChildren: () => import('./payload-decoder/payload-decoder.module').then(m => m.PayloadDecoderModule) },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

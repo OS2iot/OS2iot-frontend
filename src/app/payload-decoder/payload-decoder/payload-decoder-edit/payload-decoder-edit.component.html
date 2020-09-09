@@ -1,1 +1,44 @@
-<p>payload-decoder-edit works!</p>
+<form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+    <div *ngIf="errorMessages" class="error-messages p-3">
+      <ul class="mb-0">
+        <li *ngFor="let error of errorMessages">
+          {{error}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="row mb-5">
+        <div class="form-group mt-3 col-12">
+            <label class="form-label" for="name">{{'QUESTION.GIVE-PAYLOADDECODER-NAME' | translate}}</label>*
+            <input type="text" 
+                class="form-control" 
+                id="name" 
+                name="name"
+                [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate" 
+                maxlength="50" 
+                required
+                [(ngModel)]="payloadDecoder.name"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="form-group mt-3 col-12">
+            <label class="form-label" for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>*
+            <textarea 
+                id="decodingFunction" 
+                name="decodingFunction"
+                [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION-PLACEHOLDER' | translate" 
+                [maxLength]="1024" 
+                [rows]="20"
+                class="form-control" 
+                [(ngModel)]="payloadDecoder.decodingFunction"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('decodingFunction'), 'is-valid' : formFailedSubmit && !errorFields.includes('decodingFunction')}"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group mt-5">
+        <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+        <button class="btn btn-dark ml-2" type="submit">{{ submitButton }}</button>
+    </div>
+</form>
