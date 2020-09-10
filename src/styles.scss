@@ -51,8 +51,10 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // Assets
 @import 'assets/scss/base';
 @import 'assets/scss/buttons';
-@import 'assets/scss/tables';
-@import 'assets/scss/forms';
+
+//Components
+@import 'assets/scss/components/tables';
+@import 'assets/scss/components/forms';
 
 
 html,

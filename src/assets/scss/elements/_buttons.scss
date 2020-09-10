@@ -1,0 +1,92 @@
+// Buttons
+button,
+a {
+  &.btn {
+    font-size: $body-text;
+    color: $color-text;
+    transition: $transition;
+
+    &.xlpadding {
+      padding-right: calculateRem(30);
+      padding-left: calculateRem(30);
+    }
+
+    &-primary,
+    &-primary:not(:disabled) {
+      @extend .btn;
+      color: $color-text-white;
+      border: solid calculateRem(1) $button-primary-border-color;
+      background: $button-primary-bg;
+      box-shadow: none;
+
+      &:hover,
+      &.hover,
+      &:hover:not(:disabled) {
+        border: solid calculateRem(1) $button-primary-hover-border-color;
+        background-color: $button-primary-hover-bg;
+        box-shadow: none;
+        color: $button-primary-hover-color;
+      }
+
+      &:focus,
+      &.focus,
+      &:focus:not(:disabled) {
+        border: solid calculateRem(1) $button-primary-focus-border-color;
+        background-color: $button-primary-focus-bg;
+        box-shadow: $box-shadow;
+        color: $button-primary-focus-color;
+      }
+
+      &:active,
+      &.active,
+      &:active:not(:disabled) {
+        border: solid calculateRem(1) $button-primary-active-border-color;
+        background: $button-primary-active-bg;
+        box-shadow: none !important;
+        color: $button-primary-active-color;
+      }
+
+      .disabled {
+        pointer-events: none;
+        cursor: default;
+        background-color: #8C8C97;
+      }
+    }
+
+    &-secondary,
+    &-secondary:not(:disabled) {
+      @extend .btn;
+      border: solid calculateRem(1) $button-secondary-border-color;
+      background: $button-secondary-bg;
+      box-shadow: none;
+
+      &:hover,
+      &.hover,
+      &:hover:not(:disabled) {
+        border: solid calculateRem(1) $button-secondary-hover-border-color;
+        background: $button-secondary-hover-bg;
+        box-shadow: none;
+        color: $button-secondary-hover-color;
+      }
+
+      &:focus,
+      &.focus,
+      &:focus:not(:disabled) {
+        border: solid calculateRem(1) $button-secondary-focus-border-color;
+        background: $button-secondary-focus-bg;
+        box-shadow: $box-shadow;
+        color: $button-secondary-focus-color;
+      }
+
+      &:active,
+      &.active,
+      &:active:not(:disabled) {
+        border: solid calculateRem(1) $button-secondary-active-border-color;
+        background: $button-secondary-active-bg;
+        box-shadow: none !important;
+        color: $button-secondary-active-color;
+      }
+    }
+
+  }
+}

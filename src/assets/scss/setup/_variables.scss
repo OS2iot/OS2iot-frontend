@@ -1,0 +1,279 @@
+// These variables drive almost every aspect of the Frontend Styleguide.
+// Every variable is declared as !default so that it can be overridden
+// by a previous import.
+//
+
+//############################### Font and Font sizes ####################
+//###########################################################################
+
+//----------------
+// -to-rem
+//----------------
+$global-font-size: 100% !default;
+// Removing the !default from $em-base so we are not inheriting that
+// value from Bourbon.
+$em-base: 14; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
+
+$base-font-size: $em-base !default;
+$base-line-height: $em-base + 2 !default;
+
+/*
+Removes the unit (e.g. px, em, rem) from a value, returning the number only.
+@param {Number} $num - Number to strip unit from.
+@returns {Number} The same number, sans unit.
+*/
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+// Paths
+// Relative font and image file paths
+$font-path: '~@/assets/fonts/OrstedSans/' !default;
+$font-regular: 'OrstedSans-Regular';
+$image-path: '../../img' !default;
+$node-modules-path: '../../../node_modules';
+$icons-folder-path: '../img/svg-icons/' !default;
+
+//headline sizes
+$h1: 38 !default;
+$h1-font-size: $h1 !default;
+$h1-line-height: $h1 + 5 !default;
+
+$h2: 30 !default;
+$h2-font-size: $h2 !default;
+$h2-line-height: $h2 + 5 !default;
+
+$h3: 20 !default;
+$h3-font-size: $h3 !default;
+$h3-line-height: $h3 + 5 !default;
+
+$h4: 20 !default;
+$h4-font-size: $h4 !default;
+$h4-line-height: $h4 - 5 !default;
+
+$h5: $em-base !default;
+$h5-font-size: $h5 !default;
+$h5-line-height: $h5 + 5 !default;
+
+$h6: $em-base !default;
+$h6-font-size: $h6 - 5 !default;
+$h6-line-height: $h6 + 5 !default;
+
+//font sizes
+$body-text: $em-base !default;
+$body-text-line-height: $em-base + 3 !default;
+
+$form-label: $em-base !default;
+$form-label-line-height: $form-label + 2 !default;
+
+$big-text: $h5 + 4 !default;
+$big-text-line-height: $h5 - 6 !default;
+
+$small-text: $em-base - 4 !default;
+$small-text-line-height: $em-base + 4 !default;
+
+//icon sizes
+$icon-size: $em-base !default;
+$icon-size-medium: $icon-size * 2 !default;
+$icon-size-big: $icon-size * 4 !default;
+
+//transition on timing
+$transition-short: all 0.2s ease-in-out !default;
+$transition-long: all 0.4s ease-in-out !default;
+
+//weight & style of fonts
+
+$font-style-normal: normal !default;
+$font-style-italic: italic !default;
+
+//letter-spacing
+$letter-spacing: 0.5 !default;
+
+//#######################Coloring ####################
+//####################################################
+$color-white-001: rgba(255, 255, 255, 1) !default;
+$color-white-002: rgba(255, 255, 255, 0.75) !default;
+$color-white-003: rgba(255, 255, 255, 0.5) !default;
+$color-white-004: rgba(255, 255, 255, 0.25) !default;
+
+$color-black-001: rgba(0, 0, 0, 1) !default;
+$color-black-002: rgba(0, 0, 0, 0.75) !default;
+$color-black-003: rgba(0, 0, 0, 0.5) !default;
+$color-black-004: rgba(0, 0, 0, 0.25) !default;
+
+$color-blue-001: rgba(0, 159, 223, 1) !default;
+$color-blue-002: rgba(0, 159, 223, 0.75) !default;
+$color-blue-003: rgba(0, 159, 223, 0.5) !default;
+$color-blue-004: rgba(0, 159, 223, 0.25) !default;
+
+$color-green-001: rgba(0, 100, 50, 1) !default; //primary Miljø
+$color-green-002: rgba(0, 100, 50, 0.75) !default;
+$color-green-003: rgba(0, 100, 50, 0.5) !default;
+$color-green-004: rgba(0, 100, 50, 0.25) !default;
+
+$color-dark-green-001: rgba(0, 49, 39, 1) !default; // Primary Koncernen
+$color-dark-green-002: rgba(0, 49, 39, 0.75) !default;
+$color-dark-green-003: rgba(0, 49, 39, 0.5) !default;
+$color-dark-green-004: rgba(0, 49, 39, 0.25) !default;
+
+$color-light-green-001: rgba(229, 239, 234, 1) !default; // Primary Koncernen
+$color-light-green-002: rgba(229, 239, 234, 0.75) !default;
+$color-light-green-003: rgba(229, 239, 234, 0.5) !default;
+$color-light-green-004: rgba(229, 239, 234, 0.25) !default;
+
+$color-lime-001: rgba(171, 188, 56, 1) !default;
+$color-lime-002: rgba(171, 188, 56, 0.75) !default;
+$color-lime-003: rgba(171, 188, 56, 0.5) !default;
+$color-lime-004: rgba(171, 188, 56, 0.25) !default;
+
+$color-yellow-001: rgba(231, 205, 20, 1) !default;
+$color-yellow-002: rgba(231, 205, 20, 0.75) !default;
+$color-yellow-003: rgba(231, 205, 20, 0.5) !default;
+$color-yellow-004: rgba(231, 205, 20, 0.25) !default;
+
+$color-red-001: rgba(131, 19, 2, 1) !default;
+$color-red-002: rgba(131, 19, 2, 0.75) !default;
+$color-red-003: rgba(131, 19, 2, 0.5) !default;
+$color-red-004: rgba(131, 19, 2, 0.25) !default;
+
+$color-purple-001: rgba(81, 45, 109, 1) !default;
+$color-purple-002: rgba(81, 45, 109, 0.75) !default;
+$color-purple-003: rgba(81, 45, 109, 0.5) !default;
+$color-purple-004: rgba(81, 45, 109, 0.25) !default;
+
+$color-orange-001: rgba(237, 139, 0, 1) !default;
+$color-orange-002: rgba(237, 139, 0, 0.75) !default;
+$color-orange-003: rgba(237, 139, 0, 0.5) !default;
+$color-orange-004: rgba(237, 139, 0, 0.25) !default;
+
+// // Colors used for alert boxes // FIXME: Kommer senere
+$color-success: $color-blue-001 !default;
+$color-success-light: $color-blue-004 !default;
+$color-warning: $color-yellow-001 !default;
+$color-warning-light: $color-yellow-003 !default;
+$color-error: $color-red-001 !default;
+$color-error-light: $color-red-003 !default;
+$color-info: $color-blue-001 !default;
+$color-info-light: $color-blue-004 !default;
+
+//############################### Element variables ####################
+//########################################################################
+
+// Functional theme colors
+$color-primary: $color-green-001 !default;
+$color-secondary: $color-white-001 !default;
+$color-alternative: $color-lime-001 !default;
+
+//Focus & Active
+$color-focus: $color-green-001 !default;
+$color-active: $color-green-001 !default;
+
+// Text color
+$color-text: $color-black-001 !default;
+$color-text-primary: $color-primary !default;
+$color-text-secondary: $color-secondary !default;
+$color-text-light: $color-black-002 !default;
+$color-text-white: $color-white-001 !default;
+$color-text-blue: $color-blue-001 !default;
+$color-text-yellow: $color-yellow-001 !default;
+$color-text-lime: $color-lime-001 !default;
+$color-text-error: $color-red-001 !default;
+$color-text-red: $color-red-001 !default;
+$color-text-grey: lighten($color-black-001, 50%) !default;
+$color-text-green: $color-green-001 !default;
+$color-text-2020: $color-red-001 !default;
+
+//background-color
+$color-bg-normal: $color-white-001 !default;
+$color-bg-primary: $color-primary !default;
+$color-bg-primary-layer: $color-black-002 !default;
+$color-bg-secondary: $color-dark-green-001 !default;
+$color-bg-alternative: $color-light-green-001 !default;
+
+//Icons color
+$color-Icons-primary: $color-primary !default;
+$color-Icons-secondary: $color-secondary !default;
+$color-Icons-alternative: $color-alternative !default;
+$color-Icons-light: $color-light-green-001 !default;
+
+// //Links color
+// $color-link: $color-secondary !default;
+// $color-link-hover: $color-primary !default;
+// $color-active: $color-primary !default;
+// $color-link-focus: $color-primary !default;
+// $color-link-focus-bg: $color-primary !default;
+// $color-visited: $color-primary !default;
+
+// Colors for borders
+$color-border: $color-white-003 !default;
+$color-border-light: $color-white-004 !default;
+$color-border-black: $color-black-001 !default;
+$color-border-red: $color-red-002 !default;
+$color-border-green: $color-green-002 !default;
+
+//Borders
+$border-width: 2;
+$outer-border: $border-width solid $color-border;
+$inner-border: $border-width solid lighten($color-border, 50%);
+$focus-border: $border-width solid $color-border-green;
+$focus-outline: $border-width solid $color-border;
+$warning-border: $border-width solid $color-border-red;
+$border-radius-primary: 16px;
+$border-radius-secondary: 20px;
+
+// //Button Borders
+// $button-border-width: 1px;
+// $button-border: $button-border-width solid $color-border;
+// $link-border: $button-border-width solid $color-border-light;
+
+// /////////////////Cards////////////////////////@include
+// $card-border-width: 1px;
+
+// $card-border-red: $card-border-width solid $color-border-red;
+// $card-border-green: $card-border-width solid $color-border-green;
+// /////////////////Buttons//////////////////////
+
+// // primary button
+$button-primary-color: $color-text-secondary !default;
+$button-primary-bg: $color-bg-primary !default;
+// $button-primary-border-color: $color-primary !default;
+// //primary Hover
+// $button-primary-hover-color: $body-text !default;
+// $button-primary-hover-bg: darken(
+//   $button-primary-bg,
+//   10%
+// ) !default; // FIXME: Hvad skal dette være?
+// $button-primary-hover-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
+// //primary active
+// $button-primary-active-color: $color-text-white !default;
+// $button-primary-active-bg: $color-primary !default; // FIXME: Hvad skal dette være?
+// $button-primary-active-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
+// //primary focus
+// $button-primary-focus-color: $color-text-white !default;
+// $button-primary-focus-bg: $color-primary !default; // FIXME: Hvad skal dette være?
+// $button-primary-focus-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
+
+// $button-disabled-bg: $color-black-004 !default; // FIXME: Hvad skal dette være?
+
+// //######### secondarycolors for buttons
+$button-secondary-color: $color-text-primary !default;
+$button-secondary-bg: $color-bg-normal !default;
+// $button-secondary-border-color: $color-primary !default;
+// //secondary Hover
+// $button-secondary-hover-color: $color-bg-secondary !default;
+// $button-secondary-hover-bg: $button-secondary-color !default; // FIXME: Hvad skal dette være?
+// $button-secondary-hover-border-color: $color-border !default; // FIXME: Hvad skal dette være?
+// //secondary active
+// $button-secondary-active-color: $button-secondary-hover-color !default;
+// $button-secondary-active-bg: $button-secondary-hover-bg !default; // FIXME: Hvad skal dette være?
+// $button-secondary-active-border-color: $button-secondary-hover-border-color !default; // FIXME: Hvad skal dette være?
+// //secondary focus
+// $button-secondary-focus-color: $button-secondary-hover-color !default;
+// $button-secondary-focus-bg: $button-secondary-hover-bg !default; // FIXME: Hvad skal dette være?
+// $button-secondary-focus-border-color: $button-secondary-hover-border-color !default; // FIXME: Hvad skal dette være?
+
+// //box-shadow
+// $box-shadow: $color-black-001 !default;
+
+// // /*################################# ###########################*/

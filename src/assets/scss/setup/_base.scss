@@ -1,0 +1,17 @@
+@import 'breakpoints';
+
+html,
+body {
+  height: 100%;
+  scroll-behavior: auto;
+}
+
+
+body {
+  margin: 0;
+  padding-top: calculateRem(120);
+
+  @include for-size(tablet-portrait-up) {
+    padding-top: calculateRem(160);
+  }
+}
