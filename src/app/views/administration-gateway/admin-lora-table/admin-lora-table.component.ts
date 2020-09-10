@@ -32,7 +32,7 @@ export class AdminLoraTableComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges() {
     console.log('pageLimit', this.pageLimit);
     console.log('selectedSortId', this.selectedSortObject);
-    this.getLoraGateways()
+    this.getLoraGateways();
   }
 
   getLoraGateways(): void {
@@ -45,7 +45,7 @@ export class AdminLoraTableComponent implements OnInit, OnChanges, OnDestroy {
       })
       .subscribe(
         (gateways) => {
-          this.gateways = gateways.result
+          this.gateways = gateways.result;
           if (this.pageLimit) {
             console.log(gateways.result);
             this.pageTotal = Math.ceil(gateways.count / this.pageLimit);

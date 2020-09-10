@@ -1,1 +1,32 @@
-<p>payload-decoder-detail works!</p>
+<ng-container *ngIf="payloadDecoder">
+    <app-top-bar-single [data]="payloadDecoder" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+    <div class="p-5">
+        <div class="application-component">
+            <div class="col d-flex top-bar">
+                <button class="btn btn-primary py-3" [routerLink]="['../../payload-decoder-edit', payloadDecoder.id]" routerLinkActive="active">{{ 'PAYLOAD-DECODER.EDIT' | translate }}</button>
+            </div>
+            <div class="col-12 mb-4 py-3 bottom-separator">
+                <div class="col-8 py-4">
+                    <div class="col-12 col-sm-12">
+                    <h4>{{ 'PAYLOAD-DECODER.NAME' | translate }}</h4>
+                    </div>
+                    <div class="col-12 pt-2 col-sm-8">
+                    <p>{{payloadDecoder.name}}</p>
+                    </div>
+                </div>
+                <div class="col-12 py-4">
+                    <div class="col-12 col-sm-12">
+                        <h4>{{ 'PAYLOAD-DECODER.DECODINGFUNCTION' | translate }}</h4>
+                    </div>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <pre>
+                        <code>
+                            {{payloadDecoder.decodingFunction}}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

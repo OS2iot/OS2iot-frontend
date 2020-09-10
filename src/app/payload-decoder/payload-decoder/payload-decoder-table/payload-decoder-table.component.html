@@ -11,6 +11,7 @@
             class="py-3"
             app-payload-decoder-row
             [payloadDecoder]="payloadDecoder"
+            (deletePayloadDecoder)="deletePayloadDecoder($event)"
         ></tr>
     </tbody>
 </table>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Sort } from 'src/app/models/sort';
+import * as PayloadDecoderAction from '../store/payload-decoder.actions';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import { LoggingService } from 'src/app/logging.service';
 
 @Component({
   selector: 'app-payload-decoder',
@@ -8,8 +11,16 @@ import { Sort } from 'src/app/models/sort';
 })
 export class PayloadDecoderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private loggingService: LoggingService,
+  ) { }
 
   ngOnInit(): void {
+    this.onFetchData();
+  }
+
+  onFetchData() {
+    this.store.dispatch(new PayloadDecoderAction.FetchPayloadDecoders());
   }
 }

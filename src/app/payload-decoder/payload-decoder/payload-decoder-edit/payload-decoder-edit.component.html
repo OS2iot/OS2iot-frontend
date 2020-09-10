@@ -1,3 +1,4 @@
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
       <ul class="mb-0">
@@ -28,8 +29,6 @@
             <textarea 
                 id="decodingFunction" 
                 name="decodingFunction"
-                [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION-PLACEHOLDER' | translate" 
-                [maxLength]="1024" 
                 [rows]="20"
                 class="form-control" 
                 [(ngModel)]="payloadDecoder.decodingFunction"
@@ -39,6 +38,6 @@
 
     <div class="form-group mt-5">
         <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
-        <button class="btn btn-dark ml-2" type="submit">{{ submitButton }}</button>
+        <button class="btn btn-dark ml-2" type="submit">{{ 'PAYLOAD-DECODER.SAVE' | translate}}</button>
     </div>
 </form>

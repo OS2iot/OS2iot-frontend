@@ -105,6 +105,17 @@
     "DELETE": "Slet datatarget",
     "EDIT": "Redigér"
   },
+  "PAYLOAD-DECODER": {
+    "SAVE": "Gem Payload Decoder",
+    "NAME": "Navn",
+    "ID": "Payload Decoder Id",
+    "DECODINGFUNCTION": "Decoder funktion",
+    "EDIT": "Redigér Payload Decoder"
+  },
+  "PAYLOAD-DECODER-TABLE-ROW": {
+    "EDIT": "Redigér",
+    "DELETE": "Slet"
+  },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
@@ -114,7 +125,9 @@
     "EDIT-NEW-APPLICATION": "Redigér applikation",
     "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
     "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
-    "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
+    "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
+    "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
+    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -136,7 +149,10 @@
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
-    "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data"
+    "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
+    "GIVE-PAYLOADDECODER-NAME": "NAvngiv Payload Decoder",
+    "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
+    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PayloadDecoder } from 'src/app/models/payload-decoder';
+import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -25,9 +25,7 @@ export class PayloadDecoderRowComponent implements OnInit {
   }
 
   clickDelete() {
-    if (!this.payloadDecoder) {
-        this.deletePayloadDecoder.emit(this.payloadDecoder.id);
-    }
+    this.deletePayloadDecoder.emit(this.payloadDecoder.id);
   }
 
   navigateToEditPage() {

@@ -3,3 +3,8 @@ export class PayloadDecoder {
     public decodingFunction: string;
     public id: number;
 }
+
+export interface PayloadDecoderResponse {
+    data: PayloadDecoder[];
+    count: number;
+}

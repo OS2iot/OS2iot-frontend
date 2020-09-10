@@ -10,10 +10,10 @@ import { BackButton } from 'src/app/models/back-button';
 export class EditGatewayComponent implements OnInit {
 
   public backButton: BackButton = {label: '', routerLink: '/mine-lora-gateways'};
-  public multiPage: boolean = false;
-  public title: string = '';
-  public sectionTitle: string = '';
-  public submitButton: string = '';
+  public multiPage = false;
+  public title = '';
+  public sectionTitle = '';
+  public submitButton = '';
 
   constructor(
     public translate: TranslateService
