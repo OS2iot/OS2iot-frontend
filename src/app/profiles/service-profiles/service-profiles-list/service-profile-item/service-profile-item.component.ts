@@ -3,7 +3,7 @@ import { ServiceProfile } from '../../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as ServiceProfilesActions from '../../store/service-profile.actions';
-import * as fromApp from '../../../../store/app.reducer';
+import * as fromApp from '@store/app.reducer';
 
 
 @Component({
@@ -26,7 +26,6 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onEditServiceProfile() {
-    //this.router.navigate(['edit-profile'], { relativeTo: this.route });
     this.router.navigate([this.index, 'edit-profile'], { relativeTo: this.route });
   }
 

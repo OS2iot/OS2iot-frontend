@@ -1,18 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { HttpClient } from '@angular/common/http';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
-
 import * as ServiceProfileActions from './service-profile.actions';
-import { ServiceProfile, ServiceProfileData } from '../service-profile.model';
-import * as fromApp from '../../../store/app.reducer';
-
-import { environment } from 'src/environments/environment';
-import { RestService } from 'src/app/shared/services/rest.service';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import * as fromApp from '@store/app.reducer';
+import { Injectable } from '@angular/core';
+import { Effect, ofType, Actions } from '@ngrx/effects';
+import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { ServiceProfileData } from '../service-profile.model';
+import { RestService } from '@shared/services/rest.service';
+import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 
 
 

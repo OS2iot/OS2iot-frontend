@@ -1,14 +1,12 @@
+import * as fromApp from '@store/app.reducer';
+import * as ServiceProfilesActions from '../store/service-profile.actions';
 import { Component, OnInit } from '@angular/core';
+import { BackButton } from '@app/models/back-button';
+import { ServiceProfile } from '../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs/operators';
-
-import { ServiceProfile } from '../service-profile.model';
-import * as fromApp from '../../../store/app.reducer';
-import * as ServiceProfilesActions from '../store/service-profile.actions';
-import { BackButton } from 'src/app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
-
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-profiles-detail',

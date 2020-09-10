@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Application } from 'src/app/models/application';
 import { BackButton } from 'src/app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
-import { ApplicationService } from 'src/app/shared/services/application.service';
+
 
 @Component({
     selector: 'app-iot-device-edit',
