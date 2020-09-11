@@ -1,3 +1,7 @@
+@import '../setup//variables';
+
+
+
 // Links
 
 a:focus,
@@ -12,11 +16,14 @@ select:focus,
 
 a {
   color: $color-link;
+  border-bottom: 5px solid transparent;
+  cursor: pointer;
 
   &:hover,
   &.link-hover {
     color: $color-link-hover;
     border-bottom: 5px solid $color-link-focus-bg;
+
 
     &:disabled,
     .disabled {

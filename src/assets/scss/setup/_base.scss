@@ -1,17 +1,26 @@
+@import 'variables';
 @import 'breakpoints';
 
 html,
 body {
   height: 100%;
-  scroll-behavior: auto;
 }
-
 
 body {
   margin: 0;
-  padding-top: calculateRem(120);
-
-  @include for-size(tablet-portrait-up) {
-    padding-top: calculateRem(160);
-  }
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+// Bootstrap overrides
+$theme-colors: ('primary': $color-primary,
+  'success': $color-success,
+  'dark': $color-secondary) !default;
+
+$grid-breakpoints: (xs: 0,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+  xl: $screen-xl-min,
+  xxl: $screen-xxl-min,
+);

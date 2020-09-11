@@ -3,16 +3,18 @@
 
 // Breakpoints
 // Small tablets and large smartphones (landscape view)
-$screen-sm-min: 240px;
+$screen-sm-min: 576px;
 
 // Small tablets (portrait view)
-$screen-md-min: 400px;
+$screen-md-min: 768px;
 
 // Tablets and small desktops
 $screen-lg-min: 992px;
 
 // Large tablets and desktops
 $screen-xl-min: 1200px;
+
+$screen-xxl-min: 1400px;
 
 // Small devices
 @mixin sm-min {
@@ -62,6 +64,7 @@ $screen-xl-min: 1200px;
     @content;
   }
 }
+
 // Extra large devices
 @mixin xl-max {
   @media (max-width: #{$screen-xl-min}) {
@@ -98,6 +101,7 @@ $screen-xl-min: 1200px;
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   /* Styles */
 }
+
 /**********
   iPad 3
   **********/
@@ -108,6 +112,7 @@ $screen-xl-min: 1200px;
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
   /* Styles */
 }
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   /* Styles */

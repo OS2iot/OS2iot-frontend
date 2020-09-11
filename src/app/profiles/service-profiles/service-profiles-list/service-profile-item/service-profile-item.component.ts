@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as ServiceProfilesActions from '../../store/service-profile.actions';
 import * as fromApp from '@store/app.reducer';
+import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class ServiceProfileItemComponent implements OnInit {
   @Input() serviceProfile: ServiceProfile;
   @Input() index: number;
   id: number;
+  faPen = faPen;
+  faTimesCircle = faTimesCircle;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +33,7 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onDeleteServiceProfile() {
-    //this.store.dispatch(new ServiceProfilesActions.deleteServiceProfile(this.index));
+    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.id }));
     this.router.navigate(['/profiles']);
   }
 

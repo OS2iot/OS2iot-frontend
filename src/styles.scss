@@ -28,21 +28,7 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
-// Fonts
-@font-face {
-  font-family: 'roboto-light';
-  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
-}
 
-@font-face {
-  font-family: 'roboto';
-  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'roboto-bold';
-  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
-}
 
 
 // Variables
@@ -56,13 +42,25 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 @import 'assets/scss/components/tables';
 @import 'assets/scss/components/forms';
 
+//Elements
+@import 'assets/scss/elements/links';
 
-html,
-body {
-  height: 100%;
+//Setup
+@import 'assets/scss/setup/base';
+@import 'assets/scss/setup/breakpoints';
+
+
+@font-face {
+  font-family: 'roboto-light';
+  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+@font-face {
+  font-family: 'roboto';
+  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'roboto-bold';
+  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
 }

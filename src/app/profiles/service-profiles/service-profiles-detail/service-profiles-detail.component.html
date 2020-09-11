@@ -10,13 +10,20 @@
                 <button type="button" class="btn btn-primary dropdown-toggle">
                     {{'PROFILES.SERVICE_PROFILE.DROPDOWN' | translate}} <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a style="cursor: pointer;"
-                            (click)="onEditServiceProfile()">{{'PROFILES.SERVICE_PROFILE.EDIT' | translate}}</a></li>
-                    <li><a style="cursor: pointer;"
-                            (click)="onDeleteServiceProfile()">{{'PROFILES.SERVICE_PROFILE.DELETE' | translate}}</a>
-                    </li>
-                </ul>
+
+                <div class="btn-group" appDropdown>
+                    <button type="button" class="btn btn-primary dropdown-toggle">
+                        Håndter Profil <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a style="cursor: pointer;"
+                                (click)="onEditServiceProfile()">{{'PROFILES.SERVICE_PROFILE.EDIT' | translate}}</a>
+                        </li>
+                        <li><a style="cursor: pointer;"
+                                (click)="onDeleteServiceProfile()">{{'PROFILES.SERVICE_PROFILE.DELETE' | translate}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

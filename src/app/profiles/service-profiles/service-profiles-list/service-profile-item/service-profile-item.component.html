@@ -1,13 +1,23 @@
-<div class=" list-group-item clearfix" routerLinkActive="active">
+<div class=" list-group-item mb-1 clearfix" routerLinkActive="active">
   <div class="row">
-    <div class="col-6 pull-left"> <a [routerLink]="[index]">
-        <h4 class="application-link">{{ serviceProfile.name }}</h4>
-      </a></div>
-    <div class="col-6 text-right ">
-      <!-- TODO: skal skiftes ud med Ikoner -->
-      <a style="cursor: pointer;" class="application-link" (click)="onEditServiceProfile()">Edit ServiceProfile</a>
-      <a style="cursor: pointer;" class="application-link pl-3" (click)="onDeleteServiceProfile()">Delete
-        ServiceProfile</a>
+    <div class="col-9 pull-left d-flex align-items-center">
+      <a [routerLink]="[index]" class="container-fluid">
+        {{ serviceProfile.name }}
+      </a>
+    </div>
+    <div class="col-3 pull-right d-flex align-items-center justify-content-end">
+      <a (click)="onEditServiceProfile()">
+        <div class="text-center m-2">
+          <fa-icon [icon]="faPen"></fa-icon>
+          <p>Rediger</p>
+        </div>
+      </a>
+      <a (click)="onDeleteServiceProfile()">
+        <div class="text-center m-2">
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+          <p>Slet</p>
+        </div>
+      </a>
     </div>
   </div>
 </div>

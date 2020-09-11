@@ -19,3 +19,20 @@ $font-name: 'Lato' !default; //'Roboto'!default;
 //   font-style:   $font-style-normal;
 //   font-weight:  $font-weight-normal;
 // }
+
+
+// Fonts
+@font-face {
+  font-family: 'roboto-light';
+  src: url('../../fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('src/app/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'roboto-bold';
+  src: url('src/app/assets/fonts/Roboto-Bold.ttf') format('truetype');
+}

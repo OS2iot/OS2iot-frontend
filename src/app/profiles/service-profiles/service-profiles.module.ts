@@ -13,6 +13,7 @@ import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '@shared-material';
 import { StoreModule } from '@ngrx/store';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -28,6 +29,7 @@ import { StoreModule } from '@ngrx/store';
     ServiceProfilesListComponent
   ],
   imports: [
+    FontAwesomeModule,
     DirectivesModule,
     CommonModule,
     RouterModule,

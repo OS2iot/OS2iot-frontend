@@ -15,7 +15,7 @@ $global-font-size: 100% !default;
 $em-base: 14; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
 
 $base-font-size: $em-base !default;
-$base-line-height: $em-base + 2 !default;
+$base-line-height: $em-base+2 !default;
 
 /*
 Removes the unit (e.g. px, em, rem) from a value, returning the number only.
@@ -38,15 +38,15 @@ $icons-folder-path: '../img/svg-icons/' !default;
 //headline sizes
 $h1: 38 !default;
 $h1-font-size: $h1 !default;
-$h1-line-height: $h1 + 5 !default;
+$h1-line-height: $h1+5 !default;
 
 $h2: 30 !default;
 $h2-font-size: $h2 !default;
-$h2-line-height: $h2 + 5 !default;
+$h2-line-height: $h2+5 !default;
 
 $h3: 20 !default;
 $h3-font-size: $h3 !default;
-$h3-line-height: $h3 + 5 !default;
+$h3-line-height: $h3+5 !default;
 
 $h4: 20 !default;
 $h4-font-size: $h4 !default;
@@ -54,24 +54,24 @@ $h4-line-height: $h4 - 5 !default;
 
 $h5: $em-base !default;
 $h5-font-size: $h5 !default;
-$h5-line-height: $h5 + 5 !default;
+$h5-line-height: $h5+5 !default;
 
 $h6: $em-base !default;
 $h6-font-size: $h6 - 5 !default;
-$h6-line-height: $h6 + 5 !default;
+$h6-line-height: $h6+5 !default;
 
 //font sizes
 $body-text: $em-base !default;
-$body-text-line-height: $em-base + 3 !default;
+$body-text-line-height: $em-base+3 !default;
 
 $form-label: $em-base !default;
-$form-label-line-height: $form-label + 2 !default;
+$form-label-line-height: $form-label+2 !default;
 
-$big-text: $h5 + 4 !default;
+$big-text: $h5+4 !default;
 $big-text-line-height: $h5 - 6 !default;
 
 $small-text: $em-base - 4 !default;
-$small-text-line-height: $em-base + 4 !default;
+$small-text-line-height: $em-base+4 !default;
 
 //icon sizes
 $icon-size: $em-base !default;
@@ -142,10 +142,10 @@ $color-purple-002: rgba(81, 45, 109, 0.75) !default;
 $color-purple-003: rgba(81, 45, 109, 0.5) !default;
 $color-purple-004: rgba(81, 45, 109, 0.25) !default;
 
-$color-orange-001: rgba(237, 139, 0, 1) !default;
-$color-orange-002: rgba(237, 139, 0, 0.75) !default;
-$color-orange-003: rgba(237, 139, 0, 0.5) !default;
-$color-orange-004: rgba(237, 139, 0, 0.25) !default;
+$color-orange-001: rgba(231, 102, 89, 1) !default;
+$color-orange-002: rgba(231, 102, 89, 0.75) !default;
+$color-orange-003: rgba(231, 102, 89, 0.5) !default;
+$color-orange-004: rgba(231, 102, 89, 0.25) !default;
 
 // // Colors used for alert boxes // FIXME: Kommer senere
 $color-success: $color-blue-001 !default;
@@ -161,7 +161,7 @@ $color-info-light: $color-blue-004 !default;
 //########################################################################
 
 // Functional theme colors
-$color-primary: $color-green-001 !default;
+$color-primary: $color-orange-001 !default;
 $color-secondary: $color-white-001 !default;
 $color-alternative: $color-lime-001 !default;
 
@@ -198,12 +198,12 @@ $color-Icons-alternative: $color-alternative !default;
 $color-Icons-light: $color-light-green-001 !default;
 
 // //Links color
-// $color-link: $color-secondary !default;
-// $color-link-hover: $color-primary !default;
-// $color-active: $color-primary !default;
-// $color-link-focus: $color-primary !default;
-// $color-link-focus-bg: $color-primary !default;
-// $color-visited: $color-primary !default;
+$color-link: $color-primary !default;
+$color-link-hover: $color-primary !default;
+$color-active: $color-primary !default;
+$color-link-focus: $color-primary !default;
+$color-link-focus-bg: $color-primary !default;
+$color-visited: $color-primary !default;
 
 // Colors for borders
 $color-border: $color-white-003 !default;
@@ -213,7 +213,7 @@ $color-border-red: $color-red-002 !default;
 $color-border-green: $color-green-002 !default;
 
 //Borders
-$border-width: 2;
+$border-width: 5;
 $outer-border: $border-width solid $color-border;
 $inner-border: $border-width solid lighten($color-border, 50%);
 $focus-border: $border-width solid $color-border-green;
