@@ -12,8 +12,6 @@ import { PayloadDecoderRoutingModule } from './payload-decoder-routing.module';
 import { PayloadDecoderListComponent } from './payload-decoder/payload-decoder-list/payload-decoder-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormModule } from '../shared/form/form.module';
-import * as fromPayloadDecoders from '../payload-decoder/store/payload-decoder.reducer';
-import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -39,7 +37,6 @@ import { StoreModule } from '@ngrx/store';
       PayloadDecoderRoutingModule,
       ReactiveFormsModule,
       FormModule,
-      StoreModule.forFeature('payloadDecoders', fromPayloadDecoders.payloadDecoderReducer)
   ]
 })
 export class PayloadDecoderModule { }
