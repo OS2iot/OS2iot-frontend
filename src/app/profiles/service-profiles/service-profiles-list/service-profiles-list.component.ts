@@ -37,7 +37,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   onNewServiceProfile() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.router.navigate(['new-profile'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {

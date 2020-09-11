@@ -30,7 +30,7 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(new ServiceProfilesActions.DeleteServiceProfile(this.index));
+    //this.store.dispatch(new ServiceProfilesActions.deleteServiceProfile(this.index));
     this.router.navigate(['/profiles']);
   }
 

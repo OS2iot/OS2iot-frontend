@@ -46,15 +46,23 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   onSubmit() {
+    // if (this.editMode) {
+    //   this.store.dispatch(
+    //     new ServiceProfilesActions.UpdateServiceProfile({
+    //       index: this.id,
+    //       updateServiceProfile: this.serviceProfileForm.value
+    //     })
+    //   );
+    // } else {
+    //   this.store.dispatch(new ServiceProfilesActions.AddServiceProfile(this.serviceProfileForm.value));
+    // }
+    // this.store.dispatch(new ServiceProfilesActions.StoreServiceProfiles());
+    // this.onCancel();
     if (this.editMode) {
-      this.store.dispatch(
-        new ServiceProfilesActions.UpdateServiceProfile({
-          index: this.id,
-          updateServiceProfile: this.serviceProfileForm.value
-        })
-      );
+      this.store.dispatch(ServiceProfilesActions.updateServiceProfile({ index: this.id, serviceProfile: this.serviceProfileForm.value }));
     } else {
-      this.store.dispatch(new ServiceProfilesActions.AddServiceProfile(this.serviceProfileForm.value));
+      this.store.dispatch(ServiceProfilesActions.addServiceProfile({ serviceProfile: this.serviceProfileForm.value }));
+
     }
     this.onCancel();
   }
@@ -71,6 +79,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   private initForm() {
+    let serviceProfileId = "a735a64c-8ffb-4c25-bb82-0de1108e7bd7"
     let serviceProfileName = 'Navngiv din profil';
     let serviceProfileGWData = false;
     let serviceProfileBatteryStatus = true;
@@ -89,6 +98,7 @@ export class ServiceProfilesEditComponent implements OnInit {
           })
         )
         .subscribe(serviceProfile => {
+          serviceProfileId = serviceProfile.id
           serviceProfileName = serviceProfile.name;
           serviceProfileGWData = serviceProfile.addGWMetaData;
           serviceProfileBatteryStatus = serviceProfile.reportDevStatusBattery;
@@ -100,6 +110,7 @@ export class ServiceProfilesEditComponent implements OnInit {
     }
 
     this.serviceProfileForm = new FormGroup({
+      id: new FormControl(serviceProfileId),
       name: new FormControl(serviceProfileName, Validators.required),
       addGWMetaData: new FormControl(serviceProfileGWData),
       reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),

@@ -23,7 +23,7 @@ export class ProfilesComponent implements OnInit {
 
   onFetchData() {
     // this.dataStorageService.fetchRecipes().subscribe();
-    this.store.dispatch(new ServiceProfilesAction.FetchServiceProfiles());
+    this.store.dispatch(ServiceProfilesAction.fetchServiceProfiles());
   }
 
 }
