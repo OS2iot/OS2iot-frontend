@@ -9,4 +9,6 @@ export class LorawanSettings {
     devAddr?: string;
     networkSessionKey?: string;
     applicationSessionKey?: string;
+    serviceProfilID: string;
+    deviceProfileID: string;
 }

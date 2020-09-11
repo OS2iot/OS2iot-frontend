@@ -5,9 +5,9 @@ export class Gateway {
     name?: string;
     description?: string;
     location: CommonLocation = new CommonLocation;
-    discoveryEnabled: boolean = false;
+    discoveryEnabled = false;
     gatewayProfileID: string = null;
-    tagsString?: string = "{}";
+    tagsString = '{}';
     tags?: JSON;
 }
 
@@ -22,10 +22,10 @@ export class GatewayRequest {
 }
 
 export class GatewayResponse {
-    createdAt: string
-    updatedAt: string
-    firstSeenAt: string
-    lastSeenAt: string
+    createdAt: string;
+    updatedAt: string;
+    firstSeenAt: string;
+    lastSeenAt: string;
 
-    gateway: Gateway
+    gateway: Gateway;
 }

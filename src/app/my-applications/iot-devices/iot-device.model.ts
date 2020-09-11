@@ -1,8 +1,8 @@
-import { ReceivedMessageMetadata } from './received-message-metadata';
-import { Application } from './application';
-import { JsonLocation } from './Json-location';
-import { DeviceType } from '../shared/enums/device-type';
-import { LorawanSettings } from './lorawan-settings';
+import { Application } from 'src/app/models/application';
+import { JsonLocation } from 'src/app/models/Json-location';
+import { LorawanSettings } from 'src/app/models/lorawan-settings';
+import { ReceivedMessageMetadata } from 'src/app/models/received-message-metadata';
+import { DeviceType } from 'src/app/shared/enums/device-type';
 
 export class IotDevice {
     name: string;

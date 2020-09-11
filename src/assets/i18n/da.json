@@ -83,7 +83,8 @@
     "TYPE": "Type"
   },
   "IOT-DEVICE-TYPES": {
-    "GENERIC_HTTP": "Generisk HTTP"
+    "GENERIC_HTTP": "Generisk HTTP",
+    "LORAWAN": "LoRaWAN"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -170,7 +171,8 @@
     "SKIPFCNTCHECK-NO": "Nej",
     "SKIPFCNTCHECK-YES": "Ja",
     "OTAA": "Over The Air Activation",
-    "ABP": "Activation By Personalisation"
+    "ABP": "Activation By Personalisation",
+    "CHOOSE-SERVICEPROFILE": "Vælg service profile"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",

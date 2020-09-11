@@ -11,6 +11,12 @@ import { Location } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
 import { DeviceType } from '../../enums/device-type';
 import { LorawanSettings } from 'src/app/models/lorawan-settings';
+import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
+import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
+import { ServiceProfile } from 'src/app/profiles/service-profiles/service-profile.model';
+import { ServiceProfileService } from '../../services/service-profile.service';
+import { DeviceProfile } from 'src/app/profiles/device-profiles/device-profile.model';
+import { DeviceProfileService } from '../../services/device-profile.service';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -30,15 +36,20 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     private id: number;
     public disableChoseApplication = true;
     public loraDevice = DeviceType.LORAWAN;
+    public serviceProfiles: ServiceProfile[];
+    public deviceProfiles: DeviceProfile[];
+    iotDevice = new IotDevice();
 
     private applicationsSubscription: Subscription;
-
-    iotDevice = new IotDevice();
+    private serviceProfileSubscription: Subscription;
+    private deviceProfileSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
         public translate: TranslateService,
         private router: Router,
+        private serviceProfileService: ServiceProfileService,
+        private deviceProfileService: DeviceProfileService,
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService,
         private location: Location
@@ -55,6 +66,8 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         }
 
         this.getApplications();
+        this.getServiceProfiles();
+        this.getDeviceProfiles();
     }
 
     getApplications(): void {
@@ -69,14 +82,28 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.deviceSubscription = this.iotDeviceService
             .getIoTDevice(id)
             .subscribe((device: IotDevice) => {
-                this.iotDevice = device;
-                if (this.iotDevice?.application?.id) {
+            this.iotDevice = device;
+            if (this.iotDevice?.application?.id) {
                     this.iotDevice.applicationId = device.application?.id;
                 }
-                if (device.location) {
+            if (device.location) {
                     this.iotDevice.longitude = device.location.coordinates[0];
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
+            });
+    }
+
+    getServiceProfiles() {
+        this.serviceProfileSubscription = this.serviceProfileService
+            .getMultiple().subscribe( (result) => {
+                this.serviceProfiles = result.result;
+            });
+    }
+
+    getDeviceProfiles() {
+        this.deviceProfileSubscription = this.deviceProfileService
+            .getMultiple().subscribe( (result) => {
+                this.deviceProfiles = result.result;
             });
     }
 
