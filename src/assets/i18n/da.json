@@ -195,8 +195,8 @@
     "NAME": "Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
-      "EDIT": "Editer service profil",
-      "DELETE": "Slet service profil",
+      "EDIT": "Rediger profil",
+      "DELETE": "Slet profil",
       "NAME": "Service-profil navn",
       "REPORTBATTERYSTATUS": "Report battery status",
       "ADDGWMETADATA": "Tilføjet gateway meta-data",

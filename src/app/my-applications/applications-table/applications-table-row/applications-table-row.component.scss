@@ -1,7 +1,8 @@
-@import '~src/assets/scss/variables';
+@import '~src/assets/scss/setup/breakpoints';
+@import '~src/assets/scss/setup/variables';
 
 .application-link {
-    color: $blue-hue;
-    text-decoration: none;
-    font-family: roboto-bold;
+  color: $blue-hue;
+  text-decoration: none;
+  font-family: roboto-bold;
 }

@@ -1,8 +1,9 @@
-@import '~src/assets/scss/variables';
+@import '~src/assets/scss/setup/breakpoints';
+@import '~src/assets/scss/setup/variables';
 
 #content {
 
-    @include media-breakpoint-up(sm) {
-        padding-left: $navWidth;
-    }
+  @include media-breakpoint-up(sm) {
+    padding-left: $navWidth;
+  }
 }

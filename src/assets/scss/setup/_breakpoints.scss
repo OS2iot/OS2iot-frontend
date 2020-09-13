@@ -1,6 +1,9 @@
 //############################### Breakpoints ####################
 //###########################################################################
 
+//Bootstrap
+@import '~bootstrap/scss/mixins';
+
 // Breakpoints
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 576px;
@@ -15,6 +18,15 @@ $screen-lg-min: 992px;
 $screen-xl-min: 1200px;
 
 $screen-xxl-min: 1400px;
+
+//breakpoints
+$grid-breakpoints: (xs: 0,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+  xl: $screen-xl-min,
+  xxl: $screen-xxl-min,
+);
 
 // Small devices
 @mixin sm-min {

@@ -55,7 +55,7 @@ export class ServiceProfilesDetailComponent implements OnInit {
 
   onDeleteServiceProfile() {
     this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.id }));
-    this.router.navigate(['/serviceProfiles']);
+    this.router.navigate(['/profiles']);
   }
 
 }

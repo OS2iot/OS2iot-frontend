@@ -1,4 +1,4 @@
-$font-name: 'Lato' !default; //'Roboto'!default;
+$font-name: 'Roboto' !default; //'Roboto'!default;
 // $font-text-regular: 'IBMPlexSans-Text' !default;
 // $font-regular: 'IBMPlexSans-Regular' !default;
 // $font-medium: 'IBMPlexSans-Medium' !default;
@@ -21,18 +21,18 @@ $font-name: 'Lato' !default; //'Roboto'!default;
 // }
 
 
-// Fonts
-@font-face {
-  font-family: 'roboto-light';
-  src: url('../../fonts/Roboto-Light.ttf') format('truetype');
-}
+// // Fonts
+// @font-face {
+//   font-family: 'roboto-light';
+//   src: url('../../fonts/Roboto-Light.ttf') format('truetype');
+// }
 
-@font-face {
-  font-family: 'roboto';
-  src: url('src/app/assets/fonts/Roboto-Regular.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'roboto';
+//   src: url('../../fonts/Roboto-Regular.ttf') format('truetype');
+// }
 
-@font-face {
-  font-family: 'roboto-bold';
-  src: url('src/app/assets/fonts/Roboto-Bold.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'roboto-bold';
+//   src: url('../../fonts/Roboto-Bold.ttf') format('truetype');
+// }

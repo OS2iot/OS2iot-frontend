@@ -1,3 +1,5 @@
+@import 'utilities';
+
 html {
   font-family: $font-name, system;
   font-size: $body-text;
@@ -8,6 +10,17 @@ html {
   line-height: 0;
 }
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-family: roboto;
+  margin-bottom: 0;
+}
 
 /*####################### HEADLINE #########################*/
 @mixin h1 {
@@ -128,24 +141,6 @@ h5,
 
 h1+h4 {
   margin-top: calculateRem(-16);
-}
-
-.jumbotron {
-  p {
-    &:first-child {
-      padding-top: calculateRem(16);
-      margin-bottom: calculateRem(8);
-    }
-
-    &:last-child {
-      padding-bottom: calculateRem(16);
-      margin-bottom: 0;
-    }
-  }
-
-  h2 {
-    margin-bottom: 0 !important;
-  }
 }
 
 p,

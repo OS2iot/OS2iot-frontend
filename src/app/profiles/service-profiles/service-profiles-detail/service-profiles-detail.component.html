@@ -6,24 +6,19 @@
     </div>
     <div class="row my-3">
         <div class="col-xs-12">
-            <div class="btn-group float-right" appDropdown>
-                <button type="button" class="btn btn-primary dropdown-toggle">
+            <div class="btn-group float-right">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     {{'PROFILES.SERVICE_PROFILE.DROPDOWN' | translate}} <span class="caret"></span>
                 </button>
-
-                <div class="btn-group" appDropdown>
-                    <button type="button" class="btn btn-primary dropdown-toggle">
-                        Håndter Profil <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a style="cursor: pointer;"
-                                (click)="onEditServiceProfile()">{{'PROFILES.SERVICE_PROFILE.EDIT' | translate}}</a>
-                        </li>
-                        <li><a style="cursor: pointer;"
-                                (click)="onDeleteServiceProfile()">{{'PROFILES.SERVICE_PROFILE.DELETE' | translate}}</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a style="cursor: pointer;"
+                            (click)="onEditServiceProfile()">{{'PROFILES.SERVICE_PROFILE.EDIT' | translate}}</a>
+                    </li>
+                    <li class="dropdown-item"><a style="cursor: pointer;"
+                            (click)="onDeleteServiceProfile()">{{'PROFILES.SERVICE_PROFILE.DELETE' | translate}}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

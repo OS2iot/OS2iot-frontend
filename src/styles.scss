@@ -29,25 +29,22 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 @import '~bootstrap/scss/bootstrap.scss';
 
 
-
-
-// Variables
-@import 'assets/scss/variables';
-
-// Assets
-@import 'assets/scss/base';
-@import 'assets/scss/buttons';
-
 //Components
 @import 'assets/scss/components/tables';
 @import 'assets/scss/components/forms';
 
 //Elements
 @import 'assets/scss/elements/links';
+@import 'assets/scss/elements/buttons';
 
 //Setup
 @import 'assets/scss/setup/base';
 @import 'assets/scss/setup/breakpoints';
+@import 'assets/scss/setup/fonts';
+@import 'assets/scss/setup/typography';
+@import 'assets/scss/setup/utilities';
+@import 'assets/scss/setup/variables';
+
 
 
 @font-face {

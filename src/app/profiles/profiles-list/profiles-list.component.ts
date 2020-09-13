@@ -17,6 +17,6 @@ export class ProfilesListComponent implements OnInit {
   }
 
   onNewServiceProfile() {
-    this.router.navigate(['new-profile'], { relativeTo: this.route });
+    this.router.navigate(['new-service-profile'], { relativeTo: this.route });
   }
 }

@@ -13,7 +13,7 @@ const profilesRoutes: Routes = [
         component: ProfilesComponent,
         children: [
             { path: '', component: ProfilesListComponent },
-            { path: 'new-profile', component: ServiceProfilesEditComponent },
+            { path: 'new-service-profile', component: ServiceProfilesEditComponent },
             {
                 path: ':id',
                 component: ServiceProfilesDetailComponent,

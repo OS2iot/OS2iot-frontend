@@ -29,49 +29,44 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 
 // Paths
 // Relative font and image file paths
-$font-path: '~@/assets/fonts/OrstedSans/' !default;
-$font-regular: 'OrstedSans-Regular';
-$image-path: '../../img' !default;
+$font-path: '../fonts/Roboto/' !default;
+$image-path: '../img' !default;
 $node-modules-path: '../../../node_modules';
-$icons-folder-path: '../img/svg-icons/' !default;
+$icons-folder-path: "../img/svg-icons/" !default;
 
 //headline sizes
-$h1: 38 !default;
-$h1-font-size: $h1 !default;
-$h1-line-height: $h1+5 !default;
+$h1: 30 !default;
+$h1-font-size: calculateRem($h1) !default;
+$h1-line-height: calculateRem($h1 + 6) !default;
 
-$h2: 30 !default;
-$h2-font-size: $h2 !default;
-$h2-line-height: $h2+5 !default;
+$h2: 25 !default;
+$h2-font-size: calculateRem($h2) !default;
+$h2-line-height: calculateRem($h2 + 6) !default;
 
 $h3: 20 !default;
-$h3-font-size: $h3 !default;
-$h3-line-height: $h3+5 !default;
+$h3-font-size: calculateRem($h3) !default;
+$h3-line-height: calculateRem($h3 + 6) !default;
 
-$h4: 20 !default;
-$h4-font-size: $h4 !default;
-$h4-line-height: $h4 - 5 !default;
+$h4: 18 !default;
+$h4-font-size: calculateRem($h4) !default;
+$h4-line-height: calculateRem($h4 + 6) !default;
 
 $h5: $em-base !default;
-$h5-font-size: $h5 !default;
-$h5-line-height: $h5+5 !default;
-
-$h6: $em-base !default;
-$h6-font-size: $h6 - 5 !default;
-$h6-line-height: $h6+5 !default;
+$h5-font-size: calculateRem($h5) !default;
+$h5-line-height: calculateRem($h5 + 6) !default;
 
 //font sizes
-$body-text: $em-base !default;
-$body-text-line-height: $em-base+3 !default;
+$body-text: calculateRem($em-base) !default;
+$body-text-line-height: calculateRem($em-base + 8) !default;
 
 $form-label: $em-base !default;
-$form-label-line-height: $form-label+2 !default;
+$form-label-line-height: calculateRem($form-label + 2) !default;
 
-$big-text: $h5+4 !default;
-$big-text-line-height: $h5 - 6 !default;
+$big-text: calculateRem($h5 + 2) !default;
+$big-text-line-height: calculateRem($h5 + 6) !default;
 
-$small-text: $em-base - 4 !default;
-$small-text-line-height: $em-base+4 !default;
+$small-text: calculateRem($em-base - 2) !default;
+$small-text-line-height: calculateRem($em-base) !default;
 
 //icon sizes
 $icon-size: $em-base !default;
@@ -90,6 +85,17 @@ $font-style-italic: italic !default;
 //letter-spacing
 $letter-spacing: 0.5 !default;
 
+//weight of font sizes
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-style-normal: normal !default;
+$font-style-italic: italic !default;
+
+//fontname
+$font-family: 'Lato' !default;
+
 //#######################Coloring ####################
 //####################################################
 $color-white-001: rgba(255, 255, 255, 1) !default;
@@ -102,22 +108,32 @@ $color-black-002: rgba(0, 0, 0, 0.75) !default;
 $color-black-003: rgba(0, 0, 0, 0.5) !default;
 $color-black-004: rgba(0, 0, 0, 0.25) !default;
 
+$color-gray-001: rgba(0, 0, 0, 0.05) !default;
+$color-gray-002: rgba(88, 94, 99, 1) !default;
+$color-gray-003: rgba(112, 112, 112, 1) !default;
+$color-gray-004: rgba(252, 252, 252, 1) !default;
+$color-gray-005: rgba(232, 232, 232, 1) !default;
+$color-gray-006: rgba(245, 245, 245, 1) !default;
+$color-gray-007: rgba(49, 49, 49, 1) !default;
+$color-gray-008: rgba(36, 36, 36, 1) !default;
+$color-gray-009: rgba(196, 203, 207, 1) !default;
+
 $color-blue-001: rgba(0, 159, 223, 1) !default;
 $color-blue-002: rgba(0, 159, 223, 0.75) !default;
 $color-blue-003: rgba(0, 159, 223, 0.5) !default;
 $color-blue-004: rgba(0, 159, 223, 0.25) !default;
 
-$color-green-001: rgba(0, 100, 50, 1) !default; //primary Miljø
+$color-green-001: rgba(0, 100, 50, 1) !default;
 $color-green-002: rgba(0, 100, 50, 0.75) !default;
 $color-green-003: rgba(0, 100, 50, 0.5) !default;
 $color-green-004: rgba(0, 100, 50, 0.25) !default;
 
-$color-dark-green-001: rgba(0, 49, 39, 1) !default; // Primary Koncernen
+$color-dark-green-001: rgba(0, 49, 39, 1) !default;
 $color-dark-green-002: rgba(0, 49, 39, 0.75) !default;
 $color-dark-green-003: rgba(0, 49, 39, 0.5) !default;
 $color-dark-green-004: rgba(0, 49, 39, 0.25) !default;
 
-$color-light-green-001: rgba(229, 239, 234, 1) !default; // Primary Koncernen
+$color-light-green-001: rgba(229, 239, 234, 1) !default;
 $color-light-green-002: rgba(229, 239, 234, 0.75) !default;
 $color-light-green-003: rgba(229, 239, 234, 0.5) !default;
 $color-light-green-004: rgba(229, 239, 234, 0.25) !default;
@@ -147,7 +163,9 @@ $color-orange-002: rgba(231, 102, 89, 0.75) !default;
 $color-orange-003: rgba(231, 102, 89, 0.5) !default;
 $color-orange-004: rgba(231, 102, 89, 0.25) !default;
 
-// // Colors used for alert boxes // FIXME: Kommer senere
+// // Colors used for alert boxes
+$color-base-001: $color-white-001 !default;
+$color-base-002: $color-black-001 !default;
 $color-success: $color-blue-001 !default;
 $color-success-light: $color-blue-004 !default;
 $color-warning: $color-yellow-001 !default;
@@ -181,8 +199,11 @@ $color-text-lime: $color-lime-001 !default;
 $color-text-error: $color-red-001 !default;
 $color-text-red: $color-red-001 !default;
 $color-text-grey: lighten($color-black-001, 50%) !default;
+$color-text-gray-01: $color-gray-002 !default;
+$color-text-gray-02: $color-gray-003 !default;
 $color-text-green: $color-green-001 !default;
-$color-text-2020: $color-red-001 !default;
+$color-text-black: $color-base-002 !default;
+
 
 //background-color
 $color-bg-normal: $color-white-001 !default;
@@ -237,43 +258,76 @@ $border-radius-secondary: 20px;
 // // primary button
 $button-primary-color: $color-text-secondary !default;
 $button-primary-bg: $color-bg-primary !default;
-// $button-primary-border-color: $color-primary !default;
+$button-primary-border-color: $color-primary !default;
 // //primary Hover
-// $button-primary-hover-color: $body-text !default;
-// $button-primary-hover-bg: darken(
-//   $button-primary-bg,
-//   10%
-// ) !default; // FIXME: Hvad skal dette være?
-// $button-primary-hover-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
-// //primary active
-// $button-primary-active-color: $color-text-white !default;
-// $button-primary-active-bg: $color-primary !default; // FIXME: Hvad skal dette være?
-// $button-primary-active-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
-// //primary focus
-// $button-primary-focus-color: $color-text-white !default;
-// $button-primary-focus-bg: $color-primary !default; // FIXME: Hvad skal dette være?
-// $button-primary-focus-border-color: $color-primary !default; // FIXME: Hvad skal dette være?
+$button-primary-hover-color: $body-text !default;
+$button-primary-hover-bg: darken($button-primary-bg, 10%) !default;
+$button-primary-hover-border-color: $color-primary !default;
+$button-primary-active-color: $color-text-white !default;
+$button-primary-active-bg: $color-primary !default;
+$button-primary-active-border-color: $color-primary !default;
+//primary focus
+$button-primary-focus-color: $color-text-white !default;
+$button-primary-focus-bg: $color-primary !default;
+$button-primary-focus-border-color: $color-primary !default;
 
-// $button-disabled-bg: $color-black-004 !default; // FIXME: Hvad skal dette være?
+$button-disabled-bg: $color-black-004 !default;
 
 // //######### secondarycolors for buttons
 $button-secondary-color: $color-text-primary !default;
 $button-secondary-bg: $color-bg-normal !default;
-// $button-secondary-border-color: $color-primary !default;
-// //secondary Hover
-// $button-secondary-hover-color: $color-bg-secondary !default;
-// $button-secondary-hover-bg: $button-secondary-color !default; // FIXME: Hvad skal dette være?
-// $button-secondary-hover-border-color: $color-border !default; // FIXME: Hvad skal dette være?
-// //secondary active
-// $button-secondary-active-color: $button-secondary-hover-color !default;
-// $button-secondary-active-bg: $button-secondary-hover-bg !default; // FIXME: Hvad skal dette være?
-// $button-secondary-active-border-color: $button-secondary-hover-border-color !default; // FIXME: Hvad skal dette være?
-// //secondary focus
-// $button-secondary-focus-color: $button-secondary-hover-color !default;
-// $button-secondary-focus-bg: $button-secondary-hover-bg !default; // FIXME: Hvad skal dette være?
-// $button-secondary-focus-border-color: $button-secondary-hover-border-color !default; // FIXME: Hvad skal dette være?
+$button-secondary-border-color: $color-primary !default;
+//secondary Hover
+$button-secondary-hover-color: $color-bg-secondary !default;
+$button-secondary-hover-bg: $button-secondary-color !default;
+$button-secondary-hover-border-color: $color-border !default;
+//secondary active
+$button-secondary-active-color: $button-secondary-hover-color !default;
+$button-secondary-active-bg: $button-secondary-hover-bg !default;
+$button-secondary-active-border-color: $button-secondary-hover-border-color !default;
+//secondary focus
+$button-secondary-focus-color: $button-secondary-hover-color !default;
+$button-secondary-focus-bg: $button-secondary-hover-bg !default;
+$button-secondary-focus-border-color: $button-secondary-hover-border-color !default;
 
-// //box-shadow
-// $box-shadow: $color-black-001 !default;
+//box-shadow
+$box-shadow: $color-black-001 !default;
 
 // // /*################################# ###########################*/
+
+
+
+//############################### Old stuff - needs to be replaced with the above code ####################
+//#########################################################################################################
+
+
+// Widths
+$navWidth: 267px;
+
+// Colors
+$white: #fff;
+$grey: #aebabe;
+$grey-light: #f8f8f8;
+$grey-tablehead: #f8fafc;
+$grey-highlight: #f2f4f7;
+$grey-separator: #dee3e9;
+$grey-border: #b3b3b3;
+$grey-text: #9baeb8;
+$grey-dark: #738a94;
+$grey-outline: rgba(179, 179, 179, 0.85);
+
+$black-light: #555f63;
+$black: #3e4b50;
+
+$blue: #49b3ee;
+$blue-hue: #2f95cc;
+
+$green-light: #54a758;
+$green: #43a047;
+
+$orange-light: #ff6a3c;
+$orange: #E76659;
+$orange-outline: rgba(244, 121, 47, 0.6);
+
+$red-light: #f8e7e9;
+$red: #dc3545;

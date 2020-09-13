@@ -1,50 +1,45 @@
-import { Action } from '@ngrx/store';
-import { ServiceProfile } from '../service-profile.model';
+import { DeviceProfile } from '../device-profile.model';
+import { createAction, props } from '@ngrx/store';
 
 
-export const SET_SERVICEPROFILES = '[Service Profile] Set Service Profiles';
-export const FETCH_SERVICEPROFILES = '[Service Profile] Fetch Service Profiles';
-export const ADD_SERVICEPROFILE = '[Service Profile] Add Service Profile';
-export const UPDATE_SERVICEPROFILE = '[Service Profile] Update Service Profile';
-export const DELETE_SERVICEPROFILE = '[Service Profile] Delete Service Profile';
-export const STORE_SERVICEPROFILES = '[Service Profile] Store Service Profiles';
+export const addDeviceProfile = createAction(
+    '[DeviceProfile] Add DeviceProfile',
+    props<{
+        deviceProfile: DeviceProfile
+    }>()
+);
 
-export class SetServiceProfiles implements Action {
-    readonly type = SET_SERVICEPROFILES;
 
-    constructor(public payload: ServiceProfile[]) { }
-}
+export const updateDeviceProfile = createAction(
+    '[DeviceProfile] Update DeviceProfile',
+    props<{
+        index: number,
+        deviceProfile: DeviceProfile
+    }>()
+);
 
-export class FetchServiceProfiles implements Action {
-    readonly type = FETCH_SERVICEPROFILES;
-}
 
-export class AddServiceProfile implements Action {
-    readonly type = ADD_SERVICEPROFILE;
+export const deleteDeviceProfile = createAction(
+    '[DeviceProfile] Delete DeviceProfile',
+    props<{
+        index: number
+    }>()
+);
 
-    constructor(public payload: ServiceProfile) { }
-}
 
-export class UpdateServiceProfile implements Action {
-    readonly type = UPDATE_SERVICEPROFILE;
+export const setDeviceProfiles = createAction(
+    '[DeviceProfile] Set DeviceProfiles',
+    props<{
+        deviceProfiles: DeviceProfile[]
+    }>()
+);
 
-    constructor(public payload: { index: number; updateServiceProfile: ServiceProfile }) { }
-}
 
-export class DeleteServiceProfile implements Action {
-    readonly type = DELETE_SERVICEPROFILE;
+export const fetchDeviceProfiles = createAction(
+    '[DeviceProfile] Fetch DeviceProfiles'
+);
 
-    constructor(public payload: number) { }
-}
 
-export class StoreServiceProfiles implements Action {
-    readonly type = STORE_SERVICEPROFILES;
-}
-
-export type ServiceProfileActions =
-    | SetServiceProfiles
-    | FetchServiceProfiles
-    | AddServiceProfile
-    | UpdateServiceProfile
-    | DeleteServiceProfile
-    | StoreServiceProfiles;
+export const storeDeviceProfiles = createAction(
+    '[DeviceProfile] Store DeviceProfiles'
+);
