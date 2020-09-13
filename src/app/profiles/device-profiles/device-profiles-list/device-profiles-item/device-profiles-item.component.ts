@@ -15,7 +15,7 @@ import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 export class DeviceProfilesItemComponent implements OnInit {
   @Input() deviceProfile: DeviceProfile;
   @Input() index: number;
-  id: number;
+  deviceId: number;
   faPen = faPen;
   faTimesCircle = faTimesCircle;
 
@@ -29,11 +29,11 @@ export class DeviceProfilesItemComponent implements OnInit {
   }
 
   onEditDeviceProfile() {
-    this.router.navigate([this.index, 'edit-profile'], { relativeTo: this.route });
+    this.router.navigate([this.index, 'edit-device-profile'], { relativeTo: this.route });
   }
 
   onDeleteDeviceProfile() {
-    this.store.dispatch(DeviceProfilesActions.deleteDeviceProfile({ index: this.id }));
+    this.store.dispatch(DeviceProfilesActions.deleteDeviceProfile({ index: this.deviceId }));
     this.router.navigate(['/profiles']);
   }
 

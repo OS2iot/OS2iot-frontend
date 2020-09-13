@@ -11,8 +11,10 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$OS2IoT-frontend-primary: mat-palette($mat-indigo);
-$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$OS2IoT-frontend-primary: mat-palette($mat-teal);
+//$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$OS2IoT-frontend-accent: mat-palette($mat-amber);
+
 
 // The warn palette is optional (defaults to red).
 $OS2IoT-frontend-warn: mat-palette($mat-red);
@@ -31,6 +33,7 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 
 //Components
 @import 'assets/scss/components/tables';
+@import 'assets/scss/components/boxes';
 @import 'assets/scss/components/forms';
 
 //Elements

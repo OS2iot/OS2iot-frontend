@@ -22,6 +22,9 @@
   }
 }
 
+// Vertical align helper
+
+
 .vertical-align {
   display: -webkit-box;
   display: -moz-box;
@@ -44,4 +47,9 @@
     -webkit-align-items: flex-end;
     align-items: flex-end;
   }
+}
+
+//mandotory Asterisk helper
+.asterisk-if-mandatory::after {
+  content: " *";
 }

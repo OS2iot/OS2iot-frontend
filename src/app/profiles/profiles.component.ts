@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggingService } from '../logging.service';
 import { ServiceProfile } from './service-profiles/service-profile.model';
 import * as ServiceProfilesAction from './service-profiles/store/service-profile.actions';
+import * as DeviceProfilesAction from './device-profiles/store/device-profile.actions';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 
@@ -22,8 +23,8 @@ export class ProfilesComponent implements OnInit {
   }
 
   onFetchData() {
-    // this.dataStorageService.fetchRecipes().subscribe();
     this.store.dispatch(ServiceProfilesAction.fetchServiceProfiles());
+    this.store.dispatch(DeviceProfilesAction.fetchDeviceProfiles());
   }
 
 }

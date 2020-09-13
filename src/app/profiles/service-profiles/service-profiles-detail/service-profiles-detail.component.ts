@@ -17,7 +17,7 @@ export class ServiceProfilesDetailComponent implements OnInit {
   public backButton: BackButton = { label: 'Go back', routerLink: '/profiles' };
   public title: '';
   serviceProfile: ServiceProfile;
-  id: number;
+  serviceId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,15 +30,15 @@ export class ServiceProfilesDetailComponent implements OnInit {
     this.route.params
       .pipe(
         map(params => {
-          return +params['id'];
+          return +params['serviceId'];
         }),
         switchMap(id => {
-          this.id = id;
+          this.serviceId = id;
           return this.store.select('serviceProfiles');
         }),
         map(serviceProfilesState => {
           return serviceProfilesState.serviceProfiles.find((serviceProfile, index) => {
-            return index === this.id;
+            return index === this.serviceId;
           });
         })
       )
@@ -50,11 +50,11 @@ export class ServiceProfilesDetailComponent implements OnInit {
 
 
   onEditServiceProfile() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit-service-profile'], { relativeTo: this.route });
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.id }));
+    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.serviceId }));
     this.router.navigate(['/profiles']);
   }
 

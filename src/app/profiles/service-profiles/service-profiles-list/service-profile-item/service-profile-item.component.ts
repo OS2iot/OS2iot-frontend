@@ -15,7 +15,7 @@ import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 export class ServiceProfileItemComponent implements OnInit {
   @Input() serviceProfile: ServiceProfile;
   @Input() index: number;
-  id: number;
+  serviceId: number;
   faPen = faPen;
   faTimesCircle = faTimesCircle;
 
@@ -29,11 +29,11 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onEditServiceProfile() {
-    this.router.navigate([this.index, 'edit-profile'], { relativeTo: this.route });
+    this.router.navigate([this.index, 'edit-service-profile'], { relativeTo: this.route });
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.id }));
+    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.serviceId }));
     this.router.navigate(['/profiles']);
   }
 

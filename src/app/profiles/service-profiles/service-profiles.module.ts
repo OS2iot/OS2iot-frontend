@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '@shared-material';
 import { StoreModule } from '@ngrx/store';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 
 
@@ -29,6 +30,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ServiceProfilesListComponent
   ],
   imports: [
+    PipesModule,
     FontAwesomeModule,
     DirectivesModule,
     CommonModule,
