@@ -2,7 +2,7 @@
     <div class="col-xs-12 ">
         <app-form-header [backButton]="backButton" [title]="title">
         </app-form-header>
-        <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()" class="px-md-5 py-md-4">
+        <form [formGroup]="serviceProfileForm" (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
             <!-- Service-profile name
             A name to identify the service-profile. -->
             <div class="row">
@@ -44,7 +44,7 @@
                             <label for="name"
                                 class="form-check-label text--bold">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}</label>
                         </mat-checkbox>
-                        <p class="">{{'PROFILES.SERVICE_PROFILE.' | translate}}</p>
+                        <p class="">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATAEXPLAINED' | translate}}</p>
                     </div>
                 </div>
             </div>
