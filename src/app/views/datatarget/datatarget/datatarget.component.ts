@@ -18,8 +18,8 @@ export class DatatargetComponent implements OnInit {
     public datatargetSubscription: Subscription;
     public datatarget: DatatargetResponse;
     public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
-    public pageLimit: number = 10;
-    public selectedSortId: number = 6;
+    public pageLimit = 10;
+    public selectedSortId = 6;
     public selectedSortObject: Sort = {
         id: 6,
         dir: 'DESC',
@@ -98,7 +98,7 @@ export class DatatargetComponent implements OnInit {
             type: 'edit',
         },
     ];
-    public pageOffset: number = 0;
+    public pageOffset: 0;
     public pageTotal: number;
 
     constructor(
@@ -107,7 +107,7 @@ export class DatatargetComponent implements OnInit {
         public translate: TranslateService) { }
 
     ngOnInit(): void {
-        var id: number = +this.route.snapshot.paramMap.get('datatargetId');
+        const id: number = +this.route.snapshot.paramMap.get('datatargetId');
         if (id) {
             this.getDatatarget(id);
         }

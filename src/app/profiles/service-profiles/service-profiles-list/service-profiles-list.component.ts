@@ -7,9 +7,6 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
-
-
 @Component({
   selector: 'app-service-profiles-list',
   templateUrl: './service-profiles-list.component.html',

@@ -26,6 +26,7 @@ import { AdministrationGatewayModule } from './views/administration-gateway/admi
 import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { LoggingService } from './logging.service';
 import { ProfilesModule } from './profiles/profiles.module';
+import { PayloadDecoderModule } from './payload-decoder/payload-decoder.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        AdministrationGatewayModule
+        AdministrationGatewayModule,
+        PayloadDecoderModule
     ],
     providers: [LoggingService],
     bootstrap: [AppComponent],

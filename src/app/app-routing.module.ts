@@ -22,6 +22,7 @@ const routes: Routes = [
     },
     { path: 'datatarget', component: DatatargetListComponent },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
+    { path: 'payload-decoder', loadChildren: () => import('./payload-decoder/payload-decoder.module').then(m => m.PayloadDecoderModule) },
     { path: '', redirectTo: '/my-applications', pathMatch: 'full' },
     { path: '**', redirectTo: '/my-applications', pathMatch: 'full' },
 ];
