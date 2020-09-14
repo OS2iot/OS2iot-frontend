@@ -143,7 +143,7 @@
     </div>
 
     <div class="form-group mt-5">
-      <label class="form-label" for="devEUI">{{'QUESTION.DEVEUI' | translate}}</label>
+      <label class="form-label" for="devEUI">{{'QUESTION.DEVEUI' | translate}}*</label>
       <input type="text" id="devEUI" name="devEUI" maxLength="16"
         [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate" class="form-control"
         [(ngModel)]="iotDevice.lorawanSettings.devEUI"
@@ -155,7 +155,7 @@
         <mat-tab label="{{'QUESTION.OTAA' | translate}}">
           <div class="example-small-box mat-elevation-z4">
             <div class="form-group mt-5">
-              <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}</label>
+              <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
               <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
                 [placeholder]="'QUESTION.OTAAAPPLICATIONKEY-PLACEHOLDER' | translate" class="form-control"
                 [(ngModel)]="iotDevice.lorawanSettings.OTAAapplicationKey"
@@ -166,7 +166,7 @@
         <mat-tab label="{{'QUESTION.ABP' | translate}}">
           <div class="example-large-box mat-elevation-z4">
             <div class="form-group mt-5">
-              <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}</label>
+              <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
               <input type="text" id="devAddr" name="devAddr" maxLength="8"
                 [placeholder]="'QUESTION.DEVADDR-PLACEHOLDER' | translate" class="form-control"
                 [(ngModel)]="iotDevice.lorawanSettings.devAddr"
@@ -174,7 +174,7 @@
             </div>
         
             <div class="form-group mt-5">
-              <label class="form-label" for="networkSessionKey">{{'QUESTION.NETWORKSESSIONKEY' | translate}}</label>
+              <label class="form-label" for="networkSessionKey">{{'QUESTION.NETWORKSESSIONKEY' | translate}}*</label>
               <input type="text" id="networkSessionKey" name="networkSessionKey" maxLength="32"
                 [placeholder]="'QUESTION.NETWORKSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
                 [(ngModel)]="iotDevice.lorawanSettings.networkSessionKey"
@@ -182,7 +182,7 @@
             </div>
         
             <div class="form-group mt-5">
-              <label class="form-label" for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}</label>
+              <label class="form-label" for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}*</label>
               <input type="text" id="applicationSessionKey" name="applicationSessionKey" maxLength="32"
                 [placeholder]="'QUESTION.APPLICATIONSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
                 [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
