@@ -1,4 +1,3 @@
-import * as fromServiceProfiles from './../service-profiles/store/service-profile.reducer';
 import { NgModule } from '@angular/core';
 import { ServiceProfilesListComponent } from './service-profiles-list/service-profiles-list.component';
 import { ServiceProfileItemComponent } from './service-profiles-list/service-profile-item/service-profile-item.component';
@@ -11,10 +10,9 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from '@shared-material';
-import { StoreModule } from '@ngrx/store';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { MaterialeModule } from '@shared/Modules/materiale.module';
 
 
 
@@ -38,8 +36,7 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     ReactiveFormsModule,
     FormModule,
     TranslateModule,
-    MaterialModule,
-    StoreModule.forFeature('serviceProfiles', fromServiceProfiles.serviceProfileReducer),
+    MaterialeModule
   ]
 })
 export class ServiceProfilesModule { }

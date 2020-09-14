@@ -6,9 +6,6 @@ import { Location } from '@angular/common';
 import { BackButton } from 'src/app/models/back-button';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import * as fromApp from '../../../store/app.reducer';
-import { map, switchMap } from 'rxjs/operators';
-import * as PayloadDecoderActions from '../../store/payload-decoder.actions';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from 'src/app/shared/services/payload-decoder.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -35,7 +32,6 @@ export class PayloadDecoderEditComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
-    private store: Store<fromApp.AppState>,
     private location: Location) { }
 
   ngOnInit(): void {
@@ -107,43 +103,6 @@ export class PayloadDecoderEditComponent implements OnInit {
     }
     this.formFailedSubmit = true;
   }
-
-  /* fetchData() {
-    this.route.params
-      .pipe(
-        map(params => {
-          return +params['id'];
-        }),
-        switchMap(id => {
-          this.id = id;
-          return this.store.select('payloadDecoders');
-        }),
-        map(payloadDecodersState => {
-          return payloadDecodersState.payloadDecoders.find((payloadDecoder) => {
-            return payloadDecoder.id === this.id;
-          });
-        })
-      )
-      .subscribe(payloadDecoder => {
-        if (payloadDecoder) {
-          this.payloadDecoder = payloadDecoder;
-        }
-      });
-  } */
-
-/*   onSubmit() {
-    if (this.id) {
-      this.store.dispatch(
-        new PayloadDecoderActions.UpdatePayloadDecoder({
-          id: this.id,
-          payloadDecoder: this.payloadDecoder
-        })
-      );
-    } else {
-      this.store.dispatch(new PayloadDecoderActions.AddPayloadDecoder(this.payloadDecoder));
-    }
-    this.routeBack();
-  } */
 
   routeBack(): void {
     this.location.back();

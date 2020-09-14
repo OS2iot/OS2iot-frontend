@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from 'src/app/models/back-button';
 import { QuickActionButton } from 'src/app/models/quick-action-button';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../../../store/app.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -35,8 +34,9 @@ export class PayloadDecoderDetailComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
-    private payloadDecoderService: PayloadDecoderService,
-    private store: Store<fromApp.AppState>) { }
+    private payloadDecoderService: PayloadDecoderService
+    ) {
+    }
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -53,26 +53,5 @@ export class PayloadDecoderDetailComponent implements OnInit {
         this.payloadDecoder = response;
     });
   }
-
-  /* fetchData() {
-    this.route.params
-      .pipe(
-        map(params => {
-          return +params['id'];
-        }),
-        switchMap(id => {
-          this.id = id;
-          return this.store.select('payloadDecoders');
-        }),
-        map(payloadDecodersState => {
-          return payloadDecodersState.payloadDecoders.find((payloadDecoder, index) => {
-            return payloadDecoder.id === this.id;
-          });
-        })
-      )
-      .subscribe(payloadDecoder => {
-        this.payloadDecoder = payloadDecoder;
-      });
-  } */
 
 }

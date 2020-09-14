@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ServiceProfile } from '../../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as ServiceProfilesActions from '../../store/service-profile.actions';
-import * as fromApp from '@store/app.reducer';
 import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -22,7 +20,6 @@ export class ServiceProfileItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +30,6 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.serviceId }));
     this.router.navigate(['/profiles']);
   }
 

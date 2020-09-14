@@ -3,21 +3,10 @@ import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-import { appReducer, metaReducers } from './store/app.reducer';
-import { ServiceProfileEffects } from './profiles/service-profiles/store/service-profile.effects';
-import { environment } from '../environments/environment';
-
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { MyApplicationsModule } from './my-applications/my-applications.module';
-
 import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -45,10 +34,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         NavbarModule,
         ProfilesModule,
         TranslateModule,
-        StoreModule.forRoot(appReducer, { metaReducers }),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([ServiceProfileEffects]),
-        StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         TranslateModule.forRoot({
             defaultLanguage: 'da',
             loader: {

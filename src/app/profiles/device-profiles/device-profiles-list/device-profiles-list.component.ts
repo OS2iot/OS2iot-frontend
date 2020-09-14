@@ -2,9 +2,6 @@ import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { DeviceProfile } from '../device-profile.model';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import * as fromApp from '../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -24,16 +21,10 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
-    this.subscription = this.store
-      .select('deviceProfiles')
-      .pipe(map(deviceProfileState => deviceProfileState.deviceProfiles))
-      .subscribe((deviceProfiles: DeviceProfile[]) => {
-        this.deviceProfiles = deviceProfiles;
-      });
+   
   }
 
   onNewDeviceProfile() {

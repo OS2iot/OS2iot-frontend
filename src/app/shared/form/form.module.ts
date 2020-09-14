@@ -8,7 +8,7 @@ import { FormBodyIotDevicesComponent } from './form-body-iot-devices/form-body-i
 import { TranslateModule } from '@ngx-translate/core';
 import { FormBodyDatatargetComponent } from './form-body-datatarget/form-body-datatarget.component';
 import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body-lora-gateway.component';
-import { MaterialModule } from '../Modules/material.module';
+import { MaterialeModule } from '@shared/Modules/materiale.module';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { MaterialModule } from '../Modules/material.module';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    MaterialModule
+    MaterialeModule
   ],
   exports: [
     FormHeaderComponent,

@@ -11,12 +11,8 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from '@shared-material';
 import { StoreModule } from '@ngrx/store';
-import * as fromDeviceProfiles from './../device-profiles/store/device-profile.reducer';
-
-
-
+import { MaterialeModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [
@@ -34,8 +30,7 @@ import * as fromDeviceProfiles from './../device-profiles/store/device-profile.r
     ReactiveFormsModule,
     FormModule,
     TranslateModule,
-    MaterialModule,
-    StoreModule.forFeature('deviceProfiles', fromDeviceProfiles.deviceProfileReducer),
+    MaterialeModule,
   ],
   exports: [
     DeviceProfilesListComponent

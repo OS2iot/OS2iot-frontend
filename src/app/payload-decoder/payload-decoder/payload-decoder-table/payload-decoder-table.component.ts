@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { Sort } from 'src/app/models/sort';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { Subscription } from 'rxjs';
-import * as fromApp from '../../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { PayloadDecoderService } from 'src/app/shared/services/payload-decoder.service';
@@ -24,18 +23,11 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
   private payloaddecordersSubscription: Subscription;
 
   constructor(
-    private store: Store<fromApp.AppState>,
     private payloadDecoderService: PayloadDecoderService
   ) { }
 
   ngOnInit(): void {
     this.getPayloadDecoders();
-    /* this.subscription = this.store
-      .select('payloadDecoders')
-      .pipe(map(payloadDecoderState => payloadDecoderState.payloadDecoders))
-      .subscribe((payloadDecoders: PayloadDecoder[]) => {
-        this.payloadDecoders = payloadDecoders;
-      }); */
   }
 
   getPayloadDecoders() {
