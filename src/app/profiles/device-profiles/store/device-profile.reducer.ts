@@ -1,74 +1,61 @@
-import { ServiceProfile } from '../service-profile.model';
-import * as ServiceProfileActions from './service-profile.actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as DeviceProfilesActions from './device-profile.actions';
+import { DeviceProfile } from '../device-profile.model';
+
 
 export interface State {
-    serviceProfiles: ServiceProfile[];
+    deviceProfiles: DeviceProfile[];
 }
 
+
 const initialState: State = {
-    serviceProfiles: [{
-        id: 'ID',
-        name: 'Vandmåler',
-        networkServerID: 'networkserverID',
-        addGWMetaData: true,
-        channelMask: 'channelmask',
-        devStatusReqFreq: 789,
-        dlBucketSize: 123,
-        dlRate: 456,
-        dlRatePolicy: 'dlRatePolicy',
-        drMax: 789,
-        drMin: 132,
-        hrAllowed: true,
-        minGWDiversity: 123,
-        nwkGeoLoc: true,
-        organizationID: 'organizationID',
-        prAllowed: true,
-        raAllowed: true,
-        reportDevStatusBattery: true,
-        reportDevStatusMargin: true,
-        targetPER: 123,
-        ulBucketSize: 456,
-        ulRate: 789,
-        ulRatePolicy: 'ulRatePolicy'
-    }],
+    deviceProfiles: []
 };
 
-export function serviceProfileReducer(
-    state = initialState,
-    action: ServiceProfileActions.ServiceProfileActions
-) {
-    switch (action.type) {
-        case ServiceProfileActions.SET_SERVICEPROFILES:
-            return {
-                ...state,
-                serviceProfiles: [...action.payload],
-            };
-        case ServiceProfileActions.ADD_SERVICEPROFILE:
-            return {
-                ...state,
-                serviceProfiles: [...state.serviceProfiles, action.payload]
-            };
-        case ServiceProfileActions.UPDATE_SERVICEPROFILE:
-            const updatedRecipe = {
-                ...state.serviceProfiles[action.payload.index],
-                ...action.payload.updateServiceProfile
-            };
 
-            const updatedServiceProfiles = [...state.serviceProfiles];
-            updatedServiceProfiles[action.payload.index] = updatedRecipe;
+const _deviceProfileReducer = createReducer(
 
-            return {
-                ...state,
-                serviceProfiles: updatedServiceProfiles
-            };
-        case ServiceProfileActions.DELETE_SERVICEPROFILE:
-            return {
-                ...state,
-                serviceProfiles: state.serviceProfiles.filter((serviceProfile, index) => {
-                    return index !== action.payload;
-                })
-            };
-        default:
-            return state;
-    }
+    initialState,
+
+    on(
+        DeviceProfilesActions.addDeviceProfile,
+        (state, action) => ({
+            ...state,
+            deviceProfiles: state.deviceProfiles.concat({ ...action.deviceProfile })
+        })
+    ),
+
+    on(
+        DeviceProfilesActions.updateDeviceProfile,
+        (state, action) => ({
+            ...state,
+            deviceProfiles: state.deviceProfiles.map(
+                (deviceProfile, index) => index === action.index ? { ...action.deviceProfile } : deviceProfile
+            )
+        })
+    ),
+
+    on(
+        DeviceProfilesActions.deleteDeviceProfile,
+        (state, action) => ({
+            ...state,
+            deviceProfiles: state.deviceProfiles.filter(
+                (_, index) => index !== action.index
+            )
+        })
+    ),
+
+    on(
+        DeviceProfilesActions.setDeviceProfiles,
+        (state, action) => ({
+            ...state,
+            deviceProfiles: [...action.deviceProfiles]
+        })
+    )
+
+);
+
+
+export function deviceProfileReducer(state: State, action: Action) {
+    return _deviceProfileReducer(state, action);
 }

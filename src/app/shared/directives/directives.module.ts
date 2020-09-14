@@ -8,7 +8,8 @@ import { PlaceholderDirective } from './placeholder.directive';
 @NgModule({
   declarations: [
     DropdownDirective,
-    PlaceholderDirective],
+    PlaceholderDirective
+  ],
   imports: [
     CommonModule
   ],

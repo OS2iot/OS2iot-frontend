@@ -1,14 +1,12 @@
+import * as fromApp from '@store/app.reducer';
+import * as ServiceProfilesActions from '../store/service-profile.actions';
 import { Component, OnInit } from '@angular/core';
+import { BackButton } from '@app/models/back-button';
+import { ServiceProfile } from '../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs/operators';
-
-import { ServiceProfile } from '../service-profile.model';
-import * as fromApp from '../../../store/app.reducer';
-import * as ServiceProfilesActions from '../store/service-profile.actions';
-import { BackButton } from 'src/app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
-
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-profiles-detail',
@@ -19,7 +17,7 @@ export class ServiceProfilesDetailComponent implements OnInit {
   public backButton: BackButton = { label: 'Go back', routerLink: '/profiles' };
   public title: '';
   serviceProfile: ServiceProfile;
-  id: number;
+  serviceId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,15 +30,15 @@ export class ServiceProfilesDetailComponent implements OnInit {
     this.route.params
       .pipe(
         map(params => {
-          return +params['id'];
+          return +params['serviceId'];
         }),
         switchMap(id => {
-          this.id = id;
+          this.serviceId = id;
           return this.store.select('serviceProfiles');
         }),
         map(serviceProfilesState => {
           return serviceProfilesState.serviceProfiles.find((serviceProfile, index) => {
-            return index === this.id;
+            return index === this.serviceId;
           });
         })
       )
@@ -52,12 +50,12 @@ export class ServiceProfilesDetailComponent implements OnInit {
 
 
   onEditServiceProfile() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit-service-profile'], { relativeTo: this.route });
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(new ServiceProfilesActions.DeleteServiceProfile(this.id));
-    this.router.navigate(['/serviceProfiles']);
+    this.store.dispatch(ServiceProfilesActions.deleteServiceProfile({ index: this.serviceId }));
+    this.router.navigate(['/profiles']);
   }
 
 }

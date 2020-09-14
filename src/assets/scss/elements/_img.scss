@@ -1,0 +1,13 @@
+.img-logo {
+  background-color: transparent;
+  height: 100;
+  margin-top: 15;
+}
+
+@mixin img-cover($url) {
+  filter: blur(40);
+  background-image: $url;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

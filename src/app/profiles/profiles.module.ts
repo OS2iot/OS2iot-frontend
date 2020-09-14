@@ -1,31 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { ProfilesComponent } from './profiles.component';
-import { ProfilesRoutingModule } from './profiles-routing.module';
-import { LoggingService } from '../logging.service';
-import { RouterModule } from '@angular/router';
-import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
-import { SharedModule } from '../shared/shared.module';
-import { TopBarModule } from '../shared/top-bar/top-bar.module';
-import { FormModule } from '../shared/form/form.module';
+import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
+import { ProfilesRoutingModule } from './profiles-routing.module';
+import { RouterModule } from '@angular/router';
+import { TopBarModule } from '@shared/top-bar/top-bar.module';
+import { SharedModule } from '@shared/shared.module';
+import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProfilesDetailComponent } from './profiles-detail/profiles-detail.component';
-import { ProfilesEditComponent } from './profiles-edit/profiles-edit.component';
-
-
+import { LoggingService } from '@app/logging.service';
+import { DeviceProfile } from './device-profiles/device-profile.model';
+import { DeviceProfilesModule } from './device-profiles/device-profiles.module';
 
 @NgModule({
   declarations: [
     ProfilesComponent,
     ProfilesListComponent,
-    ProfilesDetailComponent,
-    ProfilesEditComponent,
   ],
   exports: [],
   imports: [
     ServiceProfilesModule,
+    DeviceProfilesModule,
     ProfilesRoutingModule,
     RouterModule,
     TopBarModule,

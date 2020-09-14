@@ -1,13 +1,15 @@
+import * as fromApp from '@store/app.reducer';
+import * as ServiceProfilesActions from '../store/service-profile.actions';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BackButton } from '@app/models/back-button';
+import { FormGroup, FormControl, Validators, AbstractFormGroupDirective } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import * as fromApp from '../../../store/app.reducer';
-import * as ServiceProfilesActions from '../store/service-profile.actions';
-import { BackButton } from 'src/app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
+import { map } from 'rxjs/operators';
+import { NameValidator } from '@shared/validators/name.validator';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-service-profiles-edit',
@@ -18,7 +20,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class ServiceProfilesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
   public title: 'Service Profile';
-  id: number;
+  public id: Guid;
+  serviceId: number;
   editMode = false;
   serviceProfileForm: FormGroup;
 
@@ -29,12 +32,14 @@ export class ServiceProfilesEditComponent implements OnInit {
     private router: Router,
     private store: Store<fromApp.AppState>,
     private translate: TranslateService
-  ) { }
+  ) {
+    this.id = Guid.create(); // ==> b77d409a-10cd-4a47-8e94-b0cd0ab50aa1
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.editMode = params['id'] != null;
+      this.serviceId = +params['serviceId'];
+      this.editMode = params['serviceId'] != null;
       this.initForm();
     });
     this.translate.get(['PROFILES.SERVICE_PROFILE.GOBACK', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE',])
@@ -47,17 +52,14 @@ export class ServiceProfilesEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      this.store.dispatch(
-        new ServiceProfilesActions.UpdateServiceProfile({
-          index: this.id,
-          updateServiceProfile: this.serviceProfileForm.value
-        })
-      );
+      this.store.dispatch(ServiceProfilesActions.updateServiceProfile({ index: this.serviceId, serviceProfile: this.serviceProfileForm.value }));
     } else {
-      this.store.dispatch(new ServiceProfilesActions.AddServiceProfile(this.serviceProfileForm.value));
+      this.store.dispatch(ServiceProfilesActions.addServiceProfile({ serviceProfile: this.serviceProfileForm.value }));
+
     }
     this.onCancel();
   }
+
 
 
   onCancel() {
@@ -70,13 +72,20 @@ export class ServiceProfilesEditComponent implements OnInit {
     }
   }
 
+  get f() {
+    return this.serviceProfileForm.controls;
+  }
+
   private initForm() {
-    let serviceProfileName = 'Navngiv din profil';
+    let serviceProfileId = this.id;
+    let serviceProfileName = 'Navngiv-din-profil';
     let serviceProfileGWData = false;
-    let serviceProfileBatteryStatus = true;
+    let serviceProfileNwkGeoLoc = false;
+    let serviceProfileDevStatusReqFreq = 0;
+    let serviceProfileReportDevStatusBattery = false;
+    let serviceProfileReportDevStatusMargin = false;
     let serviceProfileMinDateRate = 2000;
     let serviceProfileMaxDateRate = 2000;
-    let serviceProfileReportEndDevice = 2000;
 
     if (this.editMode) {
       this.storeSub = this.store
@@ -84,29 +93,34 @@ export class ServiceProfilesEditComponent implements OnInit {
         .pipe(
           map(serviceProfileState => {
             return serviceProfileState.serviceProfiles.find((serviceProfile, index) => {
-              return index === this.id;
+              return index === this.serviceId;
             });
           })
         )
         .subscribe(serviceProfile => {
+          serviceProfileId = serviceProfile.id;
           serviceProfileName = serviceProfile.name;
           serviceProfileGWData = serviceProfile.addGWMetaData;
-          serviceProfileBatteryStatus = serviceProfile.reportDevStatusBattery;
+          serviceProfileNwkGeoLoc = serviceProfile.nwkGeoLoc;
+          serviceProfileDevStatusReqFreq = serviceProfile.devStatusReqFreq;
+          serviceProfileReportDevStatusBattery = serviceProfile.reportDevStatusBattery;
+          serviceProfileReportDevStatusMargin = serviceProfile.reportDevStatusMargin;
           serviceProfileMinDateRate = serviceProfile.drMin;
           serviceProfileMaxDateRate = serviceProfile.drMax;
-          serviceProfileReportEndDevice = serviceProfile.targetPER;
 
         });
     }
 
     this.serviceProfileForm = new FormGroup({
-      name: new FormControl(serviceProfileName, Validators.required),
+      id: new FormControl(serviceProfileId),
+      name: new FormControl(serviceProfileName, [Validators.required, NameValidator.cannotContainSpace]),
       addGWMetaData: new FormControl(serviceProfileGWData),
-      reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),
+      nwkGeoLoc: new FormControl(serviceProfileNwkGeoLoc),
+      devStatusReqFreq: new FormControl(serviceProfileDevStatusReqFreq),
+      reportDevStatusBattery: new FormControl(serviceProfileReportDevStatusBattery),
+      reportDevStatusMargin: new FormControl(serviceProfileReportDevStatusMargin),
       drMin: new FormControl(serviceProfileMinDateRate, Validators.required),
       drMax: new FormControl(serviceProfileMaxDateRate, Validators.required),
-      targetPER: new FormControl(serviceProfileReportEndDevice, Validators.required)
-
 
     });
   }

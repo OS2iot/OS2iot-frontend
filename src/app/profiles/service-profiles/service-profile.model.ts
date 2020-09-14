@@ -1,5 +1,7 @@
+import { Guid } from 'guid-typescript';
+
 export class ServiceProfile {
-    public id: string;
+    public id: Guid;
     public name: string;
     public networkServerID: string;
     public addGWMetaData: boolean;
@@ -24,7 +26,7 @@ export class ServiceProfile {
     public ulRatePolicy: string;
 
     constructor(
-        id: string,
+        id: Guid,
         name: string,
         networkServerID: string,
         addGWMetaData: boolean,

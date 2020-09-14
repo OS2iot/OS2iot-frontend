@@ -1,1 +1,15 @@
-<p>device-profiles-list works!</p>
+<div class="row mt-5">
+    <div class="col-6">
+        <h4>Device Profiles</h4>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-primary float-right" (click)="onNewDeviceProfile()">New Device Profile</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <app-device-profiles-item *ngFor="let deviceProfileEl of deviceProfiles; let i = index"
+            [deviceProfile]="deviceProfileEl" [index]="i"></app-device-profiles-item>
+    </div>
+</div>

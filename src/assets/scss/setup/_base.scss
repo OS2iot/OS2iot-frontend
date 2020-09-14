@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'breakpoints';
+
+// Bootstrap
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $grey-light;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: $black;
+}
+
+.row {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+// Bootstrap overrides
+$theme-colors: ('primary': $color-primary,
+  'success': $color-success,
+  'dark': $color-secondary) !default;

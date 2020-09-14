@@ -1,10 +1,11 @@
-@import '~src/assets/scss/variables';
+@import '~src/assets/scss/setup/breakpoints';
+@import '~src/assets/scss/setup/variables';
 
 .per-page {
-    line-height: 40px;
-    margin-right: 8px;
+  line-height: 40px;
+  margin-right: 8px;
 }
 
 .top-bar {
-    border-bottom: $grey-border solid 1px;
+  border-bottom: $grey-border solid 1px;
 }

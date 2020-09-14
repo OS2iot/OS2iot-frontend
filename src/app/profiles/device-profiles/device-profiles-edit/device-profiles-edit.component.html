@@ -1,0 +1,66 @@
+<p>device-profiles-edit works!</p>
+
+
+
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="Generelt">
+        Device-profile name *
+        A name to identify the device-profile.
+
+        Network-server *
+        The network-server on which this device-profile will be provisioned. After creating the device-profile, this
+        value can't be changed.
+
+        LoRaWAN MAC version *
+        The LoRaWAN MAC version supported by the device.
+
+        LoRaWAN Regional Parameters revision *
+        Revision of the Regional Parameters specification supported by the device.
+
+        Max EIRP *
+        0
+        Maximum EIRP supported by the device.</mat-tab>
+    <mat-tab label="OTAA/ABP">
+        Device supports OTAA
+        RX1 delay *
+        0
+        RX1 delay (valid values are 0 - 15).
+
+        RX1 data-rate offset *
+        0
+        Please refer the LoRaWAN Regional Parameters specification for valid values.
+
+        RX2 data-rate *
+        0
+        Please refer the LoRaWAN Regional Parameters specification for valid values.
+
+        RX2 channel frequency (Hz) *
+        0
+        Factory-preset frequencies (Hz) *
+        List of factory-preset frequencies (Hz), comma separated.
+    </mat-tab>
+    <mat-tab label="Class B">
+        Device supports Class-B
+        Class-B confirmed downlink timeout *
+        0
+        Class-B timeout (in seconds) for confirmed downlink transmissions.
+
+        Class-B ping-slot periodicity *
+        Class-B ping-slot periodicity.
+
+        Class-B ping-slot data-rate *
+        0
+        Class-B ping-slot frequency (Hz) *
+        0
+
+    </mat-tab>
+    <mat-tab label="Class C">
+        Device supports Class-C
+        Select this option when the device will operate as Class-C device immediately after activation. In case it sends
+        a DeviceModeInd mac-command when it changes to Class-C, do not select this option.
+
+        Class-C confirmed downlink timeout *
+        0
+        Class-C timeout (in seconds) for confirmed downlink transmissions.
+    </mat-tab>
+</mat-tab-group>

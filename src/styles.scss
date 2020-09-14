@@ -11,8 +11,10 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$OS2IoT-frontend-primary: mat-palette($mat-indigo);
-$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$OS2IoT-frontend-primary: mat-palette($mat-teal);
+//$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$OS2IoT-frontend-accent: mat-palette($mat-amber);
+
 
 // The warn palette is optional (defaults to red).
 $OS2IoT-frontend-warn: mat-palette($mat-red);
@@ -28,7 +30,26 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
-// Fonts
+
+//Components
+@import 'assets/scss/components/tables';
+@import 'assets/scss/components/boxes';
+@import 'assets/scss/components/forms';
+
+//Elements
+@import 'assets/scss/elements/links';
+@import 'assets/scss/elements/buttons';
+
+//Setup
+@import 'assets/scss/setup/base';
+@import 'assets/scss/setup/breakpoints';
+@import 'assets/scss/setup/fonts';
+@import 'assets/scss/setup/typography';
+@import 'assets/scss/setup/utilities';
+@import 'assets/scss/setup/variables';
+
+
+
 @font-face {
   font-family: 'roboto-light';
   src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
@@ -42,25 +63,4 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 @font-face {
   font-family: 'roboto-bold';
   src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
-}
-
-
-// Variables
-@import 'assets/scss/variables';
-
-// Assets
-@import 'assets/scss/base';
-@import 'assets/scss/buttons';
-@import 'assets/scss/tables';
-@import 'assets/scss/forms';
-
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

@@ -1,0 +1,21 @@
+@import '../setup/variables';
+@import '../setup/typography';
+
+.icon {
+  &-primary {
+    font-size: $icon-size-big;
+    color: $color-Icons-alternative;
+  }
+  &-secondary {
+    font-size: $icon-size-medium;
+    color: $color-Icons-secondary;
+  }
+  &-small {
+    font-size: $icon-size;
+    line-height: 0;
+    margin-bottom: 0;
+  }
+  &-disabled {
+    color: $color-Icons-light;
+  }
+}
