@@ -13,10 +13,5 @@ export class ProfilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggingService.printLog('Profiles tapped');
-    this.onFetchData();
   }
-
-  onFetchData() {
-  }
-
 }

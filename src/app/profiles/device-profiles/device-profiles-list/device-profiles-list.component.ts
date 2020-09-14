@@ -24,7 +24,6 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-   
   }
 
   onNewDeviceProfile() {
@@ -32,7 +31,9 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

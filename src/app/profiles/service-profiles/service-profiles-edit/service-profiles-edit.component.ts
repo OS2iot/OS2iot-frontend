@@ -4,9 +4,8 @@ import { FormGroup, FormControl, Validators, AbstractFormGroupDirective } from '
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs/operators';
-import { NameValidator } from '@shared/validators/name.validator';
 import { Guid } from 'guid-typescript';
+import { ServiceProfile } from '../service-profile.model';
 
 @Component({
   selector: 'app-service-profiles-edit',
@@ -21,15 +20,13 @@ export class ServiceProfilesEditComponent implements OnInit {
   serviceId: number;
   editMode = false;
   serviceProfileForm: FormGroup;
-
-  private storeSub: Subscription;
+  serviceProfile: ServiceProfile;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService
   ) {
-    this.id = Guid.create(); // ==> b77d409a-10cd-4a47-8e94-b0cd0ab50aa1
   }
 
   ngOnInit() {
@@ -56,9 +53,6 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   ngDestroy() {
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
-    }
   }
 
   get f() {

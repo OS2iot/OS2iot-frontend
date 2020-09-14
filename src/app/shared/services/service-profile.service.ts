@@ -15,11 +15,11 @@ export class ServiceProfileService {
       return this.restService.post(this.URL, body);
   }
 
-  put(body: ServiceProfile, id: number): Observable<any> {
+  put(body: ServiceProfile, id: string): Observable<any> {
       return this.restService.replace(this.URL, body, id, { observe: 'response' });
   }
 
-  getOne(id: number): Observable<any> {
+  getOne(id: string): Observable<any> {
       return this.restService.get(this.URL, {}, id);
   }
 
@@ -27,7 +27,7 @@ export class ServiceProfileService {
       return this.restService.get(this.URL);
   }
 
-  delete(id: number) {
+  delete(id: string) {
       return this.restService.delete(this.URL, id);
   }
 }
