@@ -48,10 +48,12 @@ a {
         color: $button-primary-active-color;
       }
 
-      .disabled {
+      &.disabled,
+      &:disabled {
         pointer-events: none;
         cursor: default;
-        background-color: #8C8C97;
+        background-color: $button-disabled-bg;
+        border-color: $button-disabled-border;
       }
     }
 

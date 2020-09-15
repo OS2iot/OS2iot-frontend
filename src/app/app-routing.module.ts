@@ -5,9 +5,10 @@ import { ListLoraGatewayComponent } from './views/administration-gateway/list-lo
 import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-
+    { path: 'auth', component: AuthComponent },
     { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
 
     {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../services/alert.service';
+import { AlertService } from '@shared/services/alert.service';
 
 @Component({
   selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss']
+  templateUrl: './alert.component.html'
 })
 export class AlertComponent implements OnInit {
 

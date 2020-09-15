@@ -16,6 +16,7 @@ import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { LoggingService } from './logging.service';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PayloadDecoderModule } from './payload-decoder/payload-decoder.module';
+import { AuthModule } from './auth/auth.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        AuthModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
