@@ -27,6 +27,11 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
   @return $num / ($num * 0 + 1);
 }
 
+@function calculateRem($size) {
+  $remSize: $size / $em-base;
+  @return #{$remSize}rem;
+}
+
 // Paths
 // Relative font and image file paths
 $font-path: '../fonts/Roboto/' !default;
