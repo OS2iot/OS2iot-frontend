@@ -4,9 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { RestService } from '@shared/services/rest.service';
 import { throwError, Observable } from 'rxjs';
 
-interface AuthResponseData {
-  sub: number;
-  username: string;
+export interface AuthResponseData {
+  accessToken: string;
 }
 
 @Injectable({
@@ -17,26 +16,44 @@ export class AuthService {
 
   constructor(private http: HttpClient, private restService: RestService) { }
 
-  signup(username: string, password: string): Observable<any> {
+  signup(username: string, password: string): Observable<AuthResponseData> {
     return this.restService.post(this.URL,
       {
         username: username,
         password: password
       }
-    )
+    ).pipe(catchError(errorRes => {
+      let errorMessage = "Der skete en ukendt fejl";
+      if (!errorRes.error || errorRes.error.error) {
+        return throwError(errorMessage);
+      }
+      switch (errorRes.error.error.message) {
+        case 'MESSAGE.NAME-INVALID-OR-ALREADY-IN-USE': errorMessage = 'Navnet er invalig eller bruger er allerede i brug';
+      }
+      throw new Error(errorMessage);
+    }));
+  }
+
+  //global-admin@os2iot.dk
+  //hunter2
+
+  login(username: string, password: string): Observable<AuthResponseData> {
+    return this.restService.post(this.URL,
+      {
+        username: username,
+        password: password
+      }
+    ).pipe(catchError(errorRes => {
+      let errorMessage = "Der skete en ukendt fejl";
+      if (!errorRes.error || errorRes.error.error) {
+        return throwError(errorMessage);
+      }
+      switch (errorRes.error.statusCode) {
+        case 'MESSAGE.NAME-INVALID-OR-ALREADY-IN-USE': errorMessage = 'Navnet er invalig eller bruger er allerede i brug';
+      }
+      return throwError(errorMessage);
+
+    }));
   }
 }
 
-
-
-// .pipe(catchError(errorRes => {
-//   let errorMessage = "Der skete en ukendt fejl";
-//   if (!errorRes.error) {
-//     return throwError('error dot error');
-//   }
-//   switch (errorRes.error.statusCode) {
-//     case '401': errorMessage = errorRes.error.message;
-//   }
-//   return throwError(errorMessage);
-
-// }));

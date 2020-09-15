@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { ServiceProfilesListComponent } from './service-profiles-list/service-profiles-list.component';
 import { ServiceProfileItemComponent } from './service-profiles-list/service-profile-item/service-profile-item.component';
 import { ServiceProfilesComponent } from './service-profiles.component';
@@ -11,8 +11,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
-import { MaterialeModule } from '@shared/Modules/materiale.module';
+import { MaterialeModule } from '@shared/modules/materiale.module';
 import { FormModule } from '@shared/form/form.module';
+import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
 
 
 
@@ -39,6 +42,10 @@ import { FormModule } from '@shared/form/form.module';
     ReactiveFormsModule,
     TranslateModule,
     MaterialeModule
-  ]
+  ],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+  ],
 })
 export class ServiceProfilesModule { }
