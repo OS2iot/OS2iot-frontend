@@ -7,12 +7,12 @@ import { ServiceProfilesEditComponent } from './service-profiles-edit/service-pr
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormModule } from '@shared/form/form.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { MaterialeModule } from '@shared/Modules/materiale.module';
+import { FormModule } from '@shared/form/form.module';
 
 
 
@@ -28,13 +28,15 @@ import { MaterialeModule } from '@shared/Modules/materiale.module';
     ServiceProfilesListComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    FormModule,
     PipesModule,
     FontAwesomeModule,
     DirectivesModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FormModule,
     TranslateModule,
     MaterialeModule
   ]
