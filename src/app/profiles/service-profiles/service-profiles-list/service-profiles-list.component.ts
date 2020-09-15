@@ -1,8 +1,9 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ServiceProfile } from '../service-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ServiceProfileService } from '@shared/services/service-profile.service';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -11,16 +12,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   serviceProfiles: ServiceProfile[];
-  subscription: Subscription;
+  serviceSubscription: Subscription;
   public pageLimit: 10;
   public pageOffset: 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private serviceProfileService: ServiceProfileService
   ) { }
 
   ngOnInit() {
+    this.serviceSubscription = this.serviceProfileService.getMultiple()
+            .subscribe(
+              (result) => {
+                this.serviceProfiles = result.result;
+            });
   }
 
   onNewServiceProfile() {
@@ -28,7 +35,9 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+   if (this.serviceSubscription && this.serviceSubscription?.closed) {
+      this.serviceSubscription.unsubscribe();
+    }
   }
 
 }

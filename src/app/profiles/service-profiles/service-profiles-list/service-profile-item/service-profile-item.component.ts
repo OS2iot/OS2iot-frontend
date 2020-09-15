@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServiceProfile } from '../../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { ServiceProfile } from '@profiles/service-profiles/service-profile.model';
 
 
 @Component({
@@ -12,7 +11,6 @@ import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class ServiceProfileItemComponent implements OnInit {
   @Input() serviceProfile: ServiceProfile;
-  @Input() index: number;
   serviceId: number;
   faPen = faPen;
   faTimesCircle = faTimesCircle;
@@ -26,7 +24,7 @@ export class ServiceProfileItemComponent implements OnInit {
   }
 
   onEditServiceProfile() {
-    this.router.navigate([this.index, 'edit-service-profile'], { relativeTo: this.route });
+    this.router.navigate([this.serviceProfile.id, 'edit-service-profile'], { relativeTo: this.route });
   }
 
   onDeleteServiceProfile() {

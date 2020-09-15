@@ -10,28 +10,15 @@ import { DeviceProfilesEditComponent } from './device-profiles/device-profiles-e
 
 const profilesRoutes: Routes = [
     {
-        path: '',
-        component: ProfilesComponent,
+        path: '', component: ProfilesComponent,
         children: [
             { path: '', component: ProfilesListComponent },
             { path: 'new-service-profile', component: ServiceProfilesEditComponent },
-            {
-                path: ':serviceId',
-                component: ServiceProfilesDetailComponent,
-            },
-            {
-                path: ':serviceId/edit-service-profile',
-                component: ServiceProfilesEditComponent,
-            },
+            { path: 'detail/:serviceId', component: ServiceProfilesDetailComponent },
+            { path: ':serviceId/edit-service-profile', component: ServiceProfilesEditComponent },
             { path: 'new-device-profile', component: DeviceProfilesEditComponent },
-            {
-                path: ':deviceId',
-                component: DeviceProfilesDetailComponent,
-            },
-            {
-                path: ':deviceId/edit-device-profile',
-                component: DeviceProfilesEditComponent,
-            }
+            { path: ':deviceId', component: DeviceProfilesDetailComponent },
+            { path: ':deviceId/edit-device-profile', component: DeviceProfilesEditComponent }
         ]
     }
 ];

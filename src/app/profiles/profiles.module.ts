@@ -9,7 +9,6 @@ import { SharedModule } from '@shared/shared.module';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoggingService } from '@app/logging.service';
-import { DeviceProfile } from './device-profiles/device-profile.model';
 import { DeviceProfilesModule } from './device-profiles/device-profiles.module';
 
 @NgModule({

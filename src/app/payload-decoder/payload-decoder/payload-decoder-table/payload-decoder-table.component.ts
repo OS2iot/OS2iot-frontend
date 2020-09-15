@@ -20,8 +20,6 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
   public pageTotal: number;
   subscription: Subscription;
 
-  private payloaddecordersSubscription: Subscription;
-
   constructor(
     private payloadDecoderService: PayloadDecoderService
   ) { }
@@ -63,8 +61,8 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
 
   ngOnDestroy() {
       // prevent memory leak by unsubscribing
-      if (this.payloaddecordersSubscription) {
-          this.payloaddecordersSubscription.unsubscribe();
+      if (this.subscription) {
+          this.subscription.unsubscribe();
       }
   }
 
