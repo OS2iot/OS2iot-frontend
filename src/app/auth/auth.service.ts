@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { RestService } from '@shared/services/rest.service';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 
 interface AuthResponseData {
   sub: number;
@@ -13,13 +13,14 @@ interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
+  URL = 'auth/login'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private restService: RestService) { }
 
-  signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>('http://[::1]:3000/api/v1/auth/login',
+  signup(username: string, password: string): Observable<any> {
+    return this.restService.post(this.URL,
       {
-        email: email,
+        username: username,
         password: password
       }
     )
