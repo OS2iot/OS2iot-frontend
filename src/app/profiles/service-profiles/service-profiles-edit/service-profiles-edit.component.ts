@@ -41,10 +41,6 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params: Params) => {
-    //   this.serviceId = +params['serviceId'];
-    //   this.editMode = params['serviceId'] != null;
-    // });
     this.translate.get(['PROFILES.SERVICE_PROFILE.GOBACK', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE',])
       .subscribe(translations => {
         this.backButton.label = translations['PROFILES.SERVICE_PROFILE.GOBACK'];
@@ -53,7 +49,7 @@ export class ServiceProfilesEditComponent implements OnInit {
 
       });
     this.id = this.route.snapshot.paramMap.get('serviceId');
-    if (this.id !== this.id) {
+    if (this.id) {
       this.getServiceProfile(this.id);
     }
   }
