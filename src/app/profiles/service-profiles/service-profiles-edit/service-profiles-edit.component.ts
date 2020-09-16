@@ -20,7 +20,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
   public title: '';
   public errorMessage: string;
-  public errorMessages: any;
+  public errorMessages: string;
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
@@ -88,14 +88,10 @@ export class ServiceProfilesEditComponent implements OnInit {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
+    this.errorMessages = '';
+    if (error.error?.chirpstackError) {
+        this.errorFields.push('name');
+        this.errorMessages = error.error.chirpstackError.message;
     } else {
       this.errorMessage = error.message;
     }
