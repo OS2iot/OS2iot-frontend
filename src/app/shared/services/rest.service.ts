@@ -134,7 +134,7 @@ export class RestService {
         );
     }
 
-    public replace(
+    public put(
         url: string,
         object: any,
         id?: string | number,

@@ -3,7 +3,7 @@ import { BackButton } from '@app/models/back-button';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ServiceProfile } from '../service-profile.model';
+import { ServiceProfile, ServiceProfileResponseOne } from '../service-profile.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceProfileService } from '@shared/services/service-profile.service';
 import { Location } from '@angular/common';
@@ -57,8 +57,8 @@ export class ServiceProfilesEditComponent implements OnInit {
   private getServiceProfile(id: string) {
     this.subscription = this.serviceProfileService.getOne(id)
       .subscribe(
-        (response) => {
-          this.serviceProfile = response;
+        (response: ServiceProfileResponseOne) => {
+          this.serviceProfile = response.serviceProfile;
         });
   }
 
@@ -76,7 +76,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   private update(): void {
-    this.serviceProfileService.put(this.serviceProfile, this.id)
+    this.serviceProfileService.put(this.serviceProfile)
       .subscribe(
         (response) => {
           this.routeBack();

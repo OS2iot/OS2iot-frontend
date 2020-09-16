@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackButton } from '@app/models/back-button';
-import { ServiceProfile } from '../service-profile.model';
+import { ServiceProfile, ServiceProfileResponseOne } from '../service-profile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ServiceProfileService } from '@shared/services/service-profile.service';
@@ -35,8 +35,8 @@ export class ServiceProfilesDetailComponent implements OnInit, OnDestroy {
 
   getServiceProfile(id: string) {
     this.serviceSubscription = this.serviceProfileService.getOne(id)
-    .subscribe((result) => {
-      this.serviceProfile = result.serviceProfile;
+    .subscribe((response: ServiceProfileResponseOne) => {
+      this.serviceProfile = response.serviceProfile;
       }
     );
   }
@@ -53,7 +53,11 @@ export class ServiceProfilesDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteServiceProfile() {
-    this.router.navigate(['/profiles']);
+    this.serviceProfileService.delete(this.serviceProfile.id).subscribe( (response) => {
+      if (response.ok) {
+        this.router.navigate(['/profiles']);
+      }
+    });
   }
 
 }

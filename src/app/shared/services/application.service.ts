@@ -15,7 +15,7 @@ export class ApplicationService {
     }
 
     updateApplication(body: any, id: number): Observable<ApplicationData> {
-        return this.restService.replace('application', body, id, { observe: 'response' });
+        return this.restService.put('application', body, id, { observe: 'response' });
     }
 
     getApplication(id: number): Observable<Application> {

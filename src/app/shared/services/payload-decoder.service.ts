@@ -18,7 +18,7 @@ export class PayloadDecoderService {
 
     put(body: PayloadDecoder, id: number): Observable<PayloadDecoder> {
         body.decodingFunction = JSON.stringify(body.decodingFunction);
-        return this.restService.replace(this.URL, body, id, { observe: 'response' });
+        return this.restService.put(this.URL, body, id, { observe: 'response' });
     }
 
     getOne(id: number): Observable<PayloadDecoder> {
