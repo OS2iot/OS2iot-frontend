@@ -26,7 +26,18 @@ export class ServiceProfile {
 
 }
 
-export interface ServiceProfileData {
+export interface ServiceProfileResponseMany {
     result: ServiceProfile[];
     totalCount?: string;
+}
+
+export interface ServiceProfileResponseOne {
+    serviceProfile: ServiceProfile;
+}
+
+export class ServiceProfileRequest {
+    serviceProfile: ServiceProfile;
+    constructor(serviceProfile: ServiceProfile) {
+        this.serviceProfile = serviceProfile;
+    }
 }

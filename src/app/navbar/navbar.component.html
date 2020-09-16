@@ -14,6 +14,16 @@
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
         <app-global-admin></app-global-admin>
+        <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
+          Authenticate
+        </a>
+      </li>
+      <li class="nav-item py-2">
+        <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+          id="myApplications">
+
+          {{ 'NAV.MY-APPLICATIONS' | translate }}
+        </a>
       </li>
       <li class="nav-item py-2">
         <a>
@@ -51,6 +61,9 @@
         </ul>
       </li>
 
+      <li class="nav-item py-2">
+        <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>

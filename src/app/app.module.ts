@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './views/dashboard/dashboard.module';
@@ -13,9 +13,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
 import { DatatargetModule } from './views/datatarget/datatarget.module';
-import { LoggingService } from './logging.service';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PayloadDecoderModule } from './payload-decoder/payload-decoder.module';
+import { AuthModule } from './auth/auth.module';
+
+import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
+import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
+import { AuthJwtInterceptor } from './shared/helpers/auth-jwt.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,6 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        AuthModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -49,8 +54,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         AdministrationGatewayModule,
         PayloadDecoderModule
     ],
-    providers: [LoggingService],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
+    providers: [
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
+        { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true }
+    ],
 })
 export class AppModule { }

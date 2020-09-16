@@ -16,7 +16,7 @@ export class DeviceProfileService {
     }
 
     put(body: DeviceProfile, id: string): Observable<any> {
-        return this.restService.replace(this.URL, body, id, { observe: 'response' });
+        return this.restService.put(this.URL, body, id, { observe: 'response' });
     }
 
     getOne(id: string): Observable<any> {

@@ -29,7 +29,7 @@ export class ChirpstackGatewayService {
   public put(gateway: Gateway, id: string): Observable<GatewayResponse> {
     var gatewayRequest: GatewayRequest = new GatewayRequest;
     gatewayRequest.gateway = gateway
-    return this.restService.replace(this.chripstackGatewayUrl, gatewayRequest, id)
+    return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id)
   }
 
   public delete(id: string): Observable<any> {

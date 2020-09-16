@@ -33,7 +33,7 @@ export class DatatargetService {
   }
 
   update(datatarget: Datatarget): Observable<DatatargetResponse> {
-    return this.restService.replace(this.url,datatarget,datatarget.id,{observe: 'response'});
+    return this.restService.put(this.url,datatarget,datatarget.id,{observe: 'response'});
 
   }
 
