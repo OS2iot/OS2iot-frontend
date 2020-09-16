@@ -12,15 +12,18 @@ import { RestService } from '../shared/services/rest.service';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GlobalAdminComponent } from './global-admin/global-admin.component';
+import { MaterialeModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     TranslateModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MaterialeModule
   ],
   exports: [
     NavbarComponent,

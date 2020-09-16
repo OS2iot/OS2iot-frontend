@@ -1,0 +1,33 @@
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.mat-expansion-panel {
+  .mat-expansion-panel-header {
+    padding: 0;
+  }
+
+  .mat-expansion-panel-content {
+    font: 400 50px/60px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: initial;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+
+
+
+}
+
+
+
+
+// color: #3e4b50;
+//     padding-left: 0;
+//     padding-right: 0;
+//     line-height: 19px;
+//     background-position: 0.5rem 10px;
+//     background-repeat: no-repeat;
+//     background-size: 18px;

@@ -10,9 +10,9 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
-    "MY-APPLICATIONS": "Mine applikationer",
+    "MY-APPLICATIONS": "Applikationer",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
+    "MY-LORA-GATEWAYS": "LoRaWan Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",

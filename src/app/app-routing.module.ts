@@ -7,7 +7,7 @@ import { GatewayComponent } from './views/administration-gateway/gateway/gateway
 import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
 
 const routes: Routes = [
-
+    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
     { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
 
     {

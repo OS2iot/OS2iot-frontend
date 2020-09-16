@@ -9,33 +9,48 @@
   </button>
 
   <div class="collapse navbar-collapse flex-grow-0" id="navbar">
+
+
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
-        <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="myApplications">
+        <app-global-admin></app-global-admin>
+      </li>
+      <li class="nav-item py-2">
+        <a>
+          Skanderborg Kommune
+        </a>
+      </li>
+      <li class="nav-item py-2">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-item py-2">
+            <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="myApplications">
 
-          {{ 'NAV.MY-APPLICATIONS' | translate }}
-        </a>
-      </li>
-      <li class="nav-item py-2">
-        <a routerLink="/mine-lora-gateways" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="myLoraGateway">
-          {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
-        </a>
-      </li>
-      <li class="nav-item py-2">
-        <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="profiles">
-          {{ 'NAV.PROFILES' | translate }}
+              {{ 'NAV.MY-APPLICATIONS' | translate }}
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/mine-lora-gateways" routerLinkActive="active"
+              class="nav-link pl-5 position-relative rounded" id="myLoraGateway">
+              {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="profiles">
+              {{ 'NAV.PROFILES' | translate }}
 
-        </a>
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="payload-decoder">
+              {{ 'NAV.PAYLOAD-DECODER' | translate }}
+            </a>
+          </li>
+        </ul>
       </li>
-      <li class="nav-item py-2">
-        <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="payload-decoder">
-          {{ 'NAV.PAYLOAD-DECODER' | translate }}
-        </a>
-      </li>
+
     </ul>
   </div>
 </nav>
