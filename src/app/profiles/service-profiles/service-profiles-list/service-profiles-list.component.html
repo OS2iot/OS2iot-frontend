@@ -9,7 +9,9 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-service-profile-item *ngFor="let serviceProfile of serviceProfiles; let i = index"
+        <app-service-profile-item 
+            *ngFor="let serviceProfile of serviceProfiles; let i = index"
+            (deleteServiceProfile)="deleteServiceProfile($event)"
             [serviceProfile]="serviceProfile"></app-service-profile-item>
     </div>
 </div>

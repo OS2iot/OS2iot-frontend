@@ -14,7 +14,7 @@ const profilesRoutes: Routes = [
         children: [
             { path: '', component: ProfilesListComponent },
             { path: 'new-service-profile', component: ServiceProfilesEditComponent },
-            { path: 'detail/:serviceId', component: ServiceProfilesDetailComponent },
+            { path: ':serviceId', component: ServiceProfilesDetailComponent},
             { path: ':serviceId/edit-service-profile', component: ServiceProfilesEditComponent },
             { path: 'new-device-profile', component: DeviceProfilesEditComponent },
             { path: ':deviceId', component: DeviceProfilesDetailComponent },

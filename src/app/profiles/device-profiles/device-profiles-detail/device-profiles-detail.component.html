@@ -11,14 +11,14 @@
         <div class="btn-group float-right">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                {{'PROFILES.SERVICE_PROFILE.DROPDOWN' | translate}} <span class="caret"></span>
+                {{'PROFILES.DEVICE_PROFILE.DROPDOWN' | translate}} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
                 <li class="dropdown-item"><a style="cursor: pointer;"
-                        (click)="onEditDeviceProfile()">{{'PROFILES.SERVICE_PROFILE.EDIT' | translate}}</a>
+                        (click)="onEditDeviceProfile()">{{'PROFILES.DEVICE_PROFILE.EDIT' | translate}}</a>
                 </li>
                 <li class="dropdown-item"><a style="cursor: pointer;"
-                        (click)="onDeleteDeviceProfile()">{{'PROFILES.SERVICE_PROFILE.DELETE' | translate}}</a>
+                        (click)="onDeleteDeviceProfile()">{{'PROFILES.DEVICE_PROFILE.DELETE' | translate}}</a>
                 </li>
             </ul>
         </div>
@@ -26,13 +26,13 @@
 </div>
 <div class="jumbotron m-md-4 p-md-3">
     <div class="row">
-        <!-- <div class="col-xs-12">
+        <!-- <div class="col-12">
             <h6>GUID <span>
                     <p>{{deviceProfile.id}}</p>
                 </span></h6>
         </div> -->
-        <div class="col-xs-12">
-            <h6>{{'PROFILES.SERVICE_PROFILE.NAME' | translate}} <span>
+        <div class="col-12">
+            <h6>{{'PROFILES.DEVICE_PROFILE.NAME' | translate}} <span>
                     <p>{{deviceProfile.name}}</p>
                 </span></h6>
         </div>

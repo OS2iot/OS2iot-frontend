@@ -13,7 +13,7 @@ import { DeviceType } from '../../enums/device-type';
 import { LorawanSettings } from 'src/app/models/lorawan-settings';
 import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
-import { ServiceProfile } from 'src/app/profiles/service-profiles/service-profile.model';
+import { ServiceProfile, ServiceProfileResponseMany } from 'src/app/profiles/service-profiles/service-profile.model';
 import { ServiceProfileService } from '../../services/service-profile.service';
 import { DeviceProfile } from 'src/app/profiles/device-profiles/device-profile.model';
 import { DeviceProfileService } from '../../services/device-profile.service';
@@ -95,7 +95,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
 
     getServiceProfiles() {
         this.serviceProfileSubscription = this.serviceProfileService
-            .getMultiple().subscribe( (result) => {
+            .getMultiple().subscribe( (result: ServiceProfileResponseMany) => {
                 this.serviceProfiles = result.result;
             });
     }

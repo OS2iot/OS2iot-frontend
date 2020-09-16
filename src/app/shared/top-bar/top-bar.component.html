@@ -9,7 +9,7 @@
     </ng-template>
   </ng-template>
   <div class="ml-auto d-flex">
-    <div class="d-flex per-page">
+    <div class="d-flex per-page" *ngIf="selectedSortId">
       <!-- {{ 'GEN.SHOW' | translate }}
       <select name="my-applications-table_length" [(ngModel)]="pageLimit" aria-controls="my-applications-table" class="select-box select-box-sm">
         <option value="10">10</option>

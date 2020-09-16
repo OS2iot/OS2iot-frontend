@@ -3,9 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { DeviceProfile } from '../device-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
-
-
-
+import { DeviceProfileService } from '@shared/services/device-profile.service';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -21,9 +19,18 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private deviceProfileService: DeviceProfileService
   ) { }
 
   ngOnInit() {
+    this.getDeviceProfiles();
+  }
+
+  getDeviceProfiles() {
+    this.subscription = this.deviceProfileService.getMultiple()
+    .subscribe((deviceProfiles) => {
+      this.deviceProfiles = deviceProfiles.result;
+    });
   }
 
   onNewDeviceProfile() {
