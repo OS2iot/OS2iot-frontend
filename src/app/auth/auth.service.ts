@@ -23,14 +23,10 @@ export class AuthService {
         password: password
       }
     ).pipe(catchError(errorRes => {
-      let errorMessage = "Der skete en ukendt fejl";
-      if (!errorRes.error || errorRes.error.error) {
-        return throwError(errorMessage);
-      }
-      switch (errorRes.error.error.message) {
-        case 'MESSAGE.NAME-INVALID-OR-ALREADY-IN-USE': errorMessage = 'Navnet er invalig eller bruger er allerede i brug';
-      }
-      throw new Error(errorMessage);
+      const errorMessage = errorRes.error.message;
+      ;
+
+      return throwError(errorMessage);
     }));
   }
 
@@ -44,13 +40,8 @@ export class AuthService {
         password: password
       }
     ).pipe(catchError(errorRes => {
-      let errorMessage = "Der skete en ukendt fejl";
-      if (!errorRes.error || errorRes.error.error) {
-        return throwError(errorMessage);
-      }
-      switch (errorRes.error.statusCode) {
-        case 'MESSAGE.NAME-INVALID-OR-ALREADY-IN-USE': errorMessage = 'Navnet er invalig eller bruger er allerede i brug';
-      }
+      const errorMessage = errorRes.error.message;
+
       return throwError(errorMessage);
 
     }));

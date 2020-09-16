@@ -13,9 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { MaterialeModule } from '@shared/modules/materiale.module';
 import { FormModule } from '@shared/form/form.module';
-import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
+
 
 
 
@@ -42,10 +40,6 @@ import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor
     ReactiveFormsModule,
     TranslateModule,
     MaterialeModule
-  ],
-  providers: [
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
-  ],
+  ]
 })
 export class ServiceProfilesModule { }

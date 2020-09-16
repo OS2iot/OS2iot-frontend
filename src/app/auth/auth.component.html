@@ -18,10 +18,7 @@
                     minlength="6">
             </div>
             <div class="mt-5">
-                <button class="btn btn-primary" type="submit"
-                    [disabled]="!authForm.valid">{{isLoginMode ? 'Login' : 'Sign Up'}}</button>
-                <button class="btn btn-primary ml-2" (click)="onSwitchMode()" type="button">Skift til
-                    {{ isLoginMode ? 'Sign Up' : 'Login'}}</button>
+                <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{'Login'}}</button>
             </div>
         </form>
     </div>

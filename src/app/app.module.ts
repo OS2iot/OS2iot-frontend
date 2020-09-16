@@ -16,8 +16,7 @@ import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PayloadDecoderModule } from './payload-decoder/payload-decoder.module';
 import { AuthModule } from './auth/auth.module';
-import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
-import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,9 +52,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
-    providers: [
-        { provide: ErrorHandler, useClass: GlobalErrorHandler },
-        { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
-    ],
+    // providers: [
+    //     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    //     { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+    // ],
 })
 export class AppModule { }
