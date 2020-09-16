@@ -25,7 +25,7 @@ export class DeviceProfilesItemComponent implements OnInit {
   }
 
   onEditDeviceProfile() {
-    this.router.navigate([this.index, 'edit-device-profile'], { relativeTo: this.route });
+    this.router.navigate([this.deviceProfile.id, 'edit-device-profile'], { relativeTo: this.route });
   }
 
   onDeleteDeviceProfile() {

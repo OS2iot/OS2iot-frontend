@@ -40,7 +40,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.id = +this.route.snapshot.paramMap.get('serviceId');
+    this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
       this.getPayloadDecoder(this.id);
     }

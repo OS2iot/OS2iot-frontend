@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DeviceProfile } from 'src/app/profiles/device-profiles/device-profile.model';
+import { DeviceProfile, DeviceProfileResponse } from 'src/app/profiles/device-profiles/device-profile.model';
 import { RestService } from './rest.service';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class DeviceProfileService {
         return this.restService.get(this.URL, {}, id);
     }
 
-    getMultiple(): Observable<any> {
+    getMultiple(): Observable<DeviceProfileResponse> {
         return this.restService.get(this.URL);
     }
 

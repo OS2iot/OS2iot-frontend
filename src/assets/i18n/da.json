@@ -151,7 +151,7 @@
     "GIVE-DATATARGET-TIMEOUT": "Timeout",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
-    "GIVE-PAYLOADDECODER-NAME": "NAvngiv Payload Decoder",
+    "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
     "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
     "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
     "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
@@ -254,6 +254,12 @@
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
       "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
+    },
+    "DEVICE_PROFILE": {
+      "DROPDOWN": "Håndter device profil",
+      "EDIT": "Rediger profil",
+      "DELETE": "Slet profil",
+      "NAME": "Device-profil navn"
     }
   }
 }
