@@ -4,7 +4,6 @@ import { DeviceProfilesComponent } from './device-profiles.component';
 import { DeviceProfilesListComponent } from './device-profiles-list/device-profiles-list.component';
 import { DeviceProfilesItemComponent } from './device-profiles-list/device-profiles-item/device-profiles-item.component';
 import { DeviceProfilesEditComponent } from './device-profiles-edit/device-profiles-edit.component';
-import { DeviceProfilesDetailComponent } from './device-profiles-detail/device-profiles-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { RouterModule } from '@angular/router';
@@ -19,7 +18,6 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     DeviceProfilesListComponent,
     DeviceProfilesItemComponent,
     DeviceProfilesEditComponent,
-    DeviceProfilesDetailComponent
   ],
   imports: [
     FontAwesomeModule,

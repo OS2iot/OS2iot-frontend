@@ -20,8 +20,7 @@
                         [placeholder]="'PROFILES.DEVICE_PROFILE.NAME_PLACEHOLDER' | translate" 
                         maxlength="50" 
                         required
-                        [(ngModel)]="deviceProfile.name"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+                        [(ngModel)]="deviceProfile.name">
                 </div>
             </div>
 
@@ -36,8 +35,7 @@
                         [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" 
                         maxlength="50" 
                         required
-                        [(ngModel)]="deviceProfile.macVersion"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('macVersion'), 'is-valid' : formFailedSubmit && !errorFields.includes('macVersion')}">
+                        [(ngModel)]="deviceProfile.macVersion">
                 </div>
             </div>
 
@@ -65,8 +63,7 @@
                         maxlength="50"
                         min="0" 
                         required
-                        [(ngModel)]="deviceProfile.maxEIRP"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('maxEIRP'), 'is-valid' : formFailedSubmit && !errorFields.includes('maxEIRP')}">
+                        [(ngModel)]="deviceProfile.maxEIRP">
                 </div>
             </div>
 
@@ -82,8 +79,7 @@
                         [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL_PLACEHOLDER' | translate" 
                         maxlength="50" 
                         required
-                        [(ngModel)]="deviceProfile.geolocBufferTTL"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('geolocBufferTTL'), 'is-valid' : formFailedSubmit && !errorFields.includes('geolocBufferTTL')}">
+                        [(ngModel)]="deviceProfile.geolocBufferTTL">
                 </div>
             </div>
 
@@ -99,8 +95,7 @@
                         [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" 
                         maxlength="50" 
                         required
-                        [(ngModel)]="deviceProfile.geolocMinBufferSize"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('geolocMinBufferSize'), 'is-valid' : formFailedSubmit && !errorFields.includes('geolocMinBufferSize')}">
+                        [(ngModel)]="deviceProfile.geolocMinBufferSize">
                 </div>
             </div>
 
@@ -126,8 +121,7 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.rxDelay1"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDelay1'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDelay1')}">
+                            [(ngModel)]="deviceProfile.rxDelay1">
                     </div>
                 </div>
                 RX1 delay (valid values are 0 - 15).
@@ -144,8 +138,7 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.rxDROffset1"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDROffset1'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDROffset1')}">
+                            [(ngModel)]="deviceProfile.rxDROffset1">
                     </div>
                 </div>
     
@@ -161,8 +154,7 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.rxDataRate2"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDataRate2'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDataRate2')}">
+                            [(ngModel)]="deviceProfile.rxDataRate2">
                     </div>
                 </div>
     
@@ -178,8 +170,7 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.rxFreq2"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxFreq2'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxFreq2')}">
+                            [(ngModel)]="deviceProfile.rxFreq2">
                     </div>
                 </div>
 
@@ -194,8 +185,7 @@
                             [placeholder]="'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS_PLACEHOLDER' | translate" 
                             maxlength="50" 
                             required
-                            [(ngModel)]="deviceProfile.factoryPresetFreqsInput"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('factoryPresetFreqsInput'), 'is-valid' : formFailedSubmit && !errorFields.includes('factoryPresetFreqsInput')}">
+                            [(ngModel)]="deviceProfile.factoryPresetFreqsInput">
                     </div>
                 </div>
             </ng-container>
@@ -221,14 +211,10 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.classBTimeout"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('classBTimeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('classBTimeout')}">
+                            [(ngModel)]="deviceProfile.classBTimeout">
                     </div>
                 </div>
-
-
-
-    
+   
                 <div class="row">
                     <div class="col-xs-12 form-group">
 
@@ -264,8 +250,7 @@
                             maxlength="50"
                             min="0"
                             required
-                            [(ngModel)]="deviceProfile.pingSlotDR"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pingSlotDR'), 'is-valid' : formFailedSubmit && !errorFields.includes('pingSlotDR')}">
+                            [(ngModel)]="deviceProfile.pingSlotDR">
                     </div>
                 </div>
     
@@ -281,8 +266,7 @@
                             maxlength="50"
                             min="0" 
                             required
-                            [(ngModel)]="deviceProfile.pingSlotFreq"
-                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pingSlotFreq'), 'is-valid' : formFailedSubmit && !errorFields.includes('pingSlotFreq')}">
+                            [(ngModel)]="deviceProfile.pingSlotFreq">
                     </div>
                 </div>
             </ng-container>
@@ -307,8 +291,7 @@
                         maxlength="50"
                         min="0" 
                         required
-                        [(ngModel)]="deviceProfile.classCTimeout"
-                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('classCTimeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('classCTimeout')}">
+                        [(ngModel)]="deviceProfile.classCTimeout">
                 </div>
             </div>
         </mat-tab>

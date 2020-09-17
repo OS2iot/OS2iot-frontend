@@ -90,7 +90,6 @@ export class DeviceProfilesEditComponent implements OnInit {
     this.errorFields = [];
     this.errorMessages = '';
     if (error.error?.chirpstackError) {
-        this.errorFields.push('name');
         this.errorMessages = error.error.chirpstackError.message;
     } else {
       this.errorMessage = error.message;
