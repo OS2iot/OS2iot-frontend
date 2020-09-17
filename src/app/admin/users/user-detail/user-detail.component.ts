@@ -6,7 +6,7 @@ import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '@shared/services/application.service';
 import { Subscription } from 'rxjs';
-import { User, UserResponse } from '../user.model';
+import { UserRequest, UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({

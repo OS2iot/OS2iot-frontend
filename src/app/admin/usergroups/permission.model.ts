@@ -1,9 +1,9 @@
-import { User } from '../users/user.model';
+import { UserRequest } from '../users/user.model';
 
 export class Permission {
     type: string;
     name: string;
-    users: User[];
+    users: UserRequest[];
     id: number;
     createdAt: Date;
     updatedAt: Date;

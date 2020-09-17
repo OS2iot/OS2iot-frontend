@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { UserResponse, User, UserGetManyResponse } from './user.model';
+import { UserResponse, UserRequest, UserGetManyResponse } from './user.model';
 
 @Injectable({
     providedIn: 'root',
@@ -12,11 +12,11 @@ export class UserService {
     constructor(private restService: RestService) { }
 
 
-    post(body: User): Observable<UserResponse> {
+    post(body: UserRequest): Observable<UserResponse> {
         return this.restService.post(this.URL, body);
     }
 
-    put(body: User, id: number): Observable<UserResponse> {
+    put(body: UserRequest, id: number): Observable<UserResponse> {
         return this.restService.put(this.URL, body, id, { observe: 'response' });
     }
 

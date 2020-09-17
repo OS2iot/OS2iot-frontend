@@ -3,7 +3,7 @@ import { Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, UserResponse } from '@app/admin/users/user.model';
+import { UserRequest, UserResponse } from '@app/admin/users/user.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

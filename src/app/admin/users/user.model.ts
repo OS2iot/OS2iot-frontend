@@ -1,8 +1,6 @@
-import { Profiler } from 'inspector';
 import { Permission } from '../usergroups/permission.model';
 
-export class User {
-    id?: number;
+export class UserRequest {
     name: string;
     email: string;
     password: string;
@@ -18,7 +16,6 @@ export interface UserResponse {
     active: boolean;
     lastLogin: Date;
     permissions: Permission[];
-    password?: string;
 }
 
 export interface UserGetManyResponse {

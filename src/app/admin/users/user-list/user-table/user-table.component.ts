@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Sort } from '@app/models/sort';
 import { Subscription } from 'rxjs';
-import { User } from '../../user.model';
+import { UserRequest } from '../../user.model';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService } from '../../user.service';
 export class UserTableComponent implements OnInit {
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public users: User[];
+  public users: UserRequest[];
   public pageOffset = 0;
   public pageTotal: number;
   subscription: Subscription;
