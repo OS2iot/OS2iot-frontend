@@ -38,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DatatargetModule,
         NavbarModule,
         ProfilesModule,
+
         TranslateModule,
         TranslateModule.forRoot({
             defaultLanguage: 'da',

@@ -11,8 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { StoreModule } from '@ngrx/store';
-import { MaterialeModule } from '@shared/modules/materiale.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,7 @@ import { MaterialeModule } from '@shared/modules/materiale.module';
     ReactiveFormsModule,
     FormModule,
     TranslateModule,
-    MaterialeModule,
+    NGMaterialModule,
   ],
   exports: [
     DeviceProfilesListComponent

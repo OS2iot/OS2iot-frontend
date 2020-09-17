@@ -9,8 +9,11 @@
   </button>
 
   <div class="collapse navbar-collapse flex-grow-0" id="navbar">
+
+
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
+        <app-global-admin></app-global-admin>
         <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
           Authenticate
         </a>
@@ -23,24 +26,41 @@
         </a>
       </li>
       <li class="nav-item py-2">
-        <a routerLink="/mine-lora-gateways" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="myLoraGateway">
-          {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
+        <a>
+          Skanderborg Kommune
         </a>
       </li>
       <li class="nav-item py-2">
-        <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="profiles">
-          {{ 'NAV.PROFILES' | translate }}
+        <ul class="navbar-nav flex-column">
+          <li class="nav-item py-2">
+            <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="myApplications">
 
-        </a>
+              {{ 'NAV.MY-APPLICATIONS' | translate }}
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/mine-lora-gateways" routerLinkActive="active"
+              class="nav-link pl-5 position-relative rounded" id="myLoraGateway">
+              {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="profiles">
+              {{ 'NAV.PROFILES' | translate }}
+
+            </a>
+          </li>
+          <li class="nav-item py-2">
+            <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+              id="payload-decoder">
+              {{ 'NAV.PAYLOAD-DECODER' | translate }}
+            </a>
+          </li>
+        </ul>
       </li>
-      <li class="nav-item py-2">
-        <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-          id="payload-decoder">
-          {{ 'NAV.PAYLOAD-DECODER' | translate }}
-        </a>
-      </li>
+
       <li class="nav-item py-2">
         <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
       </li>
