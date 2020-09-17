@@ -3,12 +3,10 @@
         {{user.name}}</a>
 </td>
 <td class="position-relative">
-    <a [routerLink]="['user-detail', user.id]" routerLinkActive="active" class="application-link">
-        {{user.email}}</a>
+    <p>{{user.email}}</p>
 </td>
 <td class="position-relative">
-    <a [routerLink]="['user-detail', user.id]" routerLinkActive="active" class="application-link">
-        {{user.permissions}}</a>
+    <p>{{user.permissions}}</p>
 </td>
 <td class="position-relative">
     <p>
@@ -29,7 +27,7 @@
             [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
         <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{user.id}}">
             <li>
-                <a class="dropdown-item" [routerLink]="['user-edit', user.id]"
+                <a class="dropdown-item" [routerLink]="[user.id, 'edit-user']"
                     routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
                 </a>
             </li>

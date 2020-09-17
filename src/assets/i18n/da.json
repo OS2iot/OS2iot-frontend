@@ -18,7 +18,8 @@
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
-    "ORGANISATION": "Organisationer"
+    "ORGANISATION": "Organisationer",
+    "USERS": "Brugere"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -305,29 +306,30 @@
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
       "CANCEL": "Cancel",
       "SAVE": "Save"
+    }
+  },
+  "USERS": {
+    "SAVE": "Gem",
+    "NAME": "Navn",
+    "EMAIL": "Email",
+    "GLOBALADMIN": "Global administrator",
+    "STATUS": "Status",
+    "LASTLOG": "Sidste login",
+    "EDIT": "Tilføj eller redigér bruger",
+    "CREATE": "Opret ny bruger",
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
     },
-    "USERS": {
-      "SAVE": "Gem",
-      "NAME": "Navn",
-      "EMAIL": "Email",
-      "GLOBALADMIN": "Global administrator",
-      "STATUS": "Status",
-      "LASTLOG": "Sidste login",
-      "EDIT": "Tilføj eller redigér bruger",
-      "CREATE": "Opret ny bruger",
-      "TABLE-ROW": {
-        "EDIT": "Redigér",
-        "DELETE": "Slet"
-      },
-      "FORM": {
-        "NAME": "Indtast det fulde navn på brugeren",
-        "NAME-PLACEHOLDER": "Navn",
-        "EMAIL": "Indtast Email addressen til brugeren",
-        "EMAIL-PLACEHOLDER": "Email",
-        "PASSWORD": "Password",
-        "PASSWORD-PLACEHOLDER": "Indtast en password",
-        "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
-      }
+    "FORM": {
+      "NAME": "Indtast det fulde navn på brugeren",
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL": "Indtast Email addressen til brugeren",
+      "EMAIL-PLACEHOLDER": "Email",
+      "PASSWORD": "Password",
+      "PASSWORD-PLACEHOLDER": "Indtast en password",
+      "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
+      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
     }
   }
 }

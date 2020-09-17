@@ -32,7 +32,7 @@ export class UserTableRowComponent implements OnInit {
   }
 
   navigateToEditPage() {
-    this.router.navigate(['payload-decoder-edit', this.user.id]);
+    this.router.navigate([this.user.id, 'edit-user']);
   }
 
 }
