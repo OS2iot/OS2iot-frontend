@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalAdminComponent } from './global-admin/global-admin.component';
-import { MaterialeModule } from '@shared/Modules/materiale.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [NavbarComponent, GlobalAdminComponent],
@@ -23,7 +23,7 @@ import { MaterialeModule } from '@shared/Modules/materiale.module';
     RouterModule,
     TranslateModule,
     FontAwesomeModule,
-    MaterialeModule
+    NGMaterialModule
   ],
   exports: [
     NavbarComponent,

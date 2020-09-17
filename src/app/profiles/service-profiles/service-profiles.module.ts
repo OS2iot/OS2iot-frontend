@@ -11,8 +11,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
-import { MaterialeModule } from '@shared/modules/materiale.module';
 import { FormModule } from '@shared/form/form.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 
 
@@ -39,7 +39,7 @@ import { FormModule } from '@shared/form/form.module';
     RouterModule,
     ReactiveFormsModule,
     TranslateModule,
-    MaterialeModule
+    NGMaterialModule
   ]
 })
 export class ServiceProfilesModule { }
