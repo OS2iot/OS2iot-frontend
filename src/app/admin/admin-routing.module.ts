@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { OrganisationComponent } from './organisation/organisation.component';
 import { UsersComponent } from './users/users.component';
-import { UserTabelComponent } from './users/user-tabel/user-tabel.component';
+import { UserTabelComponent } from './users/user-list/user-list.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
