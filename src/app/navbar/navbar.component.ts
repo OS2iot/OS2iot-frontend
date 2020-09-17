@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
     public user: User;
+    isLoginMode = true;
     faBroadcastTower = faBroadcastTower;
+
 
     constructor(
         private authService: AuthService,

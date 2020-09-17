@@ -11,7 +11,6 @@ const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
     { path: 'auth', component: AuthComponent },
     { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
-
     {
         path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
         children: [
@@ -20,7 +19,6 @@ const routes: Routes = [
             { path: 'edit-gateway', component: EditGatewayComponent },
             { path: 'gateway/:id', component: GatewayComponent }
         ],
-
     },
     { path: 'datatarget', component: DatatargetListComponent },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
