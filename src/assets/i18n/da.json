@@ -17,7 +17,8 @@
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
-    "PAYLOAD-DECODER": "Payload Decoder"
+    "PAYLOAD-DECODER": "Payload Decoder",
+    "ORGANISATION": "Organisationer"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -117,6 +118,21 @@
     "EDIT": "Redigér",
     "DELETE": "Slet"
   },
+  "ORGANISATION": {
+    "NAME": "Navn",
+    "APPLICATION-COUNT": "Applikationer",
+    "SAVE": "Gem organisation",
+    "EDIT": "Rediger organisation",
+    "DETAIL": {
+      "APPLICATIONS": "Applikationer",
+      "PERMISSIONS": "Brugergrupper",
+      "NAME": "Navn"
+    }
+  },
+  "ORGANISATION-TABLE-ROW": {
+    "EDIT": "Redigér",
+    "DELETE": "Slet"
+  },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
@@ -129,7 +145,9 @@
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
-    "EDIT-DEVICE-PROFILE": "Redigér Device profile"
+    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "CREATE-NEW-ORGANISATION": "Opret organisation",
+    "EDIT-ORGANISATION": "Redigér organisation"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -155,6 +173,8 @@
     "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
     "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
     "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
+    "GIVE-ORGANISATION-NAME": "Navngiv organisation",
+    "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
     "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
     "DEVADDR": "Device adress",

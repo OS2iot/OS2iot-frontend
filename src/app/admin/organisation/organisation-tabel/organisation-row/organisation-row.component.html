@@ -1,0 +1,24 @@
+<td class="position-relative">
+  <a [routerLink]="[organisation.id]" routerLinkActive="active" class="organisation-link">
+    {{organisation.name}}</a>
+  </td>
+<td class="position-relative pr-3">
+  {{organisation.applications.length}}
+  <div class="dropdown position-absolute">
+    <a href="#" role="button" id="tableRowDropdown-{{organisation.id}}" class="applicationRow__edit dropdown-toggle"
+      data-toggle="dropdown" aria-expanded="false"
+      [attr.aria-label]="'ORGANISATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{organisation.id}}">
+      <li>
+        <a class="dropdown-item" [routerLink]="[organisation.id, 'edit-organisation']"
+          routerLinkActive="active">{{ 'ORGANISATION-TABLE-ROW.EDIT' | translate }}
+        </a>
+      </li>
+      <li>
+        <a (click)="clickDelete()" class="dropdown-item"
+          [routerLink]="">{{ 'ORGANISATION-TABLE-ROW.DELETE' | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</td>

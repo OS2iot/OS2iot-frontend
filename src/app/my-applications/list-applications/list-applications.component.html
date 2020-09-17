@@ -7,6 +7,8 @@
     </app-top-bar>
   </div>
   <div class="row">
-    <app-applications-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-applications-table>
+    <app-applications-table [applications]="applications" [pageOffset]="pageOffset" [pageTotal]="pageTotal"
+      (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)">
+    </app-applications-table>
   </div>
 </div>

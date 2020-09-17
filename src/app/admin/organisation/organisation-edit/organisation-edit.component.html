@@ -1,1 +1,30 @@
-<p>organisation-edit works!</p>
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+<form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+    <div *ngIf="errorMessages" class="error-messages p-3">
+      <ul class="mb-0">
+        <li *ngFor="let error of errorMessages">
+          {{error}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="row mb-5">
+        <div class="form-group mt-3 col-12">
+            <label class="form-label" for="name">{{'QUESTION.GIVE-ORGANISATION-NAME' | translate}}</label>*
+            <input type="text" 
+                class="form-control" 
+                id="name" 
+                name="name"
+                [placeholder]="'QUESTION.GIVE-ORGANISATION-NAME-PLACEHOLDER' | translate" 
+                maxlength="50" 
+                required
+                [(ngModel)]="organisation.name"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        </div>
+    </div>
+
+    <div class="form-group mt-5">
+        <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+        <button class="btn btn-dark ml-2" type="submit">{{ 'ORGANISATION.SAVE' | translate}}</button>
+    </div>
+</form>

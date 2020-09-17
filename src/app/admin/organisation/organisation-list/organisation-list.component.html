@@ -1,0 +1,10 @@
+<div class="px-5 py-4">
+    <div class="row mb-5">
+        <app-top-bar [sort]="sort" [pageLimit]="pageLimit" [title]="'NAV.ORGANISATION' | translate"
+            [ctaLabel]="'FORM.CREATE-NEW-ORGANISATION' | translate" [ctaRouterLink]="'new-organisation'"
+            (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
+    </div>
+    <div class="row">
+        <app-organisation-tabel></app-organisation-tabel>
+    </div>
+</div>
