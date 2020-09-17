@@ -26,7 +26,8 @@
     "DELETE": "Slet applikation",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
-    "ATTACHED-IOT": "Tilknyttede IoT enheder"
+    "ATTACHED-IOT": "Tilknyttede IoT enheder",
+    "DATATARGET-SHOW": "Tilknyttede datatargets"
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
