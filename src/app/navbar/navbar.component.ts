@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'src/app/models/user';
 import { faBroadcastTower } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
+import { User } from '@shared/form/form-body-application/form-body-application.component';
 
 @Component({
     selector: 'app-navbar',
@@ -27,6 +27,6 @@ export class NavbarComponent {
 
     onLogout() {
         this.authService.logout();
-        this.router.navigateByUrl('auth')
+        this.router.navigateByUrl('auth');
     }
 }

@@ -4,9 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { OrganisationComponent } from './organisation/organisation.component';
 import { UsersComponent } from './users/users.component';
-import { UserTabelComponent } from './users/user-list/user-list.component';
-import { UserEditComponent } from './users/user-edit/user-edit.component';
-import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
 import { OrganisationEditComponent } from './organisation/organisation-edit/organisation-edit.component';
 import { OrganisationTabelComponent } from './organisation/organisation-tabel/organisation-tabel.component';
@@ -18,14 +15,9 @@ import { UsergroupTabelComponent } from './usergroups/usergroup-tabel/usergroup-
 
 const adminRoutes: Routes = [
 
-    {
-        path: 'users', component: UsersComponent, children: [
-            { path: '', component: UserTabelComponent },
-            { path: 'new-user', component: UserEditComponent },
-            { path: ':user-id', component: UserDetailComponent },
-            { path: ':user-id/edit-user', component: UserEditComponent },
-        ]
-    },
+    { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+    // { path: 'users', component: UsersComponent },
+
     {
         path: 'organisations', component: OrganisationComponent, children: [
             { path: '', component: OrganisationTabelComponent },

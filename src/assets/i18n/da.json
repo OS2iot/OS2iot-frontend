@@ -17,7 +17,8 @@
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
-    "PAYLOAD-DECODER": "Payload Decoder"
+    "PAYLOAD-DECODER": "Payload Decoder",
+    "USERS": "Burgere"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -260,6 +261,24 @@
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Device-profil navn"
+    }
+  },
+  "USERS": {
+    "SAVE": "Gem",
+    "NAME": "Navn",
+    "EMAIL": "Email",
+    "GLOBALADMIN": "Global Administrator",
+    "STATUS": "Status",
+    "LASTLOG": "Sidste Login",
+    "EDIT": "Redigér User",
+    "CREATE": "Opret ny burger",
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    },
+    "FORM": {
+      "NAME": "Indtast det fulde navn på brugeren",
+      "NAME-PLACEHOLDER": "Navn"
     }
   }
 }

@@ -1,0 +1,15 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'USERS.NAME' | translate }}</th>
+            <th>{{ 'USERS.EMAIL' | translate }}</th>
+            <th>{{ 'USERS.GLOBALADMIN' | translate }}</th>
+            <th>{{ 'USERS.STATUS' | translate }}</th>
+            <th>{{ 'USERS.LASTLOG' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" class="py-3" app-user-table-row [user]="user" (deleteUser)="deleteUser($event)">
+        </tr>
+    </tbody>
+</table>

@@ -11,18 +11,7 @@ export class User {
     permissions: Permission[];
 }
 
-export interface UsersResponse {
+export interface UserResponse {
     data: User[];
     count: number;
-}
-
-export interface UserResponse {
-    user: User;
-}
-
-export class UserRequest {
-    user: User;
-    constructor(user: User) {
-        this.user = user;
-    }
 }
