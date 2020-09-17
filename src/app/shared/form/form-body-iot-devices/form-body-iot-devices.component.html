@@ -151,65 +151,69 @@
     </div>
 
     <div class="form-group mt-5">
-      <mat-tab-group dynamicHeight>
-        <mat-tab label="{{'QUESTION.OTAA' | translate}}">
-          <div class="example-small-box mat-elevation-z4">
-            <div class="form-group mt-5">
-              <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
-              <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
-                [placeholder]="'QUESTION.OTAAAPPLICATIONKEY-PLACEHOLDER' | translate" class="form-control"
-                [(ngModel)]="iotDevice.lorawanSettings.OTAAapplicationKey"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('OTAAapplicationKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('OTAAapplicationKey')}">
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="{{'QUESTION.ABP' | translate}}">
-          <div class="example-large-box mat-elevation-z4">
-            <div class="form-group mt-5">
-              <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
-              <input type="text" id="devAddr" name="devAddr" maxLength="8"
-                [placeholder]="'QUESTION.DEVADDR-PLACEHOLDER' | translate" class="form-control"
-                [(ngModel)]="iotDevice.lorawanSettings.devAddr"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devAddr'), 'is-valid' : formFailedSubmit && !errorFields.includes('devAddr')}">
-            </div>
-        
-            <div class="form-group mt-5">
-              <label class="form-label" for="networkSessionKey">{{'QUESTION.NETWORKSESSIONKEY' | translate}}*</label>
-              <input type="text" id="networkSessionKey" name="networkSessionKey" maxLength="32"
-                [placeholder]="'QUESTION.NETWORKSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
-                [(ngModel)]="iotDevice.lorawanSettings.networkSessionKey"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('networkSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('networkSessionKey')}">
-            </div>
-        
-            <div class="form-group mt-5">
-              <label class="form-label" for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}*</label>
-              <input type="text" id="applicationSessionKey" name="applicationSessionKey" maxLength="32"
-                [placeholder]="'QUESTION.APPLICATIONSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
-                [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
-            </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+      
+      <mat-checkbox 
+          [(ngModel)]="iotDevice.lorawanSettings.OTAA" 
+          name="OTAA">
+            {{'QUESTION.OTAA-ACTIVATE' | translate}}
+        </mat-checkbox>
+
+      <ng-container *ngIf="iotDevice.lorawanSettings.OTAA">
+        <div class="form-group mt-5">
+          <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
+          <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
+            [placeholder]="'QUESTION.OTAAAPPLICATIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.OTAAapplicationKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('OTAAapplicationKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('OTAAapplicationKey')}">
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!iotDevice.lorawanSettings.OTAA">
+        <div class="form-group mt-5">
+          <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
+          <input type="text" id="devAddr" name="devAddr" maxLength="8"
+            [placeholder]="'QUESTION.DEVADDR-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.devAddr"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devAddr'), 'is-valid' : formFailedSubmit && !errorFields.includes('devAddr')}">
+        </div>
+    
+        <div class="form-group mt-5">
+          <label class="form-label" for="networkSessionKey">{{'QUESTION.NETWORKSESSIONKEY' | translate}}*</label>
+          <input type="text" id="networkSessionKey" name="networkSessionKey" maxLength="32"
+            [placeholder]="'QUESTION.NETWORKSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.networkSessionKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('networkSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('networkSessionKey')}">
+        </div>
+    
+        <div class="form-group mt-5">
+          <label class="form-label" for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}*</label>
+          <input type="text" id="applicationSessionKey" name="applicationSessionKey" maxLength="32"
+            [placeholder]="'QUESTION.APPLICATIONSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
+        </div>
+      </ng-container>
     </div>
 
     <div class="form-group mt-5">
       <label class="form-label" for="isDisabled">{{'QUESTION.ISDISABLED' | translate}}</label>
       <div>
-        <mat-radio-group [(ngModel)]="iotDevice.lorawanSettings.isDisabled" name="isDisabled" aria-label="Select an option">
-          <mat-radio-button value="false">{{'QUESTION.ISDISABLED-NO' | translate}}</mat-radio-button>
-          <mat-radio-button value="true">{{'QUESTION.ISDISABLED-YES' | translate}}</mat-radio-button>
-        </mat-radio-group>
+        <mat-checkbox 
+          [(ngModel)]="iotDevice.lorawanSettings.isDisabled" 
+          name="isDisabled">
+            {{'QUESTION.ISDISABLED-YES' | translate}}
+        </mat-checkbox>
       </div>
     </div>
 
     <div class="form-group mt-5">
       <label class="form-label" for="skipFCntCheck">{{'QUESTION.SKIPFCNTCHECK' | translate}}</label>
       <div>
-        <mat-radio-group [(ngModel)]="iotDevice.lorawanSettings.skipFCntCheck" name="skipFCntCheck" aria-label="Select an option">
-          <mat-radio-button [checked]="true" value="false">{{'QUESTION.SKIPFCNTCHECK-NO' | translate}}</mat-radio-button>
-          <mat-radio-button value="true">{{'QUESTION.SKIPFCNTCHECK-YES' | translate}}</mat-radio-button>
-        </mat-radio-group>
+        <mat-checkbox 
+          [(ngModel)]="iotDevice.lorawanSettings.skipFCntCheck" 
+          name="skipFCntCheck">
+          {{'QUESTION.SKIPFCNTCHECK-YES' | translate}}
+        </mat-checkbox>
       </div>
     </div>
   </ng-container>

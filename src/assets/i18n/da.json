@@ -193,7 +193,8 @@
     "SKIPFCNTCHECK-YES": "Ja",
     "OTAA": "Over The Air Activation",
     "ABP": "Activation By Personalisation",
-    "CHOOSE-SERVICEPROFILE": "Vælg service profile"
+    "CHOOSE-SERVICEPROFILE": "Vælg service profile",
+    "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",

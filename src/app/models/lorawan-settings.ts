@@ -5,6 +5,7 @@ export class LorawanSettings {
     isDisabled = false;
     skipFCntCheck = false;
     activationType: ActivationType;
+    OTAA = true;
     OTAAapplicationKey?: string;
     devAddr?: string;
     networkSessionKey?: string;
