@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-profiles',
@@ -8,10 +7,8 @@ import { LoggingService } from '../logging.service';
 export class ProfilesComponent implements OnInit {
 
   constructor(
-    private loggingService: LoggingService,
   ) { }
 
   ngOnInit(): void {
-    this.loggingService.printLog('Profiles tapped');
   }
 }

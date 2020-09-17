@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
-import { MaterialeModule } from '@shared/Modules/materiale.module';
+import { MaterialeModule } from '@shared/modules/materiale.module';
 
 @NgModule({
   declarations: [

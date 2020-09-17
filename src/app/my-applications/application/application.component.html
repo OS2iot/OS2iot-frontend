@@ -2,11 +2,11 @@
   <app-top-bar-single [data]="application" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
   <div class="px-5">
     <div class="application-component">
-      <div class="col-12 mb-4 py-3 bottom-separator">
-        <div class="col-12 col-sm-4">
+      <div class="col-xs-12 mb-4 py-3 bottom-separator">
+        <div class="col-xs-12 col-sm-4">
           <h4>{{ 'APPLICATION.DESCRIPTION' | translate }}</h4>
         </div>
-        <div class="col-12 pt-2 col-sm-8">
+        <div class="col-xs-12 pt-2 col-sm-8">
           <p>{{description}}</p>
         </div>
         <div class="ml-auto d-flex">
@@ -14,7 +14,7 @@
             routerLinkActive="active" class="application-link">datatarget</button>
         </div>
       </div>
-      <div class="col-12 mb-5 application-table-header">
+      <div class="col-xs-12 mb-5 application-table-header">
         <app-top-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [sort]="sort"
           [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
           [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'new-iot-device'"
