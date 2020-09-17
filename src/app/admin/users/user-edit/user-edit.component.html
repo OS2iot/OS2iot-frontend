@@ -36,12 +36,19 @@
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
         </div>
     </div>
-
-    <mat-slide-toggle [(ngModel)]="user.permissions" id="permission" name="permission">
-        {{'USERS.FORM.GLOBAL-ADMIN' | translate}}</mat-slide-toggle>
-
-    <div class="form-group mt-5">
-        <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
-        <button class="btn btn-primary ml-2" type="submit">{{ 'PAYLOAD-DECODER.SAVE' | translate}}</button>
+    <div class="row mb-5">
+        <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
+            {{'USERS.FORM.GLOBAL-ADMIN' | translate}}</mat-slide-toggle>
+    </div>
+    <div class="row mb-3">
+        <mat-label>{{'USERS.FORM.GLOBAL-ADMIN' | translate}} TODO</mat-label>
+        <!-- <mat-slide-toggle [(ngModel)]="" id="permission" name="permission">
+            {{'USERS.FORM.GLOBAL-ADMIN' | translate}}</mat-slide-toggle> -->
+    </div>
+    <div class="form-group mt-5 clearfix">
+        <div class="col-12 d-flex justify-content-end">
+            <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+            <button class="btn btn-primary ml-2" type="submit">{{ 'USERS.FORM.SAVE' | translate}}</button>
+        </div>
     </div>
 </form>

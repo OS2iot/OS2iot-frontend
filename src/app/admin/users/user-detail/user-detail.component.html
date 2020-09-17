@@ -1,1 +1,31 @@
-<p>user-detail works!</p>
+<app-top-bar-single [data]="user" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+<div class="p-5 row">
+    <div class="col-6">
+        <div class="card mb-5">
+            <div class="card-header">
+                <h2>{{ user.name }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <h3 class="card-header">
+                {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
+            </h3>
+            <div>
+                <h1 style="color:rebeccapurple">TODO</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <h3 class="card-header">
+                {{ 'USERS.DETAIL.APPLICATIONS' | translate }}
+            </h3>
+            <div>
+                <!-- <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)">
+                </app-applications-table> -->
+            </div>
+        </div>
+    </div>
+</div>

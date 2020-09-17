@@ -1,18 +1,27 @@
+import { Profiler } from 'inspector';
 import { Permission } from '../usergroups/permission.model';
 
 export class User {
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
+    id?: number;
     name: string;
     email: string;
     password: string;
     active: boolean;
-    lastLogin: Date;
-    permissions: Permission[];
 }
 
 export interface UserResponse {
-    data: User[];
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    email: string;
+    active: boolean;
+    lastLogin: Date;
+    permissions: Permission[];
+    password?: string;
+}
+
+export interface UserGetManyResponse {
+    data: UserResponse[];
     count: number;
 }

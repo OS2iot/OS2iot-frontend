@@ -329,7 +329,12 @@
       "PASSWORD": "Password",
       "PASSWORD-PLACEHOLDER": "Indtast en password",
       "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
-      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
+      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
+      "SAVE": "Gem Bruger"
+    },
+    "DETAIL": {
+      "PERMISSIONS": "Brugergrupper",
+      "APPLICATIONS": "Applikationer"
     }
   }
 }

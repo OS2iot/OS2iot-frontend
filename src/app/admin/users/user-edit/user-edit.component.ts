@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: 'admin/users' };
+  public backButton: BackButton = { label: '', routerLink: '/users' };
   public title = '';
   public submitButton = '';
   id: number;
@@ -32,52 +32,53 @@ export class UserEditComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private location: Location) { }
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.translate.get(['NAV.USERS', 'USER.EDIT', 'USERS.SAVE'])
-      .subscribe(translations => {
+    this.translate
+      .get(['NAV.USERS', 'USERS.FORM.EDIT', 'USERS.SAVE'])
+      .subscribe((translations) => {
         this.backButton.label = translations['NAV.USERS'];
-        this.title = translations['USER.EDIT'];
+        this.title = translations['FORM.EDIT-USERS'];
         this.submitButton = translations['USERS.SAVE'];
       });
-    this.id = +this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('orgId');
     if (this.id > 0) {
       this.getUser(this.id);
     }
   }
 
   private getUser(id: number) {
-    this.subscription = this.userService.getOne(id)
-      .subscribe(
-        (response) => {
-          this.user = response;
-        });
+    this.subscription = this.userService
+      .getOne(id)
+      .subscribe((response) => {
+        this.user = response;
+      });
   }
 
   private create(): void {
-    this.userService.post(this.user)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.routeBack();
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.userService.post(this.user).subscribe(
+      (response) => {
+        console.log(response);
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   private update(): void {
-    this.userService.put(this.user, this.id)
-      .subscribe(
-        (response) => {
-          this.routeBack();
-        },
-        (error) => {
-          this.showError(error);
-        });
+    this.userService.put(this.user, this.id).subscribe(
+      (response) => {
+        this.routeBack();
+      },
+      (error) => {
+        this.showError(error);
+      }
+    );
   }
 
   onSubmit(): void {
@@ -107,5 +108,4 @@ export class UserEditComponent implements OnInit {
   routeBack(): void {
     this.location.back();
   }
-
 }
