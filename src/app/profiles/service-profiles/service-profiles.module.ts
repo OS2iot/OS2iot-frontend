@@ -37,7 +37,6 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     DirectivesModule,
     CommonModule,
     RouterModule,
-    ReactiveFormsModule,
     TranslateModule,
     NGMaterialModule
   ]

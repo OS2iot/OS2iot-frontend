@@ -34,7 +34,18 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   onNewDeviceProfile() {
-    this.router.navigate(['new-device-profile'], { relativeTo: this.route });
+    this.router.navigate(['deviceprofil/edit']);
+  }
+
+  deleteDeviceProfile(id: string) {
+    if (id) {
+      this.deviceProfileService.delete(id).subscribe( (response) => {
+        console.log(response);
+        if (response.ok) {
+          this.getDeviceProfiles();
+        }
+      });
+    }
   }
 
   ngOnDestroy() {

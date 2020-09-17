@@ -11,7 +11,7 @@ import { DeviceProfileService } from '@shared/services/device-profile.service';
 
 })
 export class DeviceProfilesDetailComponent implements OnInit {
-  public backButton: BackButton = { label: 'Go back', routerLink: '/profiles' };
+  public backButton: BackButton = { label: 'Tilbage', routerLink: '/profiles' };
   public title: '';
   deviceProfile: DeviceProfile;
   deviceId: string;
@@ -37,7 +37,7 @@ export class DeviceProfilesDetailComponent implements OnInit {
   }
 
   onEditDeviceProfile() {
-    this.router.navigate(['edit-device-profile'], { relativeTo: this.route });
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onDeleteDeviceProfile() {

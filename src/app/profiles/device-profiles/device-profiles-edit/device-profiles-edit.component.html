@@ -1,63 +1,328 @@
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+<form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
+    <div *ngIf="errorMessages" class="error-messages p-3">
+        <ul class="mb-0">
+            <li>
+                {{errorMessages}}
+            </li>
+        </ul>
+    </div>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab label="Generelt">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="name"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.NAME' | translate}}</label>
+                    <input type="text" 
+                        class="form-control" 
+                        id="name" 
+                        name="name"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.NAME_PLACEHOLDER' | translate" 
+                        maxlength="50" 
+                        required
+                        [(ngModel)]="deviceProfile.name"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+                </div>
+            </div>
 
-<mat-tab-group animationDuration="0ms">
-    <mat-tab label="Generelt">
-        Device-profile name *
-        A name to identify the device-profile.
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="macVersion"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MACVERSION' | translate}}</label>
+                    <input type="text" 
+                        class="form-control" 
+                        id="macVersion" 
+                        name="macVersion"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" 
+                        maxlength="50" 
+                        required
+                        [(ngModel)]="deviceProfile.macVersion"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('macVersion'), 'is-valid' : formFailedSubmit && !errorFields.includes('macVersion')}">
+                </div>
+            </div>
 
-        Network-server *
-        The network-server on which this device-profile will be provisioned. After creating the device-profile, this
-        value can't be changed.
+            <mat-form-field appearance="fill">
+                <mat-label>{{'PROFILES.DEVICE_PROFILE.REGPARAMSREVISION' | translate}}</mat-label>
+                <select matNativeControl 
+                    required 
+                    name="regParamsRevision"
+                    [(ngModel)]="deviceProfile.regParamsRevision"
+                    [value]="deviceProfile.regParamsRevision">
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                </select>
+            </mat-form-field>
 
-        LoRaWAN MAC version *
-        The LoRaWAN MAC version supported by the device.
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="maxEIRP"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MAXEIRP' | translate}}</label>
+                    <input type="number"
+                        class="form-control" 
+                        id="maxEIRP" 
+                        name="maxEIRP"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.MAXEIRP_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0" 
+                        required
+                        [(ngModel)]="deviceProfile.maxEIRP"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('maxEIRP'), 'is-valid' : formFailedSubmit && !errorFields.includes('maxEIRP')}">
+                </div>
+            </div>
 
-        LoRaWAN Regional Parameters revision *
-        Revision of the Regional Parameters specification supported by the device.
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="geolocBufferTTL"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL' | translate}}</label>
+                    <input type="number"
+                        min="0"
+                        class="form-control" 
+                        id="geolocBufferTTL" 
+                        name="geolocBufferTTL"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL_PLACEHOLDER' | translate" 
+                        maxlength="50" 
+                        required
+                        [(ngModel)]="deviceProfile.geolocBufferTTL"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('geolocBufferTTL'), 'is-valid' : formFailedSubmit && !errorFields.includes('geolocBufferTTL')}">
+                </div>
+            </div>
 
-        Max EIRP *
-        0
-        Maximum EIRP supported by the device.</mat-tab>
-    <mat-tab label="OTAA/ABP">
-        Device supports OTAA
-        RX1 delay *
-        0
-        RX1 delay (valid values are 0 - 15).
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="geolocMinBufferSize"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE' | translate}}</label>
+                    <input type="number"
+                        min="0"
+                        class="form-control" 
+                        id="geolocMinBufferSize" 
+                        name="geolocMinBufferSize"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" 
+                        maxlength="50" 
+                        required
+                        [(ngModel)]="deviceProfile.geolocMinBufferSize"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('geolocMinBufferSize'), 'is-valid' : formFailedSubmit && !errorFields.includes('geolocMinBufferSize')}">
+                </div>
+            </div>
 
-        RX1 data-rate offset *
-        0
-        Please refer the LoRaWAN Regional Parameters specification for valid values.
 
-        RX2 data-rate *
-        0
-        Please refer the LoRaWAN Regional Parameters specification for valid values.
 
-        RX2 channel frequency (Hz) *
-        0
-        Factory-preset frequencies (Hz) *
-        List of factory-preset frequencies (Hz), comma separated.
-    </mat-tab>
-    <mat-tab label="Class B">
-        Device supports Class-B
-        Class-B confirmed downlink timeout *
-        0
-        Class-B timeout (in seconds) for confirmed downlink transmissions.
+        </mat-tab>
+        <mat-tab label="{{'PROFILES.DEVICE_PROFILE.OTAA-ABP' | translate}}">
 
-        Class-B ping-slot periodicity *
-        Class-B ping-slot periodicity.
+            <mat-checkbox [(ngModel)]="deviceProfile.supports32BitFCnt" name="supports32BitFCnt">
+                {{'PROFILES.DEVICE_PROFILE.OTAA-ACTIVATE' | translate}}
+            </mat-checkbox>
 
-        Class-B ping-slot data-rate *
-        0
-        Class-B ping-slot frequency (Hz) *
-        0
+            <ng-container *ngIf="!deviceProfile.supports32BitFCnt">
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="rxDelay1"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDELAY1' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="rxDelay1" 
+                            name="rxDelay1"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDELAY1_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.rxDelay1"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDelay1'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDelay1')}">
+                    </div>
+                </div>
+                RX1 delay (valid values are 0 - 15).
+        
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="rxDROffset1"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDROFFSET1' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="rxDROffset1" 
+                            name="rxDROffset1"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDROFFSET1_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.rxDROffset1"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDROffset1'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDROffset1')}">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="rxDataRate2"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDATARATE2' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="rxDataRate2" 
+                            name="rxDataRate2"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDATARATE2_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.rxDataRate2"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxDataRate2'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxDataRate2')}">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="rxFreq2"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXFREQ2' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="rxFreq2" 
+                            name="rxFreq2"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXFREQ2_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.rxFreq2"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('rxFreq2'), 'is-valid' : formFailedSubmit && !errorFields.includes('rxFreq2')}">
+                    </div>
+                </div>
 
-    </mat-tab>
-    <mat-tab label="Class C">
-        Device supports Class-C
-        Select this option when the device will operate as Class-C device immediately after activation. In case it sends
-        a DeviceModeInd mac-command when it changes to Class-C, do not select this option.
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="factoryPresetFreqsInput"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS' | translate}}</label>
+                        <input type="text" 
+                            class="form-control" 
+                            id="factoryPresetFreqsInput" 
+                            name="factoryPresetFreqsInput"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS_PLACEHOLDER' | translate" 
+                            maxlength="50" 
+                            required
+                            [(ngModel)]="deviceProfile.factoryPresetFreqsInput"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('factoryPresetFreqsInput'), 'is-valid' : formFailedSubmit && !errorFields.includes('factoryPresetFreqsInput')}">
+                    </div>
+                </div>
+            </ng-container>
+        </mat-tab>
+        <mat-tab label="Class B">
 
-        Class-C confirmed downlink timeout *
-        0
-        Class-C timeout (in seconds) for confirmed downlink transmissions.
-    </mat-tab>
-</mat-tab-group>
+            <mat-checkbox 
+                [(ngModel)]="deviceProfile.supportsClassB" 
+                name="supportsClassB">
+                {{'PROFILES.DEVICE_PROFILE.SUPPORTSCLASSB_ACTIVATE' | translate}}
+            </mat-checkbox>
+
+            <ng-container *ngIf="deviceProfile.supportsClassB">
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="classBTimeout"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="classBTimeout" 
+                            name="classBTimeout"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.classBTimeout"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('classBTimeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('classBTimeout')}">
+                    </div>
+                </div>
+
+
+
+    
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD' | translate}}</mat-label>
+                            <select matNativeControl 
+                                required 
+                                name="pingSlotPeriod"
+                                [(ngModel)]="deviceProfile.pingSlotPeriod"
+                                [value]="deviceProfile.pingSlotPeriod">
+                              <option value="1" >Every second</option>
+                              <option value="2" >Every 2 seconds</option>
+                              <option value="4" >Every 4 seconds</option>
+                              <option value="8" >Every 8 seconds</option>
+                              <option value="16" >Every 16 seconds</option>
+                              <option value="32" >Every 32 seconds</option>
+                              <option value="64" >Every 64 seconds</option>
+                              <option value="128" >Every 128 seconds</option>
+                            </select>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="pingSlotDR"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTDR' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="pingSlotDR" 
+                            name="pingSlotDR"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTDR_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0"
+                            required
+                            [(ngModel)]="deviceProfile.pingSlotDR"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pingSlotDR'), 'is-valid' : formFailedSubmit && !errorFields.includes('pingSlotDR')}">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <label for="pingSlotFreq"
+                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ' | translate}}</label>
+                        <input type="number" 
+                            class="form-control" 
+                            id="pingSlotFreq" 
+                            name="pingSlotFreq"
+                            [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ_PLACEHOLDER' | translate" 
+                            maxlength="50"
+                            min="0" 
+                            required
+                            [(ngModel)]="deviceProfile.pingSlotFreq"
+                            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pingSlotFreq'), 'is-valid' : formFailedSubmit && !errorFields.includes('pingSlotFreq')}">
+                    </div>
+                </div>
+            </ng-container>
+        </mat-tab>
+        <mat-tab label="Class C">
+            
+            <mat-checkbox 
+                [(ngModel)]="deviceProfile.supportsClassC" 
+                name="supportsClassC">
+                {{'PROFILES.DEVICE_PROFILE.SUPPORTSCLASSC_ACTIVATE' | translate}}
+            </mat-checkbox>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="classCTimeout"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="classCTimeout" 
+                        name="classCTimeout"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0" 
+                        required
+                        [(ngModel)]="deviceProfile.classCTimeout"
+                        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('classCTimeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('classCTimeout')}">
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="row mt-5">
+        <div class="col-xs-12">
+            <div class="float-right">
+                <button type="button" class="btn btn-light" (click)="routeBack()">
+                    {{'PROFILES.DEVICE_PROFILE.CANCEL' | translate}}
+                </button>
+                <button type="submit" class="btn btn-dark ml-3" [disabled]="!'is-valid'">
+                    {{'PROFILES.DEVICE_PROFILE.SAVE' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

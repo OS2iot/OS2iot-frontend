@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DeviceProfile, DeviceProfileResponse } from 'src/app/profiles/device-profiles/device-profile.model';
+import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse } from 'src/app/profiles/device-profiles/device-profile.model';
 import { RestService } from './rest.service';
 
 @Injectable({
@@ -11,12 +11,14 @@ export class DeviceProfileService {
 
     constructor(private restService: RestService) { }
 
-    post(body: DeviceProfile): Observable<any> {
-        return this.restService.post(this.URL, body);
+    post(body: DeviceProfile): Observable<DeviceProfileRequest> {
+        const requestBody = new DeviceProfileRequest(body);
+        return this.restService.post(this.URL, requestBody);
     }
 
-    put(body: DeviceProfile, id: string): Observable<any> {
-        return this.restService.put(this.URL, body, id, { observe: 'response' });
+    put(body: DeviceProfile): Observable<any> {
+        const requestBody = new DeviceProfileRequest(body);
+        return this.restService.put(this.URL, requestBody, requestBody.deviceProfile.id, { observe: 'response' });
     }
 
     getOne(id: string): Observable<any> {

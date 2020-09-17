@@ -128,7 +128,8 @@
     "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
-    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder"
+    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
+    "EDIT-DEVICE-PROFILE": "Redigér Device profile"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -233,6 +234,7 @@
     "NAME": "Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
+      "CREATE-NEW-SERVICE-PROFILE": "Opret Servie Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Service-profil navn",
@@ -257,9 +259,32 @@
     },
     "DEVICE_PROFILE": {
       "DROPDOWN": "Håndter device profil",
+      "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
-      "NAME": "Device-profil navn"
+      "NAME": "Device-profil navn",
+      "NAME_PLACEHOLDER": "Device-profile name",
+      "MACVERSION": "LoRaWAN MAC version ",
+      "REGPARAMSREVISION": "LoRaWAN Regional Parameters revision ",
+      "MAXEIRP": "Max EIRP ",
+      "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
+      "GEOLOCMINBUFFERSIZE": "Geolocation minimum buffer size",
+      "OTAA-ACTIVATE": "Device supports OTAA",
+      "RXDELAY1": "RX1 delay ",
+      "RXDROFFSET1": "RX1 data-rate offset",
+      "RXDATARATE2": "RX2 data-rate",
+      "RXFREQ2": "RX2 channel frequency (Hz)",
+      "FACTORYPRESETFREQS": "Factory-preset frequencies (Hz)",
+      "FACTORYPRESETFREQS_PLACEHOLDER": "Factory-preset frequencies (Hz)",
+      "SUPPORTSCLASSB_ACTIVATE": "Device supports Class-B",
+      "CLASSBTIMEOUT": "Class B confirmed downlink timeout",
+      "PINGSLOTPERIOD": "Class-B ping-slot periodicity",
+      "PINGSLOTDR": "Class-B ping-slot data-rate",
+      "PINGSLOTFREQ": "Class-B ping-slot frequency",
+      "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
+      "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
+      "CANCEL": "Cancel",
+      "SAVE": "Save"
     }
   }
 }

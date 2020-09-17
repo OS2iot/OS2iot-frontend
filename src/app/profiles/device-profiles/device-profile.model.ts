@@ -1,20 +1,21 @@
 export class DeviceProfile {
     public id: string;
     public name: string;
-    public classBTimeout: number;
+    public classBTimeout = 0;
     public classCTimeout = 0;
-    public factoryPresetFreqs: string[];
+    public factoryPresetFreqs: number[];
+    public factoryPresetFreqsInput: string;
     public geolocBufferTTL = 0;
     public geolocMinBufferSize = 0;
-    public macVersion: string;
-    public maxDutyCycle: number;
+    public macVersion = '1.0.0';
+    public maxDutyCycle = 0;
     public maxEIRP = 0;
     public payloadDecoderScript: string;
     public payloadEncoderScript: string;
-    public pingSlotDR: number;
-    public pingSlotFreq: number;
-    public pingSlotPeriod: number;
-    public regParamsRevision: string;
+    public pingSlotDR = 0;
+    public pingSlotFreq = 0;
+    public pingSlotPeriod = 0;
+    public regParamsRevision = 'A';
     public rfRegion: string;
     public rxDROffset1 = 0;
     public rxDataRate2 = 0;
@@ -28,4 +29,11 @@ export class DeviceProfile {
 export interface DeviceProfileResponse {
     result: DeviceProfile[];
     totalCount?: string;
+}
+
+export class DeviceProfileRequest {
+    deviceProfile: DeviceProfile;
+    constructor(deviceProfile: DeviceProfile) {
+        this.deviceProfile = deviceProfile;
+    }
 }

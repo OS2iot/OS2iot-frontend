@@ -8,7 +8,7 @@ import { DeviceProfilesDetailComponent } from './device-profiles-detail/device-p
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
@@ -28,6 +28,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     RouterModule,
     ReactiveFormsModule,
     FormModule,
+    FormsModule,
     TranslateModule,
     NGMaterialModule,
   ],

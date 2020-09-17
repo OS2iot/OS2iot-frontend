@@ -16,9 +16,10 @@ const profilesRoutes: Routes = [
             { path: 'new-service-profile', component: ServiceProfilesEditComponent },
             { path: ':serviceId', component: ServiceProfilesDetailComponent},
             { path: ':serviceId/edit-service-profile', component: ServiceProfilesEditComponent },
-            { path: 'new-device-profile', component: DeviceProfilesEditComponent },
-            { path: ':deviceId', component: DeviceProfilesDetailComponent },
-            { path: ':deviceId/edit-device-profile', component: DeviceProfilesEditComponent }
+            { path: 'deviceprofile/edit', component: DeviceProfilesEditComponent },
+            { path: 'deviceprofile/edit/:deviceId', component: DeviceProfilesEditComponent },
+            { path: 'deviceprofile/:deviceId', component: DeviceProfilesDetailComponent },
+            { path: 'deviceprofile/:deviceId/edit', component: DeviceProfilesEditComponent }
         ]
     }
 ];

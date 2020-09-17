@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 
 })
 export class ServiceProfilesDetailComponent implements OnInit, OnDestroy {
-  public backButton: BackButton = { label: 'Go back', routerLink: '/profiles' };
+  public backButton: BackButton = { label: 'Tilbage', routerLink: '/profiles' };
   public title: '';
   serviceProfile: ServiceProfile;
   serviceId: string;
