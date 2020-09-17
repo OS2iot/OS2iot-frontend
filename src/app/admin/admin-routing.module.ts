@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { OrganisationComponent } from './organisation/organisation.component';
+import { UsersComponent } from './users/users.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
 import { OrganisationEditComponent } from './organisation/organisation-edit/organisation-edit.component';
 import { UsergroupsComponent } from './usergroups/usergroups.component';
@@ -13,30 +14,27 @@ import { OrganisationListComponent } from './organisation/organisation-list/orga
 
 
 const adminRoutes: Routes = [
-  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
-  {
-    path: 'organisations',
-    component: OrganisationComponent,
-    children: [
-      { path: '', component: OrganisationListComponent },
-      { path: 'new-organisation', component: OrganisationEditComponent },
-      { path: ':orgId', component: OrganisationDetailComponent },
-      {
-        path: ':orgId/edit-organisation',
-        component: OrganisationEditComponent,
-      },
-    ],
-  },
-  {
-    path: 'usergroups',
-    component: UsergroupsComponent,
-    children: [
-      { path: '', component: UsergroupTabelComponent },
-      { path: 'new-user', component: UsergroupEditComponent },
-      { path: ':user-id', component: UsergroupDetailComponent },
-      { path: ':user-id/edit-user', component: UsergroupEditComponent },
-    ],
-  },
+
+    { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+    // { path: 'users', component: UsersComponent },
+
+    {
+        path: 'organisations', component: OrganisationComponent, children: [
+            { path: '', component: OrganisationListComponent },
+            { path: 'new-organisation', component: OrganisationEditComponent },
+            { path: ':orgId', component: OrganisationDetailComponent },
+            { path: ':orgId/edit-organisation', component: OrganisationEditComponent },
+        ]
+    },
+    {
+        path: 'usergroups', component: UsergroupsComponent, children: [
+            { path: '', component: UsergroupTabelComponent },
+            { path: 'new-user', component: UsergroupEditComponent },
+            { path: ':user-id', component: UsergroupDetailComponent },
+            { path: ':user-id/edit-user', component: UsergroupEditComponent },
+        ]
+    },
+
 ];
 
 @NgModule({

@@ -312,11 +312,11 @@
     "SAVE": "Gem",
     "NAME": "Navn",
     "EMAIL": "Email",
-    "GLOBALADMIN": "Global administrator",
+    "GLOBALADMIN": "Global Administrator",
     "STATUS": "Status",
-    "LASTLOG": "Sidste login",
-    "EDIT": "Tilføj eller redigér bruger",
-    "CREATE": "Opret ny bruger",
+    "LASTLOG": "Sidste Login",
+    "EDIT": "Redigér User",
+    "CREATE": "Opret ny burger",
     "TABLE-ROW": {
       "EDIT": "Redigér",
       "DELETE": "Slet"
@@ -334,7 +334,8 @@
     },
     "DETAIL": {
       "PERMISSIONS": "Brugergrupper",
-      "APPLICATIONS": "Applikationer"
+      "APPLICATIONS": "Applikationer",
+      "NAME-PLACEHOLDER": "Navn"
     }
   }
 }
