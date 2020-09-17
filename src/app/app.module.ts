@@ -20,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
 import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
 import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
 import { AuthJwtInterceptor } from './shared/helpers/auth-jwt.interceptor';
+import { OrganisationModule } from './admin/organisation/organisation.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         AdministrationGatewayModule,
-        PayloadDecoderModule
+        PayloadDecoderModule,
+        OrganisationModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

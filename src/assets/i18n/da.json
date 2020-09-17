@@ -18,7 +18,7 @@
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
-    "USERS": "Brugere"
+    "ORGANISATION": "Organisationer"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -118,6 +118,21 @@
     "EDIT": "Redigér",
     "DELETE": "Slet"
   },
+  "ORGANISATION": {
+    "NAME": "Navn",
+    "APPLICATION-COUNT": "Applikationer",
+    "SAVE": "Gem organisation",
+    "EDIT": "Rediger organisation",
+    "DETAIL": {
+      "APPLICATIONS": "Applikationer",
+      "PERMISSIONS": "Brugergrupper",
+      "NAME": "Navn"
+    }
+  },
+  "ORGANISATION-TABLE-ROW": {
+    "EDIT": "Redigér",
+    "DELETE": "Slet"
+  },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
@@ -129,7 +144,10 @@
     "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
-    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder"
+    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
+    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "CREATE-NEW-ORGANISATION": "Opret organisation",
+    "EDIT-ORGANISATION": "Redigér organisation"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -155,6 +173,8 @@
     "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
     "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
     "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
+    "GIVE-ORGANISATION-NAME": "Navngiv organisation",
+    "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
     "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
     "DEVADDR": "Device adress",
@@ -234,6 +254,7 @@
     "NAME": "Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
+      "CREATE-NEW-SERVICE-PROFILE": "Opret Servie Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Service-profil navn",
@@ -258,32 +279,55 @@
     },
     "DEVICE_PROFILE": {
       "DROPDOWN": "Håndter device profil",
+      "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
-      "NAME": "Device-profil navn"
-    }
-  },
-  "USERS": {
-    "SAVE": "Gem",
-    "NAME": "Navn",
-    "EMAIL": "Email",
-    "GLOBALADMIN": "Global administrator",
-    "STATUS": "Status",
-    "LASTLOG": "Sidste login",
-    "EDIT": "Tilføj eller redigér bruger",
-    "CREATE": "Opret ny bruger",
-    "TABLE-ROW": {
-      "EDIT": "Redigér",
-      "DELETE": "Slet"
+      "NAME": "Device-profil navn",
+      "NAME_PLACEHOLDER": "Device-profile name",
+      "MACVERSION": "LoRaWAN MAC version ",
+      "REGPARAMSREVISION": "LoRaWAN Regional Parameters revision ",
+      "MAXEIRP": "Max EIRP ",
+      "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
+      "GEOLOCMINBUFFERSIZE": "Geolocation minimum buffer size",
+      "OTAA-ACTIVATE": "Device supports OTAA",
+      "RXDELAY1": "RX1 delay ",
+      "RXDROFFSET1": "RX1 data-rate offset",
+      "RXDATARATE2": "RX2 data-rate",
+      "RXFREQ2": "RX2 channel frequency (Hz)",
+      "FACTORYPRESETFREQS": "Factory-preset frequencies (Hz)",
+      "FACTORYPRESETFREQS_PLACEHOLDER": "Factory-preset frequencies (Hz)",
+      "SUPPORTSCLASSB_ACTIVATE": "Device supports Class-B",
+      "CLASSBTIMEOUT": "Class B confirmed downlink timeout",
+      "PINGSLOTPERIOD": "Class-B ping-slot periodicity",
+      "PINGSLOTDR": "Class-B ping-slot data-rate",
+      "PINGSLOTFREQ": "Class-B ping-slot frequency",
+      "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
+      "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
+      "CANCEL": "Cancel",
+      "SAVE": "Save"
     },
-    "FORM": {
-      "NAME": "Indtast det fulde navn på brugeren",
-      "NAME-PLACEHOLDER": "Navn",
-      "EMAIL": "Indtast Email addressen til brugeren",
-      "EMAIL-PLACEHOLDER": "Email",
-      "PASSWORD": "Password",
-      "PASSWORD-PLACEHOLDER": "Indtast en password",
-      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
+    "USERS": {
+      "SAVE": "Gem",
+      "NAME": "Navn",
+      "EMAIL": "Email",
+      "GLOBALADMIN": "Global administrator",
+      "STATUS": "Status",
+      "LASTLOG": "Sidste login",
+      "EDIT": "Tilføj eller redigér bruger",
+      "CREATE": "Opret ny bruger",
+      "TABLE-ROW": {
+        "EDIT": "Redigér",
+        "DELETE": "Slet"
+      },
+      "FORM": {
+        "NAME": "Indtast det fulde navn på brugeren",
+        "NAME-PLACEHOLDER": "Navn",
+        "EMAIL": "Indtast Email addressen til brugeren",
+        "EMAIL-PLACEHOLDER": "Email",
+        "PASSWORD": "Password",
+        "PASSWORD-PLACEHOLDER": "Indtast en password",
+        "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
+      }
     }
   }
 }
