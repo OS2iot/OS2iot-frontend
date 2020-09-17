@@ -1,0 +1,30 @@
+<td class="position-relative">
+  <a [routerLink]="[permission.id]" routerLinkActive="active" class="permission-link">
+    {{permission.name}}</a>
+</td>
+<td class="position-relative">
+  {{permission?.organization?.name ? permission.organization.name : ("PERMISSION.NO_ORGANISATION" | translate)}}
+</td>
+<td class="position-relative">
+  {{permission.users.length}}
+</td>
+<td class="position-relative pr-3">
+  {{ 'PERMISSION-TYPE.' + permission.type | translate }}
+  <div class="dropdown position-absolute">
+    <a href="#" role="button" id="tableRowDropdown-{{permission.id}}" class="applicationRow__edit dropdown-toggle"
+      data-toggle="dropdown" aria-expanded="false"
+      [attr.aria-label]="'ORGANISATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
+      <li>
+        <a class="dropdown-item" [routerLink]="[permission.id, 'edit-permission']"
+          routerLinkActive="active">{{ 'PERMISSION-TABLE-ROW.EDIT' | translate }}
+        </a>
+      </li>
+      <li>
+        <a (click)="clickDelete()" class="dropdown-item"
+          [routerLink]="">{{ 'PERMISSION-TABLE-ROW.DELETE' | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</td>

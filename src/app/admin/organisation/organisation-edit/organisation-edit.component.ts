@@ -37,9 +37,9 @@ export class OrganisationEditComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('da');
     this.translate
-      .get(['NAV.ORGANISATION', 'FORM.EDIT-ORGANISATION', 'ORGANISATION.SAVE'])
+      .get(['NAV.ORGANISATIONS', 'FORM.EDIT-ORGANISATION', 'ORGANISATION.SAVE'])
       .subscribe((translations) => {
-        this.backButton.label = translations['NAV.ORGANISATION'];
+        this.backButton.label = translations['NAV.ORGANISATIONS'];
         this.title = translations['FORM.EDIT-ORGANISATION'];
         this.submitButton = translations['ORGANISATION.SAVE'];
       });

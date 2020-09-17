@@ -21,6 +21,7 @@ import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
 import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
 import { AuthJwtInterceptor } from './shared/helpers/auth-jwt.interceptor';
 import { OrganisationModule } from './admin/organisation/organisation.module';
+import { PermissionModule } from './admin/permission/permission.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AdministrationGatewayModule,
         PayloadDecoderModule,
         OrganisationModule,
+        PermissionModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

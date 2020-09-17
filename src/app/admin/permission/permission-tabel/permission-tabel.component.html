@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'PERMISSION.NAME' | translate }}</th>
+            <th>{{ 'PERMISSION.ORGANISATION' | translate }}</th>
+            <th>{{ 'PERMISSION.NUMBER_OF_MEMBERS' | translate }}</th>
+            <th>{{ 'PERMISSION.TYPE' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let perm of permissions" class="py-3" app-permission-row [permission]="perm"
+        (innerDeletePermission)="tableDeletePermission($event)"></tr>
+    </tbody>
+</table>

@@ -3,13 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { OrganisationComponent } from './organisation/organisation.component';
-import { UsersComponent } from './users/users.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
 import { OrganisationEditComponent } from './organisation/organisation-edit/organisation-edit.component';
-import { UsergroupsComponent } from './usergroups/usergroups.component';
-import { UsergroupEditComponent } from './usergroups/usergroup-edit/usergroup-edit.component';
-import { UsergroupDetailComponent } from './usergroups/usergroup-detail/usergroup-detail.component';
-import { UsergroupTabelComponent } from './usergroups/usergroup-tabel/usergroup-tabel.component';
 import { OrganisationListComponent } from './organisation/organisation-list/organisation-list.component';
 
 
@@ -26,14 +21,8 @@ const adminRoutes: Routes = [
             { path: ':orgId/edit-organisation', component: OrganisationEditComponent },
         ]
     },
-    {
-        path: 'usergroups', component: UsergroupsComponent, children: [
-            { path: '', component: UsergroupTabelComponent },
-            { path: 'new-user', component: UsergroupEditComponent },
-            { path: ':user-id', component: UsergroupDetailComponent },
-            { path: ':user-id/edit-user', component: UsergroupEditComponent },
-        ]
-    },
+    { path: 'permissions', loadChildren: () => import('./permission/permission.module').then(m => m.PermissionModule) },
+    
 
 ];
 

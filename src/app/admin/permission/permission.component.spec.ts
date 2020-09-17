@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsergroupTabelComponent } from './usergroup-tabel.component';
+import { PermissionComponent } from './permission.component';
 
-describe('UsergroupTabelComponent', () => {
-  let component: UsergroupTabelComponent;
-  let fixture: ComponentFixture<UsergroupTabelComponent>;
+describe('PermissionComponent', () => {
+  let component: PermissionComponent;
+  let fixture: ComponentFixture<PermissionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsergroupTabelComponent ]
+      declarations: [ PermissionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsergroupTabelComponent);
+    fixture = TestBed.createComponent(PermissionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

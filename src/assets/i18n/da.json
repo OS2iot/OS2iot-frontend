@@ -18,7 +18,8 @@
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
-    "ORGANISATION": "Organisationer",
+    "ORGANISATIONS": "Organisationer",
+    "PERMISSIONS": "Brugergrupper",
     "USERS": "Brugere"
   },
   "APPLICATION": {
@@ -130,6 +131,19 @@
       "NAME": "Navn"
     }
   },
+  "PERMISSION": {
+    "NAME": "Navn",
+    "ORGANISATION": "Organisation",
+    "NUMBER_OF_MEMBERS": "Antal medlemmer",
+    "TYPE": "Type af brugergruppe",
+    "NO_ORGANISATION": "N/A"
+  },
+  "PERMISSION-TYPE": {
+    "GlobalAdmin": "Global Administrator",
+    "OrganizationAdmin": "Organisations Administrator",
+    "Write": "Skrive-rettigheder",
+    "Read": "Læse-rettigheder"
+  },
   "ORGANISATION-TABLE-ROW": {
     "EDIT": "Redigér",
     "DELETE": "Slet"
@@ -148,7 +162,8 @@
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
     "EDIT-DEVICE-PROFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
-    "EDIT-ORGANISATION": "Redigér organisation"
+    "EDIT-ORGANISATION": "Redigér organisation",
+    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",

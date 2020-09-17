@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
-import { UsergroupsModule } from './usergroups/usergroups.module';
 import { UsersModule } from './users/users.module';
 import { OrganisationModule } from './organisation/organisation.module';
+import { PermissionModule } from './permission/permission.module';
 
 
 
@@ -13,7 +13,7 @@ import { OrganisationModule } from './organisation/organisation.module';
   declarations: [],
   imports: [
     AdminRoutingModule,
-    UsergroupsModule,
+    PermissionModule,
     OrganisationModule,
     UsersModule,
     CommonModule

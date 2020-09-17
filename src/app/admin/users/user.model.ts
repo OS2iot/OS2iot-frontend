@@ -1,4 +1,4 @@
-import { Permission } from '../usergroups/permission.model';
+import { PermissionResponse } from '../permission/permission.model';
 
 export class UserRequest {
     name: string;
@@ -15,7 +15,7 @@ export interface UserResponse {
     email: string;
     active: boolean;
     lastLogin: Date;
-    permissions: Permission[];
+    permissions: PermissionResponse[];
 }
 
 export interface UserGetManyResponse {
