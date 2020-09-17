@@ -11,12 +11,16 @@
         {{user.permissions}}</a>
 </td>
 <td class="position-relative">
-    <a [routerLink]="['user-detail', user.id]" routerLinkActive="active" class="application-link">
-        {{user.active | activeDeactive}}</a>
+    <p>
+        {{user.active | activeDeactive}}</p>
 </td>
 <td class="position-relative">
-    <a [routerLink]="['user-detail', user.id]" routerLinkActive="active" class="application-link">
-        {{user.lastLogin | date}}</a>
+    <div *ngIf="user.lastLogin; else noLogin">
+        <P> {{user.lastLogin | date}}</P>
+    </div>
+    <ng-template #noLogin>
+        <P>Ikke logget på endnu</P>
+    </ng-template>
 </td>
 <td class="position-relative pr-3">
     <div class="dropdown position-absolute">

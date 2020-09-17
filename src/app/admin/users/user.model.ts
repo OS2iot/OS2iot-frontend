@@ -6,6 +6,7 @@ export class User {
     updatedAt: Date;
     name: string;
     email: string;
+    password: string;
     active: boolean;
     lastLogin: Date;
     permissions: Permission[];

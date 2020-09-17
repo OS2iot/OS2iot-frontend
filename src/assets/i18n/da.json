@@ -18,7 +18,7 @@
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
-    "USERS": "Burgere"
+    "USERS": "Brugere"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -267,18 +267,23 @@
     "SAVE": "Gem",
     "NAME": "Navn",
     "EMAIL": "Email",
-    "GLOBALADMIN": "Global Administrator",
+    "GLOBALADMIN": "Global administrator",
     "STATUS": "Status",
-    "LASTLOG": "Sidste Login",
-    "EDIT": "Redigér User",
-    "CREATE": "Opret ny burger",
+    "LASTLOG": "Sidste login",
+    "EDIT": "Tilføj eller redigér bruger",
+    "CREATE": "Opret ny bruger",
     "TABLE-ROW": {
       "EDIT": "Redigér",
       "DELETE": "Slet"
     },
     "FORM": {
       "NAME": "Indtast det fulde navn på brugeren",
-      "NAME-PLACEHOLDER": "Navn"
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL": "Indtast Email addressen til brugeren",
+      "EMAIL-PLACEHOLDER": "Email",
+      "PASSWORD": "Password",
+      "PASSWORD-PLACEHOLDER": "Indtast en password",
+      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?"
     }
   }
 }

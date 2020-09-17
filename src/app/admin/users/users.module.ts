@@ -12,6 +12,7 @@ import { UserTableRowComponent } from './user-list/user-table/user-table-row/use
 import { FormModule } from '@shared/form/form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 const userRoutes: Routes = [
 
@@ -29,6 +30,7 @@ const userRoutes: Routes = [
 @NgModule({
   declarations: [UserDetailComponent, UserEditComponent, UserListComponent, UsersComponent, UserTableComponent, UserTableRowComponent],
   imports: [
+    NGMaterialModule,
     PipesModule,
     CommonModule,
     TranslateModule,

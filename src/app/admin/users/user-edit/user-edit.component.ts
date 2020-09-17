@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BackButton } from '@app/models/back-button';
 import { User } from '../user.model';
@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 
 @Component({
