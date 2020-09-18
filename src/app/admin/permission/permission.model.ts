@@ -1,17 +1,20 @@
 import { OrganisationResponse } from '../organisation/organisation.model';
 import { UserResponse } from '../users/user.model';
+import { Application } from '../../models/application';
 
 export class PermissionRequest {
-  level:
-    | PermissionType.OrganizationAdmin
-    | PermissionType.Write
-    | PermissionType.Read;
+  level: PermissionType;
+  // | PermissionType.OrganizationAdmin
+  // | PermissionType.Write
+  // | PermissionType.Read;
 
   name: string;
 
   organizationId: number;
 
   userIds: number[];
+
+  applicationIds: number[];
 }
 
 export interface PermissionResponse {
@@ -19,6 +22,7 @@ export interface PermissionResponse {
   name: string;
   users?: UserResponse[];
   organization?: OrganisationResponse;
+  applications?: Application[];
   id: number;
   createdAt: Date;
   updatedAt: Date;

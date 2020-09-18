@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { SortDir, SortCol } from 'src/app/models/sort';
 import {
   PermissionGetManyResponse,
   PermissionResponse,
+  PermissionRequest,
 } from '../../admin/permission/permission.model';
 
 @Injectable({
