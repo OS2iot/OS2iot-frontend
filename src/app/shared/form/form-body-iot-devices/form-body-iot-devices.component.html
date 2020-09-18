@@ -13,7 +13,7 @@
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
           <input attr.aria-label="Sigfox" type="radio" name="type" value="SIGFOX" class="form-check-input" required
-            [(ngModel)]="iotDevice.type">
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
             <img src="assets/images/Sigfox_Logo.png" alt="Sigfox">
           </div>
@@ -22,7 +22,7 @@
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
           <input attr.aria-label="NB-IoT" type="radio" name="type" value="NBIOT" class="form-check-input" required
-            [(ngModel)]="iotDevice.type">
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
             <img src="assets/images/nbiot.png" alt="NB-IoT">
           </div>
@@ -31,7 +31,7 @@
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
           <input attr.aria-label="LoRaWAN" type="radio" name="type" value="LORAWAN" class="form-check-input" required
-            [(ngModel)]="iotDevice.type">
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
             <img src="assets/images/lora.png" alt="LoRaWAN">
           </div>
@@ -40,7 +40,7 @@
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
           <input attr.aria-label="{{'GEN.HTTP' | translate}}" type="radio" name="type" value="GENERIC_HTTP"
-            class="form-check-input" required [(ngModel)]="iotDevice.type">
+            class="form-check-input" required [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
             <img src="assets/images/iot.png" alt="{{'GEN.HTTP' | translate}}">
           </div>
@@ -104,7 +104,7 @@
       <h3>{{'IOTDEVICE.LORAWANSETUP' | translate}}</h3>
     </div>
 
-    <div class="form-group mt-3 col-12">
+    <div class="form-group mt-3 col-12" *ngIf="iotDevice.lorawanSettings.serviceProfileID">
       <label class="form-label" for="serviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
       <select 
         id="serviceProfileID" 
@@ -123,7 +123,7 @@
       </select>
     </div>
 
-    <div class="form-group mt-3 col-12">
+    <div class="form-group mt-3 col-12" *ngIf="iotDevice.lorawanSettings.deviceProfileID">
       <label class="form-label" for="deviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
       <select 
         id="deviceProfileID" 

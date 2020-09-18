@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
 import { DeviceType } from '../../enums/device-type';
-import { LorawanSettings } from 'src/app/models/lorawan-settings';
 import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
 import { ServiceProfile, ServiceProfileResponseMany } from 'src/app/profiles/service-profiles/service-profile.model';
@@ -39,6 +38,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     public serviceProfiles: ServiceProfile[];
     public deviceProfiles: DeviceProfile[];
     iotDevice = new IotDevice();
+    editmode = false;
 
     private applicationsSubscription: Subscription;
     private serviceProfileSubscription: Subscription;
@@ -61,6 +61,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.id = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.iotDevice.applicationId && this.id) {
+            this.editmode = true;
             this.getDevice(this.id);
             this.disableChoseApplication = false;
         }
@@ -160,10 +161,19 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.errorFields = [];
         this.errorMessages = [];
         error.error.message.forEach((err) => {
-            this.errorFields.push(err.property);
-            this.errorMessages = this.errorMessages.concat(
+            if (err.property === 'lorawanSettings') {
+                err.children.forEach(element => {
+                    this.errorFields.push(element.property);
+                    this.errorMessages = this.errorMessages.concat(
+                        Object.values(element.constraints)
+                    );
+                });
+            } else {
+                this.errorFields.push(err.property);
+                this.errorMessages = this.errorMessages.concat(
                 Object.values(err.constraints)
             );
+            }
         });
     }
 

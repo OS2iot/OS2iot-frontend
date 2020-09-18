@@ -247,7 +247,19 @@
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
     },
-    "LORAWANSETUP": "LoRaWAN Specifik opsætning"
+    "LORAWANSETUP": "LoRaWAN Specifik opsætning",
+    "LORA": {
+      "DEVEUI": "Enheds EUI",
+      "SERVICEPROFILEID": "Service profil Id",
+      "DEVICEPROFILEID": "device profil Id",
+      "ACTIVATIONTYPE": "Aktivations type",
+      "OTAA": "OTAA",
+      "DEVADDR": "devADDR",
+      "NETWORKSESSIONKEY": "Netværks session key",
+      "APPLICATIONSESSIONKEY": "Applikation session key",
+      "ISDISABLED": "Er aktiv",
+      "SKIPFCNTCHECK": "skipfcntcheck"
+    }
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
