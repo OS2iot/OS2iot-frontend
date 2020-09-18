@@ -306,7 +306,19 @@
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
       "CANCEL": "Cancel",
-      "SAVE": "Save"
+      "SAVE": "Save",
+      "OTAA-ABP": "Join (OTAA / ABP)",
+      "MACVERSION_PLACEHOLDER": "1.0.0",
+      "MAXEIRP_PLACEHOLDER": "0",
+      "GEOLOCBUFFERTTL_PLACEHOLDER": "0",
+      "GEOLOCMINBUFFERSIZE_PLACEHOLDER": "0",
+      "RXDROFFSET1_PLACEHOLDER": "0",
+      "RXDATARATE2_PLACEHOLDER": "0",
+      "RXFREQ2_PLACEHOLDER": "0",
+      "CLASSBTIMEOUT_PLACEHOLDER": "0",
+      "PINGSLOTDR_PLACEHOLDER": "0",
+      "PINGSLOTFREQ_PLACEHOLDER": "0",
+      "CLASSCTIMEOUT_PLACEHOLDER": "0"
     }
   }
 }
