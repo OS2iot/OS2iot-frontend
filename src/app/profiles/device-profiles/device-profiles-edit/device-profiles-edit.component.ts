@@ -19,7 +19,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   public errorMessage: string;
-  public errorMessages: string;
+  public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
   public title = '';
@@ -88,9 +88,17 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessages = '';
+    this.errorMessage = '';
+    this.errorMessages = [];
     if (error.error?.chirpstackError) {
-        this.errorMessages = error.error.chirpstackError.message;
+        this.errorMessage = error.error.chirpstackError.message;
+    } else if (error.error?.message?.length > 0) {
+      error.error.message[0].children.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+          Object.values(err.constraints)
+        );
+      });
     } else {
       this.errorMessage = error.message;
     }

@@ -2,8 +2,13 @@
 <form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
-            <li>
-                {{errorMessages}}
+            <div *ngIf="errorMessages">
+                <li  *ngFor="let error of errorMessages">
+                    {{error}}
+                  </li>
+            </div>
+            <li *ngIf="errorMessage">
+                {{errorMessage}}
             </li>
         </ul>
     </div>
@@ -91,11 +96,11 @@
         </mat-tab>
         <mat-tab label="{{'PROFILES.DEVICE_PROFILE.OTAA-ABP' | translate}}">
 
-            <mat-checkbox [(ngModel)]="deviceProfile.supports32BitFCnt" name="supports32BitFCnt">
+            <mat-checkbox [(ngModel)]="deviceProfile.supportsJoin" name="supportsJoin">
                 {{'PROFILES.DEVICE_PROFILE.OTAA-ACTIVATE' | translate}}
             </mat-checkbox>
 
-            <ng-container *ngIf="!deviceProfile.supports32BitFCnt">
+            <ng-container *ngIf="!deviceProfile.supportsJoin">
                 <div class="col-xs-12 form-group">
                     <label for="rxDelay1"
                         class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDELAY1' | translate}}</label>
@@ -193,14 +198,14 @@
                             name="pingSlotPeriod"
                             [(ngModel)]="deviceProfile.pingSlotPeriod"
                             [value]="deviceProfile.pingSlotPeriod">
-                            <option value="1" >Every second</option>
-                            <option value="2" >Every 2 seconds</option>
-                            <option value="4" >Every 4 seconds</option>
-                            <option value="8" >Every 8 seconds</option>
-                            <option value="16" >Every 16 seconds</option>
-                            <option value="32" >Every 32 seconds</option>
-                            <option value="64" >Every 64 seconds</option>
-                            <option value="128" >Every 128 seconds</option>
+                            <option value="32" >Every second</option>
+                            <option value="64" >Every 2 seconds</option>
+                            <option value="128" >Every 4 seconds</option>
+                            <option value="256" >Every 8 seconds</option>
+                            <option value="512" >Every 16 seconds</option>
+                            <option value="1024" >Every 32 seconds</option>
+                            <option value="2048" >Every 64 seconds</option>
+                            <option value="4096" >Every 128 seconds</option>
                         </select>
                     </mat-form-field>
                 </div>
