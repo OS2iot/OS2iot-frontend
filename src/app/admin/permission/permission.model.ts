@@ -1,5 +1,5 @@
-import { User } from '../users/user.model';
 import { OrganisationResponse } from '../organisation/organisation.model';
+import { UserResponse } from '../users/user.model';
 
 export class PermissionRequest {
   level:
@@ -17,8 +17,8 @@ export class PermissionRequest {
 export interface PermissionResponse {
   type: PermissionType;
   name: string;
-  users?: User[];
-  organization?: OrganisationResponse
+  users?: UserResponse[];
+  organization?: OrganisationResponse;
   id: number;
   createdAt: Date;
   updatedAt: Date;

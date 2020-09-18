@@ -54,7 +54,12 @@ export class UserEditComponent implements OnInit {
     this.subscription = this.userService
       .getOne(id)
       .subscribe((response) => {
-        this.user = response;
+        this.user.name = response.name;
+        this.user.email = response.email;
+        this.user.id = response.id;
+        this.user.active = response.active;
+        // We cannot set the password.
+        this.user.password = ""; 
       });
   }
 

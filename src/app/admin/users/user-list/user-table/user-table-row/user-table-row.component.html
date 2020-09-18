@@ -6,7 +6,7 @@
     <p>{{user.email}}</p>
 </td>
 <td class="position-relative">
-    <p>{{user.permissions}}</p>
+    <p>{{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}</p>
 </td>
 <td class="position-relative">
     <p>

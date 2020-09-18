@@ -1,6 +1,7 @@
 import { PermissionResponse } from '../permission/permission.model';
 
 export class UserRequest {
+    id: number;
     name: string;
     email: string;
     password: string;

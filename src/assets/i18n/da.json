@@ -351,6 +351,10 @@
       "PERMISSIONS": "Brugergrupper",
       "APPLICATIONS": "Applikationer",
       "NAME-PLACEHOLDER": "Navn"
+    },
+    "GLOBAL_ADMIN": {
+      "TRUE": "Ja",
+      "FALSE": ""
     }
   }
 }
