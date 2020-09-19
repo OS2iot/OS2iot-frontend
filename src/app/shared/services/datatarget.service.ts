@@ -37,7 +37,7 @@ export class DatatargetService {
 
   }
 
-  create(datatarget: Datatarget): Observable<DatatargetData> {
+  create(datatarget: Datatarget): Observable<any> {
     return this.restService.post(this.url,datatarget);
   }
 

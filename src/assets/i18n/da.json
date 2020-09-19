@@ -249,7 +249,8 @@
     "ABP": "Activation By Personalisation",
     "CHOOSE-SERVICEPROFILE": "Vælg service profile",
     "CHOOSE-DEVICE": "Vælg device profile",
-    "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA"
+    "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
+    "ADD-RELATIONS": "Tilføj device og payload decoder"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",

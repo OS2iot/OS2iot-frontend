@@ -20,7 +20,7 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy {
     @Input() application: Application;
     private applicationSubscription: Subscription;
     public iotDevices: IotDevice[];
-    public pageOffset: number = 0;
+    public pageOffset = 0;
     public pageTotal: number;
 
     constructor(
