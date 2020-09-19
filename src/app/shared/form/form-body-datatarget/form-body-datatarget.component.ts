@@ -12,8 +12,8 @@ import { ApplicationService } from '@shared/services/application.service';
 import { Application } from '@app/models/application';
 import { IotDevice } from '@my-applications/iot-devices/iot-device.model';
 import { PayloadDecoderService } from '@shared/services/payload-decoder.service';
-import { PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
-import { PayloadDeviceData } from '@app/models/payload-device-data';
+import { PayloadDecoder, PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
+import { PayloadDeviceDatatarget } from '@app/models/payload-device-data';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -36,6 +36,9 @@ export class FormBodyDatatargetComponent implements OnInit {
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
+
+  deviceFormControl = new FormControl();
+  payloadDecoderFormControl = new FormControl();
 
   payloadDeviceData: PayloadDeviceData[];
   newDynamic: any = {};
