@@ -104,6 +104,14 @@
       <h3>{{'IOTDEVICE.LORAWANSETUP' | translate}}</h3>
     </div>
 
+    <div class="form-group mt-5">
+      <label class="form-label" for="devEUI">{{'QUESTION.DEVEUI' | translate}}*</label>
+      <input type="text" id="devEUI" name="devEUI" maxLength="16"
+        [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate" class="form-control"
+        [(ngModel)]="iotDevice.lorawanSettings.devEUI"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devEUI'), 'is-valid' : formFailedSubmit && !errorFields.includes('devEUI')}">
+    </div>
+
     <ng-container *ngIf="iotDevice.lorawanSettings.serviceProfileID || serviceProfiles">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="serviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
@@ -126,13 +134,14 @@
     </ng-container>
     <ng-container *ngIf="iotDevice.lorawanSettings.deviceProfileID || deviceProfiles">
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="deviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
+        <label class="form-label" for="deviceProfileID">{{'QUESTION.CHOOSE-DEVICE' | translate}}</label>*
         <select 
           id="deviceProfileID" 
           class="form-select" 
           name="deviceProfileID" 
           [(ngModel)]="iotDevice.lorawanSettings.deviceProfileID" 
           required
+          (change)="onChangeDeviceProfile($event.target.value)"
           [value]="iotDevice.lorawanSettings.deviceProfileID"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceProfileID')}">
           <option 
@@ -144,24 +153,9 @@
         </select>
       </div>
     </ng-container>
-    
-    <div class="form-group mt-5">
-      <label class="form-label" for="devEUI">{{'QUESTION.DEVEUI' | translate}}*</label>
-      <input type="text" id="devEUI" name="devEUI" maxLength="16"
-        [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate" class="form-control"
-        [(ngModel)]="iotDevice.lorawanSettings.devEUI"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devEUI'), 'is-valid' : formFailedSubmit && !errorFields.includes('devEUI')}">
-    </div>
 
     <div class="form-group mt-5">
-      
-      <mat-checkbox 
-          [(ngModel)]="iotDevice.lorawanSettings.OTAA" 
-          name="OTAA">
-            {{'QUESTION.OTAA-ACTIVATE' | translate}}
-        </mat-checkbox>
-
-      <ng-container *ngIf="iotDevice.lorawanSettings.OTAA">
+      <ng-container *ngIf="OTAA">
         <div class="form-group mt-5">
           <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
           <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
@@ -171,7 +165,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="!iotDevice.lorawanSettings.OTAA">
+      <ng-container *ngIf="!OTAA">
         <div class="form-group mt-5">
           <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
           <input type="text" id="devAddr" name="devAddr" maxLength="8"

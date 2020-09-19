@@ -7,6 +7,10 @@ import { environment } from 'src/environments/environment';
 import { BackButton } from 'src/app/models/back-button';
 import { IoTDeviceService } from '../iot-device.service';
 import { IotDevice } from '../iot-device.model';
+import { DeviceProfileService } from '@shared/services/device-profile.service';
+import { DeviceProfileResponse } from '@profiles/device-profiles/device-profile.model';
+import { ServiceProfileService } from '@shared/services/service-profile.service';
+import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-profile.model';
 
 @Component({
     selector: 'app-iot-device',
@@ -20,6 +24,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public latitude: number;
     public longitude: number;
     public iotDeviceSubscription: Subscription;
+    public deviceProfileSubscription: Subscription;
+    public OTAA = true;
+    public deviceProfileName: string;
+    public serviceProfileName: string;
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
@@ -30,7 +38,9 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private deviceProfileService: DeviceProfileService,
+        private serviceProfileService: ServiceProfileService
     ) { }
 
     ngOnInit(): void {
@@ -54,6 +64,21 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             if (this.device.location) {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];
+            }
+
+            if (this.device?.lorawanSettings?.deviceProfileID) {
+                this.deviceProfileSubscription = this.deviceProfileService.getOne(this.device.lorawanSettings.deviceProfileID)
+                    .subscribe( (response) => {
+                        this.OTAA = response.deviceProfile.supportsJoin;
+                        this.deviceProfileName = response.deviceProfile.name;
+                });
+            }
+
+            if (this.device?.lorawanSettings?.serviceProfileID) {
+                this.deviceProfileSubscription = this.serviceProfileService.getOne(this.device.lorawanSettings.serviceProfileID)
+                    .subscribe( (response: ServiceProfileResponseOne) => {
+                        this.serviceProfileName = response.serviceProfile.name;
+                });
             }
         });
     }

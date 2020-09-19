@@ -195,6 +195,7 @@
     "OTAA": "Over The Air Activation",
     "ABP": "Activation By Personalisation",
     "CHOOSE-SERVICEPROFILE": "Vælg service profile",
+    "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA"
   },
   "QUESTION-LORA-GATEWAY": {
@@ -250,8 +251,8 @@
     "LORAWANSETUP": "LoRaWAN Specifik opsætning",
     "LORA": {
       "DEVEUI": "Enheds EUI",
-      "SERVICEPROFILEID": "Service profil Id",
-      "DEVICEPROFILEID": "device profil Id",
+      "SERVICEPROFILE": "Service profil",
+      "DEVICEPROFILE": "device profil",
       "ACTIVATIONTYPE": "Aktivations type",
       "OTAA": "OTAA",
       "DEVADDR": "devADDR",

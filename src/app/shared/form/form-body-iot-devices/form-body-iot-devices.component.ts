@@ -39,6 +39,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     public deviceProfiles: DeviceProfile[];
     iotDevice = new IotDevice();
     editmode = false;
+    public OTAA = true;
 
     private applicationsSubscription: Subscription;
     private serviceProfileSubscription: Subscription;
@@ -92,6 +93,11 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
             });
+    }
+
+    onChangeDeviceProfile(deviceProfileId: string) {
+        const device = this.deviceProfiles.find( deviceProfile => deviceProfile.id === deviceProfileId);
+        this.OTAA = !this.OTAA; // Change to: this.OTAA = device.lorawanSettings.supportsJoin *** when iot-447 is done
     }
 
     getServiceProfiles() {
