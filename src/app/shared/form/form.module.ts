@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormBodyDatatargetComponent } from './form-body-datatarget/form-body-datatarget.component';
 import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body-lora-gateway.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
   ],
   imports: [
     CommonModule,
+    FontAwesomeModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

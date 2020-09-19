@@ -12,7 +12,7 @@ import { ApplicationService } from '@shared/services/application.service';
 import { Application } from '@app/models/application';
 import { IotDevice } from '@my-applications/iot-devices/iot-device.model';
 import { PayloadDecoderService } from '@shared/services/payload-decoder.service';
-import { PayloadDecoder, PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
+import { PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
 import { PayloadDeviceData } from '@app/models/payload-device-data';
 
 @Component({
@@ -36,9 +36,6 @@ export class FormBodyDatatargetComponent implements OnInit {
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
-
-  deviceFormControl = new FormControl();
-  payloadDecoderFormControl = new FormControl();
 
   payloadDeviceData: PayloadDeviceData[];
   newDynamic: any = {};
@@ -85,6 +82,10 @@ export class FormBodyDatatargetComponent implements OnInit {
     } else {
       this.createDatatarget();
     }
+  }
+
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
   }
 
   updateDatatarget() {
