@@ -257,7 +257,6 @@
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle"
     }
-    
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
