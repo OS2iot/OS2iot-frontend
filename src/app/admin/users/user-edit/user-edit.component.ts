@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit {
         this.title = translations['FORM.EDIT-USERS'];
         this.submitButton = translations['USERS.SAVE'];
       });
-    this.id = +this.route.snapshot.paramMap.get('orgId');
+    this.id = +this.route.snapshot.paramMap.get('org-id');
     if (this.id > 0) {
       this.getUser(this.id);
     }

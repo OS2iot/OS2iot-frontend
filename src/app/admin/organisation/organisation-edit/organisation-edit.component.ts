@@ -44,7 +44,7 @@ export class OrganisationEditComponent implements OnInit {
         this.title = translations['FORM.EDIT-ORGANISATION'];
         this.submitButton = translations['ORGANISATION.SAVE'];
       });
-    this.id = +this.route.snapshot.paramMap.get('orgId');
+    this.id = +this.route.snapshot.paramMap.get('org-id');
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }

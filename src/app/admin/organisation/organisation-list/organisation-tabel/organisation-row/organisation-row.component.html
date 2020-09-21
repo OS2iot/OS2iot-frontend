@@ -1,9 +1,15 @@
 <td class="position-relative">
   <a [routerLink]="[organisation.id]" routerLinkActive="active" class="organisation-link">
     {{organisation.name}}</a>
-  </td>
+</td>
 <td class="position-relative pr-3">
-  {{organisation.applications.length}}
+  <div *ngIf="organisation.applications; else noApplications">
+    {{organisation.applications.length}}
+  </div>
+  <ng-template #noApplications>
+    <div>Ingen applikationer er tilknyttet endnu</div>
+  </ng-template>
+
   <div class="dropdown position-absolute">
     <a href="#" role="button" id="tableRowDropdown-{{organisation.id}}" class="applicationRow__edit dropdown-toggle"
       data-toggle="dropdown" aria-expanded="false"

@@ -44,7 +44,7 @@ export class OrganisationDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.id = +this.route.snapshot.paramMap.get('orgId');
+    this.id = +this.route.snapshot.paramMap.get('org-id');
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }
