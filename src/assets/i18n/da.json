@@ -28,7 +28,8 @@
     "DELETE": "Slet applikation",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
-    "ATTACHED-IOT": "Tilknyttede IoT enheder"
+    "ATTACHED-IOT": "Tilknyttede IoT enheder",
+    "DATATARGET-SHOW": "Tilknyttede datatargets"
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -199,17 +200,17 @@
     "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
     "APPLICATIONSESSIONKEY": "Applicationsessionkey",
     "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
-    "ISDISABLED": "Enheden skal deaktiveres",
-    "ISDISABLED-NO": "Nej",
-    "ISDISABLED-YES": "Ja",
     "DEVEUI": "Enheds EUI",
     "DEVEUI-PLACEHOLDER": "Enheds EUI",
     "SKIPFCNTCHECK": "SkipFCntCheck",
     "SKIPFCNTCHECK-NO": "Nej",
     "SKIPFCNTCHECK-YES": "Ja",
     "OTAA": "Over The Air Activation",
+    "OTAA-ABP-CONFIG-HELP": "Du vælger din aktivation type via device profile",
     "ABP": "Activation By Personalisation",
-    "CHOOSE-SERVICEPROFILE": "Vælg service profile"
+    "CHOOSE-SERVICEPROFILE": "Vælg service profile",
+    "CHOOSE-DEVICE": "Vælg device profile",
+    "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA"
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
@@ -261,7 +262,18 @@
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
     },
-    "LORAWANSETUP": "LoRaWAN Specifik opsætning"
+    "LORAWANSETUP": "LoRaWAN Specifik opsætning",
+    "LORA": {
+      "DEVEUI": "Enheds EUI",
+      "SERVICEPROFILE": "Service profil",
+      "DEVICEPROFILE": "device profil",
+      "ACTIVATIONTYPE": "Aktivations type",
+      "OTAA": "OTAA",
+      "DEVADDR": "devADDR",
+      "NETWORKSESSIONKEY": "Netværks session key",
+      "APPLICATIONSESSIONKEY": "Applikation session key",
+      "SKIPFCNTCHECK": "skipfcntcheck"
+    }
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
@@ -320,7 +332,19 @@
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
       "CANCEL": "Cancel",
-      "SAVE": "Save"
+      "SAVE": "Save",
+      "OTAA-ABP": "Join (OTAA / ABP)",
+      "MACVERSION_PLACEHOLDER": "1.0.0",
+      "MAXEIRP_PLACEHOLDER": "0",
+      "GEOLOCBUFFERTTL_PLACEHOLDER": "0",
+      "GEOLOCMINBUFFERSIZE_PLACEHOLDER": "0",
+      "RXDROFFSET1_PLACEHOLDER": "0",
+      "RXDATARATE2_PLACEHOLDER": "0",
+      "RXFREQ2_PLACEHOLDER": "0",
+      "CLASSBTIMEOUT_PLACEHOLDER": "0",
+      "PINGSLOTDR_PLACEHOLDER": "0",
+      "PINGSLOTFREQ_PLACEHOLDER": "0",
+      "CLASSCTIMEOUT_PLACEHOLDER": "0"
     }
   },
   "USERS": {

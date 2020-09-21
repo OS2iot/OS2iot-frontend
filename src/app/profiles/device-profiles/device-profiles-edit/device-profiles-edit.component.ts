@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,13 +13,13 @@ import { DeviceProfile } from '../device-profile.model';
   templateUrl: './device-profiles-edit.component.html',
   styleUrls: ['./device-profiles-edit.component.scss']
 })
-export class DeviceProfilesEditComponent implements OnInit {
+export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;
   deviceProfile = new DeviceProfile();
   subscription: Subscription;
 
   public errorMessage: string;
-  public errorMessages: string;
+  public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
   public title = '';
@@ -35,9 +35,9 @@ export class DeviceProfilesEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.translate.get(['FORM.EDIT-PAYLOAD-DECODER'])
+    this.translate.get(['FORM.EDIT-DEVICE-PROFILE'])
       .subscribe(translations => {
-        this.title = translations['FORM.EDIT-PAYLOAD-DECODER'];
+        this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
       });
 
     this.id = this.route.snapshot.paramMap.get('deviceId');
@@ -88,9 +88,17 @@ export class DeviceProfilesEditComponent implements OnInit {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessages = '';
+    this.errorMessage = '';
+    this.errorMessages = [];
     if (error.error?.chirpstackError) {
-        this.errorMessages = error.error.chirpstackError.message;
+        this.errorMessage = error.error.chirpstackError.message;
+    } else if (error.error?.message?.length > 0) {
+      error.error.message[0].children.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+          Object.values(err.constraints)
+        );
+      });
     } else {
       this.errorMessage = error.message;
     }
@@ -109,4 +117,11 @@ export class DeviceProfilesEditComponent implements OnInit {
       this.create();
     }
   }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+        this.subscription.unsubscribe();
+    }
+}
 }

@@ -70,8 +70,83 @@
                 </ng-template>
             </div>
         </div>
-    </div>
 
+        <ng-container *ngIf="device.type === 'LORAWAN' && device.lorawanSettings">
+            <div class="col-12 py-4">
+                <div class="col-12 col-sm-4">
+                    <h4>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</h4>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <p>{{device.lorawanSettings.devEUI}}</p>
+                </div>
+            </div>
+
+            <div class="col-12 py-4">
+                <div class="col-12 col-sm-4">
+                    <h4>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</h4>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <p>{{deviceProfileName}}</p>
+                </div>
+            </div>
+
+            <div class="col-12 py-4">
+                <div class="col-12 col-sm-4">
+                    <h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <p>{{serviceProfileName}}</p>
+                </div>
+            </div>
+            
+            <ng-container *ngIf="OTAA" class="col-12 py-4">
+                <div class="col-12 col-sm-4">
+                    <h4>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</h4>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <p>{{device.lorawanSettings?.OTAAapplicationKey}}</p>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="!OTAA">
+                <div class="col-12 py-4">
+                    <div class="col-12 col-sm-4">
+                        <h4>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</h4>
+                    </div>
+                    <div class="col-12 pt-2 col-sm-8">
+                        <p>{{device.lorawanSettings?.devAddr}}</p>
+                    </div>
+                </div>
+    
+                <div class="col-12 py-4">
+                    <div class="col-12 col-sm-4">
+                        <h4>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</h4>
+                    </div>
+                    <div class="col-12 pt-2 col-sm-8">
+                        <p>{{device.lorawanSettings?.activationType}}</p>
+                    </div>
+                </div>
+    
+                <div class="col-12 py-4">
+                    <div class="col-12 col-sm-4">
+                        <h4>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</h4>
+                    </div>
+                    <div class="col-12 pt-2 col-sm-8">
+                        <p>{{device.lorawanSettings?.applicationSessionKey}}</p>
+                    </div>
+                </div>
+            </ng-container>
+
+            <div class="col-12 py-4">
+                <div class="col-12 col-sm-4">
+                    <h4>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</h4>
+                </div>
+                <div class="col-12 pt-2 col-sm-8">
+                    <p>{{device.lorawanSettings?.skipFCntCheck}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
     <ng-container *ngIf="device.type">
         <div class="col-12 py-4">
             <div class="col-12 col-sm-4">

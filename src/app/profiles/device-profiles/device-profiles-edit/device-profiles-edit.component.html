@@ -2,191 +2,168 @@
 <form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
-            <li>
-                {{errorMessages}}
+            <div *ngIf="errorMessages">
+                <li  *ngFor="let error of errorMessages">
+                    {{error}}
+                  </li>
+            </div>
+            <li *ngIf="errorMessage">
+                {{errorMessage}}
             </li>
         </ul>
     </div>
     <mat-tab-group animationDuration="0ms">
         <mat-tab label="Generelt">
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="name"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.NAME' | translate}}</label>
-                    <input type="text" 
-                        class="form-control" 
-                        id="name" 
-                        name="name"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.NAME_PLACEHOLDER' | translate" 
-                        maxlength="50" 
-                        required
-                        [(ngModel)]="deviceProfile.name">
-                </div>
+            <div class="col-xs-12 form-group">
+                <label for="name"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.NAME' | translate}}</label>
+                <input type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.NAME_PLACEHOLDER' | translate" 
+                    maxlength="50" 
+                    required
+                    [(ngModel)]="deviceProfile.name">
+            </div>
+            
+            <div class="col-xs-12 form-group">
+                <label for="macVersion"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MACVERSION' | translate}}</label>
+                <input type="text" 
+                    class="form-control" 
+                    id="macVersion" 
+                    name="macVersion"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" 
+                    maxlength="50" 
+                    required
+                    [(ngModel)]="deviceProfile.macVersion">
+            </div>
+            <div class="col-xs-12 form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'PROFILES.DEVICE_PROFILE.REGPARAMSREVISION' | translate}}</mat-label>
+                    <select matNativeControl 
+                        required 
+                        name="regParamsRevision"
+                        [(ngModel)]="deviceProfile.regParamsRevision"
+                        [value]="deviceProfile.regParamsRevision">
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="col-xs-12 form-group">
+                <label for="maxEIRP"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MAXEIRP' | translate}}</label>
+                <input type="number"
+                    class="form-control" 
+                    id="maxEIRP" 
+                    name="maxEIRP"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.MAXEIRP_PLACEHOLDER' | translate" 
+                    maxlength="50"
+                    min="0" 
+                    required
+                    [(ngModel)]="deviceProfile.maxEIRP">
             </div>
 
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="macVersion"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MACVERSION' | translate}}</label>
-                    <input type="text" 
-                        class="form-control" 
-                        id="macVersion" 
-                        name="macVersion"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" 
-                        maxlength="50" 
-                        required
-                        [(ngModel)]="deviceProfile.macVersion">
-                </div>
+            <div class="col-xs-12 form-group">
+                <label for="geolocBufferTTL"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL' | translate}}</label>
+                <input type="number"
+                    min="0"
+                    class="form-control" 
+                    id="geolocBufferTTL" 
+                    name="geolocBufferTTL"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL_PLACEHOLDER' | translate" 
+                    maxlength="50" 
+                    required
+                    [(ngModel)]="deviceProfile.geolocBufferTTL">
             </div>
 
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PROFILES.DEVICE_PROFILE.REGPARAMSREVISION' | translate}}</mat-label>
-                <select matNativeControl 
-                    required 
-                    name="regParamsRevision"
-                    [(ngModel)]="deviceProfile.regParamsRevision"
-                    [value]="deviceProfile.regParamsRevision">
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                </select>
-            </mat-form-field>
-
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="maxEIRP"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MAXEIRP' | translate}}</label>
-                    <input type="number"
-                        class="form-control" 
-                        id="maxEIRP" 
-                        name="maxEIRP"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.MAXEIRP_PLACEHOLDER' | translate" 
-                        maxlength="50"
-                        min="0" 
-                        required
-                        [(ngModel)]="deviceProfile.maxEIRP">
-                </div>
+            <div class="col-xs-12 form-group">
+                <label for="geolocMinBufferSize"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE' | translate}}</label>
+                <input type="number"
+                    min="0"
+                    class="form-control" 
+                    id="geolocMinBufferSize" 
+                    name="geolocMinBufferSize"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" 
+                    maxlength="50" 
+                    required
+                    [(ngModel)]="deviceProfile.geolocMinBufferSize">
             </div>
-
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="geolocBufferTTL"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL' | translate}}</label>
-                    <input type="number"
-                        min="0"
-                        class="form-control" 
-                        id="geolocBufferTTL" 
-                        name="geolocBufferTTL"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCBUFFERTTL_PLACEHOLDER' | translate" 
-                        maxlength="50" 
-                        required
-                        [(ngModel)]="deviceProfile.geolocBufferTTL">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="geolocMinBufferSize"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE' | translate}}</label>
-                    <input type="number"
-                        min="0"
-                        class="form-control" 
-                        id="geolocMinBufferSize" 
-                        name="geolocMinBufferSize"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" 
-                        maxlength="50" 
-                        required
-                        [(ngModel)]="deviceProfile.geolocMinBufferSize">
-                </div>
-            </div>
-
-
-
         </mat-tab>
         <mat-tab label="{{'PROFILES.DEVICE_PROFILE.OTAA-ABP' | translate}}">
 
-            <mat-checkbox [(ngModel)]="deviceProfile.supports32BitFCnt" name="supports32BitFCnt">
+            <mat-checkbox [(ngModel)]="deviceProfile.supportsJoin" name="supportsJoin">
                 {{'PROFILES.DEVICE_PROFILE.OTAA-ACTIVATE' | translate}}
             </mat-checkbox>
 
-            <ng-container *ngIf="!deviceProfile.supports32BitFCnt">
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="rxDelay1"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDELAY1' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="rxDelay1" 
-                            name="rxDelay1"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDELAY1_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.rxDelay1">
-                    </div>
+            <ng-container *ngIf="!deviceProfile.supportsJoin">
+                <div class="col-xs-12 form-group">
+                    <label for="rxDelay1"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDELAY1' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="rxDelay1" 
+                        name="rxDelay1"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.RXDELAY1_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.rxDelay1">
                 </div>
-                RX1 delay (valid values are 0 - 15).
-        
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="rxDROffset1"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDROFFSET1' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="rxDROffset1" 
-                            name="rxDROffset1"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDROFFSET1_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.rxDROffset1">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="rxDROffset1"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDROFFSET1' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="rxDROffset1" 
+                        name="rxDROffset1"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.RXDROFFSET1_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.rxDROffset1">
                 </div>
-    
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="rxDataRate2"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDATARATE2' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="rxDataRate2" 
-                            name="rxDataRate2"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXDATARATE2_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.rxDataRate2">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="rxDataRate2"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXDATARATE2' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="rxDataRate2" 
+                        name="rxDataRate2"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.RXDATARATE2_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.rxDataRate2">
                 </div>
-    
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="rxFreq2"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXFREQ2' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="rxFreq2" 
-                            name="rxFreq2"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.RXFREQ2_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.rxFreq2">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="rxFreq2"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.RXFREQ2' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="rxFreq2" 
+                        name="rxFreq2"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.RXFREQ2_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.rxFreq2">
                 </div>
-
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="factoryPresetFreqsInput"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS' | translate}}</label>
-                        <input type="text" 
-                            class="form-control" 
-                            id="factoryPresetFreqsInput" 
-                            name="factoryPresetFreqsInput"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS_PLACEHOLDER' | translate" 
-                            maxlength="50" 
-                            required
-                            [(ngModel)]="deviceProfile.factoryPresetFreqsInput">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="factoryPresetFreqsInput"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS' | translate}}</label>
+                    <input type="text" 
+                        class="form-control" 
+                        id="factoryPresetFreqsInput" 
+                        name="factoryPresetFreqsInput"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.FACTORYPRESETFREQS_PLACEHOLDER' | translate" 
+                        maxlength="50" 
+                        required
+                        [(ngModel)]="deviceProfile.factoryPresetFreqsInput">
                 </div>
             </ng-container>
         </mat-tab>
@@ -199,75 +176,66 @@
             </mat-checkbox>
 
             <ng-container *ngIf="deviceProfile.supportsClassB">
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="classBTimeout"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="classBTimeout" 
-                            name="classBTimeout"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.classBTimeout">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="classBTimeout"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="classBTimeout" 
+                        name="classBTimeout"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.classBTimeout">
                 </div>
    
-                <div class="row">
-                    <div class="col-xs-12 form-group">
+                <div class="col-xs-12 form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD' | translate}}</mat-label>
+                        <select matNativeControl 
+                            required 
+                            name="pingSlotPeriod"
+                            [(ngModel)]="deviceProfile.pingSlotPeriod"
+                            [value]="deviceProfile.pingSlotPeriod">
+                            <option value="32" >Every second</option>
+                            <option value="64" >Every 2 seconds</option>
+                            <option value="128" >Every 4 seconds</option>
+                            <option value="256" >Every 8 seconds</option>
+                            <option value="512" >Every 16 seconds</option>
+                            <option value="1024" >Every 32 seconds</option>
+                            <option value="2048" >Every 64 seconds</option>
+                            <option value="4096" >Every 128 seconds</option>
+                        </select>
+                    </mat-form-field>
+                </div>
+    
+                <div class="col-xs-12 form-group">
+                    <label for="pingSlotDR"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTDR' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="pingSlotDR" 
+                        name="pingSlotDR"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTDR_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0"
+                        required
+                        [(ngModel)]="deviceProfile.pingSlotDR">
+                </div>
 
-                        <mat-form-field appearance="fill">
-                            <mat-label>{{'PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD' | translate}}</mat-label>
-                            <select matNativeControl 
-                                required 
-                                name="pingSlotPeriod"
-                                [(ngModel)]="deviceProfile.pingSlotPeriod"
-                                [value]="deviceProfile.pingSlotPeriod">
-                              <option value="1" >Every second</option>
-                              <option value="2" >Every 2 seconds</option>
-                              <option value="4" >Every 4 seconds</option>
-                              <option value="8" >Every 8 seconds</option>
-                              <option value="16" >Every 16 seconds</option>
-                              <option value="32" >Every 32 seconds</option>
-                              <option value="64" >Every 64 seconds</option>
-                              <option value="128" >Every 128 seconds</option>
-                            </select>
-                        </mat-form-field>
-                    </div>
-                </div>
-    
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="pingSlotDR"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTDR' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="pingSlotDR" 
-                            name="pingSlotDR"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTDR_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0"
-                            required
-                            [(ngModel)]="deviceProfile.pingSlotDR">
-                    </div>
-                </div>
-    
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="pingSlotFreq"
-                            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ' | translate}}</label>
-                        <input type="number" 
-                            class="form-control" 
-                            id="pingSlotFreq" 
-                            name="pingSlotFreq"
-                            [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ_PLACEHOLDER' | translate" 
-                            maxlength="50"
-                            min="0" 
-                            required
-                            [(ngModel)]="deviceProfile.pingSlotFreq">
-                    </div>
+                <div class="col-xs-12 form-group">
+                    <label for="pingSlotFreq"
+                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ' | translate}}</label>
+                    <input type="number" 
+                        class="form-control" 
+                        id="pingSlotFreq" 
+                        name="pingSlotFreq"
+                        [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ_PLACEHOLDER' | translate" 
+                        maxlength="50"
+                        min="0" 
+                        required
+                        [(ngModel)]="deviceProfile.pingSlotFreq">
                 </div>
             </ng-container>
         </mat-tab>
@@ -278,21 +246,18 @@
                 name="supportsClassC">
                 {{'PROFILES.DEVICE_PROFILE.SUPPORTSCLASSC_ACTIVATE' | translate}}
             </mat-checkbox>
-
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <label for="classCTimeout"
-                        class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT' | translate}}</label>
-                    <input type="number" 
-                        class="form-control" 
-                        id="classCTimeout" 
-                        name="classCTimeout"
-                        [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT_PLACEHOLDER' | translate" 
-                        maxlength="50"
-                        min="0" 
-                        required
-                        [(ngModel)]="deviceProfile.classCTimeout">
-                </div>
+            <div class="col-xs-12 form-group">
+                <label for="classCTimeout"
+                    class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT' | translate}}</label>
+                <input type="number" 
+                    class="form-control" 
+                    id="classCTimeout" 
+                    name="classCTimeout"
+                    [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT_PLACEHOLDER' | translate" 
+                    maxlength="50"
+                    min="0" 
+                    required
+                    [(ngModel)]="deviceProfile.classCTimeout">
             </div>
         </mat-tab>
     </mat-tab-group>

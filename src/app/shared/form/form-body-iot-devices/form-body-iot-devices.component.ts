@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
 import { DeviceType } from '../../enums/device-type';
-import { LorawanSettings } from 'src/app/models/lorawan-settings';
 import { IotDevice } from 'src/app/my-applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from 'src/app/my-applications/iot-devices/iot-device.service';
 import { ServiceProfile, ServiceProfileResponseMany } from 'src/app/profiles/service-profiles/service-profile.model';
@@ -28,7 +27,6 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     @Input() application: Application;
     public form: FormGroup;
     public payLoad = '';
-    public deviceSubscription: Subscription;
     public errorMessages: any;
     public errorFields: string[];
     public formFailedSubmit = false;
@@ -39,10 +37,14 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     public serviceProfiles: ServiceProfile[];
     public deviceProfiles: DeviceProfile[];
     iotDevice = new IotDevice();
+    editmode = false;
+    public OTAA = true;
 
+    public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
-    private serviceProfileSubscription: Subscription;
+    private serviceProfilesSubscription: Subscription;
     private deviceProfileSubscription: Subscription;
+    private devicesProfileSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -61,6 +63,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.id = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.iotDevice.applicationId && this.id) {
+            this.editmode = true;
             this.getDevice(this.id);
             this.disableChoseApplication = false;
         }
@@ -93,15 +96,22 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
             });
     }
 
+    onChangeDeviceProfile(deviceProfileId: string) {
+        this.deviceProfileSubscription = this.deviceProfileService.getOne(deviceProfileId)
+            .subscribe((response) => {
+                this.OTAA = response.deviceProfile.supportsJoin;
+            });
+    }
+
     getServiceProfiles() {
-        this.serviceProfileSubscription = this.serviceProfileService
+        this.serviceProfilesSubscription = this.serviceProfileService
             .getMultiple().subscribe( (result: ServiceProfileResponseMany) => {
                 this.serviceProfiles = result.result;
             });
     }
 
     getDeviceProfiles() {
-        this.deviceProfileSubscription = this.deviceProfileService
+        this.devicesProfileSubscription = this.deviceProfileService
             .getMultiple().subscribe( (result) => {
                 this.deviceProfiles = result.result;
             });
@@ -160,10 +170,19 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.errorFields = [];
         this.errorMessages = [];
         error.error.message.forEach((err) => {
-            this.errorFields.push(err.property);
-            this.errorMessages = this.errorMessages.concat(
+            if (err.property === 'lorawanSettings') {
+                err.children.forEach(element => {
+                    this.errorFields.push(element.property);
+                    this.errorMessages = this.errorMessages.concat(
+                        Object.values(element.constraints)
+                    );
+                });
+            } else {
+                this.errorFields.push(err.property);
+                this.errorMessages = this.errorMessages.concat(
                 Object.values(err.constraints)
             );
+            }
         });
     }
 
@@ -185,6 +204,15 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         }
         if (this.deviceSubscription) {
             this.deviceSubscription.unsubscribe();
+        }
+        if (this.deviceProfileSubscription) {
+            this.deviceProfileSubscription.unsubscribe();
+        }
+        if (this.devicesProfileSubscription) {
+            this.devicesProfileSubscription.unsubscribe();
+        }
+        if (this.serviceProfilesSubscription) {
+            this.serviceProfilesSubscription.unsubscribe();
         }
     }
 }

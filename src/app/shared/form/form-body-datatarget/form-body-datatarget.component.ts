@@ -23,7 +23,7 @@ export class FormBodyDatatargetComponent implements OnInit {
   public datatargetSubscription: Subscription;
   public errorMessages: any;
   public errorFields: string[];
-  public formFailedSubmit: boolean = false;
+  public formFailedSubmit = false;
   private id: number;
   private applicationId: number;
 
@@ -38,8 +38,8 @@ export class FormBodyDatatargetComponent implements OnInit {
     this.translate.use('da');
     this.id = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    if (this.id != 0) {
-      this.getDatatarget(this.id)
+    if (this.id !== 0) {
+      this.getDatatarget(this.id);
     }
   }
 
@@ -56,27 +56,26 @@ export class FormBodyDatatargetComponent implements OnInit {
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
-          this.datatarget = this.mapToDatatarget(datatargetResponse)
-          this.routeBack()
+          this.datatarget = this.mapToDatatarget(datatargetResponse);
+          this.routeBack();
         },
         (error: HttpErrorResponse) => {
-          this.handleError(error)
+          this.handleError(error);
           this.formFailedSubmit = true;
         }
-      )
+      );
   }
 
   createDatatarget() {
     this.datatarget.applicationId = this.applicationId;
-    //var data: DatatargetData = {data: [this.datatarget]}
     this.datatargetService.create(this.datatarget)
       .subscribe((datatargetData: DatatargetData) => {
-        this.routeBack()
+        this.routeBack();
       },
         (error: HttpErrorResponse) => {
-          this.handleError(error)
+          this.handleError(error);
           this.formFailedSubmit = true;
-        })
+        });
 
   }
 
@@ -92,17 +91,18 @@ export class FormBodyDatatargetComponent implements OnInit {
   }
 
   routeBack(): void {
-    this.location.back()
+    this.location.back();
   }
 
   onCoordinateKey(event: any) {
     console.log(event.target.value);
     console.log(event.target.maxLength);
-    if (event.target.value.length > event.target.maxLength)
+    if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(
         0,
         event.target.maxLength
       );
+    }
   }
 
   getDatatarget(id: number) {
@@ -122,8 +122,8 @@ export class FormBodyDatatargetComponent implements OnInit {
       url: data.url,
       authorizationHeader: null,
       applicationId: data.application.id
-    }
-    return dt
+    };
+    return dt;
   }
 
 }
