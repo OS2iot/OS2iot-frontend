@@ -43,7 +43,7 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.id = +this.route.snapshot.paramMap.get('userId');
+    this.id = +this.route.snapshot.paramMap.get('user-id');
     if (this.id > 0) {
       this.getUser(this.id);
     }
