@@ -156,6 +156,8 @@
 
     <div class="form-group mt-5">
       <ng-container *ngIf="OTAA">
+        <h3>{{'QUESTION.OTAA' | translate}}</h3>
+        <p>{{'QUESTION.OTAA-ABP-CONFIG-HELP' | translate}}</p>
         <div class="form-group mt-5">
           <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
           <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
@@ -166,6 +168,8 @@
       </ng-container>
 
       <ng-container *ngIf="!OTAA">
+        <h3>{{'QUESTION.ABP' | translate}}</h3>
+        <p>{{'QUESTION.OTAA-ABP-CONFIG-HELP' | translate}}</p>
         <div class="form-group mt-5">
           <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
           <input type="text" id="devAddr" name="devAddr" maxLength="8"
@@ -190,17 +194,6 @@
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
         </div>
       </ng-container>
-    </div>
-
-    <div class="form-group mt-5">
-      <label class="form-label" for="isDisabled">{{'QUESTION.ISDISABLED' | translate}}</label>
-      <div>
-        <mat-checkbox 
-          [(ngModel)]="iotDevice.lorawanSettings.isDisabled" 
-          name="isDisabled">
-            {{'QUESTION.ISDISABLED-YES' | translate}}
-        </mat-checkbox>
-      </div>
     </div>
 
     <div class="form-group mt-5">

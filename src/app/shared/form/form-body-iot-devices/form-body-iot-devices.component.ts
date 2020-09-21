@@ -27,7 +27,6 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     @Input() application: Application;
     public form: FormGroup;
     public payLoad = '';
-    public deviceSubscription: Subscription;
     public errorMessages: any;
     public errorFields: string[];
     public formFailedSubmit = false;
@@ -41,9 +40,11 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     editmode = false;
     public OTAA = true;
 
+    public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
-    private serviceProfileSubscription: Subscription;
+    private serviceProfilesSubscription: Subscription;
     private deviceProfileSubscription: Subscription;
+    private devicesProfileSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -96,19 +97,21 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     onChangeDeviceProfile(deviceProfileId: string) {
-        const device = this.deviceProfiles.find( deviceProfile => deviceProfile.id === deviceProfileId);
-        this.OTAA = !this.OTAA; // Change to: this.OTAA = device.lorawanSettings.supportsJoin *** when iot-447 is done
+        this.deviceProfileSubscription = this.deviceProfileService.getOne(deviceProfileId)
+            .subscribe((response) => {
+                this.OTAA = response.deviceProfile.supportsJoin;
+            });
     }
 
     getServiceProfiles() {
-        this.serviceProfileSubscription = this.serviceProfileService
+        this.serviceProfilesSubscription = this.serviceProfileService
             .getMultiple().subscribe( (result: ServiceProfileResponseMany) => {
                 this.serviceProfiles = result.result;
             });
     }
 
     getDeviceProfiles() {
-        this.deviceProfileSubscription = this.deviceProfileService
+        this.devicesProfileSubscription = this.deviceProfileService
             .getMultiple().subscribe( (result) => {
                 this.deviceProfiles = result.result;
             });
@@ -201,6 +204,15 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         }
         if (this.deviceSubscription) {
             this.deviceSubscription.unsubscribe();
+        }
+        if (this.deviceProfileSubscription) {
+            this.deviceProfileSubscription.unsubscribe();
+        }
+        if (this.devicesProfileSubscription) {
+            this.devicesProfileSubscription.unsubscribe();
+        }
+        if (this.serviceProfilesSubscription) {
+            this.serviceProfilesSubscription.unsubscribe();
         }
     }
 }
