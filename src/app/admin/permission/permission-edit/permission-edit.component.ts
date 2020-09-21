@@ -13,6 +13,8 @@ import { OrganisationResponse } from '../../organisation/organisation.model';
 import { OrganisationService } from '../../../shared/services/organisation.service';
 import { UserService } from '../../users/user.service';
 import { UserResponse } from '../../users/user.model';
+import { ApplicationService } from '@shared/services/application.service';
+import { Application } from '@app/models/application';
 
 @Component({
   selector: 'app-permission-edit',
@@ -23,6 +25,7 @@ export class PermissionEditComponent implements OnInit {
   permission = new PermissionRequest();
   public organisations: OrganisationResponse[];
   public users: UserResponse[];
+  public applications: Application[];
   public errorMessage: string;
   public errorMessages: any;
   public errorFields: string[];
@@ -31,10 +34,12 @@ export class PermissionEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/permissions' };
   public title = '';
   public submitButton = '';
+  public isEditMode: boolean = false;
   id: number;
   subscription: Subscription;
   organisationSubscription: Subscription;
   userSubscription: Subscription;
+  applicationSubscription: Subscription;
 
   constructor(
     private translate: TranslateService,
@@ -42,6 +47,7 @@ export class PermissionEditComponent implements OnInit {
     private permissionService: PermissionService,
     private organisationService: OrganisationService,
     private userService: UserService,
+    private applicationService: ApplicationService,
     private location: Location
   ) {}
 
@@ -59,6 +65,7 @@ export class PermissionEditComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('permission-id');
     if (this.id > 0) {
       this.getPermission(this.id);
+      this.isEditMode = true;
     }
   }
 
@@ -86,6 +93,23 @@ export class PermissionEditComponent implements OnInit {
     );
   }
 
+  organizationChanged(whatever) {
+    this.getApplications(this.permission.organizationId);
+  }
+
+  private getApplications(organizationId: number) {
+    this.applicationSubscription = this.applicationService
+      .getApplicationsByOrganizationId(organizationId)
+      .subscribe(
+        (res) => {
+          this.applications = res.data;
+        },
+        (error: HttpErrorResponse) => {
+          this.showError(error);
+        }
+      );
+  }
+
   private getPermission(id: number) {
     this.subscription = this.permissionService.getPermission(id).subscribe(
       (response) => {
@@ -102,6 +126,7 @@ export class PermissionEditComponent implements OnInit {
           response.type == PermissionType.Read ||
           response.type == PermissionType.Write
         ) {
+          this.getApplications(this.permission.organizationId);
           this.permission.applicationIds = response.applications.map(
             (x) => x.id
           );
@@ -136,8 +161,40 @@ export class PermissionEditComponent implements OnInit {
     );
   }
 
-  isActive(userId) {
-    return this.permission.userIds.indexOf(userId) >= 0;
+  allowedLevels() {
+    if (this.permission.level == PermissionType.GlobalAdmin) {
+      return [PermissionType.GlobalAdmin];
+    }
+    return [
+      PermissionType.OrganizationAdmin,
+      PermissionType.Write,
+      PermissionType.Read,
+    ];
+  }
+
+  isUserPartOfPermission(userId) {
+    if (this?.permission?.userIds) {
+      return this.permission.userIds.indexOf(userId) >= 0;
+    } else {
+      return false;
+    }
+  }
+
+  isApplicationPartOfPermission(appId) {
+    if (this?.permission?.applicationIds) {
+      return this.permission.applicationIds.indexOf(appId) >= 0;
+    } else {
+      return false;
+    }
+  }
+
+  isOrganizationAdministrationPermission() {
+    return (
+      this.permission.level ==
+        PermissionType.OrganizationApplicationPermissions ||
+      this.permission.level == PermissionType.Write ||
+      this.permission.level == PermissionType.Read
+    );
   }
 
   onSubmit(): void {
