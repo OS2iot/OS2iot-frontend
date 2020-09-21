@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Organisation } from '../organisation.model';
+
 import { OrganisationService } from 'src/app/shared/services/organisation.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { Organisation } from '../organisation.model';
 
 @Component({
   selector: 'app-organisation-edit',
@@ -32,7 +33,7 @@ export class OrganisationEditComponent implements OnInit {
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translate.use('da');

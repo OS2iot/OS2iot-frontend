@@ -59,7 +59,7 @@ export class UserEditComponent implements OnInit {
         this.user.id = response.id;
         this.user.active = response.active;
         // We cannot set the password.
-        this.user.password = ""; 
+        this.user.password = '';
       });
   }
 

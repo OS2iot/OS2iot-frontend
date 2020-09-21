@@ -6,7 +6,7 @@ import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '@shared/services/application.service';
 import { Subscription } from 'rxjs';
-import { UserRequest, UserResponse } from '../user.model';
+import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -47,10 +47,15 @@ export class UserDetailComponent implements OnInit {
     if (this.id > 0) {
       this.getUser(this.id);
     }
+    this.translate.get(['NAV.USERS'])
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.USERS'];
+      });
   }
 
   private getUser(id: number) {
-    this.subscription = this.userService.getOne(id)
+    this.subscription = this.userService
+      .getOne(id)
       .subscribe((response) => {
         this.user = response;
         //this.applications = response.applications;
@@ -60,7 +65,7 @@ export class UserDetailComponent implements OnInit {
   deleteApplication(id: number) {
     this.applicationService.deleteApplication(id).subscribe((response) => {
       if (response.ok && response.body.affected > 0) {
-        this.getUser(this.id)
+        this.getUser(this.id);
       }
     });
   }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Sort } from '@app/models/sort';
 import { OrganisationService } from '@shared/services/organisation.service';
 import { Subscription } from 'rxjs';
-import { OrganisationResponse } from '../organisation.model';
+import { OrganisationResponse } from '../../organisation.model';
 
 @Component({
     selector: 'app-organisation-tabel',
@@ -17,7 +17,7 @@ export class OrganisationTabelComponent implements OnInit {
     public pageTotal: number;
     subscription: Subscription;
 
-    constructor(private organisationService: OrganisationService) {}
+    constructor(private organisationService: OrganisationService) { }
 
     ngOnInit(): void {
         this.getOrganisations();
