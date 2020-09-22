@@ -29,4 +29,8 @@ export class NavbarComponent {
         this.authService.logout();
         this.router.navigateByUrl('auth');
     }
+
+    isLoggedIn() {
+        return this.authService.isLoggedIn()
+    }
 }

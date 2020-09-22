@@ -56,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     exports: [TranslateModule],
     providers: [
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
-        { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true }
     ],
 })
