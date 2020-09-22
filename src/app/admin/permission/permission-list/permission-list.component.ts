@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Sort } from '@app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionResponse } from '../permission.model';
@@ -58,7 +58,7 @@ export class PermissionListComponent implements OnInit, OnChanges {
     label: 'SORT.NAME-DESCENDING',
   };
 
-  public permissions: PermissionResponse[];
+  @Input() permissions: PermissionResponse[];
   permissionSubscription: Subscription;
 
   constructor(

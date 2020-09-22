@@ -23,8 +23,8 @@
                 {{ 'USERS.DETAIL.APPLICATIONS' | translate }}
             </h3>
             <div>
-                <!-- <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)">
-                </app-applications-table> -->
+                <app-permission-list [permissions]="permissions" (deletePermission)="deletePermission($event)">
+                </app-permission-list>
             </div>
         </div>
     </div>

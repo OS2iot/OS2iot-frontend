@@ -13,10 +13,7 @@ import { OrganisationRowComponent } from './organisation-list/organisation-tabel
 import { OrganisationTabelComponent } from './organisation-list/organisation-tabel/organisation-tabel.component';
 import { OrganisationComponent } from './organisation.component';
 
-
-
 const organisationRoutes: Routes = [
-
   {
     path: '', component: OrganisationComponent, children: [
       { path: '', component: OrganisationListComponent },
@@ -45,8 +42,8 @@ const organisationRoutes: Routes = [
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
-    MyApplicationsModule,
     RouterModule.forChild(organisationRoutes),
+    MyApplicationsModule,
   ],
   exports: [
     RouterModule

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { Application } from '@app/models/application';
 import { BackButton } from '@app/models/back-button';
 import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '@shared/services/application.service';
+import { PermissionService } from '@shared/services/permission.service';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
@@ -16,7 +18,7 @@ import { UserService } from '../user.service';
 })
 export class UserDetailComponent implements OnInit {
   user: UserResponse;
-  applications: Application[];
+  permissions: PermissionResponse[];
   public backButton: BackButton = {
     label: '',
     routerLink: '/admin/users',
@@ -38,7 +40,7 @@ export class UserDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private applicationService: ApplicationService
+    private permissionsService: PermissionService
   ) { }
 
   ngOnInit(): void {
@@ -58,12 +60,12 @@ export class UserDetailComponent implements OnInit {
       .getOne(id)
       .subscribe((response) => {
         this.user = response;
-        //this.applications = response.applications;
+        this.permissions = response.permissions;
       });
   }
 
-  deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
+  deletePermission(id: number) {
+    this.permissionsService.deletePermission(id).subscribe((response) => {
       if (response.ok && response.body.affected > 0) {
         this.getUser(this.id);
       }

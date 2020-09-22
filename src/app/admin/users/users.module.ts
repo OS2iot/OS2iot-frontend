@@ -13,6 +13,7 @@ import { FormModule } from '@shared/form/form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { PermissionModule } from '../permission/permission.module';
 
 const userRoutes: Routes = [
 
@@ -39,6 +40,7 @@ const userRoutes: Routes = [
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
+    PermissionModule,
     RouterModule.forChild(userRoutes),
   ],
   exports: [RouterModule]
