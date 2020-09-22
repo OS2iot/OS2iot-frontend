@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceProfileService } from '@shared/services/service-profile.service';
 import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
   public title: '';
   public errorMessage: string;
-  public errorMessages: string;
+  public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
@@ -88,10 +89,21 @@ export class ServiceProfilesEditComponent implements OnInit {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessages = '';
+    this.errorMessage = '';
+    this.errorMessages = [];
     if (error.error?.chirpstackError) {
         this.errorFields.push('name');
-        this.errorMessages = error.error.chirpstackError.message;
+        this.errorFields.push('devStatusReqFreq');
+        this.errorFields.push('drMax');
+        this.errorFields.push('drMin');
+        this.errorMessage = error.error.chirpstackError.message;
+    } else if (error.error?.message?.length > 0) {
+      error.error.message[0].children.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+          Object.values(err.constraints)
+        );
+      });
     } else {
       this.errorMessage = error.message;
     }
