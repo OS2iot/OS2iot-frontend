@@ -49,7 +49,7 @@ export class PermissionEditComponent implements OnInit {
     private userService: UserService,
     private applicationService: ApplicationService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -191,7 +191,7 @@ export class PermissionEditComponent implements OnInit {
   isOrganizationAdministrationPermission() {
     return (
       this.permission.level ==
-        PermissionType.OrganizationApplicationPermissions ||
+      PermissionType.OrganizationApplicationPermissions ||
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );

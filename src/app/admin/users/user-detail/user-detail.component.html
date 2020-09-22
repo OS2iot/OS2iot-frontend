@@ -1,31 +1,46 @@
 <app-top-bar-single [data]="user" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
-<div class="p-5 row">
-    <div class="col-6">
-        <div class="card mb-5">
-            <div class="card-header">
-                <h2>{{user.name}}</h2>
+
+<div class=" jumbotron m-md-4 p-md-3" *ngIf="user">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="float-left">
+                <h4>Generelle Info</h4>
+                <p>{{user.email}}</p>
+                <p [ngClass]="user.active | activeDeactive">{{user.active | activeDeactive}}</p>
+                <div>
+                    <div *ngIf="user.lastLogin; else noLogin">
+                        <P>Sidste login: {{user?.lastLogin | date}}</P>
+                    </div>
+                    <ng-template #noLogin>
+                        <P>Sidste login: Ikke logget på endnu</P>
+                    </ng-template>
+                </div>
+                <p>Oprettet den: {{user?.createdAt | date}}</p>
+                <p>Global administrator:
+                    {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
+                </p>
+            </div>
+            <div class="btn-group float-right">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    {{'USERS.DROPDOWN' | translate}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{user.id}}">
+                    <li class="dropdown-item">
+                        <a [routerLink]="['edit-user']"
+                            routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <div class="card">
-            <h3 class="card-header">
-                {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
-            </h3>
-            <div>
-                <h1 style="color:rebeccapurple">TODO</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card">
-            <h3 class="card-header">
-                {{ 'USERS.DETAIL.APPLICATIONS' | translate }}
-            </h3>
-            <div>
-                <app-permission-list [permissions]="permissions" (deletePermission)="deletePermission($event)">
-                </app-permission-list>
-            </div>
-        </div>
-    </div>
+</div>
+
+<div class="jumbotron m-md-4 p-md-3">
+    <h4 class="">
+        {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
+    </h4>
+    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
+    </app-permission-tabel>
 </div>

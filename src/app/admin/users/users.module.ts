@@ -7,26 +7,14 @@ import { UsersComponent } from './users.component';
 import { UserTableComponent } from './user-list/user-table/user-table.component';
 import { TopBarModule } from '@shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterModule, Routes } from '@angular/router';
 import { UserTableRowComponent } from './user-list/user-table/user-table-row/user-table-row.component';
 import { FormModule } from '@shared/form/form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { PermissionModule } from '../permission/permission.module';
+import { RouterModule } from '@angular/router';
 
-const userRoutes: Routes = [
-
-  {
-    path: '', component: UsersComponent, children: [
-      { path: '', component: UserListComponent },
-      { path: 'new-user', component: UserEditComponent },
-      { path: ':user-id', component: UserDetailComponent },
-      { path: ':user-id/edit-user', component: UserEditComponent },
-    ]
-  },
-
-];
 
 @NgModule({
   declarations: [UserDetailComponent, UserEditComponent, UserListComponent, UsersComponent, UserTableComponent, UserTableRowComponent],
@@ -35,14 +23,12 @@ const userRoutes: Routes = [
     PipesModule,
     CommonModule,
     TranslateModule,
-    RouterModule,
     FormsModule,
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
+    RouterModule,
     PermissionModule,
-    RouterModule.forChild(userRoutes),
   ],
-  exports: [RouterModule]
 })
 export class UsersModule { }

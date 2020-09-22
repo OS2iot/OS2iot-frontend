@@ -28,7 +28,4 @@ export class UserService {
         return this.restService.get(this.URL);
     }
 
-    delete(id: number) {
-        return this.restService.delete(this.URL, id);
-    }
 }

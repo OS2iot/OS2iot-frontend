@@ -378,7 +378,7 @@
     },
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",
-      "FALSE": ""
+      "FALSE": "Nej"
     }
   }
 }

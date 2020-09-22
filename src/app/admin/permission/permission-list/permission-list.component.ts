@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Sort } from '@app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionResponse } from '../permission.model';
@@ -58,7 +58,7 @@ export class PermissionListComponent implements OnInit, OnChanges {
     label: 'SORT.NAME-DESCENDING',
   };
 
-  @Input() permissions: PermissionResponse[];
+  public permissions: PermissionResponse[];
   permissionSubscription: Subscription;
 
   constructor(
@@ -91,17 +91,4 @@ export class PermissionListComponent implements OnInit, OnChanges {
       }
     });
   }
-
-  // updatePageLimit(limit: any) {
-  //   console.log(limit);
-  // }
-
-  // changeSort(sortId: number) {
-  //   for (let i = 0; i < this.sort.length; i++) {
-  //     const elem = this.sort[i];
-  //     if (elem.id === sortId) {
-  //       this.selectedSortObject = elem;
-  //     }
-  //   }
-  // }
 }

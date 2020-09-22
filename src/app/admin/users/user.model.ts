@@ -6,6 +6,7 @@ export class UserRequest {
     email: string;
     password: string;
     active: boolean;
+    globalAdmin: boolean;
 }
 
 export interface UserResponse {
@@ -17,6 +18,7 @@ export interface UserResponse {
     active: boolean;
     lastLogin: Date;
     permissions: PermissionResponse[];
+    globalAdmin: boolean;
 }
 
 export interface UserGetManyResponse {

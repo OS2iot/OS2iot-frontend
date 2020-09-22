@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PermissionResponse } from '../../permission.model';
+import { PermissionResponse } from '@app/admin/permission/permission.model';
 
 @Component({
   selector: 'tr[app-permission-row]',
@@ -10,9 +10,9 @@ export class PermissionRowComponent implements OnInit {
   @Input() permission: PermissionResponse;
   @Output() innerDeletePermission = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   clickDelete() {
     console.log("row")

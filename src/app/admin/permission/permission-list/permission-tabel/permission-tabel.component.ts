@@ -1,5 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { PermissionResponse } from '../permission.model';
+import { TranslateService } from '@ngx-translate/core';
+import { PermissionResponse } from '../../permission.model';
+
 
 @Component({
   selector: 'app-permission-tabel',
@@ -10,9 +12,11 @@ export class PermissionTabelComponent implements OnInit {
   @Input() permissions: PermissionResponse[];
   @Output() deletePermission = new EventEmitter();
 
-  constructor() {}
+  constructor(public translate: TranslateService) {
+    translate.use('da');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   tableDeletePermission(id: number) {
     console.log("table")

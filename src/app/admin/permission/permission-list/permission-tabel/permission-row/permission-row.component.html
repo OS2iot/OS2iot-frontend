@@ -6,23 +6,29 @@
   {{permission?.organization?.name ? permission.organization.name : ("PERMISSION.NO_ORGANISATION" | translate)}}
 </td>
 <td class="position-relative">
-  {{permission.users.length}}
+  <div *ngIf="permission.users; else noUsers">
+    {{permission.users.length}}
+
+  </div>
+  <ng-template #noUsers>Ingen brugere er tilføjet</ng-template>
 </td>
 <td class="position-relative pr-3">
   {{ 'PERMISSION-TYPE.' + permission.type | translate }}
-  <div class="dropdown position-absolute">
+</td>
+<td>
+
+  <div class="dropdown ">
     <a href="#" role="button" id="tableRowDropdown-{{permission.id}}" class="applicationRow__edit dropdown-toggle"
       data-toggle="dropdown" aria-expanded="false"
-      [attr.aria-label]="'ORGANISATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+      [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
-      <li>
-        <a class="dropdown-item" [routerLink]="[permission.id, 'edit-permission']"
-          routerLinkActive="active">{{ 'PERMISSION-TABLE-ROW.EDIT' | translate }}
+      <li class="dropdown-item">
+        <a [routerLink]="[permission.id, 'permission-user']"
+          routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
         </a>
       </li>
-      <li>
-        <a (click)="clickDelete()" class="dropdown-item"
-          [routerLink]="">{{ 'PERMISSION-TABLE-ROW.DELETE' | translate }}
+      <li class="dropdown-item">
+        <a (click)="clickDelete()" [routerLink]="">{{ 'PERMISSION-TABLE-ROW.DELETE' | translate }}
         </a>
       </li>
     </ul>

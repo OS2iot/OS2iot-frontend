@@ -22,16 +22,6 @@ export class OrganisationDetailComponent implements OnInit {
     label: '',
     routerLink: '/admin/organisations',
   };
-  public buttons: QuickActionButton[] = [
-    {
-      label: 'ORGANISATION.DELETE',
-      type: 'delete',
-    },
-    {
-      label: 'ORGANISATION.EDIT',
-      type: 'edit',
-    },
-  ];
   id: number;
   subscription: Subscription;
 
@@ -48,6 +38,10 @@ export class OrganisationDetailComponent implements OnInit {
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }
+    this.translate.get(['NAV.ORGANISATIONS'])
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.ORGANISATIONS'];
+      });
   }
 
   private getOrganisation(id: number) {

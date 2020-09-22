@@ -9,25 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/form/form.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
-import { TopBarModule } from '@shared/top-bar/top-bar.module';
-import { PermissionTabelComponent } from './permission-tabel/permission-tabel.component';
-import { PermissionRowComponent } from './permission-tabel/permission-row/permission-row.component';
-
-const permissionRoutes: Routes = [
-  {
-    path: '',
-    component: PermissionComponent,
-    children: [
-      { path: '', component: PermissionListComponent },
-      { path: 'new-permission', component: PermissionEditComponent },
-      { path: ':permission-id', component: PermissionDetailComponent },
-      {
-        path: ':permission-id/edit-permission',
-        component: PermissionEditComponent,
-      },
-    ],
-  },
-];
+import { TopBarModule } from '@shared/top-bar/top-bar.module'; import { PermissionRowComponent } from './permission-list/permission-tabel/permission-row/permission-row.component';
+import { PermissionTabelComponent } from './permission-list/permission-tabel/permission-tabel.component';
+import { UsersModule } from '../users/users.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+;
 
 @NgModule({
   declarations: [
@@ -47,6 +33,7 @@ const permissionRoutes: Routes = [
     PermissionRowComponent,
   ],
   imports: [
+    NGMaterialModule,
     PipesModule,
     CommonModule,
     TranslateModule,
@@ -55,7 +42,6 @@ const permissionRoutes: Routes = [
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
-    RouterModule.forChild(permissionRoutes),
   ],
 })
-export class PermissionModule {}
+export class PermissionModule { }

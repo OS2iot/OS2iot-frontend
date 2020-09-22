@@ -37,14 +37,6 @@ export class UserTableComponent implements OnInit {
     this.getUsers();
   }
 
-  deleteUser(id: number) {
-    console.log('delete:', id);
-    this.userService.delete(id).subscribe((response) => {
-      if (response.ok) {
-        this.getUsers();
-      }
-    });
-  }
 
   prevPage() {
     if (this.pageOffset) { this.pageOffset--; }

@@ -1,10 +1,8 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
   Input,
   Output,
-  OnChanges,
   EventEmitter,
 } from '@angular/core';
 
@@ -29,7 +27,7 @@ export class ApplicationsTableComponent implements OnInit {
     translate.use('da');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   doDeleteApplication(id: number) {
     this.deleteApplication.emit(id);

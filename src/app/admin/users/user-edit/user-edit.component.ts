@@ -58,6 +58,7 @@ export class UserEditComponent implements OnInit {
         this.user.email = response.email;
         this.user.id = response.id;
         this.user.active = response.active;
+        this.user.globalAdmin = response.globalAdmin;
         // We cannot set the password.
         this.user.password = '';
       });

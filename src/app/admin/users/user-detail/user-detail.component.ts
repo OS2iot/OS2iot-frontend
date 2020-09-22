@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { Application } from '@app/models/application';
 import { BackButton } from '@app/models/back-button';
@@ -19,6 +19,7 @@ import { UserService } from '../user.service';
 export class UserDetailComponent implements OnInit {
   user: UserResponse;
   permissions: PermissionResponse[];
+  @Output() deleteUser = new EventEmitter();
   public backButton: BackButton = {
     label: '',
     routerLink: '/admin/users',
@@ -40,7 +41,8 @@ export class UserDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private permissionsService: PermissionService
+    private permissionsService: PermissionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +72,15 @@ export class UserDetailComponent implements OnInit {
         this.getUser(this.id);
       }
     });
+  }
+
+  onDeleteUser() {
+    this.deleteUser.emit(this.user.id);
+    this.router.navigate(['admin/users']);
+  }
+
+  onEditUser() {
+    this.router.navigate(['edit-user'], { relativeTo: this.route });
   }
 
 }
