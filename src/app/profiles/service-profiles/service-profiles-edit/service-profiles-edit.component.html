@@ -3,8 +3,13 @@
 <form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
-            <li>
-                {{errorMessages}}
+            <div *ngIf="errorMessages">
+                <li  *ngFor="let error of errorMessages">
+                    {{error}}
+                  </li>
+            </div>
+            <li *ngIf="errorMessage">
+                {{errorMessage}}
             </li>
         </ul>
     </div>
@@ -20,36 +25,6 @@
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
         </div>
     </div>
-    <!-- Add gateway meta-data
-             GW metadata (RSSI, SNR, GW geoloc., etc.) are added to the packet sent to the application-server.-->
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <mat-checkbox id="addGWMetaData" name="addGWMetaData" [(ngModel)]="serviceProfile.addGWMetaData">
-                    <label for="name"
-                        class="form-check-label text--bold">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}</label>
-                </mat-checkbox>
-                <p>{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATAEXPLAINED' | translate}}</p>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Enable network geolocation
-                When enabled, the network-server will try to resolve the location of the devices under this service-profile. Please note that you need 
-                to have gateways supporting the fine-timestamp feature and that the network-server needs to be configured in order to provide geolocation support.
-             -->
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <mat-checkbox id="nwkGeoLoc" name="nwkGeoLoc" [(ngModel)]="serviceProfile.nwkGeoLoc">
-                    <label for="name"
-                        class="form-check-label text--bold">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATA' | translate}}</label>
-                </mat-checkbox>
-                <p class="">{{'PROFILES.SERVICE_PROFILE.ADDGWMETADATAEXPLAINED' | translate}}</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Device-status request frequency
                 Frequency to initiate an End-Device status request (request/day). Set to 0 to disable.
@@ -60,11 +35,45 @@
                 <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.DEVICEFREQUENCY' | translate}}</label>
                 <input type="text" id="devStatusReqFreq" name="devStatusReqFreq" class="form-control" [placeholder]="0"
                     [(ngModel)]="serviceProfile.devStatusReqFreq" step=".000001" min="-180" max="180" maxlength="9"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devStatusReqFreq'), 'is-valid' : formFailedSubmit && !errorFields.includes('devStatusReqFreq')}"
                     (keyup)="onCoordinateKey($event)" />
                 <label>{{'PROFILES.SERVICE_PROFILE.DEVICEFREQUENCYEXPLANIED' | translate}}</label>
             </div>
         </div>
     </div>
+
+    <!-- <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="dlRatePolicy" class="form-label">{{'PROFILES.SERVICE_PROFILE.DLRATEPOLICY' | translate}}</label>
+                <input type="text" id="dlRatePolicy" name="dlRatePolicy" class="form-control" [placeholder]="0" maxlength="1024"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('dlRatePolicy'), 'is-valid' : formFailedSubmit && !errorFields.includes('dlRatePolicy')}"
+                    [(ngModel)]="serviceProfile.dlRatePolicy" maxlength="1024"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="ulRatePolicy" class="form-label">{{'PROFILES.SERVICE_PROFILE.ULRATEPOLICY' | translate}}</label>
+                <input type="text" id="ulRatePolicy" name="ulRatePolicy" class="form-control" [placeholder]="0" maxlength="1024"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('ulRatePolicy'), 'is-valid' : formFailedSubmit && !errorFields.includes('ulRatePolicy')}"
+                    [(ngModel)]="serviceProfile.ulRatePolicy" maxlength="1024"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="channelMask" class="form-label">{{'PROFILES.SERVICE_PROFILE.CHANNELMASK' | translate}}</label>
+                <input type="text" id="channelMask" name="channelMask" class="form-control" [placeholder]="0"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('channelMask'), 'is-valid' : formFailedSubmit && !errorFields.includes('channelMask')}"
+                    [(ngModel)]="serviceProfile.channelMask" maxlength="1024"/>
+            </div>
+        </div>
+    </div> -->
 
     <!-- Checkbox
                 Report device battery level to application-server
@@ -106,6 +115,7 @@
             <div class="form-group">
                 <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.DRRATEMIN' | translate}}</label>
                 <input type="number" id="drMin" name="drMin" class="form-control" [(ngModel)]="serviceProfile.drMin"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('drMin'), 'is-valid' : formFailedSubmit && !errorFields.includes('drMin')}"
                     step="0" min="-180" max="180" maxlength="9" (keyup)="onCoordinateKey($event)" [placeholder]="0" />
                 <label>{{'PROFILES.SERVICE_PROFILE.DRRATEMINEXPLAINED' | translate}}</label>
             </div>
@@ -114,6 +124,7 @@
             <div class="form-group">
                 <label for="name" class="form-label">{{'PROFILES.SERVICE_PROFILE.DRRATEMAX' | translate}}</label>
                 <input type="number" id="drMax" name="drMax" class="form-control" [(ngModel)]="serviceProfile.drMax"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('drMax'), 'is-valid' : formFailedSubmit && !errorFields.includes('drMax')}"
                     step="0" min="-180" max="180" maxlength="9" (keyup)="onCoordinateKey($event)" [placeholder]="0" />
                 <Label>{{'PROFILES.SERVICE_PROFILE.DRRATEMAXEXPLAINED' | translate}}</Label>
             </div>
