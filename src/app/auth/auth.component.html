@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 offset-md-3 mt-5">
-        <div class="alert alert-danger" *ngIf="error">
-            <p>{{error}}</p>
+        <div *ngIf="errorMessages" class="error-messages p-3">
+            <ul class="mb-0">
+                <li *ngFor="let error of errorMessages">
+                    {{error}}
+                </li>
+            </ul>
         </div>
         <div *ngIf="isLoading">
             <app-loading-spinner></app-loading-spinner>
@@ -10,12 +14,13 @@
             *ngIf="!isLoading">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="username" id="username" class="form-control" ngModel name="username" required email>
+                <input type="username" id="username" class="form-control" ngModel name="username" required email
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" ngModel name="password" required
-                    minlength="6">
+                <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
             </div>
             <div class="mt-5">
                 <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{'Login'}}</button>

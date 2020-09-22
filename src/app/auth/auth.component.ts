@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-auth',
@@ -10,6 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+  public errorMessage: string;
+  public errorMessages: any;
+  public errorFields: string[];
+  public formFailedSubmit = false;
   isLoginMode = true;
   isLoading = false;
   error: string = null;
@@ -38,10 +43,10 @@ export class AuthComponent implements OnInit {
     authObs.subscribe(resData => {
       console.log(resData);
       this.isLoading = false;
-    }, errorMessage => {
+    }, (errorMessage: HttpErrorResponse) => {
       console.log(errorMessage);
-      this.error = errorMessage;
-      this.isLoading = false;
+      /* this.error = errorMessage;
+      this.isLoading = false; */
     });
 
     form.reset();

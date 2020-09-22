@@ -45,7 +45,7 @@ const organisationRoutes: Routes = [
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
-    //MyApplicationsModule,
+    MyApplicationsModule,
     RouterModule.forChild(organisationRoutes),
   ],
   exports: [
