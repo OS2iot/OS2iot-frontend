@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Datatarget, DatatargetData } from 'src/app/models/datatarget';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Datatarget } from 'src/app/models/datatarget';
 import { Subscription } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatargetService } from '../../services/datatarget.service';
 import { Location } from '@angular/common';
@@ -14,6 +13,8 @@ import { IotDevice } from '@my-applications/iot-devices/iot-device.model';
 import { PayloadDecoderService } from '@shared/services/payload-decoder.service';
 import { PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
 import { PayloadDeviceDatatarget } from '@app/models/payload-device-data';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -21,10 +22,9 @@ import { PayloadDeviceDatatarget } from '@app/models/payload-device-data';
   styleUrls: ['./form-body-datatarget.component.scss']
 })
 export class FormBodyDatatargetComponent implements OnInit {
-
   @Input() submitButton: string;
   public datatarget: Datatarget = new Datatarget();
-  public payLoad = '';
+  faTimesCircle = faTimesCircle;
   public datatargetSubscription: Subscription;
   public applicationSubscription: Subscription;
   public payloadDecoderSubscription: Subscription;
@@ -37,7 +37,7 @@ export class FormBodyDatatargetComponent implements OnInit {
   public devices: IotDevice[];
   public payloadDecoders = [];
 
-  payloadDeviceData: PayloadDeviceDatatarget[];
+  payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
 
   constructor(
@@ -63,16 +63,16 @@ export class FormBodyDatatargetComponent implements OnInit {
   }
 
   addRow() {
-    if (!this.payloadDeviceData) {
-      this.payloadDeviceData = [];
+    if (!this.payloadDeviceDatatarget) {
+      this.payloadDeviceDatatarget = [];
     }
-    this.payloadDeviceData.push({devices: [], payloadDecoderId: null, datatargetId: this.datatargetid});
+    this.payloadDeviceDatatarget.push({devices: [], payloadDecoderId: null, datatargetId: this.datatargetid});
   }
 
   deleteRow(index) {
-      if (this.payloadDeviceData.length === 0) {
+      if (this.payloadDeviceDatatarget.length === 0) {
       } else {
-          this.payloadDeviceData.splice(index, 1);
+          this.payloadDeviceDatatarget.splice(index, 1);
       }
   }
 
@@ -121,6 +121,16 @@ export class FormBodyDatatargetComponent implements OnInit {
         .subscribe((application: Application) => {
             this.devices = application.iotDevices;
         });
+  }
+
+  public selectAllDevices(index: number) {
+    console.log(this.payloadDeviceDatatarget[0].devices);
+    this.payloadDeviceDatatarget[index].devices = this.devices.map( device => device.id);
+  }
+
+  public deSelectAllDevices(index: number) {
+    console.log(this.payloadDeviceDatatarget[0].devices);
+    this.payloadDeviceDatatarget[index].devices = [];
   }
 
   getPayloadDecoders() {

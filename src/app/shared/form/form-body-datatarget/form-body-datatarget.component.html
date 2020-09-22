@@ -48,25 +48,34 @@
       </div>
       <div class="container row" style="margin-top: 5%" *ngIf="datatargetid > 0">
         <a (click)="addRow()" class="btn btn-secondary">{{'QUESTION.ADD-RELATIONS' | translate}}</a>
-        <ng-container *ngIf="devices && payloadDecoders && payloadDeviceData?.length > 0">
+        <ng-container *ngIf="devices && payloadDecoders && payloadDeviceDatatarget?.length > 0">
           <table class="table table-striped table-bordered">    
             <tbody>    
-              <tr *ngFor="let element of payloadDeviceData; let i = index;" [attr.data-index]="i">        
+              <tr *ngFor="let element of payloadDeviceDatatarget; let i = index;" [attr.data-index]="i">        
                 <td>    
                   <div class="row">
                     <mat-form-field appearance="fill">
-                      <mat-label>Iot-Devices</mat-label>
+                      <mat-label>{{'QUESTION.DATATARGET.SELECT-DEVICES' | translate}}</mat-label>
                       <mat-select 
                         multiple
                         name="devices"
                         [compareWith]="compare"
                         [(value)]="element.devices">
-                        <mat-select-trigger>
-                          {{devices.values.name ? devices[0].name : ''}}
-                          <span *ngIf="devices.length > 1" class="example-additional-selection">
-                            (+{{devices.values.length - 1}} {{devices.length === 2 ? 'other' : 'others'}})
-                          </span>
-                        </mat-select-trigger>
+                        <mat-option disabled="disabled" 
+                        class="filter-option">
+                          <button
+                            mat-raised-button
+                            class="mat-primary fill text-sm"
+                            (click)="selectAllDevices(i)">
+                            {{'QUESTION.DATATARGET.SELECTALLDEVICES' | translate}}
+                          </button>
+                          <button
+                            mat-raised-button
+                            class="mat-primary fill text-sm"
+                            (click)="deSelectAllDevices(i)">
+                            {{'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate}}
+                          </button>
+                        </mat-option>
                         <mat-option *ngFor="let device of devices" [value]="device.id">{{device.name}}</mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -75,7 +84,7 @@
                 <td>    
                   <div class="row">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'QUESTION.SELECT-PAYLOADDECODER' | translate}}</mat-label>
+                      <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
                       <mat-select matNativeControl
                         name="payloadDecoderId"
                         [(value)]="element.payloadDecoderId">
@@ -86,8 +95,13 @@
                     </mat-form-field>
                   </div>
                 </td>
-                <td (click)="deleteRow(i)">    
-                  <i class="fa fa-trash fa-2x">delete row</i>    
+                <td>
+                  <a (click)="deleteRow(i)">
+                    <div class="text-center m-2">
+                        <fa-icon [icon]="faTimesCircle"></fa-icon>
+                        <p>{{'DATATARGET.DELETE' | translate}}</p>
+                    </div>
+                  </a>  
                 </td>    
               </tr>      
             </tbody>    

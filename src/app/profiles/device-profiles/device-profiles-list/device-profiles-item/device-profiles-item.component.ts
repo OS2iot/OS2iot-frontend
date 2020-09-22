@@ -14,7 +14,6 @@ export class DeviceProfilesItemComponent implements OnInit {
   @Input() index: number;
   @Output() deleteDeviceProfile = new EventEmitter();
   deviceId: number;
-  faPen = faPen;
   faTimesCircle = faTimesCircle;
 
   constructor(

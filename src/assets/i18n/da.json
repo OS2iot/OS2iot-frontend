@@ -55,7 +55,8 @@
     "URL": "URL",
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
-    "NAME": "Datatarget navn"
+    "NAME": "Datatarget navn",
+    "DELETE": "Slet"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",
@@ -213,7 +214,6 @@
     "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
     "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
     "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
-    "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
     "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed",
     "DEVICE-NAME-PLACEHOLDER": "Enhedsnavn",
     "GIVE-DEVICE-NAME": "Navngiv enhed",
@@ -250,7 +250,14 @@
     "CHOOSE-SERVICEPROFILE": "Vælg service profile",
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
-    "ADD-RELATIONS": "Tilføj device og payload decoder"
+    "ADD-RELATIONS": "Tilføj device og payload decoder",
+    "DATATARGET": {
+      "SELECT-PAYLOADDECODER": "Vælg payload decoder",
+      "SELECT-DEVICES": "Vælg enheder",
+      "SELECTALLDEVICES": "Vælg alle",
+      "DESELECTALLDEVICES": "Fravælg alle"
+    }
+    
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
