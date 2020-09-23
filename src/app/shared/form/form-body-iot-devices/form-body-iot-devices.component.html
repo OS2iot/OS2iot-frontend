@@ -160,7 +160,7 @@
         <p>{{'QUESTION.OTAA-ABP-CONFIG-HELP' | translate}}</p>
         <div class="form-group mt-5">
           <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
-          <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
+          <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="16"
             [placeholder]="'QUESTION.OTAAAPPLICATIONKEY-PLACEHOLDER' | translate" class="form-control"
             [(ngModel)]="iotDevice.lorawanSettings.OTAAapplicationKey"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('OTAAapplicationKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('OTAAapplicationKey')}">
