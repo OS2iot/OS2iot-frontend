@@ -195,7 +195,8 @@
     "EDIT-DEVICE-PROFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
-    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe"
+    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
+    "EDIT-PERMISSION": "Redigér brugergruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
