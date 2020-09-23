@@ -32,8 +32,8 @@
 
     <div class="form-group mt-3 col-12">
         <label class="form-label" for="name">{{'PERMISSION.EDIT.USERS' | translate}}</label>*
-        <div class="col-6">
-            <select id="userIds" name="userIds" class="custom-select" multiple [(ngModel)]="permission.userIds">
+        <div class="col-12">
+            <select id="userIds" name="userIds" class="form-control" multiple [(ngModel)]="permission.userIds">
                 <option *ngFor="let user of users" [value]="user.id" [selected]="isUserPartOfPermission(user.id)">
                     {{user.name}}</option>
             </select>
@@ -67,8 +67,8 @@
     <div *ngIf="isOrganizationAdministrationPermission()">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="name">{{'PERMISSION.EDIT.APPS' | translate}}</label>*
-            <div class="col-6">
-                <select id="applicationIds" name="applicationIds" class="custom-select" multiple
+            <div class="col-12">
+                <select id="applicationIds" name="applicationIds" class="form-control" multiple
                     [(ngModel)]="permission.applicationIds"
                     placeholder="'PERMISSION.EDIT.APPS-PLACEHOLDER' | translate">
                     <option *ngFor="let app of applications" [value]="app.id"
