@@ -15,7 +15,6 @@ import { PermissionResponse } from '../permission.model';
 export class PermissionDetailComponent implements OnInit {
   permission: PermissionResponse;
   permissions: PermissionResponse[];
-  @Output() deletePermission = new EventEmitter();
   public backButton: BackButton = {
     label: '',
     routerLink: '/admin/permissions',
@@ -61,8 +60,11 @@ export class PermissionDetailComponent implements OnInit {
   }
 
   onDeletePermission() {
-    this.deletePermission.emit(this.permission.id);
-    this.router.navigate(['admin/permissions']);
+    this.permissionService.deletePermission(this.id).subscribe((response) => {
+      if (response.ok && response.body.affected > 0) {
+        this.router.navigate(['admin/permissions']);
+      }
+    });
   }
 
   onEditPermission() {
