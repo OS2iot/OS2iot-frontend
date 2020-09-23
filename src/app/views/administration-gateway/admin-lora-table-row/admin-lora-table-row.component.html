@@ -1,48 +1,30 @@
-<td class="position-relative">
-    <a
-        [routerLink]="['gateway', gateway.id]"
-        routerLinkActive="active"
-        class="application-link">
-            {{ gateway.name }}
+<td>
+    <a [routerLink]="['gateway', gateway.id]" routerLinkActive="active" class="application-link">
+        {{ gateway.name }}
     </a>
 </td>
 
-<td class="position-relative pr-3">
+<td class=" pr-3">
     {{ gateway.id }}
 </td>
 
-<td class="position-relative pr-3">
-    {{ gateway.location.longitude }}, {{ gateway.location.latitude }} 
-    <div class="dropdown position-absolute">
-        <a
-            href="#"
-            role="button"
-            id="tableRowDropdown-{{ gateway.id }}"
-            class="applicationRow__edit dropdown-toggle"
-            data-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
-        ></a>
-        <ul
-            class="dropdown-menu"
-            attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}"
-        >
-            <li> 
-                <a
-                    (click)="clickDelete()"
-                    class="dropdown-item"
-                    [routerLink]=""
-                    >{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}</a
-                >
+<td class=" pr-3">
+    {{ gateway.location.longitude }}, {{ gateway.location.latitude }}
+
+</td>
+<td>
+    <div class="dropdown">
+        <a href="#" role="button" id="tableRowDropdown-{{ gateway.id }}" class="applicationRow__edit dropdown-toggle"
+            data-toggle="dropdown" aria-expanded="false"
+            [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+        <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}">
+            <li class="dropdown-item">
+                <a (click)="clickDelete()" [routerLink]="">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}</a>
             </li>
-            <li>
-                <a
-                    class="dropdown-item"
-                    [routerLink]="['edit-gateway', gateway.id]"
-                    routerLinkActive="active"
-                    >{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}</a
-                >
+            <li class="dropdown-item">
+                <a [routerLink]="['edit-gateway', gateway.id]"
+                    routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}</a>
             </li>
         </ul>
     </div>
-</td> 
+</td>

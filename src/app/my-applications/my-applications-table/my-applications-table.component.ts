@@ -10,7 +10,6 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-my-applications-table',
   templateUrl: './my-applications-table.component.html',
-  styleUrls: ['./my-applications-table.component.scss']
 })
 
 export class MyApplicationsTableComponent implements AfterViewInit {
