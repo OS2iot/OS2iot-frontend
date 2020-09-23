@@ -4,6 +4,15 @@ import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
 import { SortDir, SortCol } from 'src/app/models/sort';
 
+
+interface GetApplicationParameters {
+    limit: number;
+    offset: number;
+    sort: SortDir;
+    orderOn: SortCol;
+    organizationId?: number;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -11,6 +20,7 @@ export class ApplicationService {
     constructor(private restService: RestService) { }
 
     createApplication(body: any): Observable<ApplicationData> {
+        
         return this.restService.post('application', body, { observe: 'response' });
     }
 
@@ -29,12 +39,13 @@ export class ApplicationService {
         orderOn: SortCol,
         organizationId?: number
     ): Observable<ApplicationData> {
-        const body = {
+        const body: GetApplicationParameters = {
             limit: limit,
             offset: offset,
             sort: sort,
             orderOn: orderOn,
         };
+        body.organizationId = organizationId
         return this.restService.get('application', body);
     }
 
