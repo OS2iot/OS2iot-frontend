@@ -1,13 +1,13 @@
-<td class="position-relative">
+<td>
   <a [routerLink]="['payload-decoder-detail', payloadDecoder.id]" routerLinkActive="active" class="application-link">
     {{payloadDecoder.name}}</a>
 </td>
-<td class="position-relative pr-3">
+<td class=" pr-3">
   {{payloadDecoder.id}}
 
 </td>
 <td>
-  <div class="dropdown position-absolute">
+  <div class="dropdown">
     <a href="#" role="button" id="tableRowDropdown-{{payloadDecoder.id}}" class="applicationRow__edit dropdown-toggle"
       data-toggle="dropdown" aria-expanded="false"
       [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>

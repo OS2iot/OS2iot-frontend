@@ -37,7 +37,6 @@ export class PermissionDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private permissionService: PermissionService,
-    private permissionsService: PermissionService,
     private router: Router
   ) { }
 

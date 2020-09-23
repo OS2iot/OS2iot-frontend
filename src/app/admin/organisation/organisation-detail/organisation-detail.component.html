@@ -32,9 +32,9 @@
             <div class="float-left">
 
 
-                <h2>{{ 'ORGANISATION.DETAIL.NAME' | translate }}</h2>
+                <h2> {{organisation.name}}</h2>
 
-                {{organisation.name}}
+
             </div>
             <div class="btn-group float-right">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{organisation.id}}">
                     <li class="dropdown-item">
                         <a [routerLink]="['edit-user']"
-                            routerLinkActive="active">{{ 'ORGANISATION.TABLE-ROW.EDIT' | translate }}
+                            routerLinkActive="active">{{ 'ORGANISATION-TABLE-ROW.EDIT' | translate }}
                         </a>
                     </li>
                 </ul>

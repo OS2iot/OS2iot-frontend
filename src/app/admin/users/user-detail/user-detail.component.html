@@ -4,19 +4,19 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="float-left">
-                <h4>Generelle Info</h4>
+                <h4>{{user.name}}</h4>
                 <p>{{user.email}}</p>
                 <p [ngClass]="user.active | activeDeactive">{{user.active | activeDeactive}}</p>
                 <div>
                     <div *ngIf="user.lastLogin; else noLogin">
-                        <P>Sidste login: {{user?.lastLogin | date}}</P>
+                        <P>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}{{user?.lastLogin | date}}</P>
                     </div>
                     <ng-template #noLogin>
-                        <P>Sidste login: Ikke logget på endnu</P>
+                        <P>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}{{ 'USERS.DETAIL.NO-LOGIN' | translate }}</P>
                     </ng-template>
                 </div>
-                <p>Oprettet den: {{user?.createdAt | date}}</p>
-                <p>Global administrator:
+                <p>{{ 'USERS.DETAIL.ADDED-DATE' | translate }}{{user?.createdAt | date}}</p>
+                <p>{{ 'USERS.DETAIL.GLOBALADMIN' | translate }}
                     {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
                 </p>
             </div>

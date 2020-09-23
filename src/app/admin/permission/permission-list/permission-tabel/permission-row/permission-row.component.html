@@ -24,11 +24,11 @@
     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
       <li class="dropdown-item">
         <a [routerLink]="[permission.id, 'permission-user']"
-          routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
+          routerLinkActive="active">{{ 'PERMISSION.TABLE-ROW.EDIT' | translate }}
         </a>
       </li>
       <li class="dropdown-item">
-        <a (click)="clickDelete()" [routerLink]="">{{ 'PERMISSION-TABLE-ROW.DELETE' | translate }}
+        <a (click)="clickDelete()" [routerLink]="">{{ 'PERMISSION.TABLE-ROW.DELETE' | translate }}
         </a>
       </li>
     </ul>
