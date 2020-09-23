@@ -1,11 +1,7 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{error}}
-      </li>
-    </ul>
+  <div *ngIf="errorMessage" class="error-messages p-3">
+    {{errorMessage | translate}}
   </div>
 
   <div class="row mb-5">

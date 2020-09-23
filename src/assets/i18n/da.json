@@ -310,7 +310,8 @@
     }
   },
   "MESSAGE": {
-    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
+    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
+    "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede"
   },
   "PROFILES": {
     "NAME": "Profiler",
