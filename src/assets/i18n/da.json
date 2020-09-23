@@ -425,5 +425,6 @@
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2 Internet of things",
     "WELCOME-MESSAGE": "Her kan du bla bla"
-  }
+  },
+  "HTTP_PUSH": "HTTP Push"
 }

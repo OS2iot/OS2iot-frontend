@@ -16,8 +16,8 @@ export class DatatargetTableRowComponent implements OnInit {
   private alertMessage: string;
 
   constructor(
-    private translate: TranslateService, 
-    private router: Router) { 
+    private translate: TranslateService,
+    private router: Router) {
       translate.use('da');
     }
 
@@ -25,12 +25,7 @@ export class DatatargetTableRowComponent implements OnInit {
   }
 
   clickDelete() {
-    //console.log('delete datatarget')
     this.deleteDatatarget.emit(this.datatarget.id);
-  }
-
-  navigateToEditPage() {
-    //this.router.navigate(['edit-datatarget', this.detatarget.id]);  
   }
 
 }
