@@ -128,10 +128,10 @@ $color-blue-002: rgba(0, 159, 223, 0.75) !default;
 $color-blue-003: rgba(0, 159, 223, 0.5) !default;
 $color-blue-004: rgba(0, 159, 223, 0.25) !default;
 
-$color-green-001: rgba(0, 100, 50, 1) !default;
-$color-green-002: rgba(0, 100, 50, 0.75) !default;
-$color-green-003: rgba(0, 100, 50, 0.5) !default;
-$color-green-004: rgba(0, 100, 50, 0.25) !default;
+$color-green-001: rgba(47, 121, 100, 1) !default;
+$color-green-002: rgba(47, 121, 100, 0.75) !default;
+$color-green-003: rgba(47, 121, 100, 0.5) !default;
+$color-green-004: rgba(47, 121, 100, 0.25) !default;
 
 $color-dark-green-001: rgba(0, 49, 39, 1) !default;
 $color-dark-green-002: rgba(0, 49, 39, 0.75) !default;
@@ -153,10 +153,10 @@ $color-yellow-002: rgba(231, 205, 20, 0.75) !default;
 $color-yellow-003: rgba(231, 205, 20, 0.5) !default;
 $color-yellow-004: rgba(231, 205, 20, 0.25) !default;
 
-$color-red-001: rgba(131, 19, 2, 1) !default;
-$color-red-002: rgba(131, 19, 2, 0.75) !default;
-$color-red-003: rgba(131, 19, 2, 0.5) !default;
-$color-red-004: rgba(131, 19, 2, 0.25) !default;
+$color-red-001: rgba(148, 68, 58, 1) !default;
+$color-red-002: rgba(148, 68, 58, 0.75) !default;
+$color-red-003: rgba(148, 68, 58, 0.5) !default;
+$color-red-004: rgba(148, 68, 58, 0.25) !default;
 
 $color-purple-001: rgba(81, 45, 109, 1) !default;
 $color-purple-002: rgba(81, 45, 109, 0.75) !default;
@@ -171,8 +171,8 @@ $color-orange-004: rgba(231, 102, 89, 0.25) !default;
 // // Colors used for alert boxes
 $color-base-001: $color-white-001 !default;
 $color-base-002: $color-black-001 !default;
-$color-success: $color-blue-001 !default;
-$color-success-light: $color-blue-004 !default;
+$color-success: $color-green-001 !default;
+$color-success-light: $color-green-004 !default;
 $color-warning: $color-yellow-001 !default;
 $color-warning-light: $color-yellow-003 !default;
 $color-error: $color-red-001 !default;
@@ -201,7 +201,6 @@ $color-text-white: $color-white-001 !default;
 $color-text-blue: $color-blue-001 !default;
 $color-text-yellow: $color-yellow-001 !default;
 $color-text-lime: $color-lime-001 !default;
-$color-text-error: $color-red-001 !default;
 $color-text-red: $color-red-001 !default;
 $color-text-grey: lighten($color-black-001, 50%) !default;
 $color-text-gray-01: $color-gray-002 !default;

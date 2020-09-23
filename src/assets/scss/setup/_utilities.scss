@@ -53,3 +53,14 @@
 .asterisk-if-mandatory::after {
   content: " *";
 }
+
+
+.Deactived,
+.Deaktiveret {
+  color: $color-error;
+}
+
+.Active,
+.Aktiv {
+  color: $color-success;
+}

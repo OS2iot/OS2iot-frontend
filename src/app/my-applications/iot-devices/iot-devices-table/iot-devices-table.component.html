@@ -1,20 +1,22 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>{{ 'APPLICATION-TABLE.NAME' | translate }}</th>
-      <th>{{ 'IOT-TABLE.NETWORK-TECHNOLOGY' | translate }}</th>
-      <th>{{ 'IOT-TABLE.ALARM' | translate }}</th>
-      <th>{{ 'IOT-TABLE.BATTERY' | translate }}</th>
-      <th>{{ 'IOT-TABLE.ACTIVE' | translate }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let device of iotDevices" class="py-3" app-iot-devices-table-row [device]="device"
-      (deleteDevice)="deleteDevice($event)">
-    </tr>
-  </tbody>
-</table>
-
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'APPLICATION-TABLE.NAME' | translate }}</th>
+        <th scope="col">{{ 'IOT-TABLE.NETWORK-TECHNOLOGY' | translate }}</th>
+        <th scope="col">{{ 'IOT-TABLE.ALARM' | translate }}</th>
+        <th scope="col">{{ 'IOT-TABLE.BATTERY' | translate }}</th>
+        <th scope="col">{{ 'IOT-TABLE.ACTIVE' | translate }}</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let device of iotDevices" class="py-3" app-iot-devices-table-row [device]="device"
+        (deleteDevice)="deleteDevice($event)">
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
   <ul class="pagination justify-content-center mt-5">

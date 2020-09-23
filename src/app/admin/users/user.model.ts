@@ -1,28 +1,27 @@
-import { Permission } from '../usergroups/permission.model';
+import { PermissionResponse } from '../permission/permission.model';
 
-export class User {
+export class UserRequest {
     id: number;
-    createdAt: Date;
-    updatedAt: Date;
+    name: string;
+    email: string;
+    password: string;
+    active: boolean;
+    globalAdmin: boolean;
+}
+
+export interface UserResponse {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
     name: string;
     email: string;
     active: boolean;
     lastLogin: Date;
-    permissions: Permission[];
+    permissions: PermissionResponse[];
+    globalAdmin: boolean;
 }
 
-export interface UsersResponse {
-    data: User[];
+export interface UserGetManyResponse {
+    data: UserResponse[];
     count: number;
-}
-
-export interface UserResponse {
-    user: User;
-}
-
-export class UserRequest {
-    user: User;
-    constructor(user: User) {
-        this.user = user;
-    }
 }

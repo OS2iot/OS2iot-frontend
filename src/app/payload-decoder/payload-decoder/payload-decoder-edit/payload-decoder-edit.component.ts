@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { BackButton } from 'src/app/models/back-button';
-import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from 'src/app/shared/services/payload-decoder.service';
@@ -49,11 +48,11 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   private getPayloadDecoder(id: number) {
-    this.subscription =  this.payloadDecoderService.getOne(id)
+    this.subscription = this.payloadDecoderService.getOne(id)
       .subscribe(
         (response) => {
-        this.payloadDecoder = response;
-    });
+          this.payloadDecoder = response;
+        });
   }
 
   private create(): void {

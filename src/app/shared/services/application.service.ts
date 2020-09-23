@@ -26,7 +26,8 @@ export class ApplicationService {
         limit: number,
         offset: number,
         sort: SortDir,
-        orderOn: SortCol
+        orderOn: SortCol,
+        organizationId?: number
     ): Observable<ApplicationData> {
         const body = {
             limit: limit,
@@ -35,6 +36,14 @@ export class ApplicationService {
             orderOn: orderOn,
         };
         return this.restService.get('application', body);
+    }
+
+    getApplicationsByOrganizationId(organizationId: number): Observable<ApplicationData> {
+        const body = {
+            organizationId: organizationId
+        };
+        return this.restService.get('application', body);
+
     }
 
     deleteApplication(id: number) {

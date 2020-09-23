@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Organisation } from '../organisation.model';
+
 import { OrganisationService } from 'src/app/shared/services/organisation.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { Organisation } from '../organisation.model';
 
 @Component({
   selector: 'app-organisation-edit',
@@ -32,18 +33,18 @@ export class OrganisationEditComponent implements OnInit {
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
     this.translate
-      .get(['NAV.ORGANISATION', 'FORM.EDIT-ORGANISATION', 'ORGANISATION.SAVE'])
+      .get(['NAV.ORGANISATIONS', 'FORM.EDIT-ORGANISATION', 'ORGANISATION.SAVE'])
       .subscribe((translations) => {
-        this.backButton.label = translations['NAV.ORGANISATION'];
+        this.backButton.label = translations['NAV.ORGANISATIONS'];
         this.title = translations['FORM.EDIT-ORGANISATION'];
         this.submitButton = translations['ORGANISATION.SAVE'];
       });
-    this.id = +this.route.snapshot.paramMap.get('orgId');
+    this.id = +this.route.snapshot.paramMap.get('org-id');
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }

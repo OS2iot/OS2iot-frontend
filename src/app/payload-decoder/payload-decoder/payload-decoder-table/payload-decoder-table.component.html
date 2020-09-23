@@ -1,21 +1,18 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>{{ 'PAYLOAD-DECODER.NAME' | translate }}</th>
-            <th>{{ 'PAYLOAD-DECODER.ID' | translate }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr
-            *ngFor="let payloadDecoder of payloadDecoders"
-            class="py-3"
-            app-payload-decoder-row
-            [payloadDecoder]="payloadDecoder"
-            (deletePayloadDecoder)="deletePayloadDecoder($event)"
-        ></tr>
-    </tbody>
-</table>
-
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'PAYLOAD-DECODER.NAME' | translate }}</th>
+                <th>{{ 'PAYLOAD-DECODER.ID' | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payloadDecoder of payloadDecoders" class="py-3" app-payload-decoder-row
+                [payloadDecoder]="payloadDecoder" (deletePayloadDecoder)="deletePayloadDecoder($event)"></tr>
+        </tbody>
+    </table>
+</div>
 <!-- <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
     <ul class="pagination justify-content-center mt-5">
         <li class="page-item">

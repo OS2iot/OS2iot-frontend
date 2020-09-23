@@ -18,7 +18,9 @@
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "Lorawan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
-    "ORGANISATION": "Organisationer"
+    "ORGANISATIONS": "Organisationer",
+    "PERMISSIONS": "Brugergrupper",
+    "USERS": "Brugere"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -124,15 +126,59 @@
     "APPLICATION-COUNT": "Applikationer",
     "SAVE": "Gem organisation",
     "EDIT": "Rediger organisation",
+    "DROPDOWN": "Håndter organisation",
     "DETAIL": {
-      "APPLICATIONS": "Applikationer",
+      "APPLICATIONS": "Organisationens applikationer",
       "PERMISSIONS": "Brugergrupper",
       "NAME": "Navn"
+    },
+    "FORM": {
+      "NAME": "Indtast organisationens navn",
+      "NAME-PLACEHOLDER": "Indtast organisationens navn",
+      "CANCEL": "Annuller",
+      "SAVE": "Gem organisation",
+      "CREATE-NEW-ORGANISATION": "Opret organisation"
     }
   },
   "ORGANISATION-TABLE-ROW": {
     "EDIT": "Redigér",
     "DELETE": "Slet"
+  },
+  "PERMISSION": {
+    "NAME": "Navn",
+    "ORGANISATION": "Organisation",
+    "NUMBER_OF_MEMBERS": "Antal medlemmer",
+    "TYPE": "Type af brugergruppe",
+    "NO_ORGANISATION": "N/A",
+    "DETAIL": {
+      "TYPE": "Adgangstype: ",
+      "ORG": "Organisations: ",
+      "DROPDOWN": "Håndter Brugergruppe",
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
+    },
+    "EDIT": {
+      "NAME": "Indtast brugergruppens navn",
+      "NAME-PLACEHOLDER": "Brugergruppens navn",
+      "TYPE": "Rettigheder",
+      "TYPE-PLACEHOLDER": "Adgangs rettigheder",
+      "USERS": "Vælg brugere",
+      "USERS-PLACEHOLDER": "Brugere",
+      "ORG": "Vælg en organisation",
+      "ORG-PLACEHOLDER": "Organisation",
+      "APPS": "Vælg en applikation",
+      "APPS-PLACEHOLDER": "Applikationer"
+    },
+    "TABLE-ROW": {
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
+    }
+  },
+  "PERMISSION-TYPE": {
+    "GlobalAdmin": "Global Administrator",
+    "OrganizationAdmin": "Organisations Administrator",
+    "Write": "Skrive-rettigheder",
+    "Read": "Læse-rettigheder"
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
@@ -148,7 +194,8 @@
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
     "EDIT-DEVICE-PROFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
-    "EDIT-ORGANISATION": "Redigér organisation"
+    "EDIT-ORGANISATION": "Redigér organisation",
+    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -329,6 +376,45 @@
       "PINGSLOTDR_PLACEHOLDER": "0",
       "PINGSLOTFREQ_PLACEHOLDER": "0",
       "CLASSCTIMEOUT_PLACEHOLDER": "0"
+    }
+  },
+  "USERS": {
+    "SAVE": "Gem",
+    "NAME": "Navn",
+    "EMAIL": "Email",
+    "GLOBALADMIN": "Global Administrator",
+    "STATUS": "Status",
+    "LASTLOG": "Sidste Login",
+    "EDIT": "Redigér User",
+    "CREATE": "Opret ny burger",
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    },
+    "FORM": {
+      "NAME": "Indtast det fulde navn på brugeren",
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL": "Indtast Email addressen til brugeren",
+      "EMAIL-PLACEHOLDER": "Email",
+      "PASSWORD": "Password",
+      "PASSWORD-PLACEHOLDER": "Indtast en password",
+      "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
+      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
+      "SAVE": "Gem Bruger"
+    },
+    "DETAIL": {
+      "DROPDOWN": "Håndter Bruger",
+      "LAST-LOGIN": "Sidste login: ",
+      "NO-LOGIN": "Ikke logget på endnu",
+      "ADDED-DATE": "Oprettet den: ",
+      "GLOBALADMIN": "Global Administrator: ",
+      "PERMISSIONS": "Brugergrupper",
+      "APPLICATIONS": "Applikationer",
+      "NAME-PLACEHOLDER": "Navn"
+    },
+    "GLOBAL_ADMIN": {
+      "TRUE": "Ja",
+      "FALSE": "Nej"
     }
   }
 }

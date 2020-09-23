@@ -3,55 +3,64 @@
     <img class="logo" alt="OS2IoT"
       src="data:image/svg+xml,%3Csvg width='60' height='22' viewBox='0 0 60 22' fill='none' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Crect y='3.05176e-05' width='60' height='22' fill='url(%23pattern0)'/%3E%3Cdefs%3E%3Cpattern id='pattern0' patternContentUnits='objectBoundingBox' width='1' height='1'%3E%3Cuse xlink:href='%23image0' transform='translate(0 -0.0101604) scale(0.00235294 0.00641711)'/%3E%3C/pattern%3E%3Cimage id='image0' width='425' height='159' xlink:href='data:image/png;base64,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'/%3E%3C/defs%3E%3C/svg%3E%0A">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse flex-grow-0" id="navbar">
+
+  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
-        <app-global-admin></app-global-admin>
-      </li>
-      <li class="nav-item py-2">
-        <a>
-          Skanderborg Kommune
+        <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
+          Authenticate
         </a>
-      </li>
-      <li class="nav-item py-2">
-        <ul class="navbar-nav flex-column">
-          <li class="nav-item py-2">
-            <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-              id="myApplications">
-              {{ 'NAV.MY-APPLICATIONS' | translate }}
-            </a>
-          </li>
-          <li class="nav-item py-2">
-            <a routerLink="/mine-lora-gateways" routerLinkActive="active"
-              class="nav-link pl-5 position-relative rounded" id="myLoraGateway">
-              {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
-            </a>
-          </li>
-          <li class="nav-item py-2">
-            <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-              id="profiles">
-              {{ 'NAV.PROFILES' | translate }}
-            </a>
-          </li>
-          <li class="nav-item py-2">
-            <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-              id="payload-decoder">
-              {{ 'NAV.PAYLOAD-DECODER' | translate }}
-            </a>
-          </li>
-          <li class="nav-item py-2">
-            <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
-              Authenticate
-            </a></li>
-        </ul>
-      </li>
-      <li class="nav-item py-2">
-        <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>
+  <ng-template #loggedInBlock>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0" id="navbar">
+      <ul class="navbar-nav flex-column mt-5">
+        <li class="nav-item py-2">
+          <app-global-admin></app-global-admin>
+        </li>
+        <li class="nav-item py-2">
+          <a>
+            Skanderborg Kommune
+          </a>
+        </li>
+        <li class="nav-item py-2">
+          <ul class="navbar-nav flex-column">
+            <li class="nav-item py-2">
+              <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+                id="myApplications">
+                {{ 'NAV.MY-APPLICATIONS' | translate }}
+              </a>
+            </li>
+            <li class="nav-item py-2">
+              <a routerLink="/mine-lora-gateways" routerLinkActive="active"
+                class="nav-link pl-5 position-relative rounded" id="myLoraGateway">
+                {{ 'NAV.MY-LORA-GATEWAYS' | translate }}
+              </a>
+            </li>
+            <li class="nav-item py-2">
+              <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+                id="profiles">
+                {{ 'NAV.PROFILES' | translate }}
+              </a>
+            </li>
+            <li class="nav-item py-2">
+              <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
+                id="payload-decoder">
+                {{ 'NAV.PAYLOAD-DECODER' | translate }}
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item py-2">
+          <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+
 </nav>

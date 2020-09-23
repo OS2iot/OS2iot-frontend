@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'USERS.NAME' | translate }}</th>
+                <th scope="col">{{ 'USERS.EMAIL' | translate }}</th>
+                <th scope="col">{{ 'USERS.GLOBALADMIN' | translate }}</th>
+                <th scope="col">{{ 'USERS.STATUS' | translate }}</th>
+                <th scope="col">{{ 'USERS.EMAIL' | translate }}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users" class="py-3" app-user-table-row [user]="user">
+            </tr>
+        </tbody>
+    </table>
+</div>

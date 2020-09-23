@@ -1,22 +1,26 @@
-<table class="table">
+<div class="table-responsive">
+  <table class="table">
     <thead>
       <tr>
-        <th>{{ 'DATATARGET-TABLE.NAME' | translate }}</th>
-        <th>{{ 'DATATARGET-TABLE.TYPE' | translate }}</th>
+        <th scope="col">{{ 'DATATARGET-TABLE.NAME' | translate }}</th>
+        <th scope="col">{{ 'DATATARGET-TABLE.TYPE' | translate }}</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let datatarget of datatargets" class="py-3"
-        app-datatarget-tabel-row [datatarget]="datatarget"
+      <tr *ngFor="let datatarget of datatargets" class="py-3" app-datatarget-tabel-row [datatarget]="datatarget"
         (deleteDatatarget)="deleteDatatarget($event)">
       </tr>
     </tbody>
   </table>
-  
-  <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
-    <ul class="pagination justify-content-center mt-5">
-      <li class="page-item"><a class="page-link" [routerLink]="" (click)="prevPage()">Previous</a></li>
-      <li class="page-item disabled"><div class="page-link" [routerLink]="">{{ pageOffset + 1 }} / {{ pageTotal }}</div></li>
-      <li class="page-item"><a class="page-link" [routerLink]="" (click)="nextPage()">Next</a></li>
-    </ul>
-  </nav>
+</div>
+
+<nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
+  <ul class="pagination justify-content-center mt-5">
+    <li class="page-item"><a class="page-link" [routerLink]="" (click)="prevPage()">Previous</a></li>
+    <li class="page-item disabled">
+      <div class="page-link" [routerLink]="">{{ pageOffset + 1 }} / {{ pageTotal }}</div>
+    </li>
+    <li class="page-item"><a class="page-link" [routerLink]="" (click)="nextPage()">Next</a></li>
+  </ul>
+</nav>
