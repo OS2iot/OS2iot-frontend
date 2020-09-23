@@ -403,6 +403,7 @@
       "SAVE": "Gem Bruger"
     },
     "DETAIL": {
+      "DROPDOWN": "Håndter Bruger",
       "LAST-LOGIN": "Sidste login: ",
       "NO-LOGIN": "Ikke logget på endnu",
       "ADDED-DATE": "Oprettet den: ",
