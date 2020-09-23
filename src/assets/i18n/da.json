@@ -303,7 +303,8 @@
       "DEVADDR": "devADDR",
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
-      "SKIPFCNTCHECK": "skipfcntcheck"
+      "SKIPFCNTCHECK": "skipfcntcheck",
+      "OTAAAPPLICATIONKEY":"OTAA Applicationkey"
     }
   },
   "MESSAGE": {
