@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
@@ -17,9 +18,12 @@ export class AuthComponent implements OnInit {
   isLoading = false;
   error: string = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public translate: TranslateService,) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -27,7 +31,7 @@ export class AuthComponent implements OnInit {
 
   success() {
     this.isLoading = false;
-    this.router.navigateByUrl('/my-applications');
+    this.router.navigateByUrl('/dashboard');
   }
 
   fail() {

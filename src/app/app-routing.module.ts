@@ -6,11 +6,13 @@ import { EditGatewayComponent } from './views/administration-gateway/edit-gatewa
 import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
 import { AuthComponent } from './auth/auth.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: 'auth', component: AuthComponent },
-    { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+    { path: 'auth', component: AuthComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
     {
         path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
         children: [
