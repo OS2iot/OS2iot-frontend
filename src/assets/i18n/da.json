@@ -150,6 +150,7 @@
     "NUMBER_OF_MEMBERS": "Antal medlemmer",
     "TYPE": "Type af brugergruppe",
     "NO_ORGANISATION": "N/A",
+    "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype: ",
       "ORG": "Organisations: ",
