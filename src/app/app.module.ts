@@ -5,8 +5,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardModule } from './views/dashboard/dashboard.module';
-import { MyApplicationsModule } from './my-applications/my-applications.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,14 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
 import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { ProfilesModule } from './profiles/profiles.module';
-import { PayloadDecoderModule } from './payload-decoder/payload-decoder.module';
-
-import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
-import { ServerErrorInterceptor } from '@shared/helpers/server-error.interceptor';
-import { OrganisationModule } from './admin/organisation/organisation.module';
-import { PermissionModule } from './admin/permission/permission.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     bootstrap: [AppComponent],
     exports: [TranslateModule],
     providers: [
-        { provide: ErrorHandler, useClass: GlobalErrorHandler },
+        // use these two providers only in dev environment
+        //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
         //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true }
     ],

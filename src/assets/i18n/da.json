@@ -416,5 +416,13 @@
       "TRUE": "Ja",
       "FALSE": "Nej"
     }
+  },
+  "AUTH": {
+    "EMAIL": "Email",
+    "PASSWORD": "Adgangskode"
+  },
+  "DASHBOARD": {
+    "WELCOME": "Velkommen til OS2 Internet of things",
+    "WELCOME-MESSAGE": "Her kan du bla bla"
   }
 }
