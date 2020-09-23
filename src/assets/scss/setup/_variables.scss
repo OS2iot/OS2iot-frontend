@@ -113,15 +113,15 @@ $color-black-002: rgba(0, 0, 0, 0.75) !default;
 $color-black-003: rgba(0, 0, 0, 0.5) !default;
 $color-black-004: rgba(0, 0, 0, 0.25) !default;
 
-$color-gray-001: rgba(0, 0, 0, 0.05) !default;
-$color-gray-002: rgba(88, 94, 99, 1) !default;
-$color-gray-003: rgba(112, 112, 112, 1) !default;
-$color-gray-004: rgba(252, 252, 252, 1) !default;
-$color-gray-005: rgba(232, 232, 232, 1) !default;
-$color-gray-006: rgba(245, 245, 245, 1) !default;
-$color-gray-007: rgba(49, 49, 49, 1) !default;
-$color-gray-008: rgba(36, 36, 36, 1) !default;
-$color-gray-009: rgba(196, 203, 207, 1) !default;
+$color-grey-001: rgba(0, 0, 0, 0.05) !default;
+$color-grey-002: rgba(88, 94, 99, 1) !default;
+$color-grey-003: rgba(112, 112, 112, 1) !default;
+$color-grey-004: rgba(252, 252, 252, 1) !default;
+$color-grey-005: rgba(232, 232, 232, 1) !default;
+$color-grey-006: rgba(245, 245, 245, 1) !default;
+$color-grey-007: rgba(49, 49, 49, 1) !default;
+$color-grey-008: rgba(36, 36, 36, 1) !default;
+$color-grey-009: rgba(196, 203, 207, 1) !default;
 
 $color-blue-001: rgba(0, 159, 223, 1) !default;
 $color-blue-002: rgba(0, 159, 223, 0.75) !default;
@@ -203,8 +203,8 @@ $color-text-yellow: $color-yellow-001 !default;
 $color-text-lime: $color-lime-001 !default;
 $color-text-red: $color-red-001 !default;
 $color-text-grey: lighten($color-black-001, 50%) !default;
-$color-text-gray-01: $color-gray-002 !default;
-$color-text-gray-02: $color-gray-003 !default;
+$color-text-grey-01: $color-grey-002 !default;
+$color-text-grey-02: $color-grey-003 !default;
 $color-text-green: $color-green-001 !default;
 $color-text-black: $color-base-002 !default;
 
@@ -231,21 +231,27 @@ $color-link-focus-bg: $color-primary !default;
 $color-visited: $color-primary !default;
 
 // Colors for borders
-$color-border: $color-white-003 !default;
+$color-border: $color-black-004 !default;
+$color-border-focus: $color-primary !default;
+$color-border-hover: $color-black-002;
 $color-border-light: $color-white-004 !default;
-$color-border-black: $color-black-001 !default;
+$color-border-black: $color-black-002 !default;
 $color-border-red: $color-red-002 !default;
 $color-border-green: $color-green-002 !default;
 
 //Borders
-$border-width: 5;
-$outer-border: $border-width solid $color-border;
+$border-width: 5px;
+$border-width-small: 2px;
+$border-radius-primary: 0.25rem;
+$border-radius-secondary: 20px;
+$outer-border: $border-width-small solid $color-border;
 $inner-border: $border-width solid lighten($color-border, 50%);
 $focus-border: $border-width solid $color-border-green;
 $focus-outline: $border-width solid $color-border;
 $warning-border: $border-width solid $color-border-red;
-$border-radius-primary: 16px;
-$border-radius-secondary: 20px;
+$border-input: $border-width-small solid $color-border;
+$border-input-focus: $border-width-small solid $color-border-focus;
+$border-input-hover: $border-width-small solid $color-border-hover;
 
 // //Button Borders
 // $button-border-width: 1px;

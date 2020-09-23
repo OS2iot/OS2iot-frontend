@@ -97,34 +97,29 @@ a {
 }
 
 
+// .button {
+//   width: 80%;
+//   margin-top: 20;
+//   padding: 10;
+//   border-radius: 16px;
 
+//   &-primary {
+//     background-color: $button-primary-bg;
+//     color: $button-primary-color;
+//   }
 
+//   &-secondary {
+//     background-color: $button-secondary-bg;
+//     color: $button-secondary-color;
+//   }
 
-@import '../setup/variables';
-
-.button {
-  width: 80%;
-  margin-top: 20;
-  padding: 10;
-  border-radius: 16px;
-
-  &-primary {
-    background-color: $button-primary-bg;
-    color: $button-primary-color;
-  }
-
-  &-secondary {
-    background-color: $button-secondary-bg;
-    color: $button-secondary-color;
-  }
-
-  &-small {
-    width: 20%;
-    height: 5%;
-    margin-top: 0;
-    padding: 0;
-  }
-}
+//   &-small {
+//     width: 20%;
+//     height: 5%;
+//     margin-top: 0;
+//     padding: 0;
+//   }
+// }
 
 
 .btn-create {
