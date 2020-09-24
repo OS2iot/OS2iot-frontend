@@ -213,7 +213,7 @@ $color-text-black: $color-base-002 !default;
 $color-bg-normal: $color-white-001 !default;
 $color-bg-primary: $color-primary !default;
 $color-bg-primary-layer: $color-black-002 !default;
-$color-bg-secondary: $color-dark-green-001 !default;
+$color-bg-secondary: $color-white-001 !default;
 $color-bg-alternative: $color-light-green-001 !default;
 
 //Icons color
@@ -285,7 +285,7 @@ $button-disabled-bg: $color-black-004 !default;
 $button-disabled-border: $color-black-004 !default;
 
 // //######### secondarycolors for buttons
-$button-secondary-color: $color-text-primary !default;
+$button-secondary-color: $color-primary !default;
 $button-secondary-bg: $color-bg-normal !default;
 $button-secondary-border-color: $color-primary !default;
 //secondary Hover

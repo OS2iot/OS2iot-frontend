@@ -310,7 +310,7 @@
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
   },
   "PROFILES": {
-    "NAME": "Profiler",
+    "NAME": "LoRaWan Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Servie Profile",
@@ -362,8 +362,8 @@
       "PINGSLOTFREQ": "Class-B ping-slot frequency",
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
-      "CANCEL": "Cancel",
-      "SAVE": "Save",
+      "CANCEL": "Anuller",
+      "SAVE": "Gem",
       "OTAA-ABP": "Join (OTAA / ABP)",
       "MACVERSION_PLACEHOLDER": "1.0.0",
       "MAXEIRP_PLACEHOLDER": "0",

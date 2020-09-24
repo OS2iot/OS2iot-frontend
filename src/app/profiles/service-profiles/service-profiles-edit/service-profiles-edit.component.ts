@@ -42,9 +42,9 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translate.get(['PROFILES.SERVICE_PROFILE.GOBACK', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE',])
+    this.translate.get(['PROFILES.NAME', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE', 'PAYLOAD-DECODER.SAVE'])
       .subscribe(translations => {
-        this.backButton.label = translations['PROFILES.SERVICE_PROFILE.GOBACK'];
+        this.backButton.label = translations['PROFILES.NAME'];
         this.title = translations['PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE'];
         this.submitButton = translations['PAYLOAD-DECODER.SAVE'];
 
@@ -92,11 +92,11 @@ export class ServiceProfilesEditComponent implements OnInit {
     this.errorMessage = '';
     this.errorMessages = [];
     if (error.error?.chirpstackError) {
-        this.errorFields.push('name');
-        this.errorFields.push('devStatusReqFreq');
-        this.errorFields.push('drMax');
-        this.errorFields.push('drMin');
-        this.errorMessage = error.error.chirpstackError.message;
+      this.errorFields.push('name');
+      this.errorFields.push('devStatusReqFreq');
+      this.errorFields.push('drMax');
+      this.errorFields.push('drMin');
+      this.errorMessage = error.error.chirpstackError.message;
     } else if (error.error?.message?.length > 0) {
       error.error.message[0].children.forEach((err) => {
         this.errorFields.push(err.property);

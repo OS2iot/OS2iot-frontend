@@ -23,7 +23,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   public errorFields: string[];
   public formFailedSubmit = false;
   public title = '';
-  public backButton: BackButton = { label: '', routerLink: '/payload-decoder' };
+  public backButton: BackButton = { label: '', routerLink: '/profiles' };
 
   constructor(
     private route: ActivatedRoute,
@@ -35,9 +35,10 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.translate.get(['FORM.EDIT-DEVICE-PROFILE'])
+    this.translate.get(['PROFILES.NAME', 'FORM.EDIT-DEVICE-PROFILE'])
       .subscribe(translations => {
         this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
+        this.backButton.label = translations['PROFILES.NAME'];
       });
 
     this.id = this.route.snapshot.paramMap.get('deviceId');
@@ -91,7 +92,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.errorMessages = [];
     if (error.error?.chirpstackError) {
-        this.errorMessage = error.error.chirpstackError.message;
+      this.errorMessage = error.error.chirpstackError.message;
     } else if (error.error?.message?.length > 0) {
       error.error.message[0].children.forEach((err) => {
         this.errorFields.push(err.property);
@@ -121,7 +122,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     if (this.subscription) {
-        this.subscription.unsubscribe();
+      this.subscription.unsubscribe();
     }
-}
+  }
 }
