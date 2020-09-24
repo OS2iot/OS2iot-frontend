@@ -1,4 +1,5 @@
 import { AfterContentInit, AfterViewChecked, Component, DoCheck, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { AuthService } from '@app/auth/auth.service';
@@ -24,7 +25,8 @@ export class OrganisationDropdownComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public translate: TranslateService,
-    private sharedVariable: SharedVariableService
+    private sharedVariable: SharedVariableService,
+    private route: Router,
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +57,9 @@ export class OrganisationDropdownComponent implements OnInit {
   public onChange(value) {
     this.setSelectedOrganisation(value);
     this.sharedVariable.setValue(value);
+    this.route.navigateByUrl('/my-applications');
   }
+
   setSelectedOrganisation(value) {
     this.sharedVariable.setSelectedOrganisationId(value);
   }
