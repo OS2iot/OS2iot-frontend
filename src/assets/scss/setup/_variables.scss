@@ -74,9 +74,9 @@ $small-text: calculateRem($em-base - 2) !default;
 $small-text-line-height: calculateRem($em-base) !default;
 
 //icon sizes
-$icon-size: $em-base !default;
-$icon-size-medium: $icon-size * 2 !default;
-$icon-size-big: $icon-size * 4 !default;
+$icon-size: calculateRem($em-base) !default;
+$icon-size-medium: calculateRem($em-base * 2) !default;
+$icon-size-big: calculateRem($em-base * 4) !default;
 
 //transition on timing
 $transition-short: all 0.2s ease-in-out !default;

@@ -118,13 +118,13 @@ export class PermissionEditComponent implements OnInit {
         this.permission.level = response.type;
         this.permission.userIds = response.users.map((x) => x.id);
 
-        if (response.type != PermissionType.GlobalAdmin) {
+        if (response.type !== PermissionType.GlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
         }
 
         if (
-          response.type == PermissionType.Read ||
-          response.type == PermissionType.Write
+          response.type === PermissionType.Read ||
+          response.type === PermissionType.Write
         ) {
           this.getApplications(this.permission.organizationId);
           this.permission.applicationIds = response.applications.map(

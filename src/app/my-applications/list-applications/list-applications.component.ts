@@ -20,7 +20,7 @@ import { SharedVariableService } from '../../shared-variable/shared-variable.ser
   styleUrls: ['./list-applications.component.scss'],
 })
 export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
-  public pageLimit: number = 10;
+  public pageLimit: 10;
   public sort: Sort[] = [
     {
       id: 1,
@@ -59,7 +59,7 @@ export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
       label: 'SORT.NAME-DESCENDING',
     },
   ];
-  public selectedSortId: number = 1;
+  public selectedSortId: 1;
   public selectedSortObject: Sort = {
     id: 6,
     dir: 'DESC',
@@ -105,7 +105,7 @@ export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
   changeSort(sortId: number) {
     for (let i = 0; i < this.sort.length; i++) {
       const elem = this.sort[i];
-      if (elem.id == sortId) {
+      if (elem.id === sortId) {
         this.selectedSortObject = elem;
       }
     }

@@ -22,7 +22,8 @@ export class TopBarComponent implements OnInit {
     @Output() selectedSortChange = new EventEmitter();
     @Output() updatePageLimit = new EventEmitter();
 
-    constructor(public translate: TranslateService, 
+    constructor(
+        public translate: TranslateService,
         private location: Location) {
         translate.use('da');
     }
@@ -36,7 +37,7 @@ export class TopBarComponent implements OnInit {
 
     routeBack(): void {
         this.location.back()
-      }
+    }
 
     // pageLimitUpdate(value) {
     //     console.log('page limit', value);

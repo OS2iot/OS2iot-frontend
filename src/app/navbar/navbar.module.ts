@@ -14,9 +14,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalAdminComponent } from './global-admin/global-admin.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { OrganisationDropdownComponent } from './organisation-dropdown/organisation-dropdown.component';
 
 @NgModule({
-  declarations: [NavbarComponent, GlobalAdminComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
   imports: [
     CommonModule,
     SharedModule,

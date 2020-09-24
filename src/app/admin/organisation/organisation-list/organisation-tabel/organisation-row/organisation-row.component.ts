@@ -4,6 +4,7 @@ import { OrganisationResponse } from '@app/admin/organisation/organisation.model
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tr[app-organisation-row]',
   templateUrl: './organisation-row.component.html',
   styleUrls: ['./organisation-row.component.scss'],
