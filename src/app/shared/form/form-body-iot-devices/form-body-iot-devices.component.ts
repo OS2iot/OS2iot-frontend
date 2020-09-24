@@ -16,6 +16,7 @@ import { ServiceProfile, ServiceProfileResponseMany } from 'src/app/profiles/ser
 import { ServiceProfileService } from '../../services/service-profile.service';
 import { DeviceProfile } from 'src/app/profiles/device-profiles/device-profile.model';
 import { DeviceProfileService } from '../../services/device-profile.service';
+import { SharedVariableService } from '@app/shared-variable/shared-variable.service';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -54,7 +55,8 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         private deviceProfileService: DeviceProfileService,
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService,
-        private location: Location
+        private location: Location,
+        private shareVariable: SharedVariableService,
     ) { }
 
     ngOnInit(): void {
@@ -75,7 +77,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
 
     getApplications(): void {
         this.applicationsSubscription = this.applicationService
-            .getApplications(0, 0, 'ASC', 'name')
+            .getApplications(0, 0, 'ASC', 'name', this.shareVariable.getSelectedOrganisationId())
             .subscribe((applications) => {
                 this.applications = applications.data;
             });
@@ -85,15 +87,15 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         this.deviceSubscription = this.iotDeviceService
             .getIoTDevice(id)
             .subscribe((device: IotDevice) => {
-            this.iotDevice = device;
-            if (this.iotDevice?.application?.id) {
+                this.iotDevice = device;
+                if (this.iotDevice?.application?.id) {
                     this.iotDevice.applicationId = device.application?.id;
                 }
-            if (device.location) {
+                if (device.location) {
                     this.iotDevice.longitude = device.location.coordinates[0];
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
-            this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
+                this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
             });
     }
 
@@ -106,14 +108,14 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
 
     getServiceProfiles() {
         this.serviceProfilesSubscription = this.serviceProfileService
-            .getMultiple().subscribe( (result: ServiceProfileResponseMany) => {
+            .getMultiple().subscribe((result: ServiceProfileResponseMany) => {
                 this.serviceProfiles = result.result;
             });
     }
 
     getDeviceProfiles() {
         this.devicesProfileSubscription = this.deviceProfileService
-            .getMultiple().subscribe( (result) => {
+            .getMultiple().subscribe((result) => {
                 this.deviceProfiles = result.result;
             });
     }
@@ -181,8 +183,8 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
             } else {
                 this.errorFields.push(err.property);
                 this.errorMessages = this.errorMessages.concat(
-                Object.values(err.constraints)
-            );
+                    Object.values(err.constraints)
+                );
             }
         });
     }
