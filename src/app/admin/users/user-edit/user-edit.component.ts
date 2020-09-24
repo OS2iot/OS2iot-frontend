@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { PermissionType } from '@app/admin/permission/permission.model';
 
 
 @Component({
@@ -58,9 +59,8 @@ export class UserEditComponent implements OnInit {
         this.user.email = response.email;
         this.user.id = response.id;
         this.user.active = response.active;
-        this.user.globalAdmin = response.globalAdmin;
+        this.user.globalAdmin = response.permissions.some(x => x.type == PermissionType.GlobalAdmin);
         // We cannot set the password.
-        this.user.password = '';
       });
   }
 
@@ -98,7 +98,13 @@ export class UserEditComponent implements OnInit {
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
+
+    if (typeof error.error?.message === 'string') {
+      this.errorMessage = error.error.message;
+      if (error.error.message === 'MESSAGE.PASSWORD-DOES-NOT-MEET-REQUIREMENTS') {
+        this.errorFields.push('password');
+      }
+    } else if (error.error?.message?.length > 0) {
       error.error.message.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(

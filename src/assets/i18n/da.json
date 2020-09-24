@@ -317,7 +317,8 @@
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
-    "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede"
+    "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
+    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
   },
   "PROFILES": {
     "NAME": "LoRaWan Profiler",
@@ -435,5 +436,6 @@
     "WELCOME": "Velkommen til OS2 Internet of things",
     "WELCOME-MESSAGE": "Her kan du bla bla"
   },
-  "HTTP_PUSH": "HTTP Push"
+  "HTTP_PUSH": "HTTP Push",
+  "Forbidden": "Du har ikke rettigheder til at foretage denne handling"
 }
