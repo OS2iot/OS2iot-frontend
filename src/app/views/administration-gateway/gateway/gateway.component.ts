@@ -17,7 +17,7 @@ export class GatewayComponent implements OnInit {
 
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
-    public backButton: BackButton = { label: '', routerLink: '/mine-lora-gateways' };
+    public backButton: BackButton = { label: '', routerLink: '/lora-gateways' };
     private id: string;
     public pageLimit: number = 10;
     public pageOffset: number = 0;

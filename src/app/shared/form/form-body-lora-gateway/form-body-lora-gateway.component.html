@@ -9,41 +9,24 @@
   <div class="row">
     <div class="form-group mt-3">
       <label class="form-label" for="name">{{'QUESTION-LORA-GATEWAY.NAME' | translate}}</label>*
-      <input 
-        type="text" 
-        class="form-control" 
-        id="name" 
-        name="name"
-        [placeholder]="'QUESTION-LORA-GATEWAY.NAME-PLACEHOLDER' | translate" 
-        maxlength="50" 
-        required
+      <input type="text" class="form-control" id="name" name="name"
+        [placeholder]="'QUESTION-LORA-GATEWAY.NAME-PLACEHOLDER' | translate" maxlength="50" required
         [(ngModel)]="gateway.name"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="description">{{'QUESTION-LORA-GATEWAY.DESCRIPTION' | translate}}</label>
-      <textarea 
-        id="description" 
-        name="description"
-        [placeholder]="'QUESTION-LORA-GATEWAY.DESCRIPTION-PLACEHOLDER' | translate" 
-        [maxLength]="1024" 
-        [rows]="6"
-        class="form-control" 
-        [(ngModel)]="gateway.description"
+      <textarea id="description" name="description"
+        [placeholder]="'QUESTION-LORA-GATEWAY.DESCRIPTION-PLACEHOLDER' | translate" [maxLength]="1024" [rows]="6"
+        class="form-control" [(ngModel)]="gateway.description"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('description'), 'is-valid' : formFailedSubmit && !errorFields.includes('description')}"></textarea>
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="id">{{'QUESTION-LORA-GATEWAY.GATEWAYID' | translate}}</label>*
-        <input 
-        type="text" 
-        class="form-control" 
-        id="id" 
-        name="id"
-        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" 
-        maxlength="16" 
-        required
+      <input type="text" class="form-control" id="id" name="id"
+        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" maxlength="16" required
         [(ngModel)]="gateway.id"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
     </div>
@@ -51,67 +34,32 @@
     <div class="row mb-5">
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="longitude">{{'GATEWAY.LONGITUDE' | translate}}</label>
-        <input 
-          type="number" 
-          class="form-control" 
-          id="longitude" 
-          name="longitude" 
-          [placeholder]="00" 
-          required
-          [(ngModel)]="gateway.location.longitude" 
-          step=".000001" 
-          min="-180" 
-          max="180" 
-          maxlength="9" 
+        <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="00" required
+          [(ngModel)]="gateway.location.longitude" step=".000001" min="-180" max="180" maxlength="9"
           (keyup)="onCoordinateKey($event)"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
       </div>
-  
+
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="latitude">{{'GATEWAY.LATITUDE' | translate}}</label>
-        <input 
-          type="number" 
-          class="form-control" 
-          id="location.latitude" 
-          name="location.latitude" 
-          [placeholder]="00" 
-          required
-          [(ngModel)]="gateway.location.latitude" 
-          step=".000001" 
-          min="-180" 
-          max="180" 
-          maxlength="9" 
+        <input type="number" class="form-control" id="location.latitude" name="location.latitude" [placeholder]="00"
+          required [(ngModel)]="gateway.location.latitude" step=".000001" min="-180" max="180" maxlength="9"
           (keyup)="onCoordinateKey($event)"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
       </div>
-  
+
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="altitude">{{'GATEWAY.ALTITUDE' | translate}}</label>
-        <input 
-          type="number" 
-          class="form-control" 
-          id="altitude" 
-          name="altitude" 
-          [placeholder]="00" 
-          required
-          [(ngModel)]="gateway.location.altitude" 
-          step=".000001" 
-          min="-180" 
-          max="180" 
-          maxlength="9" 
+        <input type="number" class="form-control" id="altitude" name="altitude" [placeholder]="00" required
+          [(ngModel)]="gateway.location.altitude" step=".000001" min="-180" max="180" maxlength="9"
           (keyup)="onCoordinateKey($event)"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
       </div>
     </div>
     <div class="form-group mt-3">
       <label class="form-label" for="tagsString">{{'QUESTION-LORA-GATEWAY.METADATA' | translate}}</label>
-      <input 
-        type="text" 
-        class="form-control" 
-        id="tagsString" 
-        name="tagsString"
-        [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"  
-        required
+      <input type="text" class="form-control" id="tagsString" name="tagsString"
+        [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate" required
         [(ngModel)]="gateway.tagsString"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('tagsString'), 'is-valid' : formFailedSubmit && !errorFields.includes('tagsString')}">
     </div>
@@ -119,8 +67,8 @@
   </div>
 
   <div class="form-group mt-5">
-    <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
-    <button class="btn btn-dark ml-2" type="submit">{{ submitButton }}</button>
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+    <button class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>
   </div>
 </form>
 <!-- test app-form-iot--gateway -->

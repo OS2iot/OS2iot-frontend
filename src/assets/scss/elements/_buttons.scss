@@ -49,7 +49,8 @@ a {
         color: $button-primary-active-color;
       }
 
-      .disabled {
+      &.disabled,
+      &:disabled {
         pointer-events: none;
         cursor: default;
         //background-color: #8C8C97;
@@ -64,6 +65,7 @@ a {
       border: solid calculateRem(1) $button-secondary-border-color;
       background: $button-secondary-bg;
       box-shadow: none;
+      color: $button-secondary-color;
 
       &:hover,
       &.hover,
@@ -98,35 +100,6 @@ a {
 
 
 
-
-
-@import '../setup/variables';
-
-.button {
-  width: 80%;
-  margin-top: 20;
-  padding: 10;
-  border-radius: 16px;
-
-  &-primary {
-    background-color: $button-primary-bg;
-    color: $button-primary-color;
-  }
-
-  &-secondary {
-    background-color: $button-secondary-bg;
-    color: $button-secondary-color;
-  }
-
-  &-small {
-    width: 20%;
-    height: 5%;
-    margin-top: 0;
-    padding: 0;
-  }
-}
-
-
 .btn-create {
   color: $white !important;
   background-color: $green !important;
@@ -151,36 +124,6 @@ a {
 }
 
 
-//############################### Old stuff - needs to be replaced with the above code ####################
-//#########################################################################################################
-
-
-.btn-dark,
-.btn-dark:hover,
-.btn-dark:active,
-.btn-dark:visited,
-.btn-dark:focus {
-  background: linear-gradient(180deg, $black-light 0%, $black 100%);
-  border-color: $black;
-  color: $white;
-}
-
-.btn-light,
-.btn-primary {
-  &:focus {
-    box-shadow: 0 0 0 0.2rem $grey-outline;
-  }
-}
-
-.btn-light,
-.btn-light:hover,
-.btn-light:active,
-.btn-light:visited,
-.btn-light:focus {
-  background-color: linear-gradient(180deg, $black-light 0%, $black 100%);
-  border-color: $black;
-  color: $white;
-}
 
 .back-button {
   text-decoration: none;

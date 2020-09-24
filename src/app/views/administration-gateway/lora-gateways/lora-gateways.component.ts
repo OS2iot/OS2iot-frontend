@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mine-lora-gateways',
-  templateUrl: './mine-lora-gateways.component.html',
-  styleUrls: ['./mine-lora-gateways.component.scss']
+  selector: 'app-lora-gateways',
+  templateUrl: './lora-gateways.component.html',
+  styleUrls: ['./lora-gateways.component.scss']
 })
 export class MineLoraGatewaysComponent implements OnInit {
 

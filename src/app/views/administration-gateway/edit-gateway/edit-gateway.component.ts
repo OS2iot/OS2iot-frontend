@@ -9,7 +9,7 @@ import { BackButton } from 'src/app/models/back-button';
 })
 export class EditGatewayComponent implements OnInit {
 
-  public backButton: BackButton = {label: '', routerLink: '/mine-lora-gateways'};
+  public backButton: BackButton = { label: '', routerLink: '/lora-gateways' };
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -17,17 +17,17 @@ export class EditGatewayComponent implements OnInit {
 
   constructor(
     public translate: TranslateService
-    ) {
+  ) {
     translate.use('da');
   }
 
   ngOnInit(): void {
     this.translate.get(['NAV.MY-LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
-    .subscribe(translations => {
-      this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
-      this.title = translations['FORM.EDIT-NEW-GATEWAY'];
-      this.submitButton = translations['GATEWAY.SAVE'];
-    });
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
+        this.title = translations['FORM.EDIT-NEW-GATEWAY'];
+        this.submitButton = translations['GATEWAY.SAVE'];
+      });
   }
 
 }

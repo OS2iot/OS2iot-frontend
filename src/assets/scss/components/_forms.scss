@@ -43,13 +43,38 @@
 }
 
 .form-control {
-  border: $outer-border;
+  border: $border-input;
   color: $black;
 
-  &:focus {
+  &:focus,
+  &:active {
     color: $black;
-    border-color: $grey-outline;
-    box-shadow: 0 0 0 0.2rem $grey-outline;
+    border: $border-input-focus;
+    box-shadow: none;
+  }
+
+  &:hover {
+    border: $border-input-hover;
+    cursor: pointer;
+
+  }
+}
+
+.form-select {
+  border: $border-input;
+  color: $black;
+
+  &:focus,
+  &:active {
+    color: $black;
+    border: $border-input-focus;
+    box-shadow: none;
+  }
+
+  &:hover {
+    border: $border-input-hover;
+    cursor: pointer;
+
   }
 }
 

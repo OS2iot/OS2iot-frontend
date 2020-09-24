@@ -1,0 +1,83 @@
+@import '~@angular/material/theming';
+@import 'variables';
+@include mat-core();
+
+/* ======== angular material custom theme ======== */
+$OS2IoT-primary: mat-palette($mat-orange);
+$OS2IoT-accent: mat-palette($mat-deep-orange, 100, 500, A100);
+$OS2IoT-warn: mat-palette($mat-red);
+
+// Light theme
+$OS2IoT-theme: mat-light-theme($OS2IoT-primary, $OS2IoT-accent, $OS2IoT-warn);
+
+// Dark theme
+$OS2IoT-theme: mat-dark-theme($OS2IoT-primary, $OS2IoT-accent, $OS2IoT-warn);
+
+// Main theme defination
+@include angular-material-theme($OS2IoT-theme);
+
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$OS2IoT-frontend-primary: mat-palette($mat-deep-orange);
+//$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$OS2IoT-frontend-accent: mat-palette($mat-deep-orange, A200, A100, A400);
+
+
+// The warn palette is optional (defaults to red).
+$OS2IoT-frontend-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-frontend-accent, $OS2IoT-frontend-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($OS2IoT-frontend-theme);
+
+
+
+
+.mat-form-field {
+  width: 100% !important;
+
+  .mat-form-field-wrapper {
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: $color-bg-normal !important;
+    }
+  }
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: $color-bg-normal !important;
+  border: $border-input !important;
+
+}
+
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+
+  border-radius: $border-radius-primary;
+
+  .mat-form-field-outline-start {
+    border: $border-input;
+    border-right-style: none;
+  }
+
+  .mat-form-field-outline-end {
+    border: $border-input;
+    border-left-style: none;
+  }
+}
