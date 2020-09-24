@@ -50,9 +50,9 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             this.bindIoTDeviceAndApplication(this.deviceId);
         }
 
-        this.translate.get(['NAV.MY-APPLICATIONS'])
+        this.translate.get(['NAV.APPLICATIONS'])
             .subscribe(translations => {
-                this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+                this.backButton.label = translations['NAV.APPLICATIONS'];
             });
     }
 

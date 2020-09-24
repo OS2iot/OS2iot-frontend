@@ -118,9 +118,9 @@ export class ApplicationComponent implements OnInit {
         if (this.id) {
             this.bindApplication(this.id);
         }
-        this.translate.get(['NAV.MY-APPLICATIONS'])
+        this.translate.get(['NAV.APPLICATIONS'])
             .subscribe(translations => {
-                this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+                this.backButton.label = translations['NAV.APPLICATIONS'];
             });
     }
 

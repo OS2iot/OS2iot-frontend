@@ -21,9 +21,9 @@ export class EditApplicationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translate.get(['NAV.MY-APPLICATIONS', 'FORM.EDIT-NEW-APPLICATION', 'APPLICATION.SAVE'])
+    this.translate.get(['NAV.APPLICATIONS', 'FORM.EDIT-NEW-APPLICATION', 'APPLICATION.SAVE'])
       .subscribe(translations => {
-        this.backButton.label = translations['NAV.MY-APPLICATIONS'];
+        this.backButton.label = translations['NAV.APPLICATIONS'];
         this.title = translations['FORM.EDIT-NEW-APPLICATION'];
         this.submitButton = translations['APPLICATION.SAVE'];
       });

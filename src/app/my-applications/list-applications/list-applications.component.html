@@ -1,7 +1,7 @@
 <div class="px-sm-5 py-sm-4">
   <div class="row mb-5">
     <app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
-      [title]="'NAV.MY-APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
+      [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
       [ctaRouterLink]="'new-application'" (updatePageLimit)="updatePageLimit($event)"
       (selectedSortChange)="changeSort($event)">
     </app-top-bar>
