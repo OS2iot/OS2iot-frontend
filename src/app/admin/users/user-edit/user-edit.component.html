@@ -5,6 +5,9 @@
             <li *ngFor="let error of errorMessages">
                 {{error}}
             </li>
+            <li *ngIf="errorMessage">
+                {{errorMessage | translate}}
+            </li>
         </ul>
     </div>
 
