@@ -35,6 +35,26 @@
             <p>{{datatarget.type}}</p>
           </div>
         </div>
+        <div class="col-12 py-4">
+          <div class="col-12 col-sm-12">
+            <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
+          </div>
+          <div class="col-12 pt-2 col-sm-8" *ngFor="let relation of dataTargetRelations">
+            <p>{{'DATATARGET.DATATARGET' | translate}}</p>
+              <ul>
+                <li>
+                  {{relation.dataTarget.name}}
+                </li>
+              </ul>
+            
+              <p>{{'DATATARGET.IOTDEVICE' | translate}}</p>
+            <div *ngFor="let device of relation.iotDevices">
+               <ul>
+                 <li>{{device.name}}</li>
+               </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -9,15 +9,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { RouterModule } from '@angular/router';
 import { FormModule } from 'src/app/shared/form/form.module';
-
-
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [
-    DatatargetTableComponent, 
-    DatatargetTableRowComponent, 
-    DatatargetListComponent, 
-    DatatargetEditComponent, 
+    DatatargetTableComponent,
+    DatatargetTableRowComponent,
+    DatatargetListComponent,
+    DatatargetEditComponent,
     DatatargetComponent],
   imports: [
     CommonModule,
@@ -27,11 +26,12 @@ import { FormModule } from 'src/app/shared/form/form.module';
     FormModule,
   ],
   exports: [
-    DatatargetTableComponent, 
-    DatatargetTableRowComponent, 
-    DatatargetListComponent, 
-    DatatargetEditComponent, 
-    DatatargetComponent
+    DatatargetTableComponent,
+    DatatargetTableRowComponent,
+    DatatargetListComponent,
+    DatatargetEditComponent,
+    DatatargetComponent,
+    NGMaterialModule
   ]
 })
 export class DatatargetModule { }

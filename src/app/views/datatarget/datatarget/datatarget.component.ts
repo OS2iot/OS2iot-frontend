@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatargetService } from 'src/app/shared/services/datatarget.service';
 import { DatatargetResponse } from 'src/app/models/datatarget-response';
+import { PayloadDeviceDatatargetService } from '@shared/services/payloadDeviceDatatarget.service';
+import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTarget } from '@app/models/payload-device-data';
 
 @Component({
     selector: 'app-datatarget',
@@ -100,9 +102,11 @@ export class DatatargetComponent implements OnInit {
     ];
     public pageOffset: 0;
     public pageTotal: number;
+    public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
 
     constructor(
         private route: ActivatedRoute,
+        private datatargetRelationServicer: PayloadDeviceDatatargetService,
         private datatargetService: DatatargetService,
         public translate: TranslateService) { }
 
@@ -110,6 +114,7 @@ export class DatatargetComponent implements OnInit {
         const id: number = +this.route.snapshot.paramMap.get('datatargetId');
         if (id) {
             this.getDatatarget(id);
+            this.getDatatargetRelations(id);
         }
         this.translate.get(['NAV.MY-DATATARGET'])
             .subscribe(translations => {
@@ -121,6 +126,13 @@ export class DatatargetComponent implements OnInit {
         this.datatargetService.get(id)
             .subscribe((datatargetResponse: DatatargetResponse) => {
                 this.datatarget = datatargetResponse;
+            });
+    }
+
+    getDatatargetRelations(id: number) {
+        this.datatargetRelationServicer.getByDataTarget(id)
+            .subscribe( (response) => {
+                this.dataTargetRelations = response.data;
             });
     }
 
