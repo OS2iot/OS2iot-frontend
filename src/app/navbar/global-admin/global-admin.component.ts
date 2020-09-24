@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { faGlobe, faUsers, faIdBadge, faSitemap } from '@fortawesome/free-solid-svg-icons';
+import { PermissionType } from '@app/admin/permission/permission.model';
+import { UserResponse } from '@app/admin/users/user.model';
+import { AuthService } from '@app/auth/auth.service';
+import { faGlobe, faUsers, faIdBadge, faSitemap, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-global-admin',
@@ -11,9 +14,24 @@ export class GlobalAdminComponent implements OnInit {
   faUsers = faUsers;
   faIdBadge = faIdBadge;
   faSitemap = faSitemap;
-  constructor() { }
+  faUser = faUser;
+
+  public user: UserResponse;
+  public isGlobalAdmin = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.me()
+      .subscribe(
+        (response) => {
+          this.user = response.user;
+          this.findGlobalAdminPermission(response.user);
+        });
+  }
+
+  findGlobalAdminPermission(user: UserResponse) {
+    this.isGlobalAdmin = this.user.permissions.some(x => x.type === PermissionType.GlobalAdmin);
   }
 
 }
