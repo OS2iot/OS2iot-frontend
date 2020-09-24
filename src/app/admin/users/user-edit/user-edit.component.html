@@ -31,7 +31,7 @@
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="password">{{'USERS.FORM.PASSWORD' | translate}}</label>*
             <input type="text" class="form-control" id="password" name="password"
-                [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate" maxlength="50" required
+                [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate" minlength="6" maxlength="50" required
                 [(ngModel)]="user.password"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
         </div>
