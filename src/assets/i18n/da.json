@@ -111,11 +111,16 @@
     "EDIT": "Redigér"
   },
   "PAYLOAD-DECODER": {
+    "TITLE": "Payload decoder",
     "SAVE": "Gem Payload Decoder",
-    "NAME": "Navn",
+    "NAME": "Navn: ",
     "ID": "Payload Decoder Id",
     "DECODINGFUNCTION": "Decoder funktion",
-    "EDIT": "Redigér Payload Decoder"
+    "DETAIL": {
+      "DROPDOWN": "Håndter Payload Decoder",
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    }
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",

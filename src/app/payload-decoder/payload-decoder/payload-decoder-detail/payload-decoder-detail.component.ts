@@ -20,12 +20,12 @@ export class PayloadDecoderDetailComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
   public buttons: QuickActionButton[] = [
     {
-        label: 'PAYLOAD-DECODER.DELETE',
-        type: 'delete',
+      label: 'PAYLOAD-DECODER.DELETE',
+      type: 'delete',
     },
     {
-        label: 'PAYLOAD-DECODER.EDIT',
-        type: 'edit',
+      label: 'PAYLOAD-DECODER.EDIT',
+      type: 'edit',
     },
   ];
   id: number;
@@ -34,12 +34,17 @@ export class PayloadDecoderDetailComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
-    private payloadDecoderService: PayloadDecoderService
-    ) {
-    }
+    private payloadDecoderService: PayloadDecoderService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.translate.use('da');
+
+    this.translate.get(['PAYLOAD-DECODER.TITLE'])
+      .subscribe(translations => {
+        this.backButton.label = translations['PAYLOAD-DECODER.TITLE'];
+      });
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
       this.getPayloadDecoder(this.id);
@@ -47,11 +52,11 @@ export class PayloadDecoderDetailComponent implements OnInit {
   }
 
   private getPayloadDecoder(id: number) {
-    this.subscription =  this.payloadDecoderService.getOne(id)
+    this.subscription = this.payloadDecoderService.getOne(id)
       .subscribe(
         (response) => {
-        this.payloadDecoder = response;
-    });
+          this.payloadDecoder = response;
+        });
   }
 
 }
