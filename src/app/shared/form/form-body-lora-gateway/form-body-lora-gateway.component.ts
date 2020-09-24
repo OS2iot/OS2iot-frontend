@@ -85,7 +85,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   }
 
   routeBack(): void {
-    this.router.navigateByUrl('/mine-lora-gateways');
+    this.router.navigateByUrl('/lora-gateways');
   }
 
   ngOnDestroy() {
@@ -98,7 +98,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     console.log(event.target.value);
     console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength) {
-      event.target.value = event.target.value.slice( 0, event.target.maxLength);
+      event.target.value = event.target.value.slice(0, event.target.maxLength);
     }
   }
 

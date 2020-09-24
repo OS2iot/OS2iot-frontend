@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { MineLoraGatewaysComponent } from './views/administration-gateway/mine-lora-gateways/mine-lora-gateways.component';
+import { MineLoraGatewaysComponent } from './views/administration-gateway/lora-gateways/lora-gateways.component';
 import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
 import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
     {
-        path: 'mine-lora-gateways', component: MineLoraGatewaysComponent,
+        path: 'lora-gateways', component: MineLoraGatewaysComponent,
         children: [
             { path: '', component: ListLoraGatewayComponent },
             { path: 'edit-gateway/:id', component: EditGatewayComponent },

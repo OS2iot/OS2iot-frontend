@@ -10,9 +10,9 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
-    "MY-APPLICATIONS": "Applikationer",
+    "APPLICATIONS": "Applikationer",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "MY-LORA-GATEWAYS": "LoRaWan Gateways",
+    "LORA-GATEWAYS": "LoRaWan Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
@@ -306,7 +306,7 @@
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
       "SKIPFCNTCHECK": "skipfcntcheck",
-      "OTAAAPPLICATIONKEY":"OTAA Applicationkey"
+      "OTAAAPPLICATIONKEY": "OTAA Applicationkey"
     }
   },
   "MESSAGE": {

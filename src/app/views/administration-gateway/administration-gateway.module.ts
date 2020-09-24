@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MineLoraGatewaysComponent } from './mine-lora-gateways/mine-lora-gateways.component';
+import { MineLoraGatewaysComponent } from './lora-gateways/lora-gateways.component';
 import { RouterModule } from '@angular/router';
 import { ListLoraGatewayComponent } from './list-lora-gateway/list-lora-gateway.component';
 import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
@@ -12,10 +12,10 @@ import { EditGatewayComponent } from './edit-gateway/edit-gateway.component';
 import { GatewayComponent } from './gateway/gateway.component';
 @NgModule({
   declarations: [
-    MineLoraGatewaysComponent, 
-    ListLoraGatewayComponent, 
-    AdminLoraTableComponent, 
-    AdminLoraTableRowComponent, 
+    MineLoraGatewaysComponent,
+    ListLoraGatewayComponent,
+    AdminLoraTableComponent,
+    AdminLoraTableRowComponent,
     EditGatewayComponent, GatewayComponent
   ],
   imports: [
