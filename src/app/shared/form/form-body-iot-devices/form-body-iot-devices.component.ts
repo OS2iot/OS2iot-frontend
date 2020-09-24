@@ -17,6 +17,7 @@ import { ServiceProfileService } from '../../services/service-profile.service';
 import { DeviceProfile } from 'src/app/profiles/device-profiles/device-profile.model';
 import { DeviceProfileService } from '../../services/device-profile.service';
 import { SharedVariableService } from '@app/shared-variable/shared-variable.service';
+import { ActivationType } from '@shared/enums/activation-type';
 
 @Component({
     selector: 'app-form-body-iot-devices',
@@ -100,10 +101,14 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     onChangeDeviceProfile(deviceProfileId: string) {
+       this.getDeviceProfile(deviceProfileId);
+    }
+
+    getDeviceProfile(deviceProfileId: string) {
         this.deviceProfileSubscription = this.deviceProfileService.getOne(deviceProfileId)
-            .subscribe((response) => {
-                this.OTAA = response.deviceProfile.supportsJoin;
-            });
+        .subscribe((response) => {
+            this.OTAA = response.deviceProfile.supportsJoin;
+        });
     }
 
     getServiceProfiles() {
@@ -121,7 +126,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
-        this.cleanModelBasedOnType();
+        this.adjustModelBasedOnType();
         if (this.id) {
             this.updateIoTDevice(this.id);
         } else {
@@ -129,10 +134,23 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
         }
     }
 
-    private cleanModelBasedOnType() {
+    setActivationType() {
+        if (this.OTAA) {
+            this.iotDevice.lorawanSettings.activationType = ActivationType.OTAA;
+        } else {
+            this.iotDevice.lorawanSettings.activationType = ActivationType.ABP;
+        }
+    }
+
+    private adjustModelBasedOnType() {
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
                 this.iotDevice.lorawanSettings = null;
+                break;
+            }
+            case DeviceType.LORAWAN: {
+                this.setActivationType();
+                break;
             }
         }
     }
@@ -172,21 +190,26 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
     handleError(error: HttpErrorResponse) {
         this.errorFields = [];
         this.errorMessages = [];
-        error.error.message.forEach((err) => {
-            if (err.property === 'lorawanSettings') {
-                err.children.forEach(element => {
-                    this.errorFields.push(element.property);
+        if (typeof error.error.message === 'string') {
+            this.errorMessages.push(error.error.message);
+        } else {
+            error.error.message.forEach((err) => {
+                if (err.property === 'lorawanSettings') {
+                    err.children.forEach(element => {
+                        this.errorFields.push(element.property);
+                        this.errorMessages = this.errorMessages.concat(
+                            Object.values(element.constraints)
+                        );
+                    });
+                } else {
+                    this.errorFields.push(err.property);
                     this.errorMessages = this.errorMessages.concat(
-                        Object.values(element.constraints)
+                        Object.values(err.constraints)
                     );
-                });
-            } else {
-                this.errorFields.push(err.property);
-                this.errorMessages = this.errorMessages.concat(
-                    Object.values(err.constraints)
-                );
-            }
-        });
+                }
+            });
+        }
+        
     }
 
     onCoordinateKey(event: any) {
