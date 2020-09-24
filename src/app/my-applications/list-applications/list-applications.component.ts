@@ -1,11 +1,20 @@
-import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  OnDestroy,
+} from '@angular/core';
 import { Application } from '@app/models/application';
 import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '@shared/services/application.service';
 import { Subscription } from 'rxjs';
 import { Sort } from 'src/app/models/sort';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { SharedVariableService } from '../../shared-variable/shared-variable.service';
 
 @Component({
+  providers: [NavbarComponent],
   selector: 'app-list-applications',
   templateUrl: './list-applications.component.html',
   styleUrls: ['./list-applications.component.scss'],
@@ -65,18 +74,21 @@ export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private globalService: SharedVariableService
   ) {
     translate.use('da');
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     this.getApplications();
   }
 
   ngOnInit(): void {
     this.getApplications();
-
+    this.globalService.getValue().subscribe((organisationId) => {
+      this.getApplications(organisationId);
+    });
   }
 
   ngOnDestroy() {
@@ -107,7 +119,6 @@ export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   nextPage() {
-    console.log("got next outer")
     if (this.pageOffset < this.pageTotal) {
       this.pageOffset++;
     }
@@ -122,13 +133,18 @@ export class ListApplicationsComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  getApplications(): void {
+  getCurrentOrganisationId(): number {
+    return this.globalService.getSelectedOrganisationId();
+  }
+
+  getApplications(orgId?: number): void {
     this.applicationsSubscription = this.applicationService
       .getApplications(
         this.pageLimit,
         this.pageOffset * this.pageLimit,
         this.selectedSortObject.dir,
-        this.selectedSortObject.col
+        this.selectedSortObject.col,
+        orgId ? orgId : this.getCurrentOrganisationId()
       )
       .subscribe((applications) => {
         this.applications = applications.data;

@@ -5,9 +5,18 @@ import { environment } from '@environments/environment';
 import * as jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 import { of } from 'rxjs/internal/observable/of';
+import { RestService } from '@shared/services/rest.service';
+import { Observable } from 'rxjs';
+import { Organisation } from '@app/admin/organisation/organisation.model';
+import { UserResponse } from '../admin/users/user.model';
 
 export interface AuthResponseData {
   accessToken: string;
+}
+
+export interface CurrentUserInfoResponse {
+  user: UserResponse;
+  organizations: Organisation[];
 }
 
 @Injectable({
@@ -17,7 +26,7 @@ export class AuthService {
   private baseUrl = environment.baseUrl;
   private URL = 'auth/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private restService: RestService) {}
 
   // global-admin@os2iot.dk
   // hunter2
@@ -34,6 +43,10 @@ export class AuthService {
           return of(error.status);
         })
       );
+  }
+
+  me(): Observable<CurrentUserInfoResponse> {
+    return this.restService.get('auth/me');
   }
 
   private setSession(jwt: string) {

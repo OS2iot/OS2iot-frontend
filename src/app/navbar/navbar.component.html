@@ -24,9 +24,13 @@
           <app-global-admin></app-global-admin>
         </li>
         <li class="nav-item py-2">
-          <a>
-            Skanderborg Kommune
-          </a>
+          <!-- <label class="form-label" for="name">{{'QUESTION.CHOOSE-PERMISSION-TYPE' | translate}}</label>* -->
+          <select id="organisation" name="organisation" class="form-select" required #orgSelect
+            (change)="onChange(orgSelect.value)">
+            <option *ngFor="let org of organisations" [value]="org.id"
+              [selected]="org.id === getSelectedOrganisation()">
+              {{org.name}}</option>
+          </select>
         </li>
         <li class="nav-item py-2">
           <ul class="navbar-nav flex-column">
