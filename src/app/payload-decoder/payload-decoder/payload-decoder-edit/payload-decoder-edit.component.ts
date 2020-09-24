@@ -91,7 +91,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.errorFields = [];
     this.errorMessages = [];
     if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
+      error.error.message.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(
           Object.values(err.constraints)

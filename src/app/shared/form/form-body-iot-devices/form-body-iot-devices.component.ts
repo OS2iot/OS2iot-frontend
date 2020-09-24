@@ -93,6 +93,7 @@ export class FormBodyIotDevicesComponent implements OnInit, OnDestroy {
                     this.iotDevice.longitude = device.location.coordinates[0];
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
+            this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
             });
     }
 

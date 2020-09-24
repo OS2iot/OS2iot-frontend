@@ -150,6 +150,7 @@
     "NUMBER_OF_MEMBERS": "Antal medlemmer",
     "TYPE": "Type af brugergruppe",
     "NO_ORGANISATION": "N/A",
+    "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype: ",
       "ORG": "Organisations: ",
@@ -195,7 +196,8 @@
     "EDIT-DEVICE-PROFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
-    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe"
+    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
+    "EDIT-PERMISSION": "Redigér brugergruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -303,11 +305,13 @@
       "DEVADDR": "devADDR",
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
-      "SKIPFCNTCHECK": "skipfcntcheck"
+      "SKIPFCNTCHECK": "skipfcntcheck",
+      "OTAAAPPLICATIONKEY":"OTAA Applicationkey"
     }
   },
   "MESSAGE": {
-    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
+    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
+    "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede"
   },
   "PROFILES": {
     "NAME": "LoRaWan Profiler",
@@ -424,5 +428,6 @@
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2 Internet of things",
     "WELCOME-MESSAGE": "Her kan du bla bla"
-  }
+  },
+  "HTTP_PUSH": "HTTP Push"
 }

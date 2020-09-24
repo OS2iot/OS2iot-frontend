@@ -23,13 +23,9 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     RouterModule,
     TranslateModule,
     FontAwesomeModule,
-    NGMaterialModule
+    NGMaterialModule,
   ],
-  exports: [
-    NavbarComponent,
-  ],
-  providers: [
-    RestService,
-  ]
+  exports: [NavbarComponent],
+  providers: [RestService, NavbarComponent],
 })
-export class NavbarModule { }
+export class NavbarModule {}

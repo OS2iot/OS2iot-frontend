@@ -31,7 +31,7 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit(): void {
         this.applicationId = +Number(this.route.parent.parent.snapshot.paramMap.get('id'));
-        console.log(this.applicationId)
+        console.log(this.applicationId);
         this.getDatatarget();
     }
 
@@ -49,7 +49,7 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
                     appId
                 )
                 .subscribe((datatargets: DatatargetData) => {
-                    this.datatargets = datatargets.data
+                    this.datatargets = datatargets.data;
                     if (this.pageLimit) {
                         this.pageTotal = Math.ceil(datatargets.count / this.pageLimit);
                     }

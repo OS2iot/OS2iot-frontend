@@ -52,10 +52,10 @@ export class AuthComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       (x: any) => {
         console.log(x);
-        if (x == 401) {
-          this.fail();
-        } else {
+        if (x.accessToken) {
           this.success();
+        } else {
+          this.fail();
         }
       },
       (err) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ErrorHandler } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -6,9 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { RestService } from '../../services/rest.service';
 
-import { Application } from 'src/app/models/application';
+import { Application, ApplicationRequest } from 'src/app/models/application';
 import { ApplicationService } from '../../services/application.service';
-import { HttpErrorResponse, HttpDownloadProgressEvent } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharedVariableService } from '@app/shared-variable/shared-variable.service';
+
 
 export class User {
     public name: string;
@@ -32,7 +34,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     public formFailedSubmit: boolean = false;
     private id: number;
 
-    application = new Application();
+    application = new ApplicationRequest();
     model = new User();
 
     constructor(
@@ -40,7 +42,8 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
         public translate: TranslateService,
-        private router: Router
+        private router: Router,
+        private sharedVariableService: SharedVariableService
     ) { }
 
     ngOnInit(): void {
@@ -55,11 +58,15 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.applicationsSubscription = this.restService
             .get('application', {}, id)
             .subscribe((application: Application) => {
-                this.application = application;
+                this.application = new ApplicationRequest();
+                this.application.name = application.name;
+                this.application.description = application.description;
+                this.application.organizationId = application.belongsTo.id;
             });
     }
 
     onSubmit(): void {
+        this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId()
         if (this.id) {
             this.updateApplication(this.id);
         } else {

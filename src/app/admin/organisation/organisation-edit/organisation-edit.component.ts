@@ -18,7 +18,6 @@ import { Organisation } from '../organisation.model';
 export class OrganisationEditComponent implements OnInit {
   organisation = new Organisation();
   public errorMessage: string;
-  public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
@@ -91,17 +90,10 @@ export class OrganisationEditComponent implements OnInit {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = error.message;
-    }
+    this.errorMessage = '';
+
+    this.errorMessage = error.error.message;
+    this.errorFields.push('name');
     this.formFailedSubmit = true;
   }
 

@@ -14,6 +14,8 @@ import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
+import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
+import { SharedVariableModule } from './shared-variable/shared-variable.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -23,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        SharedVariableModule.forRoot(),
         AuthModule,
         BrowserModule,
         BrowserAnimationsModule,

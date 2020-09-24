@@ -205,18 +205,18 @@ export class PermissionEditComponent implements OnInit {
     }
   }
 
-  private showError(error: HttpErrorResponse) {
+  private showError(err: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
+    if (err.error?.message?.length > 0) {
+      err.error.message[0].children.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(
           Object.values(err.constraints)
         );
       });
     } else {
-      this.errorMessage = error.message;
+      this.errorMessage = err.error.message;
     }
     this.formFailedSubmit = true;
   }
