@@ -109,9 +109,9 @@ export class GatewayComponent implements OnInit {
         if (this.id) {
             this.bindGateway(this.id);
         }
-        this.translate.get(['NAV.MY-LORA-GATEWAYS'])
+        this.translate.get(['NAV.LORA-GATEWAYS'])
             .subscribe(translations => {
-                this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
+                this.backButton.label = translations['NAV.LORA-GATEWAYS'];
             });
     }
 

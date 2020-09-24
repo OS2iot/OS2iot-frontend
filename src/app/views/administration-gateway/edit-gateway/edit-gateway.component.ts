@@ -22,9 +22,9 @@ export class EditGatewayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translate.get(['NAV.MY-LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
+    this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
       .subscribe(translations => {
-        this.backButton.label = translations['NAV.MY-LORA-GATEWAYS'];
+        this.backButton.label = translations['NAV.LORA-GATEWAYS'];
         this.title = translations['FORM.EDIT-NEW-GATEWAY'];
         this.submitButton = translations['GATEWAY.SAVE'];
       });
