@@ -14,7 +14,7 @@
         </a>
         <fa-icon [icon]="faLayergroup" class="navbar-icon"></fa-icon>
     </li>
-    <div *ngIf="">
+    <div *ngIf="isOrganisationAdmin(orgSelect.value)">
         <li class="nav-item">
             <a routerLink="/admin/users" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
                 {{'NAV.USERS' | translate}}
