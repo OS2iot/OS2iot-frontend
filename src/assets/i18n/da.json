@@ -20,7 +20,8 @@
     "PAYLOAD-DECODER": "Payload Decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
-    "USERS": "Brugere"
+    "USERS": "Brugere",
+    "LOGIN": "Login"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -322,7 +323,7 @@
     "NAME": "LoRaWan Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
-      "CREATE-NEW-SERVICE-PROFILE": "Opret Servie Profile",
+      "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Service-profil navn",

@@ -8,8 +8,9 @@
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
         <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
-          Authenticate
+          {{ 'NAV.LOGIN' | translate }}
         </a>
+        <fa-icon [icon]="faSignInAlt" class="navbar-icon"></fa-icon>
       </li>
     </ul>
   </div>
@@ -20,48 +21,50 @@
     </button>
     <div class="collapse navbar-collapse flex-grow-0" id="navbar">
       <ul class="navbar-nav flex-column mt-5">
+
         <li class="nav-item py-2">
           <app-global-admin></app-global-admin>
         </li>
         <li class="nav-item py-2">
-          <!-- <label class="form-label" for="name">{{'QUESTION.CHOOSE-PERMISSION-TYPE' | translate}}</label>* -->
-          <select id="organisation" name="organisation" class="form-select" required #orgSelect
+          <app-organisation-dropdown></app-organisation-dropdown>
+          <!-- <select id="organisation" name="organisation" class="form-select" required #orgSelect <!--
             (change)="onChange(orgSelect.value)">
             <option *ngFor="let org of organisations" [value]="org.id"
               [selected]="org.id === getSelectedOrganisation()">
               {{org.name}}</option>
-          </select>
+          </select> -->
         </li>
         <li class="nav-item py-2">
           <ul class="navbar-nav flex-column">
-            <li class="nav-item py-2">
-              <a routerLink="/my-applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-                id="myApplications">
-                {{ 'NAV.APPLICATIONS' | translate }}
-              </a>
-            </li>
+            <p class="ml-2">Generelt</p>
+            <mat-divider></mat-divider>
             <li class="nav-item py-2">
               <a routerLink="/lora-gateways" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
                 id="myLoraGateway">
                 {{ 'NAV.LORA-GATEWAYS' | translate }}
               </a>
+              <fa-icon [icon]="faBroadcastTower" class="navbar-icon"></fa-icon>
+
             </li>
             <li class="nav-item py-2">
               <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
                 id="profiles">
                 {{ 'NAV.PROFILES' | translate }}
               </a>
+              <fa-icon [icon]="faSlidersH" class="navbar-icon"></fa-icon>
             </li>
             <li class="nav-item py-2">
               <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
                 id="payload-decoder">
                 {{ 'NAV.PAYLOAD-DECODER' | translate }}
               </a>
+              <fa-icon [icon]="faNetworkWired" class="navbar-icon"></fa-icon>
             </li>
           </ul>
         </li>
-        <li class="nav-item py-2">
+        <li class="nav-item py-2 ">
           <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
+          <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
         </li>
       </ul>
     </div>

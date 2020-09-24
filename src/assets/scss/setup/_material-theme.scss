@@ -47,7 +47,25 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // that you are using.
 @include angular-material-theme($OS2IoT-frontend-theme);
 
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
 
+.mat-expansion-panel {
+  .mat-expansion-panel-header {
+    padding: 0;
+  }
+
+  .mat-expansion-panel-content {
+    font: initial;
+    letter-spacing: initial;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+}
 
 
 .mat-form-field {
@@ -63,12 +81,10 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: $color-bg-normal !important;
   border: $border-input !important;
-
 }
 
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-
   border-radius: $border-radius-primary;
 
   .mat-form-field-outline-start {

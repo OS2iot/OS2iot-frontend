@@ -66,7 +66,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
-        this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId()
+        this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId();
         if (this.id) {
             this.updateApplication(this.id);
         } else {
@@ -83,7 +83,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
                     this.router.navigateByUrl('/my-applications');
                 },
                 (error: HttpErrorResponse) => {
-                    this.handleError(error)
+                    this.handleError(error);
                 }
             );
     }
@@ -97,7 +97,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
                     this.router.navigateByUrl('/my-applications');
                 },
                 (error: HttpErrorResponse) => {
-                    this.handleError(error)
+                    this.handleError(error);
                 }
             );
     }
@@ -105,20 +105,20 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     private handleError(error: HttpErrorResponse) {
         this.errorFields = [];
         this.errorMessages = [];
-        
+
         // Temp fix till we standardise backend error handling
-        if(error.error?.message[0]?.property) {
-            this.externalError(error)
+        if (error.error?.message[0]?.property) {
+            this.externalError(error);
         } else {
-            this.backendError(error)
+            this.backendError(error);
         }
-        
+
         this.formFailedSubmit = true;
     }
 
     externalError(error: HttpErrorResponse) {
         error.error.message.forEach((err) => {
-            this.errorFields.push(err.property);    
+            this.errorFields.push(err.property);
             this.errorMessages = this.errorMessages.concat(
                 Object.values(err.constraints)
             );
@@ -128,10 +128,10 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
 
     backendError(error: HttpErrorResponse) {
         this.translate.get([error.error.message])
-        .subscribe(translations => {
-          this.errorMessages.push(translations[error.error.message]);
-        });
-        this.errorFields.push('name')
+            .subscribe(translations => {
+                this.errorMessages.push(translations[error.error.message]);
+            });
+        this.errorFields.push('name');
     }
 
     routeBack(): void {
