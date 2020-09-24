@@ -18,7 +18,6 @@ export interface UserResponse {
     active: boolean;
     lastLogin: Date;
     permissions: PermissionResponse[];
-    globalAdmin: boolean;
 }
 
 export interface UserGetManyResponse {
