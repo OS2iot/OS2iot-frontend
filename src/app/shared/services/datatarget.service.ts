@@ -10,39 +10,39 @@ import { DatatargetResponse } from 'src/app/models/datatarget-response';
 })
 export class DatatargetService {
 
-  private url: string = 'data-target';
+  private dataTargetURL = 'data-target';
 
   constructor(private restService: RestService) { }
 
   get(id: number): Observable<DatatargetResponse> {
-    return this.restService.get(this.url, null, id);
+    return this.restService.get(this.dataTargetURL, null, id);
   }
 
   getByApplicationId(
-    limit: number,offset: number, applicationId: number
+    limit: number, offset: number, applicationId: number
   ): Observable<DatatargetData> {
     const body = {
-      limit: limit,
-      offset: offset,
-      applicationId: applicationId
-      //sort: sort,
-      //orderOn: orderOn,
-      //todo tilføj når iot-314 er tilføjet
+      limit,
+      offset,
+      applicationId
+      // sort: sort,
+      // orderOn: orderOn,
+      // todo tilføj når iot-314 er tilføjet
     };
-    return this.restService.get(this.url, body)
+    return this.restService.get(this.dataTargetURL, body);
   }
 
   update(datatarget: Datatarget): Observable<DatatargetResponse> {
-    return this.restService.put(this.url,datatarget,datatarget.id,{observe: 'response'});
+    return this.restService.put(this.dataTargetURL, datatarget, datatarget.id, {observe: 'response'});
 
   }
 
   create(datatarget: Datatarget): Observable<any> {
-    return this.restService.post(this.url,datatarget);
+    return this.restService.post(this.dataTargetURL, datatarget);
   }
 
   delete(id: number) {
-    return this.restService.delete(this.url,id);
+    return this.restService.delete(this.dataTargetURL, id);
   }
 
 }

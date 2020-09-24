@@ -3,7 +3,19 @@ import { IotDevice } from '@my-applications/iot-devices/iot-device.model';
 import { Datatarget } from './datatarget';
 
 export class PayloadDeviceDatatarget {
-    devices: number[];
+    id: number;
+    iotDeviceIds: number[];
     payloadDecoderId: number;
-    datatargetId: number;
+    dataTargetId: number;
+}
+
+export interface PayloadDeviceDatatargetGetByDataTargetResponse {
+    data: PayloadDeviceDatatargetGetByDataTarget[]
+}
+
+export interface PayloadDeviceDatatargetGetByDataTarget {
+    id: number;
+    iotDevices: IotDevice[];
+    payloadDecoder: PayloadDecoder;
+    dataTarget: Datatarget;
 }

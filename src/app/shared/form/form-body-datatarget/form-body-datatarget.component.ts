@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { Datatarget } from 'src/app/models/datatarget';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -12,20 +12,22 @@ import { Application } from '@app/models/application';
 import { IotDevice } from '@my-applications/iot-devices/iot-device.model';
 import { PayloadDecoderService } from '@shared/services/payload-decoder.service';
 import { PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
-import { PayloadDeviceDatatarget } from '@app/models/payload-device-data';
+import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@app/models/payload-device-data';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { NgModel } from '@angular/forms';
+import { PayloadDeviceDatatargetService } from '@shared/services/payloadDeviceDatatarget.service';
 
 @Component({
   selector: 'app-form-body-datatarget',
   templateUrl: './form-body-datatarget.component.html',
   styleUrls: ['./form-body-datatarget.component.scss']
 })
-export class FormBodyDatatargetComponent implements OnInit {
+export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   @Input() submitButton: string;
   public datatarget: Datatarget = new Datatarget();
   faTimesCircle = faTimesCircle;
   public datatargetSubscription: Subscription;
+  public relationSubscription: Subscription;
   public applicationSubscription: Subscription;
   public payloadDecoderSubscription: Subscription;
   public errorMessages: any;
@@ -46,7 +48,8 @@ export class FormBodyDatatargetComponent implements OnInit {
     private datatargetService: DatatargetService,
     private location: Location,
     private applicationService: ApplicationService,
-    private payloadDecoderService: PayloadDecoderService
+    private payloadDecoderService: PayloadDecoderService,
+    private payloadDeviceDataTargetService: PayloadDeviceDatatargetService
   ) { }
 
   ngOnInit(): void {
@@ -55,30 +58,38 @@ export class FormBodyDatatargetComponent implements OnInit {
     this.applicationId = +this.route.snapshot.paramMap.get('id');
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
+      this.getPayloadDeviceDatatarget(this.datatargetid);
     }
     if (this.applicationId !== 0) {
       this.getDevices();
     }
     this.getPayloadDecoders();
+    console.log(this.devices, this.payloadDecoders);
   }
 
   addRow() {
     if (!this.payloadDeviceDatatarget) {
       this.payloadDeviceDatatarget = [];
     }
-    this.payloadDeviceDatatarget.push({devices: [], payloadDecoderId: null, datatargetId: this.datatargetid});
+    this.payloadDeviceDatatarget.push({id: null, iotDeviceIds: [], payloadDecoderId: null, dataTargetId: this.datatargetid});
   }
 
   deleteRow(index) {
       if (this.payloadDeviceDatatarget.length === 0) {
+      } else if (this.payloadDeviceDatatarget[index]?.id === null) {
+        this.payloadDeviceDatatarget.splice(index, 1);
       } else {
-          this.payloadDeviceDatatarget.splice(index, 1);
+          this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id)
+            .subscribe( (response) => {
+              this.payloadDeviceDatatarget.splice(index, 1);
+            });
       }
   }
 
   onSubmit(): void {
     if (this.datatargetid) {
       this.updateDatatarget();
+      this.addPayloadDeviceDatatarget();
     } else {
       this.createDatatarget();
     }
@@ -93,13 +104,44 @@ export class FormBodyDatatargetComponent implements OnInit {
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
           this.datatarget = this.mapToDatatarget(datatargetResponse);
-          this.routeBack();
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
         }
       );
+  }
+
+  addPayloadDeviceDatatarget() {
+    this.payloadDeviceDatatarget.forEach((relation) => {
+      if (relation.id) {
+        this.payloadDeviceDataTargetService.put(relation).subscribe(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            this.handleError(error);
+          }
+        );
+      } else {
+        this.payloadDeviceDataTargetService.post(relation).subscribe(
+          (res: any) => {
+            console.log(res);
+          },
+          (error) => {
+            this.handleError(error);
+          }
+        );
+      }
+      });
+  }
+
+  getPayloadDeviceDatatarget(id: number) {
+    this.relationSubscription = this.payloadDeviceDataTargetService
+      .getByDataTarget(id)
+      .subscribe((response: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+        this.mapToDatatargetDevicePayload(response);
+      });
   }
 
   createDatatarget() {
@@ -124,13 +166,13 @@ export class FormBodyDatatargetComponent implements OnInit {
   }
 
   public selectAllDevices(index: number) {
-    console.log(this.payloadDeviceDatatarget[0].devices);
-    this.payloadDeviceDatatarget[index].devices = this.devices.map( device => device.id);
+    console.log(this.payloadDeviceDatatarget[0].iotDeviceIds);
+    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map( device => device.id);
   }
 
   public deSelectAllDevices(index: number) {
-    console.log(this.payloadDeviceDatatarget[0].devices);
-    this.payloadDeviceDatatarget[index].devices = [];
+    console.log(this.payloadDeviceDatatarget[0].iotDeviceIds);
+    this.payloadDeviceDatatarget[index].iotDeviceIds = [];
   }
 
   getPayloadDecoders() {
@@ -143,12 +185,16 @@ export class FormBodyDatatargetComponent implements OnInit {
   handleError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
-    error.error.message.forEach((err) => {
-      this.errorFields.push(err.property);
-      this.errorMessages = this.errorMessages.concat(
-        Object.values(err.constraints)
-      );
-    });
+    if (typeof error.error.message === 'string') {
+      this.errorMessages.push(error.error.message);
+    } else {
+      error.error.message.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+          Object.values(err.constraints)
+        );
+      });
+    }
   }
 
   routeBack(): void {
@@ -172,6 +218,35 @@ export class FormBodyDatatargetComponent implements OnInit {
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse);
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.relationSubscription) {
+      this.relationSubscription.unsubscribe();
+    }
+    if (this.applicationSubscription) {
+      this.applicationSubscription.unsubscribe();
+    }
+    if (this.datatargetSubscription) {
+      this.datatargetSubscription.unsubscribe();
+    }
+    if (this.payloadDecoderSubscription) {
+      this.payloadDecoderSubscription.unsubscribe();
+    }
+  }
+
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse): PayloadDeviceDatatarget[] {
+    this.payloadDeviceDatatarget = [];
+    dto.data.forEach(
+      (element) => {
+        this.payloadDeviceDatatarget.push({
+          id: element.id,
+          iotDeviceIds: element.iotDevices.map((x) => x.id),
+          payloadDecoderId: element.payloadDecoder?.id,
+          dataTargetId: element.dataTarget.id
+        });
+      }
+    );
   }
 
   private mapToDatatarget(data: DatatargetResponse): Datatarget {
