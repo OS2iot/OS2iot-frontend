@@ -56,7 +56,10 @@
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
     "NAME": "Datatarget navn",
-    "DELETE": "Slet"
+    "DELETE": "Slet",
+    "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
+    "DATATARGET": "Data Target navn:",
+    "IOTDEVICE": "IoT Device navn:"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",

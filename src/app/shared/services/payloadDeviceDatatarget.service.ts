@@ -34,4 +34,19 @@ export class PayloadDeviceDatatargetService {
     return this.restService.get(this.BASEURL + this.BYDATATARGETURL, null, id);
   }
 
+  mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse): PayloadDeviceDatatarget[] {
+    const payloadDeviceDatatargetList = [];
+    dto.data.forEach(
+      (element) => {
+        payloadDeviceDatatargetList.push({
+          id: element.id,
+          iotDeviceIds: element.iotDevices.map((x) => x.id),
+          payloadDecoderId: element.payloadDecoder?.id,
+          dataTargetId: element.dataTarget.id
+        });
+      }
+    );
+    return payloadDeviceDatatargetList;
+  }
+
 }
