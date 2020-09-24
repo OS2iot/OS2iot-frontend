@@ -235,7 +235,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     }
   }
 
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse): PayloadDeviceDatatarget[] {
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
     this.payloadDeviceDatatarget = [];
     dto.data.forEach(
       (element) => {
