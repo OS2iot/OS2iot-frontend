@@ -57,7 +57,7 @@
                 [disabled]="isEditMode"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('organizationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('organizationId')}"
                 (ngModelChange)="organizationChanged($event)">
-                <option *ngFor="let org of organisations" [value]="org.id"
+                <option *ngFor="let org of organisations" [ngValue]="org.id"
                     [selected]="org.id === permission.organizationId">
                     {{org.name}}</option>
             </select>

@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../../../shared/services/permission.service';
 import { PermissionRequest, PermissionType } from '../permission.model';
-import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationResponse } from '../../organisation/organisation.model';
 import { OrganisationService } from '../../../shared/services/organisation.service';
 import { UserService } from '../../users/user.service';
@@ -49,7 +48,7 @@ export class PermissionEditComponent implements OnInit {
     private userService: UserService,
     private applicationService: ApplicationService,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -93,7 +92,7 @@ export class PermissionEditComponent implements OnInit {
     );
   }
 
-  organizationChanged(whatever) {
+  organizationChanged() {
     this.getApplications(this.permission.organizationId);
   }
 
@@ -152,7 +151,7 @@ export class PermissionEditComponent implements OnInit {
 
   private update(): void {
     this.permissionService.updatePermission(this.permission, this.id).subscribe(
-      (response) => {
+      () => {
         this.routeBack();
       },
       (error) => {
@@ -191,7 +190,7 @@ export class PermissionEditComponent implements OnInit {
   isOrganizationAdministrationPermission() {
     return (
       this.permission.level ==
-      PermissionType.OrganizationApplicationPermissions ||
+        PermissionType.OrganizationApplicationPermissions ||
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );
@@ -208,8 +207,13 @@ export class PermissionEditComponent implements OnInit {
   private showError(err: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
+    if (err?.error?.message == 'Internal server error') {
+      this.errorMessage = 'Internal server error';
+      return;
+    }
+
     if (err.error?.message?.length > 0) {
-      err.error.message[0].children.forEach((err) => {
+      err.error.message.forEach((err) => {
         this.errorFields.push(err.property);
         this.errorMessages = this.errorMessages.concat(
           Object.values(err.constraints)
