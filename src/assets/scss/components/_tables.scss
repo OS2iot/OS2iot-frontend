@@ -68,19 +68,28 @@
     left: -35px !important;
 
     li {
+      padding: 0;
+      margin: 0;
+
       a {
+        display: inline-block;
         font-family: roboto-bold;
         color: $black;
         font-size: 12px;
         line-height: 14px;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        margin: 0;
+
+        &:hover,
+        &:active {
+          color: $black;
+          text-decoration: none;
+          background-color: $color-primary;
+        }
       }
 
-      &:hover,
-      &:active {
-        color: $black;
-        text-decoration: none;
-        background-color: $color-primary;
-      }
+
     }
   }
 }
