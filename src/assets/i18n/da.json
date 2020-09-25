@@ -58,7 +58,7 @@
     "NAME": "Datatarget navn",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
-    "DATATARGET": "Data Target navn:",
+    "PAYLOADEDECODER": "Payload decoder navn:",
     "IOTDEVICE": "IoT Device navn:",
     "NO-RELATIONS": "ingen tilknyttede relationer"
   },
