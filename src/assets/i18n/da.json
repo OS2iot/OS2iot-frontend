@@ -418,7 +418,7 @@
       "EMAIL": "Indtast Email addressen til brugeren",
       "EMAIL-PLACEHOLDER": "Email",
       "PASSWORD": "Password",
-      "PASSWORD-PLACEHOLDER": "Indtast en password",
+      "PASSWORD-PLACEHOLDER": "Indtast eller redigér password",
       "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
       "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
       "SAVE": "Gem Bruger"
