@@ -39,6 +39,9 @@
           <div class="col-12 col-sm-12">
             <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
           </div>
+          <div *ngIf="dataTargetRelations.length === 0">
+            <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+          </div>
           <div class="col-12 pt-2 col-sm-8" *ngFor="let relation of dataTargetRelations">
             <p>{{'DATATARGET.DATATARGET' | translate}}</p>
               <ul>

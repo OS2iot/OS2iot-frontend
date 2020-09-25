@@ -59,7 +59,8 @@
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "DATATARGET": "Data Target navn:",
-    "IOTDEVICE": "IoT Device navn:"
+    "IOTDEVICE": "IoT Device navn:",
+    "NO-RELATIONS": "ingen tilknyttede relationer"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",
@@ -258,7 +259,8 @@
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
-      "DESELECTALLDEVICES": "Fravælg alle"
+      "DESELECTALLDEVICES": "Fravælg alle",
+      "RELATIONS": "Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
     }
   },
   "QUESTION-LORA-GATEWAY": {

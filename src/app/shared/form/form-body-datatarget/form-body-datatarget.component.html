@@ -44,7 +44,7 @@
         </div>
       </div>
       <div *ngIf="datatargetid === 0">
-        <h4>Efter oprettelse af dit data target dette parres det med en payload decoder og iot-devices</h4>
+        <h4> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h4>
       </div>
       <div class="container row" style="margin-top: 5%" *ngIf="datatargetid > 0">
         <a (click)="addRow()" class="btn btn-secondary">{{'QUESTION.ADD-RELATIONS' | translate}}</a>
