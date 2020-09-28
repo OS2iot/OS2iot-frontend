@@ -147,31 +147,36 @@
             </div>
         </ng-container>
         <div class="col-12 py-4">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime">    
-                        </ng-container>
-                        <ng-template #sentTime>
-                            <p>
-                                {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}} {{device.latestReceivedMessage?.sentTime | date:'medium'}}
-                            </p>
-                        </ng-template>
-                        <ng-template #noSentTime>
-                            <p>
-                                {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
-                            </p>
-                        </ng-template>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                    <ng-container *ngIf="device.latestReceivedMessage?.rawData">    
-                        <code>
-                            <pre>
-                                {{device.latestReceivedMessage.rawData | json }}
-                            </pre>
-                        </code>
-                    </ng-container>
-            </mat-expansion-panel>
+            <div class="col-12 col-sm-4">
+                <h4>{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h4>
+            </div>
+            <div class="col-12 pt-2 col-sm-8">
+                <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime">    
+                </ng-container>
+                <ng-template #sentTime>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <p>
+                                    {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}} {{device.latestReceivedMessage?.sentTime | date:'medium'}}
+                                </p>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                            <ng-container *ngIf="device.latestReceivedMessage?.rawData">    
+                                <code>
+                                    <pre>
+                                        {{device.latestReceivedMessage.rawData | json }}
+                                    </pre>
+                                </code>
+                            </ng-container>
+                    </mat-expansion-panel>
+                </ng-template>
+                <ng-template #noSentTime>
+                    <p>
+                        {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
+                    </p>
+                </ng-template>
+            </div>
         </div>
     </div>
     <ng-container *ngIf="device.type">
