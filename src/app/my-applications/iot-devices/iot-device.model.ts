@@ -3,6 +3,7 @@ import { JsonLocation } from 'src/app/models/Json-location';
 import { LorawanSettings } from 'src/app/models/lorawan-settings';
 import { ReceivedMessageMetadata } from 'src/app/models/received-message-metadata';
 import { DeviceType } from 'src/app/shared/enums/device-type';
+import { LatestReceivedMessage } from './latestReceivedMessage.model';
 
 export class IotDevice {
     name: string;
@@ -20,6 +21,7 @@ export class IotDevice {
     applicationId: number;
     longitude = 0;
     latitude = 0;
+    latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
 }
 

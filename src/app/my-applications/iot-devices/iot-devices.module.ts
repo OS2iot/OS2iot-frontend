@@ -12,6 +12,7 @@ import { IotDevicesListComponent } from './iot-devices-list/iot-devices-list.com
 import { IoTDeviceDetailComponent } from './iot-device-detail/iot-device-detail.component';
 import { IotDeviceEditComponent } from './iot-device-edit/iot-device-edit.component';
 import { FormModule } from 'src/app/shared/form/form.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { FormModule } from 'src/app/shared/form/form.module';
         RouterModule,
         TranslateModule,
         FormModule,
+        NGMaterialModule
     ],
 })
 export class IotDevicesModule { }

@@ -7,21 +7,24 @@ import { RestService } from 'src/app/shared/services/rest.service';
     providedIn: 'root',
 })
 export class IoTDeviceService {
+
+    private BASEURL = 'iot-device';
+
     constructor(private restService: RestService) { }
 
     createIoTDevice(body: IotDevice): Observable<IotDeviceData> {
-        return this.restService.post('iot-device', body);
+        return this.restService.post(this.BASEURL, body);
     }
 
     updateIoTDevice(body: IotDevice, id: number): Observable<IotDeviceData> {
-        return this.restService.put('iot-device', body, id, { observe: 'response' });
+        return this.restService.put(this.BASEURL, body, id, { observe: 'response' });
     }
 
     getIoTDevice(id: number): Observable<IotDevice> {
-        return this.restService.get('iot-device', {}, id);
+        return this.restService.get(this.BASEURL, {}, id);
     }
 
     deleteIoTDevice(id: number) {
-        return this.restService.delete('iot-device', id);
+        return this.restService.delete(this.BASEURL, id);
     }
 }

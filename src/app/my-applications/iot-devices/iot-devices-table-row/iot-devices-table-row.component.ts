@@ -23,7 +23,7 @@ export class IotDevicesTableRowComponent implements OnInit {
     private router: Router
   ) {
     translate.use('da');
-    moment.locale('da')
+    moment.locale('da');
   }
 
   ngOnInit(): void { }

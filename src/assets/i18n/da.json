@@ -314,6 +314,8 @@
       "INSTRUCTIONS": "Du kalder denne url:"
     },
     "LORAWANSETUP": "LoRaWAN Specifik opsætning",
+    "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
+    "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "LORA": {
       "DEVEUI": "Enheds EUI",
       "SERVICEPROFILE": "Service profil",
