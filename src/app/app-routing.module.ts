@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { MineLoraGatewaysComponent } from './views/administration-gateway/lora-gateways/lora-gateways.component';
-import { ListLoraGatewayComponent } from './views/administration-gateway/list-lora-gateway/list-lora-gateway.component';
-import { EditGatewayComponent } from './views/administration-gateway/edit-gateway/edit-gateway.component';
-import { GatewayComponent } from './views/administration-gateway/gateway/gateway.component';
 import { DatatargetListComponent } from './views/datatarget/datatarget-list/datatarget-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GatewaysComponent } from './gateway/gateways/gateways.component';
+import { GatewayEditComponent } from './gateway/gateway-edit/gateway-edit.component';
+import { GatewayListComponent } from './gateway/gateway-list/gateway-list.component';
+import { GatewayDetailComponent } from './gateway/gateway-detail/gateway-detail.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
@@ -14,12 +14,12 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'my-applications', loadChildren: () => import('./my-applications/my-applications.module').then(m => m.MyApplicationsModule) },
     {
-        path: 'lora-gateways', component: MineLoraGatewaysComponent,
+        path: 'gateways', component: GatewaysComponent,
         children: [
-            { path: '', component: ListLoraGatewayComponent },
-            { path: 'edit-gateway/:id', component: EditGatewayComponent },
-            { path: 'edit-gateway', component: EditGatewayComponent },
-            { path: 'gateway/:id', component: GatewayComponent }
+            { path: '', component: GatewayListComponent },
+            { path: 'gateway-edit/:id', component: GatewayEditComponent },
+            { path: 'gateway-edit', component: GatewayEditComponent },
+            { path: 'gateway-detail/:id', component: GatewayDetailComponent }
         ],
     },
     { path: 'datatarget', component: DatatargetListComponent },

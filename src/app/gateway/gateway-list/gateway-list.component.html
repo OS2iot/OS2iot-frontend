@@ -1,0 +1,10 @@
+<div class="px-sm-5 py-sm-4">
+  <div class="row mb-5">
+    <app-top-bar [pageLimit]="pageLimit" [title]="'NAV.LORA-GATEWAYS' | translate"
+      [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate" [ctaRouterLink]="'gateway-edit'">
+    </app-top-bar>
+  </div>
+  <div class="row">
+    <app-gateway-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-gateway-table>
+  </div>
+</div>

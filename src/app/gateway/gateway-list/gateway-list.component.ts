@@ -3,11 +3,11 @@ import { Sort } from 'src/app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-list-lora-gateway',
-  templateUrl: './list-lora-gateway.component.html',
-  styleUrls: ['./list-lora-gateway.component.scss']
+  selector: 'app-gateway-list',
+  templateUrl: './gateway-list.component.html',
+  styleUrls: ['./gateway-list.component.scss']
 })
-export class ListLoraGatewayComponent implements OnInit {
+export class GatewayListComponent implements OnInit {
 
   public pageLimit: number = 10;
     public selectedSortId: number = 1;

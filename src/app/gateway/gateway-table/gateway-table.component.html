@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let gateway of gateways" class="py-3" app-admin-lora-table-row [gateway]="gateway"
+            <tr *ngFor="let gateway of gateways" class="py-3" app-gateway-table-row [gateway]="gateway"
                 (deleteGateway)="deleteGateway($event)">
             </tr>
         </tbody>

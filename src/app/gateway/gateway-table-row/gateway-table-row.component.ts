@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { Gateway } from 'src/app/models/gateway';
 
 @Component({
-  selector: 'tr[app-admin-lora-table-row]',
-  templateUrl: './admin-lora-table-row.component.html',
-  styleUrls: ['./admin-lora-table-row.component.scss']
+  selector: 'tr[app-gateway-table-row]',
+  templateUrl: './gateway-table-row.component.html',
+  styleUrls: ['./gateway-table-row.component.scss']
 })
-export class AdminLoraTableRowComponent implements OnInit {
+export class GatewayTableRowComponent implements OnInit {
 
   @Input() gateway: Gateway;
 
   @Output() deleteGateway = new EventEmitter();
-  
+
   private alertMessage: string;
 
   constructor(
@@ -30,7 +30,7 @@ export class AdminLoraTableRowComponent implements OnInit {
     this.deleteGateway.emit(this.gateway.id);
   }
 
-  navigateToEditPage(){
-    this.router.navigate(['edit-gateway', this.gateway.id])
+  navigateToEditPage() {
+    this.router.navigate(['gateway-edit', this.gateway.id]);
   }
 }

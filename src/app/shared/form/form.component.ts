@@ -9,7 +9,7 @@ import { Application } from 'src/app/models/application';
 })
 export class FormComponent implements OnInit {
   @Input() backButton: BackButton;
-  @Input() formType: 'application' | 'iotDevice' | 'loraGateway';
+  @Input() formType: 'application' | 'iotDevice' | 'gateways';
   @Input() title: string;
   @Input() submitButton: string;
   @Input() application: Application;

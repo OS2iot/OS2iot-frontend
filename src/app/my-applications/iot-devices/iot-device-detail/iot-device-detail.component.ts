@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment';
 import { BackButton } from 'src/app/models/back-button';
 import { IoTDeviceService } from '../iot-device.service';
 import { IotDevice } from '../iot-device.model';
-import { DeviceProfileService } from '@shared/services/device-profile.service';
-import { DeviceProfileResponse } from '@profiles/device-profiles/device-profile.model';
-import { ServiceProfileService } from '@shared/services/service-profile.service';
-import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-profile.model';
+import { DeviceProfileService } from 'src/app/shared/services/device-profile.service';
+import { ServiceProfileService } from 'src/app/shared/services/service-profile.service';
+import { ServiceProfileResponseOne } from 'src/app/profiles/service-profiles/service-profile.model';
 
 @Component({
     selector: 'app-iot-device',

@@ -1,23 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { TranslateService } from '@ngx-translate/core';
-import { Gateway, GatewayResponse } from '../../../../app/models/gateway';
-import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChirpstackGatewayService } from '../../services/chirpstack-gateway.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { BackButton } from 'src/app/models/back-button';
+import { Gateway, GatewayResponse } from 'src/app/models/gateway';
+import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 
 @Component({
-  selector: 'app-form-body-lora-gateway',
-  templateUrl: './form-body-lora-gateway.component.html',
-  styleUrls: ['./form-body-lora-gateway.component.scss']
+  selector: 'app-gateway-edit',
+  templateUrl: './gateway-edit.component.html',
+  styleUrls: ['./gateway-edit.component.scss']
 })
-export class FormBodyLoraGatewayComponent implements OnInit {
+export class GatewayEditComponent implements OnInit, OnDestroy {
 
-  @Input() submitButton: string;
-  public form: FormGroup;
-  public payLoad = '';
+  public backButton: BackButton = { label: '', routerLink: '/gateways' };
+  public multiPage = false;
+  public title = '';
+  public sectionTitle = '';
+  public submitButton = '';
+
   public gatewaySubscription: Subscription;
   public errorMessage: string;
   public errorMessages: any;
@@ -40,6 +42,12 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     if (this.id) {
       this.getGateway(this.id);
     }
+    this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.LORA-GATEWAYS'];
+        this.title = translations['FORM.EDIT-NEW-GATEWAY'];
+        this.submitButton = translations['GATEWAY.SAVE'];
+      });
   }
 
   getGateway(id: string): void {
@@ -85,7 +93,7 @@ export class FormBodyLoraGatewayComponent implements OnInit {
   }
 
   routeBack(): void {
-    this.router.navigateByUrl('/lora-gateways');
+    this.router.navigateByUrl('/gateways');
   }
 
   ngOnDestroy() {
@@ -117,4 +125,5 @@ export class FormBodyLoraGatewayComponent implements OnInit {
     }
     this.formFailedSubmit = true;
   }
+
 }

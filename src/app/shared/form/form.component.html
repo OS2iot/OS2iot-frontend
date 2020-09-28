@@ -11,8 +11,3 @@
     [application]="application" 
     [questions]="iotDeviceQuestions$ | async">
 </app-form-body-iot-devices>
-
-<app-form-body-lora-gateway *ngIf="formType == 'loraGateway'" 
-    [submitButton]="submitButton" 
-    [questions]="loraGatewayQuestions$ | async">
-</app-form-body-lora-gateway>

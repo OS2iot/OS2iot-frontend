@@ -1,5 +1,5 @@
 <td>
-    <a [routerLink]="['gateway', gateway.id]" routerLinkActive="active" class="application-link">
+    <a [routerLink]="['gateway-detail', gateway.id]" routerLinkActive="active" class="application-link">
         {{ gateway.name }}
     </a>
 </td>
@@ -22,7 +22,7 @@
                 <a (click)="clickDelete()" [routerLink]="">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}</a>
             </li>
             <li class="dropdown-item">
-                <a [routerLink]="['edit-gateway', gateway.id]"
+                <a [routerLink]="['gateway-edit', gateway.id]"
                     routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}</a>
             </li>
         </ul>

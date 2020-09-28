@@ -9,14 +9,13 @@ import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
 import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
-import { GlobalErrorHandler } from '@shared/helpers/global-error-handler';
 import { SharedVariableModule } from './shared-variable/shared-variable.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { GatewayModule } from './gateway/gateway.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        AdministrationGatewayModule,
+        GatewayModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

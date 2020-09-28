@@ -7,9 +7,8 @@ import { FormBodyApplicationComponent } from './form-body-application/form-body-
 import { FormBodyIotDevicesComponent } from './form-body-iot-devices/form-body-iot-devices.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormBodyDatatargetComponent } from './form-body-datatarget/form-body-datatarget.component';
-import { FormBodyLoraGatewayComponent } from './form-body-lora-gateway/form-body-lora-gateway.component';
-import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NGMaterialModule } from '../Modules/materiale.module';
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormHeaderComponent,
     FormBodyApplicationComponent,
     FormBodyIotDevicesComponent,
-    FormBodyLoraGatewayComponent,
     FormBodyDatatargetComponent,
   ],
   imports: [
@@ -33,7 +31,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormHeaderComponent,
     FormBodyApplicationComponent,
     FormBodyIotDevicesComponent,
-    FormBodyLoraGatewayComponent,
     FormBodyDatatargetComponent
   ],
   providers: [
