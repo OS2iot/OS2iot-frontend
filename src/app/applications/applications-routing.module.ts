@@ -8,7 +8,7 @@ import { IoTDeviceDetailComponent } from './iot-devices/iot-device-detail/iot-de
 import { IotDeviceEditComponent } from './iot-devices/iot-device-edit/iot-device-edit.component';
 import { DatatargetEditComponent } from './datatarget/datatarget-edit/datatarget-edit.component';
 import { DatatargetListComponent } from './datatarget/datatarget-list/datatarget-list.component';
-import { DatatargetComponent } from './datatarget/datatarget/datatarget.component';
+import { DatatargetDetailComponent } from './datatarget/datatarget-detail/datatarget-detail.component';
 
 
 const applicationRoutes: Routes = [
@@ -32,7 +32,7 @@ const applicationRoutes: Routes = [
                             { path: '', component: DatatargetListComponent },
                             { path: 'datatarget-edit', component: DatatargetEditComponent },
                             { path: 'datatarget-edit/:datatargetId', component: DatatargetEditComponent },
-                            { path: 'datatarget/:datatargetId', component: DatatargetComponent }
+                            { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent }
                         ]
 
                     }

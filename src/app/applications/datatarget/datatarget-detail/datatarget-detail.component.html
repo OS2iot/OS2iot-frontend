@@ -1,0 +1,44 @@
+<ng-container *ngIf="datatarget">
+  <app-top-bar-single [data]="datatarget" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+  <div class=" jumbotron m-md-4 p-md-3">
+    <div class="application-component">
+      <h4>{{ 'DATATARGET.NAME' | translate }}</h4>
+      <p class="mb-5">{{datatarget.name}}</p>
+      <h4>{{ 'DATATARGET.URL' | translate }}</h4>
+      <p class="mb-5">{{datatarget.url}}</p>
+      <h4>{{ 'DATATARGET.TIMEOUT' | translate }}</h4>
+      <p class="mb-5">{{datatarget.timeout}}</p>
+      <h4>{{ 'DATATARGET.TYPE' | translate }}</h4>
+      <p class="mb-5">{{datatarget.type}}</p>
+      <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
+      <div *ngIf="dataTargetRelations.length === 0">
+        <p class="mb-5">{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+      </div>
+      <div *ngFor="let relation of dataTargetRelations">
+        <div class="row my-3">
+          <div class="col-md-2">
+            <h6>{{'DATATARGET.PAYLOADEDECODER' | translate}}</h6>
+          </div>
+          <div class="col-md-4">
+            <ul>
+              <li>
+                {{relation.dataTarget.name}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <h6>{{'DATATARGET.IOTDEVICE' | translate}}</h6>
+          </div>
+          <div class="col-md-4">
+            <div *ngFor="let device of relation.iotDevices">
+              <ul>
+                <li>{{device.name}}</li>
+              </ul>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

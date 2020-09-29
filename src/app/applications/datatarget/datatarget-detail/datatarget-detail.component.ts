@@ -11,11 +11,11 @@ import { Sort } from '@shared/models/sort.model';
 import { DatatargetService } from '../datatarget.service';
 
 @Component({
-    selector: 'app-datatarget',
-    templateUrl: './datatarget.component.html',
-    styleUrls: ['./datatarget.component.scss']
+    selector: 'app-datatarget-detail',
+    templateUrl: './datatarget-detail.component.html',
+    styleUrls: ['./datatarget-detail.component.scss']
 })
-export class DatatargetComponent implements OnInit {
+export class DatatargetDetailComponent implements OnInit {
 
     public datatargetSubscription: Subscription;
     public datatarget: DatatargetResponse;
