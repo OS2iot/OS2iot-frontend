@@ -1,0 +1,9 @@
+<app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit" [title]="title"
+  [ctaLabel]="'FORM.CREATE-NEW-DATATARGET' | translate" [ctaRouterLink]="'datatarget-edit'"
+  (updatePageLimit)="updatePageLimit($event)" [backButtonTitle]="'Tilbage'" (selectedSortChange)="changeSort($event)">
+</app-top-bar>
+
+<div class="m-md-4 p-md-3">
+  <app-datatarget-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit">
+  </app-datatarget-table>
+</div>

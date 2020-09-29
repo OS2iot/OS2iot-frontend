@@ -1,0 +1,7 @@
+<app-top-bar [sort]="sort" [pageLimit]="pageLimit" [title]="'NAV.USERS' | translate"
+    [ctaLabel]="'USERS.CREATE' | translate" [ctaRouterLink]="'new-user'" (updatePageLimit)="updatePageLimit($event)"
+    (selectedSortChange)="changeSort($event)"></app-top-bar>
+
+<div class="m-md-4 p-md-3">
+    <app-user-table></app-user-table>
+</div>

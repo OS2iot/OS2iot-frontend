@@ -1,0 +1,35 @@
+<td>
+    <a [routerLink]="[user.id]" routerLinkActive="active" class="application-link">
+        {{user.name}}</a>
+</td>
+<td>
+    <p>{{user.email}}</p>
+</td>
+<td>
+    <p>{{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}</p>
+</td>
+<td>
+    <p [ngClass]="user.active | activeDeactive">{{user.active | activeDeactive}}</p>
+</td>
+<td>
+    <div *ngIf="user.lastLogin; else noLogin">
+        <P> {{user.lastLogin | date}}</P>
+    </div>
+    <ng-template #noLogin>
+        <P>Ikke logget på endnu</P>
+    </ng-template>
+</td>
+<td>
+    <div class="dropdown ">
+        <a href="#" role="button" id="tableRowDropdown-{{user.id}}" class="applicationRow__edit dropdown-toggle"
+            data-toggle="dropdown" aria-expanded="false"
+            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+        <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{user.id}}">
+            <li class="dropdown-item">
+                <a [routerLink]="[user.id, 'edit-user']"
+                    routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</td>

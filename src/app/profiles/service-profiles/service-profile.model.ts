@@ -1,3 +1,4 @@
+
 export class ServiceProfile {
     public id: string;
     public name: string;
@@ -23,57 +24,20 @@ export class ServiceProfile {
     public ulRate: number;
     public ulRatePolicy: string;
 
-    constructor(
-        id: string,
-        name: string,
-        networkServerID: string,
-        addGWMetaData: boolean,
-        channelMask: string,
-        devStatusReqFreq: number,
-        dlBucketSize: number,
-        dlRate: number,
-        dlRatePolicy: string,
-        drMax: number,
-        drMin: number,
-        hrAllowed: boolean,
-        minGWDiversity: number,
-        nwkGeoLoc: boolean,
-        organizationID: string,
-        prAllowed: boolean,
-        raAllowed: boolean,
-        reportDevStatusBattery: boolean,
-        reportDevStatusMargin: boolean,
-        targetPER: number,
-        ulBucketSize: number,
-        ulRate: number,
-        ulRatePolicy: string) {
-        this.id = id;
-        this.name = name;
-        this.networkServerID = networkServerID;
-        this.addGWMetaData = addGWMetaData;
-        this.channelMask = channelMask;
-        this.devStatusReqFreq = devStatusReqFreq;
-        this.dlBucketSize = dlBucketSize;
-        this.dlRate = dlRate;
-        this.dlRatePolicy = dlRatePolicy;
-        this.drMax = drMax;
-        this.drMin = drMin;
-        this.hrAllowed = hrAllowed;
-        this.minGWDiversity = minGWDiversity;
-        this.nwkGeoLoc = nwkGeoLoc;
-        this.organizationID = organizationID;
-        this.prAllowed = prAllowed;
-        this.raAllowed = raAllowed;
-        this.reportDevStatusBattery = reportDevStatusBattery;
-        this.reportDevStatusMargin = reportDevStatusMargin;
-        this.targetPER = targetPER;
-        this.ulBucketSize = ulBucketSize;
-        this.ulRate = ulRate;
-        this.ulRatePolicy = ulRatePolicy;
-    }
 }
 
-export interface ServiceProfileData {
+export interface ServiceProfileResponseMany {
     result: ServiceProfile[];
     totalCount?: string;
+}
+
+export interface ServiceProfileResponseOne {
+    serviceProfile: ServiceProfile;
+}
+
+export class ServiceProfileRequest {
+    serviceProfile: ServiceProfile;
+    constructor(serviceProfile: ServiceProfile) {
+        this.serviceProfile = serviceProfile;
+    }
 }

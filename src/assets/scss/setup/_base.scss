@@ -1,0 +1,62 @@
+@import 'variables';
+@import 'breakpoints';
+@import 'fonts';
+
+// Bootstrap
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1==$u2 and $u1==$u3 and $u1==$u4 {
+    & {
+      font-size: $min-font-size;
+
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+
+
+html {
+  font-family: $font-name, system;
+  font-size: $body-text;
+  overflow-y: scroll;
+  @include fluid-type($min_width, $max_width, $min_font, $max_font);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: $grey-light;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: $black;
+}
+
+// Bootstrap overrides
+$theme-colors: ('primary': $color-primary,
+  'success': $color-success,
+  'dark': $color-secondary) !default;

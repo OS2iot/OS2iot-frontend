@@ -1,0 +1,7 @@
+<app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
+  [title]="'NAV.ALL-IOT-DEVICES' | translate" (updatePageLimit)="updatePageLimit($event)"
+  (selectedSortChange)="changeSort($event)"></app-top-bar>
+
+<div class="m-md-4 p-md-3">
+  <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-iot-devices-table>
+</div>

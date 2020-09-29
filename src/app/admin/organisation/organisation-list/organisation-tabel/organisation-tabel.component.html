@@ -1,0 +1,15 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'ORGANISATION.NAME' | translate }}</th>
+                <th scope="col">{{ 'ORGANISATION.APPLICATION-COUNT' | translate }}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let org of organisations" class="py-3" app-organisation-row [organisation]="org"
+                (deleteOrganisation)="deleteOrganisation($event)"></tr>
+        </tbody>
+    </table>
+</div>

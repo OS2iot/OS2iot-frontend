@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ServiceProfile } from '../../service-profile.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as ServiceProfilesActions from '../../store/service-profile.actions';
-import * as fromApp from '../../../../store/app.reducer';
+import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { ServiceProfile } from '@profiles/service-profiles/service-profile.model';
 
 
 @Component({
@@ -13,26 +11,24 @@ import * as fromApp from '../../../../store/app.reducer';
 })
 export class ServiceProfileItemComponent implements OnInit {
   @Input() serviceProfile: ServiceProfile;
-  @Input() index: number;
-  id: number;
+  serviceId: number;
+  faPen = faPen;
+  faTimesCircle = faTimesCircle;
+  @Output() deleteServiceProfile = new EventEmitter();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {
   }
 
   onEditServiceProfile() {
-    //this.router.navigate(['edit-profile'], { relativeTo: this.route });
-    this.router.navigate([this.index, 'edit-profile'], { relativeTo: this.route });
+    this.router.navigate([this.serviceProfile.id, 'edit-service-profile'], { relativeTo: this.route });
   }
 
   onDeleteServiceProfile() {
-    this.store.dispatch(new ServiceProfilesActions.DeleteServiceProfile(this.index));
-    this.router.navigate(['/profiles']);
+    this.deleteServiceProfile.emit(this.serviceProfile.id);
   }
-
 }

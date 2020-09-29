@@ -5,9 +5,10 @@ import { Observable, of, from } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { AlertService } from './alert.service';
-import { Alert } from 'src/app/models/alert';
+
 
 import { environment } from '../../../environments/environment';
+import { Alert } from '@shared/models/alert.model';
 
 interface IHttpOptions {
     headers?: HttpHeaders;
@@ -134,7 +135,7 @@ export class RestService {
         );
     }
 
-    public replace(
+    public put(
         url: string,
         object: any,
         id?: string | number,

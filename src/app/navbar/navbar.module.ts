@@ -12,21 +12,21 @@ import { RestService } from '../shared/services/rest.service';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GlobalAdminComponent } from './global-admin/global-admin.component';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { OrganisationDropdownComponent } from './organisation-dropdown/organisation-dropdown.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     TranslateModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NGMaterialModule,
   ],
-  exports: [
-    NavbarComponent,
-  ],
-  providers: [
-    RestService,
-  ]
+  exports: [NavbarComponent],
+  providers: [RestService, NavbarComponent],
 })
-export class NavbarModule { }
+export class NavbarModule {}

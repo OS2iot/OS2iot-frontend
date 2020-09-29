@@ -1,0 +1,205 @@
+<form (ngSubmit)="onSubmit()" #iotDeviceForm="ngForm" class="os2-form p-3 mt-4">
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="row mb-5">
+    <div class="form-group d-flex justify-content-center p-3 col-12"
+      [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('type'), 'is-valid' : formFailedSubmit && !errorFields.includes('type')}">
+      <div class="form-check-inline radio-image">
+        <label class="form-check-label d-flex flex-column-reverse">
+          <input attr.aria-label="Sigfox" type="radio" name="type" value="SIGFOX" class="form-check-input" required
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <div class="image-container">
+            <img src="assets/images/Sigfox_Logo.png" alt="Sigfox">
+          </div>
+        </label>
+      </div>
+      <div class="form-check-inline radio-image">
+        <label class="form-check-label d-flex flex-column-reverse">
+          <input attr.aria-label="NB-IoT" type="radio" name="type" value="NBIOT" class="form-check-input" required
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <div class="image-container">
+            <img src="assets/images/nbiot.png" alt="NB-IoT">
+          </div>
+        </label>
+      </div>
+      <div class="form-check-inline radio-image">
+        <label class="form-check-label d-flex flex-column-reverse">
+          <input attr.aria-label="LoRaWAN" type="radio" name="type" value="LORAWAN" class="form-check-input" required
+            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <div class="image-container">
+            <img src="assets/images/lora.png" alt="LoRaWAN">
+          </div>
+        </label>
+      </div>
+      <div class="form-check-inline radio-image">
+        <label class="form-check-label d-flex flex-column-reverse">
+          <input attr.aria-label="{{'GEN.HTTP' | translate}}" type="radio" name="type" value="GENERIC_HTTP"
+            class="form-check-input" required [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <div class="image-container">
+            <img src="assets/images/iot.png" alt="{{'GEN.HTTP' | translate}}">
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{'QUESTION.GIVE-DEVICE-NAME' | translate}}</label>*
+      <input type="text" class="form-control" id="name" name="name"
+        [placeholder]="'QUESTION.DEVICE-NAME-PLACEHOLDER' | translate" maxlength="50" required
+        [(ngModel)]="iotDevice.name"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+    </div>
+
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{'QUESTION.CHOOSE-APPLICATION' | translate}}</label>*
+      <select id="applicationId" class="form-select" name="applicationId" [(ngModel)]="iotDevice.applicationId" required
+        [disabled]="disableChoseApplication" [value]="iotDevice.applicationId"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationId')}">
+        <option *ngFor="let app of applications" [value]="app.id" [selected]="app.id === iotDevice.applicationId">
+          {{app.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="comment">{{'IOTDEVICE.COMMENT' | translate}}</label>
+      <input type="text" class="form-control" id="comment" name="comment"
+        [placeholder]="'QUESTION.EXTRA-COMMENT-PLACEHOLDER' | translate" maxLength="1024"
+        [(ngModel)]="iotDevice.comment"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('comment'), 'is-valid' : formFailedSubmit && !errorFields.includes('comment')}">
+    </div>
+
+    <div class="form-group mt-3 col-6">
+      <label class="form-label" for="longitude">{{'IOTDEVICE.LONGITUDE' | translate}}</label>
+      <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="00" required
+        [(ngModel)]="iotDevice.longitude" step=".000001" min="-180" max="180" maxlength="9"
+        (keyup)="onCoordinateKey($event)"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
+    </div>
+
+    <div class="form-group mt-3 col-6">
+      <label class="form-label" for="latitude">{{'IOTDEVICE.LATITUDE' | translate}}</label>
+      <input type="number" class="form-control" id="latitude" name="latitude" [placeholder]="00" required
+        [(ngModel)]="iotDevice.latitude" step=".000001" min="-90" max="90" maxlength="9"
+        (keyup)="onCoordinateKey($event)"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('latitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('latitude')}">
+    </div>
+  </div>
+
+  <div class="form-group mt-5">
+    <label class="form-label" for="commentOnLocation">{{'QUESTION.LOCATION-DESCRIPTION' | translate}}</label>
+    <input type="text" id="commentOnLocation" name="commentOnLocation" maxLength="1024"
+      [placeholder]="'QUESTION.LOCATION-DESCRIPTION-PLACEHOLDER' | translate" class="form-control"
+      [(ngModel)]="iotDevice.commentOnLocation"
+      [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('commentOnLocation'), 'is-valid' : formFailedSubmit && !errorFields.includes('commentOnLocation')}">
+  </div>
+
+  <ng-container *ngIf="iotDevice.type == loraDevice" class="row mb-5">
+    <div class="form-group mt-5">
+      <h3>{{'IOTDEVICE.LORAWANSETUP' | translate}}</h3>
+    </div>
+
+    <div class="form-group mt-5">
+      <label class="form-label" for="devEUI">{{'QUESTION.DEVEUI' | translate}}*</label>
+      <input type="text" id="devEUI" name="devEUI" maxLength="16"
+        [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate" class="form-control"
+        [(ngModel)]="iotDevice.lorawanSettings.devEUI"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devEUI'), 'is-valid' : formFailedSubmit && !errorFields.includes('devEUI')}">
+    </div>
+
+    <ng-container *ngIf="iotDevice.lorawanSettings.serviceProfileID || serviceProfiles">
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="serviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
+        <select id="serviceProfileID" class="form-select" name="serviceProfileID"
+          [(ngModel)]="iotDevice.lorawanSettings.serviceProfileID" required
+          [value]="iotDevice.lorawanSettings.serviceProfileID"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('serviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('serviceProfileID')}">
+          <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id"
+            [selected]="serviceProfile.id === iotDevice.lorawanSettings.serviceProfileID">
+            {{serviceProfile.name}}
+          </option>
+        </select>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="iotDevice.lorawanSettings.deviceProfileID || deviceProfiles">
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="deviceProfileID">{{'QUESTION.CHOOSE-DEVICE' | translate}}</label>*
+        <select id="deviceProfileID" class="form-select" name="deviceProfileID"
+          [(ngModel)]="iotDevice.lorawanSettings.deviceProfileID" required
+          (change)="onChangeDeviceProfile($event.target.value)" [value]="iotDevice.lorawanSettings.deviceProfileID"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceProfileID')}">
+          <option *ngFor="let deviceProfile of deviceProfiles" [value]="deviceProfile.id"
+            [selected]="deviceProfile.id === iotDevice.lorawanSettings.deviceProfileID">
+            {{deviceProfile.name}}
+          </option>
+        </select>
+      </div>
+    </ng-container>
+
+    <div class="form-group mt-5">
+      <ng-container *ngIf="OTAA">
+        <h3>{{'QUESTION.OTAA' | translate}}</h3>
+        <p>{{'QUESTION.OTAA-ABP-CONFIG-HELP' | translate}}</p>
+        <div class="form-group mt-5">
+          <label class="form-label" for="OTAAapplicationKey">{{'QUESTION.OTAAAPPLICATIONKEY' | translate}}*</label>
+          <input type="text" id="OTAAapplicationKey" name="OTAAapplicationKey" maxLength="32"
+            [placeholder]="'QUESTION.OTAAAPPLICATIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.OTAAapplicationKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('OTAAapplicationKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('OTAAapplicationKey')}">
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!OTAA">
+        <h3>{{'QUESTION.ABP' | translate}}</h3>
+        <p>{{'QUESTION.OTAA-ABP-CONFIG-HELP' | translate}}</p>
+        <div class="form-group mt-5">
+          <label class="form-label" for="devAddr">{{'QUESTION.DEVADDR' | translate}}*</label>
+          <input type="text" id="devAddr" name="devAddr" maxLength="8"
+            [placeholder]="'QUESTION.DEVADDR-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.devAddr"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devAddr'), 'is-valid' : formFailedSubmit && !errorFields.includes('devAddr')}">
+        </div>
+
+        <div class="form-group mt-5">
+          <label class="form-label" for="networkSessionKey">{{'QUESTION.NETWORKSESSIONKEY' | translate}}*</label>
+          <input type="text" id="networkSessionKey" name="networkSessionKey" maxLength="32"
+            [placeholder]="'QUESTION.NETWORKSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.networkSessionKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('networkSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('networkSessionKey')}">
+        </div>
+
+        <div class="form-group mt-5">
+          <label class="form-label"
+            for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}*</label>
+          <input type="text" id="applicationSessionKey" name="applicationSessionKey" maxLength="32"
+            [placeholder]="'QUESTION.APPLICATIONSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="form-group mt-5">
+      <label class="form-label" for="skipFCntCheck">{{'QUESTION.SKIPFCNTCHECK' | translate}}</label>
+      <div>
+        <mat-checkbox [(ngModel)]="iotDevice.lorawanSettings.skipFCntCheck" name="skipFCntCheck">
+          {{'QUESTION.SKIPFCNTCHECK-YES' | translate}}
+        </mat-checkbox>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="form-group mt-5">
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>
+    <button class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>
+  </div>
+</form>

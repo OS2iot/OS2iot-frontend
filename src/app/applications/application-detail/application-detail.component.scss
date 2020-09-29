@@ -1,0 +1,13 @@
+@import '~src/assets/scss/setup/breakpoints';
+@import '~src/assets/scss/setup/variables';
+
+.application-component {
+  .bottom-separator {
+    min-height: 60px;
+    border-bottom: $grey-separator solid 1px;
+
+    @include media-breakpoint-up(md) {
+      min-height: 150px;
+    }
+  }
+}

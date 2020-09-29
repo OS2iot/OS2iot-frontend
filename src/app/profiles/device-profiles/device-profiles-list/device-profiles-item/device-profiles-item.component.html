@@ -1,0 +1,17 @@
+<div class=" list-group-item mb-1 clearfix" routerLinkActive="active">
+    <div class="row">
+        <div class="col-9 pull-left d-flex align-items-center">
+            <a [routerLink]="['deviceprofile', deviceProfile.id]" class="container-fluid">
+                {{ deviceProfile.name }}
+            </a>
+        </div>
+        <div class="col-3 pull-right d-flex align-items-center justify-content-end">
+            <a (click)="onDeleteDeviceProfile()">
+                <div class="text-center m-2">
+                    <fa-icon [icon]="faTimesCircle"></fa-icon>
+                    <p>Slet</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

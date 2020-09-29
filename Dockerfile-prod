@@ -29,7 +29,7 @@ FROM bitnami/nginx:latest
 
 #!/bin/sh
 
-# COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./.nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/frontend.conf
 
 ## Remove default nginx index page
 # RUN rm -rf /app/*
@@ -38,5 +38,6 @@ FROM bitnami/nginx:latest
 COPY --from=builder /app/dist/OS2IoT-frontend /app
 
 EXPOSE 8080
+EXPOSE 8081
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

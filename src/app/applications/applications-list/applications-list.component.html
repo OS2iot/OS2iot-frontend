@@ -1,0 +1,11 @@
+<app-top-bar [sort]="sort" [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
+  [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
+  [ctaRouterLink]="'new-application'" (updatePageLimit)="updatePageLimit($event)"
+  (selectedSortChange)="changeSort($event)">
+</app-top-bar>
+
+<div class="m-md-4 p-md-3">
+  <app-applications-table [applications]="applications" [pageOffset]="pageOffset" [pageTotal]="pageTotal"
+    (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)">
+  </app-applications-table>
+</div>

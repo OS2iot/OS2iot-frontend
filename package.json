@@ -1,6 +1,6 @@
 {
   "name": "os2-io-t-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -35,7 +35,10 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "all": "0.0.0",
     "bootstrap": "^5.0.0-alpha1",
+    "guid-typescript": "^1.0.9",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
+    "ngx-papaparse": "^5.0.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
@@ -49,6 +52,7 @@
     "@ngrx/store-devtools": "^10.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "eslint": "^7.3.1",

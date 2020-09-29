@@ -1,14 +1,9 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ServiceProfile } from '../service-profile.model';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import * as fromApp from '../../../store/app.reducer';
+import { ServiceProfile, ServiceProfileResponseMany } from '../service-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
-
-
-
+import { ServiceProfileService } from '../service-profile.service';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -17,31 +12,47 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   serviceProfiles: ServiceProfile[];
-  subscription: Subscription;
+  serviceSubscription: Subscription;
   public pageLimit: 10;
   public pageOffset: 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<fromApp.AppState>
+    private serviceProfileService: ServiceProfileService
   ) { }
 
   ngOnInit() {
-    this.subscription = this.store
-      .select('serviceProfiles')
-      .pipe(map(serviceProfileState => serviceProfileState.serviceProfiles))
-      .subscribe((serviceProfiles: ServiceProfile[]) => {
-        this.serviceProfiles = serviceProfiles;
-      });
+    this.getServiceProfileList()
+  }
+
+  getServiceProfileList() {
+    this.serviceSubscription = this.serviceProfileService.getMultiple()
+      .subscribe(
+        (result: ServiceProfileResponseMany) => {
+          this.serviceProfiles = result.result;
+        });
   }
 
   onNewServiceProfile() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.router.navigate(['new-service-profile'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.serviceSubscription && this.serviceSubscription?.closed) {
+      this.serviceSubscription.unsubscribe();
+    }
+  }
+
+  deleteServiceProfile(id: string) {
+    if (id) {
+      this.serviceProfileService.delete(id).subscribe((response) => {
+        console.log(response);
+        if (response.ok) {
+          this.getServiceProfileList();
+        }
+      });
+    }
   }
 
 }

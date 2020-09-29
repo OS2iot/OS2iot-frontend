@@ -1,0 +1,63 @@
+@import '../setup//variables';
+
+
+
+// Links
+
+a:focus,
+button:focus,
+.focus {
+  outline: $focus-outline;
+  outline-offset: 0;
+  transition: all 0.2s;
+}
+
+a {
+  color: $color-link;
+  border-bottom: 5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &.link-hover {
+    color: $color-link-hover;
+    border-bottom: 5px solid $color-link-focus-bg;
+
+
+    &:disabled,
+    .disabled {
+      background-color: transparent !important;
+    }
+  }
+
+  &:active,
+  &.link-active {
+    color: $color-active;
+    border-bottom: 5px solid $color-link-focus-bg;
+  }
+
+  &:focus,
+  &.link-focus {
+    color: $color-link-focus;
+    background-color: transparent;
+    border-bottom: calculateRem(5) solid $color-link-focus-bg;
+  }
+
+  &:visited,
+  &.link-visited {
+    color: $color-visited;
+  }
+
+  &:disabled,
+  &.disabled {
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    //color: #000 !important; // FIXME: Hvad skal der der være her?
+    outline-offset: inherit !important;
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+  }
+}

@@ -14,25 +14,15 @@
     "lib": ["es2018", "dom"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
-      "@shared/*": [
-        "app/shared/*"
-      ],
-      "@store/*": [
-        "app/store/*"
-      ],
-      "@environments/*": [
-        "environments/*"
-      ],
-      "@Material": [
-        "app/shared/modules/material.module"
-      ],
-      "@Shared-Bootstrap": [
-        "app/shared/modules/shared-bootstrap.module"
-      ]
-    },
+      "@shared-material": ["src/app/shared/modules/material.module"],
+      "@shared/*": ["src/app/shared/*"],
+      "@admin/*": ["src/app/admin"],
+      "@applications/*": ["src/app/applications/*"],
+      "@payload-decoder/*": ["src/app/payload-decoder/*"],
+      "@profiles/*": ["src/app/profiles/*"],
+      "@environments/*": ["src/environments/*"],
+      "@app/*": ["src/app/*"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

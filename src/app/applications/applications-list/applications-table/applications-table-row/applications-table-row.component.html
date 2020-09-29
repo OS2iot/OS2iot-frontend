@@ -1,0 +1,29 @@
+<td>
+  <a [routerLink]="[application.id]" routerLinkActive="active" class="application-link">{{application.name}}</a>
+</td>
+<ng-container *ngIf="application.iotDevices; else iotZero">
+  <td>{{application.iotDevices.length}}</td>
+</ng-container>
+<ng-template #iotZero>
+  <td>0</td>
+</ng-template>
+<td>
+  {{application.updatedAt | date:'dd/MM yyyy'}}
+
+</td>
+<td>
+  <div class="dropdown">
+    <a href="#" role="button" id="tableRowDropdown-{{application.id}}" class="applicationRow__edit dropdown-toggle"
+      data-toggle="dropdown" aria-expanded="false"
+      [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{application.id}}">
+      <li class="dropdown-item">
+        <a (click)="clickDelete()" [routerLink]="">{{ 'APPLICATION-TABLE-ROW.DELETE' | translate }}</a>
+      </li>
+      <li class="dropdown-item">
+        <a [routerLink]="[application.id, 'edit-application']"
+          routerLinkActive="active">{{ 'APPLICATION-TABLE-ROW.EDIT' | translate }}</a>
+      </li>
+    </ul>
+  </div>
+</td>

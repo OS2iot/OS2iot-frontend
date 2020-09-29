@@ -1,31 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-import { appReducer, metaReducers } from './store/app.reducer';
-import { ServiceProfileEffects } from './profiles/service-profiles/store/service-profile.effects';
-import { environment } from '../environments/environment';
-
-import { DashboardModule } from './views/dashboard/dashboard.module';
-import { MineApplikationerModule } from './my-applications/my-applications.module';
-import { AlleIotEnhederModule } from './views/alle-iot-enheder/alle-iot-enheder.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdministrationGatewayModule } from './views/administration-gateway/administration-gateway.module';
-import { DatatargetModule } from './views/datatarget/datatarget.module';
-import { LoggingService } from './logging.service';
 import { ProfilesModule } from './profiles/profiles.module';
+import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { GatewayModule } from './gateway/gateway.module';
+import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,21 +23,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        SharedVariableModule.forRoot(),
+        AuthModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         DashboardModule,
-        MineApplikationerModule,
-        AlleIotEnhederModule,
-        DatatargetModule,
         NavbarModule,
         ProfilesModule,
-        TranslateModule,
-        StoreModule.forRoot(appReducer, { metaReducers }),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([ServiceProfileEffects]),
-        StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         TranslateModule.forRoot({
             defaultLanguage: 'da',
             loader: {
@@ -60,10 +43,15 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        AdministrationGatewayModule
+        GatewayModule,
     ],
-    providers: [LoggingService],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
+    providers: [
+        // use these two providers only in dev environment
+        //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true }
+    ],
 })
 export class AppModule { }

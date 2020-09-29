@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { ProfilesComponent } from './profiles.component';
-import { ProfilesRoutingModule } from './profiles-routing.module';
-import { LoggingService } from '../logging.service';
-import { RouterModule } from '@angular/router';
-import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
-import { SharedModule } from '../shared/shared.module';
-import { TopBarModule } from '../shared/top-bar/top-bar.module';
-import { FormModule } from '../shared/form/form.module';
+import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
+import { ProfilesRoutingModule } from './profiles-routing.module';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@shared/shared.module';
+import { DeviceProfilesModule } from './device-profiles/device-profiles.module';
 import { TranslateModule } from '@ngx-translate/core';
-
-
+import { FormModule } from '@shared/components/forms/form.module';
+import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
   exports: [],
   imports: [
     ServiceProfilesModule,
+    DeviceProfilesModule,
     ProfilesRoutingModule,
     RouterModule,
     TopBarModule,
@@ -30,8 +27,6 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
 
   ],
-  providers: [
-    LoggingService,
-  ]
+
 })
 export class ProfilesModule { }

@@ -1,0 +1,36 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'LORA-GATEWAY-TABLE.NAME' | translate }}</th>
+                <th>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
+                <th>{{ 'LORA-GATEWAY-TABLE.LOCATION' | translate }}</th>
+                <th>{{ 'LORA-GATEWAY-TABLE.LAST-SEEN-AT' | translate }}</th>
+                <th>{{ 'LORA-GATEWAY-TABLE.STATUS' | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let gateway of gateways" class="py-3" app-gateway-table-row [gateway]="gateway"
+                (deleteGateway)="deleteGateway($event)">
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- <nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
+    <ul class="pagination justify-content-center mt-5">
+        <li class="page-item">
+            <a class="page-link" [routerLink]="" (click)="prevPage()"
+                >Previous</a
+            >
+        </li>
+        <li class="page-item disabled">
+            <div class="page-link" [routerLink]="">
+                {{ pageOffset + 1 }} / {{ pageTotal }}
+            </div>
+        </li>
+        <li class="page-item">
+            <a class="page-link" [routerLink]="" (click)="nextPage()">Next</a>
+        </li>
+    </ul>
+</nav> -->

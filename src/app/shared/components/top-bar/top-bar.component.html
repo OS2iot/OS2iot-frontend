@@ -1,0 +1,36 @@
+<div class="row top-bar-wrapper">
+  <div class="col-12 d-flex top-bar align-items-center">
+    <ng-template [ngIf]="backButtonTitle">
+      <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
+    </ng-template>
+    <ng-template [ngIf]="title">
+      <h4 *ngIf="component; else notComponent">{{title}}</h4>
+      <ng-template #notComponent>
+        <h3 class="pl-3">{{title}}</h3>
+      </ng-template>
+    </ng-template>
+    <div class="ml-auto d-flex">
+      <div class="d-flex per-page" *ngIf="selectedSortId">
+        <!-- {{ 'GEN.SHOW' | translate }}
+        <select name="my-applications-table_length" [(ngModel)]="pageLimit" aria-controls="my-applications-table" class="select-box select-box-sm">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        {{ 'GEN.PER-PAGE' | translate }} -->
+        <label class="form-label d-none" for="myApplicationsTableSort">{{ 'SORT.SORT' | translate }}</label>
+        <select *ngIf="showSelectedSort" id="myApplicationsTableSort" name="myApplicationsTableSort"
+          [(ngModel)]="selectedSortId" (ngModelChange)="changeSort($event)" class="select-box select-box-md">
+          <option [value]="option.id" *ngFor="let option of sort">{{ option.label | translate }}</option>
+        </select>
+      </div>
+      <div>
+        <button *ngIf="ctaRouterLink" [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-primary"
+          type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import * as fromApp from '../../../store/app.reducer';
-import * as ServiceProfilesActions from '../store/service-profile.actions';
-import { BackButton } from 'src/app/models/back-button';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ServiceProfile, ServiceProfileResponseOne } from '../service-profile.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
+import { FormGroup } from '@angular/forms';
+import { BackButton } from '@shared/models/back-button.model';
+import { ServiceProfileService } from '../service-profile.service';
+
 
 @Component({
   selector: 'app-service-profiles-edit',
@@ -17,99 +18,118 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ServiceProfilesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
-  public title: 'Service Profile';
-  id: number;
+  public title: '';
+  public errorMessage: string;
+  public errorMessages: string[];
+  public errorFields: string[];
+  public formFailedSubmit = false;
+  public form: FormGroup;
+  public submitButton = '';
+  id: string;
+  serviceId: number;
   editMode = false;
-  serviceProfileForm: FormGroup;
-  GWvalues: string[] = ['true', 'false'];
-
-  private storeSub: Subscription;
+  serviceProfile = new ServiceProfile();
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromApp.AppState>,
-    private translate: TranslateService
-  ) { }
+    private translate: TranslateService,
+    private serviceProfileService: ServiceProfileService,
+    private location: Location,
+  ) {
+  }
 
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.editMode = params['id'] != null;
-      this.initForm();
-    });
-    this.translate.get(['PROFILES.SERVICE_PROFILE.GOBACK', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE',])
+  ngOnInit(): void {
+    this.translate.get(['PROFILES.NAME', 'PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE', 'PAYLOAD-DECODER.SAVE'])
       .subscribe(translations => {
-        this.backButton.label = translations['PROFILES.SERVICE_PROFILE.GOBACK'];
+        this.backButton.label = translations['PROFILES.NAME'];
         this.title = translations['PROFILES.SERVICE_PROFILE.ADDSERVICEPROFILE'];
+        this.submitButton = translations['PAYLOAD-DECODER.SAVE'];
 
       });
-  }
-
-  onSubmit() {
-    if (this.editMode) {
-      this.store.dispatch(
-        new ServiceProfilesActions.UpdateServiceProfile({
-          index: this.id,
-          updateServiceProfile: this.serviceProfileForm.value
-        })
-      );
-    } else {
-      this.store.dispatch(new ServiceProfilesActions.AddServiceProfile(this.serviceProfileForm.value));
+    this.id = this.route.snapshot.paramMap.get('serviceId');
+    if (this.id) {
+      this.getServiceProfile(this.id);
     }
-    this.onCancel();
   }
 
+  private getServiceProfile(id: string) {
+    this.subscription = this.serviceProfileService.getOne(id)
+      .subscribe(
+        (response: ServiceProfileResponseOne) => {
+          this.serviceProfile = response.serviceProfile;
+        });
+  }
+
+  private create(): void {
+    this.serviceProfileService.post(this.serviceProfile)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          this.routeBack();
+        },
+        (error: HttpErrorResponse) => {
+          this.showError(error);
+        }
+      );
+  }
+
+  private update(): void {
+    this.serviceProfileService.put(this.serviceProfile)
+      .subscribe(
+        (response) => {
+          this.routeBack();
+        },
+        (error) => {
+          this.showError(error);
+        });
+  }
+
+  private showError(error: HttpErrorResponse) {
+    this.errorFields = [];
+    this.errorMessage = '';
+    this.errorMessages = [];
+    if (error.error?.chirpstackError) {
+      this.errorFields.push('name');
+      this.errorFields.push('devStatusReqFreq');
+      this.errorFields.push('drMax');
+      this.errorFields.push('drMin');
+      this.errorMessage = error.error.chirpstackError.message;
+    } else if (error.error?.message?.length > 0) {
+      error.error.message[0].children.forEach((err) => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(
+          Object.values(err.constraints)
+        );
+      });
+    } else {
+      this.errorMessage = error.message;
+    }
+    this.formFailedSubmit = true;
+  }
+
+  onSubmit(): void {
+    if (this.serviceProfile.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  onCoordinateKey(event: any) {
+    console.log(event.target.value);
+    console.log(event.target.maxLength);
+    if (event.target.value.length > event.target.maxLength) {
+      event.target.value = event.target.value.slice(0, event.target.maxLength);
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-
-  ngDestroy() {
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
-    }
-  }
-
-  private initForm() {
-    let serviceProfileName = 'Navngiv din profil';
-    let serviceProfileGWData = false;
-    let serviceProfileBatteryStatus = true;
-    let serviceProfileMinDateRate = 2000;
-    let serviceProfileMaxDateRate = 2000;
-    let serviceProfileReportEndDevice = 2000;
-
-    if (this.editMode) {
-      this.storeSub = this.store
-        .select('serviceProfiles')
-        .pipe(
-          map(serviceProfileState => {
-            return serviceProfileState.serviceProfiles.find((serviceProfile, index) => {
-              return index === this.id;
-            });
-          })
-        )
-        .subscribe(serviceProfile => {
-          serviceProfileName = serviceProfile.name;
-          serviceProfileGWData = serviceProfile.addGWMetaData;
-          serviceProfileBatteryStatus = serviceProfile.reportDevStatusBattery;
-          serviceProfileMinDateRate = serviceProfile.drMin;
-          serviceProfileMaxDateRate = serviceProfile.drMax;
-          serviceProfileReportEndDevice = serviceProfile.targetPER;
-
-        });
-    }
-
-    this.serviceProfileForm = new FormGroup({
-      name: new FormControl(serviceProfileName, Validators.required),
-      addGWMetaData: new FormControl(serviceProfileGWData, Validators.required),
-      reportDevStatusBattery: new FormControl(serviceProfileBatteryStatus, Validators.required),
-      drMin: new FormControl(serviceProfileMinDateRate, Validators.required),
-      drMax: new FormControl(serviceProfileMaxDateRate, Validators.required),
-      targetPER: new FormControl(serviceProfileReportEndDevice, Validators.required)
-
-
-    });
-  }
-
 }

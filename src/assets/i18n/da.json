@@ -10,13 +10,19 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
-    "MY-APPLICATIONS": "Mine applikationer",
+    "APPLICATIONS": "Applikationer",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "MY-LORA-GATEWAYS": "Mine LoRaWan Gateways",
+    "LORA-GATEWAYS": "LoRaWan Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "Profiler"
+    "PROFILES": "LoRaWan Profiler",
+    "PAYLOAD-DECODER": "Payload Decoder",
+    "ORGANISATIONS": "Organisationer",
+    "PERMISSIONS": "Brugergrupper",
+    "USERS": "Brugere",
+    "LOGIN": "Login",
+    "ADMIN": "Administration"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -24,7 +30,8 @@
     "DELETE": "Slet applikation",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
-    "ATTACHED-IOT": "Tilknyttede IoT enheder"
+    "ATTACHED-IOT": "Tilknyttede IoT enheder",
+    "DATATARGET-SHOW": "Tilknyttede datatargets"
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -35,7 +42,11 @@
     "ID": "Gateway ID",
     "LOCATION": "Placering",
     "TAGS": "Tags",
-    "NAME": "Gatewayens navn"
+    "NAME": "Gatewayens navn",
+    "STATS": "Statistik",
+    "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
+    "STATS-TXPACKETSEMITTED": "Pakker Sendt",
+    "STATS-TIMESTAMP": "Tidspunkt"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",
@@ -49,7 +60,12 @@
     "URL": "URL",
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
-    "NAME": "Datatarget navn"
+    "NAME": "Datatarget navn",
+    "DELETE": "Slet",
+    "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
+    "PAYLOADEDECODER": "Payload decoder navn:",
+    "IOTDEVICE": "IoT Device navn:",
+    "NO-RELATIONS": "ingen tilknyttede relationer"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",
@@ -67,7 +83,9 @@
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
     "GATEWAYID": "Gateway ID",
-    "LOCATION": "Placering"
+    "LOCATION": "Placering",
+    "LAST-SEEN-AT": "Seneste aktivitet",
+    "STATUS": "Status"
   },
   "LORA-GATEWAY-TABLE-ROW": {
     "DELETE": "Slet Gateway",
@@ -82,7 +100,8 @@
     "TYPE": "Type"
   },
   "IOT-DEVICE-TYPES": {
-    "GENERIC_HTTP": "Generisk HTTP"
+    "GENERIC_HTTP": "Generisk HTTP",
+    "LORAWAN": "LoRaWAN"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -104,6 +123,82 @@
     "DELETE": "Slet datatarget",
     "EDIT": "Redigér"
   },
+  "PAYLOAD-DECODER": {
+    "TITLE": "Payload decoder",
+    "SAVE": "Gem Payload Decoder",
+    "NAME": "Navn: ",
+    "ID": "Payload Decoder Id",
+    "DECODINGFUNCTION": "Decoder funktion",
+    "DETAIL": {
+      "DROPDOWN": "Håndter Payload Decoder",
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    }
+  },
+  "PAYLOAD-DECODER-TABLE-ROW": {
+    "EDIT": "Redigér",
+    "DELETE": "Slet"
+  },
+  "ORGANISATION": {
+    "NAME": "Navn",
+    "APPLICATION-COUNT": "Applikationer",
+    "SAVE": "Gem organisation",
+    "EDIT": "Rediger organisation",
+    "DROPDOWN": "Håndter organisation",
+    "DETAIL": {
+      "APPLICATIONS": "Organisationens applikationer",
+      "PERMISSIONS": "Brugergrupper",
+      "NAME": "Navn"
+    },
+    "FORM": {
+      "NAME": "Indtast organisationens navn",
+      "NAME-PLACEHOLDER": "Indtast organisationens navn",
+      "CANCEL": "Annuller",
+      "SAVE": "Gem organisation",
+      "CREATE-NEW-ORGANISATION": "Opret organisation"
+    }
+  },
+  "ORGANISATION-TABLE-ROW": {
+    "EDIT": "Redigér",
+    "DELETE": "Slet"
+  },
+  "PERMISSION": {
+    "NAME": "Navn",
+    "ORGANISATION": "Organisation",
+    "NUMBER_OF_MEMBERS": "Antal medlemmer",
+    "TYPE": "Type af brugergruppe",
+    "NO_ORGANISATION": "N/A",
+    "SAVE": "Gem brugergruppe",
+    "DETAIL": {
+      "TYPE": "Adgangstype: ",
+      "ORG": "Organisations: ",
+      "DROPDOWN": "Håndter Brugergruppe",
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
+    },
+    "EDIT": {
+      "NAME": "Indtast brugergruppens navn",
+      "NAME-PLACEHOLDER": "Brugergruppens navn",
+      "TYPE": "Rettigheder",
+      "TYPE-PLACEHOLDER": "Adgangs rettigheder",
+      "USERS": "Vælg brugere",
+      "USERS-PLACEHOLDER": "Brugere",
+      "ORG": "Vælg en organisation",
+      "ORG-PLACEHOLDER": "Organisation",
+      "APPS": "Vælg en applikation",
+      "APPS-PLACEHOLDER": "Applikationer"
+    },
+    "TABLE-ROW": {
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
+    }
+  },
+  "PERMISSION-TYPE": {
+    "GlobalAdmin": "Global Administrator",
+    "OrganizationAdmin": "Organisations Administrator",
+    "Write": "Skrive-rettigheder",
+    "Read": "Læse-rettigheder"
+  },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
@@ -113,7 +208,14 @@
     "EDIT-NEW-APPLICATION": "Redigér applikation",
     "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
     "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
-    "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)"
+    "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
+    "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
+    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
+    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "CREATE-NEW-ORGANISATION": "Opret organisation",
+    "EDIT-ORGANISATION": "Redigér organisation",
+    "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
+    "EDIT-PERMISSION": "Redigér brugergruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -123,7 +225,6 @@
     "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
     "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
     "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
-    "DATATARGET": "Datatarget - Hvor vil du sende data hen?",
     "REVIEW-AND-SUBMIT": "Gennemgå og godkend indstillinger for din IoT enhed",
     "DEVICE-NAME-PLACEHOLDER": "Enhedsnavn",
     "GIVE-DEVICE-NAME": "Navngiv enhed",
@@ -135,7 +236,39 @@
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
-    "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data"
+    "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
+    "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
+    "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
+    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
+    "GIVE-ORGANISATION-NAME": "Navngiv organisation",
+    "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
+    "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+    "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
+    "DEVADDR": "Device adress",
+    "DEVADDR-PLACEHOLDER": "Indtast Device adress",
+    "NETWORKSESSIONKEY": "Networksessionkey",
+    "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
+    "APPLICATIONSESSIONKEY": "Applicationsessionkey",
+    "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
+    "DEVEUI": "Enheds EUI",
+    "DEVEUI-PLACEHOLDER": "Enheds EUI",
+    "SKIPFCNTCHECK": "SkipFCntCheck",
+    "SKIPFCNTCHECK-NO": "Nej",
+    "SKIPFCNTCHECK-YES": "Ja",
+    "OTAA": "Over The Air Activation",
+    "OTAA-ABP-CONFIG-HELP": "Du vælger din aktivation type via device profile",
+    "ABP": "Activation By Personalisation",
+    "CHOOSE-SERVICEPROFILE": "Vælg service profile",
+    "CHOOSE-DEVICE": "Vælg device profile",
+    "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
+    "ADD-RELATIONS": "Tilføj device og payload decoder",
+    "DATATARGET": {
+      "SELECT-PAYLOADDECODER": "Vælg payload decoder",
+      "SELECT-DEVICES": "Vælg enheder",
+      "SELECTALLDEVICES": "Vælg alle",
+      "DESELECTALLDEVICES": "Fravælg alle",
+      "RELATIONS": "Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+    }
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
@@ -186,27 +319,146 @@
     "GENERIC_HTTP": {
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
+    },
+    "LORAWANSETUP": "LoRaWAN Specifik opsætning",
+    "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
+    "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
+    "DATAPACKAGE": "Datapakke",
+    "LORA": {
+      "DEVEUI": "Enheds EUI",
+      "SERVICEPROFILE": "Service profil",
+      "DEVICEPROFILE": "device profil",
+      "ACTIVATIONTYPE": "Aktivations type",
+      "OTAA": "OTAA",
+      "DEVADDR": "devADDR",
+      "NETWORKSESSIONKEY": "Netværks session key",
+      "APPLICATIONSESSIONKEY": "Applikation session key",
+      "SKIPFCNTCHECK": "skipfcntcheck",
+      "OTAAAPPLICATIONKEY": "OTAA Applicationkey"
     }
   },
   "MESSAGE": {
-    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede"
+    "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
+    "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
+    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
   },
   "PROFILES": {
-    "NAME": "Profiler",
+    "NAME": "LoRaWan Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
-      "EDIT": "Editer service profil",
-      "DELETE": "Slet service profil",
-      "NAME": "Navn",
-      "REPORTBATTERYSTATUS": "Report battery status",
-      "ADDGWMETADATA": "Tilføjet GW meta data",
-      "DRRATEMIN": "Min date rate",
-      "DRRATEMAX": "Max date rate",
+      "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
+      "EDIT": "Rediger profil",
+      "DELETE": "Slet profil",
+      "NAME": "Service-profil navn",
+      "NAME_PLACEHOLDER": "service-profil-navn-uden-mellemrum",
+      "ADDGWMETADATA": "Tilføj gateway meta-data",
+      "ADDGWMETADATAEXPLAINED": "GW-metadata (RSSI, SNR, GW geoloc. Osv.) Føjes til den pakke, der sendes til applikationsserveren",
+      "NWKGEOLOC": "Aktivér geografisk placering af netværk",
+      "NWKGEOLOCEXPLAINED": "Når den er aktiveret, forsøger netværksserveren at løse placeringen af â€‹â€‹enhederne under denne serviceprofil. Bemærk, at du skal have gateways, der understøtter fine-timestamp, og at netværksserveren skal konfigureres for at yde support til geolokalisering.",
       "REPORT_END_DEVICE": "Report end-device margin",
+      "DEVICEFREQUENCY": "Device-status request frequency",
+      "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (request/dag).",
+      "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
+      "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
+      "DRRATEMIN": "Min date rate",
+      "DRRATEMINEXPLAINED": "Minimums tilladte data rate. Brugt til ADR",
+      "DRRATEMAX": "Max date rate",
+      "DRRATEMAXEXPLAINED": "Maximums tilladte data rate. Brugt til ADR",
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
       "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
+    },
+    "DEVICE_PROFILE": {
+      "DROPDOWN": "Håndter device profil",
+      "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
+      "EDIT": "Rediger profil",
+      "DELETE": "Slet profil",
+      "NAME": "Device-profil navn",
+      "NAME_PLACEHOLDER": "Device-profile name",
+      "MACVERSION": "LoRaWAN MAC version ",
+      "REGPARAMSREVISION": "LoRaWAN Regional Parameters revision ",
+      "MAXEIRP": "Max EIRP ",
+      "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
+      "GEOLOCMINBUFFERSIZE": "Geolocation minimum buffer size",
+      "OTAA-ACTIVATE": "Device supports OTAA",
+      "RXDELAY1": "RX1 delay ",
+      "RXDROFFSET1": "RX1 data-rate offset",
+      "RXDATARATE2": "RX2 data-rate",
+      "RXFREQ2": "RX2 channel frequency (Hz)",
+      "FACTORYPRESETFREQS": "Factory-preset frequencies (Hz)",
+      "FACTORYPRESETFREQS_PLACEHOLDER": "Factory-preset frequencies (Hz)",
+      "SUPPORTSCLASSB_ACTIVATE": "Device supports Class-B",
+      "CLASSBTIMEOUT": "Class B confirmed downlink timeout",
+      "PINGSLOTPERIOD": "Class-B ping-slot periodicity",
+      "PINGSLOTDR": "Class-B ping-slot data-rate",
+      "PINGSLOTFREQ": "Class-B ping-slot frequency",
+      "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
+      "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
+      "CANCEL": "Anuller",
+      "SAVE": "Gem",
+      "OTAA-ABP": "Join (OTAA / ABP)",
+      "MACVERSION_PLACEHOLDER": "1.0.0",
+      "MAXEIRP_PLACEHOLDER": "0",
+      "GEOLOCBUFFERTTL_PLACEHOLDER": "0",
+      "GEOLOCMINBUFFERSIZE_PLACEHOLDER": "0",
+      "RXDROFFSET1_PLACEHOLDER": "0",
+      "RXDATARATE2_PLACEHOLDER": "0",
+      "RXFREQ2_PLACEHOLDER": "0",
+      "CLASSBTIMEOUT_PLACEHOLDER": "0",
+      "PINGSLOTDR_PLACEHOLDER": "0",
+      "PINGSLOTFREQ_PLACEHOLDER": "0",
+      "CLASSCTIMEOUT_PLACEHOLDER": "0"
     }
-  }
+  },
+  "USERS": {
+    "SAVE": "Gem",
+    "NAME": "Navn",
+    "EMAIL": "Email",
+    "GLOBALADMIN": "Global Administrator",
+    "STATUS": "Status",
+    "LASTLOG": "Sidste Login",
+    "EDIT": "Redigér User",
+    "CREATE": "Opret ny burger",
+    "LOGIN": "Sidst aktiv",
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    },
+    "FORM": {
+      "NAME": "Indtast det fulde navn på brugeren",
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL": "Indtast Email addressen til brugeren",
+      "EMAIL-PLACEHOLDER": "Email",
+      "PASSWORD": "Password",
+      "PASSWORD-PLACEHOLDER": "Indtast eller redigér password",
+      "ACTIVE": "Aktiveret",
+      "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
+      "SAVE": "Gem Bruger"
+    },
+    "DETAIL": {
+      "DROPDOWN": "Håndter Bruger",
+      "LAST-LOGIN": "Sidste login: ",
+      "NO-LOGIN": "Ikke logget på endnu",
+      "ADDED-DATE": "Oprettet den: ",
+      "GLOBALADMIN": "Global Administrator: ",
+      "PERMISSIONS": "Brugergrupper",
+      "APPLICATIONS": "Applikationer",
+      "NAME-PLACEHOLDER": "Navn"
+    },
+    "GLOBAL_ADMIN": {
+      "TRUE": "Ja",
+      "FALSE": "Nej"
+    }
+  },
+  "AUTH": {
+    "EMAIL": "Email",
+    "PASSWORD": "Adgangskode"
+  },
+  "DASHBOARD": {
+    "WELCOME": "Velkommen til OS2IoT",
+    "WELCOME-MESSAGE": "Her vises en velkomsthilsen"
+  },
+  "HTTP_PUSH": "HTTP Push",
+  "Forbidden": "Du har ikke rettigheder til at foretage denne handling"
 }
