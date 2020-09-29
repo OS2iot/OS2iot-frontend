@@ -38,6 +38,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private id: number;
     public disableChoseApplication = true;
     public loraDevice = DeviceType.LORAWAN;
+    public sigfoxDevice = DeviceType.SIGFOX;
     public serviceProfiles: ServiceProfile[];
     public deviceProfiles: DeviceProfile[];
     iotDevice = new IotDevice();
@@ -148,10 +149,16 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
                 this.iotDevice.lorawanSettings = null;
+                this.iotDevice.sigfoxSettings = null;
                 break;
             }
             case DeviceType.LORAWAN: {
                 this.setActivationType();
+                this.iotDevice.sigfoxSettings = null;
+                break;
+            }
+            case DeviceType.SIGFOX: {
+                this.iotDevice.lorawanSettings = null;
                 break;
             }
         }

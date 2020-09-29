@@ -3,6 +3,7 @@ import { DeviceType } from '@shared/enums/device-type';
 import { JsonLocation } from '@shared/models/Json-location.model';
 import { LorawanSettings } from '@shared/models/lorawan-settings.model';
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
+import { SigfoxSettings } from '@shared/models/sigfox-settings.model';
 import { LatestReceivedMessage } from './latestReceivedMessage.model';
 
 export class IotDevice {
@@ -23,6 +24,7 @@ export class IotDevice {
     latitude = 0;
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
+    sigfoxSettings = new SigfoxSettings();
 }
 
 export interface IotDeviceData {
