@@ -9,6 +9,7 @@ export class Gateway {
     gatewayProfileID: string = null;
     tagsString = '{}';
     tags?: JSON;
+    lastSeenAt: Date;
 }
 
 export class GatewayData {
@@ -26,6 +27,14 @@ export class GatewayResponse {
     updatedAt: string;
     firstSeenAt: string;
     lastSeenAt: string;
-
     gateway: Gateway;
+    stats: GatewayStats[];
+}
+
+export interface GatewayStats {
+    timestamp: string;
+    rxPacketsReceived: number;
+    rxPacketsReceivedOK: number;
+    txPacketsReceived: number;
+    txPacketsEmitted: number;
 }

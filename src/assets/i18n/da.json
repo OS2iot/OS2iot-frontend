@@ -78,7 +78,9 @@
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
     "GATEWAYID": "Gateway ID",
-    "LOCATION": "Placering"
+    "LOCATION": "Placering",
+    "LAST-SEEN-AT": "Seneste aktivitet",
+    "STATUS": "Status"
   },
   "LORA-GATEWAY-TABLE-ROW": {
     "DELETE": "Slet Gateway",

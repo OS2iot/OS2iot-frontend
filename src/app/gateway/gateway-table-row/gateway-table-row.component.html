@@ -3,14 +3,23 @@
         {{ gateway.name }}
     </a>
 </td>
-
 <td class=" pr-3">
     {{ gateway.id }}
 </td>
-
 <td class=" pr-3">
     {{ gateway.location.longitude }}, {{ gateway.location.latitude }}
-
+</td>
+<td class=" pr-3">
+    {{lastActive()}}
+</td>
+<td class=" pr-3">
+    <ng-container *ngIf="gatewayStatus(); then statusOk else statusError"></ng-container>
+    <ng-template #statusOk>
+        <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
+    </ng-template>
+    <ng-template #statusError>
+        <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
+    </ng-template>
 </td>
 <td>
     <div class="dropdown">

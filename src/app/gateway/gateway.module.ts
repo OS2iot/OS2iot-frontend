@@ -11,6 +11,7 @@ import { GatewayListComponent } from './gateway-list/gateway-list.component';
 import { GatewayEditComponent } from './gateway-edit/gateway-edit.component';
 import { FormsModule } from '@angular/forms';
 import { GatewayDetailComponent } from './gateway-detail/gateway-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GatewayDetailComponent } from './gateway-detail/gateway-detail.componen
     TranslateModule,
     FormModule,
     FormsModule,
+    FontAwesomeModule
   ],
   exports: [
     GatewayTableComponent,
