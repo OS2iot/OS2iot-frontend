@@ -419,6 +419,7 @@
     "LASTLOG": "Sidste Login",
     "EDIT": "Redigér User",
     "CREATE": "Opret ny burger",
+    "LOGIN": "Sidst aktiv",
     "TABLE-ROW": {
       "EDIT": "Redigér",
       "DELETE": "Slet"
@@ -430,7 +431,7 @@
       "EMAIL-PLACEHOLDER": "Email",
       "PASSWORD": "Password",
       "PASSWORD-PLACEHOLDER": "Indtast eller redigér password",
-      "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
+      "ACTIVE": "Aktiveret",
       "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
       "SAVE": "Gem Bruger"
     },
