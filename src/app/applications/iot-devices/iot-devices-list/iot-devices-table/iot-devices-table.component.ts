@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { Application } from '@applications/application.model';
-import { IotDevice } from '../iot-device.model';
 import { Sort } from '@shared/models/sort.model';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
 
 @Component({
     selector: 'app-iot-devices-table',

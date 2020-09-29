@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
     selector: 'app-iot-devices-list',
@@ -79,7 +80,9 @@ export class IotDevicesListComponent implements OnInit {
         label: 'SORT.NAME-ASCENDING',
     };
 
-    constructor(public translate: TranslateService) {
+    constructor(
+        public translate: TranslateService,
+        private papa: Papa) {
         translate.use('da');
     }
 
@@ -95,6 +98,43 @@ export class IotDevicesListComponent implements OnInit {
             if (elem.id == sortId) {
                 this.selectedSortObject = elem;
             }
+        }
+    }
+
+    ConvertCSVtoJSON() {
+        console.log(JSON.stringify(this.test));
+        // let csvData = '"Hello","World!"';
+        // this.papa.parse(csvData, {
+        //   complete: (results) => {
+        //     console.log('Parsed  : ', results.data[0][1]);
+        //     // console.log(results.data.length);
+        //   }
+        // });
+    }
+
+    test = [];
+    handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+        var file = files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (event: any) => {
+            var csv = event.target.result; // Content of CSV file
+            this.papa.parse(csv, {
+                skipEmptyLines: true,
+                header: true,
+                complete: (results) => {
+                    for (let i = 0; i < results.data.length; i++) {
+                        let orderDetails = {
+                            order_id: results.data[i].Address,
+                            age: results.data[i].Age
+                        };
+                        this.test.push(orderDetails);
+                    }
+                    // console.log(this.test);
+                    console.log('Parsed: k', results.data);
+                }
+            });
         }
     }
 }

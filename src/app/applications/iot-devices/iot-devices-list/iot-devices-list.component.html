@@ -2,6 +2,12 @@
   [title]="'NAV.ALL-IOT-DEVICES' | translate" (updatePageLimit)="updatePageLimit($event)"
   (selectedSortChange)="changeSort($event)"></app-top-bar>
 
+
+
 <div class="m-md-4 p-md-3">
+  <button (click)="ConvertCSVtoJSON()">Convert CSV to JSON</button>
+  <hr>
+
+  <input type="file" accept=".csv" (change)="handleFileSelect($event)">
   <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-iot-devices-table>
 </div>
