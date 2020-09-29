@@ -1,40 +1,10 @@
 <app-top-bar-single [data]="organisation" [backButton]="backButton"></app-top-bar-single>
-<!-- <div class="p-5 row">
-    <div class="col-6">
-
-    </div>
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
-            </div>
-            <div>
-                <h1 style="color:rebeccapurple">TODO</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
-            </div>
-            <div>
-                <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)">
-                </app-applications-table>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="organisation">
     <div class="row">
         <div class="col-xs-12">
             <div class="float-left">
-
-
                 <h2> {{organisation.name}}</h2>
-
-
             </div>
             <div class="btn-group float-right">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"

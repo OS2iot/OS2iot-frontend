@@ -2,11 +2,11 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { RestService } from '@shared/services/rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApplicationRequest, Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
-import { RestService } from '@shared/services/rest.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 
 export class User {

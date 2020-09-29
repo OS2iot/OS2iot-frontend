@@ -1,6 +1,7 @@
 @import '~src/assets/scss/setup/breakpoints';
 @import '~src/assets/scss/setup/variables';
 @import '~bootstrap/scss/variables';
+@import '../setup/utilities';
 
 .top-bar-wrapper {
   margin: 0;
@@ -12,17 +13,8 @@
   .top-bar {
     @extend .p-3;
     background-color: $white;
-
-    &--add-shadow {
-      border-bottom: $grey-border solid 1px;
-      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11),
-        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-      -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11),
-        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-      -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.11),
-        0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-      line-height: 36px;
-    }
+    height: 8vh;
+    @include add-shadow;
 
     h3 {
       //padding-left: 66px;

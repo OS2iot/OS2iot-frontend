@@ -3,11 +3,6 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { PayloadDecoderResponse } from '@app/payload-decoder/payload-decoder.model';
-import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
-import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@app/payload-decoder/payload-device-data.model';
-import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
-import { Application } from '@applications/application.model';
-import { ApplicationService } from '@applications/application.service';
 import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
 import { Datatarget } from '@applications/datatarget/datatarget.model';
 import { DatatargetService } from '@applications/datatarget/datatarget.service';
@@ -15,6 +10,11 @@ import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
+import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@app/payload-decoder/payload-device-data.model';
+import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
+import { Application } from '@applications/application.model';
+import { ApplicationService } from '@applications/application.service';
 
 @Component({
   selector: 'app-form-body-datatarget',

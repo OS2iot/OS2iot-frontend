@@ -15,9 +15,6 @@ import { UsersComponent } from './users/users.component';
 
 
 const adminRoutes: Routes = [
-
-    // { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
-
     {
         path: 'organisations', component: OrganisationComponent, children: [
             { path: '', component: OrganisationListComponent },
@@ -26,8 +23,6 @@ const adminRoutes: Routes = [
             { path: ':org-id/edit-organisation', component: OrganisationEditComponent },
         ]
     },
-    // { path: 'organisations', loadChildren: () => import('./organisation/organisation.module').then(m => m.OrganisationModule) },
-    // { path: 'permissions', loadChildren: () => import('./permission/permission.module').then(m => m.PermissionModule) },
     {
         path: 'users', component: UsersComponent, children: [
             { path: '', component: UserListComponent },

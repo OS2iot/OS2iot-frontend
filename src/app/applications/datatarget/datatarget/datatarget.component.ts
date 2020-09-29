@@ -3,12 +3,12 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
-import { BackButton } from '@shared/models/back-button.model';
-import { QuickActionButton } from '@shared/models/quick-action-button.model';
-import { DatatargetService } from '../datatarget.service';
-import { Sort } from '@shared/models/sort.model';
 import { PayloadDeviceDatatargetGetByDataTarget } from '@app/payload-decoder/payload-device-data.model';
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
+import { BackButton } from '@shared/models/back-button.model';
+import { QuickActionButton } from '@shared/models/quick-action-button.model';
+import { Sort } from '@shared/models/sort.model';
+import { DatatargetService } from '../datatarget.service';
 
 @Component({
     selector: 'app-datatarget',

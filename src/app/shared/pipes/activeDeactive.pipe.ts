@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ActiveDeactivePipe implements PipeTransform {
     transform(value: any, ...args: any[]): any {
-        return value ? 'Aktiv' : 'Deaktiveret';
+        return value ? 'Aktiveret' : 'Deaktiveret';
     }
 }
