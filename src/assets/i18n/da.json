@@ -41,7 +41,11 @@
     "ID": "Gateway ID",
     "LOCATION": "Placering",
     "TAGS": "Tags",
-    "NAME": "Gatewayens navn"
+    "NAME": "Gatewayens navn",
+    "STATS": "Statistik",
+    "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
+    "STATS-TXPACKETSEMITTED": "Pakker Sendt",
+    "STATS-TIMESTAMP": "Tidspunkt"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",

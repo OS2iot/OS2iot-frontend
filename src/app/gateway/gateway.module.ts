@@ -12,6 +12,7 @@ import { GatewayEditComponent } from './gateway-edit/gateway-edit.component';
 import { FormsModule } from '@angular/forms';
 import { GatewayDetailComponent } from './gateway-detail/gateway-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [
@@ -29,14 +30,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TranslateModule,
     FormModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NGMaterialModule
   ],
   exports: [
     GatewayTableComponent,
     GatewayTableRowComponent,
     GatewaysComponent,
     GatewayListComponent,
-    GatewayEditComponent,
+    GatewayEditComponent
   ]
 })
 export class GatewayModule { }

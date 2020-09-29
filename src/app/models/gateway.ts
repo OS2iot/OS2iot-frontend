@@ -32,7 +32,7 @@ export class GatewayResponse {
 }
 
 export interface GatewayStats {
-    timestamp: string;
+    timestamp: Date;
     rxPacketsReceived: number;
     rxPacketsReceivedOK: number;
     txPacketsReceived: number;

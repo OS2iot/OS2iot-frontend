@@ -1,22 +1,29 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Gateway } from 'src/app/models/gateway';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Gateway, GatewayStats } from 'src/app/models/gateway';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from 'src/app/models/back-button';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-gateway-detail',
     templateUrl: './gateway-detail.component.html',
     styleUrls: ['./gateway-detail.component.scss']
 })
-export class GatewayDetailComponent implements OnInit, OnDestroy {
+export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
     public backButton: BackButton = { label: '', routerLink: '/gateways' };
     private id: string;
+    private gatewayStats: GatewayStats[];
+    displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
+    public dataSource = new MatTableDataSource<GatewayStats>();
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         private gatewayService: ChirpstackGatewayService,
         private route: ActivatedRoute,
@@ -35,10 +42,16 @@ export class GatewayDetailComponent implements OnInit, OnDestroy {
             });
     }
 
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
+
     bindGateway(id: string): void {
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
+            this.gatewayStats = result.stats;
+            this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
             console.log('gateway', this.gateway);
         });
     }
