@@ -6,7 +6,8 @@
     "BACK": "Tilbage",
     "EDIT": "Redigér",
     "APPLICATION": "Applikation",
-    "HTTP": "Generisk HTTP"
+    "HTTP": "Generisk HTTP",
+    "SAVE": "Gem"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -233,7 +234,7 @@
     "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
     "LOCATION-DESCRIPTION": "Beskrivelse af placering",
     "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
-    "CHOOSE-APPLICATION": "Vælg applikation",
+    "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout",

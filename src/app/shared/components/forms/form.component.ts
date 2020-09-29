@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BackButton } from 'src/app/models/back-button';
-import { Application } from '@applications/application.model';
+import { BackButton } from '@shared/models/back-button.model';
+import { Application } from '@app/applications/application.model';
 
 @Component({
   selector: 'app-form',
@@ -9,7 +8,7 @@ import { Application } from '@applications/application.model';
 })
 export class FormComponent implements OnInit {
   @Input() backButton: BackButton;
-  @Input() formType: 'application' | 'iotDevice' | 'gateways';
+  @Input() formType: 'application';
   @Input() title: string;
   @Input() submitButton: string;
   @Input() application: Application;

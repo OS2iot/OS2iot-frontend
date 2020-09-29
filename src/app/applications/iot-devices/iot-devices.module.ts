@@ -10,6 +10,7 @@ import { IotDeviceEditComponent } from './iot-device-edit/iot-device-edit.compon
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
         RouterModule,
         TranslateModule,
         FormModule,
-        NGMaterialModule
+        NGMaterialModule,
+        FormsModule
     ],
 })
 export class IotDevicesModule { }
