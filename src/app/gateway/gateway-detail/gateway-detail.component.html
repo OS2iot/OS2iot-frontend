@@ -1,85 +1,55 @@
 <app-top-bar-single [data]="gateway" [backButton]="backButton"></app-top-bar-single>
-    <div class="application-component">
-        <div class="bottom-separator">
-            <div class="col-12 py-4">
-                <div class="col-12 col-sm-4">
-                    <h4>{{ 'GATEWAY.NAME' | translate }}</h4>
-                </div>
-                <div class="col-12 pt-2 col-sm-8">
-                    <p>{{gateway.name}}</p>
-                </div>
+<div class=" jumbotron m-md-4 p-md-3">
+    <h4>{{ 'GATEWAY.NAME' | translate }}</h4>
+    <p class="mb-5">{{gateway.name}}</p>
+    <h4 *ngIf="gateway.description">{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
+    <p class="mb-5">{{gateway.description}}</p>
+    <h4>{{ 'GATEWAY.ID' | translate }}</h4>
+    <p class="mb-5">{{gateway.id}}</p>
+    <h4>{{ 'GATEWAY.LOCATION' | translate }}</h4>
+    <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>
+    <ng-template #locationThenBlock>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <h6>{{ 'GATEWAY.LONGITUDE' | translate }}</h6>
+                <p>{{gateway.location?.longitude}}</p>
             </div>
-            <div class="col-12 py-4">
-                <div class="col-12 col-sm-12">
-                    <h4>{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
-                </div>
-                <div class="col-12 pt-2 col-sm-8">
-                    <p>{{gateway.description}}</p>
-                </div>
+            <div class="col-md-4">
+                <h6>{{ 'GATEWAY.LATITUDE' | translate }}</h6>
+                <p>{{gateway.location.latitude}}</p>
             </div>
-            <div class="col-12 py-4">
-                <div class="col-12 col-sm-4">
-                    <h4>{{ 'GATEWAY.ID' | translate }}</h4>
-                </div>
-                <div class="col-12 pt-2 col-sm-8">
-                    <p>{{gateway.id}}</p>
-                </div>
-            </div>
-            <div class="col-12 py-4">
-                <div class="col-12 col-sm-4 pb-2">
-                    <h4>{{ 'GATEWAY.LOCATION' | translate }}</h4>
-                </div>
-                <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>
-                <ng-template #locationThenBlock>
-                    <div class="col-4">
-                        <h5>{{ 'GATEWAY.LONGITUDE' | translate }}</h5>
-                        <p>{{gateway.location?.longitude}}</p>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{ 'GATEWAY.LATITUDE' | translate }}</h5>
-                        <p>{{gateway.location.latitude}}</p>
-                    </div>
-                    <div class="col-4">
-                        <h5>{{ 'GATEWAY.ALTITUDE' | translate }}</h5>
-                        <p>{{gateway.location.altitude}}</p>
-                    </div>
-                </ng-template>
-                <ng-template #locationElseBlock>
-                    <p>{{ 'GATEWAY.NOLOCATION' | translate}}</p>
-                </ng-template>
-            </div>
-            <div class="col-12 py-4">
-            <div class="col-12 col-sm-4">
-                <h4>{{ 'GATEWAY.TAGS' | translate }}</h4>
-            </div>
-            <div class="col-12 pt-2 col-sm-8">
-                <p>{{gateway.tagsString}}</p>
+            <div class="col-md-4">
+                <h6>{{ 'GATEWAY.ALTITUDE' | translate }}</h6>
+                <p>{{gateway.location.altitude}}</p>
             </div>
         </div>
-            <div class="col-12 col-sm-4">
-                <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
-            </div>
-            <div class="mat-elevation-z8 col-12 pt-2 col-sm-8">
-                <table mat-table [dataSource]="dataSource">
-                    <ng-container matColumnDef="rxPacketsReceived">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-RXPACKETSRECEIVED' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.rxPacketsReceived}}</td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="txPacketsEmitted">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TXPACKETSEMITTED' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.txPacketsEmitted}}</td>
-                    </ng-container>
-            
-                    <ng-container matColumnDef="txPacketsReceived">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TIMESTAMP' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.timestamp | date}}</td>
-                    </ng-container>
-            
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            </div>
-        </div>
+    </ng-template>
+    <ng-template #locationElseBlock>
+        <p class="mb-5">{{ 'GATEWAY.NOLOCATION' | translate}}</p>
+    </ng-template>
+    <h4>{{ 'GATEWAY.TAGS' | translate }}</h4>
+    <p class="mb-5">{{gateway.tagsString}}</p>
+    <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="rxPacketsReceived">
+                <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-RXPACKETSRECEIVED' | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{element.rxPacketsReceived}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="txPacketsEmitted">
+                <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TXPACKETSEMITTED' | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{element.txPacketsEmitted}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="txPacketsReceived">
+                <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TIMESTAMP' | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{element.timestamp | date}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+</div>
