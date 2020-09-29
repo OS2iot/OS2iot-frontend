@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Gateway, GatewayStats } from 'src/app/models/gateway';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { BackButton } from 'src/app/models/back-button';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { BackButton } from '@shared/models/back-button.model';
+import { Gateway, GatewayStats } from '../gateway.model';
 
 @Component({
     selector: 'app-gateway-detail',

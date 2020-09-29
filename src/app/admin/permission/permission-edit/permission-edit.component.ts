@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { PermissionService } from '../../../shared/services/permission.service';
+import { PermissionService } from '../permission.service';
 import { PermissionRequest, PermissionType } from '../permission.model';
 import { OrganisationResponse } from '../../organisation/organisation.model';
-import { OrganisationService } from '../../../shared/services/organisation.service';
+import { OrganisationService } from '../../organisation/organisation.service';
 import { UserService } from '../../users/user.service';
 import { UserResponse } from '../../users/user.model';
-import { ApplicationService } from '@shared/services/application.service';
-import { Application } from '@app/models/application';
+import { ApplicationService } from '@applications/application.service';
+import { Application } from '@applications/application.model';
+import { BackButton } from '@shared/models/back-button.model';
 
 @Component({
   selector: 'app-permission-edit',
@@ -48,7 +48,7 @@ export class PermissionEditComponent implements OnInit {
     private userService: UserService,
     private applicationService: ApplicationService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -190,7 +190,7 @@ export class PermissionEditComponent implements OnInit {
   isOrganizationAdministrationPermission() {
     return (
       this.permission.level ==
-        PermissionType.OrganizationApplicationPermissions ||
+      PermissionType.OrganizationApplicationPermissions ||
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );

@@ -7,12 +7,12 @@ import { PermissionDetailComponent } from './permission-detail/permission-detail
 import { PermissionListComponent } from './permission-list/permission-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormModule } from '@shared/form/form.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
-import { TopBarModule } from '@shared/top-bar/top-bar.module'; import { PermissionRowComponent } from './permission-list/permission-tabel/permission-row/permission-row.component';
+import { PermissionRowComponent } from './permission-list/permission-tabel/permission-row/permission-row.component';
 import { PermissionTabelComponent } from './permission-list/permission-tabel/permission-tabel.component';
-import { UsersModule } from '../users/users.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { FormModule } from '@shared/components/forms/form.module';
+import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 ;
 
 @NgModule({

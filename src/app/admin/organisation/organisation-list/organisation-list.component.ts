@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Sort } from '@app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
   selector: 'app-organisation-list',
@@ -59,7 +59,7 @@ export class OrganisationListComponent implements OnInit {
     translate.use('da');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   updatePageLimit(limit: any) {
     console.log(limit);

@@ -1,15 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
-import { Application } from '@app/models/application';
-import { BackButton } from '@app/models/back-button';
-import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationService } from '@shared/services/application.service';
-import { PermissionService } from '@shared/services/permission.service';
+import { PermissionService } from '@app/admin/permission/permission.service';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
+import { BackButton } from '@shared/models/back-button.model';
+import { QuickActionButton } from '@shared/models/quick-action-button.model';
 
 @Component({
   selector: 'app-user-detail',

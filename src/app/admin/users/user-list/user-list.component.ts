@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sort } from '@app/models/sort';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
   selector: 'app-user-list',

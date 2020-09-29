@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Sort } from 'src/app/models/sort';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
-  selector: 'app-payload-decoder-list',
-  templateUrl: './payload-decoder-list.component.html',
-  styleUrls: ['./payload-decoder-list.component.scss']
+    selector: 'app-payload-decoder-list',
+    templateUrl: './payload-decoder-list.component.html',
+    styleUrls: ['./payload-decoder-list.component.scss']
 })
 export class PayloadDecoderListComponent implements OnInit {
 
-  public pageLimit = 10;
+    public pageLimit = 10;
     public sort: Sort[] = [
         {
             id: 1,
@@ -55,22 +55,22 @@ export class PayloadDecoderListComponent implements OnInit {
         label: 'SORT.NAME-DESCENDING',
     };
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  updatePageLimit(limit: any) {
-    console.log(limit);
-  }
+    updatePageLimit(limit: any) {
+        console.log(limit);
+    }
 
-  changeSort(sortId: number) {
-      for (let i = 0; i < this.sort.length; i++) {
-          const elem = this.sort[i];
-          if (elem.id === sortId) {
-              this.selectedSortObject = elem;
-          }
-      }
-  }
+    changeSort(sortId: number) {
+        for (let i = 0; i < this.sort.length; i++) {
+            const elem = this.sort[i];
+            if (elem.id === sortId) {
+                this.selectedSortObject = elem;
+            }
+        }
+    }
 
 }

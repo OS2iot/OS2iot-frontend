@@ -1,5 +1,5 @@
 import { PayloadDecoder } from '../../payload-decoder/payload-decoder.model';
-import { Application } from '../../models/application';
+import { Application } from '../../applications/application.model';
 
 export class Organisation {
   id?: number;

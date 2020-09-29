@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { ServiceProfile, ServiceProfileResponseMany } from '../service-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ServiceProfileService } from '@shared/services/service-profile.service';
+import { ServiceProfileService } from '../service-profile.service';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -31,7 +31,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       .subscribe(
         (result: ServiceProfileResponseMany) => {
           this.serviceProfiles = result.result;
-      });
+        });
   }
 
   onNewServiceProfile() {
@@ -39,14 +39,14 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-   if (this.serviceSubscription && this.serviceSubscription?.closed) {
+    if (this.serviceSubscription && this.serviceSubscription?.closed) {
       this.serviceSubscription.unsubscribe();
     }
   }
 
   deleteServiceProfile(id: string) {
     if (id) {
-      this.serviceProfileService.delete(id).subscribe( (response) => {
+      this.serviceProfileService.delete(id).subscribe((response) => {
         console.log(response);
         if (response.ok) {
           this.getServiceProfileList();

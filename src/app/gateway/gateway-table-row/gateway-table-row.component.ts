@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { Gateway } from 'src/app/models/gateway';
 import { faCheckCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import 'moment/locale/da';
+import { Gateway } from '../gateway.model';
 
 @Component({
   selector: 'tr[app-gateway-table-row]',
@@ -22,9 +22,9 @@ export class GatewayTableRowComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private router: Router
-    ) {
-      moment.locale('da');
-      translate.use('da');
+  ) {
+    moment.locale('da');
+    translate.use('da');
   }
 
   ngOnInit(): void {

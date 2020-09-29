@@ -16,8 +16,9 @@
     "paths": {
       "@shared-material": ["src/app/shared/modules/material.module"],
       "@shared/*": ["src/app/shared/*"],
-      "@store/*": ["src/app/store/*"],
-      "@my-applications/*": ["src/app/my-applications/*"],
+      "@admin/*": ["src/app/admin"],
+      "@applications/*": ["src/app/applications/*"],
+      "@payload-decoder/*": ["src/app/payload-decoder/*"],
       "@profiles/*": ["src/app/profiles/*"],
       "@environments/*": ["src/environments/*"],
       "@app/*": ["src/app/*"]

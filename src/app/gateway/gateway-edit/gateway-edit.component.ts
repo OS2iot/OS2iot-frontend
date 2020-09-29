@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
-import { BackButton } from 'src/app/models/back-button';
-import { Gateway, GatewayResponse } from 'src/app/models/gateway';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
+import { Gateway, GatewayResponse } from '../gateway.model';
 
 @Component({
   selector: 'app-gateway-edit',

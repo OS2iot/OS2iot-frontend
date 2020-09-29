@@ -2,13 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
 import { UserRequest } from '../user.model';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionType } from '@app/admin/permission/permission.model';
+import { BackButton } from '@shared/models/back-button.model';
 
 
 @Component({

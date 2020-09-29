@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
-import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
-import { PermissionService } from '@shared/services/permission.service';
+import { PermissionService } from '@app/admin/permission/permission.service';
 import { Subscription } from 'rxjs';
 import { PermissionResponse } from '../permission.model';
+import { BackButton } from '@shared/models/back-button.model';
+import { QuickActionButton } from '@shared/models/quick-action-button.model';
 
 @Component({
   selector: 'app-permission-detail',

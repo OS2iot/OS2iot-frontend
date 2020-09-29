@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
-import { Sort } from 'src/app/models/sort';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { PayloadDecoderService } from 'src/app/shared/services/payload-decoder.service';
+import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -29,11 +27,11 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   getPayloadDecoders() {
-    this.subscription =  this.payloadDecoderService.getMultiple()
+    this.subscription = this.payloadDecoderService.getMultiple()
       .subscribe(
         (response) => {
-        this.payloadDecoders = response.data;
-    });
+          this.payloadDecoders = response.data;
+        });
   }
 
   ngOnChanges() {
@@ -50,20 +48,20 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   prevPage() {
-      if (this.pageOffset) { this.pageOffset--; }
-      this.getPayloadDecoders();
+    if (this.pageOffset) { this.pageOffset--; }
+    this.getPayloadDecoders();
   }
 
   nextPage() {
-      if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
-      this.getPayloadDecoders();
+    if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
+    this.getPayloadDecoders();
   }
 
   ngOnDestroy() {
-      // prevent memory leak by unsubscribing
-      if (this.subscription) {
-          this.subscription.unsubscribe();
-      }
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

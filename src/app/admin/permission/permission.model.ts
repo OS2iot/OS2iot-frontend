@@ -1,6 +1,6 @@
 import { OrganisationResponse } from '../organisation/organisation.model';
 import { UserResponse } from '../users/user.model';
-import { Application } from '../../models/application';
+import { Application } from '../../applications/application.model';
 
 export class PermissionRequest {
   level: PermissionType;

@@ -4,9 +4,9 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { AuthService } from '@app/auth/auth.service';
-import { SharedVariableService } from '@app/shared-variable/shared-variable.service';
 import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-organisation-dropdown',
@@ -62,7 +62,7 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   public onChange(value) {
     this.setSelectedOrganisation(value);
     this.sharedVariable.setValue(value);
-    this.route.navigateByUrl('/my-applications');
+    this.route.navigateByUrl('/applications');
   }
 
   setSelectedOrganisation(value) {

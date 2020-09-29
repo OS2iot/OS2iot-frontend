@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MyApplicationsModule } from '@my-applications/my-applications.module';
+import { ApplicationsModule } from '@app/applications/applications.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormModule } from '@shared/form/form.module';
-import { TopBarModule } from '@shared/top-bar/top-bar.module';
+import { FormModule } from '@shared/components/forms/form.module';
+import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { OrganisationDetailComponent } from './organisation-detail/organisation-detail.component';
 import { OrganisationEditComponent } from './organisation-edit/organisation-edit.component';
 import { OrganisationListComponent } from './organisation-list/organisation-list.component';
@@ -29,7 +29,7 @@ import { OrganisationComponent } from './organisation.component';
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
-    MyApplicationsModule,
+    ApplicationsModule,
   ],
 })
 export class OrganisationModule { }

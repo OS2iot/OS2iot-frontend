@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPen, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { ServiceProfile } from '@profiles/service-profiles/service-profile.model';
-import { ServiceProfileService } from '@shared/services/service-profile.service';
 
 
 @Component({
@@ -20,7 +19,6 @@ export class ServiceProfileItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private serviceProfileService: ServiceProfileService
   ) { }
 
   ngOnInit(): void {

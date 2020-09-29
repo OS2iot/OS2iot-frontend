@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Alert } from 'src/app/models/alert';
+import { Alert } from '@shared/models/alert.model';
+
 
 @Injectable({
   providedIn: 'root',

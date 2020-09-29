@@ -2,11 +2,11 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
-import { DeviceProfileService } from '@shared/services/device-profile.service';
+import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
+import { DeviceProfileService } from '../device-profile.service';
 
 @Component({
   selector: 'app-device-profiles-edit',

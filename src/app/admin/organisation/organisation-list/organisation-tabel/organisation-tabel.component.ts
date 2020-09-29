@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Sort } from '@app/models/sort';
-import { OrganisationService } from '@shared/services/organisation.service';
+import { Sort } from '@shared/models/sort.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { Subscription } from 'rxjs';
 import { OrganisationResponse } from '../../organisation.model';
 

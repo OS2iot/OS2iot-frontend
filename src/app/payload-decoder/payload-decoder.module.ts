@@ -7,11 +7,11 @@ import { PayloadDecoderEditComponent } from './payload-decoder/payload-decoder-e
 import { PayloadDecoderDetailComponent } from './payload-decoder/payload-decoder-detail/payload-decoder-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { TopBarModule } from '../shared/top-bar/top-bar.module';
 import { PayloadDecoderRoutingModule } from './payload-decoder-routing.module';
 import { PayloadDecoderListComponent } from './payload-decoder/payload-decoder-list/payload-decoder-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FormModule } from '../shared/form/form.module';
+import { FormModule } from '@shared/components/forms/form.module';
+import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 
 @NgModule({
   declarations: [
@@ -22,21 +22,21 @@ import { FormModule } from '../shared/form/form.module';
     PayloadDecoderDetailComponent,
     PayloadDecoderListComponent],
   exports: [
-      PayloadDecoderComponent,
-      PayloadDecoderTableComponent,
-      PayloadDecoderRowComponent,
-      PayloadDecoderEditComponent,
-      PayloadDecoderDetailComponent,
-      PayloadDecoderListComponent],
+    PayloadDecoderComponent,
+    PayloadDecoderTableComponent,
+    PayloadDecoderRowComponent,
+    PayloadDecoderEditComponent,
+    PayloadDecoderDetailComponent,
+    PayloadDecoderListComponent],
   imports: [
-      CommonModule,
-      TranslateModule,
-      RouterModule,
-      FormsModule,
-      TopBarModule,
-      PayloadDecoderRoutingModule,
-      ReactiveFormsModule,
-      FormModule,
+    CommonModule,
+    TranslateModule,
+    RouterModule,
+    FormsModule,
+    TopBarModule,
+    PayloadDecoderRoutingModule,
+    ReactiveFormsModule,
+    FormModule,
   ]
 })
 export class PayloadDecoderModule { }

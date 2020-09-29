@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Sort } from '@app/models/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionResponse } from '../permission.model';
-import { Subscribable, Subscription } from 'rxjs';
-import { PermissionService } from '../../../shared/services/permission.service';
+import { Subscription } from 'rxjs';
+import { PermissionService } from '../permission.service';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
   selector: 'app-permission-list',

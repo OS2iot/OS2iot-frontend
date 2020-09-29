@@ -8,9 +8,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormModule } from '@shared/form/form.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { FormModule } from '@shared/components/forms/form.module';
 
 @NgModule({
   declarations: [

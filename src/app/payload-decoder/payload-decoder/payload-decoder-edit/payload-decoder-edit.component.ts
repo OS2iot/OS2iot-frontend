@@ -3,11 +3,11 @@ import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
-import { BackButton } from 'src/app/models/back-button';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PayloadDecoderService } from 'src/app/shared/services/payload-decoder.service';
+import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BackButton } from '@shared/models/back-button.model';
 
 @Component({
   selector: 'app-payload-decoder-edit',

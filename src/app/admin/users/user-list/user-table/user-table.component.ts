@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Sort } from '@app/models/sort';
+import { Sort } from '@shared/models/sort.model';
 import { Subscription } from 'rxjs';
-import { UserRequest, UserResponse } from '../../user.model';
+import { UserResponse } from '../../user.model';
 import { UserService } from '../../user.service';
 
 @Component({

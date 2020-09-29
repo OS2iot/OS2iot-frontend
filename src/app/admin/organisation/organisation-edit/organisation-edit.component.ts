@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
-import { OrganisationService } from 'src/app/shared/services/organisation.service';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { Organisation } from '../organisation.model';
+import { BackButton } from '@shared/models/back-button.model';
 
 @Component({
   selector: 'app-organisation-edit',

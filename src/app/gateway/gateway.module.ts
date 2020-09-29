@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TopBarModule } from 'src/app/shared/top-bar/top-bar.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormModule } from 'src/app/shared/form/form.module';
 import { GatewayTableComponent } from './gateway-table/gateway-table.component';
 import { GatewayTableRowComponent } from './gateway-table-row/gateway-table-row.component';
 import { GatewaysComponent } from './gateways/gateways.component';
@@ -13,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { GatewayDetailComponent } from './gateway-detail/gateway-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { FormModule } from '@shared/components/forms/form.module';
+import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 
 @NgModule({
   declarations: [

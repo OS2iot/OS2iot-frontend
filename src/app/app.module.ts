@@ -9,13 +9,12 @@ import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatatargetModule } from './views/datatarget/datatarget.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
-import { SharedVariableModule } from './shared-variable/shared-variable.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { GatewayModule } from './gateway/gateway.module';
+import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,7 +30,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         HttpClientModule,
         AppRoutingModule,
         DashboardModule,
-        DatatargetModule,
         NavbarModule,
         ProfilesModule,
         TranslateModule.forRoot({

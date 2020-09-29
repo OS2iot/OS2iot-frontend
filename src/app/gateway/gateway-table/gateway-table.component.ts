@@ -1,9 +1,10 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
-import { Sort } from 'src/app/models/sort';
 import { Subscription, Observable } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Gateway } from 'src/app/models/gateway';
+import { Sort } from '@shared/models/sort.model';
+import { Gateway } from '../gateway.model';
+
 
 @Component({
   selector: 'app-gateway-table',

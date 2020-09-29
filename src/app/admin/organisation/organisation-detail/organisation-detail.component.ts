@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { BackButton } from '@app/models/back-button';
-import { QuickActionButton } from '@app/models/quick-action-button';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { Application } from '@app/models/application';
-import { ApplicationService } from '@shared/services/application.service';
-import { OrganisationService } from '@shared/services/organisation.service';
+import { Application } from '@applications/application.model';
+import { ApplicationService } from '@applications/application.service';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OrganisationResponse } from '../organisation.model';
+import { BackButton } from '@shared/models/back-button.model';
 
 @Component({
   selector: 'app-organisation-detail',
