@@ -1,20 +1,26 @@
 <ng-container *ngIf="application">
   <app-top-bar-single [data]="application" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
-  <div class="px-5">
-    <div class="application-component">
-      <div class="col-xs-12 mb-4 py-3 bottom-separator">
-        <div class="col-xs-12 col-sm-4">
+  <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
+    <div class="row">
+      <div class="col-sm-12 ">
+        <div class="float-left">
           <h4>{{ 'APPLICATION.DESCRIPTION' | translate }}</h4>
         </div>
-        <div class="col-xs-12 pt-2 col-sm-8">
-          <p>{{description}}</p>
-        </div>
-        <div class="ml-auto d-flex">
+        <div class="btn-group float-right">
           <button class='btn btn-primary' type="button" [routerLink]="['datatarget-list', application.name]"
             routerLinkActive="active" class="btn btn-primary">{{ 'APPLICATION.DATATARGET-SHOW' | translate }}</button>
         </div>
       </div>
-      <div class="col-xs-12 mb-5 application-table-header">
+    </div>
+    <div class="row">
+      <div class="col-xs-12 pt-2 col-sm-8">
+        <p>{{description}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
+    <div class="row">
+      <div class="col-sm-12">
         <app-top-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [sort]="sort"
           [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
           [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'new-iot-device'"
@@ -24,4 +30,5 @@
       </div>
     </div>
   </div>
+
 </ng-container>

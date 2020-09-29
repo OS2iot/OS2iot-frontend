@@ -5,13 +5,14 @@ import {
   SimpleChanges,
   OnDestroy,
 } from '@angular/core';
+import { NavbarComponent } from '@app/navbar/navbar.component';
 import { Application } from '@applications/application.model';
-import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '@applications/application.service';
-import { Subscription } from 'rxjs';
-import { NavbarComponent } from '../../navbar/navbar.component';
+import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   providers: [NavbarComponent],

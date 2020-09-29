@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ApplicationsListComponent } from './applications-list/applications-list.component';
-
-import { ApplicationsComponent } from './applications.component';
-import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
+import { ApplicationEditComponent } from './application-edit/application-edit.component';
+import { ApplicationsListComponent } from './applications-list/applications-list.component';
+import { ApplicationsComponent } from './applications.component';
 import { IoTDeviceDetailComponent } from './iot-devices/iot-device-detail/iot-device-detail.component';
 import { IotDeviceEditComponent } from './iot-devices/iot-device-edit/iot-device-edit.component';
 import { DatatargetEditComponent } from './datatarget/datatarget-edit/datatarget-edit.component';

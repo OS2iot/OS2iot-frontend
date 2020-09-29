@@ -1,11 +1,8 @@
-<div class="px-md-5 py-md-4">
-    <div class="row">
-        <app-top-bar [showSelectedSort]="false" [title]="'PROFILES.NAME' | translate"></app-top-bar>
-    </div>
-    <div class=" row">
-        <app-service-profiles-list></app-service-profiles-list>
-    </div>
-    <div class=" row">
-        <app-device-profiles-list></app-device-profiles-list>
-    </div>
+<app-top-bar [showSelectedSort]="false" [title]="'PROFILES.NAME' | translate"></app-top-bar>
+
+<div class=" jumbotron m-md-4 p-md-3">
+    <app-service-profiles-list></app-service-profiles-list>
+</div>
+<div class=" jumbotron m-md-4 p-md-3">
+    <app-device-profiles-list></app-device-profiles-list>
 </div>

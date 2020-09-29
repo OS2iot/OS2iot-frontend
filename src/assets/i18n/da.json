@@ -16,12 +16,13 @@
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "Lorawan Profiler",
+    "PROFILES": "LoRaWan Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
     "USERS": "Brugere",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "ADMIN": "Administration"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -455,8 +456,8 @@
     "PASSWORD": "Adgangskode"
   },
   "DASHBOARD": {
-    "WELCOME": "Velkommen til OS2 Internet of things",
-    "WELCOME-MESSAGE": "Her kan du bla bla"
+    "WELCOME": "Velkommen til OS2IoT",
+    "WELCOME-MESSAGE": "Her vises en velkomsthilsen"
   },
   "HTTP_PUSH": "HTTP Push",
   "Forbidden": "Du har ikke rettigheder til at foretage denne handling"

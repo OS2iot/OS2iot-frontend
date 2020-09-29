@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Application } from '@applications/application.model';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
@@ -12,10 +11,12 @@ import { ActivationType } from '@shared/enums/activation-type';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
-import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { DeviceType } from '@shared/enums/device-type';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+
 
 @Component({
     selector: 'app-form-body-iot-devices',

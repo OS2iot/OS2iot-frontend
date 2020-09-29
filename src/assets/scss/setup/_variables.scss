@@ -3,6 +3,23 @@
 // by a previous import.
 //
 
+
+// Breakpoints
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+$screen-xxl-min: 1400px;
+
+
 //############################### Font and Font sizes ####################
 //###########################################################################
 
@@ -16,6 +33,11 @@ $em-base: 14; //62.5%; //-> 10px for standard browsers, now 'Font size' from the
 
 $base-font-size: $em-base !default;
 $base-line-height: $em-base+2 !default;
+
+$min_width: $screen-sm-min;
+$max_width: $screen-xl-min;
+$min_font: 14px;
+$max_font: 18px;
 
 /*
 Removes the unit (e.g. px, em, rem) from a value, returning the number only.

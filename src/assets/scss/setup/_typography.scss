@@ -1,15 +1,8 @@
 @import 'utilities';
+@import 'breakpoints';
 
-html {
-  font-family: $font-name, system;
-  font-size: $body-text;
-  overflow-y: scroll;
-}
-
-.line-height-none {
-  line-height: 0;
-}
-
+$mod_1: 1.2; // mobile
+$mod_2: 1.5; // desktop
 
 h1,
 h2,
@@ -30,6 +23,8 @@ a {
   line-height: $h1-line-height;
   font-weight: $font-weight-bold;
   color: $color-primary;
+  @include fluid-type($min_width, $max_width, $mod_1*$mod_1*$mod_1 *$min_font, $mod_2*$mod_2*$mod_2 *$min_font);
+
 }
 
 @mixin h2 {
@@ -39,6 +34,8 @@ a {
   line-height: $h2-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
+  @include fluid-type($min_width, $max_width, $mod_1*$mod_1*$mod_1 *$min_font, $mod_2*$mod_2*$mod_2 *$min_font);
+
 
   p {
     @extend h2;
@@ -56,6 +53,7 @@ a {
   line-height: $h3-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
+  @include fluid-type($min_width, $max_width, $mod_1*$mod_1 *$min_font, $mod_2*$mod_2 *$min_font);
 
   strong {
     font-weight: $font-weight-bold;
@@ -69,6 +67,7 @@ a {
   line-height: $h4-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
+  @include fluid-type($min_width, $max_width, $mod_1*$mod_1 *$min_font, $mod_2*$mod_2 *$min_font);
 
   strong {
     font-weight: $font-weight-bold;

@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget, DatatargetData } from '../datatarget.model';
-import { Sort } from '@shared/models/sort.model';
 import { DatatargetService } from '../datatarget.service';
+import { Sort } from '@shared/models/sort.model';
 
 @Component({
     selector: 'app-datatarget-table',
