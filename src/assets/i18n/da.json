@@ -431,7 +431,7 @@
       "EMAIL-PLACEHOLDER": "Email",
       "PASSWORD": "Password",
       "PASSWORD-PLACEHOLDER": "Indtast eller redigér password",
-      "ACTIVE": "Skal brugeren aktiveres eller deaktiveres?",
+      "ACTIVE": "Aktiveret",
       "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
       "SAVE": "Gem Bruger"
     },
