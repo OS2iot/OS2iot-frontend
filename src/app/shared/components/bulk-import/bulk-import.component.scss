@@ -1,0 +1,62 @@
+.choose-file:before {
+  content: 'Choose or drop here Your CSV File.';
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  opacity: 1 !important;
+  color: #374150;
+  text-align: center;
+  line-height: 250px;
+  font-size: 16px;
+
+  border-radius: 10px;
+
+}
+
+.choose-file {
+  content: 'Click or drop here Your CSV File.';
+  width: 100%;
+  height: 250px;
+  background: #fff !important;
+  position: relative;
+  opacity: 1 !important;
+  text-align: center;
+  border: dashed 2px #374150;
+  margin: 0 auto;
+}
+
+// .choose-file:after {
+//   content: '\f093';
+//   position: absolute;
+//   font-size: 45px;
+//   left: 100px;
+//   top: -12px;
+//   color: #374150;
+// }
+
+.dowload_csv {
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+  margin: 10px auto;
+  padding: 10px 15px;
+  display: inline-block;
+  border: solid 1px #374150;
+  border-radius: 25px;
+}
+
+.dowload_csv:hover {
+  background: #374150;
+  text-decoration: none;
+  color: #fff;
+}
+
+.upload_drop_file {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 161px;
+  z-index: 5;
+  font-size: 12px;
+}

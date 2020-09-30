@@ -6,11 +6,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DirectivesModule } from './directives/directives.module';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { BulkImportComponent } from './components/bulk-import/bulk-import.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    BulkImportComponent
   ],
   imports: [
     DirectivesModule,
@@ -19,7 +21,8 @@ import { AlertComponent } from './components/alert/alert.component';
   exports: [
     AlertComponent,
     TranslateModule,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    BulkImportComponent
   ],
 })
 export class SharedModule { }

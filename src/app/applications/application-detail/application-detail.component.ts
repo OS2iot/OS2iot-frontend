@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
@@ -8,6 +8,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
 import { Sort } from '@shared/models/sort.model';
 import { Subscription } from 'rxjs';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
     selector: 'app-application',
@@ -21,6 +22,7 @@ export class ApplicationDetailComponent implements OnInit {
     private id: number;
     public pageLimit: number = 10;
     public selectedSortId: number = 6;
+    csvRecords = [];
     public selectedSortObject: Sort = {
         id: 6,
         dir: 'DESC',
@@ -108,7 +110,8 @@ export class ApplicationDetailComponent implements OnInit {
     constructor(
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
-        public translate: TranslateService
+        public translate: TranslateService,
+        private papa: Papa
     ) { }
 
     ngOnInit(): void {
@@ -120,6 +123,7 @@ export class ApplicationDetailComponent implements OnInit {
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
             });
+        console.log(this.csvRecords);
     }
 
     bindApplication(id: number): void {
@@ -149,6 +153,42 @@ export class ApplicationDetailComponent implements OnInit {
         // prevent memory leak by unsubscribing
         if (this.applicationsSubscription) {
             this.applicationsSubscription.unsubscribe();
+        }
+    }
+
+    ConvertCSVtoJSON() {
+        console.log(JSON.stringify(this.test));
+        // let csvData = '"Hello","World!"';
+        // this.papa.parse(csvData, {
+        //   complete: (results) => {
+        //     console.log('Parsed  : ', results.data[0][1]);
+        //     // console.log(results.data.length);
+        //   }
+        // });
+    }
+    test = [];
+    handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+        var file = files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (event: any) => {
+            var csv = event.target.result; // Content of CSV file
+            this.papa.parse(csv, {
+                skipEmptyLines: true,
+                header: true,
+                complete: (results) => {
+                    for (let i = 0; i < results.data.length; i++) {
+                        let orderDetails = {
+                            order_id: results.data[i].Address,
+                            age: results.data[i].Age
+                        };
+                        this.test.push(orderDetails);
+                    }
+                    // console.log(this.test);
+                    console.log('Parsed: k', results.data);
+                }
+            });
         }
     }
 }

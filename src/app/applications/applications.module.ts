@@ -13,6 +13,7 @@ import { ApplicationsTableComponent } from './applications-list/applications-tab
 import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
         IotDevicesModule,
         DatatargetModule,
         FormModule,
+        SharedModule
     ]
 })
 export class ApplicationsModule { }

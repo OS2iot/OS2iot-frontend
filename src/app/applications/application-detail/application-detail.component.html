@@ -25,6 +25,11 @@
           [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
           [ctaLabel]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLink]="'new-iot-device'"
           (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-top-bar>
+
+        <!-- <button (click)="ConvertCSVtoJSON()">Convert CSV to JSON</button>
+        <hr>
+        <input type="file" accept=".csv" (change)="handleFileSelect($event)"> -->
+        <app-bulk-import [csvRecords]="csvRecords"></app-bulk-import>
         <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"
           [application]="application"></app-iot-devices-table>
       </div>
