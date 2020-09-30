@@ -15,9 +15,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalAdminComponent } from './global-admin/global-admin.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { OrganisationDropdownComponent } from './organisation-dropdown/organisation-dropdown.component';
+import { SigfoxDropdownComponent } from './sigfox-dropdown/sigfox-dropdown.component';
 
 @NgModule({
-  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent, SigfoxDropdownComponent],
   imports: [
     CommonModule,
     SharedModule,

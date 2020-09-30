@@ -23,7 +23,10 @@
     "PERMISSIONS": "Brugergrupper",
     "USERS": "Brugere",
     "LOGIN": "Login",
-    "ADMIN": "Administration"
+    "ADMIN": "Administration",
+    "SIGFOX": "SigFox",
+    "SIGFOX-ADMIN": "Administration",
+    "SIGFOX-PROFILES": "Profiler"
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
