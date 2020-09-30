@@ -26,25 +26,34 @@
     </div>
   </div>
     <div class="row mb-5">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="datatarget">{{'QUESTION.GIVE-DATATARGET-TIMEOUT' | translate}}</label>*
-            <input 
-            type="number" 
-            class="form-control" 
-            id="datatarget" 
-            name="datatarget" 
-            required
-            [(ngModel)]="datatarget.timeout" 
-            step="1" 
-            min="0" 
-            max="100000" 
-            maxlength="7" 
-            (keyup)="onCoordinateKey($event)"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('datatarget'), 'is-valid' : formFailedSubmit && !errorFields.includes('datatarget')}">
-        </div>
+      <div class="form-group mt-3 col-12">
+          <label class="form-label" for="timeout">{{'QUESTION.GIVE-DATATARGET-TIMEOUT' | translate}}</label>*
+          <input 
+          type="number" 
+          class="form-control" 
+          id="timeout" 
+          name="timeout" 
+          required
+          [(ngModel)]="datatarget.timeout" 
+          step="1" 
+          min="0" 
+          max="100000" 
+          maxlength="7" 
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('timeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('timeout')}">
       </div>
+    </div>
+    <div class="row mb-5">
+      <div class="form-group mt-3 col-12">
+          <label class="form-label" for="authorizationHeader">{{'QUESTION.GIVE-DATATARGET-AUTHORIZATIONHEADER' | translate}}</label>
+          <textarea 
+            class="form-control" id="authorizationHeader" name="authorizationHeader" required
+            [(ngModel)]="datatarget.authorizationHeader" [rows]="6"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorizationHeader'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorizationHeader')}">
+          </textarea>
+      </div>
+    </div>
       <div *ngIf="datatargetid === 0">
-        <h4> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h4>
+        <h6> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h6>
       </div>
       <div class="container row" style="margin-top: 5%" *ngIf="datatargetid > 0">
         <a (click)="addRow()" class="btn btn-secondary">{{'QUESTION.ADD-RELATIONS' | translate}}</a>
