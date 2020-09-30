@@ -255,7 +255,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       timeout: data.timeout,
       type: data.type,
       url: data.url,
-      authorizationHeader: null,
+      authorizationHeader: data.authorizationHeader,
       applicationId: data.application.id
     };
     return dt;

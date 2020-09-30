@@ -6,7 +6,8 @@
     "BACK": "Tilbage",
     "EDIT": "Redigér",
     "APPLICATION": "Applikation",
-    "HTTP": "Generisk HTTP"
+    "HTTP": "Generisk HTTP",
+    "SAVE": "Gem"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -65,7 +66,9 @@
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder navn:",
     "IOTDEVICE": "IoT Device navn:",
-    "NO-RELATIONS": "ingen tilknyttede relationer"
+    "NO-RELATIONS": "ingen tilknyttede relationer",
+    "AUTHORIZATIONHEADER": "Authorization header",
+    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet"
   },
   "APPLICATION-TABLE": {
     "NAME": "NAVN",
@@ -231,10 +234,11 @@
     "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
     "LOCATION-DESCRIPTION": "Beskrivelse af placering",
     "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
-    "CHOOSE-APPLICATION": "Vælg applikation",
+    "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout",
+    "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
     "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
@@ -267,7 +271,19 @@
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
-      "RELATIONS": "Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+      "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+    },
+    "SIGFOX": {
+      "REGISTEREDATSIGFOX": "Enheden er allerede registreret i SigFox?",
+      "SIGFOXGRUPPEID":"Vælg SigFox gruppe",
+      "SIGFOXIDENTIFIER": "ID",
+      "SIGFOXIDENTIFIER-PLACEHOLDER": "Enhedens unikke id",
+      "PAC": "PAC",
+      "PAC-PLACEHOLDER": "Porting Authorization Code",
+      "PRODUCTLICENS": "Produkt licens",
+      "PRODUCTLICENS-PLACEHOLDER": "Produkt licens",
+      "PROTOTYPE": "Opret som prototype",
+      "SIGFOXENHEDID": "Vælg enheden er skal oprette i OS2IoT"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -360,9 +376,9 @@
       "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (request/dag).",
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
-      "DRRATEMIN": "Min date rate",
+      "DRRATEMIN": "Min data rate",
       "DRRATEMINEXPLAINED": "Minimums tilladte data rate. Brugt til ADR",
-      "DRRATEMAX": "Max date rate",
+      "DRRATEMAX": "Max data rate",
       "DRRATEMAXEXPLAINED": "Maximums tilladte data rate. Brugt til ADR",
       "SAVE": "Gem",
       "CANCEL": "Annuller",

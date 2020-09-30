@@ -5,9 +5,3 @@
     [submitButton]="submitButton" 
     [questions]="applicationQuestions$ | async">
 </app-form-body-application>
-
-<app-form-body-iot-devices *ngIf="formType == 'iotDevice'" 
-    [submitButton]="submitButton" 
-    [application]="application" 
-    [questions]="iotDeviceQuestions$ | async">
-</app-form-body-iot-devices>

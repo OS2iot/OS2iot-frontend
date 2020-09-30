@@ -42,9 +42,9 @@
         <h4>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</h4>
         <p class="mb-5">{{device.lorawanSettings.devEUI}}</p>
         <h4>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</h4>
-        <p class="mb-5">{{deviceProfileName}}</p>
-        <h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
         <p class="mb-5">{{serviceProfileName}}</p>
+        <h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
+        <p class="mb-5">{{deviceProfileName}}</p>
         <ng-container *ngIf="OTAA">
             <h4>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</h4>
             <p class="mb-5">{{device.lorawanSettings?.OTAAapplicationKey}}</p>
