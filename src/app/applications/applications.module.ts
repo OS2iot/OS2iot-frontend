@@ -14,6 +14,7 @@ import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
 import { SharedModule } from '@shared/shared.module';
+import { BulkImportComponent } from './bulk-import/bulk-import.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { SharedModule } from '@shared/shared.module';
         ApplicationEditComponent,
         ApplicationsListComponent,
         ApplicationsTableComponent,
-        ApplicationsTableRowComponent
+        ApplicationsTableRowComponent,
+        BulkImportComponent
     ],
     exports: [
         ApplicaitonsRoutingModule,
