@@ -11,6 +11,7 @@ const routes: Routes = [
     { path: 'gateways', loadChildren: () => import('./gateway/gateway.module').then(m => m.GatewayModule) },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
     { path: 'payload-decoder', loadChildren: () => import('./payload-decoder/payload-decoder.module').then(m => m.PayloadDecoderModule) },
+    { path: 'sigfox', loadChildren: () => import('./sigfox/sigfox.module').then(m => m.SigfoxModule) },
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
     { path: '**', redirectTo: '/auth', pathMatch: 'full' },
 ];

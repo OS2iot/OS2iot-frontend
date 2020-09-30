@@ -1,24 +1,25 @@
 <mat-expansion-panel class="mb-5">
     <mat-expansion-panel-header>
         <mat-panel-title class="nav-item py-2">
-            <p class="nav-item ml-2">{{'NAV.SGIFOX' | translate}}</p>
+            <p class="nav-item ml-2">{{'NAV.SIGFOX' | translate}}</p>
         </mat-panel-title>
         <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
 
     <ul class="navbar-nav flex-column">
         <li class="nav-item">
-            <a routerLink="/admin/users" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
+            <a routerLink="/sigfox/sigfox-administration" routerLinkActive="active" 
+                class="nav-link pl-5 position-relative rounded">
                 {{'NAV.SIGFOX-ADMIN' | translate}}
             </a>
-            <fa-icon [icon]="faUsers" class="navbar-icon"></fa-icon>
+            <fa-icon [icon]="faToolbox" class="navbar-icon"></fa-icon>
         </li>
-        <li class="nav-item py-2">
-            <a routerLink="/admin/permissions" routerLinkActive="active"
+        <li class="nav-item">
+            <a routerLink="/sigfox/sigfox-profiles" routerLinkActive="active"
                 class="nav-link pl-5 position-relative rounded">
                 {{'NAV.SIGFOX-PROFILES' | translate}}
             </a>
-            <fa-icon [icon]="faIdBadge" class="navbar-icon"></fa-icon>
+            <fa-icon [icon]="faIdCard" class="navbar-icon"></fa-icon>
         </li>
     </ul>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faIdBadge, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBone, faIdBadge, faIdCard, faToolbox, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sigfox-dropdown',
@@ -7,8 +7,9 @@ import { faIdBadge, faUser } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./sigfox-dropdown.component.scss']
 })
 export class SigfoxDropdownComponent implements OnInit {
-  faUsers = faUser;
-  faIdBadge = faIdBadge;
+  faToolbox = faToolbox;
+  faIdCard = faIdCard;
+  faBone = faBone;
   constructor() { }
 
   ngOnInit(): void {
