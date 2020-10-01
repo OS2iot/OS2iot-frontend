@@ -1,6 +1,14 @@
 <ng-container>
     <app-top-bar-single [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar-single>
 </ng-container>
+<div class="row">
+    <div class="col-12">
+        <a class="float-right mx-5" href="../../../assets/docs/iotdevice-lorawan.csv" download="download">
+            <fa-icon [icon]="faDownload"></fa-icon>
+            {{'APPLICATION.BULK.DOWNLOAD' | translate}}
+        </a>
+    </div>
+</div>
 <div class="row m-3">
     <div class="col-md-6 offset-md-3 mb-5">
 

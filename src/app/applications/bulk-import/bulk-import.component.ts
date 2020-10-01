@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
 import { Papa } from 'ngx-papaparse';
@@ -21,6 +21,7 @@ export class BulkImportComponent implements OnInit {
   iotDevice: IotDevice[];
   files: any = [];
   faTrash = faTrash;
+  faDownload = faDownload;
 
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   public application: Application;

@@ -35,6 +35,7 @@
     "DATATARGET-SHOW": "Tilknyttede datatargets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
+      "DOWNLOAD": "Download Sample CSV Fil",
       "DROPFILE": "Klik eller drop din .csv file her",
       "NAME": "Navn",
       "TYPE": "Type",
