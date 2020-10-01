@@ -33,6 +33,9 @@
     "ADMINITRATION": {
       "NAME": "SigFox Adminitration",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
+    },
+    "PROFILES": {
+      "NAME": "SigFox Profiler"
     }
   },
   "APPLICATION": {
