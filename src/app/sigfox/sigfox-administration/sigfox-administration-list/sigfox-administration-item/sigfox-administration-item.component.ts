@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SigFoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 
 @Component({
   selector: 'app-sigfox-administration-item',
@@ -9,7 +9,7 @@ import { SigFoxGroup } from '@shared/models/sigfox-group.model';
 })
 export class SigfoxAdministrationItemComponent implements OnInit {
 
-  @Input() sigfoxGroup: SigFoxGroup;
+  @Input() sigfoxGroup: SigfoxGroup;
 
   constructor(
     private route: ActivatedRoute,

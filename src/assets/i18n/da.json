@@ -35,7 +35,12 @@
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
     "PROFILES": {
-      "NAME": "SigFox Profiler"
+      "NAME": "SigFox Profiler",
+      "DEVICE-TYPE": "Sigfox enehdes typer",
+      "DEVICE-TYPE-NAME": "navn",
+      "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
+      "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
+      "CREATE-NEW-DEVICE-TYPE": "Opret ny enheds type"
     }
   },
   "APPLICATION": {

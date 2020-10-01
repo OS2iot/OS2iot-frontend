@@ -13,8 +13,7 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SigfoxAdministrationListComponent } from './sigfox-administration/sigfox-administration-list/sigfox-administration-list.component';
-import { SigfoxAdministrationTableComponent } from './sigfox-profiles/sigfox-administration-table/sigfox-administration-table.component';
-import { SigfoxAdministrationRowComponent } from './sigfox-profiles/sigfox-administration-table/sigfox-administration-row/sigfox-administration-row.component';
+import { SigfoxProfileTableComponent } from './sigfox-profiles/sigfox-profile-table/sigfox-profile-table.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +24,8 @@ import { SigfoxAdministrationRowComponent } from './sigfox-profiles/sigfox-admin
     SigfoxProfilesEditComponent,
     SigfoxAdministrationItemComponent,
     SigfoxAdministrationListComponent,
-    SigfoxAdministrationTableComponent,
-    SigfoxAdministrationRowComponent],
+    SigfoxProfileTableComponent
+  ],
   imports: [
     CommonModule,
     SigfoxRoutingModule,
