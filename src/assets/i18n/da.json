@@ -38,7 +38,8 @@
       "DROPFILE": "Klik eller drop din .csv file her",
       "NAME": "Navn",
       "TYPE": "Type",
-      "STATUS": "Status"
+      "STATUS": "Status",
+      "EMPTY": "Der er ingen enheder at vise endnu"
     }
   },
   "GATEWAY": {

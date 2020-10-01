@@ -2,16 +2,21 @@
     <app-top-bar-single [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar-single>
 </ng-container>
 <div class="row m-3">
-    <div class="col-md-6 offset-3 mb-5">
-        <div class=" text-center"></div>
-        <input type="file" name="datasource_upload" class="choose-file" id="datasource_upload" accept=".xlsx,.xls,.csv"
-            ngf-max-size="20MB" fd-input (change)="handleDropedFile($event)"
-            attr.data-content="{'APPLICATION.BULK.DROPFILE' | translate}}" />
-        <p class="upload_drop_file">{{ 'APPLICATION.BULK.DROPFILE' | translate }}</p>
-        <!-- <a class="dowload_csv" href="sample-file-link" download="download"><i class="fa fa-download"></i>
-                        Download CSV File</a> -->
+    <div class="col-md-6 offset-md-3 mb-5">
+
+        <div class="choose-file" attr.data-content="{{'APPLICATION.BULK.DROPFILE' | translate}}"
+            (click)="fileInput.click()" appDragDrop (onFileDropped)="handleDropedFile($event)">
+            <input hidden type="file" accept=".xlsx,.xls,.csv" ngf-max-size="20MB" #fileInput
+                (change)="handleDropedFile($event.target.files)">
+        </div>
+        <div class="files-list" *ngFor="let file of files;let i= index">
+            <p> {{ file }} </p>
+            <button class="delete-file" (click)="deleteAttachment(i)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+        </div>
     </div>
-    <div class="col-md-6 d-flex justify-content-center align-items-center">
+    <div class="col-md-6 offset-md-3 mb-5">
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
 
@@ -37,3 +42,6 @@
     </table>
 
 </div>
+<!-- <div *ngIf="iotDevice.length === 0" class="col-md-6 offset-md-3 mb-5">
+    <p>{{ 'APPLICATION.BULK.EMPTY' | translate }}</p>
+</div> -->

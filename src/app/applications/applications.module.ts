@@ -15,6 +15,8 @@ import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
 import { SharedModule } from '@shared/shared.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DirectivesModule } from '@shared/directives/directives.module';
 
 @NgModule({
     declarations: [
@@ -38,8 +40,10 @@ import { BulkImportComponent } from './bulk-import/bulk-import.component';
         TranslateModule,
         IotDevicesModule,
         DatatargetModule,
+        DirectivesModule,
         FormModule,
-        SharedModule
+        SharedModule,
+        FontAwesomeModule
     ]
 })
 export class ApplicationsModule { }
