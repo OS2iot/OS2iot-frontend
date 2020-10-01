@@ -29,15 +29,15 @@ $screen-xxl-min: 1400px;
 $global-font-size: 100% !default;
 // Removing the !default from $em-base so we are not inheriting that
 // value from Bourbon.
-$em-base: 14; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
+$em-base: 12; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
 
 $base-font-size: $em-base !default;
 $base-line-height: $em-base+2 !default;
 
 $min_width: $screen-sm-min;
 $max_width: $screen-xl-min;
-$min_font: 14px;
-$max_font: 18px;
+$min_font: 10px;
+$max_font: 16px;
 
 /*
 Removes the unit (e.g. px, em, rem) from a value, returning the number only.

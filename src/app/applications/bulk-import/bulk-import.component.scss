@@ -1,39 +1,46 @@
+@import '~src/assets/scss/setup/utilities';
+@import '~src/assets/scss/setup/variables';
+
+
+
+$fa-font-path : '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+
+
 .choose-file:before {
-  content: 'Choose or drop here Your CSV File.';
+  content: attr(data-content);
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: $color-bg-normal;
   position: absolute;
   opacity: 1 !important;
-  color: #374150;
   text-align: center;
-  line-height: 250px;
-  font-size: 16px;
-
-  border-radius: 10px;
-
+  line-height: 10vh;
 }
 
 .choose-file {
-  content: 'Click or drop here Your CSV File.';
+  @include add-shadow;
+  content: attr(data-content);
   width: 100%;
-  height: 250px;
-  background: #fff !important;
+  height: 10vh;
+  background: $color-bg-normal;
   position: relative;
   opacity: 1 !important;
   text-align: center;
-  border: dashed 2px #374150;
-  margin: 0 auto;
+  border: dashed 5px $color-primary;
 }
 
-// .choose-file:after {
-//   content: '\f093';
-//   position: absolute;
-//   font-size: 45px;
-//   left: 100px;
-//   top: -12px;
-//   color: #374150;
-// }
+.choose-file:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f093';
+  position: relative;
+  left: 33.3%;
+}
 
 .dowload_csv {
   font-size: 14px;

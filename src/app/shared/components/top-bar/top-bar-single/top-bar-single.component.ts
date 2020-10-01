@@ -17,6 +17,7 @@ export class TopBarSingleComponent implements OnInit, OnChanges {
   @Input() buttons?: QuickActionButton[];
   @Input() backButton: BackButton;
   public title: string;
+  @Input() staticTitle: string;
 
   // @Output() selectedSortChange = new EventEmitter();
   // @Output() updatePageLimit = new EventEmitter();

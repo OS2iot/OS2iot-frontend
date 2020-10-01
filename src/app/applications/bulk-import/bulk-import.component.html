@@ -1,19 +1,39 @@
-<section class="content">
-    <div class="row m-3">
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-body text-center"></div>
-                    <input type="file" name="datasource_upload" class="choose-file" id="datasource_upload"
-                        accept=".xlsx,.xls,.csv" ngf-max-size="20MB" fd-input (change)="handleDropedFile($event)" />
-                    <p class="upload_drop_file">Choose or drop here Your CSV File.</p>
-                    <a class="dowload_csv" href="sample-file-link" download="download"><i class="fa fa-download"></i>
-                        Download CSV File</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-        </div>
+<ng-container>
+    <app-top-bar-single [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar-single>
+</ng-container>
+<div class="row m-3">
+    <div class="col-md-6 offset-3 mb-5">
+        <div class=" text-center"></div>
+        <input type="file" name="datasource_upload" class="choose-file" id="datasource_upload" accept=".xlsx,.xls,.csv"
+            ngf-max-size="20MB" fd-input (change)="handleDropedFile($event)"
+            attr.data-content="{'APPLICATION.BULK.DROPFILE' | translate}}" />
+        <p class="upload_drop_file">{{ 'APPLICATION.BULK.DROPFILE' | translate }}</p>
+        <!-- <a class="dowload_csv" href="sample-file-link" download="download"><i class="fa fa-download"></i>
+                        Download CSV File</a> -->
     </div>
-</section>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    </div>
+
+    <table mat-table [dataSource]="iotDevice" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.NAME' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.TYPE' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.STATUS' | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{this.importStatus}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

@@ -32,7 +32,14 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
-    "DATATARGET-SHOW": "Tilknyttede datatargets"
+    "DATATARGET-SHOW": "Tilknyttede datatargets",
+    "IMPORT-CSV": "Bulk-import af IoT-enheder",
+    "BULK": {
+      "DROPFILE": "Klik eller drop din .csv file her",
+      "NAME": "Navn",
+      "TYPE": "Type",
+      "STATUS": "Status"
+    }
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -275,7 +282,7 @@
     },
     "SIGFOX": {
       "REGISTEREDATSIGFOX": "Enheden er allerede registreret i SigFox?",
-      "SIGFOXGRUPPEID":"Vælg SigFox gruppe",
+      "SIGFOXGRUPPEID": "Vælg SigFox gruppe",
       "SIGFOXIDENTIFIER": "ID",
       "SIGFOXIDENTIFIER-PLACEHOLDER": "Enhedens unikke id",
       "PAC": "PAC",

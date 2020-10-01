@@ -38,3 +38,14 @@
     }
   }
 }
+
+.sub-bar-wrapper {
+  @extend .mb-5;
+
+  .sub-bar {
+
+    button {
+      @extend .mx-2;
+    }
+  }
+}
