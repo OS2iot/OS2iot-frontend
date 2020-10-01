@@ -28,6 +28,13 @@
     "SIGFOX-ADMIN": "Administration",
     "SIGFOX-PROFILES": "Profiler"
   },
+  "SIGFOX": {
+    "SIGFOX": "SigFox",
+    "ADMINITRATION": {
+      "NAME": "SigFox Adminitration",
+      "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
+    }
+  },
   "APPLICATION": {
     "CREATE": "Opret applikation",
     "SAVE": "Gem applikation",

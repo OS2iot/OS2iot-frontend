@@ -1,0 +1,22 @@
+<app-top-bar [showSelectedSort]="false" [title]="'SIGFOX.ADMINITRATION.NAME' | translate"></app-top-bar>
+
+<div class=" jumbotron m-md-4 p-md-3">
+    <div class="row mt-5">
+        <div class="col-6">
+            <h4>SigFox Administration</h4>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary float-right"
+                (click)="onNewGroup()">{{'SIGFOX.ADMINITRATION.CREATE-NEW-GROUP' | translate}}</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <app-sigfox-administration-item 
+                *ngFor="let group of sigfoxGroups; let i = index"
+                [sigfoxGroup]="group">
+            </app-sigfox-administration-item>
+        </div>
+    </div>
+</div>

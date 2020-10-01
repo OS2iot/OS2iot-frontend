@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigfoxAdministrationComponent implements OnInit {
 
-  constructor() { }
-
+  constructor() {
+  }
   ngOnInit(): void {
   }
-
 }
