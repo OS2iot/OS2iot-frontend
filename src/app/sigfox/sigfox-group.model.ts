@@ -9,3 +9,8 @@ export class SigFoxGroup {
     public updatedAt: Date;
     public belongsTo: Organisation;
 }
+
+export class SigfoxgroupResponse {
+    result: SigFoxGroup[];
+    totalCount?: string;
+}

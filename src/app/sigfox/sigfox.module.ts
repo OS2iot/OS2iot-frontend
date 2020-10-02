@@ -15,6 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SigfoxAdministrationListComponent } from './sigfox-administration/sigfox-administration-list/sigfox-administration-list.component';
 import { SigfoxAdministrationTableComponent } from './sigfox-profiles/sigfox-administration-table/sigfox-administration-table.component';
 import { SigfoxAdministrationRowComponent } from './sigfox-profiles/sigfox-administration-table/sigfox-administration-row/sigfox-administration-row.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SigfoxAdministrationRowComponent } from './sigfox-profiles/sigfox-admin
     SigfoxRoutingModule,
     FormsModule,
     FormModule,
+    SharedModule,
     TopBarModule,
     NGMaterialModule,
     TranslateModule

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SigFoxGroup } from '@shared/models/sigfox-group.model';
-import { SigfoxGroupService } from '@shared/services/sigfox-group.service';
+import { SigFoxGroup } from '@app/sigfox/sigfox-group.model';
+import { SigfoxGroupService } from '@app/sigfox/sigfox-group.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
@@ -34,9 +34,9 @@ export class SigfoxAdministrationListComponent implements OnInit {
     this.sigfoxGroups = [];
     const mock: SigFoxGroup = {
       id: 1,
-      name: "min gruppe",
+      name: "Århus kommune",
       username: "jeppe",
-      password: "123",
+      password: "123456",
       createdAt: null,
       updatedAt: null,
       belongsTo: null

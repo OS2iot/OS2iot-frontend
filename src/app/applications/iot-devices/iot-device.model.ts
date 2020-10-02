@@ -1,9 +1,9 @@
+import { SigfoxSettings } from '@app/sigfox/sigfox-settings.model';
 import { Application } from '@applications/application.model';
 import { DeviceType } from '@shared/enums/device-type';
 import { JsonLocation } from '@shared/models/Json-location.model';
 import { LorawanSettings } from '@shared/models/lorawan-settings.model';
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
-import { SigfoxSettings } from '@shared/models/sigfox-settings.model';
 import { LatestReceivedMessage } from './latestReceivedMessage.model';
 
 export class IotDevice {

@@ -1,5 +1,5 @@
 export class SigfoxSettings {
-    sigfoxgruppeId: number;
+    sigfoxgruppeId: string;
     sigfoxIdentifier: string;
     PAC: string;
     productLicens: string;
