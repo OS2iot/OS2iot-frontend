@@ -1,13 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Application } from '@applications/application.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
 import { Papa } from 'ngx-papaparse';
+import { BulkImport } from './bulk-import.model';
+import { BulkMapping } from './bulkMapping';
 
 
 @Component({
@@ -16,42 +17,44 @@ import { Papa } from 'ngx-papaparse';
   styleUrls: ['./bulk-import.component.scss']
 })
 export class BulkImportComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'type', 'status'];
+  displayedColumns: string[] = ['name', 'type', 'importStatus', 'errorMessages'];
   isLoading = false;
-  iotDevice: IotDevice[];
+  bulkImport: BulkImport[];
+  iotDevices: IotDevice[];
   files: any = [];
   faTrash = faTrash;
   faDownload = faDownload;
-
+  private bulkMapper = new BulkMapping();
   public backButton: BackButton = { label: '', routerLink: '/applications' };
-  public application: Application;
-  public errorMessages: any;
-  public errorFields: string[];
-  public importStatus = false;
+  private applicationId;
 
   constructor(
     private papa: Papa,
     private iotDeviceService: IoTDeviceService,
     private router: Router,
-    private translate: TranslateService
+    private route: ActivatedRoute,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
+    this.translate.use('da');
     this.translate.get(['NAV.APPLICATIONS'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.APPLICATIONS'];
       });
+    this.applicationId = +this.route.snapshot.paramMap.get('id');
   }
 
   deleteAttachment(index) {
-    this.files.splice(index, 1)
+    this.files.splice(index, 1);
   }
 
-  handleDropedFile(evt) {
+  handleDropedFile(evt: any) {
     // handle file
+    this.bulkImport = [];
     for (let index = 0; index < evt.length; index++) {
       const element = evt[index];
-      this.files.push(element.name)
+      this.files.push(element.name);
     }
     // handle csv data
     this.isLoading = true;
@@ -65,73 +68,75 @@ export class BulkImportComponent implements OnInit {
         skipEmptyLines: true,
         header: true,
         complete: results => {
-          const data = results.data;
-          this.iotDevice = data;
-          console.log('Parsed: ' + this.iotDevice)
-          const total = this.iotDevice.length;
-          if (total === 0) {
-            this.isLoading = false;
+          this.mapData(results.data);
+          this.iotDevices = this.bulkImport.map( (item) => item.device);
+          if (this.bulkImport?.length === 0) {
             alert('no data in csv');
-            return;
+          } else {
+            this.addIoTDevice();
           }
-          return this.iotDevice;
-          //this.addIoTDevice();
         }
       }
       );
-      console.log(this.iotDevice);
-
+      console.log(this.bulkImport);
       this.isLoading = false;
     };
   }
 
+  private mapData(data: any[]) {
+    data.forEach( (device) => {
+      const mappedDevice = this.bulkMapper.dataMapper(device, this.applicationId);
+      this.bulkImport.push(new BulkImport(mappedDevice));
+    });
+  }
+
   addIoTDevice() {
-    this.iotDevice.forEach((relation) => {
-      if (relation.id) {
-        this.iotDeviceService.createIoTDevice(relation).subscribe(
+    this.iotDevices.forEach((iotDevice) => {
+      if (iotDevice.id) {
+        this.iotDeviceService.createIoTDevice(iotDevice).subscribe(
           (response) => {
             console.log(response);
+            iotDevice.importStatus = 'success';
           },
           (error: HttpErrorResponse) => {
-            this.handleError(error);
-            this.importStatus = true;
+            iotDevice.errorMessages = this.handleError(error);
+            iotDevice.importStatus = 'Failed';
           }
         );
       } else {
-        this.iotDeviceService.createIoTDevice(relation).subscribe(
+        this.iotDeviceService.createIoTDevice(iotDevice).subscribe(
           (res: any) => {
             console.log(res);
+            iotDevice.importStatus = 'success';
           },
           (error) => {
-            this.handleError(error);
+            iotDevice.errorMessages = this.handleError(error);
+            iotDevice.importStatus = 'Failed';
           }
-        )
+        );
       }
     });
   }
 
-  handleError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
+  handleError(error: HttpErrorResponse): string[] {
+    let errorMessages = [];
     if (typeof error.error.message === 'string') {
-      this.errorMessages.push(error.error.message);
+      errorMessages.push(error.error.message);
     } else {
-      error.error.message.forEach((err) => {
+      error.error.message.forEach( (err) => {
         if (err.property === 'lorawanSettings') {
-          err.children.forEach(element => {
-            this.errorFields.push(element.property);
-            this.errorMessages = this.errorMessages.concat(
+          err.children.forEach( (element) => {
+            errorMessages = errorMessages.concat(
               Object.values(element.constraints)
             );
           });
         } else {
-          this.errorFields.push(err.property);
-          this.errorMessages = this.errorMessages.concat(
+          errorMessages.push(
             Object.values(err.constraints)
           );
         }
       });
     }
-
+    return errorMessages;
   }
 }

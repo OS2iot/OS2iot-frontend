@@ -25,6 +25,8 @@ export class IotDevice {
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
     sigfoxSettings = new SigfoxSettings();
+    errorMessages = [];
+    importStatus = '';
 }
 
 export interface IotDeviceData {
