@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RestService } from './rest.service';
+import { RestService } from '../shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
+import { SigfoxDeviceType } from './sigfox-device-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class SigfoxGroupService {
   }
 
   public getMultiple(organizationId: number): Observable<any> {
-    const body = {organizationId};
+    const body = { organizationId };
     return this.restService.get(this.SIGFOXDEVICETYPEURL, body);
   }
 
@@ -26,6 +26,6 @@ export class SigfoxGroupService {
   }
 
   public put(sigfoxGroup: SigfoxDeviceType): Observable<any> {
-    return this.restService.put(this.SIGFOXDEVICETYPEURL, sigfoxGroup, sigfoxGroup.id);
+    return this.restService.put(this.SIGFOXDEVICETYPEURL, sigfoxGroup, sigfoxGroup.contractId);
   }
 }

@@ -1,6 +1,6 @@
 import { Organisation } from '@app/admin/organisation/organisation.model';
 
-export class SigfoxGroup {
+export class SigFoxGroup {
     public id: number;
     public name: string;
     public username: string;
@@ -8,4 +8,9 @@ export class SigfoxGroup {
     public createdAt: Date;
     public updatedAt: Date;
     public belongsTo: Organisation;
+}
+
+export class SigfoxgroupResponse {
+    result: SigFoxGroup[];
+    totalCount?: string;
 }

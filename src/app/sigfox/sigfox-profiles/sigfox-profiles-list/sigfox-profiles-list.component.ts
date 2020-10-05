@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
+import { SigfoxDeviceType } from '@app/sigfox/sigfox-device-type.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({

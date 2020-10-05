@@ -2,9 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { GatewayStats } from '@app/gateway/gateway.model';
+import { SigfoxDeviceType } from '@app/sigfox/sigfox-device-type.model';
 import { TranslateService } from '@ngx-translate/core';
-import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 
 @Component({
   selector: 'app-sigfox-profile-table',
@@ -25,7 +24,7 @@ export class SigfoxProfileTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const mock = [ {
+    const mock = [{
       name: 'Nummer 1',
       contractId: '123',
       description: 'nsdf',

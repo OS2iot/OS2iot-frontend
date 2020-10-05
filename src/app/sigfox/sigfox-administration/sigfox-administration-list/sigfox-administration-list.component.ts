@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SigfoxGroup } from '@shared/models/sigfox-group.model';
-import { SigfoxGroupService } from '@shared/services/sigfox-group.service';
+
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { SigFoxGroup } from '@sigfox/sigfox-group.model';
+import { SigfoxGroupService } from '@sigfox/sigfox-group.service';
 
 @Component({
   selector: 'app-sigfox-administration-list',
@@ -12,7 +13,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 })
 export class SigfoxAdministrationListComponent implements OnInit {
 
-  public sigfoxGroups: SigfoxGroup[];
+  public sigfoxGroups: SigFoxGroup[];
 
   constructor(
     public translate: TranslateService,
@@ -32,7 +33,7 @@ export class SigfoxAdministrationListComponent implements OnInit {
       this.sigfoxGroups = response.data;
     }); */
     this.sigfoxGroups = [];
-    const mock: SigfoxGroup = {
+    const mock: SigFoxGroup = {
       id: 1,
       name: 'min gruppe',
       username: 'jeppe',

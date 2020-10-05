@@ -5,20 +5,23 @@ import { SigfoxProfilesComponent } from './sigfox-profiles/sigfox-profiles.compo
 import { SigfoxProfilesEditComponent } from './sigfox-profiles/sigfox-profiles-edit/sigfox-profiles-edit.component';
 import { SigfoxAdministrationListComponent } from './sigfox-administration/sigfox-administration-list/sigfox-administration-list.component';
 import { SigfoxProfilesListComponent } from './sigfox-profiles/sigfox-profiles-list/sigfox-profiles-list.component';
+import { SigfoxAdministrationEditComponent } from './sigfox-administration/sigfox-administration-edit/sigfox-administration-edit.component';
 
 const routes: Routes = [
-    { path: 'administration', component: SigfoxAdministrationComponent,
+    {
+        path: 'administration', component: SigfoxAdministrationComponent,
         children: [
-            {path: '', component: SigfoxAdministrationListComponent},
-            {path: ':id', component: SigfoxProfilesEditComponent},
-            {path: 'edit', component: SigfoxProfilesEditComponent}
+            { path: '', component: SigfoxAdministrationListComponent },
+            { path: ':id', component: SigfoxAdministrationEditComponent },
+            { path: 'edit', component: SigfoxAdministrationEditComponent }
         ]
     },
-    { path: 'profiles', component: SigfoxProfilesComponent,
+    {
+        path: 'profiles', component: SigfoxProfilesComponent,
         children: [
-            {path: '', component: SigfoxProfilesListComponent},
-            {path: ':id', component: SigfoxProfilesEditComponent},
-            {path: 'edit', component: SigfoxProfilesEditComponent}
+            { path: '', component: SigfoxProfilesListComponent },
+            { path: ':id', component: SigfoxProfilesEditComponent },
+            { path: 'edit', component: SigfoxProfilesEditComponent }
         ]
     }
 ];

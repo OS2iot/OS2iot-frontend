@@ -14,16 +14,17 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SigfoxAdministrationListComponent } from './sigfox-administration/sigfox-administration-list/sigfox-administration-list.component';
 import { SigfoxProfileTableComponent } from './sigfox-profiles/sigfox-profile-table/sigfox-profile-table.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
-    SigfoxProfilesComponent,
     SigfoxAdministrationComponent,
     SigfoxAdministrationEditComponent,
-    SigfoxProfilesListComponent,
-    SigfoxProfilesEditComponent,
     SigfoxAdministrationItemComponent,
     SigfoxAdministrationListComponent,
+    SigfoxProfilesComponent,
+    SigfoxProfilesListComponent,
+    SigfoxProfilesEditComponent,
     SigfoxProfileTableComponent
   ],
   imports: [
@@ -33,7 +34,8 @@ import { SigfoxProfileTableComponent } from './sigfox-profiles/sigfox-profile-ta
     FormModule,
     TopBarModule,
     NGMaterialModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule,
   ]
 })
 export class SigfoxModule { }
