@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
@@ -8,6 +9,7 @@ import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-pr
 import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
+import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
 
@@ -26,8 +28,11 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public iotDeviceSubscription: Subscription;
     public deviceProfileSubscription: Subscription;
     public OTAA = true;
+    public detailsText: string;
+    public downlinkText: string;
     public deviceProfileName: string;
     public serviceProfileName: string;
+    public downlink = new Downlink();
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
@@ -40,7 +45,8 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
         private deviceProfileService: DeviceProfileService,
-        private serviceProfileService: ServiceProfileService
+        private serviceProfileService: ServiceProfileService,
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -54,6 +60,29 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
             });
+    }
+
+    startDownlink() {
+        if (this.isValidHex(this.downlink.payload)) {
+            console.log('start downlink');
+            this.snackBar.open('Element sat i kø', 'Downlink', {
+                duration: 10000
+            });
+        } else {
+            console.log('fejl i format');
+        }
+    }
+
+    isValidHex(input: string): boolean {
+        const res = parseInt(input, 16);
+        if (res) {
+            if (this.device.type === 'SIGFOX' && input.length > 16) {
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     bindIoTDeviceAndApplication(deviceId: number) {
@@ -73,7 +102,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
                         this.deviceProfileName = response.deviceProfile.name;
                     });
             }
-
             if (this.device?.lorawanSettings?.serviceProfileID) {
                 this.deviceProfileSubscription = this.serviceProfileService.getOne(this.device.lorawanSettings.serviceProfileID)
                     .subscribe((response: ServiceProfileResponseOne) => {

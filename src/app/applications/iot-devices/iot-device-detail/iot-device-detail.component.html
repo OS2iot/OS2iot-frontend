@@ -1,29 +1,40 @@
 <ng-container *ngIf="device">
     <app-top-bar-single [data]="device" [backButton]="backButton"></app-top-bar-single>
 </ng-container>
-<div class=" jumbotron m-md-4 p-md-3">
-    <h4>{{ 'IOTDEVICE.NAME' | translate }}</h4>
-    <p class="mb-5">{{device.name}}</p>
-    <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
-    <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
-    <h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
-    <div *ngIf="device.comment; then thenBlock else elseBlock"> </div>
-    <ng-template #thenBlock>
-        <p class="mb-5">{{device.comment}}</p>
-    </ng-template>
-    <ng-template #elseBlock>
-        <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENT' | translate}}</p>
-    </ng-template>
-    <h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
-    <div *ngIf="device.location; else locationElseBlock">
-        <div class="row mb-5">
-            <div class="col-6">
-                <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
-                <p>{{longitude}}</p>
+<mat-tab-group animationDuration="200ms" class=" jumbotron m-md-4 p-md-3">
+    <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
+        <div class=" jumbotron m-md-4 p-md-3">
+            <h4>{{ 'IOTDEVICE.NAME' | translate }}</h4>
+            <p class="mb-5">{{device.name}}</p>
+            <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
+            <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
+            <h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
+            <div *ngIf="device.comment; then thenBlock else elseBlock"> </div>
+            <ng-template #thenBlock>
+                <p class="mb-5">{{device.comment}}</p>
+            </ng-template>
+            <ng-template #elseBlock>
+                <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENT' | translate}}</p>
+            </ng-template>
+            <h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
+            <div *ngIf="device.location; else locationElseBlock">
+                <div class="row mb-5">
+                    <div class="col-6">
+                        <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
+                        <p>{{longitude}}</p>
+                    </div>
+                    <div class="col-6">
+                        <h6>{{ 'IOTDEVICE.LATITUDE' | translate }}</h6>
+                        <p>{{latitude}}</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <h6>{{ 'IOTDEVICE.LATITUDE' | translate }}</h6>
-                <p>{{latitude}}</p>
+            <ng-template #locationElseBlock>
+                <p class="mb-5">{{ 'IOTDEVICE.NOLOCATION' | translate}}</p>
+            </ng-template>
+            <h4>{{ 'IOTDEVICE.COMMENTONLOCATION' | translate }}</h4>
+            <div *ngIf="device.commentOnLocation; else locationCommentElseBlock">
+                <p class="mb-5">{{device.commentOnLocation}}</p>
             </div>
         </div>
     </div>
@@ -100,18 +111,88 @@
                                         {{device.latestReceivedMessage.rawData | json }}
                                     </pre>
                                 </code>
+            <ng-template #locationCommentElseBlock>
+                <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}</p>
+            </ng-template>
+            <!-- IF  Lora device-->
+            <ng-container *ngIf="device.type === 'LORAWAN' && device.lorawanSettings">
+                <h4>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</h4>
+                <p class="mb-5">{{device.lorawanSettings.devEUI}}</p>
+                <h4>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</h4>
+                <p class="mb-5">{{serviceProfileName}}</p>
+                <h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
+                <p class="mb-5">{{deviceProfileName}}</p>
+                <ng-container *ngIf="OTAA">
+                    <h4>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</h4>
+                    <p class="mb-5">{{device.lorawanSettings?.OTAAapplicationKey}}</p>
+                </ng-container>
+                <ng-container *ngIf="!OTAA">
+                    <h4>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</h4>
+                    <p class="mb-5">{{device.lorawanSettings?.devAddr}}</p>
+                    <h4>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</h4>
+                    <p class="mb-5">{{device.lorawanSettings?.activationType}}</p>
+                    <h4>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</h4>
+                    <p class="mb-5">{{device.lorawanSettings?.applicationSessionKey}}</p>
+                </ng-container>
+                <h4>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</h4>
+                <p class="mb-5">{{device.lorawanSettings?.skipFCntCheck}}</p>
             </ng-container>
-        </mat-expansion-panel>
-    </ng-template>
-    <ng-template #noSentTime>
-        <p class="mb-5">
-            {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
-        </p>
-    </ng-template>
-    <!-- API -->
-    <ng-container *ngIf="device.type">
-        <h4>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</h4>
-        <!-- <p>{{ 'IOTDEVICE.GENERIC_HTTP.INSTRUCTIONS' | translate }}</p> -->
-        <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
-    </ng-container>
-</div>
+            <!--  IF data package -->
+            <h4>{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h4>
+            <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime">
+            </ng-container>
+            <ng-template #sentTime>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <p>
+                                {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}
+                                {{device.latestReceivedMessage?.sentTime | date:'medium'}}
+                            </p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-container *ngIf="device.latestReceivedMessage?.rawData">
+                        <code>
+                                            <pre>
+                                                {{device.latestReceivedMessage.rawData | json }}
+                                            </pre>
+                                        </code>
+                    </ng-container>
+                </mat-expansion-panel>
+            </ng-template>
+            <ng-template #noSentTime>
+                <p class="mb-5">
+                    {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
+                </p>
+            </ng-template>
+            <!-- API -->
+            <ng-container *ngIf="device.type">
+                <h4>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</h4>
+                <!-- <p>{{ 'IOTDEVICE.GENERIC_HTTP.INSTRUCTIONS' | translate }}</p> -->
+                <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
+            </ng-container>
+        </div>
+    </mat-tab>
+    <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}">
+        <h3 class="p-md-3">{{'IOTDEVICE.DOWNLINK.TITLE' | translate}}</h3>
+        <div *ngIf="device.type === 'LORAWAN'">
+            <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
+                {{'IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK' | translate}}</mat-slide-toggle>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label for="port"
+                class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PORT' | translate}}</label>
+            <input type="port" class="form-control" id="port" name="port" maxlength="50" min="0"
+                required [(ngModel)]="downlink.port">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label for="payload"
+                class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}</label>
+            <input type="payload" class="form-control" id="payload" name="payload" maxlength="device.type === 'SIGFOX' ? 16 : ''"
+                required [(ngModel)]="downlink.payload">
+        </div>
+        <div class="col-xs-6 form-group">
+            <button (click)="startDownlink()" class="btn btn-secondary" type="button">{{ 'IOTDEVICE.DOWNLINK.START' | translate}}</button>
+        </div>
+    </mat-tab>
+</mat-tab-group>

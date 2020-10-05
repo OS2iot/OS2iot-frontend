@@ -378,6 +378,15 @@
       "BASIC": "Basis info",
       "OPTIONAL": "Yderligere info"
     },
+    "DOWNLINK": {
+      "TITLE": "Downlink",
+      "PAYLOAD": "payload",
+      "PORT": "Port",
+      "CONFIRMEDDOWLINK": "Bekræft downlink",
+      "START": "Sæt downlink i kø"
+    },
+    "DETAIL-TAB": "Detail",
+    "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
     "APPLICATION": "Applikation",
