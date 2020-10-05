@@ -316,7 +316,9 @@
     "APPLICATION-ASCENDING": "Applikation: stigende",
     "APPLICATION-DESCENDING": "Applikation: faldende",
     "BATTERY-ASCENDING": "Batteri: stigende",
-    "BATTERY-DESCENDING": "Batteri: faldende"
+    "BATTERY-DESCENDING": "Batteri: faldende",
+    "ACTIVE-ASCENDING": "Aktiv: sigende",
+    "ACTIVE-DESCENDING": "Aktiv: faldende"
   },
   "IOTDEVICE": {
     "HEADING": {

@@ -19,13 +19,13 @@ export class ApplicationDetailComponent implements OnInit {
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     private id: number;
-    public pageLimit: number = 10;
-    public selectedSortId: number = 6;
+    public pageLimit = 10;
+    public selectedSortId = 1;
     public selectedSortObject: Sort = {
-        id: 6,
-        dir: 'DESC',
-        col: 'createdAt',
-        label: 'SORT.CREATED-DESCENDING',
+        id: 1,
+        dir: 'ASC',
+        col: 'name',
+        label: 'SORT.NAME-ASCENDING',
     };
     public sort: Sort[] = [
         {
@@ -42,51 +42,15 @@ export class ApplicationDetailComponent implements OnInit {
         },
         {
             id: 3,
-            dir: 'ASC',
-            col: 'updatedAt',
-            label: 'SORT.UPDATED-ASCENDING',
+            dir: 'DESC',
+            col: 'active',
+            label: 'SORT.ACTIVE-DESCENDING',
         },
         {
             id: 4,
-            dir: 'DESC',
-            col: 'updatedAt',
-            label: 'SORT.UPDATED-DESCENDING',
-        },
-        {
-            id: 5,
             dir: 'ASC',
-            col: 'createdAt',
-            label: 'SORT.CREATED-ASCENDING',
-        },
-        {
-            id: 6,
-            dir: 'DESC',
-            col: 'createdAt',
-            label: 'SORT.CREATED-DESCENDING',
-        },
-        {
-            id: 7,
-            dir: 'ASC',
-            col: 'createdAt',
-            label: 'SORT.APPLICATION-ASCENDING',
-        },
-        {
-            id: 8,
-            dir: 'DESC',
-            col: 'createdAt',
-            label: 'SORT.APPLICATION-DESCENDING',
-        },
-        {
-            id: 9,
-            dir: 'ASC',
-            col: 'createdAt',
-            label: 'SORT.BATTERY-ASCENDING',
-        },
-        {
-            id: 10,
-            dir: 'DESC',
-            col: 'createdAt',
-            label: 'SORT.BATTERY-DESCENDING',
+            col: 'active',
+            label: 'SORT.ACTIVE-ASCENDING',
         },
     ];
     public buttons: QuickActionButton[] = [
@@ -101,7 +65,7 @@ export class ApplicationDetailComponent implements OnInit {
     ];
     public description: string;
     public name: string;
-    public pageOffset: number = 0;
+    public pageOffset = 0;
     public pageTotal: number;
     public iotDevices: IotDevice[] = [];
 
@@ -127,8 +91,9 @@ export class ApplicationDetailComponent implements OnInit {
             this.application = application;
             this.name = application.name;
             this.description = application.description;
-            if (application.iotDevices)
+            if (application.iotDevices) {
                 this.iotDevices = application.iotDevices;
+            }
         });
     }
 

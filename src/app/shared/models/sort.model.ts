@@ -1,5 +1,5 @@
 export type SortDir = 'ASC' | 'DESC';
-export type SortCol = 'createdAt' | 'updatedAt' | 'name';
+export type SortCol = 'active' | 'updatedAt' | 'name';
 
 export interface Sort {
     id: number;
