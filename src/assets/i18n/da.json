@@ -13,11 +13,11 @@
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "LORA-GATEWAYS": "LoRaWan Gateways",
+    "LORA-GATEWAYS": "LoRaWAN Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "LoRaWan Profiler",
+    "PROFILES": "LoRaWAN Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
@@ -107,7 +107,7 @@
     "SHOW-OPTIONS": "Vis muligheder"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWan Gateway"
+    "CREATE": "Opret LoRaWAN Gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -215,7 +215,7 @@
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
-    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
+    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
@@ -370,7 +370,7 @@
     "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
   },
   "PROFILES": {
-    "NAME": "LoRaWan Profiler",
+    "NAME": "LoRaWAN Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
