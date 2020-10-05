@@ -22,51 +22,6 @@ import { Subscription } from 'rxjs';
 })
 export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
   public pageLimit: number = 10;
-  public sort: Sort[] = [
-    {
-      id: 1,
-      dir: 'ASC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-ASCENDING',
-    },
-    {
-      id: 2,
-      dir: 'DESC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-DESCENDING',
-    },
-    {
-      id: 3,
-      dir: 'ASC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-ASCENDING',
-    },
-    {
-      id: 4,
-      dir: 'DESC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-DESCENDING',
-    },
-    {
-      id: 5,
-      dir: 'ASC',
-      col: 'name',
-      label: 'SORT.NAME-ASCENDING',
-    },
-    {
-      id: 6,
-      dir: 'DESC',
-      col: 'name',
-      label: 'SORT.NAME-DESCENDING',
-    },
-  ];
-  public selectedSortId: number = 1;
-  public selectedSortObject: Sort = {
-    id: 6,
-    dir: 'DESC',
-    col: 'name',
-    label: 'SORT.NAME-DESCENDING',
-  };
 
   public pageTotal: number;
   public pageOffset = 0;
@@ -103,15 +58,6 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
     console.log(limit);
   }
 
-  changeSort(sortId: number) {
-    for (let i = 0; i < this.sort.length; i++) {
-      const elem = this.sort[i];
-      if (elem.id === sortId) {
-        this.selectedSortObject = elem;
-      }
-    }
-  }
-
   prevPage() {
     if (this.pageOffset) {
       this.pageOffset--;
@@ -143,8 +89,8 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
       .getApplications(
         this.pageLimit,
         this.pageOffset * this.pageLimit,
-        this.selectedSortObject.dir,
-        this.selectedSortObject.col,
+        null,
+        null,
         orgId ? orgId : this.getCurrentOrganisationId()
       )
       .subscribe((applications) => {
