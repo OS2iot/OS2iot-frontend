@@ -105,6 +105,7 @@
         <input type="text" id="devEUI" name="devEUI" maxLength="16"
           [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate" class="form-control"
           [(ngModel)]="iotDevice.lorawanSettings.devEUI"
+          [disabled]="editmode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devEUI'), 'is-valid' : formFailedSubmit && !errorFields.includes('devEUI')}">
       </div>
   
