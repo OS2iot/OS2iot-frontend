@@ -2,6 +2,11 @@
     <app-top-bar-single [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar-single>
 </ng-container>
 <div class="row">
+    <div class="col-12">
+        <mat-progress-bar *ngIf="download$ | async as download"
+            [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'" [value]="download.progress" class="mb-5">
+        </mat-progress-bar>
+    </div>
     <div *ngIf="fileFormatErrorMessage" class="error-messages p-3 col-md-10 offset-md-1 mb-5">
         <ul class="mb-0">
             {{'APPLICATION.BULK.FILEFORMATERRORMESSAGE' | translate}}
@@ -16,22 +21,10 @@
             </button>
             <ul class="dropdown-menu"
                 attr.aria-labelledby="tableRowDropdown-{{'APPLICATION.BULK.DOWNLOAD' | translate}}">
-                <li class="dropdown-item">
-                    <a href="../../../assets/docs/iotdevice_generichttp.csv" download="download">
+                <li class="dropdown-item" *ngFor="let sample of samples">
+                    <a class="a" (click)="download(sample)">
                         <fa-icon [icon]="faDownload"></fa-icon>
-                        {{'APPLICATION.BULK.TEMPLATE.GENERIC' | translate}}
-                    </a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="../../../assets/docs/iotdevice_lorawan.csv" download="download">
-                        <fa-icon [icon]="faDownload"></fa-icon>
-                        {{'APPLICATION.BULK.TEMPLATE.LORAWAN' | translate}}
-                    </a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="../../../assets/docs/iotdevice_sigfox.csv" download="download">
-                        <fa-icon [icon]="faDownload"></fa-icon>
-                        {{'APPLICATION.BULK.TEMPLATE.SIGFOX' | translate}}
+                        {{sample.name}}
                     </a>
                 </li>
             </ul>

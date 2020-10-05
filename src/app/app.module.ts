@@ -15,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
+import { SAVER, getSaver } from '@shared/providers/saver.provider';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,7 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         // use these two providers only in dev environment
         //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
         //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
+        { provide: SAVER, useFactory: getSaver },
     ],
 })
 export class AppModule { }

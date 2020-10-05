@@ -1,15 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageHandler } from '@shared/error-message-handler';
+import { Download } from '@shared/helpers/download.helper';
 import { BackButton } from '@shared/models/back-button.model';
+import { DownloadService } from '@shared/services/download.service';
 import { Papa } from 'ngx-papaparse';
+import { Observable } from 'rxjs';
 import { BulkImport } from './bulk-import.model';
 import { BulkMapping } from './bulkMapping';
-
 
 @Component({
   selector: 'app-bulk-import',
@@ -25,6 +27,12 @@ export class BulkImportComponent implements OnInit {
   files: any = [];
   faTrash = faTrash;
   faDownload = faDownload;
+  samples = [
+    { name: 'Generic Http sample', url: '../../../assets/docs/iotdevice_generichttp.csv' },
+    { name: 'Lorawan sample', url: '../../../assets/docs/iotdevice_lorawan.csv' },
+    { name: 'Sigfox sample', url: '../../../assets/docs/iotdevice_sigfox.csv' },
+  ]
+  download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   private applicationId;
@@ -35,6 +43,7 @@ export class BulkImportComponent implements OnInit {
     private iotDeviceService: IoTDeviceService,
     private route: ActivatedRoute,
     private translate: TranslateService,
+    private downloads: DownloadService,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +53,13 @@ export class BulkImportComponent implements OnInit {
         this.backButton.label = translations['NAV.APPLICATIONS'];
       });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
+
   }
+
+  download({ name, url }: { name: string, url: string }) {
+    this.download$ = this.downloads.download(url, name);
+  }
+
 
   deleteAttachment(index) {
     this.files.splice(index, 1);
@@ -93,14 +108,14 @@ export class BulkImportComponent implements OnInit {
   private validateFile(name: string) {
     const ext = name.substring(name.lastIndexOf('.') + 1);
     if (ext.toLowerCase() === 'csv') {
-        return true;
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 
   private mapData(data: any[]) {
-    data.forEach( (device) => {
+    data.forEach((device) => {
       const mappedDevice = this.bulkMapper.dataMapper(device, this.applicationId);
       this.bulkImport.push(new BulkImport(mappedDevice));
     });
