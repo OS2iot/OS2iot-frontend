@@ -28,16 +28,16 @@
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
 
-    <table mat-table [dataSource]="iotDevices" class="mat-elevation-z8">
+    <table mat-table [dataSource]="bulkImportResult" class="mat-elevation-z8">
 
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.NAME' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.device.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.TYPE' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.device.type}} </td>
         </ng-container>
 
         <ng-container matColumnDef="importStatus">

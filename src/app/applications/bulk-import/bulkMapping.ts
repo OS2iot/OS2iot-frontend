@@ -52,9 +52,7 @@ export class BulkMapping {
             latitude: data.latitude ? Number(data.latitude) : 0,
             latestReceivedMessage: null,
             lorawanSettings: null,
-            sigfoxSettings: null,
-            importStatus: '',
-            errorMessages: []
+            sigfoxSettings: null
         };
     }
 }

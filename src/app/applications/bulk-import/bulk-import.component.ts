@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageHandler } from '@shared/error-message-handler';
 import { BackButton } from '@shared/models/back-button.model';
 import { Papa } from 'ngx-papaparse';
 import { BulkImport } from './bulk-import.model';
@@ -20,18 +20,18 @@ export class BulkImportComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'importStatus', 'errorMessages'];
   isLoading = false;
   bulkImport: BulkImport[];
-  iotDevices: IotDevice[];
+  bulkImportResult: BulkImport[];
   files: any = [];
   faTrash = faTrash;
   faDownload = faDownload;
   private bulkMapper = new BulkMapping();
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   private applicationId;
+  private errorHandler = new ErrorMessageHandler();
 
   constructor(
     private papa: Papa,
     private iotDeviceService: IoTDeviceService,
-    private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
   ) { }
@@ -52,6 +52,7 @@ export class BulkImportComponent implements OnInit {
   handleDropedFile(evt: any) {
     // handle file
     this.bulkImport = [];
+    this.bulkImportResult = [];
     for (let index = 0; index < evt.length; index++) {
       const element = evt[index];
       this.files.push(element.name);
@@ -69,7 +70,8 @@ export class BulkImportComponent implements OnInit {
         header: true,
         complete: results => {
           this.mapData(results.data);
-          this.iotDevices = this.bulkImport.map( (item) => item.device);
+          // this step ensures material can read from the array - should be fixed.
+          this.bulkImportResult = this.bulkImport;
           if (this.bulkImport?.length === 0) {
             alert('no data in csv');
           } else {
@@ -78,7 +80,6 @@ export class BulkImportComponent implements OnInit {
         }
       }
       );
-      console.log(this.bulkImport);
       this.isLoading = false;
     };
   }
@@ -91,52 +92,30 @@ export class BulkImportComponent implements OnInit {
   }
 
   addIoTDevice() {
-    this.iotDevices.forEach((iotDevice) => {
-      if (iotDevice.id) {
-        this.iotDeviceService.createIoTDevice(iotDevice).subscribe(
+    this.bulkImportResult.forEach((requestItem) => {
+      if (requestItem.device.id) {
+        this.iotDeviceService.createIoTDevice(requestItem.device).subscribe(
           (response) => {
             console.log(response);
-            iotDevice.importStatus = 'success';
+            requestItem.importStatus = 'success';
           },
           (error: HttpErrorResponse) => {
-            iotDevice.errorMessages = this.handleError(error);
-            iotDevice.importStatus = 'Failed';
+            requestItem.errorMessages = this.errorHandler.handleError(error);
+            requestItem.importStatus = 'Failed';
           }
         );
       } else {
-        this.iotDeviceService.createIoTDevice(iotDevice).subscribe(
+        this.iotDeviceService.createIoTDevice(requestItem.device).subscribe(
           (res: any) => {
             console.log(res);
-            iotDevice.importStatus = 'success';
+            requestItem.importStatus = 'success';
           },
           (error) => {
-            iotDevice.errorMessages = this.handleError(error);
-            iotDevice.importStatus = 'Failed';
+            requestItem.errorMessages = this.errorHandler.handleError(error);
+            requestItem.importStatus = 'Failed';
           }
         );
       }
     });
-  }
-
-  handleError(error: HttpErrorResponse): string[] {
-    let errorMessages = [];
-    if (typeof error.error.message === 'string') {
-      errorMessages.push(error.error.message);
-    } else {
-      error.error.message.forEach( (err) => {
-        if (err.property === 'lorawanSettings') {
-          err.children.forEach( (element) => {
-            errorMessages = errorMessages.concat(
-              Object.values(element.constraints)
-            );
-          });
-        } else {
-          errorMessages.push(
-            Object.values(err.constraints)
-          );
-        }
-      });
-    }
-    return errorMessages;
   }
 }
