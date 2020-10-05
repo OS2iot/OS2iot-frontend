@@ -2,6 +2,11 @@
     <app-top-bar-single [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar-single>
 </ng-container>
 <div class="row">
+    <div *ngIf="fileFormatErrorMessage" class="error-messages p-3 col-md-10 offset-md-1 mb-5">
+        <ul class="mb-0">
+            {{'APPLICATION.BULK.FILEFORMATERRORMESSAGE' | translate}}
+        </ul>
+      </div>
     <div class="col-12">
         <a class="float-right mx-5" href="../../../assets/docs/iotdevice-lorawan.csv" download="download">
             <fa-icon [icon]="faDownload"></fa-icon>
@@ -14,7 +19,7 @@
 
         <div class="choose-file" attr.data-content="{{'APPLICATION.BULK.DROPFILE' | translate}}"
             (click)="fileInput.click()" appDragDrop (onFileDropped)="handleDropedFile($event)">
-            <input hidden type="file" accept=".xlsx,.xls,.csv" ngf-max-size="20MB" #fileInput
+            <input hidden accept=".csv" type="file" accept=".xlsx,.xls,.csv" ngf-max-size="20MB" #fileInput
                 (change)="handleDropedFile($event.target.files)">
         </div>
         <div class="files-list" *ngFor="let file of files;let i= index">

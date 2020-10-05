@@ -41,7 +41,8 @@
       "TYPE": "Type",
       "IMPORTSTATUS": "Status",
       "ERROR": "Fejl", 
-      "EMPTY": "Der er ingen enheder at vise endnu"
+      "EMPTY": "Der er ingen enheder at vise endnu",
+      "FILEFORMATERRORMESSAGE": "Forkert filformat, upload en .csv fil"
     }
   },
   "GATEWAY": {

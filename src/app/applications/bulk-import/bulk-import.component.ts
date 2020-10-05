@@ -21,6 +21,7 @@ export class BulkImportComponent implements OnInit {
   isLoading = false;
   bulkImport: BulkImport[];
   bulkImportResult: BulkImport[];
+  fileFormatErrorMessage = false;
   files: any = [];
   faTrash = faTrash;
   faDownload = faDownload;
@@ -50,7 +51,12 @@ export class BulkImportComponent implements OnInit {
   }
 
   handleDropedFile(evt: any) {
-    // handle file
+    this.fileFormatErrorMessage = false;
+    if (!this.validateFile(evt[0].name)) {
+      console.log('Selected file format is not supported');
+      this.fileFormatErrorMessage = true;
+      return false;
+    }
     this.bulkImport = [];
     this.bulkImportResult = [];
     for (let index = 0; index < evt.length; index++) {
@@ -82,6 +88,15 @@ export class BulkImportComponent implements OnInit {
       );
       this.isLoading = false;
     };
+  }
+
+  private validateFile(name: string) {
+    const ext = name.substring(name.lastIndexOf('.') + 1);
+    if (ext.toLowerCase() === 'csv') {
+        return true;
+    } else {
+        return false;
+    }
   }
 
   private mapData(data: any[]) {
