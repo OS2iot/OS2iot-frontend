@@ -4,9 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
-import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-profile.model';
-import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
@@ -45,8 +42,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
-        private deviceProfileService: DeviceProfileService,
-        private serviceProfileService: ServiceProfileService,
         private snackBar: MatSnackBar
     ) { }
 
