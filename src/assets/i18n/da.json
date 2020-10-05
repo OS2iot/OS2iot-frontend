@@ -38,12 +38,17 @@
     "DATATARGET-SHOW": "Tilknyttede datatargets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
+      "TEMPLATE": {
+        "GENERIC": "Generic HTTP sample",
+        "LORAWAN": "LoRaWan sample",
+        "SIGFOX": "Sigfox sample"
+      },
       "DOWNLOAD": "Download Sample CSV Fil",
       "DROPFILE": "Klik eller drop din .csv file her",
       "NAME": "Navn",
       "TYPE": "Type",
       "IMPORTSTATUS": "Status",
-      "ERROR": "Fejl", 
+      "ERROR": "Fejl",
       "EMPTY": "Der er ingen enheder at vise endnu",
       "FILEFORMATERRORMESSAGE": "Forkert filformat, upload en .csv fil"
     }

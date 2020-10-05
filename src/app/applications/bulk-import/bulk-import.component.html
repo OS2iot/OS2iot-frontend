@@ -6,12 +6,37 @@
         <ul class="mb-0">
             {{'APPLICATION.BULK.FILEFORMATERRORMESSAGE' | translate}}
         </ul>
-      </div>
+    </div>
     <div class="col-12">
-        <a class="float-right mx-5" href="../../../assets/docs/iotdevice-lorawan.csv" download="download">
-            <fa-icon [icon]="faDownload"></fa-icon>
-            {{'APPLICATION.BULK.DOWNLOAD' | translate}}
-        </a>
+
+        <div class="btn-group float-right">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                {{'APPLICATION.BULK.DOWNLOAD' | translate}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu"
+                attr.aria-labelledby="tableRowDropdown-{{'APPLICATION.BULK.DOWNLOAD' | translate}}">
+                <li class="dropdown-item">
+                    <a href="../../../assets/docs/iotdevice_generichttp.csv" download="download">
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                        {{'APPLICATION.BULK.TEMPLATE.GENERIC' | translate}}
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="../../../assets/docs/iotdevice_lorawan.csv" download="download">
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                        {{'APPLICATION.BULK.TEMPLATE.LORAWAN' | translate}}
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="../../../assets/docs/iotdevice_sigfox.csv" download="download">
+                        <fa-icon [icon]="faDownload"></fa-icon>
+                        {{'APPLICATION.BULK.TEMPLATE.SIGFOX' | translate}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </div>
 <div class="row m-3">
@@ -49,15 +74,15 @@
             <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.IMPORTSTATUS' | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.importStatus}} </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="errorMessages">
             <th mat-header-cell *matHeaderCellDef> {{ 'APPLICATION.BULK.ERROR' | translate }} </th>
-            <td mat-cell *matCellDef="let element"> 
+            <td mat-cell *matCellDef="let element">
                 <ul class="mb-0">
                     <li *ngFor="let error of element.errorMessages">
                         {{error}}
                     </li>
-                </ul>    
+                </ul>
             </td>
         </ng-container>
 
