@@ -19,7 +19,7 @@
 
         <div class="choose-file" attr.data-content="{{'APPLICATION.BULK.DROPFILE' | translate}}"
             (click)="fileInput.click()" appDragDrop (onFileDropped)="handleDropedFile($event)">
-            <input hidden accept=".csv" type="file" accept=".xlsx,.xls,.csv" ngf-max-size="20MB" #fileInput
+            <input hidden accept=".csv" type="file" ngf-max-size="20MB" #fileInput
                 (change)="handleDropedFile($event.target.files)">
         </div>
         <div class="files-list" *ngFor="let file of files;let i= index">
