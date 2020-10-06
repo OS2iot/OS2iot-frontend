@@ -3,8 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'moment/locale/da';
-import { IoTDeviceService } from '../iot-device.service';
-import { IotDevice } from '../iot-device.model';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
+import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 
 
 @Component({

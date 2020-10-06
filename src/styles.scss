@@ -1,3 +1,6 @@
+//Animate.css
+@import '~animate.css/animate.min';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
@@ -9,15 +12,20 @@
 @import 'assets/scss/components/navbar';
 @import 'assets/scss/components/tables';
 @import 'assets/scss/components/topbar';
+@import 'assets/scss/components/list';
 
 //Elements
 @import 'assets/scss/elements/links';
 @import 'assets/scss/elements/buttons';
+@import 'assets/scss/elements/icons';
+@import 'assets/scss/elements/img';
+@import 'assets/scss/elements/textfield';
+@import 'assets/scss/elements/labels';
 
 //Setup
 @import 'assets/scss/setup/base';
 @import 'assets/scss/setup/breakpoints';
-@import 'assets/scss/setup/fonts';
+
 @import 'assets/scss/setup/typography';
 @import 'assets/scss/setup/utilities';
 @import 'assets/scss/setup/variables';

@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { TopBarSingleComponent } from './top-bar-single/top-bar-single.component';
+import { SubBarComponent } from './sub-bar/sub-bar.component';
 
 @NgModule({
   declarations: [
     TopBarComponent,
     TopBarSingleComponent,
+    SubBarComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { TopBarSingleComponent } from './top-bar-single/top-bar-single.component
   exports: [
     TopBarComponent,
     TopBarSingleComponent,
+    SubBarComponent
   ]
 })
 export class TopBarModule { }

@@ -13,7 +13,6 @@ import { PermissionTabelComponent } from './permission-list/permission-tabel/per
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
-;
 
 @NgModule({
   declarations: [

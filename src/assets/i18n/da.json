@@ -13,11 +13,11 @@
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "LORA-GATEWAYS": "LoRaWan Gateways",
+    "LORA-GATEWAYS": "LoRaWAN Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "LoRaWan Profiler",
+    "PROFILES": "LoRaWAN Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
@@ -35,7 +35,23 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
-    "DATATARGET-SHOW": "Tilknyttede datatargets"
+    "DATATARGET-SHOW": "Tilknyttede datatargets",
+    "IMPORT-CSV": "Bulk-import af IoT-enheder",
+    "BULK": {
+      "TEMPLATE": {
+        "GENERIC": "Generic HTTP sample",
+        "LORAWAN": "LoRaWan sample",
+        "SIGFOX": "Sigfox sample"
+      },
+      "DOWNLOAD": "Download Sample CSV Fil",
+      "DROPFILE": "Klik eller drop din .csv file her",
+      "NAME": "Navn",
+      "TYPE": "Type",
+      "IMPORTSTATUS": "Status",
+      "ERROR": "Fejl",
+      "EMPTY": "Der er ingen enheder at vise endnu",
+      "FILEFORMATERRORMESSAGE": "Forkert filformat, upload en .csv fil"
+    }
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -99,7 +115,7 @@
     "SHOW-OPTIONS": "Vis muligheder"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWan Gateway"
+    "CREATE": "Opret LoRaWAN Gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -207,7 +223,7 @@
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
-    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
+    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
@@ -278,7 +294,7 @@
     },
     "SIGFOX": {
       "REGISTEREDATSIGFOX": "Enheden er allerede registreret i SigFox?",
-      "SIGFOXGRUPPEID":"Vælg SigFox gruppe",
+      "SIGFOXGRUPPEID": "Vælg SigFox gruppe",
       "SIGFOXIDENTIFIER": "ID",
       "SIGFOXIDENTIFIER-PLACEHOLDER": "Enhedens unikke id",
       "PAC": "PAC",
@@ -364,7 +380,7 @@
     "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
   },
   "PROFILES": {
-    "NAME": "LoRaWan Profiler",
+    "NAME": "LoRaWAN Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",

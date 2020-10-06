@@ -2,20 +2,24 @@
 @import '../setup/typography';
 
 .icon {
-  &-primary {
+  &--primary {
     font-size: $icon-size-big;
     color: $color-Icons-alternative;
   }
-  &-secondary {
+
+  &--secondary {
     font-size: $icon-size-medium;
     color: $color-Icons-secondary;
   }
-  &-small {
+
+  &--small {
     font-size: $icon-size;
     line-height: 0;
     margin-bottom: 0;
+    color: $color-icon-label;
   }
-  &-disabled {
+
+  &--disabled {
     color: $color-Icons-light;
   }
 }

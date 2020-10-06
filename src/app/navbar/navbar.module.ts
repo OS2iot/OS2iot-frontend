@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalAdminComponent } from './global-admin/global-admin.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { OrganisationDropdownComponent } from './organisation-dropdown/organisation-dropdown.component';
+import { InlineSVGModule } from 'ng-inline-svg';
 import { SigfoxDropdownComponent } from './sigfox-dropdown/sigfox-dropdown.component';
 
 @NgModule({
@@ -26,8 +27,10 @@ import { SigfoxDropdownComponent } from './sigfox-dropdown/sigfox-dropdown.compo
     TranslateModule,
     FontAwesomeModule,
     NGMaterialModule,
+    InlineSVGModule
+
   ],
   exports: [NavbarComponent],
   providers: [RestService, NavbarComponent],
 })
-export class NavbarModule {}
+export class NavbarModule { }
