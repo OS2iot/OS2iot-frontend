@@ -105,10 +105,6 @@ export class BulkImportComponent implements OnInit {
     };
   }
 
-  transferImports() {
-    this.addIoTDevice();
-  }
-
   private validateFile(name: string) {
     const ext = name.substring(name.lastIndexOf('.') + 1);
     if (ext.toLowerCase() === 'csv') {
