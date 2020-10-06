@@ -13,6 +13,13 @@ import { ApplicationsTableComponent } from './applications-list/applications-tab
 import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
+import { SharedModule } from '@shared/shared.module';
+import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DirectivesModule } from '@shared/directives/directives.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+
 
 @NgModule({
     declarations: [
@@ -21,7 +28,8 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
         ApplicationEditComponent,
         ApplicationsListComponent,
         ApplicationsTableComponent,
-        ApplicationsTableRowComponent
+        ApplicationsTableRowComponent,
+        BulkImportComponent
     ],
     exports: [
         ApplicaitonsRoutingModule,
@@ -35,7 +43,12 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
         TranslateModule,
         IotDevicesModule,
         DatatargetModule,
+        DirectivesModule,
+        HttpClientModule,
         FormModule,
-    ]
+        SharedModule,
+        FontAwesomeModule,
+        NGMaterialModule,
+    ],
 })
 export class ApplicationsModule { }

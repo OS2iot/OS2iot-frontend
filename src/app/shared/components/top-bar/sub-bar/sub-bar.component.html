@@ -1,0 +1,25 @@
+<div class="row sub-bar-wrapper">
+    <div class="col-12 d-flex sub-bar align-items-center">
+        <h4>{{title}}</h4>
+        <div class="ml-auto d-flex">
+            <div class="d-flex per-page" *ngIf="selectedSortId">
+                <label class="form-label d-none" for="myApplicationsTableSort">{{ 'SORT.SORT' | translate }}</label>
+                <select id="myApplicationsTableSort" name="myApplicationsTableSort" [(ngModel)]="selectedSortId"
+                    (ngModelChange)="changeSort($event)" class="select-box select-box-md">
+                    <option [value]="option.id" *ngFor="let option of sort">{{ option.label | translate }}</option>
+                </select>
+            </div>
+            <div>
+                <button *ngIf="ctaRouterLinkSecondary" [routerLink]="ctaRouterLinkSecondary" routerLinkActive="active"
+                    class="btn btn-secondary" type="button"
+                    [attr.aria-label]="ctaLabelSecondary">{{ctaLabelSecondary}}</button>
+
+                <button *ngIf="ctaRouterLinkPrimary" [routerLink]="ctaRouterLinkPrimary" routerLinkActive="active"
+                    class="btn btn-primary" type="button"
+                    [attr.aria-label]="ctaLabelPrimary">{{ctaLabelPrimary}}</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
