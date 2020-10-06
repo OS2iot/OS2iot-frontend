@@ -1,3 +1,6 @@
+//Animate.css
+@import '~animate.css/animate.min';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
@@ -13,6 +16,9 @@
 //Elements
 @import 'assets/scss/elements/links';
 @import 'assets/scss/elements/buttons';
+//@import 'assets/scss/elements/icons';
+@import 'assets/scss/elements/img';
+@import 'assets/scss/elements/textfield';
 
 //Setup
 @import 'assets/scss/setup/base';
