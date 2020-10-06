@@ -96,13 +96,17 @@ export class BulkImportComponent implements OnInit {
           if (this.bulkImport?.length === 0) {
             alert('no data in csv');
           } else {
-            this.addIoTDevice();
+            return this.bulkImport;
           }
         }
       }
       );
       this.isLoading = false;
     };
+  }
+
+  transferImports() {
+    this.addIoTDevice();
   }
 
   private validateFile(name: string) {

@@ -46,6 +46,10 @@
                 <fa-icon [icon]="faTrash"></fa-icon>
             </button>
         </div>
+
+    </div>
+    <div class="col-md-6 offset-md-3 mb-5 d-flex justify-content-center">
+        <button (click)="addIoTDevice()" class="btn btn-primary"> Overfør data</button>
     </div>
     <div class="col-md-6 offset-md-3 mb-5">
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
