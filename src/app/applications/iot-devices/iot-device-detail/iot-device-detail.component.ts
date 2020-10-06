@@ -33,7 +33,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public deviceProfileName: string;
     public serviceProfileName: string;
     public downlink = new Downlink();
-    public errorMessages: string[] //= [];
+    public errorMessages: string[];
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
