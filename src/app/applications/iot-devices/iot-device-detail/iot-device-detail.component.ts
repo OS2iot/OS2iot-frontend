@@ -33,6 +33,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public deviceProfileName: string;
     public serviceProfileName: string;
     public downlink = new Downlink();
+    public errorMessages: string[] //= [];
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
@@ -63,6 +64,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     }
 
     startDownlink() {
+        this.errorMessages = [];
         if (this.isValidHex(this.downlink.payload)) {
             console.log('start downlink');
             this.snackBar.open('Element sat i kø', 'Downlink', {
@@ -77,10 +79,18 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         const res = parseInt(input, 16);
         if (res) {
             if (this.device.type === 'SIGFOX' && input.length > 16) {
+                this.translate.get(['IOTDEVICE.DOWNLINK.ERROR-SIGFOX-LENGTH'])
+                    .subscribe(translations => {
+                    this.errorMessages.push(translations['IOTDEVICE.DOWNLINK.ERROR-SIGFOX-LENGTH']);
+                });
                 return false;
             }
             return true;
         } else {
+            this.translate.get(['IOTDEVICE.DOWNLINK.ERROR-FORMAT'])
+                    .subscribe(translations => {
+                    this.errorMessages.push(translations['IOTDEVICE.DOWNLINK.ERROR-FORMAT']);
+                });
             return false;
         }
     }

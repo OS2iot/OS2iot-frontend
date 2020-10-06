@@ -383,7 +383,9 @@
       "PAYLOAD": "payload",
       "PORT": "Port",
       "CONFIRMEDDOWLINK": "Bekræft downlink",
-      "START": "Sæt downlink i kø"
+      "START": "Sæt downlink i kø",
+      "ERROR-SIGFOX-LENGTH": "Fejl i payload længde - payload må ikke overskride 16 karaktere",
+      "ERROR-FORMAT": "Fejl i formatet. Downlink skal være på hexidecimal format: a-f 0-9"
     },
     "DETAIL-TAB": "Detail",
     "DOWNLINK-TAB": "Downlink",
