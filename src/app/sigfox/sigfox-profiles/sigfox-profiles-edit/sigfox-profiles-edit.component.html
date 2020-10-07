@@ -1,1 +1,45 @@
-<p>sigfox-profiles-edit works!</p>
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+<form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+    <div *ngIf="errorMessage" class="error-messages p-3">
+        {{errorMessage | translate}}
+    </div>
+
+    <div class="row mb-5">
+        <div class="form-group mt-3 col-12">
+            <label class="form-label" for="name">{{'ORGANISATION.FORM.NAME' | translate}}</label>*
+            <input type="text" class="form-control" id="name" name="name"
+                [placeholder]="'ORGANISATION.FORM.NAME-PLACEHOLDER' | translate" maxlength="50" required
+                [(ngModel)]="sigfoxDevice.name"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        </div>
+        <!-- Sigfox gruppe -->
+        <div class="form-group mt-3 col-12">
+            <mat-form-field appearance="fill">
+                <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
+                <mat-select matNativeControl name="groupId">
+                    <mat-option *ngFor="let groups of sigfoxDevice.groupId" [value]="sigfoxDevice.groupId">
+                        {{sigfoxDevice.groupId}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+        <!-- Sigfox contract -->
+        <div class="form-group mt-3 col-12">
+            <mat-form-field appearance="fill">
+                <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
+                <mat-select matNativeControl name="contractId">
+                    <mat-option *ngFor="let contractId of sigfoxDevice.contractId" [value]="sigfoxDevice.contractId">
+                        {{sigfoxDevice.contractId}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="form-group mt-5">
+        <button (click)="routeBack()" class="btn btn-secondary"
+            type="button">{{ 'ORGANISATION.FORM.CANCEL' | translate}}</button>
+        <button class="btn btn-primary ml-2" type="submit">{{ 'ORGANISATION.FORM.SAVE' | translate}}</button>
+    </div>
+</form>

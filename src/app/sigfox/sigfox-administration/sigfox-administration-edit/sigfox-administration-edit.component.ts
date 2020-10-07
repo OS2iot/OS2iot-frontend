@@ -68,6 +68,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     this.sigfoxService.createGroupConnection(this.sigfoxGroup)
       .subscribe(
         (response) => {
+
           console.log(response);
           this.routeBack();
         },
