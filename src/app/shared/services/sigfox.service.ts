@@ -1,22 +1,36 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { GatewayResponse, Gateway, GatewayData, GatewayRequest } from '@app/gateway/gateway.model';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChirpstackGatewayService {
+export class SigfoxService {
 
-  private chripstackGatewayUrl = 'chirpstack/gateway';
+  private SIGFOXCONTRACTURL = 'sigfox-contract';
+  private SIGFOXGROUPURL = 'sigfox-group';
+  private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
 
   constructor(private restService: RestService) { }
 
-  public get(id: string, params = {}): Observable<GatewayResponse> {
-    return this.restService.get(this.chripstackGatewayUrl, params, id);
+  public getContracts(groupid: number, params = {}): Observable<any> {
+    return this.restService.get(this.SIGFOXCONTRACTURL, params, groupid);
   }
 
-  public getMultiple(params = {}): Observable<any> {
+  getManyGroups(organisationId: number, params = {}): Observable<any> {
+    return this.restService.get(this.SIGFOXGROUPURL, params, organisationId);
+  }
+
+  getGroup(groupId: number, params = {}): Observable<any> {
+    return this.restService.get(this.SIGFOXGROUPURL, params, groupId);
+  }
+
+  createConnection(body: SigfoxGroup): Observable<any> {
+    return this.restService.post(this.SIGFOXGROUPURL, body);
+  }
+
+/*   public getMultiple(params = {}): Observable<any> {
     return this.restService.get(this.chripstackGatewayUrl, params);
   }
 
@@ -34,5 +48,5 @@ export class ChirpstackGatewayService {
 
   public delete(id: string): Observable<any> {
     return this.restService.delete(this.chripstackGatewayUrl, id);
-  }
+  } */
 }

@@ -192,68 +192,7 @@
     </ng-container>
 
     <ng-container *ngIf="iotDevice.type == sigfoxDevice">
-      <div class="row mb-5">
-        <h3>{{'IOTDEVICE.SIGFOXSETUP' | translate}}</h3>
-      </div>
-      <div class="form-group mt-3 col-12">
-        <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.alreadyRegistered" id="alreadyRegistered" name="registeredAtSigfox">
-          {{'QUESTION.SIGFOX.ALREADYREGISTERED' | translate}}</mat-slide-toggle>
-      </div>
-      <div *ngIf="!iotDevice.sigfoxSettings.alreadyRegistered">
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="groupId">{{'QUESTION.SIGFOX.GROUPID' | translate}}*</label>
-            <select id="groupId" class="form-select" name="groupId"
-              [(ngModel)]="iotDevice.sigfoxSettings.groupId" required
-              [value]="iotDevice.sigfoxSettings.groupId"
-              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('groupId'), 'is-valid' : formFailedSubmit && !errorFields.includes('groupId')}">
-              <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id">
-                {{serviceProfile.name}}
-              </option>
-            </select>
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="deviceTypeId">{{'QUESTION.SIGFOX.DEVICETYPEID' | translate}}*</label>
-          <select id="deviceTypeId" class="form-select" name="deviceTypeId"
-              [(ngModel)]="iotDevice.sigfoxSettings.deviceTypeId" required
-              [value]="iotDevice.sigfoxSettings.deviceTypeId"
-              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceTypeId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceTypeId')}">
-              <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id">
-                {{serviceProfile.name}}
-              </option>
-            </select>
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="pac">{{'QUESTION.SIGFOX.PAC' | translate}}*</label>
-          <input type="text" id="pac" name="pac" maxLength="16"
-            [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate" class="form-control"
-            [(ngModel)]="iotDevice.sigfoxSettings.pac"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pac'), 'is-valid' : formFailedSubmit && !errorFields.includes('pac')}">
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="endProductCertificate">{{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE' | translate}}*</label>
-          <input type="text" id="endProductCertificate" name="endProductCertificate" maxLength="16"
-            [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate" class="form-control"
-            [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('productLicens'), 'is-valid' : formFailedSubmit && !errorFields.includes('productLicens')}">
-        </div>
-        <div class="form-group mt-3 col-12">
-          <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.prototype" id="prototype" name="prototype">
-            {{'QUESTION.SIGFOX.PROTOTYPE' | translate}}</mat-slide-toggle>
-        </div>
-      </div>
-      <div *ngIf="iotDevice.sigfoxSettings.alreadyRegistered">
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="deviceId">{{'QUESTION.SIGFOX.DEVICEID' | translate}}*</label>
-            <select id="deviceId" class="form-select" name="deviceId"
-              [(ngModel)]="iotDevice.sigfoxSettings.deviceId" required
-              [value]="iotDevice.sigfoxSettings.deviceId"
-              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
-              <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id">
-                {{serviceProfile.name}}
-              </option>
-            </select>
-        </div>
-      </div>
+      <app-sigfox-device-edit [iotDevice]="iotDevice"></app-sigfox-device-edit>
     </ng-container>
   
     <div class="form-group mt-5">
