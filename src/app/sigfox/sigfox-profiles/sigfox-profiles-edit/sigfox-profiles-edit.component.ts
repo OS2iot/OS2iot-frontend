@@ -8,6 +8,8 @@ import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-sigfox-profiles-edit',
@@ -16,7 +18,7 @@ import { Location } from '@angular/common';
 })
 export class SigfoxProfilesEditComponent implements OnInit {
   sigfoxDevice = new SigfoxDeviceType();
-  sigfoxDevices: SigfoxDeviceType[];
+  public sigfoxGroups: SigfoxGroup[];
   public errorMessage: string;
   public errorFields: string[];
   public formFailedSubmit = false;
@@ -31,7 +33,8 @@ export class SigfoxProfilesEditComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private sigfoxService: SigfoxService,
-    private location: Location
+    private location: Location,
+    private globalService: SharedVariableService,
   ) { }
 
   ngOnInit(): void {
@@ -47,11 +50,27 @@ export class SigfoxProfilesEditComponent implements OnInit {
     if (!this.id === null) {
       this.getsigfoxDevice(this.id);
     }
+    this.getSigFoxGroups();
+  }
+
+  getSigFoxGroups() {
+    this.sigfoxService.getGroups(this.getCurrentOrganisationId())
+      .subscribe((response) => {
+        this.sigfoxGroups = response.data;
+      },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  getCurrentOrganisationId(): number {
+    return this.globalService.getSelectedOrganisationId();
   }
 
   private getsigfoxDevice(id: string) {
     this.subscription = this.sigfoxService
-      .getDeviceType(id)
+      .getDeviceTypes(this.getCurrentOrganisationId())
       .subscribe((response) => {
         this.sigfoxDevice = response;
       });

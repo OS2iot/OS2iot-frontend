@@ -17,8 +17,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
                 <mat-select matNativeControl name="groupId">
-                    <mat-option *ngFor="let groups of sigfoxDevice.groupId" [value]="sigfoxDevice.groupId">
-                        {{sigfoxDevice.groupId}}
+                    <mat-option *ngFor="let groups of sigfoxGroups" [value]="groups.username">
+                        {{groups.username}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

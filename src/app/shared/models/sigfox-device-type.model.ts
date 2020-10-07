@@ -1,4 +1,4 @@
-import { SigFoxGroup } from './sigfox-group.model';
+import { SigfoxGroup } from './sigfox-group.model';
 
 export class SigfoxDeviceType {
     name: string;
@@ -6,5 +6,5 @@ export class SigfoxDeviceType {
     description: string;
     keepAlive?: number;
     alertEmail?: string;
-    groupId?: SigFoxGroup;
+    groupId?: SigfoxGroup;
 }
