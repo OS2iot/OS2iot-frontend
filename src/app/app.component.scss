@@ -2,8 +2,7 @@
 @import '~src/assets/scss/setup/variables';
 
 #content {
-
-  @include media-breakpoint-up(sm) {
+  @media(min-width: $screen-md-min) {
     padding-left: $navWidth;
   }
 }

@@ -3,17 +3,12 @@
         <h4>Device Profiles</h4>
     </div>
     <div class="col-6">
-        <button class="btn btn-primary float-right" 
-        [routerLink]="['deviceprofile/edit']"
-        routerLinkActive="active">{{'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate}}</button>
+        <button class="btn btn-primary float-right" [routerLink]="['deviceprofile/edit']"
+            routerLinkActive="active">{{'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate}}</button>
     </div>
 </div>
 <hr>
-<div class="row">
-    <div class="col-xs-12">
-        <app-device-profiles-item 
-            *ngFor="let deviceProfile of deviceProfiles; let i = index"
-            (deleteDeviceProfile)="deleteDeviceProfile($event)"
-            [deviceProfile]="deviceProfile"></app-device-profiles-item>
-    </div>
-</div>
+
+<app-device-profiles-item *ngFor="let deviceProfile of deviceProfiles; let i = index"
+    (deleteDeviceProfile)="deleteDeviceProfile($event)" [deviceProfile]="deviceProfile">
+</app-device-profiles-item>
