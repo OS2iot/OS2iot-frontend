@@ -12,6 +12,7 @@ export class SigfoxService {
   private SIGFOXCONTRACTURL = 'sigfox-contract';
   private SIGFOXGROUPURL = 'sigfox-group';
   private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
+  private selectedGroupId: number;
 
   constructor(private restService: RestService) { }
 
@@ -38,10 +39,11 @@ export class SigfoxService {
     return this.restService.put(this.SIGFOXGROUPURL, body, id);
   }
 
+
   //Device-type
 
   public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
-    const body = {groupeId: groupId};
+    const body = { groupeId: groupId };
     return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);
   }
 
