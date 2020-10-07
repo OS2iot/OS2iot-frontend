@@ -1,5 +1,5 @@
 
-export interface SigFoxApiContractInfosContent {
+export interface SigfoxContract {
     id: string;
     name: string;
     order: string;

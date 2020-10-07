@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SigFoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 })
 export class SigfoxAdministrationEditComponent implements OnInit {
   sigfoxGroupId: number;
-  sigfoxGroup = new SigFoxGroup();
+  sigfoxGroup = new SigfoxGroup();
   subscription: Subscription;
   isLoading = false;
 

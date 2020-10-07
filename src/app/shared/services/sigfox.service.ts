@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { SigFoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxGroup, SigfoxgroupsResponse } from '@shared/models/sigfox-group.model';
 import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class SigfoxService {
   }
 
   //Group
-  getGroups(organisationId: number, params = {}): Observable<any> {
+  getGroups(organisationId: number, params = {}): Observable<SigfoxgroupsResponse> {
     return this.restService.get(this.SIGFOXGROUPURL, params, organisationId);
   }
 
@@ -29,22 +29,23 @@ export class SigfoxService {
     return this.restService.get(this.SIGFOXGROUPURL, params, groupId);
   }
 
-  createGroupConnection(body: SigFoxGroup): Observable<any> {
+  createGroupConnection(body: SigfoxGroup): Observable<any> {
     return this.restService.post(this.SIGFOXGROUPURL, body);
   }
 
-  updateGroupConnection(body: SigFoxGroup, id: number) {
+  updateGroupConnection(body: SigfoxGroup, id: number) {
     return this.restService.put(this.SIGFOXGROUPURL, body, id);
   }
 
   //Device-type
 
-  public getDeviceType(id: string, params = {}): Observable<any> {
-    return this.restService.get(this.SIGFOXDEVICETYPEURL, params, id);
+  public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
+    const body = {groupeId: groupId};
+    return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);
   }
 
-  public getDeviceTypes(organizationId: number): Observable<any> {
-    const body = { organizationId };
+  public getDeviceTypes(groupId: number): Observable<any> {
+    const body = { groupId };
     return this.restService.get(this.SIGFOXDEVICETYPEURL, body);
   }
 

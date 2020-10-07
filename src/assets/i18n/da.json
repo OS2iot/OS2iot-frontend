@@ -308,6 +308,7 @@
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
     },
     "SIGFOX": {
+      "TITLE": "SigFox specifikke felter",
       "ALREADYREGISTERED": "Enheden er allerede registreret i SigFox?",
       "GROUPID":"Vælg en SigFox gruppe",
       "DEVICEID": "SigFox enhedens id",
@@ -318,7 +319,8 @@
       "PAC-PLACEHOLDER": "Porting Authorization Code",
       "ENDPRODUCTCERTIFICATE": "Vælg en produkt licens",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
-      "PROTOTYPE": "Opret som prototype"
+      "PROTOTYPE": "Opret som prototype",
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type"
     }
   },
   "QUESTION-LORA-GATEWAY": {
