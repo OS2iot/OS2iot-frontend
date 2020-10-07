@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { SigfoxDeviceType } from '@app/sigfox/sigfox-device-type.model';
+import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

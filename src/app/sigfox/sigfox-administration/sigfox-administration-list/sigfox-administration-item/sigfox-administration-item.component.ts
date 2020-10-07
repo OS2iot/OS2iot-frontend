@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SigFoxGroup } from '@sigfox/sigfox-group.model';
+import { SigFoxGroup } from '@shared/models/sigfox-group.model';
 
 @Component({
   selector: 'app-sigfox-administration-item',

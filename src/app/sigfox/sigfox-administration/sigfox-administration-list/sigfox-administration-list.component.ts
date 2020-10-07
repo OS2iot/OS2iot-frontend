@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { SigFoxGroup } from '@sigfox/sigfox-group.model';
-import { SigfoxGroupService } from '@sigfox/sigfox-group.service';
+import { SigFoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxService } from '@shared/services/sigfox.service';
 
 @Component({
   selector: 'app-sigfox-administration-list',
@@ -20,7 +20,7 @@ export class SigfoxAdministrationListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private globalService: SharedVariableService,
-    private sigfoxGroupService: SigfoxGroupService) {
+    private sigfoxService: SigfoxService) {
     translate.use('da');
   }
 

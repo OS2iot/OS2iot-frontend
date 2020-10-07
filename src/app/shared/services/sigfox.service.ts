@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { SigfoxGroup } from '@shared/models/sigfox-group.model';
+import { SigFoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,13 @@ export class SigfoxService {
 
   constructor(private restService: RestService) { }
 
+  // Contract
   public getContracts(groupid: number, params = {}): Observable<any> {
     return this.restService.get(this.SIGFOXCONTRACTURL, params, groupid);
   }
 
-  getManyGroups(organisationId: number, params = {}): Observable<any> {
+  //Group
+  getGroups(organisationId: number, params = {}): Observable<any> {
     return this.restService.get(this.SIGFOXGROUPURL, params, organisationId);
   }
 
@@ -26,27 +29,30 @@ export class SigfoxService {
     return this.restService.get(this.SIGFOXGROUPURL, params, groupId);
   }
 
-  createConnection(body: SigfoxGroup): Observable<any> {
+  createGroupConnection(body: SigFoxGroup): Observable<any> {
     return this.restService.post(this.SIGFOXGROUPURL, body);
   }
 
-/*   public getMultiple(params = {}): Observable<any> {
-    return this.restService.get(this.chripstackGatewayUrl, params);
+  updateGroupConnection(body: SigFoxGroup, id: number) {
+    return this.restService.put(this.SIGFOXGROUPURL, body, id);
   }
 
-  public post(gateway: Gateway): Observable<GatewayData> {
-    const gatewayRequest: GatewayRequest = new GatewayRequest;
-    gatewayRequest.gateway = gateway;
-    return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, { observe: 'response' });
+  //Device-type
+
+  public getDeviceType(id: string, params = {}): Observable<any> {
+    return this.restService.get(this.SIGFOXDEVICETYPEURL, params, id);
   }
 
-  public put(gateway: Gateway, id: string): Observable<GatewayResponse> {
-    const gatewayRequest: GatewayRequest = new GatewayRequest;
-    gatewayRequest.gateway = gateway;
-    return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id);
+  public getDeviceTypes(organizationId: number): Observable<any> {
+    const body = { organizationId };
+    return this.restService.get(this.SIGFOXDEVICETYPEURL, body);
   }
 
-  public delete(id: string): Observable<any> {
-    return this.restService.delete(this.chripstackGatewayUrl, id);
-  } */
+  public postDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
+    return this.restService.post(this.SIGFOXDEVICETYPEURL, sigfoxGroup, { observe: 'response' });
+  }
+
+  public putDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
+    return this.restService.put(this.SIGFOXDEVICETYPEURL, sigfoxGroup, sigfoxGroup.contractId);
+  }
 }

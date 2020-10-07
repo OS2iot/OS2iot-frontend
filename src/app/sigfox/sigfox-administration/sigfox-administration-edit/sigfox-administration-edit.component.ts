@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SigFoxGroup } from '@app/sigfox/sigfox-group.model';
+import { SigFoxGroup } from '@shared/models/sigfox-group.model';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { SigfoxGroupService } from '@app/sigfox/sigfox-group.service';
 import { NgForm } from '@angular/forms';
+import { SigfoxService } from '@shared/services/sigfox.service';
 
 @Component({
   selector: 'app-sigfox-administration-edit',
@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./sigfox-administration-edit.component.scss']
 })
 export class SigfoxAdministrationEditComponent implements OnInit {
-  id: string;
+  sigfoxGroupId: number;
   sigfoxGroup = new SigFoxGroup();
   subscription: Subscription;
   isLoading = false;
@@ -31,7 +31,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private sigfoxGroupService: SigfoxGroupService,
+    private sigfoxService: SigfoxService,
     private location: Location,
   ) { }
 
@@ -43,14 +43,14 @@ export class SigfoxAdministrationEditComponent implements OnInit {
         this.backButton.label = translations['PROFILES.NAME'];
       });
 
-    this.id = this.route.snapshot.paramMap.get('sigfox');
-    if (this.id) {
-      this.getSigfoxGroup(this.id);
+    this.sigfoxGroupId = +this.route.snapshot.paramMap.get('sigfox');
+    if (this.sigfoxGroupId) {
+      this.getSigfoxGroup(this.sigfoxGroupId);
     }
   }
 
-  getSigfoxGroup(id: string) {
-    this.subscription = this.sigfoxGroupService.getSigfoxGroupOne(id)
+  getSigfoxGroup(id: number) {
+    this.subscription = this.sigfoxService.getGroup(id)
       .subscribe(
         (response) => {
           this.sigfoxGroup = response;
@@ -62,7 +62,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.sigfoxGroupService.post(this.sigfoxGroup)
+    this.sigfoxService.createGroupConnection(this.sigfoxGroup)
       .subscribe(
         (response) => {
           console.log(response);
@@ -75,7 +75,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
   }
 
   private update(): void {
-    this.sigfoxGroupService.put(this.sigfoxGroup)
+    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id)
       .subscribe(
         (response) => {
           this.routeBack();
@@ -115,7 +115,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     const username = form.value.username;
     const password = form.value.password;
 
-    this.sigfoxGroupService.getSigfoxGroupOne(username, password).subscribe(
+    this.sigfoxService.getGroup(username, password).subscribe(
       (x: any) => {
         if (this.sigfoxGroup.id) {
           this.update();
