@@ -31,15 +31,13 @@ export class SigfoxDeviceEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.sharedVariable.getValue().subscribe((organisationId) => {
-      this.organizationId = organisationId;
-    });
+    this.organizationId = this.sharedVariable.getSelectedOrganisationId();
     this.getGroups();
   }
 
   getGroups() {
     this.sigfoxService.getGroups(this.organizationId)
-      .subscribe((response: SigfoxgroupsResponse) => {
+      .subscribe((response: any) => {
         this.sigfoxGroups = response.result;
       });
   }

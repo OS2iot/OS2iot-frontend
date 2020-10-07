@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { SigfoxService } from '@shared/services/sigfox.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-sigfox-administration-edit',
@@ -33,6 +34,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     private translate: TranslateService,
     private sigfoxService: SigfoxService,
     private location: Location,
+    private sharedVariable: SharedVariableService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     if (this.sigfoxGroupId) {
       this.getSigfoxGroup(this.sigfoxGroupId);
     }
+    this.sigfoxGroup.organizationId = this.sharedVariable.getSelectedOrganisationId();
   }
 
   getSigfoxGroup(id: number) {
@@ -112,10 +115,8 @@ export class SigfoxAdministrationEditComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    const username = form.value.username;
-    const password = form.value.password;
 
-    this.sigfoxService.getGroup(username, password).subscribe(
+    this.sigfoxService.getGroup(this.sigfoxGroup.organizationId).subscribe(
       (x: any) => {
         if (this.sigfoxGroup.id) {
           this.update();

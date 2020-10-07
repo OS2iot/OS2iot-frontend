@@ -29,20 +29,14 @@ export class SigfoxAdministrationListComponent implements OnInit {
   }
 
   getSigFoxGroups() {
-    /* this.sigfoxGroupService.getSigfoxGroupMultiple(this.getCurrentOrganisationId()).subscribe((response) => {
-      this.sigfoxGroups = response.data;
-    }); */
-    this.sigfoxGroups = [];
-    const mock: SigfoxGroup = {
-      id: 1,
-      name: 'min gruppe',
-      username: 'jeppe',
-      password: '123',
-      createdAt: null,
-      updatedAt: null,
-      belongsTo: null
-    };
-    this.sigfoxGroups.push(mock);
+    this.sigfoxService.getGroups(this.getCurrentOrganisationId())
+      .subscribe((response) => {
+        this.sigfoxGroups = response.data;
+    },
+    (error) => {
+      console.log(error);
+    }
+    );
   }
 
   getCurrentOrganisationId(): number {

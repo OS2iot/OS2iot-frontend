@@ -21,8 +21,9 @@ export class SigfoxService {
   }
 
   //Group
-  getGroups(organisationId: number, params = {}): Observable<SigfoxgroupsResponse> {
-    return this.restService.get(this.SIGFOXGROUPURL, params, organisationId);
+  getGroups(organizationId: number): Observable<any> {
+    const params = { organizationId: organizationId }
+    return this.restService.get(this.SIGFOXGROUPURL, params);
   }
 
   getGroup(groupId: number, params = {}): Observable<any> {

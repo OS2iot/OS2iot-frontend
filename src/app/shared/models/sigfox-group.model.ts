@@ -1,6 +1,7 @@
 import { Organisation } from '@app/admin/organisation/organisation.model';
+import { OrganizationInterface } from './organization.model';
 
-export class SigfoxGroup {
+export class SigfoxGroup extends OrganizationInterface {
     public id: number;
     public name: string;
     public username: string;
