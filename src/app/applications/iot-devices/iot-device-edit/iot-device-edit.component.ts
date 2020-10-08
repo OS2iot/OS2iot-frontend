@@ -11,6 +11,7 @@ import { ServiceProfile, ServiceProfileResponseMany } from '@profiles/service-pr
 import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
+import { ErrorMessage, ErrorMessageHandler } from '@shared/error-message-handler';
 import { BackButton } from '@shared/models/back-button.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
@@ -35,7 +36,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     public errorFields: string[];
     public formFailedSubmit = false;
     public application: Application;
-    private id: number;
+    private deviceId: number;
     public disableChoseApplication = true;
     public loraDevice = DeviceType.LORAWAN;
     public sigfoxDevice = DeviceType.SIGFOX;
@@ -44,6 +45,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     iotDevice = new IotDevice();
     editmode = false;
     public OTAA = true;
+    private errorHandler = new ErrorMessageHandler();
 
     public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
@@ -60,17 +62,17 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService,
         private location: Location,
-        private shareVariable: SharedVariableService,
+        private shareVariable: SharedVariableService
     ) { }
 
     ngOnInit(): void {
         this.translate.use('da');
         this.iotDevice.applicationId = +this.route.snapshot.paramMap.get('id');
-        this.id = +this.route.snapshot.paramMap.get('deviceId');
+        this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
-        if (this.iotDevice.applicationId && this.id) {
+        if (this.iotDevice.applicationId && this.deviceId) {
             this.editmode = true;
-            this.getDevice(this.id);
+            this.getDevice(this.deviceId);
             this.disableChoseApplication = false;
         }
 
@@ -130,8 +132,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
-        if (this.id) {
-            this.updateIoTDevice(this.id);
+        if (this.deviceId !== 0) {
+            this.updateIoTDevice(this.deviceId);
         } else {
             this.postIoTDevice();
         }
@@ -148,17 +150,17 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private adjustModelBasedOnType() {
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
-                this.iotDevice.lorawanSettings = null;
-                this.iotDevice.sigfoxSettings = null;
+                this.iotDevice.lorawanSettings = undefined;
+                this.iotDevice.sigfoxSettings = undefined;
                 break;
             }
             case DeviceType.LORAWAN: {
                 this.setActivationType();
-                this.iotDevice.sigfoxSettings = null;
+                this.iotDevice.sigfoxSettings = undefined;
                 break;
             }
             case DeviceType.SIGFOX: {
-                this.iotDevice.lorawanSettings = null;
+                this.iotDevice.lorawanSettings = undefined;
                 break;
             }
         }
@@ -197,28 +199,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     handleError(error: HttpErrorResponse) {
-        this.errorFields = [];
-        this.errorMessages = [];
-        if (typeof error.error.message === 'string') {
-            this.errorMessages.push(error.error.message);
-        } else {
-            error.error.message.forEach((err) => {
-                if (err.property === 'lorawanSettings') {
-                    err.children.forEach(element => {
-                        this.errorFields.push(element.property);
-                        this.errorMessages = this.errorMessages.concat(
-                            Object.values(element.constraints)
-                        );
-                    });
-                } else {
-                    this.errorFields.push(err.property);
-                    this.errorMessages = this.errorMessages.concat(
-                        Object.values(err.constraints)
-                    );
-                }
-            });
-        }
-
+        const errorMessage: ErrorMessage = this.errorHandler.handleErrorMessageWithFields(error);
+        this.errorFields = errorMessage.errorFields;
+        this.errorMessages = errorMessage.errorMessages;
     }
 
     onCoordinateKey(event: any) {

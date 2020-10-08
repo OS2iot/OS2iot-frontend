@@ -138,7 +138,8 @@
   },
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
-    "LORAWAN": "LoRaWAN"
+    "LORAWAN": "LoRaWAN",
+    "SIGFOX": "SigFox"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -311,7 +312,7 @@
       "TITLE": "SigFox specifikke felter",
       "ALREADYREGISTERED": "Enheden er allerede registreret i SigFox?",
       "GROUPID":"Vælg en SigFox gruppe",
-      "DEVICEID": "SigFox enhedens id",
+      "DEVICEID": "SigFox enheden",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en enhedstypen",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",

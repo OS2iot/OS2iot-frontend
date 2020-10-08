@@ -60,7 +60,7 @@
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
       </div>
   
-      <div class="form-group mt-3 col-12">
+      <div class="form-group mt-3 col-12" *ngIf="application">
         <label class="form-label" for="applicationId">{{'QUESTION.RELATION-APPLICATION' | translate}}</label>
           {{application.name}}
       </div>

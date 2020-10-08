@@ -5,7 +5,7 @@ import { SigfoxGroup, SigfoxgroupsResponse } from '@shared/models/sigfox-group.m
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { SigfoxContract } from '@shared/models/sigfox-contract.model';
-import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
+import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
 import { DeviceType } from '@shared/enums/device-type';
 @Component({
   selector: 'app-sigfox-device-edit',
@@ -43,7 +43,7 @@ export class SigfoxDeviceEditComponent implements OnInit {
   getGroups() {
     this.sigfoxService.getGroups(this.organizationId)
       .subscribe((response: any) => {
-        this.sigfoxGroups = response.result;
+        this.sigfoxGroups = response.data;
       });
   }
 
@@ -69,8 +69,8 @@ export class SigfoxDeviceEditComponent implements OnInit {
 
   getDeviceTypes(groupId: number) {
     this.sigfoxService.getDeviceTypes(groupId)
-    .subscribe( (response) => {
-      this.sigfoxDeviceTypes = response;
+    .subscribe( (response: SigfoxDeviceTypeResponse) => {
+      this.sigfoxDeviceTypes = response.data;
     });
   }
 

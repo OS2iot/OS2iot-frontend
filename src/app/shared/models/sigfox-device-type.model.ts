@@ -8,3 +8,7 @@ export class SigfoxDeviceType {
     alertEmail?: string;
     groupId?: SigfoxGroup;
 }
+
+export class SigfoxDeviceTypeResponse {
+    data: SigfoxDeviceType[];
+}
