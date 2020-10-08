@@ -26,11 +26,11 @@
     "ADMIN": "Administration",
     "SIGFOX": "SigFox",
     "SIGFOX-ADMIN": "Grupper",
-    "SIGFOX-PROFILES": "Enhedstyper",
-    "SIGFOX-DEVICE-TYPES": "Enhedstyper"
+    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper"
   },
   "SIGFOX": {
     "SIGFOX": "SigFox",
+    "SIGFOX-GROUP": "SigFox Grupper",
     "ADMINITRATION": {
       "NAME": "SigFox Grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
@@ -250,12 +250,13 @@
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
-    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
     "EDIT-PERMISSION": "Redigér brugergruppe",
-    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types"
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types",
+    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",

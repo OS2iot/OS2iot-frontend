@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   templateUrl: './sigfox-administration-edit.component.html',
   styleUrls: ['./sigfox-administration-edit.component.scss']
 })
-export class SigfoxAdministrationEditComponent implements OnInit {
+export class SigfoxAdministrationEditComponent implements OnInit, OnDestroy {
   sigfoxGroupId: number;
   sigfoxGroup = new SigfoxGroup();
   subscription: Subscription;
@@ -39,10 +39,10 @@ export class SigfoxAdministrationEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.translate.get(['PROFILES.NAME', 'FORM.EDIT-DEVICE-PROFILE'])
+    this.translate.get(['SIGFOX.SIGFOX-GROUP', 'FORM.EDIT-SIGFOX-GROUPS'])
       .subscribe(translations => {
-        this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
-        this.backButton.label = translations['PROFILES.NAME'];
+        this.title = translations['FORM.EDIT-SIGFOX-GROUPS'];
+        this.backButton.label = translations['SIGFOX.SIGFOX-GROUP'];
       });
 
     this.sigfoxGroupId = +this.route.snapshot.paramMap.get('sigfox');
