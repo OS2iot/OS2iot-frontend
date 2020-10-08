@@ -47,11 +47,8 @@ export class SigfoxProfileTableComponent implements OnInit, AfterViewInit {
   }
 
   getCurrentGroupIds(): number {
-    return this.sigfoxGroup.id;
+    return this.sigfoxGroup?.id;
   }
-
-
-
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

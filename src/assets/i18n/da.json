@@ -25,22 +25,23 @@
     "LOGIN": "Login",
     "ADMIN": "Administration",
     "SIGFOX": "SigFox",
-    "SIGFOX-ADMIN": "Administration",
-    "SIGFOX-PROFILES": "Profiler"
+    "SIGFOX-ADMIN": "Grupper",
+    "SIGFOX-PROFILES": "Enhedstyper",
+    "SIGFOX-DEVICE-TYPES": "Enhedstyper"
   },
   "SIGFOX": {
     "SIGFOX": "SigFox",
     "ADMINITRATION": {
-      "NAME": "SigFox Adminitration",
+      "NAME": "SigFox Grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
     "PROFILES": {
-      "NAME": "SigFox Profiler",
-      "DEVICE-TYPE": "Sigfox enehdes typer",
+      "NAME": "SigFox Enhedstyper",
+      "DEVICE-TYPE": "Sigfox enhedstyper",
       "DEVICE-TYPE-NAME": "navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
       "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
-      "CREATE-NEW-DEVICE-TYPE": "Opret ny enheds type"
+      "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype"
     }
   },
   "APPLICATION": {
@@ -253,7 +254,8 @@
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
-    "EDIT-PERMISSION": "Redigér brugergruppe"
+    "EDIT-PERMISSION": "Redigér brugergruppe",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -321,7 +323,15 @@
       "ENDPRODUCTCERTIFICATE": "Vælg en produkt licens",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
       "PROTOTYPE": "Opret som prototype",
-      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type"
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "DEVICETYPE": {
+        "NAME": "Navngiv enhedstypen",
+        "NAME-PLACEHOLDER": "XC-123",
+        "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
+        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra SigFox",
+        "DESCRIPTION": "Angiv beskrivelse",
+        "DESCRIPTION-PLACEHOLDER": "Lipsum larum"
+      }
     }
   },
   "QUESTION-LORA-GATEWAY": {

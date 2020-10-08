@@ -43,8 +43,8 @@ export class SigfoxService {
     return this.restService.post(this.SIGFOXGROUPURL, body);
   }
 
-  updateGroupConnection(body: SigfoxGroup, id: number) {
-    return this.restService.put(this.SIGFOXGROUPURL, body, id);
+  updateGroupConnection(body: SigfoxGroup, groupId: number) {
+    return this.restService.put(this.SIGFOXGROUPURL, body, groupId);
   }
 
   // Device-type
@@ -59,7 +59,9 @@ export class SigfoxService {
   }
 
   public postDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
-    return this.restService.post(this.SIGFOXDEVICETYPEURL, sigfoxGroup, { observe: 'response' });
+    const url = this.SIGFOXDEVICETYPEURL + '?groupId=' + sigfoxGroup.groupId.toString();
+    console.log(url);
+    return this.restService.post(url, sigfoxGroup, { observe: 'response' });
   }
 
   public putDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {

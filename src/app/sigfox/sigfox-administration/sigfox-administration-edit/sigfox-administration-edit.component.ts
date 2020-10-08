@@ -119,7 +119,7 @@ export class SigfoxAdministrationEditComponent implements OnInit {
 
     this.sigfoxService.getGroup(this.sigfoxGroup.organizationId).subscribe(
       (x: any) => {
-        if (this.sigfoxGroup.id) {
+        if (this.sigfoxGroup.organizationId) {
           this.update();
         } else {
           this.create();

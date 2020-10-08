@@ -9,6 +9,9 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { SigfoxContract } from '@shared/models/sigfox-contract.model';
+import { ErrorMessage, ErrorMessageHandler } from '@shared/error-message-handler';
 
 @Component({
   selector: 'app-sigfox-profiles-edit',
@@ -16,49 +19,64 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
   styleUrls: ['./sigfox-profiles-edit.component.scss']
 })
 export class SigfoxProfilesEditComponent implements OnInit {
-  sigfoxDevice = new SigfoxDeviceType();
+  sigfoxDeviceType = new SigfoxDeviceType();
   public sigfoxGroups: SigfoxGroup[];
-  public errorMessage: string;
+  public sigfoxContracts: SigfoxContract[];
+  public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
   public backButton: BackButton = { label: '', routerLink: '/sigfox' };
   public title = '';
   public submitButton = '';
-  id: string;
+  organizationId: number;
   subscription: Subscription;
+  errorHandler = new ErrorMessageHandler();
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private sigfoxService: SigfoxService,
-    private location: Location
+    private location: Location,
+    private sharedVariable: SharedVariableService
   ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
     this.translate
-      .get(['NAV.ORGANISATIONS', 'FORM.EDIT-ORGANISATION', 'ORGANISATION.SAVE'])
+      .get(['NAV.SIGFOX-DEVICE-TYPES', 'FORM.EDIT-SIGFOX-DEVICE-TYPE', 'ORGANISATION.SAVE'])
       .subscribe((translations) => {
-        this.backButton.label = translations['NAV.ORGANISATIONS'];
-        this.title = translations['FORM.EDIT-ORGANISATION'];
+        this.backButton.label = translations['NAV.SIGFOX-DEVICE-TYPES'];
+        this.title = translations['FORM.EDIT-SIGFOX-DEVICE-TYPE'];
         this.submitButton = translations['ORGANISATION.SAVE'];
       });
-    this.id = this.route.snapshot.paramMap.get('org-id');
-    if (!this.id === null) {
-      this.getsigfoxDevice(this.id);
-    }
+    this.organizationId = this.sharedVariable.getSelectedOrganisationId();
+    this.getSigFoxGroups(this.organizationId);
   }
 
-  private getsigfoxDevice(id: string) {
-    /* this.subscription = this.sigfoxService.getDeviceType(id)
-      .subscribe((response) => {
-        this.sigfoxDevice = response.data[0];
-      }); */
+  private getSigFoxGroups(orgId: number) {
+    this.sigfoxService.getGroups(orgId)
+      .subscribe((response: any) => {
+        this.sigfoxGroups = response.data;
+      });
+  }
+
+  public changedGroup() {
+    this.sigfoxDeviceType.groupId = +this.sigfoxDeviceType.groupId;
+    this.sigfoxDeviceType.contractId = null;
+    this.getContracts(this.sigfoxDeviceType.groupId);
+    // get contracts
+  }
+
+  private getContracts(groupId: number) {
+    this.sigfoxService.getContracts(groupId)
+      .subscribe( (response: any) => {
+        this.sigfoxContracts = response;
+      });
   }
 
   private create(): void {
-    this.sigfoxService.postDeviceType(this.sigfoxDevice).subscribe(
+    this.sigfoxService.postDeviceType(this.sigfoxDeviceType).subscribe(
       (response) => {
         console.log(response);
         this.routeBack();
@@ -70,7 +88,7 @@ export class SigfoxProfilesEditComponent implements OnInit {
   }
 
   private update(): void {
-    this.sigfoxService.putDeviceType(this.sigfoxDevice).subscribe(
+    this.sigfoxService.putDeviceType(this.sigfoxDeviceType).subscribe(
       (response) => {
         this.routeBack();
       },
@@ -81,7 +99,7 @@ export class SigfoxProfilesEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.sigfoxDevice) {
+    if (this.sigfoxDeviceType.id) {
       this.update();
     } else {
       this.create();
@@ -90,11 +108,10 @@ export class SigfoxProfilesEditComponent implements OnInit {
 
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
-    this.errorMessage = '';
-
-    this.errorMessage = error.error.message;
-    this.errorFields.push('name');
-    this.formFailedSubmit = true;
+    this.errorMessages = [];
+    const errorMessages: ErrorMessage = this.errorHandler.handleErrorMessageWithFields(error);
+    this.errorFields = errorMessages.errorFields;
+    this.errorMessages = errorMessages.errorMessages;
   }
 
   routeBack(): void {
