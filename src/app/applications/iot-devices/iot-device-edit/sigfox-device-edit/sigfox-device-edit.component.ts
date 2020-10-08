@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
-import { SigfoxGroup, SigfoxgroupsResponse } from '@shared/models/sigfox-group.model';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { SigfoxContract } from '@shared/models/sigfox-contract.model';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
-import { DeviceType } from '@shared/enums/device-type';
+import { SigfoxDevice, SigfoxDevicesResponse } from '@sigfox/sigfox-device.model';
 @Component({
   selector: 'app-sigfox-device-edit',
   templateUrl: './sigfox-device-edit.component.html',
@@ -17,10 +16,10 @@ export class SigfoxDeviceEditComponent implements OnInit {
   @Input() iotDevice: IotDevice;
   private organizationId: number;
   public sigfoxGroups: SigfoxGroup[] = [];
+  public sigfoxDevices: SigfoxDevice[];
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
-  public sigfoxContract: SigfoxContract;
   public sigfoxDeviceTypes: SigfoxDeviceType[] = [];
   public editMode = false;
 
@@ -47,24 +46,26 @@ export class SigfoxDeviceEditComponent implements OnInit {
       });
   }
 
-  changeContractAndDeviceType() {
-      this.resetModelOnChangedGroup();
+  getDevicesInGroup(groupId: number) {
+    this.sigfoxService.getDevices(groupId)
+      .subscribe((response: SigfoxDevicesResponse) => {
+        this.sigfoxDevices = response.data;
+      });
+  }
+
+  onGroupChange() {
+      this.adjustModelOnChangedGroup();
       if (this.iotDevice.sigfoxSettings.groupId) {
-        this.getContracts(this.iotDevice?.sigfoxSettings?.groupId);
         this.getDeviceTypes(this.iotDevice?.sigfoxSettings?.groupId);
+        this.getDevicesInGroup(this.iotDevice?.sigfoxSettings?.groupId);
       }
   }
 
-  resetModelOnChangedGroup() {
+  adjustModelOnChangedGroup() {
+    this.iotDevice.sigfoxSettings.groupId = +this.iotDevice.sigfoxSettings.groupId;
     this.iotDevice.sigfoxSettings.endProductCertificate = null;
     this.iotDevice.sigfoxSettings.deviceTypeId = null;
     this.iotDevice.sigfoxSettings.deviceId = null;
-  }
-  getContracts(groupId: number) {
-    this.sigfoxService.getContracts(groupId)
-    .subscribe( (response) => {
-      this.sigfoxContract = response;
-    });
   }
 
   getDeviceTypes(groupId: number) {

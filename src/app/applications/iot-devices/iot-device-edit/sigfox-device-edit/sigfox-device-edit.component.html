@@ -21,7 +21,7 @@
         <select id="groupId" class="form-select" name="groupId"
           [(ngModel)]="iotDevice.sigfoxSettings.groupId" required
           [value]="iotDevice.sigfoxSettings.groupId"
-          (change)="changeContractAndDeviceType()"
+          (change)="onGroupChange()"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('groupId'), 'is-valid' : formFailedSubmit && !errorFields.includes('groupId')}">
           <option *ngFor="let group of sigfoxGroups" [value]="group.id">
             {{group.sigFoxGroupData.name}}
@@ -30,10 +30,10 @@
   </div>
   <div *ngIf="iotDevice.sigfoxSettings.groupId">
     <div class="form-group mt-3 col-12">
-      <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.alreadyRegistered" id="alreadyRegistered" name="registeredAtSigfox">
-        {{'QUESTION.SIGFOX.ALREADYREGISTERED' | translate}}</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend" id="connectToExistingDeviceInBackend" name="registeredAtSigfox">
+        {{'QUESTION.SIGFOX.CONNECTTOEXISTINGDEVICEINBACKEND' | translate}}</mat-slide-toggle>
     </div>
-    <div *ngIf="!iotDevice.sigfoxSettings.alreadyRegistered">
+    <div *ngIf="!iotDevice.sigfoxSettings.connectToExistingDeviceInBackend">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceTypeId">{{'QUESTION.SIGFOX.DEVICETYPEID' | translate}}*</label>
         <select id="deviceTypeId" class="form-select" name="deviceTypeId"
@@ -71,14 +71,14 @@
           {{'QUESTION.SIGFOX.PROTOTYPE' | translate}}</mat-slide-toggle>
       </div>
     </div>
-    <div *ngIf="iotDevice.sigfoxSettings.alreadyRegistered">
+    <div *ngIf="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceId">{{'QUESTION.SIGFOX.DEVICEID' | translate}}*</label>
           <select id="deviceId" class="form-select" name="deviceId"
             [(ngModel)]="iotDevice.sigfoxSettings.deviceId" required
             [value]="iotDevice.sigfoxSettings.deviceId"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
-            <option *ngFor="let element of sigfoxGroups" [value]="element.id">
+            <option *ngFor="let element of sigfoxDevices" [value]="element.id">
               {{element.name}}
             </option>
           </select>

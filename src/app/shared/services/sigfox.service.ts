@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { SigfoxGroup, SigfoxgroupsResponse } from '@shared/models/sigfox-group.model';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
+import { SigfoxDevicesResponse } from '@sigfox/sigfox-device.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +11,27 @@ import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfo
 export class SigfoxService {
 
   private SIGFOXCONTRACTURL = 'sigfox-contract';
+  private SIGFOXDEVICEURL = 'sigfox-api-device';
   private SIGFOXGROUPURL = 'sigfox-group';
   private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
-  private selectedGroupId: number;
 
   constructor(private restService: RestService) { }
 
   // Contract
-  public getContracts(groupid: number, params = {}): Observable<any> {
-    return this.restService.get(this.SIGFOXCONTRACTURL, params, groupid);
+  public getContracts(groupId: number): Observable<any> {
+    const body = {groupId};
+    return this.restService.get(this.SIGFOXCONTRACTURL, body);
   }
 
-  //Group
+  // device
+  public getDevices(groupId: number): Observable<SigfoxDevicesResponse> {
+    const body = {groupId};
+    return this.restService.get(this.SIGFOXDEVICEURL, body);
+  }
+
+  // Group
   getGroups(organizationId: number): Observable<any> {
-    const params = { organizationId: organizationId }
+    const params = {organizationId};
     return this.restService.get(this.SIGFOXGROUPURL, params);
   }
 
@@ -39,9 +47,7 @@ export class SigfoxService {
     return this.restService.put(this.SIGFOXGROUPURL, body, id);
   }
 
-
-  //Device-type
-
+  // Device-type
   public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
     const body = { groupeId: groupId };
     return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);

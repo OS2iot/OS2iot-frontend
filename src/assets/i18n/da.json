@@ -310,7 +310,7 @@
     },
     "SIGFOX": {
       "TITLE": "SigFox specifikke felter",
-      "ALREADYREGISTERED": "Enheden er allerede registreret i SigFox?",
+      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i SigFox?",
       "GROUPID":"Vælg en SigFox gruppe",
       "DEVICEID": "SigFox enheden",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
