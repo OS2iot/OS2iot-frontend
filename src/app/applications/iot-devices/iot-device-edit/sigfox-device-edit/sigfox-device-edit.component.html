@@ -2,43 +2,30 @@
   <div class="row mb-5">
     <h3>{{'QUESTION.SIGFOX.TITLE' | translate}}</h3>
   </div>
-  <div *ngIf="editMode">
-    <div class="form-group mt-3 col-12">
-      <label class="form-label" for="deviceTypeId">{{'QUESTION.SIGFOX.DEVICETYPEID' | translate}}*</label>
-      <select id="deviceTypeId" class="form-select" name="deviceTypeId"
-        [(ngModel)]="iotDevice.sigfoxSettings.deviceTypeId" required
-        [value]="iotDevice.sigfoxSettings.deviceTypeId"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceTypeId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceTypeId')}">
-        <option *ngFor="let deviceType of sigfoxDeviceTypes" [value]="deviceType.id">
-          {{deviceType.name}}
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="groupId">{{'QUESTION.SIGFOX.GROUPID' | translate}}*</label>
+      <select id="groupId" class="form-select" name="groupId"
+        [(ngModel)]="iotDevice.sigFoxSettings.groupId" required
+        [value]="iotDevice.sigFoxSettings.groupId"
+        (change)="onGroupChange()"
+        [disabled]="editMode"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('groupId'), 'is-valid' : formFailedSubmit && !errorFields.includes('groupId')}">
+        <option *ngFor="let group of sigfoxGroups" [value]="group.id">
+          {{group.sigFoxGroupData.name}}
         </option>
       </select>
-    </div>
   </div>
-  <div *ngIf="!editMode">
-    <div class="form-group mt-3 col-12">
-      <label class="form-label" for="groupId">{{'QUESTION.SIGFOX.GROUPID' | translate}}*</label>
-        <select id="groupId" class="form-select" name="groupId"
-          [(ngModel)]="iotDevice.sigfoxSettings.groupId" required
-          [value]="iotDevice.sigfoxSettings.groupId"
-          (change)="onGroupChange()"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('groupId'), 'is-valid' : formFailedSubmit && !errorFields.includes('groupId')}">
-          <option *ngFor="let group of sigfoxGroups" [value]="group.id">
-            {{group.sigFoxGroupData.name}}
-          </option>
-        </select>
-  </div>
-  <div *ngIf="iotDevice.sigfoxSettings.groupId">
-    <div class="form-group mt-3 col-12">
-      <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend" id="connectToExistingDeviceInBackend" name="registeredAtSigfox">
+  <div *ngIf="iotDevice.sigFoxSettings.groupId">
+    <div class="form-group mt-3 col-12" *ngIf="!editMode">
+      <mat-slide-toggle [(ngModel)]="iotDevice.sigFoxSettings.connectToExistingDeviceInBackend" id="connectToExistingDeviceInBackend" name="registeredAtSigfox">
         {{'QUESTION.SIGFOX.CONNECTTOEXISTINGDEVICEINBACKEND' | translate}}</mat-slide-toggle>
     </div>
-    <div *ngIf="!iotDevice.sigfoxSettings.connectToExistingDeviceInBackend">
+    <div *ngIf="!iotDevice.sigFoxSettings.connectToExistingDeviceInBackend || editMode">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceTypeId">{{'QUESTION.SIGFOX.DEVICETYPEID' | translate}}*</label>
         <select id="deviceTypeId" class="form-select" name="deviceTypeId"
-          [(ngModel)]="iotDevice.sigfoxSettings.deviceTypeId" required
-          [value]="iotDevice.sigfoxSettings.deviceTypeId"
+          [(ngModel)]="iotDevice.sigFoxSettings.deviceTypeId" required
+          [value]="iotDevice.sigFoxSettings.deviceTypeId"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceTypeId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceTypeId')}">
           <option *ngFor="let deviceType of sigfoxDeviceTypes" [value]="deviceType.id">
             {{deviceType.name}}
@@ -49,34 +36,37 @@
         <label class="form-label" for="endProductCertificate">{{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE' | translate}}*</label>
         <input type="text" id="endProductCertificate" name="endProductCertificate" maxLength="16"
           [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
+          [(ngModel)]="iotDevice.sigFoxSettings.endProductCertificate"
+          [disabled]="editMode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('endProductCertificate'), 'is-valid' : formFailedSubmit && !errorFields.includes('endProductCertificate')}">
       </div>
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="pac">{{'QUESTION.SIGFOX.PAC' | translate}}*</label>
         <input type="text" id="pac" name="pac" maxLength="16"
           [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.pac" maxlength="16"
+          [(ngModel)]="iotDevice.sigFoxSettings.pac" maxlength="16"
+          [disabled]="editMode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pac'), 'is-valid' : formFailedSubmit && !errorFields.includes('pac')}">
       </div>
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceId">{{'QUESTION.SIGFOX.DEVICEID' | translate}}*</label>
         <input type="text" id="deviceId" name="deviceId" maxLength="16"
           [placeholder]="'QUESTION.SIGFOX.DEVICEID-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.deviceId" maxlength="16"
+          [(ngModel)]="iotDevice.sigFoxSettings.deviceId" maxlength="16"
+          [disabled]="editMode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
       </div>
       <div class="form-group mt-3 col-12">
-        <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.prototype" id="prototype" name="prototype">
+        <mat-slide-toggle [(ngModel)]="iotDevice.sigFoxSettings.prototype" [disabled]="editMode" id="prototype" name="prototype">
           {{'QUESTION.SIGFOX.PROTOTYPE' | translate}}</mat-slide-toggle>
       </div>
     </div>
-    <div *ngIf="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend">
+    <div *ngIf="iotDevice.sigFoxSettings.connectToExistingDeviceInBackend && !editMode">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceId">{{'QUESTION.SIGFOX.DEVICEID' | translate}}*</label>
           <select id="deviceId" class="form-select" name="deviceId"
-            [(ngModel)]="iotDevice.sigfoxSettings.deviceId" required
-            [value]="iotDevice.sigfoxSettings.deviceId"
+            [(ngModel)]="iotDevice.sigFoxSettings.deviceId" required
+            [value]="iotDevice.sigFoxSettings.deviceId"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
             <option *ngFor="let element of sigfoxDevices" [value]="element.id">
               {{element.name}}
@@ -84,8 +74,7 @@
           </select>
       </div>  
     </div>
-    </div>
-    <div *ngIf="!iotDevice.sigfoxSettings.groupId">
+    <div *ngIf="!iotDevice.sigFoxSettings.groupId">
       <h3>{{'QUESTION.SIGFOX.SELECTGROUPFIRST' | translate}}</h3>
     </div>
   </div>

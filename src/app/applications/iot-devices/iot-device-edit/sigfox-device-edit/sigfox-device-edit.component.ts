@@ -36,9 +36,9 @@ export class SigfoxDeviceEditComponent implements OnInit {
     this.getGroups();
     if (this.iotDevice?.id) {
       this.editMode = true;
+      this.getDeviceTypes(this.iotDevice.sigFoxSettings.groupId);
     }
   }
-
   getGroups() {
     this.sigfoxService.getGroups(this.organizationId)
       .subscribe((response: any) => {
@@ -55,17 +55,17 @@ export class SigfoxDeviceEditComponent implements OnInit {
 
   onGroupChange() {
       this.adjustModelOnChangedGroup();
-      if (this.iotDevice.sigfoxSettings.groupId) {
-        this.getDeviceTypes(this.iotDevice?.sigfoxSettings?.groupId);
-        this.getDevicesInGroup(this.iotDevice?.sigfoxSettings?.groupId);
+      if (this.iotDevice.sigFoxSettings.groupId) {
+        this.getDeviceTypes(this.iotDevice?.sigFoxSettings?.groupId);
+        this.getDevicesInGroup(this.iotDevice?.sigFoxSettings?.groupId);
       }
   }
 
   adjustModelOnChangedGroup() {
-    this.iotDevice.sigfoxSettings.groupId = +this.iotDevice.sigfoxSettings.groupId;
-    this.iotDevice.sigfoxSettings.endProductCertificate = null;
-    this.iotDevice.sigfoxSettings.deviceTypeId = null;
-    this.iotDevice.sigfoxSettings.deviceId = null;
+    this.iotDevice.sigFoxSettings.groupId = +this.iotDevice.sigFoxSettings.groupId;
+    this.iotDevice.sigFoxSettings.endProductCertificate = null;
+    this.iotDevice.sigFoxSettings.deviceTypeId = null;
+    this.iotDevice.sigFoxSettings.deviceId = null;
   }
 
   getDeviceTypes(groupId: number) {

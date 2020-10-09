@@ -102,6 +102,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
                 this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
+                if (device.sigFoxSettings) {
+                    //this.iotDevice.sigfoxSettings.groupId = device.sigfoxSettings.
+                }
             });
     }
 
@@ -151,12 +154,12 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
                 this.iotDevice.lorawanSettings = undefined;
-                this.iotDevice.sigfoxSettings = undefined;
+                this.iotDevice.sigFoxSettings = undefined;
                 break;
             }
             case DeviceType.LORAWAN: {
                 this.setActivationType();
-                this.iotDevice.sigfoxSettings = undefined;
+                this.iotDevice.sigFoxSettings = undefined;
                 break;
             }
             case DeviceType.SIGFOX: {

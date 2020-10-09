@@ -24,10 +24,10 @@ export class IotDevice {
     latitude = 0;
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
-    sigfoxSettings = new SigfoxSettings();
+    sigFoxSettings = new SigfoxSettings();
 }
 
-export interface IotDeviceData {
+export interface IotDevicesResponse {
     data: IotDevice[];
     ok?: boolean;
     count?: number;

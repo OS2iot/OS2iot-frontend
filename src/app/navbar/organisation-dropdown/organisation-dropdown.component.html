@@ -14,7 +14,11 @@
         <fa-icon [icon]="faLayergroup" class="navbar-icon"></fa-icon>
     </li>
     <li>
-        <app-sigfox-dropdown></app-sigfox-dropdown>
+        <a routerLink="/sigfox/administration" routerLinkActive="active"
+                class="nav-link pl-5 position-relative rounded">
+                {{'NAV.SIGFOX-ADMIN' | translate}}
+            </a>
+        <fa-icon [icon]="faToolbox" class="navbar-icon"></fa-icon>
     </li>
     <div *ngIf="user && isOrganisationAdmin(orgSelect.value)">
         <li class="nav-item">
