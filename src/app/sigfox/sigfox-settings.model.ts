@@ -8,10 +8,10 @@ export class SigfoxSettings {
     pac?: string;
     endProductCertificate?: string;
     prototype =  false;
-    sigFoxGroupData: SigFoxGroupData;
+    sigfoxGroupData: SigfoxGroupData;
 }
 
-export interface SigFoxGroupData {
+export interface SigfoxGroupData {
     id: string;
     name: string;
     description: string;

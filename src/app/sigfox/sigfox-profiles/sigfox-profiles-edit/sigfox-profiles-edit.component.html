@@ -38,7 +38,7 @@
                 <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
                 <mat-select matNativeControl name="groupId" [(ngModel)]="sigfoxDeviceType.groupId" (selectionChange)="changedGroup()">
                     <mat-option *ngFor="let group of sigfoxGroups" [value]="group.id" >
-                        {{group.sigFoxGroupData.name}}
+                        {{group.sigfoxGroupData.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

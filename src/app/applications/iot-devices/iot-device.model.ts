@@ -24,7 +24,7 @@ export class IotDevice {
     latitude = 0;
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
-    sigFoxSettings = new SigfoxSettings();
+    sigfoxSettings = new SigfoxSettings();
 }
 
 export interface IotDevicesResponse {

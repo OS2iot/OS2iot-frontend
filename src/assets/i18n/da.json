@@ -321,7 +321,7 @@
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
       "PAC": "PAC",
       "PAC-PLACEHOLDER": "Porting Authorization Code",
-      "ENDPRODUCTCERTIFICATE": "Vælg en produkt licens",
+      "ENDPRODUCTCERTIFICATE": "Angiv en produkt licens",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
       "PROTOTYPE": "Opret som prototype",
       "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
