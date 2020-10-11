@@ -26,18 +26,20 @@
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('alertEmail'), 'is-valid' : formFailedSubmit && !errorFields.includes('alertEmail')}">
         </div>
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="description">{{'QUESTION.SIGFOX.DEVICETYPE.DESCRIPTION' | translate}}</label>*
+            <label class="form-label"
+                for="description">{{'QUESTION.SIGFOX.DEVICETYPE.DESCRIPTION' | translate}}</label>*
             <input type="text" class="form-control" id="description" name="description"
-                [placeholder]="'QUESTION.SIGFOX.DEVICETYPE.DESCRIPTION-PLACEHOLDER' | translate" maxlength="300" required
-                [(ngModel)]="sigfoxDeviceType.description"
+                [placeholder]="'QUESTION.SIGFOX.DEVICETYPE.DESCRIPTION-PLACEHOLDER' | translate" maxlength="300"
+                required [(ngModel)]="sigfoxDeviceType.description"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('description'), 'is-valid' : formFailedSubmit && !errorFields.includes('description')}">
         </div>
         <!-- Sigfox gruppe -->
         <div class="form-group mt-3 col-12">
             <mat-form-field appearance="fill">
                 <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
-                <mat-select matNativeControl name="groupId" [(ngModel)]="sigfoxDeviceType.groupId" (selectionChange)="changedGroup()">
-                    <mat-option *ngFor="let group of sigfoxGroups" [value]="group.id" >
+                <mat-select matNativeControl name="groupId" [(ngModel)]="sigfoxDeviceType.groupId"
+                    (selectionChange)="changedGroup()">
+                    <mat-option *ngFor="let group of sigfoxGroups" [value]="group.id">
                         {{group.sigfoxGroupData.name}}
                     </mat-option>
                 </mat-select>

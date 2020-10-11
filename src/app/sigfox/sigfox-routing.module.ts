@@ -1,23 +1,23 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { SigfoxDeviceTypesEditComponent } from './sigfox-device-types-edit/sigfox-device-types-edit.component';
-import { SigfoxDeviceTypesComponent } from './sigfox-device-types/sigfox-device-types.component';
 import { SigfoxGroupsEditComponent } from './sigfox-groups-edit/sigfox-groups-edit.component';
-import { SigfoxGroupsComponent } from './sigfox-groups/sigfox-groups.component';
+import { SigfoxGroupsListComponent } from './sigfox-groups-list/sigfox-groups-list.component';
+import { SigfoxGroupsDetailComponent } from './sigfox-groups-detail/sigfox-groups-detail.component';
+import { SigfoxDeviceTypesEditComponent } from './sigfox-groups-detail/sigfox-device-types-edit/sigfox-device-types-edit.component';
 
 const routes: Routes = [
     {
-        path: 'sigfox-groups',
+        path: '',
         children: [
-            { path: '', component: SigfoxGroupsComponent },
+            { path: '', component: SigfoxGroupsListComponent },
             { path: 'new', component: SigfoxGroupsEditComponent },
-            { path: ':id/edit', component: SigfoxGroupsEditComponent },
+            { path: ':id/edit-group', component: SigfoxGroupsEditComponent },
             {
                 path: ':id', children: [
-                    { path: '', component: SigfoxDeviceTypesComponent },
-                    { path: ':id/edit', component: SigfoxDeviceTypesEditComponent },
-                    { path: 'edit', component: SigfoxDeviceTypesEditComponent }
+                    { path: '', component: SigfoxGroupsDetailComponent },
+                    { path: ':id/edit-device-type', component: SigfoxDeviceTypesEditComponent },
+                    { path: 'edit-device-type', component: SigfoxDeviceTypesEditComponent }
                 ]
             }
         ]

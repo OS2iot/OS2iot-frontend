@@ -102,6 +102,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                     this.iotDevice.latitude = device.location.coordinates[1];
                 }
                 this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
+                if (device.sigfoxSettings) {
+                    //this.iotDevice.sigfoxSettings.groupId = device.sigfoxSettings.
+                }
             });
     }
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SigfoxDeviceTypesComponent } from './sigfox-device-types.component';
+import { SigfoxGroupsDetailComponent } from './sigfox-groups-detail.component';
 
-describe('SigfoxDeviceTypesComponent', () => {
-  let component: SigfoxDeviceTypesComponent;
-  let fixture: ComponentFixture<SigfoxDeviceTypesComponent>;
+describe('SigfoxGroupsDetailComponent', () => {
+  let component: SigfoxGroupsDetailComponent;
+  let fixture: ComponentFixture<SigfoxGroupsDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SigfoxDeviceTypesComponent ]
+      declarations: [ SigfoxGroupsDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SigfoxDeviceTypesComponent);
+    fixture = TestBed.createComponent(SigfoxGroupsDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

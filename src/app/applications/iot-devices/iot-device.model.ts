@@ -27,7 +27,7 @@ export class IotDevice {
     sigfoxSettings = new SigfoxSettings();
 }
 
-export interface IotDeviceData {
+export interface IotDevicesResponse {
     data: IotDevice[];
     ok?: boolean;
     count?: number;

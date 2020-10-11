@@ -10,18 +10,21 @@ import { SharedModule } from '@shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SigfoxGroupsEditComponent } from './sigfox-groups-edit/sigfox-groups-edit.component';
-import { SigfoxDeviceTypesComponent } from './sigfox-device-types/sigfox-device-types.component';
-import { SigfoxDeviceTypesEditComponent } from './sigfox-device-types-edit/sigfox-device-types-edit.component';
-import { SigfoxDeviceTypeTableComponent } from './sigfox-device-types/sigfox-device-type-table/sigfox-device-type-table.component';
-import { SigfoxGroupsComponent } from './sigfox-groups/sigfox-groups.component';
+import { SigfoxGroupsListComponent } from './sigfox-groups-list/sigfox-groups-list.component';
+import { SigfoxGroupsDetailComponent } from './sigfox-groups-detail/sigfox-groups-detail.component';
+import { SigfoxDeviceTypeTableComponent } from './sigfox-groups-detail/sigfox-device-type-table/sigfox-device-type-table.component';
+import { SigfoxDeviceTypesEditComponent } from './sigfox-groups-detail/sigfox-device-types-edit/sigfox-device-types-edit.component';
+import { SigfoxGroupsListItemComponent } from './sigfox-groups-list/sigfox-groups-list-item/sigfox-groups-list-item.component';
 
 @NgModule({
   declarations: [
     SigfoxGroupsEditComponent,
-    SigfoxDeviceTypesComponent,
     SigfoxDeviceTypesEditComponent,
     SigfoxDeviceTypeTableComponent,
-    SigfoxGroupsComponent
+    SigfoxGroupsListComponent,
+    SigfoxGroupsDetailComponent,
+    SigfoxGroupsListItemComponent
+
   ],
   imports: [
     CommonModule,

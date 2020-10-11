@@ -1,0 +1,12 @@
+<div class=" list-group-item mb-1 clearfix" routerLinkActive="active">
+    <div class="row">
+        <div class="col-9 pull-left d-flex align-items-center">
+            <a [routerLink]="[sigfoxGroup.id]" class="container-fluid">
+                {{ sigfoxGroup.name}}
+            </a>
+            <button mat-icon-button (click)="onEditSigfoxGroup($event)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

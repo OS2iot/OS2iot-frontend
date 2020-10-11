@@ -7,16 +7,15 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
-  selector: 'app-sigfox-groups',
-  templateUrl: './sigfox-groups.component.html',
-  styleUrls: ['./sigfox-groups.component.scss']
+  selector: 'app-sigfox-groups-list',
+  templateUrl: './sigfox-groups-list.component.html',
+  styleUrls: ['./sigfox-groups-list.component.scss']
 })
-export class SigfoxGroupsComponent implements OnInit {
+export class SigfoxGroupsListComponent implements OnInit {
   faDatabase = faDatabase;
   faToolbox = faToolbox;
 
   public sigfoxGroups: SigfoxGroup[];
-  public sigfoxGroup: SigfoxGroup;
 
   constructor(
     public translate: TranslateService,
@@ -47,10 +46,6 @@ export class SigfoxGroupsComponent implements OnInit {
   }
 
   onNewGroup() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
-  }
-
-  onEditSigfoxGroup() {
-    this.router.navigate([this.sigfoxGroup.id, 'edit'], { relativeTo: this.route });
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }

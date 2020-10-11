@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SigfoxGroupsComponent } from './sigfox-groups.component';
+import { SigfoxGroupsListComponent } from './sigfox-groups-list.component';
 
-describe('SigfoxGroupsComponent', () => {
-  let component: SigfoxGroupsComponent;
-  let fixture: ComponentFixture<SigfoxGroupsComponent>;
+describe('SigfoxGroupsListComponent', () => {
+  let component: SigfoxGroupsListComponent;
+  let fixture: ComponentFixture<SigfoxGroupsListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SigfoxGroupsComponent ]
+      declarations: [ SigfoxGroupsListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SigfoxGroupsComponent);
+    fixture = TestBed.createComponent(SigfoxGroupsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

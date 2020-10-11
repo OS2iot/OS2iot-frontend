@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   templateUrl: './sigfox-device-type-table.component.html',
   styleUrls: ['./sigfox-device-type-table.component.scss']
 })
-export class SigfoxDeviceTypeTableComponent implements OnInit {
+export class SigfoxDeviceTypeTableComponent implements OnInit, AfterViewInit {
   public sigfoxDevices: SigfoxDeviceType[];
   public sigfoxGroup: SigfoxGroup;
   public dataSource = new MatTableDataSource<SigfoxDeviceType>();
@@ -21,9 +21,7 @@ export class SigfoxDeviceTypeTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'contractId', 'alertEmail'];
 
   constructor(
-    private route: ActivatedRoute,
     private translate: TranslateService,
-    private globalService: SharedVariableService,
     private sigfoxService: SigfoxService,
   ) {
     this.translate.use('da');

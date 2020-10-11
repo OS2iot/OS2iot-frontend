@@ -36,9 +36,9 @@ export class SigfoxDeviceEditComponent implements OnInit {
     this.getGroups();
     if (this.iotDevice?.id) {
       this.editMode = true;
+      this.getDeviceTypes(this.iotDevice.sigfoxSettings.groupId);
     }
   }
-
   getGroups() {
     this.sigfoxService.getGroups(this.organizationId)
       .subscribe((response: any) => {

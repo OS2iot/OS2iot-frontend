@@ -1,7 +1,7 @@
 <app-top-bar [showSelectedSort]="false" [title]="'SIGFOX.ADMINITRATION.NAME' | translate"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3">
-    <mat-list>
+    <!-- <mat-list>
         <div class="row mt-5">
             <div class="col-6">
                 <h4>Liste over grupper</h4>
@@ -13,27 +13,25 @@
         </div>
         <hr>
         <mat-selection-list [multiple]="false">
-            <mat-list-option *ngFor="let sigfoxGroup of sigfoxGroups">
+            <mat-list-option *ngFor="let group of sigfoxGroups ; let i = index" [value]="i">
 
 
-                <a mat-list-item [routerLink]="[sigfoxGroup.id]">
+                <a mat-list-item [routerLink]="[group.id]">
                     <span class=" a" matLine>
-                        <fa-icon [icon]="faToolbox"></fa-icon>{{ sigfoxGroup.sigFoxGroupData.name }}
+                        <fa-icon [icon]="faToolbox"></fa-icon>
+                        {{ group.sigfoxGroupData.name }}
                     </span>
-                    <!-- <button mat-icon-button (click)="onAdd($event)">
-                    <mat-icon>add</mat-icon>
-                </button> -->
                     <button mat-icon-button (click)="onEditSigfoxGroup($event)">
-                        <mat-icon>delete</mat-icon>
+                        <mat-icon>edit</mat-icon>
                     </button>
                 </a>
 
             </mat-list-option>
         </mat-selection-list>
-    </mat-list>
+    </mat-list> -->
 
 
-    <!-- <div class="row mt-5">
+    <div class="row mt-5">
         <div class="col-6">
             <h4>Liste over grupper</h4>
         </div>
@@ -45,9 +43,9 @@
     <hr>
     <div class="row">
         <div class="col-xs-12">
-            <app-sigfox-administration-item *ngFor="let group of sigfoxGroups; let i = index" [sigfoxGroup]="group">
-            </app-sigfox-administration-item>
+            <app-sigfox-groups-list-item *ngFor="let group of sigfoxGroups; let i = index" [sigfoxGroup]="group">
+            </app-sigfox-groups-list-item>
 
         </div>
-    </div> -->
+    </div>
 </div>
