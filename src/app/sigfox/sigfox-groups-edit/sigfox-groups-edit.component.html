@@ -1,0 +1,39 @@
+<app-top-bar-single [data]="sigfoxGroup" [backButton]="backButton"></app-top-bar-single>
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 offset-md-3 mt-5">
+        <div *ngIf="errorMessages" class="error-messages p-3">
+            <ul class="mb-0">
+                <li *ngFor="let error of errorMessages">
+                    {{error}}
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form class="p-5 jumbotron" #sigFoxForm="ngForm" (ngSubmit)="onSubmit(sigFoxForm)" *ngIf="!isLoading">
+            <p>For at kunne tilgå din Sigfox gruppe, skal du først have oprettet en API adgang til gruppen i Sigfox.
+                Denne skal bruges til at logge ind med nedenfor. Læs hvordan du opretter adgangen her - <span><a
+                        href="https://support.sigfox.com/docs/api-credential-creation">API credential
+                        creation</a></span>
+            </p>
+            <mat-divider class="my-5"></mat-divider>
+            <div class="form-group col-8">
+                <label for="username">SigFox login</label>
+                <input type="username" id="username" class="form-control" name="username" required
+                    [(ngModel)]="sigfoxGroup.username"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('username'), 'is-valid' : formFailedSubmit && !errorFields.includes('username')}">
+            </div>
+            <div class="form-group col-8">
+                <label for="password">Kode</label>
+                <input type="password" id="password" class="form-control" ngModel name="password" required
+                    [(ngModel)]="sigfoxGroup.password"
+                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
+            </div>
+            <div class="mt-5">
+                <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">{{'Sigfox Login'}}</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,27 +1,25 @@
 import { Routes, RouterModule } from '@angular/router';
-import { Component, NgModule } from '@angular/core';
-import { SigfoxAdministrationComponent } from './sigfox-administration/sigfox-administration.component';
-import { SigfoxProfilesComponent } from './sigfox-profiles/sigfox-profiles.component';
-import { SigfoxProfilesEditComponent } from './sigfox-profiles/sigfox-profiles-edit/sigfox-profiles-edit.component';
-import { SigfoxAdministrationListComponent } from './sigfox-administration/sigfox-administration-list/sigfox-administration-list.component';
-import { SigfoxProfilesListComponent } from './sigfox-profiles/sigfox-profiles-list/sigfox-profiles-list.component';
-import { SigfoxAdministrationEditComponent } from './sigfox-administration/sigfox-administration-edit/sigfox-administration-edit.component';
+import { NgModule } from '@angular/core';
+
+import { SigfoxDeviceTypesEditComponent } from './sigfox-device-types-edit/sigfox-device-types-edit.component';
+import { SigfoxDeviceTypesComponent } from './sigfox-device-types/sigfox-device-types.component';
+import { SigfoxGroupsEditComponent } from './sigfox-groups-edit/sigfox-groups-edit.component';
+import { SigfoxGroupsComponent } from './sigfox-groups/sigfox-groups.component';
 
 const routes: Routes = [
     {
-        path: 'administration', component: SigfoxAdministrationComponent,
+        path: 'sigfox-groups',
         children: [
-            { path: '', component: SigfoxAdministrationListComponent },
-            { path: ':id', component: SigfoxAdministrationEditComponent },
-            { path: 'edit', component: SigfoxAdministrationEditComponent }
-        ]
-    },
-    {
-        path: 'profiles', component: SigfoxProfilesComponent,
-        children: [
-            { path: '', component: SigfoxProfilesListComponent },
-            { path: ':id', component: SigfoxProfilesEditComponent },
-            { path: 'edit', component: SigfoxProfilesEditComponent }
+            { path: '', component: SigfoxGroupsComponent },
+            { path: 'new', component: SigfoxGroupsEditComponent },
+            { path: ':id/edit', component: SigfoxGroupsEditComponent },
+            {
+                path: ':id', children: [
+                    { path: '', component: SigfoxDeviceTypesComponent },
+                    { path: ':id/edit', component: SigfoxDeviceTypesEditComponent },
+                    { path: 'edit', component: SigfoxDeviceTypesEditComponent }
+                ]
+            }
         ]
     }
 ];

@@ -7,7 +7,7 @@
                 <h4>Liste over grupper</h4>
             </div>
             <div class="col-6">
-                <button class="btn btn-primary float-right" [routerLink]="['deviceprofile/edit']"
+                <button class="btn btn-primary float-right" [routerLink]="['new']"
                     routerLinkActive="active">{{'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate}}</button>
             </div>
         </div>
@@ -23,9 +23,9 @@
                     <!-- <button mat-icon-button (click)="onAdd($event)">
                     <mat-icon>add</mat-icon>
                 </button> -->
-                    <!-- <button mat-icon-button (click)="deleteDeviceProfile($event)">
+                    <button mat-icon-button (click)="onEditSigfoxGroup($event)">
                         <mat-icon>delete</mat-icon>
-                    </button> -->
+                    </button>
                 </a>
 
             </mat-list-option>
