@@ -11,13 +11,13 @@ const routes: Routes = [
         path: '',
         children: [
             { path: '', component: SigfoxGroupsListComponent },
-            { path: 'new', component: SigfoxGroupsEditComponent },
-            { path: ':id/edit-group', component: SigfoxGroupsEditComponent },
+            { path: 'new-group', component: SigfoxGroupsEditComponent },
+            { path: ':groupId/edit-group', component: SigfoxGroupsEditComponent },
             {
-                path: ':id', children: [
+                path: ':groupId', children: [
                     { path: '', component: SigfoxGroupsDetailComponent },
-                    { path: ':id/edit-device-type', component: SigfoxDeviceTypesEditComponent },
-                    { path: 'edit-device-type', component: SigfoxDeviceTypesEditComponent }
+                    { path: ':deviceId/edit-device-type', component: SigfoxDeviceTypesEditComponent },
+                    { path: 'new-device-type', component: SigfoxDeviceTypesEditComponent }
                 ]
             }
         ]

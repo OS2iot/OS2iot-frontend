@@ -22,6 +22,7 @@ import { Location } from '@angular/common';
 export class SigfoxDeviceTypesEditComponent implements OnInit {
   sigfoxDeviceType = new SigfoxDeviceType();
   public sigfoxGroups: SigfoxGroup[];
+  public sigfoxGroup: SigfoxGroup;
   public sigfoxContracts: SigfoxContract[];
   public errorMessages: string[];
   public errorFields: string[];
@@ -53,6 +54,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
       });
     this.organizationId = this.sharedVariable.getSelectedOrganisationId();
     this.getSigFoxGroups(this.organizationId);
+    this.getSigFoxGroup(this.organizationId);
   }
 
   private getSigFoxGroups(orgId: number) {
@@ -60,6 +62,10 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
       .subscribe((response: any) => {
         this.sigfoxGroups = response.data;
       });
+  }
+
+  private getSigFoxGroup(orgId: number) {
+    this.sigfoxService.getGroup(orgId).subscribe();
   }
 
   public changedGroup() {

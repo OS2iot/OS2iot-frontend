@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
   templateUrl: './sigfox-groups-edit.component.html',
   styleUrls: ['./sigfox-groups-edit.component.scss']
 })
-export class SigfoxGroupsEditComponent implements OnInit {
+export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   sigfoxGroupId: number;
   sigfoxGroup = new SigfoxGroup();
   subscription: Subscription;
@@ -69,6 +69,7 @@ export class SigfoxGroupsEditComponent implements OnInit {
     this.sigfoxService.createGroupConnection(this.sigfoxGroup)
       .subscribe(
         (response) => {
+
           console.log(response);
           this.routeBack();
         },

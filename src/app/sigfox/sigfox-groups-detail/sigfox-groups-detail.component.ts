@@ -1,6 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Params } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SigfoxGroup } from '@shared/models/sigfox-group.model';
+import { SigfoxService } from '@shared/services/sigfox.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-sigfox-groups-detail',
@@ -13,15 +19,16 @@ export class SigfoxGroupsDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
+    private sigfoxService: SigfoxService,
 
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-  }
 
-  onNewGroup() {
-    this.router.navigate(['edit-device-type'], { relativeTo: this.route });
+
+  onNewDeviceType() {
+    this.router.navigate(['new-device-type'], { relativeTo: this.route });
   }
 
 }

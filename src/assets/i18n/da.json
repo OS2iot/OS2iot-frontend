@@ -314,7 +314,7 @@
     "SIGFOX": {
       "TITLE": "SigFox specifikke felter",
       "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i SigFox?",
-      "GROUPID":"Vælg en SigFox gruppe",
+      "GROUPID": "Vælg en SigFox gruppe",
       "DEVICEID": "SigFox enhed",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en enhedstypen",
@@ -331,7 +331,9 @@
         "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
         "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra SigFox",
         "DESCRIPTION": "Angiv beskrivelse",
-        "DESCRIPTION-PLACEHOLDER": "Lipsum larum"
+        "DESCRIPTION-PLACEHOLDER": "Lipsum larum",
+        "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
+        "CHOOSE-CONTRACT": "Vælg en kontrakt"
       }
     }
   },

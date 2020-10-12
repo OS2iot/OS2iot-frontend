@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faEdit, faPen, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 
 @Component({
@@ -8,6 +9,8 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
   styleUrls: ['./sigfox-groups-list-item.component.scss']
 })
 export class SigfoxGroupsListItemComponent implements OnInit {
+  faToolbox = faToolbox;
+  faEdit = faEdit;
 
   @Input() sigfoxGroup: SigfoxGroup;
 
@@ -20,7 +23,7 @@ export class SigfoxGroupsListItemComponent implements OnInit {
   }
 
   onEditSigfoxGroup() {
-    this.router.navigate([this.sigfoxGroup.id, 'edit-group'], { relativeTo: this.route });
+    this.router.navigate([this.sigfoxGroup.sigfoxGroupData.id, 'edit-group'], { relativeTo: this.route });
   }
 
 }
