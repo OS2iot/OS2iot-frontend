@@ -25,8 +25,24 @@
     "LOGIN": "Login",
     "ADMIN": "Administration",
     "SIGFOX": "SigFox",
-    "SIGFOX-ADMIN": "Administration",
-    "SIGFOX-PROFILES": "Profiler"
+    "SIGFOX-ADMIN": "Sigfox Administration",
+    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper"
+  },
+  "SIGFOX": {
+    "SIGFOX": "SigFox",
+    "SIGFOX-GROUP": "SigFox Grupper",
+    "ADMINITRATION": {
+      "NAME": "SigFox Grupper",
+      "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
+    },
+    "PROFILES": {
+      "NAME": "SigFox Enhedstyper",
+      "DEVICE-TYPE": "Sigfox enhedstyper",
+      "DEVICE-TYPE-NAME": "navn",
+      "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
+      "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
+      "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype"
+    }
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -123,7 +139,8 @@
   },
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
-    "LORAWAN": "LoRaWAN"
+    "LORAWAN": "LoRaWAN",
+    "SIGFOX": "SigFox"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -233,11 +250,13 @@
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
-    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
-    "EDIT-PERMISSION": "Redigér brugergruppe"
+    "EDIT-PERMISSION": "Redigér brugergruppe",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types",
+    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
@@ -293,16 +312,29 @@
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
     },
     "SIGFOX": {
-      "REGISTEREDATSIGFOX": "Enheden er allerede registreret i SigFox?",
-      "SIGFOXGRUPPEID": "Vælg SigFox gruppe",
-      "SIGFOXIDENTIFIER": "ID",
-      "SIGFOXIDENTIFIER-PLACEHOLDER": "Enhedens unikke id",
+      "TITLE": "SigFox specifikke felter",
+      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i SigFox?",
+      "GROUPID": "Vælg en SigFox gruppe",
+      "DEVICEID": "SigFox enhed",
+      "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
+      "DEVICETYPEID": "Vælg en enhedstypen",
+      "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
       "PAC": "PAC",
       "PAC-PLACEHOLDER": "Porting Authorization Code",
-      "PRODUCTLICENS": "Produkt licens",
-      "PRODUCTLICENS-PLACEHOLDER": "Produkt licens",
+      "ENDPRODUCTCERTIFICATE": "Angiv en produkt licens",
+      "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
       "PROTOTYPE": "Opret som prototype",
-      "SIGFOXENHEDID": "Vælg enheden er skal oprette i OS2IoT"
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "DEVICETYPE": {
+        "NAME": "Navngiv enhedstypen",
+        "NAME-PLACEHOLDER": "XC-123",
+        "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
+        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra SigFox",
+        "DESCRIPTION": "Angiv beskrivelse",
+        "DESCRIPTION-PLACEHOLDER": "Lipsum larum",
+        "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
+        "CHOOSE-CONTRACT": "Vælg en kontrakt"
+      }
     }
   },
   "QUESTION-LORA-GATEWAY": {

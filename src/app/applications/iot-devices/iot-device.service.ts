@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IotDevice, IotDeviceData } from './iot-device.model';
+import { IotDevice, IotDevicesResponse } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 
 @Injectable({
@@ -12,11 +12,11 @@ export class IoTDeviceService {
 
     constructor(private restService: RestService) { }
 
-    createIoTDevice(body: IotDevice): Observable<IotDeviceData> {
+    createIoTDevice(body: IotDevice): Observable<IotDevicesResponse> {
         return this.restService.post(this.BASEURL, body);
     }
 
-    updateIoTDevice(body: IotDevice, id: number): Observable<IotDeviceData> {
+    updateIoTDevice(body: IotDevice, id: number): Observable<IotDevicesResponse> {
         return this.restService.put(this.BASEURL, body, id, { observe: 'response' });
     }
 

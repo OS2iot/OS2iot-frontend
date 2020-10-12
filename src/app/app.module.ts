@@ -16,13 +16,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ErrorPageComponent],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,

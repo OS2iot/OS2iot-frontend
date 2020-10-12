@@ -5,7 +5,6 @@
 </select>
 <fa-icon [icon]="faExchangeAlt"></fa-icon>
 <mat-divider></mat-divider>
-
 <ul class="navbar-nav flex-column mb-4">
     <li class="nav-item py-2">
         <a routerLink="/applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
@@ -13,6 +12,12 @@
             {{ 'NAV.APPLICATIONS' | translate }}
         </a>
         <fa-icon [icon]="faLayergroup" class="navbar-icon"></fa-icon>
+    </li>
+    <li>
+        <a routerLink="/sigfox" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
+            {{'NAV.SIGFOX-ADMIN' | translate}}
+        </a>
+        <fa-icon [icon]="faToolbox" class="navbar-icon"></fa-icon>
     </li>
     <div *ngIf="user && isOrganisationAdmin(orgSelect.value)">
         <li class="nav-item">
