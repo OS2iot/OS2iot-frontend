@@ -16,7 +16,7 @@ const routes: Routes = [
             {
                 path: ':groupId', children: [
                     { path: '', component: SigfoxGroupsDetailComponent },
-                    { path: ':deviceId/edit-device-type', component: SigfoxDeviceTypesEditComponent },
+                    { path: ':deviceTypeId/edit-device-type', component: SigfoxDeviceTypesEditComponent },
                     { path: 'new-device-type', component: SigfoxDeviceTypesEditComponent }
                 ]
             }

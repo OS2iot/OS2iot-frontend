@@ -6,7 +6,6 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable, Subscription } from 'rxjs';
-import { SigfoxGroupsListItemComponent } from './sigfox-groups-list-item/sigfox-groups-list-item.component';
 
 @Component({
   selector: 'app-sigfox-groups-list',

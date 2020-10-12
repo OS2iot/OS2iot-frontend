@@ -11,7 +11,6 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 export class SigfoxGroupsListItemComponent implements OnInit {
   faToolbox = faToolbox;
   faEdit = faEdit;
-
   @Input() sigfoxGroup: SigfoxGroup;
 
   constructor(
@@ -20,6 +19,7 @@ export class SigfoxGroupsListItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.sigfoxGroup);
   }
 
   onEditSigfoxGroup() {

@@ -25,8 +25,6 @@ export class SigfoxGroupsDetailComponent implements OnInit {
 
   ngOnInit(): void { }
 
-
-
   onNewDeviceType() {
     this.router.navigate(['new-device-type'], { relativeTo: this.route });
   }

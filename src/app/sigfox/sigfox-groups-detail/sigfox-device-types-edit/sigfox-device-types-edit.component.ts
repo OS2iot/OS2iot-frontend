@@ -21,8 +21,9 @@ import { Location } from '@angular/common';
 })
 export class SigfoxDeviceTypesEditComponent implements OnInit {
   sigfoxDeviceType = new SigfoxDeviceType();
-  public sigfoxGroups: SigfoxGroup[];
   public sigfoxGroup: SigfoxGroup;
+  private sigfoxGroupId: number;
+  private deviceTypeId: string;
   public sigfoxContracts: SigfoxContract[];
   public errorMessages: string[];
   public errorFields: string[];
@@ -53,32 +54,27 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
         this.submitButton = translations['ORGANISATION.SAVE'];
       });
     this.organizationId = this.sharedVariable.getSelectedOrganisationId();
-    this.getSigFoxGroups(this.organizationId);
-    this.getSigFoxGroup(this.organizationId);
-  }
-
-  private getSigFoxGroups(orgId: number) {
-    this.sigfoxService.getGroups(orgId)
-      .subscribe((response: any) => {
-        this.sigfoxGroups = response.data;
-      });
-  }
-
-  private getSigFoxGroup(orgId: number) {
-    this.sigfoxService.getGroup(orgId).subscribe();
-  }
-
-  public changedGroup() {
-    this.sigfoxDeviceType.groupId = +this.sigfoxDeviceType.groupId;
-    this.sigfoxDeviceType.contractId = null;
-    this.getContracts(this.sigfoxDeviceType.groupId);
-    // get contracts
+    this.sigfoxGroupId = +this.route.snapshot.paramMap.get('groupId');
+    this.deviceTypeId = this.route.snapshot.paramMap.get('deviceTypeId');
+    if (this.deviceTypeId) {
+      this.getDeviceType(this.deviceTypeId);
+    } else {
+      this.sigfoxDeviceType.groupId = this.sigfoxGroupId;
+    }
+    this.getContracts(this.sigfoxGroupId);
   }
 
   private getContracts(groupId: number) {
     this.sigfoxService.getContracts(groupId)
       .subscribe((response: any) => {
         this.sigfoxContracts = response;
+      });
+  }
+
+  private getDeviceType(deviceTypeId: string) {
+    this.sigfoxService.getDeviceType(deviceTypeId, this.sigfoxGroupId)
+      .subscribe( (response) => {
+        this.sigfoxDeviceType = response;
       });
   }
 

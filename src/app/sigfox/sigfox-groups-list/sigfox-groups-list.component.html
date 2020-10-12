@@ -1,36 +1,6 @@
 <app-top-bar [showSelectedSort]="false" [title]="'SIGFOX.ADMINITRATION.NAME' | translate"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3">
-    <!-- <mat-list>
-        <div class="row mt-5">
-            <div class="col-6">
-                <h4>Liste over grupper</h4>
-            </div>
-            <div class="col-6">
-                <button class="btn btn-primary float-right" [routerLink]="['new']"
-                    routerLinkActive="active">{{'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate}}</button>
-            </div>
-        </div>
-        <hr>
-        <mat-selection-list [multiple]="false">
-            <mat-list-option *ngFor="let group of sigfoxGroups ; let i = index" [value]="i">
-
-
-                <a mat-list-item [routerLink]="[group.id]">
-                    <span class=" a" matLine>
-                        <fa-icon [icon]="faToolbox"></fa-icon>
-                        {{ group.sigfoxGroupData.name }}
-                    </span>
-                    <button mat-icon-button (click)="onEditSigfoxGroup($event)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                </a>
-
-            </mat-list-option>
-        </mat-selection-list>
-    </mat-list> -->
-
-
     <div class="row mt-5">
         <div class="col-6">
             <h4>Liste over grupper</h4>
@@ -42,7 +12,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12" *ngIf="sigfoxGroups">
             <app-sigfox-groups-list-item *ngFor="let group of sigfoxGroups; let i = index" [sigfoxGroup]="group">
             </app-sigfox-groups-list-item>
 
