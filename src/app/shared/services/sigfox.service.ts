@@ -3,7 +3,7 @@ import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
-import { SigfoxDevicesResponse } from '@sigfox/sigfox-device.model';
+import { SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.model';
 
 @Injectable({
   providedIn: 'root'

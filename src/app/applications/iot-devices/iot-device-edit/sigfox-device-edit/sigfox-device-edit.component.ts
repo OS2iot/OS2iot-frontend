@@ -5,7 +5,7 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
-import { SigfoxDevice, SigfoxDevicesResponse } from '@sigfox/sigfox-device.model';
+import { SigfoxDevice, SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.model';
 @Component({
   selector: 'app-sigfox-device-edit',
   templateUrl: './sigfox-device-edit.component.html',

@@ -1,5 +1,5 @@
 import { Organisation } from '@app/admin/organisation/organisation.model';
-import { SigfoxGroupData } from '@sigfox/sigfox-settings.model';
+import { SigfoxGroupData } from '@app/sigfox/sigfox-settings.model';
 import { OrganizationInterface } from './organization.model';
 
 export class SigfoxGroup extends OrganizationInterface {
