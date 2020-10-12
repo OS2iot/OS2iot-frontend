@@ -57,7 +57,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     this.sigfoxGroupId = +this.route.snapshot.paramMap.get('groupId');
     this.deviceTypeId = this.route.snapshot.paramMap.get('deviceTypeId');
     if (this.deviceTypeId) {
-      this.getDeviceType(this.deviceTypeId);
+      this.getDeviceType();
     } else {
       this.sigfoxDeviceType.groupId = this.sigfoxGroupId;
     }
@@ -71,10 +71,12 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
       });
   }
 
-  private getDeviceType(deviceTypeId: string) {
-    this.sigfoxService.getDeviceType(deviceTypeId, this.sigfoxGroupId)
+  private getDeviceType() {
+    this.sigfoxService.getDeviceType(this.deviceTypeId, this.sigfoxGroupId)
       .subscribe( (response) => {
         this.sigfoxDeviceType = response;
+        this.sigfoxDeviceType.groupId = this.sigfoxGroupId;
+        this.sigfoxDeviceType.contractId = response.contract?.id;
       });
   }
 

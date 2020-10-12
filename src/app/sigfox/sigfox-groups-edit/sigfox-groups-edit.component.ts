@@ -46,7 +46,7 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
         this.backButton.label = translations['SIGFOX.SIGFOX-GROUP'];
       });
 
-    this.sigfoxGroupId = +this.route.snapshot.paramMap.get('sigfox');
+    this.sigfoxGroupId = +this.route.snapshot.paramMap.get('groupId');
     if (this.sigfoxGroupId) {
       this.getSigfoxGroup(this.sigfoxGroupId);
     }

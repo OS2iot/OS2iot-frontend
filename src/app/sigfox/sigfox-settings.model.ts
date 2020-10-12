@@ -1,5 +1,3 @@
-import { Path } from 'typescript';
-
 export class SigfoxSettings {
     deviceId?: string;
     deviceTypeId?: string;
@@ -18,7 +16,7 @@ export interface SigfoxGroupData {
     type: number;
     timezone: string;
     nameCI: string;
-    path: Path[];
+    path: string[];
     currentPrototypeCount: number;
     createdBy: string;
     creationTime: number;

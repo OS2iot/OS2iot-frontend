@@ -49,7 +49,7 @@ export class SigfoxService {
 
   // Device-type
   public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
-    const body = { groupeId: groupId };
+    const body = { groupId };
     return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);
   }
 
@@ -65,6 +65,8 @@ export class SigfoxService {
   }
 
   public putDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
-    return this.restService.put(this.SIGFOXDEVICETYPEURL, sigfoxGroup, sigfoxGroup.contractId);
+    const url = this.SIGFOXDEVICETYPEURL + '/' + sigfoxGroup.id + '?groupId=' + sigfoxGroup.groupId;
+    console.log(url);
+    return this.restService.put(url, sigfoxGroup);
   }
 }
