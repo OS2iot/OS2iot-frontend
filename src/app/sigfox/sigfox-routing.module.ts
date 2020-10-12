@@ -2,9 +2,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { SigfoxGroupsEditComponent } from './sigfox-groups-edit/sigfox-groups-edit.component';
-import { SigfoxGroupsListComponent } from './sigfox-groups-list/sigfox-groups-list.component';
 import { SigfoxGroupsDetailComponent } from './sigfox-groups-detail/sigfox-groups-detail.component';
 import { SigfoxDeviceTypesEditComponent } from './sigfox-groups-detail/sigfox-device-types-edit/sigfox-device-types-edit.component';
+import { SigfoxGroupsListComponent } from './sigfox-groups-list/sigfox-groups-list.component';
 
 const routes: Routes = [
     {
