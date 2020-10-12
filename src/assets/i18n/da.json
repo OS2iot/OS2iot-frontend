@@ -256,7 +256,8 @@
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
     "EDIT-PERMISSION": "Redigér brugergruppe",
     "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types",
-    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper"
+    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
+    "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe"
   },
   "QUESTION": {
     "GIVE-APPLICATION-NAME": "Navngiv applikation",

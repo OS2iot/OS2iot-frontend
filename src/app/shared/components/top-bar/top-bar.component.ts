@@ -35,7 +35,7 @@ export class TopBarComponent implements OnInit {
     }
 
     routeBack(): void {
-        this.location.back()
+        this.location.back();
     }
 
     // pageLimitUpdate(value) {

@@ -18,7 +18,7 @@ export class SigfoxDeviceTypeTableComponent implements OnInit, AfterViewInit {
   private sigfoxGroupId: number;
   @Input() sigfoxGroup: SigfoxGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'contractId', 'alertEmail'];
+  displayedColumns: string[] = ['name', 'alertEmail'];
 
   constructor(
     private translate: TranslateService,
