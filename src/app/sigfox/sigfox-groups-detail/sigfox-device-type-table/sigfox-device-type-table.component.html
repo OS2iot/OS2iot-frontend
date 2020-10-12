@@ -1,8 +1,13 @@
-<div class="mat-elevation-z8 row">
+
+<div class="mat-elevation-z8 row table">
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>{{ 'SIGFOX.PROFILES.DEVICE-TYPE-NAME' | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            <td mat-cell *matCellDef="let element">
+                <a [routerLink]="[element.id, 'edit-device-type']" routerLinkActive="active" class="device-link">
+                    {{element.name}}
+                </a>    
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="alertEmail">
