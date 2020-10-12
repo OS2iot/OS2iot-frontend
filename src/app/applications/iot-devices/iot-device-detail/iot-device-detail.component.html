@@ -60,6 +60,26 @@
         <h4>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</h4>
         <p class="mb-5">{{device.lorawanSettings?.skipFCntCheck}}</p>
     </ng-container>
+    <!-- SIGFOX DEVICE-->
+    <ng-container *ngIf="device.type === 'SIGFOX' && device.sigfoxSettings">
+        <h4>{{ 'IOTDEVICE.SIGFOX.GROUP-NAME' | translate }}</h4>
+        <p class="mb-5">{{device.sigfoxSettings.groupName}}</p>
+        
+        <h4>{{ 'IOTDEVICE.SIGFOX.DEVICETYPE' | translate }}</h4>
+        <p class="mb-5">{{device.sigfoxSettings.deviceTypeName}}</p>
+        
+        <h4>{{ 'IOTDEVICE.SIGFOX.PAC' | translate }}</h4>
+        <p class="mb-5">{{device.sigfoxSettings.pac}}</p>
+        
+        <h4>{{ 'IOTDEVICE.SIGFOX.ENDPRODUCTCERTIFICATE' | translate }}</h4>
+        <p class="mb-5">{{device.sigfoxSettings.endProductCertificate}}</p>
+        
+        <h4>{{ 'IOTDEVICE.SIGFOX.PROTOTYPE' | translate }}</h4>
+        <p class="mb-5">{{device.sigfoxSettings.prototype ? 'true' : 'false' | translate}}</p>
+
+
+    </ng-container>
+
     <!--  IF data package -->
     <h4>{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h4>
     <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime">

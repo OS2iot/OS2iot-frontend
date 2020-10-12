@@ -1,7 +1,9 @@
 export class SigfoxSettings {
     deviceId?: string;
     deviceTypeId?: string;
+    deviceTypeName?: string;
     groupId: number;
+    groupName: string;
     connectToExistingDeviceInBackend = false;
     pac?: string;
     endProductCertificate?: string;
