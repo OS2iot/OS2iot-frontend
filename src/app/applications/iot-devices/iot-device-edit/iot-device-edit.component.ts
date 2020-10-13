@@ -25,13 +25,6 @@ import { IoTDeviceService } from '../iot-device.service';
     styleUrls: ['./iot-device-edit.component.scss'],
 })
 export class IotDeviceEditComponent implements OnInit, OnDestroy {
-    public backButton: BackButton = {
-        label: '',
-        routerLink: '',
-    };
-    public title = '';
-    public sectionTitle = '';
-    public submitButton = '';
     public errorMessages: any;
     public errorFields: string[];
     public formFailedSubmit = false;
@@ -103,7 +96,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 }
                 this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
                 if (device.sigfoxSettings) {
-                    //this.iotDevice.sigfoxSettings.groupId = device.sigfoxSettings.
                 }
             });
     }

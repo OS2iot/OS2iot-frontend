@@ -1,4 +1,5 @@
-<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+
+<app-top-bar backButtonTitle="{{'NAV.APPLICATION' | translate}}" title="{{'QUESTION.CREATE-IOT-DEVICE' | translate}}"></app-top-bar>
 
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
     <div *ngIf="errorMessages" class="error-messages p-3">

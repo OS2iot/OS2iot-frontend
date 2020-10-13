@@ -12,6 +12,7 @@
   "NAV": {
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
+    "APPLICATION": "Applikation",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
     "LORA-GATEWAYS": "LoRaWAN Gateways",
     "DATATARGET": "Datatarget",
@@ -260,6 +261,7 @@
     "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe"
   },
   "QUESTION": {
+    "CREATE-IOT-DEVICE": "IoT-enhed",
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
     "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
     "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
