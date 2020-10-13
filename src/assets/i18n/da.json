@@ -258,7 +258,8 @@
     "EDIT-PERMISSION": "Redigér brugergruppe",
     "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types",
     "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
-    "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe"
+    "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe",
+    "EDIT-USERS": "Redigér bruger"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",

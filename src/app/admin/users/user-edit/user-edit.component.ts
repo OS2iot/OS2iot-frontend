@@ -23,7 +23,7 @@ export class UserEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/users' };
+  public backButtonTitle = '';
   public title = '';
   public submitButton = '';
   id: number;
@@ -39,9 +39,9 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('da');
     this.translate
-      .get(['NAV.USERS', 'USERS.FORM.EDIT', 'USERS.SAVE'])
+      .get(['NAV.USERS', 'FORM.EDIT-USERS', 'USERS.SAVE'])
       .subscribe((translations) => {
-        this.backButton.label = translations['NAV.USERS'];
+        this.backButtonTitle = translations['NAV.USERS'];
         this.title = translations['FORM.EDIT-USERS'];
         this.submitButton = translations['USERS.SAVE'];
       });
