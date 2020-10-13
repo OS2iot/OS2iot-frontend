@@ -538,6 +538,9 @@
     "WELCOME": "Velkommen til OS2IoT",
     "WELCOME-MESSAGE": "Her vises en velkomsthilsen"
   },
+  "ERROR": {
+    "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

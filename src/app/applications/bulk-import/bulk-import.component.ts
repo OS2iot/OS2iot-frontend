@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -117,13 +118,20 @@ export class BulkImportComponent implements OnInit {
   private mapData(data: any[]) {
     data.forEach((device) => {
       const mappedDevice = this.bulkMapper.dataMapper(device, this.applicationId);
-      this.bulkImport.push(new BulkImport(mappedDevice));
+      if (mappedDevice) {
+        this.bulkImport.push(new BulkImport(mappedDevice));
+      } else {
+        this.translate.get(['ERROR.SEMANTIC'])
+          .subscribe(translations => {
+            this.bulkImport.push(new BulkImport(null, [translations['ERROR.SEMANTIC']]));
+      });
+      }
     });
   }
 
   addIoTDevice() {
     this.bulkImportResult.forEach((requestItem) => {
-      if (requestItem.device.id) {
+      if (requestItem.device?.id) {
         this.iotDeviceService.updateIoTDevice(requestItem.device, requestItem.device.id).subscribe(
           (response) => {
             console.log(response);
@@ -134,7 +142,7 @@ export class BulkImportComponent implements OnInit {
             requestItem.importStatus = 'Failed';
           }
         );
-      } else {
+      } else if (requestItem.device) {
         this.iotDeviceService.createIoTDevice(requestItem.device).subscribe(
           (res: any) => {
             console.log(res);

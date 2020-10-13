@@ -3,9 +3,9 @@ import { DeviceType } from '@shared/enums/device-type';
 
 export class BulkMapping {
 
-    public dataMapper(data: any, applicationId: number): IotDevice {
+    public dataMapper(data: IotDevice, applicationId: number): IotDevice {
 
-        switch (data.type) {
+        switch (data.type.toUpperCase()) {
           case DeviceType.LORAWAN:
             return this.lorawanMapper(data, applicationId);
           case DeviceType.GENERICHTTP:
@@ -13,7 +13,7 @@ export class BulkMapping {
           default:
             break;
         }
-        return new IotDevice();
+        //return new IotDevice();
     }
 
     private lorawanMapper(data: any, applicationId): IotDevice {
