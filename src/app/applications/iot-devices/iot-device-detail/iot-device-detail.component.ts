@@ -104,20 +104,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];
             }
-
-            if (this.device?.lorawanSettings?.deviceProfileID) {
-                this.deviceProfileSubscription = this.deviceProfileService.getOne(this.device.lorawanSettings.deviceProfileID)
-                    .subscribe((response) => {
-                        this.OTAA = response.deviceProfile.supportsJoin;
-                        this.deviceProfileName = response.deviceProfile.name;
-                    });
-            }
-            if (this.device?.lorawanSettings?.serviceProfileID) {
-                this.deviceProfileSubscription = this.serviceProfileService.getOne(this.device.lorawanSettings.serviceProfileID)
-                    .subscribe((response: ServiceProfileResponseOne) => {
-                        this.serviceProfileName = response.serviceProfile.name;
-                    });
-            }
         });
     }
 

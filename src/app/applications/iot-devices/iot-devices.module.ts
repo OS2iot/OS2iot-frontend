@@ -11,6 +11,10 @@ import { IotDeviceEditComponent } from './iot-device-edit/iot-device-edit.compon
 import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.component';
 import { IotDevicesTableRowComponent } from './iot-devices-table/iot-devices-table-row/iot-devices-table-row.component';
 import { SigfoxDeviceEditComponent } from './iot-device-edit/sigfox-device-edit/sigfox-device-edit.component';
+import { IotDeviceDetailGenericComponent } from './iot-device-detail/iot-device-detail-generic/iot-device-detail-generic.component';
+import { IotDeviceDetailLorawanComponent } from './iot-device-detail/iot-device-detail-lorawan/iot-device-detail-lorawan.component';
+import { IotDeviceDetailSigfoxComponent } from './iot-device-detail/iot-device-detail-sigfox/iot-device-detail-sigfox.component';
+import { DownlinkComponent } from './iot-device-detail/downlink/downlink.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +23,12 @@ import { SigfoxDeviceEditComponent } from './iot-device-edit/sigfox-device-edit/
         IotDevicesTableRowComponent,
         IoTDeviceDetailComponent,
         IotDeviceEditComponent,
-        SigfoxDeviceEditComponent
+        SigfoxDeviceEditComponent,
+        IotDeviceDetailGenericComponent,
+        IotDeviceDetailLorawanComponent,
+        IotDeviceDetailSigfoxComponent,
+        DownlinkComponent
+
     ],
     exports: [
         IotDevicesTableComponent,

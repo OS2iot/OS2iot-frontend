@@ -1,0 +1,39 @@
+<h4>{{ 'IOTDEVICE.NAME' | translate }}</h4>
+<p class="mb-5">{{device.name}}</p>
+
+<h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
+<p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
+
+<h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
+<div *ngIf="device.comment; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <p class="mb-5">{{device.comment}}</p>
+</ng-template>
+<ng-template #elseBlock>
+    <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENT' | translate}}</p>
+</ng-template>
+
+<h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
+<div *ngIf="device.location; else locationElseBlock">
+    <div class="row mb-5">
+        <div class="col-6">
+            <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
+            <p>{{longitude}}</p>
+        </div>
+        <div class="col-6">
+            <h6>{{ 'IOTDEVICE.LATITUDE' | translate }}</h6>
+            <p>{{latitude}}</p>
+        </div>
+    </div>
+</div>
+<ng-template #locationElseBlock>
+    <p class="mb-5">{{ 'IOTDEVICE.NOLOCATION' | translate}}</p>
+</ng-template>
+
+<h4>{{ 'IOTDEVICE.COMMENTONLOCATION' | translate }}</h4>
+<div *ngIf="device.commentOnLocation; else locationCommentElseBlock">
+    <p class="mb-5">{{device.commentOnLocation}}</p>
+</div>
+<ng-template #locationCommentElseBlock>
+    <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}</p>
+</ng-template>

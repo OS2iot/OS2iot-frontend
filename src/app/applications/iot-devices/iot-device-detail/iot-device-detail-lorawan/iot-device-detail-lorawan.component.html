@@ -1,0 +1,20 @@
+<h4>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</h4>
+<p class="mb-5">{{device.lorawanSettings.devEUI}}</p>
+<h4>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</h4>
+<p class="mb-5">{{serviceProfileName}}</p>
+<h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
+<p class="mb-5">{{deviceProfileName}}</p>
+<ng-container *ngIf="OTAA">
+    <h4>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</h4>
+    <p class="mb-5">{{device.lorawanSettings?.OTAAapplicationKey}}</p>
+</ng-container>
+<ng-container *ngIf="!OTAA">
+    <h4>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</h4>
+    <p class="mb-5">{{device.lorawanSettings?.devAddr}}</p>
+    <h4>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</h4>
+    <p class="mb-5">{{device.lorawanSettings?.activationType}}</p>
+    <h4>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</h4>
+    <p class="mb-5">{{device.lorawanSettings?.applicationSessionKey}}</p>
+</ng-container>
+<h4>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</h4>
+<p class="mb-5">{{device.lorawanSettings?.skipFCntCheck}}</p>

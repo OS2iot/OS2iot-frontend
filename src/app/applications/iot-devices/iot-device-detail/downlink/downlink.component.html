@@ -1,0 +1,27 @@
+<div *ngIf="errorMessages && errorMessages?.length !== 0" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{error}}
+      </li>
+    </ul>
+</div>
+<h3 class="p-md-3">{{'IOTDEVICE.DOWNLINK.TITLE' | translate}}</h3>
+<div *ngIf="device.type === 'LORAWAN'">
+    <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
+        {{'IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK' | translate}}</mat-slide-toggle>
+</div>
+<div class="col-xs-6 form-group">
+    <label for="port"
+        class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PORT' | translate}}</label>
+    <input type="port" class="form-control" id="port" name="port" maxlength="50" min="0"
+        required [(ngModel)]="downlink.port">
+</div>
+<div class="col-xs-6 form-group">
+    <label for="payload"
+        class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}</label>
+    <input type="payload" class="form-control" id="payload" name="payload" maxlength="device.type === 'SIGFOX' ? 16 : ''"
+        required [(ngModel)]="downlink.payload">
+</div>
+<div class="col-xs-6 form-group">
+    <button (click)="startDownlink()" class="btn btn-secondary" type="button">{{ 'IOTDEVICE.DOWNLINK.START' | translate}}</button>
+</div>
