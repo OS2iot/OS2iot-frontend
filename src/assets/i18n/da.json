@@ -420,7 +420,9 @@
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
     "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
-    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
+    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn",
+    "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
+    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",

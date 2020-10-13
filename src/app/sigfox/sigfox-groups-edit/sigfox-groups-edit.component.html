@@ -5,7 +5,7 @@
         <div *ngIf="errorMessages" class="error-messages p-3">
             <ul class="mb-0">
                 <li *ngFor="let error of errorMessages">
-                    {{error}}
+                    {{error | translate}}
                 </li>
             </ul>
         </div>
@@ -22,14 +22,12 @@
             <div class="form-group col-8">
                 <label for="username">SigFox login</label>
                 <input type="username" id="username" class="form-control" name="username" required
-                    [(ngModel)]="sigfoxGroup.username"
-                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('username'), 'is-valid' : formFailedSubmit && !errorFields.includes('username')}">
+                    [(ngModel)]="sigfoxGroup.username">
             </div>
             <div class="form-group col-8">
                 <label for="password">Kode</label>
                 <input type="password" id="password" class="form-control" ngModel name="password" required
-                    [(ngModel)]="sigfoxGroup.password"
-                    [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
+                    [(ngModel)]="sigfoxGroup.password">
             </div>
             <div class="mt-5">
                 <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">{{'Sigfox Login'}}</button>

@@ -9,6 +9,7 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { ErrorMessage, ErrorMessageHandler } from '@shared/error-message-handler';
 
 
 @Component({
@@ -24,10 +25,11 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
 
   public errorMessage: string;
   public errorMessages: string[];
-  public errorFields: string[];
+  public errorFields = [];
   public formFailedSubmit = false;
   public title = '';
   public backButton: BackButton = { label: '', routerLink: '/administration' };
+  public errorMessageHandler = new ErrorMessageHandler();
 
   constructor(
     private route: ActivatedRoute,
@@ -69,7 +71,6 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     this.sigfoxService.createGroupConnection(this.sigfoxGroup)
       .subscribe(
         (response) => {
-
           console.log(response);
           this.routeBack();
         },
@@ -95,21 +96,9 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessage = '';
-    this.errorMessages = [];
-    if (error.error?.chirpstackError) {
-      this.errorMessage = error.error.chirpstackError.message;
-    } else if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = error.message;
-    }
+    const errorMessages: ErrorMessage = this.errorMessageHandler.handleErrorMessageWithFields(error);
+    this.errorMessages = errorMessages.errorMessages;
+    this.errorFields = errorMessages.errorFields;
     this.formFailedSubmit = true;
   }
 
@@ -118,9 +107,9 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.sigfoxService.getGroup(this.sigfoxGroup.organizationId).subscribe(
-      (x: any) => {
-        if (this.sigfoxGroup.organizationId) {
+    this.sigfoxService.getGroup(this.sigfoxGroup.id).subscribe(
+      (response: any) => {
+        if (response.data.length !== 0 || response.data === undefined) {
           this.update();
         } else {
           this.create();
