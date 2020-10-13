@@ -152,6 +152,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             case DeviceType.LORAWAN: {
                 this.setActivationType();
                 this.iotDevice.sigfoxSettings = undefined;
+                if (this.iotDevice.lorawanSettings.devEUI) {
+                    this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.toLowerCase();
+                }
                 break;
             }
             case DeviceType.SIGFOX: {
