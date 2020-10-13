@@ -3,6 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Downlink } from '@applications/iot-devices/downlink.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageHandler } from '@shared/error-message-handler';
+import { DownlinkService } from '@shared/services/downlink.service';
 
 @Component({
   selector: 'app-downlink',
@@ -15,10 +17,12 @@ export class DownlinkComponent implements OnInit {
   @Input() errorMessages: string[];
   public downlinkText: string;
   public downlink = new Downlink();
+  private errorMessageHandler = new ErrorMessageHandler();
 
   constructor(
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private downlinkService: DownlinkService,
   ) { }
 
   ngOnInit(): void {
@@ -26,17 +30,25 @@ export class DownlinkComponent implements OnInit {
 
   startDownlink() {
     this.errorMessages = [];
-    if (this.isValidHex(this.downlink.payload)) {
+    if (this.validateHex(this.downlink.payload)) {
         console.log('start downlink');
-        this.snackBar.open('Element sat i kø', 'Downlink', {
-            duration: 10000
-        });
+        this.downlinkService.post(this.downlink)
+            .subscribe(
+                (response) => {
+                    this.snackBar.open('Element sat i kø', 'Downlink', {
+                        duration: 10000
+                    });
+                },
+                (error) => {
+                    const errorMessages: string[] = this.errorMessageHandler.handleErrorMessage(error);
+                    this.snackBar.open('Fejl:' + errorMessages);
+                });
     } else {
         console.log('fejl i format');
     }
   }
 
-  isValidHex(input: string): boolean {
+  validateHex(input: string): boolean {
       const res = parseInt(input, 16);
       if (res) {
           if (this.device.type === 'SIGFOX' && input.length > 16) {
