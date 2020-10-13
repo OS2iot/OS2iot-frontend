@@ -446,7 +446,7 @@
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
-      "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
+      "ADDSERVICEPROFILE": "Redigér Service Profile"
     },
     "DEVICE_PROFILE": {
       "DROPDOWN": "Håndter device profil",
