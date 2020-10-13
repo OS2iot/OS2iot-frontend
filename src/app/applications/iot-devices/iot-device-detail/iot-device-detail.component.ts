@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
@@ -42,7 +41,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
-        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
