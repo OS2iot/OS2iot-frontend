@@ -58,38 +58,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             });
     }
 
-    startDownlink() {
-        this.errorMessages = [];
-        if (this.isValidHex(this.downlink.payload)) {
-            console.log('start downlink');
-            this.snackBar.open('Element sat i kø', 'Downlink', {
-                duration: 10000
-            });
-        } else {
-            console.log('fejl i format');
-        }
-    }
-
-    isValidHex(input: string): boolean {
-        const res = parseInt(input, 16);
-        if (res) {
-            if (this.device.type === 'SIGFOX' && input.length > 16) {
-                this.translate.get(['IOTDEVICE.DOWNLINK.ERROR-SIGFOX-LENGTH'])
-                    .subscribe(translations => {
-                    this.errorMessages.push(translations['IOTDEVICE.DOWNLINK.ERROR-SIGFOX-LENGTH']);
-                });
-                return false;
-            }
-            return true;
-        } else {
-            this.translate.get(['IOTDEVICE.DOWNLINK.ERROR-FORMAT'])
-                    .subscribe(translations => {
-                    this.errorMessages.push(translations['IOTDEVICE.DOWNLINK.ERROR-FORMAT']);
-                });
-            return false;
-        }
-    }
-
     bindIoTDeviceAndApplication(deviceId: number) {
         this.iotDeviceSubscription = this.iotDeviceService.getIoTDevice(deviceId).subscribe((device: IotDevice) => {
             this.device = device;
