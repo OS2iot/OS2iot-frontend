@@ -124,7 +124,7 @@ export class BulkImportComponent implements OnInit {
   addIoTDevice() {
     this.bulkImportResult.forEach((requestItem) => {
       if (requestItem.device.id) {
-        this.iotDeviceService.createIoTDevice(requestItem.device).subscribe(
+        this.iotDeviceService.updateIoTDevice(requestItem.device, requestItem.device.id).subscribe(
           (response) => {
             console.log(response);
             requestItem.importStatus = 'success';
