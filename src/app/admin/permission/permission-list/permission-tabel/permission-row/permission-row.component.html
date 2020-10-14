@@ -1,5 +1,5 @@
 <td class="position-relative">
-  <a [routerLink]="[permission.id]" routerLinkActive="active" class="permission-link">
+  <a (click)="routeToPermissions()" routerLinkActive="active" class="permission-link">
     {{permission.name}}</a>
 </td>
 <td class="position-relative">
