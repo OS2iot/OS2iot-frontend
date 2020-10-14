@@ -9,7 +9,8 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { ErrorMessage, ErrorMessageHandler } from '@shared/error-message-handler';
+import { ErrorMessageService } from '@shared/error-message.service';
+import { ErrorMessage } from '@shared/models/error-message.model';
 
 
 @Component({
@@ -29,7 +30,6 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public title = '';
   public backButton: BackButton = { label: '', routerLink: '/administration' };
-  public errorMessageHandler = new ErrorMessageHandler();
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +37,9 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private sigfoxService: SigfoxService,
     private location: Location,
-    private sharedVariable: SharedVariableService
+    private sharedVariable: SharedVariableService,
+    private errorMessageService: ErrorMessageService
+
   ) { }
 
   ngOnInit(): void {
@@ -96,7 +98,7 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    const errorMessages: ErrorMessage = this.errorMessageHandler.handleErrorMessageWithFields(error);
+    const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorMessages = errorMessages.errorMessages;
     this.errorFields = errorMessages.errorFields;
     this.formFailedSubmit = true;

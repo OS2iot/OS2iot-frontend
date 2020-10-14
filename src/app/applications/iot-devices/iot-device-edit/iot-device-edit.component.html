@@ -179,6 +179,24 @@
               [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
           </div>
+
+          <div class="form-group mt-5">
+            <label class="form-label"
+              for="fCntUp">{{'QUESTION.FCNTUP' | translate}}*</label>
+            <input type="text" id="fCntUp" name="fCntUp" maxLength="32"
+              [placeholder]="'QUESTION.FCNTUP-PLACEHOLDER' | translate" class="form-control"
+              [(ngModel)]="iotDevice.lorawanSettings.fCntUp"
+              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('fCntUp'), 'is-valid' : formFailedSubmit && !errorFields.includes('fCntUp')}">
+          </div>
+
+          <div class="form-group mt-5">
+            <label class="form-label"
+              for="nFCntDown">{{'QUESTION.NFCNTDOWN' | translate}}*</label>
+            <input type="text" id="nFCntDown" name="nFCntDown" maxLength="32"
+              [placeholder]="'QUESTION.NFCNTDOWN-PLACEHOLDER' | translate" class="form-control"
+              [(ngModel)]="iotDevice.lorawanSettings.nFCntDown"
+              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('nFCntDown'), 'is-valid' : formFailedSubmit && !errorFields.includes('nFCntDown')}">
+          </div>
         </ng-container>
       </div>
   

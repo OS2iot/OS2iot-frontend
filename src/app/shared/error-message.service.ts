@@ -1,13 +1,21 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ErrorMessage } from './models/error-message.model';
 
-export class ErrorMessageHandler {
+@Injectable({
+  providedIn: 'root'
+})
+export class ErrorMessageService {
 
-    public handleErrorMessage(error: HttpErrorResponse): string[] {
+    public handleErrorMessage(err: HttpErrorResponse): string[] {
         let errorMessages = [];
-        if (typeof error.error.message === 'string') {
-          errorMessages.push(error.error.message);
-        } else {
-          error.error.message.forEach( (err) => {
+        if (typeof err.error.message === 'string') {
+          errorMessages.push(err.error.message);
+        } else if (err.error.chirpstackError) {
+          errorMessages.push(err.error.chirpstackError.message);
+        }
+        else {
+          err.error.message.forEach( (err) => {
             if (err.property === 'lorawanSettings') {
               err.children.forEach( (element) => {
                 errorMessages = errorMessages.concat(
@@ -49,14 +57,5 @@ export class ErrorMessageHandler {
         });
     }
     return errors;
-  }
-}
-
-export class ErrorMessage {
-  public errorFields = [];
-  public errorMessages = [];
-  constructor(errorMessage = [], errorFields = []) {
-    this.errorFields = errorFields;
-    this.errorMessages = errorMessage;
   }
 }

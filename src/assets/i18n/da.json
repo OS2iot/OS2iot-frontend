@@ -260,7 +260,8 @@
     "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Enhedstype",
     "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe",
-    "EDIT-USERS": "Redigér bruger"
+    "EDIT-USERS": "Redigér bruger",
+    "EDIT-DEVICE-PROFILE": "Redigér device profile"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -297,6 +298,10 @@
     "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
     "APPLICATIONSESSIONKEY": "Applicationsessionkey",
     "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
+    "FCNTUP": "nfcntdown",
+    "FCNTUP-PLACEHOLDER": "Angiv upload framerate",
+    "NFCNTDOWN": "nfcntdown",
+    "NFCNTDOWN-PLACEHOLDER": "Angiv download framerate",
     "DEVEUI": "Enheds EUI",
     "DEVEUI-PLACEHOLDER": "Enheds EUI",
     "SKIPFCNTCHECK": "SkipFCntCheck",
@@ -397,7 +402,8 @@
       "DIALOG-TITLE": "Downlink",
       "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
       "DIALOG-DECLINE": "Annuller",
-      "DIALOG-CONFIRM": "Ja, overskriv"
+      "DIALOG-CONFIRM": "Ja, overskriv",
+      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret den pågældende enhedstype"
     },
     "DETAIL-TAB": "Detail",
     "DOWNLINK-TAB": "Downlink",
@@ -430,7 +436,9 @@
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
       "SKIPFCNTCHECK": "skipfcntcheck",
-      "OTAAAPPLICATIONKEY": "OTAA Applicationkey"
+      "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+      "NFCNTDOWN": "nfcntdown",
+      "FCNTUP": "fcntup"
     },
     "SIGFOX": {
       "GROUP-NAME": "SigFox gruppe navn",
@@ -446,7 +454,8 @@
     "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
     "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn",
     "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
-    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode"
+    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
+    "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageHandler, ErrorMessage } from '@shared/error-message-handler';
 import { BackButton } from '@shared/models/back-button.model';
 import { SigfoxContract } from '@shared/models/sigfox-contract.model';
 import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
@@ -12,6 +11,8 @@ import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { ErrorMessageService } from '@shared/error-message.service';
+import { ErrorMessage } from '@shared/models/error-message.model';
 
 
 @Component({
@@ -34,14 +35,14 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   public submitButton = '';
   organizationId: number;
   subscription: Subscription;
-  errorHandler = new ErrorMessageHandler();
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private sigfoxService: SigfoxService,
     private location: Location,
-    private sharedVariable: SharedVariableService
+    private sharedVariable: SharedVariableService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -114,7 +115,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
-    const errorMessages: ErrorMessage = this.errorHandler.handleErrorMessageWithFields(error);
+    const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorMessages.errorFields;
     this.errorMessages = errorMessages.errorMessages;
   }

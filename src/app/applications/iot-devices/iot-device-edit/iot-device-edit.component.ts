@@ -11,8 +11,8 @@ import { ServiceProfile, ServiceProfileResponseMany } from '@profiles/service-pr
 import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
-import { ErrorMessage, ErrorMessageHandler } from '@shared/error-message-handler';
-import { BackButton } from '@shared/models/back-button.model';
+import { ErrorMessageService } from '@shared/error-message.service';
+import { ErrorMessage } from '@shared/models/error-message.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { IotDevice } from '../iot-device.model';
@@ -38,7 +38,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     iotDevice = new IotDevice();
     editmode = false;
     public OTAA = true;
-    private errorHandler = new ErrorMessageHandler();
 
     public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
@@ -55,7 +54,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private applicationService: ApplicationService,
         private iotDeviceService: IoTDeviceService,
         private location: Location,
-        private shareVariable: SharedVariableService
+        private shareVariable: SharedVariableService,
+        private errorMessageService: ErrorMessageService
     ) { }
 
     ngOnInit(): void {
@@ -197,7 +197,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     handleError(error: HttpErrorResponse) {
-        const errorMessage: ErrorMessage = this.errorHandler.handleErrorMessageWithFields(error);
+        const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
         this.errorFields = errorMessage.errorFields;
         this.errorMessages = errorMessage.errorMessages;
     }

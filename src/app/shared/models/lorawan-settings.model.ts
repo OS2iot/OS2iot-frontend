@@ -10,4 +10,6 @@ export class LorawanSettings {
     applicationSessionKey?: string;
     serviceProfileID: string;
     deviceProfileID: string;
+    fCntUp = 0;
+    nFCntDown = 0;
 }

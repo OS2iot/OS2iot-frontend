@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageHandler } from '@shared/error-message-handler';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { Download } from '@shared/helpers/download.helper';
 import { BackButton } from '@shared/models/back-button.model';
 import { DownloadService } from '@shared/services/download.service';
@@ -37,7 +36,6 @@ export class BulkImportComponent implements OnInit {
   private bulkMapper = new BulkMapping();
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   private applicationId;
-  private errorHandler = new ErrorMessageHandler();
 
   constructor(
     private papa: Papa,
@@ -45,6 +43,7 @@ export class BulkImportComponent implements OnInit {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private downloads: DownloadService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -138,7 +137,7 @@ export class BulkImportComponent implements OnInit {
             requestItem.importStatus = 'success';
           },
           (error: HttpErrorResponse) => {
-            requestItem.errorMessages = this.errorHandler.handleErrorMessage(error);
+            requestItem.errorMessages = this.errorMessageService.handleErrorMessage(error);
             requestItem.importStatus = 'Failed';
           }
         );
@@ -149,7 +148,7 @@ export class BulkImportComponent implements OnInit {
             requestItem.importStatus = 'success';
           },
           (error) => {
-            requestItem.errorMessages = this.errorHandler.handleErrorMessage(error);
+            requestItem.errorMessages = this.errorMessageService.handleErrorMessage(error);
             requestItem.importStatus = 'Failed';
           }
         );
