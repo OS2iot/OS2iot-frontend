@@ -33,14 +33,6 @@
         </select>
       </div>
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="endProductCertificate">{{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE' | translate}}*</label>
-        <input type="text" id="endProductCertificate" name="endProductCertificate" maxLength="16"
-          [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
-          [disabled]="editMode"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('endProductCertificate'), 'is-valid' : formFailedSubmit && !errorFields.includes('endProductCertificate')}">
-      </div>
-      <div class="form-group mt-3 col-12">
         <label class="form-label" for="pac">{{'QUESTION.SIGFOX.PAC' | translate}}*</label>
         <input type="text" id="pac" name="pac" maxLength="16"
           [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate" class="form-control"
@@ -57,8 +49,34 @@
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
       </div>
       <div class="form-group mt-3 col-12">
-        <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.prototype" [disabled]="editMode" id="prototype" name="prototype">
-          {{'QUESTION.SIGFOX.PROTOTYPE' | translate}}</mat-slide-toggle>
+        <label class="form-label" for="endProductCertificate">{{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE' | translate}}*</label>
+        <input type="text" id="endProductCertificate" name="endProductCertificate" maxLength="16"
+          [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate" class="form-control"
+          [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
+          [disabled]="editMode"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('endProductCertificate'), 'is-valid' : formFailedSubmit && !errorFields.includes('endProductCertificate')}">
+      </div>
+      <div class="form-group mt-3 col-12">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  <h4> {{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TITLE' | translate}}
+                  </h4>
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="form-group mt-3 col-12">
+            <a href="https://support.sigfox.com/docs/product-certificate" target="_blank">
+              {{'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TEXT' | translate}}
+            </a>
+          </div>  
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="endProductCertificate">{{'QUESTION.SIGFOX.PROTOTYPE-TITLE' | translate}}*</label>
+            <div>
+              <mat-slide-toggle [(ngModel)]="iotDevice.sigfoxSettings.prototype" [disabled]="editMode" id="prototype" name="prototype">
+                {{'QUESTION.SIGFOX.PROTOTYPE' | translate}}</mat-slide-toggle>
+            </div>
+          </div>
+      </mat-expansion-panel>
       </div>
     </div>
     <div *ngIf="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend && !editMode">
@@ -76,6 +94,12 @@
     </div>
     <div *ngIf="!iotDevice.sigfoxSettings.groupId">
       <h3>{{'QUESTION.SIGFOX.SELECTGROUPFIRST' | translate}}</h3>
+    </div>
+    <div class="form-group mt-3 col-12">
+      {{'QUESTION.SIGFOX.DISCLAIMER' | translate}}
+      <a href="https://support.sigfox.com/docs/unsubscribe-a-device" target="_blank">
+        {{'QUESTION.SIGFOX.DISCLAIMER-CLICK' | translate}}
+      </a>
     </div>
   </div>
 </form>

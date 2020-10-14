@@ -328,7 +328,12 @@
       "PAC-PLACEHOLDER": "Porting Authorization Code",
       "ENDPRODUCTCERTIFICATE": "Angiv en produkt licens",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
-      "PROTOTYPE": "Opret som prototype",
+      "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til produkt certifikat",
+      "ENDPRODUCTCERTIFICATE-HELP-TEXT": "Hjælp til at finde produkt certifikat. Klik her!",
+      "DISCLAIMER": "Bemærk dit abennement med Sigfox holdes udenfor OS2iot og løber automatisk. Afmeld dig abonnement ved at registrere en unsubscribtion date i Sigfox",
+      "DISCLAIMER-CLICK": "Guide til unsubscripe",
+      "PROTOTYPE": "Aktiver som prototype",
+      "PROTOTYPE-TITLE": "Hvis du endnu ikke har et produkt certifikat kan enheden oprettes som en prototyep",
       "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
       "DEVICETYPE": {
         "NAME": "Navngiv enhedstypen",
