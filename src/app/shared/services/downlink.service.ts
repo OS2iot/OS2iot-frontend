@@ -9,11 +9,13 @@ import { Downlink } from '@applications/iot-devices/downlink.model';
 })
 export class DownlinkService {
 
+  private IOTDEVICEURL = 'iot-device/';
   private DOWNLINKURL = 'downlink';
 
   constructor(private restService: RestService) { }
 
-  public post(downlink: Downlink, params = {}): Observable<any> {
-    return this.restService.post(this.DOWNLINKURL, downlink, params);
+  public post(downlink: Downlink, deviceId: number, params = {}): Observable<any> {
+    const url = this.IOTDEVICEURL + deviceId + '/' + this.DOWNLINKURL;
+    return this.restService.post(url, downlink, params);
   }
 }

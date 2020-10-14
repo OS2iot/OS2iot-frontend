@@ -384,11 +384,15 @@
       "PAYLOAD": "Angiv det ønskede payload",
       "PAYLOAD-PLACEHOLDER": "ADF12345",
       "PORT": "Angiv den ønskede port",
-      "CONFIRMEDDOWLINK": "Bekræft downlink",
       "START": "Sæt downlink i kø",
       "ERROR-SIGFOX-LENGTH": "Fejl i payload længde - payload må ikke overskride 16 karaktere",
       "ERROR-FORMAT": "Fejl i formatet. Downlink skal være på hexidecimal format: a-f 0-9",
-      "DESCRIPTION": "Her kan du starte et downlink til dit device."
+      "DESCRIPTION": "Her kan du starte et downlink til dit device.",
+      "CONFIRMEDDOWNLINK": "Bekræft downlink",
+      "DIALOG-TITLE": "Downlink",
+      "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
+      "DIALOG-DECLINE": "Annuller",
+      "DIALOG-CONFIRM": "Ja, overskriv"
     },
     "DETAIL-TAB": "Detail",
     "DOWNLINK-TAB": "Downlink",

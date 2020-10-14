@@ -8,7 +8,7 @@
 <div class="jumbotron m-md-4 p-md-3">
     <h3>{{'IOTDEVICE.DOWNLINK.TITLE' | translate}}</h3>
     <p>{{'IOTDEVICE.DOWNLINK.DESCRIPTION' | translate}}</p>
-    <div *ngIf="device.type === 'LORAWAN'">
+    <div *ngIf="device.type === 'LORAWAN'" class="mt-5 clearfix col-4">
         <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
             {{'IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK' | translate}}</mat-slide-toggle>
     </div>
@@ -19,12 +19,12 @@
             required [(ngModel)]="downlink.port">
     </div>
     <div class="mt-5 clearfix col-4">
-        <label for="payload"
+        <label for="data"
             class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}</label>
-        <input type="payload" class="form-control" placeholder="{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}" id="payload" name="payload" maxlength="device.type === 'SIGFOX' ? 16 : ''"
-            required [(ngModel)]="downlink.payload">
+        <input type="data" class="form-control" placeholder="{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}" id="data" name="data" maxlength="device.type === 'SIGFOX' ? 16 : ''"
+            required [(ngModel)]="downlink.data">
     </div>
     <div class="mt-5 clearfix">
-        <button (click)="startDownlink()" class="btn btn-secondary" type="button">{{ 'IOTDEVICE.DOWNLINK.START' | translate}}</button>
+        <button (click)="clickDownlink()" class="btn btn-secondary" type="button">{{ 'IOTDEVICE.DOWNLINK.START' | translate}}</button>
     </div>
 </div>

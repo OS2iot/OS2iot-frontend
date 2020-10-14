@@ -1,6 +1,6 @@
 
 export class Downlink {
-    payload: string;
+    data: string;
     port = 0;
     confirmedDownlink = false;
 }
