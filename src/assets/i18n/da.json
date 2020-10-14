@@ -42,7 +42,8 @@
       "DEVICE-TYPE-NAME": "navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
       "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
-      "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype"
+      "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype",
+      "SAVE": "Gem enhedstype"
     }
   },
   "APPLICATION": {
@@ -256,7 +257,7 @@
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
     "EDIT-PERMISSION": "Redigér brugergruppe",
-    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Device Types",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Enhedstype",
     "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe",
     "EDIT-USERS": "Redigér bruger"
