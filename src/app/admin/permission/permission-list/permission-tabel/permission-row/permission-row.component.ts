@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 
 @Component({
@@ -12,14 +12,12 @@ export class PermissionRowComponent implements OnInit {
   @Output() innerDeletePermission = new EventEmitter();
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
 
   clickDelete() {
-    console.log("row")
     this.innerDeletePermission.emit(this.permission.id);
   }
 
