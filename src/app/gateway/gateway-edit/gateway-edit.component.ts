@@ -25,6 +25,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
+  public editMode = false;
   private id: string;
 
   gateway = new Gateway();
@@ -41,6 +42,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.getGateway(this.id);
+      this.editMode = true;
     }
     this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
       .subscribe(translations => {
