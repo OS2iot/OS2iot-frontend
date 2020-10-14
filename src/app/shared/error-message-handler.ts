@@ -37,6 +37,9 @@ export class ErrorMessageHandler {
                         Object.values(element.constraints)
                     );
                 });
+            } else if (err.message) {
+              errors.errorFields.push(err.field);
+              errors.errorMessages.push(err.message);
             } else {
               errors.errorFields.push(err.property);
               errors.errorMessages = errors.errorMessages.concat(
