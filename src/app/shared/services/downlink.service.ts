@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { GatewayResponse, Gateway, GatewayData, GatewayRequest } from '@app/gateway/gateway.model';
 import { Downlink } from '@applications/iot-devices/downlink.model';
 
 @Injectable({
@@ -13,6 +12,11 @@ export class DownlinkService {
   private DOWNLINKURL = 'downlink';
 
   constructor(private restService: RestService) { }
+
+  public get(deviceId: number, params = {}): Observable<any> {
+    const url = this.IOTDEVICEURL + deviceId + '/' + this.DOWNLINKURL;
+    return this.restService.get(url, params);
+  }
 
   public post(downlink: Downlink, deviceId: number, params = {}): Observable<any> {
     const url = this.IOTDEVICEURL + deviceId + '/' + this.DOWNLINKURL;

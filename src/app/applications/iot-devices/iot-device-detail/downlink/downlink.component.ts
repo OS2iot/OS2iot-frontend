@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,18 +33,28 @@ export class DownlinkComponent implements OnInit {
   }
 
   clickDownlink() {
-    // add call to backend when developed. Check if a downlink already excist
-    if (true) {
-        this.openDownlinkDialog();
-    } else {
-        this.startDownlink();
-    }
+    this.downlinkService.get(this.device.id)
+        .subscribe((response: any) => {
+            if (response.totalCount > 0) {
+                this.openDownlinkDialog();
+            } else {
+                this.startDownlink();
+            }
+        },
+        (error) => {
+            this.handleError(error);
+            console.log(error);
+        });
   }
 
-  startDownlink() {
+  private handleError(error: HttpErrorResponse) {
+    const errorMessages: string[] = this.errorMessageHandler.handleErrorMessage(error);
+    this.snackBar.open('Fejl:' + errorMessages);
+  }
+
+  private startDownlink() {
     this.errorMessages = [];
     if (this.validateHex(this.downlink.data)) {
-        console.log('start downlink');
         this.downlinkService.post(this.downlink, this.device.id)
             .subscribe(
                 (response) => {
@@ -52,15 +63,12 @@ export class DownlinkComponent implements OnInit {
                     });
                 },
                 (error) => {
-                    const errorMessages: string[] = this.errorMessageHandler.handleErrorMessage(error);
-                    this.snackBar.open('Fejl:' + errorMessages);
+                    this.handleError(error);
                 });
-    } else {
-        console.log('fejl i format');
     }
   }
 
-  validateHex(input: string): boolean {
+  private validateHex(input: string): boolean {
       const res = parseInt(input, 16);
       if (res) {
           if (this.device.type === 'SIGFOX' && input.length > 16) {
