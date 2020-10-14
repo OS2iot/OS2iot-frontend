@@ -428,7 +428,8 @@
       "PROTOTYPE": "Er enheden en prototype",
       "PAC": "PAC",
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
-      "DEVICETYPE": "Enhedstypen"
+      "DEVICETYPE": "Enhedstypen",
+      "DEVICEID": "EnhedsId"
     }
   },
   "MESSAGE": {

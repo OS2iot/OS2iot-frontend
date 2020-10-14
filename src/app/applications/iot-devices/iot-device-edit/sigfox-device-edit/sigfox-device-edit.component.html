@@ -44,15 +44,15 @@
         <label class="form-label" for="pac">{{'QUESTION.SIGFOX.PAC' | translate}}*</label>
         <input type="text" id="pac" name="pac" maxLength="16"
           [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.pac" maxlength="16"
+          [(ngModel)]="iotDevice.sigfoxSettings.pac"
           [disabled]="editMode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('pac'), 'is-valid' : formFailedSubmit && !errorFields.includes('pac')}">
       </div>
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceId">{{'QUESTION.SIGFOX.DEVICEID' | translate}}*</label>
-        <input type="text" id="deviceId" name="deviceId" maxLength="16"
+        <input type="text" id="deviceId" name="deviceId" maxLength="8"
           [placeholder]="'QUESTION.SIGFOX.DEVICEID-PLACEHOLDER' | translate" class="form-control"
-          [(ngModel)]="iotDevice.sigfoxSettings.deviceId" maxlength="16"
+          [(ngModel)]="iotDevice.sigfoxSettings.deviceId"
           [disabled]="editMode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
       </div>
