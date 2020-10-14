@@ -298,7 +298,7 @@
     "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
     "APPLICATIONSESSIONKEY": "Applicationsessionkey",
     "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
-    "FCNTUP": "nfcntdown",
+    "FCNTUP": "fCntUp",
     "FCNTUP-PLACEHOLDER": "Angiv upload framerate",
     "NFCNTDOWN": "nfcntdown",
     "NFCNTDOWN-PLACEHOLDER": "Angiv download framerate",
