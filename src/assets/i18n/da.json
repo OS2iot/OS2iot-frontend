@@ -459,7 +459,8 @@
     "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
     "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
     "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
-    "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder"
+    "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
+    "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
