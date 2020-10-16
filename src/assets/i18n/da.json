@@ -403,7 +403,7 @@
       "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
       "DIALOG-DECLINE": "Annuller",
       "DIALOG-CONFIRM": "Ja, overskriv",
-      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret den pågældende enhedstype",
+      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret for den pågældende enhedstype",
       "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
       "NO-PAYLOAD": "Angiv en payload",
       "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til sigfox skal være mellem 8 og 16 tegn (Hexadecimal)",
