@@ -75,6 +75,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   }
 
   updateGateway(): void {
+    // Gateway ID not allowed in update.
+    this.gateway.id = undefined;
     this.loraGatewayService
       .put(this.gateway, this.id)
       .subscribe(
