@@ -13,7 +13,7 @@
             <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
                 {{'IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK' | translate}}</mat-slide-toggle>
         </div>
-        <div class="mt-5 clearfix col-4">
+        <div class="mt-5 clearfix col-4" *ngIf="device.type === 'LORAWAN'">
             <label for="port"
                 class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PORT' | translate}}</label>
             <input type="port" class="form-control" id="port" name="port" maxlength="50" min="0"

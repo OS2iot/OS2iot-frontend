@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Downlink } from '@applications/iot-devices/downlink.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
+import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { DownlinkService } from '@shared/services/downlink.service';
 import { DownlinkDialogComponent } from './downlink-dialog/downlink-dialog.component';
@@ -76,7 +77,9 @@ export class DownlinkComponent implements OnInit {
           }
           validator = true;
       } else {
-            this.addToErrorMessage('IOTDEVICE.DOWNLINK.NO-PORT-OR-PAYLOAD');
+            this.device.type === DeviceType.LORAWAN
+            ? this.addToErrorMessage('IOTDEVICE.DOWNLINK.NO-PORT-OR-PAYLOAD')
+            : this.addToErrorMessage('IOTDEVICE.DOWNLINK.NO-PAYLOAD');
             this.addToErrorMessage('IOTDEVICE.DOWNLINK.FORMAT-ERROR');
             validator = false;
       }
