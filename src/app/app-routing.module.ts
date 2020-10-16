@@ -14,9 +14,8 @@ const routes: Routes = [
     { path: 'payload-decoder', loadChildren: () => import('./payload-decoder/payload-decoder.module').then(m => m.PayloadDecoderModule) },
     { path: 'sigfox', loadChildren: () => import('./sigfox/sigfox.module').then(m => m.SigfoxModule) },
     { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not found!' } },
-    { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
-
+    { path: '**', redirectTo: '/not-found', pathMatch: 'full' }
 ];
 
 @NgModule({
