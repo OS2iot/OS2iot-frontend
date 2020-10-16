@@ -87,7 +87,7 @@
             [value]="iotDevice.sigfoxSettings.deviceId"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceId'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceId')}">
             <option *ngFor="let element of sigfoxDevices" [value]="element.id">
-              {{element.name}}
+              {{element.name}} ({{element.id}})
             </option>
           </select>
       </div>  
