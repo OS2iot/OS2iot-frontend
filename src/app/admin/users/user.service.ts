@@ -20,8 +20,8 @@ export class UserService {
         return this.restService.put(this.URL, body, id, { observe: 'response' });
     }
 
-    getOne(id: number): Observable<UserResponse> {
-        return this.restService.get(this.URL, {}, id);
+    getOne(id: number, extendedInfo = false): Observable<UserResponse> {
+        return this.restService.get(this.URL, { extendedInfo: extendedInfo }, id);
     }
 
     getMultiple(): Observable<UserGetManyResponse> {

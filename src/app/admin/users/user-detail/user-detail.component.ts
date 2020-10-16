@@ -57,7 +57,7 @@ export class UserDetailComponent implements OnInit {
 
   private getUser(id: number) {
     this.subscription = this.userService
-      .getOne(id)
+      .getOne(id, true)
       .subscribe((response) => {
         this.user = response;
         this.permissions = response.permissions;
