@@ -9,7 +9,7 @@ export class Gateway {
     gatewayProfileID: string = null;
     tagsString = '{}';
     tags?: JSON;
-    lastSeenAt: Date;
+    lastSeenAt: string;
 }
 
 export class GatewayData {

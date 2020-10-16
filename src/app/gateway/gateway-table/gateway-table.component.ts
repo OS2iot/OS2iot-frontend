@@ -15,7 +15,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public gateways: Observable<Gateway[]>;
+  public gateways: Gateway[];
   public pageOffset = 0;
   public pageTotal: number;
 

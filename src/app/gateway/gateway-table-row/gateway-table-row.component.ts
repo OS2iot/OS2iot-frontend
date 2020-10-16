@@ -41,8 +41,10 @@ export class GatewayTableRowComponent implements OnInit {
     const errorTime = new Date();
     // 150 seconds is the define error interval: 30 sec heartbeat * 5.
     errorTime.setSeconds(errorTime.getSeconds() - 150);
-    if (this.gateway?.lastSeenAt && (errorTime.getTime() < this.gateway?.lastSeenAt.getTime())) {
-      return true;
+    if (this.gateway?.lastSeenAt) {
+      const lastSeenAtUnixTimestamp = moment(this.gateway?.lastSeenAt).unix() 
+      const errorTimeUnixTimestamp = moment(errorTime).unix()
+      return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
     } else {
       return false;
     }
