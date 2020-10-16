@@ -72,13 +72,22 @@ export class DownlinkComponent implements OnInit {
       let validator = false;
       if (res) {
           if (this.device.type === 'SIGFOX' && input.length > 16) {
-              validator = false;
+            this.addToErrorMessage('IOTDEVICE.DOWNLINK.SIGFOX-PAYLOAD-LENGTH');
           }
           validator = true;
       } else {
-          validator = false;
+            this.addToErrorMessage('IOTDEVICE.DOWNLINK.NO-PORT-OR-PAYLOAD');
+            this.addToErrorMessage('IOTDEVICE.DOWNLINK.FORMAT-ERROR');
+            validator = false;
       }
       return validator;
+  }
+
+  addToErrorMessage(text: string) {
+    this.translate.get([text])
+            .subscribe( (translations) => {
+                this.errorMessages.push(translations[text]);
+            });
   }
 
   openDownlinkDialog() {

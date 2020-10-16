@@ -403,7 +403,10 @@
       "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
       "DIALOG-DECLINE": "Annuller",
       "DIALOG-CONFIRM": "Ja, overskriv",
-      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret den pågældende enhedstype"
+      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret den pågældende enhedstype",
+      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
+      "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til sigfox skal være mellem 8 og 16 tegn (Hexadecimal)",
+      "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
     "DETAIL-TAB": "Detail",
     "DOWNLINK-TAB": "Downlink",
@@ -455,7 +458,8 @@
     "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn",
     "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
     "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
-    "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde"
+    "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
+    "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
