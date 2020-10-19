@@ -28,8 +28,8 @@ export class BulkMapping {
             applicationSessionKey: data.applicationSessionKey ? data.applicationSessionKey : undefined,
             serviceProfileID: data.serviceProfileID ? data.serviceProfileID : undefined,
             deviceProfileID: data.deviceProfileID ? data.deviceProfileID : undefined,
-            fCntUp: 0,
-            nFCntDown: 0
+            fCntUp: data.fCntUp ? data.fCntUp : undefined,
+            nFCntDown: data.nFCntDown ? data.nFCntDown : undefined
         };
         newDevice.type = DeviceType.LORAWAN;
         return newDevice;
