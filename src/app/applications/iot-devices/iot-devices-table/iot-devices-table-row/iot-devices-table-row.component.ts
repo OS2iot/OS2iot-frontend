@@ -13,6 +13,8 @@ import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
   styleUrls: ['./iot-devices-table-row.component.scss']
 })
 export class IotDevicesTableRowComponent implements OnInit {
+  batteryStatusColor = 'green';
+  batteryStatusPercentage = 50;
   @Input() device: IotDevice;
 
   @Output() deleteDevice = new EventEmitter();

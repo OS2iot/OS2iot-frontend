@@ -16,10 +16,10 @@ import { SigfoxDeviceEditComponent } from './iot-device-edit/sigfox-device-edit/
 import { IotDevicesTableRowComponent } from './iot-devices-table/iot-devices-table-row/iot-devices-table-row.component';
 import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.component';
 import { DownlinkDialogComponent } from './iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [
-
         IotDevicesTableComponent,
         IotDevicesTableRowComponent,
         IoTDeviceDetailComponent,
@@ -30,20 +30,20 @@ import { DownlinkDialogComponent } from './iot-device-detail/downlink/downlink-d
         IotDeviceDetailSigfoxComponent,
         DownlinkComponent,
         DownlinkDialogComponent
-
     ],
     exports: [
         IotDevicesTableComponent,
         IoTDeviceDetailComponent
     ],
     imports: [
+        SharedModule,
         CommonModule,
         TopBarModule,
         RouterModule,
         TranslateModule,
         FormModule,
         NGMaterialModule,
-        FormsModule
+        FormsModule,
     ],
 })
 export class IotDevicesModule { }
