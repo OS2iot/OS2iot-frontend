@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
+import { getJSDocThisTag } from 'typescript';
 
 @Component({
     selector: 'app-gateway-detail',

@@ -9,18 +9,23 @@
     <h4>{{ 'GATEWAY.LOCATION' | translate }}</h4>
     <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>
     <ng-template #locationThenBlock>
-        <div class="row mb-5">
-            <div class="col-md-4">
-                <h6>{{ 'GATEWAY.LONGITUDE' | translate }}</h6>
-                <p>{{gateway.location?.longitude}}</p>
+        <div class="row">
+            <div class="mb-5 col-2">
+                <div class="row col-md-12">
+                    <h6>{{ 'GATEWAY.LONGITUDE' | translate }}</h6>
+                    <p>{{gateway.location?.longitude}}</p>
+                </div>
+                <div class="row col-md-12">
+                    <h6>{{ 'GATEWAY.LATITUDE' | translate }}</h6>
+                    <p>{{gateway.location.latitude}}</p>
+                </div>
+                <div class="row col-md-12">
+                    <h6>{{ 'GATEWAY.ALTITUDE' | translate }}</h6>
+                    <p>{{gateway.location.altitude}}</p>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h6>{{ 'GATEWAY.LATITUDE' | translate }}</h6>
-                <p>{{gateway.location.latitude}}</p>
-            </div>
-            <div class="col-md-4">
-                <h6>{{ 'GATEWAY.ALTITUDE' | translate }}</h6>
-                <p>{{gateway.location.altitude}}</p>
+            <div class="col-10" *ngIf="this.gateway.location">
+                <app-map [longitude]="this.gateway.location.longitude" [latitude]="this.gateway.location.latitude"></app-map>
             </div>
         </div>
     </ng-template>

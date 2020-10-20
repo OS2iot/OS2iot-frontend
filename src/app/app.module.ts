@@ -17,6 +17,7 @@ import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { MapModule } from './map/map.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
