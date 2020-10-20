@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
 import { getJSDocThisTag } from 'typescript';
+import { MapCoordinates } from '@app/map/map-coordinates.model';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -45,6 +46,14 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
+    }
+
+    getCoordinates() {
+        return [{
+            longitude: this.gateway.location.longitude,
+            latitude: this.gateway.location.latitude,
+            draggable: false
+        }];
     }
 
     bindGateway(id: string): void {

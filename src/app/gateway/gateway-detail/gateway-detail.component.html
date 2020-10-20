@@ -1,5 +1,5 @@
 <app-top-bar-single [data]="gateway" [backButton]="backButton"></app-top-bar-single>
-<div class=" jumbotron m-md-4 p-md-3">
+<div class=" jumbotron m-md-4 p-md-3" *ngIf="gateway">
     <h4>{{ 'GATEWAY.NAME' | translate }}</h4>
     <p class="mb-5">{{gateway.name}}</p>
     <h4 *ngIf="gateway.description">{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-10" *ngIf="this.gateway.location">
-                <app-map [longitude]="this.gateway.location.longitude" [latitude]="this.gateway.location.latitude"></app-map>
+                <app-map [coordinates]="getCoordinates()"></app-map>
             </div>
         </div>
     </ng-template>
