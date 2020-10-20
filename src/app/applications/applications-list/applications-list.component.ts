@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./applications-list.component.scss'],
 })
 export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
-  public pageLimit: number = 10;
+  public pageLimit = 10;
 
   public pageTotal: number;
   public pageOffset = 0;
