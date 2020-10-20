@@ -30,11 +30,10 @@ export class IotDevicesTableRowComponent implements OnInit {
 
   ngOnInit(): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
-    this.batteryStatusColor = 'green';
   }
 
   getBatteryProcentage(): number {
-    const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device.lorawanSettings?.deviceStatusMargin) * 100);
+    const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device?.lorawanSettings?.deviceStatusMargin) * 100);
     return percentage;
   }
 
