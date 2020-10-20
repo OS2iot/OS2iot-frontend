@@ -130,7 +130,7 @@
   "LORA-GATEWAY-TABLE-ROW": {
     "DELETE": "Slet Gateway",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Håndter Gateway"
   },
   "LORA-GATEWAY": {
     "CREATE": "Opret LoRaWAN Gateway"

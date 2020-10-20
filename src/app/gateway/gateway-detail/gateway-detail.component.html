@@ -10,18 +10,19 @@
         </div>
 
         <div class="col-md-4 order-first order-md-last ">
-            <div class="btn-group float-md-right">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+            <div class="btn-group float-md-right dropdown">
+                <button type="button" id="dropdown-{{ gateway.name }}" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ gateway.name }}">
                     <li class="dropdown-item">
-                        <a [routerLink]="['../../gateway-edit', this.gateway.id]">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}
+                        <a [routerLink]="['../../gateway-edit', this.gateway.id]"
+                            routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a (click)="onDeleteGateway()">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}
+                        <a [routerLink]="" (click)="onDeleteGateway()">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}
                         </a>
                     </li>
                 </ul>
