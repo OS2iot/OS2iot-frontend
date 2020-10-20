@@ -8,7 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./iot-device-detail-generic.component.scss']
 })
 export class IotDeviceDetailGenericComponent implements OnInit {
-
+  batteryStatusColor = 'green';
+  batteryStatusPercentage = 50;
   @Input() device: IotDevice;
   @Input() latitude: number;
   @Input() longitude: number;

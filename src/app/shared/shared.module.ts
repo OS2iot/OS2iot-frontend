@@ -6,12 +6,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DirectivesModule } from './directives/directives.module';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { BatteriStatusComponent } from './components/batteri-status/batteri-status.component';
 
 
 @NgModule({
   declarations: [
     AlertComponent,
     LoadingSpinnerComponent,
+    BatteriStatusComponent,
   ],
   imports: [
     DirectivesModule,
@@ -20,7 +22,8 @@ import { AlertComponent } from './components/alert/alert.component';
   exports: [
     AlertComponent,
     TranslateModule,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    BatteriStatusComponent
   ],
 })
 export class SharedModule { }

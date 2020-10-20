@@ -1,7 +1,20 @@
 <td><a [routerLink]="['iot-device', device.id]" routerLinkActive="active" class="device-link">{{device.name}}</a></td>
 <td>{{"IOT-DEVICE-TYPES." + device.type | translate}}</td>
-<td>N/A</td>
-<td>N/A</td>
+<td>
+        N/A
+</td>
+<td>
+        <div *ngIf="device.type === 'LORAWAN'; else noBatteryStatus">
+                <app-batteri-status [color]="batteryStatusColor" [percentage]="batteryStatusPercentage">
+                </app-batteri-status>
+        </div>
+        <ng-template #noBatteryStatus>
+                <div>
+                        {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
+                </div>
+        </ng-template>
+
+</td>
 <td>
         {{lastActive()}}
 </td>

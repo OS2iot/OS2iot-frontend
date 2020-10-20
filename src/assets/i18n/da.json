@@ -108,17 +108,17 @@
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet"
   },
   "APPLICATION-TABLE": {
-    "NAME": "NAVN",
-    "IOT-DEVICES": "IOT ENHEDER",
-    "UPDATED": "SENEST OPDATERET"
+    "NAME": "Navn",
+    "IOT-DEVICES": "IoT Enheder",
+    "UPDATED": "Senest OpdateretT"
   },
   "IOT-TABLE": {
-    "APPLICATION": "APPLIKATION",
-    "NETWORK-TECHNOLOGY": "NETVÆRKSTEKNOLOGI",
-    "ALARM": "ALARM",
-    "BATTERY": "BATTERI",
-    "ACTIVE": "AKTIV",
-    "DATA": "DATA(24 TIMER)"
+    "APPLICATION": "Applikation",
+    "NETWORK-TECHNOLOGY": "Netværksteknologi",
+    "ALARM": "Alarm",
+    "BATTERY": "Batteri",
+    "ACTIVE": "Aktiv",
+    "DATA": "Data(24 timer)"
   },
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
@@ -158,7 +158,8 @@
   "IOTDEVICE-TABLE-ROW": {
     "DELETE": "Slet",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Vis muligheder",
+    "BATTERY-ERROR-MESSAGE":"Kan ikke vise batteri status for den valgtte type teknologi"
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
@@ -434,7 +435,7 @@
     "LORA": {
       "DEVEUI": "Enheds EUI",
       "SERVICEPROFILE": "Service profil",
-      "DEVICEPROFILE": "device profil",
+      "DEVICEPROFILE": "Device profil",
       "ACTIVATIONTYPE": "Aktivations type",
       "OTAA": "OTAA",
       "DEVADDR": "devADDR",

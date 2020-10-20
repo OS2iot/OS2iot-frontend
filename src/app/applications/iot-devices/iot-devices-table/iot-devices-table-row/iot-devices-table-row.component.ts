@@ -13,6 +13,8 @@ import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
   styleUrls: ['./iot-devices-table-row.component.scss']
 })
 export class IotDevicesTableRowComponent implements OnInit {
+  batteryStatusColor = 'green';
+  batteryStatusPercentage = 50;
   @Input() device: IotDevice;
 
   @Output() deleteDevice = new EventEmitter();
@@ -26,7 +28,15 @@ export class IotDevicesTableRowComponent implements OnInit {
     moment.locale('da');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.batteryStatusPercentage = this.getBatteryProcentage();
+    this.batteryStatusColor = 'green';
+   }
+
+  getBatteryProcentage(): number {
+    const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device.lorawanSettings.deviceStatusMargin) * 100);
+    return percentage;
+  }
 
   clickDelete() {
     const id = this.device.id;
