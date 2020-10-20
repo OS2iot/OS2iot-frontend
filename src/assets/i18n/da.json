@@ -212,10 +212,11 @@
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype: ",
-      "ORG": "Organisations: ",
+      "ORG": "Organisation: ",
       "DROPDOWN": "Håndter Brugergruppe",
       "EDIT": "Rediger",
-      "DELETE": "Slet"
+      "DELETE": "Slet",
+      "USERS": "Brugere"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",

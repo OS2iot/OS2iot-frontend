@@ -8,6 +8,11 @@ import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
+import { ApplicationService } from '@applications/application.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Application } from '@applications/application.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
+import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,6 +20,14 @@ import { QuickActionButton } from '@shared/models/quick-action-button.model';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
+
+  public pageLimit: number = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
+  public applications: Application[];
+  private applicationsSubscription: Subscription;
+
+  organisation: OrganisationResponse;
   user: UserResponse;
   permissions: PermissionResponse[];
   @Output() deleteUser = new EventEmitter();
@@ -40,7 +53,10 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private permissionsService: PermissionService,
-    private router: Router
+    private router: Router,
+    private applicationService: ApplicationService,
+    private globalService: SharedVariableService,
+    private organisationService: OrganisationService,
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +95,63 @@ export class UserDetailComponent implements OnInit {
 
   onEditUser() {
     this.router.navigate(['edit-user'], { relativeTo: this.route });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.applicationsSubscription) {
+      this.applicationsSubscription.unsubscribe();
+    }
+  }
+
+  private getOrganisation(id: number) {
+    this.subscription = this.organisationService
+      .getOne(id)
+      .subscribe((response) => {
+        this.organisation = response;
+        this.applications = response.applications;
+      });
+  }
+
+
+  prevPage() {
+    if (this.pageOffset) {
+      this.pageOffset--;
+    }
+    this.getApplications();
+  }
+
+  nextPage() {
+    if (this.pageOffset < this.pageTotal) {
+      this.pageOffset++;
+    }
+    this.getApplications();
+  }
+
+
+  deleteApplication(id: number) {
+    this.applicationService.deleteApplication(id).subscribe((response) => {
+      if (response.ok && response.body.affected > 0) {
+        this.getOrganisation(this.id);
+      }
+    });
+  }
+
+
+  getApplications(orgId?: number): void {
+    this.applicationsSubscription = this.applicationService
+      .getApplications(
+        this.pageLimit,
+        this.pageOffset * this.pageLimit,
+        null,
+        null,
+      )
+      .subscribe((applications) => {
+        this.applications = applications.data;
+        if (this.pageLimit) {
+          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
+        }
+      });
   }
 
 }

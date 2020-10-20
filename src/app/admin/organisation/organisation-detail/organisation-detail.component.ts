@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,15 +8,21 @@ import { ApplicationService } from '@applications/application.service';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OrganisationResponse } from '../organisation.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-organisation-detail',
   templateUrl: './organisation-detail.component.html',
   styleUrls: ['./organisation-detail.component.scss'],
 })
-export class OrganisationDetailComponent implements OnInit {
+export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy {
+  public pageLimit: number = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
+  public applications: Application[];
+  private applicationsSubscription: Subscription;
+
   organisation: OrganisationResponse;
-  applications: Application[];
   public backButton: BackButton = {
     label: '',
     routerLink: '/admin/organisations',
@@ -28,8 +34,13 @@ export class OrganisationDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private globalService: SharedVariableService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getApplications();
+  }
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -43,6 +54,13 @@ export class OrganisationDetailComponent implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.applicationsSubscription) {
+      this.applicationsSubscription.unsubscribe();
+    }
+  }
+
   private getOrganisation(id: number) {
     this.subscription = this.organisationService
       .getOne(id)
@@ -52,11 +70,44 @@ export class OrganisationDetailComponent implements OnInit {
       });
   }
 
+
+  prevPage() {
+    if (this.pageOffset) {
+      this.pageOffset--;
+    }
+    this.getApplications();
+  }
+
+  nextPage() {
+    if (this.pageOffset < this.pageTotal) {
+      this.pageOffset++;
+    }
+    this.getApplications();
+  }
+
+
   deleteApplication(id: number) {
     this.applicationService.deleteApplication(id).subscribe((response) => {
       if (response.ok && response.body.affected > 0) {
         this.getOrganisation(this.id);
       }
     });
+  }
+
+
+  getApplications(orgId?: number): void {
+    this.applicationsSubscription = this.applicationService
+      .getApplications(
+        this.pageLimit,
+        this.pageOffset * this.pageLimit,
+        null,
+        null,
+      )
+      .subscribe((applications) => {
+        this.applications = applications.data;
+        if (this.pageLimit) {
+          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
+        }
+      });
   }
 }

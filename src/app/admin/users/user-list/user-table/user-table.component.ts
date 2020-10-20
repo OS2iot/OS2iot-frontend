@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Sort } from '@shared/models/sort.model';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../../user.model';
@@ -9,10 +9,10 @@ import { UserService } from '../../user.service';
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
-export class UserTableComponent implements OnInit {
+export class UserTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public users: UserResponse[];
+  @Input() users: UserResponse[];
   public pageOffset = 0;
   public pageTotal: number;
   subscription: Subscription;

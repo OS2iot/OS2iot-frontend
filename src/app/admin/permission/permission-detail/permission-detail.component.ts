@@ -7,12 +7,14 @@ import { PermissionResponse } from '../permission.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
 
+
 @Component({
   selector: 'app-permission-detail',
   templateUrl: './permission-detail.component.html',
   styleUrls: ['./permission-detail.component.scss']
 })
 export class PermissionDetailComponent implements OnInit {
+
   permission: PermissionResponse;
   permissions: PermissionResponse[];
   public backButton: BackButton = {
