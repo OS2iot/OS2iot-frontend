@@ -28,7 +28,15 @@ export class IotDevicesTableRowComponent implements OnInit {
     moment.locale('da');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.batteryStatusPercentage = this.getBatteryProcentage();
+    this.batteryStatusColor = 'green';
+   }
+
+  getBatteryProcentage(): number {
+    const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device.lorawanSettings.deviceStatusMargin) * 100);
+    return percentage;
+  }
 
   clickDelete() {
     const id = this.device.id;
