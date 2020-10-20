@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -23,11 +23,13 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
     public dataSource = new MatTableDataSource<GatewayStats>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
+    deleteGateway = new EventEmitter();
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
         private route: ActivatedRoute,
         private translate: TranslateService,
+        private router: Router,
     ) { }
 
     ngOnInit(): void {
@@ -54,6 +56,18 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
             console.log('gateway', this.gateway);
         });
+    }
+
+    onDeleteGateway() {
+        console.log('delete');
+        const id = this.gateway.id;
+        this.gatewayService.delete(id).subscribe((response) => {
+            if (response.ok && response.body.success === true) {
+                this.deleteGateway.emit(id);
+
+            }
+        });
+        this.router.navigate(['gateways']);
     }
 
     ngOnDestroy() {

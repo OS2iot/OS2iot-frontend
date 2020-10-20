@@ -3,27 +3,9 @@
 </ng-container>
 <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-12">
             <app-iot-device-detail-generic [device]="device" [longitude]=longitude [latitude]="latitude">
             </app-iot-device-detail-generic>
-        </div>
-        <div class="col-md-4 order-first order-md-last ">
-            <div class="btn-group float-md-right">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{application.id}}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['../../iot-device-edit', this.device.id]">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}
-                        </a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a (click)="clickDelete()">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>

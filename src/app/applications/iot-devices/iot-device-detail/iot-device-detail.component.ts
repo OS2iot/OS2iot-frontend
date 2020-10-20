@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
-import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -31,7 +31,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public serviceProfileName: string;
     public downlink = new Downlink();
     public errorMessages: string[];
-    deleteDevice = new EventEmitter();
 
 
     // TODO: Få aktivt miljø?
@@ -45,7 +44,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
         private router: Router,
-        private location: Location,
+
     ) { }
 
     ngOnInit(): void {
@@ -77,19 +76,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
     }
 
-    clickDelete() {
-        const id = this.device.id;
-        this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.deleteDevice.emit(id);
-            }
-        });
-        this.routeBack();
-    }
 
-    routeBack(): void {
-        this.location.back();
-    }
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
