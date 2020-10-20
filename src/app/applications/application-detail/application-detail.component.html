@@ -2,19 +2,37 @@
   <app-top-bar-single [data]="application" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
   <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
     <div class="row">
-      <div class="col-sm-12 ">
+      <div class="col-md-8 ">
         <div class="float-left">
           <h4>{{ 'APPLICATION.DESCRIPTION' | translate }}</h4>
-        </div>
-        <div class="btn-group float-right">
-          <button class='btn btn-primary' type="button" [routerLink]="['datatarget-list', application.name]"
-            routerLinkActive="active" class="btn btn-primary">{{ 'APPLICATION.DATATARGET-SHOW' | translate }}</button>
+          <p>{{description}}</p>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 pt-2 col-sm-8">
-        <p>{{description}}</p>
+      <div class="col-md-4 order-first order-md-last ">
+        <div class="btn-group float-md-right">
+          <ul>
+            <li>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                {{'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{application.id}}">
+                <li class="dropdown-item">
+                  <a (click)="onEditApplication()">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a (click)="onDeleteApplication()">{{ 'USERS.TABLE-ROW.DELETE' | translate }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <button class="mt-2 btn btn-primary" type="button" [routerLink]="['datatarget-list', application.name]"
+                routerLinkActive="active">{{ 'APPLICATION.DATATARGET-SHOW' | translate }}</button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

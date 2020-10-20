@@ -53,7 +53,7 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
-    "DATATARGET-SHOW": "Tilknyttede datatargets",
+    "DATATARGET-SHOW": "Se tilknyttede datatargets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
       "TEMPLATE": {
@@ -153,13 +153,13 @@
   "APPLICATION-TABLE-ROW": {
     "DELETE": "Slet",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Håndter applikation"
   },
   "IOTDEVICE-TABLE-ROW": {
     "DELETE": "Slet",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder",
-    "BATTERY-ERROR-MESSAGE":"Kan ikke vise batteri status for den valgtte type teknologi"
+    "SHOW-OPTIONS": "Håndter IoT enhed",
+    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteri status"
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
