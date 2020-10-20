@@ -26,6 +26,14 @@
         </div>
     </div>
 
+    <div class="col-xs-12 form-group" *ngIf="serviceProfile.id">
+        <label for="id"
+            class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.ID' | translate}}</label>
+        <input type="text" class="form-control" id="id" name="id"
+            [placeholder]="'PROFILES.DEVICE_PROFILE.ID_PLACEHOLDER' | translate" maxlength="50" required disabled
+            [ngModel]="serviceProfile.id">
+    </div>
+
     <!-- Device-status request frequency
                 Frequency to initiate an End-Device status request (request/day). Set to 0 to disable.
               -->
