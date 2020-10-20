@@ -8,9 +8,10 @@ import { MapCoordinates } from '../map-coordinates.model';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit, OnChanges {
 
   private map;
+  private marker;
   @Input() longitude?: number;
   @Input() latitude?: number;
   @Input() draggable?: true;
@@ -27,26 +28,35 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.placeMarkers();
   }
 
+  ngOnChanges() {
+    this.updateMarker();
+  }
+
+  updateMarker() {
+    this.marker?.setLatLng([this.latitude, this.longitude]);
+    this.map?.setView(this.marker._latlng, 13);
+  }
+
   private placeMarkers() {
     if (this.coordinates) {
       this.coordinates.forEach(coord => {
         this.addMarker(coord.latitude, coord.longitude, coord.draggable);
       });
     } else {
-      this.addMarker(this.longitude, this.latitude, this.draggable);
+      this.addMarker(this.latitude, this.longitude, this.draggable);
     }
   }
 
-  private addMarker(longitude: number, latitude: number, draggable = true) {
-    const marker = L.marker([longitude, latitude], {draggable});
-    marker.on('dragend', event => this.dragend(event));
-    marker.addTo(this.map);
+  private addMarker(latitude: number, longitude: number, draggable = true) {
+    this.marker = L.marker([latitude, longitude], {draggable});
+    this.marker.on('dragend', event => this.dragend(event));
+    this.marker.addTo(this.map);
   }
 
   private dragend(event: any) {
-    this.longitude = event.target._latlng.lng;
     this.latitude = event.target._latlng.lat;
-    this.updateCoordinates.emit({longitude: this.longitude, latitude: this.latitude});
+    this.longitude = event.target._latlng.lng;
+    this.updateCoordinates.emit({latitude: this.latitude, longitude: this.longitude});
   }
 
   private initMap(): void {
