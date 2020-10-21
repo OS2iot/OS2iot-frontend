@@ -1,0 +1,17 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width: 1em;">{{ 'SEARCH.ICON' | translate }}</th>
+                <th style="width: 10em;">{{ 'SEARCH.TYPE' | translate }}</th>
+                <th>{{ 'SEARCH.NAME' | translate }}</th>
+                <th>{{ 'SEARCH.ID' | translate }}</th>
+                <th>{{ 'SEARCH.ORGANISATION' | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let result of searchResults" class="py-3" app-search-table-row [searchResult]="result"></tr>
+        </tbody>
+    </table>
+</div>
