@@ -1,4 +1,9 @@
 @import '../setup/variables';
+.loading-wrapper{
+  @extend .my-5;
+  display: flex;
+  justify-content: center;
+  width: 100%; 
 
 .lds-roller {
   display: inline-block;
@@ -103,4 +108,5 @@
   100% {
     transform: rotate(360deg);
   }
+}
 }

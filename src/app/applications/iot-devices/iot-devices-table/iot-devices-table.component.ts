@@ -30,7 +30,6 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     device: IotDevice;
     resultsLength = 0;
     isLoadingResults = true;
-    isRateLimitReached = false;
     deleteDevice = new EventEmitter();
 
     @Input() application: Application;
