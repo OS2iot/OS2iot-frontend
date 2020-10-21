@@ -1,6 +1,9 @@
 import { CommonLocation } from '../shared/models/common-location.model';
 
 export class Gateway {
+    map(): Map<string, number> {
+        throw new Error('Method not implemented.');
+    }
     id?: string;
     name?: string;
     description?: string;

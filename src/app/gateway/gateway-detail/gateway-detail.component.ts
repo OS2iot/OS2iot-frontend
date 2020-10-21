@@ -48,6 +48,16 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.dataSource.paginator = this.paginator;
     }
 
+    getCoordinates() {
+        return {
+            longitude: this.gateway.location.longitude,
+            latitude: this.gateway.location.latitude,
+            draggable: false,
+            editEnabled: false,
+            useGeolocation: false
+        };
+    }
+
     bindGateway(id: string): void {
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
