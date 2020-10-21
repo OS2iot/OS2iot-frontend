@@ -1,9 +1,15 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, Input, ViewChild, AfterViewInit, EventEmitter } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { Gateway } from '../gateway.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
+import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import * as moment from 'moment';
 
 
 @Component({
@@ -11,13 +17,27 @@ import { Gateway } from '../gateway.model';
   templateUrl: './gateway-table.component.html',
   styleUrls: ['./gateway-table.component.scss']
 })
-export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy {
+export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'last-seen', 'status', 'menu'];
+  public dataSource = new MatTableDataSource<Gateway>();
+  public gateways: Gateway[];
+  gateway: Gateway;
+  faExclamationTriangle = faExclamationTriangle;
+  faCheckCircle = faCheckCircle;
 
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public gateways: Gateway[];
   public pageOffset = 0;
   public pageTotal: number;
+
+  batteryStatusColor = 'green';
+  batteryStatusPercentage = 50;
+  resultsLength = 0;
+  isLoadingResults = true;
+  deleteGateway = new EventEmitter();
 
   private gatewaySubscription: Subscription;
 
@@ -25,15 +45,42 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy {
     private chirpstackGatewayService: ChirpstackGatewayService,
     public translate: TranslateService) {
     this.translate.use('da');
+    moment.locale('da');
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges() {
     console.log('pageLimit', this.pageLimit);
     console.log('selectedSortId', this.selectedSortObject);
     this.getLoraGateways();
+  }
+
+  gatewayStatus(): boolean {
+    const errorTime = new Date();
+    // 150 seconds is the define error interval: 30 sec heartbeat * 5.
+    errorTime.setSeconds(errorTime.getSeconds() - 150);
+    if (this.gateway?.lastSeenAt) {
+      const lastSeenAtUnixTimestamp = moment(this.gateway?.lastSeenAt).unix()
+      const errorTimeUnixTimestamp = moment(errorTime).unix()
+      return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
+    } else {
+      return false;
+    }
+  }
+
+  lastActive(): string {
+    if (this.gateway?.lastSeenAt) {
+      return moment(this.gateway.lastSeenAt).fromNow();
+    } else {
+      return this.translate.instant("ACTIVITY.NEVER");
+    }
   }
 
   getLoraGateways(): void {
@@ -47,6 +94,11 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(
         (gateways) => {
           this.gateways = gateways.result;
+          this.dataSource = new MatTableDataSource<Gateway>(this.gateways);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.isLoadingResults = false;
+          this.resultsLength = this.gateways.length;
           if (this.pageLimit) {
             console.log(gateways.result);
             this.pageTotal = Math.ceil(gateways.count / this.pageLimit);
@@ -55,23 +107,22 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  deleteGateway(id: string) {
-    console.log('delete');
-    this.chirpstackGatewayService.delete(id).subscribe((response) => {
+  // deleteGateway(id: string) {
+  //   console.log('delete');
+  //   this.chirpstackGatewayService.delete(id).subscribe((response) => {
+  //     if (response.ok && response.body.success === true) {
+  //       this.getLoraGateways();
+  //     }
+  //   });
+  // }
+
+  clickDelete(element: any) {
+    this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
       if (response.ok && response.body.success === true) {
+        this.deleteGateway.emit(element.id);
         this.getLoraGateways();
       }
     });
-  }
-
-  prevPage() {
-    if (this.pageOffset) { this.pageOffset--; }
-    this.getLoraGateways();
-  }
-
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
-    this.getLoraGateways();
   }
 
   ngOnDestroy() {

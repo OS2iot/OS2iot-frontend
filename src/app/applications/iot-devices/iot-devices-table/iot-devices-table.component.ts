@@ -53,8 +53,6 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-        this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
     }
 
     getBatteryProcentage(): number {
