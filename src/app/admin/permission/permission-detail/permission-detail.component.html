@@ -37,3 +37,12 @@
     </h4>
     <app-user-table [users]="permission.users"></app-user-table>
 </div>
+
+<div class="jumbotron m-md-4 p-md-3">
+    <h4 class="">
+        {{ 'PERMISSION.DETAIL.APPLICATIONS' | translate }}
+    </h4>
+    <app-applications-table [applications]="applications" [pageOffset]="pageOffset" [pageTotal]="pageTotal"
+        (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)">
+    </app-applications-table>
+</div>

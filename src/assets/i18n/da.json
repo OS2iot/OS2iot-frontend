@@ -189,7 +189,7 @@
     "DROPDOWN": "Håndter organisation",
     "DETAIL": {
       "APPLICATIONS": "Organisationens applikationer",
-      "PERMISSIONS": "Brugergrupper",
+      "PERMISSIONS": "Organisations brugergrupper",
       "NAME": "Navn"
     },
     "FORM": {
@@ -217,7 +217,8 @@
       "DROPDOWN": "Håndter Brugergruppe",
       "EDIT": "Rediger",
       "DELETE": "Slet",
-      "USERS": "Brugere"
+      "USERS": "Brugergruppens brugere",
+      "APPLICATIONS": "Brugergruppens applikationer"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -567,8 +568,8 @@
       "NO-LOGIN": "Ikke logget på endnu",
       "ADDED-DATE": "Oprettet den: ",
       "GLOBALADMIN": "Global Administrator: ",
-      "PERMISSIONS": "Brugergrupper",
-      "APPLICATIONS": "Applikationer",
+      "PERMISSIONS": "Medlem af disse brugergrupper",
+      "APPLICATIONS": "Rettigheder til disse applikationer",
       "NAME-PLACEHOLDER": "Navn"
     },
     "GLOBAL_ADMIN": {

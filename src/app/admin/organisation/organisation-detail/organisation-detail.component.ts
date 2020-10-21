@@ -9,6 +9,8 @@ import { OrganisationService } from '@app/admin/organisation/organisation.servic
 import { OrganisationResponse } from '../organisation.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { PermissionResponse } from '@app/admin/permission/permission.model';
+import { PermissionService } from '@app/admin/permission/permission.service';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -29,13 +31,15 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   };
   id: number;
   subscription: Subscription;
+  permissions: PermissionResponse[];
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
     private applicationService: ApplicationService,
-    private globalService: SharedVariableService
+    private globalService: SharedVariableService,
+    private permissionsService: PermissionService,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -67,9 +71,9 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       .subscribe((response) => {
         this.organisation = response;
         this.applications = response.applications;
+        this.permissions = response.permissions;
       });
   }
-
 
   prevPage() {
     if (this.pageOffset) {
@@ -85,6 +89,13 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     this.getApplications();
   }
 
+  deletePermission(id: number) {
+    this.permissionsService.deletePermission(id).subscribe((response) => {
+      if (response.ok && response.body.affected > 0) {
+        this.getOrganisation(this.id);
+      }
+    });
+  }
 
   deleteApplication(id: number) {
     this.applicationService.deleteApplication(id).subscribe((response) => {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { OrganisationResponse } from '@app/admin/organisation/organisation.model
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
 
   public pageLimit: number = 10;
   public pageTotal: number;
