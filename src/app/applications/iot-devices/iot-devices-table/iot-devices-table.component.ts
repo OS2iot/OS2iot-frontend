@@ -17,7 +17,7 @@ import { IoTDeviceService } from '../iot-device.service';
     templateUrl: './iot-devices-table.component.html',
     styleUrls: ['./iot-devices-table.component.scss'],
 })
-export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -33,15 +33,8 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
     isRateLimitReached = false;
     deleteDevice = new EventEmitter();
 
-
-
-
-    @Input() pageLimit: number;
-    @Input() selectedSortObject: Sort;
     @Input() application: Application;
     private applicationSubscription: Subscription;
-    public pageOffset = 0;
-    public pageTotal: number;
 
     constructor(
         private restService: RestService,
@@ -50,7 +43,6 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
         private router: Router,
     ) {
         translate.use('da');
-        this.dataSource = new MatTableDataSource<IotDevice>(this.iotDevices);
     }
 
     ngOnInit(): void {
@@ -58,14 +50,11 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
         this.getDevices();
     }
 
-    ngOnChanges() {
-        // this.getDevices();
-    }
-
     ngAfterViewInit() {
-        this.getDevices();
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     }
 
@@ -80,6 +69,8 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
             .subscribe((application: Application) => {
                 this.iotDevices = application.iotDevices;
                 this.dataSource = new MatTableDataSource<IotDevice>(this.iotDevices);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
                 this.isLoadingResults = false;
                 this.resultsLength = this.iotDevices.length;
             });
@@ -95,10 +86,6 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
         }
     }
 
-    // deleteDevice(id: number): void {
-    //     this.getDevices();
-    // }
-
     clickDelete() {
         const id = this.device.id;
         this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
@@ -108,20 +95,10 @@ export class IotDevicesTableComponent implements OnInit, OnChanges, OnDestroy, A
         });
     }
 
-    // prevPage() {
-    //     if (this.pageOffset) this.pageOffset--;
-    //     this.getDevices();
-    // }
-
-    // nextPage() {
-    //     if (this.pageOffset < this.pageTotal) this.pageOffset++;
-    //     this.getDevices();
-    // }
-
     ngOnDestroy() {
-        // // prevent memory leak by unsubscribing
-        // if (this.applicationSubscription) {
-        //     this.applicationSubscription.unsubscribe();
-        // }
+        // prevent memory leak by unsubscribing
+        if (this.applicationSubscription) {
+            this.applicationSubscription.unsubscribe();
+        }
     }
 }
