@@ -125,6 +125,21 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             });
     }
 
+    getCoordinates() {
+        return {
+            longitude: this.iotDevice.longitude,
+            latitude: this.iotDevice.latitude,
+            draggable: true,
+            editEnabled: false,
+            useGeolocation: !this.editmode
+        };
+    }
+
+    updateCoordinates(event: any) {
+        this.iotDevice.longitude = event.longitude;
+        this.iotDevice.latitude = event.latitude;
+      }
+
     onSubmit(): void {
         this.adjustModelBasedOnType();
         if (this.deviceId !== 0) {
