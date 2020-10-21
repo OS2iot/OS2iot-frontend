@@ -18,9 +18,7 @@ export class SearchTableRowComponent implements OnInit {
   constructor(
     private globalService: SharedVariableService,
     private router: Router
-  ) {
-    console.log('row');
-  }
+  ) {}
 
   ngOnInit(): void {}
 

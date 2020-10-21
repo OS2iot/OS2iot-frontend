@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SearchResultDto } from '../search-results.model';
 
 @Component({
@@ -8,11 +8,20 @@ import { SearchResultDto } from '../search-results.model';
 })
 export class SearchTableComponent implements OnInit {
   @Input() searchResults: SearchResultDto[];
-  @Input() searchResultsCount: number;
+  @Input() pageTotal: number;
+  @Input() pageOffset: number;
+  @Output() prevPage = new EventEmitter();
+  @Output() nextPage = new EventEmitter();
 
-  constructor() {
-    console.log('table');
-  }
+  constructor() {}
 
   ngOnInit(): void {}
+
+  gotoPrevPage() {
+    this.prevPage.emit();
+  }
+
+  gotoNextPage() {
+    this.nextPage.emit();
+  }
 }

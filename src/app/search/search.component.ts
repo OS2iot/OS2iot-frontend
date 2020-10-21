@@ -14,7 +14,10 @@ export class SearchComponent implements OnInit {
   query: string;
   subscription: Subscription;
   searchResults: SearchResultDto[];
-  searchResultsCount: number;
+
+  public pageLimit = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
 
   constructor(
     public translate: TranslateService,
@@ -23,20 +26,48 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.pageOffset = 0;
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'];
       if (this.query != null) {
+        this.pageOffset = 0;
         this.search(this.query);
       }
     });
   }
 
+  preserveQuery(query): void {
+    this.query = query;
+  }
+
   search(query: string) {
     this.subscription = this.searchService
-      .search(query)
+      .search(query, this.pageLimit, this.pageOffset * this.pageLimit)
       .subscribe((response) => {
         this.searchResults = response.data;
-        this.searchResultsCount = response.count;
+        this.pageTotal = Math.ceil(response.count / this.pageLimit);
+        this.preserveQuery(query);
       });
+  }
+
+  prevPage() {
+    if (this.pageOffset) {
+      this.pageOffset--;
+    }
+    this.search(this.query);
+  }
+
+  nextPage() {
+    if (this.pageOffset + 1 < this.pageTotal) {
+      this.pageOffset++;
+    }
+    this.search(this.query);
+  }
+
+  decode(val: string): string {
+    if (val === undefined) {
+      return '';
+    }
+    return decodeURIComponent(val);
   }
 }

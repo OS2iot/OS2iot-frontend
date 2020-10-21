@@ -11,7 +11,15 @@ export class SearchService {
 
   constructor(private restService: RestService) {}
 
-  search(query: string): Observable<ListAllSearchResultsResponseDto> {
-    return this.restService.get(this.URL, { q: query });
+  search(
+    query: string,
+    limit: number,
+    offset: number
+  ): Observable<ListAllSearchResultsResponseDto> {
+    return this.restService.get(this.URL, {
+      q: query,
+      limit: limit,
+      offset: offset,
+    });
   }
 }
