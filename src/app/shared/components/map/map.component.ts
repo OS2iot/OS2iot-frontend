@@ -1,7 +1,6 @@
-import { DragDrop } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
-import { MapCoordinates } from '../map-coordinates.model';
+import { MapCoordinates } from './map-coordinates.model';
 
 @Component({
   selector: 'app-map',
