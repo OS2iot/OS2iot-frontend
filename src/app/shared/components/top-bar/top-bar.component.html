@@ -30,6 +30,15 @@
           type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
       </div>
     </div>
+    <div class="col-3 ml-4">
+      <!-- https://mdbootstrap.com/docs/angular/forms/search/ -->
+      <form class="form-inline md-form form-sm">
+        <i class="fas fa-search"></i>
+        <input id="searchQuery" class="form-control form-control-sm ml-3 w-75" type="text"
+          placeholder="{{ 'SEARCH.PLACEHOLDER' | translate }}" aria-label="Search" #searchInput
+          [value]="decode(searchQuery)" (keyup.enter)="search(searchInput.value)">
+      </form>
+    </div>
   </div>
 
 

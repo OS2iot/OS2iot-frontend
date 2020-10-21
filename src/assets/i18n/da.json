@@ -27,7 +27,16 @@
     "ADMIN": "Administration",
     "SIGFOX": "SigFox",
     "SIGFOX-ADMIN": "Sigfox Administration",
-    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper"
+    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
+    "SEARCH": "Søgeresultater"
+  },
+  "SEARCH": {
+    "ICON": "",
+    "TYPE": "Type",
+    "NAME": "Navn",
+    "ID": "Id",
+    "ORGANISATION": "Organisation",
+    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways"
   },
   "SIGFOX": {
     "SIGFOX": "SigFox",
@@ -596,5 +605,8 @@
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",
-  "Forbidden": "Du har ikke rettigheder til at foretage denne handling"
+  "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
+  "GENERIC_HTTP": "Generisk HTTP",
+  "LORAWAN": "LoRaWAN",
+  "SIGFOX": "SigFox"
 }

@@ -17,6 +17,7 @@ import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { SearchModule } from './search/search.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         GatewayModule,
+        SearchModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
