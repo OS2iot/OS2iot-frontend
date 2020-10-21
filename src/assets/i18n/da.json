@@ -36,7 +36,8 @@
     "NAME": "Navn",
     "ID": "Id",
     "ORGANISATION": "Organisation",
-    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways"
+    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
+    "QUERY": "Du har søgt efter:"
   },
   "SIGFOX": {
     "SIGFOX": "SigFox",
