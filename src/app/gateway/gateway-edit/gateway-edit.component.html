@@ -39,6 +39,7 @@
           [longitude]="gateway.location.longitude" 
           [latitude]="gateway.location.latitude" 
           [draggable]="true"
+          [useGeolocation]="!editMode"
           (updateCoordinates)="updateCoordinates($event)"></app-map>
       </div>
   

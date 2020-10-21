@@ -15,12 +15,29 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() longitude?: number;
   @Input() latitude?: number;
   @Input() draggable?: true;
+  @Input() useGeolocation?: false;
   @Input() coordinates?: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
+  private zoomLevel = 15;
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.useGeolocation) {
+      this.setGeolocation();
+    }
+  }
+
+  setGeolocation() {
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        (res) => {
+          this.longitude = res.coords.longitude;
+          this.latitude = res.coords.latitude;
+          this.updateMarker();
+          this.setCoordinatesOutput();
+        });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -34,7 +51,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
 
   updateMarker() {
     this.marker?.setLatLng([this.latitude, this.longitude]);
-    this.map?.setView(this.marker._latlng, 13);
+    this.map?.setView(this.marker._latlng, this.zoomLevel);
   }
 
   private placeMarkers() {
@@ -56,6 +73,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   private dragend(event: any) {
     this.latitude = event.target._latlng.lat;
     this.longitude = event.target._latlng.lng;
+    this.setCoordinatesOutput();
+  }
+
+  setCoordinatesOutput() {
     this.updateCoordinates.emit({latitude: this.latitude, longitude: this.longitude});
   }
 
@@ -65,7 +86,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
         this.coordinates ? this.coordinates[0].latitude : this.latitude,
         this.coordinates ? this.coordinates[0].longitude :  this.longitude
       ],
-      zoom: 15
+      zoom: this.zoomLevel
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
