@@ -34,6 +34,7 @@ import { BulkImportComponent } from './bulk-import/bulk-import.component';
     exports: [
         ApplicaitonsRoutingModule,
         ApplicationsComponent,
+        ApplicationsTableComponent
 
     ],
     imports: [

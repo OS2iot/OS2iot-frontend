@@ -22,7 +22,7 @@ export class IotDevicesTableRowComponent implements OnInit {
   constructor(
     public iotDeviceService: IoTDeviceService,
     public translate: TranslateService,
-    private router: Router
+    private router: Router,
   ) {
     translate.use('da');
     moment.locale('da');
@@ -30,7 +30,7 @@ export class IotDevicesTableRowComponent implements OnInit {
 
   ngOnInit(): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
-   }
+  }
 
   getBatteryProcentage(): number {
     const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device?.lorawanSettings?.deviceStatusMargin) * 100);
