@@ -84,7 +84,9 @@
     "STATS": "Statistik",
     "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
     "STATS-TXPACKETSEMITTED": "Pakker Sendt",
-    "STATS-TIMESTAMP": "Tidspunkt"
+    "STATS-TIMESTAMP": "Tidspunkt",
+    "TABEL-TAB": "Listevisning",
+    "MAP-TAB": "Kort"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",

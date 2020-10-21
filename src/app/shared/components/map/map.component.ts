@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, AfterViewChecked } from '@angular/core';
 import * as L from 'leaflet';
 import { MapCoordinates } from './map-coordinates.model';
 
@@ -41,6 +41,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     this.placeMarkers();
   }
 
+  loadMap() {
+    this.initMap();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
         changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
@@ -80,17 +84,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [
-        this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
-        this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
-      ],
-      zoom: this.zoomLevel
-    });
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-    tiles.addTo(this.map);
+    const container = document.getElementById('map');
+    if (container) {
+      this.map = L.map('map', {
+        center: [
+          this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
+          this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
+        ],
+        zoom: this.zoomLevel
+      });
+      const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+      tiles.addTo(this.map);
+    }
   }
 }

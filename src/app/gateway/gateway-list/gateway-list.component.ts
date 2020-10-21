@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { MapCoordinates } from '@shared/components/map/map-coordinates.model';
 import { Sort } from '@shared/models/sort.model';
 
 @Component({
@@ -9,8 +10,10 @@ import { Sort } from '@shared/models/sort.model';
 })
 export class GatewayListComponent implements OnInit {
 
-  public pageLimit: number = 10;
-  public selectedSortId: number = 1;
+  public coordinateList: [MapCoordinates];
+  public showmap = false;
+  public pageLimit = 10;
+  public selectedSortId = 1;
   public selectedSortObject: Sort = {
     id: 1,
     dir: 'ASC',
@@ -27,5 +30,15 @@ export class GatewayListComponent implements OnInit {
 
   updatePageLimit(limit: any) {
     console.log(limit);
+  }
+
+  showMap(event) {
+    if (event.index === 1) {
+      this.showmap = true;
+    }
+  }
+
+  getCoordinateList() {
+    return [new MapCoordinates()];
   }
 }
