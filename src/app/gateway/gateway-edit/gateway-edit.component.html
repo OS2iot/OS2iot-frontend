@@ -34,12 +34,9 @@
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="gateway.location">
         <app-map 
-          [longitude]="gateway.location.longitude" 
-          [latitude]="gateway.location.latitude" 
-          [draggable]="true"
-          [useGeolocation]="!editMode"
+          [coordinates]="getCoordinates()"
           (updateCoordinates)="updateCoordinates($event)"></app-map>
       </div>
   

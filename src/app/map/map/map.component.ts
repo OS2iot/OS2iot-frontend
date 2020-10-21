@@ -1,5 +1,5 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { MapCoordinates } from '../map-coordinates.model';
 
@@ -12,18 +12,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
 
   private map;
   private marker;
-  @Input() longitude?: number;
-  @Input() latitude?: number;
-  @Input() draggable?: true;
-  @Input() useGeolocation?: false;
-  @Input() coordinates?: [MapCoordinates];
+  @Input() coordinates?: MapCoordinates;
+  @Input() coordinateList?: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
   private zoomLevel = 15;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.useGeolocation) {
+    if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
     }
   }
@@ -32,8 +29,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
         (res) => {
-          this.longitude = res.coords.longitude;
-          this.latitude = res.coords.latitude;
+          this.coordinates.longitude = res.coords.longitude;
+          this.coordinates.latitude = res.coords.latitude;
           this.updateMarker();
           this.setCoordinatesOutput();
         });
@@ -45,22 +42,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     this.placeMarkers();
   }
 
-  ngOnChanges() {
-    this.updateMarker();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
+        changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
+      this.updateMarker();
+    }
   }
 
   updateMarker() {
-    this.marker?.setLatLng([this.latitude, this.longitude]);
+    this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
     this.map?.setView(this.marker._latlng, this.zoomLevel);
   }
 
   private placeMarkers() {
-    if (this.coordinates) {
-      this.coordinates.forEach(coord => {
+    if (this.coordinateList) {
+      this.coordinateList.forEach(coord => {
         this.addMarker(coord.latitude, coord.longitude, coord.draggable);
       });
     } else {
-      this.addMarker(this.latitude, this.longitude, this.draggable);
+      this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable);
     }
   }
 
@@ -71,20 +71,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private dragend(event: any) {
-    this.latitude = event.target._latlng.lat;
-    this.longitude = event.target._latlng.lng;
+    this.coordinates.latitude = event.target._latlng.lat;
+    this.coordinates.longitude = event.target._latlng.lng;
     this.setCoordinatesOutput();
   }
 
   setCoordinatesOutput() {
-    this.updateCoordinates.emit({latitude: this.latitude, longitude: this.longitude});
+    this.updateCoordinates.emit({latitude: this.coordinates.latitude, longitude: this.coordinates.longitude});
   }
 
   private initMap(): void {
     this.map = L.map('map', {
       center: [
-        this.coordinates ? this.coordinates[0].latitude : this.latitude,
-        this.coordinates ? this.coordinates[0].longitude :  this.longitude
+        this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
+        this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
       ],
       zoom: this.zoomLevel
     });

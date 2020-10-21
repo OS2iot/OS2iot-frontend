@@ -61,6 +61,16 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
       });
   }
 
+  getCoordinates() {
+    return {
+        longitude: this.gateway.location.longitude,
+        latitude: this.gateway.location.latitude,
+        draggable: true,
+        useGeolocation: !this.editMode,
+        editMode: this.editMode
+    };
+}
+
   createGateway(): void {
     this.loraGatewayService.post(this.gateway)
       .subscribe(

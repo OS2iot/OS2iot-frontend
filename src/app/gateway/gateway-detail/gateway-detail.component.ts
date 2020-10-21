@@ -49,11 +49,13 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     getCoordinates() {
-        return [{
+        return {
             longitude: this.gateway.location.longitude,
             latitude: this.gateway.location.latitude,
-            draggable: false
-        }];
+            draggable: false,
+            editEnabled: false,
+            useGeolocation: false
+        };
     }
 
     bindGateway(id: string): void {
