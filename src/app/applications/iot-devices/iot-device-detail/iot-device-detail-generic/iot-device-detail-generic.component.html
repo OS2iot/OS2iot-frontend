@@ -44,6 +44,7 @@
 
 <h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
 <div *ngIf="device.location; else locationElseBlock">
+    <app-map [coordinates]="getCoordinates()"></app-map>
     <div class="row mb-5">
         <div class="col-6">
             <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
