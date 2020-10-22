@@ -33,6 +33,12 @@
           [readonly]="editMode ? true : false"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
       </div>
+
+      <div class="row" *ngIf="gateway.location">
+        <app-map 
+          [coordinates]="getCoordinates()"
+          (updateCoordinates)="updateCoordinates($event)"></app-map>
+      </div>
   
       <div class="row mb-5">
         <div class="form-group mt-3 col-6">

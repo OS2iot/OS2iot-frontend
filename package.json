@@ -39,6 +39,7 @@
     "file-saver": "^2.0.2",
     "guid-typescript": "^1.0.9",
     "jwt-decode": "^2.2.0",
+    "leaflet": "^1.7.1",
     "moment": "^2.27.0",
     "ng": "0.0.0",
     "ng-inline-svg": "^11.0.0",
