@@ -9,7 +9,7 @@
       <h4>{{ 'DATATARGET.TIMEOUT' | translate }}</h4>
       <p class="mb-5">{{datatarget.timeout}}</p>
       <h4>{{ 'DATATARGET.TYPE' | translate }}</h4>
-      <p class="mb-5">{{datatarget.type}}</p>
+      <p class="mb-5">{{datatarget.type | translate}}</p>
       
       <h4>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</h4>
       <div *ngIf="datatarget.authorizationHeader; then showAuthHeader else showNoAuthText">
