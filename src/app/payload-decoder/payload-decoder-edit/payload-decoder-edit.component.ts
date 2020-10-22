@@ -16,6 +16,7 @@ import { BackButton } from '@shared/models/back-button.model';
 })
 export class PayloadDecoderEditComponent implements OnInit {
   payloadDecoder = new PayloadDecoder();
+  payloadDecoderBody: string;
   public errorMessage: string;
   public errorMessages: any;
   public errorFields: string[];
@@ -44,6 +45,8 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
       this.getPayloadDecoder(this.id);
+    } else {
+      this.payloadDecoderBody = new PayloadDecoder().decodingFunction;
     }
   }
 
@@ -52,6 +55,7 @@ export class PayloadDecoderEditComponent implements OnInit {
       .subscribe(
         (response) => {
           this.payloadDecoder = response;
+          this.payloadDecoderBody = response.decodingFunction;
         });
   }
 
@@ -80,6 +84,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.payloadDecoder.decodingFunction = this.payloadDecoderBody;
     if (this.payloadDecoder.id) {
       this.update();
     } else {

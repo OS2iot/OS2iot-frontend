@@ -23,7 +23,7 @@
       <label class="form-label"
         for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>*
       <textarea id="decodingFunction" name="decodingFunction" [rows]="20" class="form-control"
-        [(ngModel)]="payloadDecoder.decodingFunction"
+        [(ngModel)]="payloadDecoderBody"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('decodingFunction'), 'is-valid' : formFailedSubmit && !errorFields.includes('decodingFunction')}"></textarea>
     </div>
   </div>
