@@ -247,7 +247,8 @@
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
-    "CREATE-NEW-DATATARGET": "Redigér datatarget",
+    "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
+    "EDIT-DATATARGET": "Redigér datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
     "EDIT-NEW-APPLICATION": "Redigér applikation",

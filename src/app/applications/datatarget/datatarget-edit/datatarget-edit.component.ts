@@ -26,12 +26,21 @@ export class DatatargetEditComponent implements OnInit {
 
   ngOnInit() {
     this.translate
-      .get(['FORM.CREATE-NEW-DATATARGET', 'DATATARGET.SAVE', 'NAV.DATATARGET'])
+      .get([
+        'FORM.CREATE-NEW-DATATARGET',
+        'FORM.EDIT-DATATARGET',
+        'DATATARGET.SAVE',
+        'NAV.DATATARGET',
+      ])
       .subscribe((translations) => {
-        this.title = translations['FORM.CREATE-NEW-DATATARGET'];
+        const datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
+        if (datatargetid !== 0) {
+          this.title = translations['FORM.EDIT-DATATARGET'];
+        } else {
+          this.title = translations['FORM.CREATE-NEW-DATATARGET'];
+        }
         this.submitButton = translations['DATATARGET.SAVE'];
         this.backButtonTitle = translations['NAV.DATATARGET'];
       });
   }
-
 }
