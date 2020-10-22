@@ -19,7 +19,6 @@ import { PermissionComponent } from './permission/permission.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
 import { OrganisationEditComponent } from './organisation/organisation-edit/organisation-edit.component';
 import { OrganisationListComponent } from './organisation/organisation-list/organisation-list.component';
-import { OrganisationRowComponent } from './organisation/organisation-list/organisation-tabel/organisation-row/organisation-row.component';
 import { OrganisationTabelComponent } from './organisation/organisation-list/organisation-tabel/organisation-tabel.component';
 import { OrganisationComponent } from './organisation/organisation.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
@@ -28,6 +27,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserTableRowComponent } from './users/user-list/user-table/user-table-row/user-table-row.component';
 import { UserTableComponent } from './users/user-list/user-table/user-table.component';
 import { UsersComponent } from './users/users.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 
@@ -49,7 +49,6 @@ import { UsersComponent } from './users/users.component';
     OrganisationTabelComponent,
     OrganisationDetailComponent,
     OrganisationEditComponent,
-    OrganisationRowComponent,
     OrganisationListComponent,
   ],
   imports: [
@@ -63,7 +62,9 @@ import { UsersComponent } from './users/users.component';
     ReactiveFormsModule,
     FormModule,
     RouterModule,
-    ApplicationsModule
+    ApplicationsModule,
+    SharedModule,
+    NGMaterialModule,
   ],
   exports: [
     UserDetailComponent,
@@ -82,7 +83,6 @@ import { UsersComponent } from './users/users.component';
     OrganisationTabelComponent,
     OrganisationDetailComponent,
     OrganisationEditComponent,
-    OrganisationRowComponent,
     OrganisationListComponent,
   ]
 })

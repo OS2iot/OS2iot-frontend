@@ -14,7 +14,6 @@ import { MatTableDataSource } from '@angular/material/table';
 export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
   displayedColumns: string[] = ['name', 'payload-decoder-id', 'menu'];
   public dataSource = new MatTableDataSource<PayloadDecoder>();
   public payloadDecoders: PayloadDecoder[];
@@ -22,10 +21,7 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   resultsLength = 0;
   isLoadingResults = true;
   deletePayloadDecoder = new EventEmitter();
-
   private subscription: Subscription;
-
-
 
   constructor(
     private payloadDecoderService: PayloadDecoderService
