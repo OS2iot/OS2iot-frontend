@@ -1,5 +1,5 @@
 <div *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else notImplemented">
-    <div *ngIf="errorMessages && errorMessages?.length !== 0" class="error-messages p-3">
+    <div *ngIf="errorMessages && errorMessages?.length !== 0" class="error-messages p-3 m-4">
         <ul class="mb-0">
         <li *ngFor="let error of errorMessages">
             {{error | translate}}

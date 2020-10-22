@@ -52,6 +52,10 @@ export class DownlinkComponent implements OnInit {
   }
 
   private handleError(error: HttpErrorResponse) {
+    if (error?.error?.chirpstackError?.error == "f_port must be > 0") {
+      this.errorMessages = ["port must be > 0"]
+      return;
+    } 
     this.errorMessages = this.errorMessageService.handleErrorMessage(error);
   }
 
