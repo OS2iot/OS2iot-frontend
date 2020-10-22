@@ -1,28 +1,50 @@
 <app-top-bar-single [data]="gateway" [backButton]="backButton"></app-top-bar-single>
+
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="gateway">
-    <h4>{{ 'GATEWAY.NAME' | translate }}</h4>
-    <p class="mb-5">{{gateway.name}}</p>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>{{ 'GATEWAY.ID' | translate }}</h4>
+            <p class="mb-5">{{gateway.id}}</p>
+        </div>
+        <div class="col-md-4 order-first order-md-last ">
+            <div class="btn-group float-md-right dropdown">
+                <button type="button" id="dropdown-{{ gateway.name }}" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ gateway.name }}">
+                    <li class="dropdown-item">
+                        <a [routerLink]="['../../gateway-edit', this.gateway.id]"
+                            routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}
+                        </a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a [routerLink]="" (click)="onDeleteGateway()">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <h4 *ngIf="gateway.description">{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
-    <p class="mb-5">{{gateway.description}}</p>
-    <h4>{{ 'GATEWAY.ID' | translate }}</h4>
-    <p class="mb-5">{{gateway.id}}</p>
-    <h4>{{ 'GATEWAY.LOCATION' | translate }}</h4>
+    <p *ngIf="gateway.description" class="mb-5">{{gateway.description}}</p>
+
+
     <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>
     <ng-template #locationThenBlock>
         <div class="row">
             <div class="mb-5 col-2">
-                <div>
-                    <h6>{{ 'GATEWAY.LONGITUDE' | translate }}</h6>
-                    <p>{{gateway.location?.longitude}}</p>
-                </div>
-                <div>
-                    <h6>{{ 'GATEWAY.LATITUDE' | translate }}</h6>
-                    <p>{{gateway.location.latitude}}</p>
-                </div>
-                <div>
-                    <h6>{{ 'GATEWAY.ALTITUDE' | translate }}</h6>
-                    <p>{{gateway.location.altitude}}</p>
-                </div>
+                <h4>{{ 'GATEWAY.LOCATION' | translate }}</h4>
+
+                <h6>{{ 'GATEWAY.LONGITUDE' | translate }}</h6>
+                <p>{{gateway.location?.longitude}}</p>
+
+                <h6>{{ 'GATEWAY.LATITUDE' | translate }}</h6>
+                <p>{{gateway.location.latitude}}</p>
+
+                <h6>{{ 'GATEWAY.ALTITUDE' | translate }}</h6>
+                <p>{{gateway.location.altitude}}</p>
+
             </div>
             <div class="col-10" *ngIf="this.gateway.location">
                 <app-map [coordinates]="getCoordinates()"></app-map>
@@ -34,6 +56,8 @@
     </ng-template>
     <h4>{{ 'GATEWAY.TAGS' | translate }}</h4>
     <p class="mb-5">{{gateway.tagsString}}</p>
+</div>
+<div class=" jumbotron m-md-4 p-md-3">
     <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
