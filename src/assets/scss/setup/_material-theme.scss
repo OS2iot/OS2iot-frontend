@@ -117,3 +117,9 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   color: $grey-tablehead;
   background-color: $grey-dark;
 }
+
+.mat-sort-header-arrow {
+  color: $grey-tablehead;
+  opacity: 1 !important;
+  // transform: translateY(25%) !important;
+}

@@ -11,9 +11,7 @@
 
 
   .top-bar {
-    @extend .p-3;
     background-color: $white;
-    height: 8vh;
     @include add-shadow;
 
     h3 {

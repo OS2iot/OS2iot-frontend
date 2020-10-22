@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PayloadDecoder } from '../../payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
+import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 
 @Component({
   selector: 'app-payload-decoder-detail',

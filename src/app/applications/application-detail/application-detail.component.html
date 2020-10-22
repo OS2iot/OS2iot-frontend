@@ -44,8 +44,7 @@
           [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
           [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'"
           (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-sub-bar>
-        <app-iot-devices-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"
-          [application]="application"></app-iot-devices-table>
+        <app-iot-devices-table [application]="application"></app-iot-devices-table>
       </div>
     </div>
   </div>
