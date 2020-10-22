@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, OnChanges, OnDestroy {
+  isLoadingResults = true;
 
   public pageLimit = 10;
   public sort: Sort[] = [
@@ -78,6 +79,7 @@ export class UserListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(
         (response) => {
           this.users = response.data;
+          this.isLoadingResults = false;
         });
   }
 

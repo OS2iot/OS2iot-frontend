@@ -24,10 +24,8 @@ import { OrganisationComponent } from './organisation/organisation.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserListComponent } from './users/user-list/user-list.component';
-import { UserTableRowComponent } from './users/user-list/user-table/user-table-row/user-table-row.component';
 import { UserTableComponent } from './users/user-list/user-table/user-table.component';
 import { UsersComponent } from './users/users.component';
-
 
 
 @NgModule({
@@ -37,7 +35,6 @@ import { UsersComponent } from './users/users.component';
     UserListComponent,
     UsersComponent,
     UserTableComponent,
-    UserTableRowComponent,
     PermissionComponent,
     PermissionEditComponent,
     PermissionDetailComponent,
@@ -69,7 +66,6 @@ import { UsersComponent } from './users/users.component';
     UserListComponent,
     UsersComponent,
     UserTableComponent,
-    UserTableRowComponent,
     PermissionComponent,
     PermissionEditComponent,
     PermissionDetailComponent,

@@ -20,7 +20,7 @@ import { OrganisationResponse } from '@app/admin/organisation/organisation.model
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-
+  isLoadingResults = true;
   public pageLimit: number = 10;
   public pageTotal: number;
   public pageOffset = 0;
@@ -77,6 +77,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.user = response;
         this.permissions = response.permissions;
+        this.isLoadingResults = false;
       });
   }
 

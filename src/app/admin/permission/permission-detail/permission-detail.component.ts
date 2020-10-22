@@ -20,6 +20,7 @@ import { UserResponse } from '@app/admin/users/user.model';
   styleUrls: ['./permission-detail.component.scss']
 })
 export class PermissionDetailComponent implements OnInit, OnChanges {
+  isLoadingResults = true;
   public pageLimit: number = 10;
   public pageTotal: number;
   public pageOffset = 0;
@@ -72,6 +73,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
       .subscribe((response) => {
         this.permission = response;
         this.users = response.users;
+        this.isLoadingResults = false;
       });
   }
 

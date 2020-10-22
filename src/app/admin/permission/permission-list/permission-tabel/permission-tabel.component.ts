@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter, SimpleChanges, ViewChild, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, SimpleChanges, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { PermissionResponse } from '../../permission.model';
   templateUrl: './permission-tabel.component.html',
   styleUrls: ['./permission-tabel.component.scss'],
 })
-export class PermissionTabelComponent implements OnInit, OnChanges {
+export class PermissionTabelComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'organisations', 'members', 'type', 'menu'];
@@ -58,7 +58,7 @@ export class PermissionTabelComponent implements OnInit, OnChanges {
     this.deletePermission.emit(element.id);
   }
 
-  routeToPermissions() {
-    this.router.navigate(['admin/permissions', this.permission.id]);
+  routeToPermissions(element: any) {
+    this.router.navigate(['admin/permissions', element.id]);
   }
 }
