@@ -102,6 +102,7 @@
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder navn:",
+    "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT Device navn:",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "AUTHORIZATIONHEADER": "Authorization header",
