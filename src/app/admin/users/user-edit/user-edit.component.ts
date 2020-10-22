@@ -48,6 +48,9 @@ export class UserEditComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('user-id');
     if (this.id > 0) {
       this.getUser(this.id);
+    } else {
+      // Default active to be true if we're creating a new user.
+      this.user.active = true;
     }
   }
 
