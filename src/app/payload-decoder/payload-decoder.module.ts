@@ -9,15 +9,15 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { PayloadDecoderDetailComponent } from './payload-decoder-detail/payload-decoder-detail.component';
 import { PayloadDecoderEditComponent } from './payload-decoder-edit/payload-decoder-edit.component';
 import { PayloadDecoderListComponent } from './payload-decoder-list/payload-decoder-list.component';
-import { PayloadDecoderRowComponent } from './payload-decoder-list/payload-decoder-row/payload-decoder-row.component';
 import { PayloadDecoderTableComponent } from './payload-decoder-list/payload-decoder-table/payload-decoder-table.component';
 import { PayloadDecoderComponent } from './payload-decoder.component';
+import { SharedModule } from '@shared/shared.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
 
 @NgModule({
   declarations: [
     PayloadDecoderComponent,
     PayloadDecoderTableComponent,
-    PayloadDecoderRowComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
     PayloadDecoderListComponent
@@ -25,7 +25,6 @@ import { PayloadDecoderComponent } from './payload-decoder.component';
   exports: [
     PayloadDecoderComponent,
     PayloadDecoderTableComponent,
-    PayloadDecoderRowComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
     PayloadDecoderListComponent
@@ -39,6 +38,8 @@ import { PayloadDecoderComponent } from './payload-decoder.component';
     PayloadDecoderRoutingModule,
     ReactiveFormsModule,
     FormModule,
+    SharedModule,
+    NGMaterialModule,
   ]
 })
 export class PayloadDecoderModule { }

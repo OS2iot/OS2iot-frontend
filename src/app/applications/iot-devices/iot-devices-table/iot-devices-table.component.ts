@@ -81,11 +81,11 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         }
     }
 
-    clickDelete() {
-        const id = this.device.id;
-        this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
+    clickDelete(element: any) {
+        this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
             if (response.ok && response.body.affected > 0) {
-                this.deleteDevice.emit(id);
+                this.deleteDevice.emit(element.id);
+                this.getDevices();
             }
         });
     }

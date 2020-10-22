@@ -1,7 +1,7 @@
 <app-loading-spinner *ngIf=" isLoadingResults">
 </app-loading-spinner>
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -67,7 +67,7 @@
               </a>
             </li>
             <li class="dropdown-item">
-              <a (click)="clickDelete()" [routerLink]="">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}</a>
+              <a (click)="clickDelete(element)" [routerLink]="">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}</a>
             </li>
           </ul>
         </div>
