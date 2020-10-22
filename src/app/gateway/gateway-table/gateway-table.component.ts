@@ -62,12 +62,12 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
     this.getLoraGateways();
   }
 
-  gatewayStatus(): boolean {
+  gatewayStatus(gateway: Gateway): boolean {
     const errorTime = new Date();
     // 150 seconds is the define error interval: 30 sec heartbeat * 5.
     errorTime.setSeconds(errorTime.getSeconds() - 150);
-    if (this.gateway?.lastSeenAt) {
-      const lastSeenAtUnixTimestamp = moment(this.gateway?.lastSeenAt).unix()
+    if (gateway?.lastSeenAt) {
+      const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).unix()
       const errorTimeUnixTimestamp = moment(errorTime).unix()
       return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
     } else {
@@ -75,9 +75,9 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
     }
   }
 
-  lastActive(): string {
-    if (this.gateway?.lastSeenAt) {
-      return moment(this.gateway.lastSeenAt).fromNow();
+  lastActive(gateway: Gateway): string {
+    if (gateway?.lastSeenAt) {
+      return moment(gateway.lastSeenAt).fromNow();
     } else {
       return this.translate.instant("ACTIVITY.NEVER");
     }

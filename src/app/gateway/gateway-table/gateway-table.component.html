@@ -37,7 +37,7 @@
                 {{ 'LORA-GATEWAY-TABLE.LAST-SEEN-AT' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-                {{lastActive()}}
+                {{lastActive(element)}}
             </td>
         </ng-container>
 
@@ -47,7 +47,7 @@
                 {{ 'LORA-GATEWAY-TABLE.STATUS' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-                <ng-container *ngIf="gatewayStatus(); then statusOk else statusError"></ng-container>
+                <ng-container *ngIf="gatewayStatus(element); then statusOk else statusError"></ng-container>
                 <ng-template #statusOk>
                     <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
                 </ng-template>
