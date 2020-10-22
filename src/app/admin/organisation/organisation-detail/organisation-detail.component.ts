@@ -18,6 +18,9 @@ import { PermissionService } from '@app/admin/permission/permission.service';
   styleUrls: ['./organisation-detail.component.scss'],
 })
 export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy {
+  isLoadingResults = true;
+  resultsLength = 10;
+
   public pageLimit: number = 10;
   public pageTotal: number;
   public pageOffset = 0;
@@ -116,6 +119,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       )
       .subscribe((applications) => {
         this.applications = applications.data;
+        this.isLoadingResults = false;
         if (this.pageLimit) {
           this.pageTotal = Math.ceil(applications.count / this.pageLimit);
         }
