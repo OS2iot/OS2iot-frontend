@@ -10,10 +10,10 @@ import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { SharedModule } from '@shared/shared.module';
 import { PermissionDetailComponent } from './permission/permission-detail/permission-detail.component';
 import { PermissionEditComponent } from './permission/permission-edit/permission-edit.component';
 import { PermissionListComponent } from './permission/permission-list/permission-list.component';
-import { PermissionRowComponent } from './permission/permission-list/permission-tabel/permission-row/permission-row.component';
 import { PermissionTabelComponent } from './permission/permission-list/permission-tabel/permission-tabel.component';
 import { PermissionComponent } from './permission/permission.component';
 import { OrganisationDetailComponent } from './organisation/organisation-detail/organisation-detail.component';
@@ -27,7 +27,6 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserTableRowComponent } from './users/user-list/user-table/user-table-row/user-table-row.component';
 import { UserTableComponent } from './users/user-list/user-table/user-table.component';
 import { UsersComponent } from './users/users.component';
-import { SharedModule } from '@shared/shared.module';
 
 
 
@@ -44,7 +43,6 @@ import { SharedModule } from '@shared/shared.module';
     PermissionDetailComponent,
     PermissionListComponent,
     PermissionTabelComponent,
-    PermissionRowComponent,
     OrganisationComponent,
     OrganisationTabelComponent,
     OrganisationDetailComponent,
@@ -64,7 +62,6 @@ import { SharedModule } from '@shared/shared.module';
     RouterModule,
     ApplicationsModule,
     SharedModule,
-    NGMaterialModule,
   ],
   exports: [
     UserDetailComponent,
@@ -78,7 +75,6 @@ import { SharedModule } from '@shared/shared.module';
     PermissionDetailComponent,
     PermissionListComponent,
     PermissionTabelComponent,
-    PermissionRowComponent,
     OrganisationComponent,
     OrganisationTabelComponent,
     OrganisationDetailComponent,

@@ -5,7 +5,6 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  OnDestroy,
   OnChanges,
   SimpleChanges,
   AfterViewInit,

@@ -2,6 +2,7 @@
     [ctaLabel]="'FORM.CREATE-NEW-PERMISSION' | translate" [ctaRouterLink]="'new-permission'"></app-top-bar>
 
 <div class="m-md-4 p-md-3">
-    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
+    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
+        [isLoadingResults]="isLoadingResults">
     </app-permission-tabel>
 </div>
