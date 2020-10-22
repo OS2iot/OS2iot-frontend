@@ -22,7 +22,7 @@
         <div class="mt-5 clearfix col-4">
             <label for="data"
                 class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}</label>
-            <input type="data" class="form-control" placeholder="{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}" id="data" name="data" maxlength="device.type === 'SIGFOX' ? 16 : ''"
+            <input type="data" class="form-control" placeholder="{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}" id="data" name="data" pattern="[a-fA-F\d]+" maxlength="device.type === 'SIGFOX' ? 16 : ''"
                 required [(ngModel)]="downlink.data">
         </div>
         <div class="mt-5 clearfix">
