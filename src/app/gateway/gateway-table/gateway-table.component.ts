@@ -107,15 +107,6 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
       );
   }
 
-  // deleteGateway(id: string) {
-  //   console.log('delete');
-  //   this.chirpstackGatewayService.delete(id).subscribe((response) => {
-  //     if (response.ok && response.body.success === true) {
-  //       this.getLoraGateways();
-  //     }
-  //   });
-  // }
-
   clickDelete(element: any) {
     this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
       if (response.ok && response.body.success === true) {
