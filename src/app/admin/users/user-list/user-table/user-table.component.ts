@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Sort } from '@shared/models/sort.model';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../../user.model';
@@ -12,46 +12,20 @@ import { UserService } from '../../user.service';
 export class UserTableComponent implements OnInit {
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public users: UserResponse[];
+  @Input() users: UserResponse[];
   public pageOffset = 0;
   public pageTotal: number;
-  subscription: Subscription;
+
 
   constructor(
-    private userService: UserService
+
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
-  }
 
-  getUsers() {
-    this.subscription = this.userService.getMultiple()
-      .subscribe(
-        (response) => {
-          this.users = response.data;
-        });
-  }
-
-  ngOnChanges() {
-    this.getUsers();
   }
 
 
-  prevPage() {
-    if (this.pageOffset) { this.pageOffset--; }
-    this.getUsers();
-  }
 
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
-    this.getUsers();
-  }
 
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 }

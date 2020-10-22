@@ -28,11 +28,11 @@
             [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
         <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}">
             <li class="dropdown-item">
-                <a (click)="clickDelete()" [routerLink]="">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}</a>
-            </li>
-            <li class="dropdown-item">
                 <a [routerLink]="['gateway-edit', gateway.id]"
                     routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}</a>
+            </li>
+            <li class="dropdown-item">
+                <a (click)="clickDelete()" [routerLink]="">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}</a>
             </li>
         </ul>
     </div>

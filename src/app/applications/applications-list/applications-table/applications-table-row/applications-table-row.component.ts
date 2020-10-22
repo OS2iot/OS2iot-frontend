@@ -3,6 +3,7 @@ import { Application } from '@applications/application.model';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'tr[app-applications-table-row]',
@@ -18,7 +19,8 @@ export class ApplicationsTableRowComponent implements OnInit {
 
     constructor(
         public translate: TranslateService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {
         translate.use('da');
     }
@@ -42,5 +44,9 @@ export class ApplicationsTableRowComponent implements OnInit {
 
     navigateToEditPage() {
         this.router.navigate(['edit-application', this.application.id]);
+    }
+
+    onViewDetails(id) {
+        this.router.navigate([id], { relativeTo: this.route });
     }
 }

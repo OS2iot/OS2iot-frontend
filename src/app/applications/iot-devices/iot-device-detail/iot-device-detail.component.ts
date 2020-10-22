@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
+
 
 
 @Component({
@@ -31,6 +32,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public downlink = new Downlink();
     public errorMessages: string[];
 
+
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
@@ -41,6 +43,8 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
+        private router: Router,
+
     ) { }
 
     ngOnInit(): void {
@@ -71,6 +75,8 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     getGenericHttpDeviceUrl(device: IotDevice): string {
         return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
     }
+
+
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing

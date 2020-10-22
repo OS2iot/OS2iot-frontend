@@ -1,5 +1,5 @@
 <td>
-  <a [routerLink]="[application.id]" routerLinkActive="active" class="application-link">{{application.name}}</a>
+  <a (click)="onViewDetails(application.id)" routerLinkActive="active" class="application-link">{{application.name}}</a>
 </td>
 <ng-container *ngIf="application.iotDevices; else iotZero">
   <td>{{application.iotDevices.length}}</td>
