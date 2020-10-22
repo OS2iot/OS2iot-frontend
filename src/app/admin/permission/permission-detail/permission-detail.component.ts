@@ -42,18 +42,12 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   id: number;
   subscription: Subscription;
   users: UserResponse[];
-  public applications: Application[];
-  private applicationsSubscription: Subscription;
-  organisation: OrganisationResponse;
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private permissionService: PermissionService,
     private router: Router,
-    private applicationService: ApplicationService,
-    private globalService: SharedVariableService,
-    private organisationService: OrganisationService,
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +72,6 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
       .subscribe((response) => {
         this.permission = response;
         this.users = response.users;
-        this.applications = response.applications;
       });
   }
 
@@ -92,29 +85,6 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
 
   onEditPermission() {
     this.router.navigate(['edit-permission'], { relativeTo: this.route });
-  }
-
-
-  prevPage() {
-    if (this.pageOffset) {
-      this.pageOffset--;
-    }
-    this.getPermission(this.id);
-  }
-
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) {
-      this.pageOffset++;
-    }
-    this.getPermission(this.id);
-  }
-
-  deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getPermission(this.id);
-      }
-    });
   }
 
 }

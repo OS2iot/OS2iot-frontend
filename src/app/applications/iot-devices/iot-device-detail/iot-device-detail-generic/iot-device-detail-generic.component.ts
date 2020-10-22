@@ -35,9 +35,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges {
   clickDelete() {
     const id = this.device.id;
     this.iotDeviceService.deleteIoTDevice(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.deleteDevice.emit(id);
-      }
+      this.deleteDevice.emit(id);
     });
     this.routeBack();
   }

@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Sort } from '@shared/models/sort.model';
+import { Subscription } from 'rxjs';
+import { UserResponse } from '../user.model';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnChanges, OnDestroy {
 
   public pageLimit = 10;
   public sort: Sort[] = [
@@ -55,9 +58,27 @@ export class UserListComponent implements OnInit {
     label: 'SORT.NAME-DESCENDING',
   };
 
-  constructor() { }
+  subscription: Subscription;
+  users: UserResponse[];
+
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
+  getUsers() {
+    this.subscription = this.userService.getMultiple()
+      .subscribe(
+        (response) => {
+          this.users = response.data;
+        });
   }
 
   updatePageLimit(limit: any) {
@@ -70,6 +91,13 @@ export class UserListComponent implements OnInit {
       if (elem.id === sortId) {
         this.selectedSortObject = elem;
       }
+    }
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
