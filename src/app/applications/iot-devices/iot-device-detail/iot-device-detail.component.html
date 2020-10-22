@@ -26,7 +26,7 @@
             <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime"></ng-container>
             <ng-template #sentTime>
                 <mat-expansion-panel>
-                    <mat-expansion-panel-header>
+                    <mat-expansion-panel-header style="max-width: max-content;">
                         <mat-panel-title>
                             <p>
                                 {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}
@@ -36,9 +36,7 @@
                     </mat-expansion-panel-header>
                     <ng-container *ngIf="device.latestReceivedMessage?.rawData">
                         <code>
-                            <pre>
-                                {{device.latestReceivedMessage.rawData | json }}
-                            </pre>
+                            <pre>{{device.latestReceivedMessage.rawData | json }}</pre>
                         </code>
                     </ng-container>
                 </mat-expansion-panel>
