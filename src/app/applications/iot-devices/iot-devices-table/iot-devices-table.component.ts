@@ -39,7 +39,6 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         private restService: RestService,
         public translate: TranslateService,
         public iotDeviceService: IoTDeviceService,
-        private router: Router,
     ) {
         translate.use('da');
     }
@@ -52,7 +51,6 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
     }
 
     getBatteryProcentage(): number {

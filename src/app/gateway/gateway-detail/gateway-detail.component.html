@@ -28,8 +28,6 @@
     </div>
     <h4 *ngIf="gateway.description">{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
     <p *ngIf="gateway.description" class="mb-5">{{gateway.description}}</p>
-
-
     <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>
     <ng-template #locationThenBlock>
         <div class="row">
