@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceProfileService } from '../device-profile.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -15,6 +16,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   public pageLimit: 10;
   public pageOffset: 0;
+
+  public errorMessages: any;
 
   constructor(
     private router: Router,
@@ -43,6 +46,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
         console.log(response);
         if (response.ok) {
           this.getDeviceProfiles();
+        } else {
+          this.showError(response);
         }
       });
     }
@@ -54,4 +59,14 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     }
   }
 
+  private showError(err: HttpErrorResponse) {
+    if (err?.error?.message == 'Internal server error') {
+      this.errorMessages = 'Internal server error';
+      return;
+    }
+
+    if (err.error?.message) {
+      this.errorMessages = err.error?.message;
+    }
+  }
 }

@@ -465,7 +465,8 @@
     "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
     "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
     "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
-    "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack"
+    "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
+    "IS-USED": "Profilen kan ikke slettes da den er i brug."
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",

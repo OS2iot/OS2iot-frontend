@@ -8,7 +8,9 @@
     </div>
 </div>
 <hr>
-
+<div *ngIf="errorMessages" class="error-messages p-3 my-2">
+    {{errorMessages | translate }}
+</div>
 <app-device-profiles-item *ngFor="let deviceProfile of deviceProfiles; let i = index"
     (deleteDeviceProfile)="deleteDeviceProfile($event)" [deviceProfile]="deviceProfile">
 </app-device-profiles-item>
