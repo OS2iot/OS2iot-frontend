@@ -16,13 +16,14 @@
                     {{'PERMISSION.DETAIL.DROPDOWN' | translate}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['edit-permission']"
+                    <li>
+                        <a class="dropdown-item" [routerLink]="['edit-permission']"
                             routerLinkActive="active">{{'PERMISSION.DETAIL.EDIT' | translate}}
                         </a>
                     </li>
-                    <li class="dropdown-item">
-                        <a (click)="onDeletePermission()" [routerLink]="">{{ 'PERMISSION.DETAIL.DELETE' | translate }}
+                    <li>
+                        <a class="dropdown-item" (click)="onDeletePermission()"
+                            [routerLink]="">{{ 'PERMISSION.DETAIL.DELETE' | translate }}
                         </a>
                     </li>
                 </ul>
