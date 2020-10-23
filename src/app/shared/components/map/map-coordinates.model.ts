@@ -10,4 +10,5 @@ export class MapCoordinates {
 export class MarkerInfo {
     name: string;
     active = false;
+    id: string | number;
 }

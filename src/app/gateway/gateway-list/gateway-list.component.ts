@@ -64,7 +64,8 @@ export class GatewayListComponent implements OnInit, OnDestroy {
           useGeolocation: false,
           markerInfo: {
             name: gateway.name,
-            active: this.gatewayStatus(gateway)
+            active: this.gatewayStatus(gateway),
+            id: gateway.id
           }
         }
       )

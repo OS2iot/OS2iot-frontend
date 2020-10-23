@@ -76,9 +76,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     if (markerInfo) {
       const aktiv = markerInfo.active ? 'Aktiv' : 'Inaktiv';
       this.marker.bindPopup(
-        '<p class="row">' +
-          markerInfo.name +
-        '</p> ' +
+        // TODO: should be standardised when more components use this feture.
+        '<a _ngcontent-gij-c367=""' +
+        'routerlinkactive="active" class="application-link"' +
+        'ng-reflect-router-link-active="active"' +
+        'ng-reflect-router-link="gateway-detail,' + markerInfo.id +
+        '" href="/gateways/gateway-detail/' + markerInfo.id + '">' + markerInfo.name + '</a>'
+        +
         '<p>' +
           aktiv +
         '</p>');
