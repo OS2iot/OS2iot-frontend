@@ -9,8 +9,8 @@
     </div>
   </mat-tab>
   <mat-tab label="{{'GATEWAY.MAP-TAB' | translate}}">
-    <div *ngIf=showmap>
-      <app-map [coordinateList]="getCoordinateList()"></app-map>
+    <div *ngIf="showmap && gateways">
+      <app-map [coordinateList]="coordinateList"></app-map>
     </div>
   </mat-tab>
 </mat-tab-group>

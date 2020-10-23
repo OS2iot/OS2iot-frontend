@@ -62,17 +62,8 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
     this.getLoraGateways();
   }
 
-  gatewayStatus(gateway: Gateway): boolean {
-    const errorTime = new Date();
-    // 150 seconds is the define error interval: 30 sec heartbeat * 5.
-    errorTime.setSeconds(errorTime.getSeconds() - 150);
-    if (gateway?.lastSeenAt) {
-      const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).unix()
-      const errorTimeUnixTimestamp = moment(errorTime).unix()
-      return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
-    } else {
-      return false;
-    }
+  gatewayStatus(): boolean {
+    return this.chirpstackGatewayService.isGatewayActive(this.gateway);
   }
 
   lastActive(gateway: Gateway): string {

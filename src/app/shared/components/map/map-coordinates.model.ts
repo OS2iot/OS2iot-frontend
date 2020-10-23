@@ -4,4 +4,10 @@ export class MapCoordinates {
     draggable = true;
     editEnabled = false;
     useGeolocation = false;
+    markerInfo: MarkerInfo;
+}
+
+export class MarkerInfo {
+    name: string;
+    active = false;
 }

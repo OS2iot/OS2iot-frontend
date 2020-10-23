@@ -9,7 +9,6 @@ import { AlertComponent } from './components/alert/alert.component';
 import { BatteriStatusComponent } from './components/batteri-status/batteri-status.component';
 import { MapComponent } from './components/map/map.component';
 
-
 @NgModule({
   declarations: [
     AlertComponent,

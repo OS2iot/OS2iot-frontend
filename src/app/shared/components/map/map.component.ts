@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, AfterViewChecked } from '@angular/core';
 import * as L from 'leaflet';
-import { MapCoordinates } from './map-coordinates.model';
+import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
   selector: 'app-map',
@@ -15,6 +15,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() coordinateList?: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
   private zoomLevel = 15;
+  private redMarker = '/assets/images/red-marker.png';
+  private grenMarker = '/assets/images/green-marker.png';
 
   constructor() { }
 
@@ -60,17 +62,38 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   private placeMarkers() {
     if (this.coordinateList) {
       this.coordinateList.forEach(coord => {
-        this.addMarker(coord.latitude, coord.longitude, coord.draggable);
+        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo);
       });
     } else {
       this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable);
     }
   }
 
-  private addMarker(latitude: number, longitude: number, draggable = true) {
-    this.marker = L.marker([latitude, longitude], {draggable});
+  private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
+    const markerIcon = this.getMarkerIcon(markerInfo?.active);
+    this.marker = L.marker([latitude, longitude], {draggable, icon: markerIcon});
     this.marker.on('dragend', event => this.dragend(event));
+    if (markerInfo) {
+      const aktiv = markerInfo.active ? 'Aktiv' : 'Inaktiv';
+      this.marker.bindPopup(
+        '<p class="row">' +
+          markerInfo.name +
+        '</p> ' +
+        '<p>' +
+          aktiv +
+        '</p>');
+    }
     this.marker.addTo(this.map);
+  }
+
+  private getMarkerIcon(active = true): any {
+    return L.icon({
+      iconUrl: active ? this.grenMarker : this.redMarker,
+      iconSize:     [38, 38],
+      iconAnchor:   [19, 38],
+      popupAnchor:  [0, -38]
+    })
+    ;
   }
 
   private dragend(event: any) {
