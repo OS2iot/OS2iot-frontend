@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, AfterViewChecked } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
@@ -7,9 +7,10 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit, OnChanges {
+export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   private map;
+  private mapId;
   private marker;
   @Input() coordinates?: MapCoordinates;
   @Input() coordinateList?: [MapCoordinates];
@@ -19,8 +20,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   private grenMarker = '/assets/images/green-marker.png';
 
   constructor() { }
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
+    }
+  }
 
   ngOnInit(): void {
+    this.mapId = Math.random().toString();
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
     }
@@ -111,9 +119,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private initMap(): void {
-    const container = document.getElementById('map');
+    const container = document.getElementById(this.mapId);
     if (container) {
-      this.map = L.map('map', {
+      this.map = L.map(this.mapId, {
         center: [
           this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
           this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
