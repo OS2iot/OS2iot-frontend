@@ -10,7 +10,7 @@ export class ServiceProfile {
     public dlRate: number;
     public dlRatePolicy: string;
     public drMax = 5;
-    public drMin = 5;
+    public drMin = 0;
     public hrAllowed: boolean;
     public minGWDiversity: number;
     public nwkGeoLoc: boolean;

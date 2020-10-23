@@ -484,7 +484,7 @@
       "NWKGEOLOCEXPLAINED": "Når den er aktiveret, forsøger netværksserveren at løse placeringen af â€‹â€‹enhederne under denne serviceprofil. Bemærk, at du skal have gateways, der understøtter fine-timestamp, og at netværksserveren skal konfigureres for at yde support til geolokalisering.",
       "REPORT_END_DEVICE": "Report end-device margin",
       "DEVICEFREQUENCY": "Device-status request frequency",
-      "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (request/dag).",
+      "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (requests pr. dag).",
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
       "DRRATEMIN": "Min data rate",
