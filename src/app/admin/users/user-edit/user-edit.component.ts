@@ -8,7 +8,7 @@ import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionType } from '@app/admin/permission/permission.model';
-import { BackButton } from '@shared/models/back-button.model';
+import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 
 
 @Component({
@@ -28,12 +28,14 @@ export class UserEditComponent implements OnInit {
   public submitButton = '';
   id: number;
   subscription: Subscription;
+  isGlobalAdmin = false;
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class UserEditComponent implements OnInit {
       // Default active to be true if we're creating a new user.
       this.user.active = true;
     }
+    this.amIGlobalAdmin();
   }
 
   private getUser(id: number) {
@@ -65,6 +68,17 @@ export class UserEditComponent implements OnInit {
         this.user.globalAdmin = response.permissions.some(x => x.type == PermissionType.GlobalAdmin);
         // We cannot set the password.
       });
+  }
+
+  amIGlobalAdmin() {
+    this.authService.me()
+      .subscribe(
+        (response: CurrentUserInfoResponse) => {
+          this.isGlobalAdmin = response.user.permissions.some(x => x.type === 'GlobalAdmin');
+        },
+        (error) => {
+          this.isGlobalAdmin = false;
+        });
   }
 
   private create(): void {

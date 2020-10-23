@@ -43,7 +43,7 @@
         <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
             {{'USERS.FORM.ACTIVE' | translate}}</mat-slide-toggle>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-3" *ngIf="isGlobalAdmin">
         <mat-slide-toggle [(ngModel)]="user.globalAdmin" id="globalAdmin" name="globalAdmin">
             {{'USERS.FORM.GLOBAL-ADMIN' | translate}}</mat-slide-toggle>
     </div>
