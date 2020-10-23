@@ -11,6 +11,7 @@ import { SearchService } from './search.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  isLoadingResults = true;
   query: string;
   subscription: Subscription;
   searchResults: SearchResultDto[];
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private searchService: SearchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.pageOffset = 0;
@@ -46,6 +47,7 @@ export class SearchComponent implements OnInit {
       .subscribe((response) => {
         this.searchResults = response.data;
         this.pageTotal = Math.ceil(response.count / this.pageLimit);
+        this.isLoadingResults = false;
         this.preserveQuery(query);
       });
   }

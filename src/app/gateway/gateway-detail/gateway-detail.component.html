@@ -1,4 +1,4 @@
-<app-top-bar-single [data]="gateway" [backButton]="backButton"></app-top-bar-single>
+<app-top-bar *ngIf="gateway" [data]="gateway" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="gateway">
     <div class="row">

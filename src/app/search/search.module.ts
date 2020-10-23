@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
-import { SearchTableRowComponent } from './search-table/search-table-row/search-table-row.component';
 import { SearchTableComponent } from './search-table/search-table.component';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { SharedModule } from '@shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [SearchComponent, SearchTableComponent, SearchTableRowComponent],
+  declarations: [SearchComponent, SearchTableComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -19,6 +21,9 @@ import { SearchTableComponent } from './search-table/search-table.component';
     TopBarModule,
     ReactiveFormsModule,
     FormModule,
+    NGMaterialModule,
+    SharedModule,
+    FontAwesomeModule,
   ],
 })
-export class SearchModule {}
+export class SearchModule { }

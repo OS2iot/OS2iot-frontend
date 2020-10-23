@@ -1,4 +1,4 @@
-<app-top-bar-single [data]="user" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+<app-top-bar *ngIf="user" [data]="user" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="user">
     <div class="row">
