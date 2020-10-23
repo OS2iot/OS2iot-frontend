@@ -62,8 +62,8 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
     this.getLoraGateways();
   }
 
-  gatewayStatus(): boolean {
-    return this.chirpstackGatewayService.isGatewayActive(this.gateway);
+  gatewayStatus(gateway: Gateway): boolean {
+    return this.chirpstackGatewayService.isGatewayActive(gateway);
   }
 
   lastActive(gateway: Gateway): string {
