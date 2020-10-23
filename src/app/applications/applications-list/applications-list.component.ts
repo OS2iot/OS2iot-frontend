@@ -4,7 +4,12 @@ import {
   OnChanges,
   SimpleChanges,
   OnDestroy,
+  ViewChild,
+  AfterViewInit,
 } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { NavbarComponent } from '@app/navbar/navbar.component';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
@@ -21,8 +26,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./applications-list.component.scss'],
 })
 export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
-  public pageLimit = 10;
+  isLoadingResults = true;
+  resultsLength = 10;
 
+  public pageLimit = 10;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
@@ -95,6 +102,7 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
       )
       .subscribe((applications) => {
         this.applications = applications.data;
+        this.isLoadingResults = false;
         if (this.pageLimit) {
           this.pageTotal = Math.ceil(applications.count / this.pageLimit);
         }

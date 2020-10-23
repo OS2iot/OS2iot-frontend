@@ -4,6 +4,7 @@
 
 <div class="m-md-4 p-md-3">
   <app-applications-table [applications]="applications" [pageOffset]="pageOffset" [pageTotal]="pageTotal"
-    (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)">
+    (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)"
+    [isLoadingResults]="isLoadingResults">
   </app-applications-table>
 </div>

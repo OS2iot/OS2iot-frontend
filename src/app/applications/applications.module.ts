@@ -8,7 +8,6 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
-import { ApplicationsTableRowComponent } from './applications-list/applications-table/applications-table-row/applications-table-row.component';
 import { ApplicationsTableComponent } from './applications-list/applications-table/applications-table.component';
 import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
@@ -28,7 +27,6 @@ import { BulkImportComponent } from './bulk-import/bulk-import.component';
         ApplicationEditComponent,
         ApplicationsListComponent,
         ApplicationsTableComponent,
-        ApplicationsTableRowComponent,
         BulkImportComponent
     ],
     exports: [

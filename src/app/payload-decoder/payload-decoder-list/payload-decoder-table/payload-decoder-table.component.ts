@@ -1,22 +1,27 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
-import { Sort } from '@shared/models/sort.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-payload-decoder-table',
   templateUrl: './payload-decoder-table.component.html',
   styleUrls: ['./payload-decoder-table.component.scss']
 })
-export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestroy {
-
-  @Input() pageLimit: number;
-  @Input() selectedSortObject: Sort;
+export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ['name', 'payload-decoder-id', 'menu'];
+  public dataSource = new MatTableDataSource<PayloadDecoder>();
   public payloadDecoders: PayloadDecoder[];
-  public pageOffset = 0;
-  public pageTotal: number;
-  subscription: Subscription;
+  payloadDecoder: PayloadDecoder;
+  resultsLength = 0;
+  isLoadingResults = true;
+  deletePayloadDecoder = new EventEmitter();
+  private subscription: Subscription;
 
   constructor(
     private payloadDecoderService: PayloadDecoderService
@@ -26,11 +31,20 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
     this.getPayloadDecoders();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   getPayloadDecoders() {
     this.subscription = this.payloadDecoderService.getMultiple()
       .subscribe(
         (response) => {
           this.payloadDecoders = response.data;
+          this.dataSource = new MatTableDataSource<PayloadDecoder>(this.payloadDecoders);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.isLoadingResults = false;
         });
   }
 
@@ -38,23 +52,13 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, OnDestro
     this.getPayloadDecoders();
   }
 
-  deletePayloadDecoder(id: number) {
-    console.log('delete:', id);
-    this.payloadDecoderService.delete(id).subscribe((response) => {
+  clickDelete(element: any) {
+    this.payloadDecoderService.delete(element.id).subscribe((response) => {
       if (response.ok) {
+        this.deletePayloadDecoder.emit(element.id);
         this.getPayloadDecoders();
       }
     });
-  }
-
-  prevPage() {
-    if (this.pageOffset) { this.pageOffset--; }
-    this.getPayloadDecoders();
-  }
-
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
-    this.getPayloadDecoders();
   }
 
   ngOnDestroy() {

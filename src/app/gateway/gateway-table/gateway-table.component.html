@@ -1,11 +1,11 @@
-<app-loading-spinner *ngIf=" isLoadingResults">
-</app-loading-spinner>
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <app-loading-spinner *ngIf=" isLoadingResults">
+    </app-loading-spinner>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header matSortActive="name" matSortDisableClear>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
                 {{ 'LORA-GATEWAY-TABLE.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
