@@ -10,7 +10,7 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   private map;
-  private mapId;
+  public mapId;
   private marker;
   @Input() coordinates?: MapCoordinates;
   @Input() coordinateList?: [MapCoordinates];
