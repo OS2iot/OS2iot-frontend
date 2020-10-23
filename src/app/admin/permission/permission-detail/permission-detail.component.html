@@ -1,4 +1,4 @@
-<app-top-bar-single [data]="permission" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+<app-top-bar *ngIf="permission" [data]="permission" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="permission">
     <div class="row">

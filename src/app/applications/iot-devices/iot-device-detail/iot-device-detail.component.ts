@@ -37,7 +37,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
 
-    device = new IotDevice;
+    device: IotDevice;
 
     constructor(
         private route: ActivatedRoute,

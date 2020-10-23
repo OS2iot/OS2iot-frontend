@@ -6,8 +6,6 @@ import { DatatargetResponse } from '@applications/datatarget/datatarget-response
 import { PayloadDeviceDatatargetGetByDataTarget } from '@app/payload-decoder/payload-device-data.model';
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { BackButton } from '@shared/models/back-button.model';
-import { QuickActionButton } from '@shared/models/quick-action-button.model';
-import { Sort } from '@shared/models/sort.model';
 import { DatatargetService } from '../datatarget.service';
 
 @Component({

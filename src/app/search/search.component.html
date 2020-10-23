@@ -1,9 +1,7 @@
 <app-top-bar [title]="'NAV.SEARCH' | translate" [searchQuery]="query"></app-top-bar>
-<div class="mx-md-4 px-md-3">
-    <h3>{{'SEARCH.QUERY' | translate}} {{decode(query)}}</h3>
-</div>
+
 <div class="m-md-4 p-md-3">
-    <app-search-table [searchResults]="searchResults" [pageTotal]="pageTotal" [pageOffset]="pageOffset"
-        (prevPage)="prevPage()" (nextPage)="nextPage()">
+    <app-search-table [searchResults]="searchResults" [isLoadingResults]="isLoadingResults"
+        [searchText]="decode(query)">
     </app-search-table>
 </div>

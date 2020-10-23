@@ -1,4 +1,4 @@
-<app-top-bar-single [data]="payloadDecoder" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+<app-top-bar *ngIf="payloadDecoder" [data]="payloadDecoder" [backButton]="backButton" [subPage]="true"></app-top-bar>
 <div *ngIf="payloadDecoder">
     <div class=" jumbotron m-md-4 p-md-3">
         <div class="row">
@@ -17,10 +17,11 @@
                                 routerLinkActive="active">{{ 'PAYLOAD-DECODER.DETAIL.EDIT' | translate }}
                             </a>
                         </li>
-                        <!-- <li class="dropdown-item">
-                            <a (click)="onDeletePayloadDecoder()" [routerLink]="">{{ 'PAYLOAD-DECODER.DETAIL.DELETE' | translate }}
+                        <li class="dropdown-item">
+                            <a (click)="onDeletePayload()"
+                                [routerLink]="">{{ 'PAYLOAD-DECODER.DETAIL.DELETE' | translate }}
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </div>

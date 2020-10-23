@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { BackButton } from '@shared/models/back-button.model';
-import { QuickActionButton } from '@shared/models/quick-action-button.model';
 import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
+
 
 @Component({
   selector: 'app-payload-decoder-detail',
@@ -13,19 +13,9 @@ import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
   styleUrls: ['./payload-decoder-detail.component.scss']
 })
 export class PayloadDecoderDetailComponent implements OnInit {
-
+  @Output() deletePayloadDecoder = new EventEmitter();
   payloadDecoder: PayloadDecoder;
   public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
-  public buttons: QuickActionButton[] = [
-    {
-      label: 'PAYLOAD-DECODER.DELETE',
-      type: 'delete',
-    },
-    {
-      label: 'PAYLOAD-DECODER.EDIT',
-      type: 'edit',
-    },
-  ];
   id: number;
   subscription: Subscription;
 
@@ -33,6 +23,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
+    private router: Router,
   ) {
   }
 
@@ -56,5 +47,16 @@ export class PayloadDecoderDetailComponent implements OnInit {
           this.payloadDecoder = response;
         });
   }
+
+  onDeletePayload() {
+    const id = this.payloadDecoder.id;
+    this.payloadDecoderService.delete(id).subscribe((response) => {
+      if (response.ok && response.body.affected > 0) {
+        this.deletePayloadDecoder.emit(id);
+      }
+    });
+    this.router.navigate(['payload-decoder']);
+  }
+
 
 }
