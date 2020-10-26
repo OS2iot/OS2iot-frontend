@@ -17,6 +17,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { MatSelect } from '@angular/material/select';
 import { take, takeUntil } from 'rxjs/operators';
 import { User } from '@shared/components/forms/form-body-application/form-body-application.component';
+import { ErrorMessageService } from '@shared/error-message.service';
 
 @Component({
   selector: 'app-permission-edit',
@@ -50,7 +51,8 @@ export class PermissionEditComponent implements OnInit {
     private organisationService: OrganisationService,
     private userService: UserService,
     private applicationService: ApplicationService,
-    private location: Location
+    private location: Location,
+    private errormEssageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -212,24 +214,9 @@ export class PermissionEditComponent implements OnInit {
   }
 
   private showError(err: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
-    if (err?.error?.message == 'Internal server error') {
-      this.errorMessage = 'Internal server error';
-      return;
-    }
-
-    if (err.error?.message?.length > 0) {
-      err.error.message.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = err.error.message;
-    }
-    this.formFailedSubmit = true;
+    const result = this.errormEssageService.handleErrorMessageWithFields(err);
+    this.errorFields = result.errorFields;
+    this.errorMessages = result.errorMessages;
   }
 
   routeBack(): void {
