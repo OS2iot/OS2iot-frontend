@@ -20,54 +20,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     private id: number;
-    public pageLimit = 10;
-    public selectedSortId = 1;
-    public selectedSortObject: Sort = {
-        id: 1,
-        dir: 'ASC',
-        col: 'name',
-        label: 'SORT.NAME-ASCENDING',
-    };
-    public sort: Sort[] = [
-        {
-            id: 1,
-            dir: 'ASC',
-            col: 'name',
-            label: 'SORT.NAME-ASCENDING',
-        },
-        {
-            id: 2,
-            dir: 'DESC',
-            col: 'name',
-            label: 'SORT.NAME-DESCENDING',
-        },
-        {
-            id: 3,
-            dir: 'DESC',
-            col: 'active',
-            label: 'SORT.ACTIVE-DESCENDING',
-        },
-        {
-            id: 4,
-            dir: 'ASC',
-            col: 'active',
-            label: 'SORT.ACTIVE-ASCENDING',
-        },
-    ];
-    public buttons: QuickActionButton[] = [
-        {
-            label: 'APPLICATION.DELETE',
-            type: 'delete',
-        },
-        {
-            label: 'GEN.EDIT',
-            type: 'edit',
-        },
-    ];
     public description: string;
     public name: string;
-    public pageOffset = 0;
-    public pageTotal: number;
     public iotDevices: IotDevice[] = [];
 
     constructor(
@@ -111,19 +65,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
                 this.iotDevices = application.iotDevices;
             }
         });
-    }
-
-    updatePageLimit(limit: any) {
-        console.log(limit);
-    }
-
-    changeSort(sortId: number) {
-        for (let i = 0; i < this.sort.length; i++) {
-            const elem = this.sort[i];
-            if (elem.id == sortId) {
-                this.selectedSortObject = elem;
-            }
-        }
     }
 
     ngOnDestroy() {

@@ -39,11 +39,10 @@
   <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
     <div class="row">
       <div class="col-sm-12">
-        <app-sub-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [sort]="sort"
-          [(selectedSortId)]="selectedSortId" [pageLimit]="pageLimit"
+        <app-sub-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
           [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
-          [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'"
-          (updatePageLimit)="updatePageLimit($event)" (selectedSortChange)="changeSort($event)"></app-sub-bar>
+          [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
+        </app-sub-bar>
         <app-iot-devices-table [application]="application"></app-iot-devices-table>
       </div>
     </div>

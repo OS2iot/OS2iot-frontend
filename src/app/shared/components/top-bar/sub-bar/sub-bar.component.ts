@@ -15,13 +15,8 @@ export class SubBarComponent implements OnInit {
   @Input() ctaRouterLinkPrimary: string;
   @Input() ctaLabelSecondary: string;
   @Input() ctaRouterLinkSecondary: string;
-  @Input() sort: Sort[];
-  @Input() pageLimit: number;
-  @Input() selectedSortId: number;
   @Input() component: false;
   @Input() backButtonTitle: string;
-  @Output() selectedSortChange = new EventEmitter();
-  @Output() updatePageLimit = new EventEmitter();
 
   constructor(
     public translate: TranslateService,
@@ -31,12 +26,8 @@ export class SubBarComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  changeSort(id: number) {
-    this.selectedSortChange.emit(id);
-  }
-
   routeBack(): void {
-    this.location.back()
+    this.location.back();
   }
 
 }
