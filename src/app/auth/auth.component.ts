@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -21,9 +22,15 @@ export class AuthComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    public translate: TranslateService,) { }
+    public translate: TranslateService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+
+  getKombitLoginUrl() {
+    const frontpage = encodeURI(window.location.origin + '/dashboard');
+    return `${environment.baseUrl}auth/kombit/login?redirect=${frontpage}`;
+  }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;

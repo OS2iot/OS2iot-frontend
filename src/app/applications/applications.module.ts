@@ -15,7 +15,6 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
 import { SharedModule } from '@shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
-import { HttpClientModule } from '@angular/common/http';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
@@ -44,7 +43,6 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
         IotDevicesModule,
         DatatargetModule,
         DirectivesModule,
-        HttpClientModule,
         FormModule,
         SharedModule,
         FontAwesomeModule,

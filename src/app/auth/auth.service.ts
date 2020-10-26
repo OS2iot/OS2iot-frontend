@@ -49,7 +49,7 @@ export class AuthService {
     return this.restService.get('auth/me');
   }
 
-  private setSession(jwt: string) {
+  setSession(jwt: string) {
     localStorage.setItem('id_token', jwt);
   }
 

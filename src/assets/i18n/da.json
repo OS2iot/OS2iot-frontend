@@ -639,7 +639,8 @@
   },
   "AUTH": {
     "EMAIL": "Email",
-    "PASSWORD": "Adgangskode"
+    "PASSWORD": "Adgangskode",
+    "KOMBIT-BUTTON": "Login med KOMBIT Adgangsstyring"
   },
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
