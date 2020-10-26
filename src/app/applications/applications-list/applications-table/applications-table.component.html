@@ -47,12 +47,12 @@
                         [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
                     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{element.id}}">
                         <li class="dropdown-item">
-                            <a (click)="clickDelete(element)"
-                                [routerLink]="">{{ 'APPLICATION-TABLE-ROW.DELETE' | translate }}</a>
-                        </li>
-                        <li class="dropdown-item">
                             <a [routerLink]="[element.id, 'edit-application']"
                                 routerLinkActive="active">{{ 'APPLICATION-TABLE-ROW.EDIT' | translate }}</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a (click)="clickDelete(element)"
+                                [routerLink]="">{{ 'APPLICATION-TABLE-ROW.DELETE' | translate }}</a>
                         </li>
                     </ul>
                 </div>
