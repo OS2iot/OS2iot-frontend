@@ -26,6 +26,10 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserTableComponent } from './users/user-list/user-table/user-table.component';
 import { UsersComponent } from './users/users.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -59,6 +63,8 @@ import { UsersComponent } from './users/users.component';
     RouterModule,
     ApplicationsModule,
     SharedModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
   exports: [
     UserDetailComponent,

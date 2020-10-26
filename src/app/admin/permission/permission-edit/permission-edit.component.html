@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-group mt-3 col-12">
-        <label class="form-label" for="name">{{'PERMISSION.EDIT.TYPE' | translate}}</label>*
+        <label class="form-label" for="level">{{'PERMISSION.EDIT.TYPE' | translate}}</label>*
         <select id="level" class="form-select" name="level" [(ngModel)]="permission.level" required
             [value]="permission.organizationId" [disabled]="isEditMode"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('organizationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('organizationId')}"
@@ -31,13 +31,19 @@
     </div>
 
     <div class="form-group mt-3 col-12">
-        <label class="form-label" for="name">{{'PERMISSION.EDIT.USERS' | translate}}</label>*
-        <div class="col-12">
-            <select id="userIds" name="userIds" class="form-control" multiple [(ngModel)]="permission.userIds">
-                <option *ngFor="let user of users" [value]="user.id" [selected]="isUserPartOfPermission(user.id)">
-                    {{user.name}}</option>
-            </select>
-        </div>
+        <label class="form-label" for="user">{{'PERMISSION.EDIT.USERS' | translate}}</label>*
+        <mat-form-field>
+            <mat-select 
+                name="users"
+                [multiple]="true" 
+                #multiSelect
+                [compareWith]="compare"
+                [(value)]="permission.userIds">
+              <mat-option *ngFor="let user of users" [value]="user.id">
+                {{user.name}} ({{user.email}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
     </div>
 
     <div *ngIf="permission.level != 'GlobalAdmin'">

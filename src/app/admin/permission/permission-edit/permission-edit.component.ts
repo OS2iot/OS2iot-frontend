@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../permission.service';
 import { PermissionRequest, PermissionType } from '../permission.model';
@@ -14,6 +14,9 @@ import { UserResponse } from '../../users/user.model';
 import { ApplicationService } from '@applications/application.service';
 import { Application } from '@applications/application.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { MatSelect } from '@angular/material/select';
+import { take, takeUntil } from 'rxjs/operators';
+import { User } from '@shared/components/forms/form-body-application/form-body-application.component';
 
 @Component({
   selector: 'app-permission-edit',
@@ -33,7 +36,7 @@ export class PermissionEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/permissions' };
   public title = '';
   public submitButton = '';
-  public isEditMode: boolean = false;
+  public isEditMode = false;
   id: number;
   subscription: Subscription;
   organisationSubscription: Subscription;
@@ -90,6 +93,10 @@ export class PermissionEditComponent implements OnInit {
         this.showError(error);
       }
     );
+  }
+
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
   }
 
   organizationChanged() {
