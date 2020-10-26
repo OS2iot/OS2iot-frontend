@@ -2,6 +2,25 @@
   <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true"></app-top-bar>
   <div class=" jumbotron m-md-4 p-md-3">
     <div class="application-component">
+      <div class="col-md-12 order-first order-md-last ">
+        <div class="btn-group float-md-right dropdown">
+            <button type="button" id="dropdown-{{ datatarget.name }}" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ datatarget.name }}">
+                <li class="dropdown-item">
+                    <a [routerLink]="['../../datatarget-edit', this.datatarget.id]"
+                        routerLinkActive="active">Redigér
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a (click)="onDeleteDatatarget()" [routerLink]="" >Slet
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
       <h4>{{ 'DATATARGET.NAME' | translate }}</h4>
       <p class="mb-5">{{datatarget.name}}</p>
       <h4>{{ 'DATATARGET.URL' | translate }}</h4>

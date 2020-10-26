@@ -7,6 +7,7 @@ import { PayloadDeviceDatatargetGetByDataTarget } from '@app/payload-decoder/pay
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { DatatargetService } from '../datatarget.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -22,6 +23,7 @@ export class DatatargetDetailComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private location: Location,
         private datatargetRelationServicer: PayloadDeviceDatatargetService,
         private datatargetService: DatatargetService,
         public translate: TranslateService) { }
@@ -43,6 +45,13 @@ export class DatatargetDetailComponent implements OnInit {
             .subscribe((datatargetResponse: DatatargetResponse) => {
                 this.datatarget = datatargetResponse;
             });
+    }
+
+    onDeleteDatatarget() {
+        const id = this.datatarget.id;
+        this.datatargetService.delete(id).subscribe((response) => {
+        });
+        this.location.back();
     }
 
     getDatatargetRelations(id: number) {
