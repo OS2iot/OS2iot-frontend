@@ -27,8 +27,7 @@
     <h4 class="">
         {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
     </h4>
-    <app-applications-table [applications]="applications" [pageOffset]="pageOffset" [pageTotal]="pageTotal"
-        (prevPage)="prevPage()" (nextPage)="nextPage()" (deleteApplication)="deleteApplication($event)"
+    <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
         [isLoadingResults]="isLoadingResults">
     </app-applications-table>
 </div>

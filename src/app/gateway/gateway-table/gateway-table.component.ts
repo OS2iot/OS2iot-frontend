@@ -86,8 +86,8 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
         (gateways) => {
           this.gateways = gateways.result;
           this.dataSource = new MatTableDataSource<Gateway>(this.gateways);
-          this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           this.isLoadingResults = false;
           this.resultsLength = this.gateways.length;
           if (this.pageLimit) {

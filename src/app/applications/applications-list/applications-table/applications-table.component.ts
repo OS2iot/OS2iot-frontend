@@ -37,11 +37,6 @@ export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChan
   @Input() isLoadingResults: boolean;
   public pageLimit = 10;
 
-
-  @Input() pageTotal: number;
-  @Input() pageOffset: number;
-  @Output() prevPage = new EventEmitter();
-  @Output() nextPage = new EventEmitter();
   @Output() deleteApplication = new EventEmitter();
 
   constructor(
