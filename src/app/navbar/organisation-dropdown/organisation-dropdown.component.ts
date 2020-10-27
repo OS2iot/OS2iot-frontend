@@ -16,6 +16,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 export class OrganisationDropdownComponent implements OnInit, OnChanges {
   public organisations: Organisation[];
   public user: UserResponse;
+  public isOrgAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -52,16 +53,19 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
         )
       ) {
         this.setSelectedOrganisation(response.organizations[0].id);
+        this.isOrganisationAdmin(response.organizations[0].id);
       }
     });
   }
 
-  isOrganisationAdmin(orgId: number) {
-    return this.user.permissions.some(x => x.type === PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+  private isOrganisationAdmin(orgId: number) {
+    this.isOrgAdmin = this.user?.permissions?.some(x => x.type === PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+    console.log(this.isOrgAdmin);
   }
 
   public onChange(value) {
     this.setSelectedOrganisation(value);
+    this.isOrganisationAdmin(value);
     this.sharedVariable.setValue(value);
     this.route.navigateByUrl('/applications');
   }
