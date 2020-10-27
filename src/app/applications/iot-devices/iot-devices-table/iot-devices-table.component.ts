@@ -71,8 +71,8 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
             });
     }
 
-    lastActive() {
-        const arr = this.device?.receivedMessagesMetadata;
+    public lastActive(device: IotDevice) {
+        const arr = device?.receivedMessagesMetadata;
         if (!arr || arr.length === 0) {
             return this.translate.instant('ACTIVITY.NEVER');
         } else {
