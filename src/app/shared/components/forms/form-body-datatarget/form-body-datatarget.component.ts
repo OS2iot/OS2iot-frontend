@@ -92,13 +92,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   }
 
   openDeleteDialog(index) {
-    const dialog = this.dialog.open(DeleteDialogComponent, {
-      data: {
-        showAccept: true,
-        showCancel: true,
-        message: 'Er du sikker på at du vil slette?'
-      }
-    });
+    const dialog = this.dialog.open(DeleteDialogComponent, {});
 
     dialog.afterClosed().subscribe((result) => {
       if (result === true) {

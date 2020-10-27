@@ -606,9 +606,8 @@
   "DIALOG": {
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
-    "CLOSE": "Luk",
-    "DIALOG-CONFIRM": "Ja, slet",
-    "DELETE-SIGFOX-DEVICE" : "SigFox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter"
+    "CLOSE": "Annuller",
+    "DIALOG-CONFIRM": "Ja, slet"
   },
   "false": "Nej",
   "true": "Ja",
