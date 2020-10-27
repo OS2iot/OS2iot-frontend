@@ -17,6 +17,11 @@
                             routerLinkActive="active">{{ 'ORGANISATION-TABLE-ROW.EDIT' | translate }}
                         </a>
                     </li>
+                    <li class="dropdown-item">
+                        <a (click)="clickDelete(element)"
+                            [routerLink]="">{{ 'PERMISSION.TABLE-ROW.DELETE' | translate }}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

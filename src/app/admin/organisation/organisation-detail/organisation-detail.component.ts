@@ -11,6 +11,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { PermissionService } from '@app/admin/permission/permission.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -21,7 +22,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   isLoadingResults = true;
   resultsLength = 10;
 
-  public pageLimit: number = 10;
+  public pageLimit = 10;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
@@ -43,6 +44,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private applicationService: ApplicationService,
     private globalService: SharedVariableService,
     private permissionsService: PermissionService,
+    private location: Location
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -83,6 +85,14 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       this.pageOffset--;
     }
     this.getApplications();
+  }
+
+  clickDelete() {
+    this.organisationService.delete(this.organisation.id)
+      .subscribe(
+        (response) => {
+          this.location.back();
+        });
   }
 
   nextPage() {
