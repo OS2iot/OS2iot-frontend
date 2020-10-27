@@ -8,6 +8,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { AlertComponent } from './components/alert/alert.component';
 import { BatteriStatusComponent } from './components/batteri-status/batteri-status.component';
 import { MapComponent } from './components/map/map.component';
+import { NGMaterialModule } from './Modules/materiale.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MapComponent } from './components/map/map.component';
   imports: [
     DirectivesModule,
     CommonModule,
+    NGMaterialModule
   ],
   exports: [
     AlertComponent,

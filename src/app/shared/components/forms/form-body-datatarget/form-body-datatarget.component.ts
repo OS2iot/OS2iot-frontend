@@ -15,6 +15,8 @@ import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SaveSnackService } from '@shared/services/save-snack.service';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -49,7 +51,8 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     private location: Location,
     private applicationService: ApplicationService,
     private payloadDecoderService: PayloadDecoderService,
-    private payloadDeviceDataTargetService: PayloadDeviceDatatargetService
+    private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
+    private saveSnackService: SaveSnackService
   ) { }
 
   ngOnInit(): void {
@@ -144,7 +147,8 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   countToRedirect() {
     this.counter -= 1;
     if (this.counter === 0) {
-      this.location.back();
+      this.showSavedSnack();
+      this.routeBack();
     }
   }
 
@@ -162,6 +166,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.datatargetid = response.id;
         this.datatarget.id = response.id;
+        this.showSavedSnack();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -230,6 +235,10 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse);
       });
+  }
+
+  showSavedSnack() {
+    this.saveSnackService.showSavedSnack();
   }
 
   ngOnDestroy(): void {
