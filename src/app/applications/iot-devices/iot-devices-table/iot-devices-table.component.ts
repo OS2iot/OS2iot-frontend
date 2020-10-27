@@ -44,7 +44,6 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     ngOnInit(): void {
-        this.batteryStatusPercentage = this.getBatteryProcentage();
         this.getDevices();
     }
 
@@ -53,8 +52,8 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         this.dataSource.sort = this.sort;
     }
 
-    getBatteryProcentage(): number {
-        const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device?.lorawanSettings?.deviceStatusMargin) * 100);
+    public getBatteryProcentage(device: IotDevice): number {
+        const percentage = Math.round((device?.lorawanSettings?.deviceStatusBattery / device?.lorawanSettings?.deviceStatusMargin) * 100);
         return percentage;
     }
 

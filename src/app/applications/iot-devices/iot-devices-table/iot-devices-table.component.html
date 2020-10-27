@@ -34,7 +34,7 @@
       </th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="element.type === 'LORAWAN'; else noBatteryStatus">
-          <app-batteri-status [color]="batteryStatusColor" [percentage]="batteryStatusPercentage">
+          <app-batteri-status [color]="batteryStatusColor" [percentage]="getBatteryProcentage(element)">
           </app-batteri-status>
         </div>
         <ng-template #noBatteryStatus>
