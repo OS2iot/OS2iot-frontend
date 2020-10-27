@@ -9,25 +9,29 @@ import { AlertComponent } from './components/alert/alert.component';
 import { BatteriStatusComponent } from './components/batteri-status/batteri-status.component';
 import { MapComponent } from './components/map/map.component';
 import { NGMaterialModule } from './Modules/materiale.module';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     LoadingSpinnerComponent,
     BatteriStatusComponent,
-    MapComponent
+    MapComponent,
+    DeleteDialogComponent
   ],
   imports: [
     DirectivesModule,
     CommonModule,
-    NGMaterialModule
+    NGMaterialModule,
+    TranslateModule
   ],
   exports: [
     AlertComponent,
     TranslateModule,
     LoadingSpinnerComponent,
     BatteriStatusComponent,
-    MapComponent
+    MapComponent,
+    DeleteDialogComponent
   ],
 })
 export class SharedModule { }

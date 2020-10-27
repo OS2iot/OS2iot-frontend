@@ -15,8 +15,9 @@ import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SaveSnackService } from '@shared/services/save-snack.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -52,7 +53,8 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     private applicationService: ApplicationService,
     private payloadDecoderService: PayloadDecoderService,
     private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
-    private saveSnackService: SaveSnackService
+    private saveSnackService: SaveSnackService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +79,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     this.payloadDeviceDatatarget.push({ id: null, iotDeviceIds: [], payloadDecoderId: null, dataTargetId: this.datatargetid });
   }
 
-  deleteRow(index) {
+  private deleteRow(index) {
     if (this.payloadDeviceDatatarget.length === 0) {
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
@@ -87,6 +89,17 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
           this.payloadDeviceDatatarget.splice(index, 1);
         });
     }
+  }
+
+  openDeleteDialog(index) {
+    const dialog = this.dialog.open(DeleteDialogComponent, {});
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteRow(index);
+        console.log(`Dialog result: ${result}`);
+      }
+    });
   }
 
   onSubmit(): void {

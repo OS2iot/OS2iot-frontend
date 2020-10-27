@@ -603,6 +603,12 @@
   "ERROR": {
     "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
   },
+  "DIALOG": {
+    "SAVE.TITLE": "Slet",
+    "DELETE.MESSAGE": "Vil du slette?",
+    "CLOSE": "Annuller",
+    "DIALOG-CONFIRM": "Ja, slet"
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",
