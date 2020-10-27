@@ -37,6 +37,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
+  private counter: number;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
@@ -99,10 +100,12 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   }
 
   updateDatatarget() {
+    this.counter = this.counter === undefined ? 1 : this.counter + 1;
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
           this.datatarget = this.mapToDatatarget(datatargetResponse);
+          this.countToRedirect();
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -112,11 +115,13 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   }
 
   addPayloadDeviceDatatarget() {
+    this.counter = this.counter === undefined ? this.payloadDeviceDatatarget.length : this.counter + this.payloadDeviceDatatarget.length;
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
           (response) => {
             console.log(response);
+            this.countToRedirect();
           },
           (error) => {
             this.handleError(error);
@@ -126,6 +131,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         this.payloadDeviceDataTargetService.post(relation).subscribe(
           (res: any) => {
             console.log(res);
+            this.countToRedirect();
           },
           (error) => {
             this.handleError(error);
@@ -133,6 +139,13 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  countToRedirect() {
+    this.counter -= 1;
+    if (this.counter === 0) {
+      this.location.back();
+    }
   }
 
   getPayloadDeviceDatatarget(id: number) {
