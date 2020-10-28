@@ -18,6 +18,7 @@ import { SharedVariableModule } from '@shared/shared-variable/shared-variable.mo
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
+import { DeviceModelModule } from './device-model/device-model.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');

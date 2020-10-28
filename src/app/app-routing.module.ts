@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule) },
     { path: 'payload-decoder', loadChildren: () => import('./payload-decoder/payload-decoder.module').then(m => m.PayloadDecoderModule) },
     { path: 'sigfox', loadChildren: () => import('./sigfox/sigfox.module').then(m => m.SigfoxModule) },
+    { path: 'device-model', loadChildren: () => import('./device-model/device-model.module').then(m => m.DeviceModelModule) },
     { path: 'search', component: SearchComponent },
     { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not found!' } },
     { path: '', redirectTo: '/auth', pathMatch: 'full' },

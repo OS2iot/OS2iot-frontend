@@ -19,6 +19,12 @@
         </a>
         <fa-icon [icon]="faToolbox" class="navbar-icon"></fa-icon>
     </li>
+    <li>
+        <a routerLink="/device-model" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
+            {{'NAV.DEVICE-MODEL' | translate}}
+        </a>
+        <fa-icon [icon]="faBurn" class="navbar-icon"></fa-icon>
+    </li>
     <div *ngIf="user && isOrgAdmin">
         <li class="nav-item">
             <a routerLink="/admin/users" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
