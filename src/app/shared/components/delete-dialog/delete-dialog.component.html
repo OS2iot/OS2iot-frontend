@@ -1,15 +1,17 @@
 <h1 mat-dialog-title>{{'DIALOG.SAVE.TITLE' | translate}}</h1>
 <div mat-dialog-content>
-    {{'DIALOG.DELETE.MESSAGE' | translate}}
+    {{dialogModel.message}}
 </div>
 <div mat-dialog-actions>
     <button click="close()" 
+        *ngIf="dialogModel.showCancel" 
         mat-button 
         mat-dialog-close 
         class="btn btn-primary ml-2">
             {{'DIALOG.CLOSE' | translate}}
     </button>
-    <button 
+    <button
+        *ngIf="dialogModel.showAccept" 
         [mat-dialog-close]="true" 
         mat-button
         mat-dialog-close 

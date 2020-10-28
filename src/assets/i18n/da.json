@@ -606,14 +606,14 @@
   "DIALOG": {
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
-    "CLOSE": "Annuller",
-    "DIALOG-CONFIRM": "Ja, slet"
+    "CLOSE": "Luk",
+    "DIALOG-CONFIRM": "Ja, slet",
+    "DELETE-SIGFOX-DEVICE" : "SigFox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter"
   },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",
   "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
   "GENERIC_HTTP": "Generisk HTTP",
-  "LORAWAN": "LoRaWAN",
-  "SIGFOX": "SigFox"
+  "LORAWAN": "LoRaWAN"
 }

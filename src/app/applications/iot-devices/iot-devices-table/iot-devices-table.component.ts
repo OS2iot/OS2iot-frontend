@@ -11,6 +11,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { IoTDeviceService } from '../iot-device.service';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { DeviceType } from '@shared/enums/device-type';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -39,6 +42,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         private restService: RestService,
         public translate: TranslateService,
         public iotDeviceService: IoTDeviceService,
+        private dialog: MatDialog
     ) {
         translate.use('da');
     }
@@ -81,13 +85,27 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     clickDelete(element: any) {
-        this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.deleteDevice.emit(element.id);
-                this.getDevices();
-            }
-        });
+        if (element.type == DeviceType.SIGFOX) {
+            this.showSigfoxDeleteDialog();
+          } else {
+            this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
+                if (response.ok && response.body.affected > 0) {
+                    this.deleteDevice.emit(element.id);
+                    this.getDevices();
+                }
+            });
+          }
     }
+
+    showSigfoxDeleteDialog() {
+        const dialog = this.dialog.open(DeleteDialogComponent, {
+          data: {
+            message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
+            showAccept: false,
+            showCancel: true
+          }
+        });
+      }
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing

@@ -18,6 +18,7 @@ import { DirectivesModule } from '@shared/directives/directives.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
