@@ -1,18 +1,4 @@
-<div class="col-md-4">
-    <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
-    <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
-</div>
-<div class="col-md-4">
-    <h4>{{ 'IOT-TABLE.BATTERY' | translate }}</h4>
-    <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
-        [percentage]="batteryStatusPercentage"></app-batteri-status>
-    <ng-template #noBatteryStatus>
-        <div>
-            {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
-        </div>
-    </ng-template>
-</div>
-<div class="col-md-4 order-first order-md-last ">
+<div class="col-md-12 order-first order-md-last ">
     <div class="btn-group float-md-right dropdown">
         <button type="button" id="dropdown-{{ device.name }}" class="btn btn-primary dropdown-toggle"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,6 +15,20 @@
             </li>
         </ul>
     </div>
+</div>
+<div class="col-md-4">
+    <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
+    <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
+</div>
+<div class="col-md-4">
+    <h4>{{ 'IOT-TABLE.BATTERY' | translate }}</h4>
+    <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
+        [percentage]="batteryStatusPercentage"></app-batteri-status>
+    <ng-template #noBatteryStatus>
+        <div>
+            {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
+        </div>
+    </ng-template>
 </div>
 <h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
 <div *ngIf="device.comment; then thenBlock else elseBlock"></div>
