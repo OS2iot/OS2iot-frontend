@@ -111,6 +111,7 @@
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
     "NAME": "Datatarget navn",
+    "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder navn:",
