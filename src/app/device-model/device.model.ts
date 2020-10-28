@@ -6,7 +6,7 @@ import { SupportedProtocol } from './Enums/supported-protocol.enum';
 import { Unit } from './Enums/unit.enum';
 
 
-export class NgsildModel {
+export class DeviceModel {
     name: string;
     id: string;
     private type = 'DeviceModel';
