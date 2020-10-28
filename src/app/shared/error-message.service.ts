@@ -38,7 +38,10 @@ export class ErrorMessageService {
       errors.errorMessages.push(error.error.message);
     } else {
         error.error.message.forEach((err) => {
-            if (err.property === 'lorawanSettings' || err.property === 'sigfoxSettings') {
+            if (
+              err.property === 'lorawanSettings' ||
+              err.property === 'sigfoxSettings' ||
+              err.property === 'gateway') {
                 err.children.forEach(element => {
                   errors.errorFields.push(element.property);
                   errors.errorMessages = errors.errorMessages.concat(

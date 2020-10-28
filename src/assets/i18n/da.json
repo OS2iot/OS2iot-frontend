@@ -480,7 +480,8 @@
     "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
     "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
     "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
-    "IS-USED": "Profilen kan ikke slettes da den er i brug."
+    "IS-USED": "Profilen kan ikke slettes da den er i brug.",
+    "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
