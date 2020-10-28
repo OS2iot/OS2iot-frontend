@@ -4,7 +4,7 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { AuthService } from '@app/auth/auth.service';
-import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faIdCard, faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faIdCard, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
@@ -23,6 +23,7 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   faUsers = faUsers;
   faIdBadge = faIdBadge;
   faToolbox = faToolbox;
+  faBurn = faBurn;
 
 
   constructor(

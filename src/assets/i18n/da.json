@@ -30,7 +30,8 @@
     "SIGFOX-ADMIN": "Sigfox Administration",
     "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
     "SEARCH": "Søgeresultater",
-    "MENU-ITEM-MISC": "Generelt"
+    "MENU-ITEM-MISC": "Generelt",
+    "DEVICE-MODEL": "Device Model"
   },
   "SEARCH": {
     "ICON": "",

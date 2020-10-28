@@ -26,7 +26,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
     TranslateModule,
     FontAwesomeModule,
     NGMaterialModule,
-    InlineSVGModule
+    InlineSVGModule,
 
   ],
   exports: [NavbarComponent],
