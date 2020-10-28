@@ -53,13 +53,13 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
         )
       ) {
         this.setSelectedOrganisation(response.organizations[0].id);
-        this.isOrganisationAdmin(response.organizations[0].id);
       }
+      this.isOrganisationAdmin(response.organizations[0].id);
     });
   }
 
   private isOrganisationAdmin(orgId: number) {
-    this.isOrgAdmin = this.user?.permissions?.some(x => x.type === PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+    this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
     console.log(this.isOrgAdmin);
   }
 
