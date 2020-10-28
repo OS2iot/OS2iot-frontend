@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../permission.service';
 import { PermissionRequest, PermissionType } from '../permission.model';
@@ -14,9 +14,6 @@ import { UserResponse } from '../../users/user.model';
 import { ApplicationService } from '@applications/application.service';
 import { Application } from '@applications/application.model';
 import { BackButton } from '@shared/models/back-button.model';
-import { MatSelect } from '@angular/material/select';
-import { take, takeUntil } from 'rxjs/operators';
-import { User } from '@shared/components/forms/form-body-application/form-body-application.component';
 import { ErrorMessageService } from '@shared/error-message.service';
 
 @Component({
@@ -53,7 +50,7 @@ export class PermissionEditComponent implements OnInit {
     private applicationService: ApplicationService,
     private location: Location,
     private errormEssageService: ErrorMessageService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -199,7 +196,7 @@ export class PermissionEditComponent implements OnInit {
   isOrganizationAdministrationPermission() {
     return (
       this.permission.level ==
-      PermissionType.OrganizationApplicationPermissions ||
+        PermissionType.OrganizationApplicationPermissions ||
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );
