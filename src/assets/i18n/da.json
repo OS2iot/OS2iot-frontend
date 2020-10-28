@@ -376,6 +376,24 @@
         "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
         "CHOOSE-CONTRACT": "Vælg en kontrakt"
       }
+    },
+    "DEVICE-MODEL": {
+      "GIVE-NAME": "Angiv navn",
+      "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
+      "GIVE-ID": "Angiv Id",
+      "GIVE-ID-PLACEHOLDER": "Angiv Id",
+      "GIVE-BRANDNAME": "Angiv mærket",
+      "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
+      "GIVE-MODELNAME": "Angiv model navnet",
+      "GIVE-MODELNAME-PLACEHOLDER": "Angiv model navnet",
+      "GIVE-MANUFACTURERNAME": "Angiv producentens navn",
+      "GIVE-MANUFACTURERNAME-PLACEHOLDER": "Angiv producentens navn",
+      "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber",
+      "SELECT-CATEGORY": "Vælg kategori",
+      "SELECT-SUPPORTEDUNITS": "Vælg Målenheder",
+      "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner",
+      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen",
+      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller"
     }
   },
   "QUESTION-LORA-GATEWAY": {
