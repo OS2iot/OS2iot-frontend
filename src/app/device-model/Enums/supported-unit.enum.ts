@@ -1,4 +1,4 @@
-export enum Unit {
+export enum SupportedUnit {
     TWO8 = 'kg/m²',
     TWON = 'dB',
     FOURH = 'µm',
