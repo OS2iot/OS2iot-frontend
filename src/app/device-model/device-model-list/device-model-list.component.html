@@ -1,1 +1,9 @@
-<p>device-model-list works!</p>
+<app-top-bar [title]="'NAV.DEVICE-MODEL' | translate"
+  [ctaLabel]="'FORM.CREATE-NEW-DEVICE-MODEL' | translate" [ctaRouterLink]="'gateway-edit'">
+</app-top-bar>
+
+<div class="m-md-4 p-md-3">
+    <app-device-model-table></app-device-model-table>
+</div>
+
+

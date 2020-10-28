@@ -6,6 +6,7 @@
     "DELETE": "Slet",
     "BACK": "Tilbage",
     "EDIT": "Redigér",
+    "DELETE": "Slet",
     "APPLICATION": "Applikation",
     "HTTP": "Generisk HTTP",
     "SAVE": "Gem"
@@ -145,6 +146,10 @@
     "LAST-SEEN-AT": "Seneste aktivitet",
     "STATUS": "Status"
   },
+  "DEVICE-MODEL": {
+    "ID": "Id",
+    "NAME": "Navn"
+  },
   "LORA-GATEWAY-TABLE-ROW": {
     "SHOW-OPTIONS": "Håndter Gateway"
   },
@@ -262,6 +267,7 @@
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
+    "CREATE-NEW-DEVICE-MODEL": "Opret ny Device Model",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
     "EDIT-DATATARGET": "Redigér datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
