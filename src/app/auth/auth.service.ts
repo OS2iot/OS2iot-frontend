@@ -26,6 +26,8 @@ export class AuthService {
   private baseUrl = environment.baseUrl;
   private URL = 'auth/login';
 
+  private readonly LOCAL_STORAGE_JWT_LOCATION = 'id_token';
+
   constructor(private http: HttpClient, private restService: RestService) {}
 
   // global-admin@os2iot.dk
@@ -50,11 +52,22 @@ export class AuthService {
   }
 
   setSession(jwt: string) {
-    localStorage.setItem('id_token', jwt);
+    localStorage.setItem(this.LOCAL_STORAGE_JWT_LOCATION, jwt);
+  }
+
+  getJwt() {
+    return localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+  }
+
+  isLoggedInWithKombit() {
+    const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+
+    const token = this.getDecodedAccessToken(jwt);
+    return token?.isKombit == true;
   }
 
   logout() {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem(this.LOCAL_STORAGE_JWT_LOCATION);
   }
 
   public isLoggedIn() {
@@ -64,7 +77,7 @@ export class AuthService {
   }
 
   getExpiration() {
-    const jwt = localStorage.getItem('id_token');
+    const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
 
     if (!jwt) {
       return moment(0);

@@ -17,6 +17,7 @@ export class AuthComponent implements OnInit {
   public formFailedSubmit = false;
   isLoginMode = true;
   isLoading = false;
+  isKombit = false;
   error: string = null;
 
   constructor(

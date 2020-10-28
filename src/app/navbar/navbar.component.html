@@ -56,7 +56,9 @@
           </ul>
         </li>
         <li class="nav-item py-2 ">
-          <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()">Logout</a>
+          <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
+            [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+            target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">Logout</a>
           <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
         </li>
       </ul>
