@@ -3,7 +3,7 @@ import { DeviceCategory } from './Enums/device-category.enum';
 import { DeviceFunction } from './Enums/device-function.enum';
 import { EnergyLimitationClass } from './Enums/energy-limitation-class.enum';
 import { SupportedProtocol } from './Enums/supported-protocol.enum';
-import { Unit } from './Enums/unit.enum';
+import { SupportedUnit } from './Enums/supported-unit.enum';
 
 
 export class DeviceModel {
@@ -15,7 +15,7 @@ export class DeviceModel {
     manufacturerName: string;
     controlledProperty: ControlledPropperty;
     category: DeviceCategory;
-    supportedUnits: Unit;
+    supportedUnits: SupportedUnit;
     function: DeviceFunction;
     energyLimitationClass: EnergyLimitationClass;
     supportedProtocol: SupportedProtocol;
