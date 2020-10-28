@@ -21,7 +21,7 @@
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
       <label class="form-label"
-        for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>*
+        for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>
       <textarea id="decodingFunction" name="decodingFunction" [rows]="20" class="form-control"
         [(ngModel)]="payloadDecoderBody"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('decodingFunction'), 'is-valid' : formFailedSubmit && !errorFields.includes('decodingFunction')}"></textarea>
