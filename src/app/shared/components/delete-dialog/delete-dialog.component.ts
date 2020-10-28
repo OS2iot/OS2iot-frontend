@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogModel } from './dialog.model';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -11,7 +13,8 @@ export class DeleteDialogComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    public dialog: MatDialogRef<DeleteDialogComponent>) {
+    public dialog: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogModel: DialogModel) {
       this.translate.use('da');
    }
 

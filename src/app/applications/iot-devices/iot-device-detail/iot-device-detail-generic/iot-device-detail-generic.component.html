@@ -1,68 +1,66 @@
-<div class="row" *ngIf="device">
-    <div class="col-md-4">
-        <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
-        <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
-    </div>
-    <div class="col-md-4">
-        <h4>{{ 'IOT-TABLE.BATTERY' | translate }}</h4>
-        <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
-            [percentage]="batteryStatusPercentage"></app-batteri-status>
-        <ng-template #noBatteryStatus>
-            <div>
-                {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
-            </div>
-        </ng-template>
-    </div>
-    <div class="col-md-4 order-first order-md-last ">
-        <div class="btn-group float-md-right dropdown">
-            <button type="button" id="dropdown-{{ device.name }}" class="btn btn-primary dropdown-toggle"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ device.name }}">
-                <li class="dropdown-item">
-                    <a [routerLink]="['../../iot-device-edit', this.device.id]">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}
-                    </a>
-                </li>
-                <li class="dropdown-item">
-                    <a (click)="clickDelete()">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}
-                    </a>
-                </li>
-            </ul>
+<div class="col-md-4">
+    <h4>{{ 'IOTDEVICE.TYPE' | translate }}</h4>
+    <p class="mb-5">{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}</p>
+</div>
+<div class="col-md-4">
+    <h4>{{ 'IOT-TABLE.BATTERY' | translate }}</h4>
+    <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
+        [percentage]="batteryStatusPercentage"></app-batteri-status>
+    <ng-template #noBatteryStatus>
+        <div>
+            {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
         </div>
-    </div>
-    <h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
-    <div *ngIf="device.comment; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-        <p class="mb-5">{{device.comment}}</p>
-    </ng-template>
-    <ng-template #elseBlock>
-        <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENT' | translate}}</p>
-    </ng-template>
-
-    <h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
-    <div *ngIf="device.location; else locationElseBlock">
-        <app-map [coordinates]="getCoordinates()"></app-map>
-        <div class="row mb-5">
-            <div class="col-6">
-                <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
-                <p>{{longitude}}</p>
-            </div>
-            <div class="col-6">
-                <h6>{{ 'IOTDEVICE.LATITUDE' | translate }}</h6>
-                <p>{{latitude}}</p>
-            </div>
-        </div>
-    </div>
-    <ng-template #locationElseBlock>
-        <p class="mb-5">{{ 'IOTDEVICE.NOLOCATION' | translate}}</p>
-    </ng-template>
-
-    <h4>{{ 'IOTDEVICE.COMMENTONLOCATION' | translate }}</h4>
-    <div *ngIf="device.commentOnLocation; else locationCommentElseBlock">
-        <p class="mb-5">{{device.commentOnLocation}}</p>
-    </div>
-    <ng-template #locationCommentElseBlock>
-        <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}</p>
     </ng-template>
 </div>
+<div class="col-md-4 order-first order-md-last ">
+    <div class="btn-group float-md-right dropdown">
+        <button type="button" id="dropdown-{{ device.name }}" class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ device.name }}">
+            <li class="dropdown-item">
+                <a [routerLink]="['../../iot-device-edit', this.device.id]">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}
+                </a>
+            </li>
+            <li class="dropdown-item">
+                <a (click)="clickDelete()">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<h4>{{ 'IOTDEVICE.COMMENT' | translate }}</h4>
+<div *ngIf="device.comment; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <p class="mb-5">{{device.comment}}</p>
+</ng-template>
+<ng-template #elseBlock>
+    <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENT' | translate}}</p>
+</ng-template>
+
+<h4>{{ 'IOTDEVICE.LOCATION' | translate }}</h4>
+<div *ngIf="device.location; else locationElseBlock">
+    <app-map [coordinates]="getCoordinates()"></app-map>
+    <div class="row mb-5">
+        <div class="col-6">
+            <h6>{{ 'IOTDEVICE.LONGITUDE' | translate }}</h6>
+            <p>{{longitude}}</p>
+        </div>
+        <div class="col-6">
+            <h6>{{ 'IOTDEVICE.LATITUDE' | translate }}</h6>
+            <p>{{latitude}}</p>
+        </div>
+    </div>
+</div>
+<ng-template #locationElseBlock>
+    <p class="mb-5">{{ 'IOTDEVICE.NOLOCATION' | translate}}</p>
+</ng-template>
+
+<h4>{{ 'IOTDEVICE.COMMENTONLOCATION' | translate }}</h4>
+<div *ngIf="device.commentOnLocation; else locationCommentElseBlock">
+    <p class="mb-5">{{device.commentOnLocation}}</p>
+</div>
+<ng-template #locationCommentElseBlock>
+        <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}</p>
+</ng-template>
