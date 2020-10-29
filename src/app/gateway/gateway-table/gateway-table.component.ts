@@ -7,9 +7,9 @@ import { Gateway } from '../gateway.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 
 @Component({
@@ -40,9 +40,11 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   deleteGateway = new EventEmitter();
 
   private gatewaySubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     private chirpstackGatewayService: ChirpstackGatewayService,
+    private deleteDialogService: DeleteDialogService,
     public translate: TranslateService) {
     this.translate.use('da');
     moment.locale('da');
@@ -99,18 +101,29 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   }
 
   clickDelete(element: any) {
-    this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
-      if (response.ok && response.body.success === true) {
-        this.deleteGateway.emit(element.id);
-        this.getLoraGateways();
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+      (response) => {
+        if (response) {
+          this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
+            if (response.ok && response.body.success === true) {
+              this.getLoraGateways();
+            }
+          });
+        } else {
+          console.log(response);
+        }
       }
-    });
+    );
+
   }
 
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     if (this.gatewaySubscription) {
       this.gatewaySubscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 

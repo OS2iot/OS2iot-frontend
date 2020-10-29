@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -24,12 +25,14 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     public dataSource = new MatTableDataSource<GatewayStats>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();
+    private deleteDialogSubscription: Subscription;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
         private route: ActivatedRoute,
         private translate: TranslateService,
         private router: Router,
+        private deleteDialogService: DeleteDialogService
     ) { }
 
     ngOnInit(): void {
@@ -71,20 +74,27 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     onDeleteGateway() {
-        console.log('delete');
-        const id = this.gateway.id;
-        this.gatewayService.delete(id).subscribe((response) => {
-            if (response.ok && response.body.success === true) {
-                this.deleteGateway.emit(id);
-
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            (response) => {
+              if (response) {
+                this.gatewayService.delete(this.gateway.id).subscribe((response) => {
+                    if (response.ok && response.body.success === true) {
+                    }
+                });
+                this.router.navigate(['gateways']);
+              } else {
+                console.log(response);
+              }
             }
-        });
-        this.router.navigate(['gateways']);
+        );
     }
 
     ngOnDestroy() {
         if (this.gatewaySubscription) {
             this.gatewaySubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 }

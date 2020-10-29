@@ -15,11 +15,11 @@
                 <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ gateway.name }}">
                     <li class="dropdown-item">
                         <a [routerLink]="['../../gateway-edit', this.gateway.id]"
-                            routerLinkActive="active">{{ 'LORA-GATEWAY-TABLE-ROW.EDIT' | translate }}
+                            routerLinkActive="active">{{ 'GEN.EDIT' | translate }}
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a [routerLink]="" (click)="onDeleteGateway()">{{ 'LORA-GATEWAY-TABLE-ROW.DELETE' | translate }}
+                        <a [routerLink]="" (click)="onDeleteGateway()">{{ 'GEN.DELETE' | translate }}
                         </a>
                     </li>
                 </ul>
