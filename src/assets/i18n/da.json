@@ -3,6 +3,7 @@
     "CANCEL": "Annuller",
     "SHOW": "Vis",
     "PER-PAGE": "Per side",
+    "DELETE": "Slet",
     "BACK": "Tilbage",
     "EDIT": "Redigér",
     "APPLICATION": "Applikation",
@@ -142,8 +143,6 @@
     "STATUS": "Status"
   },
   "LORA-GATEWAY-TABLE-ROW": {
-    "DELETE": "Slet Gateway",
-    "EDIT": "Redigér",
     "SHOW-OPTIONS": "Håndter Gateway"
   },
   "LORA-GATEWAY": {
