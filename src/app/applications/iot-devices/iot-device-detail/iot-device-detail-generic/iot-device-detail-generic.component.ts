@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,24 +6,28 @@ import { Location } from '@angular/common';
 import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { Subscription } from 'rxjs';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
   templateUrl: './iot-device-detail-generic.component.html',
   styleUrls: ['./iot-device-detail-generic.component.scss']
 })
-export class IotDeviceDetailGenericComponent implements OnInit, OnChanges {
+export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDestroy {
   batteryStatusColor = 'green';
   batteryStatusPercentage: number;
   @Input() device: IotDevice;
   @Input() latitude = 0;
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     private translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
     private location: Location,
+    private deleteDialogService: DeleteDialogService,
     private dialog: MatDialog
   ) { }
 
@@ -39,10 +43,19 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges {
     if (this.device.type == DeviceType.SIGFOX) {
       this.showSigfoxDeleteDialog();
     } else {
-      this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe((response) => {
-        this.deleteDevice.emit(this.device.id);
-      });
-      this.routeBack();
+      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        (response) => {
+          if (response) {
+            this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(
+                (response) => {
+                  this.routeBack();
+              }
+            );
+          } else {
+            console.log(response);
+          }
+        }
+      );
     }
   }
 
@@ -72,6 +85,12 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges {
   getBatteryProcentage(): number {
     const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device?.lorawanSettings?.deviceStatusMargin) * 100);
     return percentage;
+  }
+
+  ngOnDestroy(): void {
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
 
 }

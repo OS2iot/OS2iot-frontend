@@ -14,6 +14,7 @@ import { IoTDeviceService } from '../iot-device.service';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -34,12 +35,14 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     resultsLength = 0;
     isLoadingResults = true;
     deleteDevice = new EventEmitter();
+    private deleteDialogSubscription: Subscription;
 
     @Input() application: Application;
     private applicationSubscription: Subscription;
 
     constructor(
         private restService: RestService,
+        private deleteDialogService: DeleteDialogService,
         public translate: TranslateService,
         public iotDeviceService: IoTDeviceService,
         private dialog: MatDialog
@@ -88,12 +91,19 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         if (element.type == DeviceType.SIGFOX) {
             this.showSigfoxDeleteDialog();
           } else {
-            this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
-                if (response.ok && response.body.affected > 0) {
-                    this.deleteDevice.emit(element.id);
-                    this.getDevices();
+            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+                (response) => {
+                    if (response) {
+                        this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
+                            if (response.ok && response.body.affected > 0) {
+                                this.getDevices();
+                            }
+                        });
+                    } else {
+                        console.log(response);
+                    }
                 }
-            });
+            );
           }
     }
 
@@ -111,6 +121,9 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         // prevent memory leak by unsubscribing
         if (this.applicationSubscription) {
             this.applicationSubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 }

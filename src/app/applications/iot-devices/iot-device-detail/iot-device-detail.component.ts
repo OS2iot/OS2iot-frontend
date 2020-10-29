@@ -76,8 +76,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
     }
 
-
-
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
         if (this.iotDeviceSubscription) {
