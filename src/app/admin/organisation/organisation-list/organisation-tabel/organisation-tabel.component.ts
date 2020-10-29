@@ -4,6 +4,7 @@ import { OrganisationService } from '@app/admin/organisation/organisation.servic
 import { Subscription } from 'rxjs';
 import { OrganisationResponse } from '../../organisation.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
     selector: 'app-organisation-tabel',
@@ -23,8 +24,11 @@ export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy 
     public pageTotal: number;
     subscription: Subscription;
     deleteOrganisation = new EventEmitter();
+    private deleteDialogSubscription: Subscription;
 
-    constructor(private organisationService: OrganisationService) { }
+    constructor(
+        private organisationService: OrganisationService,
+        private deleteDialogService: DeleteDialogService) { }
 
     ngOnInit(): void {
         this.getOrganisations();
@@ -39,6 +43,9 @@ export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy 
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
+        }
     }
 
     getOrganisations() {
@@ -52,12 +59,18 @@ export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     clickDelete(element: any) {
-        console.log('delete:', element.id);
-        this.organisationService.delete(element.id).subscribe((response) => {
-            if (response.ok) {
-                this.deleteOrganisation.emit(element.id);
-                this.getOrganisations();
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            (response) => {
+              if (response) {
+                this.organisationService.delete(element.id).subscribe((response) => {
+                    if (response.ok) {
+                        this.getOrganisations();
+                    }
+                });
+              } else {
+                console.log(response);
+              }
             }
-        });
+          );
     }
 }

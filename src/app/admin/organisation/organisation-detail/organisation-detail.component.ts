@@ -12,6 +12,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Location } from '@angular/common';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -27,6 +28,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   public pageOffset = 0;
   public applications: Application[];
   private applicationsSubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
   organisation: OrganisationResponse;
   public backButton: BackButton = {
@@ -44,6 +46,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private applicationService: ApplicationService,
     private globalService: SharedVariableService,
     private permissionsService: PermissionService,
+    private deleteDialogService: DeleteDialogService,
     private location: Location
   ) { }
 
@@ -68,6 +71,9 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
     }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
 
   private getOrganisation(id: number) {
@@ -88,11 +94,19 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   }
 
   clickDelete() {
-    this.organisationService.delete(this.organisation.id)
-      .subscribe(
-        (response) => {
-          this.location.back();
-        });
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+      (response) => {
+        if (response) {
+          this.organisationService.delete(this.organisation.id)
+            .subscribe(
+              (response) => {
+                this.location.back();
+              });
+        } else {
+          console.log(response);
+        }
+      }
+    );
   }
 
   nextPage() {
