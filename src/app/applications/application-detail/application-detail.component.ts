@@ -4,9 +4,8 @@ import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
-import { QuickActionButton } from '@shared/models/quick-action-button.model';
-import { Sort } from '@shared/models/sort.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,6 +16,7 @@ import { Subscription } from 'rxjs';
 export class ApplicationDetailComponent implements OnInit, OnDestroy {
     @Output() deleteApplication = new EventEmitter();
     public applicationsSubscription: Subscription;
+    private deleteDialogSubscription: Subscription;
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     private id: number;
@@ -28,7 +28,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
         public translate: TranslateService,
-        public router: Router
+        public router: Router,
+        private deleteDialogService: DeleteDialogService
     ) { }
 
     ngOnInit(): void {
@@ -43,13 +44,20 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     onDeleteApplication() {
-        const id = this.application.id;
-        this.applicationService.deleteApplication(id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.deleteApplication.emit(id);
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            (response) => {
+              if (response) {
+                this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
+                    if (response.ok && response.body.affected > 0) {
+                        console.log('delete application with id:' + this.application.id.toString());
+                    }
+                });
+                this.router.navigate(['applications']);
+              } else {
+                console.log(response);
+              }
             }
-        });
-        this.router.navigate(['applications']);
+        );
     }
 
     onEditApplication() {
@@ -68,9 +76,11 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        // prevent memory leak by unsubscribing
         if (this.applicationsSubscription) {
             this.applicationsSubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 }

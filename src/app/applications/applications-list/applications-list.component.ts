@@ -4,17 +4,12 @@ import {
   OnChanges,
   SimpleChanges,
   OnDestroy,
-  ViewChild,
-  AfterViewInit,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { NavbarComponent } from '@app/navbar/navbar.component';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Sort } from '@shared/models/sort.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 
@@ -34,11 +29,13 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
   public pageOffset = 0;
   public applications: Application[];
   private applicationsSubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     public translate: TranslateService,
     private applicationService: ApplicationService,
-    private globalService: SharedVariableService
+    private globalService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService
   ) {
     translate.use('da');
   }
@@ -58,6 +55,9 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
     // prevent memory leak by unsubscribing
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 
@@ -80,11 +80,19 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getApplications();
-      }
-    });
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        (response) => {
+          if (response) {
+            this.applicationsSubscription = this.applicationService.deleteApplication(id).subscribe((response) => {
+              if (response.ok && response.body.affected > 0) {
+                this.getApplications();
+              }
+            });
+          } else {
+            console.log(response);
+          }
+        }
+      );
   }
 
   getCurrentOrganisationId(): number {
