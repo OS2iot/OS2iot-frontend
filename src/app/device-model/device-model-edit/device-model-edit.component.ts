@@ -8,7 +8,7 @@ import { DeviceCategory } from '../Enums/device-category.enum';
 import { DeviceFunction } from '../Enums/device-function.enum';
 import { EnergyLimitationClass } from '../Enums/energy-limitation-class.enum';
 import { SupportedProtocol } from '../Enums/supported-protocol.enum';
-import { SupportedUnit } from '../Enums/supported-unit.enum';
+import { SupportedUnit } from '../supported-unit.model';
 
 @Component({
   selector: 'app-device-model-edit',
@@ -25,7 +25,7 @@ export class DeviceModelEditComponent implements OnInit {
   public formFailedSubmit = false;
   controlledPropperties = [];
   categories = [];
-  supportedUnits = [];
+  supportedUnits = new SupportedUnit();
   deviceFunctions = [];
   energyLimitationClass = [];
   supportedProtocol = [];
@@ -47,10 +47,13 @@ export class DeviceModelEditComponent implements OnInit {
   mapEnumsToArray() {
     this.controlledPropperties = Object.values(ControlledPropperty);
     this.categories = Object.values(DeviceCategory);
-    this.supportedUnits = Object.values(SupportedUnit);
     this.deviceFunctions = Object.values(DeviceFunction);
     this.energyLimitationClass = Object.values(EnergyLimitationClass);
     this.supportedProtocol = Object.values(SupportedProtocol);
+  }
+
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
   }
 
   onSubmit() {

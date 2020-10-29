@@ -3,7 +3,7 @@ import { DeviceCategory } from './Enums/device-category.enum';
 import { DeviceFunction } from './Enums/device-function.enum';
 import { EnergyLimitationClass } from './Enums/energy-limitation-class.enum';
 import { SupportedProtocol } from './Enums/supported-protocol.enum';
-import { SupportedUnit } from './Enums/supported-unit.enum';
+import { SupportedUnit } from './supported-unit.model';
 
 
 export class DeviceModel {

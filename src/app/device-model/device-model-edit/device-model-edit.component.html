@@ -65,7 +65,8 @@
             <label class="form-label" for="controlledProperty">{{'QUESTION.DEVICE-MODEL.SELECT-CONTROLLEDPROPERTY' | translate}}</label>*
             <mat-select 
                 class="form-control"
-                multiple name="controlledProperty"
+                multiple [compareWith]="compare"
+                name="controlledProperty"
                 [(ngModel)]="deviceModel.controlledProperty">
                 <mat-option 
                     *ngFor="let control of controlledPropperties" 
@@ -98,12 +99,12 @@
             <mat-select 
                 class="form-control" 
                 name="supportedUnits"
-                multiple
+                multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.supportedUnits">
                 <mat-option 
-                    *ngFor="let unit of supportedUnits" 
-                    [value]="unit">
-                        {{unit}}
+                    *ngFor="let unit of supportedUnits.units" 
+                    [value]="unit.code">
+                        {{unit.name}}
                 </mat-option>
             </mat-select>
         </div>
@@ -115,7 +116,7 @@
             <mat-select 
                 class="form-control" 
                 name="devicefunction"
-                multiple
+                multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.function">
                 <mat-option 
                     *ngFor="let function of deviceFunctions" 
@@ -132,7 +133,7 @@
             <mat-select 
                 class="form-control" 
                 name="energyLimitationClass"
-                multiple
+                multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.energyLimitationClass">
                 <mat-option 
                     *ngFor="let elclass of energyLimitationClass" 
@@ -149,7 +150,7 @@
             <mat-select 
                 class="form-control" 
                 name="supportedProtocol"
-                multiple
+                multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.supportedProtocol">
                 <mat-option 
                     *ngFor="let protocol of supportedProtocol" 
