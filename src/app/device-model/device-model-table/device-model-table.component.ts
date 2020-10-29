@@ -22,7 +22,10 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<DeviceModel>([new DeviceModel()]);
+    const dm: DeviceModel = new DeviceModel();
+    dm.name = 'Linksys';
+    dm.id = 'QWE123';
+    this.dataSource = new MatTableDataSource<DeviceModel>([dm]);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.isLoadingResults = false;

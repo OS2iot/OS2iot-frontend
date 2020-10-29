@@ -7,16 +7,20 @@ import { SupportedUnit } from './supported-unit.model';
 
 
 export class DeviceModel {
-    name: string;
-    id: string;
+    name?: string;
+    id?: string;
     private type = 'DeviceModel';
-    brandName: string;
-    modelName: string;
-    manufacturerName: string;
-    controlledProperty: ControlledPropperty;
-    category: DeviceCategory;
-    supportedUnits: SupportedUnit;
-    function: DeviceFunction;
-    energyLimitationClass: EnergyLimitationClass;
-    supportedProtocol: SupportedProtocol;
+    brandName?: string;
+    modelName?: string;
+    manufacturerName?: string;
+    controlledProperty?: ControlledPropperty;
+    category?: DeviceCategory;
+    supportedUnits?: SupportedUnit;
+    function?: DeviceFunction;
+    energyLimitationClass?: EnergyLimitationClass;
+    supportedProtocol?: SupportedProtocol;
+
+    constructor() {
+        this.type = 'DeviceModel';
+    }
 }
