@@ -65,27 +65,27 @@ export class SearchTableComponent implements OnInit, OnChanges {
     }
   }
 
-  goToResult() {
-    if (this.searchResult.organizationId != null) {
+  goToResult(searchResult) {
+    if (searchResult.organizationId != null) {
       if (
         this.globalService.getSelectedOrganisationId() !==
-        this.searchResult.organizationId
+        searchResult.organizationId
       ) {
-        this.globalService.setValue(this.searchResult.organizationId);
+        this.globalService.setValue(searchResult.organizationId);
       }
     }
 
-    if (this.searchResult.type === SearchResultType.IoTDevice) {
+    if (searchResult.type === SearchResultType.IoTDevice) {
       this.router.navigate([
         '/applications',
-        this.searchResult.applicationId,
+        searchResult.applicationId,
         'iot-device',
-        this.searchResult.id,
+        searchResult.id,
       ]);
-    } else if (this.searchResult.type === SearchResultType.Application) {
-      this.router.navigate(['/applications', this.searchResult.id]);
-    } else if (this.searchResult.type === SearchResultType.Gateway) {
-      this.router.navigate(['/gateways/gateway-detail', this.searchResult.id]);
+    } else if (searchResult.type === SearchResultType.Application) {
+      this.router.navigate(['/applications', searchResult.id]);
+    } else if (searchResult.type === SearchResultType.Gateway) {
+      this.router.navigate(['/gateways/gateway-detail', searchResult.id]);
     }
   }
 
