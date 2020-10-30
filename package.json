@@ -32,7 +32,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "all": "0.0.0",
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.0.0-alpha1",
+    "bootstrap": "^5.0.0-alpha2",
     "file-saver": "^2.0.2",
     "guid-typescript": "^1.0.9",
     "jwt-decode": "^2.2.0",
