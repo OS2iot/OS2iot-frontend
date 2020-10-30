@@ -15,6 +15,7 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
 import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -25,7 +26,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    displayedColumns: string[] = ['name', 'technology', 'alarm', 'battery', 'active', 'menu'];
+    displayedColumns: string[] = ['name', 'technology', 'battery', 'active', 'menu'];
     public dataSource = new MatTableDataSource<IotDevice>();
     public iotDevices: IotDevice[];
 
@@ -76,6 +77,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
                 this.dataSource = new MatTableDataSource<IotDevice>(this.iotDevices);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+                this.dataSource.sortingDataAccessor = tableSorter;
                 this.isLoadingResults = false;
                 this.resultsLength = this.iotDevices.length;
             });

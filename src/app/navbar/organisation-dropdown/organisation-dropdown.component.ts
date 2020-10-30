@@ -60,7 +60,6 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
 
   private isOrganisationAdmin(orgId: number) {
     this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
-    console.log(this.isOrgAdmin);
   }
 
   public onChange(value) {

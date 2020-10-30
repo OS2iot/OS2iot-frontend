@@ -1,11 +1,11 @@
 <app-loading-spinner *ngIf=" isLoadingResults">
 </app-loading-spinner>
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header matSortActive="name" matSortDisableClear>
+      <th mat-sort-header="name" *matHeaderCellDef mat-header-cell>
         {{ 'APPLICATION-TABLE.NAME' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">
@@ -29,7 +29,7 @@
 
     <!-- Battery Column -->
     <ng-container matColumnDef="battery">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+      <th mat-sort-header="battery" *matHeaderCellDef mat-header-cell>
         {{ 'IOT-TABLE.BATTERY' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">
@@ -47,7 +47,7 @@
 
     <!-- Active Column -->
     <ng-container matColumnDef="active">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="active">
         {{ 'IOT-TABLE.ACTIVE' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">{{lastActive(element)}}</td>
