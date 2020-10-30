@@ -17,9 +17,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationService } from '@applications/application.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-applications-table',
@@ -73,9 +70,5 @@ export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChan
 
   navigateToEditPage() {
     this.router.navigate(['edit-application', this.application.id]);
-  }
-
-  onViewDetails(id) {
-    this.router.navigate([id], { relativeTo: this.route });
   }
 }

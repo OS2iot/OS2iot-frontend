@@ -9,7 +9,7 @@
                 {{ 'APPLICATION-TABLE.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-                <a (click)="onViewDetails(element.id)" routerLinkActive="active"
+                <a [routerLink]="['/applications', element.id]" routerLinkActive="active"
                     class="application-link">{{element.name}}</a>
             </td>
         </ng-container>
