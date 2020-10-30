@@ -1,7 +1,7 @@
 <app-loading-spinner *ngIf="isLoadingResults; else showContent">
 </app-loading-spinner>
 
-<div #showContent>
+<ng-template #showContent>
     <div class="m-md-4">
         <h3>{{'SEARCH.QUERY' | translate}} {{searchText}}</h3>
     </div>
@@ -74,7 +74,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator *ngIf="resultsLength" [pageSizeOptions]="[5, 10, 20]" [length]="resultsLength"
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="resultsLength"
             showFirstLastButtons></mat-paginator>
     </div>
-</div>
+</ng-template>

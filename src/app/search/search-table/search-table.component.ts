@@ -17,7 +17,6 @@ export class SearchTableComponent implements OnInit, OnChanges {
   faLayerGroup = faLayerGroup;
   faMicrochip = faMicrochip;
 
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
