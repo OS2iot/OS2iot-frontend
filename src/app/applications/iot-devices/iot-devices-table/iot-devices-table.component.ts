@@ -29,6 +29,8 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     public dataSource = new MatTableDataSource<IotDevice>();
     public iotDevices: IotDevice[];
 
+    private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
+
     batteryStatusColor = 'green';
     batteryStatusPercentage = 50;
     device: IotDevice;
@@ -60,8 +62,10 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     public getBatteryProcentage(device: IotDevice): number {
-        const percentage = Math.round((device?.lorawanSettings?.deviceStatusBattery / device?.lorawanSettings?.deviceStatusMargin) * 100);
-        return percentage;
+        if (device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
+          return null;
+        }
+        return Math.round(device?.lorawanSettings?.deviceStatusBattery);
     }
 
     getDevices(): void {

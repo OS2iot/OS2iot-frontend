@@ -1,4 +1,4 @@
-<div class="d-flex  align-items-center">
+<div *ngIf="isValid(); else noBatteryStatus" class="d-flex  align-items-center">
     <div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
         <ng-template [ngIf]="item.full == false">
             <div [ngStyle]="{ 'background-color': color, width: item.width, height: '15px' }"></div>
@@ -6,3 +6,4 @@
     </div>
     <span class="pl-3"> {{percentage}} %</span>
 </div>
+<ng-template #noBatteryStatus>{{ 'BATTERY.NOT_AVAILABLE' | translate }}</ng-template>

@@ -610,6 +610,9 @@
     "CLOSE": "Annuller",
     "DIALOG-CONFIRM": "Ja, slet"
   },
+  "BATTERY": {
+    "NOT_AVAILABLE": "N/A"
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

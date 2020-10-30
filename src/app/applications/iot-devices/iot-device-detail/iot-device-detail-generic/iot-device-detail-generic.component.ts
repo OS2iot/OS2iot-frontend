@@ -23,6 +23,8 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   deleteDevice = new EventEmitter();
   private deleteDialogSubscription: Subscription;
 
+  private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
+
   constructor(
     private translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
@@ -83,8 +85,10 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
 }
 
   getBatteryProcentage(): number {
-    const percentage = Math.round((this.device?.lorawanSettings?.deviceStatusBattery / this.device?.lorawanSettings?.deviceStatusMargin) * 100);
-    return percentage;
+    if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
+      return null;
+    }
+    return Math.round(this.device?.lorawanSettings?.deviceStatusBattery) 
   }
 
   ngOnDestroy(): void {

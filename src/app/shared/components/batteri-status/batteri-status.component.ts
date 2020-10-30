@@ -16,10 +16,17 @@ export class BatteriStatusComponent implements OnInit {
 
   ngOnInit() {
     this.renderArrayColor();
-    console.log(this.arrayColor);
+  }
+
+  isValid() {
+    return this.percentage !== null && this.percentage >= 0 && this.percentage <= 100;
   }
 
   renderArrayColor() {
+    if (!this.isValid()) {
+      return;
+    }
+
     const part = 100 / this.totalPin;
     let currentLevel = 0 + part;
     for (let i = 0; i < this.totalPin; i++) {
@@ -43,7 +50,5 @@ export class BatteriStatusComponent implements OnInit {
         break;
       }
     }
-    console.log(this.arrayColor);
   }
-
 }
