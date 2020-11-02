@@ -1,11 +1,11 @@
 <div class="mat-elevation-z8">
     <app-loading-spinner *ngIf=" isLoadingResults">
     </app-loading-spinner>
-    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'ORGANISATION.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">

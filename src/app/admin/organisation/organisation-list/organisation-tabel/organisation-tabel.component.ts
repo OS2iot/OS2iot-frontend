@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Sort } from '@shared/models/sort.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { Subscription } from 'rxjs';
 import { OrganisationResponse } from '../../organisation.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-organisation-tabel',
@@ -14,6 +16,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy {
     displayedColumns: string[] = ['name', 'applications', 'menu'];
     public dataSource = new MatTableDataSource<OrganisationResponse>();
+    @ViewChild(MatSort) sort: MatSort;
 
     isLoadingResults = true;
 
@@ -54,6 +57,8 @@ export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy 
             .subscribe((response) => {
                 this.organisations = response.data;
                 this.dataSource = new MatTableDataSource<OrganisationResponse>(this.organisations);
+                this.dataSource.sort = this.sort;
+                this.dataSource.sortingDataAccessor = tableSorter;
                 this.isLoadingResults = false;
             });
     }
