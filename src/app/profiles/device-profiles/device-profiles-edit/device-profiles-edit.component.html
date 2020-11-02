@@ -34,19 +34,34 @@
             <div class="col-xs-12 form-group">
                 <label for="macVersion"
                     class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MACVERSION' | translate}}</label>
-                <input type="text" class="form-control" id="macVersion" name="macVersion"
+                <!-- <input type="text" class="form-control" id="macVersion" name="macVersion"
                     [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" maxlength="50" required
-                    [(ngModel)]="deviceProfile.macVersion">
+                    [(ngModel)]="deviceProfile.macVersion"> -->
+                <mat-form-field appearance="outline">
+                    <mat-select 
+                        matNativeControl 
+                        required
+                        [compareWith]="compare"
+                        name="macVersion" 
+                        [(value)]="deviceProfile.macVersion">
+                        <mat-option value="1.0.0">1.0.0</mat-option>
+                        <mat-option value="1.0.1">1.0.1</mat-option>
+                        <mat-option value="1.0.2">1.0.2</mat-option>
+                        <mat-option value="1.0.3">1.0.3</mat-option>
+                        <mat-option value="1.1.0">1.1.0</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="col-xs-12 form-group">
                 <label
                     class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.REGPARAMSREVISION' | translate}}</label>
                 <mat-form-field appearance="outline">
-                    <select matNativeControl required name="regParamsRevision"
-                        [(ngModel)]="deviceProfile.regParamsRevision" [value]="deviceProfile.regParamsRevision">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                    </select>
+                    <mat-select matNativeControl required name="regParamsRevision"
+                        [(value)]="deviceProfile.regParamsRevision"
+                        [compareWith]="compare">
+                        <mat-option value="A">A</mat-option>
+                        <mat-option value="B">B</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-xs-12 form-group">
