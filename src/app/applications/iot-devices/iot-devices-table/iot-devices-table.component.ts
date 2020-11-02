@@ -16,6 +16,7 @@ import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -88,7 +89,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         if (!arr || arr.length === 0) {
             return this.translate.instant('ACTIVITY.NEVER');
         } else {
-            const lastActive = arr[arr.length - 1].sentTime;
+            const lastActive = Math.max(...arr.map((x: ReceivedMessageMetadata) => Date.parse(x.sentTime)));
             return moment(lastActive).fromNow();
         }
     }
