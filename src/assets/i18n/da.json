@@ -148,7 +148,19 @@
   },
   "DEVICE-MODEL": {
     "ID": "Id",
-    "NAME": "Navn"
+    "NAME": "Navn",
+    "TYPE" : "Type",
+    "BRANDNAME" : "Mærke",
+    "MODELNAME" : "Model",
+    "MANUFACTURERNAME" : "Producentens navn",
+    "CONTROLLEDPROPERTY" : "kontrol egenskaber",
+    "CATEGORY" : "Kategori",
+    "SUPPORTEDUNITS" : "Måleenheder",
+    "FUNCTION" : "Enhedsfunktioner",
+    "ENERGYLIMITATIONCLASS" : "Energi begrænsningsklassen",
+    "SUPPORTEDPROTOCOL" : "Understøttet protokoller",
+    "DETAIL-TITLE": "Device Model detalje",
+    "DEVICE-MODEL": "Device Model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
     "SHOW-OPTIONS": "Håndter Gateway"
@@ -390,7 +402,7 @@
       "GIVE-MANUFACTURERNAME-PLACEHOLDER": "Angiv producentens navn",
       "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber",
       "SELECT-CATEGORY": "Vælg kategori",
-      "SELECT-SUPPORTEDUNITS": "Vælg Målenheder",
+      "SELECT-SUPPORTEDUNITS": "Vælg Måleenheder",
       "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner",
       "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen",
       "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller"

@@ -1,1 +1,42 @@
-<p>device-model-detail works!</p>
+<ng-container>
+    <app-top-bar [title]="title" [backButton]="backButton" [subPage]="true"></app-top-bar>
+</ng-container>
+<div class="jumbotron my-4 m-md-4 py-3 p-md-3" *ngIf="deviceModel">
+    <div class="row">
+        <div class="col-12">
+            <h4>{{ 'DEVICE-MODEL.NAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.name}}</p>
+
+            <h4>{{ 'DEVICE-MODEL.ID' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.id}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.brandName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.modelName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.manufacturerName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.controlledProperty}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.category}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.supportedUnits}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.FUNCTION' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.function}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.ENERGYLIMITATIONCLASS' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.energyLimitationClass}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.SUPPORTEDPROTOCOL' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.supportedProtocol}}</p>
+        </div>
+    </div>
+</div>
+
