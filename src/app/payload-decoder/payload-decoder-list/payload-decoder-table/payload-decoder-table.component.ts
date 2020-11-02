@@ -5,6 +5,7 @@ import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.serv
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -44,6 +45,7 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
           this.dataSource = new MatTableDataSource<PayloadDecoder>(this.payloadDecoders);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = tableSorter;
           this.isLoadingResults = false;
         });
   }

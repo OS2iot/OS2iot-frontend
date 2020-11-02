@@ -1,7 +1,7 @@
 <div class="mat-elevation-z8">
     <app-loading-spinner *ngIf=" isLoadingResults">
     </app-loading-spinner>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">

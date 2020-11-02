@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faBroadcastTower, faLayerGroup, faMicrochip } from '@fortawesome/free-solid-svg-icons';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { SearchResultDto, SearchResultType } from '../search-results.model';
 
@@ -46,6 +47,7 @@ export class SearchTableComponent implements OnInit, OnChanges {
       this.dataSource = new MatTableDataSource(this.searchResults);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sortingDataAccessor = tableSorter;
       this.isLoadingResults = false;
       this.resultsLength = this.searchResults.length;
     }

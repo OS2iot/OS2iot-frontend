@@ -16,7 +16,8 @@ import { Application } from '@applications/application.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 
 @Component({
   selector: 'app-applications-table',
@@ -36,17 +37,11 @@ export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChan
 
   @Output() deleteApplication = new EventEmitter();
 
-  constructor(
-    public translate: TranslateService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {
+  constructor(public translate: TranslateService, private router: Router) {
     translate.use('da');
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -54,11 +49,11 @@ export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("ngOnChanges")
     if (this.applications) {
       this.dataSource = new MatTableDataSource(this.applications);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sortingDataAccessor = tableSorter;
       this.isLoadingResults = false;
       this.resultsLength = this.applications.length;
     }

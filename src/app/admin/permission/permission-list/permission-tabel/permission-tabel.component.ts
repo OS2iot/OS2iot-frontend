@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { PermissionResponse } from '../../permission.model';
 
 
@@ -43,6 +44,7 @@ export class PermissionTabelComponent implements OnInit, OnChanges, AfterViewIni
       this.dataSource = new MatTableDataSource(this.permissions);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sortingDataAccessor = tableSorter;
       this.isLoadingResults = false;
       this.resultsLength = this.permissions.length;
     }

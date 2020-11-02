@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 
 
 @Component({
@@ -56,6 +57,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = tableSorter;
   }
 
   ngOnChanges() {
@@ -89,6 +91,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
           this.gateways = gateways.result;
           this.dataSource = new MatTableDataSource<Gateway>(this.gateways);
           this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = tableSorter;
           this.dataSource.paginator = this.paginator;
           this.isLoadingResults = false;
           this.resultsLength = this.gateways.length;
