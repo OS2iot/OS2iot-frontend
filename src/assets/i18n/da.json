@@ -29,7 +29,8 @@
     "SIGFOX": "SigFox",
     "SIGFOX-ADMIN": "Sigfox Administration",
     "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
-    "SEARCH": "Søgeresultater"
+    "SEARCH": "Søgeresultater",
+    "MENU-ITEM-MISC": "Generelt"
   },
   "SEARCH": {
     "ICON": "",
