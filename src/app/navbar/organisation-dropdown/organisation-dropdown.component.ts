@@ -64,9 +64,8 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   }
 
   public onChange(value) {
-    this.setSelectedOrganisation(value);
-    this.isOrganisationAdmin(value);
     this.sharedVariable.setValue(value);
+    this.isOrganisationAdmin(value);
     this.route.navigateByUrl('/applications');
   }
 
