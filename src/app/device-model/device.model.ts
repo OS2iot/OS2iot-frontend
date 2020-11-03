@@ -1,3 +1,4 @@
+import { Organisation } from '@app/admin/organisation/organisation.model';
 import { ControlledPropperty } from './Enums/controlled-propperty.enum';
 import { DeviceCategory } from './Enums/device-category.enum';
 import { DeviceFunction } from './Enums/device-function.enum';
@@ -8,7 +9,8 @@ import { SupportedUnit } from './supported-unit.model';
 
 export class DeviceModel {
     name?: string;
-    id?: string;
+    id?: number;
+    urn?: string;
     private type = 'DeviceModel';
     brandName?: string;
     modelName?: string;
@@ -22,5 +24,15 @@ export class DeviceModel {
 
     constructor() {
         this.type = 'DeviceModel';
+    }
+}
+
+export class DeviceModelRequest {
+    body: JSON;
+    belongsToId: number;
+
+    constructor(deviceModel: DeviceModel, organisationId: number) {
+        this.body = JSON.parse(JSON.stringify(deviceModel));
+        this.belongsToId = organisationId;
     }
 }

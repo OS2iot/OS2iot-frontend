@@ -20,11 +20,11 @@
     <!-- id -->
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="id">{{'QUESTION.DEVICE-MODEL.GIVE-ID' | translate}}</label>*
-            <input type="text" class="form-control" id="id" name="id"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-ID-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.id"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
+            <label class="form-label" for="urn">{{'QUESTION.DEVICE-MODEL.GIVE-URN' | translate}}</label>*
+            <input type="text" class="form-control" id="urn" name="urn"
+                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-URN-PLACEHOLDER' | translate" maxlength="50" required
+                [(ngModel)]="deviceModel.urn"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('urn'), 'is-valid' : formFailedSubmit && !errorFields.includes('urn')}">
         </div>
     </div>
     <!-- brandName -->
