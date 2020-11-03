@@ -51,7 +51,7 @@ export class SharedVariableService {
     if (this.gotWritePermission != null) {
       return this.gotWritePermission;
     }
-    return Boolean(localStorage.getItem('has_write_permission'));
+    return JSON.parse(localStorage.getItem('has_write_permission'));
   }
 
   getSelectedOrganisationId() {

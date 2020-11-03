@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeviceModel } from '../device.model';
 
 @Component({
@@ -18,8 +19,11 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'id', 'menu'];
   public isLoadingResults = false;
   resultsLength = 0;
+  public hasWritePermission = false;
 
-  constructor() { }
+  constructor(
+    private sharedService: SharedVariableService
+  ) { }
 
   ngOnInit(): void {
     const dm: DeviceModel = new DeviceModel();
@@ -30,6 +34,8 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.isLoadingResults = false;
     this.resultsLength = 1;
+
+    this.hasWritePermission = this.sharedService.getHasWritePermission();
   }
 
   ngAfterViewInit() {
