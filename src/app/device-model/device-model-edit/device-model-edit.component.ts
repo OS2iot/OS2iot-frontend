@@ -1,7 +1,10 @@
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
 import { ControlledPropperty } from '../Enums/controlled-propperty.enum';
 import { DeviceCategory } from '../Enums/device-category.enum';
@@ -32,7 +35,9 @@ export class DeviceModelEditComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private location: Location
+    private location: Location,
+    private deviceModelService: DeviceModelService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -56,8 +61,38 @@ export class DeviceModelEditComponent implements OnInit {
     return o1 === o2;
   }
 
+  createDeviceModel() {
+    this.deviceModelService.create(this.deviceModel)
+      .subscribe(
+        (response) => {
+          this.routeBack();
+        },
+        (error: HttpErrorResponse) => {
+          this.handleError(error);
+        }
+      );
+  }
+
+  handleError(err: HttpErrorResponse) {
+    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(err);
+    this.errorMessages = errorResponse.errorMessages;
+    this.errorFields = errorResponse.errorFields;
+  }
+
+  updateDeviceModel() {
+    this.deviceModelService.update(this.deviceModel, +this.deviceModel.id)
+      .subscribe(
+        (response) => {
+          this.routeBack();
+        },
+        (error: HttpErrorResponse) => {
+          this.handleError(error);
+        }
+      );
+  }
+
   onSubmit() {
-    console.log(this.deviceModel);
+    this.deviceModel.id ? this.updateDeviceModel() : this.createDeviceModel();
   }
 
   routeBack(): void {

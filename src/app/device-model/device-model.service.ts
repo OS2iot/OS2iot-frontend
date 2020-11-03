@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
-import { DeviceModel } from './device.model';
+import { DeviceModel, DeviceModelRequest } from './device.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeviceModelService {
 
-  private DEVICEMODELURL = 'devicemodel';
+  private DEVICEMODELURL = 'device-model';
 
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService,
+    private sharedVariable: SharedVariableService) { }
 
-  create(body: DeviceModel): Observable<any> {
+  create(deviceModel: DeviceModel): Observable<any> {
+    const body = new DeviceModelRequest(deviceModel, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.post(this.DEVICEMODELURL, body, { observe: 'response' });
   }
 
-  update( body: PermissionRequest, id: number): Observable<any> {
+  update(deviceModel: DeviceModel, id: number): Observable<any> {
+    const body = new DeviceModelRequest(deviceModel, +this.sharedVariable.getSelectedOrganisationId);
     return this.restService.put(this.DEVICEMODELURL, body, id, {
       observe: 'response',
     });

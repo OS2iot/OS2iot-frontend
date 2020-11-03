@@ -147,7 +147,7 @@
     "STATUS": "Status"
   },
   "DEVICE-MODEL": {
-    "ID": "Id",
+    "URN": "Urn",
     "NAME": "Navn",
     "TYPE" : "Type",
     "BRANDNAME" : "Mærke",
@@ -392,8 +392,8 @@
     "DEVICE-MODEL": {
       "GIVE-NAME": "Angiv navn",
       "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
-      "GIVE-ID": "Angiv Id",
-      "GIVE-ID-PLACEHOLDER": "Angiv Id",
+      "GIVE-URN": "Angiv Urn",
+      "GIVE-URN-PLACEHOLDER": "Angiv Urn",
       "GIVE-BRANDNAME": "Angiv mærket",
       "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
       "GIVE-MODELNAME": "Angiv model navnet",
