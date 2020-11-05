@@ -56,7 +56,7 @@
                         [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
                     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{element.id}}">
                         <li class="dropdown-item">
-                            <a [routerLink]="[element.id, 'edit-permission']"
+                            <a [routerLink]="['/admin/permissions', element.id, 'edit-permission']"
                                 routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
                             </a>
                         </li>
