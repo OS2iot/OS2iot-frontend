@@ -394,20 +394,21 @@
     "DEVICE-MODEL": {
       "GIVE-NAME": "Angiv navn",
       "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
-      "GIVE-ID": "Angiv Id",
+      "GIVE-ID": "Angiv Id (id)",
       "GIVE-ID-PLACEHOLDER": "Angiv Id",
-      "GIVE-BRANDNAME": "Angiv mærket",
+      "GIVE-BRANDNAME": "Angiv mærket (brandName)",
       "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
-      "GIVE-MODELNAME": "Angiv model navnet",
+      "GIVE-MODELNAME": "Angiv model navnet (modelName)",
       "GIVE-MODELNAME-PLACEHOLDER": "Angiv model navnet",
-      "GIVE-MANUFACTURERNAME": "Angiv producentens navn",
+      "GIVE-MANUFACTURERNAME": "Angiv producentens navn (manufacturerName)",
       "GIVE-MANUFACTURERNAME-PLACEHOLDER": "Angiv producentens navn",
-      "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber",
-      "SELECT-CATEGORY": "Vælg kategori",
-      "SELECT-SUPPORTEDUNITS": "Vælg Måleenheder",
-      "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner",
-      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen",
-      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller"
+      "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber (controlledProperty)",
+      "SELECT-CATEGORY": "Vælg kategori (category)",
+      "SELECT-SUPPORTEDUNITS": "Vælg Måleenheder (supportedUnits)",
+      "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner (function)",
+      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen (energyLimitationClass)",
+      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller (supportedProtocol)",
+      "FIWARE-LINK-TEXT": "Denne data model er adopteret fra Fiware og følger ETSI standarden"
     }
   },
   "QUESTION-LORA-GATEWAY": {
