@@ -466,6 +466,7 @@
       "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til sigfox skal være mellem 8 og 16 tegn (Hexadecimal)",
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
+    "DEVICEMODEL": "Device Model",
     "DETAIL-TAB": "Detail",
     "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",

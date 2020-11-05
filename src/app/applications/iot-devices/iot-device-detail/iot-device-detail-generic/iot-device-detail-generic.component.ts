@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { Subscription } from 'rxjs';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceModelService } from '@app/device-model/device-model.service';
+import { DeviceModel } from '@app/device-model/device.model';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
@@ -22,6 +24,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
   private deleteDialogSubscription: Subscription;
+  public deviceModel: string;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
@@ -30,7 +33,8 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
     public iotDeviceService: IoTDeviceService,
     private location: Location,
     private deleteDialogService: DeleteDialogService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private deviceModelService: DeviceModelService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +42,17 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
 
   ngOnChanges(): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
+    if (this.device.deviceModelId) {
+      this.getDeviceModel(this.device.deviceModelId);
+    }
+  }
+
+  getDeviceModel(id: number) {
+    this.deviceModelService.get(id).subscribe(
+      (response) => {
+        this.deviceModel = JSON.stringify(response.body, null, 4);
+      }
+    );
   }
 
 

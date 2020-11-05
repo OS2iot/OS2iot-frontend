@@ -64,3 +64,17 @@
 <ng-template #locationCommentElseBlock>
         <p class="mb-5">{{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}</p>
 </ng-template>
+
+<div *ngIf="deviceModel">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h4>{{ 'IOTDEVICE.DEVICEMODEL' | translate }}</h4>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <pre>
+            {{deviceModel}}
+        </pre>
+    </mat-expansion-panel>
+</div>
+
