@@ -644,7 +644,8 @@
   },
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
-    "WELCOME-MESSAGE": "Her vises en velkomsthilsen"
+    "WELCOME-MESSAGE": "Her vises en velkomsthilsen",
+    "NO-ACCESS": "Du har ikke adgang til nogle organisationer og kan derfor ikke bruge applikationen."
   },
   "ERROR": {
     "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"

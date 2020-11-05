@@ -20,8 +20,16 @@ export class DashboardComponent implements OnInit {
         // Clear the URL from the parameter
         this.router.navigate(['/dashboard']);
       }
+      1;
+      this.authService.me().subscribe((response) => {
+        this.hasSomePermission = response.user.permissions.length > 0;
+        this.isLoadingResults = false;
+      });
     });
   }
+
+  isLoadingResults = true;
+  hasSomePermission: boolean;
 
   ngOnInit(): void {}
 }
