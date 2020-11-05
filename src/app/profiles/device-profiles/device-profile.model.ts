@@ -24,7 +24,7 @@ export class DeviceProfile {
     public supports32BitFCnt: boolean;
     public supportsClassB: boolean;
     public supportsClassC: boolean;
-    public supportsJoin: boolean;
+    public supportsJoin = true;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];
