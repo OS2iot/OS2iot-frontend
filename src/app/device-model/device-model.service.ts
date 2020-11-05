@@ -32,10 +32,10 @@ export class DeviceModelService {
   get(id: number): Observable<any> {
     return this.restService.get(this.DEVICEMODELURL, {}, id).pipe(
       map(
-        response => 
+        response =>
         console.log(DeviceCategory[response.body.category])
           /* new DeviceModel(
-            response.id, 
+            response.id,
             new DeviceModelBody(
               response.body.id,
               response.body.brandName,
@@ -56,7 +56,7 @@ export class DeviceModelService {
         map(
           response => response.data.map( (item: any) =>
             new DeviceModel(
-              item.id, 
+              item.id,
               new DeviceModelBody(
                 item.body.id,
                 item.body.brandName,

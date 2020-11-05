@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeviceModelService } from '../device-model.service';
-import { DeviceModel, DeviceModelBody } from '../device.model';
+import { DeviceModel } from '../device.model';
 
 @Component({
   selector: 'app-device-model-table',
@@ -36,12 +36,12 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   getDeviceModels() {
     this.deviceModelService.getMultiple()
       .subscribe( (response) => {
-        this.deviceModels = response
-        this.setupMatTable(this.deviceModels)
+        this.deviceModels = response;
+        this.setupMatTable(this.deviceModels);
       },
       (error) => {
         console.log(error);
-      })
+      });
   }
 
   setupMatTable(rows: DeviceModel[]) {
