@@ -11,8 +11,8 @@ const routes: Routes = [
         children: [
             { path: '', component: DeviceModelListComponent },
             { path: 'device-model-edit', component: DeviceModelEditComponent },
-            { path: 'device-model-edit/:id', component: DeviceModelEditComponent },
-            { path: 'device-model-detail/:id', component: DeviceModelDetailComponent  }
+            { path: 'device-model-edit/:deviceId', component: DeviceModelEditComponent },
+            { path: 'device-model-detail/:deviceId', component: DeviceModelDetailComponent  }
         ]
     }
 ];

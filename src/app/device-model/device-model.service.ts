@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
-import { DeviceModel, DeviceModelRequest } from './device.model';
+import { map } from 'rxjs/operators';
+import { DeviceModel, DeviceModelBody, DeviceModelRequest } from './device.model';
+import { DeviceCategory } from './Enums/device-category.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -16,23 +18,56 @@ export class DeviceModelService {
     private sharedVariable: SharedVariableService) { }
 
   create(deviceModel: DeviceModel): Observable<any> {
-    const body = new DeviceModelRequest(deviceModel, +this.sharedVariable.getSelectedOrganisationId());
+    const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.post(this.DEVICEMODELURL, body, { observe: 'response' });
   }
 
   update(deviceModel: DeviceModel, id: number): Observable<any> {
-    const body = new DeviceModelRequest(deviceModel, +this.sharedVariable.getSelectedOrganisationId);
+    const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId);
     return this.restService.put(this.DEVICEMODELURL, body, id, {
       observe: 'response',
     });
   }
 
   get(id: number): Observable<any> {
-    return this.restService.get(this.DEVICEMODELURL, {}, id);
+    return this.restService.get(this.DEVICEMODELURL, {}, id).pipe(
+      map(
+        response => 
+        console.log(DeviceCategory[response.body.category])
+          /* new DeviceModel(
+            response.id, 
+            new DeviceModelBody(
+              response.body.id,
+              response.body.brandName,
+              response.body.modelName,
+              response.body.manufacturerName,
+              response.body.category,
+              response.body.energyLimitationClass
+            )
+          ) */
+        )
+      );
   }
 
   getMultiple(): Observable<any> {
-    return this.restService.get(this.DEVICEMODELURL);
+    const organizationId = this.sharedVariable.getSelectedOrganisationId()
+    return this.restService.get(this.DEVICEMODELURL, {organizationId})
+      .pipe(
+        map(
+          response => response.data.map( (item: any) =>
+            new DeviceModel(
+              item.id, 
+              new DeviceModelBody(
+                item.body.id,
+                item.body.brandName,
+                item.body.modelName,
+                item.body.manufacturerName,
+                item.body.category
+                )
+              )
+            )
+          )
+        ); 
   }
 
   delete(id: number) {
