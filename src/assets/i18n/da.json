@@ -160,7 +160,8 @@
     "ENERGYLIMITATIONCLASS" : "Energi begrænsningsklassen",
     "SUPPORTEDPROTOCOL" : "Understøttet protokoller",
     "DETAIL-TITLE": "Device Model detalje",
-    "DEVICE-MODEL": "Device Model"
+    "DEVICE-MODEL": "Device Model",
+    "SHOW-OPTIONS": "Håndter Device Model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
     "SHOW-OPTIONS": "Håndter Gateway"

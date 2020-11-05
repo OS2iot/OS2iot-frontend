@@ -2,6 +2,25 @@
     <app-top-bar [title]="title" [backButton]="backButton" [subPage]="true"></app-top-bar>
 </ng-container>
 <div class="jumbotron my-4 m-md-4 py-3 p-md-3" *ngIf="deviceModel">
+    <div class="col-md-12 order-first order-md-last ">
+        <div class="btn-group float-md-right dropdown">
+            <button type="button" id="dropdown-{{ deviceModel.body.name }}" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{'DEVICE-MODEL.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ deviceModel.body.name }}">
+                <li class="dropdown-item">
+                    <a [routerLink]="['/device-model/device-model-edit', this.deviceModel.id]">{{ 'GEN.EDIT' | translate }}
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a (click)="clickDelete()">{{ 'GEN.DELETE' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <h4>{{ 'DEVICE-MODEL.NAME' | translate }}</h4>
