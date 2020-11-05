@@ -10,7 +10,7 @@
     </div>
     <div *ngIf="pageTotal > 0">
         <div class=" mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+            <table mat-table [dataSource]="dataSource">
                 <!-- Icon Column -->
                 <ng-container matColumnDef="icon">
                     <th mat-header-cell *matHeaderCellDef>
@@ -23,7 +23,7 @@
 
                 <!-- Type Column -->
                 <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <th mat-header-cell *matHeaderCellDef >
                         {{ 'SEARCH.TYPE' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         <div *ngIf="element.type == 'IoTDevice'; else typeElse">
@@ -36,7 +36,7 @@
                 </ng-container>
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <th mat-header-cell *matHeaderCellDef >
                         {{ 'SEARCH.NAME' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         <a class="application-link" (click)="goToResult(element)">{{element.name}}</a>
@@ -65,7 +65,7 @@
                 </ng-container>
                 <!-- Org Column -->
                 <ng-container matColumnDef="org">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <th mat-header-cell *matHeaderCellDef >
                         {{ 'SEARCH.ORGANISATION' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         {{element.organizationName}}
