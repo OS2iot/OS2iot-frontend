@@ -3,7 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { DeviceModel } from '../device.model';
+import { DeviceModelService } from '../device-model.service';
+import { DeviceModel, DeviceModelBody } from '../device.model';
 
 @Component({
   selector: 'app-device-model-table',
@@ -16,24 +17,39 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   public dataSource = new MatTableDataSource<DeviceModel>();
   public deviceModels: DeviceModel[];
-  displayedColumns: string[] = ['name', 'id', 'menu'];
+  public displayedColumns: string[] = ['name', 'id', 'menu'];
   public isLoadingResults = false;
-  resultsLength = 0;
+  public resultsLength = 0;
   public hasWritePermission = false;
+  private deviceModelId: number;
 
   constructor(
-    private sharedService: SharedVariableService
+    private sharedService: SharedVariableService,
+    private deviceModelService: DeviceModelService
   ) { }
 
   ngOnInit(): void {
-    const dm: DeviceModel = new DeviceModel();
-    this.dataSource = new MatTableDataSource<DeviceModel>([dm]);
+    this.getDeviceModels();
+    this.hasWritePermission = this.sharedService.getHasWritePermission();
+  }
+
+  getDeviceModels() {
+    this.deviceModelService.getMultiple()
+      .subscribe( (response) => {
+        this.deviceModels = response
+        this.setupMatTable(this.deviceModels)
+      },
+      (error) => {
+        console.log(error);
+      })
+  }
+
+  setupMatTable(rows: DeviceModel[]) {
+    this.dataSource = new MatTableDataSource<DeviceModel>(rows);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.isLoadingResults = false;
-    this.resultsLength = 1;
-
-    this.hasWritePermission = this.sharedService.getHasWritePermission();
+    this.resultsLength = rows.length;
   }
 
   ngAfterViewInit() {

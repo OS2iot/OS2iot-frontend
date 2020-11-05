@@ -15,7 +15,6 @@ export class DeviceModelDetailComponent implements OnInit {
   deviceModel: DeviceModel;
   public backButton: BackButton = { label: '', routerLink: '/devicemodel' };
   public title: string;
-  private deviceModelId: number;
 
   constructor(
     private translate: TranslateService,
@@ -30,16 +29,16 @@ export class DeviceModelDetailComponent implements OnInit {
         this.backButton.label = translations['DEVICE-MODEL.DEVICE-MODEL'];
         this.title = translations['DEVICE-MODEL.DETAIL-TITLE'];
       });
-    this.deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
-    if (this.deviceModelId) {
-      this.getDeviceModel(this.deviceModelId);
+    const deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
+    if (deviceModelId) {
+      this.getDeviceModel(deviceModelId);
     }
   }
 
   private getDeviceModel(id: number) {
     this.deviceModelService.get(id)
       .subscribe( (response) => {
-        this.deviceModel = response.data;
+        this.deviceModel = response;
       });
   }
 

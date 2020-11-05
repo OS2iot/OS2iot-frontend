@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
@@ -37,7 +38,8 @@ export class DeviceModelEditComponent implements OnInit {
     private translate: TranslateService,
     private location: Location,
     private deviceModelService: DeviceModelService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,10 @@ export class DeviceModelEditComponent implements OnInit {
                 this.title = translations['NAV.DEVICE-MODEL'];
             });
     this.mapEnumsToArray();
+    const deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
+    if (deviceModelId) {
+      this.getDeviceModel(deviceModelId);
+    }
   }
 
   mapEnumsToArray() {
@@ -59,6 +65,13 @@ export class DeviceModelEditComponent implements OnInit {
 
   public compare(o1: any, o2: any): boolean {
     return o1 === o2;
+  }
+
+  private getDeviceModel(id: number) {
+    this.deviceModelService.get(id)
+      .subscribe( (response) => {
+        this.deviceModel = response;
+      });
   }
 
   createDeviceModel() {

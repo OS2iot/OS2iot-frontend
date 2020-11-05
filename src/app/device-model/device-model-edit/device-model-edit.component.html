@@ -13,18 +13,18 @@
             <label class="form-label" for="name">{{'QUESTION.DEVICE-MODEL.GIVE-NAME' | translate}}</label>*
             <input type="text" class="form-control" id="name" name="name"
                 [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-NAME-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.name"
+                [(ngModel)]="deviceModel.body.name"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
         </div>
     </div>
     <!-- id -->
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="urn">{{'QUESTION.DEVICE-MODEL.GIVE-URN' | translate}}</label>*
-            <input type="text" class="form-control" id="urn" name="urn"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-URN-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.urn"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('urn'), 'is-valid' : formFailedSubmit && !errorFields.includes('urn')}">
+            <label class="form-label" for="id">{{'QUESTION.DEVICE-MODEL.GIVE-ID' | translate}}</label>*
+            <input type="text" class="form-control" id="id" name="id"
+                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-ID-PLACEHOLDER' | translate" maxlength="50" required
+                [(ngModel)]="deviceModel.body.id"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
         </div>
     </div>
     <!-- brandName -->
@@ -33,7 +33,7 @@
             <label class="form-label" for="brandName">{{'QUESTION.DEVICE-MODEL.GIVE-BRANDNAME' | translate}}</label>*
             <input type="text" class="form-control" id="brandName" name="brandName"
                 [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-BRANDNAME-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.brandName"
+                [(ngModel)]="deviceModel.body.brandName"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('brandName'), 'is-valid' : formFailedSubmit && !errorFields.includes('brandName')}">
         </div>
     </div>
@@ -44,7 +44,7 @@
             <label class="form-label" for="modelName">{{'QUESTION.DEVICE-MODEL.GIVE-MODELNAME' | translate}}</label>*
             <input type="text" class="form-control" id="modelName" name="modelName"
                 [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MODELNAME-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.modelName"
+                [(ngModel)]="deviceModel.body.modelName"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('modelName'), 'is-valid' : formFailedSubmit && !errorFields.includes('modelName')}">
         </div>
     </div>
@@ -55,7 +55,7 @@
             <label class="form-label" for="manufacturerName">{{'QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME' | translate}}</label>*
             <input type="text" class="form-control" id="manufacturerName" name="manufacturerName"
                 [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="deviceModel.manufacturerName"
+                [(ngModel)]="deviceModel.body.manufacturerName"
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('manufacturerName'), 'is-valid' : formFailedSubmit && !errorFields.includes('manufacturerName')}">
         </div>
     </div>
@@ -67,7 +67,7 @@
                 class="form-control"
                 multiple [compareWith]="compare"
                 name="controlledProperty"
-                [(ngModel)]="deviceModel.controlledProperty">
+                [(ngModel)]="deviceModel.body.controlledProperty">
                 <mat-option 
                     *ngFor="let control of controlledPropperties" 
                     [value]="control">
@@ -83,7 +83,7 @@
             <mat-select 
                 class="form-control" 
                 name="categories"
-                [(ngModel)]="deviceModel.category">
+                [(ngModel)]="deviceModel.body.category">
                 <mat-option 
                     *ngFor="let category of categories" 
                     [value]="category">
@@ -100,7 +100,7 @@
                 class="form-control" 
                 name="supportedUnits"
                 multiple [compareWith]="compare"
-                [(ngModel)]="deviceModel.supportedUnits">
+                [(ngModel)]="deviceModel.body.supportedUnits">
                 <mat-option 
                     *ngFor="let unit of supportedUnits.units" 
                     [value]="unit.code">
@@ -117,7 +117,7 @@
                 class="form-control" 
                 name="devicefunction"
                 multiple [compareWith]="compare"
-                [(ngModel)]="deviceModel.function">
+                [(ngModel)]="deviceModel.body.function">
                 <mat-option 
                     *ngFor="let function of deviceFunctions" 
                     [value]="function">
@@ -134,7 +134,7 @@
                 class="form-control" 
                 name="energyLimitationClass"
                 multiple [compareWith]="compare"
-                [(ngModel)]="deviceModel.energyLimitationClass">
+                [(ngModel)]="deviceModel.body.energyLimitationClass">
                 <mat-option 
                     *ngFor="let elclass of energyLimitationClass" 
                     [value]="elclass">
@@ -151,7 +151,7 @@
                 class="form-control" 
                 name="supportedProtocol"
                 multiple [compareWith]="compare"
-                [(ngModel)]="deviceModel.supportedProtocol">
+                [(ngModel)]="deviceModel.body.supportedProtocol">
                 <mat-option 
                     *ngFor="let protocol of supportedProtocol" 
                     [value]="protocol">
