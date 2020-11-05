@@ -44,10 +44,10 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.translate.get(['SIGFOX.SIGFOX-GROUP', 'FORM.EDIT-SIGFOX-GROUPS'])
+    this.translate.get(['SIGFOX-GROUP.SIGFOX-GROUP', 'FORM.EDIT-SIGFOX-GROUPS'])
       .subscribe(translations => {
         this.title = translations['FORM.EDIT-SIGFOX-GROUPS'];
-        this.backButton.label = translations['SIGFOX.SIGFOX-GROUP'];
+        this.backButton.label = translations['SIGFOX-GROUP.SIGFOX-GROUP'];
       });
 
     this.sigfoxGroupId = +this.route.snapshot.paramMap.get('groupId');

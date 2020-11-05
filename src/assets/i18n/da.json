@@ -44,10 +44,10 @@
     "QUERY": "Du har søgt efter:",
     "NO-RESULTS": "Søgningen førte til 0 resultater."
   },
-  "SIGFOX": {
+  "SIGFOX-GROUP": {
     "SIGFOX": "SigFox",
     "SIGFOX-GROUP": "SigFox Grupper",
-    "ADMINITRATION": {
+    "ADMINISTRATION": {
       "NAME": "SigFox Grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
