@@ -1,59 +1,100 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { faBroadcastTower, faLayerGroup, faMicrochip } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  faBroadcastTower,
+  faLayerGroup,
+  faMicrochip,
+} from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Subscription } from 'rxjs';
 import { SearchResultDto, SearchResultType } from '../search-results.model';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-search-table',
   templateUrl: './search-table.component.html',
   styleUrls: ['./search-table.component.scss'],
 })
-export class SearchTableComponent implements OnInit, OnChanges {
-  faBroadcastTower = faBroadcastTower;
-  faLayerGroup = faLayerGroup;
-  faMicrochip = faMicrochip;
+export class SearchTableComponent implements OnInit {
+  private readonly faBroadcastTower = faBroadcastTower;
+  private readonly faLayerGroup = faLayerGroup;
+  private readonly faMicrochip = faMicrochip;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-
-  displayedColumns: string[] = ['icon', 'type', 'name', 'id', 'org'];
-  public dataSource = new MatTableDataSource<SearchResultDto>();
-
-  resultsLength = 0;
-  @Input() isLoadingResults: boolean;
   @Input() searchText: string;
 
-  @Input() searchResults: SearchResultDto[];
-  searchResult: SearchResultDto;
+  displayedColumns: string[] = ['icon', 'type', 'name', 'id', 'org'];
+  dataSource: MatTableDataSource<SearchResultDto>;
 
+  isLoadingResults = true;
+  subscription: Subscription;
+
+  searchResults: SearchResultDto[];
+  pageLimit = 10;
+  pageTotal: number;
+  pageOffset = 0;
+
+  pageEvent: PageEvent;
 
   constructor(
     private globalService: SharedVariableService,
-    private router: Router
-  ) { }
+    private router: Router,
+    public translate: TranslateService,
+    private route: ActivatedRoute,
+    private searchService: SearchService
+  ) {}
 
   ngOnInit(): void {
-
+    this.pageOffset = 0;
+    this.route.queryParams.subscribe((params) => {
+      this.searchText = this.decode(params['q']);
+      if (this.searchText != null) {
+        this.search(this.searchText, this.pageLimit, 0);
+      }
+    });
   }
 
-  ngOnChanges() {
+  search(query: string, limit: number, offset: number) {
+    this.subscription = this.searchService
+      .search(query, limit, offset)
+      .subscribe((response) => {
+        this.searchResults = response.data;
+        this.pageTotal = response.count;
+        this.isLoadingResults = false;
+        this.showResults();
+      });
+  }
+
+  showResults() {
     if (this.searchResults) {
-      this.dataSource = new MatTableDataSource(this.searchResults);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sortingDataAccessor = tableSorter;
+      if (this.dataSource) {
+        this.dataSource.data = this.searchResults;
+      } else {
+        this.dataSource = new MatTableDataSource(this.searchResults);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sortingDataAccessor = tableSorter;
+      }
       this.isLoadingResults = false;
-      this.resultsLength = this.searchResults.length;
     }
   }
 
-
+  public getServerData(event?: PageEvent) {
+    this.pageLimit = event.pageSize;
+    this.pageOffset = event.pageIndex;
+    this.search(
+      this.searchText,
+      event.pageSize,
+      event.pageSize * event.pageIndex
+    );
+    return event;
+  }
 
   getIcon(type: SearchResultType) {
     if (type === SearchResultType.IoTDevice) {
@@ -91,4 +132,10 @@ export class SearchTableComponent implements OnInit, OnChanges {
     }
   }
 
+  decode(val: string): string {
+    if (val === undefined) {
+      return '';
+    }
+    return decodeURIComponent(val);
+  }
 }

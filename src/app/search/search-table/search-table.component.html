@@ -5,12 +5,12 @@
     <div class="m-md-4">
         <h3>{{'SEARCH.QUERY' | translate}} {{searchText}}</h3>
     </div>
-    <div class="m-md-4" *ngIf="searchResults.length === 0">
+    <div class="m-md-4" *ngIf="pageTotal === 0">
         {{'SEARCH.NO-RESULTS' | translate}}
     </div>
-    <div *ngIf="searchResults.length> 0">
+    <div *ngIf="pageTotal > 0">
         <div class=" mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+            <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
                 <!-- Icon Column -->
                 <ng-container matColumnDef="icon">
                     <th mat-header-cell *matHeaderCellDef>
@@ -23,7 +23,7 @@
 
                 <!-- Type Column -->
                 <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         {{ 'SEARCH.TYPE' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         <div *ngIf="element.type == 'IoTDevice'; else typeElse">
@@ -36,7 +36,7 @@
                 </ng-container>
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         {{ 'SEARCH.NAME' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         <a class="application-link" (click)="goToResult(element)">{{element.name}}</a>
@@ -65,7 +65,7 @@
                 </ng-container>
                 <!-- Org Column -->
                 <ng-container matColumnDef="org">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         {{ 'SEARCH.ORGANISATION' | translate }}</th>
                     <td mat-cell *matCellDef="let element">
                         {{element.organizationName}}
@@ -76,8 +76,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="resultsLength"
-                showFirstLastButtons></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="pageTotal" showFirstLastButtons (page)="pageEvent = getServerData($event)"></mat-paginator>
         </div>
     </div>
 </ng-template>
