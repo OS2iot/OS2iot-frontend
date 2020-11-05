@@ -29,6 +29,7 @@ export class UserEditComponent implements OnInit {
   id: number;
   subscription: Subscription;
   isGlobalAdmin = false;
+  isKombit: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -66,6 +67,7 @@ export class UserEditComponent implements OnInit {
         this.user.id = response.id;
         this.user.active = response.active;
         this.user.globalAdmin = response.permissions.some(x => x.type == PermissionType.GlobalAdmin);
+        this.isKombit = response.nameId != null;
         // We cannot set the password.
       });
   }

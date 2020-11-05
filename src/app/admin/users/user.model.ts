@@ -14,6 +14,7 @@ export interface UserResponse {
     createdAt: string;
     updatedAt: string;
     name: string;
+    nameId: string;
     email: string;
     active: boolean;
     lastLogin: Date;
