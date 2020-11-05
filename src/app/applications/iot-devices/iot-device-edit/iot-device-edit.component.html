@@ -99,6 +99,22 @@
           [(ngModel)]="iotDevice.commentOnLocation"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('commentOnLocation'), 'is-valid' : formFailedSubmit && !errorFields.includes('commentOnLocation')}">
       </div>
+
+      <div class="form-group mt-5">
+        <label class="form-label" for="deviceModel">{{'QUESTION.DEVICE-MODEL-SELECT' | translate}}</label>
+            <mat-select 
+                class="form-control"
+                name="deviceModel"
+                [compareWith]="compare"
+                [(ngModel)]="iotDevice.deviceModelId">
+                <mat-option 
+                    *ngFor="let deviceModel of deviceModels" 
+                    [value]="deviceModel.id">
+                        {{deviceModel.body.name}}
+                </mat-option>
+            </mat-select>
+      </div>
+
     </div>
     <ng-container *ngIf="iotDevice.type == loraDevice" class="row mb-5">
       <div class="form-group mt-5">

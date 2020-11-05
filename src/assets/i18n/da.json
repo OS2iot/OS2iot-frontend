@@ -303,6 +303,7 @@
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
+    "DEVICE-MODEL-SELECT": "Tilknyt en device model til enheden",
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
     "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
     "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",

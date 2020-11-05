@@ -4,6 +4,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@app/applications/application.model';
 import { ApplicationService } from '@app/applications/application.service';
+import { DeviceModelService } from '@app/device-model/device-model.service';
+import { DeviceModel } from '@app/device-model/device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeviceProfile } from '@profiles/device-profiles/device-profile.model';
 import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
@@ -35,6 +37,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     public sigfoxDevice = DeviceType.SIGFOX;
     public serviceProfiles: ServiceProfile[];
     public deviceProfiles: DeviceProfile[];
+    public deviceModels: DeviceModel[];
     iotDevice = new IotDevice();
     editmode = false;
     public OTAA = true;
@@ -55,6 +58,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private iotDeviceService: IoTDeviceService,
         private location: Location,
         private shareVariable: SharedVariableService,
+        private deviceModelService: DeviceModelService,
         private errorMessageService: ErrorMessageService
     ) { }
 
@@ -72,6 +76,19 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.getApplication();
         this.getServiceProfiles();
         this.getDeviceProfiles();
+        this.getDeviceModels();
+    }
+
+    public compare(o1: any, o2: any): boolean {
+        return o1 === o2;
+      }
+
+    getDeviceModels() {
+        this.deviceModelService.getMultiple().subscribe(
+            (response) => {
+                this.deviceModels = response;
+            }
+        );
     }
 
     getApplication(): void {
