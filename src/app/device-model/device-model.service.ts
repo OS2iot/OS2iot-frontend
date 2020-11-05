@@ -33,24 +33,28 @@ export class DeviceModelService {
     return this.restService.get(this.DEVICEMODELURL, {}, id).pipe(
       map(
         response =>
-        console.log(DeviceCategory[response.body.category])
-          /* new DeviceModel(
+          new DeviceModel(
             response.id,
             new DeviceModelBody(
               response.body.id,
+              response.body.name,
               response.body.brandName,
               response.body.modelName,
               response.body.manufacturerName,
               response.body.category,
-              response.body.energyLimitationClass
+              response.body.energyLimitationClass,
+              response.body.controlledProperty,
+              response.body.supportedUnits,
+              response.body.function,
+              response.body.supportedProtocol
             )
-          ) */
+          )
         )
       );
   }
 
   getMultiple(): Observable<any> {
-    const organizationId = this.sharedVariable.getSelectedOrganisationId()
+    const organizationId = this.sharedVariable.getSelectedOrganisationId();
     return this.restService.get(this.DEVICEMODELURL, {organizationId})
       .pipe(
         map(
@@ -59,15 +63,21 @@ export class DeviceModelService {
               item.id,
               new DeviceModelBody(
                 item.body.id,
+                item.body.name,
                 item.body.brandName,
                 item.body.modelName,
                 item.body.manufacturerName,
-                item.body.category
+                item.body.category,
+                item.body.energyLimitationClass,
+                item.body.controlledProperty,
+                item.body.supportedUnits,
+                item.body.function,
+                item.body.supportedProtocol
                 )
               )
             )
           )
-        ); 
+        );
   }
 
   delete(id: number) {
