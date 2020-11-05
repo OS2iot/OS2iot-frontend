@@ -5,16 +5,6 @@ import { EnergyLimitationClass } from './Enums/energy-limitation-class.enum';
 import { SupportedProtocol } from './Enums/supported-protocol.enum';
 import { SupportedUnit } from './supported-unit.model';
 
-
-export class DeviceModel {
-    id: number
-    body: DeviceModelBody = new DeviceModelBody()
-    constructor(id: number = undefined, body: DeviceModelBody = new DeviceModelBody()) {
-        this.id = id;
-        this.body = body;
-    }
-}
-
 export class DeviceModelBody {
     name?: string;
     id?: string;
@@ -30,22 +20,30 @@ export class DeviceModelBody {
     supportedProtocol?: SupportedProtocol;
 
     constructor(
-        id: string = undefined,
-        name: string = undefined,
-        brandName: string = undefined,
-        modelName: string = undefined,
-        manufacturerName: string = undefined,
-        category: string = undefined,
-        energyLimitationClass: string = undefined) 
-    {
+        id?: string,
+        name?: string,
+        brandName?: string,
+        modelName?: string,
+        manufacturerName?: string,
+        category?: string,
+        energyLimitationClass?: string) {
+            this.id = id;
+            this.name = name;
+            this.type = 'DeviceModel';
+            this.brandName = brandName;
+            this.modelName = modelName;
+            this.manufacturerName = manufacturerName;
+            this.category = DeviceCategory[category];
+            this.energyLimitationClass = EnergyLimitationClass[energyLimitationClass];
+        }
+}
+export class DeviceModel {
+    id: number;
+    body: DeviceModelBody = new DeviceModelBody();
+
+    constructor(id?: number, body: DeviceModelBody = new DeviceModelBody()) {
         this.id = id;
-        this.name = name;
-        this.type = 'DeviceModel';
-        this.brandName = brandName;
-        this.modelName = modelName;
-        this.manufacturerName = manufacturerName;
-        this.category = DeviceCategory[category];
-        this.energyLimitationClass = EnergyLimitationClass[energyLimitationClass]
+        this.body = body;
     }
 }
 
