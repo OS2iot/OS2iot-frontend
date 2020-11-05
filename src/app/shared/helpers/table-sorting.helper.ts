@@ -27,6 +27,9 @@ export function tableSorter(item, property) {
   } else if (property === 'devices') {
     // applications table device count
     return item?.iotDevices?.length;
+  } else if (property === 'gateway-status') {
+    // gateway table status
+    return item?.lastSeenAt;
   } else if (property === 'payload-decoder-id') {
     // payload decoder table id
     return item?.id;
