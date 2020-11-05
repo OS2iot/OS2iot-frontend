@@ -10,7 +10,7 @@ import { DeviceModel } from '../device.model';
 import { ControlledPropperty } from '../Enums/controlled-propperty.enum';
 import { DeviceCategory } from '../Enums/device-category.enum';
 import { DeviceFunction } from '../Enums/device-function.enum';
-import { EnergyLimitationClass } from '../Enums/energy-limitation-class.enum';
+import { EnergyLimitationClass } from '../Enums/energy-limitation-class.model';
 import { SupportedProtocol } from '../Enums/supported-protocol.enum';
 import { SupportedUnit } from '../supported-unit.model';
 
@@ -31,7 +31,7 @@ export class DeviceModelEditComponent implements OnInit {
   categories = [];
   supportedUnits = new SupportedUnit();
   deviceFunctions = [];
-  energyLimitationClass = [];
+  energyLimitationClass = new EnergyLimitationClass();
   supportedProtocol = [];
 
   constructor(
@@ -59,7 +59,6 @@ export class DeviceModelEditComponent implements OnInit {
     this.controlledPropperties = Object.values(ControlledPropperty);
     this.categories = Object.values(DeviceCategory);
     this.deviceFunctions = Object.values(DeviceFunction);
-    this.energyLimitationClass = Object.values(EnergyLimitationClass);
     this.supportedProtocol = Object.values(SupportedProtocol);
   }
 

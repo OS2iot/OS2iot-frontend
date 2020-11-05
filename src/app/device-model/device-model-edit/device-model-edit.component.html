@@ -65,7 +65,8 @@
             <label class="form-label" for="controlledProperty">{{'QUESTION.DEVICE-MODEL.SELECT-CONTROLLEDPROPERTY' | translate}}</label>*
             <mat-select 
                 class="form-control"
-                multiple [compareWith]="compare"
+                multiple 
+                [compareWith]="compare"
                 name="controlledProperty"
                 [(ngModel)]="deviceModel.body.controlledProperty">
                 <mat-option 
@@ -83,6 +84,7 @@
             <mat-select 
                 class="form-control" 
                 name="categories"
+                [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.category">
                 <mat-option 
                     *ngFor="let category of categories" 
@@ -99,7 +101,8 @@
             <mat-select 
                 class="form-control" 
                 name="supportedUnits"
-                multiple [compareWith]="compare"
+                multiple 
+                [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.supportedUnits">
                 <mat-option 
                     *ngFor="let unit of supportedUnits.units" 
@@ -133,12 +136,12 @@
             <mat-select 
                 class="form-control" 
                 name="energyLimitationClass"
-                multiple [compareWith]="compare"
+                [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.energyLimitationClass">
                 <mat-option 
-                    *ngFor="let elclass of energyLimitationClass" 
-                    [value]="elclass">
-                        {{elclass}}
+                    *ngFor="let elclass of energyLimitationClass.energyLimits" 
+                    [value]="elclass.code">
+                        {{elclass.name}}
                 </mat-option>
             </mat-select>
         </div>

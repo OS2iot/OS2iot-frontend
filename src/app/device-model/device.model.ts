@@ -1,23 +1,16 @@
-import { ControlledPropperty } from './Enums/controlled-propperty.enum';
-import { DeviceCategory } from './Enums/device-category.enum';
-import { DeviceFunction } from './Enums/device-function.enum';
-import { EnergyLimitationClass } from './Enums/energy-limitation-class.enum';
-import { SupportedProtocol } from './Enums/supported-protocol.enum';
-import { SupportedUnit } from './supported-unit.model';
-
 export class DeviceModelBody {
-    name?: string;
     id?: string;
+    name?: string;
     private type = 'DeviceModel';
     brandName?: string;
     modelName?: string;
     manufacturerName?: string;
-    controlledProperty?: ControlledPropperty;
-    category?: DeviceCategory;
-    supportedUnits?: SupportedUnit;
-    function?: DeviceFunction;
-    energyLimitationClass?: EnergyLimitationClass;
-    supportedProtocol?: SupportedProtocol;
+    category?: string;
+    energyLimitationClass?: string;
+    controlledProperty?: string[];
+    supportedUnits?: string[];
+    function?: string[];
+    supportedProtocol?: string[];
 
     constructor(
         id?: string,
@@ -26,15 +19,25 @@ export class DeviceModelBody {
         modelName?: string,
         manufacturerName?: string,
         category?: string,
-        energyLimitationClass?: string) {
+        energyLimitationClass?: string,
+        controlledProperty?: string[],
+        supportedUnits?: string[],
+        sensorFunction?: string[],
+        supportedProtocol?: string[])
+        {
             this.id = id;
             this.name = name;
             this.type = 'DeviceModel';
             this.brandName = brandName;
             this.modelName = modelName;
             this.manufacturerName = manufacturerName;
-            this.category = DeviceCategory[category];
-            this.energyLimitationClass = EnergyLimitationClass[energyLimitationClass];
+            this.category = category;
+            this.energyLimitationClass = energyLimitationClass;
+            this.controlledProperty = controlledProperty;
+            this.supportedUnits = supportedUnits;
+            this.function = sensorFunction;
+            this.supportedProtocol = supportedProtocol;
+
         }
 }
 export class DeviceModel {
