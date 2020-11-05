@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Subscription } from 'rxjs';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
 
@@ -11,7 +14,7 @@ import { DeviceModel } from '../device.model';
   templateUrl: './device-model-table.component.html',
   styleUrls: ['./device-model-table.component.scss']
 })
-export class DeviceModelTableComponent implements OnInit, AfterViewInit {
+export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,11 +24,12 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   public isLoadingResults = false;
   public resultsLength = 0;
   public hasWritePermission = false;
-  private deviceModelId: number;
+  deleteDialogSubscription: Subscription;
 
   constructor(
     private sharedService: SharedVariableService,
-    private deviceModelService: DeviceModelService
+    private deviceModelService: DeviceModelService,
+    private deleteDialogservice: DeleteDialogService
   ) { }
 
   ngOnInit(): void {
@@ -57,12 +61,27 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  clickDelete(element: any) {
-    /* this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
-      if (response.ok && response.body.success === true) {
-        this.deleteGateway.emit(element.id);
-        this.getLoraGateways();
-      }
-    }); */
+  public clickDelete(deviceModel) {
+    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDeleteDialog()
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.deviceModelService.delete(deviceModel.id)
+              .subscribe(
+                (response) => {
+                  this.getDeviceModels();
+                }
+              );
+          } else {
+            console.log(response);
+          }
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    if (this.deleteDialogSubscription) {
+        this.deleteDialogSubscription.unsubscribe();
+    }
   }
 }
