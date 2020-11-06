@@ -138,6 +138,13 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
 
   addPayloadDeviceDatatarget() {
     this.counter = this.counter === undefined ? this.payloadDeviceDatatarget.length : this.counter + this.payloadDeviceDatatarget.length;
+    this.payloadDeviceDatatarget.map(
+      pdd => {
+        if (pdd.payloadDecoderId === 0) {
+          pdd.payloadDecoderId = null;
+        }
+      }
+    )
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
@@ -282,7 +289,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         this.payloadDeviceDatatarget.push({
           id: element.id,
           iotDeviceIds: element.iotDevices.map((x) => x.id),
-          payloadDecoderId: element.payloadDecoder?.id,
+          payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
           dataTargetId: element.dataTarget.id
         });
       }

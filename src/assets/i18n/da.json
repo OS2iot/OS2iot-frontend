@@ -356,6 +356,7 @@
     "ADD-RELATIONS": "Tilføj device og payload decoder",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
+      "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",

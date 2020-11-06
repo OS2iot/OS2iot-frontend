@@ -97,6 +97,9 @@
                       <mat-select matNativeControl
                         name="payloadDecoderId"
                         [(value)]="element.payloadDecoderId">
+                        <mat-option [value]="0">
+                          {{'QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED' | translate}}
+                        </mat-option>
                         <mat-option *ngFor="let payloadDecoder of payloadDecoders" [value]="payloadDecoder.id">
                           {{payloadDecoder.name}}
                         </mat-option>
