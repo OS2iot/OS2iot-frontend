@@ -21,10 +21,14 @@
                 <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6"
                     [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
             </div>
-            <div class="mt-5">
-                <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{'Login'}}</button>
+            <div class="row">
+                <div class="mt-5 col-md-3">
+                    <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{'Login'}}</button>
+                </div>
+                <div class="mt-5 col-md-6">
+                    <a class="btn btn-secondary" href="{{getKombitLoginUrl()}}">{{'AUTH.KOMBIT-BUTTON' | translate}}</a>
+                </div>
             </div>
         </form>
-        <a class="btn btn-secondary mt-4" href="{{getKombitLoginUrl()}}">{{'AUTH.KOMBIT-BUTTON' | translate}}</a>
     </div>
 </div>
