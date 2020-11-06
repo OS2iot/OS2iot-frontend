@@ -136,7 +136,7 @@
     "NETWORK-TECHNOLOGY": "Netværksteknologi",
     "ALARM": "Alarm",
     "BATTERY": "Batteri",
-    "ACTIVE": "Aktiv",
+    "ACTIVE": "Sidst aktiv",
     "DATA": "Data(24 timer)"
   },
   "LORA-GATEWAY-TABLE": {
