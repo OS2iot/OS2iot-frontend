@@ -264,7 +264,9 @@
       "ORG": "Vælg en organisation",
       "ORG-PLACEHOLDER": "Organisation",
       "APPS": "Vælg en applikation",
-      "APPS-PLACEHOLDER": "Applikationer"
+      "APPS-PLACEHOLDER": "Applikationer",
+      "ADD-APPLICATION-ON-CREATE": "Skal nye applikationer automatisk tilføjes til brugergruppen",
+      "ADD-APPLICATION-AUTOMATIC": "Automatisk tilføjelse af applikationer til brugergruppen"
     },
     "TABLE-ROW": {
       "EDIT": "Rediger",
