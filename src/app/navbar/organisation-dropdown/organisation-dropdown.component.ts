@@ -53,9 +53,9 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
           (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
         )
       ) {
-        this.setSelectedOrganisation(response.organizations[0].id);
+        this.setSelectedOrganisation(response.organizations[0]?.id);
       }
-      this.isOrganisationAdmin(response.organizations[0].id);
+      this.isOrganisationAdmin(response.organizations[0]?.id);
     });
   }
 

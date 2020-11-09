@@ -10,6 +10,7 @@ import {
 import { AuthService } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,7 +28,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private sharedVariableService: SharedVariableService
   ) {
     translate.use('da');
   }
@@ -41,6 +43,10 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
+  }
+
+  hasSomePermissions(): boolean {
+    return this.sharedVariableService.getHasAnyPermission()
   }
 
   isLoggedInWithKombit() {

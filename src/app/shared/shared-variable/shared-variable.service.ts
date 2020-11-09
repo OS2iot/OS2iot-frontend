@@ -14,7 +14,8 @@ export class SharedVariableService {
   }
 
   private selectedOrganisationId: number;
-  private gotWritePermission = false;
+  private gotWritePermission: boolean;
+  private gotAnyPermission: boolean;
   private routerInfo: BehaviorSubject<number>;
 
   getValue(): Observable<number> {
@@ -45,6 +46,24 @@ export class SharedVariableService {
         this.gotWritePermission = hasWritePermissions;
         localStorage.setItem('has_write_permission', hasWritePermissions.toString());
       });
+  }
+
+  setHasAnyPermission() {
+    this.authService.me()
+      .subscribe( 
+        (response: CurrentUserInfoResponse) => {
+          const hasSomePermission = response.user.permissions.length > 0;
+          this.gotAnyPermission = hasSomePermission;
+          localStorage.setItem('has_any_permission', hasSomePermission.toString());
+        }
+      )
+  }
+
+  getHasAnyPermission(): boolean {
+    if (this.gotAnyPermission != null) {
+      return this.gotAnyPermission;
+    }
+    return JSON.parse(localStorage.getItem('has_any_permission'));
   }
 
   getHasWritePermission(): boolean {

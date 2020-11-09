@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +24,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private sharedVariableService: SharedVariableService
   ) {}
 
   ngOnInit(): void {}
@@ -39,6 +41,7 @@ export class AuthComponent implements OnInit {
 
   success() {
     this.isLoading = false;
+    this.sharedVariableService.setHasAnyPermission();
     this.router.navigateByUrl('/dashboard');
   }
 
