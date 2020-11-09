@@ -76,8 +76,15 @@
         </div>
     </div>
 
-
-    <!-- TODO: Select application -->
+    <div *ngIf="isReadOrWrite()">
+        <div class="form-group mt-3 col-12">
+            <label class="form-label" for="name">{{'PERMISSION.EDIT.ADD-APPLICATION-AUTOMATIC' | translate}}</label>
+            <div class="row">
+                <mat-slide-toggle [(ngModel)]="permission.addApplicationsOnCreate" id="addApplicationsOnCreate" name="addApplicationsOnCreate">
+                    {{'PERMISSION.EDIT.ADD-APPLICATION-ON-CREATE' | translate}}</mat-slide-toggle>
+            </div>
+        </div>
+    </div>
 
     <div class="form-group mt-5">
         <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>

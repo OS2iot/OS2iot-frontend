@@ -15,6 +15,8 @@ export class PermissionRequest {
   userIds: number[];
 
   applicationIds: number[];
+  
+  addApplicationsOnCreate = true;
 }
 
 export interface PermissionResponse {

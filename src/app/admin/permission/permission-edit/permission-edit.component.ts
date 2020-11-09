@@ -202,6 +202,10 @@ export class PermissionEditComponent implements OnInit {
     );
   }
 
+  isReadOrWrite(): boolean {
+    return this.permission.level === PermissionType.Read || this.permission.level === PermissionType.Write
+  }
+
   onSubmit(): void {
     if (this.id) {
       this.update();
