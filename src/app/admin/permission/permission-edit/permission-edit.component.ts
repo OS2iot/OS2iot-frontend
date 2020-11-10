@@ -122,6 +122,7 @@ export class PermissionEditComponent implements OnInit {
         this.permission.name = response.name;
         this.permission.level = response.type;
         this.permission.userIds = response.users.map((x) => x.id);
+        this.permission.automaticallyAddNewApplications = response.automaticallyAddNewApplications;
 
         if (response.type !== PermissionType.GlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
