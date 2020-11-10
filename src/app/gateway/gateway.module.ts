@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { GatewayTableComponent } from './gateway-table/gateway-table.component';
-import { GatewayTableRowComponent } from './gateway-table-row/gateway-table-row.component';
 import { GatewaysComponent } from './gateways/gateways.component';
 import { GatewayListComponent } from './gateway-list/gateway-list.component';
 import { GatewayEditComponent } from './gateway-edit/gateway-edit.component';
@@ -13,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
+import { SharedModule } from '@shared/shared.module';
 
 const gatewayRoutes: Routes = [
   {
@@ -31,7 +31,6 @@ const gatewayRoutes: Routes = [
 @NgModule({
   declarations: [
     GatewayTableComponent,
-    GatewayTableRowComponent,
     GatewaysComponent,
     GatewayListComponent,
     GatewayDetailComponent,
@@ -47,10 +46,10 @@ const gatewayRoutes: Routes = [
     FontAwesomeModule,
     NGMaterialModule,
     RouterModule.forChild(gatewayRoutes),
+    SharedModule
   ],
   exports: [
     GatewayTableComponent,
-    GatewayTableRowComponent,
     GatewaysComponent,
     GatewayListComponent,
     GatewayEditComponent,

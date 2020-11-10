@@ -18,8 +18,11 @@
       "@shared/*": ["src/app/shared/*"],
       "@admin/*": ["src/app/admin"],
       "@applications/*": ["src/app/applications/*"],
+      "@auth/*": ["src/app/auth/*"],
+      "@navbar/*": ["src/app/navbar/*"],
       "@payload-decoder/*": ["src/app/payload-decoder/*"],
       "@profiles/*": ["src/app/profiles/*"],
+      "@sigfox/*": ["src/app/sigfox/*"],
       "@environments/*": ["src/environments/*"],
       "@app/*": ["src/app/*"]
     }

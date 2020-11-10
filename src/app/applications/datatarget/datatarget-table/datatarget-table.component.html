@@ -14,13 +14,3 @@
     </tbody>
   </table>
 </div>
-
-<nav *ngIf="pageTotal > 1" [attr.aria-label]="'TABLE.PAGINATION' | translate">
-  <ul class="pagination justify-content-center mt-5">
-    <li class="page-item"><a class="page-link" [routerLink]="" (click)="prevPage()">Previous</a></li>
-    <li class="page-item disabled">
-      <div class="page-link" [routerLink]="">{{ pageOffset + 1 }} / {{ pageTotal }}</div>
-    </li>
-    <li class="page-item"><a class="page-link" [routerLink]="" (click)="nextPage()">Next</a></li>
-  </ul>
-</nav>

@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -23,11 +24,15 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
     public dataSource = new MatTableDataSource<GatewayStats>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
+    deleteGateway = new EventEmitter();
+    private deleteDialogSubscription: Subscription;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
         private route: ActivatedRoute,
         private translate: TranslateService,
+        private router: Router,
+        private deleteDialogService: DeleteDialogService
     ) { }
 
     ngOnInit(): void {
@@ -46,19 +51,50 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.dataSource.paginator = this.paginator;
     }
 
+    getCoordinates() {
+        return {
+            longitude: this.gateway.location.longitude,
+            latitude: this.gateway.location.latitude,
+            draggable: false,
+            editEnabled: false,
+            useGeolocation: false
+        };
+    }
+
     bindGateway(id: string): void {
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
             this.gatewayStats = result.stats;
+            this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
+            this.dataSource.paginator = this.paginator;
             console.log('gateway', this.gateway);
         });
+    }
+
+    onDeleteGateway() {
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            (response) => {
+              if (response) {
+                this.gatewayService.delete(this.gateway.id).subscribe((response) => {
+                    if (response.ok && response.body.success === true) {
+                    }
+                });
+                this.router.navigate(['gateways']);
+              } else {
+                console.log(response);
+              }
+            }
+        );
     }
 
     ngOnDestroy() {
         if (this.gatewaySubscription) {
             this.gatewaySubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 }

@@ -8,4 +8,5 @@ export class DatatargetResponse {
     timeout: number;
     type: DataTargetType;
     url: string;
+    authorizationHeader: string;
 }

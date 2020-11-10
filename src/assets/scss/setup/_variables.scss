@@ -23,21 +23,23 @@ $screen-xxl-min: 1400px;
 //############################### Font and Font sizes ####################
 //###########################################################################
 
+$font-name: 'Roboto' !default;
+
 //----------------
 // -to-rem
 //----------------
 $global-font-size: 100% !default;
 // Removing the !default from $em-base so we are not inheriting that
 // value from Bourbon.
-$em-base: 14; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
+$em-base: 12; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
 
 $base-font-size: $em-base !default;
 $base-line-height: $em-base+2 !default;
 
 $min_width: $screen-sm-min;
 $max_width: $screen-xl-min;
-$min_font: 14px;
-$max_font: 18px;
+$min_font: 10px;
+$max_font: 16px;
 
 /*
 Removes the unit (e.g. px, em, rem) from a value, returning the number only.
@@ -57,7 +59,7 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 // Paths
 // Relative font and image file paths
 $font-path: '../fonts/Roboto/' !default;
-$image-path: '../img' !default;
+$image-path: '../images/' !default;
 $node-modules-path: '../../../node_modules';
 $icons-folder-path: "../img/svg-icons/" !default;
 
@@ -218,7 +220,7 @@ $color-active: $color-green-001 !default;
 $color-text: $color-black-001 !default;
 $color-text-primary: $color-primary !default;
 $color-text-secondary: $color-secondary !default;
-$color-text-light: $color-black-002 !default;
+$color-text-light: $color-grey-003 !default;
 $color-text-white: $color-white-001 !default;
 $color-text-blue: $color-blue-001 !default;
 $color-text-yellow: $color-yellow-001 !default;
@@ -243,6 +245,7 @@ $color-Icons-primary: $color-primary !default;
 $color-Icons-secondary: $color-secondary !default;
 $color-Icons-alternative: $color-alternative !default;
 $color-Icons-light: $color-light-green-001 !default;
+$color-icon-label: $color-text-light !default;
 
 // //Links color
 $color-link: $color-primary !default;
@@ -263,7 +266,7 @@ $color-border-green: $color-green-002 !default;
 
 //Borders
 $border-width: 5px;
-$border-width-small: 2px;
+$border-width-small: 1px;
 $border-radius-primary: 0.25rem;
 $border-radius-secondary: 20px;
 $outer-border: $border-width-small solid $color-border;

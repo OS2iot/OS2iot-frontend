@@ -1,6 +1,8 @@
 @import "../setup/variables";
 
-.table {
+
+.table, table {
+  width: 100%;
   background-color: $white;
   // -webkit-border-radius: .25rem;
   // -moz-border-radius: .25rem;

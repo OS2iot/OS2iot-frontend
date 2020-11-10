@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Datatarget, DatatargetData } from '../datatarget.model';
 import { DatatargetService } from '../datatarget.service';
 import { Sort } from '@shared/models/sort.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
     selector: 'app-datatarget-table',
@@ -14,16 +15,17 @@ import { Sort } from '@shared/models/sort.model';
 export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() pageLimit: number;
-    @Input() selectedSortObject: Sort;
-    public pageOffset: number = 0;
+    public pageOffset = 0;
     public pageTotal: number;
     public applicationId: number;
 
     datatargets: Datatarget[]
     private datatargetSubscription: Subscription;
+    private deleteDialogSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
+        private deleteDialogService: DeleteDialogService,
         private datatargetService: DatatargetService,
         public translate: TranslateService) {
         translate.use('da');
@@ -59,27 +61,28 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     deleteDatatarget(id: number) {
-        this.datatargetService.delete(id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.getDatatarget();
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            (response) => {
+              if (response) {
+                this.datatargetService.delete(id).subscribe((response) => {
+                    if (response.ok && response.body.affected > 0) {
+                        this.getDatatarget();
+                    }
+                });
+              } else {
+                  console.log(response);
+              }
             }
-        });
-    }
-
-    prevPage() {
-        if (this.pageOffset) this.pageOffset--;
-        this.getDatatarget();
-    }
-
-    nextPage() {
-        if (this.pageOffset < this.pageTotal) this.pageOffset++;
-        this.getDatatarget();
+          );
     }
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
         if (this.datatargetSubscription) {
             this.datatargetSubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 

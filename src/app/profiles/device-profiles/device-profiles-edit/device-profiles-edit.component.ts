@@ -87,6 +87,10 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
+  }
+
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessage = '';

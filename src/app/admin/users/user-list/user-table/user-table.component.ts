@@ -1,57 +1,63 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { Sort } from '@shared/models/sort.model';
-import { Subscription } from 'rxjs';
 import { UserResponse } from '../../user.model';
-import { UserService } from '../../user.service';
+
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
-export class UserTableComponent implements OnInit {
+export class UserTableComponent implements OnInit, OnChanges, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ['name', 'email', 'global', 'status', 'login', 'menu'];
+  dataSource = new MatTableDataSource<UserResponse>();
+
+  @Input() isLoadingResults: boolean;
+  @Output() deletePermission = new EventEmitter();
+  resultsLength = 0;
+
   @Input() pageLimit: number;
   @Input() selectedSortObject: Sort;
-  public users: UserResponse[];
+  @Input() users: UserResponse[];
+  user: UserResponse;
   public pageOffset = 0;
   public pageTotal: number;
-  subscription: Subscription;
+  deleteUser = new EventEmitter();
+
 
   constructor(
-    private userService: UserService
+    public translate: TranslateService,
+    private router: Router
+
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
+
   }
 
-  getUsers() {
-    this.subscription = this.userService.getMultiple()
-      .subscribe(
-        (response) => {
-          this.users = response.data;
-        });
-  }
-
-  ngOnChanges() {
-    this.getUsers();
-  }
-
-
-  prevPage() {
-    if (this.pageOffset) { this.pageOffset--; }
-    this.getUsers();
-  }
-
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) { this.pageOffset++; }
-    this.getUsers();
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("ngOnChanges")
+    if (this.users) {
+      this.dataSource = new MatTableDataSource(this.users);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sortingDataAccessor = tableSorter;
+      this.isLoadingResults = false;
+      this.resultsLength = this.users.length;
     }
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
 }

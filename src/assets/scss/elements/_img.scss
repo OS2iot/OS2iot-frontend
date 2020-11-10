@@ -1,7 +1,11 @@
 .img-logo {
   background-color: transparent;
-  height: 100;
-  margin-top: 15;
+  width: 50px;
+  margin-top: 15px;
+
+  @media(min-width: $screen-md-min) {
+    width: 100px;
+  }
 }
 
 @mixin img-cover($url) {

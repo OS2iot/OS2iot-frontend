@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
-import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-profile.model';
-import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
+import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
+
 
 
 @Component({
@@ -26,21 +25,26 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public iotDeviceSubscription: Subscription;
     public deviceProfileSubscription: Subscription;
     public OTAA = true;
+    public detailsText: string;
+    public downlinkText: string;
     public deviceProfileName: string;
     public serviceProfileName: string;
+    public downlink = new Downlink();
+    public errorMessages: string[];
+
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
 
-    device = new IotDevice;
+    device: IotDevice;
 
     constructor(
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
-        private deviceProfileService: DeviceProfileService,
-        private serviceProfileService: ServiceProfileService
+        private router: Router,
+
     ) { }
 
     ngOnInit(): void {
@@ -64,21 +68,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             if (this.device.location) {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];
-            }
-
-            if (this.device?.lorawanSettings?.deviceProfileID) {
-                this.deviceProfileSubscription = this.deviceProfileService.getOne(this.device.lorawanSettings.deviceProfileID)
-                    .subscribe((response) => {
-                        this.OTAA = response.deviceProfile.supportsJoin;
-                        this.deviceProfileName = response.deviceProfile.name;
-                    });
-            }
-
-            if (this.device?.lorawanSettings?.serviceProfileID) {
-                this.deviceProfileSubscription = this.serviceProfileService.getOne(this.device.lorawanSettings.serviceProfileID)
-                    .subscribe((response: ServiceProfileResponseOne) => {
-                        this.serviceProfileName = response.serviceProfile.name;
-                    });
             }
         });
     }

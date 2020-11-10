@@ -5,12 +5,12 @@ export class ServiceProfile {
     public networkServerID: string;
     public addGWMetaData: boolean;
     public channelMask: string;
-    public devStatusReqFreq: number;
+    public devStatusReqFreq = 0;
     public dlBucketSize: number;
     public dlRate: number;
     public dlRatePolicy: string;
-    public drMax: number;
-    public drMin: number;
+    public drMax = 5;
+    public drMin = 0;
     public hrAllowed: boolean;
     public minGWDiversity: number;
     public nwkGeoLoc: boolean;

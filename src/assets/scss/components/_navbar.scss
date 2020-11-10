@@ -1,17 +1,18 @@
 @import '~src/assets/scss/setup/breakpoints';
 @import '~src/assets/scss/setup/variables';
+@import '~src/assets/scss/setup/utilities';
 
 .navbar {
   top: 0;
   bottom: 0;
   background-color: $white;
-  border-right: $grey-border solid 1px;
+  border-bottom: $outer-border;
+  @include add-shadow;
 
-  @include media-breakpoint-up(sm) {
+  @media(min-width: $screen-md-min) {
+    border-bottom: none;
+    border-right: $outer-border;
     width: $navWidth;
-  }
-
-  @include media-breakpoint-up(md) {
     position: fixed;
   }
 
@@ -60,4 +61,9 @@ select+fa-icon {
   pointer-events: none;
   background-color: #fff;
   padding-right: 5px;
+}
+
+.mat-expansion-indicator {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }

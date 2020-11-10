@@ -52,5 +52,6 @@ ol {
 
 
 .list-group-item {
+  padding: 0 !important;
   @include add-shadow;
 }

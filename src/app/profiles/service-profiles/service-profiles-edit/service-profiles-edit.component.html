@@ -26,6 +26,14 @@
         </div>
     </div>
 
+    <div class="col-xs-12 form-group" *ngIf="serviceProfile.id">
+        <label for="id"
+            class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.ID' | translate}}</label>
+        <input type="text" class="form-control" id="id" name="id"
+            [placeholder]="'PROFILES.SERVICE_PROFILE.ID_PLACEHOLDER' | translate" maxlength="50" required disabled
+            [ngModel]="serviceProfile.id">
+    </div>
+
     <!-- Device-status request frequency
                 Frequency to initiate an End-Device status request (request/day). Set to 0 to disable.
               -->
@@ -83,7 +91,7 @@
             <div class="form-group">
                 <mat-checkbox id="reportDevStatusBattery" name="reportDevStatusBattery"
                     [(ngModel)]="serviceProfile.reportDevStatusBattery">
-                    <label for="name" class="form-check-label text--bold"
+                    <label for="reportDevStatusBattery-input" class="form-check-label text--bold"
                         style="white-space: initial">{{'PROFILES.SERVICE_PROFILE.REPORTBATTERYSTATUS' | translate}}</label>
                 </mat-checkbox>
             </div>
@@ -100,7 +108,7 @@
             <div class="form-group">
                 <mat-checkbox id="reportDevStatusMargin" name="reportDevStatusMargin"
                     [(ngModel)]="serviceProfile.reportDevStatusMargin">
-                    <label for="name" class="form-check-label text--bold"
+                    <label for="reportDevStatusMargin-input" class="form-check-label text--bold"
                         style="white-space: initial">{{'PROFILES.SERVICE_PROFILE.REPORTBATTERYMARGIN' | translate}}</label>
                 </mat-checkbox>
             </div>

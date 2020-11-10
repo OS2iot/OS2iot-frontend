@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
@@ -25,6 +26,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
+  public editMode = false;
   private id: string;
 
   gateway = new Gateway();
@@ -33,7 +35,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public translate: TranslateService,
     private router: Router,
-    private loraGatewayService: ChirpstackGatewayService
+    private loraGatewayService: ChirpstackGatewayService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.getGateway(this.id);
+      this.editMode = true;
     }
     this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
       .subscribe(translations => {
@@ -59,6 +63,16 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
       });
   }
 
+  getCoordinates() {
+    return {
+        longitude: this.gateway.location.longitude,
+        latitude: this.gateway.location.latitude,
+        draggable: true,
+        useGeolocation: !this.editMode,
+        editMode: this.editMode
+    };
+}
+
   createGateway(): void {
     this.loraGatewayService.post(this.gateway)
       .subscribe(
@@ -73,6 +87,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   }
 
   updateGateway(): void {
+    // Gateway ID not allowed in update.
+    this.gateway.id = undefined;
     this.loraGatewayService
       .put(this.gateway, this.id)
       .subscribe(
@@ -103,27 +119,20 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   }
 
   onCoordinateKey(event: any) {
-    console.log(event.target.value);
-    console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength);
     }
   }
 
+  updateCoordinates(event: any) {
+    this.gateway.location.longitude = event.longitude;
+    this.gateway.location.latitude = event.latitude;
+  }
+
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = error.message;
-    }
-    this.formFailedSubmit = true;
+    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errorResponse.errorFields;
+    this.errorMessages = errorResponse.errorMessages;
   }
 
 }

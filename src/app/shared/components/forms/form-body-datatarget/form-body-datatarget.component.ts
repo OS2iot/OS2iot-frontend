@@ -15,6 +15,9 @@ import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { SaveSnackService } from '@shared/services/save-snack.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-form-body-datatarget',
@@ -37,6 +40,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
+  private counter: number;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
@@ -48,7 +52,9 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     private location: Location,
     private applicationService: ApplicationService,
     private payloadDecoderService: PayloadDecoderService,
-    private payloadDeviceDataTargetService: PayloadDeviceDatatargetService
+    private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
+    private saveSnackService: SaveSnackService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +79,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
     this.payloadDeviceDatatarget.push({ id: null, iotDeviceIds: [], payloadDecoderId: null, dataTargetId: this.datatargetid });
   }
 
-  deleteRow(index) {
+  private deleteRow(index) {
     if (this.payloadDeviceDatatarget.length === 0) {
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
@@ -83,6 +89,23 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
           this.payloadDeviceDatatarget.splice(index, 1);
         });
     }
+  }
+
+  openDeleteDialog(index) {
+    const dialog = this.dialog.open(DeleteDialogComponent, {
+      data: {
+        showAccept: true,
+        showCancel: true,
+        message: 'Er du sikker på at du vil slette?'
+      }
+    });
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteRow(index);
+        console.log(`Dialog result: ${result}`);
+      }
+    });
   }
 
   onSubmit(): void {
@@ -99,10 +122,12 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   }
 
   updateDatatarget() {
+    this.counter = this.counter === undefined ? 1 : this.counter + 1;
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (datatargetResponse: DatatargetResponse) => {
           this.datatarget = this.mapToDatatarget(datatargetResponse);
+          this.countToRedirect();
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -112,11 +137,20 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
   }
 
   addPayloadDeviceDatatarget() {
+    this.counter = this.counter === undefined ? this.payloadDeviceDatatarget.length : this.counter + this.payloadDeviceDatatarget.length;
+    this.payloadDeviceDatatarget.map(
+      pdd => {
+        if (pdd.payloadDecoderId === 0) {
+          pdd.payloadDecoderId = null;
+        }
+      }
+    )
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
           (response) => {
             console.log(response);
+            this.countToRedirect();
           },
           (error) => {
             this.handleError(error);
@@ -126,6 +160,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         this.payloadDeviceDataTargetService.post(relation).subscribe(
           (res: any) => {
             console.log(res);
+            this.countToRedirect();
           },
           (error) => {
             this.handleError(error);
@@ -133,6 +168,14 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  countToRedirect() {
+    this.counter -= 1;
+    if (this.counter === 0) {
+      this.showSavedSnack();
+      this.routeBack();
+    }
   }
 
   getPayloadDeviceDatatarget(id: number) {
@@ -149,6 +192,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.datatargetid = response.id;
         this.datatarget.id = response.id;
+        this.showSavedSnack();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -219,6 +263,10 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       });
   }
 
+  showSavedSnack() {
+    this.saveSnackService.showSavedSnack();
+  }
+
   ngOnDestroy(): void {
     if (this.relationSubscription) {
       this.relationSubscription.unsubscribe();
@@ -241,7 +289,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
         this.payloadDeviceDatatarget.push({
           id: element.id,
           iotDeviceIds: element.iotDevices.map((x) => x.id),
-          payloadDecoderId: element.payloadDecoder?.id,
+          payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
           dataTargetId: element.dataTarget.id
         });
       }
@@ -255,7 +303,7 @@ export class FormBodyDatatargetComponent implements OnInit, OnDestroy {
       timeout: data.timeout,
       type: data.type,
       url: data.url,
-      authorizationHeader: null,
+      authorizationHeader: data.authorizationHeader,
       applicationId: data.application.id
     };
     return dt;

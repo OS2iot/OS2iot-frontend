@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionService } from '@app/admin/permission/permission.service';
@@ -6,13 +6,24 @@ import { Subscription } from 'rxjs';
 import { PermissionResponse } from '../permission.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
+import { Application } from '@applications/application.model';
+import { ApplicationService } from '@applications/application.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
+import { UserResponse } from '@app/admin/users/user.model';
+
 
 @Component({
   selector: 'app-permission-detail',
   templateUrl: './permission-detail.component.html',
   styleUrls: ['./permission-detail.component.scss']
 })
-export class PermissionDetailComponent implements OnInit {
+export class PermissionDetailComponent implements OnInit, OnChanges {
+  isLoadingResults = true;
+  public pageLimit: number = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
   permission: PermissionResponse;
   permissions: PermissionResponse[];
   public backButton: BackButton = {
@@ -31,12 +42,13 @@ export class PermissionDetailComponent implements OnInit {
   ];
   id: number;
   subscription: Subscription;
+  users: UserResponse[];
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private permissionService: PermissionService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -51,11 +63,17 @@ export class PermissionDetailComponent implements OnInit {
       });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getPermission(this.id);
+  }
+
   private getPermission(id: number) {
     this.subscription = this.permissionService
       .getPermission(id)
       .subscribe((response) => {
         this.permission = response;
+        this.users = response.users;
+        this.isLoadingResults = false;
       });
   }
 

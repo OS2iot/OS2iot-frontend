@@ -4,7 +4,7 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { AuthService } from '@app/auth/auth.service';
-import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faIdCard, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
@@ -16,11 +16,14 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 export class OrganisationDropdownComponent implements OnInit, OnChanges {
   public organisations: Organisation[];
   public user: UserResponse;
+  public isOrgAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
   faUsers = faUsers;
   faIdBadge = faIdBadge;
+  faToolbox = faToolbox;
+  faBurn = faBurn;
 
 
   constructor(
@@ -50,18 +53,19 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
           (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
         )
       ) {
-        this.setSelectedOrganisation(response.organizations[0].id);
+        this.setSelectedOrganisation(response.organizations[0]?.id);
       }
+      this.isOrganisationAdmin(response.organizations[0]?.id);
     });
   }
 
-  isOrganisationAdmin(orgId: number) {
-    return this.user.permissions.some(x => x.type === PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+  private isOrganisationAdmin(orgId: number) {
+    this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
   }
 
   public onChange(value) {
-    this.setSelectedOrganisation(value);
     this.sharedVariable.setValue(value);
+    this.isOrganisationAdmin(value);
     this.route.navigateByUrl('/applications');
   }
 

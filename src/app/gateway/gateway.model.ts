@@ -9,7 +9,10 @@ export class Gateway {
     gatewayProfileID: string = null;
     tagsString = '{}';
     tags?: JSON;
-    lastSeenAt: Date;
+    lastSeenAt: string;
+    map(): Map<string, number> {
+        throw new Error('Method not implemented.');
+    }
 }
 
 export class GatewayData {

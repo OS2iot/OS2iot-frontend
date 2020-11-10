@@ -47,6 +47,8 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // that you are using.
 @include angular-material-theme($OS2IoT-frontend-theme);
 
+
+////////////////////////////// EXPANSION PANELS ///////////////////////////////////////////
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
   box-shadow: none;
 }
@@ -68,8 +70,10 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 }
 
 
+///////////////////////////////////////// FORM FIELDS //////////////////////////////////////////////////
+
 .mat-form-field {
-  width: 100% !important;
+  width: 100%;
 
   .mat-form-field-wrapper {
     .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -96,4 +100,30 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
     border: $border-input;
     border-left-style: none;
   }
+}
+
+
+//////////////////////// MAT TABLES ////////////////////////////////////////// 
+
+.mat-elevation-z8 {
+  margin: 15px;
+}
+
+.mat-header-cell {
+  font-family: roboto-light;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 24px;
+  color: $grey-tablehead;
+  background-color: $grey-dark;
+}
+
+.mat-sort-header-arrow {
+  color: $grey-tablehead;
+  opacity: 1 !important;
+  // transform: translateY(25%) !important;
+}
+
+.mat-elevation-z8{
+  margin:0;
 }

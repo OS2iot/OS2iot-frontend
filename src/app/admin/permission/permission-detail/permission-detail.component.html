@@ -1,4 +1,4 @@
-<app-top-bar-single [data]="permission" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+<app-top-bar *ngIf="permission" [data]="permission" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
 <div class=" jumbotron m-md-4 p-md-3" *ngIf="permission">
     <div class="row">
@@ -16,13 +16,14 @@
                     {{'PERMISSION.DETAIL.DROPDOWN' | translate}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['edit-permission']"
+                    <li>
+                        <a class="dropdown-item" [routerLink]="['edit-permission']"
                             routerLinkActive="active">{{'PERMISSION.DETAIL.EDIT' | translate}}
                         </a>
                     </li>
-                    <li class="dropdown-item">
-                        <a (click)="onDeletePermission()" [routerLink]="">{{ 'PERMISSION.DETAIL.DELETE' | translate }}
+                    <li>
+                        <a class="dropdown-item" (click)="onDeletePermission()"
+                            [routerLink]="">{{ 'PERMISSION.DETAIL.DELETE' | translate }}
                         </a>
                     </li>
                 </ul>
@@ -31,10 +32,9 @@
     </div>
 </div>
 
-<!-- <div class="jumbotron m-md-4 p-md-3">
+<div class="jumbotron m-md-4 p-md-3">
     <h4 class="">
-        {{ 'PERMISSIONS.DETAIL.PERMISSIONS' | translate }}
+        {{ 'PERMISSION.DETAIL.USERS' | translate }}
     </h4>
-
-
-</div> -->
+    <app-user-table [users]="users" [isLoadingResults]="isLoadingResults"></app-user-table>
+</div>

@@ -1,0 +1,61 @@
+<ng-container>
+    <app-top-bar [title]="title" [backButton]="backButton" [subPage]="true"></app-top-bar>
+</ng-container>
+<div class="jumbotron my-4 m-md-4 py-3 p-md-3" *ngIf="deviceModel">
+    <div class="col-md-12 order-first order-md-last ">
+        <div class="btn-group float-md-right dropdown">
+            <button type="button" id="dropdown-{{ deviceModel.body.name }}" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{'DEVICE-MODEL.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ deviceModel.body.name }}">
+                <li class="dropdown-item">
+                    <a [routerLink]="['/device-model/device-model-edit', this.deviceModel.id]">{{ 'GEN.EDIT' | translate }}
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a (click)="clickDelete()">{{ 'GEN.DELETE' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>{{ 'DEVICE-MODEL.NAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.name}}</p>
+
+            <h4>{{ 'DEVICE-MODEL.ID' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.id}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.brandName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.modelName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.manufacturerName}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.controlledProperty}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.category}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.supportedUnits}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.FUNCTION' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.function}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.ENERGYLIMITATIONCLASS' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.energyLimitationClass}}</p>
+            
+            <h4>{{ 'DEVICE-MODEL.SUPPORTEDPROTOCOL' | translate }}</h4>
+            <p class="mb-5">{{deviceModel.body.supportedProtocol}}</p>
+        </div>
+    </div>
+</div>
+

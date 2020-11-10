@@ -3,26 +3,63 @@
     "CANCEL": "Annuller",
     "SHOW": "Vis",
     "PER-PAGE": "Per side",
+    "DELETE": "Slet",
     "BACK": "Tilbage",
     "EDIT": "Redigér",
+    "DELETE": "Slet",
     "APPLICATION": "Applikation",
-    "HTTP": "Generisk HTTP"
+    "HTTP": "Generisk HTTP",
+    "SAVE": "Gem"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
+    "APPLICATION": "Applikation",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "LORA-GATEWAYS": "LoRaWan Gateways",
+    "LORA-GATEWAYS": "LoRaWAN Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "LoRaWan Profiler",
+    "PROFILES": "LoRaWAN Profiler",
     "PAYLOAD-DECODER": "Payload Decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
     "USERS": "Brugere",
     "LOGIN": "Login",
-    "ADMIN": "Administration"
+    "ADMIN": "Administration",
+    "SIGFOX": "SigFox",
+    "SIGFOX-ADMIN": "Sigfox Administration",
+    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
+    "SEARCH": "Søgeresultater",
+    "MENU-ITEM-MISC": "Generelt",
+    "DEVICE-MODEL": "Device Model"
+  },
+  "SEARCH": {
+    "ICON": "",
+    "TYPE": "Type",
+    "NAME": "Navn",
+    "ID": "Id",
+    "ORGANISATION": "Organisation",
+    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
+    "QUERY": "Du har søgt efter:",
+    "NO-RESULTS": "Søgningen førte til 0 resultater."
+  },
+  "SIGFOX-GROUP": {
+    "SIGFOX": "SigFox",
+    "SIGFOX-GROUP": "SigFox Grupper",
+    "ADMINISTRATION": {
+      "NAME": "SigFox Grupper",
+      "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
+    },
+    "PROFILES": {
+      "NAME": "SigFox Enhedstyper",
+      "DEVICE-TYPE": "Sigfox enhedstyper",
+      "DEVICE-TYPE-NAME": "navn",
+      "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
+      "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
+      "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype",
+      "SAVE": "Gem enhedstype"
+    }
   },
   "APPLICATION": {
     "CREATE": "Opret applikation",
@@ -31,7 +68,23 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
-    "DATATARGET-SHOW": "Tilknyttede datatargets"
+    "DATATARGET-SHOW": "Se tilknyttede datatargets",
+    "IMPORT-CSV": "Bulk-import af IoT-enheder",
+    "BULK": {
+      "TEMPLATE": {
+        "GENERIC": "Generic HTTP sample",
+        "LORAWAN": "LoRaWan sample",
+        "SIGFOX": "Sigfox sample"
+      },
+      "DOWNLOAD": "Download Sample CSV Fil",
+      "DROPFILE": "Klik eller drop din .csv file her",
+      "NAME": "Navn",
+      "TYPE": "Type",
+      "IMPORTSTATUS": "Status",
+      "ERROR": "Fejl",
+      "EMPTY": "Der er ingen enheder at vise endnu",
+      "FILEFORMATERRORMESSAGE": "Forkert filformat, upload en .csv fil"
+    }
   },
   "GATEWAY": {
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -46,7 +99,9 @@
     "STATS": "Statistik",
     "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
     "STATS-TXPACKETSEMITTED": "Pakker Sendt",
-    "STATS-TIMESTAMP": "Tidspunkt"
+    "STATS-TIMESTAMP": "Tidspunkt",
+    "TABEL-TAB": "Listevisning",
+    "MAP-TAB": "Kort"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",
@@ -61,24 +116,28 @@
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
     "NAME": "Datatarget navn",
+    "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder navn:",
+    "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT Device navn:",
-    "NO-RELATIONS": "ingen tilknyttede relationer"
+    "NO-RELATIONS": "ingen tilknyttede relationer",
+    "AUTHORIZATIONHEADER": "Authorization header",
+    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet"
   },
   "APPLICATION-TABLE": {
-    "NAME": "NAVN",
-    "IOT-DEVICES": "IOT ENHEDER",
-    "UPDATED": "SENEST OPDATERET"
+    "NAME": "Navn",
+    "IOT-DEVICES": "IoT Enheder",
+    "UPDATED": "Senest Opdateret"
   },
   "IOT-TABLE": {
-    "APPLICATION": "APPLIKATION",
-    "NETWORK-TECHNOLOGY": "NETVÆRKSTEKNOLOGI",
-    "ALARM": "ALARM",
-    "BATTERY": "BATTERI",
-    "ACTIVE": "AKTIV",
-    "DATA": "DATA(24 TIMER)"
+    "APPLICATION": "Applikation",
+    "NETWORK-TECHNOLOGY": "Netværksteknologi",
+    "ALARM": "Alarm",
+    "BATTERY": "Batteri",
+    "ACTIVE": "Sidst aktiv",
+    "DATA": "Data(24 timer)"
   },
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
@@ -87,13 +146,28 @@
     "LAST-SEEN-AT": "Seneste aktivitet",
     "STATUS": "Status"
   },
+  "DEVICE-MODEL": {
+    "ID": "Id",
+    "NAME": "Navn",
+    "TYPE" : "Type",
+    "BRANDNAME" : "Mærke",
+    "MODELNAME" : "Model",
+    "MANUFACTURERNAME" : "Producentens navn",
+    "CONTROLLEDPROPERTY" : "kontrol egenskaber",
+    "CATEGORY" : "Kategori",
+    "SUPPORTEDUNITS" : "Måleenheder",
+    "FUNCTION" : "Enhedsfunktioner",
+    "ENERGYLIMITATIONCLASS" : "Energi begrænsningsklassen",
+    "SUPPORTEDPROTOCOL" : "Understøttet protokoller",
+    "DETAIL-TITLE": "Device Model detalje",
+    "DEVICE-MODEL": "Device Model",
+    "SHOW-OPTIONS": "Håndter Device Model"
+  },
   "LORA-GATEWAY-TABLE-ROW": {
-    "DELETE": "Slet Gateway",
-    "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Håndter Gateway"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWan Gateway"
+    "CREATE": "Opret LoRaWAN Gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -101,7 +175,8 @@
   },
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
-    "LORAWAN": "LoRaWAN"
+    "LORAWAN": "LoRaWAN",
+    "SIGFOX": "SigFox"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -112,12 +187,13 @@
   "APPLICATION-TABLE-ROW": {
     "DELETE": "Slet",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Håndter applikation"
   },
   "IOTDEVICE-TABLE-ROW": {
     "DELETE": "Slet",
     "EDIT": "Redigér",
-    "SHOW-OPTIONS": "Vis muligheder"
+    "SHOW-OPTIONS": "Håndter IoT enhed",
+    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteri status"
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
@@ -147,7 +223,7 @@
     "DROPDOWN": "Håndter organisation",
     "DETAIL": {
       "APPLICATIONS": "Organisationens applikationer",
-      "PERMISSIONS": "Brugergrupper",
+      "PERMISSIONS": "Organisations brugergrupper",
       "NAME": "Navn"
     },
     "FORM": {
@@ -171,10 +247,12 @@
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype: ",
-      "ORG": "Organisations: ",
+      "ORG": "Organisation: ",
       "DROPDOWN": "Håndter Brugergruppe",
       "EDIT": "Rediger",
-      "DELETE": "Slet"
+      "DELETE": "Slet",
+      "USERS": "Brugergruppens brugere",
+      "APPLICATIONS": "Brugergruppens applikationer"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -201,8 +279,10 @@
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
-    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWan Gateway",
+    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
+    "CREATE-NEW-DEVICE-MODEL": "Opret ny Device Model",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
+    "EDIT-DATATARGET": "Redigér datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
     "EDIT-NEW-APPLICATION": "Redigér applikation",
@@ -211,13 +291,20 @@
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
-    "EDIT-DEVICE-PROFILE": "Redigér Device profile",
+    "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér Device profile",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
-    "EDIT-PERMISSION": "Redigér brugergruppe"
+    "EDIT-PERMISSION": "Redigér brugergruppe",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Enhedstype",
+    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
+    "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe",
+    "EDIT-USERS": "Redigér bruger",
+    "EDIT-DEVICE-PROFILE": "Redigér device profile"
   },
   "QUESTION": {
+    "CREATE-IOT-DEVICE": "IoT-enhed",
+    "DEVICE-MODEL-SELECT": "Tilknyt en device model til enheden",
     "GIVE-APPLICATION-NAME": "Navngiv applikation",
     "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
     "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
@@ -231,10 +318,11 @@
     "EXTRA-COMMENT-PLACEHOLDER": "Anden relevant information",
     "LOCATION-DESCRIPTION": "Beskrivelse af placering",
     "LOCATION-DESCRIPTION-PLACEHOLDER": "F.eks. køleskab på 3. sal",
-    "CHOOSE-APPLICATION": "Vælg applikation",
+    "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout",
+    "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
     "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
@@ -250,6 +338,10 @@
     "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
     "APPLICATIONSESSIONKEY": "Applicationsessionkey",
     "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
+    "FCNTUP": "fCntUp",
+    "FCNTUP-PLACEHOLDER": "Angiv upload framerate",
+    "NFCNTDOWN": "nfcntdown",
+    "NFCNTDOWN-PLACEHOLDER": "Angiv download framerate",
     "DEVEUI": "Enheds EUI",
     "DEVEUI-PLACEHOLDER": "Enheds EUI",
     "SKIPFCNTCHECK": "SkipFCntCheck",
@@ -264,10 +356,60 @@
     "ADD-RELATIONS": "Tilføj device og payload decoder",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
+      "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
-      "RELATIONS": "Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+      "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+    },
+    "SIGFOX": {
+      "TITLE": "SigFox specifikke felter",
+      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i SigFox?",
+      "GROUPID": "Vælg en SigFox gruppe",
+      "DEVICEID": "SigFox enheds Id",
+      "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
+      "DEVICETYPEID": "Vælg en enhedstypen",
+      "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
+      "PAC": "PAC",
+      "PAC-PLACEHOLDER": "Porting Authorization Code",
+      "ENDPRODUCTCERTIFICATE": "Angiv en produkt licens",
+      "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
+      "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til produkt certifikat",
+      "ENDPRODUCTCERTIFICATE-HELP-TEXT": "Hjælp til at finde produkt certifikat. Klik her!",
+      "DISCLAIMER": "Bemærk dit abennement med Sigfox holdes udenfor OS2iot og løber automatisk. Afmeld dig abonnement ved at registrere en unsubscribtion date i Sigfox",
+      "DISCLAIMER-CLICK": "Guide til unsubscripe",
+      "PROTOTYPE": "Aktiver som prototype",
+      "PROTOTYPE-TITLE": "Hvis du endnu ikke har et produkt certifikat kan enheden oprettes som en prototyep",
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "DEVICETYPE": {
+        "NAME": "Navngiv enhedstypen",
+        "NAME-PLACEHOLDER": "XC-123",
+        "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
+        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra SigFox",
+        "DESCRIPTION": "Angiv beskrivelse",
+        "DESCRIPTION-PLACEHOLDER": "Lipsum larum",
+        "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
+        "CHOOSE-CONTRACT": "Vælg en kontrakt"
+      }
+    },
+    "DEVICE-MODEL": {
+      "GIVE-NAME": "Angiv navn",
+      "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
+      "GIVE-ID": "Angiv Id (id)",
+      "GIVE-ID-PLACEHOLDER": "Angiv Id",
+      "GIVE-BRANDNAME": "Angiv mærket (brandName)",
+      "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
+      "GIVE-MODELNAME": "Angiv model navnet (modelName)",
+      "GIVE-MODELNAME-PLACEHOLDER": "Angiv model navnet",
+      "GIVE-MANUFACTURERNAME": "Angiv producentens navn (manufacturerName)",
+      "GIVE-MANUFACTURERNAME-PLACEHOLDER": "Angiv producentens navn",
+      "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber (controlledProperty)",
+      "SELECT-CATEGORY": "Vælg kategori (category)",
+      "SELECT-SUPPORTEDUNITS": "Vælg Måleenheder (supportedUnits)",
+      "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner (function)",
+      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen (energyLimitationClass)",
+      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller (supportedProtocol)",
+      "FIWARE-LINK-TEXT": "Denne data model er adopteret fra Fiware og følger ETSI standarden"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -297,7 +439,9 @@
     "APPLICATION-ASCENDING": "Applikation: stigende",
     "APPLICATION-DESCENDING": "Applikation: faldende",
     "BATTERY-ASCENDING": "Batteri: stigende",
-    "BATTERY-DESCENDING": "Batteri: faldende"
+    "BATTERY-DESCENDING": "Batteri: faldende",
+    "ACTIVE-ASCENDING": "Aktiv: sigende",
+    "ACTIVE-DESCENDING": "Aktiv: faldende"
   },
   "IOTDEVICE": {
     "HEADING": {
@@ -305,6 +449,29 @@
       "BASIC": "Basis info",
       "OPTIONAL": "Yderligere info"
     },
+    "DOWNLINK": {
+      "TITLE": "Downlink",
+      "PAYLOAD": "Angiv det ønskede payload",
+      "PAYLOAD-PLACEHOLDER": "ADF12345",
+      "PORT": "Angiv den ønskede port",
+      "START": "Sæt downlink i kø",
+      "ERROR-SIGFOX-LENGTH": "Fejl i payload længde - payload må ikke overskride 16 karaktere",
+      "ERROR-FORMAT": "Fejl i formatet. Downlink skal være på hexidecimal format: a-f 0-9",
+      "DESCRIPTION": "Her kan du starte et downlink til dit device.",
+      "CONFIRMEDDOWNLINK": "Bekræft downlink",
+      "DIALOG-TITLE": "Downlink",
+      "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
+      "DIALOG-DECLINE": "Annuller",
+      "DIALOG-CONFIRM": "Ja, overskriv",
+      "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret for den pågældende enhedstype",
+      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
+      "NO-PAYLOAD": "Angiv en payload",
+      "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til sigfox skal være mellem 8 og 16 tegn (Hexadecimal)",
+      "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
+    },
+    "DEVICEMODEL": "Device Model",
+    "DETAIL-TAB": "Detail",
+    "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
     "APPLICATION": "Applikation",
@@ -327,23 +494,40 @@
     "LORA": {
       "DEVEUI": "Enheds EUI",
       "SERVICEPROFILE": "Service profil",
-      "DEVICEPROFILE": "device profil",
+      "DEVICEPROFILE": "Device profil",
       "ACTIVATIONTYPE": "Aktivations type",
       "OTAA": "OTAA",
       "DEVADDR": "devADDR",
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
       "SKIPFCNTCHECK": "skipfcntcheck",
-      "OTAAAPPLICATIONKEY": "OTAA Applicationkey"
+      "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+      "NFCNTDOWN": "nfcntdown",
+      "FCNTUP": "fcntup"
+    },
+    "SIGFOX": {
+      "GROUP-NAME": "SigFox gruppe navn",
+      "PROTOTYPE": "Er enheden en prototype",
+      "PAC": "PAC",
+      "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
+      "DEVICETYPE": "Enhedstypen",
+      "DEVICEID": "EnhedsId"
     }
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
     "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
-    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn"
+    "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn",
+    "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
+    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
+    "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
+    "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
+    "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
+    "IS-USED": "Profilen kan ikke slettes da den er i brug.",
+    "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug"
   },
   "PROFILES": {
-    "NAME": "LoRaWan Profiler",
+    "NAME": "LoRaWAN Profiler",
     "SERVICE_PROFILE": {
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
@@ -357,17 +541,18 @@
       "NWKGEOLOCEXPLAINED": "Når den er aktiveret, forsøger netværksserveren at løse placeringen af â€‹â€‹enhederne under denne serviceprofil. Bemærk, at du skal have gateways, der understøtter fine-timestamp, og at netværksserveren skal konfigureres for at yde support til geolokalisering.",
       "REPORT_END_DEVICE": "Report end-device margin",
       "DEVICEFREQUENCY": "Device-status request frequency",
-      "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (request/dag).",
+      "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (requests pr. dag).",
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
-      "DRRATEMIN": "Min date rate",
+      "DRRATEMIN": "Min data rate",
       "DRRATEMINEXPLAINED": "Minimums tilladte data rate. Brugt til ADR",
-      "DRRATEMAX": "Max date rate",
+      "DRRATEMAX": "Max data rate",
       "DRRATEMAXEXPLAINED": "Maximums tilladte data rate. Brugt til ADR",
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
-      "ADDSERVICEPROFILE": "Tilføj eller editer service profil"
+      "ADDSERVICEPROFILE": "Redigér Service Profile",
+      "ID": "Service profilens ID"
     },
     "DEVICE_PROFILE": {
       "DROPDOWN": "Håndter device profil",
@@ -408,7 +593,8 @@
       "CLASSBTIMEOUT_PLACEHOLDER": "0",
       "PINGSLOTDR_PLACEHOLDER": "0",
       "PINGSLOTFREQ_PLACEHOLDER": "0",
-      "CLASSCTIMEOUT_PLACEHOLDER": "0"
+      "CLASSCTIMEOUT_PLACEHOLDER": "0",
+      "ID": "Device profilens ID"
     }
   },
   "USERS": {
@@ -442,8 +628,8 @@
       "NO-LOGIN": "Ikke logget på endnu",
       "ADDED-DATE": "Oprettet den: ",
       "GLOBALADMIN": "Global Administrator: ",
-      "PERMISSIONS": "Brugergrupper",
-      "APPLICATIONS": "Applikationer",
+      "PERMISSIONS": "Medlem af disse brugergrupper",
+      "APPLICATIONS": "Rettigheder til disse applikationer",
       "NAME-PLACEHOLDER": "Navn"
     },
     "GLOBAL_ADMIN": {
@@ -453,12 +639,31 @@
   },
   "AUTH": {
     "EMAIL": "Email",
-    "PASSWORD": "Adgangskode"
+    "PASSWORD": "Adgangskode",
+    "KOMBIT-BUTTON": "Login med KOMBIT Adgangsstyring"
   },
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
-    "WELCOME-MESSAGE": "Her vises en velkomsthilsen"
+    "WELCOME-MESSAGE": "Her vises en velkomsthilsen",
+    "NO-ACCESS": "Du har ikke adgang til nogle organisationer og kan derfor ikke bruge applikationen."
   },
+  "ERROR": {
+    "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
+  },
+  "DIALOG": {
+    "SAVE.TITLE": "Slet",
+    "DELETE.MESSAGE": "Vil du slette?",
+    "CLOSE": "Annuller",
+    "DIALOG-CONFIRM": "Ja, slet"
+  },
+  "BATTERY": {
+    "NOT_AVAILABLE": "N/A"
+  },
+  "false": "Nej",
+  "true": "Ja",
   "HTTP_PUSH": "HTTP Push",
-  "Forbidden": "Du har ikke rettigheder til at foretage denne handling"
+  "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
+  "GENERIC_HTTP": "Generisk HTTP",
+  "LORAWAN": "LoRaWAN",
+  "SIGFOX": "SigFox"
 }

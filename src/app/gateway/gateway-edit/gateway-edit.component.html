@@ -3,7 +3,7 @@
     <div *ngIf="errorMessages" class="error-messages p-3">
       <ul class="mb-0">
         <li *ngFor="let error of errorMessages">
-          {{error}}
+          {{error | translate}}
         </li>
       </ul>
     </div>
@@ -30,7 +30,14 @@
         <input type="text" class="form-control" id="id" name="id"
           [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" maxlength="16" required
           [(ngModel)]="gateway.id"
+          [readonly]="editMode ? true : false"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
+      </div>
+
+      <div class="row" *ngIf="gateway.location">
+        <app-map 
+          [coordinates]="getCoordinates()"
+          (updateCoordinates)="updateCoordinates($event)"></app-map>
       </div>
   
       <div class="row mb-5">

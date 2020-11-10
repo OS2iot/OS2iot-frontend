@@ -8,7 +8,7 @@ export class Datatarget {
     url: string;
     //default 30 sec
     timeout: number = 30000;
-    authorizationHeader: string = null;
+    authorizationHeader: string;
 }
 
 export class DatatargetData {

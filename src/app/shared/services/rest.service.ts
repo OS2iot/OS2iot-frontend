@@ -225,7 +225,7 @@ export class RestService {
                 type: 'danger',
             });
 
-            return of(result as T);
+            return of(error as T);
         };
     }
 

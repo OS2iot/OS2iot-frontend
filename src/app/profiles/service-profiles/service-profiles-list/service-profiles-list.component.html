@@ -8,6 +8,9 @@
     </div>
 </div>
 <hr>
+<div *ngIf="errorMessages" class="error-messages p-3 my-2">
+    {{errorMessages | translate }}
+</div>
 <div class="row">
     <div class="col-xs-12">
         <app-service-profile-item *ngFor="let serviceProfile of serviceProfiles; let i = index"

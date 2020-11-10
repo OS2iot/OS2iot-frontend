@@ -11,6 +11,7 @@ import { Sort } from '@shared/models/sort.model';
   styleUrls: ['./permission-list.component.scss'],
 })
 export class PermissionListComponent implements OnInit, OnChanges {
+  isLoadingResults = true;
   public pageLimit = 10;
   public sort: Sort[] = [
     {
@@ -80,6 +81,7 @@ export class PermissionListComponent implements OnInit, OnChanges {
       .getPermissions()
       .subscribe((response) => {
         this.permissions = response.data;
+        this.isLoadingResults = false;
       });
   }
 

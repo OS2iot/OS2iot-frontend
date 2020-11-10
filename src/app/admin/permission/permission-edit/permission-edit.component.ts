@@ -14,6 +14,7 @@ import { UserResponse } from '../../users/user.model';
 import { ApplicationService } from '@applications/application.service';
 import { Application } from '@applications/application.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { ErrorMessageService } from '@shared/error-message.service';
 
 @Component({
   selector: 'app-permission-edit',
@@ -33,7 +34,7 @@ export class PermissionEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/permissions' };
   public title = '';
   public submitButton = '';
-  public isEditMode: boolean = false;
+  public isEditMode = false;
   id: number;
   subscription: Subscription;
   organisationSubscription: Subscription;
@@ -47,8 +48,9 @@ export class PermissionEditComponent implements OnInit {
     private organisationService: OrganisationService,
     private userService: UserService,
     private applicationService: ApplicationService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private errormEssageService: ErrorMessageService
+  ) {}
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -90,6 +92,10 @@ export class PermissionEditComponent implements OnInit {
         this.showError(error);
       }
     );
+  }
+
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
   }
 
   organizationChanged() {
@@ -190,7 +196,7 @@ export class PermissionEditComponent implements OnInit {
   isOrganizationAdministrationPermission() {
     return (
       this.permission.level ==
-      PermissionType.OrganizationApplicationPermissions ||
+        PermissionType.OrganizationApplicationPermissions ||
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );
@@ -205,24 +211,9 @@ export class PermissionEditComponent implements OnInit {
   }
 
   private showError(err: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
-    if (err?.error?.message == 'Internal server error') {
-      this.errorMessage = 'Internal server error';
-      return;
-    }
-
-    if (err.error?.message?.length > 0) {
-      err.error.message.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = err.error.message;
-    }
-    this.formFailedSubmit = true;
+    const result = this.errormEssageService.handleErrorMessageWithFields(err);
+    this.errorFields = result.errorFields;
+    this.errorMessages = result.errorMessages;
   }
 
   routeBack(): void {

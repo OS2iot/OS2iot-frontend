@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,13 +8,26 @@ import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
+import { ApplicationService } from '@applications/application.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Application } from '@applications/application.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
+import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
+  isLoadingResults = true;
+  public pageLimit: number = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
+  public applications: Application[];
+  private applicationsSubscription: Subscription;
+
+  organisation: OrganisationResponse;
   user: UserResponse;
   permissions: PermissionResponse[];
   @Output() deleteUser = new EventEmitter();
@@ -40,7 +53,10 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private permissionsService: PermissionService,
-    private router: Router
+    private router: Router,
+    private applicationService: ApplicationService,
+    private globalService: SharedVariableService,
+    private organisationService: OrganisationService,
   ) { }
 
   ngOnInit(): void {
@@ -57,10 +73,11 @@ export class UserDetailComponent implements OnInit {
 
   private getUser(id: number) {
     this.subscription = this.userService
-      .getOne(id)
+      .getOne(id, true)
       .subscribe((response) => {
         this.user = response;
         this.permissions = response.permissions;
+        this.isLoadingResults = false;
       });
   }
 
@@ -81,4 +98,10 @@ export class UserDetailComponent implements OnInit {
     this.router.navigate(['edit-user'], { relativeTo: this.route });
   }
 
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.applicationsSubscription) {
+      this.applicationsSubscription.unsubscribe();
+    }
+  }
 }

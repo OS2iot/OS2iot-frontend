@@ -10,16 +10,12 @@ import { BackButton } from '@shared/models/back-button.model';
   styleUrls: ['./datatarget-edit.component.scss']
 })
 export class DatatargetEditComponent implements OnInit {
-
-  public backButton: BackButton = {
-    label: '',
-    routerLink: '',
-  };
-  public multiPage: boolean = false;
-  public title: string = '';
-  public sectionTitle: string = '';
-  public submitButton: string = '';
+  public multiPage = false;
+  public title = '';
+  public sectionTitle = '';
+  public submitButton = '';
   public datatarget: Datatarget;
+  public backButtonTitle = '';
 
   constructor(
     public translate: TranslateService,
@@ -30,11 +26,21 @@ export class DatatargetEditComponent implements OnInit {
 
   ngOnInit() {
     this.translate
-      .get(['FORM.CREATE-NEW-DATATARGET', 'DATATARGET.SAVE'])
+      .get([
+        'FORM.CREATE-NEW-DATATARGET',
+        'FORM.EDIT-DATATARGET',
+        'DATATARGET.SAVE',
+        'NAV.DATATARGET',
+      ])
       .subscribe((translations) => {
-        this.title = translations['FORM.CREATE-NEW-DATATARGET'];
+        const datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
+        if (datatargetid !== 0) {
+          this.title = translations['FORM.EDIT-DATATARGET'];
+        } else {
+          this.title = translations['FORM.CREATE-NEW-DATATARGET'];
+        }
         this.submitButton = translations['DATATARGET.SAVE'];
+        this.backButtonTitle = translations['NAV.DATATARGET'];
       });
   }
-
 }

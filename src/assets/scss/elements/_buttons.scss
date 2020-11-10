@@ -4,7 +4,6 @@
 button,
 a {
   &.btn {
-    font-size: $body-text;
     color: $color-text;
     transition: $transition-short;
 
@@ -95,6 +94,19 @@ a {
       }
     }
 
+    &--white {
+      background-color: $color-white-001;
+      color: $color-grey-001;
+
+      &::after {
+        background-color: $color-white-001;
+      }
+    }
+
+    &--animated {
+      animation: moveInBottom .5s ease-out .75s;
+      animation-fill-mode: backwards;
+    }
   }
 }
 

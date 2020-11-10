@@ -9,6 +9,7 @@ import { IotDeviceEditComponent } from './iot-devices/iot-device-edit/iot-device
 import { DatatargetEditComponent } from './datatarget/datatarget-edit/datatarget-edit.component';
 import { DatatargetListComponent } from './datatarget/datatarget-list/datatarget-list.component';
 import { DatatargetDetailComponent } from './datatarget/datatarget-detail/datatarget-detail.component';
+import { BulkImportComponent } from './bulk-import/bulk-import.component';
 
 
 const applicationRoutes: Routes = [
@@ -35,7 +36,8 @@ const applicationRoutes: Routes = [
                             { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent }
                         ]
 
-                    }
+                    },
+                    { path: 'bulk-import', component: BulkImportComponent }
                 ],
             },
 

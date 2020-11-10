@@ -11,11 +11,11 @@
       [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{datatarget.id}}">
       <li class="dropdown-item">
-        <a (click)="clickDelete()" [routerLink]="">{{ 'DATATARGET-TABLE-ROW.DELETE' | translate }}</a>
+        <a [routerLink]="['datatarget-edit', datatarget.id]"
+          routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
       </li>
       <li class="dropdown-item">
-        <a [routerLink]="['datatarget-edit', datatarget.id]"
-          routerLinkActive="active">{{ 'DATATARGET-TABLE-ROW.EDIT' | translate }}</a>
+        <a (click)="clickDelete()" [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>
       </li>
     </ul>
   </div>

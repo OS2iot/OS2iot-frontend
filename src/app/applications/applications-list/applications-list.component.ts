@@ -9,7 +9,7 @@ import { NavbarComponent } from '@app/navbar/navbar.component';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Sort } from '@shared/models/sort.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 
@@ -21,62 +21,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./applications-list.component.scss'],
 })
 export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
-  public pageLimit: number = 10;
-  public sort: Sort[] = [
-    {
-      id: 1,
-      dir: 'ASC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-ASCENDING',
-    },
-    {
-      id: 2,
-      dir: 'DESC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-DESCENDING',
-    },
-    {
-      id: 3,
-      dir: 'ASC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-ASCENDING',
-    },
-    {
-      id: 4,
-      dir: 'DESC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-DESCENDING',
-    },
-    {
-      id: 5,
-      dir: 'ASC',
-      col: 'name',
-      label: 'SORT.NAME-ASCENDING',
-    },
-    {
-      id: 6,
-      dir: 'DESC',
-      col: 'name',
-      label: 'SORT.NAME-DESCENDING',
-    },
-  ];
-  public selectedSortId: number = 1;
-  public selectedSortObject: Sort = {
-    id: 6,
-    dir: 'DESC',
-    col: 'name',
-    label: 'SORT.NAME-DESCENDING',
-  };
+  isLoadingResults = true;
+  resultsLength = 10;
 
+  public pageLimit = 10;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
   private applicationsSubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     public translate: TranslateService,
     private applicationService: ApplicationService,
-    private globalService: SharedVariableService
+    private globalService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService
   ) {
     translate.use('da');
   }
@@ -97,19 +56,13 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
     }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
 
   updatePageLimit(limit: any) {
     console.log(limit);
-  }
-
-  changeSort(sortId: number) {
-    for (let i = 0; i < this.sort.length; i++) {
-      const elem = this.sort[i];
-      if (elem.id === sortId) {
-        this.selectedSortObject = elem;
-      }
-    }
   }
 
   prevPage() {
@@ -127,11 +80,19 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getApplications();
-      }
-    });
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        (response) => {
+          if (response) {
+            this.applicationsSubscription = this.applicationService.deleteApplication(id).subscribe((response) => {
+              if (response.ok && response.body.affected > 0) {
+                this.getApplications();
+              }
+            });
+          } else {
+            console.log(response);
+          }
+        }
+      );
   }
 
   getCurrentOrganisationId(): number {
@@ -143,12 +104,13 @@ export class ApplicationsListComponent implements OnInit, OnChanges, OnDestroy {
       .getApplications(
         this.pageLimit,
         this.pageOffset * this.pageLimit,
-        this.selectedSortObject.dir,
-        this.selectedSortObject.col,
+        null,
+        null,
         orgId ? orgId : this.getCurrentOrganisationId()
       )
       .subscribe((applications) => {
         this.applications = applications.data;
+        this.isLoadingResults = false;
         if (this.pageLimit) {
           this.pageTotal = Math.ceil(applications.count / this.pageLimit);
         }

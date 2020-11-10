@@ -8,11 +8,17 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
-import { ApplicationsTableRowComponent } from './applications-list/applications-table/applications-table-row/applications-table-row.component';
 import { ApplicationsTableComponent } from './applications-list/applications-table/applications-table.component';
 import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
+import { SharedModule } from '@shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DirectivesModule } from '@shared/directives/directives.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+
 
 @NgModule({
     declarations: [
@@ -21,11 +27,12 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
         ApplicationEditComponent,
         ApplicationsListComponent,
         ApplicationsTableComponent,
-        ApplicationsTableRowComponent
+        BulkImportComponent
     ],
     exports: [
         ApplicaitonsRoutingModule,
         ApplicationsComponent,
+        ApplicationsTableComponent
 
     ],
     imports: [
@@ -35,7 +42,11 @@ import { IotDevicesModule } from './iot-devices/iot-devices.module';
         TranslateModule,
         IotDevicesModule,
         DatatargetModule,
+        DirectivesModule,
         FormModule,
-    ]
+        SharedModule,
+        FontAwesomeModule,
+        NGMaterialModule,
+    ],
 })
 export class ApplicationsModule { }

@@ -8,7 +8,7 @@ import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionType } from '@app/admin/permission/permission.model';
-import { BackButton } from '@shared/models/back-button.model';
+import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 
 
 @Component({
@@ -23,32 +23,39 @@ export class UserEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/users' };
+  public backButtonTitle = '';
   public title = '';
   public submitButton = '';
   id: number;
   subscription: Subscription;
+  isGlobalAdmin = false;
+  isKombit: boolean;
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
     this.translate
-      .get(['NAV.USERS', 'USERS.FORM.EDIT', 'USERS.SAVE'])
+      .get(['NAV.USERS', 'FORM.EDIT-USERS', 'USERS.SAVE'])
       .subscribe((translations) => {
-        this.backButton.label = translations['NAV.USERS'];
+        this.backButtonTitle = translations['NAV.USERS'];
         this.title = translations['FORM.EDIT-USERS'];
         this.submitButton = translations['USERS.SAVE'];
       });
     this.id = +this.route.snapshot.paramMap.get('user-id');
     if (this.id > 0) {
       this.getUser(this.id);
+    } else {
+      // Default active to be true if we're creating a new user.
+      this.user.active = true;
     }
+    this.amIGlobalAdmin();
   }
 
   private getUser(id: number) {
@@ -60,8 +67,20 @@ export class UserEditComponent implements OnInit {
         this.user.id = response.id;
         this.user.active = response.active;
         this.user.globalAdmin = response.permissions.some(x => x.type == PermissionType.GlobalAdmin);
+        this.isKombit = response.nameId != null;
         // We cannot set the password.
       });
+  }
+
+  amIGlobalAdmin() {
+    this.authService.me()
+      .subscribe(
+        (response: CurrentUserInfoResponse) => {
+          this.isGlobalAdmin = response.user.permissions.some(x => x.type === 'GlobalAdmin');
+        },
+        (error) => {
+          this.isGlobalAdmin = false;
+        });
   }
 
   private create(): void {

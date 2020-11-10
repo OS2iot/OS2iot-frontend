@@ -1,7 +1,26 @@
 <ng-container *ngIf="datatarget">
-  <app-top-bar-single [data]="datatarget" [backButton]="backButton" [buttons]="buttons"></app-top-bar-single>
+  <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true"></app-top-bar>
   <div class=" jumbotron m-md-4 p-md-3">
     <div class="application-component">
+      <div class="col-md-12 order-first order-md-last ">
+        <div class="btn-group float-md-right dropdown">
+            <button type="button" id="dropdown-{{ datatarget.name }}" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{'DATATARGET.SHOW-OPTIONS' | translate}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ datatarget.name }}">
+                <li class="dropdown-item">
+                    <a [routerLink]="['../../datatarget-edit', this.datatarget.id]"
+                        routerLinkActive="active">Redigér
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a (click)="onDeleteDatatarget()" [routerLink]="" >Slet
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
       <h4>{{ 'DATATARGET.NAME' | translate }}</h4>
       <p class="mb-5">{{datatarget.name}}</p>
       <h4>{{ 'DATATARGET.URL' | translate }}</h4>
@@ -9,34 +28,54 @@
       <h4>{{ 'DATATARGET.TIMEOUT' | translate }}</h4>
       <p class="mb-5">{{datatarget.timeout}}</p>
       <h4>{{ 'DATATARGET.TYPE' | translate }}</h4>
-      <p class="mb-5">{{datatarget.type}}</p>
-      <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
-      <div *ngIf="dataTargetRelations.length === 0">
-        <p class="mb-5">{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+      <p class="mb-5">{{datatarget.type | translate}}</p>
+
+      <h4>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</h4>
+      <div *ngIf="datatarget.authorizationHeader; then showAuthHeader else showNoAuthText">
       </div>
-      <div *ngFor="let relation of dataTargetRelations">
-        <div class="row my-3">
-          <div class="col-md-2">
-            <h6>{{'DATATARGET.PAYLOADEDECODER' | translate}}</h6>
-          </div>
-          <div class="col-md-4">
-            <ul>
-              <li>
-                {{relation.dataTarget.name}}
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-2">
-            <h6>{{'DATATARGET.IOTDEVICE' | translate}}</h6>
-          </div>
-          <div class="col-md-4">
-            <div *ngFor="let device of relation.iotDevices">
-              <ul>
-                <li>{{device.name}}</li>
-              </ul>
+      <ng-template #showAuthHeader>
+        <pre class="mb-5">{{datatarget.authorizationHeader}}</pre>
+      </ng-template>
+      <ng-template #showNoAuthText>
+        <p class="mb-5">{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
+      </ng-template>
+
+      <div class="form-group mt-3">
+        <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
+        <div *ngIf="dataTargetRelations?.length === 0">
+          <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+        </div>
+        <div *ngIf="dataTargetRelations">
+          <div *ngFor="let relation of dataTargetRelations">
+            <div class="row my-3">
+              <div class="col-md-2">
+                <h6>{{'DATATARGET.PAYLOADEDECODER' | translate}}</h6>
+              </div>
+              <div class="col-md-4">
+                <ul>
+                  <li>
+                    <div *ngIf="relation.payloadDecoder; else noDecoder">
+                      {{relation.payloadDecoder.name}}
+                    </div>
+                    <ng-template #noDecoder>
+                      {{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}
+                    </ng-template>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-2">
+                <h6>{{'DATATARGET.IOTDEVICE' | translate}}</h6>
+              </div>
+              <div class="col-md-4">
+                <div *ngFor="let device of relation.iotDevices">
+                  <ul>
+                    <li>{{device.name}}</li>
+                  </ul>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
             </div>
           </div>
-          <mat-divider></mat-divider>
         </div>
       </div>
     </div>

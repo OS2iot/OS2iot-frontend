@@ -4,11 +4,9 @@ import {
     HttpRequest,
     HttpHandler,
     HttpInterceptor,
-    HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.prod';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthJwtInterceptor implements HttpInterceptor {
@@ -18,6 +16,7 @@ export class AuthJwtInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         // If we're not calling the baseurl skip this. Is there a better way?
         if (req.url.indexOf(environment.baseUrl) != 0) {
+            console.warn("Skip adding Bearer since we're not calling baseUrl ...");
             return next.handle(req);
         }
 
