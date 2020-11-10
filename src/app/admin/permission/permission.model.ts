@@ -16,7 +16,7 @@ export class PermissionRequest {
 
   applicationIds: number[];
   
-  addApplicationsOnCreate = true;
+  automaticallyAddNewApplications = true;
 }
 
 export interface PermissionResponse {
@@ -28,6 +28,7 @@ export interface PermissionResponse {
   id: number;
   createdAt: Date;
   updatedAt: Date;
+  automaticallyAddNewApplications: boolean;
 }
 
 export interface PermissionGetManyResponse {
