@@ -6,6 +6,7 @@ import {
   faNetworkWired,
   faSignOutAlt,
   faSignInAlt,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
   faNetworkWired = faNetworkWired;
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
+  faUser = faUser;
 
   constructor(
     private authService: AuthService,
@@ -47,6 +49,10 @@ export class NavbarComponent implements OnInit {
 
   hasSomePermissions(): boolean {
     return this.sharedVariableService.getHasAnyPermission()
+  }
+
+  getUsername(): String {
+    return this.sharedVariableService.getusername();
   }
 
   isLoggedInWithKombit() {

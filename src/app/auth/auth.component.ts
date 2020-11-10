@@ -42,6 +42,7 @@ export class AuthComponent implements OnInit {
   success() {
     this.isLoading = false;
     this.sharedVariableService.setHasAnyPermission();
+    this.sharedVariableService.setUsername();
     this.router.navigateByUrl('/dashboard');
   }
 

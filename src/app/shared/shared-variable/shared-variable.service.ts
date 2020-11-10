@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
+import { timeStamp } from 'console';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class SharedVariableService {
   private gotWritePermission: boolean;
   private gotAnyPermission: boolean;
   private routerInfo: BehaviorSubject<number>;
+  private username: string;
 
   getValue(): Observable<number> {
     return this.routerInfo.asObservable();
@@ -57,6 +59,22 @@ export class SharedVariableService {
           localStorage.setItem('has_any_permission', hasSomePermission.toString());
         }
       )
+  }
+
+  setUsername() {
+    this.authService.me().subscribe(
+      (response: CurrentUserInfoResponse) => {
+        this.username = response.user.name;
+        localStorage.setItem('username', response.user.name);
+      }
+    )
+  }
+
+  getusername(): string {
+    if(this.username) {
+      return this.username
+    }
+    return localStorage.getItem('username');
   }
 
   getHasAnyPermission(): boolean {
