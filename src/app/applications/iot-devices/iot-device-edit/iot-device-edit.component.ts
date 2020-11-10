@@ -114,6 +114,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
                 if (device.sigfoxSettings) {
                 }
+                if (!device.deviceModelId || device.deviceModelId === null) {
+                    this.iotDevice.deviceModelId = 0;
+                }
             });
     }
 
@@ -175,6 +178,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     private adjustModelBasedOnType() {
+        if (this.iotDevice.deviceModelId === 0) {
+            this.iotDevice.deviceModelId = null
+        }
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
                 this.iotDevice.lorawanSettings = undefined;

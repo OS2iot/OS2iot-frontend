@@ -98,6 +98,9 @@
                 name="deviceModel"
                 [compareWith]="compare"
                 [(ngModel)]="iotDevice.deviceModelId">
+                <mat-option [value]="0">
+                        {{'QUESTION.DEVICE-MODEL-SELECT-NON' | translate }}
+                </mat-option>
                 <mat-option 
                     *ngFor="let deviceModel of deviceModels" 
                     [value]="deviceModel.id">
