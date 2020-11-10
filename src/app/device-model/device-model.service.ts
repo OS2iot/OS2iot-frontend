@@ -23,7 +23,7 @@ export class DeviceModelService {
   }
 
   update(deviceModel: DeviceModel, id: number): Observable<any> {
-    const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId);
+    const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.put(this.DEVICEMODELURL, body, id, {
       observe: 'response',
     });
