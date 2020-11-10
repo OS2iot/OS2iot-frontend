@@ -47,6 +47,8 @@
   "SIGFOX-GROUP": {
     "SIGFOX": "SigFox",
     "SIGFOX-GROUP": "SigFox Grupper",
+    "SIGFOX-LOGIN": "Sigfox API login",
+    "LOGIN": "Login",
     "ADMINISTRATION": {
       "NAME": "SigFox Grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
@@ -56,7 +58,7 @@
       "DEVICE-TYPE": "Sigfox enhedstyper",
       "DEVICE-TYPE-NAME": "navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
-      "DEVICE-TYPE-ALERT-EMAIL": "Kontrakt E-mail",
+      "DEVICE-TYPE-ALERT-EMAIL": "Alarm email",
       "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype",
       "SAVE": "Gem enhedstype"
     }
@@ -372,14 +374,14 @@
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
       "PAC": "PAC",
       "PAC-PLACEHOLDER": "Porting Authorization Code",
-      "ENDPRODUCTCERTIFICATE": "Angiv en produkt licens",
+      "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
-      "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til produkt certifikat",
-      "ENDPRODUCTCERTIFICATE-HELP-TEXT": "Hjælp til at finde produkt certifikat. Klik her!",
-      "DISCLAIMER": "Bemærk dit abennement med Sigfox holdes udenfor OS2iot og løber automatisk. Afmeld dig abonnement ved at registrere en unsubscribtion date i Sigfox",
+      "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til at finde produkt certifikatet",
+      "ENDPRODUCTCERTIFICATE-HELP-TEXT": "Få hjælp til at finde produkt certifikatet ved at klikke her",
+      "DISCLAIMER": "Bemærk dit abonnement med Sigfox holdes ude af OS2iot og løber automatisk. Afmeld dit abonnement ved at registrere en unsubscribe date i Sigfox.",
       "DISCLAIMER-CLICK": "Guide til unsubscripe",
       "PROTOTYPE": "Aktiver som prototype",
-      "PROTOTYPE-TITLE": "Hvis du endnu ikke har et produkt certifikat kan enheden oprettes som en prototyep",
+      "PROTOTYPE-TITLE": "Hvis enhedstypen endnu ikke har tildelt et produkt certifikat, kan enheden oprettes som en prototype",
       "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
       "DEVICETYPE": {
         "NAME": "Navngiv enhedstypen",
@@ -545,9 +547,9 @@
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
       "DRRATEMIN": "Min data rate",
-      "DRRATEMINEXPLAINED": "Minimums tilladte data rate. Brugt til ADR",
+      "DRRATEMINEXPLAINED": "Minimum tilladte data rate. Brugt til ADR",
       "DRRATEMAX": "Max data rate",
-      "DRRATEMAXEXPLAINED": "Maximums tilladte data rate. Brugt til ADR",
+      "DRRATEMAXEXPLAINED": "Maximum tilladte data rate. Brugt til ADR",
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",

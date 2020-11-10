@@ -20,7 +20,8 @@
             </p>
             <mat-divider class="my-5"></mat-divider>
             <div class="form-group col-8">
-                <label for="username">SigFox login</label>
+                <label for="username">
+                    {{'SIGFOX-GROUP.SIGFOX-LOGIN' | translate}}</label>
                 <input type="username" id="username" class="form-control" name="username" required
                     [(ngModel)]="sigfoxGroup.username">
             </div>
@@ -30,7 +31,7 @@
                     [(ngModel)]="sigfoxGroup.password">
             </div>
             <div class="mt-5">
-                <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">{{'Sigfox Login'}}</button>
+                <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">{{'SIGFOX-GROUP.LOGIN' | translate }}</button>
             </div>
         </form>
     </div>
