@@ -134,7 +134,27 @@
     "IOTDEVICE": "IoT Device navn:",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "AUTHORIZATIONHEADER": "Authorization header",
-    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet"
+    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
+    "ADD-TO-OPENDATADK": "Send data til OpenDataDK"
+  },
+  "OPENDATADK": {
+    "QUESTION": {
+      "GIVE-OPENDATADK-NAME": "OpenDataDK navn",
+      "GIVE-OPENDATADK-NAME-PLACEHOLDER": "OpenDataDK navn",
+      "GIVE-OPENDATADK-TITLE": "Titel",
+      "GIVE-OPENDATADK-TITLE-PLACEHOLDER": "Kloaksensorer - Aarhus kommune",
+      "GIVE-OPENDATADK-DESCRIPTION": "OpenDataDK Beskrivelse",
+      "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "OpenDataDK Beskrivelse",
+      "GIVE-OPENDATADK-TAGS": "Angiv kommasepareret nøgleord",
+      "GIVE-OPENDATADK-TAGS-PLACEHOLDER": "IOT, Sensor, LoRaWAN, Temeratur",
+      "GIVE-OPENDATADK-AUTHOR": "Forfatter",
+      "GIVE-OPENDATADK-AUTHOR-PLACEHOLDER": "Jens Jensen",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Forfatterens e-mail",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER": "jens@jensen.dk",
+      "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed de",
+      "ACCEPT-TERMS-PART-TWO": "Heriblandt at data ikke indeholder følsomme personoplysninger eller personhenførbare informationer.",
+      "TERMS-AND-CONDITIONS": "Gældende vilkår og betingelser for OpenDataDK"
+    }
   },
   "APPLICATION-TABLE": {
     "NAME": "Navn",

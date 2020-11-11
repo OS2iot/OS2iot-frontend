@@ -18,6 +18,8 @@ import { DatatargetResponse } from '../datatarget-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { DataTargetType } from '@shared/enums/datatarget-type';
+import { OpenDataDK } from '../opendatadk/opendatadk.model';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -283,11 +285,43 @@ export class DatatargetEditComponent implements OnInit {
       .get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse);
+        //this.opendatadkMockData();
       });
   }
 
+/*   opendatadkMockData() {
+    this.datatarget.openDataDk = {
+      name: "test navn",
+      title: "title",
+      description: "description",
+      tags: ['key','work','now'],
+      licens: "testlicens",
+      accessLevel: "Public",
+      author: "Jeppe",
+      authorEmail: "J",
+      url: "www.dr.dk",
+      acceptTerms: false
+    },
+    this.datatarget.type = DataTargetType.OPENDATADK;
+    this.datatarget.setToOpendataDk = true;
+  } */
+
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
+  }
+
+  disableSaveButton(): boolean {
+    let disable = true;
+    if (!this.datatarget.setToOpendataDk) {
+      disable = false;
+    }
+    else if(this.datatarget.openDataDk?.acceptTerms) {
+      disable = false
+    }
+    else {
+      disable = true
+    }
+    return disable
   }
 
   ngOnDestroy(): void {
@@ -327,7 +361,9 @@ export class DatatargetEditComponent implements OnInit {
       type: data.type,
       url: data.url,
       authorizationHeader: data.authorizationHeader,
-      applicationId: data.application.id
+      applicationId: data.application.id,
+      setToOpendataDk: data.type === DataTargetType.OPENDATADK ? true : false,
+      openDataDk: data.openDataDk
     };
     return dt;
   }

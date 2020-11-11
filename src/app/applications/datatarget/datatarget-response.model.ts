@@ -1,5 +1,6 @@
 import { Application } from '@applications/application.model';
 import { DataTargetType } from '@shared/enums/datatarget-type';
+import { OpenDataDK } from './opendatadk/opendatadk.model';
 
 export class DatatargetResponse {
     application: Application;
@@ -9,4 +10,5 @@ export class DatatargetResponse {
     type: DataTargetType;
     url: string;
     authorizationHeader: string;
+    openDataDk: OpenDataDK;
 }
