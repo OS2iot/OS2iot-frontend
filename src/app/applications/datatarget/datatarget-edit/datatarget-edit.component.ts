@@ -285,11 +285,12 @@ export class DatatargetEditComponent implements OnInit {
       .get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse);
+        this.datatarget.openDataDk = datatargetResponse.openDataDk ? datatargetResponse.openDataDk : new OpenDataDK();
         //this.opendatadkMockData();
       });
   }
 
-/*   opendatadkMockData() {
+  opendatadkMockData() {
     this.datatarget.openDataDk = {
       name: "test navn",
       title: "title",
@@ -304,7 +305,7 @@ export class DatatargetEditComponent implements OnInit {
     },
     this.datatarget.type = DataTargetType.OPENDATADK;
     this.datatarget.setToOpendataDk = true;
-  } */
+  }
 
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
