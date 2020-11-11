@@ -27,6 +27,7 @@ export class IotDevice {
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
     sigfoxSettings = new SigfoxSettings();
+    deviceModel?: DeviceModel;
 }
 
 export class IotDeviceResponse {

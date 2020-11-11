@@ -1,13 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BackButton } from '@shared/models/back-button.model';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
+import { ApplicationService } from '@applications/application.service';
+import { Application } from '@applications/application.model';
+import * as _ from 'lodash';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MatSelectChange } from '@angular/material/select';
+import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
+import { DeviceModelService } from '@app/device-model/device-model.service';
+import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -15,6 +24,14 @@ import { BackButton } from '@shared/models/back-button.model';
   styleUrls: ['./payload-decoder-edit.component.scss']
 })
 export class PayloadDecoderEditComponent implements OnInit {
+  faExchangeAlt = faExchangeAlt;
+
+  editorJavaScriptOptions = { theme: 'vs', language: 'javascript', autoIndent: true, roundedSelection: true, };
+  editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
+  payloadData: string = 'Vælg en enhed først';
+  metadata: string = 'Vælg en enhed først';
+  codeOutput: string = 'Tryk test koden for at decode payload og metadata';
+
   payloadDecoder = new PayloadDecoder();
   payloadDecoderBody: string;
   public errorMessage: string;
@@ -27,12 +44,27 @@ export class PayloadDecoderEditComponent implements OnInit {
   public submitButton = '';
   id: number;
   subscription: Subscription;
+  public applicationsSubscription: Subscription;
+  public applications: Application[];
+  public application: Application;
+  public iotDevices: IotDevice[];
+  public iotDevice: IotDevice;
+  public name: string;
+  public pageLimit = 10;
+  public pageTotal: number;
+  public pageOffset = 0;
+  public deviceSubscription: Subscription;
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
-    private location: Location) { }
+    private location: Location,
+    private applicationService: ApplicationService,
+    private globalService: SharedVariableService,
+    private iotDeviceService: IoTDeviceService,
+    private deviceModelService: DeviceModelService
+  ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -48,6 +80,9 @@ export class PayloadDecoderEditComponent implements OnInit {
     } else {
       this.payloadDecoderBody = new PayloadDecoder().decodingFunction;
     }
+    this.globalService.getValue().subscribe((organisationId) => {
+      this.getApplications(organisationId);
+    });
   }
 
   private getPayloadDecoder(id: number) {
@@ -59,11 +94,74 @@ export class PayloadDecoderEditComponent implements OnInit {
         });
   }
 
+  decodePayloadFunction(payloadFunction: string, rawMetadata: string, rawPayload: string) {
+    const innerMetadata = JSON.stringify(rawMetadata);
+    const innerPayloadData = JSON.stringify(rawPayload);
+    const innerPayloadFunction = payloadFunction;
+
+
+    console.log('return: ' + innerMetadata + innerPayloadData);
+  }
+
+  getCurrentOrganisationId(): number {
+    return this.globalService.getSelectedOrganisationId();
+  }
+
+  getApplications(orgId?: number): void {
+    this.applicationsSubscription = this.applicationService
+      .getApplications(
+        this.pageLimit,
+        this.pageOffset * this.pageLimit,
+        null,
+        null,
+        orgId ? orgId : this.getCurrentOrganisationId()
+      )
+      .subscribe((applications) => {
+        this.applications = applications.data;
+        if (this.pageLimit) {
+          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
+        }
+      });
+  }
+
+  getDevices(event: MatSelectChange): void {
+    this.applicationsSubscription = this.applicationService.getApplication(event.value)
+      .subscribe((application: Application) => {
+        this.iotDevices = application.iotDevices;
+
+      });
+  }
+
+  getDevice(event: MatSelectChange): void {
+    this.deviceSubscription = this.iotDeviceService
+      .getIoTDevice(event.value)
+      .subscribe((device: IotDevice) => {
+        this.payloadData = JSON.stringify(device.latestReceivedMessage.rawData, null, 4);
+        this.getDeviceModel(device);
+      });
+  }
+
+  removeUnwantedMetaData(device: IotDevice) {
+    device.latestReceivedMessage = undefined;
+    device.receivedMessagesMetadata = undefined;
+    device.deviceModelId = undefined;
+    return device;
+  }
+
+  getDeviceModel(device: IotDevice) {
+    this.deviceModelService.get(device.deviceModelId).subscribe(
+      (response) => {
+        device.deviceModel = response;
+        this.metadata = JSON.stringify(this.removeUnwantedMetaData(device), null, 4);
+      }
+    );
+  }
+
   private create(): void {
     this.payloadDecoderService.post(this.payloadDecoder)
       .subscribe(
         (response) => {
-          console.log(response);
+          //console.log(response);
           this.routeBack();
         },
         (error: HttpErrorResponse) => {
@@ -92,6 +190,16 @@ export class PayloadDecoderEditComponent implements OnInit {
     }
   }
 
+  scrollToTop(): void {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
+
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
@@ -106,6 +214,7 @@ export class PayloadDecoderEditComponent implements OnInit {
       this.errorMessage = error.message;
     }
     this.formFailedSubmit = true;
+    this.scrollToTop();
   }
 
   routeBack(): void {

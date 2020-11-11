@@ -1,0 +1,35 @@
+@import '../../../assets/scss/setup/utilities';
+@import '../../../assets/scss/setup/variables';
+  
+
+  ngx-monaco-editor {
+    height: 50vh;
+    width: 100%;
+    padding: 15px;
+    //border: $border-input-hover;
+    @include add-shadow;
+  }
+
+  .rotate {
+    &--90degree{
+    transform: rotate(-90deg);
+  
+    /* Legacy vendor prefixes that you probably don't need... */
+  
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+  
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+  
+    /* IE */
+    -ms-transform: rotate(-90deg);
+  
+    /* Opera */
+    -o-transform: rotate(-90deg);
+  
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+  }
+}
