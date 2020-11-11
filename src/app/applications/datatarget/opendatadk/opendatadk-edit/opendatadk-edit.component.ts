@@ -13,9 +13,12 @@ export class OpendatadkEditComponent implements OnInit {
   public formFailedSubmit = false;
   @Input() openDataDk: OpenDataDK;
 
+  opendatadkModel: OpenDataDK = new OpenDataDK();
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.openDataDk)
   }
 
 }
