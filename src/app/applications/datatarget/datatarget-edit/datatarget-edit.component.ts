@@ -286,7 +286,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       });
   }
 
-/*   opendatadkMockData() {
+  opendatadkMockData() {
     this.datatarget.openDataDk = {
       name: "test navn",
       title: "title",
@@ -301,7 +301,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     },
     this.datatarget.type = DataTargetType.OPENDATADK;
     this.datatarget.setToOpendataDk = true;
-  } */
+  }
 
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
