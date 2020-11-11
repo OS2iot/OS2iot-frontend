@@ -286,6 +286,23 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       });
   }
 
+/*   opendatadkMockData() {
+    this.datatarget.openDataDk = {
+      name: "test navn",
+      title: "title",
+      description: "description",
+      tags: ['key','work','now'],
+      licens: "testlicens",
+      accessLevel: "Public",
+      author: "Jeppe",
+      authorEmail: "J",
+      url: "www.dr.dk",
+      acceptTerms: false
+    },
+    this.datatarget.type = DataTargetType.OPENDATADK;
+    this.datatarget.setToOpendataDk = true;
+  } */
+
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
   }
