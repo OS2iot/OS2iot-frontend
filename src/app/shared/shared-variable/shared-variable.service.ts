@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 import { timeStamp } from 'console';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedVariableService {
-  constructor(
-    private authService: AuthService
-  ) {
+  constructor(private authService: AuthService) {
     this.routerInfo = new BehaviorSubject<number>(0);
   }
 
@@ -32,47 +31,35 @@ export class SharedVariableService {
   setSelectedOrganisationId(value: number) {
     localStorage.setItem('selected_organisation', value.toString());
     this.selectedOrganisationId = value;
-    this.setHasWritePermission();
   }
 
-  setHasWritePermission() {
-    this.authService.me()
-      .subscribe( (response: CurrentUserInfoResponse) => {
-        const hasWritePermissions = response.user.permissions.some(
-          permission =>
-          permission.type === PermissionType.GlobalAdmin ||
-          (permission.organization?.id === +this.selectedOrganisationId &&
-            ( permission.type === PermissionType.OrganizationAdmin ||
-              permission.type === PermissionType.Write)
-            ));
-        this.gotWritePermission = hasWritePermissions;
-        localStorage.setItem('has_write_permission', hasWritePermissions.toString());
-      });
-  }
-
-  setHasAnyPermission() {
-    this.authService.me()
-      .subscribe( 
-        (response: CurrentUserInfoResponse) => {
+  setUserInfo() {
+    return this.authService
+      .me()
+      .pipe(
+        tap((response: CurrentUserInfoResponse) => {
           const hasSomePermission = response.user.permissions.length > 0;
           this.gotAnyPermission = hasSomePermission;
-          localStorage.setItem('has_any_permission', hasSomePermission.toString());
-        }
+          localStorage.setItem(
+            'has_any_permission',
+            hasSomePermission.toString()
+          );
+
+          this.username = response.user.name;
+          localStorage.setItem('username', response.user.name);
+
+          localStorage.setItem(
+            'permissions',
+            JSON.stringify(response.user.permissions)
+          );
+        })
       )
+      .toPromise();
   }
 
-  setUsername() {
-    this.authService.me().subscribe(
-      (response: CurrentUserInfoResponse) => {
-        this.username = response.user.name;
-        localStorage.setItem('username', response.user.name);
-      }
-    )
-  }
-
-  getusername(): string {
-    if(this.username) {
-      return this.username
+  getUsername(): string {
+    if (this.username != null) {
+      return this.username;
     }
     return localStorage.getItem('username');
   }
@@ -85,10 +72,23 @@ export class SharedVariableService {
   }
 
   getHasWritePermission(): boolean {
-    if (this.gotWritePermission != null) {
-      return this.gotWritePermission;
-    }
-    return JSON.parse(localStorage.getItem('has_write_permission'));
+    const permissions = JSON.parse(localStorage.getItem('permissions'));
+
+    return permissions.some(
+      (permission) =>
+        permission.type === PermissionType.GlobalAdmin ||
+        (permission.organization?.id === +this.selectedOrganisationId &&
+          (permission.type === PermissionType.OrganizationAdmin ||
+            permission.type === PermissionType.Write))
+    );
+  }
+
+  isGlobalAdmin(): boolean {
+    const permissions = JSON.parse(localStorage.getItem('permissions'));
+
+    return permissions.some(
+      (permission) => permission.type === PermissionType.GlobalAdmin
+    );
   }
 
   getSelectedOrganisationId() {

@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getUsername(): String {
-    return this.sharedVariableService.getusername();
+    return this.sharedVariableService.getUsername();
   }
 
   isLoggedInWithKombit() {

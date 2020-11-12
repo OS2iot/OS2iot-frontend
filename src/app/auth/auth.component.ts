@@ -39,10 +39,9 @@ export class AuthComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  success() {
+  async success() {
+    await this.sharedVariableService.setUserInfo();
     this.isLoading = false;
-    this.sharedVariableService.setHasAnyPermission();
-    this.sharedVariableService.setUsername();
     this.router.navigateByUrl('/dashboard');
   }
 

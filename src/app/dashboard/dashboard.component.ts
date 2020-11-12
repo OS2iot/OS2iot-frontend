@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth/auth.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,20 +12,19 @@ export class DashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedVariableService: SharedVariableService
   ) {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe(async (params) => {
       const jwt = params['jwt'];
       if (jwt) {
         this.authService.setSession(jwt);
         // Clear the URL from the parameter
         this.router.navigate(['/dashboard']);
       }
-      1;
-      this.authService.me().subscribe((response) => {
-        this.hasSomePermission = response.user.permissions.length > 0;
-        this.isLoadingResults = false;
-      });
+      await this.sharedVariableService.setUserInfo();
+      this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
+      this.isLoadingResults = false;
     });
   }
 
