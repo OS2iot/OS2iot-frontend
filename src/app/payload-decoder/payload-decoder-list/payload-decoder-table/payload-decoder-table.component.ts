@@ -15,7 +15,7 @@ import { tableSorter } from '@shared/helpers/table-sorting.helper';
 export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['name', 'payload-decoder-id', 'menu'];
+  displayedColumns: string[] = ['name', 'payload-decoder-id', 'organizationID', 'menu'];
   public dataSource = new MatTableDataSource<PayloadDecoder>();
   public payloadDecoders: PayloadDecoder[];
   payloadDecoder: PayloadDecoder;

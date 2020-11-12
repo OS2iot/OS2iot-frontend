@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { BackButton } from '@shared/models/back-button.model';
-import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
+import { PayloadDecoderBodyResponse } from '@payload-decoder/payload-decoder.model';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 })
 export class PayloadDecoderDetailComponent implements OnInit {
   @Output() deletePayloadDecoder = new EventEmitter();
-  payloadDecoder: PayloadDecoder;
+  payloadDecoder: PayloadDecoderBodyResponse;
   public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
   id: number;
   subscription: Subscription;

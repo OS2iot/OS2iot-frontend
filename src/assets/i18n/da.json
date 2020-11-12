@@ -208,6 +208,8 @@
     "SAVE": "Gem Payload Decoder",
     "NAME": "Navn: ",
     "ID": "Payload Decoder Id",
+    "ORGANIZATION": "Organisation",
+    "BELONGS-TO-ORGANIZATION": "Tilhørende organisation:",
     "DECODINGFUNCTION": "Decoder funktion",
     "DETAIL": {
       "DROPDOWN": "Håndter Payload Decoder",

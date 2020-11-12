@@ -1,6 +1,9 @@
+import { Organisation } from '@app/admin/organisation/organisation.model';
+
 export class PayloadDecoder {
     public name: string;
     public id: number;
+    public organizationID?: number;
     public decodingFunction = 
     `function bin16dec(bin) {
         var num = bin & 0xffff;
@@ -34,6 +37,13 @@ export class PayloadDecoder {
 }
 
 export interface PayloadDecoderResponse {
-    data: PayloadDecoder[];
+    data: PayloadDecoderBodyResponse[];
     count: number;
+}
+
+export interface PayloadDecoderBodyResponse {
+    name: string;
+    id: number;
+    organization?: Organisation;
+    decodingFunction: string;
 }
