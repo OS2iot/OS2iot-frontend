@@ -74,7 +74,7 @@ export class UserEditComponent implements OnInit {
   }
 
   amIGlobalAdmin() {
-    this.sharedVariableService.isGlobalAdmin();
+    this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
   }
 
   private create(): void {
