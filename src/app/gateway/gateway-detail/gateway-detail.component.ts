@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -32,6 +33,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         private route: ActivatedRoute,
         private translate: TranslateService,
         private router: Router,
+        private meService: MeService,
         private deleteDialogService: DeleteDialogService
     ) { }
 
@@ -65,6 +67,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
+            this.canEdit()
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
@@ -72,6 +75,15 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             console.log('gateway', this.gateway);
         });
     }
+
+    canEdit() {
+        this.meService.canWriteInTargetOrganization(this.gateway.organizationID)
+          .subscribe(
+            (response) => {
+              this.gateway.canEdit = response;
+            }
+          );
+      }
 
     onDeleteGateway() {
         this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(

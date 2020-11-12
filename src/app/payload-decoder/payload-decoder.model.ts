@@ -1,4 +1,5 @@
 import { Organisation } from '@app/admin/organisation/organisation.model';
+import { EditPermission } from '@shared/models/edit-permission.model';
 
 export class PayloadDecoder {
     public name: string;
@@ -41,7 +42,7 @@ export interface PayloadDecoderResponse {
     count: number;
 }
 
-export interface PayloadDecoderBodyResponse {
+export class PayloadDecoderBodyResponse extends EditPermission {
     name: string;
     id: number;
     organization?: Organisation;

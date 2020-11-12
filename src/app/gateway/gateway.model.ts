@@ -1,6 +1,7 @@
+import { EditPermission } from '@shared/models/edit-permission.model';
 import { CommonLocation } from '../shared/models/common-location.model';
 
-export class Gateway {
+export class Gateway extends EditPermission {
     id?: string;
     name?: string;
     description?: string;

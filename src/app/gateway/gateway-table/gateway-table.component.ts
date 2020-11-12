@@ -11,6 +11,7 @@ import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-sv
 import * as moment from 'moment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { MeService } from '@shared/services/me.service';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   constructor(
     private chirpstackGatewayService: ChirpstackGatewayService,
     private deleteDialogService: DeleteDialogService,
+    private meService: MeService,
     public translate: TranslateService) {
     this.translate.use('da');
     moment.locale('da');
@@ -89,6 +91,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
       .subscribe(
         (gateways) => {
           this.gateways = gateways.result;
+          this.setCanEdit();
           this.dataSource = new MatTableDataSource<Gateway>(this.gateways);
           this.dataSource.sort = this.sort;
           this.dataSource.sortingDataAccessor = tableSorter;
@@ -117,7 +120,19 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
         }
       }
     );
+  }
 
+  setCanEdit() {
+    this.gateways.forEach(
+      (gateway) => {
+        this.meService.canWriteInTargetOrganization(gateway.organizationID)
+          .subscribe(
+            response => {
+              gateway.canEdit = response;
+            }
+          )
+      }
+    )
   }
 
   ngOnDestroy() {

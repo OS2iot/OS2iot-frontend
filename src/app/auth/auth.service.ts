@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import * as jwtDecode from 'jwt-decode';
@@ -48,7 +48,9 @@ export class AuthService {
   }
 
   me(): Observable<CurrentUserInfoResponse> {
-    return this.restService.get('auth/me');
+    return this.restService.get('auth/me').pipe(
+      shareReplay(1)
+    );
   }
 
   setSession(jwt: string) {

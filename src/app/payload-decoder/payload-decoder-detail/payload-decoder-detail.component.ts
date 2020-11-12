@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { PayloadDecoderBodyResponse } from '@payload-decoder/payload-decoder.model';
+import { MeService } from '@shared/services/me.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
     private router: Router,
+    private meService: MeService
   ) {
   }
 
@@ -40,11 +42,21 @@ export class PayloadDecoderDetailComponent implements OnInit {
     }
   }
 
+  canEdit() {
+    this.meService.canWriteInTargetOrganization(this.payloadDecoder.organization?.id)
+      .subscribe(
+        (response) => {
+          this.payloadDecoder.canEdit = response;
+        }
+      );
+  }
+
   private getPayloadDecoder(id: number) {
     this.subscription = this.payloadDecoderService.getOne(id)
       .subscribe(
         (response) => {
           this.payloadDecoder = response;
+          this.canEdit();
         });
   }
 
