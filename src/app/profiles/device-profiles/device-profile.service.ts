@@ -1,5 +1,7 @@
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
 import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse } from 'src/app/profiles/device-profiles/device-profile.model';
 
@@ -10,9 +12,12 @@ import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse } from 'src/
 export class DeviceProfileService {
     URL = 'chirpstack/device-profiles';
 
-    constructor(private restService: RestService) { }
+    constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
 
     post(body: DeviceProfile): Observable<DeviceProfileRequest> {
+        if (!body.organizationID) {
+            body.organizationID = this.sharedVariableService.getSelectedOrganisationId();
+        }
         const requestBody = new DeviceProfileRequest(body);
         return this.restService.post(this.URL, requestBody);
     }

@@ -601,7 +601,8 @@
       "PINGSLOTDR_PLACEHOLDER": "0",
       "PINGSLOTFREQ_PLACEHOLDER": "0",
       "CLASSCTIMEOUT_PLACEHOLDER": "0",
-      "ID": "Device profilens ID"
+      "ID": "Device profilens ID",
+      "ORGANIZATION": "Tilhørende organisation:"
     }
   },
   "USERS": {

@@ -25,6 +25,7 @@ export class DeviceProfile {
     public supportsClassB: boolean;
     public supportsClassC: boolean;
     public supportsJoin = true;
+    public organizationID: number;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];

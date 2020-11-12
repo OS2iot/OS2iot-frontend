@@ -87,6 +87,13 @@
                     [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" maxlength="50"
                     required [(ngModel)]="deviceProfile.geolocMinBufferSize">
             </div>
+            <div class="col-xs-12 form-group mt-3" *ngIf="deviceProfile.organizationID">
+                <label for="geolocMinBufferSize"class="form-label">
+                    {{'PROFILES.DEVICE_PROFILE.ORGANIZATION' | translate}}
+                </label>
+                {{deviceProfile.organizationID}}
+            </div>
+
         </mat-tab>
         <mat-tab label="{{'PROFILES.DEVICE_PROFILE.OTAA-ABP' | translate}}">
 
