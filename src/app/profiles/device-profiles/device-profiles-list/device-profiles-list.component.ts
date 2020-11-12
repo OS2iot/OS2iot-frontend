@@ -5,6 +5,7 @@ import { DeviceProfile } from '../device-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceProfileService } from '../device-profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -22,7 +23,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private deviceProfileService: DeviceProfileService
+    private deviceProfileService: DeviceProfileService,
+    private meService: MeService
   ) { }
 
   ngOnInit() {
@@ -33,11 +35,25 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     this.subscription = this.deviceProfileService.getMultiple()
       .subscribe((deviceProfiles) => {
         this.deviceProfiles = deviceProfiles.result;
+        this.setCanEdit();
       });
   }
 
   onNewDeviceProfile() {
     this.router.navigate(['deviceprofil/edit']);
+  }
+
+  setCanEdit() {
+    this.deviceProfiles.forEach(
+      (deviceProfile) => {
+        this.meService.canWriteInTargetOrganization(deviceProfile.organizationID)
+          .subscribe(
+            response => {
+              deviceProfile.canEdit = response;
+            }
+          )
+      }
+    )
   }
 
   deleteDeviceProfile(id: string) {

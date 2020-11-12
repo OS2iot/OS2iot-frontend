@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
+import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { DeviceProfileService } from '../device-profile.service';
@@ -31,6 +32,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private deviceProfileService: DeviceProfileService,
     private location: Location,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,8 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('deviceId');
     if (this.id) {
       this.getDeviceProfile(this.id);
+    } else {
+      this.deviceProfile.canEdit = true;
     }
   }
 
@@ -52,6 +56,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (response) => {
           this.deviceProfile = response.deviceProfile;
+          this.canEdit();
           this.deviceProfile.factoryPresetFreqsInput = this.deviceProfile.factoryPresetFreqs.map(String).join();
         },
         (error: HttpErrorResponse) => {
@@ -59,6 +64,20 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  canEdit() {
+    if (this.deviceProfile.organizationID) {
+      this.meService.canWriteInTargetOrganization(this.deviceProfile.organizationID)
+      .subscribe(
+        (response) => {
+          this.deviceProfile.canEdit = response;
+        }
+      );
+    } else {
+      this.deviceProfile.canEdit = true;
+    }
+  }
+
   private create(): void {
     this.deviceProfileService.post(this.deviceProfile)
       .subscribe(

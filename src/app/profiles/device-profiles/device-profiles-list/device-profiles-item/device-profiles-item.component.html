@@ -5,7 +5,7 @@
                 {{ deviceProfile.name }}
             </a>
         </div>
-        <div class="col-3 pull-right d-flex align-items-center justify-content-end">
+        <div class="col-3 pull-right d-flex align-items-center justify-content-end" *ngIf="deviceProfile.canEdit">
             <a (click)="onDeleteDeviceProfile()">
                 <div class="text-center mr-2">
                     <fa-icon [icon]="faTimesCircle" class="icon--small"></fa-icon>
