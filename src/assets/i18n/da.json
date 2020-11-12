@@ -103,7 +103,8 @@
     "STATS-TXPACKETSEMITTED": "Pakker Sendt",
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
-    "MAP-TAB": "Kort"
+    "MAP-TAB": "Kort",
+    "ORGANIZATION": "Organisation"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",
@@ -146,7 +147,8 @@
     "GATEWAYID": "Gateway ID",
     "LOCATION": "Placering",
     "LAST-SEEN-AT": "Seneste aktivitet",
-    "STATUS": "Status"
+    "STATUS": "Status",
+    "ORGANIZATIONID": "Organisations Id"
   },
   "DEVICE-MODEL": {
     "ID": "Id",

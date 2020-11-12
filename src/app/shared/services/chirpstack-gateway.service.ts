@@ -3,6 +3,7 @@ import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
 import { GatewayResponse, Gateway, GatewayData, GatewayRequest } from '@app/gateway/gateway.model';
 import * as moment from 'moment';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class ChirpstackGatewayService {
 
   private chripstackGatewayUrl = 'chirpstack/gateway';
 
-  constructor(private restService: RestService) {
+  constructor(
+    private restService: RestService,
+    private sharedVariableService: SharedVariableService) {
     moment.locale('da');
    }
 
@@ -24,6 +27,9 @@ export class ChirpstackGatewayService {
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {
+    if (gateway.organizationID === null) {
+      gateway.organizationID = this.sharedVariableService.getSelectedOrganisationId();
+    }
     const gatewayRequest: GatewayRequest = new GatewayRequest;
     gatewayRequest.gateway = gateway;
     return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, { observe: 'response' });

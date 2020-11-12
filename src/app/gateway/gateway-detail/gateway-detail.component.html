@@ -26,6 +26,12 @@
             </div>
         </div>
     </div>
+    <div>
+        <div class="col-md-8">
+            <h4>{{ 'GATEWAY.ORGANIZATION' | translate }}</h4>
+            <p class="mb-5">{{gateway.organizationID}}</p>
+        </div>
+    </div>
     <h4 *ngIf="gateway.description">{{ 'GATEWAY.DESCRIPTION' | translate }}</h4>
     <p *ngIf="gateway.description" class="mb-5">{{gateway.description}}</p>
     <div *ngIf="gateway.location; then locationThenBlock else locationElseBlock"></div>

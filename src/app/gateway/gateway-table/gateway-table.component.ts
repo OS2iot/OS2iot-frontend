@@ -22,7 +22,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'last-seen', 'status', 'menu'];
+  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'organizationId', 'last-seen', 'status', 'menu'];
   public dataSource = new MatTableDataSource<Gateway>();
   public gateways: Gateway[];
   gateway: Gateway;

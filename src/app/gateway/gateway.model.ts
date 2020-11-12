@@ -10,6 +10,7 @@ export class Gateway {
     tagsString = '{}';
     tags?: JSON;
     lastSeenAt: string;
+    organizationID: number;
     map(): Map<string, number> {
         throw new Error('Method not implemented.');
     }
