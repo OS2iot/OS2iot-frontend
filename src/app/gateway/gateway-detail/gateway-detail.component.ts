@@ -77,12 +77,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     canEdit() {
-        this.meService.canWriteInTargetOrganization(this.gateway.organizationID)
-          .subscribe(
-            (response) => {
-              this.gateway.canEdit = response;
-            }
-          );
+        this.gateway.canEdit = this.meService.canWriteInTargetOrganization(this.gateway.organizationID);
       }
 
     onDeleteGateway() {

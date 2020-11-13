@@ -43,12 +43,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
   }
 
   canEdit() {
-    this.meService.canWriteInTargetOrganization(this.payloadDecoder.organization?.id)
-      .subscribe(
-        (response) => {
-          this.payloadDecoder.canEdit = response;
-        }
-      );
+    this.payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(this.payloadDecoder?.organization?.id);
   }
 
   private getPayloadDecoder(id: number) {

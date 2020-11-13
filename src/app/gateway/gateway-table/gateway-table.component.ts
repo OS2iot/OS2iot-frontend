@@ -125,14 +125,9 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   setCanEdit() {
     this.gateways.forEach(
       (gateway) => {
-        this.meService.canWriteInTargetOrganization(gateway.organizationID)
-          .subscribe(
-            response => {
-              gateway.canEdit = response;
-            }
-          )
+        gateway.canEdit = this.meService.canWriteInTargetOrganization(gateway.organizationID);
       }
-    )
+    );
   }
 
   ngOnDestroy() {
