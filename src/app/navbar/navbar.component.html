@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2 pt-md-4" >
+<nav class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2 pt-md-4"
+  aria-expanded="false">
+
   <a routerLink="/dashboard" class="navbar-brand p-0 pl-2" href="">
     <div class="img-logo" alt="OS2IoT" [inlineSVG]="'../../assets/images/OS2-iot-svg.svg'"></div>
     <!-- <img class="logo" alt="OS2IoT"
@@ -7,7 +9,7 @@
   <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
     <ul class="navbar-nav flex-column mt-5">
       <li class="nav-item py-2">
-        <a routerLink="/auth" routerLinkActive="active" class="nav-link pl-5 position-relative rounded" id="auth">
+        <a routerLink="/auth" [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth">
           {{ 'NAV.LOGIN' | translate }}
         </a>
         <fa-icon [icon]="faSignInAlt" class="navbar-icon"></fa-icon>
@@ -15,16 +17,25 @@
     </ul>
   </div>
   <ng-template #loggedInBlock>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
-      aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+      aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse flex-grow-0" id="navbar">
-      <ul class="navbar-nav flex-column mt-5">
+      <p>Menu</p>
+    </button> -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggler collapsed" aria-label="Toggle navigation" data-target="#navbar"
+        aria-controls="navbar" (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse overflow-auto flex-grow-0" id="navbar" [attr.aria-expanded]="!isCollapsed"
+      [ngClass]="{collapse: !isCollapsed}">
+      <ul class="navbar-nav d-flex flex-column mt-5" (click)="isCollapsed = !isCollapsed">
         <div>
-          <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon> {{getUsername()}}
+          <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
+          {{getUsername()}}
         </div>
-        <div *ngIf="hasSomePermissions()">
+        <div *ngIf="hasSomePermissions()" class="flex-column pb-5">
           <li class="nav-item py-2">
             <app-global-admin></app-global-admin>
           </li>
@@ -36,23 +47,23 @@
               <p class="ml-2">{{'NAV.MENU-ITEM-MISC' | translate}}</p>
               <mat-divider></mat-divider>
               <li class="nav-item py-2">
-                <a routerLink="/gateways" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-                  id="myLoraGateway">
+                <a routerLink="/gateways" [routerLinkActive]="['active']"
+                  class="nav-link pl-5 position-relative rounded" id="myLoraGateway">
                   {{ 'NAV.LORA-GATEWAYS' | translate }}
                 </a>
                 <fa-icon [icon]="faBroadcastTower" class="navbar-icon"></fa-icon>
-  
+
               </li>
               <li class="nav-item py-2">
-                <a routerLink="/profiles" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-                  id="profiles">
+                <a routerLink="/profiles" [routerLinkActive]="['active']"
+                  class="nav-link pl-5 position-relative rounded" id="profiles">
                   {{ 'NAV.PROFILES' | translate }}
                 </a>
                 <fa-icon [icon]="faSlidersH" class="navbar-icon"></fa-icon>
               </li>
               <li class="nav-item py-2">
-                <a routerLink="/payload-decoder" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
-                  id="payload-decoder">
+                <a routerLink="/payload-decoder" [routerLinkActive]="['active']"
+                  class="nav-link pl-5 position-relative rounded" id="payload-decoder">
                   {{ 'NAV.PAYLOAD-DECODER' | translate }}
                 </a>
                 <fa-icon [icon]="faNetworkWired" class="navbar-icon"></fa-icon>
@@ -60,7 +71,7 @@
             </ul>
           </li>
         </div>
-        <li class="nav-item py-2 ">
+        <li class="nav-item py-2 logout-btn">
           <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
             [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
             target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">Logout</a>
