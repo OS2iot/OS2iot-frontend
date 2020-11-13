@@ -97,7 +97,7 @@ export class PayloadDecoderEditComponent implements OnInit {
         });
   }
 
-  decodePayloadFunction() {
+  testPayloadFunction() {
     this.testPayloadDecoder.code = this.payloadDecoderBody;
     this.testPayloadDecoder.iotDeviceJsonString = this.metadata;
     this.testPayloadDecoder.rawPayloadJsonString = this.payloadData;
