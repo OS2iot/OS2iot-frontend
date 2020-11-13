@@ -18,11 +18,13 @@ export class DeviceModelService {
     private sharedVariable: SharedVariableService) { }
 
   create(deviceModel: DeviceModel): Observable<any> {
+    this.trimModel(deviceModel.body);
     const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.post(this.DEVICEMODELURL, body, { observe: 'response' });
   }
 
   update(deviceModel: DeviceModel, id: number): Observable<any> {
+    this.trimModel(deviceModel.body);
     const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.put(this.DEVICEMODELURL, body, id, {
       observe: 'response',
@@ -82,5 +84,18 @@ export class DeviceModelService {
 
   delete(id: number) {
     return this.restService.delete(this.DEVICEMODELURL, id);
+  }
+
+  private trimModel(deviceModel: DeviceModelBody) {
+    deviceModel.id = deviceModel.id ? deviceModel.id : undefined;
+    deviceModel.brandName = deviceModel.brandName ? deviceModel.brandName : undefined;
+    deviceModel.modelName = deviceModel.modelName ? deviceModel.modelName : undefined;
+    deviceModel.manufacturerName = deviceModel.manufacturerName ? deviceModel.manufacturerName : undefined;
+    if (!deviceModel.controlledProperty || deviceModel.controlledProperty.length === 0) {
+      deviceModel.controlledProperty = undefined;
+    }
+    if (!deviceModel.category || deviceModel.category.length === 0) {
+      deviceModel.category = undefined;
+    }
   }
 }
