@@ -34,6 +34,11 @@
     "MENU-ITEM-MISC": "Generelt",
     "DEVICE-MODEL": "Device Model"
   },
+  "TOPBAR":{
+    "SEARCH": {
+      "BUTTON": "Søg"
+    }
+  },
   "SEARCH": {
     "ICON": "",
     "TYPE": "Type",

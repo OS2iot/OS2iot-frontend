@@ -213,8 +213,10 @@ $color-secondary: $color-white-001 !default;
 $color-alternative: $color-lime-001 !default;
 
 //Focus & Active
-$color-focus: $color-green-001 !default;
-$color-active: $color-green-001 !default;
+$color-focus: darken($color-orange-001, 20%) !default;
+$color-active: darken($color-orange-001, 20%) !default;
+$color-visited: darken($color-orange-001, 20%) !default;
+$color-hover: darken($color-orange-001, 20%) !default;
 
 // Text color
 $color-text: $color-black-001 !default;
@@ -249,11 +251,14 @@ $color-icon-label: $color-text-light !default;
 
 // //Links color
 $color-link: $color-primary !default;
-$color-link-hover: $color-primary !default;
-$color-active: $color-primary !default;
-$color-link-focus: $color-primary !default;
+$color-link-hover: $color-hover !default;
+$color-link-hover-bg: $color-primary !default;
+$color-link-active: $color-active !default;
+$color-link-active-bg: $color-primary !default;
+$color-link-focus: $color-focus !default;
 $color-link-focus-bg: $color-primary !default;
-$color-visited: $color-primary !default;
+$color-link-visited: $color-visited !default;
+$color-link-visited-bg: $color-primary !default;
 
 // Colors for borders
 $color-border: $color-black-004 !default;

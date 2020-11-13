@@ -2,6 +2,7 @@
   <div class="top-bar">
     <div class="row col-12">
       <div class="col-md-8 top-bar--menu">
+
         <!-- Breadcrumb -->
         <nav class="top-bar--menu--breadcrumb">
           <ng-template [ngIf]="backButtonTitle">
@@ -28,8 +29,6 @@
       <div class="col-md-4">
         <!-- Search  -->
 
-        <!-- https://mdbootstrap.com/docs/angular/forms/search/ -->
-
         <form class="search-form">
           <mat-form-field class="search-form--full-width">
             <mat-label>{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
@@ -38,7 +37,7 @@
             <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
               <div class="search-icon">
                 <fa-icon [icon]="faSearch"></fa-icon>
-                <strong>Søg</strong>
+                {{ 'TOPBAR.SEARCH.BUTTON' | translate }}
               </div>
             </a>
           </mat-form-field>
