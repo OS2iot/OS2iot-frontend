@@ -19,7 +19,8 @@ a {
   text-decoration: none;
 
   &:hover,
-  &.link-hover {
+  &.link-hover,
+  &:visited:hover {
     color: $color-link-hover;
     border-bottom: 5px solid $color-link-hover-bg;
 

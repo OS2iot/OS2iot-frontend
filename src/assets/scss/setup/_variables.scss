@@ -215,8 +215,8 @@ $color-alternative: $color-lime-001 !default;
 //Focus & Active
 $color-focus: darken($color-orange-001, 20%) !default;
 $color-active: darken($color-orange-001, 20%) !default;
-$color-visited: darken($color-orange-001, 20%) !default;
 $color-hover: darken($color-orange-001, 20%) !default;
+$color-visited: $color-primary !default;
 
 // Text color
 $color-text: $color-black-001 !default;

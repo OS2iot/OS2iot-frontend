@@ -1,47 +1,52 @@
 <div class="row top-bar-wrapper">
   <div class="top-bar">
-    <div class="row col-12">
-      <div class="col-md-8 top-bar--menu">
 
-        <!-- Breadcrumb -->
-        <nav class="top-bar--menu--breadcrumb">
-          <ng-template [ngIf]="backButtonTitle">
-            <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
-          </ng-template>
-          <ng-template [ngIf]="data || subPage === true">
-            <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
-            <h3 class="p-3">{{subTitle || staticTitle}}</h3>
-          </ng-template>
-          <ng-template [ngIf]="title">
-            <h4 *ngIf="component; else notComponent">{{title || staticTitle}}</h4>
-            <ng-template #notComponent>
-              <h3 class="pl-3">{{title || staticTitle}}</h3>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-8 my-3 m-md-0 top-bar--menu">
+
+          <!-- Breadcrumb -->
+          <nav class="top-bar--menu--breadcrumb">
+            <ng-template [ngIf]="backButtonTitle">
+              <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
             </ng-template>
-          </ng-template>
-        </nav>
+            <ng-template [ngIf]="data || subPage === true">
+              <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
+              <h3 class="p-3">{{subTitle || staticTitle}}</h3>
+            </ng-template>
+            <ng-template [ngIf]="title">
+              <h4 *ngIf="component; else notComponent">{{title || staticTitle}}</h4>
+              <ng-template #notComponent>
+                <h3 class="pl-md-3">{{title || staticTitle}}</h3>
+              </ng-template>
+            </ng-template>
+          </nav>
 
-        <!-- action buttons -->
-        <div class="action-group">
-          <button *ngIf="ctaRouterLink" [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-primary"
-            type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
+          <!-- action buttons -->
+          <div class="action-group">
+            <button *ngIf="ctaRouterLink" [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-primary"
+              type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
+          </div>
+        </div>
+        <div class="col-md-4 order-first order-md-last">
+          <!-- Search  -->
+
+          <form class="search-form">
+            <mat-form-field class="search-form--full-width">
+              <mat-label>{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
+              <input matInput id="searchQuery" class="search--input" aria-label="Search" #searchInput
+                [value]="decode(searchQuery)" (keyup.enter)="search(searchInput.value)">
+              <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
+                <div class="search-icon">
+                  <fa-icon [icon]="faSearch"></fa-icon>
+                  {{ 'TOPBAR.SEARCH.BUTTON' | translate }}
+                </div>
+              </a>
+            </mat-form-field>
+          </form>
         </div>
       </div>
-      <div class="col-md-4">
-        <!-- Search  -->
-
-        <form class="search-form">
-          <mat-form-field class="search-form--full-width">
-            <mat-label>{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
-            <input matInput id="searchQuery" class="search--input" aria-label="Search" #searchInput
-              [value]="decode(searchQuery)" (keyup.enter)="search(searchInput.value)">
-            <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
-              <div class="search-icon">
-                <fa-icon [icon]="faSearch"></fa-icon>
-                {{ 'TOPBAR.SEARCH.BUTTON' | translate }}
-              </div>
-            </a>
-          </mat-form-field>
-        </form>
-      </div>
     </div>
+
+
   </div>
