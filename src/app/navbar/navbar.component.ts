@@ -19,6 +19,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  isCollapsed = false;
   isLoginMode = true;
   faBroadcastTower = faBroadcastTower;
   faSlidersH = faSlidersH;
@@ -36,7 +37,7 @@ export class NavbarComponent implements OnInit {
     translate.use('da');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onLogout() {
     this.authService.logout();

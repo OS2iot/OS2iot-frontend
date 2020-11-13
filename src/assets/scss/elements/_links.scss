@@ -7,7 +7,6 @@
 a:focus,
 button:focus,
 .focus {
-  outline: $focus-outline;
   outline-offset: 0;
   transition: all 0.2s;
 }
