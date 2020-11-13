@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
   }
 
   hasSomePermissions(): boolean {
-    return this.sharedVariableService.getHasAnyPermission()
+    return this.sharedVariableService.getHasAnyPermission();
   }
 
   getUsername(): String {

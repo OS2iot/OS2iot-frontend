@@ -12,12 +12,8 @@ export class SharedVariableService {
   constructor(private authService: AuthService) {
     this.routerInfo = new BehaviorSubject<number>(0);
   }
-
   private selectedOrganisationId: number;
-  private gotWritePermission: boolean;
-  private gotAnyPermission: boolean;
   private routerInfo: BehaviorSubject<number>;
-  private username: string;
 
   getValue(): Observable<number> {
     return this.routerInfo.asObservable();
@@ -38,19 +34,9 @@ export class SharedVariableService {
       .me()
       .pipe(
         tap((response: CurrentUserInfoResponse) => {
-          const hasSomePermission = response.user.permissions.length > 0;
-          this.gotAnyPermission = hasSomePermission;
           localStorage.setItem(
-            'has_any_permission',
-            hasSomePermission.toString()
-          );
-
-          this.username = response.user.name;
-          localStorage.setItem('username', response.user.name);
-
-          localStorage.setItem(
-            'permissions',
-            JSON.stringify(response.user.permissions)
+            'userInfo',
+            JSON.stringify(response)
           );
         })
       )
@@ -58,22 +44,15 @@ export class SharedVariableService {
   }
 
   getUsername(): string {
-    if (this.username != null) {
-      return this.username;
-    }
-    return localStorage.getItem('username');
+    return this.getUserInfo().user.name;
   }
 
   getHasAnyPermission(): boolean {
-    if (this.gotAnyPermission != null) {
-      return this.gotAnyPermission;
-    }
-    return JSON.parse(localStorage.getItem('has_any_permission'));
+    return this.getUserInfo().user.permissions.length > 0;
   }
 
   getHasWritePermission(): boolean {
-    const permissions = JSON.parse(localStorage.getItem('permissions'));
-
+    const permissions = this.getUserInfo().user.permissions;
     return permissions.some(
       (permission) =>
         permission.type === PermissionType.GlobalAdmin ||
@@ -84,9 +63,7 @@ export class SharedVariableService {
   }
 
   isGlobalAdmin(): boolean {
-    const permissions = JSON.parse(localStorage.getItem('permissions'));
-
-    return permissions.some(
+    return this.getUserInfo().user.permissions.some(
       (permission) => permission.type === PermissionType.GlobalAdmin
     );
   }
@@ -95,7 +72,10 @@ export class SharedVariableService {
     if (this.selectedOrganisationId != null) {
       return this.selectedOrganisationId;
     }
-
     return +localStorage.getItem('selected_organisation');
+  }
+
+  getUserInfo(): CurrentUserInfoResponse {
+    return new Object(JSON.parse(localStorage.getItem('userInfo'))) as CurrentUserInfoResponse;
   }
 }

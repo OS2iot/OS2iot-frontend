@@ -27,7 +27,7 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
 
 
   constructor(
-    private authService: AuthService,
+    private sharedVariableService: SharedVariableService,
     public translate: TranslateService,
     private sharedVariable: SharedVariableService,
     private route: Router,
@@ -42,21 +42,20 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   }
 
   getAllowedOrganizations() {
-    this.authService.me().subscribe((response) => {
-      this.organisations = response.organizations;
-      this.user = response.user;
-      this.sharedVariable.getSelectedOrganisationId();
-      if (
-        (this.sharedVariable.getSelectedOrganisationId() === 0 &&
-          response.organizations.length > 0) ||
-        !response.organizations.some(
-          (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
-        )
-      ) {
-        this.setSelectedOrganisation(response.organizations[0]?.id);
-      }
-      this.isOrganisationAdmin(response.organizations[0]?.id);
-    });
+    const userInfo = this.sharedVariableService.getUserInfo();
+    this.organisations = userInfo.organizations;
+    this.user = userInfo.user;
+    this.sharedVariable.getSelectedOrganisationId();
+    if (
+      (this.sharedVariable.getSelectedOrganisationId() === 0 &&
+        userInfo.organizations.length > 0) ||
+      !userInfo.organizations.some(
+        (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
+      )
+    ) {
+      this.setSelectedOrganisation(userInfo.organizations[0]?.id);
+    }
+    this.isOrganisationAdmin(userInfo.organizations[0]?.id);
   }
 
   private isOrganisationAdmin(orgId: number) {

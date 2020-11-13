@@ -28,7 +28,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'PAYLOAD-DECODER.ORGANIZATION' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-                {{ element.organization.name }}
+                {{ element.organization?.name }}
             </td>
         </ng-container>
 

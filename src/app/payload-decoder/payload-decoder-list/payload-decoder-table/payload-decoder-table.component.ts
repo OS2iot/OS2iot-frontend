@@ -56,14 +56,9 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   setCanEdit() {
     this.payloadDecoders.forEach(
       (payloadDecoder) => {
-        this.meService.canWriteInTargetOrganization(payloadDecoder.organization.id)
-          .subscribe(
-            response => {
-                payloadDecoder.canEdit = response;
-            }
-          )
+        payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(payloadDecoder.organization?.id);
       }
-    )
+    );
   }
 
   ngOnChanges() {
