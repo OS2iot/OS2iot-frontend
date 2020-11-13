@@ -102,6 +102,14 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   }
 }
 
+.search-form{
+  .mat-form-field-flex{
+    @extend .mb-2;
+    .mat-form-field-suffix {
+      align-self: flex-end;
+    }
+  }
+}
 
 //////////////////////// MAT TABLES ////////////////////////////////////////// 
 

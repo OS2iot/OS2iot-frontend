@@ -47,10 +47,16 @@
     
 
       .search-form{
- 
-        &--full-width{   
+
+        @extend .mt-2;
+        &--full-width{ 
+          width: 100%;  
+          .search--input{
+            width: 100%;
+          }
 
           .search-icon{
+            @extend .ml-2;
             display: flex;
             flex-direction: column;
             justify-content: center;
