@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,12 +11,13 @@ import { BackButton } from '@shared/models/back-button.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { ApplicationService } from '@applications/application.service';
 import { Application } from '@applications/application.model';
-import * as _ from 'lodash';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { MatSelectChange } from '@angular/material/select';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { DeviceModelService } from '@app/device-model/device-model.service';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { TestPayloadDecoder } from '@payload-decoder/test-payload-decoder.model';
+import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder.service';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -31,6 +32,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   payloadData: string = 'Vælg en enhed først';
   metadata: string = 'Vælg en enhed først';
   codeOutput: string = 'Tryk test koden for at decode payload og metadata';
+  testPayloadDecoder = new TestPayloadDecoder();
 
   payloadDecoder = new PayloadDecoder();
   payloadDecoderBody: string;
@@ -59,6 +61,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
+    private testPayloadDecoderService: TestPayloadDecoderService,
     private location: Location,
     private applicationService: ApplicationService,
     private globalService: SharedVariableService,
@@ -94,13 +97,20 @@ export class PayloadDecoderEditComponent implements OnInit {
         });
   }
 
-  decodePayloadFunction(payloadFunction: string, rawMetadata: string, rawPayload: string) {
-    const innerMetadata = JSON.stringify(rawMetadata);
-    const innerPayloadData = JSON.stringify(rawPayload);
-    const innerPayloadFunction = payloadFunction;
+  decodePayloadFunction() {
+    this.testPayloadDecoder.code = this.payloadDecoderBody;
+    this.testPayloadDecoder.iotDeviceJsonString = this.metadata;
+    this.testPayloadDecoder.rawPayloadJsonString = this.payloadData;
 
-
-    console.log('return: ' + innerMetadata + innerPayloadData);
+    this.testPayloadDecoderService.post(this.testPayloadDecoder)
+      .subscribe(
+        (response) => {
+          this.codeOutput = JSON.stringify(response, null, 4);
+        },
+        (error: HttpErrorResponse) => {
+          this.showError(error);
+        }
+      );
   }
 
   getCurrentOrganisationId(): number {
@@ -161,7 +171,6 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.payloadDecoderService.post(this.payloadDecoder)
       .subscribe(
         (response) => {
-          //console.log(response);
           this.routeBack();
         },
         (error: HttpErrorResponse) => {

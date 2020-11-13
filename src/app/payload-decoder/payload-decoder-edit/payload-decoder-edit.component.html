@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="row mb-5">
-      <div class="form-group col-12">
+      <div class="form-group col-6">
         <label class="form-label"
           for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>
         <ngx-monaco-editor [options]="editorJavaScriptOptions" [(ngModel)]="payloadDecoderBody"
@@ -66,10 +66,16 @@
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('decodingFunction'), 'is-valid' : formFailedSubmit && !errorFields.includes('decodingFunction')}">
         </ngx-monaco-editor>
       </div>
+      <div class="form-group col-6">
+        <label class="form-label" for="codePreview">{{'QUESTION.GIVE-PAYLOADDECODER-OUTPUT' | translate}}</label>
+        <ngx-monaco-editor [options]="editorJsonOptions" [(ngModel)]="codeOutput" [ngModelOptions]="{standalone: true}"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('codePreview'), 'is-valid' : formFailedSubmit && !errorFields.includes('codePreview')}">
+        </ngx-monaco-editor>
+      </div>
     </div>
     <div class="row mb-5">
       <div class="col-12 d-flex justify-content-center">
-        <div class="btn btn-secondary" (click)="decodePayloadFunction(payloadDecoderBody, payloadData, metadata)">
+        <div class="btn btn-secondary" (click)="decodePayloadFunction()">
           <div class="d-flex mx-3">
             <div class="mr-3">{{'QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON' | translate}}</div>
             <div class="rotate--90degree">
@@ -80,12 +86,7 @@
       </div>
     </div>
     <div class="row mb-5">
-      <div class="form-group col-12">
-        <label class="form-label" for="codePreview">{{'QUESTION.GIVE-PAYLOADDECODER-OUTPUT' | translate}}</label>
-        <ngx-monaco-editor [options]="editorJsonOptions" [(ngModel)]="codeOutput" [ngModelOptions]="{standalone: true}"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('codePreview'), 'is-valid' : formFailedSubmit && !errorFields.includes('codePreview')}">
-        </ngx-monaco-editor>
-      </div>
+
     </div>
     <div class="row">
       <div class="form-group pull-right">
