@@ -18,11 +18,15 @@ import { SharedVariableModule } from '@shared/shared-variable/shared-variable.mo
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
-import { DeviceModelModule } from './device-model/device-model.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+export function tokenGetter() {
+    return localStorage.getItem("id_token");
+  }
 
 @NgModule({
     declarations: [AppComponent, ErrorPageComponent],
@@ -49,6 +53,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         BrowserAnimationsModule,
         GatewayModule,
         SearchModule,
+        HttpClientModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter
+            },
+        }),
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

@@ -9,6 +9,7 @@ import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { UserResponse } from '../admin/users/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface AuthResponseData {
   accessToken: string;
@@ -28,7 +29,15 @@ export class AuthService {
 
   private readonly LOCAL_STORAGE_JWT_LOCATION = 'id_token';
 
-  constructor(private http: HttpClient, private restService: RestService) {}
+  constructor(
+    private http: HttpClient,
+    private restService: RestService,
+    private jwtHelper: JwtHelperService) {}
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   // global-admin@os2iot.dk
   // hunter2
