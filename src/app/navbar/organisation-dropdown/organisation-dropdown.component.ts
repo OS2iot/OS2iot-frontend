@@ -1,10 +1,9 @@
-import { AfterContentInit, AfterViewChecked, Component, DoCheck, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
-import { AuthService } from '@app/auth/auth.service';
-import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faIdCard, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
@@ -29,7 +28,6 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   constructor(
     private sharedVariableService: SharedVariableService,
     public translate: TranslateService,
-    private sharedVariable: SharedVariableService,
     private route: Router,
   ) { }
 
@@ -45,12 +43,12 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
     const userInfo = this.sharedVariableService.getUserInfo();
     this.organisations = userInfo.organizations;
     this.user = userInfo.user;
-    this.sharedVariable.getSelectedOrganisationId();
+    this.sharedVariableService.getSelectedOrganisationId();
     if (
-      (this.sharedVariable.getSelectedOrganisationId() === 0 &&
+      (this.sharedVariableService.getSelectedOrganisationId() === 0 &&
         userInfo.organizations.length > 0) ||
       !userInfo.organizations.some(
-        (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
+        (x) => x.id === this.sharedVariableService.getSelectedOrganisationId()
       )
     ) {
       this.setSelectedOrganisation(userInfo.organizations[0]?.id);
@@ -63,16 +61,16 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   }
 
   public onChange(value) {
-    this.sharedVariable.setValue(value);
+    this.sharedVariableService.setValue(value);
     this.isOrganisationAdmin(value);
     this.route.navigateByUrl('/applications');
   }
 
   setSelectedOrganisation(value) {
-    this.sharedVariable.setSelectedOrganisationId(value);
+    this.sharedVariableService.setSelectedOrganisationId(value);
   }
 
   getSelectedOrganisation() {
-    return this.sharedVariable.getSelectedOrganisationId();
+    return this.sharedVariableService.getSelectedOrganisationId();
   }
 }
