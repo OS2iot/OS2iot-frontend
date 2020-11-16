@@ -13,9 +13,7 @@ export class PayloadDecoderService {
     constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
 
     post(body: PayloadDecoder): Observable<PayloadDecoderResponse> {
-        if (!body.organizationId) {
-            body.organizationId = this.sharedVariableService.getSelectedOrganisationId();
-        }
+        body.organizationId = this.sharedVariableService.getSelectedOrganisationId();
         body.decodingFunction = JSON.stringify(body.decodingFunction);
         return this.restService.post(this.URL, body);
     }

@@ -102,6 +102,7 @@ export class PayloadDecoderEditComponent implements OnInit {
       .subscribe(
         (response) => {
           this.payloadDecoder = response;
+          this.payloadDecoder.organizationId = response.organization.id;
           this.payloadDecoderBody = response.decodingFunction;
         });
   }

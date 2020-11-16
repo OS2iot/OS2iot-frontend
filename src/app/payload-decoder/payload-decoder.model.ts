@@ -39,13 +39,13 @@ export class PayloadDecoder {
 }
 
 export interface PayloadDecoderResponse {
-    data: PayloadDecoderBodyResponse[];
-    count: number;
+  data: PayloadDecoderBodyResponse[];
+  count: number;
 }
 
 export class PayloadDecoderBodyResponse extends EditPermission {
-    name: string;
-    id: number;
-    organization?: Organisation;
-    decodingFunction: string;
+  name: string;
+  id: number;
+  organization?: Organisation;
+  decodingFunction: string;
 }
