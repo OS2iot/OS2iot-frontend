@@ -9,7 +9,7 @@ import { TestPayloadDecoder } from './test-payload-decoder.model';
 export class TestPayloadDecoderService {
     URL = 'test-payload-decoder';
 
-    constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
+    constructor(private restService: RestService) { }
 
     post(body: TestPayloadDecoder) {
         body.code = JSON.stringify(body.code);

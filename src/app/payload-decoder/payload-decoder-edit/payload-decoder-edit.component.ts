@@ -29,9 +29,9 @@ export class PayloadDecoderEditComponent implements OnInit {
 
   editorJavaScriptOptions = { theme: 'vs', language: 'javascript', autoIndent: true, roundedSelection: true, };
   editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
-  payloadData: string = 'Vælg en enhed først';
-  metadata: string = 'Vælg en enhed først';
-  codeOutput: string = 'Tryk test koden for at decode payload og metadata';
+  payloadData = '';
+  metadata = '';
+  codeOutput = '';
   testPayloadDecoder = new TestPayloadDecoder();
 
   payloadDecoder = new PayloadDecoder();
@@ -51,7 +51,6 @@ export class PayloadDecoderEditComponent implements OnInit {
   public application: Application;
   public iotDevices: IotDevice[];
   public iotDevice: IotDevice;
-  public name: string;
   public pageLimit = 10;
   public pageTotal: number;
   public pageOffset = 0;
@@ -64,18 +63,28 @@ export class PayloadDecoderEditComponent implements OnInit {
     private testPayloadDecoderService: TestPayloadDecoderService,
     private location: Location,
     private applicationService: ApplicationService,
-    private globalService: SharedVariableService,
+    private sharedVariableService: SharedVariableService,
     private iotDeviceService: IoTDeviceService,
     private deviceModelService: DeviceModelService
   ) { }
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.translate.get(['NAV.PAYLOAD-DECODER', 'FORM.EDIT-PAYLOAD-DECODER', 'PAYLOAD-DECODER.SAVE'])
+    this.translate.get([
+      'NAV.PAYLOAD-DECODER',
+      'FORM.EDIT-PAYLOAD-DECODER',
+      'PAYLOAD-DECODER.SAVE',
+      'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER',
+      'QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER',
+      'QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'
+    ])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.PAYLOAD-DECODER'];
         this.title = translations['FORM.EDIT-PAYLOAD-DECODER'];
         this.submitButton = translations['PAYLOAD-DECODER.SAVE'];
+        this.payloadData = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER'];
+        this.metadata = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER'];
+        this.codeOutput = translations['QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'];
       });
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
@@ -83,7 +92,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     } else {
       this.payloadDecoderBody = new PayloadDecoder().decodingFunction;
     }
-    this.globalService.getValue().subscribe((organisationId) => {
+    this.sharedVariableService.getValue().subscribe((organisationId) => {
       this.getApplications(organisationId);
     });
   }
@@ -114,7 +123,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   getCurrentOrganisationId(): number {
-    return this.globalService.getSelectedOrganisationId();
+    return this.sharedVariableService.getSelectedOrganisationId();
   }
 
   getApplications(orgId?: number): void {
@@ -128,9 +137,6 @@ export class PayloadDecoderEditComponent implements OnInit {
       )
       .subscribe((applications) => {
         this.applications = applications.data;
-        if (this.pageLimit) {
-          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
-        }
       });
   }
 
