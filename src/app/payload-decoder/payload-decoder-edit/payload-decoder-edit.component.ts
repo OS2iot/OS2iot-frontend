@@ -18,6 +18,7 @@ import { DeviceModelService } from '@app/device-model/device-model.service';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { TestPayloadDecoder } from '@payload-decoder/test-payload-decoder.model';
 import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder.service';
+import { SaveSnackService } from '@shared/services/save-snack.service';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -65,7 +66,8 @@ export class PayloadDecoderEditComponent implements OnInit {
     private applicationService: ApplicationService,
     private sharedVariableService: SharedVariableService,
     private iotDeviceService: IoTDeviceService,
-    private deviceModelService: DeviceModelService
+    private deviceModelService: DeviceModelService,
+    private saveSnackService: SaveSnackService,
   ) { }
 
   ngOnInit(): void {
@@ -174,6 +176,10 @@ export class PayloadDecoderEditComponent implements OnInit {
     );
   }
 
+  showSavedSnack() {
+    this.saveSnackService.showSavedSnack();
+  }
+
   private create(): void {
     this.payloadDecoderService.post(this.payloadDecoder)
       .subscribe(
@@ -204,6 +210,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     } else {
       this.create();
     }
+    this.showSavedSnack();
   }
 
   scrollToTop(): void {

@@ -10,7 +10,7 @@ export class SaveSnackService {
     private snackBar: MatSnackBar) { }
 
   public showSavedSnack() {
-    this.snackBar.open('Gem: Succesfuldt', 'Luk', {
+    this.snackBar.open('Gemt Succesfuldt', 'Luk', {
       duration: 10000,
     });
   }
