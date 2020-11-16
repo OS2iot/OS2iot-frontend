@@ -97,7 +97,8 @@
                 class="form-control"
                 name="deviceModel"
                 [compareWith]="compare"
-                [(ngModel)]="iotDevice.deviceModelId">
+                [(ngModel)]="iotDevice.deviceModelId"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceModel'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceModel')}">
                 <mat-option [value]="0">
                         {{'QUESTION.DEVICE-MODEL-SELECT-NON' | translate }}
                 </mat-option>
@@ -225,7 +226,7 @@
     </ng-container>
 
     <ng-container *ngIf="iotDevice.type == sigfoxDevice">
-      <app-sigfox-device-edit [iotDevice]="iotDevice"></app-sigfox-device-edit>
+      <app-sigfox-device-edit [iotDevice]="iotDevice" [errorFields]="errorFields" [formFailedSubmit]="formFailedSubmit"></app-sigfox-device-edit>
     </ng-container>
   
     <div class="form-group mt-5">
