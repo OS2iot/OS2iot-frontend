@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OpenDataDK } from '../opendatadk.model';
+import { OpenDataDkDataset } from '../opendatadk-dataset.model';
 
 @Component({
   selector: 'app-opendatadk-edit',
@@ -11,7 +11,7 @@ export class OpendatadkEditComponent implements OnInit {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
-  @Input() openDataDk: OpenDataDK;
+  @Input() openDataDk: OpenDataDkDataset;
 
   constructor() { }
 

@@ -11,7 +11,12 @@
         </li>
       </ul>
     </div>
-  
+    <mat-slide-toggle 
+        [(ngModel)]="datatarget.setToOpendataDk" 
+        id="setToOpendataDk" 
+        name="setToOpendataDk">
+        {{'DATATARGET.ADD-TO-OPENDATADK' | translate}}
+      </mat-slide-toggle>
     <div class="row mb-2">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="name">{{'QUESTION.GIVE-DATATARGET-NAME' | translate}}</label>*
@@ -55,6 +60,9 @@
               [(ngModel)]="datatarget.authorizationHeader"
               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorizationHeader'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorizationHeader')}">
         </div>
+      <div *ngIf="datatarget.setToOpendataDk">
+        <app-opendatadk-edit [openDataDk]="datatarget.openDataDkDataset"></app-opendatadk-edit>
+      </div>
       </div>
         <div *ngIf="datatargetid === 0">
           <h6> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h6>
@@ -123,15 +131,6 @@
               </tbody>    
             </table>    
           </ng-container>    
-        </div>
-        <mat-slide-toggle 
-            [(ngModel)]="datatarget.setToOpendataDk" 
-            id="setToOpendataDk" 
-            name="setToOpendataDk">
-            {{'DATATARGET.ADD-TO-OPENDATADK' | translate}}
-        </mat-slide-toggle>
-        <div *ngIf="datatarget.setToOpendataDk">
-            <app-opendatadk-edit [openDataDk]="datatarget.openDataDk"></app-opendatadk-edit>
         </div>
       <div class="form-group mt-5">
           <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>

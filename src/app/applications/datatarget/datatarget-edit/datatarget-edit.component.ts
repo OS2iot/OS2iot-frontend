@@ -19,7 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { DataTargetType } from '@shared/enums/datatarget-type';
-import { OpenDataDK } from '../opendatadk/opendatadk.model';
+import { OpenDataDkDataset } from '../opendatadk/opendatadk-dataset.model';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -285,20 +285,20 @@ export class DatatargetEditComponent implements OnInit {
       .get(id)
       .subscribe((datatargetResponse: DatatargetResponse) => {
         this.datatarget = this.mapToDatatarget(datatargetResponse);
-        this.datatarget.openDataDk = datatargetResponse.openDataDk ? datatargetResponse.openDataDk : new OpenDataDK();
+        this.datatarget.openDataDkDataset = datatargetResponse.openDataDk ? datatargetResponse.openDataDk : new OpenDataDkDataset();
         //this.opendatadkMockData();
       });
   }
 
   opendatadkMockData() {
-    this.datatarget.openDataDk = {
+    this.datatarget.openDataDkDataset = {
       name: "test navn",
-      title: "title",
+      resourceTitle: "title",
       description: "description",
-      tags: ['key','work','now'],
-      licens: "testlicens",
+      keywords: ['key','work','now'],
+      license: "testlicens",
       accessLevel: "Public",
-      author: "Jeppe",
+      authorName: "Jeppe",
       authorEmail: "J",
       url: "www.dr.dk",
       acceptTerms: false
@@ -316,7 +316,7 @@ export class DatatargetEditComponent implements OnInit {
     if (!this.datatarget.setToOpendataDk) {
       disable = false;
     }
-    else if(this.datatarget.openDataDk?.acceptTerms) {
+    else if(this.datatarget.openDataDkDataset?.acceptTerms) {
       disable = false
     }
     else {
@@ -364,7 +364,7 @@ export class DatatargetEditComponent implements OnInit {
       authorizationHeader: data.authorizationHeader,
       applicationId: data.application.id,
       setToOpendataDk: data.type === DataTargetType.OPENDATADK ? true : false,
-      openDataDk: data.openDataDk
+      openDataDkDataset: data.openDataDk
     };
     return dt;
   }

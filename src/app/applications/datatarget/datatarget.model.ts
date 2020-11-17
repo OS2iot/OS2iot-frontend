@@ -1,5 +1,5 @@
 import { DataTargetType } from '@shared/enums/datatarget-type';
-import { OpenDataDK } from './opendatadk/opendatadk.model';
+import { OpenDataDkDataset as OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
 
 export class Datatarget {
     id: number;
@@ -11,7 +11,7 @@ export class Datatarget {
     timeout: number = 30000;
     authorizationHeader: string;
     setToOpendataDk = false;
-    openDataDk: OpenDataDK;
+    openDataDkDataset: OpenDataDkDataset = new OpenDataDkDataset();
 }
 
 export class DatatargetData {
