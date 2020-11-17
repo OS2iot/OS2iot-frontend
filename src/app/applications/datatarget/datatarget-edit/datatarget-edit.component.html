@@ -132,15 +132,6 @@
             </table>    
           </ng-container>    
         </div>
-        <mat-slide-toggle 
-            [(ngModel)]="datatarget.setToOpendataDk" 
-            id="setToOpendataDk" 
-            name="setToOpendataDk">
-            {{'DATATARGET.ADD-TO-OPENDATADK' | translate}}
-        </mat-slide-toggle>
-        <div *ngIf="datatarget.setToOpendataDk">
-            <app-opendatadk-edit [openDataDk]="datatarget.openDataDk"></app-opendatadk-edit>
-        </div>
       <div class="form-group mt-5">
           <button (click)="routeBack()" class="btn btn-light" type="button">{{ 'GEN.CANCEL' | translate}}</button>
           <button [disabled]="disableSaveButton()" class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>

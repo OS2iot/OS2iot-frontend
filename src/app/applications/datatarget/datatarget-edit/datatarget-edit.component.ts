@@ -287,14 +287,14 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   opendatadkMockData() {
-    this.datatarget.openDataDk = {
+    this.datatarget.openDataDkDataset = {
       name: "test navn",
-      title: "title",
+      resourceTitle: "title",
       description: "description",
-      tags: ['key','work','now'],
-      licens: "testlicens",
+      keywords: ['key','work','now'],
+      license: "testlicens",
       accessLevel: "Public",
-      author: "Jeppe",
+      authorName: "Jeppe",
       authorEmail: "J",
       url: "www.dr.dk",
       acceptTerms: false
