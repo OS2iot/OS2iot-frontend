@@ -4,7 +4,7 @@ import { EditPermission } from '@shared/models/edit-permission.model';
 export class PayloadDecoder {
     public name: string;
     public id: number;
-    public organizationID?: number;
+    public organizationId?: number;
     public decodingFunction = 
     `function bin16dec(bin) {
         var num = bin & 0xffff;
