@@ -12,6 +12,8 @@ export class Gateway extends EditPermission {
     tags?: JSON;
     lastSeenAt: string;
     organizationID?: number;
+    internalOrganizationId: number;
+    public internalOrganizationName?: string;
     map(): Map<string, number> {
         throw new Error('Method not implemented.');
     }
@@ -25,6 +27,7 @@ export class GatewayData {
 
 export class GatewayRequest {
     gateway: Gateway;
+    organizationId: number;
 }
 
 export class GatewayResponse {

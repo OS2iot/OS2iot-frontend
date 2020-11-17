@@ -28,6 +28,8 @@ export class DeviceProfile extends EditPermission {
     public supportsClassC: boolean;
     public supportsJoin = true;
     public organizationID?: number;
+    public internalOrganizationId: number;
+    public internalOrganizationName?: string;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];
@@ -36,7 +38,9 @@ export interface DeviceProfileResponse {
 
 export class DeviceProfileRequest {
     deviceProfile: DeviceProfile;
-    constructor(deviceProfile: DeviceProfile) {
+    internalOrganizationId: number;
+    constructor(deviceProfile: DeviceProfile, orgId: number = null) {
         this.deviceProfile = deviceProfile;
+        this.internalOrganizationId = orgId
     }
 }

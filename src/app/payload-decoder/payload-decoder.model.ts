@@ -5,6 +5,7 @@ export class PayloadDecoder {
     public name: string;
     public id: number;
     public organizationId?: number;
+    public organizationName?: string;
     public decodingFunction = 
     `function bin16dec(bin) {
         var num = bin & 0xffff;

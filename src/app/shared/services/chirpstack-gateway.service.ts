@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { GatewayResponse, Gateway, GatewayData, GatewayRequest } from '@app/gateway/gateway.model';
 import * as moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { map } from 'rxjs/operators';
+import { AuthService } from '@auth/auth.service';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
+import { OperationCanceledException, resolveProjectReferencePath } from 'typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +18,7 @@ export class ChirpstackGatewayService {
 
   constructor(
     private restService: RestService,
+    private organisationSerivce: OrganisationService,
     private sharedVariableService: SharedVariableService) {
     moment.locale('da');
    }
@@ -27,11 +32,9 @@ export class ChirpstackGatewayService {
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {
-    if (gateway.organizationID === null) {
-      gateway.organizationID = this.sharedVariableService.getSelectedOrganisationId();
-    }
     const gatewayRequest: GatewayRequest = new GatewayRequest;
     gatewayRequest.gateway = gateway;
+    gatewayRequest.organizationId = this.sharedVariableService.getSelectedOrganisationId();
     return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, { observe: 'response' });
   }
 

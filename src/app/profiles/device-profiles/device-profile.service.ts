@@ -15,10 +15,7 @@ export class DeviceProfileService {
     constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
 
     post(body: DeviceProfile): Observable<DeviceProfileRequest> {
-        if (!body.organizationID) {
-            body.organizationID = this.sharedVariableService.getSelectedOrganisationId();
-        }
-        const requestBody = new DeviceProfileRequest(body);
+        const requestBody = new DeviceProfileRequest(body, this.sharedVariableService.getSelectedOrganisationId());
         return this.restService.post(this.URL, requestBody);
     }
 
