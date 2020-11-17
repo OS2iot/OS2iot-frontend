@@ -30,7 +30,7 @@ export class DeviceProfileService {
             map(
               (response: DeviceProfileResponseOne) => {
                 response.deviceProfile.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-                  .find( org => org.id = response.deviceProfile.internalOrganizationId)?.name;
+                  .find( org => org.id === response.deviceProfile.internalOrganizationId)?.name;
                 return response;
               }
             )

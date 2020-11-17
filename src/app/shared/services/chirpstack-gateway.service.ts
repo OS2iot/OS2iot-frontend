@@ -29,7 +29,7 @@ export class ChirpstackGatewayService {
         map(
           (response: GatewayResponse) => {
             response.gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-              .find( org => org.id = response.gateway.internalOrganizationId)?.name;
+              .find( org => org.id === response.gateway.internalOrganizationId)?.name;
             return response;
           }
         )
@@ -43,7 +43,7 @@ export class ChirpstackGatewayService {
           response.result.map(
             (gateway) => {
               gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-                  .find( org => org.id = gateway.internalOrganizationId)?.name;
+                  .find( org => org.id === gateway.internalOrganizationId)?.name;
             }
           )
           return response;
