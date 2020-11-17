@@ -11,5 +11,6 @@ export class MarkerInfo {
     name: string;
     active = false;
     id: string | number;
-    organisationId: number;
+    internalOrganizationId: number;
+    internalOrganizationName: string;
 }
