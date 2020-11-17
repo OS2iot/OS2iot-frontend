@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
+import { Organisation } from '@app/admin/organisation/organisation.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import * as L from 'leaflet';
+import { Subscription } from 'rxjs';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
@@ -19,7 +22,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
 
+
   constructor() { }
+
   ngOnDestroy(): void {
     if (this.map) {
       this.map.off();
@@ -57,7 +62,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
-        changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
+      changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
       this.updateMarker();
     }
   }
@@ -82,9 +87,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     this.marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
     this.marker.on('dragend', event => this.dragend(event));
     if (markerInfo) {
-      const aktiv = markerInfo.active ? 'Aktiv' : 'Inaktiv';
+      const isActive = markerInfo.active ? 'Aktiv' : 'Inaktiv';
       this.marker.bindPopup(
-        // TODO: should be standardised when more components use this feture.
+        // TODO: should be standardised when more components use this feature.
         '<a _ngcontent-gij-c367=""' +
         'routerlinkactive="active" class="application-link"' +
         'ng-reflect-router-link-active="active"' +
@@ -92,8 +97,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         '" href="/gateways/gateway-detail/' + markerInfo.id + '">' + markerInfo.name + '</a>'
         +
         '<p>' +
-          aktiv +
-        '</p>');
+        isActive +
+        '</p>'
+        +
+        '<p>' +
+        'Organisations ID: ' + markerInfo.organisationId +
+        '</p>'
+      );
     }
     this.marker.addTo(this.map);
   }
@@ -101,11 +111,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private getMarkerIcon(active = true): any {
     return L.icon({
       iconUrl: active ? this.grenMarker : this.redMarker,
-      iconSize:     [38, 38],
-      iconAnchor:   [19, 38],
-      popupAnchor:  [0, -38]
+      iconSize: [38, 38],
+      iconAnchor: [19, 38],
+      popupAnchor: [0, -38]
     })
-    ;
+      ;
   }
 
   private dragend(event: any) {
@@ -115,7 +125,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   setCoordinatesOutput() {
-    this.updateCoordinates.emit({latitude: this.coordinates.latitude, longitude: this.coordinates.longitude});
+    this.updateCoordinates.emit({ latitude: this.coordinates.latitude, longitude: this.coordinates.longitude });
   }
 
   private initMap(): void {
@@ -124,7 +134,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       this.map = L.map(this.mapId, {
         center: [
           this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
-          this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
+          this.coordinateList ? this.coordinateList[0]?.longitude : this.coordinates?.longitude
         ],
         zoom: this.zoomLevel
       });

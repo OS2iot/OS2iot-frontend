@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Organisation } from '@app/admin/organisation/organisation.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
+import { GatewayTableComponent } from '../gateway-table/gateway-table.component';
+
 
 @Component({
   selector: 'app-gateway-list',
@@ -25,10 +29,13 @@ export class GatewayListComponent implements OnInit, OnDestroy {
     col: 'name',
     label: 'SORT.NAME-ASCENDING',
   };
+  organisation: Organisation;
+  orgSubscribtion: Subscription;
 
   constructor(
     public translate: TranslateService,
-    private chirpstackGatewayService: ChirpstackGatewayService) {
+    private chirpstackGatewayService: ChirpstackGatewayService,
+    private organisationService: OrganisationService) {
     translate.use('da');
     moment.locale('da');
   }
@@ -52,6 +59,17 @@ export class GatewayListComponent implements OnInit, OnDestroy {
       this.showmap = true;
     }
   }
+
+
+  private getOrganisation(id: number) {
+    this.orgSubscribtion = this.organisationService
+      .getOne(id)
+      .subscribe((response) => {
+        this.organisation = response;
+        console.log(response);
+      });
+  }
+
   private mapToCoordinateList() {
     this.gateways.map(
       gateway => this.coordinateList.push(
@@ -64,7 +82,8 @@ export class GatewayListComponent implements OnInit, OnDestroy {
           markerInfo: {
             name: gateway.name,
             active: this.gatewayStatus(gateway),
-            id: gateway.id
+            id: gateway.id,
+            organisationId: gateway.organizationID,
           }
         }
       )
