@@ -2,10 +2,17 @@
 @import '../../../assets/scss/setup/variables';
   
 
-  ngx-monaco-editor {
-    height: 50vh;
-    width: 100%;
-    padding: 15px;
-    //border: $border-input-hover;
-    @include add-shadow;
-  }
+ngx-monaco-editor {
+  width: 100%;
+  padding: 15px;
+  //border: $border-input-hover;
+  @include add-shadow;
+}
+
+.big-editor {
+  height: 100vh;
+}
+
+.middle-editor{
+  height: 40vh;
+}

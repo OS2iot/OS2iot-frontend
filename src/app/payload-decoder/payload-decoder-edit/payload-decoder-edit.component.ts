@@ -29,11 +29,12 @@ export class PayloadDecoderEditComponent implements OnInit {
   faExchangeAlt = faExchangeAlt;
 
   editorJavaScriptOptions = { theme: 'vs', language: 'javascript', autoIndent: true, roundedSelection: true, };
-  editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
   payloadData = '';
   metadata = '';
   codeOutput = '';
   testPayloadDecoder = new TestPayloadDecoder();
+  editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
+  editorJsonOutpuOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false }, readOnly: true };
 
   payloadDecoder = new PayloadDecoder();
   payloadDecoderBody: string;
