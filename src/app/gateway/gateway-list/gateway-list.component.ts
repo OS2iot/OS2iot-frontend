@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MapCoordinates, MarkerInfo } from '@shared/components/map/map-coordinates.model';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { Gateway } from '../gateway.model';
+import { Gateway, GatewayResponseMany } from '../gateway.model';
 
 @Component({
   selector: 'app-gateway-list',
@@ -18,7 +17,7 @@ export class GatewayListComponent implements OnInit, OnDestroy {
   public showmap = false;
   public pageLimit = 10;
   public selectedSortId = 1;
-  public gateways: [Gateway];
+  public gateways: Gateway[];
   private gatewaySubscription: Subscription;
   public selectedSortObject: Sort = {
     id: 1,
@@ -40,7 +39,7 @@ export class GatewayListComponent implements OnInit, OnDestroy {
   private getGateways(): void {
     this.gatewaySubscription = this.chirpstackGatewayService.getMultiple()
       .subscribe(
-        (gateways) => {
+        (gateways: GatewayResponseMany) => {
           this.gateways = gateways.result;
           this.mapToCoordinateList();
         }
