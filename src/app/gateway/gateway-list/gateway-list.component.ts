@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { GatewayTableComponent } from '../gateway-table/gateway-table.component';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -16,6 +17,8 @@ import { GatewayTableComponent } from '../gateway-table/gateway-table.component'
   styleUrls: ['./gateway-list.component.scss']
 })
 export class GatewayListComponent implements OnInit, OnDestroy {
+
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   public coordinateList = [];
   public showmap = false;
@@ -83,7 +86,8 @@ export class GatewayListComponent implements OnInit, OnDestroy {
             name: gateway.name,
             active: this.gatewayStatus(gateway),
             id: gateway.id,
-            organisationId: gateway.organizationID,
+            internalOrganizationId: gateway.internalOrganizationId,
+            internalOrganizationName: gateway.internalOrganizationName
           }
         }
       )
