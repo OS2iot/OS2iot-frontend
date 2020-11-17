@@ -13,6 +13,9 @@ import { PayloadDecoderTableComponent } from './payload-decoder-list/payload-dec
 import { PayloadDecoderComponent } from './payload-decoder.component';
 import { SharedModule } from '@shared/shared.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { IotDevicesModule } from '@applications/iot-devices/iot-devices.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     PayloadDecoderTableComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
-    PayloadDecoderListComponent
+    PayloadDecoderListComponent,
   ],
   exports: [
     PayloadDecoderComponent,
@@ -40,6 +43,9 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     FormModule,
     SharedModule,
     NGMaterialModule,
+    MonacoEditorModule,
+    IotDevicesModule,
+    FontAwesomeModule,
   ]
 })
 export class PayloadDecoderModule { }

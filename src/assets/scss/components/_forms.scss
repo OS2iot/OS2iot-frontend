@@ -45,6 +45,7 @@
 .form-control {
   border: $border-input;
   color: $black;
+  padding: 0.75em;
 
   &:focus,
   &:active {

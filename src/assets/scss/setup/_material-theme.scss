@@ -76,10 +76,17 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   width: 100%;
 
   .mat-form-field-wrapper {
+
     .mat-form-field-appearance-fill .mat-form-field-flex {
       background-color: $color-bg-normal !important;
     }
+
   }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+  
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -129,7 +136,6 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 .mat-sort-header-arrow {
   color: $grey-tablehead;
   opacity: 1 !important;
-  // transform: translateY(25%) !important;
 }
 
 .mat-elevation-z8{
