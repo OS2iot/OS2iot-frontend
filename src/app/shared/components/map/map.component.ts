@@ -101,7 +101,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         '</p>'
         +
         '<p>' +
-        'Organisations ID: ' + markerInfo.organisationId +
+        'Organisation: ' + markerInfo.internalOrganizationName +
+        '</p>'
+        +
+        '<p>' +
+        'ID: ' + markerInfo.internalOrganizationId +
         '</p>'
       );
     }
