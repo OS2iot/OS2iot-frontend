@@ -22,3 +22,8 @@ export interface OrganisationGetManyResponse {
   data: OrganisationResponse[];
   count: number;
 }
+
+export interface OrganisationGetMinimalResponse {
+  data: Organisation[];
+  count: number;
+}

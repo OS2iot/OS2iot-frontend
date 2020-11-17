@@ -36,6 +36,10 @@ export interface DeviceProfileResponse {
     totalCount?: string;
 }
 
+export interface DeviceProfileResponseOne {
+    deviceProfile: DeviceProfile;
+}
+
 export class DeviceProfileRequest {
     deviceProfile: DeviceProfile;
     internalOrganizationId: number;

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
-import { GatewayResponse, Gateway, GatewayData, GatewayRequest } from '@app/gateway/gateway.model';
+import { GatewayResponse, Gateway, GatewayData, GatewayRequest, GatewayResponseMany } from '@app/gateway/gateway.model';
 import * as moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { map } from 'rxjs/operators';
 import { AuthService } from '@auth/auth.service';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OperationCanceledException, resolveProjectReferencePath } from 'typescript';
+import { Organisation } from '@app/admin/organisation/organisation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +19,37 @@ export class ChirpstackGatewayService {
 
   constructor(
     private restService: RestService,
-    private organisationSerivce: OrganisationService,
     private sharedVariableService: SharedVariableService) {
     moment.locale('da');
    }
 
   public get(id: string, params = {}): Observable<GatewayResponse> {
-    return this.restService.get(this.chripstackGatewayUrl, params, id);
+    return this.restService.get(this.chripstackGatewayUrl, params, id)
+      .pipe(
+        map(
+          (response: GatewayResponse) => {
+            response.gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
+              .find( org => org.id = response.gateway.internalOrganizationId)?.name;
+            return response;
+          }
+        )
+      );
   }
 
-  public getMultiple(params = {}): Observable<any> {
-    return this.restService.get(this.chripstackGatewayUrl, params);
+  public getMultiple(params = {}): Observable<GatewayResponseMany> {
+    return this.restService.get(this.chripstackGatewayUrl, params).pipe(
+      map(
+        (response: GatewayResponseMany) => {
+          response.result.map(
+            (gateway) => {
+              gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
+                  .find( org => org.id = gateway.internalOrganizationId)?.name;
+            }
+          )
+          return response;
+        }
+      )
+    );;
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {

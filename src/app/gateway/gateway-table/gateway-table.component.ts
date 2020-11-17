@@ -23,7 +23,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'internalOrganizationId', 'last-seen', 'status', 'menu'];
+  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'internalOrganizationName', 'last-seen', 'status', 'menu'];
   public dataSource = new MatTableDataSource<Gateway>();
   public gateways: Gateway[];
   gateway: Gateway;
@@ -100,7 +100,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
           this.resultsLength = this.gateways.length;
           if (this.pageLimit) {
             console.log(gateways.result);
-            this.pageTotal = Math.ceil(gateways.count / this.pageLimit);
+            this.pageTotal = Math.ceil(gateways.totalCount / this.pageLimit);
           }
         }
       );

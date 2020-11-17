@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
-import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse } from 'src/app/profiles/device-profiles/device-profile.model';
+import { map } from 'rxjs/operators';
+import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse, DeviceProfileResponseOne } from 'src/app/profiles/device-profiles/device-profile.model';
 
 
 @Injectable({
@@ -24,8 +25,16 @@ export class DeviceProfileService {
         return this.restService.put(this.URL, requestBody, requestBody.deviceProfile.id, { observe: 'response' });
     }
 
-    getOne(id: string): Observable<any> {
-        return this.restService.get(this.URL, {}, id);
+    getOne(id: string): Observable<DeviceProfileResponseOne> {
+        return this.restService.get(this.URL, {}, id).pipe(
+            map(
+              (response: DeviceProfileResponseOne) => {
+                response.deviceProfile.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
+                  .find( org => org.id = response.deviceProfile.internalOrganizationId)?.name;
+                return response;
+              }
+            )
+          );;
     }
 
     getMultiple(): Observable<DeviceProfileResponse> {

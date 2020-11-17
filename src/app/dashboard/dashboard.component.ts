@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     private sharedVariableService: SharedVariableService
   ) {
     this.route.queryParams.subscribe(async (params) => {
+      // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
       if (jwt) {
         this.authService.setSession(jwt);
@@ -23,6 +24,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
       await this.sharedVariableService.setUserInfo();
+      await this.sharedVariableService.setOrganizationInfo();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
       this.isLoadingResults = false;
     });

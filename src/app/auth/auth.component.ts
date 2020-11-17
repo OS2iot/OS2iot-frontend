@@ -42,6 +42,7 @@ export class AuthComponent implements OnInit {
 
   async success() {
     await this.sharedVariableService.setUserInfo();
+    await this.sharedVariableService.setOrganizationInfo()
     this.isLoading = false;
     this.router.navigateByUrl('/dashboard');
   }

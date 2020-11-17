@@ -89,11 +89,11 @@
                     [placeholder]="'PROFILES.DEVICE_PROFILE.GEOLOCMINBUFFERSIZE_PLACEHOLDER' | translate" maxlength="50"
                     required [(ngModel)]="deviceProfile.geolocMinBufferSize">
             </div>
-            <div class="col-xs-12 form-group mt-3" *ngIf="deviceProfile.internalOrganizationId">
+            <div class="col-xs-12 form-group mt-3" *ngIf="deviceProfile.internalOrganizationName">
                 <label for="geolocMinBufferSize"class="form-label">
                     {{'PROFILES.DEVICE_PROFILE.ORGANIZATION' | translate}}
                 </label>
-                {{deviceProfile.internalOrganizationId}}
+                {{deviceProfile.internalOrganizationName}}
             </div>
 
         </mat-tab>

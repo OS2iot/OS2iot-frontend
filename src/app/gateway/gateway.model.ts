@@ -30,6 +30,11 @@ export class GatewayRequest {
     organizationId: number;
 }
 
+export class GatewayResponseMany {
+    result: Gateway[];
+    totalCount: number;
+}
+
 export class GatewayResponse {
     createdAt: string;
     updatedAt: string;
