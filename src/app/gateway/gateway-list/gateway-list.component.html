@@ -4,19 +4,19 @@
 
 <div class="jumbotron m-md-4 p-md-3">
   <div class="row">
-    <div class="col-3"></div>
-    <div class="col-3"></div>
-    <div class="col-3"></div>
+    <div class="col-9"></div>
+
     <div class="col-3">
       <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
+        <mat-label>Filtrer Organisation</mat-label>
         <mat-select #select placeholder="Select organisation" multiple>
           <div class="select-all">
             <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}"
               (change)="toggleAllSelection()">Select All</mat-checkbox>
+            <mat-divider></mat-divider>
           </div>
-          <mat-option (click)="optionClick()" *ngFor="let topping of toppingList" [value]="topping">
-            {{topping}}
+          <mat-option (click)="optionClick()" *ngFor="let gateway of gateways" [value]="gateway.internalOrganizationId">
+            {{gateway.internalOrganizationName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -27,7 +27,8 @@
   <mat-tab-group animationDuration="200ms" class=" " (selectedTabChange)="showMap($event)">
     <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
       <div class="m-md-4 p-md-3">
-        <app-gateway-table [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit"></app-gateway-table>
+        <app-gateway-table [gateways]="gateways" [selectedSortObject]="selectedSortObject" [pageLimit]="pageLimit">
+        </app-gateway-table>
       </div>
     </mat-tab>
     <mat-tab label="{{'GATEWAY.MAP-TAB' | translate}}">
