@@ -9,6 +9,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { DatatargetService } from '../datatarget.service';
 import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { Datatarget } from '../datatarget.model';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -18,7 +19,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 export class DatatargetDetailComponent implements OnInit, OnDestroy {
 
     public datatargetSubscription: Subscription;
-    public datatarget: DatatargetResponse;
+    public datatarget: Datatarget;
     public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
     public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
     private deleteDialogSubscription: Subscription;
@@ -45,8 +46,8 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
 
     getDatatarget(id: number) {
         this.datatargetService.get(id)
-            .subscribe((datatargetResponse: DatatargetResponse) => {
-                this.datatarget = datatargetResponse;
+            .subscribe((dataTarget: Datatarget) => {
+                this.datatarget = dataTarget;
             });
     }
 
