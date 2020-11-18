@@ -10,5 +10,5 @@ export class DatatargetResponse {
     type: DataTargetType;
     url: string;
     authorizationHeader: string;
-    openDataDk: OpenDataDkDataset;
+    openDataDkDataset: OpenDataDkDataset;
 }

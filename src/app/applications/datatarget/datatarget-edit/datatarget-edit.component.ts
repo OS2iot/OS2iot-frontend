@@ -20,6 +20,7 @@ import { PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { DataTargetType } from '@shared/enums/datatarget-type';
 import { OpenDataDkDataset } from '../opendatadk/opendatadk-dataset.model';
+import { ErrorMessageService } from '@shared/error-message.service';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -60,7 +61,8 @@ export class DatatargetEditComponent implements OnInit {
     private payloadDecoderService: PayloadDecoderService,
     private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
     private saveSnackService: SaveSnackService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private errorMessageService: ErrorMessageService
   ) {
     translate.use('da');
   }
@@ -150,8 +152,8 @@ export class DatatargetEditComponent implements OnInit {
     this.counter = this.counter === undefined ? 1 : this.counter + 1;
     this.datatargetService.update(this.datatarget)
       .subscribe(
-        (datatargetResponse: DatatargetResponse) => {
-          this.datatarget = this.mapToDatatarget(datatargetResponse);
+        (response: Datatarget) => {
+          this.datatarget = response;
           this.countToRedirect();
         },
         (error: HttpErrorResponse) => {
@@ -251,18 +253,9 @@ export class DatatargetEditComponent implements OnInit {
   }
 
   handleError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
-    if (typeof error.error.message === 'string') {
-      this.errorMessages.push(error.error.message);
-    } else {
-      error.error.message.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    }
+    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errors.errorFields;
+    this.errorMessages = errors.errorMessages;
   }
 
   routeBack(): void {
@@ -283,28 +276,9 @@ export class DatatargetEditComponent implements OnInit {
   getDatatarget(id: number) {
     this.datatargetSubscription = this.datatargetService
       .get(id)
-      .subscribe((datatargetResponse: DatatargetResponse) => {
-        this.datatarget = this.mapToDatatarget(datatargetResponse);
-        this.datatarget.openDataDkDataset = datatargetResponse.openDataDk ? datatargetResponse.openDataDk : new OpenDataDkDataset();
-        //this.opendatadkMockData();
+      .subscribe((response: Datatarget) => {
+        this.datatarget = response;
       });
-  }
-
-  opendatadkMockData() {
-    this.datatarget.openDataDkDataset = {
-      name: "test navn",
-      resourceTitle: "title",
-      description: "description",
-      keywords: ['key','work','now'],
-      license: "testlicens",
-      accessLevel: "Public",
-      authorName: "Jeppe",
-      authorEmail: "J",
-      url: "www.dr.dk",
-      acceptTerms: false
-    },
-    this.datatarget.type = DataTargetType.OPENDATADK;
-    this.datatarget.setToOpendataDk = true;
   }
 
   showSavedSnack() {
@@ -352,20 +326,5 @@ export class DatatargetEditComponent implements OnInit {
         });
       }
     );
-  }
-
-  private mapToDatatarget(data: DatatargetResponse): Datatarget {
-    const dt: Datatarget = {
-      id: data.id,
-      name: data.name,
-      timeout: data.timeout,
-      type: data.type,
-      url: data.url,
-      authorizationHeader: data.authorizationHeader,
-      applicationId: data.application.id,
-      setToOpendataDk: data.type === DataTargetType.OPENDATADK ? true : false,
-      openDataDkDataset: data.openDataDk
-    };
-    return dt;
   }
 }

@@ -9,8 +9,8 @@ import { OpenDataDkDataset } from '../opendatadk-dataset.model';
 export class OpendatadkEditComponent implements OnInit {
 
   public errorMessages: any;
-  public errorFields: string[];
-  public formFailedSubmit = false;
+  @Input() errorFields: string[];
+  @Input() formFailedSubmit = false;
   @Input() openDataDk: OpenDataDkDataset;
 
   constructor() { }

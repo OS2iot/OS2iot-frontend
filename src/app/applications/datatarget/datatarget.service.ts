@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
 import { RestService } from '@shared/services/rest.service';
 import { DatatargetData, Datatarget } from './datatarget.model';
+import { map } from 'rxjs/operators';
+import { OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,15 @@ export class DatatargetService {
 
   constructor(private restService: RestService) { }
 
-  get(id: number): Observable<DatatargetResponse> {
-    return this.restService.get(this.dataTargetURL, null, id);
+  get(id: number): Observable<Datatarget> {
+    return this.restService.get(this.dataTargetURL, null, id).pipe(
+      map(
+        (response: DatatargetResponse) => {
+          const datatarget = this.mapToDatatarget(response);
+          return datatarget;
+        }
+      )
+    );
   }
 
   getByApplicationId(
@@ -31,17 +40,51 @@ export class DatatargetService {
     return this.restService.get(this.dataTargetURL, body);
   }
 
-  update(datatarget: Datatarget): Observable<DatatargetResponse> {
-    return this.restService.put(this.dataTargetURL, datatarget, datatarget.id, { observe: 'response' });
-
+  update(datatarget: Datatarget): Observable<Datatarget> {
+    this.trimModel(datatarget);
+    return this.restService.put(this.dataTargetURL, datatarget, datatarget.id, { observe: 'response' }).pipe(
+      map(
+        (response: DatatargetResponse) => {
+          const datatarget = this.mapToDatatarget(response);
+          return datatarget;
+        }
+      )
+    );
   }
 
   create(datatarget: Datatarget): Observable<any> {
+    this.trimModel(datatarget);
     return this.restService.post(this.dataTargetURL, datatarget);
   }
 
   delete(id: number) {
     return this.restService.delete(this.dataTargetURL, id);
+  }
+
+  private trimModel(datatarget: Datatarget) {
+    if (!datatarget.setToOpendataDk) {
+      datatarget.openDataDkDataset = null;
+    }
+    if (datatarget.setToOpendataDk) {
+      datatarget.openDataDkDataset.keywords = datatarget.openDataDkDataset?.keywordsInput?.split(',');
+      datatarget.openDataDkDataset.keywordsInput = undefined;
+    }
+  }
+
+  private mapToDatatarget(dataTargetResponse: DatatargetResponse): Datatarget {
+    const model: Datatarget = {
+      id: dataTargetResponse.id,
+      name: dataTargetResponse.name,
+      timeout: dataTargetResponse.timeout,
+      type: dataTargetResponse.type,
+      url: dataTargetResponse.url,
+      authorizationHeader: dataTargetResponse.authorizationHeader,
+      applicationId: dataTargetResponse.application.id,
+      setToOpendataDk: dataTargetResponse.openDataDkDataset ? true : false,
+      openDataDkDataset: dataTargetResponse.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
+    };
+    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset.keywords?.join(',');
+    return model;
   }
 
 }
