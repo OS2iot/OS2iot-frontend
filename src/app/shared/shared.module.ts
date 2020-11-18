@@ -10,6 +10,7 @@ import { BatteriStatusComponent } from './components/batteri-status/batteri-stat
 import { MapComponent } from './components/map/map.component';
 import { NGMaterialModule } from './Modules/materiale.module';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { OpendatadkDialogComponent } from './components/opendatadk-dialog/opendatadk-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     LoadingSpinnerComponent,
     BatteriStatusComponent,
     MapComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    OpendatadkDialogComponent
   ],
   imports: [
     DirectivesModule,
@@ -31,7 +33,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     LoadingSpinnerComponent,
     BatteriStatusComponent,
     MapComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    OpendatadkDialogComponent
   ],
 })
 export class SharedModule { }

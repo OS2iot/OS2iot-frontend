@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBullseye, faKissWinkHeart, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@payload-decoder/payload-device-data.model';
 import { DatatargetService } from '../datatarget.service';
 import { ApplicationService } from '@applications/application.service';
@@ -14,20 +14,19 @@ import { PayloadDecoderService } from '@payload-decoder/payload-decoder.service'
 import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-datatarget.service';
 import { SaveSnackService } from '@shared/services/save-snack.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DatatargetResponse } from '../datatarget-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { DataTargetType } from '@shared/enums/datatarget-type';
-import { OpenDataDkDataset } from '../opendatadk/opendatadk-dataset.model';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
+import { OpendatadkService } from '@shared/services/opendatadk.service';
 
 @Component({
   selector: 'app-datatarget-edit',
   templateUrl: './datatarget-edit.component.html',
   styleUrls: ['./datatarget-edit.component.scss']
 })
-export class DatatargetEditComponent implements OnInit {
+export class DatatargetEditComponent implements OnInit, OnDestroy {
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -48,6 +47,7 @@ export class DatatargetEditComponent implements OnInit {
   public devices: IotDevice[];
   public payloadDecoders = [];
   private counter: number;
+  private dataSetExcists = false;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
@@ -62,7 +62,9 @@ export class DatatargetEditComponent implements OnInit {
     private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
     private saveSnackService: SaveSnackService,
     private dialog: MatDialog,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private opendatadkService: OpendatadkService,
+    private opendatadkDialogService: OpendatadkDialogService
   ) {
     translate.use('da');
   }
@@ -97,6 +99,7 @@ export class DatatargetEditComponent implements OnInit {
     }
     this.getPayloadDecoders();
     console.log(this.devices, this.payloadDecoders);
+    this.setDataSetExcists();
   }
 
   addRow() {
@@ -155,7 +158,7 @@ export class DatatargetEditComponent implements OnInit {
       .subscribe(
         (response: Datatarget) => {
           this.datatarget = response;
-          this.countToRedirect();
+          this.finalizeSave();
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -200,7 +203,7 @@ export class DatatargetEditComponent implements OnInit {
 
   countToRedirect() {
     this.counter -= 1;
-    if (this.counter === 0) {
+    if (this.counter <= 0) {
       this.showSavedSnack();
       this.routeBack();
     }
@@ -221,6 +224,7 @@ export class DatatargetEditComponent implements OnInit {
         this.datatargetid = response.id;
         this.datatarget.id = response.id;
         this.showSavedSnack();
+        this.finalizeSave();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -286,18 +290,41 @@ export class DatatargetEditComponent implements OnInit {
     this.saveSnackService.showSavedSnack();
   }
 
+  private setDataSetExcists() {
+    this.opendatadkService.get().subscribe(
+      (response) => {
+        this.dataSetExcists = response.dataset.length === 0 ? false : true;
+      }
+    );
+  }
+
+  private finalizeSave() {
+    if (!this.dataSetExcists && this.datatarget.setToOpendataDk) {
+      this.opendatadkDialogService.showDialog().subscribe(
+        response => {
+          this.showMailClient();
+          this.countToRedirect();
+        }
+      );
+    } else  {
+      this.countToRedirect();
+    }
+  }
+
+  private showMailClient() {
+    window.location.href = 'mailto:FG2V@kk.dk?subject=Oprettelse%af%datasæt%i%OpenDataDK&body=message%20goes%20here';
+  }
+
   disableSaveButton(): boolean {
     let disable = true;
     if (!this.datatarget.setToOpendataDk) {
       disable = false;
+    } else if (this.datatarget.openDataDkDataset?.acceptTerms) {
+      disable = false;
+    } else {
+      disable = true;
     }
-    else if(this.datatarget.openDataDkDataset?.acceptTerms) {
-      disable = false
-    }
-    else {
-      disable = true
-    }
-    return disable
+    return disable;
   }
 
   ngOnDestroy(): void {

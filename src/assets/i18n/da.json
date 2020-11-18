@@ -703,7 +703,13 @@
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
     "CLOSE": "Annuller",
-    "DIALOG-CONFIRM": "Ja, slet"
+    "DIALOG-CONFIRM": "Ja, slet",
+    "OPENDATADK": {
+      "OK": "Send mail til OpenDataDk",
+      "CLOSE": "Nej, tak",
+      "TITLE": "Vil du sende data til OpenDataDK?",
+      "MESSAGE": "Send en mail til OpendataDK så opretter de dit datasæt"
+    }
   },
   "BATTERY": {
     "NOT_AVAILABLE": "N/A"
