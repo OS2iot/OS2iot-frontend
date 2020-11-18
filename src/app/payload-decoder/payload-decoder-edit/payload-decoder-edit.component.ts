@@ -31,6 +31,8 @@ export class PayloadDecoderEditComponent implements OnInit {
   editorJavaScriptOptions = { theme: 'vs', language: 'javascript', autoIndent: true, roundedSelection: true, };
   payloadData = '';
   metadata = '';
+  payloadDataErrorMessage = '';
+  metadataErrorMessage = '';
   codeOutput = '';
   testPayloadDecoder = new TestPayloadDecoder();
   editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
@@ -79,6 +81,8 @@ export class PayloadDecoderEditComponent implements OnInit {
       'PAYLOAD-DECODER.SAVE',
       'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER',
       'QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER',
+      'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE',
+      'QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE',
       'QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'
     ])
       .subscribe(translations => {
@@ -87,6 +91,8 @@ export class PayloadDecoderEditComponent implements OnInit {
         this.submitButton = translations['PAYLOAD-DECODER.SAVE'];
         this.payloadData = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER'];
         this.metadata = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER'];
+        this.payloadDataErrorMessage = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE'];
+        this.metadataErrorMessage = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE'];
         this.codeOutput = translations['QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'];
       });
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -156,7 +162,11 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.deviceSubscription = this.iotDeviceService
       .getIoTDevice(event.value)
       .subscribe((device: IotDevice) => {
-        this.payloadData = JSON.stringify(device.latestReceivedMessage.rawData, null, 4);
+        if (device.latestReceivedMessage) {
+          this.payloadData = JSON.stringify(device.latestReceivedMessage.rawData, null, 4);
+        } else {
+          this.payloadData = this.payloadDataErrorMessage;
+        }
         this.getDeviceModel(device);
       });
   }
@@ -169,12 +179,16 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   getDeviceModel(device: IotDevice) {
-    this.deviceModelService.get(device.deviceModelId).subscribe(
-      (response) => {
-        device.deviceModel = response;
-        this.metadata = JSON.stringify(this.removeUnwantedMetaData(device), null, 4);
-      }
-    );
+    if (device.deviceModelId) {
+      this.deviceModelService.get(device.deviceModelId).subscribe(
+        (response) => {
+          device.deviceModel = response;
+          this.metadata = JSON.stringify(this.removeUnwantedMetaData(device), null, 4);
+        }
+      );
+    } else {
+      this.metadata = this.metadataErrorMessage;
+    }
   }
 
   showSavedSnack() {
