@@ -63,7 +63,7 @@
 
     <div *ngIf="isOrganizationAdministrationPermission()">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="name">{{'PERMISSION.EDIT.APPS' | translate}}</label>*
+            <label class="form-label" for="name">{{'PERMISSION.EDIT.APPS' | translate}}</label>
             <div class="col-12">
                 <select id="applicationIds" name="applicationIds" class="form-control" multiple
                     [(ngModel)]="permission.applicationIds"
