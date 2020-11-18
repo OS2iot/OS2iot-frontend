@@ -90,6 +90,6 @@ import { MatTreeModule } from '@angular/material/tree';
 export class NGMaterialModule { }
 
 
-/**  Copyright 2019 Google Inc. All Rights Reserved.
- Use of this source code is governed by an MIT-style license that
- can be found in the LICENSE file at http://angular.io/license */
+
+// tslint:disable-next-line: jsdoc-format
+/**  Copyright 2019 Google Inc. All Rights Reserved. Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at http://angular.io/license **/

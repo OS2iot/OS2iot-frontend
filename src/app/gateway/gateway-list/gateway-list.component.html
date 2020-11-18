@@ -9,9 +9,15 @@
     <div class="col-3"></div>
     <div class="col-3">
       <mat-form-field appearance="fill">
-        <mat-label>Toppings</mat-label>
-        <mat-select multiple>
-          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+        <mat-label>Favorite food</mat-label>
+        <mat-select #select placeholder="Select organisation" multiple>
+          <div class="select-all">
+            <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}"
+              (change)="toggleAllSelection()">Select All</mat-checkbox>
+          </div>
+          <mat-option (click)="optionClick()" *ngFor="let topping of toppingList" [value]="topping">
+            {{topping}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
