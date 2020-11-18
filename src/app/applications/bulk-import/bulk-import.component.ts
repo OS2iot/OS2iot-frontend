@@ -6,7 +6,6 @@ import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { Download } from '@shared/helpers/download.helper';
-import { BackButton } from '@shared/models/back-button.model';
 import { DownloadService } from '@shared/services/download.service';
 import { Papa } from 'ngx-papaparse';
 import { Observable } from 'rxjs';
@@ -34,7 +33,7 @@ export class BulkImportComponent implements OnInit {
   ]
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
-  public backButton: BackButton = { label: '', routerLink: '/applications' };
+  public backButtonTitle: string;
   private applicationId;
 
   constructor(
@@ -48,10 +47,6 @@ export class BulkImportComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.translate.get(['NAV.APPLICATIONS'])
-      .subscribe(translations => {
-        this.backButton.label = translations['NAV.APPLICATIONS'];
-      });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
 
   }

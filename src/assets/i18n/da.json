@@ -32,7 +32,8 @@
     "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
     "SEARCH": "Søgeresultater",
     "MENU-ITEM-MISC": "Generelt",
-    "DEVICE-MODEL": "Device Model"
+    "DEVICE-MODEL": "Device Model",
+    "BACK": "Tilbage"
   },
   "TOPBAR":{
     "SEARCH": {
@@ -83,6 +84,7 @@
         "LORAWAN": "LoRaWan sample",
         "SIGFOX": "Sigfox sample"
       },
+      "TITLE": "Import af .csv",
       "DOWNLOAD": "Download Sample CSV Fil",
       "DROPFILE": "Klik eller drop din .csv file her",
       "NAME": "Navn",

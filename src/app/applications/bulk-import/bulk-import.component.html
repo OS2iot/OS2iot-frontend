@@ -1,6 +1,4 @@
-<ng-container>
-    <app-top-bar [backButton]="backButton" [staticTitle]="'Import af .csv'"></app-top-bar>
-</ng-container>
+<app-top-bar [backButtonTitle]="'NAV.BACK' | translate" [title]="'APPLICATION.BULK.TITLE' | translate"></app-top-bar>
 <div class="row">
     <div class="col-12">
         <mat-progress-bar *ngIf="download$ | async as download"
