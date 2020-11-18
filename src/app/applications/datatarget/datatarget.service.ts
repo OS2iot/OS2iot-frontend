@@ -80,10 +80,10 @@ export class DatatargetService {
       url: dataTargetResponse.url,
       authorizationHeader: dataTargetResponse.authorizationHeader,
       applicationId: dataTargetResponse.application.id,
-      setToOpendataDk: dataTargetResponse.openDataDkDataset ? true : false,
-      openDataDkDataset: dataTargetResponse.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
+      setToOpendataDk: dataTargetResponse?.openDataDkDataset ? true : false,
+      openDataDkDataset: dataTargetResponse?.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
     };
-    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset.keywords?.join(',');
+    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(',');
     return model;
   }
 
