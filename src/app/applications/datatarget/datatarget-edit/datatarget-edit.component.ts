@@ -286,23 +286,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  opendatadkMockData() {
-    this.datatarget.openDataDkDataset = {
-      name: "test navn",
-      resourceTitle: "title",
-      description: "description",
-      keywords: ['key','work','now'],
-      license: "testlicens",
-      accessLevel: "Public",
-      authorName: "Jeppe",
-      authorEmail: "J",
-      url: "www.dr.dk",
-      acceptTerms: false
-    },
-    this.datatarget.type = DataTargetType.OPENDATADK;
-    this.datatarget.setToOpendataDk = true;
-  }
-
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
   }
