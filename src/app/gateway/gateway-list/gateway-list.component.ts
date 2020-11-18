@@ -41,8 +41,7 @@ export class GatewayListComponent implements OnInit, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    private chirpstackGatewayService: ChirpstackGatewayService,
-    private organisationService: OrganisationService) {
+    private chirpstackGatewayService: ChirpstackGatewayService) {
     translate.use('da');
     moment.locale('da');
   }
