@@ -17,7 +17,7 @@ export class ChirpstackGatewayService {
     private restService: RestService,
     private sharedVariableService: SharedVariableService) {
     moment.locale('da');
-   }
+  }
 
   public get(id: string, params = {}): Observable<GatewayResponse> {
     return this.restService.get(this.chripstackGatewayUrl, params, id)
@@ -25,7 +25,7 @@ export class ChirpstackGatewayService {
         map(
           (response: GatewayResponse) => {
             response.gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-              .find( org => org.id === response.gateway.internalOrganizationId)?.name;
+              .find(org => org.id === response.gateway.internalOrganizationId)?.name;
             return response;
           }
         )
@@ -39,13 +39,13 @@ export class ChirpstackGatewayService {
           response.result.map(
             (gateway) => {
               gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-                  .find( org => org.id === gateway.internalOrganizationId)?.name;
+                .find(org => org.id === gateway.internalOrganizationId)?.name;
             }
-          )
+          );
           return response;
         }
       )
-    );;
+    );
   }
 
   public post(gateway: Gateway): Observable<GatewayData> {

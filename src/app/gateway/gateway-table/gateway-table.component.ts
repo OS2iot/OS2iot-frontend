@@ -78,7 +78,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
     if (gateway?.lastSeenAt) {
       return moment(gateway.lastSeenAt).fromNow();
     } else {
-      return this.translate.instant("ACTIVITY.NEVER");
+      return this.translate.instant('ACTIVITY.NEVER');
     }
   }
 

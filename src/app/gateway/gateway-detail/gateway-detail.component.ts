@@ -70,7 +70,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
-            this.canEdit()
+            this.canEdit();
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
@@ -86,15 +86,15 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     onDeleteGateway() {
         this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
             (response) => {
-              if (response) {
-                this.gatewayService.delete(this.gateway.id).subscribe((response) => {
-                    if (response.ok && response.body.success === true) {
-                    }
-                });
-                this.router.navigate(['gateways']);
-              } else {
-                console.log(response);
-              }
+                if (response) {
+                    this.gatewayService.delete(this.gateway.id).subscribe((response) => {
+                        if (response.ok && response.body.success === true) {
+                        }
+                    });
+                    this.router.navigate(['gateways']);
+                } else {
+                    console.log(response);
+                }
             }
         );
     }

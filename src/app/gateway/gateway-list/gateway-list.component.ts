@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,7 +8,9 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { GatewayTableComponent } from '../gateway-table/gateway-table.component';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 
 
 @Component({
@@ -19,6 +21,8 @@ import { FormControl } from '@angular/forms';
 export class GatewayListComponent implements OnInit, OnDestroy {
 
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  @ViewChild('select') select: MatSelect;
+  allSelected = false;
 
   public coordinateList = [];
   public showmap = false;
@@ -46,6 +50,23 @@ export class GatewayListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  toggleAllSelection() {
+    if (this.allSelected) {
+      this.select.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.select.options.forEach((item: MatOption) => item.deselect());
+    }
+  }
+  optionClick() {
+    let newStatus = true;
+    this.select.options.forEach((item: MatOption) => {
+      if (!item.selected) {
+        newStatus = false;
+      }
+    });
+    this.allSelected = newStatus;
+  }
+
   private getGateways(): void {
     this.gatewaySubscription = this.chirpstackGatewayService.getMultiple()
       .subscribe(
@@ -61,16 +82,6 @@ export class GatewayListComponent implements OnInit, OnDestroy {
       this.getGateways();
       this.showmap = true;
     }
-  }
-
-
-  private getOrganisation(id: number) {
-    this.orgSubscribtion = this.organisationService
-      .getOne(id)
-      .subscribe((response) => {
-        this.organisation = response;
-        console.log(response);
-      });
   }
 
   private mapToCoordinateList() {
@@ -104,4 +115,5 @@ export class GatewayListComponent implements OnInit, OnDestroy {
   gatewayStatus(gateway: Gateway): boolean {
     return this.chirpstackGatewayService.isGatewayActive(gateway);
   }
+
 }
