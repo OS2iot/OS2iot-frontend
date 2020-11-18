@@ -6,10 +6,12 @@ import * as _ from 'lodash';
 })
 export class OrganisationFilterPipe implements PipeTransform {
 
-  transform(value: string, keyName: string, parentId: any,): string {
-    return _.filter(value, (o) => {
-      return o[keyName] === +parentId;
-    });
+  transform(items: any[], term): any {
+    console.log('term', term);
+
+    return term
+      ? items.filter(item => item.name.indexOf(term) !== -1)
+      : items;
   }
 
 }
