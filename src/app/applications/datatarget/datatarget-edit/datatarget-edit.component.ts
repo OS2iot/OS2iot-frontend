@@ -136,6 +136,7 @@ export class DatatargetEditComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.counter = 0;
     if (this.datatargetid) {
       this.updateDatatarget();
       this.addPayloadDeviceDatatarget();
@@ -171,7 +172,7 @@ export class DatatargetEditComponent implements OnInit {
           pdd.payloadDecoderId = null;
         }
       }
-    )
+    );
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
