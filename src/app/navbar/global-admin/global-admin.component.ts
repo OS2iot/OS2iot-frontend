@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
-import { AuthService } from '@app/auth/auth.service';
 import { faGlobe, faUsers, faIdBadge, faSitemap, faUser } from '@fortawesome/free-solid-svg-icons';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 

@@ -12,7 +12,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   templateUrl: './organisation-dropdown.component.html',
   styleUrls: ['./organisation-dropdown.component.scss']
 })
-export class OrganisationDropdownComponent implements OnInit, OnChanges {
+export class OrganisationDropdownComponent implements OnInit {
   public organisations: Organisation[];
   public user: UserResponse;
   public isOrgAdmin = false;
@@ -32,10 +32,6 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    this.getAllowedOrganizations();
-  }
-
-  ngOnChanges(): void {
     this.getAllowedOrganizations();
   }
 
