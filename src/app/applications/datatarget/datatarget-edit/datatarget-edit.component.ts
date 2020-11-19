@@ -312,7 +312,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   private showMailClient() {
-    window.location.href = 'mailto:FG2V@kk.dk?subject=Oprettelse%af%datasæt%i%OpenDataDK&body=message%20goes%20here';
+    window.location.href = 'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrerer%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' + this.datatarget.openDataDkDataset.url;
   }
 
   disableSaveButton(): boolean {
