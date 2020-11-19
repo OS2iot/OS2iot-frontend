@@ -40,6 +40,10 @@
         <p class="mb-5">{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
       </ng-template>
 
+      <div *ngIf="datatarget.setToOpendataDk">
+        <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
+      </div>
+
       <div class="form-group mt-3">
         <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
         <div *ngIf="dataTargetRelations?.length === 0">

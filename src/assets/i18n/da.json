@@ -154,6 +154,17 @@
       "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed de",
       "ACCEPT-TERMS-PART-TWO": "Heriblandt at data ikke indeholder følsomme personoplysninger eller personhenførbare informationer.",
       "TERMS-AND-CONDITIONS": "Gældende vilkår og betingelser for OpenDataDK"
+    },
+    "DETAILS": {
+      "NAME": "Navn på datasæt",
+      "RESOURCETITLE": "Titel",
+      "DESCRIPTION": "Beskrivelse",
+      "KEYWORDS": "Keywords",
+      "LICENSE": "Licens",
+      "AUTHORNAME": "Forfatterens navn",
+      "AUTHOREMAIL": "Forfatterens email",
+      "URL": "endpoint til hentning af data",
+      "NA": "Intet angivet"
     }
   },
   "APPLICATION-TABLE": {

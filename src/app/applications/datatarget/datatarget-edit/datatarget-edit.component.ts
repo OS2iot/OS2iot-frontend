@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { faBullseye, faKissWinkHeart, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@payload-decoder/payload-device-data.model';
 import { DatatargetService } from '../datatarget.service';
 import { ApplicationService } from '@applications/application.service';

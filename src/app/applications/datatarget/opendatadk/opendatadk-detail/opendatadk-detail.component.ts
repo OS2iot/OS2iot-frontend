@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { OpenDataDkDataset } from '../opendatadk-dataset.model';
 
 @Component({
   selector: 'app-opendatadk-detail',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./opendatadk-detail.component.scss']
 })
 export class OpendatadkDetailComponent implements OnInit {
+
+  @Input() openDataDkDataset: OpenDataDkDataset;
 
   constructor() { }
 

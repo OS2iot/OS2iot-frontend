@@ -1,1 +1,39 @@
-<p>opendatadk-detail works!</p>
+<h4>{{ 'OPENDATADK.DETAILS.NAME' | translate }}</h4>
+<div>
+    {{openDataDkDataset.name}}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.RESOURCETITLE' | translate }}</h4>
+<div>
+    {{openDataDkDataset.resourceTitle ? openDataDkDataset.resourceTitle : ('OPENDATADK.DETAILS.NA' | translate)}}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.DESCRIPTION' | translate }}</h4>
+<div>
+    {{openDataDkDataset.description ? openDataDkDataset.description : ('OPENDATADK.DETAILS.NA' | translate) }}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.KEYWORDS' | translate }}</h4>
+<div>
+    {{openDataDkDataset.keywords ? openDataDkDataset.keywords : ('OPENDATADK.DETAILS.NA' | translate) }}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.LICENSE' | translate }}</h4>
+<div>
+    {{openDataDkDataset.license}}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.AUTHORNAME' | translate }}</h4>
+<div>
+    {{openDataDkDataset.authorName}}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.AUTHOREMAIL' | translate }}</h4>
+<div>
+    {{openDataDkDataset.authorEmail}}
+</div>
+
+<h4>{{ 'OPENDATADK.DETAILS.URL' | translate }}</h4>
+<div>
+    {{openDataDkDataset.url}}
+</div>

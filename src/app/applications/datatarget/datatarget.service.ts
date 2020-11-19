@@ -5,6 +5,7 @@ import { RestService } from '@shared/services/rest.service';
 import { DatatargetData, Datatarget } from './datatarget.model';
 import { map } from 'rxjs/operators';
 import { OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class DatatargetService {
 
   private dataTargetURL = 'data-target';
 
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService,
+    private sharedVariableService: SharedVariableService) { }
 
   get(id: number): Observable<Datatarget> {
     return this.restService.get(this.dataTargetURL, null, id).pipe(
@@ -84,7 +87,12 @@ export class DatatargetService {
       openDataDkDataset: dataTargetResponse?.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
     };
     model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(',');
+    model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
     return model;
+  }
+
+  private getOpendataSharingApiUrl(): string {
+    return this.restService.createResourceUrl('open-data-dk-sharing', this.sharedVariableService.getSelectedOrganisationId());
   }
 
 }

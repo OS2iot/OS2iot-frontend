@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class OpendatadkService {
 
-    private URL = 'open-data-dk-sharing';
+    private OPENDATADKSHARINGURL = 'open-data-dk-sharing';
 
     constructor(private restService: RestService, private sharedVariableService: SharedVariableService ) {
     }
 
     get(): Observable<any> {
         const organizationId = this.sharedVariableService.getSelectedOrganisationId();
-        return this.restService.get(this.URL, null, organizationId);
+        return this.restService.get(this.OPENDATADKSHARINGURL, null, organizationId);
     }
 }
