@@ -8,7 +8,7 @@ import { LoggedInService } from '@shared/services/loggedin.service';
 })
 export class AppComponent {
     title = 'OS2IoT-frontend';
-    isLoggedIn = false;
+    isLoggedIn = true;
 
     constructor(private loggedInService: LoggedInService) {
         loggedInService.changeEmitted?.subscribe(
