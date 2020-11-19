@@ -14,5 +14,4 @@ export class SaveSnackService {
       duration: 10000,
     });
   }
-
 }

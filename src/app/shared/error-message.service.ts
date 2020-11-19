@@ -41,6 +41,7 @@ export class ErrorMessageService {
             if (
               err.property === 'lorawanSettings' ||
               err.property === 'sigfoxSettings' ||
+              err.property === 'openDataDkDataset' ||
               err.property === 'gateway') {
                 err.children.forEach(element => {
                   errors.errorFields.push(element.property);

@@ -5,10 +5,6 @@ import { GatewayResponse, Gateway, GatewayData, GatewayRequest, GatewayResponseM
 import * as moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { map } from 'rxjs/operators';
-import { AuthService } from '@auth/auth.service';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import { OperationCanceledException, resolveProjectReferencePath } from 'typescript';
-import { Organisation } from '@app/admin/organisation/organisation.model';
 
 @Injectable({
   providedIn: 'root'

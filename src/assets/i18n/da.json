@@ -134,7 +134,38 @@
     "IOTDEVICE": "IoT Device navn:",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "AUTHORIZATIONHEADER": "Authorization header",
-    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet"
+    "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
+    "ADD-TO-OPENDATADK": "Send data til OpenDataDK"
+  },
+  "OPENDATADK": {
+    "QUESTION": {
+      "GIVE-OPENDATADK-NAME": "OpenDataDK navn",
+      "GIVE-OPENDATADK-NAME-PLACEHOLDER": "OpenDataDK navn",
+      "GIVE-OPENDATADK-RESOURCETITLE": "Titel",
+      "GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER": "Kloaksensorer - Aarhus kommune",
+      "GIVE-OPENDATADK-DESCRIPTION": "OpenDataDK Beskrivelse",
+      "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "OpenDataDK Beskrivelse",
+      "GIVE-OPENDATADK-KEYWORDS": "Angiv kommasepareret nøgleord",
+      "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, Sensor, LoRaWAN, Temeratur",
+      "GIVE-OPENDATADK-AUTHORNAME": "Forfatter",
+      "GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER": "Jens Jensen",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Forfatterens e-mail",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER": "jens@jensen.dk",
+      "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed de",
+      "ACCEPT-TERMS-PART-TWO": "Heriblandt at data ikke indeholder følsomme personoplysninger eller personhenførbare informationer.",
+      "TERMS-AND-CONDITIONS": "Gældende vilkår og betingelser for OpenDataDK"
+    },
+    "DETAILS": {
+      "NAME": "Navn på datasæt",
+      "RESOURCETITLE": "Titel",
+      "DESCRIPTION": "Beskrivelse",
+      "KEYWORDS": "Keywords",
+      "LICENSE": "Licens",
+      "AUTHORNAME": "Forfatterens navn",
+      "AUTHOREMAIL": "Forfatterens email",
+      "URL": "endpoint til hentning af data",
+      "NA": "Intet angivet"
+    }
   },
   "APPLICATION-TABLE": {
     "NAME": "Navn",
@@ -683,7 +714,13 @@
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
     "CLOSE": "Annuller",
-    "DIALOG-CONFIRM": "Ja, slet"
+    "DIALOG-CONFIRM": "Ja, slet",
+    "OPENDATADK": {
+      "OK": "Send mail til OpenDataDk",
+      "CLOSE": "Nej, tak",
+      "TITLE": "Vil du sende data til OpenDataDK?",
+      "MESSAGE": "Send en mail til OpendataDK så opretter de dit datasæt"
+    }
   },
   "BATTERY": {
     "NOT_AVAILABLE": "N/A"

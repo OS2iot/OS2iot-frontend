@@ -3,15 +3,14 @@ import { Organisation, OrganisationGetMinimalResponse } from '@app/admin/organis
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
-import { timeStamp } from 'console';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedVariableService {
-  
+
   constructor(
     private authService: AuthService,
     private organisationService: OrganisationService) {

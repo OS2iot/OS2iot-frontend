@@ -10,6 +10,11 @@ import { RouterModule } from '@angular/router';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
+import { OpendatadkComponent } from './opendatadk/opendatadk.component';
+import { OpendatadkEditComponent } from './opendatadk/opendatadk-edit/opendatadk-edit.component';
+import { OpendatadkDetailComponent } from './opendatadk/opendatadk-detail/opendatadk-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,14 +22,20 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
     DatatargetTableRowComponent,
     DatatargetListComponent,
     DatatargetEditComponent,
-    DatatargetDetailComponent],
+    DatatargetDetailComponent,
+    OpendatadkComponent,
+    OpendatadkEditComponent,
+    OpendatadkDetailComponent],
   imports: [
     CommonModule,
     TopBarModule,
     RouterModule,
     TranslateModule,
     FormModule,
-    NGMaterialModule
+    NGMaterialModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     DatatargetTableComponent,
