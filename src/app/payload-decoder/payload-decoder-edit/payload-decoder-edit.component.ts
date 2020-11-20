@@ -203,6 +203,7 @@ export class PayloadDecoderEditComponent implements OnInit {
       .subscribe(
         (response) => {
           this.routeBack();
+          this.showSavedSnack();
         },
         (error: HttpErrorResponse) => {
           this.showError(error);
@@ -215,6 +216,7 @@ export class PayloadDecoderEditComponent implements OnInit {
       .subscribe(
         (response) => {
           this.routeBack();
+          this.showSavedSnack();
         },
         (error) => {
           this.showError(error);
@@ -228,7 +230,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     } else {
       this.create();
     }
-    this.showSavedSnack();
+
   }
 
   scrollToTop(): void {
