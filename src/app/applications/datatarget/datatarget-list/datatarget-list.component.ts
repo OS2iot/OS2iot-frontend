@@ -12,10 +12,9 @@ import { BackButton } from '@shared/models/back-button.model';
 })
 export class DatatargetListComponent implements OnInit {
 
-    public pageLimit = 10;
+    public pageLimit = 20;
     public title: string;
 
-    public backButton: BackButton = { label: '', routerLink: '/applikationer' };
     public datatarget: Datatarget;
 
     constructor(
