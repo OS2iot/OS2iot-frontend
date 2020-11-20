@@ -11,19 +11,22 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-
+  orgs = [{ name: 'Skanderborg Kommune' }, { name: 'Århus kommune' }];
+  selectedOrg: string;
   private map;
   public mapId;
   private marker;
   @Input() coordinates?: MapCoordinates;
   @Input() coordinateList?: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
+  @Output() updateOrganisations = new EventEmitter();
   private zoomLevel = 15;
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnDestroy(): void {
     if (this.map) {
@@ -37,6 +40,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
     }
+  }
+
+  setOrganisationToMap() {
+    console.log("selected: " + this.selectedOrg);
+    this.updateOrganisations.emit(this.selectedOrg);
   }
 
   setGeolocation() {
