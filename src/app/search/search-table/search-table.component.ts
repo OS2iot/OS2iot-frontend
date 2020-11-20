@@ -34,6 +34,7 @@ export class SearchTableComponent implements OnInit {
 
   isLoadingResults = true;
   subscription: Subscription;
+  isFetching = true;
 
   searchResults: SearchResultDto[];
   pageLimit = 10;
@@ -48,7 +49,7 @@ export class SearchTableComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private searchService: SearchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.pageOffset = 0;
@@ -67,6 +68,7 @@ export class SearchTableComponent implements OnInit {
         this.searchResults = response.data;
         this.pageTotal = response.count;
         this.isLoadingResults = false;
+        this.isFetching = false;
         this.showResults();
       });
   }

@@ -47,8 +47,9 @@
     "ID": "Id",
     "ORGANISATION": "Organisation",
     "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
-    "QUERY": "Du har søgt efter:",
-    "NO-RESULTS": "Søgningen førte til 0 resultater."
+    "QUERY": "resultater for",
+    "NO-RESULTS": "Du kun kan søge efter IoT enheder, applikationer og gateways",
+    "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
     "SIGFOX": "SigFox",
