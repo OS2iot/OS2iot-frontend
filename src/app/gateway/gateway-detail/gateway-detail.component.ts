@@ -59,7 +59,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             latitude: this.gateway.location.latitude,
             draggable: false,
             editEnabled: false,
-            useGeolocation: false
+            useGeolocation: false,
+            markerInfo: { name: this.gateway.name, active: this.gatewayService.isGatewayActive(this.gateway), id: this.gateway.id }
         };
     }
 

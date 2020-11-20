@@ -73,13 +73,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo);
       });
     } else {
-      this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable);
+      this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
     }
   }
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
     const markerIcon = this.getMarkerIcon(markerInfo?.active);
-    this.marker = L.marker([latitude, longitude], {draggable, icon: markerIcon});
+    this.marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
     this.marker.on('dragend', event => this.dragend(event));
     if (markerInfo) {
       const aktiv = markerInfo.active ? 'Aktiv' : 'Inaktiv';
