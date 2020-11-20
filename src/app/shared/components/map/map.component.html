@@ -1,11 +1,11 @@
-<div class="row">
+<div class="row" *ngIf="organisations">
   <div class="col-9"></div>
 
   <div class="col-3">
     <mat-form-field *ngIf="orgs" appearance="fill">
       <mat-label>Filtrer efter Organisation</mat-label>
-      <mat-select [placeholder]="'Filtrer efter Organisation'" [(value)]="selectedOrg" (click)="setOrganisationToMap()">
-        <mat-option *ngFor="let org of orgs" [value]="org.name">
+      <mat-select [placeholder]="'Filtrer efter Organisation'" [(value)]="selectedOrg">
+        <mat-option *ngFor="let org of organisations" [value]="org.name" (click)="setOrganisationToMap()">
           {{org.name}}
         </mat-option>
       </mat-select>
