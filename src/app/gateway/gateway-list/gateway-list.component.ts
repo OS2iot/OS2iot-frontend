@@ -58,6 +58,19 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     this.getGateways();
   }
 
+  public filterGatewaysToMap(event: any) {
+    console.log('this event: ' + event);
+    const newFilter = [];
+    this.gateways.forEach(
+      (gateway: Gateway) => {
+        if (gateway.internalOrganizationId === event) {
+          newFilter.push({ latitude: gateway.location.latitude, longitude: gateway.location.longitude });
+        }
+      }
+    );
+    console.log(newFilter);
+  }
+
   toggleAllSelection() {
     if (this.allSelected) {
       this.select.options.forEach((item: MatOption) => item.select());

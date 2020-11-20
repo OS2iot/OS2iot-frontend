@@ -1,6 +1,12 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 pt-3">
     <app-loading-spinner *ngIf=" isLoadingResults">
     </app-loading-spinner>
+    <!-- <div class="mx-3">
+        <mat-form-field>
+            <mat-label>Filtrer tabellen på navn, id, og organisation</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+    </div> -->
     <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->
