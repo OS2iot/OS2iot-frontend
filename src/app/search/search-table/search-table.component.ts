@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import {
   faBroadcastTower,
   faLayerGroup,
@@ -31,6 +32,7 @@ export class SearchTableComponent implements OnInit {
 
   displayedColumns: string[] = ['icon', 'type', 'name', 'id', 'org'];
   dataSource: MatTableDataSource<SearchResultDto>;
+  public pageSize = environment.tablePageSize;
 
   isLoadingResults = true;
   subscription: Subscription;

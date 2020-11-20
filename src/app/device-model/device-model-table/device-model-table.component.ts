@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { environment } from '@environments/environment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
@@ -21,6 +22,7 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
   public dataSource = new MatTableDataSource<DeviceModel>();
   public deviceModels: DeviceModel[];
   public displayedColumns: string[] = ['name', 'id', 'menu'];
+  public pageSize = environment.tablePageSize;
   public isLoadingResults = false;
   public resultsLength = 0;
   public hasWritePermission = false;

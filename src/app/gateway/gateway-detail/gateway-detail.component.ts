@@ -9,6 +9,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { Gateway, GatewayStats } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
+import { environment } from '@environments/environment';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -23,6 +24,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     private id: string;
     private gatewayStats: GatewayStats[];
     displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
+    public pageSize = environment.tablePageSize;
     public dataSource = new MatTableDataSource<GatewayStats>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();

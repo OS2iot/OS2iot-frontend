@@ -18,6 +18,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-applications-table',
@@ -34,6 +35,7 @@ export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChan
   resultsLength = 0;
   @Input() isLoadingResults: boolean;
   public pageLimit = 10;
+  public pageSize = environment.tablePageSize;
 
   @Output() deleteApplication = new EventEmitter();
 

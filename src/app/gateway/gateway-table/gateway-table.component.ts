@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, Afte
 
   displayedColumns: string[] = ['name', 'gateway-id', 'location', 'internalOrganizationName', 'last-seen', 'status', 'menu'];
   public dataSource = new MatTableDataSource<Gateway>();
+  public pageSize = environment.tablePageSize;
   public gateways: Gateway[];
   gateway: Gateway;
   faExclamationTriangle = faExclamationTriangle;

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { PermissionResponse } from '../../permission.model';
@@ -23,6 +24,7 @@ export class PermissionTabelComponent implements OnInit, OnChanges, AfterViewIni
   @Input() isLoadingResults: boolean;
   @Output() deletePermission = new EventEmitter();
   resultsLength = 0;
+  public pageSize = environment.tablePageSize;
 
   constructor(
     public translate: TranslateService,

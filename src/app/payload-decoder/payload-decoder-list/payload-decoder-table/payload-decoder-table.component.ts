@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -17,6 +18,7 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'payload-decoder-id', 'organizationID', 'menu'];
+  public pageSize = environment.tablePageSize;
   public dataSource = new MatTableDataSource<PayloadDecoderBodyResponse>();
   public payloadDecoders: PayloadDecoderBodyResponse[];
   payloadDecoder: PayloadDecoderBodyResponse;

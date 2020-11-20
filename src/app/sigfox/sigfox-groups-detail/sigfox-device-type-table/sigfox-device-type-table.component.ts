@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
@@ -19,6 +20,7 @@ export class SigfoxDeviceTypeTableComponent implements OnInit, AfterViewInit {
   @Input() sigfoxGroup: SigfoxGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['name', 'alertEmail'];
+  public pageSize = environment.tablePageSize;
 
   constructor(
     private translate: TranslateService,

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { Sort } from '@shared/models/sort.model';
@@ -31,7 +32,7 @@ export class UserTableComponent implements OnInit, OnChanges, AfterViewInit {
   public pageOffset = 0;
   public pageTotal: number;
   deleteUser = new EventEmitter();
-
+  public pageSize = environment.tablePageSize;
 
   constructor(
     public translate: TranslateService,

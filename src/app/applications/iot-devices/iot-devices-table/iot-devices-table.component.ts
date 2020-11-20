@@ -3,13 +3,11 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { Application } from '@applications/application.model';
-import { Sort } from '@shared/models/sort.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
 import { IoTDeviceService } from '../iot-device.service';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { DeviceType } from '@shared/enums/device-type';
@@ -17,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
+import { environment } from '@environments/environment';
 
 @Component({
     selector: 'app-iot-devices-table',
@@ -26,7 +25,7 @@ import { ReceivedMessageMetadata } from '@shared/models/received-message-metadat
 export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-
+    public pageSize = environment.tablePageSize;
     displayedColumns: string[] = ['name', 'technology', 'battery', 'active', 'menu'];
     public dataSource = new MatTableDataSource<IotDevice>();
     public iotDevices: IotDevice[];
