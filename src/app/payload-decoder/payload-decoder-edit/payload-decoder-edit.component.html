@@ -12,15 +12,12 @@
   <div class="jumbotron m-md-4 p-md-3">
     <div class="row">
       <div class="col-6">
-        <label class="form-label" for="metadata">Navngiv payload decoder</label>
         <div class="form-group">
-          <mat-form-field appearance="outline">
-            <mat-label>{{'QUESTION.GIVE-PAYLOADDECODER-NAME' | translate}}</mat-label>
-            <input matInput type="text" id="name" name="name"
-              [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate" maxlength="50" required
-              [(ngModel)]="payloadDecoder.name"
-              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
-          </mat-form-field>
+          <label class="form-label" for="metadata">{{'QUESTION.GIVE-PAYLOADDECODER-NAME' | translate}}</label>
+          <input class="form-control" type="text" id="name" name="name"
+            [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate" maxlength="50" required
+            [(ngModel)]="payloadDecoder.name"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
         </div>
       </div>
       <div class="col-6">

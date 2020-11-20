@@ -19,6 +19,7 @@ import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { TestPayloadDecoder } from '@payload-decoder/test-payload-decoder.model';
 import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder.service';
 import { SaveSnackService } from '@shared/services/save-snack.service';
+import { ErrorMessageService } from '@shared/error-message.service';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -71,6 +72,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     private iotDeviceService: IoTDeviceService,
     private deviceModelService: DeviceModelService,
     private saveSnackService: SaveSnackService,
+    private errorMessageService: ErrorMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -117,6 +119,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   testPayloadFunction() {
+    this.errorMessages = !this.errorMessages;
     this.testPayloadDecoder.code = this.payloadDecoderBody;
     this.testPayloadDecoder.iotDeviceJsonString = this.metadata;
     this.testPayloadDecoder.rawPayloadJsonString = this.payloadData;
@@ -239,18 +242,9 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessages = [];
-    if (error.error?.message?.length > 0) {
-      error.error.message.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = error.message;
-    }
+    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errorResponse.errorFields;
+    this.errorMessages = errorResponse.errorMessages;
     this.formFailedSubmit = true;
     this.scrollToTop();
   }

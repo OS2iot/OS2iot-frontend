@@ -131,6 +131,7 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   line-height: 24px;
   color: $grey-tablehead;
   background-color: $grey-dark;
+  width: min-content;
 }
 
 .mat-sort-header-arrow {
