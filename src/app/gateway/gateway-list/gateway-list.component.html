@@ -3,27 +3,6 @@
 </app-top-bar>
 
 <div class="jumbotron m-md-4 p-md-3">
-  <div class="row">
-    <div class="col-9"></div>
-
-    <div class="col-3">
-      <mat-form-field appearance="fill">
-        <mat-label>Filtrer Organisation</mat-label>
-        <mat-select #select placeholder="Select organisation" multiple>
-          <div class="select-all">
-            <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}"
-              (change)="toggleAllSelection()">Select All</mat-checkbox>
-            <mat-divider></mat-divider>
-          </div>
-          <mat-option (click)="optionClick()" *ngFor="let gateway of gateways" [value]="gateway.internalOrganizationId">
-            {{gateway.internalOrganizationName}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
-
   <mat-tab-group animationDuration="200ms" class=" " (selectedTabChange)="showMap($event)">
     <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
       <div class="m-md-4 p-md-3">
@@ -34,7 +13,7 @@
     </mat-tab>
     <mat-tab label="{{'GATEWAY.MAP-TAB' | translate}}">
       <div *ngIf="showmap && gateways">
-        <app-map [coordinateList]="coordinateList"></app-map>
+        <app-map [coordinateList]="coordinateList" (updateOrganisations)="filterGatewaysToMap($event)"></app-map>
       </div>
     </mat-tab>
   </mat-tab-group>

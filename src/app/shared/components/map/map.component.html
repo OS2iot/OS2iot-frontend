@@ -1,5 +1,23 @@
-<div class="map-container">
-    <div class="map-frame">
-      <div class="map" id="{{mapId}}"></div>
+<div class="row">
+  <div class="col-9"></div>
+
+  <div class="col-3">
+    <mat-form-field *ngIf="orgs" appearance="fill">
+      <mat-label>Filtrer efter Organisation</mat-label>
+      <mat-select [placeholder]="'Filtrer efter Organisation'" [(value)]="selectedOrg" (click)="setOrganisationToMap()">
+        <mat-option *ngFor="let org of orgs" [value]="org.name">
+          {{org.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="map-container">
+      <div class="map-frame">
+        <div class="map" id="{{mapId}}"></div>
+      </div>
     </div>
+  </div>
 </div>

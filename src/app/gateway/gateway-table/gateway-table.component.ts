@@ -11,6 +11,7 @@ import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
 import { Output } from '@angular/core';
+import { createKeywordTypeNode } from 'typescript';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class GatewayTableComponent implements OnInit, OnChanges {
   @Input() gateways: Gateway[];
   @Input() isLoadingResults = true;
   @Output() deleteGateway = new EventEmitter();
+  filteredGateways: Gateway[];
 
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
@@ -44,8 +46,7 @@ export class GatewayTableComponent implements OnInit, OnChanges {
     moment.locale('da');
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   ngOnChanges() {
     if (this.gateways) {
@@ -55,6 +56,15 @@ export class GatewayTableComponent implements OnInit, OnChanges {
       this.dataSource.sortingDataAccessor = tableSorter;
       this.isLoadingResults = false;
       this.resultsLength = this.gateways.length;
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 
@@ -70,12 +80,8 @@ export class GatewayTableComponent implements OnInit, OnChanges {
     }
   }
 
-
   clickDelete(element: any) {
     this.deleteGateway.emit(element.id);
   }
-
-
-
 
 }
