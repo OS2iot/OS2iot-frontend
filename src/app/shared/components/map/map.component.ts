@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
-import { Organisation } from '@app/admin/organisation/organisation.model';
+import { Organisation, OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   orgs = [{ name: 'Skanderborg Kommune' }, { name: 'Århus kommune' }];
-  selectedOrg: string;
+  selectedOrg: object;
   private map;
   public mapId;
   private marker;
@@ -23,9 +23,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private zoomLevel = 15;
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
+  subscription: Subscription;
+  public organisations: OrganisationResponse[];
 
-
-  constructor() {
+  constructor(private organisationService: OrganisationService) {
   }
 
   ngOnDestroy(): void {
@@ -40,6 +41,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
     }
+    this.getOrganisations();
+  }
+
+  getOrganisations() {
+    this.subscription = this.organisationService
+      .getMultiple()
+      .subscribe((response) => {
+        this.organisations = response.data;
+        console.log(this.organisations)
+      });
   }
 
   setOrganisationToMap() {
