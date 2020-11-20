@@ -32,6 +32,7 @@ a {
 
   &:active,
   &.link-active {
+    background-color: inherit;
     color: $color-active;
     border-bottom: 5px solid $color-link-active-bg;
   }

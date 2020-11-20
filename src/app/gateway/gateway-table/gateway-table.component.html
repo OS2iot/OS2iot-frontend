@@ -73,14 +73,14 @@
                     <a href="#" role="button" id="tableRowDropdown-{{ element.id }}"
                         class="applicationRow__edit dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                         [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
-                    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
+                    <ul class="dropdown-menu dropdown-menu--table"
+                        attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
                         <li class="dropdown-item">
                             <a [routerLink]="['gateway-edit', element.id]"
                                 routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
                         </li>
                         <li class="dropdown-item">
-                            <a (click)="clickDelete(element)"
-                                [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>
+                            <a (click)="clickDelete(element)" [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>
                         </li>
                     </ul>
                 </div>

@@ -9,10 +9,9 @@
     <a href="#" role="button" id="tableRowDropdown-{{datatarget.id}}" class="applicationRow__edit dropdown-toggle"
       data-toggle="dropdown" aria-expanded="false"
       [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
-    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{datatarget.id}}">
+    <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{datatarget.id}}">
       <li class="dropdown-item">
-        <a [routerLink]="['datatarget-edit', datatarget.id]"
-          routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
+        <a [routerLink]="['datatarget-edit', datatarget.id]" routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
       </li>
       <li class="dropdown-item">
         <a (click)="clickDelete()" [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>

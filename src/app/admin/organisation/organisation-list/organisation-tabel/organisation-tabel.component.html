@@ -36,7 +36,8 @@
                     <a href="#" role="button" id="tableRowDropdown-{{element.id}}"
                         class="applicationRow__edit dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                         [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
-                    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{element.id}}">
+                    <ul class="dropdown-menu dropdown-menu--table"
+                        attr.aria-labelledby="tableRowDropdown-{{element.id}}">
                         <li class="dropdown-item">
                             <a [routerLink]="[element.id, 'edit-organisation']"
                                 routerLinkActive="active">{{ 'ORGANISATION-TABLE-ROW.EDIT' | translate }}

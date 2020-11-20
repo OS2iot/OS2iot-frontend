@@ -66,9 +66,10 @@
   }
 
   .dropdown-menu {
+    &--table{
     min-width: 90px !important;
     left: -35px !important;
-
+    }
     li {
       padding: 0;
       margin: 0;

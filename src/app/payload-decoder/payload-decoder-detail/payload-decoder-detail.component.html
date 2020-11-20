@@ -6,15 +6,14 @@
                 <div class="float-left">
                     <h4> {{ 'PAYLOAD-DECODER.NAME' | translate }} {{payloadDecoder.name}}</h4>
                 </div>
-                <div class="btn-group float-right" *ngIf="payloadDecoder.canEdit">
+                <div class="btn-group float-md-right dropdown" *ngIf="payloadDecoder.canEdit">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{'PAYLOAD-DECODER.DETAIL.DROPDOWN' | translate}} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{payloadDecoder.id}}">
                         <li class="dropdown-item">
-                            <a [routerLink]="['../../payload-decoder-edit', payloadDecoder.id]"
-                                routerLinkActive="active">{{ 'PAYLOAD-DECODER.DETAIL.EDIT' | translate }}
+                            <a [routerLink]="['../../payload-decoder-edit', payloadDecoder.id]">{{ 'PAYLOAD-DECODER.DETAIL.EDIT' | translate }}
                             </a>
                         </li>
                         <li class="dropdown-item">
