@@ -583,7 +583,7 @@
     "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
     "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
     "IS-USED": "Profilen kan ikke slettes da den er i brug.",
-    "USER-ALREADY-EXCISTS": "Brugeren findes allerede",
+    "USER-ALREADY-EXISTS": "Brugeren findes allerede",
     "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug"
   },
   "PROFILES": {
