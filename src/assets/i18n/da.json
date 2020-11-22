@@ -111,6 +111,7 @@
     "STATS-TXPACKETSEMITTED": "Pakker Sendt",
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
+    "DROPDOWNFILTER": "Organisation filter",
     "MAP-TAB": "Kort",
     "ORGANIZATION": "Organisation"
   },

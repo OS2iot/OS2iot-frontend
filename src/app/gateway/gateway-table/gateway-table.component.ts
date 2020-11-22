@@ -59,15 +59,6 @@ export class GatewayTableComponent implements OnInit, OnChanges {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
   gatewayStatus(gateway: Gateway): boolean {
     return this.chirpstackGatewayService.isGatewayActive(gateway);
   }
