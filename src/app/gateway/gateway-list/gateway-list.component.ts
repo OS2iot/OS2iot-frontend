@@ -10,6 +10,7 @@ import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 
 @Component({
@@ -19,8 +20,7 @@ import { MeService } from '@shared/services/me.service';
 })
 export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   isLoadingResults = true;
-  @ViewChild('select') select: MatSelect;
-  allSelected = false;
+  selectedOrg: number;
 
   public coordinateList = [];
   public showmap = false;
@@ -34,7 +34,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     col: 'name',
     label: 'SORT.NAME-ASCENDING',
   };
-  organisation: Organisation;
+  organisations: Organisation[];
   orgSubscribtion: Subscription;
 
   private deleteDialogSubscription: Subscription;
@@ -45,51 +45,65 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     public translate: TranslateService,
     private chirpstackGatewayService: ChirpstackGatewayService,
     private deleteDialogService: DeleteDialogService,
-    private meService: MeService) {
+    private meService: MeService,
+    private sharedVariableService: SharedVariableService) {
     translate.use('da');
     moment.locale('da');
   }
 
   ngOnInit(): void {
     this.getGateways();
+    this.organisations = this.sharedVariableService.getOrganizationInfo();
   }
 
   ngOnChanges() {
-    this.getGateways();
-  }
-
-  public filterGatewaysToMap(event: any) {
-    console.log('this event: ' + event);
-    const newFilter = [];
-    this.gateways.forEach(
-      (gateway: Gateway) => {
-        if (gateway.internalOrganizationId === event) {
-          newFilter.push({ latitude: gateway.location.latitude, longitude: gateway.location.longitude });
-        }
-      }
-    );
-    console.log(newFilter);
-  }
-
-  toggleAllSelection() {
-    if (this.allSelected) {
-      this.select.options.forEach((item: MatOption) => item.select());
+    if (this.selectedOrg > 0) {
+      this.getGatewayByOrgId();
     } else {
-      this.select.options.forEach((item: MatOption) => item.deselect());
+      this.getGateways();
     }
   }
-  optionClick() {
-    let newStatus = true;
-    this.select.options.forEach((item: MatOption) => {
-      if (!item.selected) {
-        newStatus = false;
-      }
-    });
-    this.allSelected = newStatus;
+
+  public filterGateway(event: number) {
+    this.selectedOrg = event;
+    if (event === null) {
+      this.getGateways();
+      console.log('null');
+    } else {
+      this.getGatewayByOrgId(event);
+      console.log('this event: ' + event);
+    }
   }
 
   private getGateways(): void {
-    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple()
+    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
+      {
+        limit: this.pageLimit,
+        offset: this.pageOffset * this.pageLimit,
+        sort: this.selectedSortObject.dir,
+        orderOn: this.selectedSortObject.col,
+      }
+    )
+      .subscribe(
+        (gateways: GatewayResponseMany) => {
+          this.gateways = gateways.result;
+          this.mapToCoordinateList();
+          this.setCanEdit();
+          this.isLoadingResults = false;
+        }
+      );
+  }
+
+  private getGatewayByOrgId(orgId: number = null): void {
+    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
+      {
+        limit: this.pageLimit,
+        offset: this.pageOffset * this.pageLimit,
+        sort: this.selectedSortObject.dir,
+        orderOn: this.selectedSortObject.col,
+        organizationId: orgId,
+      }
+    )
       .subscribe(
         (gateways: GatewayResponseMany) => {
           this.gateways = gateways.result;
@@ -126,7 +140,6 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
         }
       )
     );
-    console.log('getCoordinateList called');
   }
 
   gatewayStatus(gateway: Gateway): boolean {

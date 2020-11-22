@@ -20,6 +20,7 @@ import { TestPayloadDecoder } from '@payload-decoder/test-payload-decoder.model'
 import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder.service';
 import { SaveSnackService } from '@shared/services/save-snack.service';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -73,6 +74,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     private deviceModelService: DeviceModelService,
     private saveSnackService: SaveSnackService,
     private errorMessageService: ErrorMessageService,
+    private scrollToTopService: ScrollToTopService,
   ) { }
 
   ngOnInit(): void {
@@ -233,22 +235,14 @@ export class PayloadDecoderEditComponent implements OnInit {
 
   }
 
-  scrollToTop(): void {
-    (function smoothscroll() {
-      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      if (currentScroll > 0) {
-        window.requestAnimationFrame(smoothscroll);
-        window.scrollTo(0, currentScroll - (currentScroll / 5));
-      }
-    })();
-  }
+
 
   private showError(error: HttpErrorResponse) {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
     this.formFailedSubmit = true;
-    this.scrollToTop();
+    this.scrollToTopService.scrollToTop();
   }
 
   routeBack(): void {

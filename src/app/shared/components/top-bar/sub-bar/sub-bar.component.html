@@ -10,6 +10,16 @@
                 <button *ngIf="ctaRouterLinkPrimary" [routerLink]="ctaRouterLinkPrimary" routerLinkActive="active"
                     class="btn btn-primary" type="button"
                     [attr.aria-label]="ctaLabelPrimary">{{ctaLabelPrimary}}</button>
+
+                <mat-form-field appearance="fill" *ngIf="addDropdown">
+                    <mat-label>{{dropdownLabel}}</mat-label>
+                    <mat-select [placeholder]="dropdownLabel" [(value)]="selectedOpt">
+                        <mat-option (click)="setOptionToNull()">--</mat-option>
+                        <mat-option *ngFor="let option of options" [value]="option.id" (click)="setOptionToParent()">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
     </div>
