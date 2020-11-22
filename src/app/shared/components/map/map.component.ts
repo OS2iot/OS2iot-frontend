@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy, AfterViewChecked } from '@angular/core';
 import { Organisation, OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import * as L from 'leaflet';
-import { Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
@@ -11,22 +11,19 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-  orgs = [{ name: 'Skanderborg Kommune' }, { name: 'Århus kommune' }];
-  selectedOrg: object;
   private map;
   public mapId;
   private marker;
   @Input() coordinates?: MapCoordinates;
   @Input() coordinateList?: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
-  @Output() updateOrganisations = new EventEmitter();
   private zoomLevel = 15;
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
   subscription: Subscription;
   public organisations: OrganisationResponse[];
 
-  constructor(private organisationService: OrganisationService) {
+  constructor() {
   }
 
   ngOnDestroy(): void {
@@ -41,21 +38,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
     }
-    this.getOrganisations();
-  }
-
-  getOrganisations() {
-    this.subscription = this.organisationService
-      .getMultiple()
-      .subscribe((response) => {
-        this.organisations = response.data;
-        console.log(this.organisations)
-      });
-  }
-
-  setOrganisationToMap() {
-    console.log("selected: " + this.selectedOrg);
-    this.updateOrganisations.emit(this.selectedOrg);
   }
 
   setGeolocation() {
@@ -100,6 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
     }
   }
+
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
     const markerIcon = this.getMarkerIcon(markerInfo?.active);

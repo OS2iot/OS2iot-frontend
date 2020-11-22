@@ -18,6 +18,13 @@ export class SubBarComponent implements OnInit {
   @Input() component: false;
   @Input() backButtonTitle: string;
 
+  @Input() options: Array<any>;
+  @Output() updateSelectedOpt = new EventEmitter();
+  selectedOpt: number;
+  @Input() addDropdown: false;
+  @Input() dropdownLabel: string;
+
+
   constructor(
     public translate: TranslateService,
     private location: Location) {
@@ -30,4 +37,12 @@ export class SubBarComponent implements OnInit {
     this.location.back();
   }
 
+  setOptionToNull() {
+    this.selectedOpt = null;
+    this.updateSelectedOpt.emit(this.selectedOpt);
+  }
+
+  setOptionToParent() {
+    this.updateSelectedOpt.emit(this.selectedOpt);
+  }
 }
