@@ -25,7 +25,6 @@ export class GatewayTableComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['name', 'gateway-id', 'location', 'internalOrganizationName', 'last-seen', 'status', 'menu'];
   public dataSource = new MatTableDataSource<Gateway>();
   public pageSize = environment.tablePageSize;
-  //public gateways: Gateway[];
   gateway: Gateway;
   @Input() gateways: Gateway[];
   @Input() isLoadingResults = true;
