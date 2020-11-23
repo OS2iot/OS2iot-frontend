@@ -387,6 +387,8 @@
     "GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE": "// Kan ikke finde noget metadata på den pågældende enhed. \n// Det kan enten skyldes at vi ikke har modtaget noget fra enheden eller der er ikke blevet tilknyttet en devicemodel til enheden",
     "GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE": "// Kan ikke finde noget payload på den pågældende enhed. \n// Det kan enten skyldes at vi ikke har modtaget noget fra enheden eller der er ikke blevet tilknyttet en devicemodel til enheden",
     "GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER": "// Tryk 'Test Koden' for at decode payload og metadata",
+    "GIVE-PAYLOADDECODER-METADATA-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet device metadata",
+    "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
