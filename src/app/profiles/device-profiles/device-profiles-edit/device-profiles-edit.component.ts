@@ -67,7 +67,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   canEdit() {
     if (this.deviceProfile.organizationID) {
-      this.deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(this.deviceProfile.organizationID);
+      this.deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(this.deviceProfile.internalOrganizationId);
     } else {
       this.deviceProfile.canEdit = true;
     }

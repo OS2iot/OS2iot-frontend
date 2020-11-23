@@ -17,7 +17,8 @@ export class MeService {
     const userInfo = this.sharedVariableService.getUserInfo();
     return userInfo.user.permissions.some(
       permission => {
-        return permission.type === PermissionType.GlobalAdmin || (permission.organization.id === id && PermissionType.Write);
+        return permission.type === PermissionType.GlobalAdmin || 
+        (permission.organization.id === id && (permission.type === PermissionType.Write || permission.type === PermissionType.OrganizationAdmin));
       }
     );
   }
