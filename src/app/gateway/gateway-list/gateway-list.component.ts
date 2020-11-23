@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
@@ -57,21 +57,14 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if (this.selectedOrg > 0) {
-      this.getGatewayByOrgId();
-    } else {
-      this.getGateways();
-    }
   }
 
   public filterGateway(event: number) {
     this.selectedOrg = event;
     if (event === null) {
       this.getGateways();
-      console.log('null');
     } else {
       this.getGatewayByOrgId(event);
-      console.log('this event: ' + event);
     }
   }
 
@@ -122,8 +115,9 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private mapToCoordinateList() {
+    const tempcoordinateList = [];
     this.gateways.map(
-      gateway => this.coordinateList.push(
+      gateway => tempcoordinateList.push(
         {
           longitude: gateway.location.longitude,
           latitude: gateway.location.latitude,
@@ -138,8 +132,9 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
             internalOrganizationName: gateway.internalOrganizationName
           }
         }
-      )
+      ),
     );
+    this.coordinateList = tempcoordinateList;
   }
 
   gatewayStatus(gateway: Gateway): boolean {
