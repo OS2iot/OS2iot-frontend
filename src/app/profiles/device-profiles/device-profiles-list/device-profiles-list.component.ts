@@ -46,7 +46,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   setCanEdit() {
     this.deviceProfiles.forEach(
       (deviceProfile) => {
-        deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(deviceProfile.organizationID);
+        deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(deviceProfile.internalOrganizationId);
       }
     );
   }
