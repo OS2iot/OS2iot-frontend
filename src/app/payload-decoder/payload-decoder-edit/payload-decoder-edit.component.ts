@@ -121,8 +121,8 @@ export class PayloadDecoderEditComponent implements OnInit {
   testPayloadFunction() {
     this.errorMessages = !this.errorMessages;
     this.testPayloadDecoder.code = this.payloadDecoderBody;
-    this.testPayloadDecoder.iotDeviceJsonString = this.metadata;
-    this.testPayloadDecoder.rawPayloadJsonString = this.payloadData;
+    this.testPayloadDecoder.iotDeviceJsonString = JSON.parse(this.metadata);
+    this.testPayloadDecoder.rawPayloadJsonString = JSON.parse(this.payloadData);
 
     this.testPayloadDecoderService.post(this.testPayloadDecoder)
       .subscribe(
