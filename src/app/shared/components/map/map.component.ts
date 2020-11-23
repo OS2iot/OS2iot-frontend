@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy, AfterViewChecked } from '@angular/core';
-import { Organisation, OrganisationResponse } from '@app/admin/organisation/organisation.model';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy, AfterViewChecked, DoCheck } from '@angular/core';
+
 import * as L from 'leaflet';
-import { Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
@@ -14,29 +14,53 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private map;
   public mapId;
   private marker;
+  private markers: any;
   @Input() coordinates?: MapCoordinates;
-  @Input() coordinateList?: [MapCoordinates];
+  @Input() coordinateList: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
   private zoomLevel = 15;
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
   subscription: Subscription;
-  public organisations: OrganisationResponse[];
 
   constructor() {
-  }
-
-  ngOnDestroy(): void {
-    if (this.map) {
-      this.map.off();
-      this.map.remove();
-    }
   }
 
   ngOnInit(): void {
     this.mapId = Math.random().toString();
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
+      changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
+      this.updateMarker();
+    }
+    if (changes?.coordinateList?.currentValue !== changes?.coordinateList?.previousValue) {
+      this.changeMarkers();
+    }
+  }
+
+  changeMarkers() {
+    if (this.markers) {
+      this.markers.clearLayers();
+    }
+    if (this.coordinateList) {
+      this.placeMarkers();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.initMap();
+    this.placeMarkers();
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
     }
   }
 
@@ -52,22 +76,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
   }
 
-  ngAfterViewInit(): void {
-    this.initMap();
-    this.placeMarkers();
-  }
-
-  loadMap() {
-    this.initMap();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
-      changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
-      this.updateMarker();
-    }
-  }
-
   updateMarker() {
     this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
     this.map?.setView(this.marker._latlng, this.zoomLevel);
@@ -75,22 +83,24 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   private placeMarkers() {
     if (this.coordinateList) {
+      const markerLayerGroup = [];
       this.coordinateList.forEach(coord => {
-        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo);
+        markerLayerGroup.push(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo));
+        this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
       });
     } else {
-      this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
+      const marker = this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
+      this.map.addLayer(marker);
     }
   }
 
-
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
     const markerIcon = this.getMarkerIcon(markerInfo?.active);
-    this.marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
-    this.marker.on('dragend', event => this.dragend(event));
+    const marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
+    marker.on('dragend', event => this.dragend(event));
     if (markerInfo) {
       const isActive = markerInfo.active ? 'Aktiv' : 'Inaktiv';
-      this.marker.bindPopup(
+      marker.bindPopup(
         // TODO: should be standardised when more components use this feature.
         '<a _ngcontent-gij-c367=""' +
         'routerlinkactive="active" class="application-link"' +
@@ -107,7 +117,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         '</p>'
       );
     }
-    this.marker.addTo(this.map);
+    return marker;
   }
 
   private getMarkerIcon(active = true): any {
