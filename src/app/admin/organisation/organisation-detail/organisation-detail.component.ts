@@ -4,16 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
-import { ApplicationService } from '@applications/application.service';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OrganisationResponse } from '../organisation.model';
 import { BackButton } from '@shared/models/back-button.model';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { ApplicationService } from '@applications/application.service';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -45,14 +44,12 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     public translate: TranslateService,
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
-    private applicationService: ApplicationService,
     private permissionsService: PermissionService,
     private deleteDialogService: DeleteDialogService,
     private location: Location
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getApplications();
   }
 
   ngOnInit(): void {
@@ -88,16 +85,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       .getOne(id)
       .subscribe((response) => {
         this.organisation = response;
-        this.applications = response.applications;
         this.permissions = response.permissions;
       });
-  }
-
-  prevPage() {
-    if (this.pageOffset) {
-      this.pageOffset--;
-    }
-    this.getApplications();
   }
 
   clickDelete() {
@@ -116,44 +105,11 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     );
   }
 
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) {
-      this.pageOffset++;
-    }
-    this.getApplications();
-  }
-
   deletePermission(id: number) {
     this.permissionsService.deletePermission(id).subscribe((response) => {
       if (response.ok && response.body.affected > 0) {
         this.getOrganisation(this.id);
       }
     });
-  }
-
-  deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getOrganisation(this.id);
-      }
-    });
-  }
-
-
-  getApplications(orgId?: number): void {
-    this.applicationsSubscription = this.applicationService
-      .getApplications(
-        this.pageLimit,
-        this.pageOffset * this.pageLimit,
-        null,
-        null,
-      )
-      .subscribe((applications) => {
-        this.applications = applications.data;
-        this.isLoadingResults = false;
-        if (this.pageLimit) {
-          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
-        }
-      });
   }
 }

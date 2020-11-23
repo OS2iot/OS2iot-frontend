@@ -9,7 +9,7 @@ export function tableSorter(item, property) {
   } else if (property === 'login') {
     // user table is login
     return item?.lastLogin;
-  } else if (property === 'latest-update') {
+  } else if (property === 'updatedAt') {
     // application table is latest-update
     return Date.parse(item.updatedAt).valueOf();
   } else if (property === 'last-seen') {

@@ -5,9 +5,9 @@
   <div class="row">
     <div class="col-12">
       <div class="jumbotron--table">
-        <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
-          [isLoadingResults]="isLoadingResults">
-        </app-applications-table>
+        <!-- <app-applications-table [organizationId]="organizationId">
+        </app-applications-table> -->
+        <app-applications-table [organizationId]="organizationId"></app-applications-table>
       </div>
     </div>
   </div>

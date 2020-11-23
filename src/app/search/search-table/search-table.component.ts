@@ -39,7 +39,6 @@ export class SearchTableComponent implements OnInit {
   isFetching = true;
 
   searchResults: SearchResultDto[];
-  pageLimit = 10;
   pageTotal: number;
   pageOffset = 0;
 
@@ -54,11 +53,10 @@ export class SearchTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pageOffset = 0;
     this.route.queryParams.subscribe((params) => {
       this.searchText = this.decode(params['q']);
       if (this.searchText != null) {
-        this.search(this.searchText, this.pageLimit, 0);
+        this.search(this.searchText, this.pageSize, this.pageOffset);
       }
     });
   }
@@ -90,7 +88,6 @@ export class SearchTableComponent implements OnInit {
   }
 
   public getServerData(event?: PageEvent) {
-    this.pageLimit = event.pageSize;
     this.pageOffset = event.pageIndex;
     this.search(
       this.searchText,

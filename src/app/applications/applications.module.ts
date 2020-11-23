@@ -7,7 +7,6 @@ import { FormModule } from '@shared/components/forms/form.module';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
-import { ApplicationsTableComponent } from './applications-list/applications-table/applications-table.component';
 import { ApplicaitonsRoutingModule } from './applications-routing.module';
 import { DatatargetModule } from './datatarget/datatarget.module';
 import { IotDevicesModule } from './iot-devices/iot-devices.module';
@@ -17,6 +16,7 @@ import { DirectivesModule } from '@shared/directives/directives.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { ApplicationsTableComponent } from './applications-list/applications-table/applications-table.component';
 
 
 @NgModule({
@@ -31,8 +31,7 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     exports: [
         ApplicaitonsRoutingModule,
         ApplicationsComponent,
-        ApplicationsTableComponent
-
+        ApplicationsTableComponent,
     ],
     imports: [
         CommonModule,

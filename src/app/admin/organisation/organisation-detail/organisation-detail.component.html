@@ -1,4 +1,4 @@
-<div *ngIf="organisation">
+<div [hidden]="!organisation">
     <app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"
         [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
     </app-top-bar>
@@ -24,8 +24,7 @@
                     <h3>
                         {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
                     </h3>
-                    <app-applications-table [applications]="applications"
-                        (deleteApplication)="deleteApplication($event)" [isLoadingResults]="isLoadingResults">
+                    <app-applications-table [organizationId]="id">
                     </app-applications-table>
                 </div>
             </div>

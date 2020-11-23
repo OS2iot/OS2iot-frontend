@@ -10,8 +10,8 @@ import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 interface GetApplicationParameters {
     limit: number;
     offset: number;
-    sort: SortDir;
-    orderOn: SortCol;
+    sort: string;
+    orderOn: string;
     organizationId?: number;
 }
 
@@ -49,8 +49,8 @@ export class ApplicationService {
     getApplications(
         limit: number,
         offset: number,
-        sort: SortDir,
-        orderOn: SortCol,
+        sort: string,
+        orderOn: string,
         organizationId?: number
     ): Observable<ApplicationData> {
         const body: GetApplicationParameters = {
