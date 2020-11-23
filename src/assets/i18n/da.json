@@ -112,6 +112,7 @@
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
     "DROPDOWNFILTER": "Organisation filter",
+    "DROPDOWNDEFAULT": "Alle",
     "MAP-TAB": "Kort",
     "ORGANIZATION": "Organisation"
   },

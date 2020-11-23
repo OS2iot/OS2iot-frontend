@@ -23,6 +23,7 @@ export class SubBarComponent implements OnInit {
   selectedOpt: number;
   @Input() addDropdown: false;
   @Input() dropdownLabel: string;
+  @Input() dropdownDefaultOption: string;
 
 
   constructor(

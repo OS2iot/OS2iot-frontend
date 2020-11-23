@@ -3,9 +3,9 @@
 </app-top-bar>
 
 <div class="jumbotron m-md-4 p-md-3">
-  <app-sub-bar [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate" [addDropdown]="true"
-    [options]="organisations" [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate"
-    (updateSelectedOpt)="filterGateway($event)">
+  <app-sub-bar [component]="true" [addDropdown]="true" [options]="organisations"
+    [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="filterGateway($event)"
+    [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
   </app-sub-bar>
   <mat-tab-group animationDuration="200ms" (selectedTabChange)="showMap($event)">
     <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
