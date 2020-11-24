@@ -54,7 +54,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.placeMarkers();
+    //this.placeMarkers();
   }
 
   ngOnDestroy(): void {
