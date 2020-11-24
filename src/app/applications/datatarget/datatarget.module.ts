@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatatargetTableComponent } from './datatarget-table/datatarget-table.component';
-import { DatatargetTableRowComponent } from './datatarget-tabel-row/datatarget-tabel-row.component';
 import { DatatargetListComponent } from './datatarget-list/datatarget-list.component';
 import { DatatargetEditComponent } from './datatarget-edit/datatarget-edit.component';
 import { DatatargetDetailComponent } from './datatarget-detail/datatarget-detail.component';
@@ -15,11 +14,11 @@ import { OpendatadkEditComponent } from './opendatadk/opendatadk-edit/opendatadk
 import { OpendatadkDetailComponent } from './opendatadk/opendatadk-detail/opendatadk-detail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
     DatatargetTableComponent,
-    DatatargetTableRowComponent,
     DatatargetListComponent,
     DatatargetEditComponent,
     DatatargetDetailComponent,
@@ -35,11 +34,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NGMaterialModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ],
   exports: [
     DatatargetTableComponent,
-    DatatargetTableRowComponent,
     DatatargetListComponent,
     DatatargetEditComponent,
     DatatargetDetailComponent,

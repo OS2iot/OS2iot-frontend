@@ -1,25 +1,36 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget, DatatargetData } from '../datatarget.model';
 import { DatatargetService } from '../datatarget.service';
-import { Sort } from '@shared/models/sort.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { environment } from '@environments/environment';
+import { tableSorter } from '@shared/helpers/table-sorting.helper';
 
 @Component({
     selector: 'app-datatarget-table',
     templateUrl: './datatarget-table.component.html',
     styleUrls: ['./datatarget-table.component.scss']
 })
-export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
+export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestroy {
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+    displayedColumns: string[] = ['name', 'type', 'menu'];
+    dataSource = new MatTableDataSource<Datatarget>();
+    datatargets: Datatarget[];
+    resultsLength = 0;
+    @Input() isLoadingResults: boolean;
+    public pageSize = environment.tablePageSize;
 
     @Input() pageLimit: number;
     public pageOffset = 0;
     public pageTotal: number;
     public applicationId: number;
 
-    datatargets: Datatarget[]
     private datatargetSubscription: Subscription;
     private deleteDialogSubscription: Subscription;
 
@@ -37,8 +48,9 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
         this.getDatatarget();
     }
 
-    ngOnChanges() {
-        this.getDatatarget();
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     }
 
     getDatatarget(): void {
@@ -52,6 +64,11 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
                 )
                 .subscribe((datatargets: DatatargetData) => {
                     this.datatargets = datatargets.data;
+                    this.dataSource = new MatTableDataSource<Datatarget>(this.datatargets);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.sortingDataAccessor = tableSorter;
+                    this.isLoadingResults = false;
                     if (this.pageLimit) {
                         this.pageTotal = Math.ceil(datatargets.count / this.pageLimit);
                     }
@@ -60,20 +77,20 @@ export class DatatargetTableComponent implements OnInit, OnChanges, OnDestroy {
 
     }
 
-    deleteDatatarget(id: number) {
+    deleteDatatarget(element: any) {
         this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
             (response) => {
-              if (response) {
-                this.datatargetService.delete(id).subscribe((response) => {
-                    if (response.ok && response.body.affected > 0) {
-                        this.getDatatarget();
-                    }
-                });
-              } else {
-                  console.log(response);
-              }
+                if (response) {
+                    this.datatargetService.delete(element.id).subscribe((response) => {
+                        if (response.ok && response.body.affected > 0) {
+                            this.getDatatarget();
+                        }
+                    });
+                } else {
+                    console.log(response);
+                }
             }
-          );
+        );
     }
 
     ngOnDestroy() {
