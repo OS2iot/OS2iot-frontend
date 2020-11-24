@@ -38,10 +38,14 @@ export class DeviceProfile extends EditPermission {
 export interface DeviceProfileResponse {
     result: DeviceProfile[];
     totalCount?: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface DeviceProfileResponseOne {
     deviceProfile: DeviceProfile;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export class DeviceProfileRequest {

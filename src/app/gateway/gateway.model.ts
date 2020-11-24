@@ -13,6 +13,8 @@ export class Gateway extends EditPermission {
     lastSeenAt: string;
     organizationID?: number;
     internalOrganizationId: number;
+    createdAt: string;
+    updatedAt: string;
     createdBy: number;
     updatedBy: number;
     public internalOrganizationName?: string;

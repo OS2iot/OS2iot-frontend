@@ -15,12 +15,12 @@ export class DeviceProfileService {
 
     constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
 
-    post(body: DeviceProfile): Observable<DeviceProfileRequest> {
+    post(body: DeviceProfile): Observable<DeviceProfileResponseOne> {
         const requestBody = new DeviceProfileRequest(body, this.sharedVariableService.getSelectedOrganisationId());
         return this.restService.post(this.URL, requestBody);
     }
 
-    put(body: DeviceProfile): Observable<any> {
+    put(body: DeviceProfile): Observable<DeviceProfileResponseOne> {
         const requestBody = new DeviceProfileRequest(body);
         return this.restService.put(this.URL, requestBody, requestBody.deviceProfile.id, { observe: 'response' });
     }
@@ -31,6 +31,8 @@ export class DeviceProfileService {
               (response: DeviceProfileResponseOne) => {
                 response.deviceProfile.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
                   .find( org => org.id === response.deviceProfile.internalOrganizationId)?.name;
+                response.deviceProfile.createdAt= response.createdAt;
+                response.deviceProfile.updatedAt = response.updatedAt
                 return response;
               }
             )
