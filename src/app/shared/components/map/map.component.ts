@@ -83,8 +83,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
       });
     } else {
-      const marker = this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
-      this.map.addLayer(marker);
+      this.marker = this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
+      this.map.addLayer(this.marker);
     }
   }
 
