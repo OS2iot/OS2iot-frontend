@@ -19,7 +19,6 @@ import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
 import { JwtModule } from '@auth0/angular-jwt';
-import { DeviceModelModule } from './device-model/device-model.module';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 export function HttpLoaderFactory(http: HttpClient) {
