@@ -5,6 +5,7 @@ import { GatewayResponse, Gateway, GatewayData, GatewayRequest, GatewayResponseM
 import * as moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { map } from 'rxjs/operators';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class ChirpstackGatewayService {
 
   constructor(
     private restService: RestService,
-    private sharedVariableService: SharedVariableService) {
+    private sharedVariableService: SharedVariableService,
+    private userMinimalService: UserMinimalService) {
     moment.locale('da');
   }
 
@@ -29,6 +31,8 @@ export class ChirpstackGatewayService {
             //move createdat and updatedat to next level ease the use.
             response.gateway.updatedAt = response.updatedAt;
             response.gateway.createdAt = response.createdAt;
+            response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
+            response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
             return response;
           }
         )

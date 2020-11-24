@@ -7,7 +7,8 @@ import {
   OrganisationGetManyResponse,
   OrganisationGetMinimalResponse,
 } from './organisation.model';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
+import { UserMinimalService } from '../users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,9 @@ export class OrganisationService {
   URL = 'organization';
   URLMINIMAL ='organization/minimal'
 
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService) { }
 
   post(body: Organisation): Observable<OrganisationResponse> {
     return this.restService.post(this.URL, body);
@@ -29,7 +32,16 @@ export class OrganisationService {
   }
 
   getOne(id: number): Observable<OrganisationResponse> {
-    return this.restService.get(this.URL, {}, id);
+    return this.restService.get(this.URL, {}, id)
+      .pipe(
+        map(
+          (response: OrganisationResponse) => {
+            response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+            response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+            return response
+          }
+        )
+      );
   }
 
   getMinimal(): Observable<OrganisationGetMinimalResponse> {

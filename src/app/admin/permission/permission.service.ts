@@ -6,13 +6,17 @@ import {
   PermissionResponse,
   PermissionRequest,
 } from './permission.model';
+import { map } from 'rxjs/operators';
+import { UserMinimalService } from '../users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PermissionService {
   endpoint = 'permission';
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService) { }
 
   createPermission(body: PermissionRequest): Observable<PermissionResponse> {
     return this.restService.post(this.endpoint, body, { observe: 'response' });
@@ -28,7 +32,15 @@ export class PermissionService {
   }
 
   getPermission(id: number): Observable<PermissionResponse> {
-    return this.restService.get(this.endpoint, {}, id);
+    return this.restService.get(this.endpoint, {}, id).pipe(
+      map(
+        (response: PermissionResponse) => {
+          response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+          response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+          return response;
+        }
+      )
+    );
   }
 
   getPermissions(): Observable<PermissionGetManyResponse> {

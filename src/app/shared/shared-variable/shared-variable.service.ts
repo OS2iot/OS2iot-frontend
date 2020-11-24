@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Organisation, OrganisationGetMinimalResponse } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { PermissionType } from '@app/admin/permission/permission.model';
+import { UserMinimal, UserMinimalResponse } from '@app/admin/users/user-minimal.model';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -13,12 +15,14 @@ export class SharedVariableService {
 
   constructor(
     private authService: AuthService,
-    private organisationService: OrganisationService) {
+    private organisationService: OrganisationService,
+    private userMinimalService: UserMinimalService) {
       this.routerInfo = new BehaviorSubject<number>(0);
   }
   private selectedOrganisationId: number;
   private routerInfo: BehaviorSubject<number>;
   private organizationInfo: Organisation[];
+  private userMinimalList: UserMinimal[];
 
   getValue(): Observable<number> {
     return this.routerInfo.asObservable();

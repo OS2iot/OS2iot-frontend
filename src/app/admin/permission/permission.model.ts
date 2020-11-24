@@ -22,6 +22,8 @@ export interface PermissionResponse {
   updatedAt: Date;
   createdBy: number;
   updatedBy: number;
+  createdByName: string;
+  updatedByName: string;
   automaticallyAddNewApplications: boolean;
 }
 

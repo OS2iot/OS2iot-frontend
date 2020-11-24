@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { LoggedInService } from '@shared/services/loggedin.service';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Component({
   selector: 'app-auth',
@@ -27,7 +28,8 @@ export class AuthComponent implements OnInit {
     private router: Router,
     public translate: TranslateService,
     private loggedinService: LoggedInService,
-    private sharedVariableService: SharedVariableService
+    private sharedVariableService: SharedVariableService,
+    private userMinimalService: UserMinimalService
   ) {}
 
   ngOnInit(): void {}
@@ -44,6 +46,7 @@ export class AuthComponent implements OnInit {
   async success() {
     await this.sharedVariableService.setUserInfo();
     await this.sharedVariableService.setOrganizationInfo();
+    this.userMinimalService.setUserMinimalList();
     this.isLoading = false;
     this.loggedinService.emitChange(true);
     this.router.navigateByUrl('/dashboard');

@@ -12,6 +12,8 @@ export interface OrganisationResponse {
   updatedAt: string;
   createdBy: number;
   updatedBy: number;
+  createdByName: string;
+  updatedByName: string;
   name: string;
 
   payloadDecoders: PayloadDecoder[];

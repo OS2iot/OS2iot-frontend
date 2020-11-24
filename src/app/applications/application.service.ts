@@ -3,6 +3,8 @@ import { Application, ApplicationData } from '@applications/application.model';
 import { RestService } from '../shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { SortDir, SortCol } from '@shared/models/sort.model';
+import { map } from 'rxjs/operators';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 
 interface GetApplicationParameters {
@@ -17,7 +19,9 @@ interface GetApplicationParameters {
     providedIn: 'root',
 })
 export class ApplicationService {
-    constructor(private restService: RestService) { }
+    constructor(
+        private restService: RestService,
+        private userMinimalService: UserMinimalService) { }
 
     createApplication(body: any): Observable<ApplicationData> {
 
@@ -29,8 +33,18 @@ export class ApplicationService {
     }
 
     getApplication(id: number): Observable<Application> {
-        return this.restService.get('application', {}, id);
+        return this.restService.get('application', {}, id)
+            .pipe(
+                map(
+                    (response: Application) => {
+                        response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+                        response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+                        return response;
+                    }
+                )
+            );
     }
+
 
     getApplications(
         limit: number,

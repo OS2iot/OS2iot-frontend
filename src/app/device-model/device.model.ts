@@ -16,6 +16,8 @@ export class DeviceModelBody {
     updatedAt: string;
     createdBy: number;
     updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
 
     constructor(
         id?: string,
@@ -32,7 +34,9 @@ export class DeviceModelBody {
         createdAt?: string,
         updatedAt?: string,
         createdBy?: number,
-        updatedBy?: number)
+        updatedBy?: number,
+        createdByName?: string,
+        updatedByName?: string)
         {
             this.id = id;
             this.name = name;
@@ -50,6 +54,8 @@ export class DeviceModelBody {
             this.updatedAt = updatedAt;
             this.createdBy = createdBy;
             this.updatedBy = updatedBy;
+            this.createdByName = createdByName,
+            this.updatedByName = updatedByName
         }
 }
 export class DeviceModel {

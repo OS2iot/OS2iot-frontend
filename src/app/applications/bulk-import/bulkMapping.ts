@@ -68,6 +68,8 @@ export class BulkMapping {
             sigfoxSettings: undefined,
             createdBy: undefined,
             updatedBy: undefined,
+            updatedByName: undefined,
+            createdByName: undefined
         };
     }
 }

@@ -22,6 +22,8 @@ export class IotDevice {
     updatedAt: Date;
     createdBy: number;
     updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
     applicationId: number;
     longitude = 0;
     latitude = 0;

@@ -27,6 +27,8 @@ export interface SigfoxDevice {
     updatedAt: string;
     createdBy: number;
     updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
 }
 
 export interface Token {

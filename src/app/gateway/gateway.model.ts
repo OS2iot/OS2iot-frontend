@@ -17,6 +17,8 @@ export class Gateway extends EditPermission {
     updatedAt: string;
     createdBy: number;
     updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
     public internalOrganizationName?: string;
     map(): Map<string, number> {
         throw new Error('Method not implemented.');

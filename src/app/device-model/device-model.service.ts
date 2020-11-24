@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DeviceModel, DeviceModelBody, DeviceModelRequest } from './device.model';
-import { DeviceCategory } from './Enums/device-category.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,8 @@ export class DeviceModelService {
 
   constructor(
     private restService: RestService,
-    private sharedVariable: SharedVariableService) { }
+    private sharedVariable: SharedVariableService,
+    private userMinimalService: UserMinimalService) { }
 
   create(deviceModel: DeviceModel): Observable<any> {
     this.trimModel(deviceModel.body);
@@ -48,7 +49,13 @@ export class DeviceModelService {
               response.body.controlledProperty,
               response.body.supportedUnits,
               response.body.function,
-              response.body.supportedProtocol
+              response.body.supportedProtocol,
+              response.body.createdAt,
+              response.body.updatedAt,
+              response.body.createdBy,
+              response.body.updatedBy,
+              this.userMinimalService.getUserNameFrom(response.body.createdBy),
+              this.userMinimalService.getUserNameFrom(response.body.updatedBy)
             )
           )
         )

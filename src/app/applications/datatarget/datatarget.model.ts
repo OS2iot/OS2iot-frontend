@@ -16,6 +16,8 @@ export class Datatarget {
     updatedAt: string;
     createdBy: number;
     updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
 }
 
 export class DatatargetData {

@@ -11,6 +11,8 @@ export class Application {
   public belongsTo: Organisation;
   public createdBy: number;
   public updatedBy: number;
+  public createdByName: string;
+  public updatedByName: string;
 }
 
 export class ApplicationRequest {

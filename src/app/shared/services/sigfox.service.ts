@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
 import { SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.model';
+import { map } from 'rxjs/operators';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class SigfoxService {
   private SIGFOXGROUPURL = 'sigfox-group';
   private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
 
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService) { }
 
   // Contract
   public getContracts(groupId: number): Observable<any> {
@@ -50,7 +54,15 @@ export class SigfoxService {
   // Device-type
   public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
     const body = { groupId };
-    return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);
+    return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId).pipe(
+      map(
+        (response) => {
+          response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+          response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+          return response;
+        }
+      )
+    );
   }
 
   public getDeviceTypes(groupId: number): Observable<SigfoxDeviceTypeResponse> {

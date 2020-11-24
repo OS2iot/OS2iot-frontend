@@ -34,6 +34,8 @@ export class DeviceProfile extends EditPermission {
     public updatedAt: string;
     public createdBy: number;
     public updatedBy: number;
+    public createdByName: string;
+    public updatedByName: string;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];

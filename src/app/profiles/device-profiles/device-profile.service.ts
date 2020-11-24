@@ -1,5 +1,6 @@
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
@@ -13,7 +14,10 @@ import { DeviceProfile, DeviceProfileRequest, DeviceProfileResponse, DeviceProfi
 export class DeviceProfileService {
     URL = 'chirpstack/device-profiles';
 
-    constructor(private restService: RestService, private sharedVariableService: SharedVariableService) { }
+    constructor(
+      private restService: RestService, 
+      private sharedVariableService: SharedVariableService,
+      private userMinimalService: UserMinimalService) { }
 
     post(body: DeviceProfile): Observable<DeviceProfileResponseOne> {
         const requestBody = new DeviceProfileRequest(body, this.sharedVariableService.getSelectedOrganisationId());
@@ -33,6 +37,8 @@ export class DeviceProfileService {
                   .find( org => org.id === response.deviceProfile.internalOrganizationId)?.name;
                 response.deviceProfile.createdAt= response.createdAt;
                 response.deviceProfile.updatedAt = response.updatedAt
+                response.deviceProfile.createdByName = this.userMinimalService.getUserNameFrom(response.deviceProfile.createdBy);
+                response.deviceProfile.updatedByName = this.userMinimalService.getUserNameFrom(response.deviceProfile.updatedBy);
                 return response;
               }
             )

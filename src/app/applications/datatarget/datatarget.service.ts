@@ -6,6 +6,7 @@ import { DatatargetData, Datatarget } from './datatarget.model';
 import { map } from 'rxjs/operators';
 import { OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class DatatargetService {
 
   constructor(
     private restService: RestService,
-    private sharedVariableService: SharedVariableService) { }
+    private sharedVariableService: SharedVariableService,
+    private userMinimalService: UserMinimalService) { }
 
   get(id: number): Observable<Datatarget> {
     return this.restService.get(this.dataTargetURL, null, id).pipe(
@@ -89,6 +91,8 @@ export class DatatargetService {
       updatedAt: dataTargetResponse.updatedAt,
       createdBy: dataTargetResponse.createdBy,
       updatedBy: dataTargetResponse.updatedBy,
+      createdByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.createdBy),
+      updatedByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.updatedBy),
     };
     model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(',');
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
