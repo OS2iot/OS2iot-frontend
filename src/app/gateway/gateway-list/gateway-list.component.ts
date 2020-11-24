@@ -61,10 +61,10 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   public filterGateway(event: number) {
     this.selectedOrg = event;
-    if (event === null) {
-      this.getGateways();
-    } else {
+    if (event) {
       this.getGatewayByOrgId(event);
+    } else {
+      this.getGateways();
     }
   }
 
@@ -109,7 +109,11 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   showMap(event: any) {
     if (event.index === 1) {
-      this.getGateways();
+      if (this.selectedOrg) {
+        this.getGatewayByOrgId(this.selectedOrg);
+      } else {
+        this.getGateways();
+      }
       this.showmap = true;
     }
   }
