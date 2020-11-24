@@ -11,4 +11,8 @@ export class DatatargetResponse {
     url: string;
     authorizationHeader: string;
     openDataDkDataset: OpenDataDkDataset;
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
 }

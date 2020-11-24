@@ -12,6 +12,10 @@ export class Datatarget {
     authorizationHeader: string;
     setToOpendataDk = false;
     openDataDkDataset: OpenDataDkDataset = new OpenDataDkDataset();
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
 }
 
 export class DatatargetData {

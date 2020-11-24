@@ -45,6 +45,8 @@ export class IoTDeviceService {
                         latestReceivedMessage: response.latestReceivedMessage,
                         lorawanSettings: response.lorawanSettings,
                         sigfoxSettings: response.sigfoxSettings,
+                        createdBy: response.createdBy,
+                        updatedBy: response.updatedBy,
                     };
                 }
             )

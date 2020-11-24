@@ -30,6 +30,10 @@ export class DeviceProfile extends EditPermission {
     public organizationID?: number;
     public internalOrganizationId: number;
     public internalOrganizationName?: string;
+    public createdAt: string;
+    public updatedAt: string;
+    public createdBy: number;
+    public updatedBy: number;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];

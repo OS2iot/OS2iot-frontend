@@ -4,18 +4,10 @@ import { Application } from '../../applications/application.model';
 
 export class PermissionRequest {
   level: PermissionType;
-  // | PermissionType.OrganizationAdmin
-  // | PermissionType.Write
-  // | PermissionType.Read;
-
   name: string;
-
   organizationId: number;
-
   userIds: number[];
-
   applicationIds: number[];
-  
   automaticallyAddNewApplications = true;
 }
 
@@ -28,6 +20,8 @@ export interface PermissionResponse {
   id: number;
   createdAt: Date;
   updatedAt: Date;
+  createdBy: number;
+  updatedBy: number;
   automaticallyAddNewApplications: boolean;
 }
 

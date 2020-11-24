@@ -10,6 +10,8 @@ export interface OrganisationResponse {
   id: number;
   createdAt: string;
   updatedAt: string;
+  createdBy: number;
+  updatedBy: number;
   name: string;
 
   payloadDecoders: PayloadDecoder[];

@@ -9,6 +9,8 @@ export class Application {
   public description: string;
   public iotDevices?: IotDevice[];
   public belongsTo: Organisation;
+  public createdBy: number;
+  public updatedBy: number;
 }
 
 export class ApplicationRequest {

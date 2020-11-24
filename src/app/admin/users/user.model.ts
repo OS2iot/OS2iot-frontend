@@ -13,6 +13,8 @@ export interface UserResponse {
     id: number;
     createdAt: string;
     updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
     name: string;
     nameId: string;
     email: string;

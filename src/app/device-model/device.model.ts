@@ -1,3 +1,4 @@
+
 export class DeviceModelBody {
     id?: string;
     name?: string;
@@ -11,6 +12,10 @@ export class DeviceModelBody {
     supportedUnits?: string[];
     function?: string[];
     supportedProtocol?: string[];
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
 
     constructor(
         id?: string,
@@ -23,7 +28,11 @@ export class DeviceModelBody {
         controlledProperty?: string[],
         supportedUnits?: string[],
         sensorFunction?: string[],
-        supportedProtocol?: string[])
+        supportedProtocol?: string[],
+        createdAt?: string,
+        updatedAt?: string,
+        createdBy?: number,
+        updatedBy?: number)
         {
             this.id = id;
             this.name = name;
@@ -37,7 +46,10 @@ export class DeviceModelBody {
             this.supportedUnits = supportedUnits;
             this.function = sensorFunction;
             this.supportedProtocol = supportedProtocol;
-
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+            this.createdBy = createdBy;
+            this.updatedBy = updatedBy;
         }
 }
 export class DeviceModel {

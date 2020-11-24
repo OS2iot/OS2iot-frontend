@@ -85,6 +85,10 @@ export class DatatargetService {
       applicationId: dataTargetResponse.application.id,
       setToOpendataDk: dataTargetResponse?.openDataDkDataset ? true : false,
       openDataDkDataset: dataTargetResponse?.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
+      createdAt: dataTargetResponse.createdAt,
+      updatedAt: dataTargetResponse.updatedAt,
+      createdBy: dataTargetResponse.createdBy,
+      updatedBy: dataTargetResponse.updatedBy,
     };
     model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(',');
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
