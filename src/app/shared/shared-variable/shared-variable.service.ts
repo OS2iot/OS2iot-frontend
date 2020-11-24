@@ -95,9 +95,9 @@ export class SharedVariableService {
     );
   }
 
-  getSelectedOrganisationId() {
+  getSelectedOrganisationId(): number {
     if (this.selectedOrganisationId != null) {
-      return this.selectedOrganisationId;
+      return +this.selectedOrganisationId;
     }
     return +localStorage.getItem('selected_organisation');
   }
