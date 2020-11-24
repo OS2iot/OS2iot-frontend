@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy, AfterViewChecked, DoCheck } from '@angular/core';
-
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
@@ -44,17 +42,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   changeMarkers() {
-    if (this.markers) {
-      this.markers.clearLayers();
-    }
-    if (this.coordinateList) {
-      this.placeMarkers();
-    }
+    this.markers.clearLayers();
+    this.placeMarkers();
   }
 
   ngAfterViewInit(): void {
     this.initMap();
-    //this.placeMarkers();
+    this.placeMarkers();
   }
 
   ngOnDestroy(): void {

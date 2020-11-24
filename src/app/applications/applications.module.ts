@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ApplicationsComponent } from './applications.component';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
@@ -17,7 +16,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -37,7 +35,6 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
     ],
     imports: [
         CommonModule,
-        TopBarModule,
         RouterModule,
         TranslateModule,
         IotDevicesModule,

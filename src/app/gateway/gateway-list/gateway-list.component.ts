@@ -4,10 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
 import * as moment from 'moment';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -59,10 +57,10 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges() {
   }
 
-  public filterGateway(event: number) {
+  public filterGatewayByOrgId(event: number) {
     this.selectedOrg = event;
     if (event) {
-      this.getGatewayByOrgId(event);
+      this.getGateway(event);
     } else {
       this.getGateways();
     }
@@ -87,7 +85,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  private getGatewayByOrgId(orgId: number = null): void {
+  private getGateway(orgId: number): void {
     this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
       {
         limit: this.pageLimit,
@@ -110,7 +108,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   showMap(event: any) {
     if (event.index === 1) {
       if (this.selectedOrg) {
-        this.getGatewayByOrgId(this.selectedOrg);
+        this.getGateway(this.selectedOrg);
       } else {
         this.getGateways();
       }

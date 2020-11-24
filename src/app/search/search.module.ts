@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { SearchTableComponent } from './search-table/search-table.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { SharedModule } from '@shared/shared.module';
@@ -18,7 +17,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TranslateModule,
     RouterModule,
     FormsModule,
-    TopBarModule,
     ReactiveFormsModule,
     FormModule,
     NGMaterialModule,

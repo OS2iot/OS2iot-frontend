@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { PayloadDecoderRoutingModule } from './payload-decoder-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { PayloadDecoderDetailComponent } from './payload-decoder-detail/payload-decoder-detail.component';
 import { PayloadDecoderEditComponent } from './payload-decoder-edit/payload-decoder-edit.component';
 import { PayloadDecoderListComponent } from './payload-decoder-list/payload-decoder-list.component';
@@ -37,7 +36,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TranslateModule,
     RouterModule,
     FormsModule,
-    TopBarModule,
     PayloadDecoderRoutingModule,
     ReactiveFormsModule,
     FormModule,

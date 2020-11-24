@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { DownlinkComponent } from './iot-device-detail/downlink/downlink.component';
 import { IotDeviceDetailGenericComponent } from './iot-device-detail/iot-device-detail-generic/iot-device-detail-generic.component';
@@ -36,7 +35,6 @@ import { SharedModule } from '@shared/shared.module';
     imports: [
         SharedModule,
         CommonModule,
-        TopBarModule,
         RouterModule,
         TranslateModule,
         FormModule,

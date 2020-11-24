@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { OpendatadkComponent } from './opendatadk/opendatadk.component';
 import { OpendatadkEditComponent } from './opendatadk/opendatadk-edit/opendatadk-edit.component';
 import { OpendatadkDetailComponent } from './opendatadk/opendatadk-detail/opendatadk-detail.component';
@@ -27,7 +26,6 @@ import { SharedModule } from '@shared/shared.module';
     OpendatadkDetailComponent],
   imports: [
     CommonModule,
-    TopBarModule,
     RouterModule,
     TranslateModule,
     FormModule,

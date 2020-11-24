@@ -11,6 +11,11 @@ import { MapComponent } from './components/map/map.component';
 import { NGMaterialModule } from './Modules/materiale.module';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { OpendatadkDialogComponent } from './components/opendatadk-dialog/opendatadk-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +24,18 @@ import { OpendatadkDialogComponent } from './components/opendatadk-dialog/openda
     BatteriStatusComponent,
     MapComponent,
     DeleteDialogComponent,
-    OpendatadkDialogComponent
+    OpendatadkDialogComponent,
+    TopBarComponent,
+    TopBarTableComponent,
   ],
   imports: [
     DirectivesModule,
     CommonModule,
+    TranslateModule,
+    RouterModule,
+    FormsModule,
     NGMaterialModule,
-    TranslateModule
+    FontAwesomeModule
   ],
   exports: [
     AlertComponent,
@@ -34,7 +44,9 @@ import { OpendatadkDialogComponent } from './components/opendatadk-dialog/openda
     BatteriStatusComponent,
     MapComponent,
     DeleteDialogComponent,
-    OpendatadkDialogComponent
+    OpendatadkDialogComponent,
+    TopBarComponent,
+    TopBarTableComponent
   ],
 })
 export class SharedModule { }

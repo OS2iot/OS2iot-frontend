@@ -1,15 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Sort } from '@shared/models/sort.model';
 import { Location } from '@angular/common';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-sub-bar',
-  templateUrl: './sub-bar.component.html',
-  styleUrls: ['./sub-bar.component.scss']
+  selector: 'app-top-bar-table',
+  templateUrl: './top-bar-table.component.html',
+  styleUrls: ['./top-bar-table.component.scss']
 })
-export class SubBarComponent implements OnInit {
+export class TopBarTableComponent implements OnInit {
   @Input() title: string;
   @Input() ctaLabelPrimary: string;
   @Input() ctaRouterLinkPrimary: string;
@@ -46,4 +44,5 @@ export class SubBarComponent implements OnInit {
   setOptionToParent() {
     this.updateSelectedOpt.emit(this.selectedOpt);
   }
+
 }

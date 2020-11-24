@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input, ViewChild, AfterViewInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ViewChild, EventEmitter } from '@angular/core';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Gateway } from '../gateway.model';
@@ -8,10 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
-import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
 import { Output } from '@angular/core';
-import { createKeywordTypeNode } from 'typescript';
 
 
 @Component({

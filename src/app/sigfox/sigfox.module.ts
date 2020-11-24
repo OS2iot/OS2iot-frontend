@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SigfoxRoutingModule } from './sigfox-routing.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { FormsModule } from '@angular/forms';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
@@ -31,7 +30,6 @@ import { SigfoxGroupsListItemComponent } from './sigfox-groups-list/sigfox-group
     SigfoxRoutingModule,
     FormsModule,
     FormModule,
-    TopBarModule,
     NGMaterialModule,
     TranslateModule,
     SharedModule,

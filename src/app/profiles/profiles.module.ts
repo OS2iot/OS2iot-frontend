@@ -8,7 +8,6 @@ import { SharedModule } from '@shared/shared.module';
 import { DeviceProfilesModule } from './device-profiles/device-profiles.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
     DeviceProfilesModule,
     ProfilesRoutingModule,
     RouterModule,
-    TopBarModule,
     SharedModule,
     FormModule,
     TranslateModule
