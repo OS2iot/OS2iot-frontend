@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubBarComponent } from './sub-bar.component';
+import { TopBarTableComponent } from './top-bar-table.component';
 
-describe('SubBarComponent', () => {
-  let component: SubBarComponent;
-  let fixture: ComponentFixture<SubBarComponent>;
+describe('TopBarTableComponent', () => {
+  let component: TopBarTableComponent;
+  let fixture: ComponentFixture<TopBarTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubBarComponent ]
+      declarations: [ TopBarTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubBarComponent);
+    fixture = TestBed.createComponent(TopBarTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

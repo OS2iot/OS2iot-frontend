@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { Gateway, GatewayResponse } from '../gateway.model';
@@ -36,7 +37,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private router: Router,
     private loraGatewayService: ChirpstackGatewayService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private scrollToTopService: ScrollToTopService
   ) { }
 
   ngOnInit(): void {
@@ -65,19 +67,18 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
   getCoordinates() {
     return {
-        longitude: this.gateway.location.longitude,
-        latitude: this.gateway.location.latitude,
-        draggable: true,
-        useGeolocation: !this.editMode,
-        editMode: this.editMode
+      longitude: this.gateway.location.longitude,
+      latitude: this.gateway.location.latitude,
+      draggable: true,
+      useGeolocation: !this.editMode,
+      editMode: this.editMode
     };
-}
+  }
 
   createGateway(): void {
     this.loraGatewayService.post(this.gateway)
       .subscribe(
         (response) => {
-          console.log(response);
           this.routeBack();
         },
         (error: HttpErrorResponse) => {
@@ -133,6 +134,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
+    this.scrollToTopService.scrollToTop();
   }
 
 }

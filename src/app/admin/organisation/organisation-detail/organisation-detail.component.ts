@@ -44,7 +44,6 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
     private applicationService: ApplicationService,
-    private globalService: SharedVariableService,
     private permissionsService: PermissionService,
     private deleteDialogService: DeleteDialogService,
     private location: Location
