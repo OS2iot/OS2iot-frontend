@@ -25,7 +25,7 @@ import { BulkImportComponent } from './bulk-import/bulk-import.component';
         ApplicationEditComponent,
         ApplicationsListComponent,
         ApplicationsTableComponent,
-        BulkImportComponent
+        BulkImportComponent,
     ],
     exports: [
         ApplicaitonsRoutingModule,

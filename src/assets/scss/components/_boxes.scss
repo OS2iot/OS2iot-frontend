@@ -1,3 +1,17 @@
 .jumbotron {
+  @extend .my-4;
+  @extend .p-3;
+  @extend .m-md-4;
   background-color: white;
+  width: 100%;
+  &--m-right{
+    @extend .mr-md-2;
+  }
+  &--m-left{
+    @extend .ml-md-2;
+  }
+}
+
+.page{
+  @extend .m-md-4;
 }

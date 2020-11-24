@@ -1,6 +1,6 @@
 <app-top-bar *ngIf="permission" [data]="permission" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
-<div class=" jumbotron m-md-4 p-md-3" *ngIf="permission">
+<div class=" jumbotron" *ngIf="permission">
     <div class="row">
         <div class="col-xs-12">
             <div class="float-left">
@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="jumbotron m-md-4 p-md-3">
+<div class="jumbotron">
     <h4 class="">
         {{ 'PERMISSION.DETAIL.USERS' | translate }}
     </h4>

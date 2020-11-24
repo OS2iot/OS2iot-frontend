@@ -15,6 +15,9 @@ import { SigfoxDeviceEditComponent } from './iot-device-edit/sigfox-device-edit/
 import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.component';
 import { DownlinkDialogComponent } from './iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
 import { SharedModule } from '@shared/shared.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { DeviceModelComponent } from './iot-device-detail/device-model/device-model.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
     declarations: [
@@ -26,7 +29,8 @@ import { SharedModule } from '@shared/shared.module';
         IotDeviceDetailLorawanComponent,
         IotDeviceDetailSigfoxComponent,
         DownlinkComponent,
-        DownlinkDialogComponent
+        DownlinkDialogComponent,
+        DeviceModelComponent
     ],
     exports: [
         IotDevicesTableComponent,
@@ -40,6 +44,8 @@ import { SharedModule } from '@shared/shared.module';
         FormModule,
         NGMaterialModule,
         FormsModule,
+        PipesModule,
+        MonacoEditorModule,
     ],
 })
 export class IotDevicesModule { }

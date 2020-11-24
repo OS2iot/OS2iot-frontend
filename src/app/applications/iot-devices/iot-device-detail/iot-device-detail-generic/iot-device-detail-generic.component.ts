@@ -8,8 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { Subscription } from 'rxjs';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { DeviceModelService } from '@app/device-model/device-model.service';
-import { DeviceModel } from '@app/device-model/device.model';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
@@ -24,8 +22,6 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
   private deleteDialogSubscription: Subscription;
-  public deviceModel: string;
-
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
   constructor(
@@ -34,7 +30,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
     private location: Location,
     private deleteDialogService: DeleteDialogService,
     private dialog: MatDialog,
-    private deviceModelService: DeviceModelService
+
   ) { }
 
   ngOnInit(): void {
@@ -42,19 +38,8 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
 
   ngOnChanges(): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
-    if (this.device.deviceModelId) {
-      this.getDeviceModel(this.device.deviceModelId);
-    }
-  }
 
-  getDeviceModel(id: number) {
-    this.deviceModelService.get(id).subscribe(
-      (response) => {
-        this.deviceModel = JSON.stringify(response.body, null, 4);
-      }
-    );
   }
-
 
   clickDelete() {
     if (this.device.type == DeviceType.SIGFOX) {
@@ -64,8 +49,8 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
         (response) => {
           if (response) {
             this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(
-                (response) => {
-                  this.routeBack();
+              (response) => {
+                this.routeBack();
               }
             );
           } else {
@@ -91,19 +76,19 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   }
   getCoordinates() {
     return {
-        longitude: this.longitude,
-        latitude: this.latitude,
-        draggable: false,
-        editEnabled: false,
-        useGeolocation: false
+      longitude: this.longitude,
+      latitude: this.latitude,
+      draggable: false,
+      editEnabled: false,
+      useGeolocation: false
     };
-}
+  }
 
   getBatteryProcentage(): number {
     if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
       return null;
     }
-    return Math.round(this.device?.lorawanSettings?.deviceStatusBattery) 
+    return Math.round(this.device?.lorawanSettings?.deviceStatusBattery);
   }
 
   ngOnDestroy(): void {

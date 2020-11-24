@@ -1,6 +1,6 @@
 <app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
-<div class=" jumbotron m-md-4 p-md-3" *ngIf="organisation">
+<div class=" jumbotron" *ngIf="organisation">
     <div class="row">
         <div class="col-xs-12">
             <div class="float-left">
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div class="jumbotron m-md-4 p-md-3">
+<div class="jumbotron">
     <h4 class="">
         {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
     </h4>
@@ -36,7 +36,7 @@
     </app-applications-table>
 </div>
 
-<div class="jumbotron m-md-4 p-md-3">
+<div class="jumbotron">
     <h4 class="">
         {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
     </h4>

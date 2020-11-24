@@ -1,6 +1,6 @@
 <app-top-bar *ngIf="gateway" [data]="gateway" [backButton]="backButton" [subPage]="true"></app-top-bar>
 
-<div class=" jumbotron m-md-4 p-md-3" *ngIf="gateway">
+<div class=" jumbotron" *ngIf="gateway">
     <div class="row">
         <div class="col-md-8">
             <h4>{{ 'GATEWAY.ID' | translate }}</h4>
@@ -61,7 +61,7 @@
     <h4>{{ 'GATEWAY.TAGS' | translate }}</h4>
     <p class="mb-5">{{gateway.tagsString}}</p>
 </div>
-<div class=" jumbotron m-md-4 p-md-3">
+<div class=" jumbotron">
     <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">

@@ -1,0 +1,4 @@
+<h3>{{ 'IOTDEVICE.DEVICEMODEL' | translate }}</h3>
+<ngx-monaco-editor *ngIf="deviceModel" class="middle-editor" [options]="editorJsonOutpuOptions"
+    [(ngModel)]="deviceModel" [ngModelOptions]="{standalone: true}">
+</ngx-monaco-editor>

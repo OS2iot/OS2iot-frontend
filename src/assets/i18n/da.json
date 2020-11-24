@@ -533,7 +533,8 @@
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
     "DEVICEMODEL": "Device Model",
-    "DETAIL-TAB": "Detail",
+    "DETAIL": "Detaljer",
+    "DETAIL-TAB": "Datapakke",
     "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
@@ -542,7 +543,7 @@
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
     "COMMENTONLOCATION": "Kommentar om placering",
-    "COMMENT": "Kommentar",
+    "COMMENT": "Kommentar: ",
     "NOCOMMENT": "Ingen kommentar er angivet.",
     "NOLOCATION": "Ingen placering er angivet",
     "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",

@@ -1,6 +1,6 @@
 <app-top-bar [backButton]="backButton" [title]="title" [subPage]="true"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
-  <div *ngIf="errorMessages" class="jumbotron m-md-4 p-md-3">
+  <div *ngIf="errorMessages" class="jumbotron">
     <div class="error-messages p-3">
       <ul class="mb-0">
         <li *ngFor="let error of errorMessages">
@@ -9,7 +9,7 @@
       </ul>
     </div>
   </div>
-  <div class="jumbotron m-md-4 p-md-3">
+  <div class="jumbotron">
     <div class="row">
       <div class="col-6">
         <div class="form-group">

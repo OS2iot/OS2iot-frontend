@@ -2,6 +2,6 @@
     [ctaLabel]="'USERS.CREATE' | translate" [ctaRouterLink]="'new-user'" (updatePageLimit)="updatePageLimit($event)"
     (selectedSortChange)="changeSort($event)"></app-top-bar>
 
-<div class="m-md-4 p-md-3">
+<div class="page">
     <app-user-table [users]="users" [isLoadingResults]="isLoadingResults"></app-user-table>
 </div>
