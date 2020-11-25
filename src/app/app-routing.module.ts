@@ -5,10 +5,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
     { path: 'auth', component: AuthComponent },
+    { path: 'not-authorized', component: NotAuthorizedComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'applications', loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule), canActivate: [AuthGuard] },
     { path: 'gateways', loadChildren: () => import('./gateway/gateway.module').then(m => m.GatewayModule), canActivate: [AuthGuard] },

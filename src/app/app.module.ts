@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,7 +31,7 @@ export function tokenGetter() {
   }
 
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent],
+    declarations: [AppComponent, ErrorPageComponent, NotAuthorizedComponent],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,

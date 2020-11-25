@@ -22,6 +22,11 @@ export class DashboardComponent implements OnInit {
         this.authService.setSession(jwt);
         // Clear the URL from the parameter
         this.router.navigate(['/dashboard']);
+      } else {
+        const error = params['error'];
+        if (error) {
+          this.router.navigate(['/not-authorized']);
+        }
       }
       await this.sharedVariableService.setUserInfo();
       await this.sharedVariableService.setOrganizationInfo();
