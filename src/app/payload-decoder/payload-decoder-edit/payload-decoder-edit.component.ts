@@ -127,7 +127,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   testPayloadFunction() {
-    this.errorMessages = !this.errorMessages;
+    this.errorMessages = null
     this.testPayloadDecoder.code = this.payloadDecoderBody;
     try {
       this.testPayloadDecoder.iotDeviceJsonString = JSON.parse(this.metadata);
@@ -263,8 +263,6 @@ export class PayloadDecoderEditComponent implements OnInit {
     }
 
   }
-
-
 
   private showError(error: HttpErrorResponse) {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
