@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { BackButton } from '@shared/models/back-button.model';
-import { PayloadDecoderBodyResponse } from '@payload-decoder/payload-decoder.model';
+import { PayloadDecoder, PayloadDecoderBodyResponse } from '@payload-decoder/payload-decoder.model';
 import { MeService } from '@shared/services/me.service';
 
 
@@ -15,7 +15,7 @@ import { MeService } from '@shared/services/me.service';
 })
 export class PayloadDecoderDetailComponent implements OnInit {
   @Output() deletePayloadDecoder = new EventEmitter();
-  payloadDecoder: PayloadDecoderBodyResponse;
+  payloadDecoder: PayloadDecoder;
   public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
   id: number;
   subscription: Subscription;
@@ -43,7 +43,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
   }
 
   canEdit() {
-    this.payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(this.payloadDecoder?.organization?.id);
+    this.payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(this.payloadDecoder?.organizationId);
   }
 
   private getPayloadDecoder(id: number) {
@@ -64,6 +64,4 @@ export class PayloadDecoderDetailComponent implements OnInit {
     });
     this.router.navigate(['payload-decoder']);
   }
-
-
 }

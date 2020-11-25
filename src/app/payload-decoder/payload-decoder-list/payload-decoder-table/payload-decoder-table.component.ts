@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, OnChanges, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
-import { PayloadDecoderBodyResponse } from 'src/app/payload-decoder/payload-decoder.model';
+import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { Subscription } from 'rxjs';
 import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,9 +21,9 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'payload-decoder-id', 'organizationID', 'menu'];
   public pageSize = environment.tablePageSize;
-  public dataSource = new MatTableDataSource<PayloadDecoderBodyResponse>();
-  public payloadDecoders: PayloadDecoderBodyResponse[];
-  payloadDecoder: PayloadDecoderBodyResponse;
+  public dataSource = new MatTableDataSource<PayloadDecoder>();
+  public payloadDecoders: PayloadDecoder[];
+  payloadDecoder: PayloadDecoder;
   resultsLength = 0;
   isLoadingResults = true;
   deletePayloadDecoder = new EventEmitter();
@@ -50,9 +50,9 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
     this.subscription = this.payloadDecoderService.getMultiple()
       .subscribe(
         (response) => {
-          this.payloadDecoders = response.data;
+          this.payloadDecoders = response;
           this.setCanEdit();
-          this.dataSource = new MatTableDataSource<PayloadDecoderBodyResponse>(this.payloadDecoders);
+          this.dataSource = new MatTableDataSource<PayloadDecoder>(this.payloadDecoders);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.dataSource.sortingDataAccessor = tableSorter;
@@ -63,10 +63,10 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   getPayloadDecodersWith(orgId: number) {
     this.subscription = this.payloadDecoderService.getMultiple(orgId)
       .subscribe(
-        (response) => {
-          this.payloadDecoders = response.data;
+        (response: PayloadDecoder[]) => {
+          this.payloadDecoders = response;
           this.setCanEdit();
-          this.dataSource = new MatTableDataSource<PayloadDecoderBodyResponse>(this.payloadDecoders);
+          this.dataSource = new MatTableDataSource<PayloadDecoder>(this.payloadDecoders);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.dataSource.sortingDataAccessor = tableSorter;
@@ -77,7 +77,7 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   setCanEdit() {
     this.payloadDecoders.forEach(
       (payloadDecoder) => {
-        payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(payloadDecoder.organization?.id);
+        payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(payloadDecoder.organizationId);
       }
     );
   }
