@@ -10,6 +10,7 @@ import { DeviceModelEditComponent } from './device-model-edit/device-model-edit.
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@shared/components/forms/form.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormModule } from '@shared/components/forms/form.module';
     SharedModule,
     FormsModule,
     FormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class DeviceModelModule { }

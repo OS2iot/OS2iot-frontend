@@ -12,12 +12,7 @@ export class DeviceModelBody {
     supportedUnits?: string[];
     function?: string[];
     supportedProtocol?: string[];
-    createdAt: string;
-    updatedAt: string;
-    createdBy: number;
-    updatedBy: number;
-    createdByName: string;
-    updatedByName: string;
+
 
     constructor(
         id?: string,
@@ -31,40 +26,48 @@ export class DeviceModelBody {
         supportedUnits?: string[],
         sensorFunction?: string[],
         supportedProtocol?: string[],
+    ) {
+        this.id = id;
+        this.name = name;
+        this.type = 'DeviceModel';
+        this.brandName = brandName;
+        this.modelName = modelName;
+        this.manufacturerName = manufacturerName;
+        this.category = category;
+        this.energyLimitationClass = energyLimitationClass;
+        this.controlledProperty = controlledProperty;
+        this.supportedUnits = supportedUnits;
+        this.function = sensorFunction;
+        this.supportedProtocol = supportedProtocol;
+
+    }
+}
+export class DeviceModel {
+    id: number;
+    body: DeviceModelBody = new DeviceModelBody();
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
+
+    constructor(id?: number,
+        body: DeviceModelBody = new DeviceModelBody(),
         createdAt?: string,
         updatedAt?: string,
         createdBy?: number,
         updatedBy?: number,
         createdByName?: string,
-        updatedByName?: string)
-        {
-            this.id = id;
-            this.name = name;
-            this.type = 'DeviceModel';
-            this.brandName = brandName;
-            this.modelName = modelName;
-            this.manufacturerName = manufacturerName;
-            this.category = category;
-            this.energyLimitationClass = energyLimitationClass;
-            this.controlledProperty = controlledProperty;
-            this.supportedUnits = supportedUnits;
-            this.function = sensorFunction;
-            this.supportedProtocol = supportedProtocol;
-            this.createdAt = createdAt;
-            this.updatedAt = updatedAt;
-            this.createdBy = createdBy;
-            this.updatedBy = updatedBy;
-            this.createdByName = createdByName,
-            this.updatedByName = updatedByName
-        }
-}
-export class DeviceModel {
-    id: number;
-    body: DeviceModelBody = new DeviceModelBody();
-
-    constructor(id?: number, body: DeviceModelBody = new DeviceModelBody()) {
+        updatedByName?: string) {
         this.id = id;
         this.body = body;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+        this.createdByName = createdByName;
+        this.updatedByName = updatedByName;
     }
 }
 

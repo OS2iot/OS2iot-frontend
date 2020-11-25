@@ -15,6 +15,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { IotDevicesModule } from '@applications/iot-devices/iot-devices.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MonacoEditorModule,
     IotDevicesModule,
     FontAwesomeModule,
+    PipesModule,
   ]
 })
 export class PayloadDecoderModule { }

@@ -194,13 +194,15 @@
     "ORGANIZATION": "Organisation"
   },
   "DEVICE-MODEL": {
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest Opdateret",
     "ID": "Id",
     "NAME": "Navn",
     "TYPE" : "Type",
     "BRANDNAME" : "Mærke",
     "MODELNAME" : "Model",
     "MANUFACTURERNAME" : "Producentens navn",
-    "CONTROLLEDPROPERTY" : "kontrol egenskaber",
+    "CONTROLLEDPROPERTY" : "Kontrol egenskaber",
     "CATEGORY" : "Kategori",
     "SUPPORTEDUNITS" : "Måleenheder",
     "FUNCTION" : "Enhedsfunktioner",

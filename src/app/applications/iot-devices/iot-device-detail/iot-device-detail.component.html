@@ -8,11 +8,9 @@
     <div class="row">
         <div class="col-md-6 d-flex align-items-stretch">
             <div class="jumbotron jumbotron--m-right">
-                <!-- Datapackage & Downlink -->
+                <!-- Datapackage, Downlink, API Key -->
                 <mat-tab-group animationDuration="200ms">
                     <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
-                        <!-- <h3 class="mt-3">{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h3> -->
-
                         <ng-template *ngIf="device.latestReceivedMessage?.sentTime; else noSentTime">
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header style="max-width: max-content;">

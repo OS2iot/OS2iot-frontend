@@ -43,7 +43,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
 
   private getDeviceModel(id: number) {
     this.deviceModelService.get(id)
-      .subscribe( (response) => {
+      .subscribe((response) => {
         this.deviceModel = response;
       });
   }
@@ -72,8 +72,8 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.deleteDialogSubscription) {
-        this.deleteDialogSubscription.unsubscribe();
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
-}
 
 }

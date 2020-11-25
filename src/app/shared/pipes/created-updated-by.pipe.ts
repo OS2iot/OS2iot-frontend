@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CreatedUpdatedByPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: any, ...args: any[]): any {
     const createdBy = ' af ' + value;
     return createdBy;
   }
