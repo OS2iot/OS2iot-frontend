@@ -158,7 +158,8 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (response: Datatarget) => {
           this.datatarget = response;
-          this.finalizeSave();
+          this.shouldShowMailDialog();
+          this.countToRedirect();
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -224,7 +225,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
         this.datatargetid = response.id;
         this.datatarget.id = response.id;
         this.showSavedSnack();
-        this.finalizeSave();
+        this.shouldShowMailDialog();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -298,16 +299,13 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  private finalizeSave() {
+  private shouldShowMailDialog() {
     if (!this.dataSetExcists && this.datatarget.setToOpendataDk) {
       this.opendatadkDialogService.showDialog().subscribe(
         response => {
           this.showMailClient();
-          this.countToRedirect();
         }
       );
-    } else  {
-      this.countToRedirect();
     }
   }
 
