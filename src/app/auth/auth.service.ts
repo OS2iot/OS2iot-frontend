@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.LOCAL_STORAGE_JWT_LOCATION);
+    localStorage.clear();
   }
 
   public isLoggedIn() {
