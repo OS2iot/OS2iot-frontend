@@ -62,8 +62,8 @@ export class GatewayTableComponent implements OnInit, OnChanges {
 
   lastActive(gateway: Gateway): string {
     if (gateway?.lastSeenAt) {
-      const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).unix();
-      const now = moment(new Date()).unix()
+      const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).valueOf();
+      const now = moment(new Date()).valueOf();
       return moment(Math.min(lastSeenAtUnixTimestamp, now)).fromNow();
     } else {
       return this.translate.instant('ACTIVITY.NEVER');
