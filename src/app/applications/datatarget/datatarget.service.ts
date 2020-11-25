@@ -99,7 +99,7 @@ export class DatatargetService {
     return model;
   }
 
-  private getOpendataSharingApiUrl(): string {
+  getOpendataSharingApiUrl(): string {
     return this.restService.createResourceUrl('open-data-dk-sharing', this.sharedVariableService.getSelectedOrganisationId());
   }
 
