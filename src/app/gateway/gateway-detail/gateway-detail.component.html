@@ -4,6 +4,13 @@
         <div class="jumbotron jumbotron--m-right">
             <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.id}}</p>
             <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
+            <p><strong>{{ 'GATEWAY.CREATED' | translate }}</strong>{{gateway.createdAt | dkTime}}<span
+                    *ngIf="gateway.createdByName">{{gateway.createdByName | createdUpdatedBy}}</span></p>
+            <p *ngIf="gateway.createdAt !== gateway.updatedAt">
+                <strong>{{ 'GATEWAY.UPDATED' | translate }}</strong>{{gateway.updatedAt | dkTime}} <span
+                    *ngIf="gateway.updatedByName">
+                    {{gateway.updatedByName | createdUpdatedBy}} </span>
+            </p>
             <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
             <p *ngIf="gateway.description">
                 <strong>{{ 'GATEWAY.DESCRIPTION' | translate }}</strong>{{gateway.description}}</p>
@@ -24,7 +31,7 @@
                             {{gateway.location.latitude | number:'2.1-6'}}</p>
                     </div>
                     <div class="col-4">
-                        <p><strong>{{ 'GATEWAY.ALTITUDE' | translate }}</strong>
+                        <p><strong>{{ 'GATEWAY.ALTITUDE' | translate | number:'2.1-6' }}</strong>
                             {{gateway.location.altitude}}</p>
                     </div>
                 </div>
@@ -57,7 +64,7 @@
 <div class="row" *ngIf="gateway">
     <div class="col-12">
         <div class="jumbotron jumbotron--m-right">
-            <h3>{{ 'GATEWAY.STATS' | translate }}</h3>
+            <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="rxPacketsReceived">
@@ -78,8 +85,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength"
-                    showFirstLastButtons>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" showFirstLastButtons>
                 </mat-paginator>
             </div>
         </div>

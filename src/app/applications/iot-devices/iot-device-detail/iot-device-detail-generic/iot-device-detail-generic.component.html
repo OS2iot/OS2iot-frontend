@@ -13,6 +13,13 @@
                     </div>
                 </ng-template>
             </div>
+            <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{device.createdAt | dkTime}}<span
+                    *ngIf="device.createdByName">{{device.createdByName | createdUpdatedBy}}</span></p>
+            <p *ngIf="device.createdAt !== device.updatedAt">
+                <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{device.updatedAt | dkTime}}
+                <span *ngIf="device.updatedByName">
+                    {{device.updatedByName | createdUpdatedBy}} </span>
+            </p>
             <mat-divider></mat-divider>
 
             <!-- Unit type -->
@@ -63,10 +70,10 @@
                 <app-map [coordinates]="getCoordinates()"></app-map>
                 <div class="row">
                     <div class="col-6">
-                        <p><strong>{{ 'IOTDEVICE.LONGITUDE' | translate }}</strong>{{longitude}}</p>
+                        <p><strong>{{ 'IOTDEVICE.LONGITUDE' | translate }}</strong>{{longitude | number:'2.1-6'}}</p>
                     </div>
                     <div class="col-6">
-                        <p><strong>{{ 'IOTDEVICE.LATITUDE' | translate }}</strong>{{latitude}}</p>
+                        <p><strong>{{ 'IOTDEVICE.LATITUDE' | translate }}</strong>{{latitude | number:'2.1-6'}}</p>
                     </div>
                 </div>
             </div>

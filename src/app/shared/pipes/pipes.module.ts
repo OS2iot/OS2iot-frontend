@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { YesNoPipe } from './yesNo.pipe';
 import { ActiveDeactivePipe } from './activeDeactive.pipe';
 import { isGlobalAdminPipe } from './is-global-admin.pipe';
-import { OrganisationFilterPipe } from './organisation-filter.pipe';
 import { CustomDatePipe } from './custom.datepipe';
+import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 
 @NgModule({
     declarations: [
         isGlobalAdminPipe,
         ActiveDeactivePipe,
         YesNoPipe,
-        OrganisationFilterPipe,
-        CustomDatePipe
+        CustomDatePipe,
+        CreatedUpdatedByPipe,
     ],
     imports: [
         CommonModule
@@ -21,7 +21,8 @@ import { CustomDatePipe } from './custom.datepipe';
         isGlobalAdminPipe,
         ActiveDeactivePipe,
         YesNoPipe,
-        CustomDatePipe
+        CustomDatePipe,
+        CreatedUpdatedByPipe,
     ]
 })
 export class PipesModule { }

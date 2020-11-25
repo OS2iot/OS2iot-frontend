@@ -97,6 +97,8 @@
     }
   },
   "GATEWAY": {
+    "CREATED": "Oprettet",
+    "UPDATED": "Senest Opdateret",
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
@@ -532,6 +534,8 @@
       "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til Sigfox skal være præcis 16 tegn (Hexadecimal)",
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
+    "CREATED": "Oprettet",
+    "UPDATED": "Senest Opdateret",
     "DEVICEMODEL": "Device Model",
     "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
     "DETAIL": "Detaljer",
