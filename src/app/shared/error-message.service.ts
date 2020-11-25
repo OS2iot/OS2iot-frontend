@@ -42,6 +42,7 @@ export class ErrorMessageService {
               err.property === 'lorawanSettings' ||
               err.property === 'sigfoxSettings' ||
               err.property === 'openDataDkDataset' ||
+              err.property === 'deviceProfile' ||
               err.property === 'gateway') {
                 err.children.forEach(element => {
                   errors.errorFields.push(element.property);

@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
@@ -32,7 +33,8 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private deviceProfileService: DeviceProfileService,
     private location: Location,
-    private meService: MeService
+    private meService: MeService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
@@ -106,22 +108,9 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessage = '';
-    this.errorMessages = [];
-    if (error.error?.chirpstackError) {
-      this.errorMessage = error.error.chirpstackError.message;
-    } else if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
-    } else {
-      this.errorMessage = error.message;
-    }
-    this.formFailedSubmit = true;
+    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errors?.errorFields;
+    this.errorMessages = errors?.errorMessages;
   }
 
   onSubmit(): void {

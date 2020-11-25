@@ -5,11 +5,11 @@
         <ul class="mb-0">
             <div *ngIf="errorMessages">
                 <li *ngFor="let error of errorMessages">
-                    {{error}}
+                    {{error | translate}}
                 </li>
             </div>
             <li *ngIf="errorMessage">
-                {{errorMessage}}
+                {{errorMessage | translate}}
             </li>
         </ul>
     </div>
