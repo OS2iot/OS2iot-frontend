@@ -186,13 +186,13 @@ export class PayloadDecoderEditComponent implements OnInit {
   getDevice(event: MatSelectChange): void {
     this.deviceSubscription = this.iotDeviceService
       .getIoTDevice(event.value)
-      .subscribe((device: IotDevice) => {
+      .subscribe(async (device: IotDevice) => {
         if (device.latestReceivedMessage) {
           this.payloadData = JSON.stringify(device.latestReceivedMessage.rawData, null, 4);
         } else {
           this.payloadData = this.payloadDataErrorMessage;
         }
-        this.setDeviceMetadata(device);
+        await this.setDeviceMetadata(device);
       });
   }
 
@@ -203,8 +203,20 @@ export class PayloadDecoderEditComponent implements OnInit {
     return device;
   }
 
-  setDeviceMetadata(device: IotDevice) {
+  async setDeviceMetadata(device: IotDevice) {
     if (device) {
+      if (device.deviceModelId) {
+        await this.deviceModelService
+          .get(device.deviceModelId)
+          .toPromise()
+          .then((response) => {
+            device.deviceModel = response;
+          });
+      } else {
+        device.deviceModel = null;
+      }
+
+      device.deviceModelId = undefined;
       device.latestReceivedMessage = undefined;
       device.receivedMessagesMetadata = undefined;
       this.metadata = JSON.stringify(device, null, 4);
