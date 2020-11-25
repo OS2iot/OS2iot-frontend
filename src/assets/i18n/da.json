@@ -247,7 +247,7 @@
   "PAYLOAD-DECODER": {
     "TITLE": "Payload decoder",
     "SAVE": "Gem Payload Decoder",
-    "NAME": "Navn: ",
+    "NAME": "Navn",
     "ID": "Payload Decoder Id",
     "ORGANIZATION": "Organisation",
     "BELONGS-TO-ORGANIZATION": "Tilhørende organisation:",
@@ -427,16 +427,16 @@
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",
-      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i Sigfox?",
+      "CONNECTTOEXISTINGDEVICEINBACKEND": "Er enheden allerede registreret i Sigfox backend?",
       "GROUPID": "Vælg en Sigfox gruppe",
       "DEVICEID": "Sigfox enheds Id",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
-      "DEVICETYPEID": "Vælg en enhedstypen",
+      "DEVICETYPEID": "Vælg en Sigfox enhedstype",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
       "PAC": "PAC",
       "PAC-PLACEHOLDER": "Porting Authorization Code",
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
-      "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt licens",
+      "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt certifikat",
       "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til at finde produkt certifikatet",
       "ENDPRODUCTCERTIFICATE-HELP-TEXT": "Få hjælp til at finde produkt certifikatet ved at klikke her",
       "DISCLAIMER": "Bemærk dit abonnement med Sigfox holdes ude af OS2iot og løber automatisk. Afmeld dit abonnement ved at registrere en unsubscribe date i Sigfox.",
@@ -709,8 +709,8 @@
   },
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
-    "WELCOME-MESSAGE": "Her vises en velkomsthilsen",
-    "NO-ACCESS": "Du har ikke adgang til nogle organisationer og kan derfor ikke bruge applikationen."
+    "WELCOME-MESSAGE": "Velkommen til OS2iot – din nye indgang til administration af IoT enheder på tværs af netværkstyper",
+    "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder."
   },
   "ERROR": {
     "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
