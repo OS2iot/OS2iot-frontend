@@ -60,7 +60,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   public filterGatewayByOrgId(event: number) {
     this.selectedOrg = event;
     if (event) {
-      this.getGateway(event);
+      this.getGatewayWith(event);
     } else {
       this.getGateways();
     }
@@ -85,7 +85,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  private getGateway(orgId: number): void {
+  private getGatewayWith(orgId: number): void {
     this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
       {
         limit: this.pageLimit,
@@ -108,7 +108,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   showMap(event: any) {
     if (event.index === 1) {
       if (this.selectedOrg) {
-        this.getGateway(this.selectedOrg);
+        this.getGatewayWith(this.selectedOrg);
       } else {
         this.getGateways();
       }

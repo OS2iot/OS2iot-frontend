@@ -27,8 +27,14 @@ export class PayloadDecoderService {
         return this.restService.get(this.URL, {}, id);
     }
 
-    getMultiple(): Observable<PayloadDecoderResponse> {
-        return this.restService.get(this.URL);
+    getMultiple(organizationId: number = null): Observable<PayloadDecoderResponse> {
+        let params = null;
+        if (organizationId) {
+            params = {
+                organizationId: organizationId  
+            };
+        }
+        return this.restService.get(this.URL, params);
     }
 
     delete(id: number) {

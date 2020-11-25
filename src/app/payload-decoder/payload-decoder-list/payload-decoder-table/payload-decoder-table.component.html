@@ -1,6 +1,10 @@
 <div class="mat-elevation-z8">
     <app-loading-spinner *ngIf=" isLoadingResults">
     </app-loading-spinner>
+    <app-top-bar-table [component]="true" [addDropdown]="true" [options]="organizations"
+        [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="filterByOrgId($event)"
+        [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
+    </app-top-bar-table>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->

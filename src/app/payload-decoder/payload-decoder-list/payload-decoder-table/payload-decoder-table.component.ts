@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
+import { Organisation } from '@app/admin/organisation/organisation.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -26,14 +28,17 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   isLoadingResults = true;
   deletePayloadDecoder = new EventEmitter();
   private subscription: Subscription;
+  organizations: Organisation[];
 
   constructor(
     private payloadDecoderService: PayloadDecoderService,
-    private meService: MeService
+    private meService: MeService,
+    private sharedVariableService: SharedVariableService
   ) { }
 
   ngOnInit(): void {
     this.getPayloadDecoders();
+    this.organizations = this.sharedVariableService.getOrganizationInfo();
   }
 
   ngAfterViewInit() {
@@ -55,12 +60,34 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
         });
   }
 
+  getPayloadDecodersWith(orgId: number) {
+    this.subscription = this.payloadDecoderService.getMultiple(orgId)
+      .subscribe(
+        (response) => {
+          this.payloadDecoders = response.data;
+          this.setCanEdit();
+          this.dataSource = new MatTableDataSource<PayloadDecoderBodyResponse>(this.payloadDecoders);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = tableSorter;
+          this.isLoadingResults = false;
+        });
+  }
+
   setCanEdit() {
     this.payloadDecoders.forEach(
       (payloadDecoder) => {
         payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(payloadDecoder.organization?.id);
       }
     );
+  }
+
+  public filterByOrgId(event: number) {
+    if (event) {
+      this.getPayloadDecodersWith(event);
+    } else {
+      this.getPayloadDecoders();
+    }
   }
 
   ngOnChanges() {
