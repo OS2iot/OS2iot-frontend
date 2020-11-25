@@ -29,6 +29,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
+    resultsLength = 0;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -75,7 +76,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
             this.dataSource.paginator = this.paginator;
-            console.log('gateway', this.gateway);
+            this.resultsLength = this.gatewayStats.length;
         });
     }
 
