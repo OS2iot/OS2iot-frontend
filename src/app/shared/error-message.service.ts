@@ -38,27 +38,39 @@ export class ErrorMessageService {
       errors.errorMessages.push(error.error.message);
     } else {
         error.error.message.forEach((err) => {
-            if (
-              err.property === 'lorawanSettings' ||
-              err.property === 'sigfoxSettings' ||
-              err.property === 'openDataDkDataset' ||
-              err.property === 'deviceProfile' ||
-              err.property === 'gateway') {
-                err.children.forEach(element => {
-                  errors.errorFields.push(element.property);
-                  errors.errorMessages = errors.errorMessages.concat(
-                        Object.values(element.constraints)
-                    );
-                });
-            } else if (err.message) {
-              errors.errorFields.push(err.field);
-              errors.errorMessages.push(err.message);
-            } else {
-              errors.errorFields.push(err.property);
-              errors.errorMessages = errors.errorMessages.concat(
-                    Object.values(err.constraints)
+          if (
+            err.property === 'lorawanSettings' ||
+            err.property === 'sigfoxSettings' ||
+            err.property === 'openDataDkDataset' ||
+            err.property === 'deviceProfile' ||
+            err.property === 'gateway'
+          ) {
+            err.children.forEach((element) => {
+              if (element.constraints) {
+                errors.errorFields.push(element.property);
+                errors.errorMessages = errors.errorMessages.concat(
+                  Object.values(element.constraints)
                 );
-            }
+              } else if (element.children) {
+                element.children.forEach((child) => {
+                  if (child.constraints) {
+                    errors.errorFields.push(child.property);
+                    errors.errorMessages = errors.errorMessages.concat(
+                      Object.values(child.constraints)
+                    );
+                  }
+                });
+              }
+            });
+          } else if (err.message) {
+            errors.errorFields.push(err.field);
+            errors.errorMessages.push(err.message);
+          } else {
+            errors.errorFields.push(err.property);
+            errors.errorMessages = errors.errorMessages.concat(
+              Object.values(err.constraints)
+            );
+          }
         });
     }
     return errors;
