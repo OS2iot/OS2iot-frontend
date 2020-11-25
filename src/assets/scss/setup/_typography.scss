@@ -164,7 +164,7 @@ body,
 .body-text {
   @include body-text;
   letter-spacing: $letter-spacing;
-  @extend .mb-3;
+  @extend .my-2;
 }
 
 p {

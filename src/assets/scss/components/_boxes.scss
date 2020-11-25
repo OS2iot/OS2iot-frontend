@@ -1,8 +1,11 @@
+
+@import '../setup/variables';
+
 .jumbotron {
   @extend .my-4;
   @extend .p-3;
   @extend .m-md-4;
-  background-color: white;
+  background-color: $color-bg-normal;
   width: 100%;
   &--m-right{
     @extend .mr-md-2;
@@ -14,4 +17,16 @@
 
 .page{
   @extend .m-md-4;
+}
+
+.box{
+  width: 100%;
+  @extend .p-3;
+  
+  &--info{
+    background-color: $color-bg-alternative;
+    border: $info-border;
+    border-radius: $border-radius-primary;
+    @extend .mb-5;
+  }
 }

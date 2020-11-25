@@ -533,6 +533,7 @@
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
     "DEVICEMODEL": "Device Model",
+    "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
     "DETAIL": "Detaljer",
     "DETAIL-TAB": "Datapakke",
     "DOWNLINK-TAB": "Downlink",

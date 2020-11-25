@@ -3,7 +3,7 @@
         <div class="jumbotron jumbotron--m-right">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
             <!-- Battery -->
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong></p>
                 <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
                     [percentage]="batteryStatusPercentage"></app-batteri-status>
@@ -13,6 +13,7 @@
                     </div>
                 </ng-template>
             </div>
+            <mat-divider></mat-divider>
 
             <!-- Unit type -->
             <p> <strong>{{ 'IOTDEVICE.TYPE' | translate }}</strong>{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}
@@ -26,6 +27,7 @@
                 <app-iot-device-detail-sigfox [device]="device"></app-iot-device-detail-sigfox>
             </ng-container>
             <!-- Comment -->
+            <mat-divider></mat-divider>
             <p>
                 <strong>{{ 'IOTDEVICE.COMMENT' | translate }}</strong>
                 <span *ngIf="device.comment; else elseBlock">

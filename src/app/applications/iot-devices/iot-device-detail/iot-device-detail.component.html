@@ -11,10 +11,9 @@
                 <!-- Datapackage & Downlink -->
                 <mat-tab-group animationDuration="200ms">
                     <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
-                        <h4>{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h4>
-                        <ng-container *ngIf="device.latestReceivedMessage?.sentTime; then sentTime; else noSentTime">
-                        </ng-container>
-                        <ng-template #sentTime>
+                        <!-- <h3 class="mt-3">{{ 'IOTDEVICE.DATAPACKAGE' | translate }}</h3> -->
+
+                        <ng-template *ngIf="device.latestReceivedMessage?.sentTime; else noSentTime">
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header style="max-width: max-content;">
                                     <mat-panel-title>
@@ -32,20 +31,19 @@
                             </mat-expansion-panel>
                         </ng-template>
                         <ng-template #noSentTime>
-                            <p class="mb-5">
+                            <p class="m-5">
                                 {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
                             </p>
                         </ng-template>
-                        <!-- API -->
-                        <ng-container *ngIf="device.type === 'GENERIC_HTTP'">
-                            <h4>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</h4>
-                            <!-- <p>{{ 'IOTDEVICE.GENERIC_HTTP.INSTRUCTIONS' | translate }}</p> -->
-                            <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
-                        </ng-container>
-
                     </mat-tab>
                     <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}">
                         <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
+                    </mat-tab>
+                    <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"
+                        label="{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}">
+                        <div class="m-5">
+                            <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
             </div>
