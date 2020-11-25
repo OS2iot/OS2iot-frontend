@@ -27,9 +27,9 @@
     "USERS": "Brugere",
     "LOGIN": "Login",
     "ADMIN": "Administration",
-    "SIGFOX": "SigFox",
+    "SIGFOX": "Sigfox",
     "SIGFOX-ADMIN": "Sigfox Administration",
-    "SIGFOX-DEVICE-TYPES": "SigFox Enhedstyper",
+    "SIGFOX-DEVICE-TYPES": "Sigfox Enhedstyper",
     "SEARCH": "Søgeresultater",
     "MENU-ITEM-MISC": "Generelt",
     "DEVICE-MODEL": "Device Model",
@@ -52,16 +52,16 @@
     "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
-    "SIGFOX": "SigFox",
-    "SIGFOX-GROUP": "SigFox Grupper",
+    "SIGFOX": "Sigfox",
+    "SIGFOX-GROUP": "Sigfox Grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
     "LOGIN": "Login",
     "ADMINISTRATION": {
-      "NAME": "SigFox Grupper",
+      "NAME": "Sigfox Grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
     "PROFILES": {
-      "NAME": "SigFox Enhedstyper",
+      "NAME": "Sigfox Enhedstyper",
       "DEVICE-TYPE": "Sigfox enhedstyper",
       "DEVICE-TYPE-NAME": "navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
@@ -221,7 +221,7 @@
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
-    "SIGFOX": "SigFox"
+    "SIGFOX": "Sigfox"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -345,9 +345,9 @@
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
     "EDIT-PERMISSION": "Redigér brugergruppe",
-    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér SigFox Enhedstype",
-    "EDIT-SIGFOX-GROUPS": "Redigér SigFox grupper",
-    "EDIT-SIGFOX-GROUP": "Redigér SigFox gruppe",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér Sigfox Enhedstype",
+    "EDIT-SIGFOX-GROUPS": "Redigér Sigfox grupper",
+    "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
     "EDIT-DEVICE-PROFILE": "Redigér device profile"
   },
@@ -426,10 +426,10 @@
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
     },
     "SIGFOX": {
-      "TITLE": "SigFox specifikke felter",
-      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i SigFox?",
-      "GROUPID": "Vælg en SigFox gruppe",
-      "DEVICEID": "SigFox enheds Id",
+      "TITLE": "Sigfox specifikke felter",
+      "CONNECTTOEXISTINGDEVICEINBACKEND": "Enheden er allerede registreret i Sigfox?",
+      "GROUPID": "Vælg en Sigfox gruppe",
+      "DEVICEID": "Sigfox enheds Id",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en enhedstypen",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
@@ -448,7 +448,7 @@
         "NAME": "Navngiv enhedstypen",
         "NAME-PLACEHOLDER": "XC-123",
         "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
-        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra SigFox",
+        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra Sigfox",
         "DESCRIPTION": "Angiv beskrivelse",
         "DESCRIPTION-PLACEHOLDER": "Lipsum larum",
         "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
@@ -529,7 +529,7 @@
       "NOTIMPLEMENTED": "Denne feature er endnu ikke implementeret for den pågældende enhedstype",
       "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
       "NO-PAYLOAD": "Angiv en payload",
-      "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til sigfox skal være mellem 8 og 16 tegn (Hexadecimal)",
+      "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til Sigfox skal være præcis 16 tegn (Hexadecimal)",
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
     "DEVICEMODEL": "Device Model",
@@ -569,7 +569,7 @@
       "FCNTUP": "fcntup"
     },
     "SIGFOX": {
-      "GROUP-NAME": "SigFox gruppe navn",
+      "GROUP-NAME": "Sigfox gruppe navn",
       "PROTOTYPE": "Er enheden en prototype",
       "PAC": "PAC",
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
@@ -581,8 +581,8 @@
     "NAME-INVALID-OR-ALREADY-IN-USE": "En applikation med det navn findes allerede",
     "ORGANIZATION-ALREADY-EXISTS": "Navnet er forkert eller en organisation med det navn eksistere allerede",
     "PASSWORD-DOES-NOT-MEET-REQUIREMENTS": "Password lever ikke op til kravene. Password skal minimum være 6 tegn",
-    "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne SigFox gruppe",
-    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert SigFox login eller kode",
+    "GROUP-CAN-ONLY-BE-CREATED-ONCE-PR-ORGANIZATION": "Der er allerede oprette forbindelse til denne Sigfox gruppe",
+    "SIGFOX-BAD-LOGIN": "Login fejlet: Forkert Sigfox login eller kode",
     "DOWNLINK-LENGTH-WRONG-FOR-SIGFOX": "Angiv korrekt payload længde",
     "ONLY-ALLOWED-FOR-LORAWAN": "Handlinger er kun tilladt for LoRaWAN enheder",
     "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
@@ -736,5 +736,5 @@
   "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
   "GENERIC_HTTP": "Generisk HTTP",
   "LORAWAN": "LoRaWAN",
-  "SIGFOX": "SigFox"
+  "SIGFOX": "Sigfox"
 }

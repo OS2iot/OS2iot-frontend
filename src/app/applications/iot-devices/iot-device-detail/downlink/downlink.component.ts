@@ -97,6 +97,14 @@ export class DownlinkComponent implements OnInit {
     });
   }
 
+  getMaxDownloadLength(): number {
+    if (this.device.type === DeviceType.SIGFOX) {
+      return 16
+    } else {
+      return 256
+    }
+  }
+
   openDownlinkDialog() {
     const dialog = this.dialog.open(DownlinkDialogComponent, {});
 
