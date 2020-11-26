@@ -27,8 +27,7 @@
     </div>
 
     <div class="col-xs-12 form-group" *ngIf="serviceProfile.id">
-        <label for="id"
-            class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.ID' | translate}}</label>
+        <label for="id" class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.ID' | translate}}</label>
         <input type="text" class="form-control" id="id" name="id"
             [placeholder]="'PROFILES.SERVICE_PROFILE.ID_PLACEHOLDER' | translate" maxlength="50" required disabled
             [ngModel]="serviceProfile.id">
