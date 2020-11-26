@@ -314,7 +314,10 @@
       "EDIT": "Rediger",
       "DELETE": "Slet",
       "USERS": "Brugergruppens brugere",
-      "APPLICATIONS": "Brugergruppens applikationer"
+      "APPLICATIONS": "Brugergruppens applikationer",
+      "HEADLINE": "Detaljer",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -718,7 +721,8 @@
       "EMAIL":"Email",
       "CREATED":"Oprettet",
       "UPDATED":"Senest Opdateret",
-      "STATUS":"Status"
+      "STATUS":"Status",
+      "HEADLINE":"Detaljer"
     },
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",

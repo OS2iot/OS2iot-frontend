@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class=" jumbotron">
-                <h3>Detaljer</h3>
+                <h3>{{ 'USERS.DETAIL.HEADLINE' | translate }}</h3>
                 <p><strong>{{ 'USERS.DETAIL.EMAIL' | translate }}</strong>{{user.email}}</p>
                 <p><strong>{{ 'USERS.DETAIL.CREATED' | translate }}</strong>{{user.createdAt | dkTime}}<span
                         *ngIf="user.createdByName">{{user.createdByName | createdUpdatedBy}}</span></p>
