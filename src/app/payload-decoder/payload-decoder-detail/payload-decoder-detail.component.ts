@@ -6,6 +6,7 @@ import { PayloadDecoderService } from '@app/payload-decoder/payload-decoder.serv
 import { BackButton } from '@shared/models/back-button.model';
 import { PayloadDecoder, PayloadDecoderBodyResponse } from '@payload-decoder/payload-decoder.model';
 import { MeService } from '@shared/services/me.service';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class PayloadDecoderDetailComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
   id: number;
   subscription: Subscription;
+  editorJsonOutpuOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false }, readOnly: true };
+  dropdownButton: DropdownButton;
+
 
   constructor(
     public translate: TranslateService,
@@ -32,14 +36,19 @@ export class PayloadDecoderDetailComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use('da');
 
-    this.translate.get(['PAYLOAD-DECODER.TITLE'])
-      .subscribe(translations => {
-        this.backButton.label = translations['PAYLOAD-DECODER.TITLE'];
-      });
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
       this.getPayloadDecoder(this.id);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: '../../payload-decoder-edit/' + this.id,
+      }
     }
+    this.translate.get(['PAYLOAD-DECODER.TITLE', 'PAYLOAD-DECODER.DETAIL.DROPDOWN'])
+      .subscribe(translations => {
+        this.backButton.label = translations['PAYLOAD-DECODER.TITLE'];
+        this.dropdownButton.label = translations['PAYLOAD-DECODER.DETAIL.DROPDOWN']
+      });
   }
 
   canEdit() {

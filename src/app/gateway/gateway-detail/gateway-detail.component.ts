@@ -10,6 +10,7 @@ import { Gateway, GatewayStats } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -29,6 +30,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
+    public dropdownButton: DropdownButton;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -44,10 +46,15 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.bindGateway(this.id);
+            this.dropdownButton = {
+                label: '',
+                editRouterLink: '../../gateway-edit/' + this.id,
+            };
         }
-        this.translate.get(['NAV.LORA-GATEWAYS'])
+        this.translate.get(['NAV.LORA-GATEWAYS', 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.LORA-GATEWAYS'];
+                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
             });
     }
 

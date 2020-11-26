@@ -1,57 +1,58 @@
 <div *ngIf="device">
-    <ng-container>
-        <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true"></app-top-bar>
-    </ng-container>
+    <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+    </app-top-bar>
     <!-- General details & map -->
-    <app-iot-device-detail-generic [device]="device" [longitude]=longitude [latitude]="latitude">
-    </app-iot-device-detail-generic>
-    <div class="row">
-        <div class="col-md-6 d-flex align-items-stretch">
-            <div class="jumbotron jumbotron--m-right">
-                <!-- Datapackage, Downlink, API Key -->
-                <mat-tab-group animationDuration="200ms">
-                    <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
-                        <ng-template *ngIf="device.latestReceivedMessage?.sentTime; else noSentTime">
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header style="max-width: max-content;">
-                                    <mat-panel-title>
-                                        <p>
-                                            {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}
-                                            {{device.latestReceivedMessage?.sentTime | date:'medium'}}
-                                        </p>
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <ng-container *ngIf="device.latestReceivedMessage?.rawData">
-                                    <code>
+    <div class="container-fluid">
+        <app-iot-device-detail-generic [device]="device" [longitude]=longitude [latitude]="latitude">
+        </app-iot-device-detail-generic>
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+                    <!-- Datapackage, Downlink, API Key -->
+                    <mat-tab-group animationDuration="200ms">
+                        <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
+                            <ng-template *ngIf="device.latestReceivedMessage?.sentTime; else noSentTime">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header style="max-width: max-content;">
+                                        <mat-panel-title>
+                                            <p>
+                                                {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}
+                                                {{device.latestReceivedMessage?.sentTime | date:'medium'}}
+                                            </p>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <ng-container *ngIf="device.latestReceivedMessage?.rawData">
+                                        <code>
                                             <pre>{{device.latestReceivedMessage.rawData | json }}</pre>
                                         </code>
-                                </ng-container>
-                            </mat-expansion-panel>
-                        </ng-template>
-                        <ng-template #noSentTime>
-                            <p class="m-5">
-                                {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
-                            </p>
-                        </ng-template>
-                    </mat-tab>
-                    <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}">
-                        <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
-                    </mat-tab>
-                    <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"
-                        label="{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}">
-                        <div class="m-5">
-                            <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
+                                    </ng-container>
+                                </mat-expansion-panel>
+                            </ng-template>
+                            <ng-template #noSentTime>
+                                <p class="m-5">
+                                    {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
+                                </p>
+                            </ng-template>
+                        </mat-tab>
+                        <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}">
+                            <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
+                        </mat-tab>
+                        <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"
+                            label="{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}">
+                            <div class="m-5">
+                                <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
             </div>
-        </div>
-        <!-- Device model -->
-        <div class="col-md-6 d-flex align-items-stretch">
-            <div class="jumbotron jumbotron--m-left">
-                <app-device-model [device]="device"></app-device-model>
+            <!-- Device model -->
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+                    <app-device-model [device]="device"></app-device-model>
+                </div>
             </div>
         </div>
     </div>
-
 </div>

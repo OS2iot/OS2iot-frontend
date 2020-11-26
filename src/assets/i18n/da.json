@@ -38,6 +38,10 @@
   "TOPBAR":{
     "SEARCH": {
       "BUTTON": "Søg"
+    },
+    "DROPDOWN": {
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
     }
   },
   "SEARCH": {

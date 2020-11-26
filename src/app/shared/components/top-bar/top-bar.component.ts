@@ -16,6 +16,7 @@ import { DatatargetResponse } from '@applications/datatarget/datatarget-response
 import { PayloadDecoder, PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 @Component({
     selector: 'app-top-bar',
@@ -27,6 +28,7 @@ export class TopBarComponent implements OnInit {
     @Input() buttons?: QuickActionButton[];
     @Input() backButton: BackButton;
     @Input() subPage: boolean;
+    @Input()
     public subTitle: string;
 
     @Input() staticTitle: string;
@@ -42,6 +44,11 @@ export class TopBarComponent implements OnInit {
     @Input() searchQuery: string;
     @Output() selectedSortChange = new EventEmitter();
     @Output() updatePageLimit = new EventEmitter();
+
+    @Output() deleteSelectedInDropdown = new EventEmitter();
+    @Input() addDetailDowndown: boolean;
+    @Input() dropDownButton: DropdownButton;
+
     faSearch = faSearch;
 
     constructor(
@@ -84,6 +91,10 @@ export class TopBarComponent implements OnInit {
             return '';
         }
         return decodeURIComponent(val);
+    }
+
+    onClickDelete() {
+        this.deleteSelectedInDropdown.emit();
     }
 
     // pageLimitUpdate(value) {

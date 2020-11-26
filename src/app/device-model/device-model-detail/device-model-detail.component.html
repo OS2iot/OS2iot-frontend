@@ -1,51 +1,38 @@
-<ng-container>
-    <app-top-bar [title]="title" [backButton]="backButton" [subPage]="true"></app-top-bar>
-</ng-container>
-<div class="row" *ngIf="deviceModel">
-    <div class="col-12">
-        <div class="jumbotron">
-            <!-- <div class="btn-group float-md-right dropdown">
-            <button type="button" id="dropdown-{{ deviceModel.body.name }}" class="btn btn-primary dropdown-toggle"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{'DEVICE-MODEL.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ deviceModel.body.name }}">
-                <li class="dropdown-item">
-                    <a [routerLink]="['/device-model/device-model-edit', this.deviceModel.id]">{{ 'GEN.EDIT' | translate }}
-                    </a>
-                </li>
-                <li class="dropdown-item">
-                    <a (click)="clickDelete()">{{ 'GEN.DELETE' | translate }}
-                    </a>
-                </li>
-            </ul>
-        </div> -->
+<div *ngIf="deviceModel">
+    <app-top-bar [data]="deviceModel" [title]="deviceModel.body.name" [backButton]="backButton" [subPage]="true"
+        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+    </app-top-bar>
+    <div class="container-fluid">
+        <div class="row" *ngIf="deviceModel">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <p *ngIf="deviceModel.createdAt">
+                        <strong>{{ 'DEVICE-MODEL.CREATED' | translate }}</strong>{{deviceModel.createdAt | dkTime}}<span
+                            *ngIf="deviceModel.createdByName">{{deviceModel.createdByName | createdUpdatedBy}}</span>
+                    </p>
+                    <p *ngIf="deviceModel.createdAt !== deviceModel.updatedAt">
+                        <strong>{{ 'DEVICE-MODEL.UPDATED' | translate }}</strong>{{deviceModel.updatedAt | dkTime}}
+                        <span *ngIf="deviceModel.updatedByName">
+                            {{deviceModel.updatedByName | createdUpdatedBy}} </span>
+                    </p>
+                    <p><strong>{{ 'DEVICE-MODEL.ID' | translate }}</strong>{{deviceModel.body.id}}</p>
+                    <p><strong>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</strong>{{deviceModel.body.brandName}}</p>
+                    <p><strong>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</strong>{{deviceModel.body.modelName}}</p>
+                    <p><strong>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</strong>{{deviceModel.body.manufacturerName}}
+                    </p>
+                    <p><strong>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</strong>{{deviceModel.body.controlledProperty}}
+                    </p>
+                    <p><strong>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</strong>{{deviceModel.body.category}}</p>
+                    <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</strong>{{deviceModel.body.supportedUnits}}
+                    </p>
+                    <p><strong>{{ 'DEVICE-MODEL.FUNCTION' | translate }}</strong>{{deviceModel.body.function}}</p>
+                    <p><strong>{{ 'DEVICE-MODEL.ENERGYLIMITATIONCLASS' | translate }}</strong>{{deviceModel.body.energyLimitationClass}}
+                    </p>
+                    <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDPROTOCOL' | translate }}</strong>{{deviceModel.body.supportedProtocol}}
+                    </p>
+                </div>
 
-            <p><strong>{{ 'DEVICE-MODEL.NAME' | translate }}</strong>{{deviceModel.body.name}}</p>
-            <p *ngIf="deviceModel.createdAt">
-                <strong>{{ 'DEVICE-MODEL.CREATED' | translate }}</strong>{{deviceModel.createdAt | dkTime}}<span
-                    *ngIf="deviceModel.createdByName">{{deviceModel.createdByName | createdUpdatedBy}}</span>
-            </p>
-            <p *ngIf="deviceModel.createdAt !== deviceModel.updatedAt">
-                <strong>{{ 'DEVICE-MODEL.UPDATED' | translate }}</strong>{{deviceModel.updatedAt | dkTime}}
-                <span *ngIf="deviceModel.updatedByName">
-                    {{deviceModel.updatedByName | createdUpdatedBy}} </span>
-            </p>
-            <p><strong>{{ 'DEVICE-MODEL.ID' | translate }}</strong>{{deviceModel.body.id}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</strong>{{deviceModel.body.brandName}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</strong>{{deviceModel.body.modelName}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</strong>{{deviceModel.body.manufacturerName}}
-            </p>
-            <p><strong>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</strong>{{deviceModel.body.controlledProperty}}
-            </p>
-            <p><strong>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</strong>{{deviceModel.body.category}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</strong>{{deviceModel.body.supportedUnits}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.FUNCTION' | translate }}</strong>{{deviceModel.body.function}}</p>
-            <p><strong>{{ 'DEVICE-MODEL.ENERGYLIMITATIONCLASS' | translate }}</strong>{{deviceModel.body.energyLimitationClass}}
-            </p>
-            <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDPROTOCOL' | translate }}</strong>{{deviceModel.body.supportedProtocol}}
-            </p>
+            </div>
         </div>
-
     </div>
 </div>

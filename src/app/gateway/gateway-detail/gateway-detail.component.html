@@ -1,92 +1,81 @@
-<app-top-bar *ngIf="gateway" [data]="gateway" [backButton]="backButton" [subPage]="true"></app-top-bar>
-<div class="row" *ngIf="gateway">
-    <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-right">
-            <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.id}}</p>
-            <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
-            <p><strong>{{ 'GATEWAY.CREATED' | translate }}</strong>{{gateway.createdAt | dkTime}}<span
-                    *ngIf="gateway.createdByName">{{gateway.createdByName | createdUpdatedBy}}</span></p>
-            <p *ngIf="gateway.createdAt !== gateway.updatedAt">
-                <strong>{{ 'GATEWAY.UPDATED' | translate }}</strong>{{gateway.updatedAt | dkTime}} <span
-                    *ngIf="gateway.updatedByName">
-                    {{gateway.updatedByName | createdUpdatedBy}} </span>
-            </p>
-            <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
-            <p *ngIf="gateway.description">
-                <strong>{{ 'GATEWAY.DESCRIPTION' | translate }}</strong>{{gateway.description}}</p>
-        </div>
-    </div>
-    <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left">
-            <div *ngIf="gateway.location; else locationElseBlock">
-                <h3>{{ 'GATEWAY.LOCATION' | translate }}</h3>
-                <app-map [coordinates]="getCoordinates()"></app-map>
-                <div class="row">
-                    <div class="col-4">
-                        <p><strong>{{ 'GATEWAY.LONGITUDE' | translate }}</strong>
-                            {{gateway.location?.longitude | number:'2.1-6'}}</p>
-                    </div>
-                    <div class="col-4">
-                        <p><strong>{{ 'GATEWAY.LATITUDE' | translate }}</strong>
-                            {{gateway.location.latitude | number:'2.1-6'}}</p>
-                    </div>
-                    <div class="col-4">
-                        <p><strong>{{ 'GATEWAY.ALTITUDE' | translate | number:'2.1-6' }}</strong>
-                            {{gateway.location.altitude}}</p>
-                    </div>
+<div *ngIf="gateway">
+    <app-top-bar [data]="gateway" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteGateway()"></app-top-bar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+                    <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.id}}</p>
+                    <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
+                    <p><strong>{{ 'GATEWAY.CREATED' | translate }}</strong>{{gateway.createdAt | dkTime}}<span
+                            *ngIf="gateway.createdByName">{{gateway.createdByName | createdUpdatedBy}}</span></p>
+                    <p *ngIf="gateway.createdAt !== gateway.updatedAt">
+                        <strong>{{ 'GATEWAY.UPDATED' | translate }}</strong>{{gateway.updatedAt | dkTime}} <span
+                            *ngIf="gateway.updatedByName">
+                            {{gateway.updatedByName | createdUpdatedBy}} </span>
+                    </p>
+                    <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
+                    <p *ngIf="gateway.description">
+                        <strong>{{ 'GATEWAY.DESCRIPTION' | translate }}</strong>{{gateway.description}}</p>
                 </div>
             </div>
-            <ng-template #locationElseBlock>
-                <p class="mb-5">{{ 'GATEWAY.NOLOCATION' | translate}}</p>
-            </ng-template>
-        </div>
-    </div>
-</div>
-<!-- <div class="col-md-4 order-first order-md-last" *ngIf="gateway.canEdit">
-            <div class="btn-group float-md-right dropdown">
-                <button type="button" id="dropdown-{{ gateway.name }}" class="btn btn-primary dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ gateway.name }}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['../../gateway-edit', this.gateway.id]"
-                            routerLinkActive="active">{{ 'GEN.EDIT' | translate }}
-                        </a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a [routerLink]="" (click)="onDeleteGateway()">{{ 'GEN.DELETE' | translate }}
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+                    <div *ngIf="gateway.location; else locationElseBlock">
+                        <h3>{{ 'GATEWAY.LOCATION' | translate }}</h3>
+                        <app-map [coordinates]="getCoordinates()"></app-map>
+                        <div class="row">
+                            <div class="col-4">
+                                <p><strong>{{ 'GATEWAY.LONGITUDE' | translate }}</strong>
+                                    {{gateway.location?.longitude | number:'2.1-6'}}</p>
+                            </div>
+                            <div class="col-4">
+                                <p><strong>{{ 'GATEWAY.LATITUDE' | translate }}</strong>
+                                    {{gateway.location.latitude | number:'2.1-6'}}</p>
+                            </div>
+                            <div class="col-4">
+                                <p><strong>{{ 'GATEWAY.ALTITUDE' | translate }}</strong>
+                                    {{gateway.location.altitude | number:'2.1-6'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #locationElseBlock>
+                        <p class="mb-5">{{ 'GATEWAY.NOLOCATION' | translate}}</p>
+                    </ng-template>
+                </div>
             </div>
-        </div> -->
-<div class="row" *ngIf="gateway">
-    <div class="col-12">
-        <div class="jumbotron jumbotron--m-right">
-            <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
-            <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource">
-                    <ng-container matColumnDef="rxPacketsReceived">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-RXPACKETSRECEIVED' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.rxPacketsReceived}}</td>
-                    </ng-container>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="rxPacketsReceived">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    {{ 'GATEWAY.STATS-RXPACKETSRECEIVED' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element">{{element.rxPacketsReceived}}</td>
+                            </ng-container>
 
-                    <ng-container matColumnDef="txPacketsEmitted">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TXPACKETSEMITTED' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.txPacketsEmitted}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="txPacketsEmitted">
+                                <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TXPACKETSEMITTED' | translate }}
+                                </th>
+                                <td mat-cell *matCellDef="let element">{{element.txPacketsEmitted}}</td>
+                            </ng-container>
 
-                    <ng-container matColumnDef="txPacketsReceived">
-                        <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TIMESTAMP' | translate }}</th>
-                        <td mat-cell *matCellDef="let element">{{element.timestamp | date}}</td>
-                    </ng-container>
+                            <ng-container matColumnDef="txPacketsReceived">
+                                <th mat-header-cell *matHeaderCellDef>{{ 'GATEWAY.STATS-TIMESTAMP' | translate }}</th>
+                                <td mat-cell *matCellDef="let element">{{element.timestamp | date}}</td>
+                            </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" showFirstLastButtons>
-                </mat-paginator>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

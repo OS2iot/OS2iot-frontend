@@ -1,13 +1,19 @@
 import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceType } from '@shared/enums/device-type';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
+import { Location } from '@angular/common';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 
 
@@ -17,6 +23,7 @@ import { IoTDeviceService } from '../iot-device.service';
     styleUrls: ['./iot-device-detail.component.scss'],
 })
 export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
+    device: IotDevice;
     public deviceId: number;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     public application: Application;
@@ -31,32 +38,42 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public serviceProfileName: string;
     public downlink = new Downlink();
     public errorMessages: string[];
+    private deleteDialogSubscription: Subscription;
+    public dropdownButton: DropdownButton;
 
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
 
-    device: IotDevice;
 
     constructor(
         private route: ActivatedRoute,
         private iotDeviceService: IoTDeviceService,
         private translate: TranslateService,
         private router: Router,
+        private deleteDialogService: DeleteDialogService,
+        private dialog: MatDialog,
+        private location: Location,
 
     ) { }
 
     ngOnInit(): void {
+
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.deviceId) {
             this.bindIoTDeviceAndApplication(this.deviceId);
+            this.dropdownButton = {
+                label: '',
+                editRouterLink: '../../iot-device-edit/' + this.deviceId,
+            };
         }
 
-        this.translate.get(['NAV.APPLICATIONS'])
+        this.translate.get(['NAV.APPLICATIONS', 'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
+                this.dropdownButton.label = translations['IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'];
             });
     }
 
@@ -76,10 +93,47 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
     }
 
+    showSigfoxDeleteDialog() {
+        const dialog = this.dialog.open(DeleteDialogComponent, {
+            data: {
+                message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
+                showAccept: false,
+                showCancel: true
+            }
+        });
+    }
+
+    routeBack(): void {
+        this.location.back();
+    }
+
+    clickDelete() {
+        if (this.device.type === DeviceType.SIGFOX) {
+            this.showSigfoxDeleteDialog();
+        } else {
+            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+                (response) => {
+                    if (response) {
+                        this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(
+                            (response) => {
+                                this.routeBack();
+                            }
+                        );
+                    } else {
+                        console.log(response);
+                    }
+                }
+            );
+        }
+    }
+
     ngOnDestroy() {
         // prevent memory leak by unsubscribing
         if (this.iotDeviceSubscription) {
             this.iotDeviceSubscription.unsubscribe();
+        }
+        if (this.deleteDialogSubscription) {
+            this.deleteDialogSubscription.unsubscribe();
         }
     }
 }

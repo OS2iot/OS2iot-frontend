@@ -1,6 +1,6 @@
 <div class="row ">
     <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-right">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
             <!-- Battery -->
             <div class="d-flex align-items-center">
@@ -13,6 +13,7 @@
                     </div>
                 </ng-template>
             </div>
+            <mat-divider></mat-divider>
             <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{device.createdAt | dkTime}}<span
                     *ngIf="device.createdByName">{{device.createdByName | createdUpdatedBy}}</span></p>
             <p *ngIf="device.createdAt !== device.updatedAt">
@@ -44,27 +45,10 @@
                     {{ 'IOTDEVICE.NOCOMMENT' | translate}}
                 </ng-template>
             </p>
-
-            <!-- <div class="btn-group float-md-right dropdown">
-        <button type="button" id="dropdown-{{ device.name }}" class="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ device.name }}">
-            <li class="dropdown-item">
-                <a [routerLink]="['../../iot-device-edit', this.device.id]">{{ 'IOTDEVICE-TABLE-ROW.EDIT' | translate }}
-                </a>
-            </li>
-            <li class="dropdown-item">
-                <a (click)="clickDelete()">{{ 'IOTDEVICE-TABLE-ROW.DELETE' | translate }}
-                </a>
-            </li>
-        </ul>
-    </div> -->
         </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left">
+        <div class="jumbotron jumbotron--m-left jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.LOCATION' | translate }}</h3>
             <div *ngIf="device.location; else locationElseBlock">
                 <app-map [coordinates]="getCoordinates()"></app-map>

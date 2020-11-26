@@ -26,6 +26,23 @@
           <div class="action-group">
             <button *ngIf="ctaRouterLink" [routerLink]="ctaRouterLink" routerLinkActive="active" class="btn btn-primary"
               type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
+
+            <div class="btn-group float-md-right dropdown" *ngIf="addDetailDowndown === true">
+              <button type="button" id="dropdown-{{ data.name }}" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{dropDownButton.label}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data.name }}">
+                <li class="dropdown-item">
+                  <a [routerLink]="dropDownButton.editRouterLink">{{ 'TOPBAR.DROPDOWN.EDIT' | translate }}
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a (click)="onClickDelete()">{{ 'TOPBAR.DROPDOWN.DELETE' | translate }}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="col-md-4 order-first order-md-last">

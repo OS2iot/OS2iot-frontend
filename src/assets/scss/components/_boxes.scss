@@ -6,12 +6,14 @@
   @extend .p-3;
   @extend .m-md-4;
   background-color: $color-bg-normal;
-  width: 100%;
   &--m-right{
     @extend .mr-md-2;
   }
   &--m-left{
     @extend .ml-md-2;
+  }
+  &--full-width{
+    width: 100%;
   }
 }
 
