@@ -13,7 +13,16 @@
     @extend .ml-md-2;
   }
   &--full-width{
+    width: -webkit-fill-available;
+  }
+  h3{
+    display: block;
+    margin: 0;
+    border-bottom-width: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: $color-primary;
     width: 100%;
+    @extend .mb-4;
   }
 }
 
@@ -26,7 +35,7 @@
   @extend .p-3;
   
   &--info{
-    background-color: $color-bg-alternative;
+    background-color: $color-bg-info;
     border: $info-border;
     border-radius: $border-radius-primary;
     @extend .mb-5;

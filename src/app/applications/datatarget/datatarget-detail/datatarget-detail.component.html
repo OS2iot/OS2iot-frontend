@@ -1,86 +1,82 @@
-<ng-container *ngIf="datatarget">
-  <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true"></app-top-bar>
-  <div class=" jumbotron">
-    <div class="application-component">
-      <div class="col-md-12 order-first order-md-last ">
-        <div class="btn-group float-md-right dropdown">
-          <button type="button" id="dropdown-{{ datatarget.name }}" class="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{'DATATARGET.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ datatarget.name }}">
-            <li class="dropdown-item">
-              <a [routerLink]="['../../datatarget-edit', this.datatarget.id]" routerLinkActive="active">Redigér
-              </a>
-            </li>
-            <li class="dropdown-item">
-              <a (click)="onDeleteDatatarget()" [routerLink]="">Slet
-              </a>
-            </li>
-          </ul>
+<div *ngIf="datatarget">
+  <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()"></app-top-bar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+          <h3>{{ 'DATATARGET.DETAILS' | translate }}</h3>
+          <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{datatarget.createdAt | dkTime}}<span
+              *ngIf="datatarget.createdByName">{{datatarget.createdByName | createdUpdatedBy}}</span></p>
+          <p *ngIf="datatarget.createdAt !== datatarget.updatedAt">
+            <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{datatarget.updatedAt | dkTime}}
+            <span *ngIf="datatarget.updatedByName">
+              {{datatarget.updatedByName | createdUpdatedBy}} </span>
+          </p>
+          <mat-divider></mat-divider>
+          <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
+          <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
+          <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{datatarget.type | translate}}</p>
+          <mat-divider></mat-divider>
+          <p><strong>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</strong></p>
+          <code><pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{datatarget.authorizationHeader}}</pre></code>
+          <ng-template #showNoAuthText>
+            <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
+          </ng-template>
+
         </div>
       </div>
-      <h4>{{ 'DATATARGET.NAME' | translate }}</h4>
-      <p class="mb-5">{{datatarget.name}}</p>
-      <h4>{{ 'DATATARGET.URL' | translate }}</h4>
-      <p class="mb-5">{{datatarget.url}}</p>
-      <h4>{{ 'DATATARGET.TIMEOUT' | translate }}</h4>
-      <p class="mb-5">{{datatarget.timeout}}</p>
-      <h4>{{ 'DATATARGET.TYPE' | translate }}</h4>
-      <p class="mb-5">{{datatarget.type | translate}}</p>
-
-      <h4>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</h4>
-      <div *ngIf="datatarget.authorizationHeader; then showAuthHeader else showNoAuthText">
-      </div>
-      <ng-template #showAuthHeader>
-        <pre class="mb-5">{{datatarget.authorizationHeader}}</pre>
-      </ng-template>
-      <ng-template #showNoAuthText>
-        <p class="mb-5">{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
-      </ng-template>
-
-      <div *ngIf="datatarget.setToOpendataDk">
-        <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
-      </div>
-
-      <div class="form-group mt-3">
-        <h4>{{ 'DATATARGET.RELATIONS' | translate }}</h4>
-        <div *ngIf="dataTargetRelations?.length === 0">
-          <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+          <h3>{{ 'DATATARGET.OPENDATA-DK' | translate }}</h3>
+          <div *ngIf="datatarget.setToOpendataDk else noOpendataDk">
+            <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
+          </div>
+          <ng-template #noOpendataDk>
+            <p>{{ 'DATATARGET.NO-OPENDATA-DK' | translate }}</p>
+          </ng-template>
         </div>
-        <div *ngIf="dataTargetRelations">
-          <div *ngFor="let relation of dataTargetRelations">
-            <div class="row my-3">
-              <div class="col-md-2">
-                <h6>{{'DATATARGET.PAYLOADEDECODER' | translate}}</h6>
-              </div>
-              <div class="col-md-4">
-                <ul>
-                  <li>
-                    <div *ngIf="relation.payloadDecoder; else noDecoder">
-                      {{relation.payloadDecoder.name}}
-                    </div>
-                    <ng-template #noDecoder>
-                      {{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}
-                    </ng-template>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-2">
-                <h6>{{'DATATARGET.IOTDEVICE' | translate}}</h6>
-              </div>
-              <div class="col-md-4">
-                <div *ngFor="let device of relation.iotDevices">
-                  <ul>
-                    <li>{{device.name}}</li>
-                  </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class=" jumbotron">
+          <div class="form-group">
+            <h3>{{ 'DATATARGET.RELATIONS' | translate }}</h3>
+            <div *ngIf="dataTargetRelations?.length === 0">
+              <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+            </div>
+            <div *ngIf="dataTargetRelations">
+              <div *ngFor="let relation of dataTargetRelations">
+                <div class="row">
+                  <div class="col-md-4 d-flex align-items-center">
+                    <p><strong>{{'DATATARGET.PAYLOADEDECODER' | translate}}</strong><span
+                        *ngIf="relation.payloadDecoder; else noDecoder">
+                        {{relation.payloadDecoder.name}}
+                      </span>
+                      <ng-template #noDecoder>
+                        {{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}
+                      </ng-template>
+                    </p>
+                  </div>
+                  <div class="col-md-1 d-flex align-items-center justify-content-center">
+                    <fa-icon [icon]="arrowsAltH" class="icon--primary"></fa-icon>
+                  </div>
+                  <div class="col-md-7 d-flex align-items-center">
+                    <p><strong>{{'DATATARGET.IOTDEVICE' | translate}}</strong>
+                      <span *ngFor="let device of relation.iotDevices">
+                        {{device.name}}<span *ngIf="device.name.length > 2">, </span>
+                      </span>
+                    </p>
+                  </div>
+                  <mat-divider></mat-divider>
                 </div>
               </div>
-              <mat-divider></mat-divider>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</ng-container>
+</div>

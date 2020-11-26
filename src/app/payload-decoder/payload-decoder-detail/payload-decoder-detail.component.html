@@ -6,14 +6,15 @@
         <div class=" jumbotron">
             <div class="row">
                 <div class="col-xs-12">
+                    <h3>{{ 'PAYLOAD-DECODER.DETAILS' | translate }}</h3>
                     <p><strong>{{ 'PAYLOAD-DECODER.BELONGS-TO-ORGANIZATION' | translate }}
                         </strong>{{payloadDecoder.organizationName}}</p>
                     <p *ngIf="payloadDecoder.createdAt">
-                        <strong>{{ 'DEVICE-MODEL.CREATED' | translate }}</strong>{{payloadDecoder.createdAt | dkTime}}<span
+                        <strong>{{ 'PAYLOAD-DECODER.CREATED' | translate }}</strong>{{payloadDecoder.createdAt | dkTime}}<span
                             *ngIf="payloadDecoder.createdByName">{{payloadDecoder.createdByName | createdUpdatedBy}}</span>
                     </p>
                     <p *ngIf="payloadDecoder.createdAt !== payloadDecoder.updatedAt">
-                        <strong>{{ 'DEVICE-MODEL.UPDATED' | translate }}</strong>{{payloadDecoder.updatedAt | dkTime}}
+                        <strong>{{ 'PAYLOAD-DECODER.UPDATED' | translate }}</strong>{{payloadDecoder.updatedAt | dkTime}}
                         <span *ngIf="payloadDecoder.updatedByName">
                             {{payloadDecoder.updatedByName | createdUpdatedBy}} </span>
                     </p>

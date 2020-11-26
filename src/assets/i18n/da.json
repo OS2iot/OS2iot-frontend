@@ -101,6 +101,7 @@
     }
   },
   "GATEWAY": {
+    "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
     "UPDATED": "Senest Opdateret",
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
@@ -129,6 +130,7 @@
     "RESTART": "Genstart IoT enhed"
   },
   "DATATARGET": {
+    "DETAILS": "Detaljer",
     "SAVE": "Gem datatarget",
     "DESCRIPTION": "Beskrivelse",
     "URL": "URL",
@@ -138,13 +140,15 @@
     "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
-    "PAYLOADEDECODER": "Payload decoder navn:",
+    "PAYLOADEDECODER": "Payload decoder",
     "NO-PAYLOADDECODER": "Ingen payload decoder",
-    "IOTDEVICE": "IoT Device navn:",
+    "IOTDEVICE": "IoT enhed(er)",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
-    "ADD-TO-OPENDATADK": "Send data til OpenDataDK"
+    "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
+    "OPENDATA-DK": "Open Data DK", 
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datapakke endnu"
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -253,6 +257,9 @@
     "EDIT": "Redigér"
   },
   "PAYLOAD-DECODER": {
+    "DETAILS":"Detaljer",
+    "CREATED": "Oprettet",
+    "UPDATED":"Senest Opdateret",
     "TITLE": "Payload decoder",
     "SAVE": "Gem Payload Decoder",
     "NAME": "Navn",

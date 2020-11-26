@@ -14,6 +14,7 @@ import { OpendatadkDetailComponent } from './opendatadk/opendatadk-detail/openda
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SharedModule } from '@shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    PipesModule,
   ],
   exports: [
     DatatargetTableComponent,

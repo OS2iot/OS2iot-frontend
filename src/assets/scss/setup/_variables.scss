@@ -66,23 +66,23 @@ $icons-folder-path: "../img/svg-icons/" !default;
 //headline sizes
 $h1: 30 !default;
 $h1-font-size: calculateRem($h1) !default;
-$h1-line-height: calculateRem($h1 + 6) !default;
+$h1-line-height: calculateRem($h1 + 4) !default;
 
 $h2: 25 !default;
 $h2-font-size: calculateRem($h2) !default;
-$h2-line-height: calculateRem($h2 + 6) !default;
+$h2-line-height: calculateRem($h2 + 4) !default;
 
 $h3: 20 !default;
 $h3-font-size: calculateRem($h3) !default;
-$h3-line-height: calculateRem($h3 + 6) !default;
+$h3-line-height: calculateRem($h3 + 2) !default;
 
 $h4: 18 !default;
 $h4-font-size: calculateRem($h4) !default;
-$h4-line-height: calculateRem($h4 + 6) !default;
+$h4-line-height: calculateRem($h4 + 4) !default;
 
 $h5: $em-base !default;
 $h5-font-size: calculateRem($h5) !default;
-$h5-line-height: calculateRem($h5 + 6) !default;
+$h5-line-height: calculateRem($h5 + 4) !default;
 
 //font sizes
 $body-text: calculateRem($em-base) !default;
@@ -240,12 +240,12 @@ $color-bg-normal: $color-white-001 !default;
 $color-bg-primary: $color-primary !default;
 $color-bg-primary-layer: $color-black-002 !default;
 $color-bg-secondary: $color-white-001!default;
-$color-bg-alternative: $color-blue-004 !default;
+$color-bg-info: $color-blue-004 !default;
 
 //Icons color
 $color-Icons-primary: $color-primary !default;
 $color-Icons-secondary: $color-secondary !default;
-$color-Icons-alternative: $color-alternative !default;
+$color-Icons-alternative: $color-primary !default;
 $color-Icons-light: $color-light-green-001 !default;
 $color-icon-label: $color-text-light !default;
 

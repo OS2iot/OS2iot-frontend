@@ -10,6 +10,8 @@ import { DatatargetService } from '../datatarget.service';
 import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { Datatarget } from '../datatarget.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { faArrowsAltH, faChevronCircleLeft, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -23,6 +25,8 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
     public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
     private deleteDialogSubscription: Subscription;
+    public dropdownButton: DropdownButton;
+    arrowsAltH = faArrowsAltH;
 
     constructor(
         private route: ActivatedRoute,
@@ -37,10 +41,15 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
         if (id) {
             this.getDatatarget(id);
             this.getDatatargetRelations(id);
+            this.dropdownButton = {
+                label: '',
+                editRouterLink: '../../datatarget-edit/' + id,
+            }
         }
-        this.translate.get(['NAV.MY-DATATARGET'])
+        this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.MY-DATATARGET'];
+                this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS']
             });
     }
 
@@ -54,15 +63,15 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     onDeleteDatatarget() {
         this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
             (response) => {
-              if (response) {
-                this.datatargetService.delete(this.datatarget.id).subscribe((response) => {
-                });
-                this.location.back();
-              } else {
-                console.log(response);
-              }
+                if (response) {
+                    this.datatargetService.delete(this.datatarget.id).subscribe((response) => {
+                    });
+                    this.location.back();
+                } else {
+                    console.log(response);
+                }
             }
-          );
+        );
     }
 
     getDatatargetRelations(id: number) {

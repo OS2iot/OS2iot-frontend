@@ -5,6 +5,7 @@
         <div class="row">
             <div class="col-md-6 d-flex align-items-stretch">
                 <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+                    <h3>{{ 'GATEWAY.DETAILS' | translate }}</h3>
                     <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.id}}</p>
                     <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
                     <p><strong>{{ 'GATEWAY.CREATED' | translate }}</strong>{{gateway.createdAt | dkTime}}<span
@@ -48,7 +49,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="jumbotron">
-                    <h4>{{ 'GATEWAY.STATS' | translate }}</h4>
+                    <h3>{{ 'GATEWAY.STATS' | translate }}</h3>
                     <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource">
                             <ng-container matColumnDef="rxPacketsReceived">
