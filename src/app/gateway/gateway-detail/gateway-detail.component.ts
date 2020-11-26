@@ -49,6 +49,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.dropdownButton = {
                 label: '',
                 editRouterLink: '../../gateway-edit/' + this.id,
+                isErasable: true,
             };
         }
         this.translate.get(['NAV.LORA-GATEWAYS', 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])

@@ -37,7 +37,7 @@
                   <a [routerLink]="dropDownButton.editRouterLink">{{ 'TOPBAR.DROPDOWN.EDIT' | translate }}
                   </a>
                 </li>
-                <li class="dropdown-item">
+                <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
                   <a (click)="onClickDelete()">{{ 'TOPBAR.DROPDOWN.DELETE' | translate }}
                   </a>
                 </li>

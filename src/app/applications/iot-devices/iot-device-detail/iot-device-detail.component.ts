@@ -67,6 +67,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             this.dropdownButton = {
                 label: '',
                 editRouterLink: '../../iot-device-edit/' + this.deviceId,
+                isErasable: true,
             };
         }
 

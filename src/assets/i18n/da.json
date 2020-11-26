@@ -714,7 +714,11 @@
       "GLOBALADMIN": "Global Administrator: ",
       "PERMISSIONS": "Medlem af disse brugergrupper",
       "APPLICATIONS": "Rettigheder til disse applikationer",
-      "NAME-PLACEHOLDER": "Navn"
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL":"Email",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "STATUS":"Status"
     },
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",

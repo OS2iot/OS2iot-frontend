@@ -42,6 +42,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
       this.dropdownButton = {
         label: '',
         editRouterLink: '../../payload-decoder-edit/' + this.id,
+        isErasable: true,
       }
     }
     this.translate.get(['PAYLOAD-DECODER.TITLE', 'PAYLOAD-DECODER.DETAIL.DROPDOWN'])

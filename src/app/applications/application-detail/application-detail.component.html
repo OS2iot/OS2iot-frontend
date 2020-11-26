@@ -15,7 +15,7 @@
           <p *ngIf="application.createdAt !== application.updatedAt">
             <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{application.updatedAt | dkTime}}
             <span *ngIf="application.updatedByName">
-              {{application.updatedByName | createdUpdatedBy}} </span>
+              {{application.updatedByName | createdUpdatedBy}} </span></p>
         </div>
       </div>
     </div>

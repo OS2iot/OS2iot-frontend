@@ -44,6 +44,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
             this.dropdownButton = {
                 label: '',
                 editRouterLink: '../../datatarget-edit/' + id,
+                isErasable: true,
             }
         }
         this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])

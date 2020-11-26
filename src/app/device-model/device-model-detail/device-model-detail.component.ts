@@ -37,6 +37,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
       this.dropdownButton = {
         label: '',
         editRouterLink: '/device-model/device-model-edit/' + deviceModelId,
+        isErasable: true,
       }
     }
     this.translate.use('da');

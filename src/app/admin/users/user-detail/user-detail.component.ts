@@ -13,6 +13,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { Application } from '@applications/application.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -45,6 +46,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       type: 'edit',
     },
   ];
+  dropdownButton: DropdownButton;
   id: number;
   subscription: Subscription;
 
@@ -54,9 +56,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private permissionsService: PermissionService,
     private router: Router,
-    private applicationService: ApplicationService,
-    private globalService: SharedVariableService,
-    private organisationService: OrganisationService,
   ) { }
 
   ngOnInit(): void {
@@ -64,10 +63,16 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     this.id = +this.route.snapshot.paramMap.get('user-id');
     if (this.id > 0) {
       this.getUser(this.id);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: 'edit-user',
+        isErasable: false,
+      }
     }
-    this.translate.get(['NAV.USERS'])
+    this.translate.get(['NAV.USERS', 'USERS.DETAIL.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.USERS'];
+        this.dropdownButton.label = translations['USERS.DETAIL.DROPDOWN']
       });
   }
 

@@ -39,6 +39,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
             this.dropdownButton = {
                 label: '',
                 editRouterLink: '../../edit-application/' + this.id,
+                isErasable: true,
             }
             console.log(this.id);
         }
