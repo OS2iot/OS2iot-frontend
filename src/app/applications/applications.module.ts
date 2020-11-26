@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { BulkImportComponent } from './bulk-import/bulk-import.component';
         SharedModule,
         FontAwesomeModule,
         NGMaterialModule,
+        PipesModule,
     ],
 })
 export class ApplicationsModule { }

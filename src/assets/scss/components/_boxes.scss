@@ -16,13 +16,14 @@
     width: -webkit-fill-available;
   }
   h3{
+    @extend .pr-5;
+    @extend .mb-4;
     display: block;
     margin: 0;
     border-bottom-width: 5px;
     border-bottom-style: solid;
     border-bottom-color: $color-primary;
-    width: 100%;
-    @extend .mb-4;
+    width: fit-content;
   }
 }
 
