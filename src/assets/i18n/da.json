@@ -278,6 +278,9 @@
     "DELETE": "Slet"
   },
   "ORGANISATION": {
+    "HEADLINE":"Detaljer",
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest Opdateret",
     "NAME": "Navn",
     "APPLICATION-COUNT": "Applikationer",
     "SAVE": "Gem organisation",

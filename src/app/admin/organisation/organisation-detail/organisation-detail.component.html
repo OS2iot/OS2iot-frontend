@@ -1,45 +1,43 @@
-<app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"></app-top-bar>
+<div *ngIf="organisation">
+    <app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"
+        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+    </app-top-bar>
 
-<div class=" jumbotron" *ngIf="organisation">
     <div class="row">
-        <div class="col-xs-12">
-            <div class="float-left">
-                <h2> {{organisation.name}}</h2>
-            </div>
-            <div class="btn-group float-md-right dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{'ORGANISATION.DROPDOWN' | translate}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{organisation.id}}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['edit-organisation']"
-                            routerLinkActive="active">{{ 'ORGANISATION-TABLE-ROW.EDIT' | translate }}
-                        </a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a (click)="clickDelete()" [routerLink]="">{{ 'PERMISSION.TABLE-ROW.DELETE' | translate }}
-                        </a>
-                    </li>
-                </ul>
+        <div class="col-12 ">
+            <div class="jumbotron">
+                <h3> {{'ORGANISATION.HEADLINE' | translate}}</h3>
+                <p><strong>{{ 'ORGANISATION.CREATED' | translate }}</strong>{{organisation.createdAt | dkTime}}<span
+                        *ngIf="organisation.createdByName">{{organisation.createdByName | createdUpdatedBy}}</span>
+                </p>
+                <p *ngIf="organisation.createdAt !== organisation.updatedAt">
+                    <strong>{{ 'ORGANISATION.UPDATED' | translate }}</strong>{{organisation.updatedAt | dkTime}}
+                    <span *ngIf="organisation.updatedByName">{{organisation.updatedByName | createdUpdatedBy}}</span>
+                </p>
             </div>
         </div>
     </div>
-</div>
-
-<div class="jumbotron">
-    <h4 class="">
-        {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
-    </h4>
-    <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
-        [isLoadingResults]="isLoadingResults">
-    </app-applications-table>
-</div>
-
-<div class="jumbotron">
-    <h4 class="">
-        {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
-    </h4>
-    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
-    </app-permission-tabel>
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h3>
+                    {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
+                </h3>
+                <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
+                    [isLoadingResults]="isLoadingResults">
+                </app-applications-table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h3>
+                    {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
+                </h3>
+                <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
+                </app-permission-tabel>
+            </div>
+        </div>
+    </div>
 </div>
