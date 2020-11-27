@@ -6,6 +6,7 @@
         <div class="row" *ngIf="deviceModel">
             <div class="col-12">
                 <div class="jumbotron">
+                    <h3>{{ 'DEVICE-MODEL.HEADLINE' | translate }}</h3>
                     <p *ngIf="deviceModel.createdAt">
                         <strong>{{ 'DEVICE-MODEL.CREATED' | translate }}</strong>{{deviceModel.createdAt | dkTime}}<span
                             *ngIf="deviceModel.createdByName">{{deviceModel.createdByName | createdUpdatedBy}}</span>

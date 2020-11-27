@@ -45,7 +45,6 @@ export class UserTableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("ngOnChanges")
     if (this.users) {
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.sort = this.sort;

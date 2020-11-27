@@ -1,13 +1,13 @@
 <div *ngIf="sigfoxGroups">
-    <app-top-bar [showSelectedSort]="false" [title]="'SIGFOX-GROUP.ADMINISTRATION.NAME' | translate"
-        [ctaRouterLink]="'new-group'" [ctaLabel]="'SIGFOX-GROUP.ADMINISTRATION.CREATE-NEW-GROUP' | translate">
+    <app-top-bar [showSelectedSort]="false" [title]="'SIGFOX-GROUP.NAME' | translate" [ctaRouterLink]="'new-group'"
+        [ctaLabel]="'SIGFOX-GROUP.ADMINISTRATION.CREATE-NEW-GROUP' | translate">
     </app-top-bar>
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class=" jumbotron" *ngIf="sigfoxGroups">
-                    <h3>{{'SIGFOX-GROUP.ADMINISTRATION.CREATE-NEW-GROUP' | translate}}</h3>
+                    <h3>{{'SIGFOX-GROUP.ADMINISTRATION.NAME' | translate}}</h3>
                     <app-sigfox-groups-list-item *ngFor="let group of sigfoxGroups; let i = index"
                         [sigfoxGroup]="group">
                     </app-sigfox-groups-list-item>

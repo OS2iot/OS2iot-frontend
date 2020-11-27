@@ -55,7 +55,7 @@
     "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
-    "SIGFOX": "Sigfox",
+    "NAME": "Sigfox Administration",
     "SIGFOX-GROUP": "Sigfox Grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
     "LOGIN": "Login",
@@ -201,6 +201,7 @@
     "ORGANIZATION": "Organisation"
   },
   "DEVICE-MODEL": {
+    "HEADLINE":"Detaljer",
     "CREATED":"Oprettet",
     "UPDATED":"Senest Opdateret",
     "ID": "Id",

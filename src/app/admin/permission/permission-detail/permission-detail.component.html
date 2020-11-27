@@ -1,9 +1,9 @@
 <div *ngIf="permission">
-    <app-top-bar *ngIf="permission" [data]="permission" [backButton]="backButton" [subPage]="true"
-        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePermission()">
+    <app-top-bar [data]="permission" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePermission()">
     </app-top-bar>
 
-    <div class=" jumbotron" *ngIf="permission">
+    <div class=" jumbotron">
         <div class="row">
             <div class="col-xs-12">
                 <div class="float-left">

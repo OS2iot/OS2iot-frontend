@@ -20,6 +20,7 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
 import { ErrorMessageService } from '@shared/error-message.service';
 import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
 import { OpendatadkService } from '@shared/services/opendatadk.service';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -64,7 +65,8 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
     private opendatadkService: OpendatadkService,
-    private opendatadkDialogService: OpendatadkDialogService
+    private opendatadkDialogService: OpendatadkDialogService,
+    private scrollToTopService: ScrollToTopService,
   ) {
     translate.use('da');
   }
@@ -262,6 +264,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errors.errorFields;
     this.errorMessages = errors.errorMessages;
+    this.scrollToTopService.scrollToTop();
   }
 
   routeBack(): void {

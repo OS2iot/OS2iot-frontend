@@ -6,6 +6,6 @@ import { DatePipe } from '@angular/common';
 })
 export class CustomDatePipe extends DatePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        return super.transform(value, " 'd.' dd-MM-yyyy kl. HH:mm");
+        return super.transform(value, " 'den' dd-MM-yyyy kl. HH:mm");
     }
 }
