@@ -64,7 +64,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
 
     public getBatteryProcentage(device: IotDevice): number {
         if (device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
-          return null;
+            return null;
         }
         return Math.round(device?.lorawanSettings?.deviceStatusBattery);
     }
@@ -96,7 +96,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
     clickDelete(element: any) {
         if (element.type == DeviceType.SIGFOX) {
             this.showSigfoxDeleteDialog();
-          } else {
+        } else {
             this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
                 (response) => {
                     if (response) {
@@ -110,18 +110,18 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
                     }
                 }
             );
-          }
+        }
     }
 
     showSigfoxDeleteDialog() {
         const dialog = this.dialog.open(DeleteDialogComponent, {
-          data: {
-            message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
-            showAccept: false,
-            showCancel: true
-          }
+            data: {
+                message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
+                showAccept: false,
+                showCancel: true
+            }
         });
-      }
+    }
 
     ngOnDestroy() {
         // prevent memory leak by unsubscribing

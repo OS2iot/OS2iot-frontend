@@ -1,6 +1,6 @@
-<app-loading-spinner *ngIf=" isLoadingResults">
+<app-loading-spinner *ngIf="isLoadingResults; else showTable">
 </app-loading-spinner>
-<div class="mat-elevation-z8">
+<ng-template class="mat-elevation-z8" #showTable>
   <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
     <!-- Name Column -->
@@ -77,5 +77,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons></mat-paginator>
-</div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
+  </mat-paginator>
+</ng-template>
