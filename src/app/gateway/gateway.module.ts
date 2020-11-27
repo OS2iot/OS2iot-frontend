@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { SharedModule } from '@shared/shared.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 const gatewayRoutes: Routes = [
   {
@@ -44,7 +45,8 @@ const gatewayRoutes: Routes = [
     FontAwesomeModule,
     NGMaterialModule,
     RouterModule.forChild(gatewayRoutes),
-    SharedModule
+    SharedModule,
+    PipesModule,
   ],
   exports: [
     GatewayTableComponent,

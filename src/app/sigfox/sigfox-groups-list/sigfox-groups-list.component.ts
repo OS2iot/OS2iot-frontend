@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { faDatabase, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
@@ -21,8 +20,6 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    private route: ActivatedRoute,
-    private router: Router,
     private globalService: SharedVariableService,
     private sigfoxService: SigfoxService) {
     translate.use('da');
@@ -45,10 +42,6 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
 
   getCurrentOrganisationId(): number {
     return this.globalService.getSelectedOrganisationId();
-  }
-
-  onNewGroup() {
-    this.router.navigate(['new-group'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {

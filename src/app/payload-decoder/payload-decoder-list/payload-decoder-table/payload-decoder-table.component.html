@@ -1,6 +1,6 @@
-<div class="mat-elevation-z8">
-    <app-loading-spinner *ngIf=" isLoadingResults">
-    </app-loading-spinner>
+<app-loading-spinner *ngIf="isLoadingResults; else showTable">
+</app-loading-spinner>
+<ng-template class="mat-elevation-z8" #showTable>
     <app-top-bar-table [component]="true" [addDropdown]="true" [options]="organizations"
         [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="filterByOrgId($event)"
         [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
@@ -64,5 +64,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons></mat-paginator>
-</div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
+    </mat-paginator>
+</ng-template>

@@ -41,7 +41,6 @@ export class PermissionTabelComponent implements OnInit, OnChanges, AfterViewIni
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("ngOnChanges")
     if (this.permissions) {
       this.dataSource = new MatTableDataSource(this.permissions);
       this.dataSource.sort = this.sort;

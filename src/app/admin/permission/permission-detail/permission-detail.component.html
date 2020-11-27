@@ -1,40 +1,35 @@
-<app-top-bar *ngIf="permission" [data]="permission" [backButton]="backButton" [subPage]="true"></app-top-bar>
+<div *ngIf="permission">
+    <app-top-bar [data]="permission" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePermission()">
+    </app-top-bar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class=" jumbotron">
+                    <h3>{{'PERMISSION.DETAIL.HEADLINE' | translate}}</h3>
+                    <p><strong>{{ 'PERMISSION.DETAIL.CREATED' | translate }}</strong>{{permission.createdAt | dkTime}}<span
+                            *ngIf="permission.createdByName">{{permission.createdByName | createdUpdatedBy}}</span></p>
+                    <p *ngIf="permission.createdAt !== permission.updatedAt">
+                        <strong>{{ 'PERMISSION.DETAIL.UPDATED' | translate }}</strong>{{permission.updatedAt | dkTime}}
+                        <span *ngIf="permission.updatedByName">
+                            {{permission.updatedByName | createdUpdatedBy}} </span></p>
+                    <p><strong>{{'PERMISSION.DETAIL.TYPE' | translate}}</strong>{{permission.type}}</p>
+                    <p><strong>{{'PERMISSION.DETAIL.ORG' | translate}}</strong>
+                        {{permission.organization?.name}}
+                    </p>
 
-<div class=" jumbotron m-md-4 p-md-3" *ngIf="permission">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="float-left">
-                <h4>{{permission.name}}</h4>
-                <p>{{'PERMISSION.DETAIL.TYPE' | translate}}{{permission.type}}</p>
-                <p>{{'PERMISSION.DETAIL.ORG' | translate}}
-                    {{permission.organization?.name}}
-                </p>
+                </div>
             </div>
-            <div class="btn-group float-md-right dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{'PERMISSION.DETAIL.DROPDOWN' | translate}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{permission.id}}">
-                    <li>
-                        <a class="dropdown-item" [routerLink]="['edit-permission']"
-                            routerLinkActive="active">{{'PERMISSION.DETAIL.EDIT' | translate}}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" (click)="onDeletePermission()"
-                            [routerLink]="">{{ 'PERMISSION.DETAIL.DELETE' | translate }}
-                        </a>
-                    </li>
-                </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h3>
+                        {{ 'PERMISSION.DETAIL.USERS' | translate }}
+                    </h3>
+                    <app-user-table [users]="users" [isLoadingResults]="isLoadingResults"></app-user-table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="jumbotron m-md-4 p-md-3">
-    <h4 class="">
-        {{ 'PERMISSION.DETAIL.USERS' | translate }}
-    </h4>
-    <app-user-table [users]="users" [isLoadingResults]="isLoadingResults"></app-user-table>
 </div>

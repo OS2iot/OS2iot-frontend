@@ -6,7 +6,6 @@
     "DELETE": "Slet",
     "BACK": "Tilbage",
     "EDIT": "Redigér",
-    "DELETE": "Slet",
     "APPLICATION": "Applikation",
     "HTTP": "Generisk HTTP",
     "SAVE": "Gem"
@@ -38,6 +37,10 @@
   "TOPBAR":{
     "SEARCH": {
       "BUTTON": "Søg"
+    },
+    "DROPDOWN": {
+      "EDIT": "Rediger",
+      "DELETE": "Slet"
     }
   },
   "SEARCH": {
@@ -52,7 +55,7 @@
     "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
-    "SIGFOX": "Sigfox",
+    "NAME": "Sigfox Administration",
     "SIGFOX-GROUP": "Sigfox Grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
     "LOGIN": "Login",
@@ -97,6 +100,9 @@
     }
   },
   "GATEWAY": {
+    "DETAILS":"Detaljer",
+    "CREATED": "Oprettet",
+    "UPDATED": "Senest Opdateret",
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
@@ -123,6 +129,7 @@
     "RESTART": "Genstart IoT enhed"
   },
   "DATATARGET": {
+    "DETAILS": "Detaljer",
     "SAVE": "Gem datatarget",
     "DESCRIPTION": "Beskrivelse",
     "URL": "URL",
@@ -132,13 +139,15 @@
     "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
-    "PAYLOADEDECODER": "Payload decoder navn:",
+    "PAYLOADEDECODER": "Payload decoder",
     "NO-PAYLOADDECODER": "Ingen payload decoder",
-    "IOTDEVICE": "IoT Device navn:",
+    "IOTDEVICE": "IoT enhed(er)",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
-    "ADD-TO-OPENDATADK": "Send data til OpenDataDK"
+    "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
+    "OPENDATA-DK": "Open Data DK", 
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datapakke endnu"
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -166,7 +175,7 @@
       "LICENSE": "Licens",
       "AUTHORNAME": "Forfatterens navn",
       "AUTHOREMAIL": "Forfatterens email",
-      "URL": "endpoint til hentning af data",
+      "URL": "Endpoint til hentning af data",
       "NA": "Intet angivet"
     }
   },
@@ -192,13 +201,16 @@
     "ORGANIZATION": "Organisation"
   },
   "DEVICE-MODEL": {
+    "HEADLINE":"Detaljer",
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest Opdateret",
     "ID": "Id",
     "NAME": "Navn",
     "TYPE" : "Type",
     "BRANDNAME" : "Mærke",
     "MODELNAME" : "Model",
     "MANUFACTURERNAME" : "Producentens navn",
-    "CONTROLLEDPROPERTY" : "kontrol egenskaber",
+    "CONTROLLEDPROPERTY" : "Kontrol egenskaber",
     "CATEGORY" : "Kategori",
     "SUPPORTEDUNITS" : "Måleenheder",
     "FUNCTION" : "Enhedsfunktioner",
@@ -245,6 +257,9 @@
     "EDIT": "Redigér"
   },
   "PAYLOAD-DECODER": {
+    "DETAILS":"Detaljer",
+    "CREATED": "Oprettet",
+    "UPDATED":"Senest Opdateret",
     "TITLE": "Payload decoder",
     "SAVE": "Gem Payload Decoder",
     "NAME": "Navn",
@@ -263,6 +278,9 @@
     "DELETE": "Slet"
   },
   "ORGANISATION": {
+    "HEADLINE":"Detaljer",
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest Opdateret",
     "NAME": "Navn",
     "APPLICATION-COUNT": "Applikationer",
     "SAVE": "Gem organisation",
@@ -299,7 +317,10 @@
       "EDIT": "Rediger",
       "DELETE": "Slet",
       "USERS": "Brugergruppens brugere",
-      "APPLICATIONS": "Brugergruppens applikationer"
+      "APPLICATIONS": "Brugergruppens applikationer",
+      "HEADLINE": "Detaljer",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -532,8 +553,12 @@
       "SIGFOX-PAYLOAD-LENGTH": "Downlink payload til Sigfox skal være præcis 16 tegn (Hexadecimal)",
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
+    "CREATED": "Oprettet",
+    "UPDATED": "Senest Opdateret",
     "DEVICEMODEL": "Device Model",
-    "DETAIL-TAB": "Detail",
+    "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
+    "DETAIL": "Detaljer",
+    "DETAIL-TAB": "Datapakke",
     "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
@@ -542,7 +567,7 @@
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
     "COMMENTONLOCATION": "Kommentar om placering",
-    "COMMENT": "Kommentar",
+    "COMMENT": "Kommentar: ",
     "NOCOMMENT": "Ingen kommentar er angivet.",
     "NOLOCATION": "Ingen placering er angivet",
     "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",
@@ -593,6 +618,11 @@
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
     "SERVICE_PROFILE": {
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "DETAILS": "Detaljer",
+      "DELETE-FROM-LIST":"Slet",
+      "HEADLINE": "Service profiler",
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
       "EDIT": "Rediger profil",
@@ -619,6 +649,11 @@
       "ID": "Service profilens ID"
     },
     "DEVICE_PROFILE": {
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "DETAILS": "Detaljer",
+      "DELETE-FROM-LIST":"Slet",
+      "HEADLINE": "Device profiler",
       "DROPDOWN": "Håndter device profil",
       "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
       "EDIT": "Rediger profil",
@@ -695,7 +730,12 @@
       "GLOBALADMIN": "Global Administrator: ",
       "PERMISSIONS": "Medlem af disse brugergrupper",
       "APPLICATIONS": "Rettigheder til disse applikationer",
-      "NAME-PLACEHOLDER": "Navn"
+      "NAME-PLACEHOLDER": "Navn",
+      "EMAIL":"Email",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "STATUS":"Status",
+      "HEADLINE":"Detaljer"
     },
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",

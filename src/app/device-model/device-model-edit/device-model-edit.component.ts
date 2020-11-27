@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
 import { ControlledPropperty } from '../Enums/controlled-propperty.enum';
@@ -39,15 +40,16 @@ export class DeviceModelEditComponent implements OnInit {
     private location: Location,
     private deviceModelService: DeviceModelService,
     private errorMessageService: ErrorMessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private scrollToTopService: ScrollToTopService,
   ) { }
 
   ngOnInit(): void {
     this.translate.get(['NAV.DEVICE-MODEL'])
-            .subscribe(translations => {
-                this.backButton.label = translations['NAV.DEVICE-MODEL'];
-                this.title = translations['NAV.DEVICE-MODEL'];
-            });
+      .subscribe(translations => {
+        this.backButton.label = translations['NAV.DEVICE-MODEL'];
+        this.title = translations['NAV.DEVICE-MODEL'];
+      });
     this.mapEnumsToArray();
     const deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
     if (deviceModelId) {
@@ -68,7 +70,7 @@ export class DeviceModelEditComponent implements OnInit {
 
   private getDeviceModel(id: number) {
     this.deviceModelService.get(id)
-      .subscribe( (response) => {
+      .subscribe((response) => {
         this.deviceModel = response;
       });
   }
@@ -89,6 +91,7 @@ export class DeviceModelEditComponent implements OnInit {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(err);
     this.errorMessages = errorResponse.errorMessages;
     this.errorFields = errorResponse.errorFields;
+    this.scrollToTopService.scrollToTop();
   }
 
   updateDeviceModel() {

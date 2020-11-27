@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
@@ -19,6 +19,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;
   deviceProfile = new DeviceProfile();
   subscription: Subscription;
+  deviceProfileData: DeviceProfile;
 
   public errorMessage: string;
   public errorMessages: string[];
@@ -29,7 +30,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private translate: TranslateService,
     private deviceProfileService: DeviceProfileService,
     private location: Location,
@@ -58,6 +58,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (response) => {
           this.deviceProfile = response.deviceProfile;
+          this.deviceProfileData = response.deviceProfile;
           this.canEdit();
           this.deviceProfile.factoryPresetFreqsInput = this.deviceProfile.factoryPresetFreqs.map(String).join();
         },

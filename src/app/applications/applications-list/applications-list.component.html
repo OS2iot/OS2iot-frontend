@@ -1,9 +1,14 @@
 <app-top-bar [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
   [ctaRouterLink]="'new-application'" (updatePageLimit)="updatePageLimit($event)">
 </app-top-bar>
-
-<div class="m-md-4 p-md-3">
-  <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
-    [isLoadingResults]="isLoadingResults">
-  </app-applications-table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="page">
+        <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
+          [isLoadingResults]="isLoadingResults">
+        </app-applications-table>
+      </div>
+    </div>
+  </div>
 </div>

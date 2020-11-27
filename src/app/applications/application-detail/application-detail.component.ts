@@ -6,6 +6,7 @@ import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,9 +21,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     private id: number;
-    public description: string;
-    public name: string;
     public iotDevices: IotDevice[] = [];
+    public dropdownButton: DropdownButton;
 
     constructor(
         private applicationService: ApplicationService,
@@ -36,39 +36,41 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         this.id = +this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.bindApplication(this.id);
+            this.dropdownButton = {
+                label: '',
+                editRouterLink: '../../edit-application/' + this.id,
+                isErasable: true,
+            }
+            console.log(this.id);
         }
-        this.translate.get(['NAV.APPLICATIONS'])
+
+        this.translate.get(['NAV.APPLICATIONS', 'APPLICATION-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
+                this.dropdownButton.label = translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
             });
     }
 
     onDeleteApplication() {
         this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
             (response) => {
-              if (response) {
-                this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
-                    if (response.ok && response.body.affected > 0) {
-                        console.log('delete application with id:' + this.application.id.toString());
-                    }
-                });
-                this.router.navigate(['applications']);
-              } else {
-                console.log(response);
-              }
+                if (response) {
+                    this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
+                        if (response.ok && response.body.affected > 0) {
+                            console.log('delete application with id:' + this.application.id.toString());
+                        }
+                    });
+                    this.router.navigate(['applications']);
+                } else {
+                    console.log(response);
+                }
             }
         );
-    }
-
-    onEditApplication() {
-        this.router.navigate(['edit-application'], { relativeTo: this.route });
     }
 
     bindApplication(id: number): void {
         this.applicationsSubscription = this.applicationService.getApplication(id).subscribe((application) => {
             this.application = application;
-            this.name = application.name;
-            this.description = application.description;
             if (application.iotDevices) {
                 this.iotDevices = application.iotDevices;
             }

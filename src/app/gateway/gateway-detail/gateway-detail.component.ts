@@ -10,6 +10,7 @@ import { Gateway, GatewayStats } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -29,6 +30,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
+    public dropdownButton: DropdownButton;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -44,10 +46,16 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.bindGateway(this.id);
+            this.dropdownButton = {
+                label: '',
+                editRouterLink: '../../gateway-edit/' + this.id,
+                isErasable: true,
+            };
         }
-        this.translate.get(['NAV.LORA-GATEWAYS'])
+        this.translate.get(['NAV.LORA-GATEWAYS', 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.LORA-GATEWAYS'];
+                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
             });
     }
 
@@ -75,7 +83,6 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
             this.dataSource.paginator = this.paginator;
-            console.log('gateway', this.gateway);
         });
     }
 

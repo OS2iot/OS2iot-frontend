@@ -1,5 +1,15 @@
 <app-form-header [backButton]="backButton" [title]="title">
 </app-form-header>
+<!-- <div *ngIf="serviceProfileData" class="jumbotron os2-form mt-3 px-md-5 py-md-4">
+    <h3>{{ 'PROFILES.SERVICE_PROFILE.DETAILS' | translate }}</h3>
+    <p><strong>{{ 'PROFILES.SERVICE_PROFILE.CREATED' | translate }}</strong>{{serviceProfileData.createdAt | dkTime}}<span
+            *ngIf="serviceProfileData.createdByName">{{serviceProfileData.createdByName | createdUpdatedBy}}</span>
+    </p>
+    <p *ngIf="deviceProfileData.createdAt !== deviceProfileData.updatedAt">
+        <strong>{{ 'PROFILES.SERVICE_PROFILE.UPDATED' | translate }}</strong>{{serviceProfileData.updatedAt | dkTime}}
+        <span *ngIf="serviceProfileData.updatedByName">{{serviceProfileData.updatedByName | createdUpdatedBy}}</span>
+    </p>
+</div> -->
 <form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
@@ -27,8 +37,7 @@
     </div>
 
     <div class="col-xs-12 form-group" *ngIf="serviceProfile.id">
-        <label for="id"
-            class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.ID' | translate}}</label>
+        <label for="id" class="form-label asterisk-if-mandatory">{{'PROFILES.SERVICE_PROFILE.ID' | translate}}</label>
         <input type="text" class="form-control" id="id" name="id"
             [placeholder]="'PROFILES.SERVICE_PROFILE.ID_PLACEHOLDER' | translate" maxlength="50" required disabled
             [ngModel]="serviceProfile.id">

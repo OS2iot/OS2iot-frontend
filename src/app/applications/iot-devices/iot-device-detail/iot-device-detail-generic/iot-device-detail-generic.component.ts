@@ -8,8 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { Subscription } from 'rxjs';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { DeviceModelService } from '@app/device-model/device-model.service';
-import { DeviceModel } from '@app/device-model/device.model';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
@@ -23,8 +21,6 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   @Input() latitude = 0;
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
-  private deleteDialogSubscription: Subscription;
-  public deviceModel: string;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
@@ -32,9 +28,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
     private translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
     private location: Location,
-    private deleteDialogService: DeleteDialogService,
-    private dialog: MatDialog,
-    private deviceModelService: DeviceModelService
+
   ) { }
 
   ngOnInit(): void {
@@ -42,48 +36,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
 
   ngOnChanges(): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
-    if (this.device.deviceModelId) {
-      this.getDeviceModel(this.device.deviceModelId);
-    }
-  }
 
-  getDeviceModel(id: number) {
-    this.deviceModelService.get(id).subscribe(
-      (response) => {
-        this.deviceModel = JSON.stringify(response.body, null, 4);
-      }
-    );
-  }
-
-
-  clickDelete() {
-    if (this.device.type == DeviceType.SIGFOX) {
-      this.showSigfoxDeleteDialog();
-    } else {
-      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
-        (response) => {
-          if (response) {
-            this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(
-                (response) => {
-                  this.routeBack();
-              }
-            );
-          } else {
-            console.log(response);
-          }
-        }
-      );
-    }
-  }
-
-  showSigfoxDeleteDialog() {
-    const dialog = this.dialog.open(DeleteDialogComponent, {
-      data: {
-        message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
-        showAccept: false,
-        showCancel: true
-      }
-    });
   }
 
   routeBack(): void {
@@ -91,25 +44,23 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   }
   getCoordinates() {
     return {
-        longitude: this.longitude,
-        latitude: this.latitude,
-        draggable: false,
-        editEnabled: false,
-        useGeolocation: false
+      longitude: this.longitude,
+      latitude: this.latitude,
+      draggable: false,
+      editEnabled: false,
+      useGeolocation: false
     };
-}
+  }
 
   getBatteryProcentage(): number {
     if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
       return null;
     }
-    return Math.round(this.device?.lorawanSettings?.deviceStatusBattery) 
+    return Math.round(this.device?.lorawanSettings?.deviceStatusBattery);
   }
 
   ngOnDestroy(): void {
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
+
   }
 
 }

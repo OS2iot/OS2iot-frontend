@@ -1,47 +1,44 @@
-<app-top-bar *ngIf="user" [data]="user" [backButton]="backButton" [subPage]="true"></app-top-bar>
-
-<div class=" jumbotron m-md-4 p-md-3" *ngIf="user">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="float-left">
-                <h4>{{user.name}}</h4>
-                <p>{{user.email}}</p>
-                <p [ngClass]="user.active | activeDeactive">{{user.active | activeDeactive}}</p>
-                <div>
-                    <div *ngIf="user.lastLogin; else noLogin">
-                        <P>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}{{user?.lastLogin | date}}</P>
-                    </div>
+<div *ngIf="user">
+    <app-top-bar [data]="user" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton"></app-top-bar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class=" jumbotron">
+                    <h3>{{ 'USERS.DETAIL.HEADLINE' | translate }}</h3>
+                    <p><strong>{{ 'USERS.DETAIL.EMAIL' | translate }}</strong>{{user.email}}</p>
+                    <p><strong>{{ 'USERS.DETAIL.CREATED' | translate }}</strong>{{user.createdAt | dkTime}}<span
+                            *ngIf="user.createdByName">{{user.createdByName | createdUpdatedBy}}</span></p>
+                    <p *ngIf="user.createdAt !== user.updatedAt">
+                        <strong>{{ 'USERS.DETAIL.UPDATED' | translate }}</strong>{{user.updatedAt | dkTime}}
+                        <span *ngIf="user.updatedByName">
+                            {{user.updatedByName | createdUpdatedBy}} </span></p>
+                    <p [ngClass]="user.active | activeDeactive">
+                        <strong>{{ 'USERS.DETAIL.STATUS' | translate }}</strong>{{user.active | activeDeactive}}</p>
+                    <P *ngIf="user.lastLogin; else noLogin">
+                        <strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{user?.lastLogin | date}}</P>
                     <ng-template #noLogin>
-                        <P>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}{{ 'USERS.DETAIL.NO-LOGIN' | translate }}</P>
+                        <p><strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{ 'USERS.DETAIL.NO-LOGIN' | translate }}
+                        </p>
                     </ng-template>
+                    <p><strong>{{ 'USERS.DETAIL.ADDED-DATE' | translate }}</strong>{{user?.createdAt | date}}</p>
+                    <p><strong>{{ 'USERS.DETAIL.GLOBALADMIN' | translate }}</strong>
+                        {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
+                    </p>
                 </div>
-                <p>{{ 'USERS.DETAIL.ADDED-DATE' | translate }}{{user?.createdAt | date}}</p>
-                <p>{{ 'USERS.DETAIL.GLOBALADMIN' | translate }}
-                    {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
-                </p>
             </div>
-            <div class="btn-group float-md-right dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{'USERS.DETAIL.DROPDOWN' | translate}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{user.id}}">
-                    <li class="dropdown-item">
-                        <a [routerLink]="['edit-user']"
-                            routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
-                        </a>
-                    </li>
-                </ul>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h3 class="">
+                        {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
+                    </h3>
+                    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
+                        [isLoadingResults]="isLoadingResults">
+                    </app-permission-tabel>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="jumbotron m-md-4 p-md-3">
-    <h4 class="">
-        {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
-    </h4>
-    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
-        [isLoadingResults]="isLoadingResults">
-    </app-permission-tabel>
 </div>

@@ -12,6 +12,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { UserResponse } from '@app/admin/users/user.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   id: number;
   subscription: Subscription;
   users: UserResponse[];
+  dropdownButton: DropdownButton;
 
   constructor(
     public translate: TranslateService,
@@ -56,10 +58,16 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     this.id = +this.route.snapshot.paramMap.get('permission-id');
     if (this.id > 0) {
       this.getPermission(this.id);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: 'edit-permission',
+        isErasable: true,
+      }
     }
-    this.translate.get(['NAV.PERMISSIONS'])
+    this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.PERMISSIONS'];
+        this.dropdownButton.label = translations['PERMISSION.DETAIL.DROPDOWN'];
       });
   }
 

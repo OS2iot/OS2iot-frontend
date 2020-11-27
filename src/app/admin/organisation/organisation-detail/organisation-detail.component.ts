@@ -13,6 +13,7 @@ import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -29,6 +30,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   public applications: Application[];
   private applicationsSubscription: Subscription;
   private deleteDialogSubscription: Subscription;
+  public dropdownButton: DropdownButton;
 
   organisation: OrganisationResponse;
   public backButton: BackButton = {
@@ -59,9 +61,15 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }
-    this.translate.get(['NAV.ORGANISATIONS'])
+    this.dropdownButton = {
+      label: '',
+      editRouterLink: 'edit-organisation',
+      isErasable: true,
+    }
+    this.translate.get(['NAV.ORGANISATIONS', 'ORGANISATION.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.ORGANISATIONS'];
+        this.dropdownButton.label = translations['ORGANISATION.DROPDOWN'];
       });
   }
 

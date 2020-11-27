@@ -50,24 +50,25 @@ export class DeviceModelService {
               response.body.supportedUnits,
               response.body.function,
               response.body.supportedProtocol,
-              response.body.createdAt,
-              response.body.updatedAt,
-              response.body.createdBy,
-              response.body.updatedBy,
-              this.userMinimalService.getUserNameFrom(response.body.createdBy),
-              this.userMinimalService.getUserNameFrom(response.body.updatedBy)
-            )
+
+            ),
+            response.createdAt,
+            response.updatedAt,
+            response.createdBy,
+            response.updatedBy,
+            this.userMinimalService.getUserNameFrom(response.createdBy),
+            this.userMinimalService.getUserNameFrom(response.updatedBy),
           )
-        )
-      );
+      )
+    );
   }
 
   getMultiple(): Observable<any> {
     const organizationId = this.sharedVariable.getSelectedOrganisationId();
-    return this.restService.get(this.DEVICEMODELURL, {organizationId})
+    return this.restService.get(this.DEVICEMODELURL, { organizationId })
       .pipe(
         map(
-          response => response.data.map( (item: any) =>
+          response => response.data.map((item: any) =>
             new DeviceModel(
               item.id,
               new DeviceModelBody(
@@ -82,11 +83,11 @@ export class DeviceModelService {
                 item.body.supportedUnits,
                 item.body.function,
                 item.body.supportedProtocol
-                )
               )
             )
           )
-        );
+        )
+      );
   }
 
   delete(id: number) {

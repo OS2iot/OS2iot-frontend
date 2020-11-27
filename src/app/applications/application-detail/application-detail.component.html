@@ -1,51 +1,34 @@
-<ng-container *ngIf="application">
-  <app-top-bar [data]="application" [backButton]="backButton" [subPage]="true"></app-top-bar>
-  <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
+<div *ngIf="application">
+  <app-top-bar [data]="application" [backButton]="backButton" [subPage]="true"
+    [ctaRouterLink]="['datatarget-list', application.name]" [ctaLabel]="'APPLICATION.DATATARGET-SHOW' | translate"
+    [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteApplication()">
+  </app-top-bar>
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 ">
-        <div class="float-left">
-          <h4>{{ 'APPLICATION.DESCRIPTION' | translate }}</h4>
-          <p>{{description}}</p>
-        </div>
-      </div>
-      <div class="col-md-4 order-first order-md-last ">
-        <div class="btn-group float-md-right dropdown">
-          <ul>
-            <li>
-              <button type="button" id="dropdown-{{ application.name }}" class="btn btn-primary dropdown-toggle"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate}} <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{application.name}}">
-                <li class="dropdown-item">
-                  <a (click)="onEditApplication()">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
-                  </a>
-                </li>
-                <li class="dropdown-item">
-                  <a (click)="onDeleteApplication()">{{ 'USERS.TABLE-ROW.DELETE' | translate }}
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <button class="mt-2 btn btn-primary" type="button" [routerLink]="['datatarget-list', application.name]"
-                routerLinkActive="active">{{ 'APPLICATION.DATATARGET-SHOW' | translate }}</button>
-            </li>
-          </ul>
+      <div class="col-12">
+        <div class="jumbotron">
+          <h3>Detaljer</h3>
+          <p *ngIf="application.description">
+            <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong>{{application.description}}</p>
+          <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{application.createdAt | dkTime}}<span
+              *ngIf="application.createdByName">{{application.createdByName | createdUpdatedBy}}</span></p>
+          <p *ngIf="application.createdAt !== application.updatedAt">
+            <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{application.updatedAt | dkTime}}
+            <span *ngIf="application.updatedByName">
+              {{application.updatedByName | createdUpdatedBy}} </span></p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="jumbotron my-4 m-md-4 py-3 p-md-3">
     <div class="row">
       <div class="col-sm-12">
-        <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
-          [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
-          [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
-        </app-top-bar-table>
-        <app-iot-devices-table [application]="application"></app-iot-devices-table>
+        <div class="jumbotron">
+          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
+            [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
+            [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
+          </app-top-bar-table>
+          <app-iot-devices-table [application]="application"></app-iot-devices-table>
+        </div>
       </div>
     </div>
   </div>
-
-</ng-container>
+</div>

@@ -1,9 +1,12 @@
-<app-top-bar 
-    [title]="'NAV.ORGANISATIONS' | translate" 
-    [ctaLabel]="'ORGANISATION.FORM.CREATE-NEW-ORGANISATION' | translate" 
-    [ctaRouterLink]="'new-organisation'">
+<app-top-bar [title]="'NAV.ORGANISATIONS' | translate"
+    [ctaLabel]="'ORGANISATION.FORM.CREATE-NEW-ORGANISATION' | translate" [ctaRouterLink]="'new-organisation'">
 </app-top-bar>
-
-<div class="m-md-4 p-md-3">
-    <app-organisation-tabel></app-organisation-tabel>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page">
+                <app-organisation-tabel></app-organisation-tabel>
+            </div>
+        </div>
+    </div>
 </div>

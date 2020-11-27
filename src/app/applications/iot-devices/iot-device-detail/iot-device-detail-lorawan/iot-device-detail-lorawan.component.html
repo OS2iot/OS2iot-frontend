@@ -1,32 +1,18 @@
-<div class="row">
-    <div class="col-6">
-        <h4>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</h4>
-        <p class="mb-5">{{serviceProfileName}}</p>
-
-    </div>
-    <div class="col-6">
-
-        <h4>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</h4>
-        <p class="mb-5">{{deviceProfileName}}</p>
-    </div>
-</div>
-<h4>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</h4>
-<p class="mb-5">{{device.lorawanSettings.devEUI}}</p>
+<p><strong>{{ 'IOTDEVICE.LORA.SERVICEPROFILE' | translate }}</strong>{{serviceProfileName}}</p>
+<p><strong>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</strong>{{deviceProfileName}}</p>
+<p><strong>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</strong>{{device.lorawanSettings.devEUI}}</p>
 <ng-container *ngIf="OTAA">
-    <h4>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.OTAAapplicationKey}}</p>
+    <p><strong>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</strong>{{device.lorawanSettings?.OTAAapplicationKey}}
+    </p>
 </ng-container>
 <ng-container *ngIf="!OTAA">
-    <h4>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.devAddr}}</p>
-    <h4>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.activationType}}</p>
-    <h4>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.applicationSessionKey}}</p>
-    <h4>{{ 'IOTDEVICE.LORA.FCNTUP' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.fCntUp}}</p>
-    <h4>{{ 'IOTDEVICE.LORA.NFCNTDOWN' | translate }}</h4>
-    <p class="mb-5">{{device.lorawanSettings?.nFCntDown}}</p>
+    <p><strong>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</strong>{{device.lorawanSettings?.devAddr}}</p>
+    <p><strong>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</strong>{{device.lorawanSettings?.activationType}}
+    </p>
+    <p><strong>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</strong>{{device.lorawanSettings?.applicationSessionKey}}
+    </p>
+    <p><strong>{{ 'IOTDEVICE.LORA.FCNTUP' | translate }}</strong>{{device.lorawanSettings?.fCntUp}}</p>
+    <p><strong>{{ 'IOTDEVICE.LORA.NFCNTDOWN' | translate }}</strong>{{device.lorawanSettings?.nFCntDown }}</p>
 </ng-container>
-<h4>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</h4>
-<p class="mb-5">{{device.lorawanSettings?.skipFCntCheck}}</p>
+<p><strong>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</strong>{{device.lorawanSettings?.skipFCntCheck | yesNo}}
+</p>

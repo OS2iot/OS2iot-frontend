@@ -15,6 +15,7 @@ import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ErrorMessage } from '@shared/models/error-message.model';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { IotDevice } from '../iot-device.model';
@@ -59,7 +60,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private location: Location,
         private shareVariable: SharedVariableService,
         private deviceModelService: DeviceModelService,
-        private errorMessageService: ErrorMessageService
+        private errorMessageService: ErrorMessageService,
+        private scrollToTopService: ScrollToTopService,
     ) { }
 
     ngOnInit(): void {
@@ -81,7 +83,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     public compare(o1: any, o2: any): boolean {
         return o1 === o2;
-      }
+    }
 
     getDeviceModels() {
         this.deviceModelService.getMultiple().subscribe(
@@ -158,7 +160,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     updateCoordinates(event: any) {
         this.iotDevice.longitude = event.longitude;
         this.iotDevice.latitude = event.latitude;
-      }
+    }
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
@@ -241,6 +243,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
         this.errorFields = errorMessage.errorFields;
         this.errorMessages = errorMessage.errorMessages;
+        this.scrollToTopService.scrollToTop();
     }
 
     onCoordinateKey(event: any) {

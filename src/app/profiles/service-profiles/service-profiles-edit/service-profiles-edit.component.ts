@@ -29,6 +29,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   serviceId: number;
   editMode = false;
   serviceProfile = new ServiceProfile();
+  serviceProfileData: ServiceProfile;
   subscription: Subscription;
 
   constructor(
@@ -59,6 +60,7 @@ export class ServiceProfilesEditComponent implements OnInit {
       .subscribe(
         (response: ServiceProfileResponseOne) => {
           this.serviceProfile = response.serviceProfile;
+          this.serviceProfileData = response.serviceProfile;
         });
   }
 

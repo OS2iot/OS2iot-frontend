@@ -7,9 +7,9 @@
     </div>
     <div class="col-3 pull-right d-flex align-items-center justify-content-end">
       <a (click)="onDeleteServiceProfile()">
-        <div class="text-center mr-2">
-          <fa-icon [icon]="faTimesCircle" class="icon--small"></fa-icon>
-          <p class="label label--icon">Slet</p>
+        <div class="icon-list-wrapper text-center">
+          <fa-icon [icon]="faTimesCircle" class="icon--primary"></fa-icon>
+          <label class="label label--icon">{{'PROFILES.SERVICE_PROFILE.DELETE-FROM-LIST' | translate}}</label>
         </div>
       </a>
     </div>

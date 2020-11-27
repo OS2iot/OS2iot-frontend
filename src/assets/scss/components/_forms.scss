@@ -14,26 +14,26 @@
 
   @include media-breakpoint-up(md) {
     width: 510px;
-    margin-left: calc((100% - 510px) / 2);
-    margin-right: calc((100% - 510px) / 2);
+    margin-left: calc((100% - 510px) / 2) !important;
+    margin-right: calc((100% - 510px) / 2) !important;
   }
 
   @include media-breakpoint-up(lg) {
     width: 720px;
-    margin-left: calc((100% - 720px) / 2);
-    margin-right: calc((100% - 720px) / 2);
+    margin-left: calc((100% - 720px) / 2) !important;
+    margin-right: calc((100% - 720px) / 2) !important;
   }
 
   @include media-breakpoint-up(xl) {
     width: 900px;
-    margin-left: calc((100% - 900px) / 2);
-    margin-right: calc((100% - 900px) / 2);
+    margin-left: calc((100% - 900px) / 2) !important;
+    margin-right: calc((100% - 900px) / 2) !important;
   }
 
   @include media-breakpoint-up(xxl) {
     width: 1000px;
-    margin-left: calc((100% - 1000px) / 2);
-    margin-right: calc((100% - 1000px) / 2);
+    margin-left: calc((100% - 1000px) / 2) !important;
+    margin-right: calc((100% - 1000px) / 2) !important;
   }
 }
 

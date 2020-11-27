@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { Subscription } from 'rxjs';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
@@ -19,6 +20,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   public backButton: BackButton = { label: '', routerLink: '/devicemodel' };
   public title: string;
   deleteDialogSubscription: Subscription;
+  dropdownButton: DropdownButton;
 
   constructor(
     private translate: TranslateService,
@@ -29,21 +31,27 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.translate.use('da');
-    this.translate.get(['DEVICE-MODEL.DETAIL-TITLE', 'DEVICE-MODEL.DEVICE-MODEL'])
-      .subscribe(translations => {
-        this.backButton.label = translations['DEVICE-MODEL.DEVICE-MODEL'];
-        this.title = translations['DEVICE-MODEL.DETAIL-TITLE'];
-      });
     const deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
     if (deviceModelId) {
       this.getDeviceModel(deviceModelId);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: '/device-model/device-model-edit/' + deviceModelId,
+        isErasable: true,
+      }
     }
+    this.translate.use('da');
+    this.translate.get(['DEVICE-MODEL.DETAIL-TITLE', 'DEVICE-MODEL.DEVICE-MODEL', 'DEVICE-MODEL.SHOW-OPTIONS'])
+      .subscribe(translations => {
+        this.backButton.label = translations['DEVICE-MODEL.DEVICE-MODEL'];
+        this.dropdownButton.label = translations['DEVICE-MODEL.SHOW-OPTIONS'];
+        this.title = translations['DEVICE-MODEL.DETAIL-TITLE'];
+      });
   }
 
   private getDeviceModel(id: number) {
     this.deviceModelService.get(id)
-      .subscribe( (response) => {
+      .subscribe((response) => {
         this.deviceModel = response;
       });
   }
@@ -72,8 +80,8 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.deleteDialogSubscription) {
-        this.deleteDialogSubscription.unsubscribe();
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
-}
 
 }
