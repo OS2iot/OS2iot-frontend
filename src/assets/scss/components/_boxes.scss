@@ -25,11 +25,12 @@
     border-bottom-color: $color-primary;
     width: fit-content;
   }
+  &--table{
+    @extend .m-md-4;
+  }
 }
 
-.page{
-  @extend .m-md-4;
-}
+
 
 .box{
   width: 100%;

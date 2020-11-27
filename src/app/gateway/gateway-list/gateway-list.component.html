@@ -9,14 +9,14 @@
     </app-top-bar-table>
     <mat-tab-group animationDuration="200ms" (selectedTabChange)="showMap($event)">
       <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
-        <div class="page">
+        <div class="jumbotron--table">
           <app-gateway-table [gateways]="gateways" [isLoadingResults]="isLoadingResults"
             (deleteGateway)="deleteGateway($event)">
           </app-gateway-table>
         </div>
       </mat-tab>
       <mat-tab label="{{'GATEWAY.MAP-TAB' | translate}}">
-        <div class="page" *ngIf="showmap && gateways">
+        <div class="jumbotron--table" *ngIf="showmap && gateways">
           <app-map [coordinateList]="coordinateList">
           </app-map>
         </div>
