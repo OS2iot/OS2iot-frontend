@@ -72,6 +72,9 @@
   @extend .mb-3;
 
   .sub-bar {
+    h3{
+      margin-bottom: 0 !important;
+    }
 
     button {
       @extend .mx-2;

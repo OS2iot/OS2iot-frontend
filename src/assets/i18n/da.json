@@ -618,6 +618,11 @@
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
     "SERVICE_PROFILE": {
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "DETAILS": "Detaljer",
+      "DELETE-FROM-LIST":"Slet",
+      "HEADLINE": "Service profiler",
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
       "EDIT": "Rediger profil",
@@ -644,6 +649,11 @@
       "ID": "Service profilens ID"
     },
     "DEVICE_PROFILE": {
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest Opdateret",
+      "DETAILS": "Detaljer",
+      "DELETE-FROM-LIST":"Slet",
+      "HEADLINE": "Device profiler",
       "DROPDOWN": "Håndter device profil",
       "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
       "EDIT": "Rediger profil",
