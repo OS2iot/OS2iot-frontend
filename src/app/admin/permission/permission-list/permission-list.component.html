@@ -1,8 +1,13 @@
 <app-top-bar [sort]="sort" [pageLimit]="pageLimit" [title]="'NAV.PERMISSIONS' | translate"
     [ctaLabel]="'FORM.CREATE-NEW-PERMISSION' | translate" [ctaRouterLink]="'new-permission'"></app-top-bar>
-
-<div class="page">
-    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
-        [isLoadingResults]="isLoadingResults">
-    </app-permission-tabel>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page">
+                <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
+                    [isLoadingResults]="isLoadingResults">
+                </app-permission-tabel>
+            </div>
+        </div>
+    </div>
 </div>

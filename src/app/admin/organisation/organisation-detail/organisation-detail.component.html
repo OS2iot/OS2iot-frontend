@@ -2,41 +2,43 @@
     <app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"
         [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
     </app-top-bar>
-
-    <div class="row">
-        <div class="col-12 ">
-            <div class="jumbotron">
-                <h3> {{'ORGANISATION.HEADLINE' | translate}}</h3>
-                <p><strong>{{ 'ORGANISATION.CREATED' | translate }}</strong>{{organisation.createdAt | dkTime}}<span
-                        *ngIf="organisation.createdByName">{{organisation.createdByName | createdUpdatedBy}}</span>
-                </p>
-                <p *ngIf="organisation.createdAt !== organisation.updatedAt">
-                    <strong>{{ 'ORGANISATION.UPDATED' | translate }}</strong>{{organisation.updatedAt | dkTime}}
-                    <span *ngIf="organisation.updatedByName">{{organisation.updatedByName | createdUpdatedBy}}</span>
-                </p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 ">
+                <div class="jumbotron">
+                    <h3> {{'ORGANISATION.HEADLINE' | translate}}</h3>
+                    <p><strong>{{ 'ORGANISATION.CREATED' | translate }}</strong>{{organisation.createdAt | dkTime}}<span
+                            *ngIf="organisation.createdByName">{{organisation.createdByName | createdUpdatedBy}}</span>
+                    </p>
+                    <p *ngIf="organisation.createdAt !== organisation.updatedAt">
+                        <strong>{{ 'ORGANISATION.UPDATED' | translate }}</strong>{{organisation.updatedAt | dkTime}}
+                        <span
+                            *ngIf="organisation.updatedByName">{{organisation.updatedByName | createdUpdatedBy}}</span>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron">
-                <h3>
-                    {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
-                </h3>
-                <app-applications-table [applications]="applications" (deleteApplication)="deleteApplication($event)"
-                    [isLoadingResults]="isLoadingResults">
-                </app-applications-table>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h3>
+                        {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
+                    </h3>
+                    <app-applications-table [applications]="applications"
+                        (deleteApplication)="deleteApplication($event)" [isLoadingResults]="isLoadingResults">
+                    </app-applications-table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron">
-                <h3>
-                    {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
-                </h3>
-                <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
-                </app-permission-tabel>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h3>
+                        {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
+                    </h3>
+                    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
+                    </app-permission-tabel>
+                </div>
             </div>
         </div>
     </div>

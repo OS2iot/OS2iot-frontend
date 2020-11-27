@@ -3,8 +3,8 @@
 
 .jumbotron {
   @extend .my-4;
-  @extend .p-3;
   @extend .m-md-4;
+  @extend .p-3;
   background-color: $color-bg-normal;
   &--m-right{
     @extend .mr-md-2;

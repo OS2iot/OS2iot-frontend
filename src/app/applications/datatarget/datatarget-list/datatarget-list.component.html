@@ -2,7 +2,12 @@
   [ctaRouterLink]="'datatarget-edit'" (updatePageLimit)="updatePageLimit($event)"
   [backButtonTitle]="'NAV.APPLICATION' | translate">
 </app-top-bar>
-
-<div class="page">
-  <app-datatarget-table [pageLimit]="pageLimit"></app-datatarget-table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="page">
+        <app-datatarget-table [pageLimit]="pageLimit"></app-datatarget-table>
+      </div>
+    </div>
+  </div>
 </div>

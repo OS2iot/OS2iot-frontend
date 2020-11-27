@@ -19,17 +19,16 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="jumbotron">
-        <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
-          [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
-          [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
-        </app-top-bar-table>
-        <app-iot-devices-table [application]="application"></app-iot-devices-table>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="jumbotron">
+          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
+            [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
+            [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
+          </app-top-bar-table>
+          <app-iot-devices-table [application]="application"></app-iot-devices-table>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
