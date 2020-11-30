@@ -1,9 +1,23 @@
-<div class="container-flud">
+<div *ngIf="errorMessage" class="container-flud">
     <div class="row">
-        <div class="col-6 offset-3">
-            <h2 class="text-center">
-                {{errorMessage}}
-            </h2>
+        <div class="col-12">
+            <div class="jumbotron">
+                <div class="error-page">
+                    <div class="error-page__text-box">
+                        <h1 class="error-page-primary mb-5">
+                            <span class="error-page-primary--main">
+                                {{errorMessage.code}}
+                            </span>
+                            <span class="error-page-primary--sub">
+                                {{errorMessage.message}}
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="error-page__logo-box">
+                    <img src="../../assets/images/OS2-iot-svg.svg" alt="Logo" class="error-page__logo">
+                </div>
+            </div>
         </div>
     </div>
 </div>

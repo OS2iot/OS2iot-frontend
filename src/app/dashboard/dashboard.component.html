@@ -2,16 +2,7 @@
     <app-loading-spinner *ngIf="isLoadingResults">
     </app-loading-spinner>
     <div *ngIf="hasSomePermission" class="col-xs-12 col-md-10 offset-md-1 mt-5">
-        <!-- <div class="p-5 jumbotron">
-            <h1>{{'DASHBOARD.WELCOME' | translate}}</h1>
-            <p>{{'DASHBOARD.WELCOME-MESSAGE' | translate}}</p>
-        </div> -->
-        <!-- <div class="header__logo-box">
-            <img src="img/logo-white.png" alt="Logo" class="header__logo">
-        </div> -->
-
         <header class="header">
-
             <div class="header__text-box ">
                 <h1 class="heading-primary mb-5">
                     <span class="heading-primary--main">
@@ -21,7 +12,6 @@
                         {{'DASHBOARD.WELCOME-MESSAGE' | translate}}
                     </span>
                 </h1>
-
                 <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
                     class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
             </div>

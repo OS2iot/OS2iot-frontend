@@ -20,7 +20,6 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
-import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,10 +27,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export function tokenGetter() {
     return localStorage.getItem("id_token");
-  }
+}
 
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent, NotAuthorizedComponent],
+    declarations: [AppComponent, ErrorPageComponent],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,
