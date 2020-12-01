@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -27,10 +27,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export function tokenGetter() {
     return localStorage.getItem("id_token");
-  }
+}
 
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent],
+    declarations: [
+        AppComponent,
+        ErrorPageComponent
+    ],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,
