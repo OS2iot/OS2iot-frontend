@@ -3,7 +3,7 @@
         <div class="jumbotron jumbotron--m-right jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
             <!-- Battery -->
-            <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong>{{device.application.name}}</p>
+            <p class="mr-1"><strong>{{ 'IOT-TABLE.APPLICATION' | translate }}</strong>{{device.application.name}}</p>
             <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{device.createdAt | dkTime}}<span
                     *ngIf="device.createdByName">{{device.createdByName | createdUpdatedBy}}</span></p>
             <p *ngIf="device.createdAt !== device.updatedAt">
