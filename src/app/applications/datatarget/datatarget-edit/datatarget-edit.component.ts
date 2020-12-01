@@ -15,7 +15,7 @@ import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-
 import { SaveSnackService } from '@shared/services/save-snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PayloadDecoder, PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
+import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
@@ -228,6 +228,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
         this.datatarget.id = response.id;
         this.showSavedSnack();
         this.shouldShowMailDialog();
+        this.routeBack();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
