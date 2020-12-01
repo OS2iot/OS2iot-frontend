@@ -56,17 +56,18 @@ export class OrganisationDropdownComponent implements OnInit {
     this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
   }
 
-  public onChange(value) {
-    this.sharedVariableService.setValue(value);
-    this.isOrganisationAdmin(value);
-    this.route.navigateByUrl('/applications');
+  public onChange(organizationId: string) {
+    this.sharedVariableService.setValue(+organizationId);
+    this.isOrganisationAdmin(+organizationId);
+    this.route.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.route.navigate(['applications']));
   }
 
   setSelectedOrganisation(value) {
     this.sharedVariableService.setSelectedOrganisationId(value);
   }
 
-  getSelectedOrganisation() {
-    return this.sharedVariableService.getSelectedOrganisationId();
+  getSelectedOrganisation(): number {
+    return +this.sharedVariableService.getSelectedOrganisationId();
   }
 }
