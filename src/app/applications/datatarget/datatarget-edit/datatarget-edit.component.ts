@@ -156,7 +156,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   updateDatatarget() {
-    this.counter = 1 + this.payloadDeviceDatatarget?.length;
+    this.counter = 1 + this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0;
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
