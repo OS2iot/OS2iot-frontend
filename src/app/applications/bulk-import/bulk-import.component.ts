@@ -27,9 +27,9 @@ export class BulkImportComponent implements OnInit {
   faTrash = faTrash;
   faDownload = faDownload;
   samples = [
-    { name: 'Generic Http sample', url: '../../../assets/docs/iotdevice_generichttp.csv' },
-    { name: 'Lorawan sample', url: '../../../assets/docs/iotdevice_lorawan.csv' },
-    { name: 'Sigfox sample', url: '../../../assets/docs/iotdevice_sigfox.csv' },
+    { name: 'Generic-Http-sample.csv', url: '../../../assets/docs/iotdevice_generichttp.csv' },
+    { name: 'Lorawan-sample.csv', url: '../../../assets/docs/iotdevice_lorawan.csv' },
+    { name: 'Sigfox-sample.csv', url: '../../../assets/docs/iotdevice_sigfox.csv' },
   ]
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
@@ -118,7 +118,7 @@ export class BulkImportComponent implements OnInit {
         this.translate.get(['ERROR.SEMANTIC'])
           .subscribe(translations => {
             this.bulkImport.push(new BulkImport(null, [translations['ERROR.SEMANTIC']]));
-      });
+          });
       }
     });
   }
