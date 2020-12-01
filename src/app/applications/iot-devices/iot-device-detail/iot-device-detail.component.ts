@@ -41,7 +41,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
 
-
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
@@ -82,7 +81,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         this.iotDeviceSubscription = this.iotDeviceService.getIoTDevice(deviceId).subscribe((device: IotDevice) => {
             this.device = device;
             this.application = device.application;
-
             if (this.device.location) {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];

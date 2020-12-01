@@ -18,6 +18,7 @@ import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { DeviceModelComponent } from './iot-device-detail/device-model/device-model.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
         IotDeviceDetailSigfoxComponent,
         DownlinkComponent,
         DownlinkDialogComponent,
-        DeviceModelComponent
+        DeviceModelComponent,
+        DataPackageComponent
     ],
     exports: [
         IotDevicesTableComponent,

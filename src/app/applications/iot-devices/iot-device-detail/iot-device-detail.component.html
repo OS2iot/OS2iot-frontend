@@ -12,35 +12,15 @@
                     <!-- Datapackage, Downlink, API Key -->
                     <mat-tab-group animationDuration="200ms">
                         <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
-                            <ng-template *ngIf="device.latestReceivedMessage?.sentTime; else noSentTime">
-                                <mat-expansion-panel>
-                                    <mat-expansion-panel-header style="max-width: max-content;">
-                                        <mat-panel-title>
-                                            <p>
-                                                {{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}
-                                                {{device.latestReceivedMessage?.sentTime | date:'medium'}}
-                                            </p>
-                                        </mat-panel-title>
-                                    </mat-expansion-panel-header>
-                                    <ng-container *ngIf="device.latestReceivedMessage?.rawData">
-                                        <code>
-                                            <pre>{{device.latestReceivedMessage.rawData | json }}</pre>
-                                        </code>
-                                    </ng-container>
-                                </mat-expansion-panel>
-                            </ng-template>
-                            <ng-template #noSentTime>
-                                <p class="m-5">
-                                    {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
-                                </p>
-                            </ng-template>
+                            <app-data-package [latestReceivedMessage]="device.latestReceivedMessage">
+                            </app-data-package>
                         </mat-tab>
                         <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}">
                             <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
                         </mat-tab>
                         <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"
                             label="{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}">
-                            <div class="m-5">
+                            <div class="my-2 mx-3">
                                 <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
                             </div>
                         </mat-tab>

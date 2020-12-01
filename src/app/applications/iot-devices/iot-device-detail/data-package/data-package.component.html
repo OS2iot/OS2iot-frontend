@@ -1,0 +1,21 @@
+<mat-expansion-panel class="my-2 mx-3" *ngIf="latestReceivedMessage; else noSentTime">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <p>
+                <strong>{{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}</strong>
+
+                {{latestReceivedMessage.sentTime | date:'dd MMM, yyyy - HH:mm'}}
+            </p>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="latestReceivedMessage.rawData">
+        <code>
+            <pre>{{latestReceivedMessage.rawData | json }}</pre>
+         </code>
+    </ng-container>
+</mat-expansion-panel>
+<ng-template #noSentTime>
+    <p class="my-2 mx-3">
+        {{'IOTDEVICE.NO-DATAPACKAGE' | translate}}
+    </p>
+</ng-template>
