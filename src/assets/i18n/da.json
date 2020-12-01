@@ -750,7 +750,8 @@
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
     "WELCOME-MESSAGE": "Velkommen til OS2iot – din nye indgang til administration af IoT enheder på tværs af netværkstyper",
-    "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder."
+    "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
+    "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT."
   },
   "ERROR": {
     "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"

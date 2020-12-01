@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
-      await this.translate.get(['DASHBOARD.NO-ACCESS']).toPromise().then(translations => {
-        this.unauthorizedMessage = translations['DASHBOARD.NO-ACCESS'];
+      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS']).toPromise().then(translations => {
+        this.unauthorizedMessage = translations['DASHBOARD.NO-JOB-ACCESS'];
       });
       // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
