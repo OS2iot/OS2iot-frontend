@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -49,6 +49,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   public payloadDecoders = [];
   private counter: number;
   private dataSetExcists = false;
+  private isMailDialogAlreadyShown = false;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
@@ -155,13 +156,16 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   updateDatatarget() {
-    this.counter = this.counter === undefined ? 1 : this.counter + 1;
+    this.counter = 1 + this.payloadDeviceDatatarget?.length;
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
           this.datatarget = response;
-          this.shouldShowMailDialog();
-          this.countToRedirect();
+          this.shouldShowMailDialog().subscribe(
+            (response) => {
+              this.countToRedirect();
+            }
+          );
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -171,7 +175,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   addPayloadDeviceDatatarget() {
-    this.counter = this.counter === undefined ? this.payloadDeviceDatatarget.length : this.counter + this.payloadDeviceDatatarget.length;
     this.payloadDeviceDatatarget.map(
       pdd => {
         if (pdd.payloadDecoderId === 0) {
@@ -227,7 +230,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
         this.datatargetid = response.id;
         this.datatarget.id = response.id;
         this.showSavedSnack();
-        this.shouldShowMailDialog();
+        this.shouldShowMailDialog().subscribe()
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -302,14 +305,24 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  private shouldShowMailDialog() {
-    if (!this.dataSetExcists && this.datatarget.setToOpendataDk) {
-      this.opendatadkDialogService.showDialog().subscribe(
-        response => {
-          this.showMailClient();
+  private shouldShowMailDialog(): Observable<any> {
+    return new Observable(
+      (observer) => {
+        if (!this.dataSetExcists && this.datatarget.setToOpendataDk && !this.isMailDialogAlreadyShown) {
+          this.isMailDialogAlreadyShown = true;
+          this.opendatadkDialogService.showDialog().subscribe(
+            response => {
+              if (response) {
+                this.showMailClient();
+              }
+              observer.next(response);
+            }
+          );
+        } else {
+          observer.next(true);
         }
-      );
-    }
+      }
+    )
   }
 
   private showMailClient() {
