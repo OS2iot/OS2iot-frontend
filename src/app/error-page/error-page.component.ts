@@ -9,11 +9,7 @@ import { ErrorPageMessage } from '@shared/models/error-message.model';
   styleUrls: ['./error-page.component.scss']
 })
 export class ErrorPageComponent implements OnInit {
-
   errorMessage: any;
-
-  errormessageTemp: string;
-
 
   constructor() {
   }

@@ -30,7 +30,10 @@ export function tokenGetter() {
 }
 
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent],
+    declarations: [
+        AppComponent,
+        ErrorPageComponent
+    ],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,

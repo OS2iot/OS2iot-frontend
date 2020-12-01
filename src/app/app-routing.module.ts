@@ -17,9 +17,7 @@ const routes: Routes = [
     { path: 'sigfox', loadChildren: () => import('./sigfox/sigfox.module').then(m => m.SigfoxModule), canActivate: [AuthGuard] },
     { path: 'device-model', loadChildren: () => import('./device-model/device-model.module').then(m => m.DeviceModelModule), canActivate: [AuthGuard] },
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
-    {
-        path: 'not-found', component: ErrorPageComponent, data: { message: 'not-found', code: 404 }
-    },
+    { path: 'not-found', component: ErrorPageComponent, data: { message: 'not-found', code: 404 } },
     { path: 'not-authorized', component: ErrorPageComponent },
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
     { path: '**', redirectTo: '/not-found', pathMatch: 'full' }
