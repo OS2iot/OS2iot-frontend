@@ -5,20 +5,6 @@
     </app-top-bar>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12">
-                <div class=" jumbotron">
-                    <h3>{{'PERMISSION.DETAIL.HEADLINE' | translate}}</h3>
-                    <p><strong>{{ 'PERMISSION.DETAIL.CREATED' | translate }}</strong>{{sigfoxGroup.createdAt | dkTime}}<span
-                            *ngIf="sigfoxGroup.belongsTo.name">{{sigfoxGroup.belongsTo.name | createdUpdatedBy}}</span>
-                    </p>
-                    <p *ngIf="sigfoxGroup.createdAt !== sigfoxGroup.updatedAt">
-                        <strong>{{ 'PERMISSION.DETAIL.UPDATED' | translate }}</strong>{{sigfoxGroup.updatedAt | dkTime}}
-                        <span *ngIf="sigfoxGroup.belongsTo.name">
-                            {{sigfoxGroup.belongsTo.name | createdUpdatedBy}} </span></p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12">
                 <div class=" jumbotron">
                     <h3>{{'SIGFOX-GROUP.PROFILES.DEVICE-TYPE' | translate}}</h3>

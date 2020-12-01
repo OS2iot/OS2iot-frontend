@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
 import { SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.model';
-import { map } from 'rxjs/operators';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,24 +16,23 @@ export class SigfoxService {
   private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
 
   constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService) { }
+    private restService: RestService) { }
 
   // Contract
   public getContracts(groupId: number): Observable<any> {
-    const body = {groupId};
+    const body = { groupId };
     return this.restService.get(this.SIGFOXCONTRACTURL, body);
   }
 
   // device
   public getDevices(groupId: number): Observable<SigfoxDevicesResponse> {
-    const body = {groupId};
+    const body = { groupId };
     return this.restService.get(this.SIGFOXDEVICEURL, body);
   }
 
   // Group
   getGroups(organizationId: number): Observable<any> {
-    const params = {organizationId};
+    const params = { organizationId };
     return this.restService.get(this.SIGFOXGROUPURL, params);
   }
 
@@ -54,15 +51,7 @@ export class SigfoxService {
   // Device-type
   public getDeviceType(deviceTypeId: string, groupId: number): Observable<any> {
     const body = { groupId };
-    return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId).pipe(
-      map(
-        (response) => {
-          response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
-          response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
-          return response;
-        }
-      )
-    );
+    return this.restService.get(this.SIGFOXDEVICETYPEURL, body, deviceTypeId);
   }
 
   public getDeviceTypes(groupId: number): Observable<SigfoxDeviceTypeResponse> {
