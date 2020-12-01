@@ -46,11 +46,11 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.bindGateway(this.id);
-            this.dropdownButton = {
+            this.dropdownButton = this.canEdit() ?{
                 label: '',
                 editRouterLink: '../../gateway-edit/' + this.id,
                 isErasable: true,
-            };
+            } : null;
         }
         this.translate.get(['NAV.LORA-GATEWAYS', 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
@@ -78,7 +78,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
-            this.canEdit();
+            this.gateway.canEdit = this.canEdit();
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
@@ -86,8 +86,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         });
     }
 
-    canEdit() {
-        this.gateway.canEdit = this.meService.canWriteInTargetOrganization(this.gateway.internalOrganizationId);
+    canEdit(): boolean {
+        return this.meService.canWriteInTargetOrganization(this.gateway.internalOrganizationId);
     }
 
     onDeleteGateway() {
