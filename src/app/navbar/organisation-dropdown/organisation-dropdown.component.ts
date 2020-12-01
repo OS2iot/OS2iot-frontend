@@ -37,13 +37,13 @@ export class OrganisationDropdownComponent implements OnInit {
 
   getAllowedOrganizations() {
     const userInfo = this.sharedVariableService.getUserInfo();
-    this.organisations = userInfo.organizations;
     this.user = userInfo.user;
+    this.organisations = this.sharedVariableService.getOrganizationInfo()
     this.sharedVariableService.getSelectedOrganisationId();
     if (
       (this.sharedVariableService.getSelectedOrganisationId() === 0 &&
-        userInfo.organizations.length > 0) ||
-      !userInfo.organizations.some(
+        this.organisations.length > 0) ||
+      !this.organisations.some(
         (x) => x.id === this.sharedVariableService.getSelectedOrganisationId()
       )
     ) {

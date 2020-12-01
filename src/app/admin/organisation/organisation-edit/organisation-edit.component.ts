@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { Organisation } from '../organisation.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-organisation-edit',
@@ -30,7 +31,8 @@ export class OrganisationEditComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
-    private location: Location
+    private location: Location,
+    private sharedVariableService: SharedVariableService
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +67,7 @@ export class OrganisationEditComponent implements OnInit {
     this.organisationService.post(this.organisation).subscribe(
       (response) => {
         console.log(response);
+        this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
@@ -76,6 +79,7 @@ export class OrganisationEditComponent implements OnInit {
   private update(): void {
     this.organisationService.put(this.organisation, this.id).subscribe(
       (response) => {
+        this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
       (error) => {
