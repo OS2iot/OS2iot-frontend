@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IotDevice, IotDevicesResponse } from './iot-device.model';
+import { IotDevice, IoTDevicesMinimalResponse, IotDevicesResponse } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
@@ -57,6 +57,10 @@ export class IoTDeviceService {
                 }
             )
         );
+    }
+
+    getIoTDevicesUsingPayloadDecoderMinimal(payloadDecoderId: number, limit: number, offset: number): Observable<IoTDevicesMinimalResponse> {
+        return this.restService.get(`iot-device/minimalByPayloadDecoder`, {limit: limit, offset: offset}, payloadDecoderId)
     }
 
     deleteIoTDevice(id: number) {

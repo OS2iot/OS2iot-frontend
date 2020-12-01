@@ -190,7 +190,9 @@
     "ALARM": "Alarm",
     "BATTERY": "Batteri",
     "ACTIVE": "Sidst aktiv",
-    "DATA": "Data(24 timer)"
+    "DATA": "Data(24 timer)",
+    "ORGANISATION": "Organisation",
+    "NAME": "Navn"
   },
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
@@ -271,7 +273,8 @@
       "DROPDOWN": "Håndter Payload Decoder",
       "EDIT": "Redigér",
       "DELETE": "Slet"
-    }
+    },
+    "IOT-DEVICES": "Tilknyttede IoT-Enheder"
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",

@@ -61,3 +61,17 @@ export interface IotDevicesResponse {
     ok?: boolean;
     count?: number;
 }
+
+export class IoTDeviceMinimal {
+    id: number;
+    name: string;
+    canRead: boolean;
+    organizationId: number;
+    applicationId: number;
+    lastActiveTime: Date;
+}
+
+export class IoTDevicesMinimalResponse {
+    data: IoTDeviceMinimal[];
+    count: number;
+}

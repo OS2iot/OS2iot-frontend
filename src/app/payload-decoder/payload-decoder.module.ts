@@ -16,6 +16,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { IotDevicesModule } from '@applications/iot-devices/iot-devices.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { IoTDeviceMinimalTableComponent } from './payload-decoder-detail/iot-device-minimal-table/iot-device-minimal-table.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,15 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
     PayloadDecoderListComponent,
+    IoTDeviceMinimalTableComponent,
   ],
   exports: [
     PayloadDecoderComponent,
     PayloadDecoderTableComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
-    PayloadDecoderListComponent
+    PayloadDecoderListComponent,
+    IoTDeviceMinimalTableComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     IotDevicesModule,
     FontAwesomeModule,
     PipesModule,
-  ]
+  ],
 })
-export class PayloadDecoderModule { }
+export class PayloadDecoderModule {}

@@ -53,5 +53,15 @@
                 </div>
             </div>
         </div>
+        <div class=" jumbotron">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>{{ 'PAYLOAD-DECODER.IOT-DEVICES' | translate }}</h3>
+                    <!-- <code><pre>{{payloadDecoder.decodingFunction}}</pre></code> -->
+
+                    <app-iot-device-minimal-table [payloadDecoder]="payloadDecoder"></app-iot-device-minimal-table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
