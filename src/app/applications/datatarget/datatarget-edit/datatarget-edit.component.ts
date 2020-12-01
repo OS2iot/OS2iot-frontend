@@ -228,7 +228,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
         this.datatarget.id = response.id;
         this.showSavedSnack();
         this.shouldShowMailDialog();
-        this.routeBack();
       },
         (error: HttpErrorResponse) => {
           this.handleError(error);
