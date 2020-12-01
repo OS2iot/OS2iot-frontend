@@ -20,7 +20,7 @@ export class OrganisationEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/organisations' };
+  public backButton: BackButton = { label: '', routerLink: '/admin/organisations' };
   public title = '';
   public submitButton = '';
   id: number;
@@ -45,7 +45,12 @@ export class OrganisationEditComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('org-id');
     if (this.id > 0) {
       this.getOrganisation(this.id);
+      this.setBackButton(this.id.toString());
     }
+  }
+
+  setBackButton(organizationId: string) {
+    this.backButton.routerLink = ['admin','organisations', organizationId];
   }
 
   private getOrganisation(id: number) {

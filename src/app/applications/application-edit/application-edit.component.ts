@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
 
@@ -8,14 +9,16 @@ import { BackButton } from '@shared/models/back-button.model';
   styleUrls: ['./application-edit.component.scss']
 })
 export class ApplicationEditComponent implements OnInit {
-  public backButton: BackButton = { label: '', routerLink: '/applications' };
+  public backButton: BackButton = { label: '', routerLink: 'applications' };
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
   public submitButton = '';
+  private applicaitonId: string;
 
   constructor(
-    public translate: TranslateService
+    public translate: TranslateService,
+    private route: ActivatedRoute
   ) {
     translate.use('da');
   }
@@ -27,5 +30,13 @@ export class ApplicationEditComponent implements OnInit {
         this.title = translations['FORM.EDIT-NEW-APPLICATION'];
         this.submitButton = translations['APPLICATION.SAVE'];
       });
+    this.applicaitonId = this.route.snapshot.paramMap.get('id');
+    if (this.applicaitonId) {
+      this.setBackButton(this.applicaitonId);
+    }
+  }
+
+  private setBackButton(applicationId: string) {
+    this.backButton.routerLink = ['applications', applicationId]
   }
 }

@@ -49,7 +49,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/payload-decoder' };
+  public backButton: BackButton = { label: '', routerLink: '' };
   public title = '';
   public submitButton = '';
   id: number;
@@ -108,12 +108,21 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
       this.getPayloadDecoder(this.id);
+      this.setBackButtonLink(this.id);
     } else {
       this.payloadDecoderBody = new PayloadDecoder().decodingFunction;
     }
     this.sharedVariableService.getValue().subscribe((organisationId) => {
       this.getApplications(organisationId);
     });
+  }
+
+  setBackButtonLink(payloadDecoderId: number) {
+    if (payloadDecoderId) {
+      this.backButton.routerLink = ['payload-decoder','payload-decoder-detail', this.id.toString()];
+    } else {
+      this.backButton.routerLink = ['payload-decoder'];
+    }
   }
 
   private getPayloadDecoder(id: number) {

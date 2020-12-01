@@ -17,7 +17,7 @@ import { DeviceModel } from '../device.model';
 export class DeviceModelDetailComponent implements OnInit, OnDestroy {
 
   deviceModel: DeviceModel;
-  public backButton: BackButton = { label: '', routerLink: '/devicemodel' };
+  public backButton: BackButton = { label: '', routerLink: 'device-model' };
   public title: string;
   deleteDialogSubscription: Subscription;
   dropdownButton: DropdownButton;

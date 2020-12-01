@@ -8,10 +8,10 @@
           <!-- Breadcrumb -->
           <nav class="top-bar--menu--breadcrumb">
             <ng-template [ngIf]="backButtonTitle">
-              <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
+              <a (click)="routeTo()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
             </ng-template>
             <ng-template [ngIf]="data || subPage === true">
-              <a (click)="routeBack()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
+              <a (click)="routeTo()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
               <h3 class="p-3">{{subTitle || staticTitle}}</h3>
             </ng-template>
             <ng-template [ngIf]="title">

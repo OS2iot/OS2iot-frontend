@@ -27,6 +27,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
     arrowsAltH = faArrowsAltH;
+    private applicationName: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const id: number = +this.route.snapshot.paramMap.get('datatargetId');
+        this.applicationName = this.route.snapshot.paramMap.get('name');
         if (id) {
             this.getDatatarget(id);
             this.getDatatargetRelations(id);
@@ -58,7 +60,12 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
         this.datatargetService.get(id)
             .subscribe((dataTarget: Datatarget) => {
                 this.datatarget = dataTarget;
+                this.setBackButton(this.datatarget.applicationId);
             });
+    }
+
+    private setBackButton(applicationId: number) {
+        this.backButton.routerLink = ['applications', applicationId.toString(), 'datatarget-list', this.applicationName ]
     }
 
     onDeleteDatatarget() {

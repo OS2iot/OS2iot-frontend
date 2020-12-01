@@ -31,7 +31,7 @@ export class PermissionEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/permissions' };
+  public backButton: BackButton = { label: '', routerLink: ['admin','permissions'] };
   public title = '';
   public submitButton = '';
   public isEditMode = false;
@@ -67,7 +67,12 @@ export class PermissionEditComponent implements OnInit {
     if (this.id > 0) {
       this.getPermission(this.id);
       this.isEditMode = true;
+      this.setBackButton(this.id.toString());
     }
+  }
+
+  private setBackButton(permissionId: string) {
+    this.backButton.routerLink = ['admin','permissions',permissionId];
   }
 
   private getOrganizations() {

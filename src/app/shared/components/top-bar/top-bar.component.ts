@@ -2,18 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Sort } from '@shared/models/sort.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Application } from '@applications/application.model';
-import { Datatarget } from '@applications/datatarget/datatarget.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
-import { Organisation, OrganisationResponse } from '@app/admin/organisation/organisation.model';
-import { Gateway, GatewayResponse } from '@app/gateway/gateway.model';
-import { OrganisationDetailComponent } from '@app/admin/organisation/organisation-detail/organisation-detail.component';
+import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
+import { Gateway } from '@app/gateway/gateway.model';
 import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
-import { PayloadDecoder, PayloadDecoderResponse } from '@payload-decoder/payload-decoder.model';
+import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
@@ -71,8 +69,14 @@ export class TopBarComponent implements OnInit {
         this.selectedSortChange.emit(id);
     }
 
-    routeBack(): void {
-        this.location.back();
+    routeTo(): void {
+        if (this.backButton?.routerLink && Array.isArray(this.backButton.routerLink)) {
+            this.router.navigate(this.backButton.routerLink)
+        } else if (this.backButton?.routerLink && typeof this.backButton.routerLink === 'string') {
+            this.router.navigate([this.backButton.routerLink])
+        } else {
+            this.location.back();
+        }
     }
 
     search(value: string): void {

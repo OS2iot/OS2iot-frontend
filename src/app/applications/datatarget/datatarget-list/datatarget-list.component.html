@@ -1,6 +1,6 @@
 <app-top-bar [pageLimit]="pageLimit" [title]="title" [ctaLabel]="'FORM.CREATE-NEW-DATATARGET' | translate"
-  [ctaRouterLink]="'datatarget-edit'" (updatePageLimit)="updatePageLimit($event)"
-  [backButtonTitle]="'NAV.APPLICATION' | translate">
+  [ctaRouterLink]="'datatarget-edit'" (updatePageLimit)="updatePageLimit($event)" [subPage]="true"
+  [backButton]="backButton">
 </app-top-bar>
 <div class="container-fluid">
   <div class="row">

@@ -17,7 +17,7 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 export class PayloadDecoderDetailComponent implements OnInit {
   @Output() deletePayloadDecoder = new EventEmitter();
   payloadDecoder: PayloadDecoder;
-  public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
+  public backButton: BackButton = { label: '', routerLink: '/payload-decoder' };
   id: number;
   subscription: Subscription;
   editorJsonOutpuOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false }, readOnly: true };

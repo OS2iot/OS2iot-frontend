@@ -75,7 +75,7 @@ export class SharedVariableService {
   }
 
   getUsername(): string {
-    return this.getUserInfo().user.name;
+    return this.getUserInfo()?.user.name;
   }
 
   getHasAnyPermission(): boolean {

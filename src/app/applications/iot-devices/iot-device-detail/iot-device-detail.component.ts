@@ -12,10 +12,7 @@ import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
-import { Location } from '@angular/common';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
-
-
 
 @Component({
     selector: 'app-iot-device',
@@ -52,9 +49,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private translate: TranslateService,
         private router: Router,
         private deleteDialogService: DeleteDialogService,
-        private dialog: MatDialog,
-        private location: Location,
-
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -81,11 +76,16 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         this.iotDeviceSubscription = this.iotDeviceService.getIoTDevice(deviceId).subscribe((device: IotDevice) => {
             this.device = device;
             this.application = device.application;
+            this.setBackButton(device.application.id.toString());
             if (this.device.location) {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];
             }
         });
+    }
+
+    private setBackButton(applicaitonId: string) {
+        this.backButton.routerLink = ['applications', applicaitonId];
     }
 
     getGenericHttpDeviceUrl(device: IotDevice): string {
@@ -102,8 +102,8 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    routeBack(): void {
-        this.location.back();
+    routeToApplication(): void {
+        this.router.navigate(['application', this.application.id]);
     }
 
     clickDelete() {
@@ -115,7 +115,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
                     if (response) {
                         this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(
                             (response) => {
-                                this.routeBack();
+                                this.routeToApplication();
                             }
                         );
                     } else {
