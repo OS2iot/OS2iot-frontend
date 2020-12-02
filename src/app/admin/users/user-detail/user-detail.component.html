@@ -34,8 +34,7 @@
                     <h3 class="">
                         {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
                     </h3>
-                    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)"
-                        [isLoadingResults]="isLoadingResults">
+                    <app-permission-tabel [userId]="user?.id">
                     </app-permission-tabel>
                 </div>
             </div>

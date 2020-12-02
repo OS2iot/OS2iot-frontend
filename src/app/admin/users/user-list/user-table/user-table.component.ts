@@ -1,22 +1,12 @@
 import {
     AfterViewInit,
     Component,
-    EventEmitter,
     Input,
-    OnChanges,
-    OnInit,
-    Output,
-    SimpleChanges,
     ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
-import { Sort } from '@shared/models/sort.model';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { UserGetManyResponse, UserResponse } from '../../user.model';
 import { UserService } from '../../user.service';

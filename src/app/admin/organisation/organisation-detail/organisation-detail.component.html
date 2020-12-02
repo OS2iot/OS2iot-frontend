@@ -35,7 +35,7 @@
                     <h3>
                         {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
                     </h3>
-                    <app-permission-tabel [permissions]="permissions" (deletePermission)="deletePermission($event)">
+                    <app-permission-tabel [organisationId]="organisation.id">
                     </app-permission-tabel>
                 </div>
             </div>
