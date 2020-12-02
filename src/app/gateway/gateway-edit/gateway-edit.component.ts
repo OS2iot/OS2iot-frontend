@@ -16,7 +16,7 @@ import { Gateway, GatewayResponse } from '../gateway.model';
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
 
-  public backButton: BackButton = { label: '', routerLink: '/gateways' };
+  public backButton: BackButton = { label: '', routerLink: ['gateways'] };
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -47,6 +47,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.getGateway(this.id);
       this.editMode = true;
+      this.backButton.routerLink = ['gateways', 'gateway-detail', this.id]
     }
     this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
       .subscribe(translations => {
