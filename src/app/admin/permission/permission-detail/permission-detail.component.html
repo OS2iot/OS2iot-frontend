@@ -27,7 +27,7 @@
                     <h3>
                         {{ 'PERMISSION.DETAIL.USERS' | translate }}
                     </h3>
-                    <app-user-table [users]="users" [isLoadingResults]="isLoadingResults"></app-user-table>
+                    <app-user-table [permissionId]="permission.id" [canSort]="false"></app-user-table>
                 </div>
             </div>
         </div>
