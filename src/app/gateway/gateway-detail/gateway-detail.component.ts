@@ -21,7 +21,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
-    public backButton: BackButton = { label: '', routerLink: '/gateways' };
+    public backButton: BackButton = { label: '', routerLink: ['gateways'] };
     private id: string;
     private gatewayStats: GatewayStats[];
     displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
@@ -46,17 +46,12 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
             this.bindGateway(this.id);
-            this.dropdownButton = this.canEdit() ?{
-                label: '',
-                editRouterLink: '../../gateway-edit/' + this.id,
-                isErasable: true,
-            } : null;
         }
-        this.translate.get(['NAV.LORA-GATEWAYS', 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
+        this.translate.get(['NAV.LORA-GATEWAYS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.LORA-GATEWAYS'];
-                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
-            });
+            }
+        );
     }
 
     ngAfterViewInit() {
@@ -83,7 +78,21 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
             this.dataSource.paginator = this.paginator;
+            this.setDropdownButton();
         });
+    }
+
+    setDropdownButton() {
+        this.dropdownButton = this.canEdit() ? {
+            label: 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS',
+            editRouterLink: '../../gateway-edit/' + this.id,
+            isErasable: true,
+        } : null;
+        this.translate.get(['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
+            .subscribe(translations => {
+                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
+            }
+        );
     }
 
     canEdit(): boolean {
