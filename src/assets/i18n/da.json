@@ -259,6 +259,7 @@
     "EDIT": "Redigér"
   },
   "PAYLOAD-DECODER": {
+    "DELETE-FAILED": "Slet Fejlede",
     "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
     "UPDATED":"Senest Opdateret",
@@ -616,7 +617,8 @@
     "DEVICE-IS-NOT-ACTIVATED-IN-CHIRPSTACK": "Enheden er ikke aktiveret i Chirpstack",
     "IS-USED": "Profilen kan ikke slettes da den er i brug.",
     "USER-ALREADY-EXISTS": "Brugeren findes allerede",
-    "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug"
+    "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug",
+    "DELETE-NOT-ALLOWED-ITEM-IS-IN-USE": "Payload decoder er i brug og kan derfor ikke slettes"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
@@ -763,6 +765,7 @@
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
     "CLOSE": "Annuller",
+    "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",
     "OPENDATADK": {
       "OK": "Send mail til OpenDataDk",

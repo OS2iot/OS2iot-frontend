@@ -110,7 +110,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         if (this.device.type === DeviceType.SIGFOX) {
             this.showSigfoxDeleteDialog();
         } else {
-            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
                 (response) => {
                     if (response) {
                         this.iotDeviceService.deleteIoTDevice(this.device.id).subscribe(

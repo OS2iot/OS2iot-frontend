@@ -73,18 +73,18 @@ export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy,
     }
 
     clickDelete(element: any) {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
             (response) => {
-              if (response) {
-                this.organisationService.delete(element.id).subscribe((response) => {
-                    if (response.ok) {
-                        this.getOrganisations();
-                    }
-                });
-              } else {
-                console.log(response);
-              }
+                if (response) {
+                    this.organisationService.delete(element.id).subscribe((response) => {
+                        if (response.ok) {
+                            this.getOrganisations();
+                        }
+                    });
+                } else {
+                    console.log(response);
+                }
             }
-          );
+        );
     }
 }

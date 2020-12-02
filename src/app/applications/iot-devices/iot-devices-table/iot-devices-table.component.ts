@@ -97,7 +97,7 @@ export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewIni
         if (element.type == DeviceType.SIGFOX) {
             this.showSigfoxDeleteDialog();
         } else {
-            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
                 (response) => {
                     if (response) {
                         this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {

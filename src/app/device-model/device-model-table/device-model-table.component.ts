@@ -41,13 +41,13 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
 
   getDeviceModels() {
     this.deviceModelService.getMultiple()
-      .subscribe( (response) => {
+      .subscribe((response) => {
         this.deviceModels = response;
         this.setupMatTable(this.deviceModels);
       },
-      (error) => {
-        console.log(error);
-      });
+        (error) => {
+          console.log(error);
+        });
   }
 
   setupMatTable(rows: DeviceModel[]) {
@@ -64,7 +64,7 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   public clickDelete(deviceModel) {
-    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDeleteDialog()
+    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDialog()
       .subscribe(
         (response) => {
           if (response) {
@@ -83,7 +83,7 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
 
   ngOnDestroy(): void {
     if (this.deleteDialogSubscription) {
-        this.deleteDialogSubscription.unsubscribe();
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 }

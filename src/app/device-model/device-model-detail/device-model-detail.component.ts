@@ -57,7 +57,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   }
 
   public clickDelete() {
-    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDeleteDialog()
+    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDialog()
       .subscribe(
         (response) => {
           if (response) {

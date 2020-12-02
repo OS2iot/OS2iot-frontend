@@ -10,6 +10,9 @@ import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogModel } from '@shared/models/dialog.model';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -29,16 +32,27 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   deletePayloadDecoder = new EventEmitter();
   private subscription: Subscription;
   organizations: Organisation[];
+  deleteDialogSubscription: Subscription;
+  errorTitle: string;
+  errorMessage: string;
 
   constructor(
     private payloadDecoderService: PayloadDecoderService,
     private meService: MeService,
-    private sharedVariableService: SharedVariableService
+    private sharedVariableService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.getPayloadDecoders();
     this.organizations = this.sharedVariableService.getOrganizationInfo();
+    this.translateService
+      .get(['PAYLOAD-DECODER.DELETE-FAILED'])
+      .subscribe((translations) => {
+        this.errorTitle = translations['PAYLOAD-DECODER.DELETE-FAILED'];
+      });
+
   }
 
   ngAfterViewInit() {
@@ -95,18 +109,37 @@ export class PayloadDecoderTableComponent implements OnInit, OnChanges, AfterVie
   }
 
   clickDelete(element: any) {
-    this.payloadDecoderService.delete(element.id).subscribe((response) => {
-      if (response.ok) {
-        this.deletePayloadDecoder.emit(element.id);
-        this.getPayloadDecoders();
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
+      (response) => {
+        if (response) {
+          this.payloadDecoderService.delete(element.id).subscribe(
+            (response) => {
+              if (response.ok) {
+                this.getPayloadDecoders();
+              } else {
+                this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(
+                  response.error.message,
+                  false,
+                  false,
+                  true,
+                  this.errorTitle).subscribe();
+              }
+            },
+          );
+        } else {
+          console.log(response);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 

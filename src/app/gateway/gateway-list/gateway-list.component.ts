@@ -152,7 +152,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteGateway(id: string) {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
       (response) => {
         if (response) {
           this.chirpstackGatewayService.delete(id).subscribe((response) => {

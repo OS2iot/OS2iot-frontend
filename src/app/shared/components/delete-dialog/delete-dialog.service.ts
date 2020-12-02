@@ -6,16 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DeleteDialogService {
-
+  defaultTitle: 'Slet'
   constructor(
     private dialog: MatDialog
-  ) {}
+  ) { }
 
-  showSimpleDeleteDialog(message?: string, showAccept = true, showCancel = true): Observable<any> {
+  showSimpleDialog(message?: string, showAccept = true, showCancel = true, showOk = false, infoTitle = ''): Observable<any> {
     return new Observable(
       (observer) => {
         const dialog = this.dialog.open(DeleteDialogComponent, {
           data: {
+            infoTitle,
+            showOk,
             showAccept,
             showCancel,
             message: message ? message : 'Er du sikker på at du vil slette?'
@@ -28,5 +30,4 @@ export class DeleteDialogService {
       }
     );
   }
-
 }

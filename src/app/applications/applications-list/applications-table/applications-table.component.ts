@@ -18,7 +18,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 export class ApplicationsTableComponent implements AfterViewInit {
   @Input() organizationId: number;
   displayedColumns: string[] = ['name', 'devices', 'updatedAt', 'menu'];
-  data: Application[] = [];
+  @Input() data: Application[] = [];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -27,10 +27,8 @@ export class ApplicationsTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private applicationService: ApplicationService, 
-    private router: Router)
-  {
-  }
+    private applicationService: ApplicationService,
+    private router: Router) { }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
@@ -80,10 +78,10 @@ export class ApplicationsTableComponent implements AfterViewInit {
           length: this.resultsLength,
         });
       }
-    }) 
+    })
   };
 
   navigateToEditPage(applicationId: string) {
-    this.router.navigate(['applications','edit-application', applicationId]);
+    this.router.navigate(['applications', 'edit-application', applicationId]);
   }
 }
