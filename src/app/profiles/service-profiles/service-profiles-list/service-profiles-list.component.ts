@@ -49,6 +49,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       .getMultiple()
       .subscribe((result: ServiceProfileResponseMany) => {
         this.serviceProfiles = result.result;
+        this.setCanEdit()
       });
   }
 
@@ -57,7 +58,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   canCreate() {
-    return this.sharedVariableService.getHasWritePermission()
+    return this.sharedVariableService.getHasAnyWritePermission();
   }
 
   setCanEdit() {
