@@ -18,7 +18,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 export class ApplicationsTableComponent implements AfterViewInit {
   @Input() organizationId: number;
   displayedColumns: string[] = ['name', 'devices', 'updatedAt', 'menu'];
-  @Input() data: Application[] = [];
+  data: Application[] = [];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -28,7 +28,8 @@ export class ApplicationsTableComponent implements AfterViewInit {
 
   constructor(
     private applicationService: ApplicationService,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
