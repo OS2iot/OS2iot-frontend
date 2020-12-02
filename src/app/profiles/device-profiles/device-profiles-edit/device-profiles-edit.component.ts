@@ -109,9 +109,13 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-    this.errorFields = errors?.errorFields;
-    this.errorMessages = errors?.errorMessages;
+    if (error.status == 403) {      
+      this.errorMessages = ["Forbudt"]
+    } else {
+      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+      this.errorFields = errors?.errorFields;
+      this.errorMessages = errors?.errorMessages;
+    }
   }
 
   onSubmit(): void {

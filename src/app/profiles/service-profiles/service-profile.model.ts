@@ -1,5 +1,6 @@
+import { EditPermission } from '@shared/models/edit-permission.model';
 
-export class ServiceProfile {
+export class ServiceProfile extends EditPermission {
     public id: string;
     public name: string;
     public networkServerID: string;

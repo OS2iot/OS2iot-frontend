@@ -1,6 +1,6 @@
 <app-top-bar-table [title]="'PROFILES.DEVICE_PROFILE.HEADLINE' | translate"
-    [ctaLabelPrimary]="'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate"
-    [ctaRouterLinkPrimary]="'deviceprofile/edit'"></app-top-bar-table>
+    [ctaLabelPrimary]="'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate "
+    [ctaRouterLinkPrimary]="canCreate() ? 'deviceprofile/edit' : null"></app-top-bar-table>
 <div *ngIf="errorMessages" class="error-messages p-3 my-2">
     {{errorMessages | translate }}
 </div>

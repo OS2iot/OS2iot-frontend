@@ -13,11 +13,9 @@
 <form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
-            <div *ngIf="errorMessages">
-                <li *ngFor="let error of errorMessages">
-                    {{error}}
-                </li>
-            </div>
+            <li *ngFor="let error of errorMessages">
+                {{error}}
+            </li>
             <li *ngIf="errorMessage">
                 {{errorMessage}}
             </li>

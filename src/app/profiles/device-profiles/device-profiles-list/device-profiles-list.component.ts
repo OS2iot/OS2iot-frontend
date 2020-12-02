@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceProfileService } from '../device-profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MeService } from '@shared/services/me.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -24,7 +25,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private deviceProfileService: DeviceProfileService,
-    private meService: MeService
+    private meService: MeService,
+    private sharedVariableService: SharedVariableService
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,10 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
 
   onNewDeviceProfile() {
     this.router.navigate(['deviceprofil/edit']);
+  }
+
+  canCreate() {
+    return this.sharedVariableService.getHasWritePermission()
   }
 
   setCanEdit() {

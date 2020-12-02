@@ -8,6 +8,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiceProfileService } from '../service-profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -25,7 +26,8 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private serviceProfileService: ServiceProfileService
+    private serviceProfileService: ServiceProfileService,
+    private sharedVariableService: SharedVariableService
   ) {}
 
   ngOnInit() {
@@ -48,6 +50,18 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
     if (this.serviceSubscription && this.serviceSubscription?.closed) {
       this.serviceSubscription.unsubscribe();
     }
+  }
+
+  canCreate() {
+    return this.sharedVariableService.getHasWritePermission()
+  }
+
+  setCanEdit() {
+    this.serviceProfiles.forEach(
+      (serviceProfile) => {
+        serviceProfile.canEdit = this.canCreate();
+      }
+    );
   }
 
   deleteServiceProfile(id: string) {
