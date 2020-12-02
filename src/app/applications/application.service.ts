@@ -13,6 +13,7 @@ interface GetApplicationParameters {
     sort: string;
     orderOn: string;
     organizationId?: number;
+    permissionId?: number;
 }
 
 @Injectable({
@@ -51,7 +52,8 @@ export class ApplicationService {
         offset: number,
         sort: string,
         orderOn: string,
-        organizationId?: number
+        organizationId?: number,
+        permissionId?: number
     ): Observable<ApplicationData> {
         const body: GetApplicationParameters = {
             limit: limit,
@@ -59,7 +61,13 @@ export class ApplicationService {
             sort: sort,
             orderOn: orderOn,
         };
-        body.organizationId = organizationId
+        if (permissionId) {
+            body.permissionId = permissionId
+            return this.restService.get(`permission/${permissionId}/applications`, body)  
+        } else if (organizationId) {
+            body.organizationId = organizationId
+            return this.restService.get('application', body);
+        }
         return this.restService.get('application', body);
     }
 

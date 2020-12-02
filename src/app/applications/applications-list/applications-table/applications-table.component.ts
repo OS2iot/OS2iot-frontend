@@ -17,6 +17,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 })
 export class ApplicationsTableComponent implements AfterViewInit {
   @Input() organizationId: number;
+  @Input() permissionId: number;
   displayedColumns: string[] = ['name', 'devices', 'updatedAt', 'menu'];
   data: Application[] = [];
 
@@ -66,7 +67,8 @@ export class ApplicationsTableComponent implements AfterViewInit {
       this.paginator.pageIndex * this.paginator.pageSize,
       orderByDirection,
       orderByColumn,
-      this.organizationId
+      this.organizationId,
+      this.permissionId
     );
   }
 
