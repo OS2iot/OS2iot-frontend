@@ -47,7 +47,11 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
 // that you are using.
 @include angular-material-theme($OS2IoT-frontend-theme);
 
+////////////////////////////// CHECKBOX  ///////////////////////////////////////////
 
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
 ////////////////////////////// EXPANSION PANELS ///////////////////////////////////////////
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
   box-shadow: none;

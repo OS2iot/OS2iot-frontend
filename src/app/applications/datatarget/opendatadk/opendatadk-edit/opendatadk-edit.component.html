@@ -5,106 +5,82 @@
 </div>
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="name">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME' | translate}}</label>*
-    <input 
-        type="text" 
-        class="form-control" 
-        id="name" 
-        ame="name"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate" 
-        maxlength="120" 
-        required
-        [(ngModel)]="openDataDk.name"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+        <label class="form-label" for="name">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME' | translate}}</label>*
+        <input type="text" class="form-control" id="name" ame="name"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate" maxlength="120" required
+            [(ngModel)]="openDataDk.name"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
     </div>
 </div>
 
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME' | translate}}</label>*
-    <input 
-        type="text" 
-        class="form-control" 
-        id="authorName" 
-        name="authorName"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate" 
-        required 
-        [(ngModel)]="openDataDk.authorName"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorName'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorName')}">
+        <label class="form-label"
+            for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME' | translate}}</label>*
+        <input type="text" class="form-control" id="authorName" name="authorName"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate" required
+            [(ngModel)]="openDataDk.authorName"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorName'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorName')}">
     </div>
 </div>
 
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL' | translate}}</label>*
-    <input 
-        type="text" 
-        class="form-control" 
-        id="authorEmail" 
-        name="authorEmail"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate" 
-        required 
-        [(ngModel)]="openDataDk.authorEmail"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorEmail'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorEmail')}">
+        <label class="form-label"
+            for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL' | translate}}</label>*
+        <input type="text" class="form-control" id="authorEmail" name="authorEmail"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate" required
+            [(ngModel)]="openDataDk.authorEmail"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorEmail'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorEmail')}">
     </div>
 </div>
 
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="title">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE' | translate}}</label>
-    <input 
-        type="text" 
-        class="form-control" 
-        id="resourceTitle" 
-        ame="resourceTitle"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate" 
-        maxlength="120" 
-        required
-        [(ngModel)]="openDataDk.resourceTitle"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('resourceTitle'), 'is-valid' : formFailedSubmit && !errorFields.includes('resourceTitle')}">
+        <label class="form-label"
+            for="title">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE' | translate}}</label>
+        <input type="text" class="form-control" id="resourceTitle" ame="resourceTitle"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate" maxlength="120"
+            required [(ngModel)]="openDataDk.resourceTitle"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('resourceTitle'), 'is-valid' : formFailedSubmit && !errorFields.includes('resourceTitle')}">
     </div>
 </div>
 
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION' | translate}}</label>
-    <input 
-        type="text" 
-        class="form-control" 
-        id="description" 
-        name="description"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate" 
-        required 
-        [(ngModel)]="openDataDk.description"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('description'), 'is-valid' : formFailedSubmit && !errorFields.includes('description')}">
+        <label class="form-label"
+            for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION' | translate}}</label>
+        <input type="text" class="form-control" id="description" name="description"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate" required
+            [(ngModel)]="openDataDk.description"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('description'), 'is-valid' : formFailedSubmit && !errorFields.includes('description')}">
     </div>
 </div>
 
 <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-    <label class="form-label" for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS' | translate}}</label>
-    <input 
-        type="text" 
-        class="form-control" 
-        id="keywordsInput" 
-        name="keywordsInput"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate" 
-        required 
-        [(ngModel)]="openDataDk.keywordsInput"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('keywordsInput'), 'is-valid' : formFailedSubmit && !errorFields.includes('keywordsInput')}">
+        <label class="form-label"
+            for="description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS' | translate}}</label>
+        <input type="text" class="form-control" id="keywordsInput" name="keywordsInput"
+            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate" required
+            [(ngModel)]="openDataDk.keywordsInput"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('keywordsInput'), 'is-valid' : formFailedSubmit && !errorFields.includes('keywordsInput')}">
     </div>
 </div>
 
 <div class="row mt-3">
-    <mat-checkbox [(ngModel)]="openDataDk.acceptTerms" name="acceptTerms">
-        <p>
-            {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE' | translate}}
-        <a href="https://portal.opendata.dk/dataset/76b7c4cb-2e29-43aa-9b50-eec22b5c3b5e/resource/05e25340-ac7b-460f-a427-41eccb6c36ae/download/open-data-dk-vilkaar-og-betingelser.12.06.18.pdf">
-            {{'OPENDATADK.QUESTION.TERMS-AND-CONDITIONS' | translate}}
-        </a>
-        </p>
-        <p>
-            {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-TWO' | translate}}
-        </p>
-    </mat-checkbox>
-  </div>
+    <div class="col-12">
+        <mat-checkbox [(ngModel)]="openDataDk.acceptTerms" name="acceptTerms">
+            <p>
+                {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE' | translate}}
+                <a
+                    href="https://portal.opendata.dk/dataset/76b7c4cb-2e29-43aa-9b50-eec22b5c3b5e/resource/05e25340-ac7b-460f-a427-41eccb6c36ae/download/open-data-dk-vilkaar-og-betingelser.12.06.18.pdf">
+                    {{'OPENDATADK.QUESTION.TERMS-AND-CONDITIONS' | translate}}
+                </a>
+            </p>
+            <p>
+                {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-TWO' | translate}}
+            </p>
+        </mat-checkbox>
+    </div>
+</div>

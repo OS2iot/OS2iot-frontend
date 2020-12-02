@@ -128,8 +128,7 @@ export class GatewayTableComponent implements AfterViewInit {
     }
 
     deleteGateway(id: string) {
-        this.deleteDialogService
-            .showSimpleDeleteDialog()
+        this.deleteDialogService.showSimpleDialog()
             .subscribe((response) => {
                 if (response) {
                     this.chirpstackGatewayService
