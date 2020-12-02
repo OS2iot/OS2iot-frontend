@@ -7,12 +7,7 @@
                 <div class=" jumbotron">
                     <h3>{{ 'USERS.DETAIL.HEADLINE' | translate }}</h3>
                     <p><strong>{{ 'USERS.DETAIL.EMAIL' | translate }}</strong>{{user.email}}</p>
-                    <p><strong>{{ 'USERS.DETAIL.CREATED' | translate }}</strong>{{user.createdAt | dkTime}}<span
-                            *ngIf="user.createdByName">{{user.createdByName | createdUpdatedBy}}</span></p>
-                    <p *ngIf="user.createdAt !== user.updatedAt">
-                        <strong>{{ 'USERS.DETAIL.UPDATED' | translate }}</strong>{{user.updatedAt | dkTime}}
-                        <span *ngIf="user.updatedByName">
-                            {{user.updatedByName | createdUpdatedBy}} </span></p>
+                    <app-general-details [data]="user"></app-general-details>
                     <p [ngClass]="user.active | activeDeactive">
                         <strong>{{ 'USERS.DETAIL.STATUS' | translate }}</strong>{{user.active | activeDeactive}}</p>
                     <P *ngIf="user.lastLogin; else noLogin">

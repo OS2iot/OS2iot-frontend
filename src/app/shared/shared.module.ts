@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.component';
+import { GeneralDetailsComponent } from './components/general-details/general-details.component';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.c
     OpendatadkDialogComponent,
     TopBarComponent,
     TopBarTableComponent,
+    GeneralDetailsComponent
   ],
   imports: [
     DirectivesModule,
@@ -35,7 +38,8 @@ import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.c
     RouterModule,
     FormsModule,
     NGMaterialModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    PipesModule
   ],
   exports: [
     AlertComponent,
@@ -46,7 +50,8 @@ import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.c
     DeleteDialogComponent,
     OpendatadkDialogComponent,
     TopBarComponent,
-    TopBarTableComponent
+    TopBarTableComponent,
+    GeneralDetailsComponent
   ],
 })
 export class SharedModule { }

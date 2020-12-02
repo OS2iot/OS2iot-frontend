@@ -7,15 +7,7 @@
             <div class="col-12">
                 <div class="jumbotron">
                     <h3>{{ 'DEVICE-MODEL.HEADLINE' | translate }}</h3>
-                    <p *ngIf="deviceModel.createdAt">
-                        <strong>{{ 'DEVICE-MODEL.CREATED' | translate }}</strong>{{deviceModel.createdAt | dkTime}}<span
-                            *ngIf="deviceModel.createdByName">{{deviceModel.createdByName | createdUpdatedBy}}</span>
-                    </p>
-                    <p *ngIf="deviceModel.createdAt !== deviceModel.updatedAt">
-                        <strong>{{ 'DEVICE-MODEL.UPDATED' | translate }}</strong>{{deviceModel.updatedAt | dkTime}}
-                        <span *ngIf="deviceModel.updatedByName">
-                            {{deviceModel.updatedByName | createdUpdatedBy}} </span>
-                    </p>
+                    <app-general-details [data]="deviceModel"></app-general-details>
                     <p><strong>{{ 'DEVICE-MODEL.ID' | translate }}</strong>{{deviceModel.body.id}}</p>
                     <p><strong>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</strong>{{deviceModel.body.brandName}}</p>
                     <p><strong>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</strong>{{deviceModel.body.modelName}}</p>

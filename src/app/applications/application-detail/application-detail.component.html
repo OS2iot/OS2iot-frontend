@@ -9,13 +9,9 @@
         <div class="jumbotron">
           <h3>Detaljer</h3>
           <p *ngIf="application.description">
-            <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong>{{application.description}}</p>
-          <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{application.createdAt | dkTime}}<span
-              *ngIf="application.createdByName">{{application.createdByName | createdUpdatedBy}}</span></p>
-          <p *ngIf="application.createdAt !== application.updatedAt">
-            <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{application.updatedAt | dkTime}}
-            <span *ngIf="application.updatedByName">
-              {{application.updatedByName | createdUpdatedBy}} </span></p>
+            <app-general-details [data]="application"></app-general-details>
+            <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong>{{application.description}}
+          </p>
         </div>
       </div>
     </div>

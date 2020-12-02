@@ -1,20 +1,13 @@
-<div [hidden]="!organisation">
-    <app-top-bar *ngIf="organisation" [data]="organisation" [backButton]="backButton" [subPage]="true"
-        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+<div [hidden]="!organisation" *ngIf="organisation">
+    <app-top-bar [data]="organisation" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
     </app-top-bar>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 ">
                 <div class="jumbotron">
                     <h3> {{'ORGANISATION.HEADLINE' | translate}}</h3>
-                    <p><strong>{{ 'ORGANISATION.CREATED' | translate }}</strong>{{organisation.createdAt | dkTime}}<span
-                            *ngIf="organisation.createdByName">{{organisation.createdByName | createdUpdatedBy}}</span>
-                    </p>
-                    <p *ngIf="organisation.createdAt !== organisation.updatedAt">
-                        <strong>{{ 'ORGANISATION.UPDATED' | translate }}</strong>{{organisation.updatedAt | dkTime}}
-                        <span
-                            *ngIf="organisation.updatedByName">{{organisation.updatedByName | createdUpdatedBy}}</span>
-                    </p>
+                    <app-general-details [data]="organisation"></app-general-details>
                 </div>
             </div>
         </div>

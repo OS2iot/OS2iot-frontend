@@ -19,7 +19,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;
   deviceProfile = new DeviceProfile();
   subscription: Subscription;
-  deviceProfileData: DeviceProfile;
 
   public errorMessage: string;
   public errorMessages: string[];
@@ -58,7 +57,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (response) => {
           this.deviceProfile = response.deviceProfile;
-          this.deviceProfileData = response.deviceProfile;
           this.canEdit();
           this.deviceProfile.factoryPresetFreqsInput = this.deviceProfile.factoryPresetFreqs.map(String).join();
         },
@@ -109,7 +107,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    if (error.status == 403) {      
+    if (error.status == 403) {
       this.errorMessages = ["Forbudt"]
     } else {
       const errors = this.errorMessageService.handleErrorMessageWithFields(error);

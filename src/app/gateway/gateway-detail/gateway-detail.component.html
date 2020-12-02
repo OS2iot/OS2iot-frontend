@@ -8,13 +8,7 @@
                     <h3>{{ 'GATEWAY.DETAILS' | translate }}</h3>
                     <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.id}}</p>
                     <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
-                    <p><strong>{{ 'GATEWAY.CREATED' | translate }}</strong>{{gateway.createdAt | dkTime}}<span
-                            *ngIf="gateway.createdByName">{{gateway.createdByName | createdUpdatedBy}}</span></p>
-                    <p *ngIf="gateway.createdAt !== gateway.updatedAt">
-                        <strong>{{ 'GATEWAY.UPDATED' | translate }}</strong>{{gateway.updatedAt | dkTime}} <span
-                            *ngIf="gateway.updatedByName">
-                            {{gateway.updatedByName | createdUpdatedBy}} </span>
-                    </p>
+                    <app-general-details [data]="gateway"></app-general-details>
                     <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
                     <p *ngIf="gateway.description">
                         <strong>{{ 'GATEWAY.DESCRIPTION' | translate }}</strong>{{gateway.description}}</p>

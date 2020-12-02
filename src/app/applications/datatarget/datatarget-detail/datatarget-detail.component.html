@@ -6,13 +6,7 @@
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-right jumbotron--full-width">
           <h3>{{ 'DATATARGET.DETAILS' | translate }}</h3>
-          <p><strong>{{ 'IOTDEVICE.CREATED' | translate }}</strong>{{datatarget.createdAt | dkTime}}<span
-              *ngIf="datatarget.createdByName">{{datatarget.createdByName | createdUpdatedBy}}</span></p>
-          <p *ngIf="datatarget.createdAt !== datatarget.updatedAt">
-            <strong>{{ 'IOTDEVICE.UPDATED' | translate }}</strong>{{datatarget.updatedAt | dkTime}}
-            <span *ngIf="datatarget.updatedByName">
-              {{datatarget.updatedByName | createdUpdatedBy}} </span>
-          </p>
+          <app-general-details [data]="datatarget"></app-general-details>
           <mat-divider></mat-divider>
           <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
           <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
