@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
@@ -38,6 +38,8 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   private deleteDialogSubscription: Subscription;
   public pageOffset = 0;
   public pageTotal: number;
+  organisationId: number;
+  organisationChangeSubject: Subject<any> = new Subject();
 
   constructor(
     public translate: TranslateService,
@@ -64,6 +66,12 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.getGateways();
     }
+  }
+
+  setOrgIdFilter(event: number) {
+    this.organisationId = event;
+    this.organisationChangeSubject.next(event);
+    this.filterGatewayByOrgId(event);
   }
 
   private getGateways(): void {

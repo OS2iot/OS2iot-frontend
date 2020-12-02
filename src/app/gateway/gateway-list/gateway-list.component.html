@@ -4,14 +4,13 @@
 <div class="container-fluid">
   <div class="jumbotron">
     <app-top-bar-table [component]="true" [addDropdown]="true" [options]="organisations"
-      [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="filterGatewayByOrgId($event)"
+      [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="setOrgIdFilter($event)"
       [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
     </app-top-bar-table>
     <mat-tab-group animationDuration="200ms" (selectedTabChange)="showMap($event)">
       <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
         <div class="jumbotron--table">
-          <app-gateway-table [gateways]="gateways" [isLoadingResults]="isLoadingResults"
-            (deleteGateway)="deleteGateway($event)">
+          <app-gateway-table [organisationChangeSubject]="organisationChangeSubject">
           </app-gateway-table>
         </div>
       </mat-tab>

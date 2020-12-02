@@ -42,7 +42,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   changeMarkers() {
-    this.markers.clearLayers();
+    if (this.markers) {
+      this.markers.clearLayers();
+    }
     this.placeMarkers();
   }
 
