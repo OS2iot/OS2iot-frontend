@@ -48,8 +48,18 @@ export class OrganisationService {
     return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
-  getMultiple(): Observable<OrganisationGetManyResponse> {
-    return this.restService.get(this.URL);
+  getMultiple(    
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string,
+  ): Observable<OrganisationGetManyResponse> {
+    return this.restService.get(this.URL, {
+      limit: limit,
+      offset: offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
   }
 
   delete(id: number) {

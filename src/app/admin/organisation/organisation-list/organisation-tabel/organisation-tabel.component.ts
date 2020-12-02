@@ -1,90 +1,102 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Sort } from '@shared/models/sort.model';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import { Subscription } from 'rxjs';
-import { OrganisationResponse } from '../../organisation.model';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+    OrganisationGetManyResponse,
+    OrganisationResponse,
+} from '../../organisation.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { environment } from '@environments/environment';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 @Component({
     selector: 'app-organisation-tabel',
     templateUrl: './organisation-tabel.component.html',
     styleUrls: ['./organisation-tabel.component.scss'],
 })
-export class OrganisationTabelComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @Input() selectedSortObject: Sort;
+export class OrganisationTabelComponent implements AfterViewInit {
     displayedColumns: string[] = ['name', 'applications', 'menu'];
-    public dataSource = new MatTableDataSource<OrganisationResponse>();
-    isLoadingResults = true;
-    public organisations: OrganisationResponse[];
-    public pageOffset = 0;
-    public resultsLength = 0;
-    public pageTotal: number;
-    subscription: Subscription;
-    deleteOrganisation = new EventEmitter();
-    private deleteDialogSubscription: Subscription;
+
+    data: OrganisationResponse[];
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+
+    @Input() organisationId?: number;
+    @Input() userId?: number;
+
+    resultsLength = 0;
     public pageSize = environment.tablePageSize;
+    isLoadingResults = true;
 
     constructor(
         private organisationService: OrganisationService,
-        private deleteDialogService: DeleteDialogService) { }
-
-    ngOnInit(): void {
-        this.getOrganisations();
-    }
+        private deleteDialogService: DeleteDialogService
+    ) {}
 
     ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        // If the user changes the sort order, reset back to the first page.
+        this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+        merge(this.sort.sortChange, this.paginator.page)
+            .pipe(
+                startWith({}),
+                switchMap(() => {
+                    this.isLoadingResults = true;
+                    return this.getOrganisations(
+                        this.sort.active,
+                        this.sort.direction
+                    );
+                }),
+                map((data) => {
+                    // Flip flag to show that loading has finished.
+                    this.isLoadingResults = false;
+                    this.resultsLength = data.count;
+
+                    return data.data;
+                }),
+                catchError(() => {
+                    this.isLoadingResults = false;
+                    return observableOf([]);
+                })
+            )
+            .subscribe((data) => (this.data = data));
     }
 
-    ngOnChanges() {
-        this.getOrganisations();
-    }
-
-    ngOnDestroy() {
-        // prevent memory leak by unsubscribing
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-        if (this.deleteDialogSubscription) {
-            this.deleteDialogSubscription.unsubscribe();
-        }
-    }
-
-    getOrganisations() {
-        this.subscription = this.organisationService
-            .getMultiple()
-            .subscribe((response) => {
-                this.organisations = response.data;
-                this.dataSource = new MatTableDataSource<OrganisationResponse>(this.organisations);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-                this.dataSource.sortingDataAccessor = tableSorter;
-                this.isLoadingResults = false;
-                this.resultsLength = this.organisations.length;
-            });
+    getOrganisations(
+        orderByColumn: string,
+        orderByDirection: string
+    ): Observable<OrganisationGetManyResponse> {
+        return this.organisationService.getMultiple(
+            this.paginator.pageSize,
+            this.paginator.pageIndex * this.paginator.pageSize,
+            orderByColumn,
+            orderByDirection
+        );
     }
 
     clickDelete(element: any) {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
-            (response) => {
-                if (response) {
-                    this.organisationService.delete(element.id).subscribe((response) => {
+        this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+            if (response) {
+                this.organisationService
+                    .delete(element.id)
+                    .subscribe((response) => {
                         if (response.ok) {
-                            this.getOrganisations();
+                            this.refresh();
                         }
                     });
-                } else {
-                    console.log(response);
-                }
+            } else {
+                console.log(response);
             }
-        );
+        });
+    }
+
+    private refresh() {
+        const pageEvent = new PageEvent();
+        pageEvent.pageIndex = this.paginator.pageIndex;
+        pageEvent.pageSize = this.paginator.pageSize;
+        this.paginator.page.emit(pageEvent);
     }
 }
