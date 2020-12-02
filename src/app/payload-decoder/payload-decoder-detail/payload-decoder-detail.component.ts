@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
   templateUrl: './payload-decoder-detail.component.html',
   styleUrls: ['./payload-decoder-detail.component.scss']
 })
-export class PayloadDecoderDetailComponent implements OnInit {
+export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
   payloadDecoder: PayloadDecoder;
   public backButton: BackButton = { label: '', routerLink: '/payload-decoder' };
   id: number;
@@ -46,7 +46,7 @@ export class PayloadDecoderDetailComponent implements OnInit {
         label: '',
         editRouterLink: '../../payload-decoder-edit/' + this.id,
         isErasable: true,
-      }
+      };
     }
     this.translate.get(['PAYLOAD-DECODER.TITLE', 'PAYLOAD-DECODER.DETAIL.DROPDOWN', 'PAYLOAD-DECODER.DELETE-FAILED'])
       .subscribe(translations => {
@@ -68,7 +68,6 @@ export class PayloadDecoderDetailComponent implements OnInit {
           this.canEdit();
         });
   }
-
 
   onDeletePayload() {
     const id = this.payloadDecoder.id;
@@ -94,14 +93,15 @@ export class PayloadDecoderDetailComponent implements OnInit {
         }
       }
     );
-
   }
 
-  // onDeletePayload() {
-  //   const id = this.payloadDecoder.id;
-  //   this.payloadDecoderService.delete(id).subscribe((response) => {
-  //     if (response.ok && response.body.affected > 0) {
-  //       this.deletePayloadDecoder.emit(id);
-  //     }
-  //   });
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
+  }
 }

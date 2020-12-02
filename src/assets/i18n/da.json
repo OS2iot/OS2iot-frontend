@@ -618,10 +618,11 @@
     "IS-USED": "Profilen kan ikke slettes da den er i brug.",
     "USER-ALREADY-EXISTS": "Brugeren findes allerede",
     "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug",
-    "DELETE-NOT-ALLOWED-ITEM-IS-IN-USE": "Payload decoder er i brug og kan derfor ikke slettes"
+    "DELETE-NOT-ALLOWED-ITEM-IS-IN-USE": "Payload decoder kan ikke slettes da den er i brug"
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
+    "DELETE-FAILED":"Slet Fejlede",
     "SERVICE_PROFILE": {
       "CREATED":"Oprettet",
       "UPDATED":"Senest Opdateret",

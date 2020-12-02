@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DeleteDialogService {
-  defaultTitle: 'Slet'
+
   constructor(
     private dialog: MatDialog
   ) { }
