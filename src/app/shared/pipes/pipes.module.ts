@@ -4,7 +4,7 @@ import { YesNoPipe } from './yesNo.pipe';
 import { ActiveDeactivePipe } from './activeDeactive.pipe';
 import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
-import { CustomDatePipe } from './custom-date.pipe';
+import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
 
 @NgModule({
     declarations: [
@@ -12,6 +12,7 @@ import { CustomDatePipe } from './custom-date.pipe';
         ActiveDeactivePipe,
         YesNoPipe,
         CustomDatePipe,
+        CustomTableDatePipe,
         CreatedUpdatedByPipe,
     ],
     imports: [
@@ -22,6 +23,7 @@ import { CustomDatePipe } from './custom-date.pipe';
         ActiveDeactivePipe,
         YesNoPipe,
         CustomDatePipe,
+        CustomTableDatePipe,
         CreatedUpdatedByPipe,
     ]
 })

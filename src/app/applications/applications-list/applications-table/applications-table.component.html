@@ -1,7 +1,7 @@
+<div *ngIf="isLoadingResults">
+  <app-loading-spinner *ngIf="isLoadingResults"></app-loading-spinner>
+</div>
 <div class="mat-elevation-z8">
-  <div *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
 
   <div>
 
@@ -32,7 +32,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-3">
           {{ 'APPLICATION-TABLE.UPDATED' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          {{element.updatedAt}}
+          {{element.updatedAt | tableDatePipe}}
         </td>
       </ng-container>
 
@@ -62,5 +62,6 @@
     </table>
   </div>
 
-  <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons>
+  </mat-paginator>
 </div>

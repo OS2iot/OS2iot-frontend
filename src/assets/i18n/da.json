@@ -14,7 +14,7 @@
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
     "APPLICATION": "Applikation",
-    "ALL-IOT-DEVICES": "Alle IoT enheder",
+    "ALL-IOT-DEVICES": "Alle IoT-enheder",
     "LORA-GATEWAYS": "LoRaWAN Gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
@@ -27,11 +27,11 @@
     "LOGIN": "Login",
     "ADMIN": "Administration",
     "SIGFOX": "Sigfox",
-    "SIGFOX-ADMIN": "Sigfox Administration",
-    "SIGFOX-DEVICE-TYPES": "Sigfox Enhedstyper",
+    "SIGFOX-ADMIN": "Sigfox administration",
+    "SIGFOX-DEVICE-TYPES": "Sigfox enhedstyper",
     "SEARCH": "Søgeresultater",
     "MENU-ITEM-MISC": "Generelt",
-    "DEVICE-MODEL": "Device Model",
+    "DEVICE-MODEL": "Device model",
     "BACK": "Tilbage"
   },
   "TOPBAR":{
@@ -49,14 +49,14 @@
     "NAME": "Navn",
     "ID": "Id",
     "ORGANISATION": "Organisation",
-    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
+    "PLACEHOLDER": "Der kan søges efter IoT-enheder, applikationer og gateways",
     "QUERY": "resultater for",
-    "NO-RESULTS": "Du kun kan søge efter IoT enheder, applikationer og gateways",
+    "NO-RESULTS": "Du kun kan søge efter IoT-enheder, applikationer og gateways",
     "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
     "NAME": "Sigfox Administration",
-    "SIGFOX-GROUP": "Sigfox Grupper",
+    "SIGFOX-GROUP": "Sigfox grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
     "LOGIN": "Login",
     "ADMINISTRATION": {
@@ -64,7 +64,7 @@
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
     "PROFILES": {
-      "NAME": "Sigfox Enhedstyper",
+      "NAME": "Sigfox enhedstyper",
       "DEVICE-TYPE": "Sigfox enhedstyper",
       "DEVICE-TYPE-NAME": "navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
@@ -79,7 +79,7 @@
     "DELETE": "Slet applikation",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
-    "ATTACHED-IOT": "Tilknyttede IoT enheder",
+    "ATTACHED-IOT": "Tilknyttede IoT-enheder",
     "DATATARGET-SHOW": "Se tilknyttede datatargets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
@@ -102,7 +102,7 @@
   "GATEWAY": {
     "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
-    "UPDATED": "Senest Opdateret",
+    "UPDATED": "Senest opdateret",
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
@@ -138,7 +138,7 @@
     "NAME": "Datatarget navn",
     "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
-    "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
+    "RELATIONS": "Tilknyttede IoT-enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder",
     "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT enhed(er)",
@@ -181,8 +181,8 @@
   },
   "APPLICATION-TABLE": {
     "NAME": "Navn",
-    "IOT-DEVICES": "IoT Enheder",
-    "UPDATED": "Senest Opdateret"
+    "IOT-DEVICES": "IoT-enheder",
+    "UPDATED": "Senest opdateret"
   },
   "IOT-TABLE": {
     "APPLICATION": "Applikation",
@@ -205,7 +205,7 @@
   "DEVICE-MODEL": {
     "HEADLINE":"Detaljer",
     "CREATED":"Oprettet",
-    "UPDATED":"Senest Opdateret",
+    "UPDATED":"Senest opdateret",
     "ID": "Id",
     "NAME": "Navn",
     "TYPE" : "Type",
@@ -259,23 +259,23 @@
     "EDIT": "Redigér"
   },
   "PAYLOAD-DECODER": {
-    "DELETE-FAILED": "Slet Fejlede",
+    "DELETE-FAILED": "Slet fejlede",
     "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
-    "UPDATED":"Senest Opdateret",
+    "UPDATED":"Senest opdateret",
     "TITLE": "Payload decoder",
-    "SAVE": "Gem Payload Decoder",
+    "SAVE": "Gem payload decoder",
     "NAME": "Navn",
-    "ID": "Payload Decoder Id",
+    "ID": "Payload decoder id",
     "ORGANIZATION": "Organisation",
-    "BELONGS-TO-ORGANIZATION": "Tilhørende organisation:",
+    "BELONGS-TO-ORGANIZATION": "Tilhørende organisation",
     "DECODINGFUNCTION": "Decoder funktion",
     "DETAIL": {
-      "DROPDOWN": "Håndter Payload Decoder",
+      "DROPDOWN": "Håndter payload decoder",
       "EDIT": "Redigér",
       "DELETE": "Slet"
     },
-    "IOT-DEVICES": "Tilknyttede IoT-Enheder"
+    "IOT-DEVICES": "Tilknyttede IoT-enheder"
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",
@@ -284,7 +284,7 @@
   "ORGANISATION": {
     "HEADLINE":"Detaljer",
     "CREATED":"Oprettet",
-    "UPDATED":"Senest Opdateret",
+    "UPDATED":"Senest opdateret",
     "NAME": "Navn",
     "APPLICATION-COUNT": "Applikationer",
     "SAVE": "Gem organisation",
@@ -315,8 +315,8 @@
     "NO_ORGANISATION": "N/A",
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
-      "TYPE": "Adgangstype: ",
-      "ORG": "Organisation: ",
+      "TYPE": "Adgangstype ",
+      "ORG": "Tilhørende organisation ",
       "DROPDOWN": "Håndter Brugergruppe",
       "EDIT": "Rediger",
       "DELETE": "Slet",
@@ -324,7 +324,7 @@
       "APPLICATIONS": "Brugergruppens applikationer",
       "HEADLINE": "Detaljer",
       "CREATED":"Oprettet",
-      "UPDATED":"Senest Opdateret"
+      "UPDATED":"Senest opdateret"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -558,8 +558,8 @@
       "FORMAT-ERROR": "Payload skal angives som Hexadecimal"
     },
     "CREATED": "Oprettet",
-    "UPDATED": "Senest Opdateret",
-    "DEVICEMODEL": "Device Model",
+    "UPDATED": "Senest opdateret",
+    "DEVICEMODEL": "Device model",
     "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
     "DETAIL": "Detaljer",
     "DETAIL-TAB": "Datapakke",
@@ -625,7 +625,7 @@
     "DELETE-FAILED":"Slet Fejlede",
     "SERVICE_PROFILE": {
       "CREATED":"Oprettet",
-      "UPDATED":"Senest Opdateret",
+      "UPDATED":"Senest opdateret",
       "DETAILS": "Detaljer",
       "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Service profiler",
@@ -656,7 +656,7 @@
     },
     "DEVICE_PROFILE": {
       "CREATED":"Oprettet",
-      "UPDATED":"Senest Opdateret",
+      "UPDATED":"Senest opdateret",
       "DETAILS": "Detaljer",
       "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Device profiler",
@@ -700,7 +700,7 @@
       "PINGSLOTFREQ_PLACEHOLDER": "0",
       "CLASSCTIMEOUT_PLACEHOLDER": "0",
       "ID": "Device profilens ID",
-      "ORGANIZATION": "Tilhørende organisation:"
+      "ORGANIZATION": "Tilhørende organisation"
     }
   },
   "USERS": {
@@ -730,16 +730,16 @@
     },
     "DETAIL": {
       "DROPDOWN": "Håndter Bruger",
-      "LAST-LOGIN": "Sidste login: ",
+      "LAST-LOGIN": "Sidste login ",
       "NO-LOGIN": "Ikke logget på endnu",
       "ADDED-DATE": "Oprettet den: ",
-      "GLOBALADMIN": "Global Administrator: ",
+      "GLOBALADMIN": "Global Administrator ",
       "PERMISSIONS": "Medlem af disse brugergrupper",
       "APPLICATIONS": "Rettigheder til disse applikationer",
       "NAME-PLACEHOLDER": "Navn",
       "EMAIL":"Email",
       "CREATED":"Oprettet",
-      "UPDATED":"Senest Opdateret",
+      "UPDATED":"Senest opdateret",
       "STATUS":"Status",
       "HEADLINE":"Detaljer"
     },
@@ -755,7 +755,7 @@
   },
   "DASHBOARD": {
     "WELCOME": "Velkommen til OS2IoT",
-    "WELCOME-MESSAGE": "Velkommen til OS2iot – din nye indgang til administration af IoT enheder på tværs af netværkstyper",
+    "WELCOME-MESSAGE": "Velkommen til OS2iot – din nye indgang til administration af IoT-enheder på tværs af netværkstyper",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT."
   },

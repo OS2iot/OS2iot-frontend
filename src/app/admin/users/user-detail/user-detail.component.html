@@ -11,12 +11,11 @@
                     <p [ngClass]="user.active | activeDeactive">
                         <strong>{{ 'USERS.DETAIL.STATUS' | translate }}</strong>{{user.active | activeDeactive}}</p>
                     <P *ngIf="user.lastLogin; else noLogin">
-                        <strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{user?.lastLogin | date}}</P>
+                        <strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{user?.lastLogin | dkTime}}</P>
                     <ng-template #noLogin>
                         <p><strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{ 'USERS.DETAIL.NO-LOGIN' | translate }}
                         </p>
                     </ng-template>
-                    <p><strong>{{ 'USERS.DETAIL.ADDED-DATE' | translate }}</strong>{{user?.createdAt | date}}</p>
                     <p><strong>{{ 'USERS.DETAIL.GLOBALADMIN' | translate }}</strong>
                         {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
                     </p>
