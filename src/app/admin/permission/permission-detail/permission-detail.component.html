@@ -22,7 +22,22 @@
                     <h3>
                         {{ 'PERMISSION.DETAIL.USERS' | translate }}
                     </h3>
-                    <app-user-table [permissionId]="permission.id" [canSort]="false"></app-user-table>
+                    <app-user-table [permissionId]="id" [canSort]="false"></app-user-table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h3>
+                        {{ 'PERMISSION.DETAIL.APPLICATIONS' | translate }}
+                    </h3>
+
+                    <app-applications-table *ngIf="permission.type == 'Write' || permission.type == 'Read'" [permissionId]="id">
+                    </app-applications-table>
+                    <app-applications-table *ngIf="permission.type == 'OrganizationAdmin'" [organizationId]="permission.organization?.id">
+                    </app-applications-table>
+                    <app-applications-table *ngIf="permission.type == 'GlobalAdmin'"></app-applications-table>
                 </div>
             </div>
         </div>
