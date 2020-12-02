@@ -51,7 +51,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.LORA-GATEWAYS'];
             }
-        );
+            );
     }
 
     ngAfterViewInit() {
@@ -92,7 +92,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             .subscribe(translations => {
                 this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
             }
-        );
+            );
     }
 
     canEdit(): boolean {
@@ -100,7 +100,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     onDeleteGateway() {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
             (response) => {
                 if (response) {
                     this.gatewayService.delete(this.gateway.id).subscribe((response) => {

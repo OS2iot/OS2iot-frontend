@@ -78,7 +78,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     deleteDatatarget(element: any) {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
             (response) => {
                 if (response) {
                     this.datatargetService.delete(element.id).subscribe((response) => {

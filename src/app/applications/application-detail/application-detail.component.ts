@@ -52,7 +52,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     onDeleteApplication() {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
             (response) => {
                 if (response) {
                     this.applicationService.deleteApplication(this.application.id).subscribe((response) => {

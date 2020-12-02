@@ -90,7 +90,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   }
 
   clickDelete() {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
       (response) => {
         if (response) {
           this.organisationService.delete(this.organisation.id)

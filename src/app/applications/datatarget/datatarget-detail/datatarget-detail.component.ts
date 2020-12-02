@@ -69,7 +69,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     }
 
     onDeleteDatatarget() {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
             (response) => {
                 if (response) {
                     this.datatargetService.delete(this.datatarget.id).subscribe((response) => {

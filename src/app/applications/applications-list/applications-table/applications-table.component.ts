@@ -27,9 +27,8 @@ export class ApplicationsTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private applicationService: ApplicationService, 
-    private router: Router)
-  {
+    private applicationService: ApplicationService,
+    private router: Router) {
   }
 
   ngAfterViewInit() {
@@ -80,10 +79,10 @@ export class ApplicationsTableComponent implements AfterViewInit {
           length: this.resultsLength,
         });
       }
-    }) 
+    })
   };
 
   navigateToEditPage(applicationId: string) {
-    this.router.navigate(['applications','edit-application', applicationId]);
+    this.router.navigate(['applications', 'edit-application', applicationId]);
   }
 }

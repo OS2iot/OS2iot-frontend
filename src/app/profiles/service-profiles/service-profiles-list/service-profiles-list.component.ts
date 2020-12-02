@@ -7,8 +7,9 @@ import {
 } from '../service-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiceProfileService } from '../service-profile.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -22,15 +23,24 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   public pageOffset: 0;
 
   public errorMessages: string;
+  deleteDialogSubscription: Subscription;
+  errorTitle: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private serviceProfileService: ServiceProfileService,
-    private sharedVariableService: SharedVariableService
-  ) {}
+    private sharedVariableService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit() {
+    this.translateService
+      .get(['PROFILES.DELETE-FAILED'])
+      .subscribe((translations) => {
+        this.errorTitle = translations['PROFILES.DELETE-FAILED'];
+      });
     this.getServiceProfileList();
   }
 
@@ -39,6 +49,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       .getMultiple()
       .subscribe((result: ServiceProfileResponseMany) => {
         this.serviceProfiles = result.result;
+        this.setCanEdit()
       });
   }
 
@@ -46,14 +57,8 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
     this.router.navigate(['new-service-profile'], { relativeTo: this.route });
   }
 
-  ngOnDestroy() {
-    if (this.serviceSubscription && this.serviceSubscription?.closed) {
-      this.serviceSubscription.unsubscribe();
-    }
-  }
-
   canCreate() {
-    return this.sharedVariableService.getHasWritePermission()
+    return this.sharedVariableService.getHasAnyWritePermission();
   }
 
   setCanEdit() {
@@ -66,30 +71,41 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
 
   deleteServiceProfile(id: string) {
     if (id) {
-      this.serviceProfileService.delete(id).subscribe(
+      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
         (response) => {
-          console.log(response);
-          if (response.ok) {
-            this.getServiceProfileList();
+          if (response) {
+            this.serviceProfileService.delete(id).subscribe((response) => {
+              console.log(response);
+              if (response.ok) {
+                this.getServiceProfileList();
+              } else {
+                if (response?.error?.message === 'Internal server error') {
+                  this.errorMessages = 'Internal server error';
+                  return;
+                } else {
+                  this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(
+                    response.error.message,
+                    false,
+                    false,
+                    true,
+                    this.errorTitle).subscribe();
+                }
+              }
+            });
           } else {
-            this.showError(response);
+            console.log(response);
           }
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
         }
       );
     }
   }
-  
-  private showError(err: HttpErrorResponse) {
-    if (err?.error?.message == 'Internal server error') {
-      this.errorMessages = 'Internal server error';
-      return;
-    }
 
-    if (err.error?.message) {
-      this.errorMessages = err.error?.message;
+  ngOnDestroy() {
+    if (this.serviceSubscription && this.serviceSubscription?.closed) {
+      this.serviceSubscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 }
