@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
     { path: 'not-found', component: ErrorPageComponent, data: { message: 'not-found', code: 404 } },
     { path: 'not-authorized', component: ErrorPageComponent },
-    { path: '', redirectTo: '/auth', pathMatch: 'full' },
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: '/not-found', pathMatch: 'full' }
 ];
 

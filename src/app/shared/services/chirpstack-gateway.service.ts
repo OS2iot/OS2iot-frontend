@@ -27,10 +27,11 @@ export class ChirpstackGatewayService {
         map(
           (response: GatewayResponse) => {
             response.gateway.internalOrganizationName = this.sharedVariableService.getOrganizationInfo()
-              .find( org => org.id === response.gateway.internalOrganizationId)?.name;
+              .find(org => org.id === response.gateway.internalOrganizationId)?.name;
             //move createdat and updatedat to next level ease the use.
             response.gateway.updatedAt = response.updatedAt;
             response.gateway.createdAt = response.createdAt;
+            response.gateway.lastSeenAt = response.lastSeenAt;
             response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
             response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
             return response;
