@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
-import { Location } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
@@ -44,6 +43,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public datatargetid: number;
   private applicationId: number;
+  private applicationNane: string;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
@@ -57,8 +57,8 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
+    private router: Router,
     private datatargetService: DatatargetService,
-    private location: Location,
     private applicationService: ApplicationService,
     private payloadDecoderService: PayloadDecoderService,
     private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
@@ -93,6 +93,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
     this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.applicationNane = this.route.snapshot.paramMap.get('name');
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -211,7 +212,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     this.counter -= 1;
     if (this.counter <= 0) {
       this.showSavedSnack();
-      this.routeBack();
+      this.routeToDatatargets();
     }
   }
 
@@ -226,9 +227,9 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   createDatatarget() {
     this.datatarget.applicationId = this.applicationId;
     this.datatargetService.create(this.datatarget)
-      .subscribe((response) => {
+      .subscribe((response: Datatarget) => {
         this.datatargetid = response.id;
-        this.datatarget.id = response.id;
+        this.datatarget = response
         this.showSavedSnack();
         this.shouldShowMailDialog().subscribe()
       },
@@ -270,8 +271,8 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     this.scrollToTopService.scrollToTop();
   }
 
-  routeBack(): void {
-    this.location.back();
+  routeToDatatargets(): void {
+    this.router.navigate(['applications',this.applicationId.toString(),'datatarget-list', this.applicationNane])
   }
 
   onCoordinateKey(event: any) {

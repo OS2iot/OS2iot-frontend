@@ -57,9 +57,16 @@ export class DatatargetService {
     );
   }
 
-  create(datatarget: Datatarget): Observable<any> {
+  create(datatarget: Datatarget): Observable<Datatarget> {
     this.trimModel(datatarget);
-    return this.restService.post(this.dataTargetURL, datatarget);
+    return this.restService.post(this.dataTargetURL, datatarget).pipe(
+      map(
+        (response: DatatargetResponse) => {
+          const datatarget = this.mapToDatatarget(response);
+          return datatarget;
+        }
+      )
+    );;
   }
 
   delete(id: number) {
