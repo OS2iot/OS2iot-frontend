@@ -84,6 +84,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
         },
         (error: HttpErrorResponse) => {
           this.showError(error);
+          this.formFailedSubmit = true;
         }
       );
   }
@@ -99,6 +100,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.showError(error);
+          this.formFailedSubmit = true;
         });
   }
 
