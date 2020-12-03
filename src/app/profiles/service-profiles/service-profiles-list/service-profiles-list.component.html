@@ -1,6 +1,6 @@
 <app-top-bar-table [title]="'PROFILES.SERVICE_PROFILE.HEADLINE' | translate"
     [ctaLabelPrimary]="'PROFILES.SERVICE_PROFILE.CREATE-NEW-SERVICE-PROFILE' | translate"
-    [ctaRouterLinkPrimary]="canCreate() ? 'new-service-profile' : null"></app-top-bar-table>
+    [ctaRouterLinkPrimary]="canCreate() ? 'service-profile/new-service-profile' : null"></app-top-bar-table>
 <div *ngIf="errorMessages" class="error-messages p-3 my-2">
     {{errorMessages | translate }}
 </div>

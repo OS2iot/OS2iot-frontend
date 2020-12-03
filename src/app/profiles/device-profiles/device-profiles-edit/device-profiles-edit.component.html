@@ -1,6 +1,7 @@
 <app-form-header [backButton]="backButton" [title]="title">
 </app-form-header>
-<div *ngIf="deviceProfile" class="jumbotron os2-form mt-3 px-md-5 py-md-4">
+<div *ngIf="deviceProfile.internalOrganizationName || deviceProfile.createdAt"
+    class="jumbotron os2-form mt-3 px-md-5 py-md-4">
     <h3>{{ 'PROFILES.DEVICE_PROFILE.DETAILS' | translate }}</h3>
     <p><strong
             *ngIf="deviceProfile.internalOrganizationName">{{ 'PROFILES.DEVICE_PROFILE.ORGANIZATION' | translate }}</strong>{{deviceProfile.internalOrganizationName}}

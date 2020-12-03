@@ -53,10 +53,6 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       });
   }
 
-  onNewServiceProfile() {
-    this.router.navigate(['new-service-profile'], { relativeTo: this.route });
-  }
-
   canCreate() {
     return this.sharedVariableService.getHasAnyWritePermission();
   }

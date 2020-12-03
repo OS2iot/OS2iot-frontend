@@ -24,10 +24,6 @@ export class DeviceProfilesItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onEditDeviceProfile() {
-    this.router.navigate([this.deviceProfile.id, 'deviceprofile/edit'], { relativeTo: this.route });
-  }
-
   onDeleteDeviceProfile() {
     this.deleteDeviceProfile.emit(this.deviceProfile.id);
   }

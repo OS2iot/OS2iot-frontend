@@ -37,7 +37,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
     this.translate.get(['PROFILES.NAME', 'FORM.EDIT-DEVICE-PROFILE'])
       .subscribe(translations => {
         this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
