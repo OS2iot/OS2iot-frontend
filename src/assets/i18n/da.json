@@ -152,12 +152,12 @@
   },
   "OPENDATADK": {
     "QUESTION": {
-      "GIVE-OPENDATADK-NAME": "OpenDataDK navn",
-      "GIVE-OPENDATADK-NAME-PLACEHOLDER": "OpenDataDK navn",
-      "GIVE-OPENDATADK-RESOURCETITLE": "Titel",
+      "GIVE-OPENDATADK-NAME": "Datasæt titel",
+      "GIVE-OPENDATADK-NAME-PLACEHOLDER": "Datasæt titel",
+      "GIVE-OPENDATADK-RESOURCETITLE": "Datakilde titel",
       "GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER": "Kloaksensorer - Aarhus kommune",
-      "GIVE-OPENDATADK-DESCRIPTION": "OpenDataDK Beskrivelse",
-      "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "OpenDataDK Beskrivelse",
+      "GIVE-OPENDATADK-DESCRIPTION": "Beskrivelse",
+      "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "Beskrivelse",
       "GIVE-OPENDATADK-KEYWORDS": "Angiv kommasepareret nøgleord",
       "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, Sensor, LoRaWAN, Temeratur",
       "GIVE-OPENDATADK-AUTHORNAME": "Forfatter",
@@ -169,8 +169,8 @@
       "TERMS-AND-CONDITIONS": "Gældende vilkår og betingelser for OpenDataDK"
     },
     "DETAILS": {
-      "NAME": "Navn på datasæt",
-      "RESOURCETITLE": "Titel",
+      "NAME": "Datasæt titel",
+      "RESOURCETITLE": "Datakilde titel",
       "DESCRIPTION": "Beskrivelse",
       "KEYWORDS": "Keywords",
       "LICENSE": "Licens",
