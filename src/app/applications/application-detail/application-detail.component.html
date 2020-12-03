@@ -11,10 +11,10 @@
       <div class="col-12">
         <div class="jumbotron">
           <h3>Detaljer</h3>
+          <app-general-details [data]="application"></app-general-details>
           <p *ngIf="application.description">
-            <app-general-details [data]="application"></app-general-details>
-            <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong>{{application.description}}
-          </p>
+            <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong></p>
+          <pre><p>{{application.description}}</p></pre>
         </div>
       </div>
     </div>
