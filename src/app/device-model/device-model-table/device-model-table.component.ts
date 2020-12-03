@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from '@environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
@@ -27,16 +28,23 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
   public resultsLength = 0;
   public hasWritePermission = false;
   deleteDialogSubscription: Subscription;
+  errorTitle: string;
 
   constructor(
     private sharedService: SharedVariableService,
     private deviceModelService: DeviceModelService,
-    private deleteDialogservice: DeleteDialogService
+    private deleteDialogservice: DeleteDialogService,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.getDeviceModels();
     this.hasWritePermission = this.sharedService.getHasWritePermission();
+    this.translateService
+      .get(['DEVICE-MODEL.DELETE-FAILED'])
+      .subscribe((translations) => {
+        this.errorTitle = translations['DEVICE-MODEL.DELETE-FAILED'];
+      });
   }
 
   getDeviceModels() {
@@ -71,7 +79,17 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit, OnDestr
             this.deviceModelService.delete(deviceModel.id)
               .subscribe(
                 (response) => {
-                  this.getDeviceModels();
+                  if (response.ok) {
+                    this.getDeviceModels();
+                  }
+                  else {
+                    this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDialog(
+                      response.error.message,
+                      false,
+                      false,
+                      true,
+                      this.errorTitle).subscribe();
+                  }
                 }
               );
           } else {
