@@ -20,8 +20,11 @@
     <div class="mt-2 col-6">
         <label for="data" class="form-label asterisk-if-mandatory">{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}</label>
         <input type="data" class="form-control" placeholder="{{'IOTDEVICE.DOWNLINK.PAYLOAD' | translate}}" id="data"
-            name="data" pattern="[a-fA-F\d]+" maxlength="device.type === 'SIGFOX' ? 16 : ''" required
+            name="data" pattern="[a-fA-F\d]+" [maxlength]="getMaxDownloadLength()" required
             [(ngModel)]="downlink.data">
+    </div>
+    <div *ngIf="device.type === 'SIGFOX'" class="mt-1">
+        <p>{{'IOTDEVICE.DOWNLINK.SIGFOX-PAYLOAD-LENGTH' | translate}}</p>
     </div>
     <div class="mt-5">
         <button (click)="clickDownlink()" class="btn btn-secondary"
