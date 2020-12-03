@@ -125,7 +125,7 @@ textarea {
       background-color: $grey-border;
 
       &.mat-step-icon-selected {
-        background-color: $orange;
+        background-color: $color-primary;
       }
     }
 
@@ -161,11 +161,11 @@ textarea {
 }
 
 .form-check-input:checked {
-  background-color: $orange;
-  border-color: $orange;
+  background-color: $color-primary;
+  border-color: $color-primary;
 
   &:focus {
-    box-shadow: 0 0 0 0.2rem $orange-outline;
+    box-shadow: 0 0 0 0.2rem $color-border;
   }
 }
 
@@ -194,8 +194,8 @@ textarea {
   }
 
   .form-check-input:checked+.image-container {
-    border: solid 1px $orange;
-    box-shadow: 0 0 0 0.2rem $orange;
+    border: solid 1px $color-primary;
+    box-shadow: 0 0 0 0.2rem $color-primary;
   }
 }
 

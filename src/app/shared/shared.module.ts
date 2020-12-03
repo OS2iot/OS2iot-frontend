@@ -18,6 +18,8 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.component';
 import { GeneralDetailsComponent } from './components/general-details/general-details.component';
 import { PipesModule } from './pipes/pipes.module';
+import { DynamicImgComponent } from './components/dynamic-img/dynamic-img.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { PipesModule } from './pipes/pipes.module';
     OpendatadkDialogComponent,
     TopBarComponent,
     TopBarTableComponent,
-    GeneralDetailsComponent
+    GeneralDetailsComponent,
+    DynamicImgComponent
   ],
   imports: [
     DirectivesModule,
@@ -51,7 +54,8 @@ import { PipesModule } from './pipes/pipes.module';
     OpendatadkDialogComponent,
     TopBarComponent,
     TopBarTableComponent,
-    GeneralDetailsComponent
+    GeneralDetailsComponent,
+    DynamicImgComponent
   ],
 })
 export class SharedModule { }

@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
   faUser = faUser;
+  imagePath = '../../assets/images/os2iot.png ';
 
   constructor(
     private authService: AuthService,
