@@ -106,10 +106,14 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   }
 
   deletePermission(id: number) {
-    this.permissionsService.deletePermission(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getOrganisation(this.id);
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.permissionsService.deletePermission(id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.getOrganisation(this.id);
+          }
+        });
       }
-    });
+    })
   }
 }

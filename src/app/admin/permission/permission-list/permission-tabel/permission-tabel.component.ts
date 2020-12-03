@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import {
@@ -40,7 +41,8 @@ export class PermissionTabelComponent implements AfterViewInit {
     constructor(
         public translate: TranslateService,
         private router: Router,
-        private permissionService: PermissionService
+        private permissionService: PermissionService,
+        private deleteDialogService: DeleteDialogService
     ) {
         translate.use('da');
     }
@@ -93,12 +95,15 @@ export class PermissionTabelComponent implements AfterViewInit {
     }
 
     deletePermission(id: number) {
-        console.log('list');
-        this.permissionService.deletePermission(id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-                this.refresh();
+        this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+            if (response) {
+                this.permissionService.deletePermission(id).subscribe((response) => {
+                    if (response.ok && response.body.affected > 0) {
+                        this.refresh();
+                    }
+                });
             }
-        });
+        })
     }
 
     private refresh() {

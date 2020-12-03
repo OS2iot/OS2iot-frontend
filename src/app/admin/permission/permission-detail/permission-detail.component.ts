@@ -13,6 +13,7 @@ import { OrganisationResponse } from '@app/admin/organisation/organisation.model
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 
 @Component({
@@ -51,6 +52,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private permissionService: PermissionService,
     private router: Router,
+    private deleteDialogService: DeleteDialogService
   ) { }
 
   ngOnInit(): void {
@@ -86,11 +88,15 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   }
 
   onDeletePermission() {
-    this.permissionService.deletePermission(this.id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.router.navigate(['admin/permissions']);
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.permissionService.deletePermission(this.id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.router.navigate(['admin/permissions']);
+          }
+        });
       }
-    });
+    })
   }
 
   onEditPermission() {
