@@ -76,7 +76,7 @@
                 <td mat-cell *matCellDef="let element">
                     <ul class="mb-0">
                         <li *ngFor="let error of element.errorMessages">
-                            {{error}}
+                            {{error | translate}}
                         </li>
                     </ul>
                 </td>
