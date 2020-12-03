@@ -11,6 +11,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 })
 export class DashboardComponent implements OnInit {
   unauthorizedMessage: string;
+  kombitError: string;
   isLoadingResults = true;
   hasSomePermission: boolean;
 
@@ -23,8 +24,9 @@ export class DashboardComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
-      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS']).toPromise().then(translations => {
+      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS', 'DASHBOARD.KOMBIT-LOGIN-ERROR']).toPromise().then(translations => {
         this.unauthorizedMessage = translations['DASHBOARD.NO-JOB-ACCESS'];
+        this.kombitError = translations['DASHBOARD.KOMBIT-LOGIN-ERROR'];
       });
       // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
@@ -35,7 +37,11 @@ export class DashboardComponent implements OnInit {
       } else {
         const error = params['error'];
         if (error) {
-          this.router.navigate(['/not-authorized'], { state: { message: this.unauthorizedMessage, code: 401 } });
+          if (error == "MESSAGE.KOMBIT-LOGIN-FAILED") {
+            this.router.navigate(['/not-authorized'], { state: { message: this.kombitError, code: 401 } });
+          } else {
+            this.router.navigate(['/not-authorized'], { state: { message: this.unauthorizedMessage, code: 401 } });
+          } 
         }
       }
       await this.sharedVariableService.setUserInfo();
