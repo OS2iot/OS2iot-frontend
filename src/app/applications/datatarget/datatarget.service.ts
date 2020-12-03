@@ -101,7 +101,7 @@ export class DatatargetService {
       createdByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.createdBy),
       updatedByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.updatedBy),
     };
-    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(',');
+    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(', ');
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
     return model;
   }

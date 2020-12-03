@@ -13,7 +13,7 @@
                     <p><strong>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</strong>{{deviceModel.body.modelName}}</p>
                     <p><strong>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</strong>{{deviceModel.body.manufacturerName}}
                     </p>
-                    <p><strong>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</strong>{{deviceModel.body.controlledProperty}}
+                    <p><strong>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</strong>{{deviceModel.body.controlledProperty.join(', ')}}
                     </p>
                     <p><strong>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</strong>{{deviceModel.body.category}}</p>
                     <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</strong>{{deviceModel.body.supportedUnits}}

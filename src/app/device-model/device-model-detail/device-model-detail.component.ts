@@ -68,8 +68,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
                 (response) => {
                   if (response.ok && response.body.affected > 0) {
                     this.router.navigate(['device-model']);
-                  }
-                  else {
+                  } else {
                     this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDialog(
                       response.error.message,
                       false,
