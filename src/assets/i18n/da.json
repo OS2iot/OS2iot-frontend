@@ -786,6 +786,7 @@
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",
   "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
+  "Forbidden resource": "Du har ikke rettigheder til at foretage denne handling",
   "GENERIC_HTTP": "Generisk HTTP",
   "LORAWAN": "LoRaWAN",
   "SIGFOX": "Sigfox"
