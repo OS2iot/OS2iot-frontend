@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Application, ApplicationData } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -30,7 +31,8 @@ export class ApplicationsTableComponent implements AfterViewInit {
 
   constructor(
     private applicationService: ApplicationService,
-    private router: Router
+    private router: Router,
+    private deleteDialogService: DeleteDialogService
   ) {}
 
   ngAfterViewInit() {
@@ -74,15 +76,19 @@ export class ApplicationsTableComponent implements AfterViewInit {
   }
 
   deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.paginator.page.emit({
-          pageIndex: this.paginator.pageIndex,
-          pageSize: this.paginator.pageSize,
-          length: this.resultsLength,
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.applicationService.deleteApplication(id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.paginator.page.emit({
+              pageIndex: this.paginator.pageIndex,
+              pageSize: this.paginator.pageSize,
+              length: this.resultsLength,
+            });
+          } else {
+            this.errorMessage = response?.error?.message;
+          }
         });
-      } else {
-        this.errorMessage = response?.error?.message;
       }
     });
   }
