@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { buildDriverProvider } from 'protractor/built/driverProviders';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DeviceModel, DeviceModelBody, DeviceModelRequest } from './device.model';
+import { DeviceModel, DeviceModelBody, DeviceModelRequest, DeviceModelResponse } from './device.model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,32 +64,53 @@ export class DeviceModelService {
     );
   }
 
-  getMultiple(): Observable<any> {
-    const organizationId = this.sharedVariable.getSelectedOrganisationId();
-    return this.restService.get(this.DEVICEMODELURL, { organizationId })
+  getMultiple(
+    limit: number,
+    offset: number,
+    sort: string,
+    orderOn: string,
+    organizationId?: number
+  ): Observable<DeviceModelResponse> {
+    const body = {
+        limit: limit,
+        offset: offset,
+        sort: sort,
+        orderOn: orderOn,
+        organizationId: undefined,
+    };
+    if (organizationId) {
+      body.organizationId = organizationId;
+    }
+    return this.restService
+      .get(this.DEVICEMODELURL, body)
       .pipe(
-        map(
-          response => response.data.map((item: any) =>
-            new DeviceModel(
-              item.id,
-              new DeviceModelBody(
-                item.body.id,
-                item.body.name,
-                item.body.brandName,
-                item.body.modelName,
-                item.body.manufacturerName,
-                item.body.category,
-                item.body.energyLimitationClass,
-                item.body.controlledProperty,
-                item.body.supportedUnits,
-                item.body.function,
-                item.body.supportedProtocol
-              )
-            )
-          )
-        )
+        map((response) => {
+          return {
+            data: response.data.map(
+              (item: any) =>
+                new DeviceModel(
+                  item.id,
+                  new DeviceModelBody(
+                    item.body.id,
+                    item.body.name,
+                    item.body.brandName,
+                    item.body.modelName,
+                    item.body.manufacturerName,
+                    item.body.category,
+                    item.body.energyLimitationClass,
+                    item.body.controlledProperty,
+                    item.body.supportedUnits,
+                    item.body.function,
+                    item.body.supportedProtocol
+                  )
+                )
+            ),
+            count: response.count,
+          };
+        })
       );
-  }
+  };
+  
 
   delete(id: number) {
     return this.restService.delete(this.DEVICEMODELURL, id);

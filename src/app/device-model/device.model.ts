@@ -42,6 +42,12 @@ export class DeviceModelBody {
 
     }
 }
+
+export class DeviceModelResponse {
+    data: DeviceModel[];
+    count: number;
+}
+
 export class DeviceModel {
     id: number;
     body: DeviceModelBody = new DeviceModelBody();

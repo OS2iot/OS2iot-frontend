@@ -86,9 +86,15 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     getDeviceModels() {
-        this.deviceModelService.getMultiple().subscribe(
+        this.deviceModelService.getMultiple(
+            1000,
+            0, 
+            "id",
+            "ASC",
+            this.shareVariable.getSelectedOrganisationId()
+        ).subscribe(
             (response) => {
-                this.deviceModels = response;
+                this.deviceModels = response.data;
             }
         );
     }
