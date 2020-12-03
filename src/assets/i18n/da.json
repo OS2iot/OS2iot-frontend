@@ -58,6 +58,7 @@
     "NAME": "Sigfox Administration",
     "SIGFOX-GROUP": "Sigfox grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
+    "API-ACCESS": "For at kunne tilgå din Sigfox gruppe skal du først have oprettet en API adgang til gruppen i Sigfox. Denne skal bruges til at logge ind med nedenfor. Læs hvordan du opretter adgangen her -",
     "LOGIN": "Login",
     "ADMINISTRATION": {
       "NAME": "Sigfox Grupper",
@@ -80,7 +81,7 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT-enheder",
-    "DATATARGET-SHOW": "Se tilknyttede datatargets",
+    "DATATARGET-SHOW": "Se tilknyttede data targets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
       "TEMPLATE": {
@@ -117,7 +118,7 @@
     "STATS-TXPACKETSEMITTED": "Pakker Sendt",
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
-    "DROPDOWNFILTER": "Organisation filter",
+    "DROPDOWNFILTER": "Organisationsfilter",
     "DROPDOWNDEFAULT": "Alle",
     "MAP-TAB": "Kort",
     "ORGANIZATION": "Organisation"
@@ -216,14 +217,14 @@
     "CATEGORY" : "Kategori",
     "SUPPORTEDUNITS" : "Måleenheder",
     "FUNCTION" : "Enhedsfunktioner",
-    "ENERGYLIMITATIONCLASS" : "Energi begrænsningsklassen",
-    "SUPPORTEDPROTOCOL" : "Understøttet protokoller",
+    "ENERGYLIMITATIONCLASS" : "Energibegrænsningsklassen",
+    "SUPPORTEDPROTOCOL" : "Understøttede protokoller",
     "DETAIL-TITLE": "Device Model detalje",
     "DEVICE-MODEL": "Device Model",
     "SHOW-OPTIONS": "Håndter Device Model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
-    "SHOW-OPTIONS": "Håndter Gateway"
+    "SHOW-OPTIONS": "Håndtér Gateway"
   },
   "LORA-GATEWAY": {
     "CREATE": "Opret LoRaWAN Gateway"
@@ -252,7 +253,7 @@
     "DELETE": "Slet",
     "EDIT": "Redigér",
     "SHOW-OPTIONS": "Håndter IoT enhed",
-    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteri status"
+    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteristatus"
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
@@ -365,7 +366,7 @@
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
     "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
     "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
-    "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér Device profile",
+    "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér device profil",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
@@ -374,7 +375,7 @@
     "EDIT-SIGFOX-GROUPS": "Redigér Sigfox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
-    "EDIT-DEVICE-PROFILE": "Redigér device profile"
+    "EDIT-DEVICE-PROFILE": "Redigér device profil"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -418,7 +419,7 @@
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
-    "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+    "OTAAAPPLICATIONKEY": "OTAA application key (AppKey)",
     "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
     "DEVADDR": "Device adress",
     "DEVADDR-PLACEHOLDER": "Indtast Device adress",
@@ -430,8 +431,8 @@
     "FCNTUP-PLACEHOLDER": "Angiv upload framerate",
     "NFCNTDOWN": "nfcntdown",
     "NFCNTDOWN-PLACEHOLDER": "Angiv download framerate",
-    "DEVEUI": "Enheds EUI",
-    "DEVEUI-PLACEHOLDER": "Enheds EUI",
+    "DEVEUI": "Enheds EUI (DevEUI)",
+    "DEVEUI-PLACEHOLDER": "Enheds EUI (DevEUI)",
     "SKIPFCNTCHECK": "SkipFCntCheck",
     "SKIPFCNTCHECK-NO": "Nej",
     "SKIPFCNTCHECK-YES": "Ja",
@@ -473,7 +474,7 @@
         "NAME": "Navngiv enhedstypen",
         "NAME-PLACEHOLDER": "XC-123",
         "ALERTEMAIL-PLACEHOLDER": "Jens@jensen.dk",
-        "ALERTEMAIL": "Angiv e-mail tilbrug i tilfælde af alarm fra Sigfox",
+        "ALERTEMAIL": "Angiv e-mail til brug i tilfælde af alarm fra Sigfox",
         "DESCRIPTION": "Angiv beskrivelse",
         "DESCRIPTION-PLACEHOLDER": "Lipsum larum",
         "CHOOSE-GROUP": "Vælg en sigfoxgruppe",
@@ -491,20 +492,20 @@
       "GIVE-MODELNAME-PLACEHOLDER": "Angiv model navnet",
       "GIVE-MANUFACTURERNAME": "Angiv producentens navn (manufacturerName)",
       "GIVE-MANUFACTURERNAME-PLACEHOLDER": "Angiv producentens navn",
-      "SELECT-CONTROLLEDPROPERTY": "Vælg en til flere kontrol egenskaber (controlledProperty)",
+      "SELECT-CONTROLLEDPROPERTY": "Vælg en eller flere kontrolegenskaber (controlledProperty)",
       "SELECT-CATEGORY": "Vælg kategori (category)",
-      "SELECT-SUPPORTEDUNITS": "Vælg Måleenheder (supportedUnits)",
-      "SELECT-DEVICEFUNCTIONS": "Vælg Enhedsfunktioner (function)",
-      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energi begrænsningsklassen (energyLimitationClass)",
-      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttet protokoller (supportedProtocol)",
+      "SELECT-SUPPORTEDUNITS": "Vælg måleenheder (supportedUnits)",
+      "SELECT-DEVICEFUNCTIONS": "Vælg enhedsfunktioner (function)",
+      "SELECT-ENERGYLIMITATIONCLASS": "Vælg energibegrænsningsklassen (energyLimitationClass)",
+      "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttede protokoller (supportedProtocol)",
       "FIWARE-LINK-TEXT": "Denne data model er adopteret fra Fiware og følger ETSI standarden"
     }
   },
   "QUESTION-LORA-GATEWAY": {
     "NAME": "Navngiv LoRaWAN Gateway",
-    "NAME-PLACEHOLDER": "LoRaWAN Gateways' navn",
+    "NAME-PLACEHOLDER": "Navn på LoRaWAN Gateway",
     "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
-    "DESCRIPTION-PLACEHOLDER": "beskrivelse af LoRaWAN Gateway",
+    "DESCRIPTION-PLACEHOLDER": "Beskrivelse af LoRaWAN Gateway",
     "GATEWAYID": "Gateway ID",
     "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
     "METADATA": "Gateway Tags",
@@ -570,11 +571,11 @@
     "LOCATION": "Placering",
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
-    "COMMENTONLOCATION": "Kommentar om placering",
+    "COMMENTONLOCATION": "Beskrivelse af placeringen",
     "COMMENT": "Kommentar: ",
-    "NOCOMMENT": "Ingen kommentar er angivet.",
+    "NOCOMMENT": "Ingen kommentar er angivet",
     "NOLOCATION": "Ingen placering er angivet",
-    "NOCOMMENTONLOCATION": "Ingen kommentar om placeringen er angivet",
+    "NOCOMMENTONLOCATION": "Ingen beskrivelse af placeringen er angivet",
     "GENERIC_HTTP": {
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
@@ -584,7 +585,7 @@
     "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "DATAPACKAGE": "Datapakke",
     "LORA": {
-      "DEVEUI": "Enheds EUI",
+      "DEVEUI": "Enheds EUI (DevEUI)",
       "SERVICEPROFILE": "Service profil",
       "DEVICEPROFILE": "Device profil",
       "ACTIVATIONTYPE": "Aktivations type",
@@ -593,13 +594,13 @@
       "NETWORKSESSIONKEY": "Netværks session key",
       "APPLICATIONSESSIONKEY": "Applikation session key",
       "SKIPFCNTCHECK": "skipfcntcheck",
-      "OTAAAPPLICATIONKEY": "OTAA Applicationkey",
+      "OTAAAPPLICATIONKEY": "OTAA application key (AppKey)",
       "NFCNTDOWN": "nfcntdown",
       "FCNTUP": "fcntup"
     },
     "SIGFOX": {
       "GROUP-NAME": "Sigfox gruppe navn",
-      "PROTOTYPE": "Er enheden en prototype",
+      "PROTOTYPE": "Prototype",
       "PAC": "PAC",
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
       "DEVICETYPE": "Enhedstypen",
@@ -633,14 +634,14 @@
       "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
-      "NAME": "Service-profil navn",
+      "NAME": "Service profil navn",
       "NAME_PLACEHOLDER": "service-profil-navn-uden-mellemrum",
       "ADDGWMETADATA": "Tilføj gateway meta-data",
       "ADDGWMETADATAEXPLAINED": "GW-metadata (RSSI, SNR, GW geoloc. Osv.) Føjes til den pakke, der sendes til applikationsserveren",
       "NWKGEOLOC": "Aktivér geografisk placering af netværk",
       "NWKGEOLOCEXPLAINED": "Når den er aktiveret, forsøger netværksserveren at løse placeringen af â€‹â€‹enhederne under denne serviceprofil. Bemærk, at du skal have gateways, der understøtter fine-timestamp, og at netværksserveren skal konfigureres for at yde support til geolokalisering.",
       "REPORT_END_DEVICE": "Report end-device margin",
-      "DEVICEFREQUENCY": "Device-status request frequency",
+      "DEVICEFREQUENCY": "Device status request frequency",
       "DEVICEFREQUENCYEXPLANIED": "Frekvens til at starte en anmodning om end-device (requests pr. dag).",
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
@@ -664,8 +665,8 @@
       "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
-      "NAME": "Device-profil navn",
-      "NAME_PLACEHOLDER": "Device-profile name",
+      "NAME": "Device profil navn",
+      "NAME_PLACEHOLDER": "Device profil navn",
       "MACVERSION": "LoRaWAN MAC version ",
       "REGPARAMSREVISION": "LoRaWAN Regional Parameters revision ",
       "MAXEIRP": "Max EIRP ",
@@ -711,7 +712,7 @@
     "STATUS": "Status",
     "LASTLOG": "Sidste Login",
     "EDIT": "Redigér User",
-    "CREATE": "Opret ny burger",
+    "CREATE": "Opret ny bruger",
     "LOGIN": "Sidst aktiv",
     "TABLE-ROW": {
       "EDIT": "Redigér",

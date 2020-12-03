@@ -13,8 +13,7 @@
             <app-loading-spinner></app-loading-spinner>
         </div>
         <form class="p-5 jumbotron" #sigFoxForm="ngForm" (ngSubmit)="onSubmit(sigFoxForm)" *ngIf="!isLoading">
-            <p>For at kunne tilgå din Sigfox gruppe, skal du først have oprettet en API adgang til gruppen i Sigfox.
-                Denne skal bruges til at logge ind med nedenfor. Læs hvordan du opretter adgangen her - <span><a
+            <p>{{'SIGFOX-GROUP.API-ACCESS' | translate}} <span><a
                         href="https://support.sigfox.com/docs/api-credential-creation">API credential
                         creation</a></span>
             </p>
