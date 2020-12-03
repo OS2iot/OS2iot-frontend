@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy, ViewChild, EventEmitter, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { merge, Observable, of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/shared/services/rest.service';
-import { Application } from '@applications/application.model';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  IotDevice,
+  IotDevicesResponse,
+} from '@applications/iot-devices/iot-device.model';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,123 +14,142 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
 import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
 import { environment } from '@environments/environment';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-iot-devices-table',
-    templateUrl: './iot-devices-table.component.html',
-    styleUrls: ['./iot-devices-table.component.scss'],
+  selector: 'app-iot-devices-table',
+  templateUrl: './iot-devices-table.component.html',
+  styleUrls: ['./iot-devices-table.component.scss'],
 })
-export class IotDevicesTableComponent implements OnInit, OnDestroy, AfterViewInit {
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-    public pageSize = environment.tablePageSize;
-    displayedColumns: string[] = ['name', 'technology', 'battery', 'active', 'menu'];
-    public dataSource = new MatTableDataSource<IotDevice>();
-    public iotDevices: IotDevice[];
+export class IotDevicesTableComponent implements AfterViewInit {
+  @Input() applicationId: number;
+  data: IotDevice[] = [];
 
-    private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  public pageSize = environment.tablePageSize;
+  displayedColumns: string[] = [
+    'name',
+    'technology',
+    'battery',
+    'active',
+    'menu',
+  ];
 
-    batteryStatusColor = 'green';
-    batteryStatusPercentage = 50;
-    device: IotDevice;
-    resultsLength = 0;
-    isLoadingResults = true;
-    deleteDevice = new EventEmitter();
-    private deleteDialogSubscription: Subscription;
+  private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
-    @Input() application: Application;
-    private applicationSubscription: Subscription;
+  batteryStatusColor = 'green';
+  batteryStatusPercentage = 50;
+  resultsLength = 0;
+  isLoadingResults = true;
 
-    constructor(
-        private restService: RestService,
-        private deleteDialogService: DeleteDialogService,
-        public translate: TranslateService,
-        public iotDeviceService: IoTDeviceService,
-        private dialog: MatDialog
+  constructor(
+    private restService: RestService,
+    private deleteDialogService: DeleteDialogService,
+    public translate: TranslateService,
+    public iotDeviceService: IoTDeviceService,
+    private dialog: MatDialog
+  ) {
+    translate.use('da');
+  }
+
+  ngAfterViewInit() {
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.getDevices(this.sort.active, this.sort.direction);
+        }),
+        map((data) => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.resultsLength = data.count;
+
+          return data.data;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      )
+      .subscribe((data) => (this.data = data));
+  }
+
+  public getBatteryProcentage(device: IotDevice): number {
+    if (
+      device?.lorawanSettings?.deviceStatusBattery ===
+      this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE
     ) {
-        translate.use('da');
+      return null;
     }
+    return Math.round(device?.lorawanSettings?.deviceStatusBattery);
+  }
 
-    ngOnInit(): void {
-        this.getDevices();
+  getDevices(
+    orderByColumn: string,
+    orderByDirection: string
+  ): Observable<IotDevicesResponse> {
+    return this.restService.get(
+      `application/${this.applicationId}/iot-devices`,
+      {
+        limit: this.paginator.pageSize,
+        offset: this.paginator.pageIndex * this.paginator.pageSize,
+        sort: orderByDirection,
+        orderOn: orderByColumn,
+      }
+    );
+  }
+
+  public lastActive(device: IotDevice) {
+    const arr = device?.receivedMessagesMetadata;
+    if (!arr || arr.length === 0) {
+      return this.translate.instant('ACTIVITY.NEVER');
+    } else {
+      const lastActive = Math.max(
+        ...arr.map((x: ReceivedMessageMetadata) => Date.parse(x.sentTime))
+      );
+      return moment(lastActive).fromNow();
     }
+  }
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-    }
-
-    public getBatteryProcentage(device: IotDevice): number {
-        if (device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
-            return null;
-        }
-        return Math.round(device?.lorawanSettings?.deviceStatusBattery);
-    }
-
-    getDevices(): void {
-        this.applicationSubscription = this.restService
-            .get('application', {}, this.application.id)
-            .subscribe((application: Application) => {
-                this.iotDevices = application.iotDevices;
-                this.dataSource = new MatTableDataSource<IotDevice>(this.iotDevices);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-                this.dataSource.sortingDataAccessor = tableSorter;
-                this.isLoadingResults = false;
-                this.resultsLength = this.iotDevices.length;
+  clickDelete(element: any) {
+    if (element.type == DeviceType.SIGFOX) {
+      this.showSigfoxDeleteDialog();
+    } else {
+      this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+        if (response) {
+          this.iotDeviceService
+            .deleteIoTDevice(element.id)
+            .subscribe((response) => {
+              if (response.ok && response.body.affected > 0) {
+                this.paginator.page.emit({
+                  pageIndex: this.paginator.pageIndex,
+                  pageSize: this.paginator.pageSize,
+                  length: this.resultsLength,
+                });
+              }
             });
-    }
-
-    public lastActive(device: IotDevice) {
-        const arr = device?.receivedMessagesMetadata;
-        if (!arr || arr.length === 0) {
-            return this.translate.instant('ACTIVITY.NEVER');
         } else {
-            const lastActive = Math.max(...arr.map((x: ReceivedMessageMetadata) => Date.parse(x.sentTime)));
-            return moment(lastActive).fromNow();
+          console.log(response);
         }
+      });
     }
+  }
 
-    clickDelete(element: any) {
-        if (element.type == DeviceType.SIGFOX) {
-            this.showSigfoxDeleteDialog();
-        } else {
-            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
-                (response) => {
-                    if (response) {
-                        this.iotDeviceService.deleteIoTDevice(element.id).subscribe((response) => {
-                            if (response.ok && response.body.affected > 0) {
-                                this.getDevices();
-                            }
-                        });
-                    } else {
-                        console.log(response);
-                    }
-                }
-            );
-        }
-    }
-
-    showSigfoxDeleteDialog() {
-        const dialog = this.dialog.open(DeleteDialogComponent, {
-            data: {
-                message: 'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
-                showAccept: false,
-                showCancel: true
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        // prevent memory leak by unsubscribing
-        if (this.applicationSubscription) {
-            this.applicationSubscription.unsubscribe();
-        }
-        if (this.deleteDialogSubscription) {
-            this.deleteDialogSubscription.unsubscribe();
-        }
-    }
+  showSigfoxDeleteDialog() {
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        message:
+          'Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter',
+        showAccept: false,
+        showCancel: true,
+      },
+    });
+  }
 }

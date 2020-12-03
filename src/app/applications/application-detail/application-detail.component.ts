@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
@@ -20,8 +19,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     private deleteDialogSubscription: Subscription;
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
-    private id: number;
-    public iotDevices: IotDevice[] = [];
+    public id: number;
     public dropdownButton: DropdownButton;
     public errorMessage: string;
 
@@ -74,9 +72,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     bindApplication(id: number): void {
         this.applicationsSubscription = this.applicationService.getApplication(id).subscribe((application) => {
             this.application = application;
-            if (application.iotDevices) {
-                this.iotDevices = application.iotDevices;
-            }
         });
     }
 
