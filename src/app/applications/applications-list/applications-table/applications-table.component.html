@@ -4,6 +4,9 @@
 <div class="mat-elevation-z8">
 
   <div>
+    <div *ngIf="errorMessage" class="error-messages p-3 m-2">
+      {{errorMessage | translate}}
+    </div>
 
     <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="created" matSortDisableClear
       matSortDirection="desc">

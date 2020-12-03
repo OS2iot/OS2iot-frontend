@@ -23,14 +23,15 @@ export class ApplicationsTableComponent implements AfterViewInit {
 
   resultsLength = 0;
   isLoadingResults = true;
+  public errorMessage: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private applicationService: ApplicationService,
-    private router: Router) {
-  }
+    private router: Router
+  ) {}
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
@@ -80,9 +81,11 @@ export class ApplicationsTableComponent implements AfterViewInit {
           pageSize: this.paginator.pageSize,
           length: this.resultsLength,
         });
+      } else {
+        this.errorMessage = response?.error?.message;
       }
-    })
-  };
+    });
+  }
 
   navigateToEditPage(applicationId: string) {
     this.router.navigate(['applications', 'edit-application', applicationId]);

@@ -5,6 +5,9 @@
   </app-top-bar>
   <div class="container-fluid">
     <div class="row">
+      <div *ngIf="errorMessage" class="error-messages col-8 p-3 mx-4 my-3">
+        {{errorMessage | translate}}
+      </div>
       <div class="col-12">
         <div class="jumbotron">
           <h3>Detaljer</h3>

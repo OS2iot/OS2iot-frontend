@@ -23,6 +23,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     private id: number;
     public iotDevices: IotDevice[] = [];
     public dropdownButton: DropdownButton;
+    public errorMessage: string;
 
     constructor(
         private applicationService: ApplicationService,
@@ -58,9 +59,11 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
                     this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
                         if (response.ok && response.body.affected > 0) {
                             console.log('delete application with id:' + this.application.id.toString());
+                            this.router.navigate(['applications']);
+                        } else {
+                            this.errorMessage = response?.error?.message;
                         }
                     });
-                    this.router.navigate(['applications']);
                 } else {
                     console.log(response);
                 }
