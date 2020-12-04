@@ -9,7 +9,7 @@ export enum ControlledPropperty {
     ELECTRICITYCONSUMPTION = "electricityConsumption",
     ENERGY = "energy",
     FILLINGLEVEL = "fillingLevel",
-    GASCONSUMPTION = "gasConsumption",
+    GASCOMSUMPTION = "gasComsumption",
     HEADING = "heading",
     HUMIDITY = "humidity",
     LIGHT = "light",
