@@ -124,6 +124,7 @@
         <select id="serviceProfileID" class="form-select" name="serviceProfileID"
           [(ngModel)]="iotDevice.lorawanSettings.serviceProfileID" required
           [value]="iotDevice.lorawanSettings.serviceProfileID"
+          [disabled]="editmode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('serviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('serviceProfileID')}">
           <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id"
             [selected]="serviceProfile.id === iotDevice.lorawanSettings.serviceProfileID">
