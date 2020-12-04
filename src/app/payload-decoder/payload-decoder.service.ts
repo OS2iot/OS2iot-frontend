@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '../shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { PayloadDecoderResponse, PayloadDecoder, PayloadDecoderBodyResponse } from 'src/app/payload-decoder/payload-decoder.model';
+import { PayloadDecoderResponse, PayloadDecoder, PayloadDecoderBodyResponse, PayloadDecoderMappedResponse, GetPayloadDecoderParameters } from 'src/app/payload-decoder/payload-decoder.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
@@ -53,12 +53,21 @@ export class PayloadDecoderService {
             );
     }
 
-    getMultiple(organizationId: number = null): Observable<PayloadDecoder[]> {
-        let params = null;
+    getMultiple(
+        limit: number,
+        offset: number,
+        sort: string,
+        orderOn: string,
+        organizationId?: number
+    ): Observable<PayloadDecoderMappedResponse> {
+        const params: GetPayloadDecoderParameters = {
+            limit: limit,
+            offset: offset,
+            sort: sort,
+            orderOn: orderOn
+        };
         if (organizationId) {
-            params = {
-                organizationId: organizationId  
-            };
+            params.organizationId = organizationId
         }
         return this.restService.get(this.URL, params).pipe(
             map(
@@ -83,7 +92,10 @@ export class PayloadDecoderService {
                             payloadDecoders.push(newModel)
                         }
                     )
-                    return payloadDecoders;
+                    return {
+                        data: payloadDecoders,
+                        count: response.count
+                    }
                 }
             )
         );

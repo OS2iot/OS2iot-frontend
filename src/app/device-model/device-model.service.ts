@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+import { GetPayloadDecoderParameters } from '@payload-decoder/payload-decoder.model';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { buildDriverProvider } from 'protractor/built/driverProviders';
@@ -71,7 +72,7 @@ export class DeviceModelService {
     orderOn: string,
     organizationId?: number
   ): Observable<DeviceModelResponse> {
-    const body = {
+    const body: GetPayloadDecoderParameters = {
         limit: limit,
         offset: offset,
         sort: sort,

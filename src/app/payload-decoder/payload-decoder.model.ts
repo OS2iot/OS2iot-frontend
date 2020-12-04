@@ -44,6 +44,11 @@ export class PayloadDecoder extends EditPermission{
     `;
 }
 
+export interface PayloadDecoderMappedResponse {
+  data: PayloadDecoder[];
+  count: number;  
+}
+
 export interface PayloadDecoderResponse {
   data: PayloadDecoderBodyResponse[];
   count: number;
@@ -58,4 +63,12 @@ export class PayloadDecoderBodyResponse {
   updatedAt: string;
   createdBy: number;
   updatedBy: number;
+}
+
+export interface GetPayloadDecoderParameters {
+    limit: number;
+    offset: number;
+    sort: string;
+    orderOn: string;
+    organizationId?: number;
 }
