@@ -4,18 +4,41 @@
         <app-loading-spinner *ngIf="isLoadingResults">
         </app-loading-spinner>
         <div *ngIf="hasSomePermission" class="col-xs-12 col-md-10 offset-md-1 mt-5">
-            <header class="header">
+            <header class="header p-3">
                 <div class="header__text-box ">
-                    <h1 class="heading-primary mb-5">
-                        <span class="heading-primary--main">
-                            {{'DASHBOARD.WELCOME' | translate}}
-                        </span>
+                    <h1 class="heading-primary ">
+                        <div class="row mb-5 ">
+                            <div class="col-12">
+                                <span class="heading-primary--main">
+                                    {{'DASHBOARD.WELCOME' | translate}}
+                                </span>
+                            </div>
+                        </div>
+
                         <span class="heading-primary--sub">
-                            {{'DASHBOARD.WELCOME-MESSAGE' | translate}}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span>{{'DASHBOARD.LIST.HEADLINE' | translate}}</span>
+                                    <ul class="inline-list text-white">
+                                        <li>{{'DASHBOARD.LIST.P1' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P2' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P3' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P4' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P5' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P6' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P7' | translate}}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">{{'DASHBOARD.WELCOME-MESSAGE' | translate}}</div>
+                            </div>
                         </span>
                     </h1>
-                    <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
-                        class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
+                                class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
+                        </div>
+                    </div>
                 </div>
             </header>
             <div class="header__logo-box">

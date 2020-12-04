@@ -758,8 +758,18 @@
     "KOMBIT-BUTTON": "Login med KOMBIT Adgangsstyring"
   },
   "DASHBOARD": {
-    "WELCOME": "Velkommen til OS2IoT",
-    "WELCOME-MESSAGE": "Velkommen til OS2iot – din nye indgang til administration af IoT-enheder på tværs af netværkstyper",
+    "WELCOME": "Velkommen til OS2iot – din nye indgang til administration af IoT enheder på tværs af netværkstyper.",
+    "LIST": {
+      "HEADLINE": "Med version 1.0 kan du:",
+      "P1": "Håndtere dine IoT enheder ét sted",
+      "P2":"Få et samlet overblik over dine IoT enheder på tværs af netværksteknologier ",
+      "P3":"Lave bulk import af IoT enheder",
+      "P4":"Oprette applikationer på tværs af organisationer",
+      "P5":"Genbruge dekodningsfunktioner og –scripts på tværs af organisationer",
+      "P6":"Dele gateways og data fra IoT enheder på tværs af organisationer",
+      "P7":"Og meget mere."
+    },
+    "WELCOME-MESSAGE": "Vi opfordrer dig til at blive en aktiv del af vores OS2iot community på OS2iot.os2.eu og dele dine spørgsmål, udviklingsønsker og de fejl du måtte finde. Ved fælles hjælp bliver løsningen bedre. \n \n OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på løsningens produktside.",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT.",
     "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere."
