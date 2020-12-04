@@ -140,10 +140,15 @@ export class PayloadDecoderEditComponent implements OnInit {
     try {
       this.testPayloadDecoder.iotDeviceJsonString = JSON.parse(this.metadata);
     } catch (err) {
-      this.errorFields = ["metadata"];
-      this.errorMessages = [this.metadataInvalidJSONMessage];
-      this.formFailedSubmit = true;
-      return;
+      // Allow the empty string as a valid input
+      if (this.isMetadataDefaultOrEmpty()) {
+        this.testPayloadDecoder.iotDeviceJsonString = JSON.parse("{}")
+      } else {
+        this.errorFields = ["metadata"];
+        this.errorMessages = [this.metadataInvalidJSONMessage];
+        this.formFailedSubmit = true;
+        return;         
+      }
     }
     try {
       this.testPayloadDecoder.rawPayloadJsonString = JSON.parse(this.payloadData);
@@ -163,6 +168,10 @@ export class PayloadDecoderEditComponent implements OnInit {
           this.showError(error);
         }
       );
+  }
+
+  private isMetadataDefaultOrEmpty() {
+    return this.metadata.trim() == "" || this.metadata.split("\n").every(x => x.trim().startsWith("//"));
   }
 
   getCurrentOrganisationId(): number {
