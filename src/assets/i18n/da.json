@@ -622,7 +622,7 @@
     "ID-INVALID-OR-ALREADY-IN-USE": "Gateway Id skal være unikt. En Gateway med det pågældende Id er allerede brug",
     "DELETE-NOT-ALLOWED-ITEM-IS-IN-USE": "Dette element er i brug og kan derfor ikke slettes",
     "DELETE-NOT-ALLOWED-HAS-SIGFOX-DEVICE": "Applikation kan ikke blive slettet, da den indeholder en eller flere Sigfox enheder.",
-    "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Service profilen kan ikke slettes, da den er tilknytte en eller flere LoRaWAN enheder"
+    "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Service profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder."
   },
   "PROFILES": {
     "NAME": "LoRaWAN Profiler",
