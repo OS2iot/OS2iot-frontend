@@ -132,7 +132,7 @@ export class BulkImportComponent implements OnInit {
             requestItem.importStatus = 'success';
           },
           (error: HttpErrorResponse) => {
-            requestItem.errorMessages = this.errorMessageService.handleErrorMessage(error);
+            requestItem.errorMessages = this.errorMessageService.handleErrorMessageWithFields(error).errorMessages;
             requestItem.importStatus = 'Failed';
           }
         );
