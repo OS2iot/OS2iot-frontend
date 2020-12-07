@@ -4,6 +4,7 @@ import { PermissionResponse } from '../permission.model';
 import { Subscription } from 'rxjs';
 import { PermissionService } from '../permission.service';
 import { Sort } from '@shared/models/sort.model';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-permission-list',
@@ -12,7 +13,7 @@ import { Sort } from '@shared/models/sort.model';
 })
 export class PermissionListComponent implements OnInit, OnChanges {
   isLoadingResults = true;
-  public pageLimit = 10;
+  public pageLimit = environment.tablePageSize;
   public sort: Sort[] = [
     {
       id: 1,

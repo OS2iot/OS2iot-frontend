@@ -8,6 +8,7 @@ import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -17,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   deviceProfiles: DeviceProfile[];
   subscription: Subscription;
-  public pageLimit: 10;
+  public pageLimit = environment.tablePageSize;
   public pageOffset: 0;
 
   public errorMessages: any;

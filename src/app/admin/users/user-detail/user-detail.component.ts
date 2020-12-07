@@ -9,6 +9,7 @@ import { QuickActionButton } from '@shared/models/quick-action-button.model';
 import { Application } from '@applications/application.model';
 import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-user-detail',
@@ -17,7 +18,7 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
-  public pageLimit: number = 10;
+  public pageLimit: number = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];

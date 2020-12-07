@@ -14,6 +14,7 @@ import { OrganisationService } from '@app/admin/organisation/organisation.servic
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 })
 export class PermissionDetailComponent implements OnInit, OnChanges {
   isLoadingResults = true;
-  public pageLimit: number = 10;
+  public pageLimit: number = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   permission: PermissionResponse;

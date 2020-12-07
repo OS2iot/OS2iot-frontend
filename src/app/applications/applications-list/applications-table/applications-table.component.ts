@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Application, ApplicationData } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
@@ -22,6 +23,7 @@ export class ApplicationsTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'devices', 'menu'];
   data: Application[] = [];
 
+  public pageSize = environment.tablePageSize;
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;

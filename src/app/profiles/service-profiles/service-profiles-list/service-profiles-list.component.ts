@@ -10,6 +10,7 @@ import { ServiceProfileService } from '../service-profile.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -19,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   serviceProfiles: ServiceProfile[];
   serviceSubscription: Subscription;
-  public pageLimit: 10;
+  public pageLimit = environment.tablePageSize;
   public pageOffset: 0;
 
   public errorMessages: string;

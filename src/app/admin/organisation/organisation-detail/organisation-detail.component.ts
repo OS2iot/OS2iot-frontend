@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -23,7 +24,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   isLoadingResults = true;
   resultsLength = 10;
 
-  public pageLimit = 10;
+  public pageLimit = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];

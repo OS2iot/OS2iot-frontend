@@ -9,6 +9,7 @@ import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   public coordinateList = [];
   public showmap = false;
-  public pageLimit = 10;
+  public pageLimit = environment.tablePageSize;
   public selectedSortId = 1;
   public gateways: Gateway[];
   private gatewaySubscription: Subscription;

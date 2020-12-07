@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { BackButton } from '@shared/models/back-button.model';
 })
 export class DatatargetListComponent implements OnInit {
 
-    public pageLimit = 20;
+    public pageLimit = environment.tablePageSize;
     public title: string;
     public backButton: BackButton = { label: '', routerLink: ''};
     public datatarget: Datatarget;

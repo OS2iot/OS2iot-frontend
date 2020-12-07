@@ -12,6 +12,7 @@ import { Observable, of as observableOf, Subject } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MeService } from '@shared/services/me.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { environment } from '@environments/environment';
 
 @Component({
     selector: 'app-gateway-table',
@@ -31,6 +32,7 @@ export class GatewayTableComponent implements AfterViewInit {
         'menu',
     ];
     data: Gateway[] = [];
+    public pageSize = environment.tablePageSize;
 
     faExclamationTriangle = faExclamationTriangle;
     faCheckCircle = faCheckCircle;

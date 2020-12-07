@@ -21,6 +21,7 @@ import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder
 import { SaveSnackService } from '@shared/services/save-snack.service';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -59,7 +60,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   public application: Application;
   public iotDevices: IotDevice[];
   public iotDevice: IotDevice;
-  public pageLimit = 10;
+  public pageLimit = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   public deviceSubscription: Subscription;
