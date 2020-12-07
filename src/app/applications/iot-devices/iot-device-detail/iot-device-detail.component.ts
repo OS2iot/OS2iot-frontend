@@ -103,7 +103,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     }
 
     routeToApplication(): void {
-        this.router.navigate(['application', this.application.id]);
+        this.router.navigate(['applications', this.application.id]);
     }
 
     clickDelete() {
