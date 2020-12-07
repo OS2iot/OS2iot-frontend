@@ -100,9 +100,4 @@ export class TopBarComponent implements OnInit {
     onClickDelete() {
         this.deleteSelectedInDropdown.emit();
     }
-
-    // pageLimitUpdate(value) {
-    //     console.log('page limit', value);
-    //     this.updatePageLimit.emit(value);
-    // }
 }
