@@ -47,14 +47,14 @@ export class ErrorMessageService {
           ) {
             err.children.forEach((element) => {
               if (element.constraints) {
-                errors.errorFields.push(element.property);
+                errors.errorFields.push(err.property === 'openDataDkDataset' ? 'openDataDkDataset.'+element.property: element.property);
                 errors.errorMessages = errors.errorMessages.concat(
                   Object.values(element.constraints)
                 );
               } else if (element.children) {
                 element.children.forEach((child) => {
                   if (child.constraints) {
-                    errors.errorFields.push(child.property);
+                    errors.errorFields.push(err.property === 'openDataDkDataset' ? 'openDataDkDataset.'+element.property: element.property);
                     errors.errorMessages = errors.errorMessages.concat(
                       Object.values(child.constraints)
                     );
