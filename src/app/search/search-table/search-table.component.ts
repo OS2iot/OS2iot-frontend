@@ -50,7 +50,7 @@ export class SearchTableComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private searchService: SearchService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -62,6 +62,7 @@ export class SearchTableComponent implements OnInit {
   }
 
   search(query: string, limit: number, offset: number) {
+    this.isFetching = true;
     this.subscription = this.searchService
       .search(query, limit, offset)
       .subscribe((response) => {
@@ -104,6 +105,18 @@ export class SearchTableComponent implements OnInit {
       return this.faLayerGroup;
     } else if (type === SearchResultType.Gateway) {
       return this.faBroadcastTower;
+    } else {
+      return '';
+    }
+  }
+
+  getOrganizationName(element: SearchResultDto) {
+    if (element.organizationName) {
+      return element.organizationName;
+    } else if (element.organizationId) {
+      return this.globalService
+        .getOrganizationInfo()
+        .find((org) => org.id === element.organizationId)?.name;
     } else {
       return '';
     }

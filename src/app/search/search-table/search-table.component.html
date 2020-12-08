@@ -80,7 +80,7 @@
                 <th mat-header-cell *matHeaderCellDef>
                     {{ 'SEARCH.ORGANISATION' | translate }}</th>
                 <td mat-cell *matCellDef="let element">
-                    {{element.organizationName}}
+                    {{getOrganizationName(element)}}
                 </td>
             </ng-container>
 
