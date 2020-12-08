@@ -65,7 +65,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             draggable: false,
             editEnabled: false,
             useGeolocation: false,
-            markerInfo: { name: this.gateway.name, active: this.gatewayService.isGatewayActive(this.gateway), id: this.gateway.id }
+            markerInfo: { name: this.gateway.name, active: this.gatewayService.isGatewayActive(this.gateway), id: this.gateway.id, internalOrganizationName: this.gateway.internalOrganizationName }
         };
     }
 
