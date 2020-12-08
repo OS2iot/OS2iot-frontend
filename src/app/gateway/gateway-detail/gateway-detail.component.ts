@@ -19,15 +19,17 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 })
 export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
+    displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
+    private gatewayStats: GatewayStats[];
+    public pageSize = environment.tablePageSize;
+    public dataSource = new MatTableDataSource<GatewayStats>();
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    public resultLength = 0;
+
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
     public backButton: BackButton = { label: '', routerLink: ['gateways'] };
     private id: string;
-    private gatewayStats: GatewayStats[];
-    displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
-    public pageSize = environment.tablePageSize;
-    public dataSource = new MatTableDataSource<GatewayStats>();
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
@@ -44,9 +46,6 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     ngOnInit(): void {
         this.translate.use('da');
         this.id = this.route.snapshot.paramMap.get('id');
-        if (this.id) {
-            this.bindGateway(this.id);
-        }
         this.translate.get(['NAV.LORA-GATEWAYS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.LORA-GATEWAYS'];
@@ -55,7 +54,9 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
+        if (this.id) {
+            this.bindGateway(this.id);
+        }
     }
 
     getCoordinates() {
@@ -76,7 +77,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.gateway.canEdit = this.canEdit();
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-            this.dataSource = new MatTableDataSource<GatewayStats>(this.gatewayStats);
+            this.dataSource.data = this.gatewayStats;
+            this.resultLength = this.gatewayStats.length;
             this.dataSource.paginator = this.paginator;
             this.setDropdownButton();
         });

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Application, ApplicationData } from '@applications/application.model';
 import { RestService } from '../shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { SortDir, SortCol } from '@shared/models/sort.model';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
