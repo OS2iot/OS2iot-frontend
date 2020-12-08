@@ -169,8 +169,8 @@
                 </div>
 
                 <div class="col-xs-12 form-group mt-3">
+                    <label for="pingSlotPeriod" class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD' | translate}}</label>
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD' | translate}}</mat-label>
                         <select matNativeControl required name="pingSlotPeriod" [disabled]="!deviceProfile.canEdit"
                             [(ngModel)]="deviceProfile.pingSlotPeriod" [value]="deviceProfile.pingSlotPeriod">
                             <option value="32">Every second</option>
