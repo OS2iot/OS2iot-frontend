@@ -14,12 +14,13 @@ import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-
 import { SaveSnackService } from '@shared/services/save-snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PayloadDecoder, PayloadDecoderMappedResponse } from '@payload-decoder/payload-decoder.model';
+import { PayloadDecoderMappedResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
 import { OpendatadkService } from '@shared/services/opendatadk.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
+import { OpenDataDkDataset } from '../opendatadk/opendatadk-dataset.model';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -169,6 +170,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
           );
         },
         (error: HttpErrorResponse) => {
+          this.checkDataTargetModelOpendatadkdatasaet();
           this.handleError(error);
           this.formFailedSubmit = true;
         }
@@ -233,10 +235,17 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
         this.showSavedSnack();
       },
         (error: HttpErrorResponse) => {
+          this.checkDataTargetModelOpendatadkdatasaet();
           this.handleError(error);
           this.formFailedSubmit = true;
         });
 
+  }
+
+  checkDataTargetModelOpendatadkdatasaet() {
+    if (!this.datatarget.openDataDkDataset) {
+      this.datatarget.openDataDkDataset = new OpenDataDkDataset();
+    }
   }
 
   getDevices(): void {
