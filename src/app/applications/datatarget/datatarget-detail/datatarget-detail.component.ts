@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
 import { PayloadDeviceDatatargetGetByDataTarget } from '@app/payload-decoder/payload-device-data.model';
 import { PayloadDeviceDatatargetService } from '@app/payload-decoder/payload-device-datatarget.service';
 import { BackButton } from '@shared/models/back-button.model';
@@ -11,7 +10,8 @@ import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { Datatarget } from '../datatarget.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
-import { faArrowsAltH, faChevronCircleLeft, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -80,6 +80,10 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
                 }
             }
         );
+    }
+
+    getJoinedDeviceNames(element: IotDevice[]): string {
+        return element.map(device => device.name).join(', ');
     }
 
     getDatatargetRelations(id: number) {

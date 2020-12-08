@@ -59,9 +59,7 @@
                   </div>
                   <div class="col-md-7 d-flex align-items-center">
                     <p><strong>{{'DATATARGET.IOTDEVICE' | translate}}</strong>
-                      <span *ngFor="let device of relation.iotDevices">
-                        {{device.name}}<span *ngIf="device.name.length > 2">, </span>
-                      </span>
+                      <span>{{getJoinedDeviceNames(relation.iotDevices)}}</span>
                     </p>
                   </div>
                   <mat-divider></mat-divider>
