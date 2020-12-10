@@ -72,7 +72,7 @@ export class PermissionEditComponent implements OnInit {
   }
 
   private setBackButton(permissionId: string) {
-    this.backButton.routerLink = ['admin','permissions',permissionId];
+    this.backButton.routerLink = ['admin', 'permissions'];
   }
 
   private getOrganizations() {
