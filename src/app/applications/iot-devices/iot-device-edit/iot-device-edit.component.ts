@@ -246,9 +246,17 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     handleError(error: HttpErrorResponse) {
-        const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
-        this.errorFields = errorMessage.errorFields;
-        this.errorMessages = errorMessage.errorMessages;
+        if (error?.error?.message == "MESSAGE.OTAA-INFO-MISSING") {
+            this.errorFields = ["OTAAapplicationKey"];
+            this.errorMessages = [error?.error?.message];
+        } else if (error?.error?.message == "MESSAGE.ID-INVALID-OR-ALREADY-IN-USE") {
+            this.errorFields = ["devEUI"];
+            this.errorMessages = [error?.error?.message];
+        } else {
+            const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
+            this.errorFields = errorMessage.errorFields;
+            this.errorMessages = errorMessage.errorMessages;
+        }
         this.scrollToTopService.scrollToTop();
     }
 
