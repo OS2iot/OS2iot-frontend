@@ -32,7 +32,9 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
     private service: IoTDeviceService,
     private sharedVariableService: SharedVariableService,
     public translate: TranslateService
-  ) {}
+  ) {
+    moment.locale('da');
+  }
 
   ngAfterViewInit() {
     this.paginator.page

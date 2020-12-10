@@ -53,6 +53,7 @@ export class IotDevicesTableComponent implements AfterViewInit {
     private dialog: MatDialog
   ) {
     translate.use('da');
+    moment.locale('da');
   }
 
   ngAfterViewInit() {
