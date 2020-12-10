@@ -208,7 +208,7 @@
     "HEADLINE":"Detaljer",
     "CREATED":"Oprettet",
     "UPDATED":"Senest opdateret",
-    "ID": "Id",
+    "ID": "Unik identifikator",
     "NAME": "Navn",
     "TYPE" : "Type",
     "BRANDNAME" : "Mærke",
@@ -485,7 +485,7 @@
     "DEVICE-MODEL": {
       "GIVE-NAME": "Angiv navn",
       "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
-      "GIVE-ID": "Angiv Id (id)",
+      "GIVE-ID": "Angiv unik identifikator (id)",
       "GIVE-ID-PLACEHOLDER": "Angiv Id",
       "GIVE-BRANDNAME": "Angiv mærket (brandName)",
       "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
