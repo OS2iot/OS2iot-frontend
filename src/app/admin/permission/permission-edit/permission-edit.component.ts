@@ -67,11 +67,11 @@ export class PermissionEditComponent implements OnInit {
     if (this.id > 0) {
       this.getPermission(this.id);
       this.isEditMode = true;
-      this.setBackButton(this.id.toString());
+      this.setBackButton();
     }
   }
 
-  private setBackButton(permissionId: string) {
+  private setBackButton() {
     this.backButton.routerLink = ['admin', 'permissions'];
   }
 
