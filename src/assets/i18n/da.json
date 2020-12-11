@@ -398,7 +398,7 @@
     "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
-    "GIVE-DATATARGET-TIMEOUT": "Timeout",
+    "GIVE-DATATARGET-TIMEOUT": "Timeout i millisekunder",
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
