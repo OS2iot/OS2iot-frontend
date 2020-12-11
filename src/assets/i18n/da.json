@@ -773,7 +773,8 @@
     "WELCOME-MESSAGE": "Vi opfordrer dig til at blive en aktiv del af vores OS2iot community på OS2iot.os2.eu og dele dine spørgsmål, udviklingsønsker og de fejl du måtte finde. Ved fælles hjælp bliver løsningen bedre. \n \n OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på løsningens produktside.",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT.",
-    "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere."
+    "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere.",
+    "USER-INACTIVE": "Login successfuldt, men din bruger er deaktiveret i OS2IoT. Kontakt din administrator for at få tildelt rettigheder"
   },
   "ERROR": {
     "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
