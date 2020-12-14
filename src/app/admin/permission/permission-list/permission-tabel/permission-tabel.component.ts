@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import {
     PermissionGetManyResponse,
     PermissionResponse,
+    PermissionType,
 } from '../../permission.model';
 import { PermissionService } from '../../permission.service';
 
@@ -42,7 +44,8 @@ export class PermissionTabelComponent implements AfterViewInit {
         public translate: TranslateService,
         private router: Router,
         private permissionService: PermissionService,
-        private deleteDialogService: DeleteDialogService
+        private deleteDialogService: DeleteDialogService,
+        private meService: MeService,
     ) {
         translate.use('da');
     }
@@ -104,6 +107,13 @@ export class PermissionTabelComponent implements AfterViewInit {
                 });
             }
         })
+    }
+
+    canAccess(element: PermissionResponse) {
+        if (element.type == PermissionType.GlobalAdmin) {
+            return this.meService.hasGlobalAdmin();
+        }
+        return this.meService.hasAdminAccessInTargetOrganization(element.organization.id);
     }
 
     private refresh() {
