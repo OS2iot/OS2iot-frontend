@@ -16,6 +16,7 @@ export class OrganisationDropdownComponent implements OnInit {
   public organisations: Organisation[];
   public user: UserResponse;
   public isOrgAdmin = false;
+  public isGlobalAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -49,16 +50,17 @@ export class OrganisationDropdownComponent implements OnInit {
     ) {
       this.setSelectedOrganisation(userInfo.organizations[0]?.id);
     }
-    this.isOrganisationAdmin(userInfo.organizations[0]?.id);
+    this.setLocalPermissionCheck(userInfo.organizations[0]?.id);
   }
 
-  private isOrganisationAdmin(orgId: number) {
+  private setLocalPermissionCheck(orgId: number) {
     this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+    this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
   }
 
   public onChange(organizationId: string) {
     this.sharedVariableService.setValue(+organizationId);
-    this.isOrganisationAdmin(+organizationId);
+    this.setLocalPermissionCheck(+organizationId);
     this.route.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.route.navigate(['applications']));
   }
