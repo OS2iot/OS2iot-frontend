@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { AuthService } from '@auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private sharedVariableService: SharedVariableService,
     private translate: TranslateService,
+    private userMinimalService: UserMinimalService,
   ) {
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
@@ -50,6 +52,7 @@ export class DashboardComponent implements OnInit {
       }
       await this.sharedVariableService.setUserInfo();
       await this.sharedVariableService.setOrganizationInfo();
+      this.userMinimalService.setUserMinimalList()
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
       this.isLoadingResults = false;
     });

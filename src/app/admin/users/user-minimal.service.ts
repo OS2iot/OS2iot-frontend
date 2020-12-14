@@ -21,7 +21,6 @@ export class UserMinimalService {
     setUserMinimalList() {
         return this.getUserMinimalRest().subscribe(
             (response: UserMinimalResponse) => {
-                console.log(response);
                 localStorage.setItem(
                     'userMinimalList',
                     JSON.stringify(response.users)
