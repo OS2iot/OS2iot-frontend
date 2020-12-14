@@ -81,7 +81,7 @@
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT-enheder",
-    "DATATARGET-SHOW": "Se tilknyttede data targets",
+    "DATATARGET-SHOW": "Tilknyttede data targets",
     "IMPORT-CSV": "Bulk-import af IoT-enheder",
     "BULK": {
       "TEMPLATE": {

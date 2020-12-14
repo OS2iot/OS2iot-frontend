@@ -4,14 +4,15 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-8 my-3 m-md-0 top-bar--menu">
-
           <!-- Breadcrumb -->
           <nav class="top-bar--menu--breadcrumb">
             <ng-template [ngIf]="backButtonTitle">
-              <a (click)="routeTo()" class="back-button py-3" [routerLink]="">{{backButtonTitle}}</a>
+              <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+              <a (click)="routeTo()" class="back-button" [routerLink]="">{{backButtonTitle}}</a>
             </ng-template>
             <ng-template [ngIf]="data || subPage === true">
-              <a (click)="routeTo()" class="back-button py-3" [routerLink]="">{{backButton.label}}</a>
+              <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+              <a (click)="routeTo()" class="back-button" [routerLink]="">{{backButton.label}}</a>
               <h3 class="p-3">{{subTitle || staticTitle}}</h3>
             </ng-template>
             <ng-template [ngIf]="title">
@@ -23,7 +24,7 @@
           </nav>
 
           <!-- action buttons -->
-          <div class="action-group">
+          <div class="action-group d-flex justify-content-end">
             <button *ngIf="ctaRouterLink && ctaRouterLink != ''" [routerLink]="ctaRouterLink" routerLinkActive="active"
               class="btn btn-primary mr-1" type="button" [attr.aria-label]="ctaLabel">{{ctaLabel}}</button>
             <div class="btn-group float-md-right dropdown" *ngIf="dropDownButton && addDetailDowndown === true">
@@ -44,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 order-first order-md-last">
+        <div class="col-md-4 order-first order-md-last search-form-wrapper">
           <!-- Search  -->
 
           <form class="search-form">

@@ -17,9 +17,12 @@ a {
       @extend .btn;
       color: $color-text-white;
       border: solid calculateRem(1) $button-primary-border-color;
-      background: linear-gradient(180deg, $button-primary-bg 0%, $button-primary-bg 100%);
+      background: linear-gradient(
+        180deg,
+        $button-primary-bg 0%,
+        $button-primary-bg 100%
+      );
       box-shadow: none;
-
 
       &:hover,
       &.hover,
@@ -104,13 +107,11 @@ a {
     }
 
     &--animated {
-      animation: moveInBottom .5s ease-out .75s;
+      animation: moveInBottom 0.5s ease-out 0.75s;
       animation-fill-mode: backwards;
     }
   }
 }
-
-
 
 .btn-create {
   color: $white !important;
@@ -119,16 +120,14 @@ a {
 }
 
 .btn {
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03),
+    0px 0px 1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
     0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
     0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-
-  font-size: 16px;
-  line-height: 19px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem;
+  white-space: normal;
 
   &:active:focus {
     box-shadow: 0 0 0 0.2rem $grey-outline;
@@ -137,12 +136,13 @@ a {
 
 .back-button {
   text-decoration: none;
-  padding-left: 1.5rem;
-  padding-right: 1rem;
+  padding: 0.5rem;
   border-right: $grey-border solid 1px;
   color: $color-primary;
-    background-position: 0 27px;
-    background-repeat: no-repeat;
-    background-size: 8px;
-    background-image: url("data:image/svg+xml,%3Csvg width='8' height='12' viewBox='0 0 8 12' fill='$color-primary' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.07422 5.40625C0.859375 5.62109 0.859375 5.92188 1.07422 6.13672L6.10156 11.1211C6.31641 11.3359 6.66016 11.3359 6.83203 11.1211L7.13281 10.8203C7.34766 10.6055 7.34766 10.3047 7.13281 10.0898L2.75 5.75L7.17578 1.45312C7.34766 1.23828 7.34766 0.9375 7.17578 0.722656L6.83203 0.421875C6.66016 0.207031 6.31641 0.207031 6.10156 0.421875L1.07422 5.40625Z' fill='%23E76659'/%3E%3C/svg%3E%0A");
+  margin: 0;
+
+  // background-position: 0 27px;
+  // background-repeat: no-repeat;
+  // background-size: 8px;
+  // background-image: url("data:image/svg+xml,%3Csvg width='8' height='12' viewBox='0 0 8 12' fill='$color-primary' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.07422 5.40625C0.859375 5.62109 0.859375 5.92188 1.07422 6.13672L6.10156 11.1211C6.31641 11.3359 6.66016 11.3359 6.83203 11.1211L7.13281 10.8203C7.34766 10.6055 7.34766 10.3047 7.13281 10.0898L2.75 5.75L7.17578 1.45312C7.34766 1.23828 7.34766 0.9375 7.17578 0.722656L6.83203 0.421875C6.66016 0.207031 6.31641 0.207031 6.10156 0.421875L1.07422 5.40625Z' fill='%23E76659'/%3E%3C/svg%3E%0A");
 }

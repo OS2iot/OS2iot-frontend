@@ -2,8 +2,8 @@
 @import 'breakpoints';
 @import 'base';
 
-$mod_1: 1.2; // mobile
-$mod_2: 1.5; // desktop
+$mod_1: 1.1; // mobile
+$mod_2: 1.4; // desktop
 
 h1,
 h2,
@@ -12,7 +12,7 @@ h4,
 h5,
 p,
 a {
-  font-family: "Roboto";
+  font-family: 'Roboto';
 }
 
 /*####################### HEADLINE #########################*/
@@ -23,8 +23,12 @@ a {
   line-height: $h1-line-height;
   font-weight: $font-weight-bold;
   color: $color-primary;
-  @include fluid-type($min_width, $max_width, $mod_1*$mod_1*$mod_1 *$min_font, $mod_2*$mod_2*$mod_2 *$min_font);
-
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $mod_2 * $min_font
+  );
 }
 
 @mixin h2 {
@@ -34,8 +38,12 @@ a {
   line-height: $h2-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
-  @include fluid-type($min_width, $max_width, $mod_1*$mod_1*$mod_1 *$min_font, $mod_2*$mod_2*$mod_2 *$min_font);
-
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $mod_2 * $min_font
+  );
 
   p {
     @extend h2;
@@ -53,7 +61,12 @@ a {
   line-height: $h3-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
-  @include fluid-type($min_width, $max_width, $mod_1*$mod_1 *$min_font, $mod_2*$mod_2 *$min_font);
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $min_font
+  );
 
   strong {
     font-weight: $font-weight-bold;
@@ -67,7 +80,12 @@ a {
   line-height: $h4-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
-  @include fluid-type($min_width, $max_width, $mod_1*$mod_1 *$min_font, $mod_2*$mod_2 *$min_font);
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $min_font
+  );
 
   strong {
     font-weight: $font-weight-bold;
@@ -151,11 +169,12 @@ h5,
   @include h5;
 }
 
-h6, .h6{
+h6,
+.h6 {
   @include h6;
 }
 
-h1+h4 {
+h1 + h4 {
   margin-top: calculateRem(-16);
 }
 
@@ -172,9 +191,7 @@ p {
     @include h6;
     line-height: none;
     @extend .mr-3;
-
   }
-
 }
 
 pre {
@@ -184,7 +201,6 @@ pre {
 }
 
 .text {
-
   // Transforms
   &--uppercase {
     text-transform: uppercase;
@@ -251,7 +267,7 @@ footer {
     br {
       display: block;
       @extend .mb-3;
-      content: " ";
+      content: ' ';
     }
   }
 
