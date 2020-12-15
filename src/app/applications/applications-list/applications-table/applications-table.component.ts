@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Application, ApplicationData } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -17,7 +18,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./applications-table.component.scss'],
   templateUrl: './applications-table.component.html',
 })
-export class ApplicationsTableComponent implements AfterViewInit {
+export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   @Input() organizationId: number;
   @Input() permissionId: number;
   displayedColumns: string[] = ['name', 'devices', 'menu'];
@@ -27,6 +28,7 @@ export class ApplicationsTableComponent implements AfterViewInit {
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;
+  public canEdit = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -34,8 +36,13 @@ export class ApplicationsTableComponent implements AfterViewInit {
   constructor(
     private applicationService: ApplicationService,
     private router: Router,
+    private meService: MeService,
     private deleteDialogService: DeleteDialogService
   ) { }
+
+  ngOnInit() {
+    this.canEdit = this.meService.canWriteInTargetOrganization()
+  }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.

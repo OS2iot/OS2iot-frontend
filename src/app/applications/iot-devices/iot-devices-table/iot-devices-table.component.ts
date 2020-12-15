@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/shared/services/rest.service';
@@ -17,16 +17,16 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
 import { environment } from '@environments/environment';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
   selector: 'app-iot-devices-table',
   templateUrl: './iot-devices-table.component.html',
   styleUrls: ['./iot-devices-table.component.scss'],
 })
-export class IotDevicesTableComponent implements AfterViewInit {
+export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   @Input() applicationId: number;
   data: IotDevice[] = [];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public pageSize = environment.tablePageSize;
@@ -37,6 +37,7 @@ export class IotDevicesTableComponent implements AfterViewInit {
     'active',
     'menu',
   ];
+  public canEdit = false;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
@@ -50,10 +51,15 @@ export class IotDevicesTableComponent implements AfterViewInit {
     private deleteDialogService: DeleteDialogService,
     public translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
+    private meService: MeService,
     private dialog: MatDialog
   ) {
     translate.use('da');
     moment.locale('da');
+  }
+
+  ngOnInit() {
+    this.canEdit = this.meService.canWriteInTargetOrganization()
   }
 
   ngAfterViewInit() {

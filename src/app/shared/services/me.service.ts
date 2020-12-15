@@ -11,7 +11,7 @@ export class MeService {
 
   constructor(private sharedVariableService: SharedVariableService) {}
 
-  canWriteInTargetOrganization(id: number): boolean {
+  canWriteInTargetOrganization(id: number = this.sharedVariableService.getSelectedOrganisationId()): boolean {
     const userInfo = this.sharedVariableService.getUserInfo();
     return userInfo.user.permissions.some((permission) => {
       return (

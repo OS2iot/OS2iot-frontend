@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from '@environments/environment';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
     selector: 'app-datatarget-table',
@@ -23,6 +24,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     dataSource = new MatTableDataSource<Datatarget>();
     datatargets: Datatarget[];
     resultsLength = 0;
+    public canEdit = false;
     @Input() isLoadingResults: boolean;
     public pageSize = environment.tablePageSize;
 
@@ -38,6 +40,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
         private route: ActivatedRoute,
         private deleteDialogService: DeleteDialogService,
         private datatargetService: DatatargetService,
+        private meService: MeService,
         public translate: TranslateService) {
         translate.use('da');
     }
@@ -46,6 +49,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
         this.applicationId = +Number(this.route.parent.parent.snapshot.paramMap.get('id'));
         console.log(this.applicationId);
         this.getDatatarget();
+        this.canEdit = this.meService.canWriteInTargetOrganization()
     }
 
     ngAfterViewInit() {

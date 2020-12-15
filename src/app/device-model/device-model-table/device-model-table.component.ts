@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
@@ -26,26 +27,25 @@ import { DeviceModel, DeviceModelResponse } from '../device.model';
 export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
   public data: DeviceModel[];
-
   public displayedColumns: string[] = ['name', 'id', 'menu'];
   public pageSize = environment.tablePageSize;
   public isLoadingResults = false;
   public resultsLength = 0;
-  public hasWritePermission = false;
   deleteDialogSubscription: Subscription;
   errorTitle: string;
+  public canEdit = false;
 
   constructor(
     private sharedVariableService: SharedVariableService,
     private deviceModelService: DeviceModelService,
     private deleteDialogservice: DeleteDialogService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private meService: MeService
   ) {}
 
   ngOnInit(): void {
-    this.hasWritePermission = this.sharedVariableService.getHasWritePermission();
+    this.canEdit = this.meService.canWriteInTargetOrganization()
     this.translateService
       .get(['DEVICE-MODEL.DELETE-FAILED'])
       .subscribe((translations) => {
