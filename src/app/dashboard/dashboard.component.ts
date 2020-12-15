@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   noAccess: string;
   isLoadingResults = true;
   hasSomePermission: boolean;
+  isGlobalAdmin = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
       await this.sharedVariableService.setOrganizationInfo();
       this.userMinimalService.setUserMinimalList()
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
+      this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
       this.isLoadingResults = false;
     });
   }

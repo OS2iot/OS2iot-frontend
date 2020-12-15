@@ -37,7 +37,7 @@
                             </div>
                         </span>
                     </h1>
-                    <div class="row">
+                    <div class="row" *ngIf="isGlobalAdmin">
                         <div class="col-12 d-flex justify-content-center">
                             <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
                                 class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
