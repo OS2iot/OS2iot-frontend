@@ -209,6 +209,9 @@
     "CREATED":"Oprettet",
     "UPDATED":"Senest opdateret",
     "ID": "Unik identifikator",
+    "TABLE": {
+      "ID": "Id"
+    },
     "NAME": "Navn",
     "TYPE" : "Type",
     "BRANDNAME" : "Mærke",
