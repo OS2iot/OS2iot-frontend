@@ -28,8 +28,8 @@ export class BulkMapping {
             applicationSessionKey: data.applicationSessionKey ? data.applicationSessionKey : undefined,
             serviceProfileID: data.serviceProfileID ? data.serviceProfileID : undefined,
             deviceProfileID: data.deviceProfileID ? data.deviceProfileID : undefined,
-            fCntUp: data.fCntUp ? data.fCntUp : undefined,
-            nFCntDown: data.nFCntDown ? data.nFCntDown : undefined,
+            fCntUp: data.fCntUp ? +data.fCntUp : undefined,
+            nFCntDown: data.nFCntDown ? +data.nFCntDown : undefined,
             deviceStatusBattery: undefined,
             deviceStatusMargin: undefined
         };
@@ -69,7 +69,8 @@ export class BulkMapping {
             createdBy: undefined,
             updatedBy: undefined,
             updatedByName: undefined,
-            createdByName: undefined
+            createdByName: undefined,
+            deviceModelId: data.deviceModelId
         };
     }
 }
