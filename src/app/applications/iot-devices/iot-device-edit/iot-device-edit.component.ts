@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@app/applications/application.model';
 import { ApplicationService } from '@app/applications/application.service';
@@ -62,6 +63,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private deviceModelService: DeviceModelService,
         private errorMessageService: ErrorMessageService,
         private scrollToTopService: ScrollToTopService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
@@ -74,6 +76,11 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             this.getDevice(this.deviceId);
             this.disableChoseApplication = false;
         }
+
+        this.translate.get(['TITLE.IOTDEVICE'])
+            .subscribe(translations => {
+                this.titleService.setTitle(translations['TITLE.IOTDEVICE']);
+            });
 
         this.getApplication();
         this.getServiceProfiles();

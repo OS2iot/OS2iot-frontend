@@ -10,6 +10,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     private chirpstackGatewayService: ChirpstackGatewayService,
     private deleteDialogService: DeleteDialogService,
     private meService: MeService,
+    private titleService: Title,
     private sharedVariableService: SharedVariableService) {
     translate.use('da');
     moment.locale('da');
@@ -55,6 +57,10 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.getGateways();
     this.organisations = this.sharedVariableService.getOrganizationInfo();
+    this.translate.get(['TITLE.LORAWAN-GATEWAY'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.LORAWAN-GATEWAY']);
+      });
   }
 
   ngOnChanges() {

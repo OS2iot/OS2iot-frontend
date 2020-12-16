@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
@@ -31,6 +32,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         public translate: TranslateService,
         public router: Router,
         private meService: MeService,
+        private titleService: Title,
         private deleteDialogService: DeleteDialogService
     ) { }
 
@@ -46,10 +48,11 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
             console.log(this.id);
         }
 
-        this.translate.get(['NAV.APPLICATIONS', 'APPLICATION-TABLE-ROW.SHOW-OPTIONS'])
+        this.translate.get(['NAV.APPLICATIONS', 'APPLICATION-TABLE-ROW.SHOW-OPTIONS', 'TITLE.APPLICATION'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
                 this.dropdownButton.label = translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
+                this.titleService.setTitle(translations['TITLE.APPLICATION']);
             });
         this.canEdit = this.meService.canWriteInTargetOrganization();
     }

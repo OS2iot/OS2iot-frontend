@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -71,6 +71,7 @@ export function tokenGetter() {
         // use these two providers only in dev environment
         //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
         //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+        Title,
         { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
         { provide: SAVER, useFactory: getSaver },
     ],

@@ -801,6 +801,21 @@
   "BATTERY": {
     "NOT_AVAILABLE": "N/A"
   },
+  "TITLE": {
+    "APPLICATION": "OS2IoT - Applikationer",
+    "SIGFOX": "OS2IoT - Sigfox administration",
+    "DEVICEMODEL": "OS2IoT - Device model",
+    "LORAWAN-GATEWAY": "OS2IoT - LoRaWAN Gateways",
+    "LORAWAN-PROFILE": "OS2IoT - LoRaWAN profiler",
+    "PAYLOADDECODER": "OS2IoT - Payload decoder",
+    "USER": "OS2IoT - Brugere",
+    "PERMISSION": "OS2IoT - Brugergrupper",
+    "ORGANIZATION": "OS2IoT - Organisationer",
+    "DATATARGET": "OS2IoT - Datatarget",
+    "BULKIMPORT": "OS2IoT - Bulk import",
+    "IOTDEVICE": "OS2IoT - IoT enhed"
+
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

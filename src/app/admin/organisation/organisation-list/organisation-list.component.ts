@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 
@@ -9,9 +10,14 @@ import { Sort } from '@shared/models/sort.model';
 })
 export class OrganisationListComponent implements OnInit {
   
-  constructor(public translate: TranslateService) {
+  constructor(public translate: TranslateService, private titleService: Title) {
     translate.use('da');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.translate.get(['TITLE.ORGANIZATION'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.ORGANIZATION']);
+      });
+   }
 }

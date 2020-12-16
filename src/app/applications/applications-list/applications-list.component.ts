@@ -3,6 +3,7 @@ import {
   OnInit,
   Input,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NavbarComponent } from '@app/navbar/navbar.component';
 import { Application } from '@applications/application.model';
 import { environment } from '@environments/environment';
@@ -26,12 +27,17 @@ export class ApplicationsListComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
+    private titleService: Title,
     private globalService: SharedVariableService
   ) {
     translate.use('da');
   }
 
   ngOnInit(): void {
+    this.translate.get(['TITLE.APPLICATION'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.APPLICATION']);
+      });
     this.organizationId = this.globalService.getSelectedOrganisationId();
   }
 

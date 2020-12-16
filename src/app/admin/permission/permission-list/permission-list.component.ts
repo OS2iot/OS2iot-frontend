@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PermissionService } from '../permission.service';
 import { Sort } from '@shared/models/sort.model';
 import { environment } from '@environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-permission-list',
@@ -14,57 +15,14 @@ import { environment } from '@environments/environment';
 export class PermissionListComponent implements OnInit, OnChanges {
   isLoadingResults = true;
   public pageLimit = environment.tablePageSize;
-  public sort: Sort[] = [
-    {
-      id: 1,
-      dir: 'ASC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-ASCENDING',
-    },
-    {
-      id: 2,
-      dir: 'DESC',
-      col: 'updatedAt',
-      label: 'SORT.UPDATED-DESCENDING',
-    },
-    {
-      id: 3,
-      dir: 'ASC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-ASCENDING',
-    },
-    {
-      id: 4,
-      dir: 'DESC',
-      col: 'createdAt',
-      label: 'SORT.CREATED-DESCENDING',
-    },
-    {
-      id: 5,
-      dir: 'ASC',
-      col: 'name',
-      label: 'SORT.NAME-ASCENDING',
-    },
-    {
-      id: 6,
-      dir: 'DESC',
-      col: 'name',
-      label: 'SORT.NAME-DESCENDING',
-    },
-  ];
   public selectedSortId = 1;
-  public selectedSortObject: Sort = {
-    id: 6,
-    dir: 'DESC',
-    col: 'name',
-    label: 'SORT.NAME-DESCENDING',
-  };
 
   public permissions: PermissionResponse[];
   permissionSubscription: Subscription;
 
   constructor(
     public translate: TranslateService,
+    private titleService: Title,
     private permissionService: PermissionService
   ) {
     translate.use('da');
@@ -75,6 +33,10 @@ export class PermissionListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getPermissions();
+    this.translate.get(['TITLE.PERMISSION'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.PERMISSION']);
+    });
   }
 
   getPermissions() {

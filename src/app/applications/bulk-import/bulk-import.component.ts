@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -40,13 +41,19 @@ export class BulkImportComponent implements OnInit {
     private papa: Papa,
     private iotDeviceService: IoTDeviceService,
     private route: ActivatedRoute,
+    private titleService: Title,
     private translate: TranslateService,
     private downloads: DownloadService,
     private errorMessageService: ErrorMessageService
-  ) { }
+  ) {
+    this.translate.use('da');
+   }
 
   ngOnInit(): void {
-    this.translate.use('da');
+    this.translate.get(['TITLE.BULKIMPORT'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.BULKIMPORT']);
+      });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
 
   }

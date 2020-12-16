@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-user-list',
@@ -6,9 +8,14 @@ import { Component } from '@angular/core';
     styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent {
-    constructor() {}
+    constructor(private titleService: Title, private translate: TranslateService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.translate.get(['TITLE.USER'])
+        .subscribe(translations => {
+          this.titleService.setTitle(translations['TITLE.USER']);
+        });
+    }
 
     ngOnChanges(): void {}
 }
