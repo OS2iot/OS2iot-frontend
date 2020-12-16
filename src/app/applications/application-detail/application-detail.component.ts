@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,12 +23,14 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     public id: number;
     public dropdownButton: DropdownButton;
     public errorMessage: string;
+    public canEdit = false;
 
     constructor(
         private applicationService: ApplicationService,
         private route: ActivatedRoute,
         public translate: TranslateService,
         public router: Router,
+        private meService: MeService,
         private deleteDialogService: DeleteDialogService
     ) { }
 
@@ -48,6 +51,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
                 this.dropdownButton.label = translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
             });
+        this.canEdit = this.meService.canWriteInTargetOrganization();
     }
 
     onDeleteApplication() {

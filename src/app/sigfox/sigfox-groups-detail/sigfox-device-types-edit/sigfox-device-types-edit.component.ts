@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ErrorMessage } from '@shared/models/error-message.model';
+import { MeService } from '@shared/services/me.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/sigfox' };
   public title = '';
   public submitButton = '';
+  public canEdit = false;
   organizationId: number;
   subscription: Subscription;
 
@@ -42,6 +44,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     private sigfoxService: SigfoxService,
     private location: Location,
     private sharedVariable: SharedVariableService,
+    private meService: MeService,
     private errorMessageService: ErrorMessageService
   ) { }
 
@@ -63,6 +66,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
       this.sigfoxDeviceType.groupId = this.sigfoxGroupId;
     }
     this.getContracts(this.sigfoxGroupId);
+    this.canEdit = this.meService.canWriteInTargetOrganization()
   }
 
   private getContracts(groupId: number) {

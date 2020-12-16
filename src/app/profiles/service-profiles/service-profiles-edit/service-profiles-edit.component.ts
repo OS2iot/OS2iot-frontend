@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { BackButton } from '@shared/models/back-button.model';
 import { ServiceProfileService } from '../service-profile.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   public formFailedSubmit = false;
   public form: FormGroup;
   public submitButton = '';
+  public canEdit = false;
   id: string;
   serviceId: number;
   editMode = false;
@@ -36,6 +38,7 @@ export class ServiceProfilesEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
+    private sharedVariableService: SharedVariableService,
     private serviceProfileService: ServiceProfileService,
     private location: Location,
   ) {
@@ -53,6 +56,7 @@ export class ServiceProfilesEditComponent implements OnInit {
     if (this.id) {
       this.getServiceProfile(this.id);
     }
+    this.canEdit = this.sharedVariableService.getHasAnyWritePermission();
   }
 
   private getServiceProfile(id: string) {
