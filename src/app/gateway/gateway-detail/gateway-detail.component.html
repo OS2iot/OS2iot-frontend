@@ -48,6 +48,9 @@
         <div class="jumbotron">
             <h3>{{ 'GATEWAY.STATS' | translate }}</h3>
             <div class="mat-elevation-z8">
+                <div class="loading-shade" *ngIf="isLoadingResults">
+                    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+                </div>
                 <table mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="rxPacketsReceived">
                         <th mat-header-cell *matHeaderCellDef>
