@@ -47,7 +47,7 @@
                   <div class="col-md-4 d-flex align-items-center">
                     <p><strong>{{'DATATARGET.PAYLOADEDECODER' | translate}}</strong><span
                         *ngIf="relation.payloadDecoder; else noDecoder">
-                        {{relation.payloadDecoder.name}}
+                        <a [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{relation.payloadDecoder.name}}</a>
                       </span>
                       <ng-template #noDecoder>
                         {{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}
@@ -59,7 +59,9 @@
                   </div>
                   <div class="col-md-7 d-flex align-items-center">
                     <p><strong>{{'DATATARGET.IOTDEVICE' | translate}}</strong>
-                      <span>{{getJoinedDeviceNames(relation.iotDevices)}}</span>
+                      <span *ngFor="let device of relation.iotDevices; let first = first">
+                        <ng-container *ngIf="!first">, </ng-container> <a [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{device.name}}</a>
+                      </span>
                     </p>
                   </div>
                   <mat-divider></mat-divider>
