@@ -64,12 +64,18 @@
             </ul>
           </li>
         </div>
-        <li class="nav-item py-2 logout-btn">
-          <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
-            [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-            target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">Logout</a>
-          <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
-        </li>
+        <div class="logout-btn">
+          <li class="nav-item py-2">
+            <a class="nav-link pl-5 position-relative rounded" href="https://os2iot.os2.eu/" target="_blank">{{'NAV.HELP' | translate }}</a>
+            <fa-icon [icon]="faQuestionCircle" class="navbar-icon"></fa-icon>
+          </li>
+          <li class="nav-item py-2">
+            <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
+              [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+              target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">{{'NAV.LOGOUT' | translate }}</a>
+            <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
+          </li>
+        </div>
       </ul>
     </div>
   </ng-template>

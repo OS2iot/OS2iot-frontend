@@ -32,7 +32,9 @@
     "SEARCH": "Søgeresultater",
     "MENU-ITEM-MISC": "Generelt",
     "DEVICE-MODEL": "Device model",
-    "BACK": "Tilbage"
+    "BACK": "Tilbage",
+    "LOGOUT": "Log ud",
+    "HELP": "Hjælp"
   },
   "TOPBAR":{
     "SEARCH": {
