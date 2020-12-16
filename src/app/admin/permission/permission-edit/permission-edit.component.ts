@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../permission.service';
 import { PermissionRequest, PermissionType } from '../permission.model';
@@ -15,13 +15,14 @@ import { ApplicationService } from '@applications/application.service';
 import { Application } from '@applications/application.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-permission-edit',
   templateUrl: './permission-edit.component.html',
   styleUrls: ['./permission-edit.component.scss'],
 })
-export class PermissionEditComponent implements OnInit {
+export class PermissionEditComponent implements OnInit, OnDestroy {
   permission = new PermissionRequest();
   public organisations: OrganisationResponse[];
   public users: UserResponse[];
@@ -31,7 +32,10 @@ export class PermissionEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: ['admin','permissions'] };
+  public backButton: BackButton = {
+    label: '',
+    routerLink: ['admin', 'permissions'],
+  };
   public title = '';
   public submitButton = '';
   public isEditMode = false;
@@ -40,6 +44,18 @@ export class PermissionEditComponent implements OnInit {
   organisationSubscription: Subscription;
   userSubscription: Subscription;
   applicationSubscription: Subscription;
+
+  public userMultiCtrl: FormControl = new FormControl();
+  public userMultiFilterCtrl: FormControl = new FormControl();
+  public filteredUsersMulti: ReplaySubject<UserResponse[]> = new ReplaySubject<
+    UserResponse[]
+  >(1);
+
+  public applicationMultiCtrl: FormControl = new FormControl();
+  public applicationMultiFilterCtrl: FormControl = new FormControl();
+  public filteredApplicationsMulti: ReplaySubject<
+    Application[]
+  > = new ReplaySubject<Application[]>(1);
 
   constructor(
     private translate: TranslateService,
@@ -69,6 +85,56 @@ export class PermissionEditComponent implements OnInit {
       this.isEditMode = true;
       this.setBackButton();
     }
+
+    this.userMultiFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterUsersMulti();
+      });
+
+    this.applicationMultiFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterApplicationsMulti();
+      });
+  }
+
+  private filterApplicationsMulti() {
+    if (!this.applications) {
+      return;
+    }
+    // get the search keyword
+    let search = this.applicationMultiFilterCtrl.value;
+    if (!search) {
+      this.filteredApplicationsMulti.next(this.applications.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredApplicationsMulti.next(
+      this.applications.filter(
+        (app) => app.name.toLowerCase().indexOf(search) > -1
+      )
+    );
+  }
+
+  private filterUsersMulti() {
+    if (!this.users) {
+      return;
+    }
+    // get the search keyword
+    let search = this.userMultiFilterCtrl.value;
+    if (!search) {
+      this.filteredUsersMulti.next(this.users.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredUsersMulti.next(
+      this.users.filter((user) => user.name.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   private setBackButton() {
@@ -92,6 +158,7 @@ export class PermissionEditComponent implements OnInit {
     this.userSubscription = this.userService.getMultiple().subscribe(
       (users) => {
         this.users = users.data;
+        this.filteredUsersMulti.next(this.users.slice());
       },
       (error: HttpErrorResponse) => {
         this.showError(error);
@@ -113,6 +180,7 @@ export class PermissionEditComponent implements OnInit {
       .subscribe(
         (res) => {
           this.applications = res.data;
+          this.filteredApplicationsMulti.next(this.applications.slice());
         },
         (error: HttpErrorResponse) => {
           this.showError(error);
@@ -127,7 +195,9 @@ export class PermissionEditComponent implements OnInit {
         this.permission.name = response.name;
         this.permission.level = response.type;
         this.permission.userIds = response.users.map((x) => x.id);
-        this.permission.automaticallyAddNewApplications = response.automaticallyAddNewApplications;
+        this.userMultiCtrl.setValue(this.permission.userIds);
+        this.permission.automaticallyAddNewApplications =
+          response.automaticallyAddNewApplications;
 
         if (response.type !== PermissionType.GlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
@@ -141,6 +211,7 @@ export class PermissionEditComponent implements OnInit {
           this.permission.applicationIds = response.applications.map(
             (x) => x.id
           );
+          this.applicationMultiCtrl.setValue(this.permission.applicationIds);
         }
       },
       (error: HttpErrorResponse) => {
@@ -199,17 +270,19 @@ export class PermissionEditComponent implements OnInit {
     }
   }
 
-  isOrganizationAdministrationPermission() {
+  isOrganizationApplicationPermission() {
     return (
       this.permission.level ==
         PermissionType.OrganizationApplicationPermissions ||
-      this.permission.level == PermissionType.Write ||
-      this.permission.level == PermissionType.Read
+      this.isReadOrWrite()
     );
   }
 
   isReadOrWrite(): boolean {
-    return this.permission.level === PermissionType.Read || this.permission.level === PermissionType.Write
+    return (
+      this.permission.level === PermissionType.Read ||
+      this.permission.level === PermissionType.Write
+    );
   }
 
   onSubmit(): void {
@@ -228,5 +301,13 @@ export class PermissionEditComponent implements OnInit {
 
   routeBack(): void {
     this.location.back();
+  }
+
+  /** Subject that emits when the component has been destroyed. */
+  private _onDestroy = new Subject<void>();
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 }

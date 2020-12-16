@@ -342,7 +342,7 @@
       "USERS-PLACEHOLDER": "Brugere",
       "ORG": "Vælg en organisation",
       "ORG-PLACEHOLDER": "Organisation",
-      "APPS": "Vælg en applikation",
+      "APPS": "Vælg en eller flere applikationer",
       "APPS-PLACEHOLDER": "Applikationer",
       "ADD-APPLICATION-ON-CREATE": "Skal nye applikationer automatisk tilføjes til brugergruppen",
       "ADD-APPLICATION-AUTOMATIC": "Automatisk tilføjelse af applikationer til brugergruppen"

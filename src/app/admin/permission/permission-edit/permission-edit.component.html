@@ -31,19 +31,16 @@
     </div>
 
     <div class="form-group mt-3 col-12">
-        <label class="form-label" for="user">{{'PERMISSION.EDIT.USERS' | translate}}</label>
         <mat-form-field>
-            <mat-select 
-                name="users"
-                [multiple]="true" 
-                #multiSelect
-                [compareWith]="compare"
-                [(value)]="permission.userIds">
-              <mat-option *ngFor="let user of users" [value]="user.id">
-                {{user.name}} ({{user.email}})
-              </mat-option>
+            <label class="form-label" for="user">{{'PERMISSION.EDIT.USERS' | translate}}</label>
+            <mat-select [formControl]="userMultiCtrl" placeholder="" [multiple]="true" panelClass="overflow-x-hidden"
+                [(value)]="permission.userIds" name="users" #multiSelect [compareWith]="compare">
+                <mat-select-search [formControl]="userMultiFilterCtrl"></mat-select-search>
+                <mat-option *ngFor="let user of filteredUsersMulti | async" [value]="user.id">
+                    {{user.name}}
+                </mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
     </div>
 
     <div *ngIf="permission.level != 'GlobalAdmin'">
@@ -61,26 +58,28 @@
         </div>
     </div>
 
-    <div *ngIf="isOrganizationAdministrationPermission()">
-        <div class="form-group mt-3 col-12">
+    <div class="form-group mt-3 col-12" *ngIf="isOrganizationApplicationPermission()">
+        <mat-form-field>
             <label class="form-label" for="name">{{'PERMISSION.EDIT.APPS' | translate}}</label>
             <div class="col-12">
-                <select id="applicationIds" name="applicationIds" class="form-control" multiple
-                    [(ngModel)]="permission.applicationIds"
-                    placeholder="'PERMISSION.EDIT.APPS-PLACEHOLDER' | translate">
-                    <option *ngFor="let app of applications" [value]="app.id"
-                        [selected]="isApplicationPartOfPermission(app.id)">
-                        {{app.name}}</option>
-                </select>
+                <mat-select [formControl]="applicationMultiCtrl" placeholder="" [multiple]="true"
+                    panelClass="overflow-x-hidden" [(value)]="permission.applicationIds" id="applicationIds"
+                    name="applicationIds" #multiSelect [compareWith]="compare">
+                    <mat-select-search [formControl]="applicationMultiFilterCtrl"></mat-select-search>
+                    <mat-option *ngFor="let app of filteredApplicationsMulti | async" [value]="app.id">
+                        {{app.name}}
+                    </mat-option>
+                </mat-select>
             </div>
-        </div>
+        </mat-form-field>
     </div>
 
     <div *ngIf="isReadOrWrite()">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="name">{{'PERMISSION.EDIT.ADD-APPLICATION-AUTOMATIC' | translate}}</label>
             <div class="row">
-                <mat-slide-toggle [(ngModel)]="permission.automaticallyAddNewApplications" id="automaticallyAddNewApplications" name="automaticallyAddNewApplications">
+                <mat-slide-toggle [(ngModel)]="permission.automaticallyAddNewApplications"
+                    id="automaticallyAddNewApplications" name="automaticallyAddNewApplications">
                     {{'PERMISSION.EDIT.ADD-APPLICATION-ON-CREATE' | translate}}</mat-slide-toggle>
             </div>
         </div>

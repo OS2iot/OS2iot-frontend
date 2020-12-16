@@ -20,6 +20,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { MatInputModule } from '@angular/material/input';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,6 +59,7 @@ export function tokenGetter() {
         GatewayModule,
         SearchModule,
         HttpClientModule,
+        MatInputModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter
