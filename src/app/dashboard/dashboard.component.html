@@ -1,28 +1,25 @@
-<title>Grandma's Heavy Metal Festival Journal</title>
 <div *ngIf="hasSomePermission">
     <app-top-bar></app-top-bar>
 </div>
 <div class="container-fluid">
-
-    <div class="row">
+    <div class="row mt-5 mx-5">
         <app-loading-spinner *ngIf="isLoadingResults">
         </app-loading-spinner>
-        <div *ngIf="hasSomePermission" class="col-xs-12 col-md-10 offset-md-1 mt-5">
+        <div *ngIf="hasSomePermission" class="col-12">
             <header class="header p-3">
                 <div class="header__text-box ">
                     <h1 class="heading-primary ">
-                        <div class="row mb-5 ">
+                        <span class="row heading-primary--main">
                             <div class="col-12">
-                                <span class="heading-primary--main">
-                                    {{'DASHBOARD.WELCOME' | translate}}
-                                </span>
+                                <h1>{{'DASHBOARD.WELCOME' | translate}}</h1>
+                                <h2>{{'DASHBOARD.WELCOME-SUB' | translate}}</h2>
                             </div>
-                        </div>
-
-                        <span class="heading-primary--sub">
+                        </span>
+                        <span class="heading-primary--sub mt-5">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <span>{{'DASHBOARD.LIST.HEADLINE' | translate}}</span>
+                                <div class="col-md-6 px-md-4">
+                                    <p><strong>{{'DASHBOARD.LIST.HEADLINE' | translate}}</strong>
+                                    </p>
                                     <ul class="inline-list text-white">
                                         <li>{{'DASHBOARD.LIST.P1' | translate}}</li>
                                         <li>{{'DASHBOARD.LIST.P2' | translate}}</li>
@@ -33,39 +30,46 @@
                                         <li>{{'DASHBOARD.LIST.P7' | translate}}</li>
                                     </ul>
                                 </div>
-                                <div class="col-md-6">{{'DASHBOARD.WELCOME-MESSAGE' | translate}}</div>
+                                <div class="col-md-6 px-md-4">
+                                    <p><strong>Community</strong></p>
+                                    <p>{{'DASHBOARD.WELCOME-MESSAGE' | translate}}<span><a
+                                                href="https://OS2iot.os2.eu">OS2iot.os2.eu</a></span>{{'DASHBOARD.WELCOME-MESSAGE-3' | translate}}
+                                    </p>
+                                    <p><strong>Om OS2IOT</strong></p>
+                                    <p>{{'DASHBOARD.WELCOME-MESSAGE-2' | translate}}<span><a
+                                                href="https://os2.eu/produkt/os2iot">løsningens produktside</a></span>
+                                    </p>
+                                </div>
                             </div>
                         </span>
                     </h1>
-                    <div class="row" *ngIf="isGlobalAdmin">
+                    <div class="row">
                         <div class="col-12 d-flex justify-content-center">
+                    <div class="row mt-5" *ngIf="isGlobalAdmin">
+                        <div class="col-12 d-flex justify-content-center">
+                    <div class="row mt-5">
+                        <div
+                            class="col-12 d-flex justify-content-center justify-content-md-start justify-content-lg-center ">
                             <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
-                                class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
+                                class="btn btn-primary btn--animated">Start med at oprette en organisation</a>
                         </div>
                     </div>
                 </div>
             </header>
-            <div class="header__logo-box">
-                <img src="../../assets/images/os2iot.png" alt="Logo" class="header__logo">
-            </div>
         </div>
         <div *ngIf="hasSomePermission == false" class="col-xs-12 col-md-10 offset-md-1 mt-5">
-            <header class="header">
-
+            <header class="header p-3">
                 <div class="header__text-box ">
-                    <h1 class="heading-primary mb-5">
-                        <span class="heading-primary--main">
-                            {{'DASHBOARD.WELCOME' | translate}}
+                    <div class="heading-primary ">
+                        <span class="row heading-primary--main mb-5">
+                            <div class="col-12">
+                                <h1>{{'DASHBOARD.WELCOME' | translate}}</h1>
+                                <h2>{{'DASHBOARD.NO-ACCESS' | translate}}</h2>
+                            </div>
                         </span>
-                        <span class="heading-primary--sub">
-                            {{'DASHBOARD.NO-ACCESS' | translate}}
-                        </span>
-                    </h1>
+                    </div>
                 </div>
             </header>
-            <div class="header__logo-box">
-                <img src="../../assets/images/os2iot.png" alt="Logo" class="header__logo">
-            </div>
         </div>
     </div>
 </div>
