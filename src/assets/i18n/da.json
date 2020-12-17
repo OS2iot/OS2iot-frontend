@@ -813,7 +813,8 @@
     "ORGANIZATION": "OS2IoT - Organisationer",
     "DATATARGET": "OS2IoT - Datatarget",
     "BULKIMPORT": "OS2IoT - Bulk import",
-    "IOTDEVICE": "OS2IoT - IoT enhed"
+    "IOTDEVICE": "OS2IoT - IoT enhed",
+    "DASHBOARD": "OS2IoT - Dashboard"
 
   },
   "false": "Nej",
