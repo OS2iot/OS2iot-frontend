@@ -12,6 +12,9 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { UserResponse } from '@app/admin/users/user.model';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -21,7 +24,7 @@ import { UserResponse } from '@app/admin/users/user.model';
 })
 export class PermissionDetailComponent implements OnInit, OnChanges {
   isLoadingResults = true;
-  public pageLimit: number = 10;
+  public pageLimit: number = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   permission: PermissionResponse;
@@ -43,12 +46,14 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   id: number;
   subscription: Subscription;
   users: UserResponse[];
+  dropdownButton: DropdownButton;
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private permissionService: PermissionService,
     private router: Router,
+    private deleteDialogService: DeleteDialogService
   ) { }
 
   ngOnInit(): void {
@@ -56,10 +61,16 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     this.id = +this.route.snapshot.paramMap.get('permission-id');
     if (this.id > 0) {
       this.getPermission(this.id);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: 'edit-permission',
+        isErasable: true,
+      }
     }
-    this.translate.get(['NAV.PERMISSIONS'])
+    this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.PERMISSIONS'];
+        this.dropdownButton.label = translations['PERMISSION.DETAIL.DROPDOWN'];
       });
   }
 
@@ -78,11 +89,15 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   }
 
   onDeletePermission() {
-    this.permissionService.deletePermission(this.id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.router.navigate(['admin/permissions']);
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.permissionService.deletePermission(this.id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.router.navigate(['admin/permissions']);
+          }
+        });
       }
-    });
+    })
   }
 
   onEditPermission() {

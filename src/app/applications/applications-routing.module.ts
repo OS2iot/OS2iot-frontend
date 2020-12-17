@@ -19,7 +19,7 @@ const applicationRoutes: Routes = [
         children: [
             { path: '', component: ApplicationsListComponent },
             { path: 'new-application', component: ApplicationEditComponent, },
-            { path: ':id/edit-application', component: ApplicationEditComponent, },
+            { path: 'edit-application/:id', component: ApplicationEditComponent, },
             {
                 path: ':id',
                 children: [

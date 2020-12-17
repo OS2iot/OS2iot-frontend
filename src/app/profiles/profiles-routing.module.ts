@@ -11,10 +11,11 @@ const profilesRoutes: Routes = [
         path: '', component: ProfilesComponent,
         children: [
             { path: '', component: ProfilesListComponent },
-            { path: 'new-service-profile', component: ServiceProfilesEditComponent },
-            { path: ':serviceId', component: ServiceProfilesEditComponent },
-            { path: 'deviceprofile/edit', component: DeviceProfilesEditComponent },
-            { path: 'deviceprofile/:deviceId', component: DeviceProfilesEditComponent },
+            { path: 'service-profile/new-service-profile', component: ServiceProfilesEditComponent },
+            { path: 'service-profile/:serviceId', component: ServiceProfilesEditComponent },
+            { path: 'device-profile/edit', component: DeviceProfilesEditComponent },
+            { path: 'device-profile/new-device-profile', component: DeviceProfilesEditComponent },
+            { path: 'device-profile/:deviceId', component: DeviceProfilesEditComponent },
         ]
     }
 ];

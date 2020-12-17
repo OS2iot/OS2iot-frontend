@@ -4,16 +4,20 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
+//Animations
+@import 'assets/scss/animation/jumping-dots';
 
 //Components
 @import 'assets/scss/components/boxes';
 @import 'assets/scss/components/bulk-import';
 @import 'assets/scss/components/forms';
+@import 'assets/scss/components/list';
 @import 'assets/scss/components/loading-spinner';
+@import 'assets/scss/components/map';
+@import 'assets/scss/components/monaco-editor';
 @import 'assets/scss/components/navbar';
 @import 'assets/scss/components/tables';
 @import 'assets/scss/components/topbar';
-@import 'assets/scss/components/list';
 
 //Elements
 @import 'assets/scss/elements/links';

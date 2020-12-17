@@ -179,7 +179,7 @@ export class RestService {
             );
     }
 
-    private createResourceUrl(url: string, id?: string | number) {
+    createResourceUrl(url: string, id?: string | number) {
         let resourceUrl = this.baseUrl + url;
 
         if (id != null) {

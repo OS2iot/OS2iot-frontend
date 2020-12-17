@@ -20,7 +20,6 @@ export interface SigfoxDevice {
     productCertificate: string;
     automaticRenewal: boolean;
     automaticRenewalStatus: number;
-    createdBy: string;
     lastEditionTime: any;
     lastEditedBy: string;
     activable: boolean;

@@ -1,63 +1,84 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    Input,
+    ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
-import { Sort } from '@shared/models/sort.model';
-import { UserResponse } from '../../user.model';
-
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { UserGetManyResponse, UserResponse } from '../../user.model';
+import { UserService } from '../../user.service';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { environment } from '@environments/environment';
 
 @Component({
-  selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss']
+    selector: 'app-user-table',
+    templateUrl: './user-table.component.html',
+    styleUrls: ['./user-table.component.scss'],
 })
-export class UserTableComponent implements OnInit, OnChanges, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['name', 'email', 'global', 'status', 'login', 'menu'];
-  dataSource = new MatTableDataSource<UserResponse>();
+export class UserTableComponent implements AfterViewInit {
+    displayedColumns: string[] = [
+        'name',
+        'email',
+        'global',
+        'status',
+        'lastLogin',
+        'menu',
+    ];
+    data: UserResponse[];
 
-  @Input() isLoadingResults: boolean;
-  @Output() deletePermission = new EventEmitter();
-  resultsLength = 0;
+    public pageSize = environment.tablePageSize;
+    resultsLength = 0;
+    isLoadingResults = true;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
-  @Input() pageLimit: number;
-  @Input() selectedSortObject: Sort;
-  @Input() users: UserResponse[];
-  user: UserResponse;
-  public pageOffset = 0;
-  public pageTotal: number;
-  deleteUser = new EventEmitter();
+    @Input() permissionId?: number;
+    @Input() canSort = true;
 
+    constructor(
+        public translate: TranslateService,
+        private userService: UserService
+    ) {}
 
-  constructor(
-    public translate: TranslateService,
-    private router: Router
-
-  ) { }
-
-  ngOnInit(): void {
-
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log("ngOnChanges")
-    if (this.users) {
-      this.dataSource = new MatTableDataSource(this.users);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sortingDataAccessor = tableSorter;
-      this.isLoadingResults = false;
-      this.resultsLength = this.users.length;
+    getUsers(
+        orderByColumn: string,
+        orderByDirection: string
+    ): Observable<UserGetManyResponse> {
+        return this.userService.getMultiple(
+            this.paginator.pageSize,
+            this.paginator.pageIndex * this.paginator.pageSize,
+            orderByColumn,
+            orderByDirection,
+            this.permissionId
+        );
     }
-  }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+    ngAfterViewInit() {
+        // If the user changes the sort order, reset back to the first page.
+        this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
+        merge(this.sort.sortChange, this.paginator.page)
+            .pipe(
+                startWith({}),
+                switchMap(() => {
+                    this.isLoadingResults = true;
+                    return this.getUsers(this.sort.active, this.sort.direction);
+                }),
+                map((data) => {
+                    // Flip flag to show that loading has finished.
+                    this.isLoadingResults = false;
+                    this.resultsLength = data.count;
+
+                    return data.data;
+                }),
+                catchError(() => {
+                    this.isLoadingResults = false;
+                    return observableOf([]);
+                })
+            )
+            .subscribe((data) => (this.data = data));
+    }
 }

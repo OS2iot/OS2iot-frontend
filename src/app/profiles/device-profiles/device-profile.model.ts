@@ -1,4 +1,6 @@
-export class DeviceProfile {
+import { EditPermission } from '@shared/models/edit-permission.model';
+
+export class DeviceProfile extends EditPermission {
     public id: string;
     public name: string;
     public classBTimeout = 0;
@@ -25,15 +27,34 @@ export class DeviceProfile {
     public supportsClassB: boolean;
     public supportsClassC: boolean;
     public supportsJoin = true;
+    public organizationID?: number;
+    public internalOrganizationId: number;
+    public internalOrganizationName?: string;
+    public createdAt: string;
+    public updatedAt: string;
+    public createdBy: number;
+    public updatedBy: number;
+    public createdByName: string;
+    public updatedByName: string;
 }
 export interface DeviceProfileResponse {
     result: DeviceProfile[];
     totalCount?: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface DeviceProfileResponseOne {
+    deviceProfile: DeviceProfile;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export class DeviceProfileRequest {
     deviceProfile: DeviceProfile;
-    constructor(deviceProfile: DeviceProfile) {
+    internalOrganizationId: number;
+    constructor(deviceProfile: DeviceProfile, orgId: number = null) {
         this.deviceProfile = deviceProfile;
+        this.internalOrganizationId = orgId
     }
 }

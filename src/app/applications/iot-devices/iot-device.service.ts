@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IotDevice, IotDevicesResponse } from './iot-device.model';
+import { IotDevice, IoTDevicesMinimalResponse, IotDevicesResponse } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { map } from 'rxjs/operators';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +12,10 @@ export class IoTDeviceService {
 
     private BASEURL = 'iot-device';
 
-    constructor(private restService: RestService) { }
+    constructor(
+        private restService: RestService,
+        private userMinimalService: UserMinimalService 
+        ) { }
 
     createIoTDevice(body: IotDevice): Observable<IotDevicesResponse> {
         return this.restService.post(this.BASEURL, body);
@@ -24,7 +28,7 @@ export class IoTDeviceService {
     getIoTDevice(id: number): Observable<IotDevice> {
         return this.restService.get(this.BASEURL, {}, id).pipe(
             map(
-                response => {
+                (response: IotDevice) => {
                     return {
                         name: response.name,
                         application: response.application,
@@ -45,10 +49,18 @@ export class IoTDeviceService {
                         latestReceivedMessage: response.latestReceivedMessage,
                         lorawanSettings: response.lorawanSettings,
                         sigfoxSettings: response.sigfoxSettings,
+                        createdBy: response.createdBy,
+                        updatedBy: response.updatedBy,
+                        createdByName: this.userMinimalService.getUserNameFrom(response.createdBy),
+                        updatedByName: this.userMinimalService.getUserNameFrom(response.updatedBy)
                     };
                 }
             )
         );
+    }
+
+    getIoTDevicesUsingPayloadDecoderMinimal(payloadDecoderId: number, limit: number, offset: number): Observable<IoTDevicesMinimalResponse> {
+        return this.restService.get(`iot-device/minimalByPayloadDecoder`, {limit: limit, offset: offset}, payloadDecoderId)
     }
 
     deleteIoTDevice(id: number) {

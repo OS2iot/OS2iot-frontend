@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,14 +18,22 @@ import { SharedVariableModule } from '@shared/shared-variable/shared-variable.mo
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchModule } from './search/search.module';
-import { DeviceModelModule } from './device-model/device-model.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+export function tokenGetter() {
+    return localStorage.getItem("id_token");
+}
+
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent],
+    declarations: [
+        AppComponent,
+        ErrorPageComponent
+    ],
     imports: [
         SharedVariableModule.forRoot(),
         AuthModule,
@@ -49,6 +57,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         BrowserAnimationsModule,
         GatewayModule,
         SearchModule,
+        HttpClientModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter
+            },
+        }),
+        MonacoEditorModule.forRoot()
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

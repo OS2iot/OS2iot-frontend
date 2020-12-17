@@ -1,6 +1,11 @@
 <app-top-bar [title]="'NAV.SEARCH' | translate" [searchQuery]="query"></app-top-bar>
-
-<div class="m-md-4 p-md-3">
-    <app-search-table [searchText]="decode(query)">
-    </app-search-table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron--table">
+                <app-search-table [searchText]="decode(query)">
+                </app-search-table>
+            </div>
+        </div>
+    </div>
 </div>

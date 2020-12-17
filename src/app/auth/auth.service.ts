@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import * as jwtDecode from 'jwt-decode';
@@ -9,6 +9,7 @@ import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { UserResponse } from '../admin/users/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface AuthResponseData {
   accessToken: string;
@@ -28,7 +29,15 @@ export class AuthService {
 
   private readonly LOCAL_STORAGE_JWT_LOCATION = 'id_token';
 
-  constructor(private http: HttpClient, private restService: RestService) {}
+  constructor(
+    private http: HttpClient,
+    private restService: RestService,
+    private jwtHelper: JwtHelperService) {}
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   // global-admin@os2iot.dk
   // hunter2
@@ -48,7 +57,9 @@ export class AuthService {
   }
 
   me(): Observable<CurrentUserInfoResponse> {
-    return this.restService.get('auth/me');
+    return this.restService.get('auth/me').pipe(
+      shareReplay(1)
+    );
   }
 
   setSession(jwt: string) {
@@ -67,7 +78,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.LOCAL_STORAGE_JWT_LOCATION);
+    localStorage.clear();
   }
 
   public isLoggedIn() {

@@ -1,14 +1,14 @@
-@import "../setup/variables";
+@import '../setup/variables';
 
-
-.table, table {
+.table,
+table {
   width: 100%;
   background-color: $white;
   // -webkit-border-radius: .25rem;
   // -moz-border-radius: .25rem;
   // border-radius: .25rem;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14),
-    0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03),
+    0px 0px 1px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14),
     0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14),
@@ -27,21 +27,14 @@
   }
 
   thead {
-    font-family: roboto-light;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 24px;
     color: $grey-tablehead;
     background-color: $grey-dark;
   }
 
   tbody {
-    color: $black;
-    font-family: roboto;
-
     tr {
       border-top: $grey-border solid 1px;
-      line-height: 40px;
+      line-height: $body-text-line-height;
       color: $black;
 
       &:hover {
@@ -52,7 +45,6 @@
 }
 
 .dropdown {
-
   .applicationRow__edit {
     width: 10px;
     height: 20px;
@@ -66,9 +58,10 @@
   }
 
   .dropdown-menu {
-    min-width: 90px !important;
-    left: -35px !important;
-
+    &--table {
+      min-width: 90px !important;
+      left: -35px !important;
+    }
     li {
       padding: 0;
       margin: 0;
@@ -90,8 +83,6 @@
           background-color: $color-primary;
         }
       }
-
-
     }
   }
 }

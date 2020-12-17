@@ -15,6 +15,7 @@ import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ErrorMessage } from '@shared/models/error-message.model';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Subscription } from 'rxjs';
 import { IotDevice } from '../iot-device.model';
@@ -59,7 +60,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private location: Location,
         private shareVariable: SharedVariableService,
         private deviceModelService: DeviceModelService,
-        private errorMessageService: ErrorMessageService
+        private errorMessageService: ErrorMessageService,
+        private scrollToTopService: ScrollToTopService,
     ) { }
 
     ngOnInit(): void {
@@ -81,12 +83,18 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     public compare(o1: any, o2: any): boolean {
         return o1 === o2;
-      }
+    }
 
     getDeviceModels() {
-        this.deviceModelService.getMultiple().subscribe(
+        this.deviceModelService.getMultiple(
+            1000,
+            0, 
+            "id",
+            "ASC",
+            this.shareVariable.getSelectedOrganisationId()
+        ).subscribe(
             (response) => {
-                this.deviceModels = response;
+                this.deviceModels = response.data;
             }
         );
     }
@@ -113,6 +121,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 }
                 this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
                 if (device.sigfoxSettings) {
+                }
+                if (!device.deviceModelId || device.deviceModelId === null) {
+                    this.iotDevice.deviceModelId = 0;
                 }
             });
     }
@@ -155,7 +166,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     updateCoordinates(event: any) {
         this.iotDevice.longitude = event.longitude;
         this.iotDevice.latitude = event.latitude;
-      }
+    }
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
@@ -175,6 +186,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     private adjustModelBasedOnType() {
+        if (this.iotDevice.deviceModelId === 0) {
+            this.iotDevice.deviceModelId = null
+        }
         switch (this.iotDevice.type) {
             case DeviceType.GENERICHTTP: {
                 this.iotDevice.lorawanSettings = undefined;
@@ -232,9 +246,18 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     handleError(error: HttpErrorResponse) {
-        const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
-        this.errorFields = errorMessage.errorFields;
-        this.errorMessages = errorMessage.errorMessages;
+        if (error?.error?.message == "MESSAGE.OTAA-INFO-MISSING") {
+            this.errorFields = ["OTAAapplicationKey"];
+            this.errorMessages = [error?.error?.message];
+        } else if (error?.error?.message == "MESSAGE.ID-INVALID-OR-ALREADY-IN-USE") {
+            this.errorFields = ["devEUI"];
+            this.errorMessages = [error?.error?.message];
+        } else {
+            const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
+            this.errorFields = errorMessage.errorFields;
+            this.errorMessages = errorMessage.errorMessages;
+        }
+        this.scrollToTopService.scrollToTop();
     }
 
     onCoordinateKey(event: any) {

@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { BackButton } from '@shared/models/back-button.model';
 import { Step } from '@shared/models/step.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-header',
@@ -16,7 +17,10 @@ export class FormHeaderComponent implements OnInit {
   public stepTitle: string = '';
   public activeStep: string = '';
 
-  constructor(public translate: TranslateService, public location: Location) {
+  constructor(
+    public translate: TranslateService, 
+    public location: Location,
+    private router: Router) {
     translate.use('da');
   }
 
@@ -24,7 +28,13 @@ export class FormHeaderComponent implements OnInit {
   }
 
   routeBack(): void {
-    this.location.back()
+    if (this.backButton?.routerLink && Array.isArray(this.backButton.routerLink)) {
+      this.router.navigate(this.backButton.routerLink)
+    } else if (this.backButton?.routerLink && typeof this.backButton.routerLink === 'string') {
+        this.router.navigate([this.backButton.routerLink])
+    } else {
+        this.location.back();
+    }
   }
 
 }

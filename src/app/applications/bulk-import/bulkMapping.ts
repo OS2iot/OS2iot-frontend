@@ -65,7 +65,11 @@ export class BulkMapping {
             latitude: data.latitude ? Number(data.latitude) : 0,
             latestReceivedMessage: undefined,
             lorawanSettings: undefined,
-            sigfoxSettings: undefined
+            sigfoxSettings: undefined,
+            createdBy: undefined,
+            updatedBy: undefined,
+            updatedByName: undefined,
+            createdByName: undefined
         };
     }
 }

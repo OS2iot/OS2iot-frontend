@@ -1,133 +1,148 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input, ViewChild, AfterViewInit, EventEmitter } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Sort } from '@shared/models/sort.model';
-import { Gateway } from '../gateway.model';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Gateway, GatewayResponseMany } from '../gateway.model';
+import {
+    faExclamationTriangle,
+    faCheckCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Observable, of as observableOf, Subject } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { MeService } from '@shared/services/me.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
-
+import { environment } from '@environments/environment';
 
 @Component({
-  selector: 'app-gateway-table',
-  templateUrl: './gateway-table.component.html',
-  styleUrls: ['./gateway-table.component.scss']
+    selector: 'app-gateway-table',
+    templateUrl: './gateway-table.component.html',
+    styleUrls: ['./gateway-table.component.scss'],
 })
-export class GatewayTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+export class GatewayTableComponent implements AfterViewInit {
+    @Input() organisationChangeSubject: Subject<any>;
+    organizationId?: number;
+    displayedColumns: string[] = [
+        'name',
+        'gateway-id',
+        'location',
+        'internalOrganizationName',
+        'last-seen',
+        'status',
+        'menu',
+    ];
+    data: Gateway[] = [];
+    public pageSize = environment.tablePageSize;
 
-  displayedColumns: string[] = ['name', 'gateway-id', 'location', 'last-seen', 'status', 'menu'];
-  public dataSource = new MatTableDataSource<Gateway>();
-  public gateways: Gateway[];
-  gateway: Gateway;
-  faExclamationTriangle = faExclamationTriangle;
-  faCheckCircle = faCheckCircle;
+    faExclamationTriangle = faExclamationTriangle;
+    faCheckCircle = faCheckCircle;
 
-  @Input() pageLimit: number;
-  @Input() selectedSortObject: Sort;
-  public pageOffset = 0;
-  public pageTotal: number;
+    batteryStatusColor = 'green';
+    batteryStatusPercentage = 50;
+    resultsLength = 0;
+    isLoadingResults = true;
 
-  batteryStatusColor = 'green';
-  batteryStatusPercentage = 50;
-  resultsLength = 0;
-  isLoadingResults = true;
-  deleteGateway = new EventEmitter();
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  private gatewaySubscription: Subscription;
-  private deleteDialogSubscription: Subscription;
-
-  constructor(
-    private chirpstackGatewayService: ChirpstackGatewayService,
-    private deleteDialogService: DeleteDialogService,
-    public translate: TranslateService) {
-    this.translate.use('da');
-    moment.locale('da');
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = tableSorter;
-  }
-
-  ngOnChanges() {
-    console.log('pageLimit', this.pageLimit);
-    console.log('selectedSortId', this.selectedSortObject);
-    this.getLoraGateways();
-  }
-
-  gatewayStatus(gateway: Gateway): boolean {
-    return this.chirpstackGatewayService.isGatewayActive(gateway);
-  }
-
-  lastActive(gateway: Gateway): string {
-    if (gateway?.lastSeenAt) {
-      return moment(gateway.lastSeenAt).fromNow();
-    } else {
-      return this.translate.instant("ACTIVITY.NEVER");
+    constructor(
+        private chirpstackGatewayService: ChirpstackGatewayService,
+        public translate: TranslateService,
+        private meService: MeService,
+        private deleteDialogService: DeleteDialogService
+    ) {
+        this.translate.use('da');
+        moment.locale('da');
     }
-  }
 
-  getLoraGateways(): void {
-    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
-      {
-        limit: this.pageLimit,
-        offset: this.pageOffset * this.pageLimit,
-        sort: this.selectedSortObject.dir,
-        orderOn: this.selectedSortObject.col
-      })
-      .subscribe(
-        (gateways) => {
-          this.gateways = gateways.result;
-          this.dataSource = new MatTableDataSource<Gateway>(this.gateways);
-          this.dataSource.sort = this.sort;
-          this.dataSource.sortingDataAccessor = tableSorter;
-          this.dataSource.paginator = this.paginator;
-          this.isLoadingResults = false;
-          this.resultsLength = this.gateways.length;
-          if (this.pageLimit) {
-            console.log(gateways.result);
-            this.pageTotal = Math.ceil(gateways.count / this.pageLimit);
-          }
+    ngAfterViewInit() {
+        this.organisationChangeSubject.subscribe((x) => {
+            this.organizationId = x;
+            this.refresh();
+        });
+
+        this.paginator.page
+            .pipe(
+                startWith({}),
+                switchMap(() => {
+                    this.isLoadingResults = true;
+                    return this.getGateways();
+                }),
+                map((data) => {
+                    // Flip flag to show that loading has finished.
+                    this.isLoadingResults = false;
+                    this.resultsLength = data.totalCount;
+                    data.result.forEach((gw) => {
+                        gw.canEdit = this.canEdit(gw.internalOrganizationId);
+                    });
+
+                    return data.result;
+                }),
+                catchError(() => {
+                    this.isLoadingResults = false;
+                    return observableOf([]);
+                })
+            )
+            .subscribe((data) => (this.data = data));
+    }
+
+    private refresh() {
+        const pageEvent = new PageEvent();
+        pageEvent.pageIndex = this.paginator.pageIndex;
+        pageEvent.pageSize = this.paginator.pageSize;
+        this.paginator.page.emit(pageEvent);
+    }
+
+    canEdit(internalOrganizationId: number): boolean {
+        return this.meService.canWriteInTargetOrganization(
+            internalOrganizationId
+        );
+    }
+
+    private getGateways(): Observable<GatewayResponseMany> {
+        const params = {
+            limit: this.paginator.pageSize,
+            offset: this.paginator.pageIndex * this.paginator.pageSize,
+        };
+        if (this.organizationId > 0) {
+            params['organizationId'] = this.organizationId;
         }
-      );
-  }
+        return this.chirpstackGatewayService.getMultiple(params);
+    }
 
-  clickDelete(element: any) {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
-      (response) => {
-        if (response) {
-          this.chirpstackGatewayService.delete(element.id).subscribe((response) => {
-            if (response.ok && response.body.success === true) {
-              this.getLoraGateways();
-            }
-          });
+    gatewayStatus(gateway: Gateway): boolean {
+        return this.chirpstackGatewayService.isGatewayActive(gateway);
+    }
+
+    lastActive(gateway: Gateway): string {
+        if (gateway?.lastSeenAt) {
+            const lastSeenAtUnixTimestamp = moment(
+                gateway?.lastSeenAt
+            ).valueOf();
+            const now = moment(new Date()).valueOf();
+            return moment(Math.min(lastSeenAtUnixTimestamp, now)).fromNow();
         } else {
-          console.log(response);
+            return this.translate.instant('ACTIVITY.NEVER');
         }
-      }
-    );
-
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.gatewaySubscription) {
-      this.gatewaySubscription.unsubscribe();
     }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
-  }
 
+    clickDelete(element) {
+        this.deleteGateway(element.id);
+    }
+
+    deleteGateway(id: string) {
+        this.deleteDialogService.showSimpleDialog()
+            .subscribe((response) => {
+                if (response) {
+                    this.chirpstackGatewayService
+                        .delete(id)
+                        .subscribe((response) => {
+                            if (response.ok && response.body.success === true) {
+                                this.refresh();
+                            }
+                        });
+                } else {
+                    console.error(response);
+                }
+            });
+    }
 }

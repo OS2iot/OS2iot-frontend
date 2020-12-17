@@ -6,11 +6,13 @@ import {
   faNetworkWired,
   faSignOutAlt,
   faSignInAlt,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { LoggedInService } from '@shared/services/loggedin.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,27 +20,32 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  isCollapsed = false;
   isLoginMode = true;
   faBroadcastTower = faBroadcastTower;
   faSlidersH = faSlidersH;
   faNetworkWired = faNetworkWired;
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
+  faUser = faUser;
+  imagePath = '../../assets/images/os2iot.png ';
 
   constructor(
     private authService: AuthService,
     public translate: TranslateService,
     private router: Router,
-    private sharedVariableService: SharedVariableService
+    private sharedVariableService: SharedVariableService,
+    private loggedInService: LoggedInService
   ) {
     translate.use('da');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onLogout() {
     this.authService.logout();
     this.router.navigateByUrl('auth');
+    this.loggedInService.emitChange(false);
   }
 
   isLoggedIn() {
@@ -46,7 +53,11 @@ export class NavbarComponent implements OnInit {
   }
 
   hasSomePermissions(): boolean {
-    return this.sharedVariableService.getHasAnyPermission()
+    return this.sharedVariableService.getHasAnyPermission();
+  }
+
+  getUsername(): string {
+    return this.sharedVariableService.getUsername();
   }
 
   isLoggedInWithKombit() {

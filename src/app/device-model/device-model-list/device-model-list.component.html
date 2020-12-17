@@ -1,9 +1,12 @@
-<app-top-bar [title]="'NAV.DEVICE-MODEL' | translate"
-  [ctaLabel]="'FORM.CREATE-NEW-DEVICE-MODEL' | translate" [ctaRouterLink]="'device-model-edit'">
+<app-top-bar [title]="'NAV.DEVICE-MODEL' | translate" [ctaLabel]="'FORM.CREATE-NEW-DEVICE-MODEL' | translate"
+  [ctaRouterLink]="'device-model-edit'">
 </app-top-bar>
-
-<div class="m-md-4 p-md-3">
-    <app-device-model-table></app-device-model-table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron--table">
+        <app-device-model-table></app-device-model-table>
+      </div>
+    </div>
+  </div>
 </div>
-
-

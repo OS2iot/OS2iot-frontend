@@ -7,7 +7,6 @@
 a:focus,
 button:focus,
 .focus {
-  outline: $focus-outline;
   outline-offset: 0;
   transition: all 0.2s;
 }
@@ -19,9 +18,10 @@ a {
   text-decoration: none;
 
   &:hover,
-  &.link-hover {
+  &.link-hover,
+  &:visited:hover {
     color: $color-link-hover;
-    border-bottom: 5px solid $color-link-focus-bg;
+    border-bottom: 5px solid $color-link-hover-bg;
 
 
     &:disabled,
@@ -32,8 +32,9 @@ a {
 
   &:active,
   &.link-active {
+    background-color: inherit;
     color: $color-active;
-    border-bottom: 5px solid $color-link-focus-bg;
+    border-bottom: 5px solid $color-link-active-bg;
   }
 
   &:focus,
@@ -45,7 +46,7 @@ a {
 
   &:visited,
   &.link-visited {
-    color: $color-visited;
+    color: $color-link-visited;
   }
 
   &:disabled,

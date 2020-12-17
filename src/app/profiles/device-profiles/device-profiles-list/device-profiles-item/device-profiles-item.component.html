@@ -1,15 +1,15 @@
 <div class=" list-group-item mb-1 clearfix" routerLinkActive="active">
     <div class="row">
         <div class="col-9 pull-left d-flex align-items-center">
-            <a [routerLink]="['deviceprofile', deviceProfile.id]" class="container-fluid">
+            <a [routerLink]="['device-profile', deviceProfile.id]" class="container-fluid">
                 {{ deviceProfile.name }}
             </a>
         </div>
-        <div class="col-3 pull-right d-flex align-items-center justify-content-end">
+        <div class="col-3 pull-right d-flex align-items-center justify-content-end" *ngIf="deviceProfile.canEdit">
             <a (click)="onDeleteDeviceProfile()">
-                <div class="text-center mr-2">
-                    <fa-icon [icon]="faTimesCircle" class="icon--small"></fa-icon>
-                    <p class="label label--icon">Slet</p>
+                <div class="icon-list-wrapper text-center">
+                    <fa-icon [icon]="faTimesCircle" class="icon--primary icon--medium"></fa-icon>
+                    <label class="label label--icon">{{'PROFILES.DEVICE_PROFILE.DELETE-FROM-LIST' | translate}}</label>
                 </div>
             </a>
         </div>

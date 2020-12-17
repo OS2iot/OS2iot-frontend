@@ -1,10 +1,9 @@
-import { AfterContentInit, AfterViewChecked, Component, DoCheck, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
-import { AuthService } from '@app/auth/auth.service';
-import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faIdCard, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
@@ -13,10 +12,11 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
   templateUrl: './organisation-dropdown.component.html',
   styleUrls: ['./organisation-dropdown.component.scss']
 })
-export class OrganisationDropdownComponent implements OnInit, OnChanges {
+export class OrganisationDropdownComponent implements OnInit {
   public organisations: Organisation[];
   public user: UserResponse;
   public isOrgAdmin = false;
+  public isGlobalAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -27,9 +27,8 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
 
 
   constructor(
-    private authService: AuthService,
+    private sharedVariableService: SharedVariableService,
     public translate: TranslateService,
-    private sharedVariable: SharedVariableService,
     private route: Router,
   ) { }
 
@@ -37,43 +36,40 @@ export class OrganisationDropdownComponent implements OnInit, OnChanges {
     this.getAllowedOrganizations();
   }
 
-  ngOnChanges(): void {
-    this.getAllowedOrganizations();
-  }
-
   getAllowedOrganizations() {
-    this.authService.me().subscribe((response) => {
-      this.organisations = response.organizations;
-      this.user = response.user;
-      this.sharedVariable.getSelectedOrganisationId();
-      if (
-        (this.sharedVariable.getSelectedOrganisationId() === 0 &&
-          response.organizations.length > 0) ||
-        !response.organizations.some(
-          (x) => x.id === this.sharedVariable.getSelectedOrganisationId()
-        )
-      ) {
-        this.setSelectedOrganisation(response.organizations[0]?.id);
-      }
-      this.isOrganisationAdmin(response.organizations[0]?.id);
-    });
+    const userInfo = this.sharedVariableService.getUserInfo();
+    this.organisations = userInfo.organizations;
+    this.user = userInfo.user;
+    this.sharedVariableService.getSelectedOrganisationId();
+    if (
+      (this.sharedVariableService.getSelectedOrganisationId() === 0 &&
+        userInfo.organizations.length > 0) ||
+      !userInfo.organizations.some(
+        (x) => x.id === this.sharedVariableService.getSelectedOrganisationId()
+      )
+    ) {
+      this.setSelectedOrganisation(userInfo.organizations[0]?.id);
+    }
+    this.setLocalPermissionCheck(userInfo.organizations[0]?.id);
   }
 
-  private isOrganisationAdmin(orgId: number) {
+  private setLocalPermissionCheck(orgId: number) {
     this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+    this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
   }
 
-  public onChange(value) {
-    this.sharedVariable.setValue(value);
-    this.isOrganisationAdmin(value);
-    this.route.navigateByUrl('/applications');
+  public onChange(organizationId: string) {
+    this.sharedVariableService.setValue(+organizationId);
+    this.setLocalPermissionCheck(+organizationId);
+    this.route.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.route.navigate(['applications']));
   }
 
   setSelectedOrganisation(value) {
-    this.sharedVariable.setSelectedOrganisationId(value);
+    this.sharedVariableService.setSelectedOrganisationId(value);
   }
 
-  getSelectedOrganisation() {
-    return this.sharedVariable.getSelectedOrganisationId();
+  getSelectedOrganisation(): number {
+    return +this.sharedVariableService.getSelectedOrganisationId();
   }
 }

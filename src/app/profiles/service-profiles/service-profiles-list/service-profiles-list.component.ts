@@ -7,7 +7,10 @@ import {
 } from '../service-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiceProfileService } from '../service-profile.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -17,18 +20,28 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ServiceProfilesListComponent implements OnInit, OnDestroy {
   serviceProfiles: ServiceProfile[];
   serviceSubscription: Subscription;
-  public pageLimit: 10;
+  public pageLimit = environment.tablePageSize;
   public pageOffset: 0;
 
   public errorMessages: string;
+  deleteDialogSubscription: Subscription;
+  errorTitle: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private serviceProfileService: ServiceProfileService
-  ) {}
+    private serviceProfileService: ServiceProfileService,
+    private sharedVariableService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit() {
+    this.translateService
+      .get(['PROFILES.DELETE-FAILED'])
+      .subscribe((translations) => {
+        this.errorTitle = translations['PROFILES.DELETE-FAILED'];
+      });
     this.getServiceProfileList();
   }
 
@@ -37,45 +50,59 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       .getMultiple()
       .subscribe((result: ServiceProfileResponseMany) => {
         this.serviceProfiles = result.result;
+        this.setCanEdit()
       });
   }
 
-  onNewServiceProfile() {
-    this.router.navigate(['new-service-profile'], { relativeTo: this.route });
+  canCreate() {
+    return this.sharedVariableService.getHasAnyWritePermission();
+  }
+
+  setCanEdit() {
+    this.serviceProfiles.forEach(
+      (serviceProfile) => {
+        serviceProfile.canEdit = this.canCreate();
+      }
+    );
+  }
+
+  deleteServiceProfile(id: string) {
+    if (id) {
+      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
+        (response) => {
+          if (response) {
+            this.serviceProfileService.delete(id).subscribe((response) => {
+              console.log(response);
+              if (response.ok) {
+                this.getServiceProfileList();
+              } else {
+                if (response?.error?.message === 'Internal server error') {
+                  this.errorMessages = 'Internal server error';
+                  return;
+                } else {
+                  this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(
+                    response.error.message,
+                    false,
+                    false,
+                    true,
+                    this.errorTitle).subscribe();
+                }
+              }
+            });
+          } else {
+            console.log(response);
+          }
+        }
+      );
+    }
   }
 
   ngOnDestroy() {
     if (this.serviceSubscription && this.serviceSubscription?.closed) {
       this.serviceSubscription.unsubscribe();
     }
-  }
-
-  deleteServiceProfile(id: string) {
-    if (id) {
-      this.serviceProfileService.delete(id).subscribe(
-        (response) => {
-          console.log(response);
-          if (response.ok) {
-            this.getServiceProfileList();
-          } else {
-            this.showError(response);
-          }
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
-    }
-  }
-  
-  private showError(err: HttpErrorResponse) {
-    if (err?.error?.message == 'Internal server error') {
-      this.errorMessages = 'Internal server error';
-      return;
-    }
-
-    if (err.error?.message) {
-      this.errorMessages = err.error?.message;
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 }

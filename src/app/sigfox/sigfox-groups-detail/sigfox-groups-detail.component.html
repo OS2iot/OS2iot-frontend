@@ -1,19 +1,17 @@
-<app-top-bar [showSelectedSort]="false" backButtonTitle="{{'SIGFOX-GROUP.SIGFOX-GROUP' | translate}}" [title]="'SIGFOX.PROFILES.NAME' | translate"></app-top-bar>
-
-<div class=" jumbotron m-md-4 p-md-3">
-    <div class="row mt-5">
-        <div class="col-6">
-            <h4>{{'SIGFOX.PROFILES.DEVICE-TYPE' | translate}}</h4>
-        </div>
-        <div class="col-6">
-            <button class="btn btn-primary float-right"
-                (click)="onNewDeviceType()">{{'SIGFOX.PROFILES.CREATE-NEW-DEVICE-TYPE' | translate}}</button>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-xs-12">
-            <app-sigfox-device-type-table></app-sigfox-device-type-table>
+<div *ngIf="sigfoxGroup">
+    <app-top-bar [showSelectedSort]="false" backButtonTitle="{{'SIGFOX-GROUP.SIGFOX-GROUP' | translate}}"
+        [title]="sigfoxGroup.sigfoxGroupData.name"
+        [ctaLabel]="'SIGFOX-GROUP.PROFILES.CREATE-NEW-DEVICE-TYPE' | translate" [ctaRouterLink]="'new-device-type'">
+    </app-top-bar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class=" jumbotron">
+                    <h3>{{'SIGFOX-GROUP.PROFILES.DEVICE-TYPE' | translate}}</h3>
+                    <app-sigfox-device-type-table [sigfoxDevices]="sigfoxDevices" [isLoadingResults]="isLoadingResults">
+                    </app-sigfox-device-type-table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

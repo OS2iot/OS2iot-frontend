@@ -1,31 +1,50 @@
 import { NgModule } from '@angular/core';
 import { ProfilesComponent } from './profiles.component';
 import { ProfilesListComponent } from './profiles-list/profiles-list.component';
-import { ServiceProfilesModule } from './service-profiles/service-profiles.module';
 import { ProfilesRoutingModule } from './profiles-routing.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { DeviceProfilesModule } from './device-profiles/device-profiles.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DirectivesModule } from '@shared/directives/directives.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { DeviceProfilesEditComponent } from './device-profiles/device-profiles-edit/device-profiles-edit.component';
+import { DeviceProfilesItemComponent } from './device-profiles/device-profiles-list/device-profiles-item/device-profiles-item.component';
+import { DeviceProfilesListComponent } from './device-profiles/device-profiles-list/device-profiles-list.component';
+import { ServiceProfilesEditComponent } from './service-profiles/service-profiles-edit/service-profiles-edit.component';
+import { ServiceProfileItemComponent } from './service-profiles/service-profiles-list/service-profile-item/service-profile-item.component';
+import { ServiceProfilesListComponent } from './service-profiles/service-profiles-list/service-profiles-list.component';
 
 @NgModule({
   declarations: [
     ProfilesComponent,
     ProfilesListComponent,
+    DeviceProfilesListComponent,
+    DeviceProfilesItemComponent,
+    DeviceProfilesEditComponent,
+    ServiceProfilesListComponent,
+    ServiceProfileItemComponent,
+    ServiceProfilesEditComponent,
   ],
   exports: [],
   imports: [
-    ServiceProfilesModule,
-    DeviceProfilesModule,
     ProfilesRoutingModule,
     RouterModule,
-    TopBarModule,
     SharedModule,
     FormModule,
-    TranslateModule
-
+    TranslateModule,
+    FontAwesomeModule,
+    DirectivesModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NGMaterialModule,
+    SharedModule,
+    PipesModule,
   ],
 
 })

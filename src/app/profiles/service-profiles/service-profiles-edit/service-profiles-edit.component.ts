@@ -29,6 +29,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   serviceId: number;
   editMode = false;
   serviceProfile = new ServiceProfile();
+  serviceProfileData: ServiceProfile;
   subscription: Subscription;
 
   constructor(
@@ -59,6 +60,7 @@ export class ServiceProfilesEditComponent implements OnInit {
       .subscribe(
         (response: ServiceProfileResponseOne) => {
           this.serviceProfile = response.serviceProfile;
+          this.serviceProfileData = response.serviceProfile;
         });
   }
 
@@ -87,24 +89,29 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessage = '';
-    this.errorMessages = [];
-    if (error.error?.chirpstackError) {
-      this.errorFields.push('name');
-      this.errorFields.push('devStatusReqFreq');
-      this.errorFields.push('drMax');
-      this.errorFields.push('drMin');
-      this.errorMessage = error.error.chirpstackError.message;
-    } else if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
+    if (error.status == 403) {
+      this.errorMessages = ["Forbudt"];
+      this.errorFields = []
     } else {
-      this.errorMessage = error.message;
+      this.errorFields = [];
+      this.errorMessage = '';
+      this.errorMessages = [];
+      if (error.error?.chirpstackError) {
+        this.errorFields.push('name');
+        this.errorFields.push('devStatusReqFreq');
+        this.errorFields.push('drMax');
+        this.errorFields.push('drMin');
+        this.errorMessage = error.error.chirpstackError.message;
+      } else if (error.error?.message?.length > 0) {
+        error.error.message[0].children.forEach((err) => {
+          this.errorFields.push(err.property);
+          this.errorMessages = this.errorMessages.concat(
+            Object.values(err.constraints)
+          );
+        });
+      } else {
+        this.errorMessage = error.message;
+      }
     }
     this.formFailedSubmit = true;
   }

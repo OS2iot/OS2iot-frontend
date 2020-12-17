@@ -13,6 +13,10 @@ export interface UserResponse {
     id: number;
     createdAt: string;
     updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
     name: string;
     nameId: string;
     email: string;

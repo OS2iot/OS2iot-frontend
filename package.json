@@ -1,6 +1,6 @@
 {
-  "name": "os2-io-t-frontend",
-  "version": "0.0.1",
+  "name": "os2iot-frontend",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --watch",
@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "@auth0/angular-jwt": "^5.0.1",
     "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -32,7 +33,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "all": "0.0.0",
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.0.0-alpha2",
+    "bootstrap": "5.0.0-alpha2",
     "file-saver": "^2.0.2",
     "guid-typescript": "^1.0.9",
     "jwt-decode": "^2.2.0",
@@ -40,6 +41,7 @@
     "moment": "^2.27.0",
     "ng": "0.0.0",
     "ng-inline-svg": "^11.0.0",
+    "ngx-monaco-editor": "^9.0.0",
     "ngx-papaparse": "^5.0.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.5.4",

@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Organisation, OrganisationGetMinimalResponse } from '@app/admin/organisation/organisation.model';
+import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { PermissionType } from '@app/admin/permission/permission.model';
+import { UserMinimal, UserMinimalResponse } from '@app/admin/users/user-minimal.model';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedVariableService {
-  constructor(
-    private authService: AuthService
-  ) {
-    this.routerInfo = new BehaviorSubject<number>(0);
-  }
 
+  constructor(
+    private authService: AuthService,
+    private organisationService: OrganisationService,
+    private userMinimalService: UserMinimalService) {
+      this.routerInfo = new BehaviorSubject<number>(0);
+  }
   private selectedOrganisationId: number;
-  private gotWritePermission: boolean;
-  private gotAnyPermission: boolean;
   private routerInfo: BehaviorSubject<number>;
+  private organizationInfo: Organisation[];
+  private userMinimalList: UserMinimal[];
 
   getValue(): Observable<number> {
     return this.routerInfo.asObservable();
@@ -30,54 +36,87 @@ export class SharedVariableService {
   setSelectedOrganisationId(value: number) {
     localStorage.setItem('selected_organisation', value.toString());
     this.selectedOrganisationId = value;
-    this.setHasWritePermission();
   }
 
-  setHasWritePermission() {
-    this.authService.me()
-      .subscribe( (response: CurrentUserInfoResponse) => {
-        const hasWritePermissions = response.user.permissions.some(
-          permission =>
-          permission.type === PermissionType.GlobalAdmin ||
-          (permission.organization?.id === +this.selectedOrganisationId &&
-            ( permission.type === PermissionType.OrganizationAdmin ||
-              permission.type === PermissionType.Write)
-            ));
-        this.gotWritePermission = hasWritePermissions;
-        localStorage.setItem('has_write_permission', hasWritePermissions.toString());
-      });
-  }
-
-  setHasAnyPermission() {
-    this.authService.me()
-      .subscribe( 
-        (response: CurrentUserInfoResponse) => {
-          const hasSomePermission = response.user.permissions.length > 0;
-          this.gotAnyPermission = hasSomePermission;
-          localStorage.setItem('has_any_permission', hasSomePermission.toString());
-        }
+  setUserInfo() {
+    return this.authService
+      .me()
+      .pipe(
+        tap((response: CurrentUserInfoResponse) => {
+          localStorage.setItem(
+            'userInfo',
+            JSON.stringify(response)
+          );
+        })
       )
+      .toPromise();
+  }
+
+  setOrganizationInfo() {
+    return this.organisationService
+      .getMinimal()
+      .pipe(
+        tap((response: OrganisationGetMinimalResponse) => {
+          localStorage.setItem(
+            'organizationInfo',
+            JSON.stringify(response.data)
+          );
+        })
+      )
+      .toPromise();
+  }
+
+  getOrganizationInfo(): Organisation[] {
+    if (this.organizationInfo != null) {
+      return this.organizationInfo;
+    }
+    this.organizationInfo = new Object(JSON.parse(localStorage.getItem('organizationInfo'))) as Organisation[];
+    return this.organizationInfo;
+  }
+
+  getUsername(): string {
+    return this.getUserInfo()?.user.name;
   }
 
   getHasAnyPermission(): boolean {
-    if (this.gotAnyPermission != null) {
-      return this.gotAnyPermission;
-    }
-    return JSON.parse(localStorage.getItem('has_any_permission'));
+    return this.getUserInfo().user.permissions.length > 0;
   }
 
   getHasWritePermission(): boolean {
-    if (this.gotWritePermission != null) {
-      return this.gotWritePermission;
-    }
-    return JSON.parse(localStorage.getItem('has_write_permission'));
+    const permissions = this.getUserInfo().user.permissions;
+    return permissions.some(
+      (permission) =>
+        permission.type === PermissionType.GlobalAdmin ||
+        (permission.organization?.id === +this.selectedOrganisationId &&
+          (permission.type === PermissionType.OrganizationAdmin ||
+            permission.type === PermissionType.Write))
+    );
   }
 
-  getSelectedOrganisationId() {
-    if (this.selectedOrganisationId != null) {
-      return this.selectedOrganisationId;
-    }
+  getHasAnyWritePermission(): boolean {
+    const permissions = this.getUserInfo().user.permissions;
+    return permissions.some(
+        (permission) =>
+            permission.type === PermissionType.GlobalAdmin ||
+            permission.type === PermissionType.OrganizationAdmin ||
+            permission.type === PermissionType.Write
+    );
+  }
 
+  isGlobalAdmin(): boolean {
+    return this.getUserInfo().user.permissions.some(
+      (permission) => permission.type === PermissionType.GlobalAdmin
+    );
+  }
+
+  getSelectedOrganisationId(): number {
+    if (this.selectedOrganisationId != null) {
+      return +this.selectedOrganisationId;
+    }
     return +localStorage.getItem('selected_organisation');
+  }
+
+  getUserInfo(): CurrentUserInfoResponse {
+    return new Object(JSON.parse(localStorage.getItem('userInfo'))) as CurrentUserInfoResponse;
   }
 }

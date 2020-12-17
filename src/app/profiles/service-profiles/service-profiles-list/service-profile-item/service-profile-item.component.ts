@@ -24,10 +24,6 @@ export class ServiceProfileItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onEditServiceProfile() {
-    this.router.navigate([this.serviceProfile.id, 'edit-service-profile'], { relativeTo: this.route });
-  }
-
   onDeleteServiceProfile() {
     this.deleteServiceProfile.emit(this.serviceProfile.id);
   }

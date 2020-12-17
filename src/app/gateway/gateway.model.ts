@@ -1,6 +1,7 @@
+import { EditPermission } from '@shared/models/edit-permission.model';
 import { CommonLocation } from '../shared/models/common-location.model';
 
-export class Gateway {
+export class Gateway extends EditPermission {
     id?: string;
     name?: string;
     description?: string;
@@ -10,6 +11,15 @@ export class Gateway {
     tagsString = '{}';
     tags?: JSON;
     lastSeenAt: string;
+    organizationID?: number;
+    internalOrganizationId: number;
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
+    public internalOrganizationName?: string;
     map(): Map<string, number> {
         throw new Error('Method not implemented.');
     }
@@ -23,6 +33,12 @@ export class GatewayData {
 
 export class GatewayRequest {
     gateway: Gateway;
+    organizationId: number;
+}
+
+export class GatewayResponseMany {
+    result: Gateway[];
+    totalCount: number;
 }
 
 export class GatewayResponse {

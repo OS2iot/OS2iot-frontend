@@ -15,23 +15,24 @@ export class SigfoxService {
   private SIGFOXGROUPURL = 'sigfox-group';
   private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
 
-  constructor(private restService: RestService) { }
+  constructor(
+    private restService: RestService) { }
 
   // Contract
   public getContracts(groupId: number): Observable<any> {
-    const body = {groupId};
+    const body = { groupId };
     return this.restService.get(this.SIGFOXCONTRACTURL, body);
   }
 
   // device
   public getDevices(groupId: number): Observable<SigfoxDevicesResponse> {
-    const body = {groupId};
+    const body = { groupId };
     return this.restService.get(this.SIGFOXDEVICEURL, body);
   }
 
   // Group
   getGroups(organizationId: number): Observable<any> {
-    const params = {organizationId};
+    const params = { organizationId };
     return this.restService.get(this.SIGFOXGROUPURL, params);
   }
 

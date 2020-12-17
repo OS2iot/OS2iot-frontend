@@ -1,69 +1,108 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit,
-} from '@angular/core';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import { Application } from '@applications/application.model';
+import { Component, ViewChild, AfterViewInit, Input, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { Application, ApplicationData } from '@applications/application.model';
+import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { MeService } from '@shared/services/me.service';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
+/**
+ * @title Table retrieving data through HTTP
+ */
 @Component({
   selector: 'app-applications-table',
-  templateUrl: './applications-table.component.html',
   styleUrls: ['./applications-table.component.scss'],
+  templateUrl: './applications-table.component.html',
 })
-export class ApplicationsTableComponent implements OnInit, AfterViewInit, OnChanges {
+export class ApplicationsTableComponent implements AfterViewInit, OnInit {
+  @Input() organizationId: number;
+  @Input() permissionId: number;
+  displayedColumns: string[] = ['name', 'devices', 'menu'];
+  data: Application[] = [];
+
+  public pageSize = environment.tablePageSize;
+  resultsLength = 0;
+  isLoadingResults = true;
+  public errorMessage: string;
+  public canEdit = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['name', 'devices', 'latest-update', 'menu'];
-  dataSource = new MatTableDataSource<Application>();
-  @Input() applications: Application[];
-  application: Application;
-  resultsLength = 0;
-  @Input() isLoadingResults: boolean;
-  public pageLimit = 10;
 
-  @Output() deleteApplication = new EventEmitter();
+  constructor(
+    private applicationService: ApplicationService,
+    private router: Router,
+    private meService: MeService,
+    private deleteDialogService: DeleteDialogService
+  ) { }
 
-  constructor(public translate: TranslateService, private router: Router) {
-    translate.use('da');
+  ngOnInit() {
+    this.canEdit = this.meService.canWriteInTargetOrganization()
   }
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.getApplications(this.sort.active, this.sort.direction);
+        }),
+        map((data) => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.resultsLength = data.count;
+
+          return data.data;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      )
+      .subscribe((data) => (this.data = data));
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.applications) {
-      this.dataSource = new MatTableDataSource(this.applications);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sortingDataAccessor = tableSorter;
-      this.isLoadingResults = false;
-      this.resultsLength = this.applications.length;
-    }
+  getApplications(
+    orderByColumn: string,
+    orderByDirection: string
+  ): Observable<ApplicationData> {
+    return this.applicationService.getApplications(
+      this.paginator.pageSize,
+      this.paginator.pageIndex * this.paginator.pageSize,
+      orderByDirection,
+      orderByColumn,
+      this.organizationId,
+      this.permissionId
+    );
   }
 
-  clickDelete(element: any) {
-    this.deleteApplication.emit(element.id);
+  deleteApplication(id: number) {
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.applicationService.deleteApplication(id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.paginator.page.emit({
+              pageIndex: this.paginator.pageIndex,
+              pageSize: this.paginator.pageSize,
+              length: this.resultsLength,
+            });
+          } else {
+            this.errorMessage = response?.error?.message;
+          }
+        });
+      }
+    });
   }
 
-  navigateToEditPage() {
-    this.router.navigate(['edit-application', this.application.id]);
+  navigateToEditPage(applicationId: string) {
+    this.router.navigate(['applications', 'edit-application', applicationId]);
   }
 }

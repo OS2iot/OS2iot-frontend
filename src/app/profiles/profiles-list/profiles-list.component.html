@@ -1,8 +1,13 @@
 <app-top-bar [showSelectedSort]="false" [title]="'PROFILES.NAME' | translate"></app-top-bar>
-
-<div class=" jumbotron m-md-4 p-md-3">
-    <app-service-profiles-list></app-service-profiles-list>
-</div>
-<div class=" jumbotron m-md-4 p-md-3">
-    <app-device-profiles-list></app-device-profiles-list>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class=" jumbotron">
+                <app-service-profiles-list></app-service-profiles-list>
+            </div>
+            <div class=" jumbotron">
+                <app-device-profiles-list></app-device-profiles-list>
+            </div>
+        </div>
+    </div>
 </div>

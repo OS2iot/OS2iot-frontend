@@ -9,12 +9,12 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
-
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.scss']
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
   user = new UserRequest();
@@ -36,8 +36,9 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private sharedVariableService: SharedVariableService
+  ) {}
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -59,28 +60,21 @@ export class UserEditComponent implements OnInit {
   }
 
   private getUser(id: number) {
-    this.subscription = this.userService
-      .getOne(id)
-      .subscribe((response) => {
-        this.user.name = response.name;
-        this.user.email = response.email;
-        this.user.id = response.id;
-        this.user.active = response.active;
-        this.user.globalAdmin = response.permissions.some(x => x.type == PermissionType.GlobalAdmin);
-        this.isKombit = response.nameId != null;
-        // We cannot set the password.
-      });
+    this.subscription = this.userService.getOne(id).subscribe((response) => {
+      this.user.name = response.name;
+      this.user.email = response.email;
+      this.user.id = response.id;
+      this.user.active = response.active;
+      this.user.globalAdmin = response.permissions.some(
+        (x) => x.type == PermissionType.GlobalAdmin
+      );
+      this.isKombit = response.nameId != null;
+      // We cannot set the password.
+    });
   }
 
   amIGlobalAdmin() {
-    this.authService.me()
-      .subscribe(
-        (response: CurrentUserInfoResponse) => {
-          this.isGlobalAdmin = response.user.permissions.some(x => x.type === 'GlobalAdmin');
-        },
-        (error) => {
-          this.isGlobalAdmin = false;
-        });
+    this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
   }
 
   private create(): void {
@@ -120,7 +114,9 @@ export class UserEditComponent implements OnInit {
 
     if (typeof error.error?.message === 'string') {
       this.errorMessage = error.error.message;
-      if (error.error.message === 'MESSAGE.PASSWORD-DOES-NOT-MEET-REQUIREMENTS') {
+      if (
+        error.error.message === 'MESSAGE.PASSWORD-DOES-NOT-MEET-REQUIREMENTS'
+      ) {
         this.errorFields.push('password');
       }
     } else if (error.error?.message?.length > 0) {

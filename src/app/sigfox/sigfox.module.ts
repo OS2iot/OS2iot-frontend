@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SigfoxRoutingModule } from './sigfox-routing.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { FormsModule } from '@angular/forms';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
@@ -15,6 +14,7 @@ import { SigfoxGroupsDetailComponent } from './sigfox-groups-detail/sigfox-group
 import { SigfoxDeviceTypeTableComponent } from './sigfox-groups-detail/sigfox-device-type-table/sigfox-device-type-table.component';
 import { SigfoxDeviceTypesEditComponent } from './sigfox-groups-detail/sigfox-device-types-edit/sigfox-device-types-edit.component';
 import { SigfoxGroupsListItemComponent } from './sigfox-groups-list/sigfox-groups-list-item/sigfox-groups-list-item.component';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -31,11 +31,11 @@ import { SigfoxGroupsListItemComponent } from './sigfox-groups-list/sigfox-group
     SigfoxRoutingModule,
     FormsModule,
     FormModule,
-    TopBarModule,
     NGMaterialModule,
     TranslateModule,
     SharedModule,
     FontAwesomeModule,
+    PipesModule,
   ]
 })
 export class SigfoxModule { }

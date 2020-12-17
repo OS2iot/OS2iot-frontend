@@ -1,13 +1,6 @@
-<div class="row mt-5">
-    <div class="col-6">
-        <h4>Device Profiles</h4>
-    </div>
-    <div class="col-6">
-        <button class="btn btn-primary float-right" [routerLink]="['deviceprofile/edit']"
-            routerLinkActive="active">{{'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate}}</button>
-    </div>
-</div>
-<hr>
+<app-top-bar-table [title]="'PROFILES.DEVICE_PROFILE.HEADLINE' | translate"
+    [ctaLabelPrimary]="'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate "
+    [ctaRouterLinkPrimary]="canCreate() ? 'device-profile/new-device-profile' : null"></app-top-bar-table>
 <div *ngIf="errorMessages" class="error-messages p-3 my-2">
     {{errorMessages | translate }}
 </div>

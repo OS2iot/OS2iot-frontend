@@ -1,9 +1,11 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { DeviceProfileService } from '../device-profile.service';
@@ -27,14 +29,14 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private translate: TranslateService,
     private deviceProfileService: DeviceProfileService,
     private location: Location,
+    private meService: MeService,
+    private errorMessageService: ErrorMessageService
   ) { }
 
   ngOnInit(): void {
-
     this.translate.get(['PROFILES.NAME', 'FORM.EDIT-DEVICE-PROFILE'])
       .subscribe(translations => {
         this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
@@ -44,6 +46,8 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('deviceId');
     if (this.id) {
       this.getDeviceProfile(this.id);
+    } else {
+      this.deviceProfile.canEdit = true;
     }
   }
 
@@ -52,6 +56,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (response) => {
           this.deviceProfile = response.deviceProfile;
+          this.canEdit();
           this.deviceProfile.factoryPresetFreqsInput = this.deviceProfile.factoryPresetFreqs.map(String).join();
         },
         (error: HttpErrorResponse) => {
@@ -59,6 +64,15 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  canEdit() {
+    if (this.deviceProfile.organizationID) {
+      this.deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(this.deviceProfile.internalOrganizationId);
+    } else {
+      this.deviceProfile.canEdit = true;
+    }
+  }
+
   private create(): void {
     this.deviceProfileService.post(this.deviceProfile)
       .subscribe(
@@ -92,22 +106,13 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    this.errorFields = [];
-    this.errorMessage = '';
-    this.errorMessages = [];
-    if (error.error?.chirpstackError) {
-      this.errorMessage = error.error.chirpstackError.message;
-    } else if (error.error?.message?.length > 0) {
-      error.error.message[0].children.forEach((err) => {
-        this.errorFields.push(err.property);
-        this.errorMessages = this.errorMessages.concat(
-          Object.values(err.constraints)
-        );
-      });
+    if (error.status == 403) {
+      this.errorMessages = ["Forbudt"]
     } else {
-      this.errorMessage = error.message;
+      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+      this.errorFields = errors?.errorFields;
+      this.errorMessages = errors?.errorMessages;
     }
-    this.formFailedSubmit = true;
   }
 
   onSubmit(): void {

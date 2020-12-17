@@ -20,6 +20,10 @@ export class IotDevice {
     id: number;
     createdAt: Date;
     updatedAt: Date;
+    createdBy: number;
+    updatedBy: number;
+    createdByName: string;
+    updatedByName: string;
     applicationId: number;
     longitude = 0;
     latitude = 0;
@@ -27,6 +31,7 @@ export class IotDevice {
     latestReceivedMessage: LatestReceivedMessage;
     lorawanSettings = new LorawanSettings();
     sigfoxSettings = new SigfoxSettings();
+    deviceModel?: DeviceModel;
 }
 
 export class IotDeviceResponse {
@@ -55,4 +60,18 @@ export interface IotDevicesResponse {
     data: IotDevice[];
     ok?: boolean;
     count?: number;
+}
+
+export class IoTDeviceMinimal {
+    id: number;
+    name: string;
+    canRead: boolean;
+    organizationId: number;
+    applicationId: number;
+    lastActiveTime: Date;
+}
+
+export class IoTDevicesMinimalResponse {
+    data: IoTDeviceMinimal[];
+    count: number;
 }

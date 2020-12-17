@@ -14,12 +14,12 @@ import { SigfoxDevice, SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.m
 export class SigfoxDeviceEditComponent implements OnInit {
 
   @Input() iotDevice: IotDevice;
+  @Input() errorFields: string[];
+  @Input() formFailedSubmit = false;
+  public errorMessages: any;
   private organizationId: number;
   public sigfoxGroups: SigfoxGroup[] = [];
   public sigfoxDevices: SigfoxDevice[];
-  public errorMessages: any;
-  public errorFields: string[];
-  public formFailedSubmit = false;
   public sigfoxDeviceTypes: SigfoxDeviceType[] = [];
   public editMode = false;
 

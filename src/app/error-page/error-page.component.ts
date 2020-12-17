@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ErrorPageMessage } from '@shared/models/error-message.model';
 
 @Component({
   selector: 'app-error-page',
@@ -7,16 +9,20 @@ import { ActivatedRoute, Data } from '@angular/router';
   styleUrls: ['./error-page.component.scss']
 })
 export class ErrorPageComponent implements OnInit {
-  errorMessage: string;
+  errorMessage: any;
 
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.route.data.subscribe(
-      (data: Data) => {
-        this.errorMessage = data['message'];
-      }
-    );
+  constructor() {
   }
 
+  ngOnInit() {
+    if (history.state.code === 401) {
+      this.errorMessage = history.state;
+    } else {
+      this.errorMessage = {
+        message: 'Page not found',
+        code: 404
+      }
+    }
+  }
 }
+

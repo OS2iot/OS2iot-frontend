@@ -2,22 +2,26 @@ import { Injectable } from '@angular/core';
 import { Application, ApplicationData } from '@applications/application.model';
 import { RestService } from '../shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { SortDir, SortCol } from '@shared/models/sort.model';
+import { map } from 'rxjs/operators';
+import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 
 
 interface GetApplicationParameters {
     limit: number;
     offset: number;
-    sort: SortDir;
-    orderOn: SortCol;
+    sort: string;
+    orderOn: string;
     organizationId?: number;
+    permissionId?: number;
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApplicationService {
-    constructor(private restService: RestService) { }
+    constructor(
+        private restService: RestService,
+        private userMinimalService: UserMinimalService) { }
 
     createApplication(body: any): Observable<ApplicationData> {
 
@@ -29,15 +33,26 @@ export class ApplicationService {
     }
 
     getApplication(id: number): Observable<Application> {
-        return this.restService.get('application', {}, id);
+        return this.restService.get('application', {}, id)
+            .pipe(
+                map(
+                    (response: Application) => {
+                        response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+                        response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+                        return response;
+                    }
+                )
+            );
     }
+
 
     getApplications(
         limit: number,
         offset: number,
-        sort: SortDir,
-        orderOn: SortCol,
-        organizationId?: number
+        sort: string,
+        orderOn: string,
+        organizationId?: number,
+        permissionId?: number
     ): Observable<ApplicationData> {
         const body: GetApplicationParameters = {
             limit: limit,
@@ -45,7 +60,13 @@ export class ApplicationService {
             sort: sort,
             orderOn: orderOn,
         };
-        body.organizationId = organizationId
+        if (permissionId) {
+            body.permissionId = permissionId
+            return this.restService.get(`permission/${permissionId}/applications`, body)  
+        } else if (organizationId) {
+            body.organizationId = organizationId
+            return this.restService.get('application', body);
+        }
         return this.restService.get('application', body);
     }
 

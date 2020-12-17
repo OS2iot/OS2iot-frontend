@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { SharedModule } from '@shared/shared.module';
@@ -54,7 +53,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CommonModule,
     TranslateModule,
     FormsModule,
-    TopBarModule,
     ReactiveFormsModule,
     FormModule,
     RouterModule,
@@ -81,4 +79,4 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     OrganisationListComponent,
   ],
 })
-export class AdminModule {}
+export class AdminModule { }

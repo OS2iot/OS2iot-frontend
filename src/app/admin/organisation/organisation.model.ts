@@ -10,6 +10,10 @@ export interface OrganisationResponse {
   id: number;
   createdAt: string;
   updatedAt: string;
+  createdBy: number;
+  updatedBy: number;
+  createdByName: string;
+  updatedByName: string;
   name: string;
 
   payloadDecoders: PayloadDecoder[];
@@ -20,5 +24,10 @@ export interface OrganisationResponse {
 
 export interface OrganisationGetManyResponse {
   data: OrganisationResponse[];
+  count: number;
+}
+
+export interface OrganisationGetMinimalResponse {
+  data: Organisation[];
   count: number;
 }

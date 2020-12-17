@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { DownlinkComponent } from './iot-device-detail/downlink/downlink.component';
 import { IotDeviceDetailGenericComponent } from './iot-device-detail/iot-device-detail-generic/iot-device-detail-generic.component';
@@ -16,6 +15,10 @@ import { SigfoxDeviceEditComponent } from './iot-device-edit/sigfox-device-edit/
 import { IotDevicesTableComponent } from './iot-devices-table/iot-devices-table.component';
 import { DownlinkDialogComponent } from './iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
 import { SharedModule } from '@shared/shared.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { DeviceModelComponent } from './iot-device-detail/device-model/device-model.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +30,9 @@ import { SharedModule } from '@shared/shared.module';
         IotDeviceDetailLorawanComponent,
         IotDeviceDetailSigfoxComponent,
         DownlinkComponent,
-        DownlinkDialogComponent
+        DownlinkDialogComponent,
+        DeviceModelComponent,
+        DataPackageComponent
     ],
     exports: [
         IotDevicesTableComponent,
@@ -36,12 +41,13 @@ import { SharedModule } from '@shared/shared.module';
     imports: [
         SharedModule,
         CommonModule,
-        TopBarModule,
         RouterModule,
         TranslateModule,
         FormModule,
         NGMaterialModule,
         FormsModule,
+        PipesModule,
+        MonacoEditorModule,
     ],
 })
 export class IotDevicesModule { }

@@ -14,26 +14,26 @@
 
   @include media-breakpoint-up(md) {
     width: 510px;
-    margin-left: calc((100% - 510px) / 2);
-    margin-right: calc((100% - 510px) / 2);
+    margin-left: calc((100% - 510px) / 2) !important;
+    margin-right: calc((100% - 510px) / 2) !important;
   }
 
   @include media-breakpoint-up(lg) {
     width: 720px;
-    margin-left: calc((100% - 720px) / 2);
-    margin-right: calc((100% - 720px) / 2);
+    margin-left: calc((100% - 720px) / 2) !important;
+    margin-right: calc((100% - 720px) / 2) !important;
   }
 
   @include media-breakpoint-up(xl) {
     width: 900px;
-    margin-left: calc((100% - 900px) / 2);
-    margin-right: calc((100% - 900px) / 2);
+    margin-left: calc((100% - 900px) / 2) !important;
+    margin-right: calc((100% - 900px) / 2) !important;
   }
 
   @include media-breakpoint-up(xxl) {
     width: 1000px;
-    margin-left: calc((100% - 1000px) / 2);
-    margin-right: calc((100% - 1000px) / 2);
+    margin-left: calc((100% - 1000px) / 2) !important;
+    margin-right: calc((100% - 1000px) / 2) !important;
   }
 }
 
@@ -45,6 +45,7 @@
 .form-control {
   border: $border-input;
   color: $black;
+  padding: 0.75em;
 
   &:focus,
   &:active {
@@ -124,7 +125,7 @@ textarea {
       background-color: $grey-border;
 
       &.mat-step-icon-selected {
-        background-color: $orange;
+        background-color: $color-primary;
       }
     }
 
@@ -160,11 +161,11 @@ textarea {
 }
 
 .form-check-input:checked {
-  background-color: $orange;
-  border-color: $orange;
+  background-color: $color-primary;
+  border-color: $color-primary;
 
   &:focus {
-    box-shadow: 0 0 0 0.2rem $orange-outline;
+    box-shadow: 0 0 0 0.2rem $color-border;
   }
 }
 
@@ -193,8 +194,8 @@ textarea {
   }
 
   .form-check-input:checked+.image-container {
-    border: solid 1px $orange;
-    box-shadow: 0 0 0 0.2rem $orange;
+    border: solid 1px $color-primary;
+    box-shadow: 0 0 0 0.2rem $color-primary;
   }
 }
 

@@ -1,16 +1,54 @@
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">{{ 'DATATARGET-TABLE.NAME' | translate }}</th>
-        <th scope="col">{{ 'DATATARGET-TABLE.TYPE' | translate }}</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let datatarget of datatargets" class="py-3" app-datatarget-tabel-row [datatarget]="datatarget"
-        (deleteDatatarget)="deleteDatatarget($event)">
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-loading-spinner *ngIf="isLoadingResults; else showTable">
+</app-loading-spinner>
+<ng-template #showTable>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'DATATARGET-TABLE.NAME' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['datatarget', element.id]" routerLinkActive="active"
+            class="application-link">{{element.name}}</a>
+        </td>
+      </ng-container>
+
+      <!-- Devices Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
+          {{ 'DATATARGET-TABLE.TYPE' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+
+          {{element.type | translate}}</td>
+      </ng-container>
+
+      <!-- Menu Column -->
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef class="col-1"></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="dropdown" *ngIf="canEdit">
+            <a href="#" role="button" id="tableRowDropdown-{{element.id}}" class="applicationRow__edit dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
+            <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{element.id}}">
+              <li class="dropdown-item">
+                <a [routerLink]="['datatarget-edit', element.id]"
+                  routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="deleteDatatarget(element)" [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</ng-template>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { BackButton } from '@shared/models/back-button.model';
+import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { Subscription } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { Gateway, GatewayResponse } from '../gateway.model';
@@ -15,7 +16,7 @@ import { Gateway, GatewayResponse } from '../gateway.model';
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
 
-  public backButton: BackButton = { label: '', routerLink: '/gateways' };
+  public backButton: BackButton = { label: '', routerLink: ['gateways'] };
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -36,7 +37,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private router: Router,
     private loraGatewayService: ChirpstackGatewayService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private scrollToTopService: ScrollToTopService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.getGateway(this.id);
       this.editMode = true;
+      this.backButton.routerLink = ['gateways', 'gateway-detail', this.id]
     }
     this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
       .subscribe(translations => {
@@ -65,23 +68,23 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
   getCoordinates() {
     return {
-        longitude: this.gateway.location.longitude,
-        latitude: this.gateway.location.latitude,
-        draggable: true,
-        useGeolocation: !this.editMode,
-        editMode: this.editMode
+      longitude: this.gateway.location.longitude,
+      latitude: this.gateway.location.latitude,
+      draggable: true,
+      useGeolocation: !this.editMode,
+      editMode: this.editMode
     };
-}
+  }
 
   createGateway(): void {
     this.loraGatewayService.post(this.gateway)
       .subscribe(
         (response) => {
-          console.log(response);
           this.routeBack();
         },
         (error: HttpErrorResponse) => {
           this.showError(error);
+          this.formFailedSubmit = true;
         }
       );
   }
@@ -97,6 +100,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.showError(error);
+          this.formFailedSubmit = true;
         });
   }
 
@@ -133,6 +137,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
+    this.scrollToTopService.scrollToTop();
   }
 
 }

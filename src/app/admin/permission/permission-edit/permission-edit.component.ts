@@ -31,7 +31,7 @@ export class PermissionEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public form: FormGroup;
-  public backButton: BackButton = { label: '', routerLink: '/permissions' };
+  public backButton: BackButton = { label: '', routerLink: ['admin','permissions'] };
   public title = '';
   public submitButton = '';
   public isEditMode = false;
@@ -67,7 +67,12 @@ export class PermissionEditComponent implements OnInit {
     if (this.id > 0) {
       this.getPermission(this.id);
       this.isEditMode = true;
+      this.setBackButton();
     }
+  }
+
+  private setBackButton() {
+    this.backButton.routerLink = ['admin', 'permissions'];
   }
 
   private getOrganizations() {
@@ -122,6 +127,7 @@ export class PermissionEditComponent implements OnInit {
         this.permission.name = response.name;
         this.permission.level = response.type;
         this.permission.userIds = response.users.map((x) => x.id);
+        this.permission.automaticallyAddNewApplications = response.automaticallyAddNewApplications;
 
         if (response.type !== PermissionType.GlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
@@ -200,6 +206,10 @@ export class PermissionEditComponent implements OnInit {
       this.permission.level == PermissionType.Write ||
       this.permission.level == PermissionType.Read
     );
+  }
+
+  isReadOrWrite(): boolean {
+    return this.permission.level === PermissionType.Read || this.permission.level === PermissionType.Write
   }
 
   onSubmit(): void {

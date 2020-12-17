@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, OnDestroy, AfterViewChecked, DoCheck } from '@angular/core';
 import * as L from 'leaflet';
+import { Subscription } from 'rxjs';
 import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
 
 @Component({
@@ -8,29 +9,54 @@ import { MapCoordinates, MarkerInfo } from './map-coordinates.model';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-
   private map;
   public mapId;
   private marker;
+  private markers: any;
   @Input() coordinates?: MapCoordinates;
-  @Input() coordinateList?: [MapCoordinates];
+  @Input() coordinateList: [MapCoordinates];
   @Output() updateCoordinates = new EventEmitter();
   private zoomLevel = 15;
   private redMarker = '/assets/images/red-marker.png';
   private grenMarker = '/assets/images/green-marker.png';
+  subscription: Subscription;
 
-  constructor() { }
-  ngOnDestroy(): void {
-    if (this.map) {
-      this.map.off();
-      this.map.remove();
-    }
+  constructor() {
   }
 
   ngOnInit(): void {
     this.mapId = Math.random().toString();
     if (this.coordinates?.useGeolocation) {
       this.setGeolocation();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
+      changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
+      this.updateMarker();
+    }
+    if (changes?.coordinateList?.currentValue !== changes?.coordinateList?.previousValue) {
+      this.changeMarkers();
+    }
+  }
+
+  changeMarkers() {
+    if (this.markers) {
+      this.markers.clearLayers();
+    }
+    this.placeMarkers();
+  }
+
+  ngAfterViewInit(): void {
+    this.initMap();
+    this.placeMarkers();
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
     }
   }
 
@@ -46,22 +72,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
   }
 
-  ngAfterViewInit(): void {
-    this.initMap();
-    this.placeMarkers();
-  }
-
-  loadMap() {
-    this.initMap();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes?.coordinates?.currentValue?.latitude !== changes?.coordinates?.previousValue?.latitude ||
-        changes?.coordinates?.currentValue?.longitude !== changes?.coordinates?.previousValue?.longitude) {
-      this.updateMarker();
-    }
-  }
-
   updateMarker() {
     this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
     this.map?.setView(this.marker._latlng, this.zoomLevel);
@@ -69,22 +79,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   private placeMarkers() {
     if (this.coordinateList) {
+      const markerLayerGroup = [];
       this.coordinateList.forEach(coord => {
-        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo);
+        markerLayerGroup.push(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo));
+        this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
       });
     } else {
-      this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable);
+      this.marker = this.addMarker(this.coordinates.latitude, this.coordinates.longitude, this.coordinates.draggable, this.coordinates.markerInfo);
+      this.map.addLayer(this.marker);
     }
   }
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
     const markerIcon = this.getMarkerIcon(markerInfo?.active);
-    this.marker = L.marker([latitude, longitude], {draggable, icon: markerIcon});
-    this.marker.on('dragend', event => this.dragend(event));
+    const marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
+    marker.on('dragend', event => this.dragend(event));
     if (markerInfo) {
-      const aktiv = markerInfo.active ? 'Aktiv' : 'Inaktiv';
-      this.marker.bindPopup(
-        // TODO: should be standardised when more components use this feture.
+      const isActive = markerInfo.active ? 'Aktiv' : 'Inaktiv';
+      marker.bindPopup(
+        // TODO: should be standardised when more components use this feature.
         '<a _ngcontent-gij-c367=""' +
         'routerlinkactive="active" class="application-link"' +
         'ng-reflect-router-link-active="active"' +
@@ -92,20 +105,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         '" href="/gateways/gateway-detail/' + markerInfo.id + '">' + markerInfo.name + '</a>'
         +
         '<p>' +
-          aktiv +
-        '</p>');
+        isActive +
+        '</p>'
+        +
+        '<p>' +
+        'Organisation: ' + markerInfo.internalOrganizationName +
+        '</p>'
+      );
     }
-    this.marker.addTo(this.map);
+    return marker;
   }
 
   private getMarkerIcon(active = true): any {
     return L.icon({
       iconUrl: active ? this.grenMarker : this.redMarker,
-      iconSize:     [38, 38],
-      iconAnchor:   [19, 38],
-      popupAnchor:  [0, -38]
+      iconSize: [38, 38],
+      iconAnchor: [19, 38],
+      popupAnchor: [0, -38]
     })
-    ;
+      ;
   }
 
   private dragend(event: any) {
@@ -115,7 +133,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   setCoordinatesOutput() {
-    this.updateCoordinates.emit({latitude: this.coordinates.latitude, longitude: this.coordinates.longitude});
+    this.updateCoordinates.emit({ latitude: this.coordinates.latitude, longitude: this.coordinates.longitude });
   }
 
   private initMap(): void {
@@ -124,7 +142,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       this.map = L.map(this.mapId, {
         center: [
           this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
-          this.coordinateList ? this.coordinateList[0]?.longitude :  this.coordinates?.longitude
+          this.coordinateList ? this.coordinateList[0]?.longitude : this.coordinates?.longitude
         ],
         zoom: this.zoomLevel
       });

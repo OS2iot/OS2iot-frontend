@@ -6,7 +6,6 @@ import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { Download } from '@shared/helpers/download.helper';
-import { BackButton } from '@shared/models/back-button.model';
 import { DownloadService } from '@shared/services/download.service';
 import { Papa } from 'ngx-papaparse';
 import { Observable } from 'rxjs';
@@ -28,13 +27,13 @@ export class BulkImportComponent implements OnInit {
   faTrash = faTrash;
   faDownload = faDownload;
   samples = [
-    { name: 'Generic Http sample', url: '../../../assets/docs/iotdevice_generichttp.csv' },
-    { name: 'Lorawan sample', url: '../../../assets/docs/iotdevice_lorawan.csv' },
-    { name: 'Sigfox sample', url: '../../../assets/docs/iotdevice_sigfox.csv' },
+    { name: 'Generic-Http-sample.csv', url: '../../../assets/docs/iotdevice_generichttp.csv' },
+    { name: 'Lorawan-sample.csv', url: '../../../assets/docs/iotdevice_lorawan.csv' },
+    { name: 'Sigfox-sample.csv', url: '../../../assets/docs/iotdevice_sigfox.csv' },
   ]
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
-  public backButton: BackButton = { label: '', routerLink: '/applications' };
+  public backButtonTitle: string;
   private applicationId;
 
   constructor(
@@ -48,10 +47,6 @@ export class BulkImportComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.translate.get(['NAV.APPLICATIONS'])
-      .subscribe(translations => {
-        this.backButton.label = translations['NAV.APPLICATIONS'];
-      });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
 
   }
@@ -123,7 +118,7 @@ export class BulkImportComponent implements OnInit {
         this.translate.get(['ERROR.SEMANTIC'])
           .subscribe(translations => {
             this.bulkImport.push(new BulkImport(null, [translations['ERROR.SEMANTIC']]));
-      });
+          });
       }
     });
   }
@@ -137,7 +132,7 @@ export class BulkImportComponent implements OnInit {
             requestItem.importStatus = 'success';
           },
           (error: HttpErrorResponse) => {
-            requestItem.errorMessages = this.errorMessageService.handleErrorMessage(error);
+            requestItem.errorMessages = this.errorMessageService.handleErrorMessageWithFields(error).errorMessages;
             requestItem.importStatus = 'Failed';
           }
         );

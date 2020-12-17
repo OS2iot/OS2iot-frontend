@@ -4,7 +4,11 @@ import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceProfileService } from '../device-profile.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { MeService } from '@shared/services/me.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -14,18 +18,29 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   deviceProfiles: DeviceProfile[];
   subscription: Subscription;
-  public pageLimit: 10;
+  public pageLimit = environment.tablePageSize;
   public pageOffset: 0;
 
   public errorMessages: any;
+  deleteDialogSubscription: Subscription;
+  errorTitle: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private deviceProfileService: DeviceProfileService
+    private deviceProfileService: DeviceProfileService,
+    private meService: MeService,
+    private sharedVariableService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
+    this.translateService
+      .get(['PROFILES.DELETE-FAILED'])
+      .subscribe((translations) => {
+        this.errorTitle = translations['PROFILES.DELETE-FAILED'];
+      });
     this.getDeviceProfiles();
   }
 
@@ -33,6 +48,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     this.subscription = this.deviceProfileService.getMultiple()
       .subscribe((deviceProfiles) => {
         this.deviceProfiles = deviceProfiles.result;
+        this.setCanEdit();
       });
   }
 
@@ -40,16 +56,46 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     this.router.navigate(['deviceprofil/edit']);
   }
 
+  canCreate() {
+    return this.sharedVariableService.getHasWritePermission()
+  }
+
+  setCanEdit() {
+    this.deviceProfiles.forEach(
+      (deviceProfile) => {
+        deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(deviceProfile.internalOrganizationId);
+      }
+    );
+  }
+
   deleteDeviceProfile(id: string) {
     if (id) {
-      this.deviceProfileService.delete(id).subscribe((response) => {
-        console.log(response);
-        if (response.ok) {
-          this.getDeviceProfiles();
-        } else {
-          this.showError(response);
+      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
+        (response) => {
+          if (response) {
+            this.deviceProfileService.delete(id).subscribe((response) => {
+              console.log(response);
+              if (response.ok) {
+                this.getDeviceProfiles();
+              } else {
+                if (response?.error?.message === 'Internal server error') {
+                  this.errorMessages = 'Internal server error';
+                  return;
+                } else {
+                  this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(
+                    response.error.message,
+                    false,
+                    false,
+                    true,
+                    this.errorTitle).subscribe();
+                }
+              }
+            });
+          } else {
+            console.log(response);
+          }
         }
-      });
+      );
     }
   }
 
@@ -57,16 +103,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  private showError(err: HttpErrorResponse) {
-    if (err?.error?.message == 'Internal server error') {
-      this.errorMessages = 'Internal server error';
-      return;
-    }
-
-    if (err.error?.message) {
-      this.errorMessages = err.error?.message;
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
     }
   }
 }

@@ -1,11 +1,12 @@
+<!-- <app-loading-spinner *ngIf="isLoadingResults; else showTable">
+</app-loading-spinner>
+<ng-template #showTable> -->
 <div class="mat-elevation-z8">
-    <app-loading-spinner *ngIf=" isLoadingResults">
-    </app-loading-spinner>
-    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+    <table mat-table [dataSource]="data" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!canSort">
                 {{ 'USERS.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
@@ -43,13 +44,13 @@
             </td>
         </ng-container>
 
-        <!-- Login Column -->
-        <ng-container matColumnDef="login">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <!-- lastLogin Column -->
+        <ng-container matColumnDef="lastLogin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!canSort">
                 {{ 'USERS.LOGIN' | translate }}</th>
             <td mat-cell *matCellDef="let element">
                 <div *ngIf="element.lastLogin; else noLogin">
-                    <P> {{element.lastLogin | date}}</P>
+                    <P> {{element.lastLogin | tableDatePipe}}</P>
                 </div>
                 <ng-template #noLogin>
                     <P>Ikke logget på endnu</P>
@@ -65,7 +66,8 @@
                     <a href="#" role="button" id="tableRowDropdown-{{element.id}}"
                         class="applicationRow__edit dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                         [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
-                    <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{element.id}}">
+                    <ul class="dropdown-menu dropdown-menu--table"
+                        attr.aria-labelledby="tableRowDropdown-{{element.id}}">
                         <li class="dropdown-item">
                             <a [routerLink]="['/admin/users', element.id, 'edit-user']"
                                 routerLinkActive="active">{{ 'USERS.TABLE-ROW.EDIT' | translate }}
@@ -79,5 +81,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="resultsLength" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
+    </mat-paginator>
 </div>
+<!-- </ng-template> -->

@@ -16,7 +16,7 @@ export class AuthJwtInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         // If we're not calling the baseurl skip this. Is there a better way?
         if (req.url.indexOf(environment.baseUrl) != 0) {
-            console.warn("Skip adding Bearer since we're not calling baseUrl ...");
+            console.warn(`Skip adding Bearer since we're not calling baseUrl ... URL: '${req.url}'`);
             return next.handle(req);
         }
 

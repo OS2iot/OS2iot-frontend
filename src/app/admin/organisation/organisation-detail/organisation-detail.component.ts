@@ -4,15 +4,16 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
-import { ApplicationService } from '@applications/application.service';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { OrganisationResponse } from '../organisation.model';
 import { BackButton } from '@shared/models/back-button.model';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Location } from '@angular/common';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -23,12 +24,13 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   isLoadingResults = true;
   resultsLength = 10;
 
-  public pageLimit = 10;
+  public pageLimit = environment.tablePageSize;
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
   private applicationsSubscription: Subscription;
   private deleteDialogSubscription: Subscription;
+  public dropdownButton: DropdownButton;
 
   organisation: OrganisationResponse;
   public backButton: BackButton = {
@@ -43,15 +45,12 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     public translate: TranslateService,
     private route: ActivatedRoute,
     private organisationService: OrganisationService,
-    private applicationService: ApplicationService,
-    private globalService: SharedVariableService,
     private permissionsService: PermissionService,
     private deleteDialogService: DeleteDialogService,
     private location: Location
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getApplications();
   }
 
   ngOnInit(): void {
@@ -60,9 +59,15 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     if (this.id > 0) {
       this.getOrganisation(this.id);
     }
-    this.translate.get(['NAV.ORGANISATIONS'])
+    this.dropdownButton = {
+      label: '',
+      editRouterLink: 'edit-organisation',
+      isErasable: true,
+    }
+    this.translate.get(['NAV.ORGANISATIONS', 'ORGANISATION.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.ORGANISATIONS'];
+        this.dropdownButton.label = translations['ORGANISATION.DROPDOWN'];
       });
   }
 
@@ -81,20 +86,12 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       .getOne(id)
       .subscribe((response) => {
         this.organisation = response;
-        this.applications = response.applications;
         this.permissions = response.permissions;
       });
   }
 
-  prevPage() {
-    if (this.pageOffset) {
-      this.pageOffset--;
-    }
-    this.getApplications();
-  }
-
   clickDelete() {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDeleteDialog().subscribe(
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
       (response) => {
         if (response) {
           this.organisationService.delete(this.organisation.id)
@@ -109,44 +106,15 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     );
   }
 
-  nextPage() {
-    if (this.pageOffset < this.pageTotal) {
-      this.pageOffset++;
-    }
-    this.getApplications();
-  }
-
   deletePermission(id: number) {
-    this.permissionsService.deletePermission(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getOrganisation(this.id);
+    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+      if (response) {
+        this.permissionsService.deletePermission(id).subscribe((response) => {
+          if (response.ok && response.body.affected > 0) {
+            this.getOrganisation(this.id);
+          }
+        });
       }
-    });
-  }
-
-  deleteApplication(id: number) {
-    this.applicationService.deleteApplication(id).subscribe((response) => {
-      if (response.ok && response.body.affected > 0) {
-        this.getOrganisation(this.id);
-      }
-    });
-  }
-
-
-  getApplications(orgId?: number): void {
-    this.applicationsSubscription = this.applicationService
-      .getApplications(
-        this.pageLimit,
-        this.pageOffset * this.pageLimit,
-        null,
-        null,
-      )
-      .subscribe((applications) => {
-        this.applications = applications.data;
-        this.isLoadingResults = false;
-        if (this.pageLimit) {
-          this.pageTotal = Math.ceil(applications.count / this.pageLimit);
-        }
-      });
+    })
   }
 }

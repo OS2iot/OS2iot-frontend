@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
 import { BackButton } from '@shared/models/back-button.model';
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -12,11 +13,11 @@ import { BackButton } from '@shared/models/back-button.model';
 })
 export class DatatargetListComponent implements OnInit {
 
-    public pageLimit = 10;
+    public pageLimit = environment.tablePageSize;
     public title: string;
-
-    public backButton: BackButton = { label: '', routerLink: '/applikationer' };
+    public backButton: BackButton = { label: '', routerLink: ''};
     public datatarget: Datatarget;
+    private applikationId: string;
 
     constructor(
         public translate: TranslateService,
@@ -26,10 +27,17 @@ export class DatatargetListComponent implements OnInit {
 
     ngOnInit(): void {
         const applikationName: string = this.route.snapshot.paramMap.get('name');
-        this.translate.get(["NAV.DATATARGET"])
+        this.applikationId = this.route.snapshot.paramMap.get('id');
+        this.translate.get(["NAV.DATATARGET", "NAV.APPLICATIONS"])
             .subscribe((translate) => {
                 this.title = translate['NAV.DATATARGET'] + ' - ' + applikationName;
+                this.backButton.label = translate['NAV.APPLICATIONS'];
             });
+        this.setBackButton()
+    }
+
+    setBackButton() {
+        this.backButton.routerLink = ['applications', this.applikationId];
     }
 
     updatePageLimit(limit: any) {

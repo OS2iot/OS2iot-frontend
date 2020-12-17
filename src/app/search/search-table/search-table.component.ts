@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import {
   faBroadcastTower,
   faLayerGroup,
@@ -31,12 +32,13 @@ export class SearchTableComponent implements OnInit {
 
   displayedColumns: string[] = ['icon', 'type', 'name', 'id', 'org'];
   dataSource: MatTableDataSource<SearchResultDto>;
+  public pageSize = environment.tablePageSize;
 
   isLoadingResults = true;
   subscription: Subscription;
+  isFetching = true;
 
   searchResults: SearchResultDto[];
-  pageLimit = 10;
   pageTotal: number;
   pageOffset = 0;
 
@@ -51,22 +53,23 @@ export class SearchTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pageOffset = 0;
     this.route.queryParams.subscribe((params) => {
       this.searchText = this.decode(params['q']);
       if (this.searchText != null) {
-        this.search(this.searchText, this.pageLimit, 0);
+        this.search(this.searchText, this.pageSize, this.pageOffset);
       }
     });
   }
 
   search(query: string, limit: number, offset: number) {
+    this.isFetching = true;
     this.subscription = this.searchService
       .search(query, limit, offset)
       .subscribe((response) => {
         this.searchResults = response.data;
         this.pageTotal = response.count;
         this.isLoadingResults = false;
+        this.isFetching = false;
         this.showResults();
       });
   }
@@ -86,7 +89,6 @@ export class SearchTableComponent implements OnInit {
   }
 
   public getServerData(event?: PageEvent) {
-    this.pageLimit = event.pageSize;
     this.pageOffset = event.pageIndex;
     this.search(
       this.searchText,
@@ -103,6 +105,18 @@ export class SearchTableComponent implements OnInit {
       return this.faLayerGroup;
     } else if (type === SearchResultType.Gateway) {
       return this.faBroadcastTower;
+    } else {
+      return '';
+    }
+  }
+
+  getOrganizationName(element: SearchResultDto) {
+    if (element.organizationName) {
+      return element.organizationName;
+    } else if (element.organizationId) {
+      return this.globalService
+        .getOrganizationInfo()
+        .find((org) => org.id === element.organizationId)?.name;
     } else {
       return '';
     }

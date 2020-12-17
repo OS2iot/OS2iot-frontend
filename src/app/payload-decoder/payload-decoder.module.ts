@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { PayloadDecoderRoutingModule } from './payload-decoder-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormModule } from '@shared/components/forms/form.module';
-import { TopBarModule } from '@shared/components/top-bar/top-bar.module';
 import { PayloadDecoderDetailComponent } from './payload-decoder-detail/payload-decoder-detail.component';
 import { PayloadDecoderEditComponent } from './payload-decoder-edit/payload-decoder-edit.component';
 import { PayloadDecoderListComponent } from './payload-decoder-list/payload-decoder-list.component';
@@ -13,6 +12,11 @@ import { PayloadDecoderTableComponent } from './payload-decoder-list/payload-dec
 import { PayloadDecoderComponent } from './payload-decoder.component';
 import { SharedModule } from '@shared/shared.module';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { IotDevicesModule } from '@applications/iot-devices/iot-devices.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { IoTDeviceMinimalTableComponent } from './payload-decoder-detail/iot-device-minimal-table/iot-device-minimal-table.component';
 
 @NgModule({
   declarations: [
@@ -20,26 +24,31 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
     PayloadDecoderTableComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
-    PayloadDecoderListComponent
+    PayloadDecoderListComponent,
+    IoTDeviceMinimalTableComponent,
   ],
   exports: [
     PayloadDecoderComponent,
     PayloadDecoderTableComponent,
     PayloadDecoderEditComponent,
     PayloadDecoderDetailComponent,
-    PayloadDecoderListComponent
+    PayloadDecoderListComponent,
+    IoTDeviceMinimalTableComponent,
   ],
   imports: [
     CommonModule,
     TranslateModule,
     RouterModule,
     FormsModule,
-    TopBarModule,
     PayloadDecoderRoutingModule,
     ReactiveFormsModule,
     FormModule,
     SharedModule,
     NGMaterialModule,
-  ]
+    MonacoEditorModule,
+    IotDevicesModule,
+    FontAwesomeModule,
+    PipesModule,
+  ],
 })
-export class PayloadDecoderModule { }
+export class PayloadDecoderModule {}

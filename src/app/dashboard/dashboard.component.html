@@ -1,51 +1,68 @@
-<div class="row">
-    <app-loading-spinner *ngIf="isLoadingResults">
-    </app-loading-spinner>
-    <div *ngIf="hasSomePermission" class="col-xs-12 col-md-10 offset-md-1 mt-5">
-        <!-- <div class="p-5 jumbotron">
-            <h1>{{'DASHBOARD.WELCOME' | translate}}</h1>
-            <p>{{'DASHBOARD.WELCOME-MESSAGE' | translate}}</p>
-        </div> -->
-        <!-- <div class="header__logo-box">
-            <img src="img/logo-white.png" alt="Logo" class="header__logo">
-        </div> -->
+<app-top-bar></app-top-bar>
+<div class="container-fluid">
 
-        <header class="header">
+    <div class="row">
+        <app-loading-spinner *ngIf="isLoadingResults">
+        </app-loading-spinner>
+        <div *ngIf="hasSomePermission" class="col-xs-12 col-md-10 offset-md-1 mt-5">
+            <header class="header p-3">
+                <div class="header__text-box ">
+                    <h1 class="heading-primary ">
+                        <div class="row mb-5 ">
+                            <div class="col-12">
+                                <span class="heading-primary--main">
+                                    {{'DASHBOARD.WELCOME' | translate}}
+                                </span>
+                            </div>
+                        </div>
 
-            <div class="header__text-box ">
-                <h1 class="heading-primary mb-5">
-                    <span class="heading-primary--main">
-                        {{'DASHBOARD.WELCOME' | translate}}
-                    </span>
-                    <span class="heading-primary--sub">
-                        {{'DASHBOARD.WELCOME-MESSAGE' | translate}}
-                    </span>
-                </h1>
-
-                <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
-                    class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
+                        <span class="heading-primary--sub">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span>{{'DASHBOARD.LIST.HEADLINE' | translate}}</span>
+                                    <ul class="inline-list text-white">
+                                        <li>{{'DASHBOARD.LIST.P1' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P2' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P3' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P4' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P5' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P6' | translate}}</li>
+                                        <li>{{'DASHBOARD.LIST.P7' | translate}}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">{{'DASHBOARD.WELCOME-MESSAGE' | translate}}</div>
+                            </div>
+                        </span>
+                    </h1>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a [routerLink]="['/admin/organisations']" routerLinkActive="router-link-active"
+                                class="btn btn-secondary btn--animated">Start med at oprette en organisation</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="header__logo-box">
+                <img src="../../assets/images/os2iot.png" alt="Logo" class="header__logo">
             </div>
-        </header>
-        <div class="header__logo-box">
-            <img src="../../assets/images/OS2-iot-svg.svg" alt="Logo" class="header__logo">
         </div>
-    </div>
-    <div *ngIf="hasSomePermission == false" class="col-xs-12 col-md-10 offset-md-1 mt-5">
-        <header class="header">
+        <div *ngIf="hasSomePermission == false" class="col-xs-12 col-md-10 offset-md-1 mt-5">
+            <header class="header">
 
-            <div class="header__text-box ">
-                <h1 class="heading-primary mb-5">
-                    <span class="heading-primary--main">
-                        {{'DASHBOARD.WELCOME' | translate}}
-                    </span>
-                    <span class="heading-primary--sub">
-                        {{'DASHBOARD.NO-ACCESS' | translate}}
-                    </span>
-                </h1>
+                <div class="header__text-box ">
+                    <h1 class="heading-primary mb-5">
+                        <span class="heading-primary--main">
+                            {{'DASHBOARD.WELCOME' | translate}}
+                        </span>
+                        <span class="heading-primary--sub">
+                            {{'DASHBOARD.NO-ACCESS' | translate}}
+                        </span>
+                    </h1>
+                </div>
+            </header>
+            <div class="header__logo-box">
+                <img src="../../assets/images/os2iot.png" alt="Logo" class="header__logo">
             </div>
-        </header>
-        <div class="header__logo-box">
-            <img src="../../assets/images/OS2-iot-svg.svg" alt="Logo" class="header__logo">
         </div>
     </div>
 </div>

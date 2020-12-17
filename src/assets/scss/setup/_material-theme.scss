@@ -16,8 +16,6 @@ $OS2IoT-theme: mat-dark-theme($OS2IoT-primary, $OS2IoT-accent, $OS2IoT-warn);
 // Main theme defination
 @include angular-material-theme($OS2IoT-theme);
 
-
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -35,21 +33,28 @@ $OS2IoT-frontend-primary: mat-palette($mat-deep-orange);
 //$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
 $OS2IoT-frontend-accent: mat-palette($mat-deep-orange, A200, A100, A400);
 
-
 // The warn palette is optional (defaults to red).
 $OS2IoT-frontend-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-frontend-accent, $OS2IoT-frontend-warn);
+$OS2IoT-frontend-theme: mat-light-theme(
+  $OS2IoT-frontend-primary,
+  $OS2IoT-frontend-accent,
+  $OS2IoT-frontend-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($OS2IoT-frontend-theme);
 
+////////////////////////////// CHECKBOX  ///////////////////////////////////////////
 
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
 ////////////////////////////// EXPANSION PANELS ///////////////////////////////////////////
-.mat-expansion-panel:not([class*=mat-elevation-z]) {
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
   box-shadow: none;
 }
 
@@ -66,9 +71,7 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   .mat-expansion-panel-body {
     padding: 0;
   }
-
 }
-
 
 ///////////////////////////////////////// FORM FIELDS //////////////////////////////////////////////////
 
@@ -82,11 +85,14 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   }
 }
 
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+}
+
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: $color-bg-normal !important;
   border: $border-input !important;
 }
-
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   border-radius: $border-radius-primary;
@@ -102,8 +108,16 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   }
 }
 
+.search-form {
+  .mat-form-field-flex {
+    @extend .mb-2;
+    .mat-form-field-suffix {
+      align-self: flex-end;
+    }
+  }
+}
 
-//////////////////////// MAT TABLES ////////////////////////////////////////// 
+//////////////////////// MAT TABLES //////////////////////////////////////////
 
 .mat-elevation-z8 {
   margin: 15px;
@@ -116,14 +130,18 @@ $OS2IoT-frontend-theme: mat-light-theme($OS2IoT-frontend-primary, $OS2IoT-fronte
   line-height: 24px;
   color: $grey-tablehead;
   background-color: $grey-dark;
+  width: min-content;
 }
 
 .mat-sort-header-arrow {
   color: $grey-tablehead;
   opacity: 1 !important;
-  // transform: translateY(25%) !important;
 }
 
-.mat-elevation-z8{
-  margin:0;
+tr.mat-row {
+  word-break: break-word;
+}
+
+.mat-elevation-z8 {
+  margin: 0;
 }
