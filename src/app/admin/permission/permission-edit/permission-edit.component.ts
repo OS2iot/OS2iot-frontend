@@ -124,17 +124,25 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       return;
     }
     // get the search keyword
-    let search = this.userMultiFilterCtrl.value;
+    let search = this.userMultiFilterCtrl?.value?.trim();
     if (!search) {
       this.filteredUsersMulti.next(this.users.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
+    const filtered = this.users.filter((user) => {
+      return (
+        user.name.toLocaleLowerCase().indexOf(search) > -1 ||
+        user?.email?.toLocaleLowerCase()?.indexOf(search) > -1
+      );
+    });
     // filter the banks
-    this.filteredUsersMulti.next(
-      this.users.filter((user) => user.name.toLowerCase().indexOf(search) > -1)
-    );
+    this.filteredUsersMulti.next(filtered);
+  }
+
+  getTextForUser(user: UserResponse): string {
+    return `${user.name}` + (user.email ? ` (${user.email})` : ``);
   }
 
   private setBackButton() {

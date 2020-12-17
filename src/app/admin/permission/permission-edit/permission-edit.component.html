@@ -37,7 +37,7 @@
                 [(value)]="permission.userIds" name="users" #multiSelect [compareWith]="compare">
                 <mat-select-search [formControl]="userMultiFilterCtrl"></mat-select-search>
                 <mat-option *ngFor="let user of filteredUsersMulti | async" [value]="user.id">
-                    {{user.name}}
+                    {{getTextForUser(user)}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
