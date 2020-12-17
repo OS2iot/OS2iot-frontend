@@ -1,5 +1,7 @@
 <title>Grandma's Heavy Metal Festival Journal</title>
-<app-top-bar></app-top-bar>
+<div *ngIf="hasSomePermission">
+    <app-top-bar></app-top-bar>
+</div>
 <div class="container-fluid">
 
     <div class="row">
