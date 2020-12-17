@@ -29,13 +29,13 @@ export class DashboardComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
-      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS','TITLE.DASHBOARD', 'DASHBOARD.KOMBIT-LOGIN-ERROR','DASHBOARD.USER-INACTIVE'])
+      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS','TITLE.FRONTPAGE', 'DASHBOARD.KOMBIT-LOGIN-ERROR','DASHBOARD.USER-INACTIVE'])
         .toPromise()
           .then(translations => {
             this.unauthorizedMessage = translations['DASHBOARD.NO-JOB-ACCESS'];
             this.kombitError = translations['DASHBOARD.KOMBIT-LOGIN-ERROR'];
             this.noAccess = translations['DASHBOARD.USER-INACTIVE'];
-            this.titleService.setTitle(translations['TITLE.DASHBOARD']);
+            this.titleService.setTitle(translations['TITLE.FRONTPAGE']);
           }
       );
       // this is used when a user is returned from Kombit login

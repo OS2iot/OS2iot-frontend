@@ -814,7 +814,7 @@
     "DATATARGET": "OS2IoT - Datatarget",
     "BULKIMPORT": "OS2IoT - Bulk import",
     "IOTDEVICE": "OS2IoT - IoT enhed",
-    "DASHBOARD": "OS2IoT - Dashboard"
+    "FRONTPAGE": "OS2IoT - Forside"
 
   },
   "false": "Nej",
