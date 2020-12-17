@@ -5,8 +5,8 @@
 </select>
 <fa-icon [icon]="faExchangeAlt"></fa-icon>
 <mat-divider></mat-divider>
-<ul class="navbar-nav flex-column mb-4">
-    <li class="nav-item py-2">
+<ul class="navbar-nav flex-column mb-2">
+    <li class="nav-item">
         <a routerLink="/applications" routerLinkActive="active" class="nav-link pl-5 position-relative rounded"
             id="applications">
             {{ 'NAV.APPLICATIONS' | translate }}
@@ -32,7 +32,7 @@
             </a>
             <fa-icon [icon]="faUsers" class="navbar-icon"></fa-icon>
         </li>
-        <li class="nav-item py-2">
+        <li class="nav-item">
             <a routerLink="/admin/permissions" routerLinkActive="active"
                 class="nav-link pl-5 position-relative rounded">
                 {{'NAV.PERMISSIONS' | translate}}
