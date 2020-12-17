@@ -70,7 +70,7 @@ export class BulkMapping {
             updatedBy: undefined,
             updatedByName: undefined,
             createdByName: undefined,
-            deviceModelId: data.deviceModelId
+            deviceModelId: data.deviceModelId != "" ? +data.deviceModelId : undefined,
         };
     }
 }
