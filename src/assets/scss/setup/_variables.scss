@@ -382,3 +382,9 @@ $red: #dc3545;
 .overflow-y-hidden {
   overflow-y: hidden !important;
 }
+
+.mat-tab-group {
+  .mat-tab-body.mat-tab-body-active {
+    overflow-y: hidden;
+  }
+}

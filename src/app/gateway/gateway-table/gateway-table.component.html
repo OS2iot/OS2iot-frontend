@@ -2,11 +2,11 @@
     <div class="loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
-    <table mat-table [dataSource]="data">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'LORA-GATEWAY-TABLE.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
@@ -18,7 +18,7 @@
 
         <!-- Id Column -->
         <ng-container matColumnDef="gateway-id">
-            <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
             <td mat-cell *matCellDef="let element">
                 {{ element.id }}
             </td>
@@ -26,7 +26,8 @@
 
         <!-- Location Column -->
         <ng-container matColumnDef="internalOrganizationName">
-            <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.ORGANIZATION' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.ORGANIZATION' | translate }}
+            </th>
             <td mat-cell *matCellDef="let element">
                 {{ element.internalOrganizationName }}
             </td>
@@ -36,14 +37,14 @@
         <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.LOCATION' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-                {{ element.location.longitude  | number:'2.1-6' }},
-                {{ element.location.latitude  | number:'2.1-6' }}
+                {{ element.location.latitude | number:'2.1-6' }},
+                {{ element.location.longitude | number:'2.1-6' }}
             </td>
         </ng-container>
 
         <!-- Last seen Column -->
         <ng-container matColumnDef="last-seen">
-            <th mat-header-cell *matHeaderCellDef>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'LORA-GATEWAY-TABLE.LAST-SEEN-AT' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
@@ -53,7 +54,7 @@
 
         <!-- Status Column -->
         <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'LORA-GATEWAY-TABLE.STATUS' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
@@ -78,8 +79,8 @@
                     <ul class="dropdown-menu dropdown-menu--table"
                         attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
                         <li class="dropdown-item">
-                            <a [routerLink]="['gateway-edit', element.id]"
-                                routerLinkActive="active">{{ 'GEN.EDIT' | translate }}</a>
+                            <a [routerLink]="['gateway-edit', element.id]" routerLinkActive="active">{{ 'GEN.EDIT' |
+                                translate }}</a>
                         </li>
                         <li class="dropdown-item">
                             <a (click)="clickDelete(element)" [routerLink]="">{{ 'GEN.DELETE' | translate }}</a>
