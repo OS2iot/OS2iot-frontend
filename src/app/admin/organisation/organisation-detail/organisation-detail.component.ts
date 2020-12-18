@@ -14,6 +14,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -47,7 +48,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private organisationService: OrganisationService,
     private permissionsService: PermissionService,
     private deleteDialogService: DeleteDialogService,
-    private location: Location
+    private location: Location,
+    private titleService: Title
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -64,10 +66,11 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       editRouterLink: 'edit-organisation',
       isErasable: true,
     }
-    this.translate.get(['NAV.ORGANISATIONS', 'ORGANISATION.DROPDOWN'])
+    this.translate.get(['NAV.ORGANISATIONS', 'ORGANISATION.DROPDOWN', 'TITLE.ORGANIZATION'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.ORGANISATIONS'];
         this.dropdownButton.label = translations['ORGANISATION.DROPDOWN'];
+        this.titleService.setTitle(translations['TITLE.ORGANIZATION'])
       });
   }
 

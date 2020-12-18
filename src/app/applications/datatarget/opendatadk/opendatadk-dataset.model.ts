@@ -1,4 +1,5 @@
 export class OpenDataDkDataset {
+    id?: number; 
     name: string; //reqired - max 120
     resourceTitle: string;
     description: string;

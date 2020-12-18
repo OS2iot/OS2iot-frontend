@@ -7,6 +7,7 @@ import {
   faSignOutAlt,
   faSignInAlt,
   faUser,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
   faUser = faUser;
+  faQuestionCircle = faQuestionCircle;
   imagePath = '../../assets/images/os2iot.png ';
 
   constructor(
@@ -62,6 +64,10 @@ export class NavbarComponent implements OnInit {
 
   isLoggedInWithKombit() {
     return this.authService.isLoggedInWithKombit();
+  }
+
+  public goToHelp() {
+    window.open('https://os2iot.os2.eu/');
   }
 
   getKombitLogoutUrl() {

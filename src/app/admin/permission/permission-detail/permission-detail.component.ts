@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionService } from '@app/admin/permission/permission.service';
@@ -6,15 +6,11 @@ import { Subscription } from 'rxjs';
 import { PermissionResponse } from '../permission.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
-import { Application } from '@applications/application.model';
-import { ApplicationService } from '@applications/application.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -53,6 +49,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private permissionService: PermissionService,
     private router: Router,
+    private titleService: Title,
     private deleteDialogService: DeleteDialogService
   ) { }
 
@@ -67,10 +64,11 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         isErasable: true,
       }
     }
-    this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN'])
+    this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN', 'TITLE.PERMISSION'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.PERMISSIONS'];
         this.dropdownButton.label = translations['PERMISSION.DETAIL.DROPDOWN'];
+        this.titleService.setTitle(translations['TITLE.PERMISSION']);
       });
   }
 

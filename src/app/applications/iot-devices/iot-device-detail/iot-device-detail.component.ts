@@ -13,6 +13,8 @@ import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { Title } from '@angular/platform-browser';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
     selector: 'app-iot-device',
@@ -37,6 +39,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public errorMessages: string[];
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
+    public canStartDownlink = false;
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
@@ -49,11 +52,13 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private translate: TranslateService,
         private router: Router,
         private deleteDialogService: DeleteDialogService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private titleService: Title,
+        private meService: MeService
     ) { }
 
     ngOnInit(): void {
-
+        this.canStartDownlink = this.meService.canWriteInTargetOrganization();
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.deviceId) {
@@ -65,10 +70,11 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             };
         }
 
-        this.translate.get(['NAV.APPLICATIONS', 'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'])
+        this.translate.get(['NAV.APPLICATIONS', 'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS', 'TITLE.IOTDEVICE'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.APPLICATIONS'];
                 this.dropdownButton.label = translations['IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'];
+                this.titleService.setTitle(translations['TITLE.IOTDEVICE']);
             });
     }
 

@@ -14,13 +14,13 @@
     "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
     "APPLICATION": "Applikation",
-    "ALL-IOT-DEVICES": "Alle IoT-enheder",
-    "LORA-GATEWAYS": "LoRaWAN Gateways",
+    "ALL-IOT-DEVICES": "Alle IoT enheder",
+    "LORA-GATEWAYS": "LoRaWAN gateways",
     "DATATARGET": "Datatarget",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "LoRaWAN Profiler",
-    "PAYLOAD-DECODER": "Payload Decoder",
+    "PROFILES": "LoRaWAN profiler",
+    "PAYLOAD-DECODER": "Payload decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
     "USERS": "Brugere",
@@ -32,7 +32,9 @@
     "SEARCH": "Søgeresultater",
     "MENU-ITEM-MISC": "Generelt",
     "DEVICE-MODEL": "Device model",
-    "BACK": "Tilbage"
+    "BACK": "Tilbage",
+    "LOGOUT": "Log ud",
+    "HELP": "Hjælp"
   },
   "TOPBAR":{
     "SEARCH": {
@@ -49,26 +51,26 @@
     "NAME": "Navn",
     "ID": "Id",
     "ORGANISATION": "Organisation",
-    "PLACEHOLDER": "Der kan søges efter IoT-enheder, applikationer og gateways",
+    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
     "QUERY": "resultater for",
-    "NO-RESULTS": "Du kun kan søge efter IoT-enheder, applikationer og gateways",
+    "NO-RESULTS": "Du kun kan søge efter IoT enheder, applikationer og gateways",
     "FETCHING": "Henter søgeresultater"
   },
   "SIGFOX-GROUP": {
-    "NAME": "Sigfox Administration",
+    "NAME": "Sigfox administration",
     "SIGFOX-GROUP": "Sigfox grupper",
     "SIGFOX-LOGIN": "Sigfox API login",
     "API-ACCESS": "For at kunne tilgå din Sigfox gruppe skal du først have oprettet en API adgang til gruppen i Sigfox. Denne skal bruges til at logge ind med nedenfor. Læs hvordan du opretter adgangen her -",
     "LOGIN": "Login",
     "ADMINISTRATION": {
-      "NAME": "Sigfox Grupper",
+      "NAME": "Sigfox grupper",
       "CREATE-NEW-GROUP": "Opret forbindelse til ny gruppe"
     },
     "PROFILES": {
       "NAME": "Sigfox enhedstyper",
       "DEVICE-TYPE": "Sigfox enhedstyper",
       "DEVICE-TYPE-NAME": "navn",
-      "DEVICE-TYPE-CONTRACT-ID": "kontrakt Id",
+      "DEVICE-TYPE-CONTRACT-ID": "kontrakt id",
       "DEVICE-TYPE-ALERT-EMAIL": "Alarm email",
       "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype",
       "SAVE": "Gem enhedstype"
@@ -80,9 +82,9 @@
     "DELETE": "Slet applikation",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
-    "ATTACHED-IOT": "Tilknyttede IoT-enheder",
+    "ATTACHED-IOT": "Tilknyttede IoT enheder",
     "DATATARGET-SHOW": "Tilknyttede data targets",
-    "IMPORT-CSV": "Bulk-import af IoT-enheder",
+    "IMPORT-CSV": "Bulk import af IoT enheder",
     "BULK": {
       "TEMPLATE": {
         "GENERIC": "Generic HTTP sample",
@@ -90,7 +92,7 @@
         "SIGFOX": "Sigfox sample"
       },
       "TITLE": "Import af .csv",
-      "DOWNLOAD": "Download Sample CSV Fil",
+      "DOWNLOAD": "Download sample CSV fil",
       "DROPFILE": "Klik eller drop din .csv file her",
       "NAME": "Navn",
       "TYPE": "Type",
@@ -104,12 +106,12 @@
     "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
     "UPDATED": "Senest opdateret",
-    "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
+    "DESCRIPTION": "LoRaWAN gateway beskrivelse",
     "LONGITUDE": "Længdegrad",
     "LATITUDE": "Breddegrad",
     "ALTITUDE": "Højde",
     "SAVE": "Gem gateway",
-    "ID": "Gateway ID",
+    "ID": "Gateway id",
     "LOCATION": "Placering",
     "TAGS": "Tags",
     "NAME": "Gatewayens navn",
@@ -139,7 +141,7 @@
     "NAME": "Datatarget navn",
     "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
-    "RELATIONS": "Tilknyttede IoT-enheder og payload decoders",
+    "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder",
     "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT enhed(er)",
@@ -147,8 +149,8 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "Open Data DK", 
-    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datapakke endnu"
+    "OPENDATA-DK": "OpenDataDK", 
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -159,7 +161,7 @@
       "GIVE-OPENDATADK-DESCRIPTION": "Beskrivelse",
       "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "Beskrivelse",
       "GIVE-OPENDATADK-KEYWORDS": "Angiv kommasepareret nøgleord",
-      "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, Sensor, LoRaWAN, Temeratur",
+      "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, sensor, LoRaWAN, temeratur",
       "GIVE-OPENDATADK-AUTHORNAME": "Forfatter",
       "GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER": "Jens Jensen",
       "GIVE-OPENDATADK-AUTHOR-EMAIL": "Forfatterens e-mail",
@@ -182,7 +184,7 @@
   },
   "APPLICATION-TABLE": {
     "NAME": "Navn",
-    "IOT-DEVICES": "IoT-enheder",
+    "IOT-DEVICES": "IoT enheder",
     "UPDATED": "Senest opdateret"
   },
   "IOT-TABLE": {
@@ -223,15 +225,15 @@
     "FUNCTION" : "Enhedsfunktioner",
     "ENERGYLIMITATIONCLASS" : "Energibegrænsningsklassen",
     "SUPPORTEDPROTOCOL" : "Understøttede protokoller",
-    "DETAIL-TITLE": "Device Model detalje",
-    "DEVICE-MODEL": "Device Model",
-    "SHOW-OPTIONS": "Håndter Device Model"
+    "DETAIL-TITLE": "Device model detalje",
+    "DEVICE-MODEL": "Device nodel",
+    "SHOW-OPTIONS": "Håndter device model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
-    "SHOW-OPTIONS": "Håndtér Gateway"
+    "SHOW-OPTIONS": "Håndtér gateway"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWAN Gateway"
+    "CREATE": "Opret LoRaWAN gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -273,14 +275,14 @@
     "NAME": "Navn",
     "ID": "Payload decoder id",
     "ORGANIZATION": "Organisation",
-    "BELONGS-TO-ORGANIZATION": "Tilhørende organisation",
+    "BELONGS-TO-ORGANIZATION": "Organisation",
     "DECODINGFUNCTION": "Decoder funktion",
     "DETAIL": {
       "DROPDOWN": "Håndter payload decoder",
       "EDIT": "Redigér",
       "DELETE": "Slet"
     },
-    "IOT-DEVICES": "Tilknyttede IoT-enheder"
+    "IOT-DEVICES": "Tilknyttede IoT enheder"
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",
@@ -321,8 +323,8 @@
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype ",
-      "ORG": "Tilhørende organisation ",
-      "DROPDOWN": "Håndter Brugergruppe",
+      "ORG": "Organisation ",
+      "DROPDOWN": "Håndter brugergruppe",
       "EDIT": "Rediger",
       "DELETE": "Slet",
       "USERS": "Brugergruppens brugere",
@@ -340,7 +342,7 @@
       "USERS-PLACEHOLDER": "Brugere",
       "ORG": "Vælg en organisation",
       "ORG-PLACEHOLDER": "Organisation",
-      "APPS": "Vælg en applikation",
+      "APPS": "Vælg en eller flere applikationer",
       "APPS-PLACEHOLDER": "Applikationer",
       "ADD-APPLICATION-ON-CREATE": "Skal nye applikationer automatisk tilføjes til brugergruppen",
       "ADD-APPLICATION-AUTOMATIC": "Automatisk tilføjelse af applikationer til brugergruppen"
@@ -351,31 +353,31 @@
     }
   },
   "PERMISSION-TYPE": {
-    "GlobalAdmin": "Global Administrator",
-    "OrganizationAdmin": "Organisations Administrator",
+    "GlobalAdmin": "Global administrator",
+    "OrganizationAdmin": "Organisations administrator",
     "Write": "Skrive-rettigheder",
     "Read": "Læse-rettigheder"
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
-    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN Gateway",
-    "CREATE-NEW-DEVICE-MODEL": "Opret ny Device Model",
+    "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN gateway",
+    "CREATE-NEW-DEVICE-MODEL": "Opret ny device model",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
     "EDIT-DATATARGET": "Redigér datatarget",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
-    "EDIT-NEW-GATEWAY": "Redigér LoRaWAN Gateway",
+    "EDIT-NEW-GATEWAY": "Redigér LoRaWAN gateway",
     "EDIT-NEW-APPLICATION": "Redigér applikation",
     "TRANSMISSION_PROTOCOL_TEXT": "Vælg transmissionsprotokol",
     "TRANSMISSION_PROTOCOL_DESCRIPTION": "Transmissions protokollen angiver måden IoT-enheden forbinder til OS2IoT",
     "ALERT-NO-DELETE-DEVICES": "Du kan ikke slette denne applikation da den indeholder IOT enhed(er)",
-    "CREATE-NEW-PAYLOAD-DECODER": "Opret Payload Decoder",
-    "EDIT-PAYLOAD-DECODER": "Redigér Payload Decoder",
+    "CREATE-NEW-PAYLOAD-DECODER": "Opret payload decoder",
+    "EDIT-PAYLOAD-DECODER": "Redigér payload decoder",
     "EDIT-DEVICE-PREDIT-SIGFOX-GROUPSOFILE": "Redigér device profil",
     "CREATE-NEW-ORGANISATION": "Opret organisation",
     "EDIT-ORGANISATION": "Redigér organisation",
     "CREATE-NEW-PERMISSION": "Opret ny brugergruppe",
     "EDIT-PERMISSION": "Redigér brugergruppe",
-    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér Sigfox Enhedstype",
+    "EDIT-SIGFOX-DEVICE-TYPE": "Redigér Sigfox enhedstype",
     "EDIT-SIGFOX-GROUPS": "Redigér Sigfox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
@@ -405,30 +407,30 @@
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
-    "GIVE-PAYLOADDECODER-NAME": "Navngiv Payload Decoder",
-    "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. Kloak sensor decoder",
-    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload Decoder funktion",
-    "GIVE-PAYLOADDECODER-CHOOSE-APPLICATION": "Vælg Applikation",
-    "GIVE-PAYLOADDECODER-CHOOSE-DEVICE": "Vælg Enhed",
+    "GIVE-PAYLOADDECODER-NAME": "Navngiv payload decoder",
+    "GIVE-PAYLOADDECODER-NAME-PLACEHOLDER": "F.eks. kloak sensor decoder",
+    "GIVE-PAYLOADDECODER-DECODINGFUNCTION": "Payload decoder funktion",
+    "GIVE-PAYLOADDECODER-CHOOSE-APPLICATION": "Vælg applikation",
+    "GIVE-PAYLOADDECODER-CHOOSE-DEVICE": "Vælg enhed",
     "GIVE-PAYLOADDECODER-PAYLOAD": "Test med den valgte enheds payload",
     "GIVE-PAYLOADDECODER-METADATA": "Test med den valgte enheds metadata",
     "GIVE-PAYLOADDECODER-TESTBUTTON": "Test din kode",
-    "GIVE-PAYLOADDECODER-OUTPUT": "Test preview af Payload Decoder Output",
+    "GIVE-PAYLOADDECODER-OUTPUT": "Test preview af payload decoder Output",
     "GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER": "// Vælg applikation og enhed først for at \n// teste din decoder funktion med metadata",
     "GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER": "// Vælg applikation og enhed først for at \n// teste din decoder funktion med payload data",
     "GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE": "// Kan ikke finde noget metadata på den pågældende enhed. \n// Det kan enten skyldes at vi ikke har modtaget noget fra enheden eller der er ikke blevet tilknyttet en devicemodel til enheden",
     "GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE": "// Kan ikke finde noget payload på den pågældende enhed. \n// Det kan enten skyldes at vi ikke har modtaget noget fra enheden eller der er ikke blevet tilknyttet en devicemodel til enheden",
-    "GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER": "// Tryk 'Test Koden' for at decode payload og metadata",
+    "GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER": "// Tryk 'Test koden' for at decode payload og metadata",
     "GIVE-PAYLOADDECODER-METADATA-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet device metadata",
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "OTAAAPPLICATIONKEY": "OTAA application key (AppKey)",
-    "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA Application key",
+    "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA application key",
     "DEVADDR": "Device adress",
-    "DEVADDR-PLACEHOLDER": "Indtast Device adress",
+    "DEVADDR-PLACEHOLDER": "Indtast device adress",
     "NETWORKSESSIONKEY": "Networksessionkey",
-    "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast Network session key",
+    "NETWORKSESSIONKEY-PLACEHOLDER": "Indtast network session key",
     "APPLICATIONSESSIONKEY": "Applicationsessionkey",
     "APPLICATIONSESSIONKEY-PLACEHOLDER": "Indtast application session key",
     "FCNTUP": "fCntUp",
@@ -446,7 +448,7 @@
     "CHOOSE-SERVICEPROFILE": "Vælg service profile",
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
-    "ADD-RELATIONS": "Tilføj device og payload decoder",
+    "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
@@ -464,7 +466,7 @@
       "DEVICETYPEID": "Vælg en Sigfox enhedstype",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
       "PAC": "PAC",
-      "PAC-PLACEHOLDER": "Porting Authorization Code",
+      "PAC-PLACEHOLDER": "Porting authorization code",
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
       "ENDPRODUCTCERTIFICATE-PLACEHOLDER": "Produkt certifikat",
       "ENDPRODUCTCERTIFICATE-HELP-TITLE": "Hjælp til at finde produkt certifikatet",
@@ -489,7 +491,7 @@
       "GIVE-NAME": "Angiv navn",
       "GIVE-NAME-PLACEHOLDER": "F.eks. Elsys-tx3",
       "GIVE-ID": "Angiv unik identifikator (id)",
-      "GIVE-ID-PLACEHOLDER": "Angiv Id",
+      "GIVE-ID-PLACEHOLDER": "Angiv id",
       "GIVE-BRANDNAME": "Angiv mærket (brandName)",
       "GIVE-BRANDNAME-PLACEHOLDER": "Angiv mærket",
       "GIVE-MODELNAME": "Angiv model navnet (modelName)",
@@ -506,13 +508,13 @@
     }
   },
   "QUESTION-LORA-GATEWAY": {
-    "NAME": "Navngiv LoRaWAN Gateway",
-    "NAME-PLACEHOLDER": "Navn på LoRaWAN Gateway",
-    "DESCRIPTION": "LoRaWAN Gateway beskrivelse",
-    "DESCRIPTION-PLACEHOLDER": "Beskrivelse af LoRaWAN Gateway",
-    "GATEWAYID": "Gateway ID",
+    "NAME": "Navngiv LoRaWAN gateway",
+    "NAME-PLACEHOLDER": "Navn på LoRaWAN gateway",
+    "DESCRIPTION": "LoRaWAN gateway beskrivelse",
+    "DESCRIPTION-PLACEHOLDER": "Beskrivelse af LoRaWAN gateway",
+    "GATEWAYID": "Gateway id (EUI)",
     "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
-    "METADATA": "Gateway Tags",
+    "METADATA": "Gateway tags",
     "METADATA-PLACEHOLDER": "Angiv JSON her",
     "ALTITUDE": "Højde",
     "ALTITUDE-PLACEHOLDER": "00",
@@ -538,7 +540,7 @@
   },
   "IOTDEVICE": {
     "HEADING": {
-      "PROTOCOL": "Transmission Protokol",
+      "PROTOCOL": "Transmission protokol",
       "BASIC": "Basis info",
       "OPTIONAL": "Yderligere info"
     },
@@ -550,7 +552,7 @@
       "START": "Sæt downlink i kø",
       "ERROR-SIGFOX-LENGTH": "Fejl i payload længde - payload må ikke overskride 16 karaktere",
       "ERROR-FORMAT": "Fejl i formatet. Downlink skal være på hexidecimal format: a-f 0-9",
-      "DESCRIPTION": "Her kan du starte et downlink til dit device.",
+      "DESCRIPTION": "Her kan du starte et downlink til din enhed",
       "CONFIRMEDDOWNLINK": "Bekræft downlink",
       "DIALOG-TITLE": "Downlink",
       "DIALOG-MESSAGE": "Der ligger allerede et downlink i kø, vil du overskrive?",
@@ -584,7 +586,7 @@
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:"
     },
-    "LORAWANSETUP": "LoRaWAN Specifik opsætning",
+    "LORAWANSETUP": "LoRaWAN specifik opsætning",
     "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
     "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "DATAPACKAGE": "Datapakke",
@@ -630,8 +632,8 @@
     "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig."
   },
   "PROFILES": {
-    "NAME": "LoRaWAN Profiler",
-    "DELETE-FAILED":"Slet Fejlede",
+    "NAME": "LoRaWAN profiler",
+    "DELETE-FAILED":"Slet fejlede",
     "SERVICE_PROFILE": {
       "CREATED":"Oprettet",
       "UPDATED":"Senest opdateret",
@@ -639,7 +641,7 @@
       "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Service profiler",
       "DROPDOWN": "Håndter service profil",
-      "CREATE-NEW-SERVICE-PROFILE": "Opret Service Profile",
+      "CREATE-NEW-SERVICE-PROFILE": "Opret service profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Service profil navn",
@@ -660,8 +662,8 @@
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
-      "ADDSERVICEPROFILE": "Redigér Service Profile",
-      "ID": "Service profilens ID"
+      "ADDSERVICEPROFILE": "Redigér service profile",
+      "ID": "Service profilens id"
     },
     "DEVICE_PROFILE": {
       "CREATED":"Oprettet",
@@ -670,13 +672,13 @@
       "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Device profiler",
       "DROPDOWN": "Håndter device profil",
-      "CREATE-NEW-DEVICE-PROFILE": "Opret Device Profile",
+      "CREATE-NEW-DEVICE-PROFILE": "Opret device profile",
       "EDIT": "Rediger profil",
       "DELETE": "Slet profil",
       "NAME": "Device profil navn",
       "NAME_PLACEHOLDER": "Device profil navn",
       "MACVERSION": "LoRaWAN MAC version ",
-      "REGPARAMSREVISION": "LoRaWAN Regional Parameters revision ",
+      "REGPARAMSREVISION": "LoRaWAN regional parameters revision ",
       "MAXEIRP": "Max EIRP ",
       "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
       "GEOLOCMINBUFFERSIZE": "Geolocation minimum buffer size",
@@ -708,17 +710,17 @@
       "PINGSLOTDR_PLACEHOLDER": "0",
       "PINGSLOTFREQ_PLACEHOLDER": "0",
       "CLASSCTIMEOUT_PLACEHOLDER": "0",
-      "ID": "Device profilens ID",
-      "ORGANIZATION": "Tilhørende organisation"
+      "ID": "Device profilens id",
+      "ORGANIZATION": "Organisation"
     }
   },
   "USERS": {
     "SAVE": "Gem",
     "NAME": "Navn",
     "EMAIL": "Email",
-    "GLOBALADMIN": "Global Administrator",
+    "GLOBALADMIN": "Global administrator",
     "STATUS": "Status",
-    "LASTLOG": "Sidste Login",
+    "LASTLOG": "Sidste login",
     "EDIT": "Redigér User",
     "CREATE": "Opret ny bruger",
     "LOGIN": "Sidst aktiv",
@@ -760,10 +762,16 @@
   "AUTH": {
     "EMAIL": "Email",
     "PASSWORD": "Adgangskode",
-    "KOMBIT-BUTTON": "Login med KOMBIT Adgangsstyring"
+    "KOMBIT-BUTTON": "Login med KOMBIT adgangsstyring"
   },
   "DASHBOARD": {
-    "WELCOME": "Velkommen til OS2iot – din nye indgang til administration af IoT enheder på tværs af netværkstyper.",
+    "WELCOME": "VELKOMMEN TIL OS2IoT",
+    "WELCOME-SUB": " Din indgang til administration af IoT enheder",
+    "LINK-1": "OS2iot.os2.eu",
+    "LINK-2": "løsningens produktside",
+    "SUB-HEADER-1":"Community",
+    "SUB-HEADER-2": "Om OS2IOT",
+    "BUTTON":"Start med at oprette en organisation",
     "LIST": {
       "HEADLINE": "Med version 1.0 kan du:",
       "P1": "Håndtere dine IoT enheder ét sted",
@@ -772,9 +780,11 @@
       "P4":"Oprette applikationer på tværs af organisationer",
       "P5":"Genbruge dekodningsfunktioner og –scripts på tværs af organisationer",
       "P6":"Dele gateways og data fra IoT enheder på tværs af organisationer",
-      "P7":"Og meget mere."
+      "P7":"Let offentligøre dine data og meget mere."
     },
-    "WELCOME-MESSAGE": "Vi opfordrer dig til at blive en aktiv del af vores OS2iot community på OS2iot.os2.eu og dele dine spørgsmål, udviklingsønsker og de fejl du måtte finde. Ved fælles hjælp bliver løsningen bedre. \n \n OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på løsningens produktside.",
+    "WELCOME-MESSAGE": "Vi opfordrer dig til at blive en aktiv del af vores OS2iot community på ",
+    "WELCOME-MESSAGE-3": " og dele dine spørgsmål, udviklingsønsker og de fejl du måtte finde. Ved fælles hjælp bliver løsningen bedre.",
+    "WELCOME-MESSAGE-2": "OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på ",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT.",
     "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere.",
@@ -798,6 +808,30 @@
   },
   "BATTERY": {
     "NOT_AVAILABLE": "N/A"
+  },
+  "TITLE": {
+    "APPLICATION": "OS2IoT - Applikationer",
+    "SIGFOX": "OS2IoT - Sigfox administration",
+    "DEVICEMODEL": "OS2IoT - Device model",
+    "LORAWAN-GATEWAY": "OS2IoT - LoRaWAN gateways",
+    "LORAWAN-PROFILE": "OS2IoT - LoRaWAN profiler",
+    "PAYLOADDECODER": "OS2IoT - Payload decoder",
+    "USER": "OS2IoT - Brugere",
+    "PERMISSION": "OS2IoT - Brugergrupper",
+    "ORGANIZATION": "OS2IoT - Organisationer",
+    "DATATARGET": "OS2IoT - Datatarget",
+    "BULKIMPORT": "OS2IoT - Bulk import",
+    "IOTDEVICE": "OS2IoT - IoT enhed",
+    "FRONTPAGE": "OS2IoT - Forside"
+
+  },
+  "PAGINATOR": {
+    "ITEM_PER_PAGE": "Antal pr. side",
+    "NEXT_PAGE": "Næste side",
+    "PREVIOUS_PAGE": "Forrige side",
+    "FIRST_PAGE": "Første side",
+    "LAST_PAGE": "Sidste side",
+    "OF": "af"
   },
   "false": "Nej",
   "true": "Ja",

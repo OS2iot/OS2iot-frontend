@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { faDatabase, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
@@ -21,12 +22,17 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
   constructor(
     public translate: TranslateService,
     private globalService: SharedVariableService,
+    private titleService: Title,
     private sigfoxService: SigfoxService) {
     translate.use('da');
   }
 
   ngOnInit(): void {
     this.getSigFoxGroups();
+    this.translate.get(['TITLE.SIGFOX'])
+      .subscribe(translations => {
+        this.titleService.setTitle(translations['TITLE.SIGFOX']);
+    });
   }
 
   getSigFoxGroups() {

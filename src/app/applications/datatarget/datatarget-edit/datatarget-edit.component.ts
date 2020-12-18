@@ -103,7 +103,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       this.getDevices();
     }
     this.getPayloadDecoders();
-    console.log(this.devices, this.payloadDecoders);
     this.setDataSetExcists();
   }
 
@@ -138,7 +137,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     dialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.deleteRow(index);
-        console.log(`Dialog result: ${result}`);
       }
     });
   }
@@ -158,11 +156,15 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   updateDatatarget() {
-    this.counter = 1 + this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0;
+    this.resetErrors();
+    this.counter = 1 + (this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0);
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
-          this.datatarget = response;
+          this.datatarget = response;          
+          if (this.datatarget.openDataDkDataset != null) {
+            this.datatarget.openDataDkDataset.acceptTerms = true;
+          }
           this.shouldShowMailDialog().subscribe(
             (response) => {
               this.countToRedirect();
@@ -189,7 +191,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
           (response) => {
-            console.log(response);
             this.countToRedirect();
           },
           (error) => {
@@ -199,7 +200,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
       } else {
         this.payloadDeviceDataTargetService.post(relation).subscribe(
           (res: any) => {
-            console.log(res);
             this.countToRedirect();
           },
           (error) => {
@@ -212,7 +212,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
   countToRedirect() {
     this.counter -= 1;
-    if (this.counter <= 0) {
+    if (this.counter <= 0 && !this.formFailedSubmit) {
       this.showSavedSnack();
       this.routeToDatatargets();
     }
@@ -227,11 +227,15 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   createDatatarget() {
+    this.resetErrors();
     this.datatarget.applicationId = this.applicationId;
     this.datatargetService.create(this.datatarget)
       .subscribe((response: Datatarget) => {
         this.datatargetid = response.id;
-        this.datatarget = response
+        this.datatarget = response;
+        if (this.datatarget.openDataDkDataset != null) {
+          this.datatarget.openDataDkDataset.acceptTerms = true;
+        }
         this.showSavedSnack();
       },
         (error: HttpErrorResponse) => {
@@ -240,6 +244,12 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
           this.formFailedSubmit = true;
         });
 
+  }
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
   }
 
   checkDataTargetModelOpendatadkdatasaet() {
@@ -256,12 +266,10 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   public selectAllDevices(index: number) {
-    console.log(this.payloadDeviceDatatarget[0].iotDeviceIds);
     this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
   }
 
   public deSelectAllDevices(index: number) {
-    console.log(this.payloadDeviceDatatarget[0].iotDeviceIds);
     this.payloadDeviceDatatarget[index].iotDeviceIds = [];
   }
 
@@ -284,8 +292,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   onCoordinateKey(event: any) {
-    console.log(event.target.value);
-    console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(
         0,

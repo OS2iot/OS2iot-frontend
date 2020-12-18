@@ -3,7 +3,6 @@
 // by a previous import.
 //
 
-
 // Breakpoints
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 576px;
@@ -19,7 +18,6 @@ $screen-xl-min: 1200px;
 
 $screen-xxl-min: 1400px;
 
-
 //############################### Font and Font sizes ####################
 //###########################################################################
 
@@ -34,7 +32,7 @@ $global-font-size: 100% !default;
 $em-base: 12; //62.5%; //-> 10px for standard browsers, now 'Font size' from the browser setting works correctly if the uses specifies a bigger standard font-size.
 
 $base-font-size: $em-base !default;
-$base-line-height: $em-base+2 !default;
+$base-line-height: $em-base + 2 !default;
 
 $min_width: $screen-sm-min;
 $max_width: $screen-xl-min;
@@ -61,7 +59,7 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 $font-path: '../fonts/Roboto/' !default;
 $image-path: '../images/' !default;
 $node-modules-path: '../../../node_modules';
-$icons-folder-path: "../img/svg-icons/" !default;
+$icons-folder-path: '../img/svg-icons/' !default;
 
 //headline sizes
 $h1: 30 !default;
@@ -152,10 +150,10 @@ $color-blue-002: rgba(0, 159, 223, 0.75) !default;
 $color-blue-003: rgba(0, 159, 223, 0.5) !default;
 $color-blue-004: rgba(63, 192, 243, 0.164) !default;
 
-$color-green-001: rgba(47, 121, 100, 1) !default;
-$color-green-002: rgba(47, 121, 100, 0.75) !default;
-$color-green-003: rgba(47, 121, 100, 0.5) !default;
-$color-green-004: rgba(47, 121, 100, 0.25) !default;
+$color-green-001: rgba(86, 178, 87, 1) !default;
+$color-green-002: rgba(86, 178, 87, 0.75) !default;
+$color-green-003: rgba(486, 178, 87, 0.5) !default;
+$color-green-004: rgba(86, 178, 87, 0.25) !default;
 
 $color-dark-green-001: rgba(0, 49, 39, 1) !default;
 $color-dark-green-002: rgba(0, 49, 39, 0.75) !default;
@@ -187,10 +185,10 @@ $color-purple-002: rgba(81, 45, 109, 0.75) !default;
 $color-purple-003: rgba(81, 45, 109, 0.5) !default;
 $color-purple-004: rgba(81, 45, 109, 0.25) !default;
 
-$color-orange-001: rgba(231, 102, 89, 1) !default;
-$color-orange-002: rgba(231, 102, 89, 0.75) !default;
-$color-orange-003: rgba(231, 102, 89, 0.5) !default;
-$color-orange-004: rgba(231, 102, 89, 0.25) !default;
+$color-orange-001: rgba(245, 122, 47, 1) !default;
+$color-orange-002: rgba(245, 122, 47, 0.75) !default;
+$color-orange-003: rgba(245, 122, 47, 0.5) !default;
+$color-orange-004: rgba(245, 122, 47, 0.25) !default;
 
 // // Colors used for alert boxes
 $color-base-001: $color-white-001 !default;
@@ -234,12 +232,11 @@ $color-text-grey-02: $color-grey-003 !default;
 $color-text-green: $color-green-001 !default;
 $color-text-black: $color-base-002 !default;
 
-
 //background-color
 $color-bg-normal: $color-white-001 !default;
 $color-bg-primary: $color-primary !default;
 $color-bg-primary-layer: $color-black-002 !default;
-$color-bg-secondary: $color-white-001!default;
+$color-bg-secondary: $color-white-001 !default;
 $color-bg-info: $color-blue-004 !default;
 
 //Icons color
@@ -268,7 +265,7 @@ $color-border-light: $color-white-004 !default;
 $color-border-black: $color-black-002 !default;
 $color-border-red: $color-red-002 !default;
 $color-border-success: $color-green-002 !default;
-$color-border-info: $color-blue-002 !default; 
+$color-border-info: $color-blue-002 !default;
 
 //Borders
 $border-width: 5px;
@@ -338,11 +335,8 @@ $box-shadow: $color-black-001 !default;
 
 // // /*################################# ###########################*/
 
-
-
 //############################### Old stuff - needs to be replaced with the above code ####################
 //#########################################################################################################
-
 
 // Widths
 $navWidth: 267px;
@@ -369,8 +363,22 @@ $green-light: #54a758;
 $green: #43a047;
 
 $orange-light: #ff6a3c;
-$orange: #E76659;
+$orange: #e76659;
 $orange-outline: rgba(244, 121, 47, 0.6);
 
 $red-light: #f8e7e9;
 $red: #dc3545;
+
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden !important;
+}
+
+.mat-tab-group {
+  .mat-tab-body.mat-tab-body-active {
+    overflow-y: hidden;
+  }
+}

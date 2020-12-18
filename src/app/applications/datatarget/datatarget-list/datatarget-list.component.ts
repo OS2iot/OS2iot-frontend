@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Datatarget } from '../datatarget.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { environment } from '@environments/environment';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -21,17 +22,19 @@ export class DatatargetListComponent implements OnInit {
 
     constructor(
         public translate: TranslateService,
-        private route: ActivatedRoute,) {
+        private titleService: Title,
+        private route: ActivatedRoute) {
         translate.use('da');
     }
 
     ngOnInit(): void {
         const applikationName: string = this.route.snapshot.paramMap.get('name');
         this.applikationId = this.route.snapshot.paramMap.get('id');
-        this.translate.get(["NAV.DATATARGET", "NAV.APPLICATIONS"])
+        this.translate.get(["NAV.DATATARGET", "NAV.APPLICATIONS", "TITLE.DATATARGET"])
             .subscribe((translate) => {
                 this.title = translate['NAV.DATATARGET'] + ' - ' + applikationName;
                 this.backButton.label = translate['NAV.APPLICATIONS'];
+                this.titleService.setTitle(translate['TITLE.DATATARGET']);
             });
         this.setBackButton()
     }

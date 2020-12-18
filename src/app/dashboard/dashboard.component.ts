@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { AuthService } from '@auth/auth.service';
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
   noAccess: string;
   isLoadingResults = true;
   hasSomePermission: boolean;
+  isGlobalAdmin = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,15 +25,20 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private sharedVariableService: SharedVariableService,
     private translate: TranslateService,
+    private titleService: Title,
     private userMinimalService: UserMinimalService,
   ) {
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
-      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS', 'DASHBOARD.KOMBIT-LOGIN-ERROR','DASHBOARD.USER-INACTIVE']).toPromise().then(translations => {
-        this.unauthorizedMessage = translations['DASHBOARD.NO-JOB-ACCESS'];
-        this.kombitError = translations['DASHBOARD.KOMBIT-LOGIN-ERROR'];
-        this.noAccess = translations['DASHBOARD.USER-INACTIVE'];
-      });
+      await this.translate.get(['DASHBOARD.NO-JOB-ACCESS','TITLE.FRONTPAGE', 'DASHBOARD.KOMBIT-LOGIN-ERROR','DASHBOARD.USER-INACTIVE'])
+        .toPromise()
+          .then(translations => {
+            this.unauthorizedMessage = translations['DASHBOARD.NO-JOB-ACCESS'];
+            this.kombitError = translations['DASHBOARD.KOMBIT-LOGIN-ERROR'];
+            this.noAccess = translations['DASHBOARD.USER-INACTIVE'];
+            this.titleService.setTitle(translations['TITLE.FRONTPAGE']);
+          }
+      );
       // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
       if (jwt) {
@@ -54,6 +61,7 @@ export class DashboardComponent implements OnInit {
       await this.sharedVariableService.setOrganizationInfo();
       this.userMinimalService.setUserMinimalList()
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
+      this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
       this.isLoadingResults = false;
     });
   }

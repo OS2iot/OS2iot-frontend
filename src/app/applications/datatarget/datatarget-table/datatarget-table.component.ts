@@ -25,7 +25,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     datatargets: Datatarget[];
     resultsLength = 0;
     public canEdit = false;
-    @Input() isLoadingResults: boolean;
+    @Input() isLoadingResults: boolean = true;
     public pageSize = environment.tablePageSize;
 
     @Input() pageLimit: number;

@@ -82,10 +82,6 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    getJoinedDeviceNames(element: IotDevice[]): string {
-        return element.map(device => device.name).join(', ');
-    }
-
     getDatatargetRelations(id: number) {
         this.datatargetRelationServicer.getByDataTarget(id)
             .subscribe((response) => {

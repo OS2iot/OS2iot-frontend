@@ -1,9 +1,7 @@
 .img-logo {
   background-color: transparent;
   width: 50px;
-  margin-top: 15px;
-
-  @media(min-width: $screen-md-min) {
+  @media (min-width: $screen-md-min) {
     width: 100px;
   }
 }

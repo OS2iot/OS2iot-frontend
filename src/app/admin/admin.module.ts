@@ -27,6 +27,7 @@ import { UserTableComponent } from './users/user-list/user-table/user-table.comp
 import { UsersComponent } from './users/users.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     SharedModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatSelectSearchModule,
   ],
   exports: [
     UserDetailComponent,
@@ -79,4 +81,4 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     OrganisationListComponent,
   ],
 })
-export class AdminModule { }
+export class AdminModule {}

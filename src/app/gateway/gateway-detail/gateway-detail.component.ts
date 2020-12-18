@@ -33,6 +33,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
+    isLoadingResults = true;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -81,6 +82,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.resultLength = this.gatewayStats.length;
             this.dataSource.paginator = this.paginator;
             this.setDropdownButton();
+            this.isLoadingResults = false;
         });
     }
 

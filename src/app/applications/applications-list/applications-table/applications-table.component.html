@@ -1,8 +1,7 @@
-<div *ngIf="isLoadingResults">
-  <app-loading-spinner *ngIf="isLoadingResults"></app-loading-spinner>
-</div>
 <div class="mat-elevation-z8">
-
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
   <div>
     <div *ngIf="errorMessage" class="error-messages p-3 m-2">
       {{errorMessage | translate}}

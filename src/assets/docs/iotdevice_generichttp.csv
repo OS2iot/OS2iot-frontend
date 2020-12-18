@@ -1,1 +1,2 @@
-name,id,type,longitude,latitude,commentOnLocation,comment
+name,id,type,longitude,latitude,commentOnLocation,comment,deviceModelId
+,,"GENERIC_HTTP",,,,,

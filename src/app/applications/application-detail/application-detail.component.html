@@ -21,10 +21,16 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="jumbotron">
-          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
-            [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
-            [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
-          </app-top-bar-table>
+          <div *ngIf="canEdit else readOnly">
+            <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
+              [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'new-iot-device'"
+              [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'bulk-import'">
+            </app-top-bar-table>
+          </div>
+          <ng-template #readOnly>
+            <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate">
+            </app-top-bar-table>
+          </ng-template>
           <app-iot-devices-table [applicationId]="id"></app-iot-devices-table>
         </div>
       </div>

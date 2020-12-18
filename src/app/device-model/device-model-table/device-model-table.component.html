@@ -1,8 +1,8 @@
-<app-loading-spinner [hidden]="!isLoadingResults">
-</app-loading-spinner>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc">
-
+        <div class="loading-shade" *ngIf="isLoadingResults">
+            <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        </div>
         <!-- Name Column -->
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef matSortDisableClear>
