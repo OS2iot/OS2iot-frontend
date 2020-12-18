@@ -150,7 +150,7 @@
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "OPENDATA-DK": "OpenDataDK", 
-    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datapakke endnu"
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
   },
   "OPENDATADK": {
     "QUESTION": {
