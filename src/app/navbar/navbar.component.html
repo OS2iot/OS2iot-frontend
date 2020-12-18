@@ -66,7 +66,9 @@
         </div>
         <div class="logout-btn">
           <li class="nav-item">
-            <a class="nav-link pl-5 position-relative rounded" href="https://os2iot.os2.eu/" target="_blank">{{'NAV.HELP' | translate }}</a>
+            <a class="nav-link pl-5 position-relative rounded" (click)="goToHelp()" target="_blank">
+              {{'NAV.HELP' | translate }}
+            </a>
             <fa-icon [icon]="faQuestionCircle" class="navbar-icon"></fa-icon>
           </li>
           <li class="nav-item">

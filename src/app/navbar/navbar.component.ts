@@ -66,6 +66,10 @@ export class NavbarComponent implements OnInit {
     return this.authService.isLoggedInWithKombit();
   }
 
+  public goToHelp() {
+    window.open('https://os2iot.os2.eu/');
+  }
+
   getKombitLogoutUrl() {
     const jwt = this.authService.getJwt();
     if (this.authService.isLoggedInWithKombit()) {
