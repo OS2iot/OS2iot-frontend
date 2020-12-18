@@ -227,11 +227,17 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   createDatatarget() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
     this.datatarget.applicationId = this.applicationId;
     this.datatargetService.create(this.datatarget)
       .subscribe((response: Datatarget) => {
         this.datatargetid = response.id;
         this.datatarget = response
+        if (this.datatarget.openDataDkDataset != null) {
+          this.datatarget.openDataDkDataset.acceptTerms = true;
+        }
         this.showSavedSnack();
       },
         (error: HttpErrorResponse) => {
