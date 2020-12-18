@@ -31,7 +31,6 @@ export class BulkImportComponent implements OnInit {
     { name: 'generic-http-sample.csv', url: '../../../assets/docs/iotdevice_generichttp.csv' },
     { name: 'lorawan-otaa-sample.csv', url: '../../../assets/docs/iotdevice_lorawan_otaa.csv' },
     { name: 'lorawan-abp-sample.csv', url: '../../../assets/docs/iotdevice_lorawan_abp.csv' },
-    { name: 'sigfox-sample.csv', url: '../../../assets/docs/iotdevice_sigfox.csv' },
   ]
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
