@@ -23,7 +23,7 @@
     </div>
     <div class="navbar-collapse collapse overflow-auto flex-grow-0" id="navbar" [attr.aria-expanded]="!isCollapsed"
       [ngClass]="{collapse: !isCollapsed}">
-      <ul class="navbar-nav d-flex flex-column mt-5" (click)="isCollapsed = !isCollapsed">
+      <ul class="navbar-nav d-flex flex-column marginY mt-lg-5" (click)="isCollapsed = !isCollapsed">
         <div>
           <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
           {{getUsername()}}
