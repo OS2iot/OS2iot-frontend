@@ -767,6 +767,11 @@
   "DASHBOARD": {
     "WELCOME": "VELKOMMEN TIL OS2IoT",
     "WELCOME-SUB": " Din indgang til administration af IoT enheder",
+    "LINK-1": "OS2iot.os2.eu",
+    "LINK-2": "løsningens produktside",
+    "SUB-HEADER-1":"Community",
+    "SUB-HEADER-2": "Om OS2IOT",
+    "BUTTON":"Start med at oprette en organisation",
     "LIST": {
       "HEADLINE": "Med version 1.0 kan du:",
       "P1": "Håndtere dine IoT enheder ét sted",
