@@ -157,11 +157,14 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
   updateDatatarget() {
     this.resetErrors();
-    this.counter = 1 + this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0;
+    this.counter = 1 + (this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0);
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
-          this.datatarget = response;
+          this.datatarget = response;          
+          if (this.datatarget.openDataDkDataset != null) {
+            this.datatarget.openDataDkDataset.acceptTerms = true;
+          }
           this.shouldShowMailDialog().subscribe(
             (response) => {
               this.countToRedirect();
@@ -229,7 +232,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     this.datatargetService.create(this.datatarget)
       .subscribe((response: Datatarget) => {
         this.datatargetid = response.id;
-        this.datatarget = response
+        this.datatarget = response;
         if (this.datatarget.openDataDkDataset != null) {
           this.datatarget.openDataDkDataset.acceptTerms = true;
         }
