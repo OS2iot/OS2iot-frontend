@@ -817,6 +817,14 @@
     "FRONTPAGE": "OS2IoT - Forside"
 
   },
+  "PAGINATOR": {
+    "ITEM_PER_PAGE": "Antal pr. side",
+    "NEXT_PAGE": "Næste side",
+    "PREVIOUS_PAGE": "Forrige side",
+    "FIRST_PAGE": "Første side",
+    "LAST_PAGE": "Sidste side",
+    "OF": "af"
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

@@ -21,6 +21,8 @@ import { SearchModule } from './search/search.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,6 +78,7 @@ export function tokenGetter() {
         Title,
         { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
         { provide: SAVER, useFactory: getSaver },
+        { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
     ],
 })
 export class AppModule { }
