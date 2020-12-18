@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2 pt-md-4"
   aria-expanded="false">
 
-  <a routerLink="/dashboard" class="navbar-brand p-0 pl-2" href="">
+  <a routerLink="/dashboard" class="navbar-brand p-0 pl-2 mb-5" href="">
     <img class="img-logo" alt="OS2IoT-logo" [src]="imagePath" />
   </a>
   <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
-    <ul class="navbar-nav flex-column mt-5">
+    <ul class="navbar-nav flex-column">
       <li class="nav-item">
         <a routerLink="/auth" [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth">
           {{ 'NAV.LOGIN' | translate }}
@@ -21,9 +21,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-    <div class="navbar-collapse collapse overflow-auto flex-grow-0" id="navbar" [attr.aria-expanded]="!isCollapsed"
+    <div class="navbar-collapse collapse overflow-auto flex-grow-0 h-100" id="navbar" [attr.aria-expanded]="!isCollapsed"
       [ngClass]="{collapse: !isCollapsed}">
-      <ul class="navbar-nav d-flex flex-column marginY mt-lg-5" (click)="isCollapsed = !isCollapsed">
+      <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
         <div>
           <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
           {{getUsername()}}
@@ -64,7 +64,8 @@
             </ul>
           </li>
         </div>
-        <div class="logout-btn">
+        <div class="flex-column flex-grow-1"></div>
+        <div class="flex-column">
           <li class="nav-item">
             <a class="nav-link pl-5 position-relative rounded" (click)="goToHelp()" target="_blank">
               {{'NAV.HELP' | translate }}
