@@ -93,7 +93,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   private fitToBounds(markers: any[]) {
     const group = new L.featureGroup(markers);
-    this.map.fitBounds(group.getBounds());
+    this.map.fitBounds(group.getBounds(), {padding: [50,50]});
   }
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
