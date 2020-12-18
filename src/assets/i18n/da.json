@@ -512,7 +512,7 @@
     "NAME-PLACEHOLDER": "Navn på LoRaWAN gateway",
     "DESCRIPTION": "LoRaWAN gateway beskrivelse",
     "DESCRIPTION-PLACEHOLDER": "Beskrivelse af LoRaWAN gateway",
-    "GATEWAYID": "Gateway id",
+    "GATEWAYID": "Gateway id (EUI)",
     "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
     "METADATA": "Gateway tags",
     "METADATA-PLACEHOLDER": "Angiv JSON her",
