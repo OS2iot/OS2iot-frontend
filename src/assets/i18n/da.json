@@ -80,6 +80,7 @@
     "CREATE": "Opret applikation",
     "SAVE": "Gem applikation",
     "DELETE": "Slet applikation",
+	"DELETE-HAS-DEVICES-PROMPT": "Der er knyttet IoT-enheder til denne applikation. Disse vil også blive slettet. Slet alligevel?",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",

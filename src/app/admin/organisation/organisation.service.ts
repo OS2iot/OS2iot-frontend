@@ -15,7 +15,7 @@ import { UserMinimalService } from '../users/user-minimal.service';
 })
 export class OrganisationService {
   URL = 'organization';
-  URLMINIMAL ='organization/minimal'
+  URLMINIMAL = 'organization/minimal';
 
   constructor(
     private restService: RestService,
@@ -38,25 +38,27 @@ export class OrganisationService {
           (response: OrganisationResponse) => {
             response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
             response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
-            return response
+            return response;
           }
         )
       );
   }
 
   getMinimal(): Observable<OrganisationGetMinimalResponse> {
-    return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
+    const test = this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
+    console.log('Minimal Organization Response', test);
+    return test;
   }
 
-  getMultiple(    
+  getMultiple(
     limit: number = 1000,
     offset: number = 0,
     orderByColumn?: string,
     orderByDirection?: string,
   ): Observable<OrganisationGetManyResponse> {
     return this.restService.get(this.URL, {
-      limit: limit,
-      offset: offset,
+      limit,
+      offset,
       orderOn: orderByColumn,
       sort: orderByDirection,
     });

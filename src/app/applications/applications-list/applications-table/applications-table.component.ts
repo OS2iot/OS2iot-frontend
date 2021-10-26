@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Application, ApplicationData } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
@@ -34,6 +35,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    public translate: TranslateService,
     private applicationService: ApplicationService,
     private router: Router,
     private meService: MeService,
@@ -41,7 +43,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization()
+    this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
   ngAfterViewInit() {
@@ -85,7 +87,12 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   deleteApplication(id: number) {
-    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+    let message: string;
+    if (this.applicationHasDevices(id)) {
+      message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
+    }
+
+    this.deleteDialogService.showSimpleDialog(message).subscribe((response) => {
       if (response) {
         this.applicationService.deleteApplication(id).subscribe((response) => {
           if (response.ok && response.body.affected > 0) {
@@ -100,6 +107,11 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         });
       }
     });
+  }
+
+  applicationHasDevices(id: number): boolean {
+    const applicationToDelete = this.data?.find(app => app.id === id);
+    return applicationToDelete && applicationToDelete.iotDevices.length > 0;
   }
 
   navigateToEditPage(applicationId: string) {
