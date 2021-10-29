@@ -45,9 +45,7 @@ export class OrganisationService {
   }
 
   getMinimal(): Observable<OrganisationGetMinimalResponse> {
-    const test = this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
-    console.log('Minimal Organization Response', test);
-    return test;
+    return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
   getMultiple(
