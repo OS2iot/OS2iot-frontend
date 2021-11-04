@@ -1,11 +1,8 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
+// "env" is defined in env.js and facilitates dynamic configurations using environment variables
 export const environment = {
-    production: false,
-    baseUrl: 'http://localhost:3000/api/v1/',
-    tablePageSize: 20,
+    production: window["env"].PRODUCTION === "true",
+    baseUrl: window["env"].BASE_URL,
+    tablePageSize: parseInt(window["env"].TABLE_PAGE_SIZE) || 20
 };
 
 /*

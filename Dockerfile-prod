@@ -23,7 +23,7 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . /app
 
 # Build the project and copy the files
-RUN npm run ng build -- --deploy-url=/ --prod
+RUN npm run ng build -- --deploy-url=/ --c production
 
 FROM bitnami/nginx:latest
 
@@ -37,7 +37,17 @@ COPY ./.nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/frontend.conf
 # Copy from the stahg 1
 COPY --from=builder /app/dist/OS2IoT-frontend /app
 
+## Change user to perform privileged actions
+USER 0
+# Install envsubst
+RUN apt-get update && apt-get install -y gettext-base
+# Make sure we have write access to the env.js file without using the root user
+RUN chown 1001 /app/assets/env.js
+# Revert to the original non-root user
+USER 1001
+
 EXPOSE 8080
 EXPOSE 8081
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Substiture placeholders in env.template.js using environment variables overwrite env.js
+CMD ["/bin/sh",  "-c",  "envsubst < /app/assets/env.template.js > /app/assets/env.js && exec nginx -g 'daemon off;'"]
