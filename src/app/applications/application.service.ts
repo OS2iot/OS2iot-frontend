@@ -55,16 +55,16 @@ export class ApplicationService {
         permissionId?: number
     ): Observable<ApplicationData> {
         const body: GetApplicationParameters = {
-            limit: limit,
-            offset: offset,
-            sort: sort,
-            orderOn: orderOn,
+            limit,
+            offset,
+            sort,
+            orderOn,
         };
         if (permissionId) {
-            body.permissionId = permissionId
-            return this.restService.get(`permission/${permissionId}/applications`, body)  
+            body.permissionId = permissionId;
+            return this.restService.get(`permission/${permissionId}/applications`, body);
         } else if (organizationId) {
-            body.organizationId = organizationId
+            body.organizationId = organizationId;
             return this.restService.get('application', body);
         }
         return this.restService.get('application', body);
@@ -72,7 +72,7 @@ export class ApplicationService {
 
     getApplicationsByOrganizationId(organizationId: number): Observable<ApplicationData> {
         const body = {
-            organizationId: organizationId
+            organizationId
         };
         return this.restService.get('application', body);
 

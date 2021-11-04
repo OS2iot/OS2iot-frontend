@@ -65,7 +65,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       label: '',
       editRouterLink: 'edit-organisation',
       isErasable: true,
-    }
+    };
+
     this.translate.get(['NAV.ORGANISATIONS', 'ORGANISATION.DROPDOWN', 'TITLE.ORGANIZATION'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.ORGANISATIONS'];
