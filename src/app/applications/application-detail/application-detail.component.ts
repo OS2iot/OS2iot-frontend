@@ -44,7 +44,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
                 label: '',
                 editRouterLink: '../../edit-application/' + this.id,
                 isErasable: true,
-            }
+            };
+
             console.log(this.id);
         }
 
@@ -58,7 +59,12 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     onDeleteApplication() {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
+        let message: string;
+        if (this.applicationHasDevices()) {
+            message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
+        }
+
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(message).subscribe(
             (response) => {
                 if (response) {
                     this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
@@ -74,6 +80,10 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
                 }
             }
         );
+    }
+
+    applicationHasDevices(): boolean {
+        return this.application.iotDevices?.length > 0;
     }
 
     bindApplication(id: number): void {

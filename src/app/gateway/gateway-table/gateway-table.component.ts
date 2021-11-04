@@ -57,7 +57,7 @@ export class GatewayTableComponent implements AfterViewInit {
   ) {
     this.translate.use('da');
     moment.locale('da');
-  }
+}
 
   ngAfterViewInit() {
     this.organisationChangeSubject.subscribe((x) => {
