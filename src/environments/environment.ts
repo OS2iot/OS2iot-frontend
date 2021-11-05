@@ -1,7 +1,7 @@
 // "env" is defined in env.js and facilitates dynamic configurations using environment variables
 export const environment = {
     production: window["env"].PRODUCTION === "true",
-    baseUrl: window["env"].BASE_URL,
+    baseUrl: window["env"].BASE_URL || "http://localhost:3000/api/v1/",
     tablePageSize: parseInt(window["env"].TABLE_PAGE_SIZE) || 20
 };
 
