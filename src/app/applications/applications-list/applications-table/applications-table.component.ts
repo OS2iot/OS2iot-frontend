@@ -1,4 +1,10 @@
-import { Component, ViewChild, AfterViewInit, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -10,6 +16,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { DeviceType } from '@shared/enums/device-type';
 
 /**
  * @title Table retrieving data through HTTP
@@ -40,7 +47,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     private router: Router,
     private meService: MeService,
     private deleteDialogService: DeleteDialogService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.canEdit = this.meService.canWriteInTargetOrganization();
@@ -88,6 +95,11 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
 
   deleteApplication(id: number) {
     let message: string;
+
+    if (this.canBeDeleted(id)) {
+      return;
+    }
+
     if (this.applicationHasDevices(id)) {
       message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
     }
@@ -110,8 +122,40 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   applicationHasDevices(id: number): boolean {
-    const applicationToDelete = this.data?.find(app => app.id === id);
+    const applicationToDelete = this.data?.find((app) => app.id === id);
     return applicationToDelete && applicationToDelete.iotDevices.length > 0;
+  }
+
+  applicationHasSigFoxDevices(id: number): boolean {
+    const applicationToDelete = this.data?.find((app) => app.id === id);
+    const checkForSigfox = applicationToDelete.iotDevices.find((device) => {
+      return device.type === DeviceType.SIGFOX;
+    });
+    if (checkForSigfox) {
+      return true;
+    } else return false;
+  }
+
+  canBeDeleted(id: number): boolean {
+    let message: string;
+
+    if (this.applicationHasSigFoxDevices(id)) {
+      message = this.translate.instant(
+        'APPLICATION.DELETE-HAS-SIGFOX-DEVICES-PROMPT'
+      );
+      this.deleteDialogService
+        .showSimpleDialog(
+          message,
+          false,
+          true,
+          false,
+          this.translate.instant('APPLICATION.DELETE')
+        )
+        .subscribe();
+      return true;
+    } else {
+      return false;
+    }
   }
 
   navigateToEditPage(applicationId: string) {
