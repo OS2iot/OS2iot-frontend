@@ -17,34 +17,35 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { ApplicationsTableComponent } from './applications-list/applications-table/applications-table.component';
-
+import { MulticastModule } from './multicast/multicast.module';
 
 @NgModule({
-    declarations: [
-        ApplicationsComponent,
-        ApplicationDetailComponent,
-        ApplicationEditComponent,
-        ApplicationsListComponent,
-        ApplicationsTableComponent,
-        BulkImportComponent,
-    ],
-    exports: [
-        ApplicaitonsRoutingModule,
-        ApplicationsComponent,
-        ApplicationsTableComponent,
-    ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        TranslateModule,
-        IotDevicesModule,
-        DatatargetModule,
-        DirectivesModule,
-        FormModule,
-        SharedModule,
-        FontAwesomeModule,
-        NGMaterialModule,
-        PipesModule,
-    ],
+  declarations: [
+    ApplicationsComponent,
+    ApplicationDetailComponent,
+    ApplicationEditComponent,
+    ApplicationsListComponent,
+    ApplicationsTableComponent,
+    BulkImportComponent,
+  ],
+  exports: [
+    ApplicaitonsRoutingModule,
+    ApplicationsComponent,
+    ApplicationsTableComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    IotDevicesModule,
+    DatatargetModule,
+    DirectivesModule,
+    FormModule,
+    SharedModule,
+    FontAwesomeModule,
+    NGMaterialModule,
+    PipesModule,
+    MulticastModule,
+  ],
 })
-export class ApplicationsModule { }
+export class ApplicationsModule {}

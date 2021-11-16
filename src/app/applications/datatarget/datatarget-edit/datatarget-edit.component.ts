@@ -44,7 +44,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public datatargetid: number;
   private applicationId: number;
-  private applicationNane: string;
+  private applicationName: string;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
@@ -94,7 +94,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
     this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.applicationNane = this.route.snapshot.paramMap.get('name');
+    this.applicationName = this.route.snapshot.paramMap.get('name');
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -288,7 +288,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications',this.applicationId.toString(),'datatarget-list', this.applicationNane])
+    this.router.navigate(['applications',this.applicationId.toString(),'datatarget-list', this.applicationName])
   }
 
   onCoordinateKey(event: any) {

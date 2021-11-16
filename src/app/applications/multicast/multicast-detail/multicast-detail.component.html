@@ -1,0 +1,24 @@
+<div *ngIf="multicast">
+    <app-top-bar [title]="multicast.groupName" [data]="multicast" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+      [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()"></app-top-bar>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+            <h3>{{ 'MULTICAST.DETAILS' | translate }}</h3>
+            <app-general-details [data]="multicast"></app-general-details>
+            <mat-divider></mat-divider>
+            <p><strong>{{ 'MULTICAST.GROUPNAME' | translate }}</strong>{{multicast.groupName | translate }}</p>
+            <p><strong>{{ 'MULTICAST.ADDRESS' | translate }}</strong>{{multicast.address | translate}}</p>
+            <p><strong>{{ 'MULTICAST.NETWORK-KEY' | translate }}</strong>{{multicast.networkSessionKey | translate}}</p>
+            <p><strong>{{ 'MULTICAST.APPLICATION-KEY' | translate }}</strong>{{multicast.applicationSessionKey | translate}}</p>
+            <p><strong>{{ 'MULTICAST.FRAMECOUNTER' | translate }}</strong>{{multicast.frameCounter}}</p>
+            <p><strong>{{ 'MULTICAST.DATARATE' | translate }}</strong>{{multicast.dataRate}}</p>
+            <p><strong>{{ 'MULTICAST.FREQUENCY' | translate }}</strong>{{multicast.frequency}}</p>
+            <p><strong>{{ 'MULTICAST.GROUPTYPE' | translate }}</strong>{{multicast.groupType}}</p>
+            <!-- <p *ngIf="canShowPeriodicity()"><strong>{{ 'MULTICAST.PERIODICITY' | translate }}</strong>{{multicast.periodicity}}</p> Only if classB can be used--> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

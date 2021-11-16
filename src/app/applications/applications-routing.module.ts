@@ -10,6 +10,9 @@ import { DatatargetEditComponent } from './datatarget/datatarget-edit/datatarget
 import { DatatargetListComponent } from './datatarget/datatarget-list/datatarget-list.component';
 import { DatatargetDetailComponent } from './datatarget/datatarget-detail/datatarget-detail.component';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { MulticastListComponent } from './multicast/multicast-list/multicast-list.component';
+import { MulticastEditComponent } from './multicast/multicast-edit/multicast-edit.component';
+import { MulticastDetailComponent } from './multicast/multicast-detail/multicast-detail.component';
 
 
 const applicationRoutes: Routes = [
@@ -37,7 +40,16 @@ const applicationRoutes: Routes = [
                         ]
 
                     },
-                    { path: 'bulk-import', component: BulkImportComponent }
+                    {
+                        path: 'multicast-list/:name',
+                        children: [
+                            { path: '', component: MulticastListComponent },
+                            { path: 'multicast-edit', component: MulticastEditComponent},
+                            { path: 'multicast-edit/:multicastId', component: MulticastEditComponent },
+                            { path: 'multicast/:multicastId', component: MulticastDetailComponent }
+                        ]
+                    },
+                    { path: 'bulk-import', component: BulkImportComponent },
                 ],
             },
 

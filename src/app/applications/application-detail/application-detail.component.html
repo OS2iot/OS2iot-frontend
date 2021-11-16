@@ -1,5 +1,6 @@
 <div *ngIf="application">
   <app-top-bar [data]="application" [backButton]="backButton" [subPage]="true"
+    [ctaRouterLink]="['multicast-list', application.name]" [ctaLabel]="'APPLICATION.MULTICAST-SHOW' | translate"
     [dtRouterLink]="['datatarget-list', application.name]" [dtLabel]="'APPLICATION.DATATARGET-SHOW' | translate"
     [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteApplication()">
   </app-top-bar>

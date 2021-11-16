@@ -17,6 +17,7 @@
     "ALL-IOT-DEVICES": "Alle IoT enheder",
     "LORA-GATEWAYS": "LoRaWAN gateways",
     "DATATARGET": "Datatarget",
+    "MULTICAST": "Multicast",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "LoRaWAN profiler",
@@ -81,10 +82,12 @@
     "SAVE": "Gem applikation",
     "DELETE": "Slet applikation",
     "DELETE-HAS-DEVICES-PROMPT": "Der er knyttet IoT-enheder til denne applikation. Disse vil også blive slettet. Slet alligevel?",
+    "DELETE-HAS-SIGFOX-DEVICES-PROMPT": "Applikationen kan ikke slettes, da der er knyttet Sigfox enheder til den",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
     "DATATARGET-SHOW": "Tilknyttede data targets",
+    "MULTICAST-SHOW": "Tilknyttede multicast grupper",
     "IMPORT-CSV": "Bulk import af IoT enheder",
     "BULK": {
       "TEMPLATE": {
@@ -152,6 +155,19 @@
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "OPENDATA-DK": "OpenDataDK", 
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
+  },
+  "MULTICAST": {
+    "SAVE": "Gem multicast",
+    "DETAILS": "Detaljer",
+    "GROUPNAME": "Gruppe navn",
+    "ADDRESS": "Adresse",
+    "NETWORK-KEY": "Network session key",
+    "APPLICATION-KEY": "Network application key",
+    "FRAMECOUNTER": "Frame counter",
+    "DATARATE": "Data rate",
+    "FREQUENCY": "Frekvens (Hz)",
+    "GROUPTYPE": "Gruppe type",
+    "PERIODICITY": "Periodicitet"
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -240,6 +256,10 @@
     "NAME": "Navn",
     "TYPE": "Type"
   },
+  "MULTICAST-TABLE":{
+    "NAME": "Gruppenavn",
+    "TYPE": "Gruppetype"
+  },
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
@@ -264,7 +284,13 @@
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
-    "EDIT": "Redigér"
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Håndter datatarget"
+  },
+  "MULTICAST-TABLE-ROW": {
+    "DELETE": "Slet multicast",
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Håndter multicast"
   },
   "PAYLOAD-DECODER": {
     "DELETE-FAILED": "Slet fejlede",
@@ -364,7 +390,9 @@
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN gateway",
     "CREATE-NEW-DEVICE-MODEL": "Opret ny device model",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
+    "CREATE-NEW-MULTICAST": "Opret nyt multicast",
     "EDIT-DATATARGET": "Redigér datatarget",
+    "EDIT-MULTICAST": "Redigér multicast",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN gateway",
     "EDIT-NEW-APPLICATION": "Redigér applikation",
@@ -426,6 +454,22 @@
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
+    "GIVE-MULTICAST-NAME":"Navngiv multicast",
+    "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen",
+    "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key",
+    "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key",
+    "GIVE-MULTICAST-FRAMECOUNTER": "Angiv frame counter",
+    "GIVE-MULTICAST-DATARATE": "Angiv data rate",
+    "GIVE-MULTICAST-FREQUENCY": "Angiv frekvens (Hz)",
+    "GIVE-MULTICAST-GROUP-TYPE": "Angiv multicast gruppe type",
+    "GIVE-MULTICAST-PERIODICITY": "Angiv multicast ping-slot periodicitet",
+    "GIVE-MULTICAST-GROUPTYPE": "Angiv multicast gruppe typen",
+    "MULTICAST-NAME-PLACEHOLDER": "Multicastens navn",
+    "MULTICAST-ADDRESS-PLACEHOLDER": "Multicast adressen",
+    "MULTICAST-NETWORK-KEY-PLACEHOLDER": "Multicastens network session key",
+    "MULTICAST-APPLICATION-KEY-PLACEHOLDER": "Multicastens application session key",
+    "MULTICAST-GROUPTYPE-PLACEHOLDER": "Vælg multicast gruppe typen",
+    "MULTICAST-PERIODICITY-PLACEHOLDER": "Vælg Class-B ping periodiciteten",
     "OTAAAPPLICATIONKEY": "OTAA application key (AppKey)",
     "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA application key",
     "DEVADDR": "Device adress",
@@ -697,7 +741,7 @@
       "PINGSLOTFREQ": "Class-B ping-slot frequency",
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
-      "CANCEL": "Anuller",
+      "CANCEL": "Annuller",
       "SAVE": "Gem",
       "OTAA-ABP": "Join (OTAA / ABP)",
       "MACVERSION_PLACEHOLDER": "1.0.0",
@@ -821,6 +865,7 @@
     "PERMISSION": "OS2IoT - Brugergrupper",
     "ORGANIZATION": "OS2IoT - Organisationer",
     "DATATARGET": "OS2IoT - Datatarget",
+    "MULTICAST": "OS2IoT - Multicast",
     "BULKIMPORT": "OS2IoT - Bulk import",
     "IOTDEVICE": "OS2IoT - IoT enhed",
     "FRONTPAGE": "OS2IoT - Forside"
