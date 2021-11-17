@@ -2,6 +2,7 @@ import { MulticastType } from '@shared/enums/multicast-type';
 
 export class Multicast {
   id: number;
+  applicationId: number;
   groupName: string;
   address: string;
   networkSessionKey: string;

@@ -91,24 +91,40 @@ export class MulticastEditComponent implements OnInit {
   // }
 
   updateMulticast(): void {
+    this.resetErrors();
+    this.multicast.applicationId = this.applicationId;
     this.multicastService.update(this.multicast).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigateByUrl('/applications');
+        this.router.navigate([
+          'applications',
+          this.applicationId.toString(),
+          'multicast-list',
+          this.applicationName,
+        ]);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
+        this.formFailedSubmit = true;
       }
     );
   }
   createMulticast(): void {
+    this.resetErrors();
+    this.multicast.applicationId = this.applicationId;
     this.multicastService.create(this.multicast).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigateByUrl('/multicast-list');
+        this.router.navigate([
+          'applications',
+          this.applicationId.toString(),
+          'multicast-list',
+          this.applicationName,
+        ]);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
+        this.formFailedSubmit = true;
       }
     );
   }
@@ -119,6 +135,11 @@ export class MulticastEditComponent implements OnInit {
       'multicast-list',
       this.applicationName,
     ]);
+  }
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
   }
   handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);

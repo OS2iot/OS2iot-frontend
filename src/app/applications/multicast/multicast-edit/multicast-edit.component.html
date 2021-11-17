@@ -28,19 +28,19 @@
       </div>
 
       <div class="form-group mt-3">
-        <label class="form-label" for="networkKey">{{'QUESTION.GIVE-MULTICAST-NETWORK-KEY' | translate}}</label>*
+        <label class="form-label" for="networkSessionKey">{{'QUESTION.GIVE-MULTICAST-NETWORK-KEY' | translate}}</label>*
         <input type="text"
           [placeholder]="'QUESTION.MULTICAST-NETWORK-KEY-PLACEHOLDER' | translate" [maxLength]="32" required
-          class="form-control" id="networkKey" name="networkKey" [(ngModel)]="multicast.networkSessionKey"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('networkKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('networkKey')}">
+          class="form-control" id="networkSessionKey" name="networkSessionKey" [(ngModel)]="multicast.networkSessionKey"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('networkSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('networkSessionKey')}">
       </div>
 
       <div class="form-group mt-3">
-        <label class="form-label" for="applicationkey">{{'QUESTION.GIVE-MULTICAST-APPLICATION-KEY' | translate}}</label>*
+        <label class="form-label" for="applicationSessionKey">{{'QUESTION.GIVE-MULTICAST-APPLICATION-KEY' | translate}}</label>*
         <input type="text"
           [placeholder]="'QUESTION.MULTICAST-APPLICATION-KEY-PLACEHOLDER' | translate" [maxLength]="32" required
-          class="form-control" id="appliciationKey" name="applicationKey" [(ngModel)]="multicast.applicationSessionKey"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationKey')}">
+          class="form-control" id="appliciationSessionKey" name="applicationSessionKey" [(ngModel)]="multicast.applicationSessionKey"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('applicationSessionKey'), 'is-valid' : formFailedSubmit && !errorFields.includes('applicationSessionKey')}">
       </div>
 
       <div class="form-group mt-3">
@@ -68,7 +68,7 @@
       </div>
 
       <div class="form-group mt-3">
-        <label class="form-label" for="groupType">{{'QUESTION.MULTICAST-GROUPTYPE-PLACEHOLDER' | translate}}</label>
+        <label class="form-label" for="groupType">{{'QUESTION.MULTICAST-GROUPTYPE-PLACEHOLDER' | translate}}</label>*
         <mat-select class="form-control" name="groupType" [(ngModel)]="multicast.groupType" required
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('groupType'), 'is-valid' : formFailedSubmit && !errorFields.includes('groupType')}">
           <mat-option *ngFor="let multicastType of multicastTypes" [value]="multicastType">
