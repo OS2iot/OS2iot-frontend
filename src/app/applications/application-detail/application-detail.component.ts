@@ -5,6 +5,7 @@ import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceType } from '@shared/enums/device-type';
 import { BackButton } from '@shared/models/back-button.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { MeService } from '@shared/services/me.service';
@@ -59,12 +60,22 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     onDeleteApplication() {
+        
         let message: string;
-        if (this.applicationHasDevices()) {
-            message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
+        let showAccept: boolean = true;
+        const hasSigfoxDevices: boolean = this.applicationHasSigFoxDevices();
+
+        if (hasSigfoxDevices) {
+        message = this.translate.instant(
+            'APPLICATION.DELETE-HAS-SIGFOX-DEVICES-PROMPT'
+        );
+        showAccept = false;
+
+        } else if (this.applicationHasDevices()) {
+        message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
         }
 
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(message).subscribe(
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog(message, showAccept).subscribe(
             (response) => {
                 if (response) {
                     this.applicationService.deleteApplication(this.application.id).subscribe((response) => {
@@ -84,6 +95,13 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
 
     applicationHasDevices(): boolean {
         return this.application.iotDevices?.length > 0;
+    }
+
+    applicationHasSigFoxDevices(): boolean {
+        const sigfoxDevice = this.application.iotDevices.find((device) => {
+          return device.type === DeviceType.SIGFOX;
+        });
+        return sigfoxDevice !== undefined;
     }
 
     bindApplication(id: number): void {
