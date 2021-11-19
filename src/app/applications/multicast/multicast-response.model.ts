@@ -1,8 +1,9 @@
+import { Application } from '@applications/application.model';
 import { MulticastType } from '@shared/enums/multicast-type';
 
-export class Multicast {
+export class MulticastResponse {
   id: number;
-  applicationId: number;
+  application: Application;
   groupName: string;
   address: string;
   networkSessionKey: string;
@@ -18,10 +19,4 @@ export class Multicast {
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
-}
-
-export class MulticastData {
-  data: Multicast[];
-  ok?: boolean;
-  count?: number;
 }
