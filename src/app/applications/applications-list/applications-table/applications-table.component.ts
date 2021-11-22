@@ -94,21 +94,10 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   deleteApplication(id: number) {
-    let message: string;
-    let showAccept: boolean = true;
-    const hasSigfoxDevices: boolean = this.applicationHasSigFoxDevices(id);
-
-    if (hasSigfoxDevices) {
-      message = this.translate.instant(
-        'APPLICATION.DELETE-HAS-SIGFOX-DEVICES-PROMPT'
-      );
-      showAccept = false;
-    } else if (this.applicationHasDevices(id)) {
-      message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
-    }
+    const applicationToDelete = this.data?.find((app) => app.id === id);
 
     this.deleteDialogService
-      .showSimpleDialog(message, showAccept)
+      .showApplicationDialog(applicationToDelete)
       .subscribe((response) => {
         if (response) {
           this.applicationService
@@ -127,20 +116,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         }
       });
   }
-
-  applicationHasDevices(id: number): boolean {
-    const applicationToDelete = this.data?.find((app) => app.id === id);
-    return applicationToDelete && applicationToDelete.iotDevices.length > 0;
-  }
-
-  applicationHasSigFoxDevices(id: number): boolean {
-    const applicationToDelete = this.data?.find((app) => app.id === id);
-    const sigfoxDevice = applicationToDelete.iotDevices.find((device) => {
-      return device.type === DeviceType.SIGFOX;
-    });
-    return sigfoxDevice !== undefined;
-  }
-
   navigateToEditPage(applicationId: string) {
     this.router.navigate(['applications', 'edit-application', applicationId]);
   }
