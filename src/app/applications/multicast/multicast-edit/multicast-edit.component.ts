@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MulticastType } from '@shared/enums/multicast-type';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { SnackService } from '@shared/services/snack.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { Subscription } from 'rxjs';
 import { Multicast } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-multicast-edit',
@@ -36,7 +38,8 @@ export class MulticastEditComponent implements OnInit {
     private router: Router,
     public multicastService: MulticastService,
     public errorMessageService: ErrorMessageService,
-    public scrollToTopService: ScrollToTopService
+    public scrollToTopService: ScrollToTopService,
+    public snackService: SnackService
   ) {}
 
   ngOnInit(): void {
@@ -95,13 +98,8 @@ export class MulticastEditComponent implements OnInit {
     this.multicast.applicationId = this.applicationId;
     this.multicastService.update(this.multicast).subscribe(
       (response) => {
-        console.log(response);
-        this.router.navigate([
-          'applications',
-          this.applicationId.toString(),
-          'multicast-list',
-          this.applicationName,
-        ]);
+        this.showUpdatedSnack();
+        this.routeBack();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -114,13 +112,8 @@ export class MulticastEditComponent implements OnInit {
     this.multicast.applicationId = this.applicationId;
     this.multicastService.create(this.multicast).subscribe(
       (response) => {
-        console.log(response);
-        this.router.navigate([
-          'applications',
-          this.applicationId.toString(),
-          'multicast-list',
-          this.applicationName,
-        ]);
+        this.showSavedSnack();
+        this.routeBack();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -129,12 +122,23 @@ export class MulticastEditComponent implements OnInit {
     );
   }
   routeBack(): void {
-    this.router.navigate([
-      'applications',
-      this.applicationId.toString(),
-      'multicast-list',
-      this.applicationName,
-    ]);
+    this.router.navigate(['applications', this.applicationId.toString()]);
+  }
+  showSavedSnack() {
+    this.snackService.showSavedSnack();
+  }
+  showUpdatedSnack() {
+    this.snackService.showUpdatedSnack();
+  }
+  keyPressAlphaNumeric(event) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z0-9]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
   private resetErrors() {
     this.errorFields = [];

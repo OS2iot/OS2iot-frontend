@@ -65,7 +65,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     }
 
     private setBackButton(applicationId: number) {
-        this.backButton.routerLink = ['applications', applicationId.toString(), 'datatarget-list', this.applicationName ]
+        this.backButton.routerLink = ['applications', applicationId.toString()]
     }
 
     onDeleteDatatarget() {

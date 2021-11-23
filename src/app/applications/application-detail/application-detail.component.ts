@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { BackButton } from '@shared/models/back-button.model';
@@ -22,6 +23,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     public application: Application;
     public backButton: BackButton = { label: '', routerLink: '/applications' };
     public id: number;
+    public pageLimit = environment.tablePageSize;
     public dropdownButton: DropdownButton;
     public errorMessage: string;
     public canEdit = false;
@@ -86,6 +88,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         return this.application.iotDevices?.length > 0;
     }
 
+    
     bindApplication(id: number): void {
         this.applicationsSubscription = this.applicationService.getApplication(id).subscribe((application) => {
             this.application = application;
@@ -100,4 +103,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
             this.deleteDialogSubscription.unsubscribe();
         }
     }
+    updatePageLimit(limit: any) {
+        console.log(limit);
+      }
 }

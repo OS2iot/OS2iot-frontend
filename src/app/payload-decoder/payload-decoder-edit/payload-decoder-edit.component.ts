@@ -18,7 +18,7 @@ import { DeviceModelService } from '@app/device-model/device-model.service';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { TestPayloadDecoder } from '@payload-decoder/test-payload-decoder.model';
 import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder.service';
-import { SaveSnackService } from '@shared/services/save-snack.service';
+import { SnackService } from '@shared/services/snack.service';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { environment } from '@environments/environment';
@@ -75,7 +75,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     private iotDeviceService: IoTDeviceService,
     private deviceModelService: DeviceModelService,
-    private saveSnackService: SaveSnackService,
+    private saveSnackService: SnackService,
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService,
   ) { }

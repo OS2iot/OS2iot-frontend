@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Multicast } from '../multicast.model';
 import { Location } from '@angular/common';
 import { MulticastService } from '../multicast.service';
+import { SnackService } from '@shared/services/snack.service';
 
 @Component({
   selector: 'app-multicast-detail',
@@ -28,7 +29,8 @@ export class MulticastDetailComponent implements OnInit {
     private deleteDialogService: DeleteDialogService,
     private location: Location,
     private multicastService: MulticastService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public snackService: SnackService
   ) {}
 
   ngOnInit(): void {
@@ -62,9 +64,7 @@ export class MulticastDetailComponent implements OnInit {
   private setBackButton(applicationId: number) {
     this.backButton.routerLink = [
       'applications',
-      applicationId.toString(),
-      'multicast-list',
-      this.applicationName,
+      applicationId.toString()
     ];
   }
 
@@ -82,12 +82,27 @@ export class MulticastDetailComponent implements OnInit {
         if (response) {
           this.multicastService
             .delete(this.multicast.id)
-            .subscribe((response) => {});
-          this.location.back();
+            .subscribe((response) => {
+              if (response.status !== 0) {
+                this.showDeletedSnack();
+                this.location.back();
+              }
+              else{
+                this.showFailSnack();
+              }
+            });
         } else {
           console.log(response);
         }
       });
+  }
+
+  showDeletedSnack(): void {
+    this.snackService.showDeletedSnack();
+  }
+
+  showFailSnack(): void{
+    this.snackService.showFailSnack();
   }
 
   ngOnDestroy(): void {

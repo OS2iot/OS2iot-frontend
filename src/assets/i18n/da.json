@@ -46,6 +46,13 @@
       "DELETE": "Slet"
     }
   },
+  "SNACK": {
+    "SAVE": "Gemt succesfuldt",
+    "DELETE": "Slettet succesfuldt",
+    "UPDATE": "Opdateret succesfuldt",
+    "FAIL": "Fejl - aktion ikke fuldført",
+    "LOADFAIL": "Fejl - kunne ikke loade"
+  },
   "SEARCH": {
     "ICON": "",
     "TYPE": "Type",
@@ -87,8 +94,10 @@
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
     "DATATARGET-SHOW": "Tilknyttede data targets",
-    "MULTICAST-SHOW": "Tilknyttede multicast grupper",
+    "MULTICAST-SHOW": "Tilknyttede multicast",
+    "MULTICAST-GROUPS": "Multicast-grupper",
     "IMPORT-CSV": "Bulk import af IoT enheder",
+    "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {
         "GENERIC": "Generic HTTP sample",

@@ -16,7 +16,9 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MulticastType } from '@shared/enums/multicast-type';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
+import { SnackService } from '@shared/services/snack.service';
 import { Subscription } from 'rxjs';
+import { multicast } from 'rxjs/operators';
 import { Multicast, MulticastData } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 
@@ -50,16 +52,14 @@ export class MulticastTableComponent
     private deleteDialogService: DeleteDialogService,
     private multicastService: MulticastService,
     private meService: MeService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public snackService: SnackService
   ) {
     translate.use('da');
   }
 
   ngOnInit(): void {
-    this.applicationId = +Number(
-      this.route.parent.parent.snapshot.paramMap.get('id')
-    );
-    console.log(this.applicationId);
+    this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
     this.getMulticast();
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
@@ -79,6 +79,7 @@ export class MulticastTableComponent
           appId
         )
         .subscribe((multicasts: MulticastData) => {
+          console.log(multicasts);
           this.multicasts = multicasts.data;
           this.dataSource = new MatTableDataSource<Multicast>(this.multicasts);
           this.dataSource.paginator = this.paginator;
@@ -87,6 +88,9 @@ export class MulticastTableComponent
           this.isLoadingResults = false;
           if (this.pageLimit) {
             this.pageTotal = Math.ceil(multicasts.count / this.pageLimit);
+          }
+          if (multicasts.ok === false) {
+            this.showLoadFailSnack();
           }
         });
     }
@@ -100,6 +104,9 @@ export class MulticastTableComponent
           this.multicastService.delete(element.id).subscribe((response) => {
             if (response.ok && response.body.affected > 0) {
               this.getMulticast();
+              this.showDeletedSnack();
+            } else {
+              this.showFailSnack();
             }
           });
         } else {
@@ -108,6 +115,15 @@ export class MulticastTableComponent
       });
   }
 
+  showLoadFailSnack() {
+    this.snackService.showLoadFailSnack();
+  }
+  showFailSnack() {
+    this.snackService.showFailSnack();
+  }
+  showDeletedSnack() {
+    this.snackService.showDeletedSnack();
+  }
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     if (this.multicastSubscription) {

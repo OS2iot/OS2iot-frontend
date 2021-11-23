@@ -46,7 +46,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     ngOnInit(): void {
-        this.applicationId = +Number(this.route.parent.parent.snapshot.paramMap.get('id'));
+        this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
         console.log(this.applicationId);
         this.getDatatarget();
         this.canEdit = this.meService.canWriteInTargetOrganization()

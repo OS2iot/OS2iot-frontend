@@ -1,13 +1,19 @@
-<app-top-bar [pageLimit]="pageLimit" [title]="title" [ctaLabel]="'FORM.CREATE-NEW-MULTICAST' | translate"
-  [ctaRouterLink]="'multicast-edit'" (updatePageLimit)="updatePageLimit($event)" [subPage]="true"
-  [backButton]="backButton">
+<app-top-bar
+  [pageLimit]="pageLimit"
+  [title]="title"
+  [ctaLabel]="'FORM.CREATE-NEW-MULTICAST' | translate"
+  [ctaRouterLink]="'multicast-edit'"
+  (updatePageLimit)="updatePageLimit($event)"
+  [subPage]="true"
+  [backButton]="backButton"
+>
 </app-top-bar>
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron--table">
-          <app-multicast-table [pageLimit]="pageLimit"></app-multicast-table>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron--table">
+        <app-multicast-table [pageLimit]="pageLimit"></app-multicast-table>
       </div>
     </div>
   </div>
+</div>
