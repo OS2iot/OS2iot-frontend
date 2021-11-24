@@ -58,8 +58,8 @@ export class MulticastService {
     return this.restService.post(this.multicastURL, multicast).pipe(
       map(
         (response: MulticastResponse) => {
-          const datatarget = this.mapToMulticast(response);
-          return datatarget;
+          const multicast = this.mapToMulticast(response);
+          return multicast;
         }
       )
     );
