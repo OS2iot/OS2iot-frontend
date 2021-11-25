@@ -1,4 +1,10 @@
-import { Component, Input, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  AfterViewInit,
+  OnInit,
+} from '@angular/core';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from 'src/app/shared/services/rest.service';
@@ -59,7 +65,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization()
+    this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
   ngAfterViewInit() {
@@ -114,15 +120,9 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   public lastActive(device: IotDevice) {
-    const arr = device?.receivedMessagesMetadata;
-    if (!arr || arr.length === 0) {
-      return this.translate.instant('ACTIVITY.NEVER');
-    } else {
-      const lastActive = Math.max(
-        ...arr.map((x: ReceivedMessageMetadata) => Date.parse(x.sentTime))
-      );
-      return moment(lastActive).fromNow();
-    }
+    return device.latestReceivedMessage
+      ? moment(device.latestReceivedMessage.sentTime).fromNow()
+      : this.translate.instant('ACTIVITY.NEVER');
   }
 
   clickDelete(element: any) {
