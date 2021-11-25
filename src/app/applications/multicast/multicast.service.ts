@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, multicast } from 'rxjs/operators';
 import { MulticastResponse } from './multicast-response.model';
 import { Multicast, MulticastData } from './multicast.model';
 
@@ -15,8 +15,8 @@ export class MulticastService {
     private userMinimalService: UserMinimalService
   ) {}
 
-  private multicastURL = 'multicast';
-  getByApplicationId(
+  private multicastURL = 'multicast'; // api endpoint
+  getMulticastsByApplicationId(
     limit: number,
     offset: number,
     applicationId: number
@@ -25,58 +25,55 @@ export class MulticastService {
       limit,
       offset,
       applicationId,
-      // sort: sort,
-      // orderOn: orderOn,
-      // todo tilføj når iot-314 er tilføjet
     };
-    return this.restService.get(this.multicastURL, body);
+    return this.restService.get(this.multicastURL, body); // get's the multicasts from specific application by the url and the body with applicationId.
   }
-  get(id: number): Observable<Multicast> {
+  get(id: string): Observable<Multicast> {
+    // Get's a single multicast by id.
     return this.restService.get(this.multicastURL, {}, id).pipe(
-      map(
-        (response: MulticastResponse) => {
-          const datatarget = this.mapToMulticast(response);
-          return datatarget;
-        }
-      )
+      map((response: MulticastResponse) => {
+        const multicast = this.mapToMulticast(response); // maps the response from backend.
+        return multicast;
+      })
     );
   }
-  delete(id: number) {
+  delete(id: string) {
+    // deletes a chosen multicast by id
     return this.restService.delete(this.multicastURL, id);
   }
   update(multicast: Multicast): Observable<Multicast> {
-    return this.restService.put(this.multicastURL, multicast, multicast.id, { observe: 'response' }).pipe(
-      map(
-        (response: MulticastResponse) => {
-          const datatarget = this.mapToMulticast(response);
-          return datatarget;
-        }
-      )
-    );
-  }
-  create(multicast: Multicast): Observable<Multicast> {
-    return this.restService.post(this.multicastURL, multicast).pipe(
-      map(
-        (response: MulticastResponse) => {
+    // updates the chosen multicast by id
+    return this.restService
+      .put(this.multicastURL, multicast, multicast.multicastId)
+      .pipe(
+        map((response: MulticastResponse) => {
           const multicast = this.mapToMulticast(response);
           return multicast;
-        }
-      )
+        })
+      );
+  }
+  create(multicast: Multicast): Observable<Multicast> {
+    // creates a new multicast
+    return this.restService.post(this.multicastURL, multicast).pipe(
+      map((response: MulticastResponse) => {
+        const multicast = this.mapToMulticast(response);
+        return multicast;
+      })
     );
   }
 
   private mapToMulticast(multicastResponse: MulticastResponse): Multicast {
     const model: Multicast = {
-      id: multicastResponse.id,
-      groupName: multicastResponse.groupName,
+      multicastId: multicastResponse.multicastId,
+      name: multicastResponse.groupName,
       groupType: multicastResponse.groupType,
-      address: multicastResponse.address,
-      applicationSessionKey: multicastResponse.applicationSessionKey,
-      dataRate: multicastResponse.dataRate,
-      frameCounter: multicastResponse.frameCounter,
+      mcAddr: multicastResponse.address,
+      mcAppSKey: multicastResponse.applicationSessionKey,
+      dr: multicastResponse.dataRate,
+      fCnt: multicastResponse.frameCounter,
       frequency: multicastResponse.frequency,
-      networkSessionKey: multicastResponse.networkSessionKey,
-      applicationId: multicastResponse.application.id,
+      mcNwkSKey: multicastResponse.networkSessionKey,
+      applicationID: multicastResponse.application.id,
       createdAt: multicastResponse.createdAt,
       updatedAt: multicastResponse.updatedAt,
       createdBy: multicastResponse.createdBy,

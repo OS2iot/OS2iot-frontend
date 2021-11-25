@@ -16,12 +16,10 @@ import { SnackService } from '@shared/services/snack.service';
   styleUrls: ['./multicast-detail.component.scss'],
 })
 export class MulticastDetailComponent implements OnInit {
-  public multicastSubscription: Subscription;
   public multicast: Multicast;
   public backButton: BackButton = { label: '', routerLink: '/multicast-list' };
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
-  private applicationName: string;
   private applicationId: number;
 
   constructor(
@@ -34,8 +32,7 @@ export class MulticastDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id: number = +this.route.snapshot.paramMap.get('multicastId');
-    this.applicationName = this.route.snapshot.paramMap.get('name');
+    const id: string = this.route.snapshot.paramMap.get('multicastId'); // the multicastId is a string, created by chirpstack.
     if (id) {
       this.getMulticast(id);
       this.dropdownButton = {
@@ -54,7 +51,7 @@ export class MulticastDetailComponent implements OnInit {
       });
   }
 
-  getMulticast(id: number) {
+  getMulticast(id: string) {
     this.multicastService.get(id).subscribe((multicast: Multicast) => {
       this.multicast = multicast;
       this.setBackButton(this.applicationId);
@@ -75,13 +72,13 @@ export class MulticastDetailComponent implements OnInit {
   //   } else return false;
   // }
 
-  onDeleteDatatarget() {
+  onDeleteMulticast() {
     this.deleteDialogSubscription = this.deleteDialogService
       .showSimpleDialog()
       .subscribe((response) => {
         if (response) {
           this.multicastService
-            .delete(this.multicast.id)
+            .delete(this.multicast.multicastId)
             .subscribe((response) => {
               if (response.status !== 0) {
                 this.showDeletedSnack();

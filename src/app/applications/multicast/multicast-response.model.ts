@@ -2,7 +2,7 @@ import { Application } from '@applications/application.model';
 import { MulticastType } from '@shared/enums/multicast-type';
 
 export class MulticastResponse {
-  id: number;
+  multicastId: string;
   application: Application;
   groupName: string;
   address: string;

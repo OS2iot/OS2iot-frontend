@@ -13,12 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MulticastType } from '@shared/enums/multicast-type';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
 import { SnackService } from '@shared/services/snack.service';
 import { Subscription } from 'rxjs';
-import { multicast } from 'rxjs/operators';
 import { Multicast, MulticastData } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 
@@ -34,11 +32,10 @@ export class MulticastTableComponent
   displayedColumns: string[] = ['groupName', 'groupType', 'menu'];
   dataSource = new MatTableDataSource<Multicast>();
   multicasts: Multicast[];
-  resultsLength = 0;
+  resultsLength = 0
   public canEdit = false;
   @Input() isLoadingResults: boolean = true;
   public pageSize = environment.tablePageSize;
-
   @Input() pageLimit: number;
   public pageOffset = 0;
   public pageTotal: number;
@@ -60,7 +57,7 @@ export class MulticastTableComponent
 
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
-    this.getMulticast();
+    this.getMulticast(); // loads the multicasts
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
@@ -70,18 +67,17 @@ export class MulticastTableComponent
   }
 
   getMulticast(): void {
-    const appId: number = this.applicationId;
-    if (appId) {
+    if (this.applicationId) {
       this.multicastSubscription = this.multicastService
-        .getByApplicationId(
+        .getMulticastsByApplicationId(
+          // gets multicasts from db by applicationId
           this.pageLimit,
           this.pageOffset * this.pageLimit,
-          appId
+          this.applicationId
         )
         .subscribe((multicasts: MulticastData) => {
-          console.log(multicasts);
           this.multicasts = multicasts.data;
-          this.dataSource = new MatTableDataSource<Multicast>(this.multicasts);
+          this.dataSource = new MatTableDataSource<Multicast>(this.multicasts); // these lines of code is inspired/taken from datatarget.
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.dataSource.sortingDataAccessor = tableSorter;
@@ -90,25 +86,27 @@ export class MulticastTableComponent
             this.pageTotal = Math.ceil(multicasts.count / this.pageLimit);
           }
           if (multicasts.ok === false) {
-            this.showLoadFailSnack();
+            this.showLoadFailSnack(); // if not possible to load the multicasts, show error.
           }
         });
     }
   }
 
-  deleteMulticast(element: any) {
+  deleteMulticast(multicast: Multicast) {
     this.deleteDialogSubscription = this.deleteDialogService
       .showSimpleDialog()
       .subscribe((response) => {
-        if (response) {
-          this.multicastService.delete(element.id).subscribe((response) => {
-            if (response.ok && response.body.affected > 0) {
-              this.getMulticast();
-              this.showDeletedSnack();
-            } else {
-              this.showFailSnack();
-            }
-          });
+        if (response) { // if user presses "yes, delete", then delete the multicast.
+          this.multicastService
+            .delete(multicast.multicastId)
+            .subscribe((response) => {
+              if (response.ok && response.body.affected > 0) { // if deleted succesfully, get the new array of multicasts and show a succesful snack.
+                this.getMulticast();
+                this.showDeletedSnack();
+              } else {
+                this.showFailSnack();
+              }
+            });
         } else {
           console.log(response);
         }
@@ -124,7 +122,7 @@ export class MulticastTableComponent
   showDeletedSnack() {
     this.snackService.showDeletedSnack();
   }
-  ngOnDestroy() {
+  ngOnDestroy() { // inspired by datatarget
     // prevent memory leak by unsubscribing
     if (this.multicastSubscription) {
       this.multicastSubscription.unsubscribe();

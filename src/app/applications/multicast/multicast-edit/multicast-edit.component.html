@@ -11,28 +11,28 @@
 
   <div class="row">
     <div class="form-group mt-3">
-      <label class="form-label" for="groupName">{{
+      <label class="form-label" for="name">{{
         'QUESTION.GIVE-MULTICAST-NAME' | translate
       }}</label
       >*
       <input
         type="text"
         class="form-control"
-        id="groupName"
-        name="groupName"
+        id="name"
+        name="name"
         [placeholder]="'QUESTION.MULTICAST-NAME-PLACEHOLDER' | translate"
         maxlength="50"
         required
-        [(ngModel)]="multicast.groupName"
+        [(ngModel)]="multicast.name"
         [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('groupName'),
-          'is-valid': formFailedSubmit && !errorFields.includes('groupName')
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
       />
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="address">{{
+      <label class="form-label" for="mcAddr">{{
         'QUESTION.GIVE-MULTICAST-ADDRESS' | translate
       }}</label
       >*
@@ -43,19 +43,19 @@
         [maxLength]="8"
         required
         class="form-control"
-        id="address"
-        name="address"
-        [(ngModel)]="multicast.address"
+        id="mcAddr"
+        name="mcAddr"
+        [(ngModel)]="multicast.mcAddr"
         [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('address'),
-          'is-valid': formFailedSubmit && !errorFields.includes('address')
+          'is-invalid': formFailedSubmit && errorFields.includes('mcAddr'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mcAddr')
         }"
-        (keypress)="keyPressAlphaNumeric($event)"
+        (keypress)="keyPressHexadecimal($event)"
       />
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="networkSessionKey">{{
+      <label class="form-label" for="mcNwkSKey">{{
         'QUESTION.GIVE-MULTICAST-NETWORK-KEY' | translate
       }}</label
       >*
@@ -65,21 +65,21 @@
         [maxLength]="32"
         required
         class="form-control"
-        id="networkSessionKey"
-        name="networkSessionKey"
-        [(ngModel)]="multicast.networkSessionKey"
+        id="mcNwkSKey"
+        name="mcNwkSKey"
+        [(ngModel)]="multicast.mcNwkSKey"
         [ngClass]="{
           'is-invalid':
-            formFailedSubmit && errorFields.includes('networkSessionKey'),
+            formFailedSubmit && errorFields.includes('mcNwkSKey'),
           'is-valid':
-            formFailedSubmit && !errorFields.includes('networkSessionKey')
+            formFailedSubmit && !errorFields.includes('mcNwkSKey')
         }"
-        (keypress)="keyPressAlphaNumeric($event)"
+        (keypress)="keyPressHexadecimal($event)"
       />
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="applicationSessionKey">{{
+      <label class="form-label" for="mcAppSKey">{{
         'QUESTION.GIVE-MULTICAST-APPLICATION-KEY' | translate
       }}</label
       >*
@@ -91,56 +91,56 @@
         [maxLength]="32"
         required
         class="form-control"
-        id="appliciationSessionKey"
-        name="applicationSessionKey"
-        [(ngModel)]="multicast.applicationSessionKey"
+        id="mcAppSKey"
+        name="mcAppSKey"
+        [(ngModel)]="multicast.mcAppSKey"
         [ngClass]="{
           'is-invalid':
-            formFailedSubmit && errorFields.includes('applicationSessionKey'),
+            formFailedSubmit && errorFields.includes('mcAppSKey'),
           'is-valid':
-            formFailedSubmit && !errorFields.includes('applicationSessionKey')
+            formFailedSubmit && !errorFields.includes('mcAppSKey')
         }"
-        (keypress)="keyPressAlphaNumeric($event)"
+        (keypress)="keyPressHexadecimal($event)"
       />
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="frameCounter">{{
+      <label class="form-label" for="fCnt">{{
         'QUESTION.GIVE-MULTICAST-FRAMECOUNTER' | translate
       }}</label
       >*
       <input
         type="number"
-        [placeholder]="multicast.frameCounter"
+        [placeholder]="multicast.fCnt"
         required
         class="form-control"
-        id="frameCounter"
-        name="frameCounter"
-        [(ngModel)]="multicast.frameCounter"
+        id="fCnt"
+        name="fCnt"
+        [(ngModel)]="multicast.fCnt"
         [ngClass]="{
           'is-invalid':
-            formFailedSubmit && errorFields.includes('frameCounter'),
-          'is-valid': formFailedSubmit && !errorFields.includes('frameCounter')
+            formFailedSubmit && errorFields.includes('fCnt'),
+          'is-valid': formFailedSubmit && !errorFields.includes('fCnt')
         }"
       />
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="dataRate">{{
+      <label class="form-label" for="dr">{{
         'QUESTION.GIVE-MULTICAST-DATARATE' | translate
       }}</label
       >*
       <input
         type="number"
-        [placeholder]="multicast.dataRate"
+        [placeholder]="multicast.dr"
         required
         class="form-control"
-        id="dataRate"
-        name="dataRate"
-        [(ngModel)]="multicast.dataRate"
+        id="dr"
+        name="dr"
+        [(ngModel)]="multicast.dr"
         [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('dataRate'),
-          'is-valid': formFailedSubmit && !errorFields.includes('dataRate')
+          'is-invalid': formFailedSubmit && errorFields.includes('dr'),
+          'is-valid': formFailedSubmit && !errorFields.includes('dr')
         }"
       />
     </div>

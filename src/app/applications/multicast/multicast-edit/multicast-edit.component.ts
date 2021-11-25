@@ -9,7 +9,6 @@ import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { Subscription } from 'rxjs';
 import { Multicast } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-multicast-edit',
@@ -18,16 +17,14 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class MulticastEditComponent implements OnInit {
   public title: string;
-  public multicastId: number;
+  public multicastId: string;
   public errorMessages: any;
   private multicastSubscription: Subscription;
   public errorFields: string[];
   @Input() submitButton: string;
   public backButtonTitle: string;
   public multicast: Multicast = new Multicast();
-  private counter: number;
   private applicationId: number;
-  private applicationName: string;
   public formFailedSubmit: boolean = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128];
@@ -51,8 +48,10 @@ export class MulticastEditComponent implements OnInit {
         'NAV.MULTICAST',
       ])
       .subscribe((translations) => {
-        const multicastId = +this.route.snapshot.paramMap.get('multicastId');
-        if (multicastId !== 0) {
+        this.multicastId = this.route.snapshot.paramMap.get('multicastId'); // the multicastId is a string, created by chirpstack. Used when in edit when update.
+        this.applicationId = +this.route.snapshot.paramMap.get('id');
+
+        if (this.multicastId !== null) {
           this.title = translations['FORM.EDIT-MULTICAST'];
         } else {
           this.title = translations['FORM.CREATE-NEW-MULTICAST'];
@@ -61,28 +60,23 @@ export class MulticastEditComponent implements OnInit {
         this.backButtonTitle = translations['NAV.MULTICAST'];
       });
 
-    this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
-    this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.applicationName = this.route.snapshot.paramMap.get('name');
-
-    if (this.multicastId !== 0) {
+    if (this.multicastId !== null) { // If edit is pressed, then get the specific multicast.
       this.getMulticast(this.multicastId);
     }
   }
   onSubmit(): void {
-    this.counter = 0;
-    if (this.multicastId) {
+    if (this.multicastId) { // if already created, only update
       this.updateMulticast();
-    } else {
+    } else { // else create new
       this.createMulticast();
     }
   }
 
-  getMulticast(id: number) {
+  getMulticast(id: string) {
     this.multicastSubscription = this.multicastService
       .get(id)
       .subscribe((response: Multicast) => {
-        this.multicast = response;
+        this.multicast = response; // gets the multicast and set's local multicast. Used when update.
       });
   }
 
@@ -95,9 +89,9 @@ export class MulticastEditComponent implements OnInit {
 
   updateMulticast(): void {
     this.resetErrors();
-    this.multicast.applicationId = this.applicationId;
+    this.multicast.applicationID = this.applicationId;
     this.multicastService.update(this.multicast).subscribe(
-      (response) => {
+      () => {
         this.showUpdatedSnack();
         this.routeBack();
       },
@@ -109,9 +103,9 @@ export class MulticastEditComponent implements OnInit {
   }
   createMulticast(): void {
     this.resetErrors();
-    this.multicast.applicationId = this.applicationId;
+    this.multicast.applicationID = this.applicationId;
     this.multicastService.create(this.multicast).subscribe(
-      (response) => {
+      () => {
         this.showSavedSnack();
         this.routeBack();
       },
@@ -130,10 +124,10 @@ export class MulticastEditComponent implements OnInit {
   showUpdatedSnack() {
     this.snackService.showUpdatedSnack();
   }
-  keyPressAlphaNumeric(event) {
+  keyPressHexadecimal(event) { // make sure only hexadecimal can be typed in input with adresses.
     var inp = String.fromCharCode(event.keyCode);
 
-    if (/[a-zA-Z0-9]/.test(inp)) {
+    if (/[a-fA-F0-9]/.test(inp)) {
       return true;
     } else {
       event.preventDefault();

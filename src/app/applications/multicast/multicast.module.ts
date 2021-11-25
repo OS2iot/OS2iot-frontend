@@ -22,7 +22,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     CommonModule,
     RouterModule,
     TranslateModule,
-    FormModule,
     NGMaterialModule,
     FontAwesomeModule,
     ReactiveFormsModule,
