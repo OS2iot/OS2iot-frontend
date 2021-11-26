@@ -34,7 +34,8 @@
     "DEVICE-MODEL": "Device model",
     "BACK": "Tilbage",
     "LOGOUT": "Log ud",
-    "HELP": "Hjælp"
+    "HELP": "Hjælp",
+    "API-KEY": "API nøgler"
   },
   "TOPBAR":{
     "SEARCH": {
@@ -150,7 +151,7 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK", 
+    "OPENDATA-DK": "OpenDataDK",
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
   },
   "OPENDATADK": {
