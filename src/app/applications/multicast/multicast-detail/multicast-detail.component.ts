@@ -32,7 +32,7 @@ export class MulticastDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id: string = this.route.snapshot.paramMap.get('multicastId'); // the multicastId is a string, created by chirpstack.
+    const id: number = +this.route.snapshot.paramMap.get('multicastId');
     if (id) {
       this.getMulticast(id);
       this.dropdownButton = {
@@ -51,7 +51,7 @@ export class MulticastDetailComponent implements OnInit {
       });
   }
 
-  getMulticast(id: string) {
+  getMulticast(id: number) {
     this.multicastService.get(id).subscribe((multicast: Multicast) => {
       this.multicast = multicast;
       this.setBackButton(this.applicationId);
@@ -59,10 +59,7 @@ export class MulticastDetailComponent implements OnInit {
   }
 
   private setBackButton(applicationId: number) {
-    this.backButton.routerLink = [
-      'applications',
-      applicationId.toString()
-    ];
+    this.backButton.routerLink = ['applications', applicationId.toString()];
   }
 
   //only if classB can be used
@@ -78,13 +75,12 @@ export class MulticastDetailComponent implements OnInit {
       .subscribe((response) => {
         if (response) {
           this.multicastService
-            .delete(this.multicast.multicastId)
+            .delete(this.multicast.id)
             .subscribe((response) => {
               if (response.status !== 0) {
                 this.showDeletedSnack();
                 this.location.back();
-              }
-              else{
+              } else {
                 this.showFailSnack();
               }
             });
@@ -98,7 +94,7 @@ export class MulticastDetailComponent implements OnInit {
     this.snackService.showDeletedSnack();
   }
 
-  showFailSnack(): void{
+  showFailSnack(): void {
     this.snackService.showFailSnack();
   }
 

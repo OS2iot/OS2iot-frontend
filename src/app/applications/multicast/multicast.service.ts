@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
-import { map, multicast } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { MulticastResponse } from './multicast-response.model';
 import { Multicast, MulticastData } from './multicast.model';
 
@@ -28,7 +28,7 @@ export class MulticastService {
     };
     return this.restService.get(this.multicastURL, body); // get's the multicasts from specific application by the url and the body with applicationId.
   }
-  get(id: string): Observable<Multicast> {
+  get(id: number): Observable<Multicast> {
     // Get's a single multicast by id.
     return this.restService.get(this.multicastURL, {}, id).pipe(
       map((response: MulticastResponse) => {
@@ -37,14 +37,14 @@ export class MulticastService {
       })
     );
   }
-  delete(id: string) {
+  delete(id: number) {
     // deletes a chosen multicast by id
     return this.restService.delete(this.multicastURL, id);
   }
   update(multicast: Multicast): Observable<Multicast> {
     // updates the chosen multicast by id
     return this.restService
-      .put(this.multicastURL, multicast, multicast.multicastId)
+      .put(this.multicastURL, multicast, multicast.id)
       .pipe(
         map((response: MulticastResponse) => {
           const multicast = this.mapToMulticast(response);
@@ -64,15 +64,16 @@ export class MulticastService {
 
   private mapToMulticast(multicastResponse: MulticastResponse): Multicast {
     const model: Multicast = {
-      multicastId: multicastResponse.multicastId,
+      id: multicastResponse.id,
       name: multicastResponse.groupName,
-      groupType: multicastResponse.groupType,
-      mcAddr: multicastResponse.address,
-      mcAppSKey: multicastResponse.applicationSessionKey,
-      dr: multicastResponse.dataRate,
-      fCnt: multicastResponse.frameCounter,
-      frequency: multicastResponse.frequency,
-      mcNwkSKey: multicastResponse.networkSessionKey,
+      groupType: multicastResponse.lorawanMulticastDefinition.groupType,
+      mcAddr: multicastResponse.lorawanMulticastDefinition.address,
+      mcAppSKey:
+        multicastResponse.lorawanMulticastDefinition.applicationSessionKey,
+      dr: multicastResponse.lorawanMulticastDefinition.dataRate,
+      fCnt: multicastResponse.lorawanMulticastDefinition.frameCounter,
+      frequency: multicastResponse.lorawanMulticastDefinition.frequency,
+      mcNwkSKey: multicastResponse.lorawanMulticastDefinition.networkSessionKey,
       applicationID: multicastResponse.application.id,
       createdAt: multicastResponse.createdAt,
       updatedAt: multicastResponse.updatedAt,

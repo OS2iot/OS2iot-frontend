@@ -1,7 +1,7 @@
 import { MulticastType } from '@shared/enums/multicast-type';
 
 export class Multicast {
-  multicastId: string;
+  id: number;
   applicationID: number;
   name: string;
   mcAddr: string;

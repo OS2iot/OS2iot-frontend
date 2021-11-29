@@ -2,16 +2,10 @@ import { Application } from '@applications/application.model';
 import { MulticastType } from '@shared/enums/multicast-type';
 
 export class MulticastResponse {
-  multicastId: string;
+  id: number;
   application: Application;
   groupName: string;
-  address: string;
-  networkSessionKey: string;
-  applicationSessionKey: string;
-  frameCounter: number = 0;
-  dataRate: number = 0;
-  frequency: number = 0;
-  groupType: MulticastType;
+  lorawanMulticastDefinition: LorawanMulticastDefinition;
   // periodicity: number; -> only if classB is gonna be used
   createdAt: string;
   updatedAt: string;
@@ -19,4 +13,15 @@ export class MulticastResponse {
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
+}
+
+export class LorawanMulticastDefinition {
+  address: string;
+  networkSessionKey: string;
+  applicationSessionKey: string;
+  frameCounter: number = 0;
+  dataRate: number = 0;
+  frequency: number = 0;
+  groupType: MulticastType;
+  chirpstackGroupId: string;
 }

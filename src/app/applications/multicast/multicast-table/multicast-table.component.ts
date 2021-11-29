@@ -98,7 +98,7 @@ export class MulticastTableComponent
       .subscribe((response) => {
         if (response) { // if user presses "yes, delete", then delete the multicast.
           this.multicastService
-            .delete(multicast.multicastId)
+            .delete(multicast.id)
             .subscribe((response) => {
               if (response.ok && response.body.affected > 0) { // if deleted succesfully, get the new array of multicasts and show a succesful snack.
                 this.getMulticast();

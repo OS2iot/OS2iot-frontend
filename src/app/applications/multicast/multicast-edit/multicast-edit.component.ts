@@ -17,7 +17,7 @@ import { MulticastService } from '../multicast.service';
 })
 export class MulticastEditComponent implements OnInit {
   public title: string;
-  public multicastId: string;
+  public multicastId: number;
   public errorMessages: any;
   private multicastSubscription: Subscription;
   public errorFields: string[];
@@ -46,33 +46,37 @@ export class MulticastEditComponent implements OnInit {
         'FORM.EDIT-MULTICAST',
         'MULTICAST.SAVE',
         'NAV.MULTICAST',
+        'GEN.BACK',
       ])
       .subscribe((translations) => {
-        this.multicastId = this.route.snapshot.paramMap.get('multicastId'); // the multicastId is a string, created by chirpstack. Used when in edit when update.
+        this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
         this.applicationId = +this.route.snapshot.paramMap.get('id');
 
-        if (this.multicastId !== null) {
+        if (this.multicastId) {
           this.title = translations['FORM.EDIT-MULTICAST'];
         } else {
           this.title = translations['FORM.CREATE-NEW-MULTICAST'];
         }
         this.submitButton = translations['MULTICAST.SAVE'];
-        this.backButtonTitle = translations['NAV.MULTICAST'];
+        this.backButtonTitle = translations['GEN.BACK'];
       });
 
-    if (this.multicastId !== null) { // If edit is pressed, then get the specific multicast.
+    if (this.multicastId) {
+      // If edit is pressed, then get the specific multicast.
       this.getMulticast(this.multicastId);
     }
   }
   onSubmit(): void {
-    if (this.multicastId) { // if already created, only update
+    if (this.multicastId) {
+      // if already created, only update
       this.updateMulticast();
-    } else { // else create new
+    } else {
+      // else create new
       this.createMulticast();
     }
   }
 
-  getMulticast(id: string) {
+  getMulticast(id: number) {
     this.multicastSubscription = this.multicastService
       .get(id)
       .subscribe((response: Multicast) => {
@@ -124,7 +128,8 @@ export class MulticastEditComponent implements OnInit {
   showUpdatedSnack() {
     this.snackService.showUpdatedSnack();
   }
-  keyPressHexadecimal(event) { // make sure only hexadecimal can be typed in input with adresses.
+  keyPressHexadecimal(event) {
+    // make sure only hexadecimal can be typed in input with adresses.
     var inp = String.fromCharCode(event.keyCode);
 
     if (/[a-fA-F0-9]/.test(inp)) {
