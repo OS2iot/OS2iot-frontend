@@ -3,6 +3,7 @@ import { MulticastType } from '@shared/enums/multicast-type';
 export class Multicast {
   id: number;
   applicationID: number;
+  iotDeviceIds?: number[];
   name: string;
   mcAddr: string;
   mcNwkSKey: string;

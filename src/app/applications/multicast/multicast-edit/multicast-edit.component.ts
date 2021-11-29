@@ -9,6 +9,9 @@ import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { Subscription } from 'rxjs';
 import { Multicast } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
+import { ApplicationService } from '@applications/application.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-multicast-edit',
@@ -21,6 +24,7 @@ export class MulticastEditComponent implements OnInit {
   public errorMessages: any;
   private multicastSubscription: Subscription;
   public errorFields: string[];
+  public iotDevices: IotDevice[];
   @Input() submitButton: string;
   public backButtonTitle: string;
   public multicast: Multicast = new Multicast();
@@ -28,6 +32,7 @@ export class MulticastEditComponent implements OnInit {
   public formFailedSubmit: boolean = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128];
+  public selectedIotDevices: IotDevice[];
 
   constructor(
     public translate: TranslateService,
@@ -36,7 +41,8 @@ export class MulticastEditComponent implements OnInit {
     public multicastService: MulticastService,
     public errorMessageService: ErrorMessageService,
     public scrollToTopService: ScrollToTopService,
-    public snackService: SnackService
+    public snackService: SnackService,
+    public applicationService: ApplicationService
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +67,8 @@ export class MulticastEditComponent implements OnInit {
         this.backButtonTitle = translations['GEN.BACK'];
       });
 
+    this.getApplication(this.applicationId);
+
     if (this.multicastId) {
       // If edit is pressed, then get the specific multicast.
       this.getMulticast(this.multicastId);
@@ -84,6 +92,12 @@ export class MulticastEditComponent implements OnInit {
       });
   }
 
+  getApplication(id: number) {
+    this.applicationService
+      .getApplication(this.applicationId)
+      .subscribe((application) => (this.iotDevices = application.iotDevices));
+  }
+
   //only if classB can be used
   // showPeriodicity(): boolean {
   //   if (this.multicast.groupType === MulticastType.ClassB) {
@@ -94,6 +108,10 @@ export class MulticastEditComponent implements OnInit {
   updateMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
+    this.multicast.iotDeviceIds = this.selectedIotDevices.map(
+      (device) => device.id
+    );
+
     this.multicastService.update(this.multicast).subscribe(
       () => {
         this.showUpdatedSnack();
@@ -108,6 +126,10 @@ export class MulticastEditComponent implements OnInit {
   createMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
+    this.multicast.iotDeviceIds = this.selectedIotDevices.map(
+      (device) => device.id
+    );
+
     this.multicastService.create(this.multicast).subscribe(
       () => {
         this.showSavedSnack();
@@ -119,6 +141,17 @@ export class MulticastEditComponent implements OnInit {
       }
     );
   }
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
+  }
+
+  selectAll() {
+    this.selectedIotDevices = this.iotDevices;
+  }
+  unSelectAll() {
+    this.selectedIotDevices = [];
+  }
+
   routeBack(): void {
     this.router.navigate(['applications', this.applicationId.toString()]);
   }

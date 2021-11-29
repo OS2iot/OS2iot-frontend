@@ -69,10 +69,8 @@
         name="mcNwkSKey"
         [(ngModel)]="multicast.mcNwkSKey"
         [ngClass]="{
-          'is-invalid':
-            formFailedSubmit && errorFields.includes('mcNwkSKey'),
-          'is-valid':
-            formFailedSubmit && !errorFields.includes('mcNwkSKey')
+          'is-invalid': formFailedSubmit && errorFields.includes('mcNwkSKey'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mcNwkSKey')
         }"
         (keypress)="keyPressHexadecimal($event)"
       />
@@ -95,10 +93,8 @@
         name="mcAppSKey"
         [(ngModel)]="multicast.mcAppSKey"
         [ngClass]="{
-          'is-invalid':
-            formFailedSubmit && errorFields.includes('mcAppSKey'),
-          'is-valid':
-            formFailedSubmit && !errorFields.includes('mcAppSKey')
+          'is-invalid': formFailedSubmit && errorFields.includes('mcAppSKey'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mcAppSKey')
         }"
         (keypress)="keyPressHexadecimal($event)"
       />
@@ -118,8 +114,7 @@
         name="fCnt"
         [(ngModel)]="multicast.fCnt"
         [ngClass]="{
-          'is-invalid':
-            formFailedSubmit && errorFields.includes('fCnt'),
+          'is-invalid': formFailedSubmit && errorFields.includes('fCnt'),
           'is-valid': formFailedSubmit && !errorFields.includes('fCnt')
         }"
       />
@@ -201,6 +196,45 @@
       </div> -->
   </div>
 
+  <div class="form-group mt-3">
+    <label class="form-label" for="groupType">{{
+      'QUESTION.GIVE-MULTICAST-IOTDEVICES' | translate
+    }}</label>
+
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>{{
+          'QUESTION.MULTICAST.SELECT-DEVICES' | translate
+        }}</mat-label>
+        <mat-select
+          multiple
+          name="devices"
+          [compareWith]="compare"
+          [(ngModel)]="selectedIotDevices"
+        >
+          <mat-option disabled="disabled" class="filter-option">
+            <button
+              mat-raised-button
+              class="mat-primary fill text-sm"
+              (click)="selectAll()"
+            >
+              {{ 'QUESTION.MULTICAST.SELECTALLDEVICES' | translate }}
+            </button>
+            <button
+              mat-raised-button
+              class="mat-primary fill text-sm"
+              (click)="unSelectAll()"
+            >
+              {{ 'QUESTION.MULTICAST.DESELECTALLDEVICES' | translate }}
+            </button>
+          </mat-option>
+          <mat-option *ngFor="let device of iotDevices" [value]="device">{{
+            device.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">
       {{ 'GEN.CANCEL' | translate }}

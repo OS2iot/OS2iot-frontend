@@ -469,6 +469,7 @@
     "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key",
     "GIVE-MULTICAST-FRAMECOUNTER": "Angiv frame counter",
     "GIVE-MULTICAST-DATARATE": "Angiv data rate",
+    "GIVE-MULTICAST-IOTDEVICES": "Angiv IoT Devices",
     "GIVE-MULTICAST-FREQUENCY": "Angiv frekvens (Hz)",
     "GIVE-MULTICAST-GROUP-TYPE": "Angiv multicast gruppe type",
     "GIVE-MULTICAST-PERIODICITY": "Angiv multicast ping-slot periodicitet",
@@ -510,6 +511,11 @@
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+    },
+    "MULTICAST": {
+      "SELECT-DEVICES": "Vælg enheder",
+      "SELECTALLDEVICES": "Vælg alle",
+      "DESELECTALLDEVICES": "Fravælg alle"
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",
