@@ -11,7 +11,6 @@ import { Multicast } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { ApplicationService } from '@applications/application.service';
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-multicast-edit',
@@ -32,7 +31,6 @@ export class MulticastEditComponent implements OnInit {
   public formFailedSubmit: boolean = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128];
-  public selectedIotDevices: IotDevice[];
 
   constructor(
     public translate: TranslateService,
@@ -89,12 +87,13 @@ export class MulticastEditComponent implements OnInit {
       .get(id)
       .subscribe((response: Multicast) => {
         this.multicast = response; // gets the multicast and set's local multicast. Used when update.
+        console.log(this.multicast.iotDevices);
       });
   }
 
   getApplication(id: number) {
     this.applicationService
-      .getApplication(this.applicationId)
+      .getApplication(id)
       .subscribe((application) => (this.iotDevices = application.iotDevices));
   }
 
@@ -108,9 +107,6 @@ export class MulticastEditComponent implements OnInit {
   updateMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
-    this.multicast.iotDeviceIds = this.selectedIotDevices.map(
-      (device) => device.id
-    );
 
     this.multicastService.update(this.multicast).subscribe(
       () => {
@@ -126,9 +122,6 @@ export class MulticastEditComponent implements OnInit {
   createMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
-    this.multicast.iotDeviceIds = this.selectedIotDevices.map(
-      (device) => device.id
-    );
 
     this.multicastService.create(this.multicast).subscribe(
       () => {
@@ -142,14 +135,14 @@ export class MulticastEditComponent implements OnInit {
     );
   }
   public compare(o1: any, o2: any): boolean {
-    return o1 === o2;
+    return o1 && o2 && o1.id == o2.id;
   }
 
   selectAll() {
-    this.selectedIotDevices = this.iotDevices;
+    this.multicast.iotDevices = this.iotDevices;
   }
   unSelectAll() {
-    this.selectedIotDevices = [];
+    this.multicast.iotDevices = [];
   }
 
   routeBack(): void {

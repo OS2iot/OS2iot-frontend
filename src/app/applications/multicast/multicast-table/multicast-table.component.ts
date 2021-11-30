@@ -57,7 +57,7 @@ export class MulticastTableComponent
 
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
-    this.getMulticast(); // loads the multicasts
+    this.getMulticasts(); // loads the multicasts
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
@@ -66,7 +66,7 @@ export class MulticastTableComponent
     this.dataSource.sort = this.sort;
   }
 
-  getMulticast(): void {
+  getMulticasts(): void {
     if (this.applicationId) {
       this.multicastSubscription = this.multicastService
         .getMulticastsByApplicationId(
@@ -101,7 +101,7 @@ export class MulticastTableComponent
             .delete(multicast.id)
             .subscribe((response) => {
               if (response.ok && response.body.affected > 0) { // if deleted succesfully, get the new array of multicasts and show a succesful snack.
-                this.getMulticast();
+                this.getMulticasts();
                 this.showDeletedSnack();
               } else {
                 this.showFailSnack();

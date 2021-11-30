@@ -176,7 +176,8 @@
     "DATARATE": "Data rate",
     "FREQUENCY": "Frekvens (Hz)",
     "GROUPTYPE": "Gruppe type",
-    "PERIODICITY": "Periodicitet"
+    "PERIODICITY": "Periodicitet",
+    "IOTDEVICE": "IoT enhed(er)"
   },
   "OPENDATADK": {
     "QUESTION": {

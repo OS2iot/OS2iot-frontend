@@ -1,24 +1,83 @@
 <div *ngIf="multicast">
-    <app-top-bar [data]="multicast" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-      [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteMulticast()"></app-top-bar>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="jumbotron jumbotron--m-right jumbotron--full-width">
-            <h3>{{ 'MULTICAST.DETAILS' | translate }}</h3>
-            <app-general-details [data]="multicast"></app-general-details>
-            <mat-divider></mat-divider>
-            <p><strong>{{ 'MULTICAST.GROUPNAME' | translate }}</strong>{{multicast.name | translate }}</p>
-            <p><strong>{{ 'MULTICAST.ADDRESS' | translate }}</strong>{{multicast.mcAddr | translate}}</p>
-            <p><strong>{{ 'MULTICAST.NETWORK-KEY' | translate }}</strong>{{multicast.mcNwkSKey | translate}}</p>
-            <p><strong>{{ 'MULTICAST.APPLICATION-KEY' | translate }}</strong>{{multicast.mcAppSKey | translate}}</p>
-            <p><strong>{{ 'MULTICAST.FRAMECOUNTER' | translate }}</strong>{{multicast.fCnt}}</p>
-            <p><strong>{{ 'MULTICAST.DATARATE' | translate }}</strong>{{multicast.dr}}</p>
-            <p><strong>{{ 'MULTICAST.FREQUENCY' | translate }}</strong>{{multicast.frequency}}</p>
-            <p><strong>{{ 'MULTICAST.GROUPTYPE' | translate }}</strong>{{multicast.groupType}}</p>
-            <!-- <p *ngIf="canShowPeriodicity()"><strong>{{ 'MULTICAST.PERIODICITY' | translate }}</strong>{{multicast.periodicity}}</p> Only if classB can be used--> 
+  <app-top-bar
+    [data]="multicast"
+    [backButton]="backButton"
+    [subPage]="true"
+    [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton"
+    (deleteSelectedInDropdown)="onDeleteMulticast()"
+  ></app-top-bar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+          <h3>{{ 'MULTICAST.DETAILS' | translate }}</h3>
+          <app-general-details [data]="multicast"></app-general-details>
+          <mat-divider></mat-divider>
+          <p>
+            <strong>{{ 'MULTICAST.GROUPNAME' | translate }}</strong
+            >{{ multicast.name | translate }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.ADDRESS' | translate }}</strong
+            >{{ multicast.mcAddr | translate }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.NETWORK-KEY' | translate }}</strong
+            >{{ multicast.mcNwkSKey | translate }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.APPLICATION-KEY' | translate }}</strong
+            >{{ multicast.mcAppSKey | translate }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.FRAMECOUNTER' | translate }}</strong
+            >{{ multicast.fCnt }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.DATARATE' | translate }}</strong
+            >{{ multicast.dr }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.FREQUENCY' | translate }}</strong
+            >{{ multicast.frequency }}
+          </p>
+          <p>
+            <strong>{{ 'MULTICAST.GROUPTYPE' | translate }}</strong
+            >{{ multicast.groupType }}
+          </p>
+          <!-- <p *ngIf="canShowPeriodicity()"><strong>{{ 'MULTICAST.PERIODICITY' | translate }}</strong>{{multicast.periodicity}}</p> Only if classB can be used-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+          <h3>{{ 'APPLICATION.ATTACHED-IOT' | translate }}</h3>
+          <div class="col-md-7 d-flex align-items-center">
+            <p>
+              <strong>{{ 'DATATARGET.IOTDEVICE' | translate }}:</strong>
+              <span
+                *ngFor="let device of multicast.iotDevices; let first = first"
+              >
+                <ng-container *ngIf="!first">, </ng-container>
+                <a
+                  [routerLink]="[
+                    '/applications',
+                    multicast.applicationID,
+                    'iot-device',
+                    device.id
+                  ]"
+                  >{{ device.name }}</a
+                >
+              </span>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

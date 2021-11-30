@@ -1,9 +1,11 @@
 import { Application } from '@applications/application.model';
+import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { MulticastType } from '@shared/enums/multicast-type';
 
 export class MulticastResponse {
   id: number;
   application: Application;
+  iotDevices: IotDevice[];
   groupName: string;
   lorawanMulticastDefinition: LorawanMulticastDefinition;
   // periodicity: number; -> only if classB is gonna be used

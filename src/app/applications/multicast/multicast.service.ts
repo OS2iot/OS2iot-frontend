@@ -45,21 +45,23 @@ export class MulticastService {
     // updates the chosen multicast by id
     return this.restService
       .put(this.multicastURL, multicast, multicast.id)
-      .pipe(
-        map((response: MulticastResponse) => {
-          const multicast = this.mapToMulticast(response);
-          return multicast;
-        })
-      );
+      .pipe
+      // map((response: MulticastResponse) => {
+      //   const multicast = this.mapToMulticast(response);
+      //   return multicast;
+      // })
+      ();
   }
   create(multicast: Multicast): Observable<Multicast> {
     // creates a new multicast
-    return this.restService.post(this.multicastURL, multicast).pipe(
-      map((response: MulticastResponse) => {
-        const multicast = this.mapToMulticast(response);
-        return multicast;
-      })
-    );
+    return this.restService
+      .post(this.multicastURL, multicast)
+      .pipe
+      // map((response: MulticastResponse) => {
+      //   const multicast = this.mapToMulticast(response);
+      //   return multicast;
+      // })
+      ();
   }
 
   private mapToMulticast(multicastResponse: MulticastResponse): Multicast {
@@ -75,6 +77,7 @@ export class MulticastService {
       frequency: multicastResponse.lorawanMulticastDefinition.frequency,
       mcNwkSKey: multicastResponse.lorawanMulticastDefinition.networkSessionKey,
       applicationID: multicastResponse.application.id,
+      iotDevices: multicastResponse.iotDevices,
       createdAt: multicastResponse.createdAt,
       updatedAt: multicastResponse.updatedAt,
       createdBy: multicastResponse.createdBy,
