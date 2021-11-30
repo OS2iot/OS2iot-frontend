@@ -1,1 +1,98 @@
-<p>api-key-table works!</p>
+<div class="mat-elevation-z8">
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <table
+    mat-table
+    [dataSource]="data"
+    matSort
+    matSortActive="name"
+    matSortDirection="asc"
+    matSortDisableClear
+  >
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ 'API-KEY.NAME' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <a *ngIf="canAccess(element); else justText"
+              (click)="routeToPermissions(element)"
+                  routerLinkActive="active" class="permission-link">
+              {{element.name}}
+              </a> -->
+        <!-- <ng-template #justText> -->
+        {{ element.name }}
+        <!-- </ng-template> -->
+      </td>
+    </ng-container>
+
+    <!-- User Groups Column -->
+    <ng-container matColumnDef="permissions">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'API-KEY.PERMISSIONS' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.users; else noUsers">
+          {{ element.users.length }}
+        </div>
+        <ng-template #noUsers>{{ 'NoUsersAdded' | translate }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Key Column -->
+    <ng-container matColumnDef="key">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'API-KEY.KEY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.key }}
+      </td>
+    </ng-container>
+
+    <!-- Menu Column -->
+    <ng-container matColumnDef="menu">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="dropdown" *ngIf="canAccess(element)">
+          <a
+            href="#"
+            role="button"
+            id="tableRowDropdown-{{ element.id }}"
+            class="applicationRow__edit dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="false"
+            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+          ></a>
+          <ul
+            class="dropdown-menu dropdown-menu--table"
+            attr.aria-labelledby="tableRowDropdown-{{ element.id }}"
+          >
+            <li class="dropdown-item">
+              <a
+                [routerLink]="['/admin/api-key', element.id, 'edit-api-key']"
+                routerLinkActive="active"
+                >{{ 'API-KEY.TABLE-ROW.EDIT' | translate }}
+              </a>
+            </li>
+            <li class="dropdown-item">
+              <a (click)="deleteApiKey(element.id)" [routerLink]=""
+                >{{ 'API-KEY.TABLE-ROW.DELETE' | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="pageSize"
+    [length]="resultsLength"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

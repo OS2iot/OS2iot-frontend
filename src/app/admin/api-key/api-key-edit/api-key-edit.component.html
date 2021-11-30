@@ -1,1 +1,65 @@
-<p>api-key-edit works!</p>
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+
+<form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{ error | translate }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{
+        'API-KEY.EDIT.NAME' | translate
+      }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [placeholder]="'API-KEY.EDIT.NAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="apiKeyRequest.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="permissions">{{
+        'QUESTION.PERMISSION.SELECT-PERMISSION' | translate
+      }}</label
+      >*
+      <mat-select
+        class="form-control"
+        name="permissions"
+        [compareWith]="compare"
+        [(ngModel)]="apiKeyRequest.permissions"
+      >
+        <mat-option
+          *ngFor="let permission of permissions"
+          [value]="permission.id"
+        >
+          {{ permission.name }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="form-group mt-5">
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">
+      {{ 'GEN.CANCEL' | translate }}
+    </button>
+    <button class="btn btn-primary ml-2" type="submit">
+      {{ 'GEN.SAVE' | translate }}
+    </button>
+  </div>
+</form>

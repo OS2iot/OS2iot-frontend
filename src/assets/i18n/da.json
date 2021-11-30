@@ -383,7 +383,8 @@
     "EDIT-SIGFOX-GROUPS": "Redigér Sigfox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
-    "EDIT-DEVICE-PROFILE": "Redigér device profil"
+    "EDIT-DEVICE-PROFILE": "Redigér device profil",
+    "EDIT-API-KEY": "Redigér API nøgle"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -507,6 +508,9 @@
       "SELECT-ENERGYLIMITATIONCLASS": "Vælg energibegrænsningsklassen (energyLimitationClass)",
       "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttede protokoller (supportedProtocol)",
       "FIWARE-LINK-TEXT": "Denne data model er adopteret fra Fiware og følger ETSI standarden"
+    },
+    "PERMISSION": {
+      "SELECT-PERMISSION": "Vælg brugergruppe"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -824,7 +828,8 @@
     "DATATARGET": "OS2IoT - Datatarget",
     "BULKIMPORT": "OS2IoT - Bulk import",
     "IOTDEVICE": "OS2IoT - IoT enhed",
-    "FRONTPAGE": "OS2IoT - Forside"
+    "FRONTPAGE": "OS2IoT - Forside",
+    "API-KEY": "OS2IoT - API nøgler"
 
   },
   "PAGINATOR": {
@@ -842,5 +847,23 @@
   "Forbidden resource": "Du har ikke rettigheder til at foretage denne handling",
   "GENERIC_HTTP": "Generisk HTTP",
   "LORAWAN": "LoRaWAN",
-  "SIGFOX": "Sigfox"
+  "SIGFOX": "Sigfox",
+  "API-KEY": {
+    "NAME": "Navn",
+    "PERMISSIONS": "Brugergrupper",
+    "KEY": "Nøgle",
+    "DETAIL": {},
+    "EDIT": {
+      "NAME": "Indtast nøglens navn",
+      "NAME-PLACEHOLDER": "Indtast nøglens navn",
+      "CANCEL": "Annuller",
+      "SAVE": "Gem nøgle",
+      "CREATE-NEW-API-KEY": "Opret nøgle"
+    },
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    }
+  },
+  "NoUsersAdded": "Ingen brugergrupper er tilføjet"
 }
