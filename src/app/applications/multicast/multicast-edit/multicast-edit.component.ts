@@ -114,6 +114,7 @@ export class MulticastEditComponent implements OnInit {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
+        this.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -129,6 +130,7 @@ export class MulticastEditComponent implements OnInit {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
+        this.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -150,6 +152,9 @@ export class MulticastEditComponent implements OnInit {
   }
   showSavedSnack() {
     this.snackService.showSavedSnack();
+  }
+  showFailSnack(){
+    this.snackService.showFailSnack();
   }
   showUpdatedSnack() {
     this.snackService.showUpdatedSnack();
