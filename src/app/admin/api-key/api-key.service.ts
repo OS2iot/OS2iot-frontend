@@ -25,12 +25,6 @@ export class ApiKeyService {
     });
   }
 
-  update(body: ApiKeyRequest, id: number): Observable<ApiKeyResponse> {
-    return this.restService.put(this.endpoint, body, id, {
-      observe: 'response',
-    });
-  }
-
   get(id: number): Observable<ApiKeyResponse> {
     return this.restService.get(this.endpoint, {}, id).pipe(
       map((response: ApiKeyResponse) => {

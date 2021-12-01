@@ -24,12 +24,10 @@ export class ApiKeyEditComponent implements OnInit {
   };
   public title = '';
   public submitButton = '';
-  private id: number;
   public errorMessage: string;
   public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
-  public isEditMode = false;
   public permissions: PermissionResponse[] = [];
   private organizationId: number;
 
@@ -56,29 +54,8 @@ export class ApiKeyEditComponent implements OnInit {
         this.submitButton = translations['API-KEY.EDIT.SAVE'];
       });
 
-    this.id = +this.route.snapshot.paramMap.get('api-key-id');
     this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
-
-    // if (this.id > 0) {
-    //   // TODO: Fetch current api key
-    //   this.getApiKey(this.id);
-    //   this.isEditMode = true;
-    // }
   }
-
-  // private getApiKey(id: number) {
-  //   this.apiKeyService.get(id).subscribe(
-  //     (response) => {
-  //       console.log(response);
-  //       this.apiKeyRequest.id = response.id;
-  //       this.apiKeyRequest.name = response.name;
-  //       this.apiKeyRequest.permissions = response.permissions;
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       this.showError(error);
-  //     }
-  //   );
-  // }
 
   private getPermissions() {
     this.permissionService
@@ -103,7 +80,7 @@ export class ApiKeyEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.id ? this.update() : this.create();
+    this.create();
   }
 
   private create(): void {
@@ -111,12 +88,6 @@ export class ApiKeyEditComponent implements OnInit {
       () => this.routeBack(),
       (err) => this.showError(err)
     );
-  }
-
-  private update(): void {
-    this.apiKeyService
-      .update(this.apiKeyRequest, this.id)
-      .subscribe(this.routeBack, this.showError);
   }
 
   public compare(o1: any, o2: any): boolean {
