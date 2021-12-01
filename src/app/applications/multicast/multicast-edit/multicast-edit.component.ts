@@ -87,7 +87,6 @@ export class MulticastEditComponent implements OnInit {
       .get(id)
       .subscribe((response: Multicast) => {
         this.multicast = response; // gets the multicast and set's local multicast. Used when update.
-        console.log(this.multicast.iotDevices);
       });
   }
 
