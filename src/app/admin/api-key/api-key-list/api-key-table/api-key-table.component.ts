@@ -17,16 +17,13 @@ import { ApiKeyService } from '../../api-key.service';
 })
 export class ApiKeyTableComponent implements AfterViewInit {
   @Input() organisationId: number;
-  displayedColumns: string[] = ['name', 'permissions', 'key', 'menu'];
-  data: ApiKeyResponse[] = [
-    // { id: 1, name: 'Abcd', key: 'sdafsegjhkjtrewr34252t$25!', permissions: [] },
-    // {
-    //   id: 2,
-    //   name: 'DoofApi',
-    //   key: 'jasdhjlw8o3-4u2qeuqnwodasd-521529f',
-    //   permissions: [],
-    // },
+  displayedColumns: string[] = [
+    'name',
+    'permissions',
+    'key',
+    'menu',
   ];
+  data: ApiKeyResponse[] = [];
   isLoadingResults = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -83,15 +80,7 @@ export class ApiKeyTableComponent implements AfterViewInit {
     );
   }
 
-  canAccess(element: ApiKeyResponse) {
-    // if (element.type === PermissionType.GlobalAdmin) {
-    //   return this.meService.hasGlobalAdmin();
-    // }
-    // return element.permissions?.some(
-    //   (p) =>
-    //     p.organization &&
-    //     this.meService.hasAdminAccessInTargetOrganization(p.organization.id)
-    // );
+  canAccess(_element: ApiKeyResponse) {
     return this.meService.hasAdminAccessInTargetOrganization(
       this.organisationId
     );

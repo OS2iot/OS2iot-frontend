@@ -5,6 +5,7 @@ import { ActiveDeactivePipe } from './activeDeactive.pipe';
 import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
+import { UniquePermissionOrganizationsPipe } from './unique-permission-organizations.pipe';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
         CustomDatePipe,
         CustomTableDatePipe,
         CreatedUpdatedByPipe,
+        UniquePermissionOrganizationsPipe,
     ],
     imports: [
         CommonModule
@@ -25,6 +27,7 @@ import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
         CustomDatePipe,
         CustomTableDatePipe,
         CreatedUpdatedByPipe,
+        UniquePermissionOrganizationsPipe,
     ]
 })
 export class PipesModule { }

@@ -850,15 +850,17 @@
   "SIGFOX": "Sigfox",
   "API-KEY": {
     "NAME": "Navn",
+    "ORGANIZATION": "Organisation",
     "PERMISSIONS": "Brugergrupper",
     "KEY": "Nøgle",
+    "CREATE-NEW-API-KEY": "Opret ny nøgle",
     "DETAIL": {},
     "EDIT": {
       "NAME": "Indtast nøglens navn",
       "NAME-PLACEHOLDER": "Indtast nøglens navn",
       "CANCEL": "Annuller",
       "SAVE": "Gem nøgle",
-      "CREATE-NEW-API-KEY": "Opret nøgle"
+      "CREATE-API-KEY": "Opret nøgle"
     },
     "TABLE-ROW": {
       "EDIT": "Redigér",

@@ -43,6 +43,7 @@
         name="permissions"
         [compareWith]="compare"
         [(ngModel)]="apiKeyRequest.permissions"
+        [multiple]="true"
       >
         <mat-option
           *ngFor="let permission of permissions"
