@@ -30,7 +30,7 @@ export class MulticastEditComponent implements OnInit {
   private applicationId: number;
   public formFailedSubmit: boolean = false;
   public multicastTypes: string[] = Object.values(MulticastType);
-  public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128];
+  // public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future
 
   constructor(
     public translate: TranslateService,
@@ -152,7 +152,7 @@ export class MulticastEditComponent implements OnInit {
   showSavedSnack() {
     this.snackService.showSavedSnack();
   }
-  showFailSnack(){
+  showFailSnack() {
     this.snackService.showFailSnack();
   }
   showUpdatedSnack() {

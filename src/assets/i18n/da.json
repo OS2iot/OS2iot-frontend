@@ -51,7 +51,9 @@
     "DELETE": "Slettet succesfuldt",
     "UPDATE": "Opdateret succesfuldt",
     "FAIL": "Fejl - aktion ikke fuldført",
-    "LOADFAIL": "Fejl - kunne ikke loade"
+    "LOADFAIL": "Fejl - kunne ikke loade",
+    "QUEUE": "Element sat i kø",
+    "CLOSE": "Luk"
   },
   "SEARCH": {
     "ICON": "",
@@ -177,7 +179,12 @@
     "FREQUENCY": "Frekvens (Hz)",
     "GROUPTYPE": "Gruppe type",
     "PERIODICITY": "Periodicitet",
-    "IOTDEVICE": "IoT enhed(er)"
+    "IOTDEVICE": "IoT enhed(er)",
+    "DOWNLINK": {
+      "PORT": "Angiv den ønskede port",
+      "PAYLOAD": "Angiv det ønskede payload",
+      "START": "Sæt downlink i kø"
+    }
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -516,7 +523,8 @@
     "MULTICAST": {
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
-      "DESELECTALLDEVICES": "Fravælg alle"
+      "DESELECTALLDEVICES": "Fravælg alle",
+      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload"
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",

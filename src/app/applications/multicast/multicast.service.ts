@@ -88,6 +88,7 @@ export class MulticastService {
       updatedByName: this.userMinimalService.getUserNameFrom(
         multicastResponse.updatedBy
       ),
+      
     };
     return model;
   }
