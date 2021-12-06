@@ -169,7 +169,8 @@
   },
   "MULTICAST": {
     "SAVE": "Gem multicast",
-    "DETAILS": "Detaljer",
+    "BASIC-DETAILS": "Basale detaljer",
+    "LORAWAN-DETAILS": "LoRaWAN detailjer",
     "GROUPNAME": "Gruppe navn",
     "ADDRESS": "Adresse",
     "NETWORK-KEY": "Network session key",
@@ -698,7 +699,9 @@
     "DELETE-NOT-ALLOWED-HAS-SIGFOX-DEVICE": "Applikation kan ikke blive slettet, da den indeholder en eller flere Sigfox enheder.",
     "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Service profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder.",
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
-    "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig."
+    "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
+    "DIFFERENT-SERVICE-PROFILE": "Dine devices har forskellige service profiles. De skal have den samme service profile!",
+    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast."
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",

@@ -25,5 +25,5 @@ export class LorawanMulticastDefinition {
   dataRate: number = 0;
   frequency: number = 0;
   groupType: MulticastType;
-  chirpstackGroupId: string;
+  chirpstackGroupId?: string;
 }

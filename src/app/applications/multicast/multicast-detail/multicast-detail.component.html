@@ -10,13 +10,15 @@
   <div class="row">
     <div class="col-md-6 d-flex align-items-stretch">
       <div class="jumbotron jumbotron--m-right jumbotron--full-width">
-        <h3>{{ 'MULTICAST.DETAILS' | translate }}</h3>
+        <h3>{{ 'MULTICAST.BASIC-DETAILS' | translate }}</h3>
         <app-general-details [data]="multicast"></app-general-details>
-        <mat-divider></mat-divider>
         <p>
           <strong>{{ 'MULTICAST.GROUPNAME' | translate }}</strong
           >{{ multicast.name | translate }}
         </p>
+        <mat-divider></mat-divider>
+        <h3 class="loraDetails">{{ 'MULTICAST.LORAWAN-DETAILS' | translate }}</h3>
+        <mat-divider></mat-divider>
         <p>
           <strong>{{ 'MULTICAST.ADDRESS' | translate }}</strong
           >{{ multicast.mcAddr | translate }}
