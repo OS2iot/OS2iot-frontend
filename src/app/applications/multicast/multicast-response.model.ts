@@ -21,9 +21,9 @@ export class LorawanMulticastDefinition {
   address: string;
   networkSessionKey: string;
   applicationSessionKey: string;
-  frameCounter: number = 0;
-  dataRate: number = 0;
-  frequency: number = 0;
+  frameCounter = 0;
+  dataRate = 0;
+  frequency = 0;
   groupType: MulticastType;
   chirpstackGroupId?: string;
 }

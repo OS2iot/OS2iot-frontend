@@ -7,10 +7,10 @@ import { MulticastTableComponent } from './multicast-table/multicast-table.compo
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
-import { FormModule } from '@shared/components/forms/form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     FormsModule,
     SharedModule,
     PipesModule,
+    MatSelectSearchModule,
   ],
   exports: [
     MulticastDetailComponent,

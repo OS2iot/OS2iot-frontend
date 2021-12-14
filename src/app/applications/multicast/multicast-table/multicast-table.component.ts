@@ -32,7 +32,7 @@ export class MulticastTableComponent
   displayedColumns: string[] = ['groupName', 'groupType', 'menu'];
   dataSource = new MatTableDataSource<Multicast>();
   multicasts: Multicast[];
-  resultsLength = 0
+  resultsLength = 0;
   public canEdit = false;
   @Input() isLoadingResults: boolean = true;
   public pageSize = environment.tablePageSize;
@@ -57,7 +57,7 @@ export class MulticastTableComponent
 
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
-    this.getMulticasts(); // loads the multicasts
+    this.getMulticasts();
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
@@ -70,7 +70,6 @@ export class MulticastTableComponent
     if (this.applicationId) {
       this.multicastSubscription = this.multicastService
         .getMulticastsByApplicationId(
-          // gets multicasts from db by applicationId
           this.pageLimit,
           this.pageOffset * this.pageLimit,
           this.applicationId
@@ -86,7 +85,8 @@ export class MulticastTableComponent
             this.pageTotal = Math.ceil(multicasts.count / this.pageLimit);
           }
           if (multicasts.ok === false) {
-            this.showLoadFailSnack(); // if not possible to load the multicasts, show error.
+            // ok is only defined when it's an error.
+            this.snackService.showLoadFailSnack();
           }
         });
     }
@@ -96,39 +96,25 @@ export class MulticastTableComponent
     this.deleteDialogSubscription = this.deleteDialogService
       .showSimpleDialog()
       .subscribe((response) => {
-        if (response) { // if user presses "yes, delete", then delete the multicast.
-          this.multicastService
-            .delete(multicast.id)
-            .subscribe((response) => {
-              if (response.ok && response.body.affected > 0) { // if deleted succesfully, get the new array of multicasts and show a succesful snack.
-                this.getMulticasts();
-                this.showDeletedSnack();
-              } else {
-                this.showFailSnack();
-              }
-            });
-        } else {
-          console.log(response);
+        if (response) {
+          // if user presses "yes, delete", then delete the multicast.
+          this.multicastService.delete(multicast.id).subscribe((response) => {
+            if (response.ok && response.body.affected > 0) {
+              // if deleted succesfully, get the new array of multicasts and show a succesful snack.
+              this.getMulticasts();
+              this.snackService.showDeletedSnack();
+            } else {
+              this.snackService.showFailSnack();
+            }
+          });
         }
       });
   }
-
-  showLoadFailSnack() {
-    this.snackService.showLoadFailSnack();
-  }
-  showFailSnack() {
-    this.snackService.showFailSnack();
-  }
-  showDeletedSnack() {
-    this.snackService.showDeletedSnack();
-  }
-  ngOnDestroy() { // inspired by datatarget
+  ngOnDestroy() {
     // prevent memory leak by unsubscribing
-    if (this.multicastSubscription) {
-      this.multicastSubscription.unsubscribe();
-    }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
+
+    this.multicastSubscription?.unsubscribe();
+
+    this.deleteDialogSubscription?.unsubscribe();
   }
 }

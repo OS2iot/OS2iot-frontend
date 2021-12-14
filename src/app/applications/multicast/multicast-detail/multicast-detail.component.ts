@@ -10,12 +10,11 @@ import { Location } from '@angular/common';
 import { MulticastService } from '../multicast.service';
 import { SnackService } from '@shared/services/snack.service';
 import { Downlink } from '@applications/iot-devices/downlink.model';
-import { DownlinkService } from '@shared/services/downlink.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DownlinkDialogComponent } from '@applications/iot-devices/iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { keyPressedHex } from '@shared/constants/regex-constants';
 
 @Component({
   selector: 'app-multicast-detail',
@@ -27,7 +26,6 @@ export class MulticastDetailComponent implements OnInit {
   public backButton: BackButton = { label: '', routerLink: '/multicast-list' };
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
-
   public formFailedSubmit: boolean = false;
   private applicationId: number;
   public downlink = new Downlink();
@@ -35,14 +33,12 @@ export class MulticastDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private deleteDialogService: DeleteDialogService,
     private location: Location,
     private multicastService: MulticastService,
-    public translate: TranslateService,
-    public snackService: SnackService,
-    public downlinkService: DownlinkService,
+    private translate: TranslateService,
+    private snackService: SnackService,
     private errorMessageService: ErrorMessageService
   ) {}
 
@@ -78,6 +74,7 @@ export class MulticastDetailComponent implements OnInit {
     this.backButton.routerLink = ['applications', applicationId.toString()];
   }
 
+  // Class-B:
   //only if classB can be used
   // canShowPeriodicity(): boolean {
   //   if (this.multicast.groupType === MulticastType.ClassB) {
@@ -101,7 +98,6 @@ export class MulticastDetailComponent implements OnInit {
               }
             });
         } else {
-          console.log(response);
         }
       });
   }
@@ -118,15 +114,9 @@ export class MulticastDetailComponent implements OnInit {
   }
   keyPressHexadecimal(event) {
     // make sure only hexadecimal can be typed in input with adresses.
-    var inp = String.fromCharCode(event.keyCode);
-
-    if (/[a-fA-F0-9]/.test(inp)) {
-      return true;
-    } else {
-      event.preventDefault();
-      return false;
-    }
+    keyPressedHex(event);
   }
+
   private handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorMessages = errors.errorFields;
@@ -135,20 +125,15 @@ export class MulticastDetailComponent implements OnInit {
 
   clickDownlink() {
     if (this.validateHex(this.downlink.data)) {
-      this.downlinkService.multicastGet(this.multicast.id).subscribe(
-        (response: any) => {
-          console.log(response)
+      this.multicastService
+        .multicastGet(this.multicast.id)
+        .subscribe((response: any) => {
           if (response.totalCount > 0) {
             this.openDownlinkDialog();
           } else {
             this.startDownlink();
           }
-        },
-        (error) => {
-          this.handleError(error);
-          console.log(error);
-        }
-      );
+        });
     }
   }
   openDownlinkDialog() {
@@ -157,17 +142,16 @@ export class MulticastDetailComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.startDownlink();
-        console.log(`Dialog result: ${result}`);
       }
     });
   }
 
   private startDownlink() {
     this.errorMessages = [];
-    this.downlinkService
+    this.multicastService
       .multicastPost(this.downlink, this.multicast.id)
       .subscribe(
-        (response) => {
+        () => {
           this.showQueueSnack();
         },
         (error) => {
@@ -178,15 +162,13 @@ export class MulticastDetailComponent implements OnInit {
 
   private validateHex(input: string): boolean {
     const isHexinput = /^[a-fA-F\d]+$/.test(input);
-    let validator = false;
+
     if (isHexinput) {
-      validator = true;
+      return true;
     } else {
-      console.log('test');
       this.addToErrorMessage('MULTICAST.DOWNLINK.NO-PORT-OR-PAYLOAD');
-      validator = false;
+      return false;
     }
-    return validator;
   }
 
   addToErrorMessage(text: string) {
@@ -196,8 +178,6 @@ export class MulticastDetailComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
+    this.deleteDialogSubscription?.unsubscribe();
   }
 }

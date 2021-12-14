@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+import { Downlink } from '@applications/iot-devices/downlink.model';
 import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,7 +16,10 @@ export class MulticastService {
     private userMinimalService: UserMinimalService
   ) {}
 
-  private multicastURL = 'multicast'; // api endpoint
+  private multicastURL = 'multicast';
+  private multicastDownlinkURL = 'multicast/';
+  private DOWNLINKMULTICASTURL = 'downlink-multicast';
+
   getMulticastsByApplicationId(
     limit: number,
     offset: number,
@@ -26,42 +30,27 @@ export class MulticastService {
       offset,
       applicationId,
     };
-    return this.restService.get(this.multicastURL, body); // get's the multicasts from specific application by the url and the body with applicationId.
+    return this.restService.get(this.multicastURL, body);
   }
+
   get(id: number): Observable<Multicast> {
-    // Get's a single multicast by id.
     return this.restService.get(this.multicastURL, {}, id).pipe(
+      // bind "this" correctly by creating a new lambda function
       map((response: MulticastResponse) => {
-        const multicast = this.mapToMulticast(response); // maps the response from backend.
+        const multicast = this.mapToMulticast(response);
         return multicast;
       })
     );
   }
+
   delete(id: number) {
-    // deletes a chosen multicast by id
     return this.restService.delete(this.multicastURL, id);
   }
   update(multicast: Multicast): Observable<Multicast> {
-    // updates the chosen multicast by id
-    return this.restService
-      .put(this.multicastURL, multicast, multicast.id)
-      .pipe
-      // map((response: MulticastResponse) => {
-      //   const multicast = this.mapToMulticast(response);
-      //   return multicast;
-      // })
-      ();
+    return this.restService.put(this.multicastURL, multicast, multicast.id);
   }
   create(multicast: Multicast): Observable<Multicast> {
-    // creates a new multicast
-    return this.restService
-      .post(this.multicastURL, multicast)
-      .pipe
-      // map((response: MulticastResponse) => {
-      //   const multicast = this.mapToMulticast(response);
-      //   return multicast;
-      // })
-      ();
+    return this.restService.post(this.multicastURL, multicast);
   }
 
   private mapToMulticast(multicastResponse: MulticastResponse): Multicast {
@@ -88,8 +77,22 @@ export class MulticastService {
       updatedByName: this.userMinimalService.getUserNameFrom(
         multicastResponse.updatedBy
       ),
-      
     };
     return model;
+  }
+
+  public multicastGet(multicastId: number, params = {}): Observable<any> {
+    const url =
+      this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
+    return this.restService.get(url, params);
+  }
+  public multicastPost(
+    downlink: Downlink,
+    multicastId: number,
+    params = {}
+  ): Observable<any> {
+    const url =
+      this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
+    return this.restService.post(url, downlink, params);
   }
 }

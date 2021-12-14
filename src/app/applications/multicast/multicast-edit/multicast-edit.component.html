@@ -196,7 +196,7 @@
       </div> -->
   </div>
 
-  <div class="form-group mt-3">
+  <div class="form-group mt-3 col-12">
     <label class="form-label" for="groupType">{{
       'QUESTION.GIVE-MULTICAST-IOTDEVICES' | translate
     }}</label>
@@ -211,7 +211,12 @@
           name="devices"
           [compareWith]="compare"
           [(ngModel)]="multicast.iotDevices"
+          panelClass="overflow-x-hidden"
         >
+          <mat-select-search
+            [formControl]="deviceFilterCtrl"
+          ></mat-select-search>
+
           <mat-option disabled="disabled" class="filter-option">
             <button
               mat-raised-button
@@ -227,10 +232,15 @@
             >
               {{ 'QUESTION.MULTICAST.DESELECTALLDEVICES' | translate }}
             </button>
+            <label class="onlyLorawan">{{
+              'QUESTION.MULTICAST.ONLY-LORAWAN' | translate
+            }}</label>
           </mat-option>
-          <mat-option *ngFor="let device of iotDevices" [value]="device">{{
-            device.name
-          }}</mat-option>
+          <mat-option
+            *ngFor="let device of filteredDevicesMulti | async | filterDevices"
+            [value]="device"
+            >{{ device.name }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>

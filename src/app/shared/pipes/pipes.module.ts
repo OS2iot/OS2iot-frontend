@@ -5,26 +5,27 @@ import { ActiveDeactivePipe } from './activeDeactive.pipe';
 import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
+import { FilterDevicesPipe } from './filter-devices.pipe';
 
 @NgModule({
-    declarations: [
-        isGlobalAdminPipe,
-        ActiveDeactivePipe,
-        YesNoPipe,
-        CustomDatePipe,
-        CustomTableDatePipe,
-        CreatedUpdatedByPipe,
-    ],
-    imports: [
-        CommonModule
-    ],
-    exports: [
-        isGlobalAdminPipe,
-        ActiveDeactivePipe,
-        YesNoPipe,
-        CustomDatePipe,
-        CustomTableDatePipe,
-        CreatedUpdatedByPipe,
-    ]
+  declarations: [
+    isGlobalAdminPipe,
+    ActiveDeactivePipe,
+    YesNoPipe,
+    CustomDatePipe,
+    CustomTableDatePipe,
+    CreatedUpdatedByPipe,
+    FilterDevicesPipe,
+  ],
+  imports: [CommonModule],
+  exports: [
+    isGlobalAdminPipe,
+    ActiveDeactivePipe,
+    YesNoPipe,
+    CustomDatePipe,
+    CustomTableDatePipe,
+    CreatedUpdatedByPipe,
+    FilterDevicesPipe,
+  ],
 })
-export class PipesModule { }
+export class PipesModule {}

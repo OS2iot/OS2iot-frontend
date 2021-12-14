@@ -91,7 +91,6 @@
     "SAVE": "Gem applikation",
     "DELETE": "Slet applikation",
     "DELETE-HAS-DEVICES-PROMPT": "Der er knyttet IoT-enheder til denne applikation. Disse vil også blive slettet. Slet alligevel?",
-    "DELETE-HAS-SIGFOX-DEVICES-PROMPT": "Applikationen kan ikke slettes, da der er knyttet Sigfox enheder til den",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
@@ -180,7 +179,7 @@
     "FREQUENCY": "Frekvens (Hz)",
     "GROUPTYPE": "Gruppe type",
     "PERIODICITY": "Periodicitet",
-    "IOTDEVICE": "IoT enhed(er)",
+    "IOTDEVICE": "IoT enheder",
     "DOWNLINK": {
       "PORT": "Angiv den ønskede port",
       "PAYLOAD": "Angiv det ønskede payload",
@@ -525,7 +524,8 @@
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
-      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload"
+      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
+      "ONLY-LORAWAN": "* På nuværende tidspunkt er det kun muligt at tilknytte LoRaWAN devices."
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",

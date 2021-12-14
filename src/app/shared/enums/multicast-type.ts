@@ -1,4 +1,4 @@
 export enum MulticastType {
-    // ClassB = 'Class-B',
-    ClassC = 'CLASS_C'
+  // Class-B: {ClassB = 'Class-B'},
+  ClassC = 'CLASS_C',
 }

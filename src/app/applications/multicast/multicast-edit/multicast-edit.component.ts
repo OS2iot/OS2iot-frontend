@@ -6,11 +6,14 @@ import { MulticastType } from '@shared/enums/multicast-type';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { SnackService } from '@shared/services/snack.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
-import { Subscription } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Multicast } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { ApplicationService } from '@applications/application.service';
+import { keyPressedHex } from '@shared/constants/regex-constants';
+import { FormControl } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-multicast-edit',
@@ -22,25 +25,30 @@ export class MulticastEditComponent implements OnInit {
   public multicastId: number;
   public errorMessages: any;
   private multicastSubscription: Subscription;
+  public searchDevices: FormControl = new FormControl();
   public errorFields: string[];
-  public iotDevices: IotDevice[];
+  public iotDevices: IotDevice[] = [];
   @Input() submitButton: string;
   public backButtonTitle: string;
   public multicast: Multicast = new Multicast();
   private applicationId: number;
   public formFailedSubmit: boolean = false;
   public multicastTypes: string[] = Object.values(MulticastType);
-  // public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future
+  // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
+  public deviceFilterCtrl: FormControl = new FormControl();
+  public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<
+    IotDevice[]
+  >(1);
 
   constructor(
-    public translate: TranslateService,
+    private translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
-    public multicastService: MulticastService,
-    public errorMessageService: ErrorMessageService,
-    public scrollToTopService: ScrollToTopService,
-    public snackService: SnackService,
-    public applicationService: ApplicationService
+    private multicastService: MulticastService,
+    private errorMessageService: ErrorMessageService,
+    private scrollToTopService: ScrollToTopService,
+    private snackService: SnackService,
+    private applicationService: ApplicationService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +79,32 @@ export class MulticastEditComponent implements OnInit {
       // If edit is pressed, then get the specific multicast.
       this.getMulticast(this.multicastId);
     }
+
+    this.deviceFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterDevicesMulti();
+      });
   }
+
+  private filterDevicesMulti() {
+    if (!this.iotDevices) {
+      return;
+    }
+    // get the search keyword
+    let search = this.deviceFilterCtrl?.value?.trim();
+    if (!search) {
+      this.filteredDevicesMulti.next(this.iotDevices.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    const filtered = this.iotDevices.filter((device) => {
+      return device.name.toLocaleLowerCase().indexOf(search) > -1;
+    });
+    this.filteredDevicesMulti.next(filtered);
+  }
+
   onSubmit(): void {
     if (this.multicastId) {
       // if already created, only update
@@ -91,9 +124,10 @@ export class MulticastEditComponent implements OnInit {
   }
 
   getApplication(id: number) {
-    this.applicationService
-      .getApplication(id)
-      .subscribe((application) => (this.iotDevices = application.iotDevices));
+    this.applicationService.getApplication(id).subscribe((application) => {
+      this.iotDevices = application.iotDevices;
+      this.filteredDevicesMulti.next(this.iotDevices.slice());
+    });
   }
 
   //only if classB can be used
@@ -135,8 +169,11 @@ export class MulticastEditComponent implements OnInit {
       }
     );
   }
-  public compare(o1: any, o2: any): boolean {
-    return o1 && o2 && o1.id == o2.id;
+  public compare(
+    o1: IotDevice | undefined,
+    o2: IotDevice | undefined
+  ): boolean {
+    return o1?.id === o2?.id;
   }
 
   selectAll() {
@@ -159,15 +196,7 @@ export class MulticastEditComponent implements OnInit {
     this.snackService.showUpdatedSnack();
   }
   keyPressHexadecimal(event) {
-    // make sure only hexadecimal can be typed in input with adresses.
-    var inp = String.fromCharCode(event.keyCode);
-
-    if (/[a-fA-F0-9]/.test(inp)) {
-      return true;
-    } else {
-      event.preventDefault();
-      return false;
-    }
+    keyPressedHex(event);
   }
   private resetErrors() {
     this.errorFields = [];
@@ -181,8 +210,7 @@ export class MulticastEditComponent implements OnInit {
     this.scrollToTopService.scrollToTop();
   }
   ngOnDestroy(): void {
-    if (this.multicastSubscription) {
-      this.multicastSubscription.unsubscribe();
-    }
+    this.multicastSubscription?.unsubscribe();
   }
+  private _onDestroy = new Subject<void>();
 }
