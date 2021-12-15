@@ -23,11 +23,15 @@ export class MulticastService {
   getMulticastsByApplicationId(
     limit: number,
     offset: number,
+    sort: string,
+    orderOn: string,
     applicationId: number
   ): Observable<MulticastData> {
     const body = {
       limit,
       offset,
+      sort,
+      orderOn,
       applicationId,
     };
     return this.restService.get(this.multicastURL, body);

@@ -103,7 +103,4 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
             this.deleteDialogSubscription.unsubscribe();
         }
     }
-    updatePageLimit(limit: any) {
-        console.log(limit);
-      }
 }

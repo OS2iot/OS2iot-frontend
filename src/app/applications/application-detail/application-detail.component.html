@@ -1,7 +1,6 @@
 <div *ngIf="application">
   <app-top-bar [data]="application" [backButton]="backButton" [subPage]="true"
-    [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteApplication()"
-    [pageLimit]="pageLimit"  (updatePageLimit)="updatePageLimit($event)">
+    [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteApplication()">
   </app-top-bar>
   <div class="container-fluid">
     <div class="row">
@@ -54,7 +53,7 @@
                   <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate">
                   </app-top-bar-table>
                 </ng-template>
-                  <app-multicast-table [pageLimit]="pageLimit"></app-multicast-table>
+                  <app-multicast-table></app-multicast-table>
               </div>
             </div>
           </div>

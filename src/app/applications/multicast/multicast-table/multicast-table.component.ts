@@ -8,15 +8,14 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
 import { SnackService } from '@shared/services/snack.service';
-import { Subscription } from 'rxjs';
+import { merge, Observable, Subscription, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Multicast, MulticastData } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 
@@ -30,15 +29,12 @@ export class MulticastTableComponent
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['groupName', 'groupType', 'menu'];
-  dataSource = new MatTableDataSource<Multicast>();
-  multicasts: Multicast[];
+  multicasts: Multicast[] = [];
   resultsLength = 0;
   public canEdit = false;
   @Input() isLoadingResults: boolean = true;
   public pageSize = environment.tablePageSize;
-  @Input() pageLimit: number;
   public pageOffset = 0;
-  public pageTotal: number;
   public applicationId: number;
 
   private multicastSubscription: Subscription;
@@ -57,38 +53,52 @@ export class MulticastTableComponent
 
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
-    this.getMulticasts();
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          const multicasts = this.getMulticasts(
+            this.sort.active,
+            this.sort.direction
+          );
+          //TODO::: Snack here
+          return multicasts;
+        }),
+        map((data) => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.resultsLength = data.count;
+
+          return data.data;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      )
+      .subscribe((data) => (this.multicasts = data));
   }
 
-  getMulticasts(): void {
+  getMulticasts(
+    orderByColumn: string,
+    orderByDirection: string
+  ): Observable<MulticastData> {
     if (this.applicationId) {
-      this.multicastSubscription = this.multicastService
-        .getMulticastsByApplicationId(
-          this.pageLimit,
-          this.pageOffset * this.pageLimit,
-          this.applicationId
-        )
-        .subscribe((multicasts: MulticastData) => {
-          this.multicasts = multicasts.data;
-          this.dataSource = new MatTableDataSource<Multicast>(this.multicasts); // these lines of code is inspired/taken from datatarget.
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          this.dataSource.sortingDataAccessor = tableSorter;
-          this.isLoadingResults = false;
-          if (this.pageLimit) {
-            this.pageTotal = Math.ceil(multicasts.count / this.pageLimit);
-          }
-          if (multicasts.ok === false) {
-            // ok is only defined when it's an error.
-            this.snackService.showLoadFailSnack();
-          }
-        });
+      return this.multicastService.getMulticastsByApplicationId(
+        this.paginator.pageSize,
+        this.paginator.pageIndex * this.paginator.pageSize,
+        orderByDirection,
+        orderByColumn,
+        this.applicationId
+      );
     }
   }
 
@@ -101,7 +111,11 @@ export class MulticastTableComponent
           this.multicastService.delete(multicast.id).subscribe((response) => {
             if (response.ok && response.body.affected > 0) {
               // if deleted succesfully, get the new array of multicasts and show a succesful snack.
-              this.getMulticasts();
+              this.paginator.page.emit({
+                pageIndex: this.paginator.pageIndex,
+                pageSize: this.paginator.pageSize,
+                length: this.resultsLength,
+              });
               this.snackService.showDeletedSnack();
             } else {
               this.snackService.showFailSnack();
