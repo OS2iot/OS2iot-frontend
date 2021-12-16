@@ -143,11 +143,11 @@ export class MulticastEditComponent implements OnInit {
 
     this.multicastService.update(this.multicast).subscribe(
       () => {
-        this.showUpdatedSnack();
+        this.snackService.showUpdatedSnack();
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
-        this.showFailSnack();
+        this.snackService.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -159,11 +159,11 @@ export class MulticastEditComponent implements OnInit {
 
     this.multicastService.create(this.multicast).subscribe(
       () => {
-        this.showSavedSnack();
+        this.snackService.showSavedSnack();
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
-        this.showFailSnack();
+        this.snackService.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -185,15 +185,6 @@ export class MulticastEditComponent implements OnInit {
 
   routeBack(): void {
     this.router.navigate(['applications', this.applicationId.toString()]);
-  }
-  showSavedSnack() {
-    this.snackService.showSavedSnack();
-  }
-  showFailSnack() {
-    this.snackService.showFailSnack();
-  }
-  showUpdatedSnack() {
-    this.snackService.showUpdatedSnack();
   }
   keyPressHexadecimal(event) {
     keyPressedHex(event);

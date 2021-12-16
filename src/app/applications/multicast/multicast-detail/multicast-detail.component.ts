@@ -91,10 +91,10 @@ export class MulticastDetailComponent implements OnInit {
             .delete(this.multicast.id)
             .subscribe((response) => {
               if (response.status !== 0) {
-                this.showDeletedSnack();
+                this.snackService.showDeletedSnack();
                 this.location.back();
               } else {
-                this.showFailSnack();
+                this.snackService.showFailSnack();
               }
             });
         } else {
@@ -102,16 +102,6 @@ export class MulticastDetailComponent implements OnInit {
       });
   }
 
-  showDeletedSnack(): void {
-    this.snackService.showDeletedSnack();
-  }
-
-  showFailSnack(): void {
-    this.snackService.showFailSnack();
-  }
-  showQueueSnack(): void {
-    this.snackService.showInQueueSnack();
-  }
   keyPressHexadecimal(event) {
     // make sure only hexadecimal can be typed in input with adresses.
     keyPressedHex(event);
@@ -124,16 +114,20 @@ export class MulticastDetailComponent implements OnInit {
   }
 
   clickDownlink() {
-    if (this.validateHex(this.downlink.data)) {
-      this.multicastService
-        .multicastGet(this.multicast.id)
-        .subscribe((response: any) => {
-          if (response.totalCount > 0) {
-            this.openDownlinkDialog();
-          } else {
-            this.startDownlink();
-          }
-        });
+    if (this.multicast.iotDevices.length > 0) {
+      if (this.validateHex(this.downlink.data)) {
+        this.multicastService
+          .multicastGet(this.multicast.id)
+          .subscribe((response: any) => {
+            if (response.totalCount > 0) {
+              this.openDownlinkDialog();
+            } else {
+              this.startDownlink();
+            }
+          });
+      }
+    } else {
+      this.snackService.showSendDownlinkFailNoDevices();
     }
   }
   openDownlinkDialog() {
@@ -152,7 +146,7 @@ export class MulticastDetailComponent implements OnInit {
       .multicastPost(this.downlink, this.multicast.id)
       .subscribe(
         () => {
-          this.showQueueSnack();
+          this.snackService.showInQueueSnack();
         },
         (error) => {
           this.handleError(error);

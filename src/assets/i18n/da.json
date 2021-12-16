@@ -53,7 +53,8 @@
     "FAIL": "Fejl - aktion ikke fuldført",
     "LOADFAIL": "Fejl - kunne ikke loade",
     "QUEUE": "Element sat i kø",
-    "CLOSE": "Luk"
+    "CLOSE": "Luk",
+    "NODEVICES": "Kan ikke sende downlink - der er ingen devices!"
   },
   "SEARCH": {
     "ICON": "",

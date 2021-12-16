@@ -69,11 +69,13 @@ export class MulticastTableComponent
             this.sort.active,
             this.sort.direction
           );
-          //TODO::: Snack here
           return multicasts;
         }),
         map((data) => {
           // Flip flag to show that loading has finished.
+          if (data.ok === false) {
+            this.snackService.showLoadFailSnack();
+          }
           this.isLoadingResults = false;
           this.resultsLength = data.count;
 
