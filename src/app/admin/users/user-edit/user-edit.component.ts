@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { AuthService, CurrentUserInfoResponse } from '@auth/auth.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-user-edit',
@@ -30,6 +32,7 @@ export class UserEditComponent implements OnInit {
   subscription: Subscription;
   isGlobalAdmin = false;
   isKombit: boolean;
+  canEdit: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -37,7 +40,8 @@ export class UserEditComponent implements OnInit {
     private userService: UserService,
     private location: Location,
     private authService: AuthService,
-    private sharedVariableService: SharedVariableService
+    private sharedVariableService: SharedVariableService,
+    private meService: MeService
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +61,7 @@ export class UserEditComponent implements OnInit {
       this.user.active = true;
     }
     this.amIGlobalAdmin();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   private getUser(id: number) {
@@ -66,7 +71,7 @@ export class UserEditComponent implements OnInit {
       this.user.id = response.id;
       this.user.active = response.active;
       this.user.globalAdmin = response.permissions.some(
-        (x) => x.type == PermissionType.GlobalAdmin
+        (x) => x.type === PermissionType.GlobalAdmin
       );
       this.isKombit = response.nameId != null;
       // We cannot set the password.

@@ -82,27 +82,6 @@ export class SharedVariableService {
     return this.getUserInfo().user.permissions.length > 0;
   }
 
-  getHasWritePermission(): boolean {
-    const permissions = this.getUserInfo().user.permissions;
-    return permissions.some(
-      (permission) =>
-        permission.type === PermissionType.GlobalAdmin ||
-        (permission.organization?.id === +this.selectedOrganisationId &&
-          (permission.type === PermissionType.OrganizationAdmin ||
-            permission.type === PermissionType.Write))
-    );
-  }
-
-  getHasAnyWritePermission(): boolean {
-    const permissions = this.getUserInfo().user.permissions;
-    return permissions.some(
-        (permission) =>
-            permission.type === PermissionType.GlobalAdmin ||
-            permission.type === PermissionType.OrganizationAdmin ||
-            permission.type === PermissionType.Write
-    );
-  }
-
   isGlobalAdmin(): boolean {
     return this.getUserInfo().user.permissions.some(
       (permission) => permission.type === PermissionType.GlobalAdmin

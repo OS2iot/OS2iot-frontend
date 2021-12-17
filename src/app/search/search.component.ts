@@ -8,6 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  // TODO: Is search component used, and why does it even have a top bar?
+  canEdit = false;
+
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute

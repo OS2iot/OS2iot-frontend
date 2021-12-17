@@ -1,6 +1,6 @@
 <div *ngIf="gateway">
     <app-top-bar [data]="gateway" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteGateway()"></app-top-bar>
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteGateway()" [canEdit]="canEdit"></app-top-bar>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 d-flex align-items-stretch">

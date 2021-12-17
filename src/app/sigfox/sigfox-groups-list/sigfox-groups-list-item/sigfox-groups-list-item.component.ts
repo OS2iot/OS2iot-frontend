@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEdit, faPen, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-sigfox-groups-list-item',
@@ -23,7 +24,7 @@ export class SigfoxGroupsListItemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.sigfoxGroup);
-    this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   onEditSigfoxGroup() {

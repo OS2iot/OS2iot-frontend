@@ -12,6 +12,8 @@ import { Papa } from 'ngx-papaparse';
 import { Observable } from 'rxjs';
 import { BulkImport } from './bulk-import.model';
 import { BulkMapping } from './bulkMapping';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-bulk-import',
@@ -31,11 +33,12 @@ export class BulkImportComponent implements OnInit {
     { name: 'generic-http-sample.csv', url: '../../../assets/docs/iotdevice_generichttp.csv' },
     { name: 'lorawan-otaa-sample.csv', url: '../../../assets/docs/iotdevice_lorawan_otaa.csv' },
     { name: 'lorawan-abp-sample.csv', url: '../../../assets/docs/iotdevice_lorawan_abp.csv' },
-  ]
+  ];
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();
   public backButtonTitle: string;
   private applicationId;
+  canEdit: boolean;
 
   constructor(
     private papa: Papa,
@@ -44,7 +47,8 @@ export class BulkImportComponent implements OnInit {
     private titleService: Title,
     private translate: TranslateService,
     private downloads: DownloadService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private meService: MeService
   ) {
     this.translate.use('da');
    }
@@ -55,6 +59,7 @@ export class BulkImportComponent implements OnInit {
         this.titleService.setTitle(translations['TITLE.BULKIMPORT']);
       });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
 
   }
 

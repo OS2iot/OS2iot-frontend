@@ -1,6 +1,7 @@
 <div *ngIf="device">
     <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()"
+        [canEdit]="canEdit">
     </app-top-bar>
     <!-- General details & map -->
     <div class="container-fluid">
@@ -15,7 +16,7 @@
                             <app-data-package [latestReceivedMessage]="device.latestReceivedMessage">
                             </app-data-package>
                         </mat-tab>
-                        <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canStartDownlink">
+                        <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canEdit">
                             <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
                         </mat-tab>
                         <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"

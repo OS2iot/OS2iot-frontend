@@ -150,7 +150,7 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK", 
+    "OPENDATA-DK": "OpenDataDK",
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
   },
   "OPENDATADK": {
@@ -355,9 +355,10 @@
   },
   "PERMISSION-TYPE": {
     "GlobalAdmin": "Global administrator",
-    "OrganizationAdmin": "Organisations administrator",
-    "Write": "Skrive-rettigheder",
-    "Read": "Læse-rettigheder"
+    "OrganizationUserAdmin": "Brugeradministrator administrator",
+    "OrganizationGatewayAdmin": "Gateway administrator",
+    "OrganizationApplicationAdmin": "Applikationsadministrator",
+    "Read": "Læserettigheder"
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",
@@ -697,7 +698,7 @@
       "PINGSLOTFREQ": "Class-B ping-slot frequency",
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
-      "CANCEL": "Anuller",
+      "CANCEL": "Annuller",
       "SAVE": "Gem",
       "OTAA-ABP": "Join (OTAA / ABP)",
       "MACVERSION_PLACEHOLDER": "1.0.0",

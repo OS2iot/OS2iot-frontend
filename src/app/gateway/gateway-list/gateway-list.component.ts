@@ -11,6 +11,7 @@ import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   public pageTotal: number;
   organisationId: number;
   organisationChangeSubject: Subject<any> = new Subject();
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -61,6 +63,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(translations => {
         this.titleService.setTitle(translations['TITLE.LORAWAN-GATEWAY']);
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite);
   }
 
   ngOnChanges() {
@@ -177,7 +180,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   setCanEdit() {
     this.gateways.forEach(
       (gateway) => {
-        gateway.canEdit = this.meService.canWriteInTargetOrganization(gateway.internalOrganizationId);
+        gateway.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, gateway.internalOrganizationId);
       }
     );
   }

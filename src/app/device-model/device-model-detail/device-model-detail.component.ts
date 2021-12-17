@@ -8,6 +8,8 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { Subscription } from 'rxjs';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-device-model-detail',
@@ -22,6 +24,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   deleteDialogSubscription: Subscription;
   dropdownButton: DropdownButton;
   errorTitle: string;
+  canEdit: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -29,6 +32,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
     private deviceModelService: DeviceModelService,
     private deleteDialogservice: DeleteDialogService,
     private router: Router,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +43,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
         label: '',
         editRouterLink: '/device-model/device-model-edit/' + deviceModelId,
         isErasable: true,
-      }
+      };
     }
     this.translate.use('da');
     this.translate.get(['DEVICE-MODEL.DETAIL-TITLE', 'DEVICE-MODEL.DEVICE-MODEL', 'DEVICE-MODEL.SHOW-OPTIONS', 'DEVICE-MODEL.DELETE-FAILED'])
@@ -49,6 +53,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
         this.title = translations['DEVICE-MODEL.DETAIL-TITLE'];
         this.errorTitle = translations['DEVICE-MODEL.DELETE-FAILED'];
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   private getDeviceModel(id: number) {

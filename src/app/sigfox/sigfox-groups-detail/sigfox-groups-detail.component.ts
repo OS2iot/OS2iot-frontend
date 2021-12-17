@@ -8,6 +8,8 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SigfoxGroupData } from '@sigfox/sigfox-settings.model';
 import { Observable } from 'rxjs';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -20,18 +22,20 @@ export class SigfoxGroupsDetailComponent implements OnInit {
   private sigfoxGroupId: number;
   sigfoxDevices: SigfoxDeviceType[];
   sigfoxGroup: SigfoxGroup;
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private sigfoxService: SigfoxService,
-
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
     this.sigfoxGroupId = +this.route.snapshot.paramMap.get('groupId');
     this.getSigFoxGroup(this.sigfoxGroupId);
     this.getSigFoxDevices();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   getSigFoxDevices() {

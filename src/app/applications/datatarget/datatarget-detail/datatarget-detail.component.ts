@@ -12,6 +12,8 @@ import { Datatarget } from '../datatarget.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -28,6 +30,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     public dropdownButton: DropdownButton;
     arrowsAltH = faArrowsAltH;
     private applicationName: string;
+    canEdit: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -35,7 +38,8 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
         private location: Location,
         private datatargetRelationServicer: PayloadDeviceDatatargetService,
         private datatargetService: DatatargetService,
-        public translate: TranslateService) { }
+        public translate: TranslateService,
+        private meService: MeService) { }
 
     ngOnInit(): void {
         const id: number = +this.route.snapshot.paramMap.get('datatargetId');
@@ -47,13 +51,14 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
                 label: '',
                 editRouterLink: '../../datatarget-edit/' + id,
                 isErasable: true,
-            }
+            };
         }
         this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
             .subscribe(translations => {
                 this.backButton.label = translations['NAV.MY-DATATARGET'];
-                this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS']
+                this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
             });
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
     }
 
     getDatatarget(id: number) {
@@ -65,7 +70,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     }
 
     private setBackButton(applicationId: number) {
-        this.backButton.routerLink = ['applications', applicationId.toString(), 'datatarget-list', this.applicationName ]
+        this.backButton.routerLink = ['applications', applicationId.toString(), 'datatarget-list', this.applicationName ];
     }
 
     onDeleteDatatarget() {

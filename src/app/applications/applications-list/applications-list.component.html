@@ -1,12 +1,10 @@
 <app-top-bar [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
-  [ctaRouterLink]="'new-application'" (updatePageLimit)="updatePageLimit($event)">
+  [ctaRouterLink]="'new-application'" (updatePageLimit)="updatePageLimit($event)" [canEdit]="canEdit">
 </app-top-bar>
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="jumbotron--table">
-        <!-- <app-applications-table [organizationId]="organizationId">
-        </app-applications-table> -->
         <app-applications-table [organizationId]="organizationId"></app-applications-table>
       </div>
     </div>

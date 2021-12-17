@@ -10,6 +10,8 @@ import { Application } from '@applications/application.model';
 import { OrganisationResponse } from '@app/admin/organisation/organisation.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { environment } from '@environments/environment';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-user-detail',
@@ -43,12 +45,14 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   dropdownButton: DropdownButton;
   id: number;
   subscription: Subscription;
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -60,13 +64,14 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         label: '',
         editRouterLink: 'edit-user',
         isErasable: false,
-      }
+      };
     }
     this.translate.get(['NAV.USERS', 'USERS.DETAIL.DROPDOWN'])
       .subscribe(translations => {
         this.backButton.label = translations['NAV.USERS'];
-        this.dropdownButton.label = translations['USERS.DETAIL.DROPDOWN']
+        this.dropdownButton.label = translations['USERS.DETAIL.DROPDOWN'];
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   private getUser(id: number) {

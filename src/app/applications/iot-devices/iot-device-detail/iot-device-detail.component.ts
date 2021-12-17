@@ -15,6 +15,7 @@ import { IoTDeviceService } from '../iot-device.service';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { Title } from '@angular/platform-browser';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
     selector: 'app-iot-device',
@@ -39,7 +40,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public errorMessages: string[];
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
-    public canStartDownlink = false;
+    public canEdit = false;
 
     // TODO: Få aktivt miljø?
     public baseUrl = environment.baseUrl;
@@ -58,7 +59,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.canStartDownlink = this.meService.canWriteInTargetOrganization();
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.deviceId) {

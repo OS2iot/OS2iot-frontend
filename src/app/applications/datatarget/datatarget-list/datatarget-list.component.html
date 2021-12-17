@@ -1,6 +1,7 @@
 <app-top-bar [pageLimit]="pageLimit" [title]="title" [ctaLabel]="'FORM.CREATE-NEW-DATATARGET' | translate"
   [ctaRouterLink]="'datatarget-edit'" (updatePageLimit)="updatePageLimit($event)" [subPage]="true"
-  [backButton]="backButton">
+  [backButton]="backButton"
+  [canEdit]="canEdit">
 </app-top-bar>
 <div class="container-fluid">
   <div class="row">

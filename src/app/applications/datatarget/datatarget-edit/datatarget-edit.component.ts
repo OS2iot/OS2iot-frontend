@@ -21,6 +21,8 @@ import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/op
 import { OpendatadkService } from '@shared/services/opendatadk.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { OpenDataDkDataset } from '../opendatadk/opendatadk-dataset.model';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-datatarget-edit',
@@ -54,6 +56,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -69,6 +72,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     private opendatadkService: OpendatadkService,
     private opendatadkDialogService: OpendatadkDialogService,
     private scrollToTopService: ScrollToTopService,
+    private meService: MeService
   ) {
     translate.use('da');
   }
@@ -104,6 +108,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     }
     this.getPayloadDecoders();
     this.setDataSetExcists();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   addRow() {
@@ -161,7 +166,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
-          this.datatarget = response;          
+          this.datatarget = response;
           if (this.datatarget.openDataDkDataset != null) {
             this.datatarget.openDataDkDataset.acceptTerms = true;
           }
@@ -288,7 +293,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications',this.applicationId.toString(),'datatarget-list', this.applicationNane])
+    this.router.navigate(['applications', this.applicationId.toString(), 'datatarget-list', this.applicationNane]);
   }
 
   onCoordinateKey(event: any) {
@@ -337,12 +342,12 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
           observer.next(true);
         }
       }
-    )
+    );
   }
 
   private showMailClient() {
     if (!this.datatarget.openDataDkDataset.url) {
-      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl()
+      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl();
     }
     window.location.href = 'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrere%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' + this.datatarget.openDataDkDataset.url;
   }

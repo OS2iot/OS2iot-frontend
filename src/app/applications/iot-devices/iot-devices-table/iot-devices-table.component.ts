@@ -24,6 +24,7 @@ import { ReceivedMessageMetadata } from '@shared/models/received-message-metadat
 import { environment } from '@environments/environment';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -65,7 +66,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   ngAfterViewInit() {
@@ -126,7 +127,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   clickDelete(element: any) {
-    if (element.type == DeviceType.SIGFOX) {
+    if (element.type === DeviceType.SIGFOX) {
       this.showSigfoxDeleteDialog();
     } else {
       this.deleteDialogService.showSimpleDialog().subscribe((response) => {

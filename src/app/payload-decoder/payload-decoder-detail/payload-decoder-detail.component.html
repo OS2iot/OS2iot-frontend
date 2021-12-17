@@ -1,6 +1,7 @@
 <div>
     <app-top-bar *ngIf="payloadDecoder" [data]="payloadDecoder" [backButton]="backButton" [subPage]="true"
-        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePayload()">
+        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePayload()"
+        [canEdit]="canEdit">
     </app-top-bar>
     <div *ngIf="payloadDecoder">
         <div class=" jumbotron">

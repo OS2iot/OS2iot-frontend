@@ -15,7 +15,6 @@ import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
-import { MeService } from '@shared/services/me.service';
 
 @Component({
     selector: 'app-top-bar',
@@ -50,15 +49,14 @@ export class TopBarComponent implements OnInit {
     @Output() deleteSelectedInDropdown = new EventEmitter();
     @Input() addDetailDowndown: boolean;
     @Input() dropDownButton: DropdownButton;
-    public canEdit = false;
+    @Input() canEdit = false;
 
     faSearch = faSearch;
 
     constructor(
         public translate: TranslateService,
         private location: Location,
-        private router: Router,
-        private meService: MeService
+        private router: Router
     ) {
         translate.use('da');
     }
@@ -68,7 +66,6 @@ export class TopBarComponent implements OnInit {
         if (this.data) {
             this.subTitle = this.data.name;
         }
-        this.canEdit = this.meService.canWriteInTargetOrganization()
     }
 
 
