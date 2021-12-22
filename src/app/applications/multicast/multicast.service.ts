@@ -85,7 +85,7 @@ export class MulticastService {
     return model;
   }
 
-  public multicastGet(multicastId: number, params = {}): Observable<any> {
+  public multicastGet(multicastId: number, params = {}): Observable<unknown> {
     const url =
       this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
     return this.restService.get(url, params);
@@ -94,7 +94,7 @@ export class MulticastService {
     downlink: Downlink,
     multicastId: number,
     params = {}
-  ): Observable<any> {
+  ): Observable<unknown> {
     const url =
       this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
     return this.restService.post(url, downlink, params);

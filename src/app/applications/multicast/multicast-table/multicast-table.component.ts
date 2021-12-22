@@ -32,7 +32,7 @@ export class MulticastTableComponent
   multicasts: Multicast[] = [];
   resultsLength = 0;
   public canEdit = false;
-  @Input() isLoadingResults: boolean = true;
+  @Input() isLoadingResults = true;
   public pageSize = environment.tablePageSize;
   public pageOffset = 0;
   public applicationId: number;
@@ -127,10 +127,7 @@ export class MulticastTableComponent
       });
   }
   ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-
     this.multicastSubscription?.unsubscribe();
-
     this.deleteDialogSubscription?.unsubscribe();
   }
 }

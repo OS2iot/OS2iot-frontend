@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MulticastType } from '@shared/enums/multicast-type';
@@ -20,10 +20,10 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './multicast-edit.component.html',
   styleUrls: ['./multicast-edit.component.scss'],
 })
-export class MulticastEditComponent implements OnInit {
+export class MulticastEditComponent implements OnInit, OnDestroy {
   public title: string;
   public multicastId: number;
-  public errorMessages: any;
+  public errorMessages: unknown;
   private multicastSubscription: Subscription;
   public searchDevices: FormControl = new FormControl();
   public errorFields: string[];
@@ -32,7 +32,8 @@ export class MulticastEditComponent implements OnInit {
   public backButtonTitle: string;
   public multicast: Multicast = new Multicast();
   private applicationId: number;
-  public formFailedSubmit: boolean = false;
+  private onDestroy = new Subject<void>();
+  public formFailedSubmit = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
   public deviceFilterCtrl: FormControl = new FormControl();
@@ -81,7 +82,7 @@ export class MulticastEditComponent implements OnInit {
     }
 
     this.deviceFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
+      .pipe(takeUntil(this.onDestroy))
       .subscribe(() => {
         this.filterDevicesMulti();
       });
@@ -130,7 +131,7 @@ export class MulticastEditComponent implements OnInit {
     });
   }
 
-  //only if classB can be used
+  // only if classB can be used
   // showPeriodicity(): boolean {
   //   if (this.multicast.groupType === MulticastType.ClassB) {
   //     return true;
@@ -203,5 +204,4 @@ export class MulticastEditComponent implements OnInit {
   ngOnDestroy(): void {
     this.multicastSubscription?.unsubscribe();
   }
-  private _onDestroy = new Subject<void>();
 }

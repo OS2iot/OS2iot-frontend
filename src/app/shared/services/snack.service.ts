@@ -41,9 +41,4 @@ export class SnackService {
       duration: 10000,
     });
   }
-  public showSendDownlinkFailNoDevices(){
-    this.snackBar.open(this.translate.instant('SNACK.NODEVICES'), this.translate.instant('SNACK.CLOSE'), {
-      duration: 10000,
-    });
-  }
 }

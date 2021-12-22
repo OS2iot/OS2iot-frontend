@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
@@ -15,18 +15,19 @@ import { ErrorMessageService } from '@shared/error-message.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DownlinkDialogComponent } from '@applications/iot-devices/iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
 import { keyPressedHex } from '@shared/constants/regex-constants';
+import { DownlinkService } from '@shared/services/downlink.service';
 
 @Component({
   selector: 'app-multicast-detail',
   templateUrl: './multicast-detail.component.html',
   styleUrls: ['./multicast-detail.component.scss'],
 })
-export class MulticastDetailComponent implements OnInit {
+export class MulticastDetailComponent implements OnInit, OnDestroy {
   public multicast: Multicast;
   public backButton: BackButton = { label: '', routerLink: '/multicast-list' };
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
-  public formFailedSubmit: boolean = false;
+  public formFailedSubmit = false;
   private applicationId: number;
   public downlink = new Downlink();
   @Input() errorMessages: string[];
@@ -39,7 +40,8 @@ export class MulticastDetailComponent implements OnInit {
     private multicastService: MulticastService,
     private translate: TranslateService,
     private snackService: SnackService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private downlinkService: DownlinkService
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class MulticastDetailComponent implements OnInit {
   }
 
   // Class-B:
-  //only if classB can be used
+  // only if classB can be used
   // canShowPeriodicity(): boolean {
   //   if (this.multicast.groupType === MulticastType.ClassB) {
   //     return true;
@@ -127,7 +129,7 @@ export class MulticastDetailComponent implements OnInit {
           });
       }
     } else {
-      this.snackService.showSendDownlinkFailNoDevices();
+      this.downlinkService.showSendDownlinkFailNoDevices();
     }
   }
   openDownlinkDialog() {
