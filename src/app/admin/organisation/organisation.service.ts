@@ -19,7 +19,8 @@ export class OrganisationService {
 
   constructor(
     private restService: RestService,
-    private userMinimalService: UserMinimalService) { }
+    private userMinimalService: UserMinimalService
+  ) {}
 
   post(body: Organisation): Observable<OrganisationResponse> {
     return this.restService.post(this.URL, body);
@@ -32,16 +33,17 @@ export class OrganisationService {
   }
 
   getOne(id: number): Observable<OrganisationResponse> {
-    return this.restService.get(this.URL, {}, id)
-      .pipe(
-        map(
-          (response: OrganisationResponse) => {
-            response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
-            response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
-            return response;
-          }
-        )
-      );
+    return this.restService.get(this.URL, {}, id).pipe(
+      map((response: OrganisationResponse) => {
+        response.createdByName = this.userMinimalService.getUserNameFrom(
+          response.createdBy
+        );
+        response.updatedByName = this.userMinimalService.getUserNameFrom(
+          response.updatedBy
+        );
+        return response;
+      })
+    );
   }
 
   getMinimal(): Observable<OrganisationGetMinimalResponse> {
@@ -52,9 +54,23 @@ export class OrganisationService {
     limit: number = 1000,
     offset: number = 0,
     orderByColumn?: string,
-    orderByDirection?: string,
+    orderByDirection?: string
   ): Observable<OrganisationGetManyResponse> {
     return this.restService.get(this.URL, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
+  }
+
+  getMultipleNoReq(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<OrganisationGetManyResponse> {
+    return this.restService.get(this.URL + '/all', {
       limit,
       offset,
       orderOn: orderByColumn,

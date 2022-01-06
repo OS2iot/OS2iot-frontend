@@ -1,0 +1,60 @@
+<div class="container-flud">
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron">
+        <h1>
+          Siden dette er dit første login, bedes du udfylde din mail og de
+          organisationer du ønsker at være medlem af.
+        </h1>
+        <form (ngSubmit)="onSubmit()" #newUserForm="ngForm" class="p-3 mt-4">
+          <div class="row">
+            <div class="form-group mt-3">
+              <label class="form-label" for="email">Email</label>*
+
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                maxlength="50"
+                required
+                name="email"
+                [(ngModel)]="email"
+              />
+            </div>
+
+            <div class="form-group mt-3 col-12">
+              <label class="form-label" for="groupType">Organisationer</label>*
+              <mat-form-field appearance="outline">
+                <mat-label>Organisationer</mat-label>
+                <mat-select
+                  multiple
+                  name="organisations"
+                  [compareWith]="compare"
+                  panelClass="overflow-x-hidden"
+                  aria-required="true"
+                >
+                  <mat-select-search
+                    [formControl]="organisationsFilterCtrl"
+                  ></mat-select-search>
+
+                  <mat-option
+                    *ngFor="let org of filteredOrganisations | async" [value]="org"
+                    >{{ org.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <button class="btn btn-secondary" type="button">
+              tilbage
+            </button>
+            <button class="btn btn-primary ml-2" type="submit">
+              submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

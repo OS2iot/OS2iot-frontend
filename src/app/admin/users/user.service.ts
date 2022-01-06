@@ -26,6 +26,12 @@ export class UserService {
         });
     }
 
+    putEmail(email: string): Observable<UserResponse> {
+      return this.restService.put(this.URL + '/setEmail', email, undefined, {
+        observe: 'response',
+      });
+    }
+
     getOne(id: number, extendedInfo = false): Observable<UserResponse> {
         return this.restService
             .get(this.URL, { extendedInfo: extendedInfo }, id)
