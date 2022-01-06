@@ -81,6 +81,7 @@
     "SAVE": "Gem applikation",
     "DELETE": "Slet applikation",
     "DELETE-HAS-DEVICES-PROMPT": "Der er knyttet IoT-enheder til denne applikation. Disse vil også blive slettet. Slet alligevel?",
+    "DELETE-HAS-SIGFOX-DEVICES-PROMPT": "Applikationen kan ikke slettes, da der er knyttet Sigfox enheder til den",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
