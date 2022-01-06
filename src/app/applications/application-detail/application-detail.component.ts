@@ -9,6 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DeviceType } from '@shared/enums/device-type';
@@ -28,6 +29,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
   public application: Application;
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   public id: number;
+  public pageLimit = environment.tablePageSize;
   public dropdownButton: DropdownButton;
   public errorMessage: string;
   public canEdit = false;

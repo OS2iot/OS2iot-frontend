@@ -66,7 +66,7 @@ export class DatatargetService {
           return datatarget;
         }
       )
-    );;
+    );
   }
 
   delete(id: number) {

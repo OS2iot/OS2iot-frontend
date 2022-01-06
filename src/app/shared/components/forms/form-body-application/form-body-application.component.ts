@@ -89,8 +89,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.applicationService
             .createApplication(this.application)
             .subscribe(
-                (response) => {
-                    console.log(response);
+                () => {
                     this.router.navigateByUrl('/applications');
                 },
                 (error: HttpErrorResponse) => {
