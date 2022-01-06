@@ -12,6 +12,7 @@ import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceType } from '@shared/enums/device-type';
 import { BackButton } from '@shared/models/back-button.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { MeService } from '@shared/services/me.service';
@@ -25,7 +26,6 @@ import { Subscription } from 'rxjs';
 export class ApplicationDetailComponent implements OnInit, OnDestroy {
   @Output() deleteApplication = new EventEmitter();
   public applicationsSubscription: Subscription;
-  private deleteDialogSubscription: Subscription;
   public application: Application;
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   public id: number;
@@ -73,13 +73,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteApplication() {
-    let message: string;
-    if (this.applicationHasDevices()) {
-      message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
-    }
-
-    this.deleteDialogSubscription = this.deleteDialogService
-      .showSimpleDialog(message)
+    this.deleteDialogService
+      .showApplicationDialog(this.application)
       .subscribe((response) => {
         if (response) {
           this.applicationService
@@ -100,10 +95,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  applicationHasDevices(): boolean {
-    return this.application.iotDevices?.length > 0;
-  }
-
   bindApplication(id: number): void {
     this.applicationsSubscription = this.applicationService
       .getApplication(id)
@@ -115,9 +106,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
-    }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
     }
   }
 }
