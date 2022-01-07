@@ -834,6 +834,9 @@
     "LAST_PAGE": "Sidste side",
     "OF": "af"
   },
+  "NEW_USER": {
+    "FIRST_LOGIN": "Siden dette er dit første login, bedes du udfylde din mail og de organisationer du ønsker at være medlem af."
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

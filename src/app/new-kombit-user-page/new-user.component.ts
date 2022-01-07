@@ -5,6 +5,7 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { UserRequest, UserResponse } from '@app/admin/users/user.model';
 import { UserService } from '@app/admin/users/user.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -28,10 +29,13 @@ export class NewUserComponent implements OnInit {
 
   constructor(
     private organisationService: OrganisationService,
-    private userService: UserService
+    private userService: UserService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
+    this.translate.get(['NEW_USER.FIRST_LOGIN', 'USERS.EMAIL', 'NAV.ORGANISATIONS', 'NAV.BACK', 'USERS.SAVE']);
+
     this.getOrganisations();
 
     this.organisationsFilterCtrl.valueChanges
