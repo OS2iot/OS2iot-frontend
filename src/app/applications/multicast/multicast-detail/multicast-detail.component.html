@@ -1,0 +1,137 @@
+<div *ngIf="multicast">
+  <app-top-bar
+    [data]="multicast"
+    [backButton]="backButton"
+    [subPage]="true"
+    [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton"
+    (deleteSelectedInDropdown)="onDeleteMulticast()"
+  ></app-top-bar>
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+        <h3>{{ 'MULTICAST.BASIC-DETAILS' | translate }}</h3>
+        <app-general-details [data]="multicast"></app-general-details>
+        <p>
+          <strong>{{ 'MULTICAST.GROUPNAME' | translate }}</strong
+          >{{ multicast.name | translate }}
+        </p>
+        <mat-divider></mat-divider>
+        <h3 class="loraDetails">{{ 'MULTICAST.LORAWAN-DETAILS' | translate }}</h3>
+        <mat-divider></mat-divider>
+        <p>
+          <strong>{{ 'MULTICAST.ADDRESS' | translate }}</strong
+          >{{ multicast.mcAddr | translate }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.NETWORK-KEY' | translate }}</strong
+          >{{ multicast.mcNwkSKey | translate }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.APPLICATION-KEY' | translate }}</strong
+          >{{ multicast.mcAppSKey | translate }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.FRAMECOUNTER' | translate }}</strong
+          >{{ multicast.fCnt }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.DATARATE' | translate }}</strong
+          >{{ multicast.dr }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.FREQUENCY' | translate }}</strong
+          >{{ multicast.frequency }}
+        </p>
+        <p>
+          <strong>{{ 'MULTICAST.GROUPTYPE' | translate }}</strong
+          >{{ multicast.groupType }}
+        </p>
+        <!-- <p *ngIf="canShowPeriodicity()"><strong>{{ 'MULTICAST.PERIODICITY' | translate }}</strong>{{multicast.periodicity}}</p> Only if classB can be used-->
+      </div>
+    </div>
+
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+        <h3>{{ 'APPLICATION.ATTACHED-IOT' | translate }}</h3>
+        <div class="col-md-7 d-flex align-items-center">
+          <p>
+            <strong>{{ 'MULTICAST.IOTDEVICE' | translate }}:</strong>
+            <span
+              *ngFor="let device of multicast.iotDevices; let first = first"
+            >
+              <ng-container *ngIf="!first">, </ng-container>
+              <a
+                [routerLink]="[
+                  '/applications',
+                  multicast.applicationID,
+                  'iot-device',
+                  device.id
+                ]"
+                >{{ device.name }}</a
+              >
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="jumbotron">
+        <h3>Downlink</h3>
+        <div
+          *ngIf="errorMessages && errorMessages?.length !== 0"
+          class="error-messages p-3"
+        >
+          <ul class="mb-0">
+            <li *ngFor="let error of errorMessages">
+              {{ error | translate }}
+            </li>
+          </ul>
+        </div>
+        <div class="mt-2 col-12">
+          <label for="port" class="form-label asterisk-if-mandatory">{{
+            'MULTICAST.DOWNLINK.PORT' | translate
+          }}</label>
+          <input
+            class="form-control"
+            id="port"
+            type="number"
+            name="port"
+            required
+            (keypress)="keyPressHexadecimal($event)"
+            [(ngModel)]="downlink.port"
+            [ngClass]="{
+              'is-invalid': formFailedSubmit && errorMessages.includes('fCnt'),
+              'is-valid': formFailedSubmit && !errorMessages.includes('fCnt')
+            }"
+          />
+        </div>
+        <div class="mt-2 col-12">
+          <label for="data" class="form-label asterisk-if-mandatory">{{
+            'MULTICAST.DOWNLINK.PAYLOAD' | translate
+          }}</label>
+          <input
+            type="data"
+            class="form-control"
+            placeholder="{{ 'MULTICAST.DOWNLINK.PAYLOAD' | translate }}"
+            id="data"
+            name="data"
+            maxlength="64"
+            required
+            [(ngModel)]="downlink.data"
+            (keypress)="keyPressHexadecimal($event)"
+          />
+        </div>
+        <div class="mt-5">
+          <button
+            (click)="clickDownlink()"
+            class="btn btn-secondary"
+            type="button"
+          >
+            {{ 'MULTICAST.DOWNLINK.START' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

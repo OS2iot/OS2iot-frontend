@@ -11,7 +11,6 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { Datatarget } from '../datatarget.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 
 @Component({
     selector: 'app-datatarget-detail',
@@ -65,7 +64,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     }
 
     private setBackButton(applicationId: number) {
-        this.backButton.routerLink = ['applications', applicationId.toString(), 'datatarget-list', this.applicationName ]
+        this.backButton.routerLink = ['applications', applicationId.toString()]
     }
 
     onDeleteDatatarget() {
