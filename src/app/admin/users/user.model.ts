@@ -1,3 +1,4 @@
+import { Organisation } from '../organisation/organisation.model';
 import { PermissionResponse } from '../permission/permission.model';
 
 export class UserRequest {
@@ -23,9 +24,15 @@ export interface UserResponse {
     active: boolean;
     lastLogin: Date;
     permissions: PermissionResponse[];
+    awaitingConfirmation: boolean;
 }
 
 export interface UserGetManyResponse {
     data: UserResponse[];
     count: number;
+}
+
+export class CreateNewKombitUserDto{
+    email: string;
+    organizations: Organisation[];
 }

@@ -1,11 +1,16 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import { UserRequest, UserResponse } from '@app/admin/users/user.model';
+import {
+  CreateNewKombitUserDto,
+  UserRequest,
+} from '@app/admin/users/user.model';
 import { UserService } from '@app/admin/users/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorMessageService } from '@shared/error-message.service';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,9 +23,11 @@ export class NewUserComponent implements OnInit {
   public organisationSubscription: Subscription;
   public userSubscription: Subscription;
   public organisations: Organisation[];
+  public formFailedSubmit = false;
+  public errorFields: string[];
+  public errorMessages: unknown;
   public user: UserRequest = new UserRequest();
-  public email: string;
-
+  public createNewKombitUserDto: CreateNewKombitUserDto = new CreateNewKombitUserDto();
   public organisationsFilterCtrl: FormControl = new FormControl();
   public filteredOrganisations: ReplaySubject<
     Organisation[]
@@ -30,19 +37,31 @@ export class NewUserComponent implements OnInit {
   constructor(
     private organisationService: OrganisationService,
     private userService: UserService,
-    private translate: TranslateService
+    private router: Router,
+    private translate: TranslateService,
+    private errorMessageService: ErrorMessageService
   ) {}
 
   ngOnInit(): void {
-    this.translate.get(['NEW_USER.FIRST_LOGIN', 'USERS.EMAIL', 'NAV.ORGANISATIONS', 'NAV.BACK', 'USERS.SAVE']);
+    if (history.state.code === 200) {
+      this.translate.get([
+        'NEW_USER.FIRST_LOGIN',
+        'USERS.EMAIL',
+        'NAV.ORGANISATIONS',
+        'NAV.BACK',
+        'USERS.SAVE',
+      ]);
 
-    this.getOrganisations();
+      this.getOrganisations();
 
-    this.organisationsFilterCtrl.valueChanges
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(() => {
-        this.filterOrganisations();
-      });
+      this.organisationsFilterCtrl.valueChanges
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(() => {
+          this.filterOrganisations();
+        });
+    } else {
+      this.router.navigate(['/not-found']);
+    }
   }
 
   private filterOrganisations() {
@@ -64,8 +83,18 @@ export class NewUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.email);
-    this.userService.putEmail(this.email);
+    this.resetErrors();
+    this.userService.putEmail(this.createNewKombitUserDto).subscribe(
+      () => {
+        this.router.navigate(['/awaiting-page'], {
+          state: { code: 200 },
+        });
+      },
+      (error: HttpErrorResponse) => {
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   public compare(
@@ -82,5 +111,15 @@ export class NewUserComponent implements OnInit {
         this.organisations = orgs.data;
         this.filteredOrganisations.next(this.organisations.slice());
       });
+  }
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
+  }
+  handleError(error: HttpErrorResponse) {
+    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errors.errorFields;
+    this.errorMessages = errors.errorMessages;
   }
 }

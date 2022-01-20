@@ -26,6 +26,7 @@ import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
 import { NewUserComponent } from './new-kombit-user-page/new-user.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
+import { AwaitingPageComponent } from './awaiting-page/awaiting-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,7 +40,8 @@ export function tokenGetter() {
     declarations: [
         AppComponent,
         ErrorPageComponent,
-        NewUserComponent
+        NewUserComponent,
+        AwaitingPageComponent
     ],
     imports: [
         SharedVariableModule.forRoot(),

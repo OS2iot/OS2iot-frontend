@@ -83,8 +83,16 @@ export class DashboardComponent implements OnInit {
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
       this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
       this.isLoadingResults = false;
-      if (!userInfo.user.email) { // THIS HAS TO BE AT LINE 50. IS PUT HERE FOR TEST BECAUSE OF KOMBIT
-        this.router.navigate(['/new-user']);
+      if (!userInfo.user.email) {
+        // TODO::: THIS HAS TO BE AT LINE 50. IS PUT HERE FOR TEST BECAUSE OF KOMBIT
+        this.router.navigate(['/new-user'], {
+          state: { code: 200 },
+        });
+      } else if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
+        // TODO::: THIS SHOULD JUST BE AN IF STATEMENT TO CHECK IF USER IS AWAITING
+        this.router.navigate(['/awaiting-page'], {
+          state: { code: 200 },
+        });
       }
     });
   }

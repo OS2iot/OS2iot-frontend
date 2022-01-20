@@ -3,7 +3,7 @@ import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from './user-minimal.service';
-import { UserResponse, UserRequest, UserGetManyResponse } from './user.model';
+import { UserResponse, UserRequest, UserGetManyResponse, CreateNewKombitUserDto } from './user.model';
 
 @Injectable({
     providedIn: 'root',
@@ -26,8 +26,8 @@ export class UserService {
         });
     }
 
-    putEmail(email: string): Observable<UserResponse> {
-      return this.restService.put(this.URL + '/setEmail', email, undefined, {
+    putEmail(body: CreateNewKombitUserDto): Observable<UserResponse> {
+      return this.restService.put(this.URL + '/createNewKombitUser', body, undefined, {
         observe: 'response',
       });
     }
