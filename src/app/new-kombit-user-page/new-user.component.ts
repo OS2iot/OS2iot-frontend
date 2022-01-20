@@ -86,9 +86,7 @@ export class NewUserComponent implements OnInit {
     this.resetErrors();
     this.userService.putEmail(this.createNewKombitUserDto).subscribe(
       () => {
-        this.router.navigate(['/awaiting-page'], {
-          state: { code: 200 },
-        });
+        this.router.navigate(['/user-page']);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);

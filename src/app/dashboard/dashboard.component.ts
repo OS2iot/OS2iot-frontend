@@ -90,9 +90,7 @@ export class DashboardComponent implements OnInit {
         });
       } else if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
         // TODO::: THIS SHOULD JUST BE AN IF STATEMENT TO CHECK IF USER IS AWAITING
-        this.router.navigate(['/awaiting-page'], {
-          state: { code: 200 },
-        });
+        this.router.navigate(['/user-page']);
       }
     });
   }
