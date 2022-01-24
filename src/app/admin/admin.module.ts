@@ -32,7 +32,6 @@ import { ApiKeyComponent } from './api-key/api-key.component';
 import { ApiKeyListComponent } from './api-key/api-key-list/api-key-list.component';
 import { ApiKeyTableComponent } from './api-key/api-key-list/api-key-table/api-key-table.component';
 import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.component';
-import { ApiKeyDetailComponent } from './api-key/api-key-detail/api-key-detail.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { ApiKeyDetailComponent } from './api-key/api-key-detail/api-key-detail.c
     ApiKeyListComponent,
     ApiKeyTableComponent,
     ApiKeyEditComponent,
-    ApiKeyDetailComponent,
   ],
   imports: [
     AdminRoutingModule,

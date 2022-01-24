@@ -15,7 +15,6 @@ import { UsersComponent } from './users/users.component';
 import { ApiKeyComponent } from './api-key/api-key.component';
 import { ApiKeyListComponent } from './api-key/api-key-list/api-key-list.component';
 import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.component';
-import { ApiKeyDetailComponent } from './api-key/api-key-detail/api-key-detail.component';
 
 
 const adminRoutes: Routes = [
@@ -54,7 +53,6 @@ const adminRoutes: Routes = [
         children: [
             { path: '', component: ApiKeyListComponent },
             { path: 'new-api-key', component: ApiKeyEditComponent },
-            { path: ':api-key-id', component: ApiKeyDetailComponent },
             {
                 path: ':api-key-id/edit-api-key',
                 component: ApiKeyEditComponent,
