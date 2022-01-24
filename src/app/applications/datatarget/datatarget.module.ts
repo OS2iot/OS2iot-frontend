@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatatargetTableComponent } from './datatarget-table/datatarget-table.component';
-import { DatatargetListComponent } from './datatarget-list/datatarget-list.component';
 import { DatatargetEditComponent } from './datatarget-edit/datatarget-edit.component';
 import { DatatargetDetailComponent } from './datatarget-detail/datatarget-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,7 +18,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
 @NgModule({
   declarations: [
     DatatargetTableComponent,
-    DatatargetListComponent,
     DatatargetEditComponent,
     DatatargetDetailComponent,
     OpendatadkComponent,
@@ -39,7 +37,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
   ],
   exports: [
     DatatargetTableComponent,
-    DatatargetListComponent,
     DatatargetEditComponent,
     DatatargetDetailComponent,
     NGMaterialModule
