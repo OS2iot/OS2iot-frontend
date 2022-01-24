@@ -30,6 +30,5 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-    // "strictTemplates": true // Highly recommended for type-safety in html. Apply if there's ever time to fix the 30+ errors that appear
   }
 }

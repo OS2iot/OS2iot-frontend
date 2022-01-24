@@ -6,7 +6,6 @@ import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
 import { FilterDevicesPipe } from './filter-devices.pipe';
-import { UniquePermissionOrganizationsPipe } from './unique-permission-organizations.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { UniquePermissionOrganizationsPipe } from './unique-permission-organizat
     CustomTableDatePipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
-    UniquePermissionOrganizationsPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -28,7 +26,6 @@ import { UniquePermissionOrganizationsPipe } from './unique-permission-organizat
     CustomTableDatePipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
-    UniquePermissionOrganizationsPipe,
   ],
 })
 export class PipesModule {}
