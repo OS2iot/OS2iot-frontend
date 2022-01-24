@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-api-key',
-  templateUrl: './api-key.component.html',
-  styleUrls: ['./api-key.component.scss']
+  template: '<router-outlet></router-outlet>',
 })
 export class ApiKeyComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
