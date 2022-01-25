@@ -1,0 +1,76 @@
+<div class="container-flud">
+  <app-top-bar
+    [backButtonTitle]="backButtonTitle"
+    [title]="title"
+  ></app-top-bar>
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron">
+        <h1 *ngIf="awaitingConfirmation">
+          {{ 'USER_PAGE.AWAITING_CONFIRMATION' | translate }}
+        </h1>
+        <mat-divider *ngIf="awaitingConfirmation"></mat-divider>
+        <h3 class="newOrganisationsHeadLine">
+          {{ 'USER_PAGE.APPLY_ORGANISATIONS' | translate }}
+        </h3>
+        <div>
+          <h4>{{ 'USER_PAGE.APPLIED_ORGANISATIONS' | translate }}</h4>
+          <p *ngFor="let org of userOrganizations">
+            {{ org.name }}
+          </p>
+          <p class="noOrgs" *ngIf="userOrganizations.length === 0">
+            {{ 'USER_PAGE.NO_APPLIED_ORGS' | translate }}
+          </p>
+          <h6 class="mt-5">
+            {{ 'USER_PAGE.QUESTION_APPLY_ORGANISATIONS' | translate }}
+          </h6>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #applyOrgsForm="ngForm">
+          <div *ngIf="errorMessages" class="error-messages p-3">
+            <ul class="mb-0">
+              <li *ngFor="let error of errorMessages">
+                {{ error | translate }}
+              </li>
+            </ul>
+          </div>
+          <div class="form-group mt-3">
+            <mat-form-field appearance="outline">
+              <mat-label *ngIf="organizations.length > 0; else noMultiOrgs">{{
+                'NAV.ORGANISATIONS' | translate
+              }}</mat-label>
+              <ng-template #noMultiOrgs>
+                <mat-label
+                  >{{ 'USER_PAGE.NO_ORGS' | translate }}</mat-label
+                >
+              </ng-template>
+              <mat-select
+                multiple
+                name="organizations"
+                [compareWith]="compare"
+                [(ngModel)]="updateUserOrgs.organizations"
+                panelClass="overflow-x-hidden"
+                aria-required="true"
+              >
+                <mat-select-search
+                  [formControl]="organisationsFilterCtrl"
+                ></mat-select-search>
+
+                <mat-option
+                  *ngFor="let org of filteredOrganisations | async"
+                  [value]="org"
+                  >{{ org.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group mt-3">
+            <button class="btn btn-primary ml-2" type="submit">
+              {{ 'USERS.SAVE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

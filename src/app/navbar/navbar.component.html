@@ -24,12 +24,18 @@
     <div class="navbar-collapse collapse overflow-auto flex-grow-0 h-100" id="navbar" [attr.aria-expanded]="!isCollapsed"
       [ngClass]="{collapse: !isCollapsed}">
       <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
-        <li class="nav-item">
+        <li *ngIf="hasEmail(); else noEmail" class="nav-item">
           <a routerLink="/user-page" [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="userPage">
             {{getUsername()}}
           </a>
           <fa-icon [icon]="faUser" class="navbar-icon"></fa-icon>
         </li>
+        <ng-template #noEmail>
+          <div>
+            <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
+            {{getUsername()}}
+          </div>
+        </ng-template>
         <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
           <li class="nav-item">
             <app-global-admin></app-global-admin>

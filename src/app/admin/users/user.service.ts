@@ -26,12 +26,6 @@ export class UserService {
         });
     }
 
-    putEmail(body: CreateNewKombitUserDto): Observable<UserResponse> {
-      return this.restService.put(this.URL + '/createNewKombitUser', body, undefined, {
-        observe: 'response',
-      });
-    }
-
     getOne(id: number, extendedInfo = false): Observable<UserResponse> {
         return this.restService
             .get(this.URL, { extendedInfo: extendedInfo }, id)
@@ -69,4 +63,21 @@ export class UserService {
             });
         }
     }
+    getOneSimple(id: number): Observable<UserResponse> {
+        return this.restService.get(this.URL, {}, id).pipe(
+          map((response: UserResponse) => {
+            return response;
+          })
+        );
+      }
+      updateNewKombit(body: CreateNewKombitUserDto): Observable<UserResponse> {
+        return this.restService.put(
+          this.URL + '/createNewKombitUser',
+          body,
+          undefined,
+          {
+            observe: 'response',
+          }
+        );
+      }
 }

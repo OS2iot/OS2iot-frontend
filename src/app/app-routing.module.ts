@@ -5,8 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
-import { NewUserComponent } from './new-kombit-user-page/new-user.component';
-import { UserPageComponent } from './user-page/user-page.component';
+import { NewUserComponent } from './admin/users/new-kombit-user-page/new-user.component';
+import { UserPageComponent } from './admin/users/user-page/user-page.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },

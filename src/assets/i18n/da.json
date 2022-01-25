@@ -911,6 +911,16 @@
   "NEW_USER": {
     "FIRST_LOGIN": "Siden dette er dit første login, bedes du udfylde din mail og de organisationer du ønsker at være medlem af."
   },
+  "USER_PAGE": {
+    "AWAITING_CONFIRMATION": "Din bruger er oprettet og afventer bekræftelse fra administratorer på de organisationer du har søgt tilknytning.",
+    "APPLY_ORGANISATIONS": "Søg tilknytning til andre organisationer",
+    "APPLIED_ORGANISATIONS": "Der er pt søgt tilknytning til følgende organisationer:",
+    "QUESTION_APPLY_ORGANISATIONS": "Ønsker du at søge tilknytning til andre organisationer?",
+    "USER_PAGE": "Brugerprofil",
+    "NO_APPLIED_ORGS": "Du har ikke søgt tilknytning til nogle organisationer..",
+    "NO_ORGS": "Der findes ikke yderligere organisationer.."
+
+  },
   "false": "Nej",
   "true": "Ja",
   "HTTP_PUSH": "HTTP Push",

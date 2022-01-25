@@ -23,10 +23,11 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
-import { NewUserComponent } from './new-kombit-user-page/new-user.component';
+import { NewUserComponent } from './admin/users/new-kombit-user-page/new-user.component';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
-import { UserPageComponent } from './user-page/user-page.component';
+import { UserPageComponent } from './admin/users/user-page/user-page.component';
+import { SharedModule } from '@shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,6 +70,7 @@ export function tokenGetter() {
         GatewayModule,
         MatSelectSearchModule,
         SearchModule,
+        SharedModule,
         HttpClientModule,
         MatInputModule,
         JwtModule.forRoot({

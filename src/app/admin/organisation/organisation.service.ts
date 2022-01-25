@@ -9,6 +9,7 @@ import {
 } from './organisation.model';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserMinimalService } from '../users/user-minimal.service';
+import { UpdateUserOrgsDto } from '../users/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -80,5 +81,11 @@ export class OrganisationService {
 
   delete(id: number) {
     return this.restService.delete(this.URL, id);
+  }
+
+  updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
+    return this.restService.put(this.URL + '/updateUserOrgs', body, undefined, {
+      observe: 'response',
+    });
   }
 }

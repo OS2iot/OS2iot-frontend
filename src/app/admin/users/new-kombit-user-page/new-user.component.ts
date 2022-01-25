@@ -4,10 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import {
-  CreateNewKombitUserDto,
-  UserRequest,
-} from '@app/admin/users/user.model';
+import { CreateNewKombitUserDto } from '@app/admin/users/user.model';
 import { UserService } from '@app/admin/users/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
@@ -26,7 +23,6 @@ export class NewUserComponent implements OnInit {
   public formFailedSubmit = false;
   public errorFields: string[];
   public errorMessages: unknown;
-  public user: UserRequest = new UserRequest();
   public createNewKombitUserDto: CreateNewKombitUserDto = new CreateNewKombitUserDto();
   public organisationsFilterCtrl: FormControl = new FormControl();
   public filteredOrganisations: ReplaySubject<
@@ -84,7 +80,7 @@ export class NewUserComponent implements OnInit {
 
   onSubmit(): void {
     this.resetErrors();
-    this.userService.putEmail(this.createNewKombitUserDto).subscribe(
+    this.userService.updateNewKombit(this.createNewKombitUserDto).subscribe(
       () => {
         this.router.navigate(['/user-page']);
       },
@@ -99,7 +95,7 @@ export class NewUserComponent implements OnInit {
     o1: Organisation | undefined,
     o2: Organisation | undefined
   ): boolean {
-    return o1 === o2;
+    return o1?.id === o2?.id;
   }
 
   public getOrganisations() {
