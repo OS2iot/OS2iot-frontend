@@ -28,6 +28,10 @@ import { UsersComponent } from './users/users.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
+import { ApiKeyComponent } from './api-key/api-key.component';
+import { ApiKeyListComponent } from './api-key/api-key-list/api-key-list.component';
+import { ApiKeyTableComponent } from './api-key/api-key-list/api-key-table/api-key-table.component';
+import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,10 @@ import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-
     OrganisationDetailComponent,
     OrganisationEditComponent,
     OrganisationListComponent,
+    ApiKeyComponent,
+    ApiKeyListComponent,
+    ApiKeyTableComponent,
+    ApiKeyEditComponent,
   ],
   imports: [
     AdminRoutingModule,
@@ -79,6 +87,10 @@ import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-
     OrganisationDetailComponent,
     OrganisationEditComponent,
     OrganisationListComponent,
+    ApiKeyComponent,
+    ApiKeyListComponent,
+    ApiKeyTableComponent,
+    ApiKeyEditComponent,
   ],
 })
 export class AdminModule {}

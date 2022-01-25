@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       } else {
         const error = params['error'];
         if (error) {
-          if (error == 'MESSAGE.KOMBIT-LOGIN-FAILED') {
+          if (error == "MESSAGE.KOMBIT-LOGIN-FAILED" || error == "MESSAGE.API-KEY-AUTH-FAILED") {
             this.router.navigate(['/not-authorized'], {
               state: { message: this.kombitError, code: 401 },
             });
