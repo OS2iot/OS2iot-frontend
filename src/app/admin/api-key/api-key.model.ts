@@ -3,7 +3,7 @@ import { PermissionResponse } from '../permission/permission.model';
 export class ApiKeyRequest {
   id: number;
   name: string;
-  permissions?: PermissionResponse[];
+  permissions?: number[];
 }
 
 export interface ApiKeyResponse {

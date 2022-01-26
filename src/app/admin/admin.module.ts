@@ -90,7 +90,6 @@ import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.compone
     ApiKeyComponent,
     ApiKeyListComponent,
     ApiKeyTableComponent,
-    ApiKeyEditComponent,
   ],
 })
 export class AdminModule {}
