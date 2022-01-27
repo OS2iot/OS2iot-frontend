@@ -30,6 +30,7 @@ export class ApiKeyEditComponent implements OnInit {
   public formFailedSubmit = false;
   public permissions: PermissionResponse[] = [];
   private organizationId: number;
+  private id: number;
 
   constructor(
     private translate: TranslateService,
@@ -39,9 +40,7 @@ export class ApiKeyEditComponent implements OnInit {
     private permissionService: PermissionService,
     private errorMessageService: ErrorMessageService,
     private sharedVariableService: SharedVariableService
-  ) {
-    translate.use('da');
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getPermissions();
@@ -54,6 +53,11 @@ export class ApiKeyEditComponent implements OnInit {
         this.submitButton = translations['API-KEY.EDIT.SAVE'];
       });
 
+    this.id = +this.route.snapshot.paramMap.get('api-key-id');
+
+    if (this.id > 0) {
+      this.getApiKey(this.id);
+    }
     this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
   }
 
@@ -68,8 +72,8 @@ export class ApiKeyEditComponent implements OnInit {
         this.organizationId
       )
       .subscribe(
-        (permissions) => {
-          this.permissions = permissions.data.filter(
+        (permissionsResponse) => {
+          this.permissions = permissionsResponse.data.filter(
             (x) => x.organization?.id === this.organizationId
           );
         },
@@ -79,8 +83,16 @@ export class ApiKeyEditComponent implements OnInit {
       );
   }
 
+  private getApiKey(id: number) {
+    this.apiKeyService.get(id).subscribe((key) => {
+      this.apiKeyRequest.id = key.id;
+      this.apiKeyRequest.name = key.name;
+      this.apiKeyRequest.permissionIds = key.permissions.map((pm) => pm.id);
+    });
+  }
+
   onSubmit(): void {
-    this.create();
+    this.id ? this.update() : this.create();
   }
 
   private create(): void {
@@ -90,11 +102,21 @@ export class ApiKeyEditComponent implements OnInit {
     );
   }
 
-  public compare(o1: any, o2: any): boolean {
-    return o1 === o2;
+  private update(): void {
+    this.apiKeyService.update(this.apiKeyRequest, this.id).subscribe(
+      () => this.routeBack(),
+      (err) => this.showError(err)
+    );
   }
 
-  private showError(err: HttpErrorResponse) {
+  public compare(
+    matOptionValue: number,
+    ngModelObject: number
+  ): boolean {
+    return matOptionValue === ngModelObject;
+  }
+
+  showError(err: HttpErrorResponse) {
     const result = this.errorMessageService.handleErrorMessageWithFields(err);
     this.errorFields = result.errorFields;
     this.errorMessages = result.errorMessages;
