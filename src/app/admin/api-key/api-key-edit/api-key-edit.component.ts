@@ -30,7 +30,7 @@ export class ApiKeyEditComponent implements OnInit {
   public formFailedSubmit = false;
   public permissions: PermissionResponse[] = [];
   private organizationId: number;
-  id: number;
+  private id: number;
 
   constructor(
     private translate: TranslateService,
@@ -85,10 +85,9 @@ export class ApiKeyEditComponent implements OnInit {
 
   private getApiKey(id: number) {
     this.apiKeyService.get(id).subscribe((key) => {
-      this.apiKeyRequest = new ApiKeyRequest();
       this.apiKeyRequest.id = key.id;
       this.apiKeyRequest.name = key.name;
-      this.apiKeyRequest.permissions = key.permissions.map((pm) => pm.id);
+      this.apiKeyRequest.permissionIds = key.permissions.map((pm) => pm.id);
     });
   }
 
