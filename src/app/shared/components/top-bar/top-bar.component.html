@@ -3,7 +3,7 @@
 
     <div class="col-12">
       <div class="row">
-        <div class="col-md-8 my-3 m-md-0 top-bar--menu">
+        <div class="col-md-7 my-3 m-md-0 top-bar--menu">
           <!-- Breadcrumb -->
           <nav class="top-bar--menu--breadcrumb">
             <ng-template [ngIf]="backButtonTitle">
@@ -61,12 +61,32 @@
               <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
                 <div class="search-icon">
                   <fa-icon [icon]="faSearch"></fa-icon>
-                  {{ 'TOPBAR.SEARCH.BUTTON' | translate }}
                 </div>
               </a>
             </mat-form-field>
           </form>
         </div>
+
+          <div class="col-md-1 order-md-last search-form-wrapper">
+            <button mat-icon-button type="button" id="user"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <fa-icon [icon]="faUser" class="icon--primary mb-1"></fa-icon>
+            </button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a>1
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a>2
+                </a>
+              </li>
+            </ul>
+         
+            <button mat-icon-button type="button" id="user">
+              <fa-icon [icon]="faQuestionCircle" class="icon--primary mb-1"></fa-icon>
+            </button>
+          </div>
       </div>
     </div>
 

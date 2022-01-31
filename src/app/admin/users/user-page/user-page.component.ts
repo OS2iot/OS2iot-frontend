@@ -27,8 +27,10 @@ export class UserPageComponent implements OnInit {
   public errorMessages: unknown;
   public title: string;
   public awaitingConfirmation: boolean;
-  public organizations: Organisation[];
-  public userOrganizations: Organisation[];
+  public requestedOrganizations: Organisation[];
+  public requestedUserOrganizations: Organisation[];
+  public checkForUserOrganizations = false;
+  public checkForRemainingOrganizations = false;
   public userInfo: CurrentUserInfoResponse;
   public organisationsFilterCtrl: FormControl = new FormControl();
   public filteredOrganisations: ReplaySubject<
@@ -55,10 +57,22 @@ export class UserPageComponent implements OnInit {
     ]);
 
     this.userInfo = this.sharedService.getUserInfo();
+
     this.userService
       .getOneSimple(this.userInfo.user.id)
       .subscribe((response: UserResponse) => {
-        this.userOrganizations = response.organizations;
+        this.requestedUserOrganizations = response.requestedOrganizations;
+
+        if (this.userInfo.organizations.length > 0) {
+          this.compareRequestedAndActualOrganisations(
+            this.requestedUserOrganizations,
+            this.userInfo.organizations
+          );
+        }
+
+        if (this.requestedUserOrganizations.length === 0) {
+          this.checkForUserOrganizations = true;
+        }
 
         this.awaitingConfirmation = response.awaitingConfirmation;
         if (!this.awaitingConfirmation) {
@@ -79,21 +93,32 @@ export class UserPageComponent implements OnInit {
       });
   }
   private filterOrganisations() {
-    if (!this.organizations) {
+    if (!this.requestedOrganizations) {
       return;
     }
     // get the search keyword
     let search = this.organisationsFilterCtrl?.value?.trim();
     if (!search) {
-      this.filteredOrganisations.next(this.organizations.slice());
+      this.filteredOrganisations.next(this.requestedOrganizations.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
-    const filtered = this.organizations.filter((org) => {
+    const filtered = this.requestedOrganizations.filter((org) => {
       return org.name.toLocaleLowerCase().indexOf(search) > -1;
     });
     this.filteredOrganisations.next(filtered);
+  }
+
+  public compareRequestedAndActualOrganisations(
+    requestedOrganizations: Organisation[],
+    actualOrganizations: Organisation[]
+  ) {
+    actualOrganizations.forEach((actOrg) => {
+      if (!requestedOrganizations.find((org) => org.id === actOrg.id)) {
+        this.requestedUserOrganizations.push(actOrg);
+      }
+    });
   }
 
   public compare(
@@ -107,26 +132,31 @@ export class UserPageComponent implements OnInit {
     this.organisationSubscription = this.organizationService
       .getMultipleNoReq()
       .subscribe((orgs) => {
-        this.organizations = orgs.data;
-        this.organizations = this.filterChosenOrganizations(
-          this.userOrganizations,
-          this.organizations
+        this.requestedOrganizations = orgs.data;
+        this.requestedOrganizations = this.filterChosenOrganizations(
+          this.requestedUserOrganizations,
+          this.requestedOrganizations
         );
-        this.filteredOrganisations.next(this.organizations.slice());
+        this.filteredOrganisations.next(this.requestedOrganizations.slice());
       });
   }
 
   public filterChosenOrganizations(
-    userOrganizations: Organisation[],
+    requestedUserOrganizations: Organisation[],
     allOrganizations: Organisation[]
   ): Organisation[] {
     const filteredChosenOrganizations: Organisation[] = [];
 
     allOrganizations.forEach((allOrg) => {
-      if (!userOrganizations.find((org) => org.id === allOrg.id)) {
+      if (!requestedUserOrganizations.find((org) => org.id === allOrg.id)) {
         filteredChosenOrganizations.push(allOrg);
       }
     });
+    if (filteredChosenOrganizations.length > 0) {
+      this.checkForRemainingOrganizations = true;
+    } else {
+      this.checkForRemainingOrganizations = false;
+    }
 
     return filteredChosenOrganizations;
   }

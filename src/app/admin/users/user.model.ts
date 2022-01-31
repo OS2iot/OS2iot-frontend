@@ -28,7 +28,7 @@ export interface UserResponse {
   lastLogin: Date;
   permissions: PermissionResponse[];
   awaitingConfirmation: boolean;
-  organizations: OrganisationResponse[];
+  requestedOrganizations: OrganisationResponse[];
 }
 
 export interface UserGetManyResponse {
@@ -38,9 +38,9 @@ export interface UserGetManyResponse {
 
 export class CreateNewKombitUserDto {
   email: string;
-  organizations: Organisation[];
+  requestedOrganizations: Organisation[];
 }
 
 export class UpdateUserOrgsDto {
-  organizations: Organisation[];
+  requestedOrganizations: Organisation[];
 }

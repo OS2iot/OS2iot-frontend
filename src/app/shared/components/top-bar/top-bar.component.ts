@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Sort } from '@shared/models/sort.model';
 import { Router } from '@angular/router';
-import { faSearch, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faChevronLeft, faUser, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { BackButton } from '@shared/models/back-button.model';
@@ -30,6 +30,8 @@ export class TopBarComponent implements OnInit {
     @Input()
     public subTitle: string;
     faChevronLeft = faChevronLeft;
+    faQuestionCircle = faQuestionCircle
+    faUser = faUser;
 
     @Input() staticTitle: string;
     @Input() title: string;
