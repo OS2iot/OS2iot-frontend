@@ -11,7 +11,7 @@ import { DatatargetService } from '../datatarget.service';
 import { ApplicationService } from '@applications/application.service';
 import { PayloadDecoderService } from '@payload-decoder/payload-decoder.service';
 import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-datatarget.service';
-import { SaveSnackService } from '@shared/services/save-snack.service';
+import { SnackService } from '@shared/services/snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PayloadDecoderMappedResponse } from '@payload-decoder/payload-decoder.model';
@@ -46,7 +46,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public datatargetid: number;
   private applicationId: number;
-  private applicationNane: string;
+  private applicationName: string;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
@@ -66,7 +66,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
     private applicationService: ApplicationService,
     private payloadDecoderService: PayloadDecoderService,
     private payloadDeviceDataTargetService: PayloadDeviceDatatargetService,
-    private saveSnackService: SaveSnackService,
+    private saveSnackService: SnackService,
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
     private opendatadkService: OpendatadkService,
@@ -98,7 +98,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
 
     this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.applicationNane = this.route.snapshot.paramMap.get('name');
+    this.applicationName = this.route.snapshot.paramMap.get('name');
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -242,6 +242,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
           this.datatarget.openDataDkDataset.acceptTerms = true;
         }
         this.showSavedSnack();
+        this.routeToDatatargets();
       },
         (error: HttpErrorResponse) => {
           this.checkDataTargetModelOpendatadkdatasaet();
@@ -293,7 +294,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications', this.applicationId.toString(), 'datatarget-list', this.applicationNane]);
+    this.router.navigate(['applications',this.applicationId.toString()])
   }
 
   onCoordinateKey(event: any) {

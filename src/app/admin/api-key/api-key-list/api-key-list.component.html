@@ -1,0 +1,18 @@
+<app-top-bar
+  [title]="'NAV.API-KEY' | translate"
+  [ctaLabel]="'API-KEY.CREATE-NEW-API-KEY' | translate"
+  [ctaRouterLink]="'new-api-key'"
+  [canEdit]="canEdit"
+>
+</app-top-bar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron--table">
+        <app-api-key-table
+          [organisationId]="organisationId"
+        ></app-api-key-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Application } from '@applications/application.model';
 import { PayloadDecoder } from '../../payload-decoder/payload-decoder.model';
+import { PermissionResponse } from '../permission/permission.model';
 
 export class Organisation {
   id?: number;
@@ -18,8 +19,7 @@ export interface OrganisationResponse {
 
   payloadDecoders: PayloadDecoder[];
   applications: Application[];
-  // TODO: This.
-  permissions: any[];
+  permissions: PermissionResponse[];
 }
 
 export interface OrganisationGetManyResponse {

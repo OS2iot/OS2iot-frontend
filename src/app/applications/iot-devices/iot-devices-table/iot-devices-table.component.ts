@@ -20,7 +20,6 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
 import { DeviceType } from '@shared/enums/device-type';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
 import { environment } from '@environments/environment';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { MeService } from '@shared/services/me.service';

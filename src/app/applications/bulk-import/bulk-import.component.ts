@@ -60,7 +60,6 @@ export class BulkImportComponent implements OnInit {
       });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
-
   }
 
   download({ name, url }: { name: string, url: string }) {

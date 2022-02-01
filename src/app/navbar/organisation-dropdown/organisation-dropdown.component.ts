@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { PermissionType } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
-import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn, faKey } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { MeService } from '@shared/services/me.service';
@@ -26,6 +26,7 @@ export class OrganisationDropdownComponent implements OnInit {
   faIdBadge = faIdBadge;
   faToolbox = faToolbox;
   faBurn = faBurn;
+  faKey = faKey;
 
 
   constructor(

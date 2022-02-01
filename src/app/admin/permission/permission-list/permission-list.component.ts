@@ -54,7 +54,6 @@ export class PermissionListComponent implements OnInit, OnChanges {
   }
 
   deletePermission(id: number) {
-    console.log("list")
     this.permissionService.deletePermission(id).subscribe((response) => {
       if (response.ok && response.body.affected > 0) {
         this.getPermissions();

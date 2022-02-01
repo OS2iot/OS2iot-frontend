@@ -112,7 +112,7 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.sigfoxService.getGroup(this.sigfoxGroup.id).subscribe(
+    this.sigfoxService.getGroup(this.sigfoxGroupId).subscribe(
       (response: any) => {
         if (response.data.length !== 0 || response.data === undefined) {
           this.update();
