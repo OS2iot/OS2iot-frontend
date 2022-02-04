@@ -13,8 +13,7 @@ export class ErrorMessageService {
           errorMessages.push(err.error.message);
         } else if (err.error.chirpstackError) {
           errorMessages.push(err.error.chirpstackError.message);
-        }
-        else {
+        } else {
           err.error.message.forEach( (err) => {
             if (err.property === 'lorawanSettings') {
               err.children.forEach( (element) => {
@@ -32,7 +31,7 @@ export class ErrorMessageService {
         return errorMessages;
   }
 
-  public handleErrorMessageWithFields(error: HttpErrorResponse): ErrorMessage {
+  public handleErrorMessageWithFields(error: HttpErrorResponse | Pick<HttpErrorResponse, 'error'>): ErrorMessage {
     const errors: ErrorMessage = {errorFields: [], errorMessages: []};
     if (typeof error.error.message === 'string') {
       errors.errorMessages.push(error.error.message);

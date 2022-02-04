@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IotDevice, IoTDevicesMinimalResponse, IotDevicesResponse } from './iot-device.model';
+import { Observable} from 'rxjs';
+import { IotDevice, IoTDevicesMinimalResponse, IotDevicesImportResponse, IotDeviceImportRequest } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
@@ -14,15 +14,23 @@ export class IoTDeviceService {
 
     constructor(
         private restService: RestService,
-        private userMinimalService: UserMinimalService 
+        private userMinimalService: UserMinimalService
         ) { }
 
-    createIoTDevice(body: IotDevice): Observable<IotDevicesResponse> {
+    createIoTDevice(body: IotDevice): Observable<IotDevice> {
         return this.restService.post(this.BASEURL, body);
     }
 
-    updateIoTDevice(body: IotDevice, id: number): Observable<IotDevicesResponse> {
+    updateIoTDevice(body: IotDevice, id: number): Observable<IotDevice> {
         return this.restService.put(this.BASEURL, body, id, { observe: 'response' });
+    }
+
+    createIoTDevices(body: IotDeviceImportRequest): Observable<IotDevicesImportResponse[]> {
+        return this.restService.post(`${this.BASEURL}/createMany`, body);
+    }
+
+    updateIoTDevices(body: IotDeviceImportRequest): Observable<IotDevicesImportResponse[]> {
+        return this.restService.put(`${this.BASEURL}/updateMany`, body, undefined, { observe: 'response' });
     }
 
     getIoTDevice(id: number): Observable<IotDevice> {
@@ -60,7 +68,7 @@ export class IoTDeviceService {
     }
 
     getIoTDevicesUsingPayloadDecoderMinimal(payloadDecoderId: number, limit: number, offset: number): Observable<IoTDevicesMinimalResponse> {
-        return this.restService.get(`iot-device/minimalByPayloadDecoder`, {limit: limit, offset: offset}, payloadDecoderId)
+        return this.restService.get(`${this.BASEURL}/minimalByPayloadDecoder`, {limit, offset}, payloadDecoderId);
     }
 
     deleteIoTDevice(id: number) {
