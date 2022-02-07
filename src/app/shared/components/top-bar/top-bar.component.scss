@@ -18,12 +18,12 @@ button:focus {
 }
 
 .mobileMedia {
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: $screen-md-min) {
     display: flex;
     justify-content: flex-end;
   }
 }
 
 ::ng-deep .matMenuMargin {
-  margin-right: 10px;
+  margin-right: 5px;
 }

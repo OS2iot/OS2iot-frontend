@@ -44,10 +44,10 @@ a {
     border-bottom: calculateRem(5) solid $color-link-focus-bg;
   }
 
-  &:visited,
-  &.link-visited {
-    color: $color-link-visited;
-  }
+  // &:visited,
+  // &.link-visited {
+  //   color: $color-link-visited;
+  // }
 
   &:disabled,
   &.disabled {
