@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BulkImportService {
-  public readonly nextIotDeviceListIndex$: BehaviorSubject<number>  = new BehaviorSubject(0);
+  public readonly nextCreateIotDeviceBatchIndex$: Subject<void> = new Subject();
+  public readonly nextUpdateDeviceBatchIndex$: Subject<void> = new Subject();
 
-  constructor() { }
+  constructor() {}
 }

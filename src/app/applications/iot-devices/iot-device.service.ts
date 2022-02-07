@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { IotDevice, IoTDevicesMinimalResponse, IotDevicesImportResponse, IotDeviceImportRequest } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { map } from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class IoTDeviceService {
     }
 
     updateIoTDevices(body: IotDeviceImportRequest): Observable<IotDevicesImportResponse[]> {
-        return this.restService.put(`${this.BASEURL}/updateMany`, body, undefined, { observe: 'response' });
+        return this.restService.post(`${this.BASEURL}/updateMany`, body);
     }
 
     getIoTDevice(id: number): Observable<IotDevice> {

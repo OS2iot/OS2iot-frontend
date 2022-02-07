@@ -48,6 +48,10 @@ export interface IotDeviceImportRequest {
 
 export interface IotDevicesImportResponse {
   data: IotDevice;
+  idMetadata: {
+    name: string;
+    applicationId: number;
+  };
   error?: Omit<Error, 'name'>;
 }
 

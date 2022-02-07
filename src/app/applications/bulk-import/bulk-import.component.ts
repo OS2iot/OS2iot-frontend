@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import {
-  IotDevicesImportResponse,
   IotDeviceImportRequest,
+  IotDevicesImportResponse,
 } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -15,12 +15,10 @@ import { Download } from '@shared/helpers/download.helper';
 import { BulkImportService } from '@shared/services/bulk-import.service';
 import { DownloadService } from '@shared/services/download.service';
 import { Papa } from 'ngx-papaparse';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { BulkImport } from './bulk-import.model';
 import { BulkMapping } from './bulkMapping';
-
-let timeoutId: any = null;
 
 @Component({
   selector: 'app-bulk-import',
@@ -156,121 +154,71 @@ export class BulkImportComponent implements OnInit {
   }
 
   addIoTDevice() {
-    const times: { label: string; duration: number }[] = [];
-
     // Subscribe to subject in service, Emit the index of next item in the array to be previous
     // The emit will activate the subscription which should call the updateIoTDevice
-
     const { newDevices, updatedDevices } = this.splitDevices();
 
-    // Reset the index of the next list to process
-    this.bulkImportService.nextIotDeviceListIndex$.next(0);
-    this.bulkImportService.nextIotDeviceListIndex$
-      .pipe(takeWhile((value) => value in newDevices))
-      .subscribe(
-        (nextIndex) => {
-          console.log("next index is ", nextIndex);
-          const timeNow = performance.now();
+    this.postBulkImportPayload(
+      newDevices,
+      this.bulkImportService.nextCreateIotDeviceBatchIndex$,
+      this.iotDeviceService.createIoTDevices.bind(this.iotDeviceService)
+    );
+    this.postBulkImportPayload(
+      updatedDevices,
+      this.bulkImportService.nextUpdateDeviceBatchIndex$,
+      this.iotDeviceService.updateIoTDevices.bind(this.iotDeviceService)
+    );
+  }
 
-          const requestItems = newDevices[nextIndex];
-          // TODO: Only subscribe to devices if there's actually data to send
-          const devices: IotDeviceImportRequest = {
-            data: requestItems.map((bulkResult) => bulkResult.device),
-          };
-          this.iotDeviceService.createIoTDevices(devices).subscribe(
-            (response) => {
-              times.push({
-                label: `${nextIndex} - Success`,
-                duration: performance.now() - timeNow,
-              });
-              this.onSuccessfulImport(response, requestItems);
-              // TODO: Update nextIoTDeviceIndex?
-              this.bulkImportService.nextIotDeviceListIndex$.next(nextIndex + 1);
-            },
-            (error: HttpErrorResponse) => {
-              times.push({
-                label: `${requestItems[0].device.name} - Failed`,
-                duration: performance.now() - timeNow,
-              });
-              requestItems.forEach((item) => {
-                item.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
-                  error
-                ).errorMessages;
-                item.importStatus = 'Failed';
-              });
-            }
-          );
-        },
-        (error: HttpErrorResponse) => {}
-      );
+  private postBulkImportPayload(
+    bulkDevices: BulkImport[][],
+    batchIndex$: Subject<void>,
+    importDevices: (
+      payload: IotDeviceImportRequest
+    ) => Observable<IotDevicesImportResponse[]>
+  ): void {
+    if (!bulkDevices.length) {
+      return;
+    }
 
-    // for (const requestItem of this.bulkImportResult) {
-    //   if (requestItem.device?.id) {
-    //     // TODO: This doesn't work. Subscribe returns immediately. Then again, a request is made for every item at the same time..
-    //     const timeNow = performance.now();
-    //     this.iotDeviceService
-    //       .updateIoTDevice(requestItem.device, requestItem.device.id)
-    //       .subscribe(
-    //         (response) => {
-    //           times.push({
-    //             label: `${requestItem.device.name} - Success`,
-    //             duration: performance.now() - timeNow,
-    //           });
-    //           // console.log(response);
-    //           requestItem.importStatus = 'success';
-    //         },
-    //         (error: HttpErrorResponse) => {
-    //           times.push({
-    //             label: `${requestItem.device.name} - Failed`,
-    //             duration: performance.now() - timeNow,
-    //           });
-    //           requestItem.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
-    //             error
-    //           ).errorMessages;
-    //           requestItem.importStatus = 'Failed';
-    //         }
-    //       );
-    //   } else if (requestItem.device) {
-    //     const timeNow = performance.now();
-    //     this.iotDeviceService.createIoTDevice(requestItem.device).subscribe(
-    //       (res: any) => {
-    //         // console.log(res);
-    //         times.push({
-    //           label: `${requestItem.device.name} - Success`,
-    //           duration: performance.now() - timeNow,
-    //         });
-    //         requestItem.importStatus = 'success';
-    //       },
-    //       (error) => {
-    //         times.push({
-    //           label: `${requestItem.device.name} - Failed`,
-    //           duration: performance.now() - timeNow,
-    //         });
-    //         requestItem.errorMessages = this.errorMessageService.handleErrorMessage(
-    //           error
-    //         );
-    //         requestItem.importStatus = 'Failed';
-    //       }
-    //     );
-    //   }
-    // }
+    let batchIndex = 0;
 
-    timeoutId = setInterval(() => {
-      if (times.length < this.bulkImportResult.length / 30) {
-        console.log('Timer still going...');
-        return;
+    batchIndex$.pipe(takeWhile(() => batchIndex in bulkDevices)).subscribe(
+      () => {
+        const requestItems = bulkDevices[batchIndex];
+        const devices: IotDeviceImportRequest = {
+          data: requestItems.map((bulkResult) => bulkResult.device),
+        };
+        importDevices(devices).subscribe(
+          (response) => {
+            this.onSuccessfulImport(response, requestItems);
+            ++batchIndex;
+            batchIndex$.next();
+          },
+          (error: HttpErrorResponse) => {
+            requestItems.forEach((item) => {
+              item.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
+                error
+              ).errorMessages;
+              item.importStatus = 'Failed';
+            });
+            // Unsubscribe from subject while still allowing future subscriptions
+            ++batchIndex;
+            batchIndex$.next();
+          }
+        );
+      },
+      (_error: HttpErrorResponse) => {
+        // Should not happen
+      },
+      () => {
+        // All devices have been processed. Check if some devices' status hasn't been set
+        this.onCompleteImport(bulkDevices);
       }
-      clearInterval(timeoutId);
-      console.log(
-        'times',
-        times.sort((a, b) => b.duration - a.duration)
-      );
-    }, 10 * 1000);
+    );
 
-    // TODO: Edge case - a device's status was not set. This indicates a flaw in the above logic. Set them to error
-
-    // Clear the subject. Or should we? TODO:
-    // this.bulkImportService.nextIotDeviceIndex$.next(0);
+    // Trigger our listener
+    batchIndex$.next();
   }
 
   private onSuccessfulImport(
@@ -280,8 +228,8 @@ export class BulkImportComponent implements OnInit {
     response.forEach((responseItem) => {
       const match = requestItems.find(
         ({ device }) =>
-          device.name === responseItem.data.name &&
-          device.applicationId === responseItem.data.application?.id
+          device.name === responseItem.idMetadata.name &&
+          device.applicationId === responseItem.idMetadata.applicationId
       );
       if (!match) {
         return;
@@ -299,7 +247,31 @@ export class BulkImportComponent implements OnInit {
     });
   }
 
-  private splitDevices() {
+  private onCompleteImport(devicesBulk: BulkImport[][]) {
+    for (const bulk of devicesBulk) {
+      for (const device of bulk) {
+        if (!device.importStatus) {
+          device.importStatus = 'Failed';
+          device.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
+            {
+              error: {
+                message: 'MESSAGE.FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE',
+              },
+            }
+          ).errorMessages;
+        }
+      }
+    }
+  }
+
+  private splitDevices(): {
+    newDevices: BulkImport[][];
+    updatedDevices: BulkImport[][];
+  } {
+    if (!this.bulkImportResult) {
+      return { newDevices: [], updatedDevices: [] };
+    }
+
     const { updatedDevices, newDevices } = this.bulkImportResult.reduce(
       (
         res: {

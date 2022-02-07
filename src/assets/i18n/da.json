@@ -708,7 +708,10 @@
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
     "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
     "DIFFERENT-SERVICE-PROFILE": "Dine devices har forskellige service profiles. De skal have den samme service profile!",
-    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast."
+    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast.",
+    "ID-DOES-NOT-EXIST": "Id'et findes ikke",
+    "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
+    "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",

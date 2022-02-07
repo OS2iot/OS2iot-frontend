@@ -33,7 +33,11 @@ export class ErrorMessageService {
 
   public handleErrorMessageWithFields(error: HttpErrorResponse | Pick<HttpErrorResponse, 'error'>): ErrorMessage {
     const errors: ErrorMessage = {errorFields: [], errorMessages: []};
-    if (typeof error.error.message === 'string') {
+    if (typeof error.error === 'string') {
+      errors.errorMessages.push(error.error);
+    } else if (typeof error.error?.error === 'string') {
+      errors.errorMessages.push(error.error.error);
+    } else if (typeof error.error?.message === 'string') {
       errors.errorMessages.push(error.error.message);
     } else {
         error.error.message.forEach((err) => {
@@ -64,7 +68,7 @@ export class ErrorMessageService {
           } else if (err.message) {
             errors.errorFields.push(err.field);
             errors.errorMessages.push(err.message);
-          } else {
+          } else if (err.constraints) {
             errors.errorFields.push(err.property);
             errors.errorMessages = errors.errorMessages.concat(
               Object.values(err.constraints)
