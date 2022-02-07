@@ -16,6 +16,10 @@ import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { MeService } from '@shared/services/me.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { AuthService } from '@auth/auth.service';
+import { LoggedInService } from '@shared/services/loggedin.service';
+import { environment } from '@environments/environment';
 
 @Component({
     selector: 'app-top-bar',
@@ -60,7 +64,10 @@ export class TopBarComponent implements OnInit {
         public translate: TranslateService,
         private location: Location,
         private router: Router,
-        private meService: MeService
+        private meService: MeService,
+        private sharedVariableService: SharedVariableService,
+        private authService: AuthService,
+        private loggedInService: LoggedInService
     ) {
         translate.use('da');
     }
@@ -109,4 +116,29 @@ export class TopBarComponent implements OnInit {
     onClickDelete() {
         this.deleteSelectedInDropdown.emit();
     }
+
+    public goToHelp() {
+        window.open('https://os2iot.os2.eu/');
+    }
+
+    getUsername(): string {
+        return this.sharedVariableService.getUsername();
+    }
+    onLogout() {
+        this.authService.logout();
+        this.router.navigateByUrl('auth');
+        this.loggedInService.emitChange(false);
+    }
+    getKombitLogoutUrl() {
+        const jwt = this.authService.getJwt();
+        if (this.authService.isLoggedInWithKombit()) {
+          return `${environment.baseUrl}auth/kombit/logout?secret_token=${jwt}`;
+        } else {
+          return '';
+        }
+      }
+      isLoggedInWithKombit() {
+        return this.authService.isLoggedInWithKombit();
+      }
 }
+

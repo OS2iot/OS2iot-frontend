@@ -67,26 +67,40 @@
           </form>
         </div>
 
-          <div class="col-md-1 order-md-last search-form-wrapper">
-            <button mat-icon-button type="button" id="user"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+        <div class="col-md-1 order-md-last search-form-wrapper">
+          <div class="mobileMedia">
+            <button mat-icon-button [matMenuTriggerFor]="menu" id="userDropdown" >
               <fa-icon [icon]="faUser" class="icon--primary mb-1"></fa-icon>
             </button>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">
-                <a>1
+            <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
+              <button mat-menu-item class="userNameFont userName">{{getUsername()}}</button>
+              <a mat-menu-item routerLink="/user-page">{{'USER_PAGE.USER_PAGE' | translate}}
+              </a>
+              <a mat-menu-item [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null" 
+              target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}" (click)="onLogout()">{{'NAV.LOGOUT' | translate }}
+              </a>
+            </mat-menu>
+            <!-- <ul class="dropdown-menu dropdownList" attr.aria-labelledby="userDropdown">
+              <li class="dropdown-item userName">
+                <p class="userNameFont">{{getUsername()}}</p>
+              </li>
+              <li class="dropdown-item" routerLink="/user-page">
+                <a routerLink="/user-page">{{'USER_PAGE.USER_PAGE' | translate}}
                 </a>
               </li>
-              <li class="dropdown-item">
-                <a>2
+              <li class="dropdown-item" (click)="onLogout()">
+                <a [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+                target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}" (click)="onLogout()">{{'NAV.LOGOUT' | translate }}
                 </a>
               </li>
-            </ul>
-         
-            <button mat-icon-button type="button" id="user">
+            </ul> -->
+       
+            <button mat-icon-button type="button" id="help" (click)="goToHelp()">
               <fa-icon [icon]="faQuestionCircle" class="icon--primary mb-1"></fa-icon>
             </button>
           </div>
+        </div>
       </div>
     </div>
 

@@ -6,4 +6,24 @@
   margin-right: 8px;
 }
 
+button:focus {
+  outline: none;
+}
 
+.userName {
+  pointer-events: none;
+}
+.userNameFont {
+  font-weight: bold;
+}
+
+.mobileMedia {
+  @media (max-width: $screen-sm-min) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+::ng-deep .matMenuMargin {
+  margin-right: 10px;
+}

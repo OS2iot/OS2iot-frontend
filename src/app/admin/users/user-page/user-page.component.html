@@ -1,8 +1,11 @@
-<div class="container-flud">
+
   <app-top-bar
+    *ngIf="!awaitingConfirmation" 
     [backButtonTitle]="backButtonTitle"
     [title]="title"
   ></app-top-bar>
+  
+  <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="jumbotron">

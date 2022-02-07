@@ -24,18 +24,10 @@
     <div class="navbar-collapse collapse overflow-auto flex-grow-0 h-100" id="navbar" [attr.aria-expanded]="!isCollapsed"
       [ngClass]="{collapse: !isCollapsed}">
       <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
-        <li *ngIf="hasEmail(); else noEmail" class="nav-item">
-          <a routerLink="/user-page" [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="userPage">
-            {{getUsername()}}
-          </a>
-          <fa-icon [icon]="faUser" class="navbar-icon"></fa-icon>
-        </li>
-        <ng-template #noEmail>
-          <div>
-            <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
-            {{getUsername()}}
-          </div>
-        </ng-template>
+        <div>
+          <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em;"></fa-icon>
+          {{getUsername()}}
+        </div>
         <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
           <li class="nav-item">
             <app-global-admin></app-global-admin>
@@ -70,21 +62,6 @@
                 <fa-icon [icon]="faNetworkWired" class="navbar-icon"></fa-icon>
               </li>
             </ul>
-          </li>
-        </div>
-        <div class="flex-column flex-grow-1"></div>
-        <div class="flex-column">
-          <li class="nav-item">
-            <a class="nav-link pl-5 position-relative rounded" (click)="goToHelp()" target="_blank">
-              {{'NAV.HELP' | translate }}
-            </a>
-            <fa-icon [icon]="faQuestionCircle" class="navbar-icon"></fa-icon>
-          </li>
-          <li class="nav-item">
-            <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
-              [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-              target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">{{'NAV.LOGOUT' | translate }}</a>
-            <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
           </li>
         </div>
       </ul>
