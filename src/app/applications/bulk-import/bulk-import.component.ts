@@ -183,6 +183,7 @@ export class BulkImportComponent implements OnInit {
 
     let batchIndex = 0;
 
+    // takeWhile() will unsubscribe once the condition is false
     batchIndex$.pipe(takeWhile(() => batchIndex in bulkDevices)).subscribe(
       () => {
         const requestItems = bulkDevices[batchIndex];
@@ -202,7 +203,7 @@ export class BulkImportComponent implements OnInit {
               ).errorMessages;
               item.importStatus = 'Failed';
             });
-            // Unsubscribe from subject while still allowing future subscriptions
+            // Continue processing the next batches
             ++batchIndex;
             batchIndex$.next();
           }
@@ -212,7 +213,7 @@ export class BulkImportComponent implements OnInit {
         // Should not happen
       },
       () => {
-        // All devices have been processed. Check if some devices' status hasn't been set
+        // Process any devices whose status hasn't been set and mark them as errors.
         this.onCompleteImport(bulkDevices);
       }
     );
