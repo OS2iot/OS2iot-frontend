@@ -21,9 +21,22 @@ button:focus {
   @media (max-width: $screen-md-min) {
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
   }
 }
 
 ::ng-deep .matMenuMargin {
   margin-right: 5px;
 }
+
+.marginLeft {
+  margin-left: 16px;
+}
+
+.topbarWidth {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+
