@@ -476,7 +476,7 @@
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "GIVE-MULTICAST-NAME":"Navngiv multicast",
-    "GIVE-MULTICAST-ADDRESS": "Angiv multicast (mcAddr)",
+    "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen (mcAddr)",
     "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key (mcNwkSKey)",
     "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key (mcAppSKey)",
     "GIVE-MULTICAST-FRAMECOUNTER": "Angiv frame counter",
