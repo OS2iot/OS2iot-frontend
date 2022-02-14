@@ -10,6 +10,7 @@ import { DatatargetEditComponent } from './datatarget/datatarget-edit/datatarget
 import { DatatargetListComponent } from './datatarget/datatarget-list/datatarget-list.component';
 import { DatatargetDetailComponent } from './datatarget/datatarget-detail/datatarget-detail.component';
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
+import { DatatargetNewComponent } from './datatarget/datatarget-new/datatarget-new.component';
 
 
 const applicationRoutes: Routes = [
@@ -31,9 +32,10 @@ const applicationRoutes: Routes = [
                         path: 'datatarget-list/:name',
                         children: [
                             { path: '', component: DatatargetListComponent },
+                            { path: 'datatarget-new', component: DatatargetNewComponent },
                             { path: 'datatarget-edit', component: DatatargetEditComponent },
                             { path: 'datatarget-edit/:datatargetId', component: DatatargetEditComponent },
-                            { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent }
+                            { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent }                            
                         ]
 
                     },
@@ -41,7 +43,7 @@ const applicationRoutes: Routes = [
                 ],
             },
 
-        ],
+        ], 
     },
 ];
 

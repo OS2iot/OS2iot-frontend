@@ -90,6 +90,8 @@ export class DatatargetService {
       timeout: dataTargetResponse.timeout,
       type: dataTargetResponse.type,
       url: dataTargetResponse.url,
+      tenant: dataTargetResponse.tenant,
+      context: dataTargetResponse.context,
       authorizationHeader: dataTargetResponse.authorizationHeader,
       applicationId: dataTargetResponse.application.id,
       setToOpendataDk: dataTargetResponse?.openDataDkDataset ? true : false,

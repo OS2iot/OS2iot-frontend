@@ -15,16 +15,30 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { DatatargetNewComponent } from './datatarget-new/datatarget-new.component';
+import { FiwareEditComponent } from './fiware/fiware-edit/fiware-edit.component';
+import { FiwareDetailComponent } from './fiware/fiware-detail/fiware-detail.component';
+import { HttppushDetailComponent } from './httppush/httppush-detail/httppush-detail.component';
+import { HttppushEditComponent } from './httppush/httppush-edit/httppush-edit.component';
+import { DatatargetDetailTypeSelectorDirective } from './datatarget-detail/datatarget-detail-type-selector.directive';
+import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarget-edit-type-selector.directive';
 
 @NgModule({
-  declarations: [
+  declarations: [    
     DatatargetTableComponent,
     DatatargetListComponent,
     DatatargetEditComponent,
+    DatatargetNewComponent,
     DatatargetDetailComponent,
+    FiwareDetailComponent,
+    FiwareEditComponent,
+    HttppushDetailComponent,
+    HttppushEditComponent,
     OpendatadkComponent,
     OpendatadkEditComponent,
-    OpendatadkDetailComponent],
+    OpendatadkDetailComponent,
+    DatatargetDetailTypeSelectorDirective,
+    DatatargetEditTypeSelectorDirective],
   imports: [
     CommonModule,
     RouterModule,
@@ -41,7 +55,12 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     DatatargetTableComponent,
     DatatargetListComponent,
     DatatargetEditComponent,
-    DatatargetDetailComponent,
+    DatatargetNewComponent,
+    DatatargetDetailComponent,    
+    FiwareDetailComponent,
+    FiwareEditComponent,
+    HttppushDetailComponent,
+    HttppushEditComponent,
     NGMaterialModule
   ]
 })
