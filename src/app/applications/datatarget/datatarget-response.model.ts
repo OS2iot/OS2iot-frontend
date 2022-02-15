@@ -9,6 +9,8 @@ export class DatatargetResponse {
     timeout: number;
     type: DataTargetType;
     url: string;
+    tenant: string;
+    context: string;
     authorizationHeader: string;
     openDataDkDataset: OpenDataDkDataset;
     createdAt: string;

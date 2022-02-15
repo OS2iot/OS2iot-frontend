@@ -11,7 +11,7 @@ import { DatatargetDetailComponent } from './datatarget/datatarget-detail/datata
 import { BulkImportComponent } from './bulk-import/bulk-import.component';
 import { MulticastEditComponent } from './multicast/multicast-edit/multicast-edit.component';
 import { MulticastDetailComponent } from './multicast/multicast-detail/multicast-detail.component';
-
+import { DatatargetNewComponent } from './datatarget/datatarget-new/datatarget-new.component';
 
 const applicationRoutes: Routes = [
     {
@@ -27,12 +27,11 @@ const applicationRoutes: Routes = [
                     { path: '', component: ApplicationDetailComponent },
                     { path: 'new-iot-device', component: IotDeviceEditComponent, },
                     { path: 'iot-device-edit/:deviceId', component: IotDeviceEditComponent, },
-                    { path: 'iot-device/:deviceId', component: IoTDeviceDetailComponent, },    
-
+                    { path: 'iot-device/:deviceId', component: IoTDeviceDetailComponent, },
+                    { path: 'datatarget-new', component: DatatargetNewComponent },
                     { path: 'datatarget-edit', component: DatatargetEditComponent },
                     { path: 'datatarget-edit/:datatargetId', component: DatatargetEditComponent },
-                    { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent },    
-
+                    { path: 'datatarget/:datatargetId', component: DatatargetDetailComponent },                                        
                     { path: 'multicast-edit', component: MulticastEditComponent},
                     { path: 'multicast-edit/:multicastId', component: MulticastEditComponent },
                     { path: 'multicast/:multicastId', component: MulticastDetailComponent },
@@ -41,7 +40,7 @@ const applicationRoutes: Routes = [
                 ],
             },
 
-        ],
+        ], 
     },
 ];
 
