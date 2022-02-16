@@ -1,5 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { DataTargetType } from '@shared/enums/datatarget-type';
+import { DatatargetDetail } from './datatarget-detail/datatarget-detail';
+import { DatatargetEdit } from './datatarget-edit/datatarget-edit';
 import { DatatargetTypeDescriptor } from './datatarget.model';
 import { FiwareDetailComponent } from './fiware/fiware-detail/fiware-detail.component';
 import { FiwareEditComponent } from './fiware/fiware-edit/fiware-edit.component';
@@ -42,37 +44,37 @@ constructor() { }
       ]
   }
 
-  getDetailComponent(dataTargetType: DataTargetType): Type<any>
+  getDetailComponent(dataTargetType: DataTargetType): Type<DatatargetDetail>
   {
-    if (dataTargetType == DataTargetType.HTTPPUSH)
+    if (dataTargetType === DataTargetType.HTTPPUSH)
     {
       return HttppushDetailComponent;
     }
 
-    if (dataTargetType == DataTargetType.OPENDATADK)
+    if (dataTargetType === DataTargetType.OPENDATADK)
     {
       return HttppushDetailComponent;
     }
 
-    if (dataTargetType == DataTargetType.FIWARE)
+    if (dataTargetType === DataTargetType.FIWARE)
     {
       return FiwareDetailComponent;
     }
   }
 
-  getEditComponent(dataTargetType: DataTargetType): Type<any>
+  getEditComponent(dataTargetType: DataTargetType): Type<DatatargetEdit>
   {
-    if (dataTargetType == DataTargetType.HTTPPUSH)
+    if (dataTargetType === DataTargetType.HTTPPUSH)
     {
       return HttppushEditComponent;
     }
 
-    if (dataTargetType == DataTargetType.OPENDATADK)
+    if (dataTargetType === DataTargetType.OPENDATADK)
     {
       return HttppushEditComponent;
     }
 
-    if (dataTargetType == DataTargetType.FIWARE)
+    if (dataTargetType === DataTargetType.FIWARE)
     {
       return FiwareEditComponent;
     }
