@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, OnDestroy, OnInit, QueryList, Type, ViewChild, ViewChildren} from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, Type, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataTargetType } from '@shared/enums/datatarget-type';
-import { DatatargetTypesServiceService } from '../datatarget-types-service.service';
+import { DatatargetTypesService } from '../datatarget-types.service';
 import { Datatarget } from '../datatarget.model';
 import { DatatargetService } from '../datatarget.service';
-import { HttppushDetailComponent } from '../httppush/httppush-detail/httppush-detail.component';
 import { DatatargetDetail } from './datatarget-detail';
 import { DatatargetDetailTypeSelectorDirective } from './datatarget-detail-type-selector.directive';
 
@@ -17,48 +16,44 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
 
     @ViewChild(DatatargetDetailTypeSelectorDirective, {static: true}) adHost!: DatatargetDetailTypeSelectorDirective;
 
-    private applicationName: string;
     public datatarget: Datatarget;
     private datatargetType: DataTargetType;
-        
-    constructor(private componentFactoryResolver: ComponentFactoryResolver,  
-        private datatargetService: DatatargetService,
-        private route: ActivatedRoute,
-        private datatargetTypesService: DatatargetTypesServiceService
+
+    constructor(private componentFactoryResolver: ComponentFactoryResolver,
+                private datatargetService: DatatargetService,
+                private route: ActivatedRoute,
+                private datatargetTypesService: DatatargetTypesService
         ) { }
-   
+
 
     loadComponent(componentType: Type<any>) {
-       
+
         const viewContainerRef = this.adHost.viewContainerRef;
-    
+
         viewContainerRef.clear();
         const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-        const componentRef = viewContainerRef.createComponent<DatatargetDetail>(factory)
-    
-
+        viewContainerRef.createComponent<DatatargetDetail>(factory);
     }
 
     ngOnInit(): void {
 
-         this.applicationName = this.route.snapshot.paramMap.get('name');
          const id: number = +this.route.snapshot.paramMap.get('datatargetId');
-        
-        this.datatargetService.get(id)
+
+         this.datatargetService.get(id)
           .subscribe((dataTarget: Datatarget) => {
               this.datatarget = dataTarget;
               this.datatargetType = dataTarget.type;
-    
+
               const component = this.datatargetTypesService.getDetailComponent(this.datatargetType);
 
               this.loadComponent(component);
-              
+
           });
 
-        
+
     }
 
     ngOnDestroy() {
-      
+
       }
 }

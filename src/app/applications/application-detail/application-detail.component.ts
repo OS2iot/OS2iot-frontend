@@ -52,9 +52,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         label: '',
         editRouterLink: '../../edit-application/' + this.id,
         isErasable: true,
-      };
-
-      console.log(this.id);
+      };      
     }
 
     this.translate

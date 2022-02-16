@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
+import { ViewContainerRef } from '@angular/core';
 import { DatatargetEditTypeSelectorDirective } from './datatarget-edit-type-selector.directive';
-
+let  viewContainerRef: ViewContainerRef;
 describe('Directive: DatatargetEditTypeSelector', () => {
   it('should create an instance', () => {
-    //const directive = new DatatargetEditTypeSelectorDirective();
-    //expect(directive).toBeTruthy();
+    const directive = new DatatargetEditTypeSelectorDirective(viewContainerRef);
+    expect(directive).toBeTruthy();
   });
 });

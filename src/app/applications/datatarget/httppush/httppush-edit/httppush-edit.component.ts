@@ -6,7 +6,10 @@ import { Observable, Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@payload-decoder/payload-device-data.model';
+import {
+  PayloadDeviceDatatarget,
+  PayloadDeviceDatatargetGetByDataTargetResponse,
+} from '@payload-decoder/payload-device-data.model';
 import { DatatargetService } from '../../datatarget.service';
 import { ApplicationService } from '@applications/application.service';
 import { PayloadDecoderService } from '@payload-decoder/payload-decoder.service';
@@ -27,9 +30,10 @@ import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatar
 @Component({
   selector: 'app-httppush-edit',
   templateUrl: './httppush-edit.component.html',
-  styleUrls: ['./httppush-edit.component.scss']
+  styleUrls: ['./httppush-edit.component.scss'],
 })
-export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy {
+export class HttppushEditComponent
+  implements DatatargetEdit, OnInit, OnDestroy {
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -70,7 +74,7 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
     private errorMessageService: ErrorMessageService,
     private opendatadkService: OpendatadkService,
     private opendatadkDialogService: OpendatadkDialogService,
-    private scrollToTopService: ScrollToTopService,
+    private scrollToTopService: ScrollToTopService
   ) {
     translate.use('da');
   }
@@ -112,7 +116,12 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
     if (!this.payloadDeviceDatatarget) {
       this.payloadDeviceDatatarget = [];
     }
-    this.payloadDeviceDatatarget.push({ id: null, iotDeviceIds: [], payloadDecoderId: null, dataTargetId: this.datatargetid });
+    this.payloadDeviceDatatarget.push({
+      id: null,
+      iotDeviceIds: [],
+      payloadDecoderId: null,
+      dataTargetId: this.datatargetid,
+    });
   }
 
   private deleteRow(index) {
@@ -120,7 +129,8 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
     } else {
-      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id)
+      this.payloadDeviceDataTargetService
+        .delete(this.payloadDeviceDatatarget[index].id)
         .subscribe((response) => {
           this.payloadDeviceDatatarget.splice(index, 1);
         });
@@ -132,8 +142,8 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
       data: {
         showAccept: true,
         showCancel: true,
-        message: 'Er du sikker på at du vil slette?'
-      }
+        message: 'Er du sikker på at du vil slette?',
+      },
     });
 
     dialog.afterClosed().subscribe((result) => {
@@ -159,36 +169,35 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
 
   updateDatatarget() {
     this.resetErrors();
-    this.counter = 1 + (this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0);
-    this.datatargetService.update(this.datatarget)
-      .subscribe(
-        (response: Datatarget) => {
-          this.datatarget = response;          
-          if (this.datatarget.openDataDkDataset != null) {
-            this.datatarget.openDataDkDataset.acceptTerms = true;
-          }
-          this.shouldShowMailDialog().subscribe(
-            (response) => {
-              this.countToRedirect();
-            }
-          );
-        },
-        (error: HttpErrorResponse) => {
-          this.checkDataTargetModelOpendatadkdatasaet();
-          this.handleError(error);
-          this.formFailedSubmit = true;
+    this.counter =
+      1 +
+      (this.payloadDeviceDatatarget?.length
+        ? this.payloadDeviceDatatarget?.length
+        : 0);
+    this.datatargetService.update(this.datatarget).subscribe(
+      (response: Datatarget) => {
+        this.datatarget = response;
+        if (this.datatarget.openDataDkDataset != null) {
+          this.datatarget.openDataDkDataset.acceptTerms = true;
         }
-      );
+        this.shouldShowMailDialog().subscribe((response) => {
+          this.countToRedirect();
+        });
+      },
+      (error: HttpErrorResponse) => {
+        this.checkDataTargetModelOpendatadkdatasaet();
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   addPayloadDeviceDatatarget() {
-    this.payloadDeviceDatatarget.map(
-      pdd => {
-        if (pdd.payloadDecoderId === 0) {
-          pdd.payloadDecoderId = null;
-        }
+    this.payloadDeviceDatatarget.map((pdd) => {
+      if (pdd.payloadDecoderId === 0) {
+        pdd.payloadDecoderId = null;
       }
-    );
+    });
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
@@ -231,8 +240,8 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
   createDatatarget() {
     this.resetErrors();
     this.datatarget.applicationId = this.applicationId;
-    this.datatargetService.create(this.datatarget)
-      .subscribe((response: Datatarget) => {
+    this.datatargetService.create(this.datatarget).subscribe(
+      (response: Datatarget) => {
         this.datatargetid = response.id;
         this.datatarget = response;
         if (this.datatarget.openDataDkDataset != null) {
@@ -241,12 +250,12 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
         this.showSavedSnack();
         this.routeToDatatargets();
       },
-        (error: HttpErrorResponse) => {
-          this.checkDataTargetModelOpendatadkdatasaet();
-          this.handleError(error);
-          this.formFailedSubmit = true;
-        });
-
+      (error: HttpErrorResponse) => {
+        this.checkDataTargetModelOpendatadkdatasaet();
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   private resetErrors() {
@@ -262,14 +271,17 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
   }
 
   getDevices(): void {
-    this.applicationSubscription = this.applicationService.getApplication(this.applicationId)
+    this.applicationSubscription = this.applicationService
+      .getApplication(this.applicationId)
       .subscribe((application: Application) => {
         this.devices = application.iotDevices;
       });
   }
 
   public selectAllDevices(index: number) {
-    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
+    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(
+      (device) => device.id
+    );
   }
 
   public deSelectAllDevices(index: number) {
@@ -277,7 +289,8 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
   }
 
   getPayloadDecoders() {
-    this.payloadDecoderSubscription = this.payloadDecoderService.getMultiple(1000, 0, 'id', 'ASC')
+    this.payloadDecoderSubscription = this.payloadDecoderService
+      .getMultiple(1000, 0, 'id', 'ASC')
       .subscribe((response: PayloadDecoderMappedResponse) => {
         this.payloadDecoders = response.data;
       });
@@ -291,15 +304,12 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications',this.applicationId.toString()])
+    this.router.navigate(['applications', this.applicationId.toString()]);
   }
 
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
-      event.target.value = event.target.value.slice(
-        0,
-        event.target.maxLength
-      );
+      event.target.value = event.target.value.slice(0, event.target.maxLength);
     }
   }
 
@@ -316,38 +326,38 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
   }
 
   private setDataSetExcists() {
-    this.opendatadkService.get().subscribe(
-      (response) => {
-        this.dataSetExcists = response.dataset.length === 0 ? false : true;
-      }
-    );
+    this.opendatadkService.get().subscribe((response) => {
+      this.dataSetExcists = response.dataset.length === 0 ? false : true;
+    });
   }
 
   private shouldShowMailDialog(): Observable<any> {
-    return new Observable(
-      (observer) => {
-        if (!this.dataSetExcists && this.datatarget.setToOpendataDk && !this.isMailDialogAlreadyShown) {
-          this.isMailDialogAlreadyShown = true;
-          this.opendatadkDialogService.showDialog().subscribe(
-            response => {
-              if (response) {
-                this.showMailClient();
-              }
-              observer.next(response);
-            }
-          );
-        } else {
-          observer.next(true);
-        }
+    return new Observable((observer) => {
+      if (
+        !this.dataSetExcists &&
+        this.datatarget.setToOpendataDk &&
+        !this.isMailDialogAlreadyShown
+      ) {
+        this.isMailDialogAlreadyShown = true;
+        this.opendatadkDialogService.showDialog().subscribe((response) => {
+          if (response) {
+            this.showMailClient();
+          }
+          observer.next(response);
+        });
+      } else {
+        observer.next(true);
       }
-    )
+    });
   }
 
   private showMailClient() {
     if (!this.datatarget.openDataDkDataset.url) {
-      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl()
+      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl();
     }
-    window.location.href = 'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrere%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' + this.datatarget.openDataDkDataset.url;
+    window.location.href =
+      'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrere%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' +
+      this.datatarget.openDataDkDataset.url;
   }
 
   disableSaveButton(): boolean {
@@ -377,17 +387,20 @@ export class HttppushEditComponent  implements DatatargetEdit, OnInit, OnDestroy
     }
   }
 
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
+  private mapToDatatargetDevicePayload(
+    dto: PayloadDeviceDatatargetGetByDataTargetResponse
+  ) {
     this.payloadDeviceDatatarget = [];
-    dto.data.forEach(
-      (element) => {
-        this.payloadDeviceDatatarget.push({
-          id: element.id,
-          iotDeviceIds: element.iotDevices.map((x) => x.id),
-          payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
-          dataTargetId: element.dataTarget.id
-        });
-      }
-    );
+    dto.data.forEach((element) => {
+      this.payloadDeviceDatatarget.push({
+        id: element.id,
+        iotDeviceIds: element.iotDevices.map((x) => x.id),
+        payloadDecoderId:
+          element.payloadDecoder?.id === undefined
+            ? 0
+            : element.payloadDecoder?.id,
+        dataTargetId: element.dataTarget.id,
+      });
+    });
   }
 }

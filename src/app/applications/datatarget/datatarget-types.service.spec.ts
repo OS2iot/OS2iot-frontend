@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { DatatargetTypesServiceService } from './datatarget-types-service.service';
+import { DatatargetTypesService } from './datatarget-types.service';
 
 describe('Service: DatatargetTypesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DatatargetTypesServiceService]
+      providers: [DatatargetTypesService]
     });
   });
 
-  it('should ...', inject([DatatargetTypesServiceService], (service: DatatargetTypesServiceService) => {
+  it('should ...', inject([DatatargetTypesService], (service: DatatargetTypesService) => {
     expect(service).toBeTruthy();
   }));
 });

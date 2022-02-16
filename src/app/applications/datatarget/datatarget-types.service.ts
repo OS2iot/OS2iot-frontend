@@ -1,5 +1,4 @@
 import { Injectable, Type } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { DataTargetType } from '@shared/enums/datatarget-type';
 import { DatatargetTypeDescriptor } from './datatarget.model';
 import { FiwareDetailComponent } from './fiware/fiware-detail/fiware-detail.component';
@@ -10,35 +9,35 @@ import { HttppushEditComponent } from './httppush/httppush-edit/httppush-edit.co
 @Injectable({
   providedIn: 'root'
 })
-export class DatatargetTypesServiceService {
+export class DatatargetTypesService {
 
 constructor() { }
 
   getAvailableDataTargetTypes() : DatatargetTypeDescriptor[]
   {
       return [  
-        { name: "Generisk HTTP Push",
+        { name: 'Generisk HTTP Push',
           type: DataTargetType.HTTPPUSH,
           icon: null,
-          description: "Send data med HTTP POST requests til et HTTP URL endpoint",
-          readMoreUrl: "",
-          provider: "OS2"
+          description: 'Send data med HTTP POST requests til et HTTP URL endpoint',
+          readMoreUrl: '',
+          provider: 'OS2'
          
         },
-        { name: "Open Data DK",
+        { name: 'Open Data DK',
           type: DataTargetType.OPENDATADK,
-          icon: "/assets/images/logo_opendatadk.svg",
-          description: "Offentliggør datasæt i Open Data DK's åbne dataportal.",
-          readMoreUrl: "https://www.opendata.dk/",
-          provider: "OS2"
+          icon: '/assets/images/logo_opendatadk.svg',
+          description: 'Offentliggør datasæt i Open Data DK\'s åbne dataportal.',
+          readMoreUrl: 'https://www.opendata.dk/',
+          provider: 'OS2'
        
         },
-        { name: "FIWARE connection",
+        { name: 'FIWARE connection',
           type: DataTargetType.FIWARE,
-          icon: "/assets/images/logo_FIWARE.png",
-          description: "En integration til FIWARE Context Broker"     ,
-          readMoreUrl: "https://www.kmd.dk",
-          provider: "KMD A/S"
+          icon: '/assets/images/logo_FIWARE.png',
+          description: 'En integration til FIWARE Context Broker'     ,
+          readMoreUrl: 'https://www.kmd.dk',
+          provider: 'KMD A/S'
         }
       ]
   }

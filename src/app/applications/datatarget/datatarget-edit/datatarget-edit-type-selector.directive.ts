@@ -6,5 +6,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
 export class DatatargetEditTypeSelectorDirective  {
 
   constructor(public viewContainerRef: ViewContainerRef) { }
-  
+
 }

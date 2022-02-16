@@ -47,12 +47,12 @@ export class HttppushDetailComponent  implements DatatargetDetail, OnInit, OnDes
               label: '',
               editRouterLink: '../../datatarget-edit/' + id,
               isErasable: true,
-          }
+          };
       }
       this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
           .subscribe(translations => {
               this.backButton.label = translations['NAV.MY-DATATARGET'];
-              this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS']
+              this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
           });
   }
 
@@ -65,7 +65,7 @@ export class HttppushDetailComponent  implements DatatargetDetail, OnInit, OnDes
   }
 
   private setBackButton(applicationId: number) {
-    this.backButton.routerLink = ['applications', applicationId.toString()]
+    this.backButton.routerLink = ['applications', applicationId.toString()];
   }
 
   onDeleteDatatarget() {

@@ -23,12 +23,11 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
 
   public datatargetSubscription: Subscription;
   public datatarget: Datatarget;
-  public backButton: BackButton = { label: '', routerLink: '/datatarget-list' };
+  public backButton: BackButton = { label: '', routerLink: '' };
   public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   arrowsAltH = faArrowsAltH;
-  private applicationName: string;
 
   constructor(
       private route: ActivatedRoute,
@@ -40,7 +39,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
 
   ngOnInit(): void {
       const id: number = +this.route.snapshot.paramMap.get('datatargetId');
-      this.applicationName = this.route.snapshot.paramMap.get('name');
+
       if (id) {
           this.getDatatarget(id);
           this.getDatatargetRelations(id);
@@ -48,12 +47,12 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
               label: '',
               editRouterLink: '../../datatarget-edit/' + id,
               isErasable: true,
-          }
+          };
       }
       this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
           .subscribe(translations => {
               this.backButton.label = translations['NAV.MY-DATATARGET'];
-              this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS']
+              this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
           });
   }
 
@@ -66,7 +65,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
   }
 
   private setBackButton(applicationId: number) {
-      this.backButton.routerLink = ['applications', applicationId.toString() ]
+      this.backButton.routerLink = ['applications', applicationId.toString() ];
   }
 
   onDeleteDatatarget() {

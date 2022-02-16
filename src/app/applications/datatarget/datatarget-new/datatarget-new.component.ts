@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatatargetTypeDescriptor } from '../datatarget.model';
-import { DatatargetTypesServiceService } from '../datatarget-types-service.service';
+import { DatatargetTypesService } from '../datatarget-types.service';
 
 
 
@@ -23,7 +23,7 @@ export class DatatargetNewComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
-    private dataTargetTypesService: DatatargetTypesServiceService
+    private dataTargetTypesService: DatatargetTypesService
   ) {
     translate.use('da');
   }

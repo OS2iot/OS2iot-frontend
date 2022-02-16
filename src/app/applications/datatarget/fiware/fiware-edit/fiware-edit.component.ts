@@ -29,7 +29,7 @@ import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatar
 })
 export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
- 
+
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -46,11 +46,10 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public formFailedSubmit = false;
   public datatargetid: number;
   private applicationId: number;
-  private applicationNane: string;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
-  private counter: number;  
+  private counter: number;
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
   faQuestionCircle = faQuestionCircle;
@@ -73,7 +72,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   }
 
 
- 
+
   ngOnInit() {
     this.translate
       .get([
@@ -95,10 +94,9 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
     this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.applicationNane = this.route.snapshot.paramMap.get('name');    
 
     this.datatarget.type = DataTargetType.FIWARE;
-    
+
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -110,7 +108,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   }
 
-  
+
   addRow() {
     if (!this.payloadDeviceDatatarget) {
       this.payloadDeviceDatatarget = [];
@@ -166,10 +164,10 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.datatargetService.update(this.datatarget)
       .subscribe(
         (response: Datatarget) => {
-          this.datatarget = response;          
-          this.countToRedirect();                  
+          this.datatarget = response;
+          this.countToRedirect();
         },
-        (error: HttpErrorResponse) => {         
+        (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
         }
@@ -229,10 +227,10 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.datatargetService.create(this.datatarget)
       .subscribe((response: Datatarget) => {
         this.datatargetid = response.id;
-        this.datatarget = response;   
+        this.datatarget = response;
         this.showSavedSnack();
       },
-        (error: HttpErrorResponse) => {         
+        (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
         });
@@ -245,7 +243,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.formFailedSubmit = false;
   }
 
- 
+
 
   getDevices(): void {
     this.applicationSubscription = this.applicationService.getApplication(this.applicationId)
@@ -277,7 +275,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications',this.applicationId.toString(),'datatarget-list'])
+    this.router.navigate(['applications', this.applicationId.toString()]);
   }
 
   onCoordinateKey(event: any) {
@@ -299,11 +297,11 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   showSavedSnack() {
     this.snackService.showSavedSnack();
-  } 
+  }
 
   disableSaveButton(): boolean {
-    let disable = false;
-    
+    const disable = false;
+
     return disable;
   }
 
