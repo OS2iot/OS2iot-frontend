@@ -7,6 +7,8 @@ export class Datatarget {
     applicationId: number;
     type: DataTargetType = DataTargetType.HTTPPUSH;
     url: string;
+    tenant: string;
+    context: string;
     //default 30 sec
     timeout: number = 30000;
     authorizationHeader: string;
@@ -24,4 +26,14 @@ export class DatatargetData {
     data: Datatarget[];
     ok?: boolean;
     count?: number;
+}
+
+export class DatatargetTypeDescriptor
+{
+    name: string;
+    type: DataTargetType;
+    icon: string;
+    description: string;  
+    readMoreUrl: string;
+    provider: string;
 }
