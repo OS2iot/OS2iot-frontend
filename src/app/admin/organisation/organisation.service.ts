@@ -82,10 +82,4 @@ export class OrganisationService {
   delete(id: number) {
     return this.restService.delete(this.URL, id);
   }
-
-  updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
-    return this.restService.put(this.URL + '/updateUserOrgs', body, undefined, {
-      observe: 'response',
-    });
-  }
 }

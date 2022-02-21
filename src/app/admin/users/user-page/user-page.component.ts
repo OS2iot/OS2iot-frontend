@@ -4,7 +4,11 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import { UpdateUserOrgsDto, UserResponse } from '@app/admin/users/user.model';
+import {
+  UpdateUserOrgFromFrontend,
+  UpdateUserOrgsDto,
+  UserResponse,
+} from '@app/admin/users/user.model';
 import { UserService } from '@app/admin/users/user.service';
 import { CurrentUserInfoResponse } from '@auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +24,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class UserPageComponent implements OnInit {
   public updateUserOrgs: UpdateUserOrgsDto = new UpdateUserOrgsDto();
+  public updateUserOrgsFromFrontend: UpdateUserOrgFromFrontend = new UpdateUserOrgFromFrontend();
   public organisationSubscription: Subscription;
   public formFailedSubmit = false;
   public backButtonTitle: string;
@@ -161,9 +166,17 @@ export class UserPageComponent implements OnInit {
     return filteredChosenOrganizations;
   }
 
+  public mapToDto(body: UpdateUserOrgFromFrontend) {
+    this.updateUserOrgs.requestedOrganizationIds = [];
+    body.requestedOrganizations.forEach((organization) => {
+      this.updateUserOrgs.requestedOrganizationIds.push(organization.id);
+    });
+  }
+
   onSubmit(): void {
     this.resetErrors();
-    this.organizationService.updateUserOrgs(this.updateUserOrgs).subscribe(
+    this.mapToDto(this.updateUserOrgsFromFrontend);
+    this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
       () => {
         window.location.reload();
       },

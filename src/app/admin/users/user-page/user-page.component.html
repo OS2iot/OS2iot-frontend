@@ -1,10 +1,6 @@
+<app-top-bar [backButtonTitle]="backButtonTitle" [title]="title"></app-top-bar>
 
-  <app-top-bar
-    [backButtonTitle]="backButtonTitle"
-    [title]="title"
-  ></app-top-bar>
-  
-  <div class="container-fluid">
+<div *ngIf="userInfo.user.email" class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="jumbotron">
@@ -38,19 +34,18 @@
           </div>
           <div class="form-group mt-3">
             <mat-form-field appearance="outline">
-              <mat-label *ngIf="checkForRemainingOrganizations; else noMultiOrgs">{{
-                'NAV.ORGANISATIONS' | translate
-              }}</mat-label>
+              <mat-label
+                *ngIf="checkForRemainingOrganizations; else noMultiOrgs"
+                >{{ 'NAV.ORGANISATIONS' | translate }}</mat-label
+              >
               <ng-template #noMultiOrgs>
-                <mat-label
-                  >{{ 'USER_PAGE.NO_ORGS' | translate }}</mat-label
-                >
+                <mat-label>{{ 'USER_PAGE.NO_ORGS' | translate }}</mat-label>
               </ng-template>
               <mat-select
                 multiple
                 name="organizations"
                 [compareWith]="compare"
-                [(ngModel)]="updateUserOrgs.requestedOrganizations"
+                [(ngModel)]="updateUserOrgsFromFrontend.requestedOrganizations"
                 panelClass="overflow-x-hidden"
                 aria-required="true"
               >

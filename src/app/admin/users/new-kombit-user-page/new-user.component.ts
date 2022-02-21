@@ -4,7 +4,10 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import { CreateNewKombitUserDto } from '@app/admin/users/user.model';
+import {
+  CreateNewKombitUserDto,
+  CreateNewKombitUserFromFrontend,
+} from '@app/admin/users/user.model';
 import { UserService } from '@app/admin/users/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
@@ -18,12 +21,13 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class NewUserComponent implements OnInit {
   public organisationSubscription: Subscription;
+  public createNewKombitUserDto: CreateNewKombitUserDto = new CreateNewKombitUserDto();
   public userSubscription: Subscription;
   public organisations: Organisation[];
   public formFailedSubmit = false;
   public errorFields: string[];
   public errorMessages: unknown;
-  public createNewKombitUserDto: CreateNewKombitUserDto = new CreateNewKombitUserDto();
+  public createNewKombitUserFromFrontend: CreateNewKombitUserFromFrontend = new CreateNewKombitUserFromFrontend();
   public organisationsFilterCtrl: FormControl = new FormControl();
   public filteredOrganisations: ReplaySubject<
     Organisation[]
@@ -80,15 +84,26 @@ export class NewUserComponent implements OnInit {
 
   onSubmit(): void {
     this.resetErrors();
+    this.mapToDto(this.createNewKombitUserFromFrontend);
     this.userService.updateNewKombit(this.createNewKombitUserDto).subscribe(
       () => {
-        this.router.navigate(['/user-page']);
+        this.router.navigate(['/dashboard']);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
       }
     );
+  }
+
+  public mapToDto(body: CreateNewKombitUserFromFrontend) {
+    this.createNewKombitUserDto.email = body.email;
+    this.createNewKombitUserDto.requestedOrganizationIds = [];
+    body.requestedOrganizations.forEach((organization) => {
+      this.createNewKombitUserDto.requestedOrganizationIds.push(
+        organization.id
+      );
+    });
   }
 
   public compare(

@@ -27,7 +27,7 @@
                 maxlength="50"
                 required
                 name="email"
-                [(ngModel)]="createNewKombitUserDto.email"
+                [(ngModel)]="createNewKombitUserFromFrontend.email"
                 [ngClass]="{
                   'is-invalid':
                     formFailedSubmit && errorFields.includes('email'),
@@ -47,7 +47,9 @@
                   multiple
                   name="organisations"
                   [compareWith]="compare"
-                  [(ngModel)]="createNewKombitUserDto.requestedOrganizations"
+                  [(ngModel)]="
+                    createNewKombitUserFromFrontend.requestedOrganizations
+                  "
                   panelClass="overflow-x-hidden"
                   aria-required="true"
                 >

@@ -36,11 +36,19 @@ export interface UserGetManyResponse {
   count: number;
 }
 
-export class CreateNewKombitUserDto {
+export class CreateNewKombitUserFromFrontend {
   email: string;
   requestedOrganizations: Organisation[];
 }
 
-export class UpdateUserOrgsDto {
+export class UpdateUserOrgFromFrontend {
   requestedOrganizations: Organisation[];
+}
+export class UpdateUserOrgsDto {
+  requestedOrganizationIds: number[];
+}
+
+export class CreateNewKombitUserDto {
+  email: string;
+  requestedOrganizationIds: number[];
 }
