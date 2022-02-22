@@ -1,6 +1,6 @@
 <div *ngIf="datatarget">
     <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-      [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()"></app-top-bar>
+      [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()" [canEdit]="canEdit"></app-top-bar>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 d-flex align-items-stretch">
@@ -30,11 +30,11 @@
             <ng-template #showNoAuthText>
               <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
             </ng-template>
-  
+
           </div>
         </div>
-       
-  
+
+
       <div class="row">
         <div class="col-12">
           <div class=" jumbotron">

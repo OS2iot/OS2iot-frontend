@@ -12,6 +12,8 @@ import { Datatarget } from '../../datatarget.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { DatatargetDetail } from '@applications/datatarget/datatarget-detail/datatarget-detail';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   arrowsAltH = faArrowsAltH;
+  canEdit: boolean;
 
   constructor(
       private route: ActivatedRoute,
@@ -35,7 +38,8 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
       private location: Location,
       private datatargetRelationServicer: PayloadDeviceDatatargetService,
       private datatargetService: DatatargetService,
-      public translate: TranslateService) { }
+      public translate: TranslateService,
+      private meService: MeService) { }
 
   ngOnInit(): void {
       const id: number = +this.route.snapshot.paramMap.get('datatargetId');
@@ -54,6 +58,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
               this.backButton.label = translations['NAV.MY-DATATARGET'];
               this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
           });
+      this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   getDatatarget(id: number) {

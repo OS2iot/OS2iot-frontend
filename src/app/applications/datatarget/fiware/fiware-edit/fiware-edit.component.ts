@@ -21,6 +21,8 @@ import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { DataTargetType } from '@shared/enums/datatarget-type';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatarget-edit';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-fiware-edit',
@@ -53,7 +55,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
   faQuestionCircle = faQuestionCircle;
-
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -67,6 +69,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService,
+    private meService: MeService,
   ) {
     translate.use('da');
   }
@@ -105,7 +108,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       this.getDevices();
     }
     this.getPayloadDecoders();
-
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
 

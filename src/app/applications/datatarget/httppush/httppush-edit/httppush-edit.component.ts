@@ -26,6 +26,8 @@ import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { OpenDataDkDataset } from '../../opendatadk/opendatadk-dataset.model';
 import { DataTargetType } from '@shared/enums/datatarget-type';
 import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatarget-edit';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-httppush-edit',
@@ -60,6 +62,7 @@ export class HttppushEditComponent
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -74,7 +77,8 @@ export class HttppushEditComponent
     private errorMessageService: ErrorMessageService,
     private opendatadkService: OpendatadkService,
     private opendatadkDialogService: OpendatadkDialogService,
-    private scrollToTopService: ScrollToTopService
+    private scrollToTopService: ScrollToTopService,
+    private meService: MeService,
   ) {
     translate.use('da');
   }
@@ -110,6 +114,7 @@ export class HttppushEditComponent
     }
     this.getPayloadDecoders();
     this.setDataSetExcists();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   addRow() {
