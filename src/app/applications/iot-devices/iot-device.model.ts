@@ -8,70 +8,63 @@ import { ReceivedMessageMetadata } from '@shared/models/received-message-metadat
 import { LatestReceivedMessage } from './latestReceivedMessage.model';
 
 export class IotDevice {
-    name: string;
-    application?: Application;
-    location: JsonLocation;
-    commentOnLocation: string;
-    comment: string;
-    type: DeviceType = DeviceType.GENERICHTTP;
-    receivedMessagesMetadata: ReceivedMessageMetadata[];
-    metadata?: JSON;
-    apiKey?: string;
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    createdBy: number;
-    updatedBy: number;
-    createdByName: string;
-    updatedByName: string;
-    applicationId: number;
-    longitude = 0;
-    latitude = 0;
-    deviceModelId?: number;
-    latestReceivedMessage: LatestReceivedMessage;
-    lorawanSettings = new LorawanSettings();
-    sigfoxSettings = new SigfoxSettings();
-    deviceModel?: DeviceModel;
+  name: string;
+  application?: Application;
+  location: JsonLocation;
+  commentOnLocation: string;
+  comment: string;
+  type: DeviceType = DeviceType.GENERICHTTP;
+  receivedMessagesMetadata: ReceivedMessageMetadata[];
+  metadata?: JSON;
+  apiKey?: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: number;
+  updatedBy: number;
+  createdByName: string;
+  updatedByName: string;
+  applicationId: number;
+  longitude = 0;
+  latitude = 0;
+  deviceModelId?: number;
+  latestReceivedMessage: LatestReceivedMessage;
+  lorawanSettings = new LorawanSettings();
+  sigfoxSettings = new SigfoxSettings();
+  deviceModel?: DeviceModel;
 }
 
-export class IotDeviceResponse {
-    name: string;
-    application?: Application;
-    location: JsonLocation;
-    commentOnLocation: string;
-    comment: string;
-    type: DeviceType = DeviceType.GENERICHTTP;
-    receivedMessagesMetadata: ReceivedMessageMetadata[];
-    metadata?: JSON;
-    apiKey?: string;
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    applicationId: number;
-    longitude = 0;
-    latitude = 0;
-    deviceModelId?: DeviceModel;
-    latestReceivedMessage: LatestReceivedMessage;
-    lorawanSettings = new LorawanSettings();
-    sigfoxSettings = new SigfoxSettings();
-}
+export class IotDeviceResponse extends IotDevice {}
 
 export interface IotDevicesResponse {
-    data: IotDevice[];
-    ok?: boolean;
-    count?: number;
+  data: IotDevice[];
+  ok?: boolean;
+  count?: number;
+}
+
+export interface IotDeviceImportRequest {
+  data: IotDevice[];
+}
+
+export interface IotDevicesImportResponse {
+  data: IotDevice;
+  idMetadata: {
+    name: string;
+    applicationId: number;
+  };
+  error?: Omit<Error, 'name'>;
 }
 
 export class IoTDeviceMinimal {
-    id: number;
-    name: string;
-    canRead: boolean;
-    organizationId: number;
-    applicationId: number;
-    lastActiveTime: Date;
+  id: number;
+  name: string;
+  canRead: boolean;
+  organizationId: number;
+  applicationId: number;
+  lastActiveTime: Date;
 }
 
 export class IoTDevicesMinimalResponse {
-    data: IoTDeviceMinimal[];
-    count: number;
+  data: IoTDeviceMinimal[];
+  count: number;
 }

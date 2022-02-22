@@ -151,6 +151,8 @@
   "DATATARGET": {
     "DETAILS": "Detaljer",
     "SAVE": "Gem datatarget",
+    "CREATE": "Opret",
+    "READMORE": "Læs mere",
     "DESCRIPTION": "Beskrivelse",
     "URL": "URL",
     "TIMEOUT": "Timeout",
@@ -163,11 +165,17 @@
     "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT enhed(er)",
     "NO-RELATIONS": "ingen tilknyttede relationer",
+    "TENANT": "Tenant",
+    "NO-TENANT": "Ingen Tenant angivet",
+    "CONTEXT": "Context",
+    "NO-CONTEXT": "Ingen Context angivet",
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK",
-    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
+    "OPENDATA-DK": "OpenDataDK", 
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
+    "HTTP_PUSH": "HTTP Push",
+    "FIWARE": "FIWARE"
   },
   "MULTICAST": {
     "SAVE": "Gem multicast",
@@ -477,12 +485,12 @@
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
     "GIVE-MULTICAST-NAME":"Navngiv multicast",
-    "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen",
-    "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key",
-    "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key",
+    "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen (mcAddr)",
+    "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key (mcNwkSKey)",
+    "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key (mcAppSKey)",
     "GIVE-MULTICAST-FRAMECOUNTER": "Angiv frame counter",
     "GIVE-MULTICAST-DATARATE": "Angiv data rate",
-    "GIVE-MULTICAST-IOTDEVICES": "Angiv IoT Devices",
+    "GIVE-MULTICAST-IOTDEVICES": "Angiv IoT-enheder",
     "GIVE-MULTICAST-FREQUENCY": "Angiv frekvens (Hz)",
     "GIVE-MULTICAST-GROUP-TYPE": "Angiv multicast gruppe type",
     "GIVE-MULTICAST-PERIODICITY": "Angiv multicast ping-slot periodicitet",
@@ -530,7 +538,11 @@
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
       "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
-      "ONLY-LORAWAN": "* På nuværende tidspunkt er det kun muligt at tilknytte LoRaWAN devices."
+      "ONLY-LORAWAN": "* På nuværende tidspunkt er det kun muligt at tilknytte LoRaWAN devices.",
+      "HINT-8-HEXA": "8-tegns hexadecimal værdi",
+      "HINT-32-HEXA": "32-tegns hexadecimal værdi",
+      "HINT-DATA-RATE": "Data rate, der skal bruges ved overførsel af multicast-frames. Se venligst LoRaWAN Regional Parameters specifikationen for gyldige værdier",
+      "HINT-FREQUENCY": "Frekvensen, der skal bruges ved transmission af multicast-frames. Se venligst LoRaWAN Regional Parameters specifikationen for gyldige værdier"
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",
@@ -709,7 +721,12 @@
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
     "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
     "DIFFERENT-SERVICE-PROFILE": "Dine devices har forskellige service profiles. De skal have den samme service profile!",
-    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast."
+    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast.",
+    "ID-DOES-NOT-EXIST": "Id'et findes ikke",
+    "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
+    "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
+    "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
@@ -942,5 +959,19 @@
       "DELETE": "Slet"
     }
   },
-  "NoUsersAdded": "Ingen brugergrupper er tilføjet"
+  "NoUsersAdded": "Ingen brugergrupper er tilføjet",
+
+  "FIWARE": {
+      "QUESTION": {
+        "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
+        "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
+        "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
+        "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
+        "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
+        "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
+        "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
+        "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
+      }
+
+  }
 }

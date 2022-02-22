@@ -51,7 +51,7 @@ export class ApiKeyService {
     orderByColumn?: string,
     orderByDirection?: string,
     userId?: number,
-    organisationId?: number
+    organizationId?: number
   ): Observable<ApiKeyGetManyResponse> {
     if (userId) {
       return this.restService.get(this.endpoint, {
@@ -61,13 +61,13 @@ export class ApiKeyService {
         sort: orderByDirection,
         userId,
       });
-    } else if (organisationId) {
+    } else if (organizationId) {
       return this.restService.get(this.endpoint, {
         limit,
         offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
-        organisationId,
+        organizationId,
       });
     } else {
       return this.restService.get(this.endpoint, {
