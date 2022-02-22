@@ -23,6 +23,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -62,6 +63,7 @@ export function tokenGetter() {
         SearchModule,
         HttpClientModule,
         MatInputModule,
+        MatTooltipModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter
