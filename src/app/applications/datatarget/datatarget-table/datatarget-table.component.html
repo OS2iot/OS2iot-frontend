@@ -15,13 +15,13 @@
       </td>
     </ng-container>
 
-    <!-- Devices Column -->
+    <!-- Type Column -->
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
         {{ 'DATATARGET-TABLE.TYPE' | translate }}</th>
       <td mat-cell *matCellDef="let element">
 
-        {{element.type | translate}}</td>
+        {{'DATATARGET.' + element.type | translate}}</td>
     </ng-container>
 
     <!-- Menu Column -->

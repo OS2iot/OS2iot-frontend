@@ -1,4 +1,10 @@
-import { Component, ViewChild, AfterViewInit, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -10,6 +16,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { DeviceType } from '@shared/enums/device-type';
 
 /**
  * @title Table retrieving data through HTTP
@@ -40,7 +47,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     private router: Router,
     private meService: MeService,
     private deleteDialogService: DeleteDialogService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.canEdit = this.meService.canWriteInTargetOrganization();
@@ -87,33 +94,28 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   deleteApplication(id: number) {
-    let message: string;
-    if (this.applicationHasDevices(id)) {
-      message = this.translate.instant('APPLICATION.DELETE-HAS-DEVICES-PROMPT');
-    }
+    const applicationToDelete = this.data?.find((app) => app.id === id);
 
-    this.deleteDialogService.showSimpleDialog(message).subscribe((response) => {
-      if (response) {
-        this.applicationService.deleteApplication(id).subscribe((response) => {
-          if (response.ok && response.body.affected > 0) {
-            this.paginator.page.emit({
-              pageIndex: this.paginator.pageIndex,
-              pageSize: this.paginator.pageSize,
-              length: this.resultsLength,
+    this.deleteDialogService
+      .showApplicationDialog(applicationToDelete)
+      .subscribe((response) => {
+        if (response) {
+          this.applicationService
+            .deleteApplication(id)
+            .subscribe((response) => {
+              if (response.ok && response.body.affected > 0) {
+                this.paginator.page.emit({
+                  pageIndex: this.paginator.pageIndex,
+                  pageSize: this.paginator.pageSize,
+                  length: this.resultsLength,
+                });
+              } else {
+                this.errorMessage = response?.error?.message;
+              }
             });
-          } else {
-            this.errorMessage = response?.error?.message;
-          }
-        });
-      }
-    });
+        }
+      });
   }
-
-  applicationHasDevices(id: number): boolean {
-    const applicationToDelete = this.data?.find(app => app.id === id);
-    return applicationToDelete && applicationToDelete.iotDevices.length > 0;
-  }
-
   navigateToEditPage(applicationId: string) {
     this.router.navigate(['applications', 'edit-application', applicationId]);
   }

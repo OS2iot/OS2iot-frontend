@@ -17,6 +17,7 @@
     "ALL-IOT-DEVICES": "Alle IoT enheder",
     "LORA-GATEWAYS": "LoRaWAN gateways",
     "DATATARGET": "Datatarget",
+    "MULTICAST": "Multicast",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
     "PROFILES": "LoRaWAN profiler",
@@ -34,7 +35,8 @@
     "DEVICE-MODEL": "Device model",
     "BACK": "Tilbage",
     "LOGOUT": "Log ud",
-    "HELP": "Hjælp"
+    "HELP": "Hjælp",
+    "API-KEY": "API nøgler"
   },
   "TOPBAR":{
     "SEARCH": {
@@ -44,6 +46,16 @@
       "EDIT": "Rediger",
       "DELETE": "Slet"
     }
+  },
+  "SNACK": {
+    "SAVE": "Gemt succesfuldt",
+    "DELETE": "Slettet succesfuldt",
+    "UPDATE": "Opdateret succesfuldt",
+    "FAIL": "Fejl - aktion ikke fuldført",
+    "LOADFAIL": "Fejl - kunne ikke loade",
+    "QUEUE": "Element sat i kø",
+    "CLOSE": "Luk",
+    "NODEVICES": "Kan ikke sende downlink - der er ingen devices!"
   },
   "SEARCH": {
     "ICON": "",
@@ -81,11 +93,15 @@
     "SAVE": "Gem applikation",
     "DELETE": "Slet applikation",
     "DELETE-HAS-DEVICES-PROMPT": "Der er knyttet IoT-enheder til denne applikation. Disse vil også blive slettet. Slet alligevel?",
+    "DELETE-HAS-SIGFOX-DEVICES-PROMPT": "Applikationen kan ikke slettes, da der er knyttet Sigfox enheder til den",
     "NAME": "Applikationens navn",
     "DESCRIPTION": "Applikationens beskrivelse",
     "ATTACHED-IOT": "Tilknyttede IoT enheder",
     "DATATARGET-SHOW": "Tilknyttede data targets",
+    "MULTICAST-SHOW": "Tilknyttede multicast",
+    "MULTICAST-GROUPS": "Multicast-grupper",
     "IMPORT-CSV": "Bulk import af IoT enheder",
+    "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {
         "GENERIC": "Generic HTTP sample",
@@ -135,6 +151,8 @@
   "DATATARGET": {
     "DETAILS": "Detaljer",
     "SAVE": "Gem datatarget",
+    "CREATE": "Opret",
+    "READMORE": "Læs mere",
     "DESCRIPTION": "Beskrivelse",
     "URL": "URL",
     "TIMEOUT": "Timeout",
@@ -147,11 +165,37 @@
     "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT enhed(er)",
     "NO-RELATIONS": "ingen tilknyttede relationer",
+    "TENANT": "Tenant",
+    "NO-TENANT": "Ingen Tenant angivet",
+    "CONTEXT": "Context",
+    "NO-CONTEXT": "Ingen Context angivet",
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "OPENDATA-DK": "OpenDataDK", 
-    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu"
+    "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
+    "HTTP_PUSH": "HTTP Push",
+    "FIWARE": "FIWARE"
+  },
+  "MULTICAST": {
+    "SAVE": "Gem multicast",
+    "BASIC-DETAILS": "Basale detaljer",
+    "LORAWAN-DETAILS": "LoRaWAN detailjer",
+    "GROUPNAME": "Gruppe navn",
+    "ADDRESS": "Adresse",
+    "NETWORK-KEY": "Network session key",
+    "APPLICATION-KEY": "Network application key",
+    "FRAMECOUNTER": "Frame counter",
+    "DATARATE": "Data rate",
+    "FREQUENCY": "Frekvens (Hz)",
+    "GROUPTYPE": "Gruppe type",
+    "PERIODICITY": "Periodicitet",
+    "IOTDEVICE": "IoT enheder",
+    "DOWNLINK": {
+      "PORT": "Angiv den ønskede port",
+      "PAYLOAD": "Angiv det ønskede payload",
+      "START": "Sæt downlink i kø"
+    }
   },
   "OPENDATADK": {
     "QUESTION": {
@@ -240,6 +284,10 @@
     "NAME": "Navn",
     "TYPE": "Type"
   },
+  "MULTICAST-TABLE":{
+    "NAME": "Gruppenavn",
+    "TYPE": "Gruppetype"
+  },
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
@@ -264,7 +312,13 @@
   },
   "DATATARGET-TABLE-ROW": {
     "DELETE": "Slet datatarget",
-    "EDIT": "Redigér"
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Håndter datatarget"
+  },
+  "MULTICAST-TABLE-ROW": {
+    "DELETE": "Slet multicast",
+    "EDIT": "Redigér",
+    "SHOW-OPTIONS": "Håndter multicast"
   },
   "PAYLOAD-DECODER": {
     "DELETE-FAILED": "Slet fejlede",
@@ -364,7 +418,9 @@
     "CREATE-NEW-LORA-GATEWAY": "Opret ny LoRaWAN gateway",
     "CREATE-NEW-DEVICE-MODEL": "Opret ny device model",
     "CREATE-NEW-DATATARGET": "Opret nyt datatarget",
+    "CREATE-NEW-MULTICAST": "Opret nyt multicast",
     "EDIT-DATATARGET": "Redigér datatarget",
+    "EDIT-MULTICAST": "Redigér multicast",
     "CREATE-NEW-IOT-DEVICE": "Tilføj en IoT enhed",
     "EDIT-NEW-GATEWAY": "Redigér LoRaWAN gateway",
     "EDIT-NEW-APPLICATION": "Redigér applikation",
@@ -382,7 +438,8 @@
     "EDIT-SIGFOX-GROUPS": "Redigér Sigfox grupper",
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
-    "EDIT-DEVICE-PROFILE": "Redigér device profil"
+    "EDIT-DEVICE-PROFILE": "Redigér device profil",
+    "EDIT-API-KEY": "Redigér API nøgle"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -426,6 +483,23 @@
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
+    "GIVE-MULTICAST-NAME":"Navngiv multicast",
+    "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen (mcAddr)",
+    "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key (mcNwkSKey)",
+    "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key (mcAppSKey)",
+    "GIVE-MULTICAST-FRAMECOUNTER": "Angiv frame counter",
+    "GIVE-MULTICAST-DATARATE": "Angiv data rate",
+    "GIVE-MULTICAST-IOTDEVICES": "Angiv IoT-enheder",
+    "GIVE-MULTICAST-FREQUENCY": "Angiv frekvens (Hz)",
+    "GIVE-MULTICAST-GROUP-TYPE": "Angiv multicast gruppe type",
+    "GIVE-MULTICAST-PERIODICITY": "Angiv multicast ping-slot periodicitet",
+    "GIVE-MULTICAST-GROUPTYPE": "Angiv multicast gruppe typen",
+    "MULTICAST-NAME-PLACEHOLDER": "Multicastens navn",
+    "MULTICAST-ADDRESS-PLACEHOLDER": "Multicast adressen",
+    "MULTICAST-NETWORK-KEY-PLACEHOLDER": "Multicastens network session key",
+    "MULTICAST-APPLICATION-KEY-PLACEHOLDER": "Multicastens application session key",
+    "MULTICAST-GROUPTYPE-PLACEHOLDER": "Vælg multicast gruppe typen",
+    "MULTICAST-PERIODICITY-PLACEHOLDER": "Vælg Class-B ping periodiciteten",
     "OTAAAPPLICATIONKEY": "OTAA application key (AppKey)",
     "OTAAAPPLICATIONKEY-PLACEHOLDER": "Indtast OTAA application key",
     "DEVADDR": "Device adress",
@@ -457,6 +531,17 @@
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+    },
+    "MULTICAST": {
+      "SELECT-DEVICES": "Vælg enheder",
+      "SELECTALLDEVICES": "Vælg alle",
+      "DESELECTALLDEVICES": "Fravælg alle",
+      "NO-PORT-OR-PAYLOAD": "Angiv en port og en payload",
+      "ONLY-LORAWAN": "* På nuværende tidspunkt er det kun muligt at tilknytte LoRaWAN devices.",
+      "HINT-8-HEXA": "8-tegns hexadecimal værdi",
+      "HINT-32-HEXA": "32-tegns hexadecimal værdi",
+      "HINT-DATA-RATE": "Data rate, der skal bruges ved overførsel af multicast-frames. Se venligst LoRaWAN Regional Parameters specifikationen for gyldige værdier",
+      "HINT-FREQUENCY": "Frekvensen, der skal bruges ved transmission af multicast-frames. Se venligst LoRaWAN Regional Parameters specifikationen for gyldige værdier"
     },
     "SIGFOX": {
       "TITLE": "Sigfox specifikke felter",
@@ -506,6 +591,9 @@
       "SELECT-ENERGYLIMITATIONCLASS": "Vælg energibegrænsningsklassen (energyLimitationClass)",
       "SELECT-SUPPORTEDPROTOCOL": "Vælg understøttede protokoller (supportedProtocol)",
       "FIWARE-LINK-TEXT": "Denne data model er adopteret fra Fiware og følger ETSI standarden"
+    },
+    "PERMISSION": {
+      "SELECT-PERMISSION": "Vælg brugergruppe"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -630,7 +718,14 @@
     "DELETE-NOT-ALLOWED-HAS-SIGFOX-DEVICE": "Applikation kan ikke blive slettet, da den indeholder en eller flere Sigfox enheder.",
     "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Service profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder.",
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
-    "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig."
+    "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
+    "DIFFERENT-SERVICE-PROFILE": "Dine devices har forskellige service profiles. De skal have den samme service profile!",
+    "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast.",
+    "ID-DOES-NOT-EXIST": "Id'et findes ikke",
+    "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
+    "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
+    "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
@@ -697,7 +792,7 @@
       "PINGSLOTFREQ": "Class-B ping-slot frequency",
       "SUPPORTSCLASSC_ACTIVATE": "Device supports Class-C",
       "CLASSCTIMEOUT": "Class C confirmed downlink timeout",
-      "CANCEL": "Anuller",
+      "CANCEL": "Annuller",
       "SAVE": "Gem",
       "OTAA-ABP": "Join (OTAA / ABP)",
       "MACVERSION_PLACEHOLDER": "1.0.0",
@@ -821,9 +916,11 @@
     "PERMISSION": "OS2IoT - Brugergrupper",
     "ORGANIZATION": "OS2IoT - Organisationer",
     "DATATARGET": "OS2IoT - Datatarget",
+    "MULTICAST": "OS2IoT - Multicast",
     "BULKIMPORT": "OS2IoT - Bulk import",
     "IOTDEVICE": "OS2IoT - IoT enhed",
-    "FRONTPAGE": "OS2IoT - Forside"
+    "FRONTPAGE": "OS2IoT - Forside",
+    "API-KEY": "OS2IoT - API nøgler"
 
   },
   "PAGINATOR": {
@@ -841,5 +938,39 @@
   "Forbidden resource": "Du har ikke rettigheder til at foretage denne handling",
   "GENERIC_HTTP": "Generisk HTTP",
   "LORAWAN": "LoRaWAN",
-  "SIGFOX": "Sigfox"
+  "SIGFOX": "Sigfox",
+  "API-KEY": {
+    "NAME": "Navn",
+    "ORGANIZATION": "Organisation",
+    "PERMISSIONS": "Brugergrupper",
+    "KEY": "Nøgle",
+    "CREATE-NEW-API-KEY": "Opret ny nøgle",
+    "DETAIL": {},
+    "EDIT": {
+      "NAME": "Indtast nøglens navn",
+      "NAME-PLACEHOLDER": "Indtast nøglens navn",
+      "CANCEL": "Annuller",
+      "SAVE": "Gem nøgle",
+      "CREATE-API-KEY": "Opret nøgle"
+    },
+    "TABLE-ROW": {
+      "EDIT": "Redigér",
+      "DELETE": "Slet"
+    }
+  },
+  "NoUsersAdded": "Ingen brugergrupper er tilføjet",
+
+  "FIWARE": {
+      "QUESTION": {
+        "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
+        "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
+        "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
+        "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
+        "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
+        "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
+        "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
+        "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
+      }
+
+  }
 }

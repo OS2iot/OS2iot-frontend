@@ -13,8 +13,7 @@ export class ErrorMessageService {
           errorMessages.push(err.error.message);
         } else if (err.error.chirpstackError) {
           errorMessages.push(err.error.chirpstackError.message);
-        }
-        else {
+        } else {
           err.error.message.forEach( (err) => {
             if (err.property === 'lorawanSettings') {
               err.children.forEach( (element) => {
@@ -32,9 +31,13 @@ export class ErrorMessageService {
         return errorMessages;
   }
 
-  public handleErrorMessageWithFields(error: HttpErrorResponse): ErrorMessage {
+  public handleErrorMessageWithFields(error: HttpErrorResponse | Pick<HttpErrorResponse, 'error'>): ErrorMessage {
     const errors: ErrorMessage = {errorFields: [], errorMessages: []};
-    if (typeof error.error.message === 'string') {
+    if (typeof error.error === 'string') {
+      errors.errorMessages.push(error.error);
+    } else if (typeof error.error?.error === 'string') {
+      errors.errorMessages.push(error.error.error);
+    } else if (typeof error.error?.message === 'string') {
       errors.errorMessages.push(error.error.message);
     } else {
         error.error.message.forEach((err) => {
@@ -65,7 +68,7 @@ export class ErrorMessageService {
           } else if (err.message) {
             errors.errorFields.push(err.field);
             errors.errorMessages.push(err.message);
-          } else {
+          } else if (err.constraints) {
             errors.errorFields.push(err.property);
             errors.errorMessages = errors.errorMessages.concat(
               Object.values(err.constraints)
