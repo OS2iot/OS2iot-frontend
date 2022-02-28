@@ -32,9 +32,9 @@ export class UserPageComponent implements OnInit {
   public errorMessages: unknown;
   public title: string;
   public awaitingConfirmation: boolean;
-  public requestedOrganizations: Organisation[];
+  public requestOrganizationsList: Organisation[];
   public requestedUserOrganizations: Organisation[];
-  public checkForUserOrganizations = false;
+  public checkForNoUserOrganizations = false;
   public checkForRemainingOrganizations = false;
   public userInfo: CurrentUserInfoResponse;
   public organisationsFilterCtrl: FormControl = new FormControl();
@@ -66,17 +66,17 @@ export class UserPageComponent implements OnInit {
     this.userService
       .getOneSimple(this.userInfo.user.id)
       .subscribe((response: UserResponse) => {
+        //When used as user-page, check for users organizations so it's only possible to apply not already joined organizations
         this.requestedUserOrganizations = response.requestedOrganizations;
-
         if (this.userInfo.organizations.length > 0) {
-          this.compareRequestedAndActualOrganisations(
+          this.compareRequestedAndAlreadyJoinedOrganizations(
             this.requestedUserOrganizations,
             this.userInfo.organizations
           );
         }
 
         if (this.requestedUserOrganizations.length === 0) {
-          this.checkForUserOrganizations = true;
+          this.checkForNoUserOrganizations = true;
         }
 
         this.awaitingConfirmation = response.awaitingConfirmation;
@@ -88,9 +88,10 @@ export class UserPageComponent implements OnInit {
         this.translate.get('USER_PAGE.USER_PAGE').subscribe((translation) => {
           this.title = translation;
         });
+        
+        this.getOrganisations();
       });
 
-    this.getOrganisations();
     this.organisationsFilterCtrl.valueChanges
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => {
@@ -98,28 +99,28 @@ export class UserPageComponent implements OnInit {
       });
   }
   private filterOrganisations() {
-    if (!this.requestedOrganizations) {
+    if (!this.requestOrganizationsList) {
       return;
     }
     // get the search keyword
     let search = this.organisationsFilterCtrl?.value?.trim();
     if (!search) {
-      this.filteredOrganisations.next(this.requestedOrganizations.slice());
+      this.filteredOrganisations.next(this.requestOrganizationsList.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
-    const filtered = this.requestedOrganizations.filter((org) => {
+    const filtered = this.requestOrganizationsList.filter((org) => {
       return org.name.toLocaleLowerCase().indexOf(search) > -1;
     });
     this.filteredOrganisations.next(filtered);
   }
 
-  public compareRequestedAndActualOrganisations(
+  public compareRequestedAndAlreadyJoinedOrganizations(
     requestedOrganizations: Organisation[],
-    actualOrganizations: Organisation[]
+    alreadyJoinedOrganizations: Organisation[]
   ) {
-    actualOrganizations.forEach((actOrg) => {
+    alreadyJoinedOrganizations.forEach((actOrg) => {
       if (!requestedOrganizations.find((org) => org.id === actOrg.id)) {
         this.requestedUserOrganizations.push(actOrg);
       }
@@ -137,12 +138,12 @@ export class UserPageComponent implements OnInit {
     this.organisationSubscription = this.organizationService
       .getMultipleNoReq()
       .subscribe((orgs) => {
-        this.requestedOrganizations = orgs.data;
-        this.requestedOrganizations = this.filterChosenOrganizations(
+        this.requestOrganizationsList = orgs.data;
+        this.requestOrganizationsList = this.filterChosenOrganizations(
           this.requestedUserOrganizations,
-          this.requestedOrganizations
+          this.requestOrganizationsList
         );
-        this.filteredOrganisations.next(this.requestedOrganizations.slice());
+        this.filteredOrganisations.next(this.requestOrganizationsList.slice());
       });
   }
 

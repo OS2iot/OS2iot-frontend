@@ -97,9 +97,9 @@
           <div class="col-md-5 order-first order-md-last search-form-wrapper">
             <!-- Search  -->
 
-            <form class="search-form">
+            <form *ngIf="hasEmail()" class="search-form">
               <mat-form-field class="search-form--full-width">
-                <mat-label>{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
+                <mat-label >{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
                 <input
                   matInput
                   id="searchQuery"
@@ -132,7 +132,7 @@
             <button mat-menu-item class="userNameFont userName">
               {{ getUsername() }}
             </button>
-            <a mat-menu-item routerLink="/user-page"
+            <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page"
               >{{ 'USER_PAGE.USER_PAGE' | translate }}
             </a>
             <a
@@ -143,21 +143,6 @@
               >{{ 'NAV.LOGOUT' | translate }}
             </a>
           </mat-menu>
-          <!-- <ul class="dropdown-menu dropdownList" attr.aria-labelledby="userDropdown">
-              <li class="dropdown-item userName">
-                <p class="userNameFont">{{getUsername()}}</p>
-              </li>
-              <li class="dropdown-item" routerLink="/user-page">
-                <a routerLink="/user-page">{{'USER_PAGE.USER_PAGE' | translate}}
-                </a>
-              </li>
-              <li class="dropdown-item" (click)="onLogout()">
-                <a [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-                target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}" (click)="onLogout()">{{'NAV.LOGOUT' | translate }}
-                </a>
-              </li>
-            </ul> -->
-
           <button mat-icon-button type="button" id="help" (click)="goToHelp()">
             <fa-icon
               [icon]="faQuestionCircle"

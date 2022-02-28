@@ -140,5 +140,12 @@ export class TopBarComponent implements OnInit {
       isLoggedInWithKombit() {
         return this.authService.isLoggedInWithKombit();
       }
+      hasEmail(): boolean {
+          if(this.sharedVariableService.getUserInfo().user.email)
+          {
+              return true
+          }
+          else return false;
+      }
 }
 

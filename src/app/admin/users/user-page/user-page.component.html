@@ -16,7 +16,7 @@
           <p *ngFor="let org of requestedUserOrganizations">
             {{ org.name }}
           </p>
-          <p class="noOrgs" *ngIf="checkForUserOrganizations">
+          <p class="noOrgs" *ngIf="checkForNoUserOrganizations">
             {{ 'USER_PAGE.NO_APPLIED_ORGS' | translate }}
           </p>
           <h6 class="mt-5">
