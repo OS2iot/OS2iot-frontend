@@ -69,6 +69,26 @@ export class UserService {
       });
     }
   }
+
+  getAwaitingUsers(
+    limit: number = 1000,
+    offset: number = 0,
+    organizationId: number,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<UserGetManyResponse> {
+    return this.restService.get(
+      this.URL + '/awaitingUsers',
+      {
+        limit: limit,
+        offset: offset,
+        orderOn: orderByColumn,
+        sort: orderByDirection,
+      },
+      organizationId
+    );
+  }
+
   getOneSimple(id: number): Observable<UserResponse> {
     return this.restService.get(this.URL, {}, id).pipe(
       map((response: UserResponse) => {

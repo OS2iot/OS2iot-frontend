@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import {
@@ -88,7 +87,7 @@ export class UserPageComponent implements OnInit {
         this.translate.get('USER_PAGE.USER_PAGE').subscribe((translation) => {
           this.title = translation;
         });
-        
+
         this.getOrganisations();
       });
 
@@ -169,9 +168,13 @@ export class UserPageComponent implements OnInit {
 
   public mapToDto(body: UpdateUserOrgFromFrontend) {
     this.updateUserOrgs.requestedOrganizationIds = [];
-    body.requestedOrganizations.forEach((organization) => {
-      this.updateUserOrgs.requestedOrganizationIds.push(organization.id);
-    });
+    if (body.requestedOrganizations) {
+      body.requestedOrganizations.forEach((organization) => {
+        this.updateUserOrgs.requestedOrganizationIds.push(organization.id);
+      });
+    } else {
+      this.formFailedSubmit = true;
+    }
   }
 
   onSubmit(): void {

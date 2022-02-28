@@ -32,6 +32,7 @@ import { ApiKeyComponent } from './api-key/api-key.component';
 import { ApiKeyListComponent } from './api-key/api-key-list/api-key-list.component';
 import { ApiKeyTableComponent } from './api-key/api-key-list/api-key-table/api-key-table.component';
 import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.component';
+import { AwaitingUsersTableComponent } from './users/user-list/awaiting-users-table/awaiting-users-table.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.compone
     ApiKeyListComponent,
     ApiKeyTableComponent,
     ApiKeyEditComponent,
+    AwaitingUsersTableComponent,
   ],
   imports: [
     AdminRoutingModule,

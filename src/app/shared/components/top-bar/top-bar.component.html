@@ -97,7 +97,7 @@
           <div class="col-md-5 order-first order-md-last search-form-wrapper">
             <!-- Search  -->
 
-            <form *ngIf="hasEmail()" class="search-form">
+            <form *ngIf="hasEmail() && hasAnyPermission()" class="search-form">
               <mat-form-field class="search-form--full-width">
                 <mat-label >{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
                 <input

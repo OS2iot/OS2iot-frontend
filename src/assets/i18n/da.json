@@ -794,6 +794,8 @@
     }
   },
   "USERS": {
+    "AWAITING-USERS": "Afventende brugere",
+    "EXISTING-USERS": "Tilknyttede brugere",
     "SAVE": "Gem",
     "NAME": "Navn",
     "EMAIL": "Email",
@@ -805,7 +807,9 @@
     "LOGIN": "Sidst aktiv",
     "TABLE-ROW": {
       "EDIT": "Redigér",
-      "DELETE": "Slet"
+      "DELETE": "Slet",
+      "APPROVE": "Godkend",
+      "REJECT": "Afvis"
     },
     "FORM": {
       "NAME": "Indtast det fulde navn på brugeren",

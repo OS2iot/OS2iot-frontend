@@ -147,5 +147,9 @@ export class TopBarComponent implements OnInit {
           }
           else return false;
       }
+
+      hasAnyPermission(): boolean {
+          return this.sharedVariableService.getHasAnyPermission();
+      }
 }
 
