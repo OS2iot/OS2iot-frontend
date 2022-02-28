@@ -1,28 +1,30 @@
 import {
+  AfterViewInit,
   Component,
   Input,
-  ViewChild,
-  AfterViewInit,
   OnInit,
+  ViewChild,
 } from '@angular/core';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { RestService } from 'src/app/shared/services/rest.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import {
   IotDevice,
   IotDevicesResponse,
 } from '@applications/iot-devices/iot-device.model';
-import * as moment from 'moment';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { IoTDeviceService } from '../iot-device.service';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { DeviceType } from '@shared/enums/device-type';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceType } from '@shared/enums/device-type';
+import { isValidRssiInfo, RxInfo } from '@shared/helpers/rx-info.helper';
+import { keyofNumber } from '@shared/helpers/type.helper';
 import { MeService } from '@shared/services/me.service';
+import * as moment from 'moment';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { RestService } from 'src/app/shared/services/rest.service';
+import { IoTDeviceService } from '../iot-device.service';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -40,6 +42,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     'technology',
     'battery',
     'active',
+    'rssi',
+    'snr',
     'menu',
   ];
   public canEdit = false;
@@ -50,6 +54,9 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
+  isValidRssiInfo = isValidRssiInfo;
+  noValueText: string;
+  toText: string;
 
   constructor(
     private restService: RestService,
@@ -65,6 +72,11 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.translate.get(['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE', 'GEN.to'])
+      .subscribe(translations => {
+        this.noValueText = translations['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE'];
+        this.toText = translations['GEN.to'];
+      });
   }
 
   ngAfterViewInit() {
@@ -103,6 +115,17 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     return Math.round(device?.lorawanSettings?.deviceStatusBattery);
   }
 
+  buildFromLoRaRxInfo(rxInfo: RxInfo[], prop: keyofNumber<RxInfo>): string | number {
+    const values = rxInfo.map((x) => x[prop]);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    return min && max
+      ? min !== max
+        ? `${min} ${this.toText} ${max}`
+        : max
+      : this.noValueText;
+  }
+
   getDevices(
     orderByColumn: string,
     orderByDirection: string
@@ -125,7 +148,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   clickDelete(element: any) {
-    if (element.type == DeviceType.SIGFOX) {
+    if (element.type === DeviceType.SIGFOX) {
       this.showSigfoxDeleteDialog();
     } else {
       this.deleteDialogService.showSimpleDialog().subscribe((response) => {
