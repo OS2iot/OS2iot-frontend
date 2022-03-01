@@ -13,12 +13,14 @@ export class Application {
   public updatedBy: number;
   public createdByName: string;
   public updatedByName: string;
+  public metadata: string;
 }
 
 export class ApplicationRequest {
   public name: string;
   public description: string;
   public organizationId: number;
+  public metadata: string;
 }
 
 export interface ApplicationData {
@@ -26,3 +28,5 @@ export interface ApplicationData {
   ok?: boolean;
   count?: number;
 }
+
+export type ApplicationMetadata = Record<string, unknown>;

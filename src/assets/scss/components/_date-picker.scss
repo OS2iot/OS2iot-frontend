@@ -1,0 +1,7 @@
+.datepicker-table-fix {
+  // TODO: Hack. Should be applied to mat-datepicker-content but doesn't work
+  mat-datepicker-content {
+    margin: 1000px; // Temp to see the difference
+    padding-bottom: 10px;
+  }
+}

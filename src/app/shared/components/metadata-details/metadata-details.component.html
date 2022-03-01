@@ -1,0 +1,5 @@
+<ng-container *ngIf="metadata">
+  <p *ngFor="let entry of entries(metadata)">
+    <strong>{{ 'APPLICATION.METADATA-FIELD.' + toPascalKebabCase(entry[0]) | translate }}</strong>{{formatValue(entry[1])}}
+  </p>
+</ng-container>

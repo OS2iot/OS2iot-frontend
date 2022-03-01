@@ -95,7 +95,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     getDeviceModels() {
         this.deviceModelService.getMultiple(
             1000,
-            0, 
+            0,
             "id",
             "ASC",
             this.shareVariable.getSelectedOrganisationId()
@@ -197,7 +197,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             this.iotDevice.deviceModelId = null
         }
         switch (this.iotDevice.type) {
-            case DeviceType.GENERICHTTP: {
+            case DeviceType.GENERIC_HTTP: {
                 this.iotDevice.lorawanSettings = undefined;
                 this.iotDevice.sigfoxSettings = undefined;
                 break;

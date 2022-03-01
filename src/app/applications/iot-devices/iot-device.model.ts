@@ -13,7 +13,7 @@ export class IotDevice {
   location: JsonLocation;
   commentOnLocation: string;
   comment: string;
-  type: DeviceType = DeviceType.GENERICHTTP;
+  type: DeviceType = DeviceType.GENERIC_HTTP;
   receivedMessagesMetadata: ReceivedMessageMetadata[];
   metadata?: JSON;
   apiKey?: string;

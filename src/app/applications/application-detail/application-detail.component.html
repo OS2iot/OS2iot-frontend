@@ -9,11 +9,12 @@
           <div *ngIf="errorMessage" class="error-messages p-3 my-3">
             {{errorMessage | translate}}
           </div>
-          <h3>Detaljer</h3>
+          <h3>{{ 'APPLICATION.DETAILS' | translate }}</h3>
           <app-general-details [data]="application"></app-general-details>
           <p *ngIf="application.description">
             <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong></p>
           <pre><p>{{application.description}}</p></pre>
+          <app-metadata-details [metadataJson]="application.metadata"></app-metadata-details>
         </div>
       </div>
     </div>

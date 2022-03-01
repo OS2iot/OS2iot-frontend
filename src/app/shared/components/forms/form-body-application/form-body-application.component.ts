@@ -1,12 +1,20 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from '@shared/services/rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ApplicationRequest, Application } from '@applications/application.model';
+import { ApplicationRequest, Application, ApplicationMetadata } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { ApplicationStatus, ApplicationStatusEntries } from '@applications/enums/status.enum';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { isJSDocThisTag } from 'typescript';
+import { SupportedUnit } from '@app/device-model/supported-unit.model';
+import { ControlledPropperty } from '@app/device-model/Enums/controlled-propperty.enum';
+import { enumToEntries } from '@shared/helpers/enum.helper';
+import { DeviceType } from '@shared/enums/device-type';
 
 
 export class User {
@@ -16,10 +24,15 @@ export class User {
     public hobbies: string;
 }
 
+interface DropdownOption {
+  label: string;
+  value: string | number;
+}
+
 @Component({
     selector: 'app-form-body-application',
     templateUrl: './form-body-application.component.html',
-    styleUrls: ['./form-body-application.component.scss']
+    styleUrls: ['./form-body-application.component.scss'],
 })
 export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     @Input() submitButton: string;
@@ -28,11 +41,18 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     public errorMessage: string;
     public errorMessages: any;
     public errorFields: string[];
-    public formFailedSubmit: boolean = false;
+    public formFailedSubmit = false;
     private id: number;
 
     application = new ApplicationRequest();
+    metadata: ApplicationMetadata;
     model = new User();
+    statuses: DropdownOption[] = [];
+    serializedStartDate = new FormControl();
+    serializedEndDate = new FormControl();
+    controlledProperties = Object.values(ControlledPropperty);
+    deviceTypes: DropdownOption[] = [];
+    today = new Date();
 
     constructor(
         private restService: RestService,
@@ -41,7 +61,9 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         public translate: TranslateService,
         private router: Router,
         private sharedVariableService: SharedVariableService
-    ) { }
+    ) {
+      this.fillDefaultMetadata();
+     }
 
     ngOnInit(): void {
         this.translate.use('da');
@@ -49,6 +71,38 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         if (this.id) {
             this.getApplication(this.id);
         }
+
+        const statusTranslationPrefix = 'APPLICATION.STATUS.';
+        const statusTranslationKeys = ApplicationStatusEntries.map((x) => `${statusTranslationPrefix}${x.key}`);
+        const deviceTypeTranslationPrefix = 'IOT-DEVICE-TYPES.';
+        const deviceTypeEntries = enumToEntries(DeviceType);
+        const deviceTypeTranslationKeys = deviceTypeEntries.map((x) => `${deviceTypeTranslationPrefix}${x.key}`);
+        this.translate
+          .get([...statusTranslationKeys, ...deviceTypeTranslationKeys, deviceTypeTranslationPrefix + 'OTHER'])
+          .subscribe((translations) => {
+            // Populate the dropdown options with a translated label and the enum value
+            const statusOptions: DropdownOption[] = ApplicationStatusEntries.map(
+              (entry) => ({
+                label: translations[statusTranslationPrefix + entry.key],
+                value: ApplicationStatus[entry.key],
+              })
+            );
+            this.statuses.push(...statusOptions);
+
+            const deviceTypeOptions: DropdownOption[] = deviceTypeEntries.map(
+              (entry) => ({
+                label: translations[deviceTypeTranslationPrefix + entry.key],
+                value: DeviceType[entry.key],
+              })
+            );
+            this.deviceTypes.push(...deviceTypeOptions);
+          });
+    }
+
+    fillDefaultMetadata() {
+      this.metadata = {
+        status: ApplicationStatus['NONE'],
+      };
     }
 
     getApplication(id: number): void {
@@ -59,11 +113,24 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
                 this.application.name = application.name;
                 this.application.description = application.description;
                 this.application.organizationId = application.belongsTo.id;
+
+                try {
+                  this.metadata = JSON.parse(application.metadata);
+                } catch (error) {
+                } finally {
+                  if (!this.metadata) {
+                    this.fillDefaultMetadata();
+                  }
+                }
             });
     }
 
     onSubmit(): void {
         this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId();
+        this.metadata.startDate = this.serializedStartDate.value?.toISOString();
+        this.metadata.endDate = this.serializedStartDate.value?.toISOString();
+        this.application.metadata = JSON.stringify(this.metadata);
+
         if (this.id) {
             this.updateApplication(this.id);
         } else {

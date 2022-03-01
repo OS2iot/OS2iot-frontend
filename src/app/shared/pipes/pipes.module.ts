@@ -27,5 +27,8 @@ import { FilterDevicesPipe } from './filter-devices.pipe';
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
   ],
+  providers: [
+    CustomTableDatePipe
+  ]
 })
 export class PipesModule {}
