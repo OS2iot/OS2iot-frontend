@@ -1,4 +1,3 @@
-<!-- TODO: Validate all validators! Make sure they make sense -->
 <form (ngSubmit)="onSubmit()" #applicationForm="ngForm" class="os2-form p-3 mt-4">
   <div *ngIf="errorMessages" class="error-messages p-3">
     <ul class="mb-0">
@@ -35,13 +34,13 @@
       </mat-select>
     </div>
 
-    <!-- TODO: Fix styling -->
     <div class="form-group mt-3">
       <label class="form-label" for="metadata.startDate">{{'APPLICATION.METADATA-FIELD.START-DATE' | translate}}</label>
       <mat-form-field appearance="fill">
         <mat-label>{{'QUESTION.APPLICATION.START-DATE-PLACEHOLDER' | translate}}</mat-label>
         <input matInput [min]="today" [max]="serializedEndDate.value" [matDatepicker]="startDatePicker"
-          [formControl]="serializedStartDate">
+          [formControl]="serializedStartDate"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.startDate'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.startDate')}">
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker panelClass="datepicker-table-fix" #startDatePicker></mat-datepicker>
       </mat-form-field>
@@ -52,7 +51,8 @@
       <mat-form-field appearance="fill" [ngClass]="'datepicker-table-fix'">
         <mat-label>{{'QUESTION.APPLICATION.END-DATE-PLACEHOLDER' | translate}}</mat-label>
         <input matInput [min]="serializedStartDate.value" [matDatepicker]="endDatePicker"
-          [formControl]="serializedEndDate">
+          [formControl]="serializedEndDate"
+          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.endDate'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.endDate')}">
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker panelClass="datepicker-table-fix" #endDatePicker></mat-datepicker>
       </mat-form-field>
@@ -61,7 +61,7 @@
     <div class="form-group mt-3">
       <label class="form-label" for="metadata.category">{{'APPLICATION.METADATA-FIELD.CATEGORY' | translate}}</label>
       <input type="text" class="form-control" id="category" name="category"
-        [placeholder]="'QUESTION.APPLICATION.CATEGORY-PLACEHOLDER' | translate" maxlength="50" required
+        [placeholder]="'QUESTION.APPLICATION.CATEGORY-PLACEHOLDER' | translate" maxlength="100"
         [(ngModel)]="metadata.category"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.category'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.category')}">
     </div>
@@ -69,7 +69,7 @@
     <div class="form-group mt-3">
       <label class="form-label" for="metadata.owner">{{'APPLICATION.METADATA-FIELD.OWNER' | translate}}</label>
       <input type="text" class="form-control" id="owner" name="owner"
-        [placeholder]="'QUESTION.APPLICATION.OWNER-PLACEHOLDER' | translate" maxlength="50" required
+        [placeholder]="'QUESTION.APPLICATION.OWNER-PLACEHOLDER' | translate" maxlength="100"
         [(ngModel)]="metadata.owner"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.owner'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.owner')}">
     </div>
@@ -78,32 +78,31 @@
       <label class="form-label" for="metadata.contactPerson">{{'APPLICATION.METADATA-FIELD.CONTACT-PERSON' |
         translate}}</label>
       <input type="text" class="form-control" id="contactPerson" name="contactPerson"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate" maxlength="50" required
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate" maxlength="100"
         [(ngModel)]="metadata.contactPerson"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.contactPerson'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.contactPerson')}">
     </div>
 
-    <!-- TODO: Validate email. God, not this shit... -->
     <div class="form-group mt-3">
-      <label class="form-label" for="metadata.contactEmail">{{'APPLICATION.METADATA-FIELD.CONTACT-EMAIL' | translate}}</label>
-      <input type="text" class="form-control" id="contactEmail" name="contactEmail"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate" maxlength="50" required
+      <label class="form-label" for="metadata.contactEmail">{{'APPLICATION.METADATA-FIELD.CONTACT-EMAIL' |
+        translate}}</label>
+      <input type="email" class="form-control" id="contactEmail" name="contactEmail"
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate" maxlength="50" [email]="true"
         [(ngModel)]="metadata.contactEmail"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.contactEmail'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.contactEmail')}">
     </div>
 
-    <!-- TODO: Validate phone. -->
     <div class="form-group mt-3">
-      <label class="form-label" for="metadata.contactPhone">{{'APPLICATION.METADATA-FIELD.CONTACT-PHONE' | translate}}</label>
-      <input type="text" class="form-control" id="contactPhone" name="contactPhone"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate" maxlength="50" required
+      <label class="form-label" for="metadata.contactPhone">{{'APPLICATION.METADATA-FIELD.CONTACT-PHONE' |
+        translate}}</label>
+      <input type="text" class="form-control" id="contactPhone" name="contactPhone" [formControl]="phoneCtrl"
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate" maxlength="12"
         [(ngModel)]="metadata.contactPhone"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.contactPhone'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.contactPhone')}">
+        [ngClass]="{'is-invalid' : metadata.contactPhone && phoneCtrl.invalid, 'is-valid' : !phoneCtrl.invalid}">
     </div>
 
     <div class="form-group mt-3">
-      <mat-checkbox id="metadata.personalData" name="metadata.personalData"
-        [(ngModel)]="metadata.personalData">
+      <mat-checkbox id="metadata.personalData" name="metadata.personalData" [(ngModel)]="metadata.personalData">
         <mat-label for="metadata.personalData" class="form-check-label text--bold margin-top-25px"
           style="white-space: initial">{{'QUESTION.APPLICATION.PERSONAL-DATA-PLACEHOLDER' | translate}}</mat-label>
       </mat-checkbox>
@@ -122,6 +121,7 @@
         translate}}</label>
       <mat-select class="form-control" name="metadata.controlledProperty" multiple="true"
         [(ngModel)]="metadata.controlledProperty"
+        [placeholder]="'QUESTION.APPLICATION.CONTROLLED-PROPERTY-PLACEHOLDER' | translate"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.controlledProperty'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.controlledProperty')}">
         <mat-option *ngFor="let ctrlProperty of controlledProperties" [value]="ctrlProperty">
           {{ctrlProperty}}
@@ -130,9 +130,10 @@
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="metadata.deviceType">{{'APPLICATION.METADATA-FIELD.DEVICE-TYPE' | translate}}</label>
-      <mat-select class="form-control" name="metadata.deviceType" multiple="true"
-        [(ngModel)]="metadata.deviceType"
+      <label class="form-label" for="metadata.deviceType">{{'APPLICATION.METADATA-FIELD.DEVICE-TYPE' |
+        translate}}</label>
+      <mat-select class="form-control" name="metadata.deviceType" multiple="true" [(ngModel)]="metadata.deviceType"
+        [placeholder]="'QUESTION.APPLICATION.DEVICE-TYPE-PLACEHOLDER' | translate"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata.deviceType'), 'is-valid' : formFailedSubmit && !errorFields.includes('metadata.deviceType')}">
         <mat-option *ngFor="let deviceType of deviceTypes" [value]="deviceType.value">
           {{deviceType.label}}

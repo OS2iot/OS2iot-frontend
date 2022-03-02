@@ -13,8 +13,9 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { isJSDocThisTag } from 'typescript';
 import { SupportedUnit } from '@app/device-model/supported-unit.model';
 import { ControlledPropperty } from '@app/device-model/Enums/controlled-propperty.enum';
-import { enumToEntries } from '@shared/helpers/enum.helper';
+import { recordToEntries } from '@shared/helpers/record.helper';
 import { DeviceType } from '@shared/enums/device-type';
+import { isPhoneNumberValid } from '@shared/validators/phone-number.validator';
 
 
 export class User {
@@ -28,6 +29,21 @@ interface DropdownOption {
   label: string;
   value: string | number;
 }
+
+const knownMetadataFields = [
+  'status',
+  'startDate',
+  'endDate',
+  'category',
+  'owner',
+  'contactPerson',
+  'contactEmail',
+  'contactPhone',
+  'personalData',
+  'hardware',
+  'controlledProperty',
+  'deviceType',
+];
 
 @Component({
     selector: 'app-form-body-application',
@@ -50,6 +66,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     statuses: DropdownOption[] = [];
     serializedStartDate = new FormControl();
     serializedEndDate = new FormControl();
+    phoneCtrl: FormControl;
     controlledProperties = Object.values(ControlledPropperty);
     deviceTypes: DropdownOption[] = [];
     today = new Date();
@@ -63,6 +80,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         private sharedVariableService: SharedVariableService
     ) {
       this.fillDefaultMetadata();
+      this.phoneCtrl = new FormControl(this.metadata.contactPhone, [isPhoneNumberValid()]);
      }
 
     ngOnInit(): void {
@@ -75,7 +93,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         const statusTranslationPrefix = 'APPLICATION.STATUS.';
         const statusTranslationKeys = ApplicationStatusEntries.map((x) => `${statusTranslationPrefix}${x.key}`);
         const deviceTypeTranslationPrefix = 'IOT-DEVICE-TYPES.';
-        const deviceTypeEntries = enumToEntries(DeviceType);
+        const deviceTypeEntries = recordToEntries(DeviceType);
         const deviceTypeTranslationKeys = deviceTypeEntries.map((x) => `${deviceTypeTranslationPrefix}${x.key}`);
         this.translate
           .get([...statusTranslationKeys, ...deviceTypeTranslationKeys, deviceTypeTranslationPrefix + 'OTHER'])
@@ -129,7 +147,19 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId();
         this.metadata.startDate = this.serializedStartDate.value?.toISOString();
         this.metadata.endDate = this.serializedStartDate.value?.toISOString();
-        this.application.metadata = JSON.stringify(this.metadata);
+
+        // Any unknown properties should not be serialized
+        const knownMetadata = Object.keys(this.metadata).reduce(
+          (res: Record<string, unknown>, key) => {
+            if (knownMetadataFields.includes(key)) {
+              res[key] = this.metadata[key];
+            }
+
+            return res;
+          },
+          {}
+        );
+        this.application.metadata = JSON.stringify(knownMetadata);
 
         if (this.id) {
             this.updateApplication(this.id);

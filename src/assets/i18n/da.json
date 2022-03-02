@@ -139,7 +139,6 @@
       "CONTACT-PHONE": "Kontakttelefon",
       "PERSONAL-DATA": "Persondata",
       "HARDWARE": "Hardware",
-      "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY": "Data",
       "DEVICE-TYPE": "Forbindelsesteknologi"
     }
@@ -629,6 +628,7 @@
       "CONTACT-EMAIL-PLACEHOLDER": "Angiv mailadresse på ansvarlig medarbejder",
       "CONTACT-PHONE-PLACEHOLDER": "Angiv telefonnummer på ansvarlig medarbejder",
       "PERSONAL-DATA-PLACEHOLDER": "Markér, hvis data i applikationen indeholder personoplysninger. Berører ikke funktionalitet i OS2iot",
+      "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
       "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
     }

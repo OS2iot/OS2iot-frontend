@@ -29,7 +29,7 @@ export class MetadataDetailsComponent implements OnInit {
     } else if (typeof value === 'number') {
       return value;
     } else if (typeof value === 'string') {
-      if (moment(value).isValid()) {
+      if (moment(value, moment.ISO_8601, true).isValid()) {
         return this.datePipe.transform(value);
       }
     }

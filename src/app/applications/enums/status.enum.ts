@@ -1,4 +1,4 @@
-import { enumToEntries } from '@shared/helpers/enum.helper';
+import { recordToEntries } from '@shared/helpers/record.helper';
 
 export enum ApplicationStatus {
   'NONE' = 0,
@@ -8,4 +8,4 @@ export enum ApplicationStatus {
   'OTHER' = 4,
 }
 
-export const ApplicationStatusEntries = enumToEntries(ApplicationStatus);
+export const ApplicationStatusEntries = recordToEntries(ApplicationStatus);

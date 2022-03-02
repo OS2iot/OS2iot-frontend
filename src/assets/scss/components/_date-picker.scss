@@ -1,7 +1,27 @@
-.datepicker-table-fix {
-  // TODO: Hack. Should be applied to mat-datepicker-content but doesn't work
-  mat-datepicker-content {
-    margin: 1000px; // Temp to see the difference
-    padding-bottom: 10px;
+mat-calendar.datepicker-table-fix {
+  margin-bottom: 25px;
+
+  table {
+    box-shadow: unset;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+
+    thead {
+      background-color: unset;
+    }
+
+    tbody {
+      tr {
+        border-top: unset;
+
+        &:hover {
+          background-color: unset;
+        }
+
+        td.mat-calendar-body-active div {
+          border-bottom-width: 1px !important;
+        }
+      }
+    }
   }
 }
