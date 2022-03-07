@@ -18,7 +18,8 @@ mat-calendar.datepicker-table-fix {
           background-color: unset;
         }
 
-        td.mat-calendar-body-active div {
+        // Fix border circle on selected date
+        td.mat-calendar-body-cell div.mat-calendar-body-today {
           border-bottom-width: 1px !important;
         }
       }

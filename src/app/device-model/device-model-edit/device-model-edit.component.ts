@@ -8,7 +8,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
-import { ControlledPropperty } from '../Enums/controlled-propperty.enum';
+import { ControlledPropertyTypes } from '../Enums/controlled-propperty.enum';
 import { DeviceCategory } from '../Enums/device-category.enum';
 import { DeviceFunction } from '../Enums/device-function.enum';
 import { EnergyLimitationClass } from '../Enums/energy-limitation-class.model';
@@ -58,7 +58,7 @@ export class DeviceModelEditComponent implements OnInit {
   }
 
   mapEnumsToArray() {
-    this.controlledPropperties = Object.values(ControlledPropperty);
+    this.controlledPropperties = Object.values(ControlledPropertyTypes);
     this.categories = Object.values(DeviceCategory);
     this.deviceFunctions = Object.values(DeviceFunction);
     this.supportedProtocol = Object.values(SupportedProtocol);

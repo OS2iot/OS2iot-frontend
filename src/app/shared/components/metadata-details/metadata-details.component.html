@@ -1,5 +1,38 @@
-<ng-container *ngIf="metadata">
-  <p *ngFor="let entry of entries(metadata)">
-    <strong>{{ 'APPLICATION.METADATA-FIELD.' + toPascalKebabCase(entry[0]) | translate }}</strong>{{formatValue(entry[1])}}
-  </p>
-</ng-container>
+<p *ngIf="status">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.STATUS' | translate }}</strong>{{ 'APPLICATION.STATUS.' + status | translate }}
+</p>
+<p *ngIf="startDate">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.START-DATE' | translate }}</strong>{{ startDate | dateOnly }}
+</p>
+<p *ngIf="endDate">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.END-DATE' | translate }}</strong>{{ endDate | dateOnly }}
+</p>
+<p *ngIf="category">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.CATEGORY' | translate }}</strong>{{ category }}
+</p>
+<p *ngIf="owner">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.OWNER' | translate }}</strong>{{ owner }}
+</p>
+<p *ngIf="contactPerson">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.CONTACT-PERSON' | translate }}</strong>{{ contactPerson }}
+</p>
+<p *ngIf="contactEmail">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.CONTACT-EMAIL' | translate }}</strong>{{ contactEmail }}
+</p>
+<p *ngIf="contactPhone">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.CONTACT-PHONE' | translate }}</strong>{{ contactPhone }}
+</p>
+<p>
+  <strong>{{ 'APPLICATION.METADATA-FIELD.PERSONAL-DATA' | translate }}</strong>{{ (personalData ? true.toString()
+  : false.toString()) |
+  translate }}
+</p>
+<p *ngIf="hardware">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.HARDWARE' | translate }}</strong>{{ hardware }}
+</p>
+<p *ngIf="controlledProperties?.length">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.CONTROLLED-PROPERTY' | translate }}</strong>{{controlledPropertyText}}
+</p>
+<p *ngIf="deviceTypes?.length">
+  <strong>{{ 'APPLICATION.METADATA-FIELD.DEVICE-TYPE' | translate }}</strong>{{deviceTypeText}}
+</p>

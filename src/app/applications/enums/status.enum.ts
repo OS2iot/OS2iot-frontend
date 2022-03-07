@@ -1,11 +1,11 @@
 import { recordToEntries } from '@shared/helpers/record.helper';
 
 export enum ApplicationStatus {
-  'NONE' = 0,
-  'IN-OPERATION' = 1,
-  'PROJECT' = 2,
-  'PROTOTYPE' = 3,
-  'OTHER' = 4,
+  'NONE' = 'NONE',
+  'IN-OPERATION' = 'IN-OPERATION',
+  'PROJECT' = 'PROJECT',
+  'PROTOTYPE' = 'PROTOTYPE',
+  'OTHER' = 'OTHER',
 }
 
 export const ApplicationStatusEntries = recordToEntries(ApplicationStatus);

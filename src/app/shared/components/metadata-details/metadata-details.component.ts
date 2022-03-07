@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApplicationMetadata } from '@applications/application.model';
+import { ApplicationStatus } from '@applications/enums/status.enum';
+import { ApplicationDeviceType } from '@applications/models/application-device-type.model';
+import { TranslateService } from '@ngx-translate/core';
 import { toPascalKebabCase } from '@shared/helpers/string.helper';
-import { CustomTableDatePipe } from '@shared/pipes/custom-date.pipe';
-import * as moment from 'moment';
+import { ControlledProperty } from '@shared/models/controlled-property.model';
 
 @Component({
   selector: 'app-metadata-details',
@@ -10,30 +11,42 @@ import * as moment from 'moment';
   styleUrls: ['./metadata-details.component.scss'],
 })
 export class MetadataDetailsComponent implements OnInit {
-  @Input() metadataJson: string;
-  metadata: ApplicationMetadata;
+  @Input() status?: ApplicationStatus;
+  @Input() startDate?: Date;
+  @Input() endDate?: Date;
+  @Input() category?: string;
+  @Input() owner?: string;
+  @Input() contactPerson?: string;
+  @Input() contactEmail?: string;
+  @Input() contactPhone?: string;
+  @Input() personalData?: boolean;
+  @Input() hardware?: string;
+  @Input() controlledProperties?: ControlledProperty[];
+  @Input() deviceTypes?: ApplicationDeviceType[];
+  controlledPropertyText: string;
+  deviceTypeText: string;
+
   entries = Object.entries;
   toPascalKebabCase = toPascalKebabCase;
 
-  constructor(private datePipe: CustomTableDatePipe) {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.metadata = JSON.parse(this.metadataJson);
-  }
+    this.translate.use('da');
 
-  formatValue(value: unknown): unknown {
-    if (typeof value === 'object') {
-      if (Array.isArray(value)) {
-        return value.join(', ');
-      }
-    } else if (typeof value === 'number') {
-      return value;
-    } else if (typeof value === 'string') {
-      if (moment(value, moment.ISO_8601, true).isValid()) {
-        return this.datePipe.transform(value);
-      }
-    }
+    this.controlledPropertyText = this.controlledProperties
+      .map((type) => type.type)
+      .join(', ');
 
-    return value;
+    this.translate.get('IOT-DEVICE-TYPES').subscribe((translations) => {
+      const translatedDeviceTypes: Record<string, string> = translations ?? {};
+
+      this.deviceTypeText = this.deviceTypes
+        .map(
+          (deviceType) =>
+            translatedDeviceTypes[deviceType.type] ?? deviceType.type
+        )
+        .join(', ');
+    });
   }
 }
