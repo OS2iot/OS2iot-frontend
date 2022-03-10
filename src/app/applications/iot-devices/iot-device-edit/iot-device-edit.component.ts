@@ -43,6 +43,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     iotDevice = new IotDevice();
     editmode = false;
     public OTAA = true;
+    metadataTags: {key?: string, value?: string}[] = [];
 
     public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
@@ -95,7 +96,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     getDeviceModels() {
         this.deviceModelService.getMultiple(
             1000,
-            0, 
+            0,
             "id",
             "ASC",
             this.shareVariable.getSelectedOrganisationId()
@@ -131,6 +132,19 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 }
                 if (!device.deviceModelId || device.deviceModelId === null) {
                     this.iotDevice.deviceModelId = 0;
+                }
+                if (device.metadata) {
+                  // Parsing a JSON can lead to unexpected errors. Try-catch to avoid failing hard
+                  try {
+                    const deserialized = JSON.parse(device.metadata) as Record<string, string>;
+
+                    for (const key of Object.keys(deserialized)) {
+                      this.metadataTags.push({ key, value: deserialized[key] });
+                    }
+                  } catch (error) {
+                  }
+                } else {
+                  this.metadataTags.push({});
                 }
             });
     }
@@ -177,6 +191,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
+        this.setMetadata();
         if (this.deviceId !== 0) {
             this.updateIoTDevice(this.deviceId);
         } else {
@@ -218,6 +233,19 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 break;
             }
         }
+    }
+
+    private setMetadata(): void {
+      if (
+        this.metadataTags.length &&
+        this.metadataTags.some((tag) => tag.key && tag.value)
+      ) {
+        const metadata: Record<string, string> = {};
+        this.metadataTags.forEach((tag) => {
+          metadata[tag.key] = tag.value;
+        });
+        this.iotDevice.metadata = JSON.stringify(metadata);
+      }
     }
 
     postIoTDevice() {

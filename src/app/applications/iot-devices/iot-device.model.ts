@@ -15,7 +15,7 @@ export class IotDevice {
   comment: string;
   type: DeviceType = DeviceType.GENERICHTTP;
   receivedMessagesMetadata: ReceivedMessageMetadata[];
-  metadata?: JSON;
+  metadata?: string;
   apiKey?: string;
   id: number;
   createdAt: Date;

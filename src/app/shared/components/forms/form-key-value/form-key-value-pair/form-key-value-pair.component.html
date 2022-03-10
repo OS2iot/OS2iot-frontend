@@ -1,0 +1,12 @@
+<div class="col">
+  <input type="text" id="keyValuePairKey" name="keyValuePairKey" maxLength="32" [placeholder]="'GEN.KEY' | translate"
+    class="form-control" [(ngModel)]="pair.key">
+</div>
+<div class="col">
+  <input type="text" id="keyValuePairValue" name="keyValuePairValue" maxLength="32"
+    [placeholder]="'GEN.VALUE' | translate" class="form-control" [(ngModel)]="pair.value">
+</div>
+<!-- TODO: Style delete button after mock up -->
+<div class="col-1">
+  <button (click)="this.deletePair.emit(id)" class="btn btn-secondary" type="button">{{ "GEN.DELETE" | translate }}</button>
+</div>

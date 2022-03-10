@@ -1,0 +1,4 @@
+<button (click)="addNewTag()" class="btn btn-secondary mb-2" type="button">{{ "FORM.ADD-METADATA-ROW" | translate }}</button>
+<ng-container *ngFor="let pair of tags; let i = index">
+  <app-form-key-value-pair [id]="i" [pair]="pair" (deletePair)="deleteTag($event)" ></app-form-key-value-pair>
+</ng-container>

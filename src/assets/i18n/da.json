@@ -8,7 +8,9 @@
     "EDIT": "Redigér",
     "APPLICATION": "Applikation",
     "HTTP": "Generisk HTTP",
-    "SAVE": "Gem"
+    "SAVE": "Gem",
+    "KEY": "Nøgle",
+    "VALUE": "Værdi"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -172,7 +174,7 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK", 
+    "OPENDATA-DK": "OpenDataDK",
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
     "HTTP_PUSH": "HTTP Push",
     "FIWARE": "FIWARE"
@@ -439,7 +441,8 @@
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
     "EDIT-DEVICE-PROFILE": "Redigér device profil",
-    "EDIT-API-KEY": "Redigér API nøgle"
+    "EDIT-API-KEY": "Redigér API nøgle",
+    "ADD-METADATA-ROW": "Tilføj metadata række"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -524,6 +527,7 @@
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
     "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
+    "METADATA": "Metadata",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
