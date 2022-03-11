@@ -10,11 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-
-interface KeyValue {
-  key?: string;
-  value?: string;
-}
+import { KeyValue } from '@shared/types/tuple.type';
 
 @Component({
   // Require this tag to be used with <tr> to preserve global table styling

@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-interface KeyValue {
-  key?: string;
-  value?: string;
-}
+import { KeyValue } from '@shared/types/tuple.type';
 
 @Component({
   selector: 'app-form-key-value-list',

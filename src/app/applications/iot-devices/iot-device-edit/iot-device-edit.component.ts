@@ -15,6 +15,7 @@ import { ServiceProfileService } from '@profiles/service-profiles/service-profil
 import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { jsonToList } from '@shared/helpers/json.helper';
 import { ErrorMessage } from '@shared/models/error-message.model';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -135,15 +136,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                     this.iotDevice.deviceModelId = 0;
                 }
                 if (device.metadata) {
-                  // Parsing a JSON can lead to unexpected errors. Try-catch to avoid failing hard
-                  try {
-                    const deserialized = JSON.parse(device.metadata) as Record<string, string>;
-
-                    for (const key of Object.keys(deserialized)) {
-                      this.metadataTags.push({ key, value: deserialized[key] });
-                    }
-                  } catch (error) {
-                  }
+                  this.metadataTags = jsonToList(device.metadata);
                 }
             });
     }
