@@ -35,7 +35,7 @@ export class ErrorMessageService {
     const errors: ErrorMessage = {errorFields: [], errorMessages: []};
     if (typeof error.error === 'string') {
       errors.errorMessages.push(error.error);
-    } else if (typeof error.error?.error === 'string') {
+    } else if (typeof error.error?.error === 'string' && !Array.isArray(error.error?.message )) {
       errors.errorMessages.push(error.error.error);
     } else if (typeof error.error?.message === 'string') {
       errors.errorMessages.push(error.error.message);
