@@ -44,6 +44,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     editmode = false;
     public OTAA = true;
     metadataTags: {key?: string, value?: string}[] = [];
+    errorMetadataFieldId: string | undefined;
 
     public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
@@ -143,8 +144,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                     }
                   } catch (error) {
                   }
-                } else {
-                  this.metadataTags.push({});
                 }
             });
     }
@@ -191,12 +190,38 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
-        this.setMetadata();
-        if (this.deviceId !== 0) {
-            this.updateIoTDevice(this.deviceId);
-        } else {
-            this.postIoTDevice();
+
+        if (this.isMetadataSet()) {
+          const invalidKey = this.validateMetadata();
+
+          if (!invalidKey) {
+            this.setMetadata();
+          } else {
+            this.handleMetadataError(invalidKey);
+            return;
+          }
         }
+
+        if (this.deviceId !== 0) {
+          this.updateIoTDevice(this.deviceId);
+        } else {
+          this.postIoTDevice();
+        }
+    }
+
+    private handleMetadataError(invalidKey: string) {
+      this.handleError({
+        error: {
+          message: [
+            {
+              field: 'metadata',
+              message: 'MESSAGE.DUPLICATE-METADATA-KEY',
+            },
+          ],
+        },
+      });
+      this.errorMetadataFieldId = invalidKey;
+      this.formFailedSubmit = true;
     }
 
     setActivationType() {
@@ -235,6 +260,20 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         }
     }
 
+    private isMetadataSet(): boolean {
+      return this.metadataTags.length && this.metadataTags.some((tag) => tag.key && tag.value);
+    }
+
+    private validateMetadata(): string | undefined {
+      const seen = new Set();
+
+      for (const tag of this.metadataTags) {
+        if (seen.size === seen.add(tag.key).size) {
+          return tag.key;
+        }
+      }
+    }
+
     private setMetadata(): void {
       if (
         this.metadataTags.length &&
@@ -242,6 +281,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       ) {
         const metadata: Record<string, string> = {};
         this.metadataTags.forEach((tag) => {
+          if (!tag.key) {
+            return;
+          }
           metadata[tag.key] = tag.value;
         });
         this.iotDevice.metadata = JSON.stringify(metadata);
@@ -280,7 +322,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.location.back();
     }
 
-    handleError(error: HttpErrorResponse) {
+    handleError(error: Pick<HttpErrorResponse, 'error'>) {
         if (error?.error?.message == "MESSAGE.OTAA-INFO-MISSING") {
             this.errorFields = ["OTAAapplicationKey"];
             this.errorMessages = [error?.error?.message];

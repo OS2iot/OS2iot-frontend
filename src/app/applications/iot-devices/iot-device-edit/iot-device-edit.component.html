@@ -223,8 +223,7 @@
 
   <div class="mt-5 row">
     <h3>{{ "QUESTION.METADATA" | translate}}</h3>
-    <app-form-key-value-list [(tags)]="metadataTags"
-      [ngClass]="{'is-invalid' : true, 'is-valid' : formFailedSubmit && !errorFields.includes('nFCntDown')}">
+    <app-form-key-value-list [(tags)]="metadataTags" [errorFieldId]="errorMetadataFieldId">
     </app-form-key-value-list>
   </div>
   <div class="form-group mt-5">

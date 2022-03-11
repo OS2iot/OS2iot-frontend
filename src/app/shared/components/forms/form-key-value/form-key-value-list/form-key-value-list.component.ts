@@ -12,6 +12,7 @@ interface KeyValue {
 })
 export class FormKeyValueListComponent implements OnInit {
   @Input() tags: KeyValue[] = [{}];
+  @Input() errorFieldId: string | undefined;
 
   constructor() {}
 

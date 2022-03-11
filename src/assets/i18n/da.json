@@ -729,7 +729,8 @@
     "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
     "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
     "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
-    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke",
+    "DUPLICATE-METADATA-KEY": "Metadata må ikke indeholde den samme nøgle flere gange"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
@@ -896,6 +897,7 @@
   "DIALOG": {
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
+    "DELETE.ARE-YOU-SURE": "Er du sikker på, at du vil slette?",
     "CLOSE": "Annuller",
     "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",
