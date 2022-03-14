@@ -805,6 +805,10 @@
     "EDIT": "Redigér User",
     "CREATE": "Opret ny bruger",
     "LOGIN": "Sidst aktiv",
+    "DIALOG": {
+      "QUESTION-REJECT": "Er du sikker på, at du vil afvise brugeren?",
+      "HEAD-REJECT": "Afvis bruger"
+    },
     "TABLE-ROW": {
       "EDIT": "Redigér",
       "DELETE": "Slet",
@@ -840,6 +844,10 @@
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",
       "FALSE": "Nej"
+    },
+    "ACCEPT-USER": {
+      "ACCEPT": "Godkend bruger",
+      "QUESTION-ACCEPT": "Vælg brugergruppe til "
     }
   },
   "AUTH": {
@@ -882,6 +890,7 @@
     "CLOSE": "Annuller",
     "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",
+    "DIALOG-REJECT": "Ja, afvis",
     "OPENDATADK": {
       "OK": "Send mail til OpenDataDk",
       "CLOSE": "Nej, tak",

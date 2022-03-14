@@ -48,6 +48,10 @@ export class UpdateUserOrgsDto {
   requestedOrganizationIds: number[];
 }
 
+export class RejectUserDto {
+  orgId: number;
+}
+
 export class CreateNewKombitUserDto {
   email: string;
   requestedOrganizationIds: number[];

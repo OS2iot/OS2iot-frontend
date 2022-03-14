@@ -74,6 +74,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
                       false,
                       false,
                       true,
+                      false,
                       this.errorTitle).subscribe();
                   }
                 }

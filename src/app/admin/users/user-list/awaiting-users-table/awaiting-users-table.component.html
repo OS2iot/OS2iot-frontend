@@ -2,9 +2,12 @@
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
+  <div *ngIf="errorMessage" class="error-messages p-3 m-2">
+    {{ errorMessage | translate }}
+  </div>
   <table
     mat-table
-    [dataSource]="data"
+    [dataSource]="users"
     matSort
     matSortActive="id"
     matSortDirection="asc"
@@ -55,10 +58,19 @@
           >
             <li class="dropdown-item">
               <a
-                [routerLink]="['/admin/users', element.id, 'edit-user']"
+                [routerLink]="[
+                  '/admin/users/accept-user/',
+                  element.id,
+                  rejectUserOrg.orgId
+                ]"
                 routerLinkActive="active"
                 >{{ 'USERS.TABLE-ROW.APPROVE' | translate }}
               </a>
+            </li>
+            <li class="dropdown-item">
+              <a (click)="rejectUser(element.id)" [routerLink]="">{{
+                'USERS.TABLE-ROW.REJECT' | translate
+              }}</a>
             </li>
           </ul>
         </div>

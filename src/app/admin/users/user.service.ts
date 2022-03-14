@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RestService } from '@shared/services/rest.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Organisation } from '../organisation/organisation.model';
 import { UserMinimalService } from './user-minimal.service';
 import {
   UserResponse,
@@ -9,6 +10,7 @@ import {
   UserGetManyResponse,
   CreateNewKombitUserDto,
   UpdateUserOrgsDto,
+  RejectUserDto,
 } from './user.model';
 
 @Injectable({
@@ -80,8 +82,8 @@ export class UserService {
     return this.restService.get(
       this.URL + '/awaitingUsers',
       {
-        limit: limit,
-        offset: offset,
+        limit,
+        offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
       },
@@ -109,6 +111,12 @@ export class UserService {
 
   updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
     return this.restService.put(this.URL + '/updateUserOrgs', body, undefined, {
+      observe: 'response',
+    });
+  }
+
+  rejectUser(userId: number, body: RejectUserDto): Observable<Organisation> {
+    return this.restService.put(this.URL + '/rejectUser', body, userId, {
       observe: 'response',
     });
   }

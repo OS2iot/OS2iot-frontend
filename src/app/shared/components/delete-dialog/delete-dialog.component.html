@@ -13,4 +13,7 @@
     <button *ngIf="dialogModel.showOk" click="close()" mat-dialog-close class="btn btn-primary ml-2">
         {{'DIALOG.OK' | translate}}
     </button>
+    <button *ngIf="dialogModel.showReject" click="close()" [mat-dialog-close]="true" mat-dialog-close class="btn btn-secondary ml-2">
+        {{'DIALOG.DIALOG-REJECT' | translate}}
+    </button>
 </div>

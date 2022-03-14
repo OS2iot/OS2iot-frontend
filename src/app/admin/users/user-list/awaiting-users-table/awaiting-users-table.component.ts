@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { UserGetManyResponse, UserResponse } from '../../user.model';
+import {
+  RejectUserDto,
+  UserGetManyResponse,
+  UserResponse,
+} from '../../user.model';
 import { UserService } from '../../user.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
@@ -8,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 
 @Component({
   selector: 'app-awaiting-users-table',
@@ -16,12 +21,15 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 })
 export class AwaitingUsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'menu'];
-  data: UserResponse[];
+  users: UserResponse[];
 
   public pageSize = environment.tablePageSize;
   resultsLength = 0;
+  public errorMessage: string;
   isLoadingResults = true;
-  orgId: number;
+  rejectUserOrg: RejectUserDto = new RejectUserDto();
+  message: string;
+  infoTitle: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -31,7 +39,8 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
   constructor(
     public translate: TranslateService,
     private userService: UserService,
-    private sharedService: SharedVariableService
+    private sharedService: SharedVariableService,
+    private deleteDialogService: DeleteDialogService
   ) {}
 
   getUsers(
@@ -41,14 +50,14 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
     return this.userService.getAwaitingUsers(
       this.paginator.pageSize,
       this.paginator.pageIndex * this.paginator.pageSize,
-      this.orgId,
+      this.rejectUserOrg.orgId,
       orderByColumn,
       orderByDirection
     );
   }
 
   ngAfterViewInit() {
-    this.orgId = this.sharedService.getSelectedOrganisationId();
+    this.rejectUserOrg.orgId = this.sharedService.getSelectedOrganisationId();
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -71,6 +80,35 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
           return observableOf([]);
         })
       )
-      .subscribe((data) => (this.data = data));
+      .subscribe((data) => (this.users = data));
+
+    this.translate
+      .get(['USERS.DIALOG.QUESTION-REJECT', 'USERS.DIALOG.HEAD-REJECT'])
+      .subscribe((translations) => {
+        this.message = translations['USERS.DIALOG.QUESTION-REJECT'];
+        this.infoTitle = translations['USERS.DIALOG.HEAD-REJECT'];
+      });
+  }
+
+  rejectUser(userId: number) {
+    this.deleteDialogService
+      .showSimpleDialog(this.message, false, true, false, true, this.infoTitle)
+      .subscribe((response) => {
+        if (response) {
+          this.userService
+            .rejectUser(userId, this.rejectUserOrg)
+            .subscribe((response) => {
+              if (response) {
+                this.paginator.page.emit({
+                  pageIndex: this.paginator.pageIndex,
+                  pageSize: this.paginator.pageSize,
+                  length: this.resultsLength,
+                });
+              } else {
+                this.errorMessage = response?.name;
+              }
+            });
+        }
+      });
   }
 }

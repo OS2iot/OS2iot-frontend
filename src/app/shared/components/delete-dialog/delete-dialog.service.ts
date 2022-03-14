@@ -20,6 +20,7 @@ export class DeleteDialogService {
     showAccept = true,
     showCancel = true,
     showOk = false,
+    showReject?: boolean,
     infoTitle = ''
   ): Observable<any> {
     return new Observable((observer) => {
@@ -29,6 +30,7 @@ export class DeleteDialogService {
           showOk,
           showAccept,
           showCancel,
+          showReject,
           message: message ? message : 'Er du sikker på at du vil slette?',
         },
       });

@@ -3,5 +3,6 @@ export class DialogModel {
     showOk = true;
     showAccept = true;
     showCancel = true;
+    showReject: boolean;
     message: string;
 }
