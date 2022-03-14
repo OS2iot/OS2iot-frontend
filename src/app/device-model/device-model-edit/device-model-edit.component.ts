@@ -31,7 +31,7 @@ export class DeviceModelEditComponent implements OnInit {
   controlledPropperties = [];
   categories = [];
   supportedUnits = new SupportedUnit();
-  deviceFunctions = [];
+  deviceFunctions: string[] = [];
   energyLimitationClass = new EnergyLimitationClass();
   supportedProtocol = [];
 
@@ -55,12 +55,14 @@ export class DeviceModelEditComponent implements OnInit {
     if (deviceModelId) {
       this.getDeviceModel(deviceModelId);
     }
+    this.supportedUnits.units.sort((a,b) => a.name.localeCompare(b.name));
   }
 
   mapEnumsToArray() {
     this.controlledPropperties = Object.values(ControlledPropperty);
     this.categories = Object.values(DeviceCategory);
     this.deviceFunctions = Object.values(DeviceFunction);
+    this.deviceFunctions.sort((a: string, b: string) => a.localeCompare(b));
     this.supportedProtocol = Object.values(SupportedProtocol);
   }
 
