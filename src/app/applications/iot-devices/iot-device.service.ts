@@ -74,4 +74,8 @@ export class IoTDeviceService {
     deleteIoTDevice(id: number) {
         return this.restService.delete(this.BASEURL, id);
     }
+
+    resetHttpDeviceApiKey(id: number): Observable<Pick<IotDevice, 'apiKey'>> {
+      return this.restService.put(`${this.BASEURL}/resetHttpDeviceApiKey`, null, id);
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
-import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { DropdownButton, ExtraDropdownOption } from '@shared/models/dropdown-button.model';
 import { Title } from '@angular/platform-browser';
 import { MeService } from '@shared/services/me.service';
 
@@ -45,6 +45,11 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public baseUrl = environment.baseUrl;
     public genericHttpDeviceUrl: string;
 
+    private resetApiKeyId = 'RESET-API-KEY';
+    private resetApiKeyOption: ExtraDropdownOption;
+    private resetApiKeyBody: string;
+    private resetApiKeyConfirm: string;
+    private resetApiKeyCancel: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -54,7 +59,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         private deleteDialogService: DeleteDialogService,
         private dialog: MatDialog,
         private titleService: Title,
-        private meService: MeService
+        private meService: MeService,
     ) { }
 
     ngOnInit(): void {
@@ -70,12 +75,31 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             };
         }
 
-        this.translate.get(['NAV.APPLICATIONS', 'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS', 'TITLE.IOTDEVICE'])
-            .subscribe(translations => {
-                this.backButton.label = translations['NAV.APPLICATIONS'];
-                this.dropdownButton.label = translations['IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'];
-                this.titleService.setTitle(translations['TITLE.IOTDEVICE']);
-            });
+        this.translate
+          .get([
+            'NAV.APPLICATIONS',
+            'IOTDEVICE-TABLE-ROW.SHOW-OPTIONS',
+            'TITLE.IOTDEVICE',
+            'IOTDEVICE-TABLE-ROW.RESET-API-KEY',
+            'IOTDEVICE.GENERIC_HTTP.RESET-API-KEY',
+            'GEN.CANCEL'
+          ])
+          .subscribe((translations) => {
+            this.backButton.label = translations['NAV.APPLICATIONS'];
+            this.dropdownButton.label =
+              translations['IOTDEVICE-TABLE-ROW.SHOW-OPTIONS'];
+            this.titleService.setTitle(translations['TITLE.IOTDEVICE']);
+
+            this.resetApiKeyOption = {
+              id: this.resetApiKeyId,
+              label: translations['IOTDEVICE-TABLE-ROW.RESET-API-KEY'],
+            };
+            this.resetApiKeyBody = translations['IOTDEVICE.GENERIC_HTTP.RESET-API-KEY']['BODY'];
+            this.resetApiKeyConfirm = translations['IOTDEVICE.GENERIC_HTTP.RESET-API-KEY']['YESRESET'];
+            this.resetApiKeyCancel = translations['GEN.CANCEL'];
+          });
+
+        this.dropdownButton.extraOptions = [];
     }
 
     bindIoTDeviceAndApplication(deviceId: number) {
@@ -86,6 +110,13 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             if (this.device.location) {
                 this.longitude = this.device.location.coordinates[0];
                 this.latitude = this.device.location.coordinates[1];
+            }
+
+            if (
+              this.meService.canWriteInTargetOrganization() &&
+              this.device.type === DeviceType.GENERICHTTP
+            ) {
+              this.dropdownButton.extraOptions.push(this.resetApiKeyOption);
             }
         });
     }
@@ -140,5 +171,29 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         if (this.deleteDialogSubscription) {
             this.deleteDialogSubscription.unsubscribe();
         }
+    }
+
+    clickExtraDropdownOption(id: string) {
+      if (id === this.resetApiKeyId) {
+        this.deleteDialogService
+          .showSimpleDialog(
+            this.resetApiKeyBody,
+            true,
+            true,
+            false,
+            '',
+            this.resetApiKeyConfirm,
+            this.resetApiKeyCancel
+          )
+          .subscribe((isConfirmed) => {
+            if (isConfirmed) {
+              this.iotDeviceService
+                .resetHttpDeviceApiKey(this.device.id)
+                .subscribe((response) => {
+                  this.device.apiKey = response.apiKey;
+                });
+            }
+          });
+      }
     }
 }
