@@ -142,6 +142,15 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
+        if (this.serializedStartDate.invalid) {
+            // Depending on what date component is used, it might use its own highlighting
+            this.handleError(this.buildErrorMessage('MESSAGE.INVALID-DATE'), 'application.startDate');
+            return;
+        } else if (this.serializedEndDate.invalid) {
+            this.handleError(this.buildErrorMessage('MESSAGE.INVALID-DATE'), 'application.endDate');
+            return;
+        }
+
         this.application.organizationId = this.sharedVariableService.getSelectedOrganisationId();
         this.application.startDate = this.serializedStartDate.value?.toISOString();
         this.application.endDate = this.serializedEndDate.value?.toISOString();
@@ -152,6 +161,14 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         } else {
             this.postApplication();
         }
+    }
+
+    private buildErrorMessage(message: string): Pick<HttpErrorResponse, 'error'> {
+      return {
+        error: {
+          message,
+        },
+      };
     }
 
     updateApplication(id: number): void {
@@ -181,7 +198,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
             );
     }
 
-    private handleError(error: HttpErrorResponse) {
+    private handleError(error: Pick<HttpErrorResponse, 'error'>, errorField?: string) {
         this.errorFields = [];
         this.errorMessages = [];
 
@@ -189,13 +206,13 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         if (error.error?.message[0]?.property) {
             this.externalError(error);
         } else {
-            this.backendError(error);
+            this.backendError(error, errorField);
         }
 
         this.formFailedSubmit = true;
     }
 
-    externalError(error: HttpErrorResponse) {
+    externalError(error: Pick<HttpErrorResponse, 'error'>) {
         error.error.message.forEach((err) => {
             this.errorFields.push(err.property);
             this.errorMessages = this.errorMessages.concat(
@@ -205,12 +222,12 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.formFailedSubmit = true;
     }
 
-    backendError(error: HttpErrorResponse) {
+    backendError(error: Pick<HttpErrorResponse, 'error'>, errorField = 'name') {
         this.translate.get([error.error.message])
             .subscribe(translations => {
                 this.errorMessages.push(translations[error.error.message]);
             });
-        this.errorFields.push('name');
+        this.errorFields.push(errorField);
     }
 
     routeBack(): void {

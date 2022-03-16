@@ -28,6 +28,7 @@ export class MetadataDetailsComponent implements OnInit {
 
   entries = Object.entries;
   toPascalKebabCase = toPascalKebabCase;
+  ApplicationStatus = ApplicationStatus;
 
   constructor(private translate: TranslateService) {}
 

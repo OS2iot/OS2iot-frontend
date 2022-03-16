@@ -762,7 +762,8 @@
     "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
     "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
     "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
-    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke",
+    "INVALID-DATE": "Datoen er ugyldig"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",

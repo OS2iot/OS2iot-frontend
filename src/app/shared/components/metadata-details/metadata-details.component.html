@@ -1,4 +1,4 @@
-<p *ngIf="status">
+<p *ngIf="status && status !== ApplicationStatus.NONE">
   <strong>{{ 'APPLICATION.METADATA-FIELD.STATUS' | translate }}</strong>{{ 'APPLICATION.STATUS.' + status | translate }}
 </p>
 <p *ngIf="startDate">
