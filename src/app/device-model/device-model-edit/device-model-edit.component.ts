@@ -22,18 +22,18 @@ import { SupportedUnit } from '../supported-unit.model';
 })
 export class DeviceModelEditComponent implements OnInit {
 
-  public errorMessages: any;
+  public errorMessages: string[];
   public errorFields: string[];
   public deviceModel: DeviceModel = new DeviceModel();
   public backButton: BackButton = { label: '', routerLink: '/device-model' };
   public title = '';
   public formFailedSubmit = false;
-  controlledPropperties = [];
-  categories = [];
+  controlledPropperties: ControlledPropperty[] = [];
+  categories: DeviceCategory[] = [];
   supportedUnits = new SupportedUnit();
-  deviceFunctions: string[] = [];
+  deviceFunctions: DeviceFunction[] = [];
   energyLimitationClass = new EnergyLimitationClass();
-  supportedProtocol = [];
+  supportedProtocol: SupportedProtocol[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -55,14 +55,14 @@ export class DeviceModelEditComponent implements OnInit {
     if (deviceModelId) {
       this.getDeviceModel(deviceModelId);
     }
-    this.supportedUnits.units.sort((a,b) => a.name.localeCompare(b.name));
+    this.supportedUnits.units.sort((a, b) => a.name.localeCompare(b.name));
+    this.deviceFunctions.sort((a, b) => a.localeCompare(b));
   }
 
   mapEnumsToArray() {
     this.controlledPropperties = Object.values(ControlledPropperty);
     this.categories = Object.values(DeviceCategory);
     this.deviceFunctions = Object.values(DeviceFunction);
-    this.deviceFunctions.sort((a: string, b: string) => a.localeCompare(b));
     this.supportedProtocol = Object.values(SupportedProtocol);
   }
 
