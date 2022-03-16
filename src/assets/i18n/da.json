@@ -682,6 +682,7 @@
     },
     "LORAWANSETUP": "LoRaWAN specifik opsætning",
     "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
+    "LATEST-DATAPACKAGES": "Seneste modtagelser af datapakker (nyeste først):",
     "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "DATAPACKAGE": "Datapakke",
     "LORA": {
