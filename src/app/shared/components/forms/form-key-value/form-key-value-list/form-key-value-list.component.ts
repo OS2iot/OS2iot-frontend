@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KeyValue } from '@shared/types/tuple.type';
 
 @Component({
@@ -8,6 +8,7 @@ import { KeyValue } from '@shared/types/tuple.type';
 })
 export class FormKeyValueListComponent implements OnInit {
   @Input() tags: KeyValue[] = [{}];
+  @Output() tagsChange = new EventEmitter<KeyValue[]>();
   @Input() errorFieldId: string | undefined;
 
   constructor() {}
@@ -19,6 +20,8 @@ export class FormKeyValueListComponent implements OnInit {
   }
 
   deleteTag(id: number): void {
-    this.tags = this.tags.filter((_tag, i) => i !== id);
+    const newTags = this.tags.filter((_tag, i) => i !== id);
+    // Update parent with a tag less and banana-in-a-box binding (in html) for the update to propagate 2-way
+    this.tagsChange.emit(newTags);
   }
 }

@@ -184,7 +184,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     onSubmit(): void {
         this.adjustModelBasedOnType();
 
-        if (this.isMetadataSet()) {
+        if (this.metadataTags.length === 0) {
+          this.iotDevice.metadata = JSON.stringify({});
+        } else if (this.isMetadataSet()) {
           const invalidKey = this.validateMetadata();
 
           if (!invalidKey) {
