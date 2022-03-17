@@ -42,8 +42,9 @@
             </p>
             <ng-container *ngIf="metadataTags.length">
               <mat-divider></mat-divider>
-              <p *ngFor="let tag of metadataTags">
-                <strong>{{ tag.key }}</strong>
+              <p><strong>{{ 'QUESTION.METADATA' | translate }}</strong></p>
+              <p *ngFor="let tag of metadataTags; let i = index">
+                <strong>{{i + 1}}: {{ tag.key }}</strong>
                 <span>{{ tag.value }}</span>
             </p>
             </ng-container>
