@@ -39,4 +39,11 @@ export class LorawanFieldComponent implements OnInit {
         : max
       : this.noValueText;
   }
+
+  /**
+   * TS cannot narrow the type after passing a type guard
+   */
+  asRxInfo(rxInfo: unknown): RxInfo[] {
+    return rxInfo as RxInfo[];
+  }
 }

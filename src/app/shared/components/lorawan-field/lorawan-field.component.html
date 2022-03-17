@@ -1,6 +1,6 @@
 <ng-container *ngIf="device.type === 'LORAWAN'; else notSupported">
   <div *ngIf="isValidRssiInfo(device.latestReceivedMessage?.rawData?.rxInfo); else notAvailable">
-    {{buildRangeFromLoRaRxInfo(device.latestReceivedMessage.rawData.rxInfo, 'rssi')}}
+    {{buildRangeFromLoRaRxInfo(asRxInfo(device.latestReceivedMessage.rawData.rxInfo), 'rssi')}}
   </div>
 </ng-container>
 <ng-template #notSupported>

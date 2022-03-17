@@ -1,6 +1,6 @@
 export interface LatestReceivedMessage {
     createdAt: Date;
     updatedAt: Date;
-    rawData: JSON;
+    rawData: Record<string, unknown>;
     sentTime: Date;
 }
