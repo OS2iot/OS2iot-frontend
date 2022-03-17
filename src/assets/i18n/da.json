@@ -623,9 +623,9 @@
     "APPLICATION": {
       "NAME-PLACEHOLDER": "Navngiv applikationen",
       "DESCRIPTION-PLACEHOLDER": "Lav kort beskrivelse af applikationen",
-      "STATUS-PLACEHOLDER": "NO-PLACEHOLDER-DELETE-ME",
-      "START-DATE-PLACEHOLDER": "Dato berører ikke funktionalitet i OS2IoT",
-      "END-DATE-PLACEHOLDER": "Dato berører ikke funktionalitet i OS2IoT",
+      "START-DATE-PLACEHOLDER": "Angiv en startdato for applikationen",
+      "END-DATE-PLACEHOLDER": "Angiv en slutdato for applikationen",
+      "DATE-HINT": "Dato berører ikke funktionalitet i OS2IoT",
       "CATEGORY-PLACEHOLDER": "Angiv den/de kategorier applikationen tilhører. Fx indeklima eller tracking",
       "OWNER-PLACEHOLDER": "Angiv afdeling eller lignende, der ejer data",
       "CONTACT-PERSON-PLACEHOLDER": "Angiv navn og eventuel afdeling på ansvarlig medarbejder",

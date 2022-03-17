@@ -39,11 +39,12 @@
         translate}}</label>
       <mat-form-field appearance="fill">
         <mat-label>{{'QUESTION.APPLICATION.START-DATE-PLACEHOLDER' | translate}}</mat-label>
-        <input matInput [min]="today" [max]="serializedEndDate.value" [matDatepicker]="startDatePicker"
+        <input matInput [max]="serializedEndDate.value" [matDatepicker]="startDatePicker"
           [formControl]="serializedStartDate"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('application.startDate'), 'is-valid' : formFailedSubmit && !errorFields.includes('application.startDate')}">
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker panelClass="datepicker-table-fix" #startDatePicker></mat-datepicker>
+        <mat-hint>{{'QUESTION.APPLICATION.DATE-HINT' | translate}}</mat-hint>
       </mat-form-field>
     </div>
 
@@ -56,6 +57,7 @@
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('application.endDate'), 'is-valid' : formFailedSubmit && !errorFields.includes('application.endDate')}">
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker panelClass="datepicker-table-fix" #endDatePicker></mat-datepicker>
+        <mat-hint>{{'QUESTION.APPLICATION.DATE-HINT' | translate}}</mat-hint>
       </mat-form-field>
     </div>
 
@@ -102,9 +104,12 @@
     </div>
 
     <div class="form-group mt-3">
+      <label class="form-label" for="application.personalData">{{'APPLICATION.METADATA-FIELD.PERSONAL-DATA' |
+        translate}}</label>
+        <br />
       <mat-checkbox id="application.personalData" name="application.personalData"
         [(ngModel)]="application.personalData">
-        <mat-label for="application.personalData" class="form-check-label text--bold margin-top-25px"
+        <mat-label for="application.personalData" class="form-check-label margin-top-25px"
           style="white-space: initial">{{'QUESTION.APPLICATION.PERSONAL-DATA-PLACEHOLDER' | translate}}</mat-label>
       </mat-checkbox>
     </div>

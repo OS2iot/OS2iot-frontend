@@ -49,7 +49,6 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     phoneCtrl: FormControl;
     controlledProperties = Object.values(ControlledPropertyTypes);
     deviceTypes: DropdownOption[] = [];
-    today = new Date();
 
     constructor(
         private restService: RestService,
