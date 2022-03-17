@@ -9,3 +9,20 @@ export const splitList = <T extends unknown>(
 
   return dataBatches;
 };
+
+export const sortBy = <T>(
+  value: T[],
+  column: keyof T,
+  order: 'asc' | 'desc' = 'asc'
+): T[] => {
+  if (!value?.length) {
+    return value;
+  }
+
+  const copy = value.slice();
+  copy.sort((a, b) =>
+    a[column] === b[column] ? 0 : a[column] > b[column] ? 1 : -1
+  );
+
+  return order === 'asc' ? copy : copy.reverse();
+};

@@ -6,6 +6,7 @@ import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 import { CustomDatePipe, CustomTableDatePipe, DateOnlyPipe } from './custom-date.pipe';
 import { FilterDevicesPipe } from './filter-devices.pipe';
+import { SortByPipe } from './sort-by.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FilterDevicesPipe } from './filter-devices.pipe';
     DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
+    SortByPipe
   ],
   imports: [CommonModule],
   exports: [
@@ -28,6 +30,7 @@ import { FilterDevicesPipe } from './filter-devices.pipe';
     DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
+    SortByPipe
   ],
   providers: [
     DateOnlyPipe

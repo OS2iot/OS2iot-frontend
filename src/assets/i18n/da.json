@@ -9,6 +9,8 @@
     "APPLICATION": "Applikation",
     "HTTP": "Generisk HTTP",
     "SAVE": "Gem",
+    "KEY": "Nøgle",
+    "VALUE": "Værdi",
     "NAME": "Navn",
     "DESCRIPTION": "Beskrivelse"
   },
@@ -464,7 +466,8 @@
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
     "EDIT-DEVICE-PROFILE": "Redigér device profil",
-    "EDIT-API-KEY": "Redigér API nøgle"
+    "EDIT-API-KEY": "Redigér API nøgle",
+    "ADD-METADATA-ROW": "Tilføj metadata række"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
@@ -545,6 +548,7 @@
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
     "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
+    "METADATA": "Metadata",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
@@ -714,6 +718,7 @@
     },
     "LORAWANSETUP": "LoRaWAN specifik opsætning",
     "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
+    "LATEST-DATAPACKAGES": "Seneste modtagelser af datapakker (nyeste først):",
     "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "DATAPACKAGE": "Datapakke",
     "LORA": {
@@ -763,6 +768,9 @@
     "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
     "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
     "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke",
+    "DUPLICATE-METADATA-KEY": "Metadata må ikke indeholde den samme nøgle flere gange",
+    "INVALID-KEY-IN-KEY-VALUE-PAIR": "En eller flere nøgler er ugyldige. Det skal være en gyldig tekstværdi",
+    "INVALID-VALUE-IN-KEY-VALUE-PAIR": "En eller flere værdier er ugyldige. Det skal være en gyldig tekstværdi",
     "INVALID-DATE": "Datoen er ugyldig"
   },
   "PROFILES": {
@@ -930,6 +938,7 @@
   "DIALOG": {
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
+    "DELETE.ARE-YOU-SURE": "Er du sikker på, at du vil slette?",
     "CLOSE": "Annuller",
     "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",
