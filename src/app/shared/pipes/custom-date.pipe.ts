@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 })
 export class CustomDatePipe extends DatePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        return super.transform(value, " 'den' dd-MM-yyyy kl. HH:mm");
+        return super.transform(value, ' \'den\' dd-MM-yyyy kl. HH:mm');
     }
 }
 
@@ -16,6 +16,15 @@ export class CustomDatePipe extends DatePipe implements PipeTransform {
 })
 export class CustomTableDatePipe extends DatePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        return super.transform(value, "dd MMM, yyyy - HH:mm");
+        return super.transform(value, 'dd MMM, yyyy - HH:mm');
     }
+}
+
+@Pipe({
+  name: 'dateOnly',
+})
+export class DateOnlyPipe extends DatePipe implements PipeTransform {
+  transform(value: unknown, _?: unknown): string {
+    return super.transform(value, 'dd MMM, yyyy');
+  }
 }

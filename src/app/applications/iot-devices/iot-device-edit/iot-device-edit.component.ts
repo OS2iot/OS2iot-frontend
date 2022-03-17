@@ -230,7 +230,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             this.iotDevice.deviceModelId = null
         }
         switch (this.iotDevice.type) {
-            case DeviceType.GENERICHTTP: {
+            case DeviceType.GENERIC_HTTP: {
                 this.iotDevice.lorawanSettings = undefined;
                 this.iotDevice.sigfoxSettings = undefined;
                 break;

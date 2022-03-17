@@ -4,7 +4,7 @@ import { YesNoPipe } from './yesNo.pipe';
 import { ActiveDeactivePipe } from './activeDeactive.pipe';
 import { isGlobalAdminPipe } from './is-global-admin.pipe';
 import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
-import { CustomDatePipe, CustomTableDatePipe } from './custom-date.pipe';
+import { CustomDatePipe, CustomTableDatePipe, DateOnlyPipe } from './custom-date.pipe';
 import { FilterDevicesPipe } from './filter-devices.pipe';
 import { SortByPipe } from './sort-by.pipe';
 
@@ -15,6 +15,7 @@ import { SortByPipe } from './sort-by.pipe';
     YesNoPipe,
     CustomDatePipe,
     CustomTableDatePipe,
+    DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
     SortByPipe
@@ -26,9 +27,13 @@ import { SortByPipe } from './sort-by.pipe';
     YesNoPipe,
     CustomDatePipe,
     CustomTableDatePipe,
+    DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
     SortByPipe
   ],
+  providers: [
+    DateOnlyPipe
+  ]
 })
 export class PipesModule {}
