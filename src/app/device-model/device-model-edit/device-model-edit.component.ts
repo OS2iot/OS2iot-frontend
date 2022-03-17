@@ -8,7 +8,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel } from '../device.model';
-import { ControlledPropperty } from '../Enums/controlled-propperty.enum';
+import { ControlledPropertyTypes } from '../Enums/controlled-propperty.enum';
 import { DeviceCategory } from '../Enums/device-category.enum';
 import { DeviceFunction } from '../Enums/device-function.enum';
 import { EnergyLimitationClass } from '../Enums/energy-limitation-class.model';
@@ -22,18 +22,18 @@ import { SupportedUnit } from '../supported-unit.model';
 })
 export class DeviceModelEditComponent implements OnInit {
 
-  public errorMessages: any;
+  public errorMessages: string[];
   public errorFields: string[];
   public deviceModel: DeviceModel = new DeviceModel();
   public backButton: BackButton = { label: '', routerLink: '/device-model' };
   public title = '';
   public formFailedSubmit = false;
-  controlledPropperties = [];
-  categories = [];
+  controlledPropperties: ControlledPropertyTypes[] = [];
+  categories: DeviceCategory[] = [];
   supportedUnits = new SupportedUnit();
-  deviceFunctions = [];
+  deviceFunctions: DeviceFunction[] = [];
   energyLimitationClass = new EnergyLimitationClass();
-  supportedProtocol = [];
+  supportedProtocol: SupportedProtocol[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -55,10 +55,12 @@ export class DeviceModelEditComponent implements OnInit {
     if (deviceModelId) {
       this.getDeviceModel(deviceModelId);
     }
+    this.supportedUnits.units.sort((a, b) => a.name.localeCompare(b.name));
+    this.deviceFunctions.sort((a, b) => a.localeCompare(b));
   }
 
   mapEnumsToArray() {
-    this.controlledPropperties = Object.values(ControlledPropperty);
+    this.controlledPropperties = Object.values(ControlledPropertyTypes);
     this.categories = Object.values(DeviceCategory);
     this.deviceFunctions = Object.values(DeviceFunction);
     this.supportedProtocol = Object.values(SupportedProtocol);

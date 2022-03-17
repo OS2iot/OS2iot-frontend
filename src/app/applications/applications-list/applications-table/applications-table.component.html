@@ -7,8 +7,8 @@
       {{errorMessage | translate}}
     </div>
 
-    <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="created" matSortDisableClear
-      matSortDirection="desc">
+    <table mat-table [dataSource]="data" class="example-table" matSort matSortActive="name" matSortDisableClear
+      matSortDirection="asc">
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">

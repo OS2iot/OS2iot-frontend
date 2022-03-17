@@ -44,6 +44,13 @@
                     {{ 'IOTDEVICE.NOCOMMENT' | translate}}
                 </ng-template>
             </p>
+            <ng-container *ngIf="metadataTags.length">
+              <mat-divider></mat-divider>
+              <p *ngFor="let tag of metadataTags">
+                <strong>{{ tag.key }}</strong>
+                <span>{{ tag.value }}</span>
+            </p>
+            </ng-container>
         </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch">

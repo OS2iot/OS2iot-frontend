@@ -19,8 +19,8 @@ import { TopBarTableComponent } from './components/top-bar-table/top-bar-table.c
 import { GeneralDetailsComponent } from './components/general-details/general-details.component';
 import { PipesModule } from './pipes/pipes.module';
 import { DynamicImgComponent } from './components/dynamic-img/dynamic-img.component';
+import { MetadataDetailsComponent } from './components/metadata-details/metadata-details.component';
 import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.component';
-
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.
     TopBarTableComponent,
     GeneralDetailsComponent,
     DynamicImgComponent,
-    LorawanFieldComponent,
+    MetadataDetailsComponent,
+    LorawanFieldComponent
   ],
   imports: [
     DirectivesModule,
@@ -58,7 +59,8 @@ import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.
     TopBarTableComponent,
     GeneralDetailsComponent,
     DynamicImgComponent,
-    LorawanFieldComponent,
+    MetadataDetailsComponent,
+    LorawanFieldComponent
   ],
 })
 export class SharedModule { }
