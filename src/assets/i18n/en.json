@@ -29,9 +29,7 @@
     "CREATE-NEW-IOT-DEVICE": "Add IoT unit"
   },
   "QUESTION": {
-    "GIVE-APPLICATION-NAME": "Name application",
     "APPLICATION-NAME-PLACEHOLDER": "Name of the application",
-    "GIVE-APPLICATION-DESCRIPTION": "Describe application",
     "APPLICATION-DESCRIPTION-PLACEHOLDER": "Short description of the application"
   },
   "SORT": {

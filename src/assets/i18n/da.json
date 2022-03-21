@@ -8,7 +8,11 @@
     "EDIT": "Redigér",
     "APPLICATION": "Applikation",
     "HTTP": "Generisk HTTP",
-    "SAVE": "Gem"
+    "SAVE": "Gem",
+    "KEY": "Nøgle",
+    "VALUE": "Værdi",
+    "NAME": "Navn",
+    "DESCRIPTION": "Beskrivelse"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -117,6 +121,28 @@
       "ERROR": "Fejl",
       "EMPTY": "Der er ingen enheder at vise endnu",
       "FILEFORMATERRORMESSAGE": "Forkert filformat, upload en .csv fil"
+    },
+    "STATUS": {
+      "NONE": "-",
+      "IN-OPERATION": "I drift",
+      "PROJECT": "Projekt",
+      "PROTOTYPE": "Prototype",
+      "OTHER": "Andet"
+    },
+    "DETAILS": "Detaljer",
+    "METADATA-FIELD": {
+      "STATUS": "Status",
+      "START-DATE": "Startdato",
+      "END-DATE": "Slutdato",
+      "CATEGORY": "Kategori",
+      "OWNER": "Ejer",
+      "CONTACT-PERSON": "Kontaktperson",
+      "CONTACT-EMAIL": "Kontaktmail",
+      "CONTACT-PHONE": "Kontakttelefon",
+      "PERSONAL-DATA": "Persondata",
+      "HARDWARE": "Hardware",
+      "CONTROLLED-PROPERTY": "Data",
+      "DEVICE-TYPE": "Forbindelsesteknologi"
     }
   },
   "GATEWAY": {
@@ -172,7 +198,7 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK", 
+    "OPENDATA-DK": "OpenDataDK",
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
     "HTTP_PUSH": "HTTP Push",
     "FIWARE": "FIWARE"
@@ -291,7 +317,8 @@
   "IOT-DEVICE-TYPES": {
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
-    "SIGFOX": "Sigfox"
+    "SIGFOX": "Sigfox",
+    "OTHER": "Andet"
   },
   "ACTIVITY": {
     "NEVER": "Aldrig set"
@@ -439,16 +466,13 @@
     "EDIT-SIGFOX-GROUP": "Redigér Sigfox gruppe",
     "EDIT-USERS": "Redigér bruger",
     "EDIT-DEVICE-PROFILE": "Redigér device profil",
-    "EDIT-API-KEY": "Redigér API nøgle"
+    "EDIT-API-KEY": "Redigér API nøgle",
+    "ADD-METADATA-ROW": "Tilføj metadata række"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
     "DEVICE-MODEL-SELECT": "Tilknyt en device model til enheden",
     "DEVICE-MODEL-SELECT-NON": "Ingen device model valgt",
-    "GIVE-APPLICATION-NAME": "Navngiv applikation",
-    "APPLICATION-NAME-PLACEHOLDER": "Applikationens navn",
-    "GIVE-APPLICATION-DESCRIPTION": "Applikationens beskrivelse",
-    "APPLICATION-DESCRIPTION-PLACEHOLDER": "Kort beskrivelse af applikationen",
     "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
     "ESTABLISH-CONNECTION-TO-DEVICE": "Opret forbindelse til din enhed",
     "ADD-MORE-INFO-ABOUT-DEVICE": "Tilføj yderlige informationer om din enhed",
@@ -524,6 +548,7 @@
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
     "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
+    "METADATA": "Metadata",
     "DATATARGET": {
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
@@ -594,6 +619,22 @@
     },
     "PERMISSION": {
       "SELECT-PERMISSION": "Vælg brugergruppe"
+    },
+    "APPLICATION": {
+      "NAME-PLACEHOLDER": "Navngiv applikationen",
+      "DESCRIPTION-PLACEHOLDER": "Lav kort beskrivelse af applikationen",
+      "START-DATE-PLACEHOLDER": "Angiv en startdato for applikationen",
+      "END-DATE-PLACEHOLDER": "Angiv en slutdato for applikationen",
+      "DATE-HINT": "Dato berører ikke funktionalitet i OS2IoT",
+      "CATEGORY-PLACEHOLDER": "Angiv den/de kategorier applikationen tilhører. Fx indeklima eller tracking",
+      "OWNER-PLACEHOLDER": "Angiv afdeling eller lignende, der ejer data",
+      "CONTACT-PERSON-PLACEHOLDER": "Angiv navn og eventuel afdeling på ansvarlig medarbejder",
+      "CONTACT-EMAIL-PLACEHOLDER": "Angiv mailadresse på ansvarlig medarbejder",
+      "CONTACT-PHONE-PLACEHOLDER": "Angiv telefonnummer på ansvarlig medarbejder",
+      "PERSONAL-DATA-PLACEHOLDER": "Markér, hvis data i applikationen indeholder personoplysninger. Berører ikke funktionalitet i OS2iot",
+      "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
+      "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
+      "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -677,6 +718,7 @@
     },
     "LORAWANSETUP": "LoRaWAN specifik opsætning",
     "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",
+    "LATEST-DATAPACKAGES": "Seneste modtagelser af datapakker (nyeste først):",
     "NO-DATAPACKAGE": "Der er ikke modtaget nogle datapakker",
     "DATAPACKAGE": "Datapakke",
     "LORA": {
@@ -725,7 +767,11 @@
     "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
     "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
     "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
-    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke",
+    "DUPLICATE-METADATA-KEY": "Metadata må ikke indeholde den samme nøgle flere gange",
+    "INVALID-KEY-IN-KEY-VALUE-PAIR": "En eller flere nøgler er ugyldige. Det skal være en gyldig tekstværdi",
+    "INVALID-VALUE-IN-KEY-VALUE-PAIR": "En eller flere værdier er ugyldige. Det skal være en gyldig tekstværdi",
+    "INVALID-DATE": "Datoen er ugyldig"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
@@ -892,6 +938,7 @@
   "DIALOG": {
     "SAVE.TITLE": "Slet",
     "DELETE.MESSAGE": "Vil du slette?",
+    "DELETE.ARE-YOU-SURE": "Er du sikker på, at du vil slette?",
     "CLOSE": "Annuller",
     "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",

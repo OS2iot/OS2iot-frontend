@@ -1,4 +1,4 @@
-export enum ControlledPropperty {
+export enum ControlledPropertyTypes {
     AIRPOLLUTION = "airPollution",
     ATMOSPHERICPRESSURE = "atmosphericPressure",
     CDOM = "cdom",
