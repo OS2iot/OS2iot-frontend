@@ -48,20 +48,22 @@ export class DashboardComponent implements OnInit {
       const jwt = params['jwt'];
       if (jwt) {
         this.authService.setSession(jwt);
-        // TODO:::
-        // const userInfo = await this.sharedVariableService.setUserInfo();
-        // if (!userInfo.user.email)
-        // {
-        //   this.router.navigate(['/new-user'])
-        // }
-        // else {
-        // Clear the URL from the parameter
-        this.router.navigate(['/dashboard']);
-        // }
+        const userInfo = await this.sharedVariableService.setUserInfo();
+        if (!userInfo.user.email) {
+          this.router.navigate(['/new-user'], {
+            state: { code: 200 },
+          });
+        } else {
+          // Clear the URL from the parameter
+          this.router.navigate(['/dashboard']);
+        }
       } else {
         const error = params['error'];
         if (error) {
-          if (error == "MESSAGE.KOMBIT-LOGIN-FAILED" || error == "MESSAGE.API-KEY-AUTH-FAILED") {
+          if (
+            error == 'MESSAGE.KOMBIT-LOGIN-FAILED' ||
+            error == 'MESSAGE.API-KEY-AUTH-FAILED'
+          ) {
             this.router.navigate(['/not-authorized'], {
               state: { message: this.kombitError, code: 401 },
             });
@@ -83,13 +85,7 @@ export class DashboardComponent implements OnInit {
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
       this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
       this.isLoadingResults = false;
-      if (!userInfo.user.email) {
-        // TODO::: THIS HAS TO BE AT LINE 50. IS PUT HERE FOR TEST BECAUSE OF KOMBIT
-        this.router.navigate(['/new-user'], {
-          state: { code: 200 },
-        });
-      } else if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
-        // TODO::: THIS SHOULD JUST BE AN IF STATEMENT TO CHECK IF USER IS AWAITING
+      if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
         this.router.navigate(['/user-page']);
       }
     });

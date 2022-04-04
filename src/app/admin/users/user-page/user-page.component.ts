@@ -36,6 +36,7 @@ export class UserPageComponent implements OnInit {
   public checkForNoUserOrganizations = false;
   public checkForRemainingOrganizations = false;
   public userInfo: CurrentUserInfoResponse;
+  public pressed = false;
   public organisationsFilterCtrl: FormControl = new FormControl();
   public filteredOrganisations: ReplaySubject<
     Organisation[]
@@ -178,17 +179,21 @@ export class UserPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.resetErrors();
-    this.mapToDto(this.updateUserOrgsFromFrontend);
-    this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
-      () => {
-        window.location.reload();
-      },
-      (error: HttpErrorResponse) => {
-        this.handleError(error);
-        this.formFailedSubmit = true;
-      }
-    );
+    if (this.pressed === false) {
+      this.pressed = true;
+
+      this.resetErrors();
+      this.mapToDto(this.updateUserOrgsFromFrontend);
+      this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
+        () => {
+          window.location.reload();
+        },
+        (error: HttpErrorResponse) => {
+          this.handleError(error);
+          this.formFailedSubmit = true;
+        }
+      );
+    }
   }
   private resetErrors() {
     this.errorFields = [];
