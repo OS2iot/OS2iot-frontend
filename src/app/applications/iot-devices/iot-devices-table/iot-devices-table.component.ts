@@ -41,9 +41,9 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     'name',
     'technology',
     'battery',
-    'active',
     'rssi',
     'snr',
+    'active',
     'menu',
   ];
   public canEdit = false;

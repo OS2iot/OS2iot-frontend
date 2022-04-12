@@ -67,8 +67,8 @@
       </th>
       <td mat-cell *matCellDef="let element">
         <ng-container *ngIf="element.type === 'LORAWAN'; else notSupported">
-          <div *ngIf="isValidRssiInfo(element.latestReceivedMessage?.rawData?.rxInfo); else notAvailable">
-            {{buildFromLoRaRxInfo(element.latestReceivedMessage.rawData.rxInfo, 'rssi')}}
+          <div *ngIf="element.latestReceivedMessage?.rssi; else notAvailable">
+            {{element.latestReceivedMessage.rssi}}
           </div>
         </ng-container>
       </td>
@@ -81,8 +81,8 @@
       </th>
       <td mat-cell *matCellDef="let element">
         <ng-container *ngIf="element.type === 'LORAWAN'; else notSupported">
-          <div *ngIf="isValidRssiInfo(element.latestReceivedMessage?.rawData?.rxInfo); else notAvailable">
-            {{buildFromLoRaRxInfo(element.latestReceivedMessage.rawData.rxInfo, 'loRaSNR')}}
+          <div *ngIf="element.latestReceivedMessage?.snr; else notAvailable">
+            {{element.latestReceivedMessage?.snr}}
           </div>
         </ng-container>
       </td>
