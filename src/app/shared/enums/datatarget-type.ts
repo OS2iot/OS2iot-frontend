@@ -1,5 +1,6 @@
 export enum DataTargetType {
     HTTPPUSH = 'HTTP_PUSH',
     OPENDATADK = 'OPENDATADK',
-    FIWARE = 'FIWARE'
+    FIWARE = 'FIWARE',
+    MQTT = 'MQTT'
 }

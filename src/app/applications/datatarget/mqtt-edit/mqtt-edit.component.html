@@ -1,0 +1,82 @@
+<app-top-bar backButtonTitle="{{'NAV.DATATARGET' | translate}}" title="{{'FORM.EDIT-DATATARGET' | translate}}">
+</app-top-bar>
+
+<form (ngSubmit)="onSubmit()" #datatargetForm="ngForm" class="os2-form p-3 mt-4">
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{error | translate}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{'QUESTION.GIVE-DATATARGET-NAME' | translate}}</label>*
+      <input type="text" class="form-control" id="name" name="name"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate" maxlength="50" required
+        [(ngModel)]="datatarget.name"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="url">{{'QUESTION.DATATARGET.MQTT.GIVE-URL' | translate}}</label>*
+      <input type="text" class="form-control" id="url" name="url"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-URL-PLACEHOLDER' | translate" required
+        [(ngModel)]="datatarget.url"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('url'), 'is-valid' : formFailedSubmit && !errorFields.includes('url')}">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqtt-topic">{{'QUESTION.DATATARGET.MQTT.GIVE-TOPIC' | translate}}</label>*
+      <input type="text" class="form-control" id="mqtt-topic" name="mqtt-topic"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-TOPIC-PLACEHOLDER' | translate" required
+        [(ngModel)]="datatarget.mqttTopic"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('mqtt-topic'), 'is-valid' : formFailedSubmit && !errorFields.includes('mqtt-topic')}">
+    </div>
+  </div>
+
+  <ng-container *ngIf="authenticationMethod === MqttAuthenticationType.UsernamePassword">
+    <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqttUsername">{{'QUESTION.DATATARGET.MQTT.GIVE-USERNAME' | translate}}</label>*
+      <input type="text" class="form-control" id="mqttUsername" name="mqttUsername"
+        [required]="true"
+        [(ngModel)]="datatarget.mqttUsername"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('mqttUsername'), 'is-valid' : formFailedSubmit && !errorFields.includes('mqttUsername')}">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqttPassword">{{'QUESTION.DATATARGET.MQTT.GIVE-PASSWORD' | translate}}</label>*
+      <input type="password" class="form-control" id="mqttPassword" name="mqttPassword"
+        [required]="true"
+        [(ngModel)]="datatarget.mqttPassword"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('mqttPassword'), 'is-valid' : formFailedSubmit && !errorFields.includes('mqttPassword')}">
+    </div>
+  </div>
+</ng-container>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="timeout">{{'QUESTION.GIVE-DATATARGET-TIMEOUT' | translate}}</label>*
+      <input type="number" class="form-control" id="timeout" name="timeout" required [(ngModel)]="datatarget.timeout"
+        step="1" min="0" max="100000" maxlength="7"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('timeout'), 'is-valid' : formFailedSubmit && !errorFields.includes('timeout')}">
+    </div>
+  </div>
+
+  <div *ngIf="!datatargetId">
+    <h6> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h6>
+  </div>
+
+  <div class="form-group mt-5">
+    <button (click)="routeToDatatargets()" class="btn btn-light" type="button">{{ 'GEN.BACK' | translate}}</button>
+    <button class="btn btn-primary ml-2" type="submit">{{ 'DATATARGET.SAVE' | translate }}</button>
+  </div>
+</form>

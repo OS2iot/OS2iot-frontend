@@ -199,9 +199,26 @@
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "OPENDATA-DK": "OpenDataDK",
+    "OPENDATA-DK-TYPE": {
+      "NAME": "Open Data DK",
+      "DESCRIPTION": "Offentliggør datasæt i Open Data DK's åbne dataportal."
+    },
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
     "HTTP_PUSH": "HTTP Push",
-    "FIWARE": "FIWARE"
+    "HTTP-PUSH-TYPE": {
+      "NAME": "Generisk HTTP Push",
+      "DESCRIPTION": "Send data med HTTP POST requests til et HTTP URL endpoint"
+    },
+    "FIWARE": "FIWARE",
+    "FIWARE-TYPE": {
+      "NAME": "FIWARE connection",
+      "DESCRIPTION": "En integration til FIWARE Context Broker"
+    },
+    "MQTT": "MQTT",
+    "MQTT-TYPE": {
+      "NAME": "MQTT forbindelse",
+      "DESCRIPTION": "En integration til MQTT Broker"
+    }
   },
   "MULTICAST": {
     "SAVE": "Gem multicast",
@@ -555,7 +572,20 @@
       "SELECT-DEVICES": "Vælg enheder",
       "SELECTALLDEVICES": "Vælg alle",
       "DESELECTALLDEVICES": "Fravælg alle",
-      "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices"
+      "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices",
+      "MQTT": {
+        "GIVE-URL": "Angiv datatargets broker URL",
+        "GIVE-URL-PLACEHOLDER": "mqtt://min-mqtt-broker.dk:1883",
+        "GIVE-TOPIC": "Angiv hvilket topic på brokeren der skal sendes til",
+        "GIVE-TOPIC-PLACEHOLDER": "device/+/event",
+        "GIVE-AUTHENTICATION-METHOD": "Vælg autentificeringsmetode",
+        "USERNAME-PASSWORD": "Brugernavn og password",
+        "CERTIFICATE": "Certifikat",
+        "USERNAME": "Brugernavn",
+        "GIVE-USERNAME": "Angiv et brugernavn med adgang til brokeren og den valgte topic",
+        "PASSWORD": "Adgangskode",
+        "GIVE-PASSWORD": "Angiv adgangskoden til brugeren"
+      }
     },
     "MULTICAST": {
       "SELECT-DEVICES": "Vælg enheder",

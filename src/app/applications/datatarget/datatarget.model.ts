@@ -22,6 +22,13 @@ export class Datatarget {
     updatedByName: string;
 }
 
+export class MqttDataTarget extends Datatarget {
+  mqttTopic?: string;
+  mqttUsername?: string;
+  mqttPassword?: string;
+  type = DataTargetType.MQTT;
+}
+
 export class DatatargetData {
     data: Datatarget[];
     ok?: boolean;
@@ -33,7 +40,7 @@ export class DatatargetTypeDescriptor
     name: string;
     type: DataTargetType;
     icon: string;
-    description: string;  
+    description: string;
     readMoreUrl: string;
     provider: string;
 }
