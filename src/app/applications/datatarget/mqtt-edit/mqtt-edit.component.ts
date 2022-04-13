@@ -280,17 +280,9 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.relationSubscription) {
-      this.relationSubscription.unsubscribe();
-    }
-    if (this.applicationSubscription) {
-      this.applicationSubscription.unsubscribe();
-    }
-    if (this.datatargetSubscription) {
-      this.datatargetSubscription.unsubscribe();
-    }
-    if (this.payloadDecoderSubscription) {
-      this.payloadDecoderSubscription.unsubscribe();
-    }
+    this.relationSubscription?.unsubscribe();
+    this.applicationSubscription?.unsubscribe();
+    this.datatargetSubscription?.unsubscribe();
+    this.payloadDecoderSubscription?.unsubscribe();
   }
 }

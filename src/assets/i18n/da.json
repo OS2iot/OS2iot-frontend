@@ -198,26 +198,32 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK",
-    "OPENDATA-DK-TYPE": {
+    "OPENDATA-DK": {
+      "TYPE": "OpenDataDK",
       "NAME": "Open Data DK",
       "DESCRIPTION": "Offentliggør datasæt i Open Data DK's åbne dataportal."
     },
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
-    "HTTP_PUSH": "HTTP Push",
-    "HTTP-PUSH-TYPE": {
+    "HTTP_PUSH": {
+      "TYPE": "HTTP Push",
       "NAME": "Generisk HTTP Push",
       "DESCRIPTION": "Send data med HTTP POST requests til et HTTP URL endpoint"
     },
-    "FIWARE": "FIWARE",
-    "FIWARE-TYPE": {
+    "FIWARE": {
+      "TYPE": "FIWARE",
       "NAME": "FIWARE connection",
       "DESCRIPTION": "En integration til FIWARE Context Broker"
     },
-    "MQTT": "MQTT",
-    "MQTT-TYPE": {
+    "MQTT": {
+      "TYPE": "MQTT",
       "NAME": "MQTT forbindelse",
-      "DESCRIPTION": "En integration til MQTT Broker"
+      "DESCRIPTION": "En integration til MQTT Broker",
+      "BROKER-URL": "Broker URL",
+      "PORT": "Port",
+      "TOPIC": "Topic",
+      "QOS": "QoS",
+      "USERNAME": "Brugernavn",
+      "PASSWORD": "Adgangskode"
     }
   },
   "MULTICAST": {
