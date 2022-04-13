@@ -575,7 +575,12 @@
       "RELATIONS": "*Efter oprettelse af dit data target parres dette med en/flere payload decoder(s) og IoT-devices",
       "MQTT": {
         "GIVE-URL": "Angiv datatargets broker URL",
-        "GIVE-URL-PLACEHOLDER": "mqtt://min-mqtt-broker.dk:1883",
+        "GIVE-URL-PLACEHOLDER": "https://min-mqtt-broker.dk",
+        "GIVE-PORT": "Angiv datatargets broker port",
+        "GIVE-PORT-PLACEHOLDER": "1883",
+        "GIVE-QOS": "Angiv hvilken QoS niveau data skal sendes med",
+        "GIVE-QOS-PLACEHOLDER": "0, 1, 2",
+        "GIVE-QOS-INFO": "QoS (Quality of Service) bestemmer vigtigheden af, at en besked leveres til modtageren. Se dokumentationen for at vide mere.",
         "GIVE-TOPIC": "Angiv hvilket topic på brokeren der skal sendes til",
         "GIVE-TOPIC-PLACEHOLDER": "device/+/event",
         "GIVE-AUTHENTICATION-METHOD": "Vælg autentificeringsmetode",

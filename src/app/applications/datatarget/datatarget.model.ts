@@ -9,11 +9,16 @@ export class Datatarget {
     url: string;
     tenant: string;
     context: string;
-    //default 30 sec
-    timeout: number = 30000;
+    // default 30 sec
+    timeout = 30000;
     authorizationHeader: string;
     setToOpendataDk = false;
     openDataDkDataset: OpenDataDkDataset = new OpenDataDkDataset();
+    mqttPort?: number;
+    mqttTopic?: string;
+    mqttQos?: string;
+    mqttUsername?: string;
+    mqttPassword?: string;
     createdAt: string;
     updatedAt: string;
     createdBy: number;
@@ -22,21 +27,13 @@ export class Datatarget {
     updatedByName: string;
 }
 
-export class MqttDataTarget extends Datatarget {
-  mqttTopic?: string;
-  mqttUsername?: string;
-  mqttPassword?: string;
-  type = DataTargetType.MQTT;
-}
-
 export class DatatargetData {
     data: Datatarget[];
     ok?: boolean;
     count?: number;
 }
 
-export class DatatargetTypeDescriptor
-{
+export class DatatargetTypeDescriptor {
     name: string;
     type: DataTargetType;
     icon: string;

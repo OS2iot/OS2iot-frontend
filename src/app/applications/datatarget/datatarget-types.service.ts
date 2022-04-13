@@ -48,7 +48,7 @@ export class DatatargetTypesService {
         icon: '/assets/images/logo_mqtt.png',
         description: 'DATATARGET.MQTT-TYPE.DESCRIPTION',
         readMoreUrl: 'https://mqtt.org/',
-        provider: 'OS2', // TODO: Is this correct?
+        provider: 'OS2',
       },
     ];
   }
