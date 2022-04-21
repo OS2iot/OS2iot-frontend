@@ -20,6 +20,7 @@ import { DeviceModelComponent } from './iot-device-detail/device-model/device-mo
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
+import { MyLineChartComponent } from '@app/my-line-chart/my-line-chart.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { DataPackagesTimestampComponent } from './iot-device-detail/data-package
         DeviceModelComponent,
         DataPackageComponent,
         DataPackagesTimestampComponent,
+        MyLineChartComponent,
     ],
     exports: [
         IotDevicesTableComponent,

@@ -4,6 +4,8 @@
     </app-top-bar>
     <!-- General details & map -->
     <div class="container-fluid">
+      <mat-tab-group animationDuration="200ms">
+        <mat-tab label="{{'APPLICATION.DETAILS' | translate}}">
         <app-iot-device-detail-generic [device]="device" [longitude]=longitude [latitude]="latitude">
         </app-iot-device-detail-generic>
         <div class="row">
@@ -44,5 +46,13 @@
                 </div>
             </div>
         </div>
+        </mat-tab>
+        <mat-tab label="{{'APPLICATION.HISTORY' | translate}}">
+          <app-my-line-chart></app-my-line-chart>
+        </mat-tab>
+        <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
+
+        </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

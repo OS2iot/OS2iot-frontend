@@ -144,7 +144,8 @@
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
       "DEVICE-TYPE": "Forbindelsesteknologi"
-    }
+    },
+    "HISTORY": "Historik"
   },
   "GATEWAY": {
     "DETAILS":"Detaljer",
@@ -704,7 +705,7 @@
     "DEVICEMODEL": "Device model",
     "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
     "DETAIL": "Detaljer",
-    "DETAIL-TAB": "Datapakke",
+    "DETAIL-TAB": "Datapakker",
     "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
