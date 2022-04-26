@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IotDevice, IoTDevicesMinimalResponse, IotDevicesImportResponse, IotDeviceImportRequest } from './iot-device.model';
+import { IotDevice, IoTDevicesMinimalResponse, IotDevicesImportResponse, IotDeviceImportRequest, IoTDeviceStatsResponse } from './iot-device.model';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
@@ -73,5 +73,9 @@ export class IoTDeviceService {
 
     deleteIoTDevice(id: number) {
         return this.restService.delete(this.BASEURL, id);
+    }
+
+    getDeviceStats(id: number): Observable<IoTDeviceStatsResponse[]> {
+      return this.restService.get(`${this.BASEURL}/stats`, null, id);
     }
 }

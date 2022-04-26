@@ -144,8 +144,7 @@
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
       "DEVICE-TYPE": "Forbindelsesteknologi"
-    },
-    "HISTORY": "Historik"
+    }
   },
   "GATEWAY": {
     "DETAILS":"Detaljer",
@@ -341,6 +340,7 @@
     "SHOW-OPTIONS": "Håndter IoT enhed",
     "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteristatus",
     "NOT-SUPPORTED": "Ikke understøttet",
+    "NOT-SUPPORTED-SHORT": "-",
     "NOT-AVAILABLE": "N/A"
   },
   "DATATARGET-TABLE-ROW": {
@@ -702,10 +702,10 @@
     },
     "CREATED": "Oprettet",
     "UPDATED": "Senest opdateret",
+    "DATA-PACKETS": "Datapakker",
     "DEVICEMODEL": "Device model",
     "DEVICEMODEL-ERROR": "Der er ikke tilknyttet nogen device model endnu",
     "DETAIL": "Detaljer",
-    "DETAIL-TAB": "Datapakker",
     "DOWNLINK-TAB": "Downlink",
     "NAME": "Navn",
     "TYPE": "Enhedstype",
@@ -748,6 +748,13 @@
       "ENDPRODUCTCERTIFICATE": "Produkt certifikat",
       "DEVICETYPE": "Enhedstypen",
       "DEVICEID": "EnhedsId"
+    },
+    "HISTORY": "Historik",
+    "HISTORY-TAB": {
+      "DATA-RATE": "Data rate",
+      "SNR": "SNR",
+      "RSSI": "RSSI",
+      "HISTORY-NOT-SUPPORTED": "Understøttes ikke af denne teknologi"
     }
   },
   "MESSAGE": {
@@ -1012,7 +1019,6 @@
     }
   },
   "NoUsersAdded": "Ingen brugergrupper er tilføjet",
-
   "FIWARE": {
       "QUESTION": {
         "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
@@ -1024,6 +1030,8 @@
         "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
         "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
       }
-
+  },
+  "GRAPH": {
+    "NO-DATA": "Der er ingen data at vise"
   }
 }

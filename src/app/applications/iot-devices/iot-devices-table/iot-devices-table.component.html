@@ -4,7 +4,7 @@
   </div>
   <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <ng-template #notSupported>
-      <span>{{'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED' | translate}}</span>
+      <span>{{'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate}}</span>
     </ng-template>
     <ng-template #notAvailable>
       <span>{{'IOTDEVICE-TABLE-ROW.NOT-AVAILABLE' | translate}}</span>
@@ -46,7 +46,7 @@
         </div>
         <ng-template #noBatteryStatus>
           <div>
-            {{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}
+            {{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}
           </div>
         </ng-template>
       </td>
@@ -62,11 +62,11 @@
 
     <!-- RSSI column -->
     <ng-container matColumnDef="rssi">
-      <th *matHeaderCellDef mat-header-cell>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="rssi">
         {{ 'IOT-TABLE.RSSI' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="element.type === 'LORAWAN'; else notSupported">
+        <ng-container *ngIf="element.type === 'LORAWAN' || element.type === 'SIGFOX'; else notSupported">
           <div *ngIf="element.latestReceivedMessage?.rssi; else notAvailable">
             {{element.latestReceivedMessage.rssi}}
           </div>
@@ -76,11 +76,11 @@
 
     <!-- SNR column -->
     <ng-container matColumnDef="snr">
-      <th *matHeaderCellDef mat-header-cell>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="snr">
         {{ 'IOT-TABLE.SNR' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="element.type === 'LORAWAN'; else notSupported">
+        <ng-container *ngIf="element.type === 'LORAWAN' || element.type === 'SIGFOX'; else notSupported">
           <div *ngIf="element.latestReceivedMessage?.snr; else notAvailable">
             {{element.latestReceivedMessage?.snr}}
           </div>
