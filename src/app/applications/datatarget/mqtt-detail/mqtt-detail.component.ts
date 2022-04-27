@@ -33,7 +33,7 @@ export class MqttDetailComponent
     private route: ActivatedRoute,
     private deleteDialogService: DeleteDialogService,
     private location: Location,
-    private datatargetRelationServicer: PayloadDeviceDatatargetService,
+    private datatargetRelationService: PayloadDeviceDatatargetService,
     private datatargetService: DatatargetService,
     public translate: TranslateService
   ) {}
@@ -80,7 +80,7 @@ export class MqttDetailComponent
   }
 
   getDatatargetRelations(id: number) {
-    this.datatargetRelationServicer
+    this.datatargetRelationService
       .getByDataTarget(id)
       .subscribe((response) => {
         this.dataTargetRelations = response.data;
