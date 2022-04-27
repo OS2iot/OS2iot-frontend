@@ -10,10 +10,9 @@
                 <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong></p>
                 <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
                     [percentage]="batteryStatusPercentage"></app-batteri-status>
-                <app-lorawan-field [device]="device"></app-lorawan-field>
                 <ng-template #noBatteryStatus>
                     <div>
-                        <p>{{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}</p>
+                        <p>{{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}</p>
                     </div>
                 </ng-template>
                 <ng-template #notAvailable>

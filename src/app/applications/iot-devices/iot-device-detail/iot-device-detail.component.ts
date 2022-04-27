@@ -19,7 +19,7 @@ import { ChartConfiguration } from 'chart.js';
 import * as moment from 'moment';
 import { recordToEntries } from '@shared/helpers/record.helper';
 
-const colorGraphBlue1 = '#2196f3';
+const colorGraphBlue1 = '#03AEEF';
 
 const defaultChartOptions: ChartConfiguration['options'] = {
   plugins: { legend: { display: false }, },
@@ -34,16 +34,16 @@ const defaultChartOptions: ChartConfiguration['options'] = {
 };
 
 /**
- * Taken from Chirpstack's source code. There's as many colors as there are data rates
+ * Inspired from Chirpstack's source code. There's as many colors as there are data rates
  * @see https://github.com/brocaar/chirpstack-application-server/blob/9cf39fdda404e71744fa4f84a1cf26bf63a9b4aa/ui/src/views/devices/DeviceDetails.js#L402
  */
 const dataRateColors = [
-  '#8bc34a',
-  '#ff5722',
-  '#ff9800',
-  '#ffc107',
-  '#ffeb3b',
-  '#cddc39',
+  '#E74C3C',
+  '#FFA620',
+  '#F6CE06',
+  '#93E528',
+  '#72D144',
+  '#56B257',
   '#4caf50',
   '#009688',
   '#00bcd4',

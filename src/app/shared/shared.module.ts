@@ -20,7 +20,6 @@ import { GeneralDetailsComponent } from './components/general-details/general-de
 import { PipesModule } from './pipes/pipes.module';
 import { DynamicImgComponent } from './components/dynamic-img/dynamic-img.component';
 import { MetadataDetailsComponent } from './components/metadata-details/metadata-details.component';
-import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.
     GeneralDetailsComponent,
     DynamicImgComponent,
     MetadataDetailsComponent,
-    LorawanFieldComponent
   ],
   imports: [
     DirectivesModule,
@@ -60,7 +58,6 @@ import { LorawanFieldComponent } from './components/lorawan-field/lorawan-field.
     GeneralDetailsComponent,
     DynamicImgComponent,
     MetadataDetailsComponent,
-    LorawanFieldComponent
   ],
 })
 export class SharedModule { }

@@ -17,8 +17,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DeviceType } from '@shared/enums/device-type';
-import { isValidRssiInfo, RxInfo } from '@shared/helpers/rx-info.helper';
-import { keyofNumber } from '@shared/helpers/type.helper';
 import { MeService } from '@shared/services/me.service';
 import * as moment from 'moment';
 import { merge, Observable, of as observableOf } from 'rxjs';
@@ -54,7 +52,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
-  isValidRssiInfo = isValidRssiInfo;
   noValueText: string;
   toText: string;
 
@@ -113,17 +110,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
       return null;
     }
     return Math.round(device?.lorawanSettings?.deviceStatusBattery);
-  }
-
-  buildFromLoRaRxInfo(rxInfo: RxInfo[], prop: keyofNumber<RxInfo>): string | number {
-    const values = rxInfo.map((x) => x[prop]);
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    return min && max
-      ? min !== max
-        ? `${min} ${this.toText} ${max}`
-        : max
-      : this.noValueText;
   }
 
   getDevices(

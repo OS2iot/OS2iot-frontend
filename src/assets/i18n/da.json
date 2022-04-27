@@ -338,7 +338,6 @@
     "DELETE": "Slet",
     "EDIT": "Redigér",
     "SHOW-OPTIONS": "Håndter IoT enhed",
-    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteristatus",
     "NOT-SUPPORTED": "Ikke understøttet",
     "NOT-SUPPORTED-SHORT": "-",
     "NOT-AVAILABLE": "N/A"
