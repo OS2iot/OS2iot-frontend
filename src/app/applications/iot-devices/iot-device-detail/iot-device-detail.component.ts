@@ -34,25 +34,17 @@ const defaultChartOptions: ChartConfiguration['options'] = {
 };
 
 /**
- * Inspired from Chirpstack's source code. There's as many colors as there are data rates
- * @see https://github.com/brocaar/chirpstack-application-server/blob/9cf39fdda404e71744fa4f84a1cf26bf63a9b4aa/ui/src/views/devices/DeviceDetails.js#L402
+ * Ordered from "worst" to "best" (from DR0 and up)
  */
 const dataRateColors = [
-  '#E74C3C',
+  '#F57A2F',
   '#FFA620',
   '#F6CE06',
+  '#FFEB3B',
+  '#CDDC39',
   '#93E528',
   '#72D144',
   '#56B257',
-  '#4caf50',
-  '#009688',
-  '#00bcd4',
-  '#03a9f4',
-  '#2196f3',
-  '#3f51b5',
-  '#673ab7',
-  '#9c27b0',
-  '#e91e63',
 ];
 
 @Component({
