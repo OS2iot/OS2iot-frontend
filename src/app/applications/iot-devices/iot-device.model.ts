@@ -13,9 +13,9 @@ export class IotDevice {
   location: JsonLocation;
   commentOnLocation: string;
   comment: string;
-  type: DeviceType = DeviceType.GENERICHTTP;
+  type: DeviceType = DeviceType.GENERIC_HTTP;
   receivedMessagesMetadata: ReceivedMessageMetadata[];
-  metadata?: JSON;
+  metadata?: string;
   apiKey?: string;
   id: number;
   createdAt: Date;
@@ -67,4 +67,11 @@ export class IoTDeviceMinimal {
 export class IoTDevicesMinimalResponse {
   data: IoTDeviceMinimal[];
   count: number;
+}
+
+export class IoTDeviceStatsResponse {
+  timestamp: string;
+  rssi: number;
+  snr: number;
+  rxPacketsPerDr?: Record<number, number>;
 }

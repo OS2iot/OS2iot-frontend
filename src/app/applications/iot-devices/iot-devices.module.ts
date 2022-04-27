@@ -20,6 +20,7 @@ import { DeviceModelComponent } from './iot-device-detail/device-model/device-mo
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
+import { GraphModule } from '@app/graph/graph.module';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { DataPackagesTimestampComponent } from './iot-device-detail/data-package
         FormsModule,
         PipesModule,
         MonacoEditorModule,
+        GraphModule,
     ],
 })
 export class IotDevicesModule { }

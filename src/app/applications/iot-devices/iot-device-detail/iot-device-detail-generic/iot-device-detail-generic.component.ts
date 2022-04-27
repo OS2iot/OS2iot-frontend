@@ -1,42 +1,56 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Location } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
-import { DeviceType } from '@shared/enums/device-type';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { Subscription } from 'rxjs';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { jsonToList } from '@shared/helpers/json.helper';
+import { KeyValue } from '@shared/types/tuple.type';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
   templateUrl: './iot-device-detail-generic.component.html',
-  styleUrls: ['./iot-device-detail-generic.component.scss']
+  styleUrls: ['./iot-device-detail-generic.component.scss'],
 })
-export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDestroy {
+export class IotDeviceDetailGenericComponent
+  implements OnInit, OnChanges, OnDestroy {
   batteryStatusColor = 'green';
   batteryStatusPercentage: number;
+  metadataTags: KeyValue[] = [];
   @Input() device: IotDevice;
   @Input() latitude = 0;
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
+  baseUrl: string = environment.baseUrl;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
   constructor(
     private translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
-    private location: Location,
+    private location: Location
+  ) {}
 
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
 
+    if (
+      changes?.device?.previousValue?.metadata !==
+        changes?.device?.currentValue?.metadata &&
+      this.device.metadata
+    ) {
+      this.metadataTags = jsonToList(this.device.metadata);
+    }
   }
 
   routeBack(): void {
@@ -48,19 +62,23 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
       latitude: this.latitude,
       draggable: false,
       editEnabled: false,
-      useGeolocation: false
+      useGeolocation: false,
     };
   }
 
   getBatteryProcentage(): number {
-    if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
+    if (
+      this.device?.lorawanSettings?.deviceStatusBattery ===
+      this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE
+    ) {
       return null;
     }
     return Math.round(this.device?.lorawanSettings?.deviceStatusBattery);
   }
 
-  ngOnDestroy(): void {
-
+  getGenericHttpDeviceUrl(device: IotDevice): string {
+    return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
   }
 
+  ngOnDestroy(): void {}
 }

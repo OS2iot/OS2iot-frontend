@@ -36,7 +36,7 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
-        ErrorPageComponent
+        ErrorPageComponent,
     ],
     imports: [
         SharedVariableModule.forRoot(),
@@ -69,7 +69,7 @@ export function tokenGetter() {
                 tokenGetter
             },
         }),
-        MonacoEditorModule.forRoot()
+        MonacoEditorModule.forRoot(),
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

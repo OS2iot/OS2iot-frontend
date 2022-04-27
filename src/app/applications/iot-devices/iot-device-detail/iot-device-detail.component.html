@@ -1,48 +1,72 @@
 <div *ngIf="device">
-    <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
+  <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
         [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()" (extraDropdownOptions)="clickExtraDropdownOption($event)">
-    </app-top-bar>
-    <!-- General details & map -->
-    <div class="container-fluid">
+  </app-top-bar>
+  <!-- General details & map -->
+  <mat-tab-group animationDuration="200ms" (selectedTabChange)="selectedTabChange($event)">
+    <mat-tab label="{{'APPLICATION.DETAILS' | translate}}">
+      <div class="container-fluid">
         <app-iot-device-detail-generic [device]="device" [longitude]=longitude [latitude]="latitude">
         </app-iot-device-detail-generic>
-        <div class="row">
-            <div class="col-md-6 d-flex align-items-stretch">
-                <div class="jumbotron jumbotron--m-right jumbotron--full-width">
-                    <!-- Datapackage, Downlink, API Key -->
-                    <mat-tab-group animationDuration="200ms">
-                        <mat-tab label="{{'IOTDEVICE.DETAIL-TAB' | translate}}">
-                          <ng-container *ngIf="device.latestReceivedMessage; else noSentTime">
-                            <app-data-package [latestReceivedMessage]="device.latestReceivedMessage">
-                            </app-data-package>
-                            <mat-divider></mat-divider>
-                            <app-data-packages-timestamp [receivedMessagesMetadata]="device.receivedMessagesMetadata">
-                            </app-data-packages-timestamp>
-                          </ng-container>
-                          <ng-template #noSentTime>
-                            <p class="my-2 mx-3">
-                              {{ 'IOTDEVICE.NO-DATAPACKAGE' | translate }}
-                            </p>
-                          </ng-template>
-                        </mat-tab>
-                        <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canStartDownlink">
-                            <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
-                        </mat-tab>
-                        <mat-tab *ngIf="device.type === 'GENERIC_HTTP'"
-                            label="{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}">
-                            <div class="my-2 mx-3">
-                                <pre>{{ getGenericHttpDeviceUrl(device) }}</pre>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
-                </div>
-            </div>
-            <!-- Device model -->
-            <div class="col-md-6 d-flex align-items-stretch">
-                <div class="jumbotron jumbotron--m-left jumbotron--full-width">
-                    <app-device-model [device]="device"></app-device-model>
-                </div>
-            </div>
+        <!-- Device model -->
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+            <app-device-model [device]="device"></app-device-model>
+          </div>
         </div>
-    </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'IOTDEVICE.HISTORY' | translate}}">
+      <ng-container *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else historyNotSupported">
+        <div class="container-fluid mt-4">
+          <div class="row">
+            <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
+              <app-graph *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'" [data]="rssiChartData"
+                [type]="'line'" [options]="rssiChartOptions" [title]="'IOTDEVICE.HISTORY-TAB.RSSI' | translate">
+              </app-graph>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
+              <app-graph *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'" [data]="snrChartData"
+                [type]="'line'" [options]="snrChartOptions" [title]="'IOTDEVICE.HISTORY-TAB.SNR' | translate">
+              </app-graph>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-6 d-flex align-items-stretch">
+              <app-graph *ngIf="device.type === 'LORAWAN'" [data]="dataRateChartData" [type]="'bar'"
+                [options]="dataRateChartOptions" [title]="'IOTDEVICE.HISTORY-TAB.DATA-RATE' | translate"></app-graph>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #historyNotSupported>
+        <div class="jumbotron jumbotron--full-width">
+          <p class="my-2 mx-3">
+            {{ 'IOTDEVICE.HISTORY-TAB.HISTORY-NOT-SUPPORTED' | translate }}
+          </p>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="{{'IOTDEVICE.DATA-PACKETS' | translate}}">
+      <div class="jumbotron jumbotron--full-width">
+        <ng-container *ngIf="device.latestReceivedMessage; else noSentTime">
+          <app-data-package [latestReceivedMessage]="device.latestReceivedMessage">
+          </app-data-package>
+          <mat-divider></mat-divider>
+          <app-data-packages-timestamp [receivedMessagesMetadata]="device.receivedMessagesMetadata">
+          </app-data-packages-timestamp>
+        </ng-container>
+        <ng-template #noSentTime>
+          <p class="my-2 mx-3">
+            {{ 'IOTDEVICE.NO-DATAPACKAGE' | translate }}
+          </p>
+        </ng-template>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canStartDownlink">
+      <div class="jumbotron jumbotron--full-width">
+        <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
