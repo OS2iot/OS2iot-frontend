@@ -2,7 +2,7 @@
 export const environment = {
     production: window["env"].PRODUCTION === "true",
     baseUrl: window["env"].BASE_URL || "http://localhost:3000/api/v1/",
-    tablePageSize: parseInt(window["env"].TABLE_PAGE_SIZE) || 20
+    tablePageSize: parseInt(window["env"].TABLE_PAGE_SIZE) || 25
 };
 
 /*
