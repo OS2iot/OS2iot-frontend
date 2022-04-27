@@ -48,6 +48,7 @@ export class TopBarComponent implements OnInit {
     @Output() updatePageLimit = new EventEmitter();
 
     @Output() deleteSelectedInDropdown = new EventEmitter();
+    @Output() extraDropdownOptions = new EventEmitter();
     @Input() addDetailDowndown: boolean;
     @Input() dropDownButton: DropdownButton;
     public canEdit = false;
@@ -106,5 +107,9 @@ export class TopBarComponent implements OnInit {
 
     onClickDelete() {
         this.deleteSelectedInDropdown.emit();
+    }
+
+    onClickExtraDropdownOption(id: string) {
+      this.extraDropdownOptions.emit(id);
     }
 }

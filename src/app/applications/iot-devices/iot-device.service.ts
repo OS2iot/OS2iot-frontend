@@ -78,4 +78,8 @@ export class IoTDeviceService {
     getDeviceStats(id: number): Observable<IoTDeviceStatsResponse[]> {
       return this.restService.get(`${this.BASEURL}/stats`, null, id);
     }
+
+    resetHttpDeviceApiKey(id: number): Observable<Pick<IotDevice, 'apiKey'>> {
+      return this.restService.put(`${this.BASEURL}/resetHttpDeviceApiKey`, null, id);
+    }
 }

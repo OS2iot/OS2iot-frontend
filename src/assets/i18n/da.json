@@ -361,6 +361,8 @@
     "DELETE": "Slet",
     "EDIT": "Redigér",
     "SHOW-OPTIONS": "Håndter IoT enhed",
+    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteristatus",
+    "RESET-API-KEY": "Nulstil API nøgle",
     "NOT-SUPPORTED": "Ikke understøttet",
     "NOT-SUPPORTED-SHORT": "-",
     "NOT-AVAILABLE": "N/A"
@@ -760,7 +762,11 @@
     "NOCOMMENTONLOCATION": "Ingen beskrivelse af placeringen er angivet",
     "GENERIC_HTTP": {
       "APIKEY": "API kald",
-      "INSTRUCTIONS": "Du kalder denne url:"
+      "INSTRUCTIONS": "Du kalder denne url:",
+      "RESET-API-KEY": {
+        "BODY": "Advarsel! Nulstilling vil stoppe modtagelse af data på den eksisterende API Key. Vil du fortsætte?",
+        "YESRESET": "Ja, nulstil"
+      }
     },
     "LORAWANSETUP": "LoRaWAN specifik opsætning",
     "LATEST-DATAPACKAGE": "Seneste datapakke sendt fra enheden:",

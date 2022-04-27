@@ -31,7 +31,7 @@
 
             <button *ngIf="dtRouterLink && dtRouterLink != ''" [routerLink]="dtRouterLink" routerLinkActive="active"
             class="btn btn-primary mr-1" type="button" [attr.aria-label]="dtLabel">{{dtLabel}}</button>
-            
+
             <div class="btn-group float-md-right dropdown" *ngIf="dropDownButton && addDetailDowndown === true && canEdit">
               <button type="button" id="dropdown-{{ data.name }}" class="btn btn-primary dropdown-toggle"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,6 +42,11 @@
                   <a [routerLink]="dropDownButton.editRouterLink">{{ 'TOPBAR.DROPDOWN.EDIT' | translate }}
                   </a>
                 </li>
+                <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
+                  <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+                    <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+                  </li>
+                </ng-container>
                 <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
                   <a (click)="onClickDelete()">{{ 'TOPBAR.DROPDOWN.DELETE' | translate }}
                   </a>
