@@ -69,7 +69,7 @@ export function tokenGetter() {
                 tokenGetter
             },
         }),
-        MonacoEditorModule.forRoot()
+        MonacoEditorModule.forRoot(),
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

@@ -1,0 +1,13 @@
+<mat-card class="chart-container">
+  <mat-card-header *ngIf="title">
+    <mat-card-title>
+      {{title}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="no-data-container" *ngIf="isGraphEmpty">
+      <h3>{{ 'GRAPH.NO-DATA' | translate }}</h3>
+    </div>
+    <canvas #someGraph [ngClass]="{'width-100': isGraphEmpty}"></canvas>
+  </mat-card-content>
+</mat-card>
