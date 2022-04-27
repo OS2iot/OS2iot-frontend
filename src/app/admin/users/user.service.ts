@@ -18,6 +18,7 @@ import {
 })
 export class UserService {
   URL = 'user';
+  URL_NEW_KOMBIT = "kombitCreation"
 
   constructor(
     private restService: RestService,
@@ -92,7 +93,7 @@ export class UserService {
   }
 
   getOneSimple(id: number): Observable<UserResponse> {
-    return this.restService.get(this.URL, {}, id).pipe(
+    return this.restService.get(this.URL_NEW_KOMBIT, {}, id).pipe(
       map((response: UserResponse) => {
         return response;
       })
@@ -100,7 +101,7 @@ export class UserService {
   }
   updateNewKombit(body: CreateNewKombitUserDto): Observable<UserResponse> {
     return this.restService.put(
-      this.URL + '/createNewKombitUser',
+      this.URL_NEW_KOMBIT + '/createNewKombitUser',
       body,
       undefined,
       {
@@ -110,7 +111,7 @@ export class UserService {
   }
 
   updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
-    return this.restService.put(this.URL + '/updateUserOrgs', body, undefined, {
+    return this.restService.put(this.URL_NEW_KOMBIT + '/updateUserOrgs', body, undefined, {
       observe: 'response',
     });
   }

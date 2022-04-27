@@ -11,6 +11,7 @@ import {
 import { UserService } from '@app/admin/users/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -36,6 +37,7 @@ export class NewUserComponent implements OnInit {
 
   constructor(
     private organisationService: OrganisationService,
+    private sharedService: SharedVariableService,
     private userService: UserService,
     private router: Router,
     private translate: TranslateService,
@@ -114,12 +116,17 @@ export class NewUserComponent implements OnInit {
   }
 
   public getOrganisations() {
-    this.organisationSubscription = this.organisationService
-      .getMultipleNoReq()
-      .subscribe((orgs) => {
-        this.organisations = orgs.data;
-        this.filteredOrganisations.next(this.organisations.slice());
-      });
+    this.organisations = this.sharedService.getOrganizationInfo();
+    if (!this.organisations) {
+      this.filteredOrganisations.next(this.organisations.slice());
+    } else {
+      this.organisationSubscription = this.organisationService
+        .getMinimalNoPerm()
+        .subscribe((orgs) => {
+          this.organisations = orgs.data;
+          this.filteredOrganisations.next(this.organisations.slice());
+        });
+    }
   }
   private resetErrors() {
     this.errorFields = [];

@@ -54,7 +54,7 @@ export class SharedVariableService {
 
   setOrganizationInfo() {
     return this.organisationService
-      .getMinimal()
+      .getMinimalNoPerm()
       .pipe(
         tap((response: OrganisationGetMinimalResponse) => {
           localStorage.setItem(

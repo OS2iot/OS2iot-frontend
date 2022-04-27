@@ -136,7 +136,7 @@ export class UserPageComponent implements OnInit {
 
   public getOrganisations() {
     this.organisationSubscription = this.organizationService
-      .getMultipleNoReq()
+      .getMinimalNoPerm()
       .subscribe((orgs) => {
         this.requestOrganizationsList = orgs.data;
         this.requestOrganizationsList = this.filterChosenOrganizations(
@@ -187,10 +187,12 @@ export class UserPageComponent implements OnInit {
       this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
         () => {
           window.location.reload();
+          this.pressed = false;
         },
         (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
+          this.pressed = false;
         }
       );
     }

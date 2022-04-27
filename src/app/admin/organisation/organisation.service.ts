@@ -17,6 +17,7 @@ import { UpdateUserOrgsDto } from '../users/user.model';
 export class OrganisationService {
   URL = 'organization';
   URLMINIMAL = 'organization/minimal';
+  URLMINIMAL_NEWKOMBIT = 'kombitCreation/minimal';
 
   constructor(
     private restService: RestService,
@@ -51,6 +52,10 @@ export class OrganisationService {
     return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
+  getMinimalNoPerm(): Observable<OrganisationGetMinimalResponse> {
+    return this.restService.get(this.URLMINIMAL_NEWKOMBIT, {}).pipe(shareReplay(1));
+  }
+
   getMultiple(
     limit: number = 1000,
     offset: number = 0,
@@ -58,20 +63,6 @@ export class OrganisationService {
     orderByDirection?: string
   ): Observable<OrganisationGetManyResponse> {
     return this.restService.get(this.URL, {
-      limit,
-      offset,
-      orderOn: orderByColumn,
-      sort: orderByDirection,
-    });
-  }
-
-  getMultipleNoReq(
-    limit: number = 1000,
-    offset: number = 0,
-    orderByColumn?: string,
-    orderByDirection?: string
-  ): Observable<OrganisationGetManyResponse> {
-    return this.restService.get(this.URL + '/all', {
       limit,
       offset,
       orderOn: orderByColumn,
