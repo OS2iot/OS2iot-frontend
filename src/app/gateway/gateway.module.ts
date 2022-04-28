@@ -13,6 +13,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormModule } from '@shared/components/forms/form.module';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { GatewayStatusComponent } from './gateway-status/gateway-status.component';
 
 const gatewayRoutes: Routes = [
   {
@@ -35,6 +36,7 @@ const gatewayRoutes: Routes = [
     GatewayListComponent,
     GatewayDetailComponent,
     GatewayEditComponent,
+    GatewayStatusComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ const gatewayRoutes: Routes = [
     GatewaysComponent,
     GatewayListComponent,
     GatewayEditComponent,
+    GatewayStatusComponent,
     RouterModule
   ]
 })

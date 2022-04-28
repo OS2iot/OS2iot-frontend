@@ -13,7 +13,9 @@
     "VALUE": "Værdi",
     "NAME": "Navn",
     "DESCRIPTION": "Beskrivelse",
-    "to": "til"
+    "to": "til",
+    "ONLINE": "Online",
+    "OFFLINE": "Offline"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -301,6 +303,9 @@
     "LAST-SEEN-AT": "Seneste aktivitet",
     "STATUS": "Status",
     "ORGANIZATION": "Organisation"
+  },
+  "LORA-GATEWAY-STATUS": {
+    "TIMESTAMP": "Tidspunkt"
   },
   "DEVICE-MODEL": {
     "DELETE-FAILED":"Slet Fejlede",

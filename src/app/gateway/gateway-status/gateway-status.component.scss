@@ -1,0 +1,62 @@
+$online: #449d52;
+$offline: #f96772;
+
+.status-table {
+  border-collapse: separate;
+  border-spacing: 10px 4px;
+
+  .online {
+    background-color: $online;
+  }
+  .offline {
+    background-color: $offline;
+  }
+
+  tr {
+    &:hover {
+      background-color: unset;
+    }
+
+    > td.mat-cell {
+      min-width: 1.2rem;
+
+      &:not(:first-child) {
+        max-width: 1.2rem;
+      }
+
+      &:first-child {
+        padding-left: 0;
+        min-width: 5rem;
+      }
+
+      &:last-child {
+        max-width: 1.2rem;
+        padding-right: 0;
+      }
+    }
+
+    > td.mat-footer-cell {
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.status-legend {
+  .legend {
+    width: 5rem;
+    height: 8px;
+
+    &.online {
+      background-color: $online;
+    }
+    &.offline {
+      background-color: $offline;
+    }
+  }
+
+  span {
+    color: rgba($color: #000, $alpha: 0.6);
+  }
+}

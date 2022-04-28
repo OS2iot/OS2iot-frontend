@@ -57,3 +57,8 @@ export interface GatewayStats {
     txPacketsReceived: number;
     txPacketsEmitted: number;
 }
+
+export interface GatewayStatus {
+  id: string;
+  onlineTimestamps: Date[];
+}
