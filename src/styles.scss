@@ -10,6 +10,7 @@
 //Components
 @import 'assets/scss/components/boxes';
 @import 'assets/scss/components/bulk-import';
+@import 'assets/scss/components/date-picker';
 @import 'assets/scss/components/forms';
 @import 'assets/scss/components/list';
 @import 'assets/scss/components/loading-spinner';
@@ -53,3 +54,38 @@
   font-family: 'roboto-bold';
   src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
 }
+
+body {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color: #000000, $alpha: 0.5);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($color: #000000, $alpha: 0.4);
+  }
+
+  // For FireFox
+  scrollbar-width: 5px;
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: rgba($color: #000000, $alpha: 0.5);
+    scrollbar-track-color: rgba($color: #000000, $alpha: 0.4);
+  }
+}
+
+.snackBar.mat-snack-bar-container{
+  background: #f4f4f4;
+  color: #000;
+}
+
+.mat-tooltip {
+  font-size: 1rem !important;
+}
+

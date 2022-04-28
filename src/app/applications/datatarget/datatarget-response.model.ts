@@ -9,8 +9,15 @@ export class DatatargetResponse {
     timeout: number;
     type: DataTargetType;
     url: string;
+    tenant: string;
+    context: string;
     authorizationHeader: string;
     openDataDkDataset: OpenDataDkDataset;
+    mqttPort?: number;
+    mqttTopic?: string;
+    mqttQos?: string;
+    mqttUsername?: string;
+    mqttPassword?: string;
     createdAt: string;
     updatedAt: string;
     createdBy: number;

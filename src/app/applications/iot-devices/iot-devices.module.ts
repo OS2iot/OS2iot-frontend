@@ -19,6 +19,8 @@ import { PipesModule } from '@shared/pipes/pipes.module';
 import { DeviceModelComponent } from './iot-device-detail/device-model/device-model.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
+import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
+import { GraphModule } from '@app/graph/graph.module';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,8 @@ import { DataPackageComponent } from './iot-device-detail/data-package/data-pack
         DownlinkComponent,
         DownlinkDialogComponent,
         DeviceModelComponent,
-        DataPackageComponent
+        DataPackageComponent,
+        DataPackagesTimestampComponent,
     ],
     exports: [
         IotDevicesTableComponent,
@@ -48,6 +51,7 @@ import { DataPackageComponent } from './iot-device-detail/data-package/data-pack
         FormsModule,
         PipesModule,
         MonacoEditorModule,
+        GraphModule,
     ],
 })
 export class IotDevicesModule { }

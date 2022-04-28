@@ -92,7 +92,7 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
 
   rejectUser(userId: number) {
     this.deleteDialogService
-      .showSimpleDialog(this.message, false, true, false, true, this.infoTitle)
+      .showSimpleDialog(this.message, false, true, false, this.infoTitle, true)
       .subscribe((response) => {
         if (response) {
           this.userService

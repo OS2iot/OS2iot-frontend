@@ -113,7 +113,6 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
                     false,
                     false,
                     true,
-                    false,
                     this.errorTitle
                   )
                   .subscribe();

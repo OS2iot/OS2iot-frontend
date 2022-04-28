@@ -128,7 +128,6 @@ export class PayloadDecoderTableComponent
                     false,
                     false,
                     true,
-                    false,
                     this.errorTitle
                   )
                   .subscribe();

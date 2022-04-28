@@ -82,11 +82,16 @@
                       >{{ 'TOPBAR.DROPDOWN.EDIT' | translate }}
                     </a>
                   </li>
-                  <li
-                    class="dropdown-item"
-                    *ngIf="dropDownButton.isErasable === true"
-                  >
-                    <a (click)="onClickDelete()"
+                <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
+                  <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+                    <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+                  </li>
+                </ng-container>
+                 <li
+                   class="dropdown-item"
+                   *ngIf="dropDownButton.isErasable === true"
+                 >
+                   <a (click)="onClickDelete()"
                       >{{ 'TOPBAR.DROPDOWN.DELETE' | translate }}
                     </a>
                   </li>

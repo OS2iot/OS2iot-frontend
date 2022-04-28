@@ -7,11 +7,18 @@ export class Datatarget {
     applicationId: number;
     type: DataTargetType = DataTargetType.HTTPPUSH;
     url: string;
-    //default 30 sec
-    timeout: number = 30000;
+    tenant: string;
+    context: string;
+    // default 30 sec
+    timeout = 30000;
     authorizationHeader: string;
     setToOpendataDk = false;
     openDataDkDataset: OpenDataDkDataset = new OpenDataDkDataset();
+    mqttPort?: number;
+    mqttTopic?: string;
+    mqttQos?: string;
+    mqttUsername?: string;
+    mqttPassword?: string;
     createdAt: string;
     updatedAt: string;
     createdBy: number;
@@ -24,4 +31,13 @@ export class DatatargetData {
     data: Datatarget[];
     ok?: boolean;
     count?: number;
+}
+
+export class DatatargetTypeDescriptor {
+    name: string;
+    type: DataTargetType;
+    icon: string;
+    description: string;
+    readMoreUrl: string;
+    provider: string;
 }

@@ -5,4 +5,6 @@ export class DialogModel {
     showCancel = true;
     showReject: boolean;
     message: string;
+    acceptText: string;
+    cancelText: string;
 }

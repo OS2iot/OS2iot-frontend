@@ -14,15 +14,33 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { DatatargetNewComponent } from './datatarget-new/datatarget-new.component';
+import { FiwareEditComponent } from './fiware/fiware-edit/fiware-edit.component';
+import { FiwareDetailComponent } from './fiware/fiware-detail/fiware-detail.component';
+import { HttppushDetailComponent } from './httppush/httppush-detail/httppush-detail.component';
+import { HttppushEditComponent } from './httppush/httppush-edit/httppush-edit.component';
+import { DatatargetDetailTypeSelectorDirective } from './datatarget-detail/datatarget-detail-type-selector.directive';
+import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarget-edit-type-selector.directive';
+import { MqttEditComponent } from './mqtt-edit/mqtt-edit.component';
+import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
 
 @NgModule({
   declarations: [
     DatatargetTableComponent,
     DatatargetEditComponent,
+    DatatargetNewComponent,
     DatatargetDetailComponent,
+    FiwareDetailComponent,
+    FiwareEditComponent,
+    HttppushDetailComponent,
+    HttppushEditComponent,
     OpendatadkComponent,
     OpendatadkEditComponent,
-    OpendatadkDetailComponent],
+    OpendatadkDetailComponent,
+    MqttDetailComponent,
+    MqttEditComponent,
+    DatatargetDetailTypeSelectorDirective,
+    DatatargetEditTypeSelectorDirective],
   imports: [
     CommonModule,
     RouterModule,
@@ -38,7 +56,12 @@ import { PipesModule } from '@shared/pipes/pipes.module';
   exports: [
     DatatargetTableComponent,
     DatatargetEditComponent,
+    DatatargetNewComponent,
     DatatargetDetailComponent,
+    FiwareDetailComponent,
+    FiwareEditComponent,
+    HttppushDetailComponent,
+    HttppushEditComponent,
     NGMaterialModule
   ]
 })
