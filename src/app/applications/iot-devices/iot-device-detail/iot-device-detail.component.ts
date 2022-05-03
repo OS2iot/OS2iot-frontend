@@ -226,7 +226,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
 
       this.iotDeviceService.getDeviceStats(this.deviceId).subscribe(
         (response) => {
-          if (response === null) {
+          if (!response) {
             return;
           }
 

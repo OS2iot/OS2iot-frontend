@@ -15,7 +15,9 @@
     "DESCRIPTION": "Beskrivelse",
     "to": "til",
     "ONLINE": "Online",
-    "OFFLINE": "Offline"
+    "OFFLINE": "Offline",
+    "NEVER-SEEN": "Aldrig set",
+    "DATE": "Dato"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
@@ -305,6 +307,7 @@
     "ORGANIZATION": "Organisation"
   },
   "LORA-GATEWAY-STATUS": {
+    "TITLE": "LoRaWAN online status historik",
     "TIMESTAMP": "Tidspunkt"
   },
   "DEVICE-MODEL": {

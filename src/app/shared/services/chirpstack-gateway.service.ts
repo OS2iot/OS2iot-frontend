@@ -56,6 +56,11 @@ export class ChirpstackGatewayService {
     );
   }
 
+  // TODO: GATEWAY: Implement fetch
+  public getStatus(id: number): Observable<null> {
+    return null;
+  }
+
   public post(gateway: Gateway): Observable<GatewayData> {
     const gatewayRequest: GatewayRequest = new GatewayRequest;
     gatewayRequest.gateway = gateway;

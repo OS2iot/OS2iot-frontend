@@ -1,5 +1,9 @@
-$online: #449d52;
-$offline: #f96772;
+@import '~src/assets/scss/setup/variables';
+
+$online: $color-green-001;
+$offline: $red;
+$neverSeen: $color-grey-003;
+$cellSize: 0.9rem;
 
 .status-table {
   border-collapse: separate;
@@ -17,27 +21,39 @@ $offline: #f96772;
       background-color: unset;
     }
 
-    > td.mat-cell {
-      min-width: 1.2rem;
-
-      &:not(:first-child) {
-        max-width: 1.2rem;
+    > td {
+      font-size: $cellSize;
+      &:hover {
+        transition: $transition-short;
+        filter: brightness(0.65);
       }
 
-      &:first-child {
-        padding-left: 0;
-        min-width: 5rem;
+      &.mat-cell {
+        min-width: 1.2rem;
+
+        &:not(:first-child) {
+          max-width: 1.2rem;
+        }
+
+        &:first-child {
+          padding-left: 0;
+          min-width: 5rem;
+        }
+
+        &:last-child {
+          max-width: 1.2rem;
+          padding-right: 0;
+        }
       }
 
-      &:last-child {
-        max-width: 1.2rem;
-        padding-right: 0;
-      }
-    }
+      &.mat-footer-cell {
+        &:first-child {
+          padding-left: 0;
+        }
 
-    > td.mat-footer-cell {
-      &:last-child {
-        padding-right: 0;
+        &:last-child {
+          padding-right: 0;
+        }
       }
     }
   }
@@ -54,9 +70,16 @@ $offline: #f96772;
     &.offline {
       background-color: $offline;
     }
+    &.never-seen {
+      background-color: $neverSeen;
+    }
   }
 
   span {
     color: rgba($color: #000, $alpha: 0.6);
   }
+}
+
+.margin-right--5 {
+  margin-right: -1.5rem;
 }

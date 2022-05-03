@@ -15,7 +15,9 @@ export class GatewayStatusComponent implements OnInit {
   timeColumns: string[] = [];
   displayedColumns: string[] = [];
   nameText = '';
+  neverSeenText = '';
   timestampText = '';
+  visibleFooterTimeInterval = 1;
 
   constructor(private translate: TranslateService) {}
 
@@ -23,24 +25,29 @@ export class GatewayStatusComponent implements OnInit {
     this.getGatewayStatus();
 
     this.translate
-      .get(['GEN.NAME', 'LORA-GATEWAY-STATUS.TIMESTAMP'])
+      .get(['GEN.NAME', 'GEN.NEVER-SEEN', 'LORA-GATEWAY-STATUS.TIMESTAMP'])
       .subscribe((translations) => {
         this.nameText = translations['GEN.NAME'];
+        this.neverSeenText = translations['GEN.NEVER-SEEN'];
         this.timestampText = translations['LORA-GATEWAY-STATUS.TIMESTAMP'];
       });
   }
 
   getGatewayStatus(): void {
-    // TODO: Fetch from API
+    // TODO: Fetch from API on gateway list
     const response: GatewayStatus[] = [
       { id: 'aaa', onlineTimestamps: [moment().toDate()] },
       {
         id: 'bbbbbbbbb',
-        onlineTimestamps: [moment().subtract(1, 'day').toDate()],
+        onlineTimestamps: [moment().subtract(10, 'hour').toDate()],
       },
     ];
 
     this.buildColumns(response);
+    this.visibleFooterTimeInterval = Math.round(
+      this.clamp(this.timeColumns.length / 4, 1, 6)
+    );
+
     this.dataSource = new MatTableDataSource<GatewayStatus>(response);
   }
 
@@ -71,20 +78,32 @@ export class GatewayStatusComponent implements OnInit {
     }
   }
 
+  private clamp(value: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, value));
+  }
+
   getStatusClass(gateway: GatewayStatus, timestamp: string) {
-    return gateway.onlineTimestamps.some((gatewayTimestamp) =>
-      moment(gatewayTimestamp).isSame(moment(timestamp), 'hour')
-    )
+    return !gateway.onlineTimestamps.length
+      ? 'never-seen'
+      : gateway.onlineTimestamps.some((gatewayTimestamp) =>
+          moment(gatewayTimestamp).isSame(moment(timestamp), 'hour')
+        )
       ? 'online'
       : 'offline';
+  }
+
+  formatFooterDate(timestamp: string): string {
+    return moment(timestamp).format('DD-MM');
   }
 
   formatTime(timestamp: string): string {
     return moment(timestamp).format('HH:00');
   }
 
-  formatTooltip(gatewayId: string, timestamp: string): string {
-    const formattedTime = moment(timestamp).format('DD-MM-YYYY HH:MM');
-    return `${this.nameText}: ${gatewayId}\n${this.timestampText}: ${formattedTime}`;
+  formatTooltip(gateway: GatewayStatus, timestamp: string): string {
+    const formattedTime = !gateway.onlineTimestamps.length
+      ? this.neverSeenText
+      : moment(timestamp).format('DD-MM-YYYY HH:00');
+    return `${this.nameText}: ${gateway.id}\n${this.timestampText}: ${formattedTime}`;
   }
 }

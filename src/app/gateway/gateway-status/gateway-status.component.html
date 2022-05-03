@@ -2,27 +2,51 @@
   Responsiveness on smaller screens or if there's too many columns
   - Already has horizontal scroll on iPad portrait.
   - "next page" where the next/previous 6 hours is shown. 24 hours is too much on iPad portrait
-  - minimum width on cells
+  - max width on cell?
+  - min and max date picker?
 
-  Title similar to the mock-up?
 
-  Should the status legend be moved inside the table container so that it's on the same elevation?
+
+  Gateway id vs gateway name
+  - Use name if possible. Will it work if pagination is introduced?
+
+  __Backend__
+  Fetch gateways paginated
+  - Shouldn't be a heavy operation if we DON'T ask fetch info for every single one.
+  - Sorting shouldn't be a concern. Chirpstack doesn't support this and the "listevisning" tab only sorts on response
+
+  __Questions__
+   Colors used from variables.scss instead of from grafana example. Is it okay?
+
 -->
-<table mat-table [dataSource]="dataSource" class="status-table">
-  <ng-container matColumnDef="gatewayName">
-    <td mat-cell *matCellDef="let element">{{element.id}}</td>
-    <td mat-footer-cell *matFooterCellDef></td>
-  </ng-container>
+<h4 class="text-center">{{ 'LORA-GATEWAY-STATUS.TITLE' | translate}}</h4>
+<div class="d-flex margin-right--5">
+  <table #gatewayStatus mat-table [dataSource]="dataSource" class="status-table">
+    <ng-container matColumnDef="gatewayName">
+      <td mat-cell *matCellDef="let element" class="text--semibold">{{element.id}}</td>
+      <td mat-footer-cell *matFooterCellDef class="text--semibold text-center">
+        {{'GEN.DATE' | translate}}
+        <br />
+        {{'LORA-GATEWAY-STATUS.TIMESTAMP' | translate}}
+      </td>
+    </ng-container>
 
-  <ng-container *ngFor="let col of timeColumns; let colIndex = index" matColumnDef="{{col}}">
-    <td mat-cell *matCellDef="let gateway" [matTooltip]="formatTooltip(gateway.id, col)"
-      [matTooltipClass]="'status-tooltip'" [ngClass]="getStatusClass(gateway, col)"></td>
-    <td mat-footer-cell *matFooterCellDef="let gateway">{{formatTime(col)}}</td>
-  </ng-container>
+    <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{time}}">
+      <td mat-cell *matCellDef="let gateway" [matTooltip]="formatTooltip(gateway, time)"
+        [matTooltipClass]="'status-tooltip'" [ngClass]="getStatusClass(gateway, time)"></td>
+      <td mat-footer-cell *matFooterCellDef="let gateway" [ngClass]="{'invisible': index % visibleFooterTimeInterval}">
+        {{formatFooterDate(time)}}
+        <br />
+        {{formatTime(time)}}
+      </td>
+    </ng-container>
 
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-</table>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+  <!-- Empty spacing if table overflows -->
+  <div class="pl-4"></div>
+</div>
 <div class="status-legend d-flex flex-row mt-3">
   <div class="d-flex flex-column">
     <div class="legend online"></div>
@@ -31,5 +55,9 @@
   <div class="d-flex flex-column">
     <div class="legend offline"></div>
     <span class="text-center">{{ "GEN.OFFLINE" | translate}}</span>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="legend never-seen"></div>
+    <span class="text-center">{{ "GEN.NEVER-SEEN" | translate}}</span>
   </div>
 </div>

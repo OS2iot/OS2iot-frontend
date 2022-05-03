@@ -11,6 +11,7 @@ import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   public selectedSortId = 1;
   public gateways: Gateway[];
   private gatewaySubscription: Subscription;
+  private gatewayStatusSubscription: Subscription;
   public selectedSortObject: Sort = {
     id: 1,
     dir: 'ASC',
@@ -120,14 +122,21 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  showMap(event: any) {
-    if (event.index === 1) {
+  private getGatewayStatus(): void {
+    // TODO: GATEWAY: Implement fetch
+    // this.gatewayStatusSubscription = this.chirpstackGatewayService.get
+  }
+
+  selectedTabChange({index}: MatTabChangeEvent) {
+    if (index === 1) {
       if (this.selectedOrg) {
         this.getGatewayWith(this.selectedOrg);
       } else {
         this.getGateways();
       }
       this.showmap = true;
+    } else if (index === 2) {
+      this.getGatewayStatus();
     }
   }
 
@@ -184,12 +193,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
-    if (this.gatewaySubscription) {
-      this.gatewaySubscription.unsubscribe();
-    }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
+      this.gatewaySubscription?.unsubscribe();
+      this.deleteDialogSubscription?.unsubscribe();
   }
-
 }

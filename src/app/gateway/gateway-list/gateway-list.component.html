@@ -7,7 +7,7 @@
       [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="setOrgIdFilter($event)"
       [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
     </app-top-bar-table>
-    <mat-tab-group animationDuration="200ms" (selectedTabChange)="showMap($event)">
+    <mat-tab-group animationDuration="200ms" (selectedTabChange)="selectedTabChange($event)">
       <mat-tab label="{{'GATEWAY.TABEL-TAB' | translate}}">
         <div class="jumbotron--table">
           <app-gateway-table [organisationChangeSubject]="organisationChangeSubject">
