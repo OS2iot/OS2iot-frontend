@@ -1,9 +1,9 @@
 @import '~src/assets/scss/setup/variables';
 
-$online: $color-green-001;
-$offline: $red;
-$neverSeen: $color-grey-003;
-$cellSize: 0.9rem;
+$online: #56b257;
+$offline: #e74c3c;
+$neverSeen: #acacac;
+$cellFontSize: 0.9rem;
 
 .status-table {
   border-collapse: separate;
@@ -15,6 +15,9 @@ $cellSize: 0.9rem;
   .offline {
     background-color: $offline;
   }
+  .never-seen {
+    background-color: $neverSeen;
+  }
 
   tr {
     &:hover {
@@ -22,7 +25,7 @@ $cellSize: 0.9rem;
     }
 
     > td {
-      font-size: $cellSize;
+      font-size: $cellFontSize;
       &:hover {
         transition: $transition-short;
         filter: brightness(0.65);
@@ -77,9 +80,21 @@ $cellSize: 0.9rem;
 
   span {
     color: rgba($color: #000, $alpha: 0.6);
+    font-size: $cellFontSize;
   }
 }
 
-.margin-right--5 {
-  margin-right: -1.5rem;
+.overflow-auto {
+  overflow: auto;
+}
+
+.no-shadow {
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+  -moz-box-shadow: unset;
+}
+
+.status-interval {
+  width: 180px;
+  font-size: $cellFontSize;
 }

@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  Input,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { MatOptionSelectionChange } from '@angular/material/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { recordToEntries } from '@shared/helpers/record.helper';
+import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import * as moment from 'moment';
-import { GatewayStatus } from '../gateway.model';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { GatewayStatusInterval } from '../enums/gateway-status-interval.enum';
+import { GatewayStatus, GatewayStatusResponse } from '../gateway.model';
 
 @Component({
   selector: 'app-gateway-status',
   templateUrl: './gateway-status.component.html',
   styleUrls: ['./gateway-status.component.scss'],
 })
-export class GatewayStatusComponent implements OnInit {
+export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
+  @Input() organisationChangeSubject: Subject<number>;
+  @Input() isVisibleSubject: Subject<void>;
+
+  private gatewayStatusSubscription: Subscription;
   private readonly columnGatewayName = 'gatewayName';
   dataSource: MatTableDataSource<GatewayStatus>;
   timeColumns: string[] = [];
@@ -18,11 +36,24 @@ export class GatewayStatusComponent implements OnInit {
   neverSeenText = '';
   timestampText = '';
   visibleFooterTimeInterval = 1;
+  pageSize = environment.tablePageSize;
+  resultsLength = 0;
+  organizationId: number;
+  isLoadingResults = false;
+  isDirty = true;
+  statusIntervals: GatewayStatusInterval[];
+  selectedStatusInterval = GatewayStatusInterval.DAY;
 
-  constructor(private translate: TranslateService) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngOnInit(): void {
-    this.getGatewayStatus();
+  constructor(
+    private translate: TranslateService,
+    private sharedVariableService: SharedVariableService,
+    private lorawanGatewayService: LoRaWANGatewayService
+  ) {}
+
+  ngAfterContentInit(): void {
+    this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
 
     this.translate
       .get(['GEN.NAME', 'GEN.NEVER-SEEN', 'LORA-GATEWAY-STATUS.TIMESTAMP'])
@@ -31,32 +62,84 @@ export class GatewayStatusComponent implements OnInit {
         this.neverSeenText = translations['GEN.NEVER-SEEN'];
         this.timestampText = translations['LORA-GATEWAY-STATUS.TIMESTAMP'];
       });
+
+    this.organisationChangeSubject.subscribe((orgId) => {
+      if (orgId) {
+        this.organizationId = orgId;
+        this.isDirty = true;
+      }
+    });
+
+    this.isVisibleSubject.pipe().subscribe(() => {
+      if (!this.isDirty) {
+        return;
+      }
+
+      this.isDirty = false;
+      this.subscribeToGetGatewayStatus();
+    });
+
+    this.statusIntervals = recordToEntries(GatewayStatusInterval).map(
+      (interval) => interval.value
+    );
   }
 
-  getGatewayStatus(): void {
-    // TODO: Fetch from API on gateway list
-    const response: GatewayStatus[] = [
-      { id: 'aaa', onlineTimestamps: [moment().toDate()] },
-      {
-        id: 'bbbbbbbbb',
-        onlineTimestamps: [moment().subtract(10, 'hour').toDate()],
-      },
-    ];
+  private getGatewayStatus(
+    organizationId = this.organizationId,
+    timeInterval = this.selectedStatusInterval
+  ): Observable<GatewayStatusResponse> {
+    return this.lorawanGatewayService.getAllStatus({
+      organizationId,
+      timeInterval,
+      // Paginator is only avaiable in ngAfterViewInit
+      limit: this.paginator?.pageSize,
+      offset: this.paginator?.pageIndex * this.paginator.pageSize,
+    });
+  }
 
-    this.buildColumns(response);
+  private subscribeToGetGatewayStatus(
+    organizationId = this.organizationId,
+    timeInterval = this.selectedStatusInterval
+  ): void {
+    this.isLoadingResults = true;
+    this.gatewayStatusSubscription = this.getGatewayStatus(
+      organizationId,
+      timeInterval
+    ).subscribe((response) => {
+      this.isLoadingResults = false;
+      this.handleStatusResponse(response);
+    });
+  }
+
+  private handleStatusResponse(response: GatewayStatusResponse) {
+    this.resultsLength = response.count;
+    const sortedData = response.data
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    this.buildColumns(sortedData);
     this.visibleFooterTimeInterval = Math.round(
       this.clamp(this.timeColumns.length / 4, 1, 6)
     );
 
-    this.dataSource = new MatTableDataSource<GatewayStatus>(response);
+    this.dataSource = new MatTableDataSource<GatewayStatus>(sortedData);
+    this.dataSource.paginator = this.paginator;
   }
 
   private buildColumns(response: GatewayStatus[]) {
-    let minDate: Date | null | undefined = response[0]?.onlineTimestamps[0];
-    let maxDate: Date | null | undefined = response[0]?.onlineTimestamps[0];
+    let minDate: Date | null | undefined;
+    let maxDate: Date | null | undefined;
+    this.timeColumns = [];
 
     response.forEach((gateway) => {
       gateway.onlineTimestamps.forEach((timestamp) => {
+        if (!minDate) {
+          minDate = timestamp;
+        }
+        if (!maxDate) {
+          maxDate = timestamp;
+        }
+
         if (timestamp < minDate) {
           minDate = timestamp;
         } else if (timestamp > maxDate) {
@@ -73,9 +156,9 @@ export class GatewayStatusComponent implements OnInit {
       ) {
         this.timeColumns.push(dt.toISOString());
       }
-
-      this.displayedColumns = [this.columnGatewayName].concat(this.timeColumns);
     }
+
+    this.displayedColumns = [this.columnGatewayName].concat(this.timeColumns);
   }
 
   private clamp(value: number, min: number, max: number) {
@@ -92,6 +175,19 @@ export class GatewayStatusComponent implements OnInit {
       : 'offline';
   }
 
+  onSelectInterval({
+    isUserInput,
+    source: { value: newInterval },
+  }: MatOptionSelectionChange) {
+    if (
+      isUserInput &&
+      newInterval !== this.selectedStatusInterval &&
+      this.dataSource?.data.length
+    ) {
+      this.subscribeToGetGatewayStatus(this.organizationId, newInterval);
+    }
+  }
+
   formatFooterDate(timestamp: string): string {
     return moment(timestamp).format('DD-MM');
   }
@@ -104,6 +200,11 @@ export class GatewayStatusComponent implements OnInit {
     const formattedTime = !gateway.onlineTimestamps.length
       ? this.neverSeenText
       : moment(timestamp).format('DD-MM-YYYY HH:00');
-    return `${this.nameText}: ${gateway.id}\n${this.timestampText}: ${formattedTime}`;
+    return `${this.nameText}: ${gateway.name}\n${this.timestampText}: ${formattedTime}`;
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    this.gatewayStatusSubscription?.unsubscribe();
   }
 }

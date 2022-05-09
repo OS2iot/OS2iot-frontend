@@ -1,5 +1,6 @@
 import { EditPermission } from '@shared/models/edit-permission.model';
 import { CommonLocation } from '../shared/models/common-location.model';
+import { GatewayStatusInterval } from './enums/gateway-status-interval.enum';
 
 export class Gateway extends EditPermission {
     id?: string;
@@ -58,7 +59,20 @@ export interface GatewayStats {
     txPacketsEmitted: number;
 }
 
+export interface GetGatewayStatusParameters {
+  limit?: number;
+  offset?: number;
+  organizationId: number;
+  timeInterval?: GatewayStatusInterval;
+}
+
 export interface GatewayStatus {
   id: string;
+  name: string;
   onlineTimestamps: Date[];
+}
+
+export interface GatewayStatusResponse {
+  data: GatewayStatus[];
+  count: number;
 }

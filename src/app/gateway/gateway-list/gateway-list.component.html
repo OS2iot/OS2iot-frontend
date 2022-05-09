@@ -22,7 +22,8 @@
       </mat-tab>
       <mat-tab label="{{'LORA-GATEWAY-TABLE.STATUS' | translate}}">
         <div class="jumbotron--table">
-          <app-gateway-status></app-gateway-status>
+          <app-gateway-status [organisationChangeSubject]="organisationChangeSubject"
+            [isVisibleSubject]="isGatewayStatusVisibleSubject"></app-gateway-status>
         </div>
       </mat-tab>
     </mat-tab-group>
