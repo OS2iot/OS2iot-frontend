@@ -11,8 +11,8 @@ export class AuthGuardService {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // Allow KOMBIT adgangsstyring callback to work
     if (
-      route.queryParams['jwt'] != undefined ||
-      route.queryParams['error'] != undefined
+      route.queryParams['jwt'] !== undefined ||
+      route.queryParams['error'] !== undefined
     ) {
       return true;
     }

@@ -52,7 +52,10 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.translate.get(['NAV.LORA-GATEWAYS']).subscribe((translations) => {
           this.backButton.label = translations['NAV.LORA-GATEWAYS'];
         });
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, this.gateway.internalOrganizationId);
+
+        if (this.gateway) {
+            this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, this.gateway.internalOrganizationId);
+        }
     }
 
     ngAfterViewInit() {
@@ -93,11 +96,13 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             editRouterLink: '../../gateway-edit/' + this.id,
             isErasable: true,
         } : null;
+
         this.translate.get(['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
-                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'];
-            }
-            );
+                if (this.dropdownButton) {
+                    this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'];
+                }
+            });
     }
 
     onDeleteGateway() {
