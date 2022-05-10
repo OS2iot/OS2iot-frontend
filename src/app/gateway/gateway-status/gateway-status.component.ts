@@ -228,7 +228,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     if (
       isUserInput &&
       newInterval !== this.selectedStatusInterval &&
-      this.dataSource?.data.length
+      !this.isLoadingResults
     ) {
       this.subscribeToGetAllGatewayStatus(this.organizationId, newInterval);
     }
