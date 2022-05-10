@@ -26,6 +26,8 @@ import { GatewayStatus, GatewayStatusResponse } from '../gateway.model';
 export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   @Input() organisationChangeSubject: Subject<number>;
   @Input() isVisibleSubject: Subject<void>;
+  @Input() paginatorClass: string;
+  @Input() title: string;
 
   private gatewayStatusSubscription: Subscription;
   private readonly columnGatewayName = 'gatewayName';
@@ -63,20 +65,20 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
         this.timestampText = translations['LORA-GATEWAY-STATUS.TIMESTAMP'];
       });
 
-    this.organisationChangeSubject.subscribe((orgId) => {
+    this.organisationChangeSubject?.subscribe((orgId) => {
       if (orgId && this.organizationId !== orgId) {
         this.organizationId = orgId;
         this.isDirty = true;
       }
     });
 
-    this.isVisibleSubject.pipe().subscribe(() => {
+    this.isVisibleSubject?.pipe().subscribe(() => {
       if (!this.isDirty) {
         return;
       }
 
       this.isDirty = false;
-      this.subscribeToGetGatewayStatus();
+      this.subscribeToGetAllGatewayStatus();
     });
 
     this.statusIntervals = recordToEntries(GatewayStatusInterval).map(
@@ -97,7 +99,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     });
   }
 
-  private subscribeToGetGatewayStatus(
+  private subscribeToGetAllGatewayStatus(
     organizationId = this.organizationId,
     timeInterval = this.selectedStatusInterval
   ): void {
@@ -228,7 +230,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       newInterval !== this.selectedStatusInterval &&
       this.dataSource?.data.length
     ) {
-      this.subscribeToGetGatewayStatus(this.organizationId, newInterval);
+      this.subscribeToGetAllGatewayStatus(this.organizationId, newInterval);
     }
   }
 

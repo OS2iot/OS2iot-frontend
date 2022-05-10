@@ -5,6 +5,7 @@
 </ng-template>
 
 <div class="d-flex mb-3">
+  <h3 *ngIf="title">{{title}}</h3>
   <mat-select class="form-control ml-auto status-interval" name="statusIntervals" [(ngModel)]="selectedStatusInterval">
     <mat-option *ngFor="let interval of statusIntervals" [value]="interval"
       (onSelectionChange)="onSelectInterval($event)">
@@ -41,7 +42,7 @@
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
 </div>
-<mat-paginator [pageSizeOptions]="[25, 50, 100]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
+<mat-paginator [ngClass]="paginatorClass" [pageSizeOptions]="[25, 50, 100]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
 </mat-paginator>
 <div class="status-legend d-flex flex-row mt-3">
   <div class="d-flex flex-column">
