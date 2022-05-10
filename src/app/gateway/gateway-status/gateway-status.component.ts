@@ -12,11 +12,17 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { recordToEntries } from '@shared/helpers/record.helper';
 import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import * as moment from 'moment';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { GatewayStatusInterval } from '../enums/gateway-status-interval.enum';
 import { GatewayStatus, GatewayStatusResponse } from '../gateway.model';
+
+interface TimeColumn {
+  exactTimestamp: string;
+  tooltip: string;
+  datePart: string;
+  timePart: string;
+}
 
 @Component({
   selector: 'app-gateway-status',
@@ -32,15 +38,18 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   private gatewayStatusSubscription: Subscription;
   private readonly columnGatewayName = 'gatewayName';
   dataSource: MatTableDataSource<GatewayStatus>;
-  timeColumns: string[] = [];
-  displayedColumns: string[] = [];
+  /**
+   * List of pre-processed timestamps for performance
+   */
+  timeColumns: TimeColumn[] = [];
+  displayedColumns: (TimeColumn | string)[] = [];
   nameText = '';
   neverSeenText = '';
   timestampText = '';
   visibleFooterTimeInterval = 1;
   pageSize = environment.tablePageSize;
   resultsLength = 0;
-  organizationId: number;
+  organizationId: number | undefined;
   isLoadingResults = false;
   isDirty = true;
   statusIntervals: GatewayStatusInterval[];
@@ -50,13 +59,10 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private sharedVariableService: SharedVariableService,
     private lorawanGatewayService: LoRaWANGatewayService
   ) {}
 
   ngAfterContentInit(): void {
-    this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
-
     this.translate
       .get(['GEN.NAME', 'GEN.NEVER-SEEN', 'LORA-GATEWAY-STATUS.TIMESTAMP'])
       .subscribe((translations) => {
@@ -66,7 +72,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       });
 
     this.organisationChangeSubject?.subscribe((orgId) => {
-      if (orgId && this.organizationId !== orgId) {
+      if (this.organizationId !== orgId) {
         this.organizationId = orgId;
         this.isDirty = true;
       }
@@ -90,13 +96,18 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     organizationId = this.organizationId,
     timeInterval = this.selectedStatusInterval
   ): Observable<GatewayStatusResponse> {
-    return this.lorawanGatewayService.getAllStatus({
-      organizationId,
+    const params: Record<string, string | number> = {
       timeInterval,
       // Paginator is only avaiable in ngAfterViewInit
       limit: this.paginator?.pageSize,
       offset: this.paginator?.pageIndex * this.paginator.pageSize,
-    });
+    };
+
+    if (organizationId) {
+      params.organizationId = organizationId;
+    }
+
+    return this.lorawanGatewayService.getAllStatus(params);
   }
 
   private subscribeToGetAllGatewayStatus(
@@ -119,9 +130,14 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
 
   private handleStatusResponse(response: GatewayStatusResponse) {
     this.resultsLength = response.count;
-    const filteredData = this.takeLatestTimestampInHour(response.data);
+    const gatewaysWithLatestTimestampsPerHour = this.takeLatestTimestampInHour(
+      response.data
+    );
+    const gatewaysWithWholeHourTimestamps = this.toWholeHour(
+      gatewaysWithLatestTimestampsPerHour
+    );
 
-    const sortedData = filteredData
+    const sortedData = gatewaysWithWholeHourTimestamps
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -161,11 +177,29 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       const lastDate = moment(maxDate).startOf('hour');
 
       do {
-        this.timeColumns.push(currDate.toISOString());
+        this.timeColumns.push({
+          exactTimestamp: currDate.toISOString(),
+          tooltip: currDate.format('DD-MM-YYYY HH:00'),
+          datePart: currDate.format('DD-MM'),
+          timePart: currDate.format('HH:00'),
+        });
       } while (currDate.add(1, 'hour').startOf('hour').diff(lastDate) <= 0);
     }
 
-    this.displayedColumns = [this.columnGatewayName].concat(this.timeColumns);
+    this.displayedColumns = [
+      this.columnGatewayName,
+      ...this.timeColumns.map((column) => column.exactTimestamp),
+    ];
+  }
+
+  private toWholeHour(data: GatewayStatus[]): typeof data {
+    return data.map((gateway) => ({
+      ...gateway,
+      statusTimestamps: gateway.statusTimestamps.map((status) => ({
+        ...status,
+        timestamp: moment(status.timestamp).startOf('hour').toDate(),
+      })),
+    }));
   }
 
   private takeLatestTimestampInHour(data: GatewayStatus[]): typeof data {
@@ -173,9 +207,10 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       const timestamps = gateway.statusTimestamps.reduce(
         (res: typeof gateway.statusTimestamps, currentStatus) => {
           // Check if we already passed a timestamp in the same hour slot as the current one and if it's older
+          const currentTimestamp = moment(currentStatus.timestamp);
           const sameHourTimestampIndex = res.findIndex((storedStatus) => {
             const storedTimestamp = moment(storedStatus.timestamp);
-            return storedTimestamp.isSame(currentStatus.timestamp, 'hour');
+            return storedTimestamp.isSame(currentTimestamp, 'hour');
           });
 
           if (sameHourTimestampIndex >= 0) {
@@ -207,20 +242,6 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     return Math.max(min, Math.min(max, value));
   }
 
-  getStatusClass(gateway: GatewayStatus, timestamp: string) {
-    return !gateway.statusTimestamps.length
-      ? 'never-seen'
-      : gateway.statusTimestamps.some(
-          (gatewayTimestamp) =>
-            moment(gatewayTimestamp.timestamp).isSame(
-              moment(timestamp),
-              'hour'
-            ) && gatewayTimestamp.wasOnline
-        )
-      ? 'online'
-      : 'offline';
-  }
-
   onSelectInterval({
     isUserInput,
     source: { value: newInterval },
@@ -232,21 +253,6 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     ) {
       this.subscribeToGetAllGatewayStatus(this.organizationId, newInterval);
     }
-  }
-
-  formatFooterDate(timestamp: string): string {
-    return moment(timestamp).format('DD-MM');
-  }
-
-  formatTime(timestamp: string): string {
-    return moment(timestamp).format('HH:00');
-  }
-
-  formatTooltip(gateway: GatewayStatus, timestamp: string): string {
-    const formattedTime = !gateway.statusTimestamps.length
-      ? this.neverSeenText
-      : moment(timestamp).format('DD-MM-YYYY HH:00');
-    return `${this.nameText}: ${gateway.name}\n${this.timestampText}: ${formattedTime}`;
   }
 
   ngOnDestroy() {

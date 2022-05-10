@@ -36,6 +36,7 @@ $cellFontSize: 0.9rem;
 
         &:not(:first-child) {
           max-width: 1.2rem;
+          border-radius: 3px;
         }
 
         &:first-child {

@@ -62,7 +62,7 @@ export interface GatewayStats {
 export interface GetGatewayStatusParameters {
   limit?: number;
   offset?: number;
-  organizationId: number;
+  organizationId?: number;
   timeInterval?: GatewayStatusInterval;
 }
 
