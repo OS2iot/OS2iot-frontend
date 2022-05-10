@@ -85,7 +85,6 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     this.organisationChangeSubject.next(orgId);
 
     if (this.tabIndex === gatewayStatusTabIndex) {
-      // TODO: Race condition with organisation change event?
       this.isGatewayStatusVisibleSubject.next();
     }
 

@@ -4,7 +4,7 @@
   </ng-container>
 </ng-template>
 
-<div class="d-flex">
+<div class="d-flex mb-3">
   <mat-select class="form-control ml-auto status-interval" name="statusIntervals" [(ngModel)]="selectedStatusInterval">
     <mat-option *ngFor="let interval of statusIntervals" [value]="interval"
       (onSelectionChange)="onSelectInterval($event)">
@@ -12,38 +12,34 @@
     </mat-option>
   </mat-select>
 </div>
-<div class="d-flex flex-row">
-  <div class="d-flex overflow-auto">
-    <div class="loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
-    <!-- TODO: Handle if time columns are empty -->
-    <table #gatewayStatus mat-table [dataSource]="dataSource" class="status-table"
-      *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData">
-      <ng-container matColumnDef="gatewayName">
-        <td mat-cell *matCellDef="let element" class="text--semibold">{{element.name}}</td>
-        <td mat-footer-cell *matFooterCellDef class="text--semibold text-center">
-          {{'GEN.DATE' | translate}}
-          <br />
-          {{'LORA-GATEWAY-STATUS.TIMESTAMP' | translate}}
-        </td>
-      </ng-container>
-
-      <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{time}}">
-        <td mat-cell *matCellDef="let gateway" [matTooltip]="formatTooltip(gateway, time)"
-          [matTooltipClass]="'status-tooltip'" [ngClass]="getStatusClass(gateway, time)"></td>
-        <td mat-footer-cell *matFooterCellDef="let gateway"
-          [ngClass]="{'invisible': index % visibleFooterTimeInterval}">
-          {{formatFooterDate(time)}}
-          <br />
-          {{formatTime(time)}}
-        </td>
-      </ng-container>
-
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-    </table>
+<div class="overflow-auto">
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
+  <table #gatewayStatus mat-table [dataSource]="dataSource" class="status-table"
+    *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData">
+    <ng-container matColumnDef="gatewayName">
+      <td mat-cell *matCellDef="let element" class="text--semibold">{{element.name}}</td>
+      <td mat-footer-cell *matFooterCellDef class="text--semibold text-center">
+        {{'GEN.DATE' | translate}}
+        <br />
+        {{'LORA-GATEWAY-STATUS.TIMESTAMP' | translate}}
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{time}}">
+      <td mat-cell *matCellDef="let gateway" [matTooltip]="formatTooltip(gateway, time)"
+        [matTooltipClass]="'status-tooltip'" [ngClass]="getStatusClass(gateway, time)"></td>
+      <td mat-footer-cell *matFooterCellDef="let gateway" [ngClass]="{'invisible': index % visibleFooterTimeInterval}">
+        {{formatFooterDate(time)}}
+        <br />
+        {{formatTime(time)}}
+      </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
 </div>
 <mat-paginator [pageSizeOptions]="[25, 50, 100]" [pageSize]="pageSize" [length]="resultsLength" showFirstLastButtons>
 </mat-paginator>

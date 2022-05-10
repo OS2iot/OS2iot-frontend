@@ -64,7 +64,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       });
 
     this.organisationChangeSubject.subscribe((orgId) => {
-      if (orgId) {
+      if (orgId && this.organizationId !== orgId) {
         this.organizationId = orgId;
         this.isDirty = true;
       }
@@ -102,18 +102,24 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     timeInterval = this.selectedStatusInterval
   ): void {
     this.isLoadingResults = true;
+    this.paginator.pageIndex = 0;
     this.gatewayStatusSubscription = this.getGatewayStatus(
       organizationId,
       timeInterval
     ).subscribe((response) => {
       this.isLoadingResults = false;
-      this.handleStatusResponse(response);
+
+      if (response) {
+        this.handleStatusResponse(response);
+      }
     });
   }
 
   private handleStatusResponse(response: GatewayStatusResponse) {
     this.resultsLength = response.count;
-    const sortedData = response.data
+    const filteredData = this.takeLatestTimestampInHour(response.data);
+
+    const sortedData = filteredData
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -132,7 +138,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     this.timeColumns = [];
 
     response.forEach((gateway) => {
-      gateway.onlineTimestamps.forEach((timestamp) => {
+      gateway.statusTimestamps.forEach(({ timestamp }) => {
         if (!minDate) {
           minDate = timestamp;
         }
@@ -149,16 +155,50 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     });
 
     if (minDate && maxDate) {
-      for (
-        const dt = new Date(minDate);
-        dt <= new Date(maxDate);
-        dt.setTime(dt.getTime() + 1000 * (60 * 60 * 1))
-      ) {
-        this.timeColumns.push(dt.toISOString());
-      }
+      const currDate = moment(minDate).startOf('hour');
+      const lastDate = moment(maxDate).startOf('hour');
+
+      do {
+        this.timeColumns.push(currDate.toISOString());
+      } while (currDate.add(1, 'hour').startOf('hour').diff(lastDate) <= 0);
     }
 
     this.displayedColumns = [this.columnGatewayName].concat(this.timeColumns);
+  }
+
+  private takeLatestTimestampInHour(data: GatewayStatus[]): typeof data {
+    return data.map((gateway) => {
+      const timestamps = gateway.statusTimestamps.reduce(
+        (res: typeof gateway.statusTimestamps, currentStatus) => {
+          // Check if we already passed a timestamp in the same hour slot as the current one and if it's older
+          const sameHourTimestampIndex = res.findIndex((storedStatus) => {
+            const storedTimestamp = moment(storedStatus.timestamp);
+            return storedTimestamp.isSame(currentStatus.timestamp, 'hour');
+          });
+
+          if (sameHourTimestampIndex >= 0) {
+            // Only keep the latest timestamp in the same slot
+            if (
+              res[sameHourTimestampIndex].timestamp < currentStatus.timestamp
+            ) {
+              res.splice(sameHourTimestampIndex, 1);
+            } else {
+              // Don't store the current timestamp as it's older than the stored one
+              return res;
+            }
+          }
+
+          res.push(currentStatus);
+          return res;
+        },
+        []
+      );
+
+      return {
+        ...gateway,
+        statusTimestamps: timestamps,
+      };
+    });
   }
 
   private clamp(value: number, min: number, max: number) {
@@ -166,10 +206,14 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   }
 
   getStatusClass(gateway: GatewayStatus, timestamp: string) {
-    return !gateway.onlineTimestamps.length
+    return !gateway.statusTimestamps.length
       ? 'never-seen'
-      : gateway.onlineTimestamps.some((gatewayTimestamp) =>
-          moment(gatewayTimestamp).isSame(moment(timestamp), 'hour')
+      : gateway.statusTimestamps.some(
+          (gatewayTimestamp) =>
+            moment(gatewayTimestamp.timestamp).isSame(
+              moment(timestamp),
+              'hour'
+            ) && gatewayTimestamp.wasOnline
         )
       ? 'online'
       : 'offline';
@@ -197,7 +241,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   }
 
   formatTooltip(gateway: GatewayStatus, timestamp: string): string {
-    const formattedTime = !gateway.onlineTimestamps.length
+    const formattedTime = !gateway.statusTimestamps.length
       ? this.neverSeenText
       : moment(timestamp).format('DD-MM-YYYY HH:00');
     return `${this.nameText}: ${gateway.name}\n${this.timestampText}: ${formattedTime}`;
