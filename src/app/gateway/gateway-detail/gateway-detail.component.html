@@ -46,6 +46,12 @@
 <div class="row">
     <div class="col-12">
         <div class="jumbotron">
+          <app-gateway-status [isVisibleSubject]="isGatewayStatusVisibleSubject" [gatewayId]="id" paginatorClass="d-none"
+              [shouldLinkToDetails]="false" [title]="'GATEWAY.ONLINE-STATUS' | translate">
+            </app-gateway-status>
+        </div>
+
+        <div class="jumbotron">
             <h3>{{ 'GATEWAY.STATS' | translate }}</h3>
             <div class="mat-elevation-z8">
                 <div class="loading-shade" *ngIf="isLoadingResults">

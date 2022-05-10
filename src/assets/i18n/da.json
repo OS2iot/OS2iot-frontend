@@ -172,7 +172,8 @@
     "DROPDOWNFILTER": "Organisationsfilter",
     "DROPDOWNDEFAULT": "Alle",
     "MAP-TAB": "Kort",
-    "ORGANIZATION": "Organisation"
+    "ORGANIZATION": "Organisation",
+    "ONLINE-STATUS": "Online status"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",

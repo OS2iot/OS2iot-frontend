@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gateway.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,11 +29,12 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
     public backButton: BackButton = { label: '', routerLink: ['gateways'] };
-    private id: string;
+    id: string;
     deleteGateway = new EventEmitter();
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
     isLoadingResults = true;
+    isGatewayStatusVisibleSubject = new Subject<void>();
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -83,6 +84,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.dataSource.paginator = this.paginator;
             this.setDropdownButton();
             this.isLoadingResults = false;
+
+            this.isGatewayStatusVisibleSubject.next();
         });
     }
 
@@ -94,7 +97,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         } : null;
         this.translate.get(['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
             .subscribe(translations => {
-                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS']
+                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'];
             }
             );
     }

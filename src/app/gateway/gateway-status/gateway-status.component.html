@@ -5,7 +5,7 @@
 </ng-template>
 
 <div class="d-flex mb-3">
-  <h3 *ngIf="title">{{title}}</h3>
+  <h3 *ngIf="title" class="title">{{title}}</h3>
   <mat-select class="form-control ml-auto status-interval" name="statusIntervals" [(ngModel)]="selectedStatusInterval">
     <mat-option *ngFor="let interval of statusIntervals" [value]="interval"
       (onSelectionChange)="onSelectInterval($event)">
@@ -21,7 +21,8 @@
     *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData">
     <ng-container matColumnDef="gatewayName">
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="'/gateways/gateway-detail/' + element.id" routerLinkActive="active">{{element.name}}</a>
+        <a [routerLink]="'/gateways/gateway-detail/' + element.id" routerLinkActive="active" *ngIf="shouldLinkToDetails">{{element.name}}</a>
+        <span class="text--semibold" *ngIf="!shouldLinkToDetails">{{element.name}}</span>
       </td>
       <td mat-footer-cell *matFooterCellDef class="text--semibold">
         {{'GEN.DATE' | translate}}

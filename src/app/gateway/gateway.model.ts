@@ -59,7 +59,7 @@ export interface GatewayStats {
     txPacketsEmitted: number;
 }
 
-export interface GetGatewayStatusParameters {
+export interface GetAllGatewayStatusParameters {
   limit?: number;
   offset?: number;
   organizationId?: number;
@@ -71,13 +71,17 @@ export interface StatusTimestamp {
   wasOnline: boolean;
 }
 
+export interface GetGatewayStatusParameters {
+  timeInterval?: GatewayStatusInterval;
+}
+
 export interface GatewayStatus {
   id: string;
   name: string;
   statusTimestamps: StatusTimestamp[];
 }
 
-export interface GatewayStatusResponse {
+export interface AllGatewayStatusResponse {
   data: GatewayStatus[];
   count: number;
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  GatewayStatusResponse,
+  AllGatewayStatusResponse,
+  GetAllGatewayStatusParameters,
   GetGatewayStatusParameters,
+  GatewayStatus,
 } from '@app/gateway/gateway.model';
 import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
@@ -15,8 +17,19 @@ export class LoRaWANGatewayService {
   constructor(private restService: RestService) {}
 
   public getAllStatus(
-    params: GetGatewayStatusParameters
-  ): Observable<GatewayStatusResponse> {
+    params: GetAllGatewayStatusParameters
+  ): Observable<AllGatewayStatusResponse> {
     return this.restService.get(`${this.baseUrl}/status`, params);
+  }
+
+  public getStatus(
+    id: string,
+    params: GetGatewayStatusParameters
+  ): Observable<GatewayStatus> {
+    return this.restService.get(
+      `${this.baseUrl}/status`,
+      params,
+      id
+    );
   }
 }
