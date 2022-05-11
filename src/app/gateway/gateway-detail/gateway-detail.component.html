@@ -59,13 +59,13 @@
 
             <div class="d-flex flex-row mb-4">
               <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
-                <app-graph [data]="receivedChartData" [type]="'line'" [title]="'GATEWAY.STATS-RXPACKETSRECEIVED' | translate"
-                  chartClass="shadow-none">
+                <app-graph [data]="receivedGraphData" [type]="'line'" [title]="'GATEWAY.STATS-RXPACKETSRECEIVED' | translate"
+                  [graphCardClass]="'shadow-none pl-0'" [graphHeaderClass]="'mat-card-header-text-ml-0'">
                 </app-graph>
               </div>
               <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
-                <app-graph [data]="sentChartData" [type]="'line'" [title]="'GATEWAY.STATS-TXPACKETSEMITTED' | translate"
-                  chartClass="shadow-none">
+                <app-graph [data]="sentGraphData" [type]="'line'" [title]="'GATEWAY.STATS-TXPACKETSEMITTED' | translate"
+                  [graphCardClass]="'shadow-none pl-0'" [graphHeaderClass]="'mat-card-header-text-ml-0'">
                 </app-graph>
               </div>
             </div>

@@ -30,7 +30,8 @@ export class GraphComponent implements OnChanges {
     },
   };
   @Input() title: string;
-  @Input() chartClass: string;
+  @Input() graphCardClass: string;
+  @Input() graphHeaderClass: string;
   chartInstance: Chart = null;
   isGraphEmpty: boolean;
 

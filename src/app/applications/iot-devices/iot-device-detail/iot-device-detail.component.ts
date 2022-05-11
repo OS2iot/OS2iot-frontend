@@ -18,8 +18,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChartConfiguration } from 'chart.js';
 import * as moment from 'moment';
 import { recordToEntries } from '@shared/helpers/record.helper';
-
-const colorGraphBlue1 = '#03AEEF';
+import { ColorGraphBlue1 } from '@shared/constants/color-constants';
 
 /**
  * Ordered from "worst" to "best" (from DR0 and up)
@@ -234,10 +233,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             },
             {
               rssiDatasets: [
-                { data: [], borderColor: colorGraphBlue1,  backgroundColor: colorGraphBlue1 },
+                { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
               ],
               snrDatasets: [
-                { data: [], borderColor: colorGraphBlue1,  backgroundColor: colorGraphBlue1 },
+                { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
               ],
               dataRateDatasets: this.initDataRates(),
               labels: [],
