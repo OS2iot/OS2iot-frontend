@@ -11,6 +11,8 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   subscription: Subscription;
   users: UserResponse[];
   dropdownButton: DropdownButton;
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -50,7 +53,8 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     private permissionService: PermissionService,
     private router: Router,
     private titleService: Title,
-    private deleteDialogService: DeleteDialogService
+    private deleteDialogService: DeleteDialogService,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +66,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         label: '',
         editRouterLink: 'edit-permission',
         isErasable: true,
-      }
+      };
     }
     this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN', 'TITLE.PERMISSION'])
       .subscribe(translations => {
@@ -70,6 +74,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         this.dropdownButton.label = translations['PERMISSION.DETAIL.DROPDOWN'];
         this.titleService.setTitle(translations['TITLE.PERMISSION']);
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -95,7 +100,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
           }
         });
       }
-    })
+    });
   }
 
   onEditPermission() {

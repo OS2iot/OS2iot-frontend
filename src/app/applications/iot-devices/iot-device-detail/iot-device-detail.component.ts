@@ -18,6 +18,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChartConfiguration } from 'chart.js';
 import * as moment from 'moment';
 import { recordToEntries } from '@shared/helpers/record.helper';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 const colorGraphBlue1 = '#03AEEF';
 
@@ -70,7 +71,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public errorMessages: string[];
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
-    public canStartDownlink = false;
+    public canEdit = false;
 
     private resetApiKeyId = 'RESET-API-KEY';
     private resetApiKeyOption: ExtraDropdownOption;
@@ -113,7 +114,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.canStartDownlink = this.meService.canWriteInTargetOrganization();
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.deviceId) {
@@ -163,7 +164,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             }
 
             if (
-              this.meService.canWriteInTargetOrganization() &&
+              this.canEdit &&
               this.device.type === DeviceType.GENERIC_HTTP
             ) {
               this.dropdownButton.extraOptions.push(this.resetApiKeyOption);

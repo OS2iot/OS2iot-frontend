@@ -22,6 +22,8 @@ import { SnackService } from '@shared/services/snack.service';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { environment } from '@environments/environment';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-payload-decoder-edit',
@@ -64,6 +66,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   public pageTotal: number;
   public pageOffset = 0;
   public deviceSubscription: Subscription;
+  canEdit: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -78,6 +81,7 @@ export class PayloadDecoderEditComponent implements OnInit {
     private saveSnackService: SnackService,
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -116,11 +120,12 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.sharedVariableService.getValue().subscribe((organisationId) => {
       this.getApplications(organisationId);
     });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   setBackButtonLink(payloadDecoderId: number) {
     if (payloadDecoderId) {
-      this.backButton.routerLink = ['payload-decoder','payload-decoder-detail', this.id.toString()];
+      this.backButton.routerLink = ['payload-decoder', 'payload-decoder-detail', this.id.toString()];
     } else {
       this.backButton.routerLink = ['payload-decoder'];
     }
@@ -136,25 +141,25 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   testPayloadFunction() {
-    this.errorMessages = null
+    this.errorMessages = null;
     this.testPayloadDecoder.code = this.payloadDecoderBody;
     try {
       this.testPayloadDecoder.iotDeviceJsonString = JSON.parse(this.metadata);
     } catch (err) {
       // Allow the empty string as a valid input
       if (this.isMetadataDefaultOrEmpty()) {
-        this.testPayloadDecoder.iotDeviceJsonString = JSON.parse("{}")
+        this.testPayloadDecoder.iotDeviceJsonString = JSON.parse('{}');
       } else {
-        this.errorFields = ["metadata"];
+        this.errorFields = ['metadata'];
         this.errorMessages = [this.metadataInvalidJSONMessage];
         this.formFailedSubmit = true;
-        return;         
+        return;
       }
     }
     try {
       this.testPayloadDecoder.rawPayloadJsonString = JSON.parse(this.payloadData);
-    }catch (err) {
-      this.errorFields = ["payload"];
+    } catch (err) {
+      this.errorFields = ['payload'];
       this.errorMessages = [this.payloadInvalidJSONMessage];
       this.formFailedSubmit = true;
       return;
@@ -172,7 +177,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   private isMetadataDefaultOrEmpty() {
-    return this.metadata.trim() == "" || this.metadata.split("\n").every(x => x.trim().startsWith("//"));
+    return this.metadata.trim() === '' || this.metadata.split('\n').every(x => x.trim().startsWith('//'));
   }
 
   getCurrentOrganisationId(): number {

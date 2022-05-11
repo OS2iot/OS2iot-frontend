@@ -6,6 +6,8 @@ import { UserResponse } from '@app/admin/users/user.model';
 import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn, faKey } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-organisation-dropdown',
@@ -15,8 +17,9 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 export class OrganisationDropdownComponent implements OnInit {
   public organisations: Organisation[];
   public user: UserResponse;
-  public isOrgAdmin = false;
+  public isUserAdmin = false;
   public isGlobalAdmin = false;
+  public isOnlyGatewayAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -31,6 +34,7 @@ export class OrganisationDropdownComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     public translate: TranslateService,
     private route: Router,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -55,15 +59,17 @@ export class OrganisationDropdownComponent implements OnInit {
   }
 
   private setLocalPermissionCheck(orgId: number) {
-    this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
+    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
     this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
+    this.isOnlyGatewayAdmin = this.user.permissions.every(permission => permission.type === PermissionType.OrganizationGatewayAdmin);
   }
 
   public onChange(organizationId: string) {
     this.sharedVariableService.setValue(+organizationId);
     this.setLocalPermissionCheck(+organizationId);
-    this.route.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.route.navigate(['applications']));
+    this.route
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.route.navigate(['applications']));
   }
 
   setSelectedOrganisation(value) {

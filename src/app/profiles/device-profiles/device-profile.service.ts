@@ -42,7 +42,7 @@ export class DeviceProfileService {
           return response;
         }
       )
-    );;
+    );
   }
 
   getMultiple(): Observable<DeviceProfileResponse> {

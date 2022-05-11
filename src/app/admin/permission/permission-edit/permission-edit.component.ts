@@ -213,7 +213,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
         if (
           response.type === PermissionType.Read ||
-          response.type === PermissionType.Write
+          response.type === PermissionType.OrganizationApplicationAdmin
         ) {
           this.getApplications(this.permission.organizationId);
           this.permission.applicationIds = response.applications.map(
@@ -252,12 +252,13 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   allowedLevels() {
-    if (this.permission.level == PermissionType.GlobalAdmin) {
+    if (this.permission.level === PermissionType.GlobalAdmin) {
       return [PermissionType.GlobalAdmin];
     }
     return [
-      PermissionType.OrganizationAdmin,
-      PermissionType.Write,
+      PermissionType.OrganizationUserAdmin,
+      PermissionType.OrganizationApplicationAdmin,
+      PermissionType.OrganizationGatewayAdmin,
       PermissionType.Read,
     ];
   }
@@ -280,7 +281,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
   isOrganizationApplicationPermission() {
     return (
-      this.permission.level ==
+      this.permission.level ===
         PermissionType.OrganizationApplicationPermissions ||
       this.isReadOrWrite()
     );
@@ -289,7 +290,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   isReadOrWrite(): boolean {
     return (
       this.permission.level === PermissionType.Read ||
-      this.permission.level === PermissionType.Write
+      this.permission.level === PermissionType.OrganizationApplicationAdmin
     );
   }
 

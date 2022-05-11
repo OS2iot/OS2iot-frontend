@@ -1,6 +1,6 @@
 <div *ngIf="permission">
     <app-top-bar [data]="permission" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePermission()">
+        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeletePermission()" [canEdit]="canEdit">
     </app-top-bar>
     <div class="container-fluid">
         <div class="row">
@@ -33,9 +33,9 @@
                         {{ 'PERMISSION.DETAIL.APPLICATIONS' | translate }}
                     </h3>
 
-                    <app-applications-table *ngIf="permission.type == 'Write' || permission.type == 'Read'" [permissionId]="id">
+                    <app-applications-table *ngIf="permission.type == 'Read'" [permissionId]="id">
                     </app-applications-table>
-                    <app-applications-table *ngIf="permission.type == 'OrganizationAdmin'" [organizationId]="permission.organization?.id">
+                    <app-applications-table *ngIf="permission.type == 'OrganizationApplicationAdmin'" [organizationId]="permission.organization?.id">
                     </app-applications-table>
                     <app-applications-table *ngIf="permission.type == 'GlobalAdmin'"></app-applications-table>
                 </div>

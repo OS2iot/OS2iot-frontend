@@ -17,6 +17,7 @@ import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DeviceType } from '@shared/enums/device-type';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 /**
  * @title Table retrieving data through HTTP
@@ -50,7 +51,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   ngAfterViewInit() {

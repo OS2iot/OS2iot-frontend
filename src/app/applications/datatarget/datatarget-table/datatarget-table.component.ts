@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { environment } from '@environments/environment';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
     selector: 'app-datatarget-table',
@@ -25,7 +26,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     datatargets: Datatarget[];
     resultsLength = 0;
     public canEdit = false;
-    @Input() isLoadingResults: boolean = true;
+    @Input() isLoadingResults = true;
     public pageSize = environment.tablePageSize;
 
     @Input() pageLimit: number;
@@ -48,7 +49,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
     ngOnInit(): void {
         this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));        
         this.getDatatarget();
-        this.canEdit = this.meService.canWriteInTargetOrganization()
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
     }
 
     ngAfterViewInit() {

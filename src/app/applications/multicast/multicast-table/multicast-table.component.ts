@@ -18,6 +18,7 @@ import { merge, Observable, Subscription, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Multicast, MulticastData } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-multicast-table',
@@ -53,7 +54,9 @@ export class MulticastTableComponent
 
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
-    this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
   }
 
   ngAfterViewInit() {

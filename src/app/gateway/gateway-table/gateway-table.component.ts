@@ -16,6 +16,7 @@ import { environment } from '@environments/environment';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-gateway-table',
@@ -84,7 +85,7 @@ export class GatewayTableComponent implements AfterViewInit {
   }
 
   canEdit(internalOrganizationId: number): boolean {
-    return this.meService.canWriteInTargetOrganization(internalOrganizationId);
+    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, internalOrganizationId);
   }
 
   private getGateways(): Observable<GatewayResponseMany> {

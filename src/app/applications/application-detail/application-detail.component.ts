@@ -17,6 +17,7 @@ import { BackButton } from '@shared/models/back-button.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-application',
@@ -67,7 +68,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
           translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
         this.titleService.setTitle(translations['TITLE.APPLICATION']);
       });
-    this.canEdit = this.meService.canWriteInTargetOrganization();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   onDeleteApplication() {

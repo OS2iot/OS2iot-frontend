@@ -1,6 +1,7 @@
 <div *ngIf="sigfoxGroups">
     <app-top-bar [showSelectedSort]="false" [title]="'SIGFOX-GROUP.NAME' | translate" [ctaRouterLink]="'new-group'"
-        [ctaLabel]="'SIGFOX-GROUP.ADMINISTRATION.CREATE-NEW-GROUP' | translate">
+        [ctaLabel]="'SIGFOX-GROUP.ADMINISTRATION.CREATE-NEW-GROUP' | translate"
+        [canEdit]="canEdit">
     </app-top-bar>
 
     <div class="container-fluid">

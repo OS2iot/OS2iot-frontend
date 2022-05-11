@@ -6,6 +6,8 @@ import { PermissionService } from '../permission.service';
 import { Sort } from '@shared/models/sort.model';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-permission-list',
@@ -19,11 +21,13 @@ export class PermissionListComponent implements OnInit, OnChanges {
 
   public permissions: PermissionResponse[];
   permissionSubscription: Subscription;
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
     private titleService: Title,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private meService: MeService
   ) {
     translate.use('da');
   }
@@ -37,6 +41,7 @@ export class PermissionListComponent implements OnInit, OnChanges {
       .subscribe(translations => {
         this.titleService.setTitle(translations['TITLE.PERMISSION']);
     });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   getPermissions() {

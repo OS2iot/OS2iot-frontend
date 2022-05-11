@@ -9,6 +9,8 @@ import { FormGroup } from '@angular/forms';
 import { BackButton } from '@shared/models/back-button.model';
 import { ServiceProfileService } from '../service-profile.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -41,6 +43,7 @@ export class ServiceProfilesEditComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     private serviceProfileService: ServiceProfileService,
     private location: Location,
+    private meService: MeService
   ) {
   }
 
@@ -56,7 +59,7 @@ export class ServiceProfilesEditComponent implements OnInit {
     if (this.id) {
       this.getServiceProfile(this.id);
     }
-    this.canEdit = this.sharedVariableService.getHasAnyWritePermission();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   private getServiceProfile(id: string) {
@@ -93,9 +96,9 @@ export class ServiceProfilesEditComponent implements OnInit {
   }
 
   private showError(error: HttpErrorResponse) {
-    if (error.status == 403) {
-      this.errorMessages = ["Forbudt"];
-      this.errorFields = []
+    if (error.status === 403) {
+      this.errorMessages = ['Forbudt'];
+      this.errorFields = [];
     } else {
       this.errorFields = [];
       this.errorMessage = '';

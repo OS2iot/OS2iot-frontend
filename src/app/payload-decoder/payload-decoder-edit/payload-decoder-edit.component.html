@@ -1,4 +1,4 @@
-<app-top-bar [backButton]="backButton" [title]="title" [subPage]="true"></app-top-bar>
+<app-top-bar [backButton]="backButton" [title]="title" [subPage]="true" [canEdit]="canEdit"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
   <div *ngIf="errorMessages" class="jumbotron">
     <div class="error-messages p-3">

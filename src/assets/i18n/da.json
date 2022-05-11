@@ -480,9 +480,10 @@
   },
   "PERMISSION-TYPE": {
     "GlobalAdmin": "Global administrator",
-    "OrganizationAdmin": "Organisations administrator",
-    "Write": "Skrive-rettigheder",
-    "Read": "Læse-rettigheder"
+    "OrganizationUserAdmin": "Brugeradministrator administrator",
+    "OrganizationGatewayAdmin": "Gateway administrator",
+    "OrganizationApplicationAdmin": "Applikationsadministrator",
+    "Read": "Læserettigheder"
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Opret ny applikation",

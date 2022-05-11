@@ -1,4 +1,4 @@
-<app-top-bar backButtonTitle="{{backButtonTitle}}" title="{{title}}"></app-top-bar>
+<app-top-bar backButtonTitle="{{backButtonTitle}}" title="{{title}}" [canEdit]="canEdit"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">

@@ -23,6 +23,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { IoTDeviceService } from '../iot-device.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -52,8 +53,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
-  noValueText: string;
-  toText: string;
 
   constructor(
     private restService: RestService,
@@ -68,12 +67,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization();
-    this.translate.get(['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE', 'GEN.to'])
-      .subscribe(translations => {
-        this.noValueText = translations['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE'];
-        this.toText = translations['GEN.to'];
-      });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   ngAfterViewInit() {
