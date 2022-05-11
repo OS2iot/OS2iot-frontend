@@ -166,14 +166,15 @@
     "NAME": "Gatewayens navn",
     "STATS": "Statistik",
     "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
-    "STATS-TXPACKETSEMITTED": "Pakker Sendt",
+    "STATS-TXPACKETSEMITTED": "Pakker sendt",
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
     "DROPDOWNFILTER": "Organisationsfilter",
     "DROPDOWNDEFAULT": "Alle",
     "MAP-TAB": "Kort",
     "ORGANIZATION": "Organisation",
-    "ONLINE-STATUS": "Online status"
+    "ONLINE-STATUS": "Online status",
+    "DATA-PACKETS": "Datapakker"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",

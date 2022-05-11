@@ -11,6 +11,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -35,6 +36,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     public dropdownButton: DropdownButton;
     isLoadingResults = true;
     isGatewayStatusVisibleSubject = new Subject<void>();
+    receivedChartData: ChartConfiguration['data'] = { datasets: [] };
+    sentChartData: ChartConfiguration['data'] = { datasets: [] };
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
