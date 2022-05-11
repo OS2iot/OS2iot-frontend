@@ -19,6 +19,7 @@ export class OrganisationDropdownComponent implements OnInit {
   public user: UserResponse;
   public isUserAdmin = false;
   public isGlobalAdmin = false;
+  public isOnlyGatewayAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -60,6 +61,7 @@ export class OrganisationDropdownComponent implements OnInit {
   private setLocalPermissionCheck(orgId: number) {
     this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
     this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
+    this.isOnlyGatewayAdmin = this.user.permissions.every(permission => permission.type === PermissionType.OrganizationGatewayAdmin);
   }
 
   public onChange(organizationId: string) {

@@ -35,7 +35,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
     isLoadingResults = true;
-  canEdit: boolean;
+    canEdit: boolean;
 
     constructor(
         private gatewayService: ChirpstackGatewayService,
@@ -79,6 +79,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.gatewayService.get(id).subscribe((result: any) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
+            this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, this.gateway.internalOrganizationId);
             this.gateway.canEdit = this.canEdit;
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
