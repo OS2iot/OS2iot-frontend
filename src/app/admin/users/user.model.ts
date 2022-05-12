@@ -7,6 +7,7 @@ export class UserRequest {
     password: string;
     active: boolean;
     globalAdmin: boolean;
+    showWelcomeScreen: boolean;
 }
 
 export interface UserResponse {
@@ -23,6 +24,7 @@ export interface UserResponse {
     active: boolean;
     lastLogin: Date;
     permissions: PermissionResponse[];
+    showWelcomeScreen: boolean;
 }
 
 export interface UserGetManyResponse {

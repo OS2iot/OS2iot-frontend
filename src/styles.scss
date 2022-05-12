@@ -89,3 +89,14 @@ body {
   font-size: 1rem !important;
 }
 
+.welcome-screen .mat-dialog-container {
+  background-color: #55b156;
+}
+
+.hide-checkbox {
+  color: $color-white-001;
+
+  .mat-checkbox-frame {
+    border-color: $color-white-001;
+  }
+}
