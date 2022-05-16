@@ -93,3 +93,15 @@ body {
   background: rgba(97, 97, 97, 1.0);
   white-space: pre-line;
 }
+
+.welcome-screen .mat-dialog-container {
+  background-color: #55b156;
+}
+
+.hide-checkbox {
+  color: $color-white-001;
+
+  .mat-checkbox-frame {
+    border-color: $color-white-001;
+  }
+}

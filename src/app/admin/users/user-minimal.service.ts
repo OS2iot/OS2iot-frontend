@@ -43,4 +43,12 @@ export class UserMinimalService {
         )?.name;
         return username;
     }
+
+    setHasSeenWelcomeScreen(): void {
+      localStorage.setItem('hasSeenWelcomeScreen', true.toString());
+    }
+
+    getHasSeenWelcomeScreen(): boolean {
+      return !!localStorage.getItem('hasSeenWelcomeScreen');
+    }
 }

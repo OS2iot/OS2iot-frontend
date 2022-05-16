@@ -13,15 +13,9 @@
     "VALUE": "Værdi",
     "NAME": "Navn",
     "DESCRIPTION": "Beskrivelse",
-    "to": "til",
-    "ONLINE": "Online",
-    "OFFLINE": "Offline",
-    "NEVER-SEEN": "Aldrig set",
-    "DATE": "Dato",
-    "NO-DATA": "Der er ingen data at vise"
+    "to": "til"
   },
   "NAV": {
-    "DASHBOARD": "Dashboard",
     "APPLICATIONS": "Applikationer",
     "APPLICATION": "Applikation",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
@@ -48,7 +42,7 @@
     "HELP": "Hjælp",
     "API-KEY": "API nøgler"
   },
-  "TOPBAR": {
+  "TOPBAR":{
     "SEARCH": {
       "BUTTON": "Søg"
     },
@@ -152,7 +146,7 @@
     }
   },
   "GATEWAY": {
-    "DETAILS": "Detaljer",
+    "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
     "UPDATED": "Senest opdateret",
     "DESCRIPTION": "LoRaWAN gateway beskrivelse",
@@ -190,7 +184,7 @@
     "TIMEOUT": "Timeout",
     "TYPE": "Type",
     "NAME": "Datatarget navn",
-    "SHOW-OPTIONS": "Håndter datatarget",
+    "SHOW-OPTIONS":"Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
     "PAYLOADEDECODER": "Payload decoder",
@@ -307,35 +301,26 @@
     "STATUS": "Status",
     "ORGANIZATION": "Organisation"
   },
-  "LORA-GATEWAY-STATUS": {
-    "TITLE": "LoRaWAN online status historik",
-    "TIMESTAMP": "Tidspunkt",
-    "INTERVAL": {
-      "DAY": "Seneste døgn",
-      "WEEK": "Seneste uge",
-      "MONTH": "Seneste måned"
-    }
-  },
   "DEVICE-MODEL": {
-    "DELETE-FAILED": "Slet Fejlede",
-    "HEADLINE": "Detaljer",
-    "CREATED": "Oprettet",
-    "UPDATED": "Senest opdateret",
+    "DELETE-FAILED":"Slet Fejlede",
+    "HEADLINE":"Detaljer",
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest opdateret",
     "ID": "Unik identifikator",
     "TABLE": {
       "ID": "Id"
     },
     "NAME": "Navn",
-    "TYPE": "Type",
-    "BRANDNAME": "Mærke",
-    "MODELNAME": "Model",
-    "MANUFACTURERNAME": "Producentens navn",
-    "CONTROLLEDPROPERTY": "Kontrol egenskaber",
-    "CATEGORY": "Kategori",
-    "SUPPORTEDUNITS": "Måleenheder",
-    "FUNCTION": "Enhedsfunktioner",
-    "ENERGYLIMITATIONCLASS": "Energibegrænsningsklassen",
-    "SUPPORTEDPROTOCOL": "Understøttede protokoller",
+    "TYPE" : "Type",
+    "BRANDNAME" : "Mærke",
+    "MODELNAME" : "Model",
+    "MANUFACTURERNAME" : "Producentens navn",
+    "CONTROLLEDPROPERTY" : "Kontrol egenskaber",
+    "CATEGORY" : "Kategori",
+    "SUPPORTEDUNITS" : "Måleenheder",
+    "FUNCTION" : "Enhedsfunktioner",
+    "ENERGYLIMITATIONCLASS" : "Energibegrænsningsklassen",
+    "SUPPORTEDPROTOCOL" : "Understøttede protokoller",
     "DETAIL-TITLE": "Device model detalje",
     "DEVICE-MODEL": "Device nodel",
     "SHOW-OPTIONS": "Håndter device model"
@@ -350,7 +335,7 @@
     "NAME": "Navn",
     "TYPE": "Type"
   },
-  "MULTICAST-TABLE": {
+  "MULTICAST-TABLE":{
     "NAME": "Gruppenavn",
     "TYPE": "Gruppetype"
   },
@@ -375,7 +360,7 @@
     "DELETE": "Slet",
     "EDIT": "Redigér",
     "SHOW-OPTIONS": "Håndter IoT enhed",
-    "BATTERY-ERROR-MESSAGE": "Den valgte teknologi understøtter ikke batteristatus",
+    "BATTERY-ERROR-MESSAGE":"Den valgte teknologi understøtter ikke batteristatus",
     "RESET-API-KEY": "Nulstil API nøgle",
     "NOT-SUPPORTED": "Ikke understøttet",
     "NOT-SUPPORTED-SHORT": "-",
@@ -393,9 +378,9 @@
   },
   "PAYLOAD-DECODER": {
     "DELETE-FAILED": "Slet fejlede",
-    "DETAILS": "Detaljer",
+    "DETAILS":"Detaljer",
     "CREATED": "Oprettet",
-    "UPDATED": "Senest opdateret",
+    "UPDATED":"Senest opdateret",
     "TITLE": "Payload decoder",
     "SAVE": "Gem payload decoder",
     "NAME": "Navn",
@@ -415,9 +400,9 @@
     "DELETE": "Slet"
   },
   "ORGANISATION": {
-    "HEADLINE": "Detaljer",
-    "CREATED": "Oprettet",
-    "UPDATED": "Senest opdateret",
+    "HEADLINE":"Detaljer",
+    "CREATED":"Oprettet",
+    "UPDATED":"Senest opdateret",
     "NAME": "Navn",
     "APPLICATION-COUNT": "Applikationer",
     "SAVE": "Gem organisation",
@@ -456,8 +441,8 @@
       "USERS": "Brugergruppens brugere",
       "APPLICATIONS": "Brugergruppens applikationer",
       "HEADLINE": "Detaljer",
-      "CREATED": "Oprettet",
-      "UPDATED": "Senest opdateret"
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest opdateret"
     },
     "EDIT": {
       "NAME": "Indtast brugergruppens navn",
@@ -551,7 +536,7 @@
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
-    "GIVE-MULTICAST-NAME": "Navngiv multicast",
+    "GIVE-MULTICAST-NAME":"Navngiv multicast",
     "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen (mcAddr)",
     "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key (mcNwkSKey)",
     "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key (mcAppSKey)",
@@ -848,12 +833,12 @@
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
-    "DELETE-FAILED": "Slet fejlede",
+    "DELETE-FAILED":"Slet fejlede",
     "SERVICE_PROFILE": {
-      "CREATED": "Oprettet",
-      "UPDATED": "Senest opdateret",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest opdateret",
       "DETAILS": "Detaljer",
-      "DELETE-FROM-LIST": "Slet",
+      "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Service profiler",
       "DROPDOWN": "Håndter service profil",
       "CREATE-NEW-SERVICE-PROFILE": "Opret service profile",
@@ -881,10 +866,10 @@
       "ID": "Service profilens id"
     },
     "DEVICE_PROFILE": {
-      "CREATED": "Oprettet",
-      "UPDATED": "Senest opdateret",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest opdateret",
       "DETAILS": "Detaljer",
-      "DELETE-FROM-LIST": "Slet",
+      "DELETE-FROM-LIST":"Slet",
       "HEADLINE": "Device profiler",
       "DROPDOWN": "Håndter device profil",
       "CREATE-NEW-DEVICE-PROFILE": "Opret device profile",
@@ -963,11 +948,11 @@
       "PERMISSIONS": "Medlem af disse brugergrupper",
       "APPLICATIONS": "Rettigheder til disse applikationer",
       "NAME-PLACEHOLDER": "Navn",
-      "EMAIL": "Email",
-      "CREATED": "Oprettet",
-      "UPDATED": "Senest opdateret",
-      "STATUS": "Status",
-      "HEADLINE": "Detaljer"
+      "EMAIL":"Email",
+      "CREATED":"Oprettet",
+      "UPDATED":"Senest opdateret",
+      "STATUS":"Status",
+      "HEADLINE":"Detaljer"
     },
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",
@@ -979,27 +964,18 @@
     "PASSWORD": "Adgangskode",
     "KOMBIT-BUTTON": "Login med KOMBIT adgangsstyring"
   },
-  "DASHBOARD": {
+  "WELCOME-DIALOG": {
     "WELCOME": "VELKOMMEN TIL OS2IoT",
     "WELCOME-SUB": " Din indgang til administration af IoT enheder",
-    "LINK-1": "OS2iot.os2.eu",
-    "LINK-2": "løsningens produktside",
-    "SUB-HEADER-1": "Community",
+    "LINK-1": "OS2iot's brugerforum",
+    "LINK-2": "produktsiden",
+    "LINK-3": "Github",
+    "SUB-HEADER-1":"Brugerforum",
     "SUB-HEADER-2": "Om OS2IOT",
-    "BUTTON": "Start med at oprette en organisation",
-    "LIST": {
-      "HEADLINE": "Med version 1.0 kan du:",
-      "P1": "Håndtere dine IoT enheder ét sted",
-      "P2": "Få et samlet overblik over dine IoT enheder på tværs af netværksteknologier ",
-      "P3": "Lave bulk import af IoT enheder",
-      "P4": "Oprette applikationer på tværs af organisationer",
-      "P5": "Genbruge dekodningsfunktioner og –scripts på tværs af organisationer",
-      "P6": "Dele gateways og data fra IoT enheder på tværs af organisationer",
-      "P7": "Let offentligøre dine data og meget mere."
-    },
-    "WELCOME-MESSAGE": "Vi opfordrer dig til at blive en aktiv del af vores OS2iot community på ",
-    "WELCOME-MESSAGE-3": " og dele dine spørgsmål, udviklingsønsker og de fejl du måtte finde. Ved fælles hjælp bliver løsningen bedre.",
-    "WELCOME-MESSAGE-2": "OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på ",
+    "WELCOME-MESSAGE": "Bliv en aktiv del af ",
+    "WELCOME-MESSAGE-2": ". Her kan du stille spørgsmål og indrapportere udviklingsønsker og de fejl, du måtte finde. Ved fælles hjælp bliver løsningen bedre.",
+    "WELCOME-MESSAGE-3": "OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan derfor finde al yderligere information om OS2iot på ",
+    "WELCOME-MESSAGE-4": " og følge udviklingen på ",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT.",
     "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere.",
@@ -1020,6 +996,9 @@
       "CLOSE": "Nej, tak",
       "TITLE": "Vil du sende data til OpenDataDK?",
       "MESSAGE": "Send en mail til OpendataDK så opretter de dit datasæt"
+    },
+    "WELCOME": {
+      "DONT-SHOW-AGAIN": "Vis ikke igen"
     }
   },
   "BATTERY": {
@@ -1041,6 +1020,7 @@
     "IOTDEVICE": "OS2IoT - IoT enhed",
     "FRONTPAGE": "OS2IoT - Forside",
     "API-KEY": "OS2IoT - API nøgler"
+
   },
   "PAGINATOR": {
     "ITEM_PER_PAGE": "Antal pr. side",
@@ -1079,15 +1059,18 @@
   },
   "NoUsersAdded": "Ingen brugergrupper er tilføjet",
   "FIWARE": {
-    "QUESTION": {
-      "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
-      "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
-      "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
-      "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
-      "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
-      "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
-      "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
-      "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
-    }
+      "QUESTION": {
+        "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
+        "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
+        "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
+        "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
+        "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
+        "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
+        "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
+        "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
+      }
+  },
+  "GRAPH": {
+    "NO-DATA": "Der er ingen data at vise"
   }
 }
