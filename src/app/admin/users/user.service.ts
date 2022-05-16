@@ -63,4 +63,8 @@ export class UserService {
             });
         }
     }
+
+    hideWelcome(id: number): Observable<boolean> {
+      return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);
+    }
 }

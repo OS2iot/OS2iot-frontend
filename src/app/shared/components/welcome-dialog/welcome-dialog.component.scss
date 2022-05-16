@@ -1,0 +1,65 @@
+@import '~src/assets/scss/setup/variables';
+
+$spacing: 5rem;
+
+.container {
+  padding-left: $spacing;
+  padding-right: $spacing;
+}
+
+.header {
+  h1 {
+    font-size: 3rem;
+    color: $color-white-001;
+    margin-bottom: 0 !important;
+  }
+  h2 {
+    color: $color-white-001;
+  }
+}
+
+.mat-dialog-content {
+  p {
+    &.sub-header {
+      strong {
+        color: $color-white-001;
+        font-size: 1.5rem;
+      }
+      margin-bottom: 1rem !important;
+    }
+
+    color: $color-white-001;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    &:nth-child(odd) {
+      margin-top: 1.5rem !important;
+    }
+    a {
+      color: $color-white-001;
+      border-bottom: 1px $color-white-001 solid;
+      &:hover,
+      :visited {
+        color: darken($color-primary, 10%);
+        border-bottom: 1px darken($color-primary, 10%) solid;
+      }
+    }
+  }
+}
+
+.btn.ok {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+
+  background-color: #f79267;
+  color: $color-white-001;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.close-symbol {
+  color: $color-white-001;
+  cursor: pointer;
+  font-size: 2rem;
+}

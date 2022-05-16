@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {}
 
   getKombitLoginUrl() {
-    const frontpage = encodeURI(window.location.origin + '/dashboard');
+    const frontpage = encodeURI(window.location.origin + '/applications');
     return `${environment.baseUrl}auth/kombit/login?redirect=${frontpage}`;
   }
 
@@ -49,7 +49,7 @@ export class AuthComponent implements OnInit {
     this.userMinimalService.setUserMinimalList();
     this.isLoading = false;
     this.loggedinService.emitChange(true);
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/applications');
   }
 
   fail() {
