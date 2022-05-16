@@ -70,8 +70,8 @@ export class UserEditComponent implements OnInit {
       this.user.email = response.email;
       this.user.id = response.id;
       this.user.active = response.active;
-      this.user.globalAdmin = response.permissions.some(
-        (x) => x.type === PermissionType.GlobalAdmin
+      this.user.globalAdmin = response.permissions.some((response) =>
+        this.meService.hasPermissions(response, PermissionType.GlobalAdmin)
       );
       this.isKombit = response.nameId != null;
       // We cannot set the password.
@@ -79,7 +79,7 @@ export class UserEditComponent implements OnInit {
   }
 
   amIGlobalAdmin() {
-    this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
+    this.isGlobalAdmin = this.meService.hasGlobalAdmin();
   }
 
   private create(): void {

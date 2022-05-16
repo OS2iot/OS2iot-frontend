@@ -21,13 +21,18 @@
 
     <div class="form-group mt-3 col-12">
         <label class="form-label" for="level">{{'PERMISSION.EDIT.TYPE' | translate}}</label>*
-        <select id="level" class="form-select" name="level" [(ngModel)]="permission.level" required
-            [value]="permission.organizationId" [disabled]="isEditMode"
+        <mat-select id="level" class="form-control" name="level"
+            required
+            [formControl]="permissionLevelsCtrl"
+            [(value)]="permission.levels"
             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('organizationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('organizationId')}"
-            placeholder="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate">
-            <option *ngFor="let level of allowedLevels()" [value]="level" [selected]="level === permission.level">
-                {{level}}</option>
-        </select>
+            [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
+            [compareWith]="compareLevels"
+            [multiple]="true">
+            <mat-option *ngFor="let level of allowedLevels" [value]="level">
+              {{'PERMISSION-TYPE.' + level.type | translate}}
+            </mat-option>
+        </mat-select>
     </div>
 
     <div class="form-group mt-3 col-12">
@@ -43,7 +48,7 @@
         </mat-form-field>
     </div>
 
-    <div *ngIf="permission.level != 'GlobalAdmin'">
+    <div *ngIf="isNotGlobalAdmin">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="name">{{'PERMISSION.EDIT.ORG' | translate}}</label>*
             <select id="organizationId" class="form-select" name="organizationId"

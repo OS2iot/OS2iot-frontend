@@ -49,7 +49,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ 'PERMISSION.TYPE' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-                {{ 'PERMISSION-TYPE.' + element.type | translate }}
+                {{ element.type | translatePermissions }}
             </td>
         </ng-container>
 

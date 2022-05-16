@@ -107,11 +107,11 @@ export class PermissionTabelComponent implements AfterViewInit {
                     }
                 });
             }
-        })
+        });
     }
 
     canAccess(element: PermissionResponse) {
-        if (element.type === PermissionType.GlobalAdmin) {
+        if (this.meService.hasPermissions(element, PermissionType.GlobalAdmin)) {
             return this.meService.hasGlobalAdmin();
         }
         return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, element.organization.id);

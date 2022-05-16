@@ -82,12 +82,6 @@ export class SharedVariableService {
     return this.getUserInfo().user.permissions.length > 0;
   }
 
-  isGlobalAdmin(): boolean {
-    return this.getUserInfo().user.permissions.some(
-      (permission) => permission.type === PermissionType.GlobalAdmin
-    );
-  }
-
   getSelectedOrganisationId(): number {
     if (this.selectedOrganisationId != null) {
       return +this.selectedOrganisationId;

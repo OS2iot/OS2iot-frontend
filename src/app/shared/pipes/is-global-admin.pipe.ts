@@ -7,8 +7,10 @@ import {
 @Pipe({
   name: 'isGlobalAdmin',
 })
-export class isGlobalAdminPipe implements PipeTransform {
+export class IsGlobalAdminPipe implements PipeTransform {
   transform(value: PermissionResponse[], ...args: any[]): any {
-    return value?.some((x) => x.type == PermissionType.GlobalAdmin);
+    return value?.some(({ type: response }) =>
+      response.some(({ type }) => type === PermissionType.GlobalAdmin)
+    );
   }
 }

@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../permission.service';
-import { PermissionRequest, PermissionType } from '../permission.model';
+import { PermissionRequest, PermissionType, PermissionTypes } from '../permission.model';
 import { OrganisationResponse } from '../../organisation/organisation.model';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { UserService } from '../../users/user.service';
@@ -16,6 +16,7 @@ import { Application } from '@applications/application.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { takeUntil } from 'rxjs/operators';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
   selector: 'app-permission-edit',
@@ -24,6 +25,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class PermissionEditComponent implements OnInit, OnDestroy {
   permission = new PermissionRequest();
+  isNotGlobalAdmin = true;
   public organisations: OrganisationResponse[];
   public users: UserResponse[];
   public applications: Application[];
@@ -44,6 +46,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   organisationSubscription: Subscription;
   userSubscription: Subscription;
   applicationSubscription: Subscription;
+  allowedLevels: PermissionTypes[];
 
   public userMultiCtrl: FormControl = new FormControl();
   public userMultiFilterCtrl: FormControl = new FormControl();
@@ -57,6 +60,11 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     Application[]
   > = new ReplaySubject<Application[]>(1);
 
+  public permissionLevelsCtrl: FormControl = new FormControl();
+
+  /** Subject that emits when the component has been destroyed. */
+  private _onDestroy = new Subject<void>();
+
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
@@ -65,8 +73,11 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private applicationService: ApplicationService,
     private location: Location,
-    private errormEssageService: ErrorMessageService
-  ) {}
+    private errormEssageService: ErrorMessageService,
+    private meService: MeService
+  ) {
+    this.buildAllowedLevels();
+  }
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -83,6 +94,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     if (this.id > 0) {
       this.getPermission(this.id);
       this.isEditMode = true;
+      this.permissionLevelsCtrl.disable();
       this.setBackButton();
     }
 
@@ -178,6 +190,10 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     return o1 === o2;
   }
 
+  public compareLevels(p1: PermissionTypes, p2: PermissionTypes): boolean {
+    return p1?.type === p2?.type;
+  }
+
   organizationChanged() {
     this.getApplications(this.permission.organizationId);
   }
@@ -199,21 +215,31 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   private getPermission(id: number) {
     this.subscription = this.permissionService.getPermission(id).subscribe(
       (response) => {
-        console.log(response);
         this.permission.name = response.name;
-        this.permission.level = response.type;
+        this.permission.levels = response.type;
+        this.permissionLevelsCtrl.setValue(this.permission.levels);
         this.permission.userIds = response.users.map((x) => x.id);
         this.userMultiCtrl.setValue(this.permission.userIds);
         this.permission.automaticallyAddNewApplications =
           response.automaticallyAddNewApplications;
+        this.isNotGlobalAdmin = this.meService.hasNotTargetPermissions(
+          response,
+          PermissionType.GlobalAdmin
+        );
 
-        if (response.type !== PermissionType.GlobalAdmin) {
+        if (this.isNotGlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
+          this.buildAllowedLevels();
+        } else {
+          this.allowedLevels = [{ type: PermissionType.GlobalAdmin }];
         }
 
         if (
-          response.type === PermissionType.Read ||
-          response.type === PermissionType.OrganizationApplicationAdmin
+          this.meService.hasPermissions(
+            response,
+            PermissionType.Read,
+            PermissionType.OrganizationApplicationAdmin
+          )
         ) {
           this.getApplications(this.permission.organizationId);
           this.permission.applicationIds = response.applications.map(
@@ -221,6 +247,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
           );
           this.applicationMultiCtrl.setValue(this.permission.applicationIds);
         }
+
       },
       (error: HttpErrorResponse) => {
         this.showError(error);
@@ -251,46 +278,29 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  allowedLevels() {
-    if (this.permission.level === PermissionType.GlobalAdmin) {
-      return [PermissionType.GlobalAdmin];
-    }
-    return [
-      PermissionType.OrganizationUserAdmin,
-      PermissionType.OrganizationApplicationAdmin,
-      PermissionType.OrganizationGatewayAdmin,
-      PermissionType.Read,
+  private buildAllowedLevels(): void {
+    this.allowedLevels = [
+      { type: PermissionType.OrganizationUserAdmin },
+      { type: PermissionType.OrganizationApplicationAdmin },
+      { type: PermissionType.OrganizationGatewayAdmin },
+      { type: PermissionType.Read },
     ];
-  }
-
-  isUserPartOfPermission(userId) {
-    if (this?.permission?.userIds) {
-      return this.permission.userIds.indexOf(userId) >= 0;
-    } else {
-      return false;
-    }
-  }
-
-  isApplicationPartOfPermission(appId) {
-    if (this?.permission?.applicationIds) {
-      return this.permission.applicationIds.indexOf(appId) >= 0;
-    } else {
-      return false;
-    }
   }
 
   isOrganizationApplicationPermission() {
     return (
-      this.permission.level ===
-        PermissionType.OrganizationApplicationPermissions ||
-      this.isReadOrWrite()
+      this.meService.hasPermissionTypes(
+        this.permission.levels,
+        PermissionType.OrganizationApplicationPermissions
+      ) || this.isReadOrWrite()
     );
   }
 
   isReadOrWrite(): boolean {
-    return (
-      this.permission.level === PermissionType.Read ||
-      this.permission.level === PermissionType.OrganizationApplicationAdmin
+    return this.meService.hasPermissionTypes(
+      this.permission.levels,
+      PermissionType.Read,
+      PermissionType.OrganizationApplicationAdmin
     );
   }
 
@@ -311,9 +321,6 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   routeBack(): void {
     this.location.back();
   }
-
-  /** Subject that emits when the component has been destroyed. */
-  private _onDestroy = new Subject<void>();
 
   ngOnDestroy() {
     this._onDestroy.next();

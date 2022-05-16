@@ -3,7 +3,7 @@ import { UserResponse } from '../users/user.model';
 import { Application } from '../../applications/application.model';
 
 export class PermissionRequest {
-  level: PermissionType;
+  levels: PermissionTypes[];
   name: string;
   organizationId: number;
   userIds: number[];
@@ -12,7 +12,7 @@ export class PermissionRequest {
 }
 
 export interface PermissionResponse {
-  type: PermissionType;
+  type: PermissionTypes[];
   name: string;
   users?: UserResponse[];
   organization?: OrganisationResponse;
@@ -30,6 +30,10 @@ export interface PermissionResponse {
 export interface PermissionGetManyResponse {
   data: PermissionResponse[];
   count: number;
+}
+
+export interface PermissionTypes {
+  type: PermissionType;
 }
 
 export enum PermissionType {
