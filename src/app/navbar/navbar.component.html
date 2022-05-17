@@ -64,21 +64,6 @@
             </ul>
           </li>
         </div>
-        <div class="flex-column flex-grow-1"></div>
-        <div class="flex-column">
-          <li class="nav-item">
-            <a class="nav-link pl-5 position-relative rounded" (click)="goToHelp()" target="_blank">
-              {{'NAV.HELP' | translate }}
-            </a>
-            <fa-icon [icon]="faQuestionCircle" class="navbar-icon"></fa-icon>
-          </li>
-          <li class="nav-item">
-            <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
-              [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-              target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">{{'NAV.LOGOUT' | translate }}</a>
-            <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
-          </li>
-        </div>
       </ul>
     </div>
   </ng-template>

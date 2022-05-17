@@ -4,6 +4,8 @@ import { AuthComponent } from './auth/auth.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+import { NewUserComponent } from './admin/users/new-kombit-user-page/new-user.component';
+import { UserPageComponent } from './admin/users/user-page/user-page.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
@@ -17,6 +19,8 @@ const routes: Routes = [
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
     { path: 'not-found', component: ErrorPageComponent, data: { message: 'not-found', code: 404 } },
     { path: 'not-authorized', component: ErrorPageComponent },
+    { path: 'new-user', component: NewUserComponent, canActivate: [AuthGuard]},
+    { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},    
     { path: '', redirectTo: '/applications', pathMatch: 'full' },
     { path: '**', redirectTo: '/not-found', pathMatch: 'full' }
 ];

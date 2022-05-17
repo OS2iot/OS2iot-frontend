@@ -9,6 +9,7 @@ import {
 } from './organisation.model';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserMinimalService } from '../users/user-minimal.service';
+import { UpdateUserOrgsDto } from '../users/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,12 @@ import { UserMinimalService } from '../users/user-minimal.service';
 export class OrganisationService {
   URL = 'organization';
   URLMINIMAL = 'organization/minimal';
+  URLMINIMAL_NEWKOMBIT = 'kombitCreation/minimal';
 
   constructor(
     private restService: RestService,
-    private userMinimalService: UserMinimalService) { }
+    private userMinimalService: UserMinimalService
+  ) {}
 
   post(body: Organisation): Observable<OrganisationResponse> {
     return this.restService.post(this.URL, body);
@@ -32,27 +35,32 @@ export class OrganisationService {
   }
 
   getOne(id: number): Observable<OrganisationResponse> {
-    return this.restService.get(this.URL, {}, id)
-      .pipe(
-        map(
-          (response: OrganisationResponse) => {
-            response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
-            response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
-            return response;
-          }
-        )
-      );
+    return this.restService.get(this.URL, {}, id).pipe(
+      map((response: OrganisationResponse) => {
+        response.createdByName = this.userMinimalService.getUserNameFrom(
+          response.createdBy
+        );
+        response.updatedByName = this.userMinimalService.getUserNameFrom(
+          response.updatedBy
+        );
+        return response;
+      })
+    );
   }
 
   getMinimal(): Observable<OrganisationGetMinimalResponse> {
     return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
+  getMinimalNoPerm(): Observable<OrganisationGetMinimalResponse> {
+    return this.restService.get(this.URLMINIMAL_NEWKOMBIT, {}).pipe(shareReplay(1));
+  }
+
   getMultiple(
     limit: number = 1000,
     offset: number = 0,
     orderByColumn?: string,
-    orderByDirection?: string,
+    orderByDirection?: string
   ): Observable<OrganisationGetManyResponse> {
     return this.restService.get(this.URL, {
       limit,

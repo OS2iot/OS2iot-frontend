@@ -21,6 +21,7 @@ export class DeleteDialogService {
     showCancel = true,
     showOk = false,
     infoTitle = '',
+    showReject?: boolean,
     acceptText?: string,
     cancelText?: string
   ): Observable<any> {
@@ -31,7 +32,8 @@ export class DeleteDialogService {
           showOk,
           showAccept,
           showCancel,
-          message: message ? message : 'Er du sikker på at du vil slette?',
+          message: message ? message : this.translate.instant('DIALOG.DELETE.ARE-YOU-SURE'),
+          showReject,
           acceptText,
           cancelText
         },

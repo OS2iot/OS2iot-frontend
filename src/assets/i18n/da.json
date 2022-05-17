@@ -915,6 +915,8 @@
     }
   },
   "USERS": {
+    "AWAITING-USERS": "Afventende brugere",
+    "EXISTING-USERS": "Tilknyttede brugere",
     "SAVE": "Gem",
     "NAME": "Navn",
     "EMAIL": "Email",
@@ -924,9 +926,15 @@
     "EDIT": "Redigér User",
     "CREATE": "Opret ny bruger",
     "LOGIN": "Sidst aktiv",
+    "DIALOG": {
+      "QUESTION-REJECT": "Er du sikker på, at du vil afvise brugeren?",
+      "HEAD-REJECT": "Afvis bruger"
+    },
     "TABLE-ROW": {
       "EDIT": "Redigér",
-      "DELETE": "Slet"
+      "DELETE": "Slet",
+      "APPROVE": "Godkend",
+      "REJECT": "Afvis"
     },
     "FORM": {
       "NAME": "Indtast det fulde navn på brugeren",
@@ -957,6 +965,10 @@
     "GLOBAL_ADMIN": {
       "TRUE": "Ja",
       "FALSE": "Nej"
+    },
+    "ACCEPT-USER": {
+      "ACCEPT": "Godkend bruger",
+      "QUESTION-ACCEPT": "Vælg brugergruppe til "
     }
   },
   "AUTH": {
@@ -991,6 +1003,7 @@
     "CLOSE": "Annuller",
     "OK": "Ok",
     "DIALOG-CONFIRM": "Ja, slet",
+    "DIALOG-REJECT": "Ja, afvis",
     "OPENDATADK": {
       "OK": "Send mail til OpenDataDk",
       "CLOSE": "Nej, tak",
@@ -1029,6 +1042,19 @@
     "FIRST_PAGE": "Første side",
     "LAST_PAGE": "Sidste side",
     "OF": "af"
+  },
+  "NEW_USER": {
+    "FIRST_LOGIN": "Siden dette er dit første login, bedes du udfylde din mail og de organisationer du ønsker at være medlem af."
+  },
+  "USER_PAGE": {
+    "AWAITING_CONFIRMATION": "Din bruger er oprettet og afventer bekræftelse fra administratorer på de organisationer du har søgt tilknytning.",
+    "APPLY_ORGANISATIONS": "Søg tilknytning til andre organisationer",
+    "APPLIED_ORGANISATIONS": "Der er pt søgt eller allerede eksisterende tilknytning til følgende organisationer:",
+    "QUESTION_APPLY_ORGANISATIONS": "Ønsker du at søge tilknytning til andre organisationer?",
+    "USER_PAGE": "Organisationstilknytning",
+    "NO_APPLIED_ORGS": "Du har ikke søgt tilknytning til nogle organisationer..",
+    "NO_ORGS": "Der findes ikke yderligere organisationer.."
+
   },
   "false": "Nej",
   "true": "Ja",

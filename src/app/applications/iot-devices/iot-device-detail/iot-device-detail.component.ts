@@ -330,6 +330,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             true,
             false,
             '',
+            false,
             this.resetApiKeyConfirm,
             this.resetApiKeyCancel
           )

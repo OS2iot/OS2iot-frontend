@@ -11,6 +11,12 @@ export class PermissionRequest {
   automaticallyAddNewApplications = true;
 }
 
+export class PermissionRequestAcceptUser {
+  organizationId: number;
+  userId: number;
+  level: PermissionType;
+}
+
 export interface PermissionResponse {
   type: PermissionType;
   name: string;
