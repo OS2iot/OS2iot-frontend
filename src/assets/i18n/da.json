@@ -204,7 +204,7 @@
       "DESCRIPTION": "Offentliggør datasæt i Open Data DK's åbne dataportal."
     },
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
-    "HTTP_PUSH": {
+    "HTTP-PUSH": {
       "TYPE": "HTTP Push",
       "NAME": "Generisk HTTP Push",
       "DESCRIPTION": "Send data med HTTP POST requests til et HTTP URL endpoint"
