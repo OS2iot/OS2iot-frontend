@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2 pt-md-4"
   aria-expanded="false">
 
-  <a routerLink="/dashboard" class="navbar-brand p-0 pl-2 mb-5" href="">
+  <div class="navbar-brand p-0 pl-2 mb-5">
     <img class="img-logo" alt="OS2IoT-logo" [src]="imagePath" />
-  </a>
+  </div>
   <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
     <ul class="navbar-nav flex-column">
       <li class="nav-item">

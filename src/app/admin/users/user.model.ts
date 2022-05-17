@@ -11,6 +11,7 @@ export class UserRequest {
   password: string;
   active: boolean;
   globalAdmin: boolean;
+    showWelcomeScreen: boolean;
 }
 
 export interface UserResponse {
@@ -28,6 +29,7 @@ export interface UserResponse {
   lastLogin: Date;
   permissions: PermissionResponse[];
   awaitingConfirmation: boolean;
+  showWelcomeScreen: boolean;
   requestedOrganizations: OrganisationResponse[];
 }
 

@@ -73,6 +73,10 @@ export class UserService {
     }
   }
 
+  hideWelcome(id: number): Observable<boolean> {
+    return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);
+  }
+    
   getAwaitingUsers(
     limit: number = 1000,
     offset: number = 0,

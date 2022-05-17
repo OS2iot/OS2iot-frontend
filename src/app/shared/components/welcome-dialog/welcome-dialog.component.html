@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-end">
+  <p class="close-symbol text-right" (click)="close()">X</p>
+</div>
+<div class="container">
+  <header mat-dialog-title class="text-center header">
+    <h1>
+      {{'WELCOME-DIALOG.WELCOME' | translate}}
+    </h1>
+    <h2>{{ (dialogModel?.hasSomePermission ? 'WELCOME-DIALOG.WELCOME-SUB' : 'WELCOME-DIALOG.NO-ACCESS') | translate}}</h2>
+  </header>
+  <div mat-dialog-content class="col-md-12 px-md-4" *ngIf="dialogModel?.hasSomePermission">
+    <p class="sub-header"><strong>{{'WELCOME-DIALOG.SUB-HEADER-1' | translate}}</strong></p>
+    <p>{{'WELCOME-DIALOG.WELCOME-MESSAGE' | translate}}
+      <span>
+        <a href="https://OS2iot.os2.eu" target="_blank">{{'WELCOME-DIALOG.LINK-1' |
+          translate}}</a>
+      </span>{{'WELCOME-DIALOG.WELCOME-MESSAGE-2' | translate}}
+    </p>
+    <p class="sub-header"><strong>{{'WELCOME-DIALOG.SUB-HEADER-2' | translate}}</strong></p>
+    <p>{{'WELCOME-DIALOG.WELCOME-MESSAGE-3' | translate}}
+      <span>
+        <a href="https://os2.eu/produkt/os2iot" target="_blank">{{'WELCOME-DIALOG.LINK-2' |
+          translate}}
+        </a>.
+      </span>
+      {{'WELCOME-DIALOG.WELCOME-MESSAGE-4' | translate}}
+      <span>
+        <a href="https://github.com/OS2iot/" target="_blank">{{'WELCOME-DIALOG.LINK-3' |
+          translate}}</a>.
+      </span>
+    </p>
+  </div>
+  <div mat-dialog-actions class="d-flex flex-column">
+    <button (click)="close()" mat-dialog-close class="btn ok text--big">
+      {{'DIALOG.OK' | translate | uppercase}}
+    </button>
+
+  </div>
+</div>
+<mat-checkbox *ngIf="dialogModel?.hasSomePermission" [(ngModel)]="dontShowAgain" name="dontShowAgain"
+  class="hide-checkbox align-self-start">{{
+  'DIALOG.WELCOME.DONT-SHOW-AGAIN' | translate}}</mat-checkbox>

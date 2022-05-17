@@ -22,7 +22,6 @@ export class SigfoxGroupsListItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.sigfoxGroup);
     this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
