@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
@@ -24,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { WelcomeDialogModule } from '@shared/components/welcome-dialog/welcome-dialog.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +45,6 @@ export function tokenGetter() {
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
-        DashboardModule,
         NavbarModule,
         ProfilesModule,
         TranslateModule.forRoot({
@@ -70,6 +69,7 @@ export function tokenGetter() {
             },
         }),
         MonacoEditorModule.forRoot(),
+        WelcomeDialogModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
