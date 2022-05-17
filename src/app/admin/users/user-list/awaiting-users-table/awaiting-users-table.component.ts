@@ -27,7 +27,7 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
   resultsLength = 0;
   public errorMessage: string;
   isLoadingResults = true;
-  rejectUserOrg: RejectUserDto = new RejectUserDto();
+  public organizationId: number;
   message: string;
   infoTitle: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,23 +41,10 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
     private userService: UserService,
     private sharedService: SharedVariableService,
     private deleteDialogService: DeleteDialogService
-  ) {}
+  ) {} 
 
-  getUsers(
-    orderByColumn: string,
-    orderByDirection: string
-  ): Observable<UserGetManyResponse> {
-    return this.userService.getAwaitingUsers(
-      this.paginator.pageSize,
-      this.paginator.pageIndex * this.paginator.pageSize,
-      this.rejectUserOrg.orgId,
-      orderByColumn,
-      orderByDirection
-    );
-  }
-
-  ngAfterViewInit() {
-    this.rejectUserOrg.orgId = this.sharedService.getSelectedOrganisationId();
+  ngAfterViewInit() {    
+    this.organizationId = this.sharedService.getSelectedOrganisationId();
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -90,13 +77,32 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
       });
   }
 
+  getUsers(
+    orderByColumn: string,
+    orderByDirection: string
+  ): Observable<UserGetManyResponse> {
+    return this.userService.getAwaitingUsers(
+      this.paginator.pageSize,
+      this.paginator.pageIndex * this.paginator.pageSize,
+      this.organizationId,
+      orderByColumn,
+      orderByDirection
+    );
+  }
+
   rejectUser(userId: number) {
     this.deleteDialogService
       .showSimpleDialog(this.message, false, true, false, this.infoTitle, true)
       .subscribe((response) => {
+
         if (response) {
+		  const rejectUserOrgDto: RejectUserDto = {
+			  orgId: this.organizationId,
+			  userIdToReject: userId
+		  }
+
           this.userService
-            .rejectUser(userId, this.rejectUserOrg)
+            .rejectUser(rejectUserOrgDto)
             .subscribe((response) => {
               if (response) {
                 this.paginator.page.emit({

@@ -44,12 +44,14 @@ export class CreateNewKombitUserFromFrontend {
 export class UpdateUserOrgFromFrontend {
   requestedOrganizations: Organisation[];
 }
+
 export class UpdateUserOrgsDto {
   requestedOrganizationIds: number[];
 }
 
 export class RejectUserDto {
   orgId: number;
+  userIdToReject: number;
 }
 
 export class CreateNewKombitUserDto {

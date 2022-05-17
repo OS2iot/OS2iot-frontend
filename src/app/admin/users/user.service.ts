@@ -116,8 +116,8 @@ export class UserService {
     });
   }
 
-  rejectUser(userId: number, body: RejectUserDto): Observable<Organisation> {
-    return this.restService.put(this.URL + '/rejectUser', body, userId, {
+  rejectUser(body: RejectUserDto): Observable<Organisation> {
+    return this.restService.put(this.URL + '/rejectUser', body, undefined, {
       observe: 'response',
     });
   }

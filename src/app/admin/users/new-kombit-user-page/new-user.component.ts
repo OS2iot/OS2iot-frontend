@@ -22,7 +22,6 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class NewUserComponent implements OnInit {
   public organisationSubscription: Subscription;
-  public createNewKombitUserDto: CreateNewKombitUserDto = new CreateNewKombitUserDto();
   public userSubscription: Subscription;
   public organisations: Organisation[];
   public formFailedSubmit = false;
@@ -70,6 +69,7 @@ export class NewUserComponent implements OnInit {
     if (!this.organisations) {
       return;
     }
+
     // get the search keyword
     let search = this.organisationsFilterCtrl?.value?.trim();
     if (!search) {
@@ -78,16 +78,20 @@ export class NewUserComponent implements OnInit {
     } else {
       search = search.toLowerCase();
     }
+
     const filtered = this.organisations.filter((org) => {
       return org.name.toLocaleLowerCase().indexOf(search) > -1;
     });
+
     this.filteredOrganisations.next(filtered);
   }
 
   onSubmit(): void {
     this.resetErrors();
-    this.mapToDto(this.createNewKombitUserFromFrontend);
-    this.userService.updateNewKombit(this.createNewKombitUserDto).subscribe(
+
+    const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);	
+	
+    this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
       () => {
         this.router.navigate(['/dashboard']);
       },
@@ -98,14 +102,18 @@ export class NewUserComponent implements OnInit {
     );
   }
 
-  public mapToDto(body: CreateNewKombitUserFromFrontend) {
-    this.createNewKombitUserDto.email = body.email;
-    this.createNewKombitUserDto.requestedOrganizationIds = [];
-    body.requestedOrganizations.forEach((organization) => {
-      this.createNewKombitUserDto.requestedOrganizationIds.push(
+  private mapToDto(frontendModel: CreateNewKombitUserFromFrontend): CreateNewKombitUserDto {
+    const createNewKombitUserDTO = new CreateNewKombitUserDto();
+    createNewKombitUserDTO.email = frontendModel.email;
+    createNewKombitUserDTO.requestedOrganizationIds = [];
+
+    frontendModel.requestedOrganizations.forEach((organization) => {
+      createNewKombitUserDTO.requestedOrganizationIds.push(
         organization.id
       );
     });
+
+	return createNewKombitUserDTO;
   }
 
   public compare(
@@ -128,11 +136,13 @@ export class NewUserComponent implements OnInit {
         });
     }
   }
+
   private resetErrors() {
     this.errorFields = [];
     this.errorMessages = undefined;
     this.formFailedSubmit = false;
   }
+
   handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errors.errorFields;
