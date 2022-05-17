@@ -129,11 +129,13 @@ export class TopBarComponent implements OnInit {
     getUsername(): string {
         return this.sharedVariableService.getUsername();
     }
+	
     onLogout() {
         this.authService.logout();
         this.router.navigateByUrl('auth');
         this.loggedInService.emitChange(false);
     }
+
     getKombitLogoutUrl() {
         const jwt = this.authService.getJwt();
         if (this.authService.isLoggedInWithKombit()) {
@@ -142,11 +144,13 @@ export class TopBarComponent implements OnInit {
           return '';
         }
       }
+
       isLoggedInWithKombit() {
         return this.authService.isLoggedInWithKombit();
       }
+
       hasEmail(): boolean {
-          if(this.sharedVariableService.getUserInfo().user.email)
+          if (this.sharedVariableService.getUserInfo().user.email)
           {
               return true
           }
