@@ -59,7 +59,7 @@ export class OrganisationDropdownComponent implements OnInit {
   }
 
   private setLocalPermissionCheck(orgId: number) {
-    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
+    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, orgId);
     this.isGlobalAdmin = this.user?.permissions?.some(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin));
     this.isOnlyGatewayAdmin = this.user.permissions.every(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin));
   }

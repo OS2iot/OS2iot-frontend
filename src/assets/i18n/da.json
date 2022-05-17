@@ -172,7 +172,7 @@
     "AUTHORIZATIONHEADER": "Authorization header",
     "NO-AUTHORIZATIONHEADER": "Ingen Authorization header angivet",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
-    "OPENDATA-DK": "OpenDataDK", 
+    "OPENDATA-DK": "OpenDataDK",
     "NO-OPENDATA-DK": "Der er ikke oprettet nogen datadeling med Open Data DK endnu",
     "HTTP_PUSH": "HTTP Push",
     "FIWARE": "FIWARE"
@@ -726,7 +726,8 @@
     "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
     "FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE": "Enheden kunne ikke oprettes eller opdateres",
     "DEVICE-MODEL-ORGANIZATION-DOES-NOT-MATCH": "Organisationsid'et på device modellen matcher ikke den tilhørende applikation",
-    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke"
+    "DEVICE-MODEL-DOES-NOT-EXIST": "Device model findes ikke",
+    "DUPLICATE-PERMISSION-TYPES": "Den samme rettighed må ikke optræde flere gange"
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",

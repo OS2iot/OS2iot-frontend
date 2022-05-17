@@ -34,13 +34,13 @@ export class MeService {
 
     switch (scope) {
       case OrganizationAccessScope.ApplicationWrite:
-        canWriteCallback = this.canWriteApplicationInTargetOrganization;
+        canWriteCallback = this.canWriteApplicationInTargetOrganization.bind(this);
         break;
       case OrganizationAccessScope.GatewayWrite:
-        canWriteCallback = this.canWriteGatewayInTargetOrganization;
+        canWriteCallback = this.canWriteGatewayInTargetOrganization.bind(this);
         break;
       case OrganizationAccessScope.UserAdministrationWrite:
-        canWriteCallback = this.canWriteUserInTargetOrganization;
+        canWriteCallback = this.canWriteUserInTargetOrganization.bind(this);
         break;
       default:
         // Should never happen

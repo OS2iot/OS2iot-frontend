@@ -257,8 +257,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
   private create(): void {
     this.permissionService.createPermission(this.permission).subscribe(
-      (response) => {
-        console.log(response);
+      (_response) => {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {

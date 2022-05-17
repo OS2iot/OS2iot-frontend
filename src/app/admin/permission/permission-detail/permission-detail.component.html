@@ -8,7 +8,7 @@
                 <div class=" jumbotron">
                     <h3>{{'PERMISSION.DETAIL.HEADLINE' | translate}}</h3>
                     <app-general-details [data]="permission"></app-general-details>
-                    <p><strong>{{'PERMISSION.DETAIL.TYPE' | translate}}</strong>{{permission.type}}</p>
+                    <p><strong>{{'PERMISSION.DETAIL.TYPE' | translate}}</strong>{{permission.type | translatePermissions}}</p>
                     <p><strong>{{'PERMISSION.DETAIL.ORG' | translate}}</strong>
                         {{permission.organization?.name}}
                     </p>
