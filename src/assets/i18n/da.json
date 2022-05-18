@@ -13,7 +13,12 @@
     "VALUE": "Værdi",
     "NAME": "Navn",
     "DESCRIPTION": "Beskrivelse",
-    "to": "til"
+    "to": "til",
+    "ONLINE": "Online",
+    "OFFLINE": "Offline",
+    "NEVER-SEEN": "Aldrig set",
+    "DATE": "Dato",
+    "NO-DATA": "Der er ingen data at vise"
   },
   "NAV": {
     "APPLICATIONS": "Applikationer",
@@ -160,13 +165,15 @@
     "NAME": "Gatewayens navn",
     "STATS": "Statistik",
     "STATS-RXPACKETSRECEIVED": "Pakker modtaget",
-    "STATS-TXPACKETSEMITTED": "Pakker Sendt",
+    "STATS-TXPACKETSEMITTED": "Pakker sendt",
     "STATS-TIMESTAMP": "Tidspunkt",
     "TABEL-TAB": "Listevisning",
     "DROPDOWNFILTER": "Organisationsfilter",
     "DROPDOWNDEFAULT": "Alle",
     "MAP-TAB": "Kort",
-    "ORGANIZATION": "Organisation"
+    "ORGANIZATION": "Organisation",
+    "ONLINE-STATUS": "Online status",
+    "DATA-PACKETS": "Datapakker"
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",
@@ -300,6 +307,15 @@
     "LAST-SEEN-AT": "Seneste aktivitet",
     "STATUS": "Status",
     "ORGANIZATION": "Organisation"
+  },
+  "LORA-GATEWAY-STATUS": {
+    "TITLE": "LoRaWAN online status historik",
+    "TIMESTAMP": "Tidspunkt",
+    "INTERVAL": {
+      "DAY": "Seneste døgn",
+      "WEEK": "Seneste uge",
+      "MONTH": "Seneste måned"
+    }
   },
   "DEVICE-MODEL": {
     "DELETE-FAILED":"Slet Fejlede",
@@ -1095,8 +1111,5 @@
         "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
         "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
       }
-  },
-  "GRAPH": {
-    "NO-DATA": "Der er ingen data at vise"
   }
 }

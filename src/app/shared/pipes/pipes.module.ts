@@ -7,6 +7,8 @@ import { CreatedUpdatedByPipe } from './created-updated-by.pipe';
 import { CustomDatePipe, CustomTableDatePipe, DateOnlyPipe } from './custom-date.pipe';
 import { FilterDevicesPipe } from './filter-devices.pipe';
 import { SortByPipe } from './sort-by.pipe';
+import { GatewayStatusTooltipPipe } from './gateway/gateway-status-tooltip.pipe';
+import { GatewayStatusClassPipe } from './gateway/gateway-status-class.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SortByPipe } from './sort-by.pipe';
     DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
-    SortByPipe
+    SortByPipe,
+    GatewayStatusTooltipPipe,
+    GatewayStatusClassPipe
   ],
   imports: [CommonModule],
   exports: [
@@ -30,7 +34,9 @@ import { SortByPipe } from './sort-by.pipe';
     DateOnlyPipe,
     CreatedUpdatedByPipe,
     FilterDevicesPipe,
-    SortByPipe
+    SortByPipe,
+    GatewayStatusTooltipPipe,
+    GatewayStatusClassPipe
   ],
   providers: [
     DateOnlyPipe

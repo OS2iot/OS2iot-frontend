@@ -22,12 +22,12 @@
           <div class="row">
             <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
               <app-graph *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'" [data]="rssiChartData"
-                [type]="'line'" [options]="rssiChartOptions" [title]="'IOTDEVICE.HISTORY-TAB.RSSI' | translate">
+                [type]="'line'" [title]="'IOTDEVICE.HISTORY-TAB.RSSI' | translate">
               </app-graph>
             </div>
             <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
               <app-graph *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'" [data]="snrChartData"
-                [type]="'line'" [options]="snrChartOptions" [title]="'IOTDEVICE.HISTORY-TAB.SNR' | translate">
+                [type]="'line'" [title]="'IOTDEVICE.HISTORY-TAB.SNR' | translate">
               </app-graph>
             </div>
           </div>

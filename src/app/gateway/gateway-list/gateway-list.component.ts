@@ -11,7 +11,9 @@ import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
+const gatewayStatusTabIndex = 2;
 
 @Component({
   selector: 'app-gateway-list',
@@ -41,7 +43,9 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   public pageOffset = 0;
   public pageTotal: number;
   organisationId: number;
-  organisationChangeSubject: Subject<any> = new Subject();
+  tabIndex = 0;
+  organisationChangeSubject: Subject<number> = new Subject();
+  isGatewayStatusVisibleSubject: Subject<void> = new Subject();
 
   constructor(
     public translate: TranslateService,
@@ -49,7 +53,8 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     private deleteDialogService: DeleteDialogService,
     private meService: MeService,
     private titleService: Title,
-    private sharedVariableService: SharedVariableService) {
+    private sharedVariableService: SharedVariableService,
+  ) {
     translate.use('da');
     moment.locale('da');
   }
@@ -75,10 +80,15 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  setOrgIdFilter(event: number) {
-    this.organisationId = event;
-    this.organisationChangeSubject.next(event);
-    this.filterGatewayByOrgId(event);
+  setOrgIdFilter(orgId: number) {
+    this.organisationId = orgId;
+    this.organisationChangeSubject.next(orgId);
+
+    if (this.tabIndex === gatewayStatusTabIndex) {
+      this.isGatewayStatusVisibleSubject.next();
+    }
+
+    this.filterGatewayByOrgId(orgId);
   }
 
   private getGateways(): void {
@@ -120,14 +130,18 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  showMap(event: any) {
-    if (event.index === 1) {
+  selectedTabChange({index}: MatTabChangeEvent) {
+    this.tabIndex = index;
+
+    if (index === 1) {
       if (this.selectedOrg) {
         this.getGatewayWith(this.selectedOrg);
       } else {
         this.getGateways();
       }
       this.showmap = true;
+    } else if (index === gatewayStatusTabIndex) {
+      this.isGatewayStatusVisibleSubject.next();
     }
   }
 
@@ -184,12 +198,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
-    if (this.gatewaySubscription) {
-      this.gatewaySubscription.unsubscribe();
-    }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
+      this.gatewaySubscription?.unsubscribe();
+      this.deleteDialogSubscription?.unsubscribe();
   }
-
 }
