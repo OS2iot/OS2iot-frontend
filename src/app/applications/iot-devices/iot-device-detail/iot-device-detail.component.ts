@@ -18,20 +18,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChartConfiguration } from 'chart.js';
 import * as moment from 'moment';
 import { recordToEntries } from '@shared/helpers/record.helper';
-
-const colorGraphBlue1 = '#03AEEF';
-
-const defaultChartOptions: ChartConfiguration['options'] = {
-  plugins: { legend: { display: false }, },
-  responsive: true,
-  layout: {
-    padding: {
-      top: 15,
-      left: 10,
-      right: 10,
-    }
-  },
-};
+import { ColorGraphBlue1 } from '@shared/constants/color-constants';
 
 /**
  * Ordered from "worst" to "best" (from DR0 and up)
@@ -83,17 +70,13 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     dataRateChartData: ChartConfiguration['data'] = { datasets: [] };
     rssiChartData: ChartConfiguration['data'] = { datasets: [] };
     snrChartData: ChartConfiguration['data'] = { datasets: [] };
-    rssiChartOptions = defaultChartOptions;
-    snrChartOptions: typeof defaultChartOptions = defaultChartOptions;
 
-    dataRateChartOptions: typeof defaultChartOptions = {
-      ...defaultChartOptions,
+    dataRateChartOptions: ChartConfiguration['options'] = {
       scales: {
         x: { stacked: true },
         y: { stacked: true },
       },
       plugins: {
-        ...defaultChartOptions,
         tooltip: {
           mode: 'index',
           position: 'average',
@@ -250,10 +233,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             },
             {
               rssiDatasets: [
-                { data: [], borderColor: colorGraphBlue1,  backgroundColor: colorGraphBlue1 },
+                { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
               ],
               snrDatasets: [
-                { data: [], borderColor: colorGraphBlue1,  backgroundColor: colorGraphBlue1 },
+                { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
               ],
               dataRateDatasets: this.initDataRates(),
               labels: [],

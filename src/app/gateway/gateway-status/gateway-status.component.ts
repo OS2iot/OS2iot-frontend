@@ -15,7 +15,8 @@ import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service'
 import * as moment from 'moment';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { GatewayStatusInterval } from '../enums/gateway-status-interval.enum';
-import { GatewayStatus, GatewayStatusResponse } from '../gateway.model';
+import { GatewayStatus, AllGatewayStatusResponse } from '../gateway.model';
+import { map } from 'rxjs/operators';
 
 interface TimeColumn {
   exactTimestamp: string;
@@ -34,6 +35,8 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   @Input() isVisibleSubject: Subject<void>;
   @Input() paginatorClass: string;
   @Input() title: string;
+  @Input() gatewayId: string;
+  @Input() shouldLinkToDetails = true;
 
   private gatewayStatusSubscription: Subscription;
   private readonly columnGatewayName = 'gatewayName';
@@ -95,7 +98,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   private getGatewayStatus(
     organizationId = this.organizationId,
     timeInterval = this.selectedStatusInterval
-  ): Observable<GatewayStatusResponse> {
+  ): Observable<AllGatewayStatusResponse> {
     const params: Record<string, string | number> = {
       timeInterval,
       // Paginator is only avaiable in ngAfterViewInit
@@ -107,7 +110,16 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       params.organizationId = organizationId;
     }
 
-    return this.lorawanGatewayService.getAllStatus(params);
+    return !this.gatewayId
+      ? this.lorawanGatewayService.getAllStatus(params)
+      : this.lorawanGatewayService
+          .getStatus(this.gatewayId, { timeInterval })
+          .pipe(
+            map(
+              (response) =>
+                ({ data: [response], count: 1 } as AllGatewayStatusResponse)
+            )
+          );
   }
 
   private subscribeToGetAllGatewayStatus(
@@ -128,7 +140,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     });
   }
 
-  private handleStatusResponse(response: GatewayStatusResponse) {
+  private handleStatusResponse(response: AllGatewayStatusResponse) {
     this.resultsLength = response.count;
     const gatewaysWithLatestTimestampsPerHour = this.takeLatestTimestampInHour(
       response.data

@@ -19,9 +19,19 @@ export class GraphComponent implements OnChanges {
   @Input() data: ChartConfiguration['data'];
   @Input() type: ChartConfiguration['type'];
   @Input() options: ChartConfiguration['options'] = {
+    plugins: { legend: { display: false } },
     responsive: true,
+    layout: {
+      padding: {
+        top: 15,
+        left: 10,
+        right: 10,
+      },
+    },
   };
   @Input() title: string;
+  @Input() graphCardClass: string;
+  @Input() graphHeaderClass: string;
   chartInstance: Chart = null;
   isGraphEmpty: boolean;
 
@@ -72,13 +82,13 @@ export class GraphComponent implements OnChanges {
       ? {
           ...options,
           scales: {
-            ...options.scales,
+            ...options?.scales,
             x: {
-              ...options.scales.x,
+              ...options?.scales?.x,
               display: false,
             },
             y: {
-              ...options.scales.y,
+              ...options?.scales?.y,
               display: false,
             },
           },

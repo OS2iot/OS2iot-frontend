@@ -14,6 +14,7 @@ import { FormModule } from '@shared/components/forms/form.module';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { GatewayStatusComponent } from './gateway-status/gateway-status.component';
+import { GraphModule } from '@app/graph/graph.module';
 
 const gatewayRoutes: Routes = [
   {
@@ -49,6 +50,7 @@ const gatewayRoutes: Routes = [
     RouterModule.forChild(gatewayRoutes),
     SharedModule,
     PipesModule,
+    GraphModule,
   ],
   exports: [
     GatewayTableComponent,
