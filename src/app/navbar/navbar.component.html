@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2 pt-md-4"
   aria-expanded="false">
 
-  <a routerLink="/dashboard" class="navbar-brand p-0 pl-2 mb-5" href="">
+  <div class="navbar-brand p-0 pl-2 mb-5">
     <img class="img-logo" alt="OS2IoT-logo" [src]="imagePath" />
-  </a>
+  </div>
   <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
     <ul class="navbar-nav flex-column">
       <li class="nav-item">
@@ -62,21 +62,6 @@
                 <fa-icon [icon]="faNetworkWired" class="navbar-icon"></fa-icon>
               </li>
             </ul>
-          </li>
-        </div>
-        <div class="flex-column flex-grow-1"></div>
-        <div class="flex-column">
-          <li class="nav-item">
-            <a class="nav-link pl-5 position-relative rounded" (click)="goToHelp()" target="_blank">
-              {{'NAV.HELP' | translate }}
-            </a>
-            <fa-icon [icon]="faQuestionCircle" class="navbar-icon"></fa-icon>
-          </li>
-          <li class="nav-item">
-            <a style="cursor: pointer;" class="nav-link pl-5 position-relative rounded" (click)="onLogout()"
-              [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-              target="{{(isLoggedInWithKombit()) ? '_blank' : undefined}}">{{'NAV.LOGOUT' | translate }}</a>
-            <fa-icon [icon]="faSignOutAlt" class="navbar-icon"></fa-icon>
           </li>
         </div>
       </ul>

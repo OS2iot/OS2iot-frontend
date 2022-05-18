@@ -15,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { ApiKeyComponent } from './api-key/api-key.component';
 import { ApiKeyListComponent } from './api-key/api-key-list/api-key-list.component';
 import { ApiKeyEditComponent } from './api-key/api-key-edit/api-key-edit.component';
+import { AcceptUserComponent } from './users/accept-user/accept-user.component';
 
 
 const adminRoutes: Routes = [
@@ -32,6 +33,7 @@ const adminRoutes: Routes = [
             { path: 'new-user', component: UserEditComponent },
             { path: ':user-id', component: UserDetailComponent },
             { path: ':user-id/edit-user', component: UserEditComponent },
+            { path: 'accept-user/:user-id/:org-id', component: AcceptUserComponent }
         ]
     },
     {

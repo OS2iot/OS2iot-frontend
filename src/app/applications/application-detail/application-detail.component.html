@@ -10,11 +10,23 @@
           <div *ngIf="errorMessage" class="error-messages p-3 my-3">
             {{errorMessage | translate}}
           </div>
-          <h3>Detaljer</h3>
+          <h3>{{ 'APPLICATION.DETAILS' | translate }}</h3>
           <app-general-details [data]="application"></app-general-details>
           <p *ngIf="application.description">
             <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong></p>
           <pre><p>{{application.description}}</p></pre>
+          <app-metadata-details [status]="application.status" [startDate]="application.startDate"
+          [endDate]="application.endDate"
+          [category]="application.category"
+          [owner]="application.owner"
+          [contactPerson]="application.contactPerson"
+          [contactEmail]="application.contactEmail"
+          [contactPhone]="application.contactPhone"
+          [personalData]="application.personalData"
+          [hardware]="application.hardware"
+          [controlledProperties]="application.controlledProperties"
+          [deviceTypes]="application.deviceTypes"
+          ></app-metadata-details>
         </div>
       </div>
     </div>

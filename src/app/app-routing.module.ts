@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+import { NewUserComponent } from './admin/users/new-kombit-user-page/new-user.component';
+import { UserPageComponent } from './admin/users/user-page/user-page.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
     { path: 'auth', component: AuthComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'applications', loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule), canActivate: [AuthGuard] },
     { path: 'gateways', loadChildren: () => import('./gateway/gateway.module').then(m => m.GatewayModule), canActivate: [AuthGuard] },
     { path: 'profiles', loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule), canActivate: [AuthGuard] },
@@ -19,7 +19,9 @@ const routes: Routes = [
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
     { path: 'not-found', component: ErrorPageComponent, data: { message: 'not-found', code: 404 } },
     { path: 'not-authorized', component: ErrorPageComponent },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: 'new-user', component: NewUserComponent, canActivate: [AuthGuard]},
+    { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuard]},    
+    { path: '', redirectTo: '/applications', pathMatch: 'full' },
     { path: '**', redirectTo: '/not-found', pathMatch: 'full' }
 ];
 

@@ -1,0 +1,70 @@
+<div *ngIf="user">
+  <app-top-bar
+    [backButtonTitle]="backButtonTitle"
+    [title]="title"
+  ></app-top-bar>
+
+  <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+    <div *ngIf="errorMessages" class="error-messages p-3">
+      <ul class="mb-0">
+        <li *ngFor="let error of errorMessages">
+          {{ error | translate }}
+        </li>
+      </ul>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h3>
+              {{ 'USERS.ACCEPT-USER.QUESTION-ACCEPT' | translate }}
+              {{ user.name }}
+            </h3>
+            <mat-divider></mat-divider>
+
+            <div class="form-group mt-3 col-12">
+              <label class="form-label" for="level">{{
+                'PERMISSION.EDIT.TYPE' | translate
+              }}</label
+              >*
+              <select
+                id="level"
+                class="form-select"
+                name="level"
+                [(ngModel)]="permission.level"
+                required
+                [ngClass]="{
+                  'is-invalid':
+                    formFailedSubmit && errorFields.includes('organizationId'),
+                  'is-valid':
+                    formFailedSubmit && !errorFields.includes('organizationId')
+                }"
+                placeholder="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
+              >
+                <option
+                  *ngFor="let level of allowedLevels()"
+                  [value]="level"
+                  [selected]="level === permission.level"
+                >
+                  {{ level }}</option
+                >
+              </select>
+            </div>
+            <div class="form-group mt-5">
+              <button
+                (click)="routeBack()"
+                class="btn btn-secondary"
+                type="button"
+              >
+                {{ 'GEN.CANCEL' | translate }}
+              </button>
+              <button class="btn btn-primary ml-2" type="submit">
+                {{ 'USERS.ACCEPT-USER.ACCEPT' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

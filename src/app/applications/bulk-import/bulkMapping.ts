@@ -8,7 +8,7 @@ export class BulkMapping {
         switch (data.type.toUpperCase()) {
           case DeviceType.LORAWAN:
             return this.lorawanMapper(data, applicationId);
-          case DeviceType.GENERICHTTP:
+          case DeviceType.GENERIC_HTTP:
             return this.baseMapper(data, applicationId);
           default:
             break;
@@ -53,7 +53,7 @@ export class BulkMapping {
             location: undefined,
             commentOnLocation: data.commentOnLocation,
             comment: data.comment,
-            type: DeviceType.GENERICHTTP,
+            type: DeviceType.GENERIC_HTTP,
             receivedMessagesMetadata: undefined,
             metadata: undefined,
             apiKey: undefined,

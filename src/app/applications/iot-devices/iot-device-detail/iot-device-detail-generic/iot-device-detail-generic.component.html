@@ -1,4 +1,4 @@
-<div class="row ">
+<div class="row">
     <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-right jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
@@ -12,8 +12,11 @@
                     [percentage]="batteryStatusPercentage"></app-batteri-status>
                 <ng-template #noBatteryStatus>
                     <div>
-                        <p>{{ 'IOTDEVICE-TABLE-ROW.BATTERY-ERROR-MESSAGE' | translate }}</p>
+                        <p>{{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}</p>
                     </div>
+                </ng-template>
+                <ng-template #notAvailable>
+                  <span>{{'IOTDEVICE-TABLE-ROW.NOT-AVAILABLE' | translate}}</span>
                 </ng-template>
             </div>
             <mat-divider></mat-divider>
@@ -29,6 +32,13 @@
             <ng-container *ngIf="device.type === 'SIGFOX' && device.sigfoxSettings">
                 <app-iot-device-detail-sigfox [device]="device"></app-iot-device-detail-sigfox>
             </ng-container>
+            <ng-container  *ngIf="device.type === 'GENERIC_HTTP'">
+                <mat-divider></mat-divider>
+                <p>
+                    <strong>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</strong>
+                    <span class="pre">{{ getGenericHttpDeviceUrl(device) }}</span>
+                </p>
+            </ng-container>
             <!-- Comment -->
             <mat-divider></mat-divider>
             <p>
@@ -40,6 +50,14 @@
                     {{ 'IOTDEVICE.NOCOMMENT' | translate}}
                 </ng-template>
             </p>
+            <ng-container *ngIf="metadataTags.length">
+              <mat-divider></mat-divider>
+              <p><strong>{{ 'QUESTION.METADATA' | translate }}</strong></p>
+              <p *ngFor="let tag of metadataTags; let i = index">
+                <strong>{{i + 1}}: {{ tag.key }}</strong>
+                <span>{{ tag.value }}</span>
+            </p>
+            </ng-container>
         </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch">

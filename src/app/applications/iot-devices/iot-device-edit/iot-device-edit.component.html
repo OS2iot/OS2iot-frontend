@@ -123,8 +123,7 @@
         <label class="form-label" for="serviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
         <select id="serviceProfileID" class="form-select" name="serviceProfileID"
           [(ngModel)]="iotDevice.lorawanSettings.serviceProfileID" required
-          [value]="iotDevice.lorawanSettings.serviceProfileID"
-          [disabled]="editmode"
+          [value]="iotDevice.lorawanSettings.serviceProfileID" [disabled]="editmode"
           [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('serviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('serviceProfileID')}">
           <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id"
             [selected]="serviceProfile.id === iotDevice.lorawanSettings.serviceProfileID">
@@ -181,8 +180,8 @@
         </div>
 
         <div class="form-group mt-5">
-          <label class="form-label"
-            for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' | translate}}*</label>
+          <label class="form-label" for="applicationSessionKey">{{'QUESTION.APPLICATIONSESSIONKEY' |
+            translate}}*</label>
           <input type="text" id="applicationSessionKey" name="applicationSessionKey" maxLength="32"
             [placeholder]="'QUESTION.APPLICATIONSESSIONKEY-PLACEHOLDER' | translate" class="form-control"
             [(ngModel)]="iotDevice.lorawanSettings.applicationSessionKey"
@@ -222,6 +221,11 @@
     </app-sigfox-device-edit>
   </ng-container>
 
+  <div class="mt-5 row">
+    <h3>{{ "QUESTION.METADATA" | translate}}</h3>
+    <app-form-key-value-list [(tags)]="metadataTags" [errorFieldId]="errorMetadataFieldId">
+    </app-form-key-value-list>
+  </div>
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>
     <button class="btn btn-primary ml-2" type="submit">{{ 'GEN.SAVE' | translate }}</button>

@@ -1,29 +1,29 @@
 import {
+  AfterViewInit,
   Component,
   Input,
-  ViewChild,
-  AfterViewInit,
   OnInit,
+  ViewChild,
 } from '@angular/core';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { RestService } from 'src/app/shared/services/rest.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import {
   IotDevice,
   IotDevicesResponse,
 } from '@applications/iot-devices/iot-device.model';
-import * as moment from 'moment';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { IoTDeviceService } from '../iot-device.service';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { DeviceType } from '@shared/enums/device-type';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
+import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DeviceType } from '@shared/enums/device-type';
 import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import * as moment from 'moment';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { RestService } from 'src/app/shared/services/rest.service';
+import { IoTDeviceService } from '../iot-device.service';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -40,6 +40,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     'name',
     'technology',
     'battery',
+    'rssi',
+    'snr',
     'active',
     'menu',
   ];
@@ -51,6 +53,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
+  noValueText: string;
+  toText: string;
 
   constructor(
     private restService: RestService,
