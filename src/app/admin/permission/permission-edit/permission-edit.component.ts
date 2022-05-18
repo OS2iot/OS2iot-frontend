@@ -46,7 +46,12 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   organisationSubscription: Subscription;
   userSubscription: Subscription;
   applicationSubscription: Subscription;
-  allowedLevels: PermissionTypes[];
+  allowedLevels: PermissionTypes[] = [
+    { type: PermissionType.OrganizationUserAdmin },
+    { type: PermissionType.OrganizationApplicationAdmin },
+    { type: PermissionType.OrganizationGatewayAdmin },
+    { type: PermissionType.Read },
+  ];
 
   public userMultiCtrl: FormControl = new FormControl();
   public userMultiFilterCtrl: FormControl = new FormControl();
@@ -76,7 +81,6 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     private errormEssageService: ErrorMessageService,
     private meService: MeService
   ) {
-    this.buildAllowedLevels();
   }
 
   ngOnInit(): void {
@@ -287,12 +291,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   isOrganizationApplicationPermission() {
-    return (
-      this.meService.hasPermissionTypes(
-        this.permission.levels,
-        PermissionType.OrganizationApplicationPermissions
-      ) || this.isReadOrWrite()
-    );
+    return this.isReadOrWrite();
   }
 
   isReadOrWrite(): boolean {

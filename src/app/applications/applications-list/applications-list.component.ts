@@ -51,12 +51,13 @@ export class ApplicationsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translate.get(['TITLE.APPLICATION'])
-      .subscribe(translations => {
-        this.titleService.setTitle(translations['TITLE.APPLICATION']);
-      });
+    this.translate.get(['TITLE.APPLICATION']).subscribe((translations) => {
+      this.titleService.setTitle(translations['TITLE.APPLICATION']);
+    });
     this.organizationId = this.globalService.getSelectedOrganisationId();
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
 
     // Authenticate user
     this.verifyUserAndInit();
@@ -73,7 +74,8 @@ export class ApplicationsListComponent implements OnInit {
         ])
         .toPromise()
         .then((translations) => {
-          this.unauthorizedMessage = translations['WELCOME-DIALOG.NO-JOB-ACCESS'];
+          this.unauthorizedMessage =
+            translations['WELCOME-DIALOG.NO-JOB-ACCESS'];
           this.kombitError = translations['WELCOME-DIALOG.KOMBIT-LOGIN-ERROR'];
           this.noAccess = translations['WELCOME-DIALOG.USER-INACTIVE'];
           this.titleService.setTitle(translations['TITLE.FRONTPAGE']);
@@ -84,15 +86,15 @@ export class ApplicationsListComponent implements OnInit {
       if (jwt) {
         this.authService.setSession(jwt);
 
-		const userInfo = await this.sharedVariableService.setUserInfo();
+        const userInfo = await this.sharedVariableService.setUserInfo();
         if (userInfo.user.email) {
           this.router.navigate(['/new-user'], {
             state: { fromKombit: true },
           });
-		} else {
-			// Clear the URL from the parameter
-        	this.router.navigate(['/applications']);
-		}
+        } else {
+          // Clear the URL from the parameter
+          this.router.navigate(['/applications']);
+        }
       } else {
         const error = params['error'];
         if (error) {
@@ -116,7 +118,7 @@ export class ApplicationsListComponent implements OnInit {
       }
 
       const userInfo = await this.sharedVariableService.setUserInfo();
-      this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
+      this.isGlobalAdmin = this.meService.hasGlobalAdmin();
       const hasSeenWelcomeScreen = this.userMinimalService.getHasSeenWelcomeScreen();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
 
@@ -135,7 +137,7 @@ export class ApplicationsListComponent implements OnInit {
           maxWidth: '60vw',
           data: {
             hasSomePermission: this.hasSomePermission,
-          } as WelcomeDialogModel
+          } as WelcomeDialogModel,
         });
       }
 

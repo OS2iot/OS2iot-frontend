@@ -89,11 +89,13 @@ export class NewUserComponent implements OnInit {
   onSubmit(): void {
     this.resetErrors();
 
-    const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);	
-	
+    const createNewKombitUserDTO = this.mapToDto(
+      this.createNewKombitUserFromFrontend
+    );
+
     this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
       () => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/applications']);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -102,18 +104,18 @@ export class NewUserComponent implements OnInit {
     );
   }
 
-  private mapToDto(frontendModel: CreateNewKombitUserFromFrontend): CreateNewKombitUserDto {
+  private mapToDto(
+    frontendModel: CreateNewKombitUserFromFrontend
+  ): CreateNewKombitUserDto {
     const createNewKombitUserDTO = new CreateNewKombitUserDto();
     createNewKombitUserDTO.email = frontendModel.email;
     createNewKombitUserDTO.requestedOrganizationIds = [];
 
     frontendModel.requestedOrganizations.forEach((organization) => {
-      createNewKombitUserDTO.requestedOrganizationIds.push(
-        organization.id
-      );
+      createNewKombitUserDTO.requestedOrganizationIds.push(organization.id);
     });
 
-	return createNewKombitUserDTO;
+    return createNewKombitUserDTO;
   }
 
   public compare(

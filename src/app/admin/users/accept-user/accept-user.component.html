@@ -42,11 +42,11 @@
                 placeholder="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
               >
                 <option
-                  *ngFor="let level of allowedLevels()"
-                  [value]="level"
+                  *ngFor="let level of allowedLevels"
+                  [value]="level.type"
                   [selected]="level === permission.level"
                 >
-                  {{ level }}</option
+                  {{ 'PERMISSION-TYPE.' + level.type | translate }}</option
                 >
               </select>
             </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   PermissionRequestAcceptUser,
   PermissionType,
+  PermissionTypes,
 } from '@app/admin/permission/permission.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
@@ -29,6 +30,12 @@ export class AcceptUserComponent implements OnInit {
   organizationId: number;
   public formFailedSubmit = false;
   errorMessages: any;
+  allowedLevels: PermissionTypes[] = [
+    { type: PermissionType.OrganizationUserAdmin },
+    { type: PermissionType.OrganizationApplicationAdmin },
+    { type: PermissionType.OrganizationGatewayAdmin },
+    { type: PermissionType.Read },
+  ];
 
   constructor(
     private userService: UserService,
@@ -37,7 +44,8 @@ export class AcceptUserComponent implements OnInit {
     private route: ActivatedRoute,
     private errorMessageService: ErrorMessageService,
     private permissionService: PermissionService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.userId = +this.route.snapshot.paramMap.get('user-id');
@@ -62,14 +70,6 @@ export class AcceptUserComponent implements OnInit {
       .subscribe((response) => {
         this.user = response;
       });
-  }
-
-  allowedLevels() {
-    return [
-      PermissionType.OrganizationAdmin,
-      PermissionType.Write,
-      PermissionType.Read,
-    ];
   }
 
   private showError(err: HttpErrorResponse) {

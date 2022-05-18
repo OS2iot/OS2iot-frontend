@@ -64,7 +64,7 @@
         </ng-template>
       </div>
     </mat-tab>
-    <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canStartDownlink">
+    <mat-tab label="{{'IOTDEVICE.DOWNLINK-TAB' | translate}}" *ngIf="canEdit">
       <div class="jumbotron jumbotron--full-width">
         <app-downlink [device]="device" [errorMessages]="errorMessages"></app-downlink>
       </div>
