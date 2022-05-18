@@ -202,6 +202,12 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     }));
   }
 
+  /**
+   * The most recent status per time period takes priority. The data can contain multiple data points
+   * per time period. This method processeses the data and keeps the latest data point per time period.
+   *
+   * @param data A list of gateway status'
+   */
   private takeLatestTimestampInHour(data: GatewayStatus[]): typeof data {
     return data.map((gateway) => {
       const timestamps = gateway.statusTimestamps.reduce(
