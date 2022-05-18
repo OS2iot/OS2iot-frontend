@@ -123,7 +123,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
           // Formatted to stay consistent with the corresponding table. When more languages are added,
           // register and use them properly. See https://stackoverflow.com/a/54769064
-          res.labels.push(formatDate(data.timestamp, 'MM MMM', 'en-US'));
+          res.labels.push(formatDate(data.timestamp, 'dd MMM', 'en-US'));
           return res;
         },
         {
