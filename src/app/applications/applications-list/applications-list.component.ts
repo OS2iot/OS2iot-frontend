@@ -78,7 +78,7 @@ export class ApplicationsListComponent implements OnInit {
         this.authService.setSession(jwt);
 
 		const userInfo = await this.sharedVariableService.setUserInfo();		
-        if (userInfo.user.email) {
+        if (!userInfo.user.email) {
           this.router.navigate(['/new-user'], {
             state: { fromKombit: true },
           });
