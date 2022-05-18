@@ -44,7 +44,7 @@ export class NewUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (history.state.code === 200) {
+    if (history.state.fromKombit) {
       this.translate.get([
         'NEW_USER.FIRST_LOGIN',
         'USERS.EMAIL',

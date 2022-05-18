@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
     private titleService: Title,
     private userMinimalService: UserMinimalService
   ) {
+
     this.route.queryParams.subscribe(async (params) => {
       this.translate.use('da');
       await this.translate
@@ -44,6 +45,7 @@ export class DashboardComponent implements OnInit {
           this.noAccess = translations['DASHBOARD.USER-INACTIVE'];
           this.titleService.setTitle(translations['TITLE.FRONTPAGE']);
         });
+
       // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
       if (jwt) {
@@ -57,6 +59,7 @@ export class DashboardComponent implements OnInit {
           // Clear the URL from the parameter
           this.router.navigate(['/dashboard']);
         }
+
       } else {
         const error = params['error'];
         if (error) {
@@ -79,12 +82,15 @@ export class DashboardComponent implements OnInit {
           }
         }
       }
+
       const userInfo = await this.sharedVariableService.setUserInfo();
       await this.sharedVariableService.setOrganizationInfo();
+
       this.userMinimalService.setUserMinimalList();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
       this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
       this.isLoadingResults = false;
+	  
       if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
         this.router.navigate(['/user-page']);
       }

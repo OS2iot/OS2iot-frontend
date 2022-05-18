@@ -73,10 +73,19 @@ export class ApplicationsListComponent implements OnInit {
         });
       // this is used when a user is returned from Kombit login
       const jwt = params['jwt'];
+
       if (jwt) {
         this.authService.setSession(jwt);
-        // Clear the URL from the parameter
-        this.router.navigate(['/applications']);
+
+		const userInfo = await this.sharedVariableService.setUserInfo();		
+        if (userInfo.user.email) {
+          this.router.navigate(['/new-user'], {
+            state: { fromKombit: true },
+          });
+		} else {
+			// Clear the URL from the parameter
+        	this.router.navigate(['/applications']);
+		}       
       } else {
         const error = params['error'];
         if (error) {
