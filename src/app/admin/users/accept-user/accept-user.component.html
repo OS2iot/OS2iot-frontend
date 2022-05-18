@@ -27,28 +27,17 @@
                 'PERMISSION.EDIT.TYPE' | translate
               }}</label
               >*
-              <select
-                id="level"
-                class="form-select"
-                name="level"
-                [(ngModel)]="permission.level"
+              <mat-select id="permissionIds" class="form-control" name="permissionIds"
                 required
-                [ngClass]="{
-                  'is-invalid':
-                    formFailedSubmit && errorFields.includes('organizationId'),
-                  'is-valid':
-                    formFailedSubmit && !errorFields.includes('organizationId')
-                }"
-                placeholder="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
-              >
-                <option
-                  *ngFor="let level of allowedLevels"
-                  [value]="level.type"
-                  [selected]="level === permission.level"
-                >
-                  {{ 'PERMISSION-TYPE.' + level.type | translate }}</option
-                >
-              </select>
+                [formControl]="permissionsCtrl"
+                [(value)]="permission.permissionIds"
+                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('permissionIds'), 'is-valid' : formFailedSubmit && !errorFields.includes('permissionIds')}"
+                [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
+                [multiple]="true">
+                <mat-option *ngFor="let permission of permissions" [value]="permission.id">
+                  {{ permission.name }}
+                </mat-option>
+              </mat-select>
             </div>
             <div class="form-group mt-5">
               <button

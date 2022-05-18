@@ -14,7 +14,7 @@ export class PermissionRequest {
 export class PermissionRequestAcceptUser {
   organizationId: number;
   userId: number;
-  level: PermissionType;
+  permissionIds: number[];
 }
 
 export interface PermissionResponse {

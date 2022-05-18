@@ -25,7 +25,7 @@
             required
             [formControl]="permissionLevelsCtrl"
             [(value)]="permission.levels"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('organizationId'), 'is-valid' : formFailedSubmit && !errorFields.includes('organizationId')}"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('level'), 'is-valid' : formFailedSubmit && !errorFields.includes('level')}"
             [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
             [compareWith]="compareLevels"
             [multiple]="true">
