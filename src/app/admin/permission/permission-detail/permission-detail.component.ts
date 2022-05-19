@@ -114,4 +114,13 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     this.router.navigate(['edit-permission'], { relativeTo: this.route });
   }
 
+  isApplicationAdmin () {
+    if (this.permission) {
+      if (this.permission.type.some(perm => perm.type === PermissionType.OrganizationApplicationAdmin)) {
+        return true;
+      }
+    }
+	
+	return false;
+  }
 }

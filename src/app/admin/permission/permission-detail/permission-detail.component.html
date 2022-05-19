@@ -26,15 +26,15 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="showApplicationTable">
             <div class="col-12">
                 <div class="jumbotron">
                     <h3>
                         {{ 'PERMISSION.DETAIL.APPLICATIONS' | translate }}
                     </h3>
 
-                    <app-applications-table *ngIf="showApplicationTable" [permissionId]="id" [organizationId]="permission.organization?.id">
-                    </app-applications-table>
+                    <app-applications-table *ngIf="!isApplicationAdmin()" [permissionId]="id" [organizationId]="permission.organization?.id"></app-applications-table>
+                    <app-applications-table *ngIf="isApplicationAdmin()"></app-applications-table>
                 </div>
             </div>
         </div>
