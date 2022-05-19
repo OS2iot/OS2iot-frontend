@@ -67,9 +67,14 @@ export class OrganisationDropdownComponent implements OnInit {
   public onChange(organizationId: string) {
     this.sharedVariableService.setValue(+organizationId);
     this.setLocalPermissionCheck(+organizationId);
-    this.route
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.route.navigate(['applications']));
+
+    if (this.route.url === '/' || this.route.url === '/applications') {
+      window.location.reload();
+    } else {
+      this.route
+        .navigateByUrl('/', { skipLocationChange: false })
+        .then(() => this.route.navigate(['applications']));
+    }
   }
 
   setSelectedOrganisation(value) {
