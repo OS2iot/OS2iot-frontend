@@ -11,6 +11,8 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-service-profiles-list',
@@ -34,6 +36,7 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
     private sharedVariableService: SharedVariableService,
     private deleteDialogService: DeleteDialogService,
     private translateService: TranslateService,
+    private meService: MeService
   ) { }
 
   ngOnInit() {
@@ -50,12 +53,12 @@ export class ServiceProfilesListComponent implements OnInit, OnDestroy {
       .getMultiple()
       .subscribe((result: ServiceProfileResponseMany) => {
         this.serviceProfiles = result.result;
-        this.setCanEdit()
+        this.setCanEdit();
       });
   }
 
   canCreate() {
-    return this.sharedVariableService.getHasAnyWritePermission();
+    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   setCanEdit() {

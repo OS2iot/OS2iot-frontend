@@ -9,11 +9,13 @@ import {
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { splitList } from '@shared/helpers/array.helper';
 import { Download } from '@shared/helpers/download.helper';
 import { BulkImportService } from '@shared/services/bulk-import.service';
 import { DownloadService } from '@shared/services/download.service';
+import { MeService } from '@shared/services/me.service';
 import { Papa } from 'ngx-papaparse';
 import { Observable, Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -57,6 +59,7 @@ export class BulkImportComponent implements OnInit {
   private bulkMapper = new BulkMapping();
   public backButtonTitle: string;
   private applicationId;
+  canEdit: boolean;
 
   constructor(
     private papa: Papa,
@@ -66,6 +69,7 @@ export class BulkImportComponent implements OnInit {
     private translate: TranslateService,
     private downloads: DownloadService,
     private errorMessageService: ErrorMessageService,
+    private meService: MeService,
     private bulkImportService: BulkImportService
   ) {
     this.translate.use('da');
@@ -76,6 +80,9 @@ export class BulkImportComponent implements OnInit {
       this.titleService.setTitle(translations['TITLE.BULKIMPORT']);
     });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
   }
 
   download({ name, url }: { name: string; url: string }) {

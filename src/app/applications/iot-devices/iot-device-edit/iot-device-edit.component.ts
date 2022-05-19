@@ -22,6 +22,8 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { Subscription } from 'rxjs';
 import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -52,6 +54,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private serviceProfilesSubscription: Subscription;
     private deviceProfileSubscription: Subscription;
     private devicesProfileSubscription: Subscription;
+  canEdit: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -66,7 +69,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         private deviceModelService: DeviceModelService,
         private errorMessageService: ErrorMessageService,
         private scrollToTopService: ScrollToTopService,
-        private titleService: Title
+        private titleService: Title,
+        private meService: MeService
     ) { }
 
     ngOnInit(): void {
@@ -89,6 +93,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.getServiceProfiles();
         this.getDeviceProfiles();
         this.getDeviceModels();
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
     }
 
     public compare(o1: any, o2: any): boolean {
@@ -99,8 +104,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.deviceModelService.getMultiple(
             1000,
             0,
-            "id",
-            "ASC",
+            'id',
+            'ASC',
             this.shareVariable.getSelectedOrganisationId()
         ).subscribe(
             (response) => {
@@ -229,7 +234,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     private adjustModelBasedOnType() {
         if (this.iotDevice.deviceModelId === 0) {
-            this.iotDevice.deviceModelId = null
+            this.iotDevice.deviceModelId = null;
         }
         switch (this.iotDevice.type) {
             case DeviceType.GENERIC_HTTP: {
@@ -318,11 +323,11 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     handleError(error: Pick<HttpErrorResponse, 'error'>) {
-        if (error?.error?.message == "MESSAGE.OTAA-INFO-MISSING") {
-            this.errorFields = ["OTAAapplicationKey"];
+        if (error?.error?.message === 'MESSAGE.OTAA-INFO-MISSING') {
+            this.errorFields = ['OTAAapplicationKey'];
             this.errorMessages = [error?.error?.message];
-        } else if (error?.error?.message == "MESSAGE.ID-INVALID-OR-ALREADY-IN-USE") {
-            this.errorFields = ["devEUI"];
+        } else if (error?.error?.message === 'MESSAGE.ID-INVALID-OR-ALREADY-IN-USE') {
+            this.errorFields = ['devEUI'];
             this.errorMessages = [error?.error?.message];
         } else {
             const errorMessage: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);

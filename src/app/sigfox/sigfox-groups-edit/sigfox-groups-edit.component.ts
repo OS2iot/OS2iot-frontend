@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ErrorMessage } from '@shared/models/error-message.model';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -30,6 +32,7 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public title = '';
   public backButton: BackButton = { label: '', routerLink: '/administration' };
+  canEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,12 +41,11 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     private sigfoxService: SigfoxService,
     private location: Location,
     private sharedVariable: SharedVariableService,
-    private errorMessageService: ErrorMessageService
-
+    private errorMessageService: ErrorMessageService,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
-
     this.translate.get(['SIGFOX-GROUP.SIGFOX-GROUP', 'FORM.EDIT-SIGFOX-GROUPS'])
       .subscribe(translations => {
         this.title = translations['FORM.EDIT-SIGFOX-GROUPS'];
@@ -55,6 +57,7 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
       this.getSigfoxGroup(this.sigfoxGroupId);
     }
     this.sigfoxGroup.organizationId = this.sharedVariable.getSelectedOrganisationId();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   getSigfoxGroup(id: number) {

@@ -9,6 +9,7 @@ import { MeService } from '@shared/services/me.service';
 import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { DeviceProfileService } from '../device-profile.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-device-profiles-edit',
@@ -67,7 +68,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
   canEdit() {
     if (this.deviceProfile.organizationID) {
-      this.deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(this.deviceProfile.internalOrganizationId);
+      this.deviceProfile.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, this.deviceProfile.internalOrganizationId);
     } else {
       this.deviceProfile.canEdit = true;
     }

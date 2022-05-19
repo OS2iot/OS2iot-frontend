@@ -10,6 +10,8 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { WelcomeDialogComponent } from '@shared/components/welcome-dialog/welcome-dialog.component';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { MeService } from '@shared/services/me.service';
 import { WelcomeDialogModel } from '@shared/models/dialog.model';
 
 @Component({
@@ -26,6 +28,7 @@ export class ApplicationsListComponent implements OnInit {
   public pageOffset = 0;
   public applications: Application[];
   @Input() organizationId: number;
+  canEdit: boolean;
   private unauthorizedMessage: string;
   private kombitError: string;
   private noAccess: string;
@@ -35,6 +38,8 @@ export class ApplicationsListComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private titleService: Title,
+    private globalService: SharedVariableService,
+    private meService: MeService,
     private sharedVariableService: SharedVariableService,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -49,7 +54,10 @@ export class ApplicationsListComponent implements OnInit {
     this.translate.get(['TITLE.APPLICATION']).subscribe((translations) => {
       this.titleService.setTitle(translations['TITLE.APPLICATION']);
     });
-    this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
+    this.organizationId = this.globalService.getSelectedOrganisationId();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
 
     // Authenticate user
     this.verifyUserAndInit();
@@ -66,7 +74,8 @@ export class ApplicationsListComponent implements OnInit {
         ])
         .toPromise()
         .then((translations) => {
-          this.unauthorizedMessage = translations['WELCOME-DIALOG.NO-JOB-ACCESS'];
+          this.unauthorizedMessage =
+            translations['WELCOME-DIALOG.NO-JOB-ACCESS'];
           this.kombitError = translations['WELCOME-DIALOG.KOMBIT-LOGIN-ERROR'];
           this.noAccess = translations['WELCOME-DIALOG.USER-INACTIVE'];
           this.titleService.setTitle(translations['TITLE.FRONTPAGE']);
@@ -77,15 +86,15 @@ export class ApplicationsListComponent implements OnInit {
       if (jwt) {
         this.authService.setSession(jwt);
 
-		const userInfo = await this.sharedVariableService.setUserInfo();		
+        const userInfo = await this.sharedVariableService.setUserInfo();
         if (!userInfo.user.email) {
           this.router.navigate(['/new-user'], {
             state: { fromKombit: true },
           });
-		} else {
-			// Clear the URL from the parameter
-        	this.router.navigate(['/applications']);
-		}       
+        } else {
+          // Clear the URL from the parameter
+          this.router.navigate(['/applications']);
+        }
       } else {
         const error = params['error'];
         if (error) {
@@ -109,7 +118,7 @@ export class ApplicationsListComponent implements OnInit {
       }
 
       const userInfo = await this.sharedVariableService.setUserInfo();
-      this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
+      this.isGlobalAdmin = this.meService.hasGlobalAdmin();
       const hasSeenWelcomeScreen = this.userMinimalService.getHasSeenWelcomeScreen();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
 
@@ -128,7 +137,7 @@ export class ApplicationsListComponent implements OnInit {
           maxWidth: '60vw',
           data: {
             hasSomePermission: this.hasSomePermission,
-          } as WelcomeDialogModel
+          } as WelcomeDialogModel,
         });
       }
 

@@ -1,4 +1,4 @@
-<app-top-bar backButtonTitle="{{'NAV.APPLICATION' | translate}}" title="{{'QUESTION.CREATE-IOT-DEVICE' | translate}}">
+<app-top-bar backButtonTitle="{{'NAV.APPLICATION' | translate}}" title="{{'QUESTION.CREATE-IOT-DEVICE' | translate}}" [canEdit]="canEdit">
 </app-top-bar>
 
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">

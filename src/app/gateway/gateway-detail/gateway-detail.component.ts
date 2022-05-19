@@ -11,6 +11,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { environment } from '@environments/environment';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { ChartConfiguration } from 'chart.js';
 import { ColorGraphBlue1 } from '@shared/constants/color-constants';
 import { formatDate } from '@angular/common';
@@ -37,6 +38,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
     isLoadingResults = true;
+    canEdit: boolean;
     isGatewayStatusVisibleSubject = new Subject<void>();
     receivedGraphData: ChartConfiguration['data'] = { datasets: [] };
     sentGraphData: ChartConfiguration['data'] = { datasets: [] };
@@ -53,11 +55,13 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     ngOnInit(): void {
         this.translate.use('da');
         this.id = this.route.snapshot.paramMap.get('id');
-        this.translate.get(['NAV.LORA-GATEWAYS'])
-            .subscribe(translations => {
-                this.backButton.label = translations['NAV.LORA-GATEWAYS'];
-            }
-            );
+        this.translate.get(['NAV.LORA-GATEWAYS']).subscribe((translations) => {
+          this.backButton.label = translations['NAV.LORA-GATEWAYS'];
+        });
+
+        if (this.gateway) {
+            this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, this.gateway.internalOrganizationId);
+        }
     }
 
     ngAfterViewInit() {
@@ -81,7 +85,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         this.gatewayService.get(id).subscribe((result: GatewayResponse) => {
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
-            this.gateway.canEdit = this.canEdit();
+            this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, this.gateway.internalOrganizationId);
+            this.gateway.canEdit = this.canEdit;
             this.gatewayStats = result.stats;
             this.gatewayStats.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             this.dataSource.data = this.gatewayStats;
@@ -96,16 +101,20 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     setDropdownButton() {
-        this.dropdownButton = this.canEdit() ? {
+        this.dropdownButton = this.canEdit ? {
             label: 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS',
             editRouterLink: '../../gateway-edit/' + this.id,
             isErasable: true,
         } : null;
-        this.translate.get(['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
-            .subscribe(translations => {
-                this.dropdownButton.label = translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'];
+
+        this.translate
+          .get(['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'])
+          .subscribe((translations) => {
+            if (this.dropdownButton) {
+              this.dropdownButton.label =
+                translations['LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS'];
             }
-            );
+          });
     }
 
     private buildGraphs() {
@@ -139,10 +148,6 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
       this.receivedGraphData = { datasets: receivedDatasets, labels };
       this.sentGraphData = { datasets: sentDatasets, labels };
-    }
-
-    canEdit(): boolean {
-        return this.meService.canWriteInTargetOrganization(this.gateway.internalOrganizationId);
     }
 
     onDeleteGateway() {

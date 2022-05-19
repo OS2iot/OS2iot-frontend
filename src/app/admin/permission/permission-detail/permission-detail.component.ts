@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Subscription } from 'rxjs';
-import { PermissionResponse } from '../permission.model';
+import { PermissionResponse, PermissionType } from '../permission.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
 import { UserResponse } from '@app/admin/users/user.model';
@@ -11,6 +11,8 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -43,6 +45,8 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   subscription: Subscription;
   users: UserResponse[];
   dropdownButton: DropdownButton;
+  canEdit: boolean;
+  showApplicationTable = false;
 
   constructor(
     public translate: TranslateService,
@@ -50,7 +54,8 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     private permissionService: PermissionService,
     private router: Router,
     private titleService: Title,
-    private deleteDialogService: DeleteDialogService
+    private deleteDialogService: DeleteDialogService,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +67,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         label: '',
         editRouterLink: 'edit-permission',
         isErasable: true,
-      }
+      };
     }
     this.translate.get(['NAV.PERMISSIONS', 'PERMISSION.DETAIL.DROPDOWN', 'TITLE.PERMISSION'])
       .subscribe(translations => {
@@ -70,6 +75,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         this.dropdownButton.label = translations['PERMISSION.DETAIL.DROPDOWN'];
         this.titleService.setTitle(translations['TITLE.PERMISSION']);
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -82,6 +88,12 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
       .subscribe((response) => {
         this.permission = response;
         this.users = response.users;
+        this.showApplicationTable = this.meService.hasPermissions(
+          response,
+          PermissionType.Read,
+          PermissionType.OrganizationApplicationAdmin,
+          PermissionType.GlobalAdmin
+        );
         this.isLoadingResults = false;
       });
   }
@@ -95,11 +107,20 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
           }
         });
       }
-    })
+    });
   }
 
   onEditPermission() {
     this.router.navigate(['edit-permission'], { relativeTo: this.route });
   }
 
+  isApplicationAdmin () {
+    if (this.permission) {
+      if (this.permission.type.some(perm => perm.type === PermissionType.OrganizationApplicationAdmin)) {
+        return true;
+      }
+    }
+	
+	return false;
+  }
 }

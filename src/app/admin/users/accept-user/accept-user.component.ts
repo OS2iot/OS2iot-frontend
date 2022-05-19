@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   PermissionRequestAcceptUser,
   PermissionType,
+  PermissionTypes,
+  PermissionResponse,
 } from '@app/admin/permission/permission.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessageService } from '@shared/error-message.service';
@@ -12,23 +14,33 @@ import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 import { Location } from '@angular/common';
 import { PermissionService } from '@app/admin/permission/permission.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-accept-user',
   templateUrl: './accept-user.component.html',
   styleUrls: ['./accept-user.component.scss'],
 })
-export class AcceptUserComponent implements OnInit {
+export class AcceptUserComponent implements OnInit, OnDestroy {
   public backButtonTitle: string;
   permission = new PermissionRequestAcceptUser();
   public title: string;
   userId: number;
   subscription: Subscription;
+  permissionsForOrgSubscription: Subscription;
   user: UserResponse;
   errorFields: string[];
   organizationId: number;
   public formFailedSubmit = false;
   errorMessages: any;
+  allowedLevels: PermissionTypes[] = [
+    { type: PermissionType.OrganizationUserAdmin },
+    { type: PermissionType.OrganizationApplicationAdmin },
+    { type: PermissionType.OrganizationGatewayAdmin },
+    { type: PermissionType.Read },
+  ];
+  public permissionsCtrl: FormControl = new FormControl();
+  permissions: PermissionResponse[] = [];
 
   constructor(
     private userService: UserService,
@@ -54,6 +66,7 @@ export class AcceptUserComponent implements OnInit {
       });
     this.permission.userId = this.userId;
     this.permission.organizationId = this.organizationId;
+    this.getPermissionsForOrg(this.organizationId);
   }
 
   private getUser(id: number) {
@@ -64,12 +77,27 @@ export class AcceptUserComponent implements OnInit {
       });
   }
 
-  allowedLevels() {
-    return [
-      PermissionType.OrganizationAdmin,
-      PermissionType.Write,
-      PermissionType.Read,
-    ];
+  private getPermissionsForOrg(orgId: number) {
+    this.permissionsForOrgSubscription = this.permissionService
+      .getPermissions(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        orgId
+      )
+      .subscribe(
+        (permissionsResponse) => {
+          this.permissions = permissionsResponse.data.filter(
+            (x) => x.organization?.id === this.organizationId
+          );
+          this.permissionsCtrl.setValue(this.permissions);
+        },
+        (error: HttpErrorResponse) => {
+          this.showError(error);
+        }
+      );
   }
 
   private showError(err: HttpErrorResponse) {
@@ -94,5 +122,10 @@ export class AcceptUserComponent implements OnInit {
           this.showError(error);
         }
       );
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+    this.permissionsForOrgSubscription?.unsubscribe();
   }
 }

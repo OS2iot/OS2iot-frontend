@@ -15,7 +15,6 @@ import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
 import { UserResponse } from '@app/admin/users/user.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
-import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { AuthService } from '@auth/auth.service';
 import { LoggedInService } from '@shared/services/loggedin.service';
@@ -57,7 +56,7 @@ export class TopBarComponent implements OnInit {
     @Output() extraDropdownOptions = new EventEmitter();
     @Input() addDetailDowndown: boolean;
     @Input() dropDownButton: DropdownButton;
-    public canEdit = false;
+    @Input() canEdit = false;
 
     faSearch = faSearch;
 
@@ -65,7 +64,6 @@ export class TopBarComponent implements OnInit {
         public translate: TranslateService,
         private location: Location,
         private router: Router,
-        private meService: MeService,
         private sharedVariableService: SharedVariableService,
         private authService: AuthService,
         private loggedInService: LoggedInService
@@ -78,7 +76,6 @@ export class TopBarComponent implements OnInit {
         if (this.data) {
             this.subTitle = this.data.name;
         }
-        this.canEdit = this.meService.canWriteInTargetOrganization()
     }
 
 
@@ -129,7 +126,7 @@ export class TopBarComponent implements OnInit {
     getUsername(): string {
         return this.sharedVariableService.getUsername();
     }
-	
+
     onLogout() {
         this.authService.logout();
         this.router.navigateByUrl('auth');

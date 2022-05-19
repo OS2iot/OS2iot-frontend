@@ -9,11 +9,12 @@ import { DeviceType } from '@shared/enums/device-type';
 import { BackButton } from '@shared/models/back-button.model';
 import { Subscription } from 'rxjs';
 import { Downlink } from '../downlink.model';
-import { IotDevice, IoTDeviceStatsResponse } from '../iot-device.model';
+import { IotDevice } from '../iot-device.model';
 import { IoTDeviceService } from '../iot-device.service';
 import { DropdownButton, ExtraDropdownOption } from '@shared/models/dropdown-button.model';
 import { Title } from '@angular/platform-browser';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChartConfiguration } from 'chart.js';
 import * as moment from 'moment';
@@ -57,7 +58,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     public errorMessages: string[];
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
-    public canStartDownlink = false;
+    public canEdit = false;
 
     private resetApiKeyId = 'RESET-API-KEY';
     private resetApiKeyOption: ExtraDropdownOption;
@@ -96,7 +97,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.canStartDownlink = this.meService.canWriteInTargetOrganization();
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
 
         if (this.deviceId) {
@@ -146,7 +147,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             }
 
             if (
-              this.meService.canWriteInTargetOrganization() &&
+              this.canEdit &&
               this.device.type === DeviceType.GENERIC_HTTP
             ) {
               this.dropdownButton.extraOptions.push(this.resetApiKeyOption);

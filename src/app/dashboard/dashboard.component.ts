@@ -5,6 +5,7 @@ import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { AuthService } from '@auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,8 @@ export class DashboardComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     private translate: TranslateService,
     private titleService: Title,
-    private userMinimalService: UserMinimalService
+    private userMinimalService: UserMinimalService,
+    private meService: MeService
   ) {
 
     this.route.queryParams.subscribe(async (params) => {
@@ -88,9 +90,9 @@ export class DashboardComponent implements OnInit {
 
       this.userMinimalService.setUserMinimalList();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
-      this.isGlobalAdmin = this.sharedVariableService.isGlobalAdmin();
+      this.isGlobalAdmin = this. meService.hasGlobalAdmin();
       this.isLoadingResults = false;
-	  
+
       if (userInfo.user.awaitingConfirmation && userInfo.user.email) {
         this.router.navigate(['/user-page']);
       }

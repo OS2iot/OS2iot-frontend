@@ -18,6 +18,7 @@ import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-d
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DeviceType } from '@shared/enums/device-type';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import * as moment from 'moment';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
@@ -68,12 +69,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization();
-    this.translate.get(['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE', 'GEN.to'])
-      .subscribe(translations => {
-        this.noValueText = translations['IOTDEVICE-TABLE-ROW.NOT-AVAILABLE'];
-        this.toText = translations['GEN.to'];
-      });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   ngAfterViewInit() {

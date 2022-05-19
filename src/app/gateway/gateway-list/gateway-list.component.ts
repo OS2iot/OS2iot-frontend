@@ -11,6 +11,7 @@ import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 const gatewayStatusTabIndex = 2;
@@ -43,6 +44,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   public pageOffset = 0;
   public pageTotal: number;
   organisationId: number;
+  canEdit: boolean;
   tabIndex = 0;
   organisationChangeSubject: Subject<number> = new Subject();
   isGatewayStatusVisibleSubject: Subject<void> = new Subject();
@@ -66,6 +68,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(translations => {
         this.titleService.setTitle(translations['TITLE.LORAWAN-GATEWAY']);
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite);
   }
 
   ngOnChanges() {
@@ -191,7 +194,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   setCanEdit() {
     this.gateways.forEach(
       (gateway) => {
-        gateway.canEdit = this.meService.canWriteInTargetOrganization(gateway.internalOrganizationId);
+        gateway.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, gateway.internalOrganizationId);
       }
     );
   }

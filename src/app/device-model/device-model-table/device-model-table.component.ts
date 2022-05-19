@@ -18,6 +18,7 @@ import { merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel, DeviceModelResponse } from '../device.model';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-device-model-table',
@@ -45,7 +46,7 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.canEdit = this.meService.canWriteInTargetOrganization()
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
     this.translateService
       .get(['DEVICE-MODEL.DELETE-FAILED'])
       .subscribe((translations) => {

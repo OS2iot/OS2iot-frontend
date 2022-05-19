@@ -6,6 +6,8 @@ import { UserResponse } from '@app/admin/users/user.model';
 import { faExchangeAlt, faLayerGroup, faUsers, faIdBadge, faToolbox, faBurn, faKey } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-organisation-dropdown',
@@ -15,8 +17,9 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 export class OrganisationDropdownComponent implements OnInit {
   public organisations: Organisation[];
   public user: UserResponse;
-  public isOrgAdmin = false;
+  public isUserAdmin = false;
   public isGlobalAdmin = false;
+  public isOnlyGatewayAdmin = false;
 
   faExchangeAlt = faExchangeAlt;
   faLayergroup = faLayerGroup;
@@ -31,6 +34,7 @@ export class OrganisationDropdownComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     public translate: TranslateService,
     private route: Router,
+    private meService: MeService
   ) { }
 
   ngOnInit(): void {
@@ -55,8 +59,9 @@ export class OrganisationDropdownComponent implements OnInit {
   }
 
   private setLocalPermissionCheck(orgId: number) {
-    this.isOrgAdmin = this.user?.permissions?.some(x => x.type == PermissionType.OrganizationAdmin && x.organization.id === +orgId);
-    this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
+    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, orgId);
+    this.isGlobalAdmin = this.user?.permissions?.some(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin));
+    this.isOnlyGatewayAdmin = this.user.permissions.every(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin));
   }
 
   public onChange(organizationId: string) {
@@ -68,7 +73,7 @@ export class OrganisationDropdownComponent implements OnInit {
     } else {
       this.route
         .navigateByUrl('/', { skipLocationChange: false })
-        .then(() => this.route.navigate(['applications'], {}));
+        .then(() => this.route.navigate(['applications']));
     }
   }
 

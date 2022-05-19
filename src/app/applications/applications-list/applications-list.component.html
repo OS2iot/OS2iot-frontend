@@ -13,7 +13,7 @@
   </header>
 </ng-template>
 <app-top-bar [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
-  [ctaRouterLink]="'new-application'">
+  [ctaRouterLink]="'new-application'" [canEdit]="canEdit">
 </app-top-bar>
 <div class="container-fluid d-flex flex-column">
   <ng-container *ngIf="!isLoadingResults">

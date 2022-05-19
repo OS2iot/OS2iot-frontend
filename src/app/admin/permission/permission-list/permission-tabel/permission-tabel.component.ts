@@ -14,6 +14,7 @@ import {
     PermissionType,
 } from '../../permission.model';
 import { PermissionService } from '../../permission.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
     selector: 'app-permission-tabel',
@@ -106,14 +107,14 @@ export class PermissionTabelComponent implements AfterViewInit {
                     }
                 });
             }
-        })
+        });
     }
 
     canAccess(element: PermissionResponse) {
-        if (element.type == PermissionType.GlobalAdmin) {
+        if (this.meService.hasPermissions(element, PermissionType.GlobalAdmin)) {
             return this.meService.hasGlobalAdmin();
         }
-        return this.meService.hasAdminAccessInTargetOrganization(element.organization.id);
+        return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, element.organization.id);
     }
 
     private refresh() {
