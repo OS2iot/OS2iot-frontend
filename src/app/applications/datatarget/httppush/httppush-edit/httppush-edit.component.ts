@@ -40,7 +40,7 @@ export class HttppushEditComponent
   public title = '';
   public sectionTitle = '';
   public backButtonTitle = '';
-  @Input() submitButton: string;
+  public submitButton: string;
   public datatarget: Datatarget = new Datatarget();
   faTimesCircle = faTimesCircle;
   public datatargetSubscription: Subscription;

@@ -1,0 +1,80 @@
+<app-top-bar></app-top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron">
+        <h1>
+          {{ 'NEW_USER.FIRST_LOGIN' | translate }}
+        </h1>
+        <form (ngSubmit)="onSubmit()" #newUserForm="ngForm" class="p-3 mt-4">
+          <div *ngIf="errorMessages" class="error-messages p-3">
+            <ul class="mb-0">
+              <li *ngFor="let error of errorMessages">
+                {{ error | translate }}
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="form-group mt-3">
+              <label class="form-label" for="createNewKombitUserDto.email">{{
+                'USERS.EMAIL' | translate
+              }}</label
+              >*
+
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                maxlength="50"
+                required
+                name="email"
+                [(ngModel)]="createNewKombitUserFromFrontend.email"
+                [ngClass]="{
+                  'is-invalid':
+                    formFailedSubmit && errorFields.includes('email'),
+                  'is-valid': formFailedSubmit && !errorFields.includes('email')
+                }"
+              />
+            </div>
+
+            <div class="form-group mt-3 col-12">
+              <label class="form-label" for="groupType">{{
+                'NAV.ORGANISATIONS' | translate
+              }}</label
+              >*
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'NAV.ORGANISATIONS' | translate }}</mat-label>
+                <mat-select
+                  multiple
+                  name="organisations"
+                  [compareWith]="compare"
+                  [(ngModel)]="
+                    createNewKombitUserFromFrontend.requestedOrganizations
+                  "
+                  panelClass="overflow-x-hidden"
+                  aria-required="true"
+                >
+                  <mat-select-search
+                    [formControl]="organisationsFilterCtrl"
+                  ></mat-select-search>
+
+                  <mat-option
+                    *ngFor="let org of filteredOrganisations | async"
+                    [value]="org"
+                    >{{ org.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <button class="btn btn-primary ml-2" type="submit">
+              {{ 'USERS.SAVE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

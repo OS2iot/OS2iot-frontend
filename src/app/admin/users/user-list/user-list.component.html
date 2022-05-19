@@ -1,11 +1,32 @@
-<app-top-bar [title]="'NAV.USERS' | translate"
-    [ctaLabel]="'USERS.CREATE' | translate" [ctaRouterLink]="'new-user'" [canEdit]="canEdit"></app-top-bar>
+<app-top-bar
+  [title]="'NAV.USERS' | translate"
+  [ctaLabel]="'USERS.CREATE' | translate"
+  [ctaRouterLink]="'new-user'"
+  [canEdit]="canEdit"
+></app-top-bar>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron--table">
-                <app-user-table></app-user-table>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <mat-tab-group animationDuration="200ms">
+        <mat-tab label="{{ 'USERS.EXISTING-USERS' | translate }}">
+          <div class="jumbotron--table">
+            <app-top-bar-table
+              [component]="true"
+              [title]="'USERS.EXISTING-USERS' | translate"
+            ></app-top-bar-table>
+            <app-user-table></app-user-table>
+          </div>
+        </mat-tab>
+        <mat-tab label="{{ 'USERS.AWAITING-USERS' | translate }}">
+          <div class="jumbotron--table">
+            <app-top-bar-table
+              [component]="true"
+              [title]="'USERS.AWAITING-USERS' | translate"
+            ></app-top-bar-table>
+            <app-awaiting-users-table></app-awaiting-users-table>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+  </div>
 </div>

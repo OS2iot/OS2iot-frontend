@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PermissionService } from '@app/admin/permission/permission.service';
 import { Subscription } from 'rxjs';
-import { PermissionResponse } from '../permission.model';
+import { PermissionResponse, PermissionType } from '../permission.model';
 import { BackButton } from '@shared/models/back-button.model';
 import { QuickActionButton } from '@shared/models/quick-action-button.model';
 import { UserResponse } from '@app/admin/users/user.model';
@@ -46,6 +46,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   users: UserResponse[];
   dropdownButton: DropdownButton;
   canEdit: boolean;
+  showApplicationTable = false;
 
   constructor(
     public translate: TranslateService,
@@ -87,6 +88,12 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
       .subscribe((response) => {
         this.permission = response;
         this.users = response.users;
+        this.showApplicationTable = this.meService.hasPermissions(
+          response,
+          PermissionType.Read,
+          PermissionType.OrganizationApplicationAdmin,
+          PermissionType.GlobalAdmin
+        );
         this.isLoadingResults = false;
       });
   }
@@ -107,4 +114,13 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     this.router.navigate(['edit-permission'], { relativeTo: this.route });
   }
 
+  isApplicationAdmin () {
+    if (this.permission) {
+      if (this.permission.type.some(perm => perm.type === PermissionType.OrganizationApplicationAdmin)) {
+        return true;
+      }
+    }
+	
+	return false;
+  }
 }

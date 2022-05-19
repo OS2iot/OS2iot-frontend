@@ -15,6 +15,7 @@ import { ServiceProfileService } from '@profiles/service-profiles/service-profil
 import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
+import { jsonToList } from '@shared/helpers/json.helper';
 import { ErrorMessage } from '@shared/models/error-message.model';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -45,6 +46,8 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     iotDevice = new IotDevice();
     editmode = false;
     public OTAA = true;
+    metadataTags: {key?: string, value?: string}[] = [];
+    errorMetadataFieldId: string | undefined;
 
     public deviceSubscription: Subscription;
     private applicationsSubscription: Subscription;
@@ -137,6 +140,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 if (!device.deviceModelId || device.deviceModelId === null) {
                     this.iotDevice.deviceModelId = 0;
                 }
+                if (device.metadata) {
+                  this.metadataTags = jsonToList(device.metadata);
+                }
             });
     }
 
@@ -182,11 +188,40 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         this.adjustModelBasedOnType();
-        if (this.deviceId !== 0) {
-            this.updateIoTDevice(this.deviceId);
-        } else {
-            this.postIoTDevice();
+
+        if (this.metadataTags.length === 0) {
+          this.iotDevice.metadata = JSON.stringify({});
+        } else if (this.isMetadataSet()) {
+          const invalidKey = this.validateMetadata();
+
+          if (!invalidKey) {
+            this.setMetadata();
+          } else {
+            this.handleMetadataError(invalidKey);
+            return;
+          }
         }
+
+        if (this.deviceId !== 0) {
+          this.updateIoTDevice(this.deviceId);
+        } else {
+          this.postIoTDevice();
+        }
+    }
+
+    private handleMetadataError(invalidKey: string) {
+      this.handleError({
+        error: {
+          message: [
+            {
+              field: 'metadata',
+              message: 'MESSAGE.DUPLICATE-METADATA-KEY',
+            },
+          ],
+        },
+      });
+      this.errorMetadataFieldId = invalidKey;
+      this.formFailedSubmit = true;
     }
 
     setActivationType() {
@@ -202,7 +237,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             this.iotDevice.deviceModelId = null;
         }
         switch (this.iotDevice.type) {
-            case DeviceType.GENERICHTTP: {
+            case DeviceType.GENERIC_HTTP: {
                 this.iotDevice.lorawanSettings = undefined;
                 this.iotDevice.sigfoxSettings = undefined;
                 break;
@@ -223,6 +258,36 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
                 break;
             }
         }
+    }
+
+    private isMetadataSet(): boolean {
+      return this.metadataTags.length && this.metadataTags.some((tag) => tag.key && tag.value);
+    }
+
+    private validateMetadata(): string | undefined {
+      const seen = new Set();
+
+      for (const tag of this.metadataTags) {
+        if (seen.size === seen.add(tag.key).size) {
+          return tag.key;
+        }
+      }
+    }
+
+    private setMetadata(): void {
+      if (
+        this.metadataTags.length &&
+        this.metadataTags.some((tag) => tag.key && tag.value)
+      ) {
+        const metadata: Record<string, string> = {};
+        this.metadataTags.forEach((tag) => {
+          if (!tag.key) {
+            return;
+          }
+          metadata[tag.key] = tag.value;
+        });
+        this.iotDevice.metadata = JSON.stringify(metadata);
+      }
     }
 
     postIoTDevice() {
@@ -257,7 +322,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.location.back();
     }
 
-    handleError(error: HttpErrorResponse) {
+    handleError(error: Pick<HttpErrorResponse, 'error'>) {
         if (error?.error?.message === 'MESSAGE.OTAA-INFO-MISSING') {
             this.errorFields = ['OTAAapplicationKey'];
             this.errorMessages = [error?.error?.message];

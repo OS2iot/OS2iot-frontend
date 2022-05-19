@@ -10,6 +10,7 @@
 //Components
 @import 'assets/scss/components/boxes';
 @import 'assets/scss/components/bulk-import';
+@import 'assets/scss/components/date-picker';
 @import 'assets/scss/components/forms';
 @import 'assets/scss/components/list';
 @import 'assets/scss/components/loading-spinner';
@@ -88,3 +89,23 @@ body {
   font-size: 1rem !important;
 }
 
+.status-tooltip {
+  background: rgba(97, 97, 97, 1.0);
+  white-space: pre-line;
+}
+
+.mat-card-header-text-ml-0 .mat-card-header-text {
+  margin-left: 0;
+}
+
+.welcome-screen .mat-dialog-container {
+  background-color: #55b156;
+}
+
+.hide-checkbox {
+  color: $color-white-001;
+
+  .mat-checkbox-frame {
+    border-color: $color-white-001;
+  }
+}

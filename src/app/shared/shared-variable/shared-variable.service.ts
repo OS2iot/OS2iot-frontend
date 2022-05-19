@@ -54,7 +54,7 @@ export class SharedVariableService {
 
   setOrganizationInfo() {
     return this.organisationService
-      .getMinimal()
+      .getMinimalNoPerm()
       .pipe(
         tap((response: OrganisationGetMinimalResponse) => {
           localStorage.setItem(
@@ -80,12 +80,6 @@ export class SharedVariableService {
 
   getHasAnyPermission(): boolean {
     return this.getUserInfo().user.permissions.length > 0;
-  }
-
-  isGlobalAdmin(): boolean {
-    return this.getUserInfo().user.permissions.some(
-      (permission) => permission.type === PermissionType.GlobalAdmin
-    );
   }
 
   getSelectedOrganisationId(): number {

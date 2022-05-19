@@ -59,17 +59,22 @@ export class OrganisationDropdownComponent implements OnInit {
   }
 
   private setLocalPermissionCheck(orgId: number) {
-    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
-    this.isGlobalAdmin = this.user?.permissions?.some( permission => permission.type === PermissionType.GlobalAdmin);
-    this.isOnlyGatewayAdmin = this.user.permissions.every(permission => permission.type === PermissionType.OrganizationGatewayAdmin);
+    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, orgId);
+    this.isGlobalAdmin = this.user?.permissions?.some(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin));
+    this.isOnlyGatewayAdmin = this.user.permissions.every(({ type: pmTypes }) => pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin));
   }
 
   public onChange(organizationId: string) {
     this.sharedVariableService.setValue(+organizationId);
     this.setLocalPermissionCheck(+organizationId);
-    this.route
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.route.navigate(['applications']));
+
+    if (this.route.url === '/' || this.route.url === '/applications') {
+      window.location.reload();
+    } else {
+      this.route
+        .navigateByUrl('/', { skipLocationChange: false })
+        .then(() => this.route.navigate(['applications']));
+    }
   }
 
   setSelectedOrganisation(value) {

@@ -7,12 +7,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { FormBodyApplicationComponent } from './form-body-application/form-body-application.component';
 import { FormHeaderComponent } from './form-header/form-header.component';
+import { FormKeyValuePairComponent } from './form-key-value/form-key-value-pair/form-key-value-pair.component';
+import { FormKeyValueListComponent } from './form-key-value/form-key-value-list/form-key-value-list.component';
 
 
 @NgModule({
   declarations: [
     FormHeaderComponent,
     FormBodyApplicationComponent,
+    FormKeyValuePairComponent,
+    FormKeyValueListComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,8 @@ import { FormHeaderComponent } from './form-header/form-header.component';
   exports: [
     FormHeaderComponent,
     FormBodyApplicationComponent,
+    FormKeyValuePairComponent,
+    FormKeyValueListComponent,
   ],
   providers: [
   ]

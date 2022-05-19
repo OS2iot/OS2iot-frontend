@@ -7,12 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilesModule } from './profiles/profiles.module';
 import { AuthJwtInterceptor } from '@shared/helpers/auth-jwt.interceptor';
 import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { SharedVariableModule } from '@shared/shared-variable/shared-variable.module';
 import { SAVER, getSaver } from '@shared/providers/saver.provider';
@@ -24,6 +23,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginatorIntlDa } from '@shared/helpers/mat-paginator-intl-da';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NewUserComponent } from './admin/users/new-kombit-user-page/new-user.component';
+import { WelcomeDialogModule } from '@shared/components/welcome-dialog/welcome-dialog.module';
+import { NGMaterialModule } from '@shared/Modules/materiale.module';
+import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
+import { UserPageComponent } from './admin/users/user-page/user-page.component';
+import { SharedModule } from '@shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,7 +41,9 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
-        ErrorPageComponent
+        ErrorPageComponent,
+        NewUserComponent,
+        UserPageComponent
     ],
     imports: [
         SharedVariableModule.forRoot(),
@@ -45,7 +52,6 @@ export function tokenGetter() {
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
-        DashboardModule,
         NavbarModule,
         ProfilesModule,
         TranslateModule.forRoot({
@@ -57,10 +63,14 @@ export function tokenGetter() {
             },
         }),
         NgbModule,
+        FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+        NGMaterialModule,
         GatewayModule,
+        MatSelectSearchModule,
         SearchModule,
+        SharedModule,
         HttpClientModule,
         MatInputModule,
         MatTooltipModule,
@@ -69,7 +79,8 @@ export function tokenGetter() {
                 tokenGetter
             },
         }),
-        MonacoEditorModule.forRoot()
+        MonacoEditorModule.forRoot(),
+        WelcomeDialogModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],

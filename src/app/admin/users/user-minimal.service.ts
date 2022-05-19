@@ -9,6 +9,7 @@ import { UserMinimal, UserMinimalResponse } from './user-minimal.model';
 export class UserMinimalService {
 
     URL = 'user/minimal';
+    URL_NEW_KOMBIT = "kombitCreation/minimalUsers"
     private userMinimalList: UserMinimal[];
 
     constructor(
@@ -18,8 +19,12 @@ export class UserMinimalService {
         return this.restService.get(this.URL);
     }
 
+    getUserMinimalRestNewKombit(): Observable<UserMinimalResponse> {
+        return this.restService.get(this.URL_NEW_KOMBIT);
+    }
+
     setUserMinimalList() {
-        return this.getUserMinimalRest().subscribe(
+        return this.getUserMinimalRestNewKombit().subscribe(
             (response: UserMinimalResponse) => {
                 localStorage.setItem(
                     'userMinimalList',
@@ -42,5 +47,13 @@ export class UserMinimalService {
             user => user.id === id
         )?.name;
         return username;
+    }
+
+    setHasSeenWelcomeScreen(): void {
+      localStorage.setItem('hasSeenWelcomeScreen', true.toString());
+    }
+
+    getHasSeenWelcomeScreen(): boolean {
+      return !!localStorage.getItem('hasSeenWelcomeScreen');
     }
 }

@@ -9,11 +9,12 @@ import {
   faUser,
   faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '@app/auth/auth.service';
+import { AuthService, CurrentUserInfoResponse } from '@app/auth/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { LoggedInService } from '@shared/services/loggedin.service';
+import { User } from '@shared/components/forms/form-body-application/form-body-application.component';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,9 @@ import { LoggedInService } from '@shared/services/loggedin.service';
 export class NavbarComponent implements OnInit {
   isCollapsed = false;
   isLoginMode = true;
+  user: User;
   faBroadcastTower = faBroadcastTower;
+  userInfo: CurrentUserInfoResponse;
   faSlidersH = faSlidersH;
   faNetworkWired = faNetworkWired;
   faSignOutAlt = faSignOutAlt;
@@ -42,7 +45,7 @@ export class NavbarComponent implements OnInit {
     translate.use('da');
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onLogout() {
     this.authService.logout();
@@ -64,6 +67,11 @@ export class NavbarComponent implements OnInit {
 
   isLoggedInWithKombit() {
     return this.authService.isLoggedInWithKombit();
+  }
+
+  hasEmail(): string {
+    this.userInfo = this.sharedVariableService.getUserInfo();
+    return this.userInfo.user.email;
   }
 
   public goToHelp() {
