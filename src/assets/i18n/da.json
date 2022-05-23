@@ -780,8 +780,8 @@
       "APIKEY": "API kald",
       "INSTRUCTIONS": "Du kalder denne url:",
       "RESET-API-KEY": {
-        "BODY": "Advarsel! Nulstilling vil stoppe modtagelse af data på den eksisterende API Key. Vil du fortsætte?",
-        "YESRESET": "Ja, nulstil"
+        "BODY": "Advarsel! Nulstilling vil stoppe modtagelse af data på den eksisterende API nøgle. Vil du fortsætte?",
+        "YESRESET": "Nulstil"
       }
     },
     "LORAWANSETUP": "LoRaWAN specifik opsætning",
