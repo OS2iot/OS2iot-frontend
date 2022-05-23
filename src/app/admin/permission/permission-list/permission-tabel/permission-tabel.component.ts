@@ -15,6 +15,7 @@ import {
 } from '../../permission.model';
 import { PermissionService } from '../../permission.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
     selector: 'app-permission-tabel',
@@ -39,6 +40,8 @@ export class PermissionTabelComponent implements AfterViewInit {
 
     resultsLength = 0;
     public pageSize = environment.tablePageSize;
+    pageSizeOptions = DefaultPageSizeOptions;
+
     isLoadingResults = true;
 
     constructor(

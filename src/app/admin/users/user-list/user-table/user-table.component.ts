@@ -12,6 +12,7 @@ import { UserGetManyResponse, UserResponse } from '../../user.model';
 import { UserService } from '../../user.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { environment } from '@environments/environment';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
     selector: 'app-user-table',
@@ -30,6 +31,7 @@ export class UserTableComponent implements AfterViewInit {
     data: UserResponse[];
 
     public pageSize = environment.tablePageSize;
+    pageSizeOptions = DefaultPageSizeOptions;
     resultsLength = 0;
     isLoadingResults = true;
     @ViewChild(MatPaginator) paginator: MatPaginator;

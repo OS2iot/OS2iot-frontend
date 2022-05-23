@@ -11,6 +11,8 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { Observable, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@environments/environment';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-iot-device-minimal-table',
@@ -25,6 +27,8 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
 
   resultsLength = 0;
   isLoadingResults = true;
+  public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

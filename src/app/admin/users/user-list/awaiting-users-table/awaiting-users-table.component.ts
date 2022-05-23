@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-awaiting-users-table',
@@ -24,6 +25,8 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
   users: UserResponse[];
 
   public pageSize = environment.tablePageSize;
+  pageSizeOptions = DefaultPageSizeOptions;
+
   resultsLength = 0;
   public errorMessage: string;
   isLoadingResults = true;
@@ -41,9 +44,9 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
     private userService: UserService,
     private sharedService: SharedVariableService,
     private deleteDialogService: DeleteDialogService
-  ) {} 
+  ) {}
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
     this.organizationId = this.sharedService.getSelectedOrganisationId();
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));

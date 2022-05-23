@@ -15,6 +15,7 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { ChartConfiguration } from 'chart.js';
 import { ColorGraphBlue1 } from '@shared/constants/color-constants';
 import { formatDate } from '@angular/common';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
     selector: 'app-gateway-detail',
@@ -26,6 +27,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     displayedColumns: string[] = ['rxPacketsReceived', 'txPacketsEmitted', 'txPacketsReceived'];
     private gatewayStats: GatewayStats[];
     public pageSize = environment.tablePageSize;
+    public pageSizeOptions = DefaultPageSizeOptions;
     public dataSource = new MatTableDataSource<GatewayStats>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     public resultLength = 0;

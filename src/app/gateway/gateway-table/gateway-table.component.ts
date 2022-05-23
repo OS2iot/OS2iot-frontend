@@ -17,6 +17,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-gateway-table',
@@ -38,6 +39,7 @@ export class GatewayTableComponent implements AfterViewInit {
   data: Gateway[] = [];
   dataSource: MatTableDataSource<Gateway>;
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
 
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
