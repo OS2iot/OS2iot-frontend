@@ -481,7 +481,7 @@
   },
   "PERMISSION-TYPE": {
     "GlobalAdmin": "Global administrator",
-    "OrganizationUserAdmin": "Brugeradministrator administrator",
+    "OrganizationUserAdmin": "Brugeradministrator",
     "OrganizationGatewayAdmin": "Gateway administrator",
     "OrganizationApplicationAdmin": "Applikationsadministrator",
     "Read": "Læserettigheder"
