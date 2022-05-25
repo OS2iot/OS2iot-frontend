@@ -19,10 +19,10 @@ export class DatatargetTypesService {
   getAvailableDataTargetTypes(): DatatargetTypeDescriptor[] {
     return [
       {
-        name: 'DATATARGET.HTTP-PUSH.NAME',
+        name: 'DATATARGET.HTTP_PUSH.NAME',
         type: DataTargetType.HTTPPUSH,
         icon: null,
-        description: 'DATATARGET.HTTP-PUSH.DESCRIPTION',
+        description: 'DATATARGET.HTTP_PUSH.DESCRIPTION',
         readMoreUrl: '',
         provider: 'OS2',
       },

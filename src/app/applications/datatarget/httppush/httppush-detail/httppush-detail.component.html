@@ -10,7 +10,7 @@
           <mat-divider></mat-divider>
           <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
           <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
-          <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{'DATATARGET.' + datatarget.type | translate}}</p>
+          <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{'DATATARGET.' + datatarget.type + '.TYPE' | translate}}</p>
           <mat-divider></mat-divider>
           <p><strong>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</strong></p>
           <code><pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{datatarget.authorizationHeader}}</pre></code>
@@ -22,7 +22,7 @@
       </div>
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-left jumbotron--full-width">
-          <h3>{{ 'DATATARGET.OPENDATA-DK' | translate }}</h3>
+          <h3>{{ 'DATATARGET.OPENDATA-DK.TYPE' | translate }}</h3>
           <div *ngIf="datatarget.setToOpendataDk else noOpendataDk">
             <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
           </div>
