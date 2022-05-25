@@ -17,6 +17,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { GatewayStatusInterval } from '../enums/gateway-status-interval.enum';
 import { GatewayStatus, AllGatewayStatusResponse } from '../gateway.model';
 import { map } from 'rxjs/operators';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 interface TimeColumn {
   exactTimestamp: string;
@@ -51,6 +52,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   timestampText = '';
   visibleFooterTimeInterval = 1;
   pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
   resultsLength = 0;
   organizationId: number | undefined;
   isLoadingResults = false;

@@ -10,6 +10,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { environment } from '@environments/environment';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
     selector: 'app-organisation-tabel',
@@ -29,6 +30,8 @@ export class OrganisationTabelComponent implements AfterViewInit {
 
     resultsLength = 0;
     public pageSize = environment.tablePageSize;
+    pageSizeOptions = DefaultPageSizeOptions;
+
     isLoadingResults = true;
 
     constructor(

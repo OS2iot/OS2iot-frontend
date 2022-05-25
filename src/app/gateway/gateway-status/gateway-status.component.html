@@ -48,7 +48,7 @@
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
 </div>
-<mat-paginator [ngClass]="paginatorClass" [pageSizeOptions]="[25, 50, 100]" [pageSize]="pageSize"
+<mat-paginator [ngClass]="paginatorClass" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
   [length]="resultsLength" showFirstLastButtons>
 </mat-paginator>
 <div class="status-legend d-flex flex-row mt-3">

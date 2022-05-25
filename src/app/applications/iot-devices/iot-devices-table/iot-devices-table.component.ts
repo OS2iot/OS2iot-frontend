@@ -24,6 +24,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { IoTDeviceService } from '../iot-device.service';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -36,6 +37,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
   displayedColumns: string[] = [
     'name',
     'technology',

@@ -19,6 +19,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Multicast, MulticastData } from '../multicast.model';
 import { MulticastService } from '../multicast.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-multicast-table',
@@ -35,6 +36,7 @@ export class MulticastTableComponent
   public canEdit = false;
   @Input() isLoadingResults = true;
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
   public pageOffset = 0;
   public applicationId: number;
 

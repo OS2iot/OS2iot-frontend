@@ -6,6 +6,7 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { SigfoxDeviceType } from '@shared/models/sigfox-device-type.model';
 import { SigfoxGroup } from '@shared/models/sigfox-group.model';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-sigfox-device-type-table',
@@ -20,6 +21,7 @@ export class SigfoxDeviceTypeTableComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['name', 'alertEmail'];
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
   @Input() isLoadingResults: boolean;
   resultsLength: number;
 

@@ -19,6 +19,7 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel, DeviceModelResponse } from '../device.model';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-device-model-table',
@@ -31,6 +32,7 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   public data: DeviceModel[];
   public displayedColumns: string[] = ['name', 'id', 'menu'];
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
   public isLoadingResults = false;
   public resultsLength = 0;
   deleteDialogSubscription: Subscription;

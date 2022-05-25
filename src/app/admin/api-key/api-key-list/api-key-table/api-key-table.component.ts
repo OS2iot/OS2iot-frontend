@@ -10,6 +10,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { ApiKeyGetManyResponse, ApiKeyResponse } from '../../api-key.model';
 import { ApiKeyService } from '../../api-key.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-api-key-table',
@@ -30,6 +31,7 @@ export class ApiKeyTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   resultsLength = 0;
   public pageSize = environment.tablePageSize;
+  pageSizeOptions = DefaultPageSizeOptions;
 
   constructor(
     private meService: MeService,
