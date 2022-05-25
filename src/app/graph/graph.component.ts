@@ -69,7 +69,9 @@ export class GraphComponent implements OnChanges {
     return (
       !this.data?.datasets?.length ||
       (this.data.datasets.length === 1 &&
-        !this.data.datasets[0].data.some((point) => !!point))
+        !this.data.datasets[0].data.some(
+          (point) => point !== null && point !== undefined
+        ))
     );
   }
 
