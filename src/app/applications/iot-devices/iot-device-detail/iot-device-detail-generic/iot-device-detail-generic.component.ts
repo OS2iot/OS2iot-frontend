@@ -30,6 +30,7 @@ export class IotDeviceDetailGenericComponent
   @Input() longitude = 0;
   deleteDevice = new EventEmitter();
   baseUrl: string = environment.baseUrl;
+  httpDeviceUrl: string;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
@@ -43,6 +44,7 @@ export class IotDeviceDetailGenericComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
+    this.httpDeviceUrl = this.getGenericHttpDeviceUrl();
 
     if (
       changes?.device?.previousValue?.metadata !==
@@ -66,7 +68,7 @@ export class IotDeviceDetailGenericComponent
     };
   }
 
-  getBatteryProcentage(): number {
+  private getBatteryProcentage(): number {
     if (
       this.device?.lorawanSettings?.deviceStatusBattery ===
       this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE
@@ -76,8 +78,8 @@ export class IotDeviceDetailGenericComponent
     return Math.round(this.device?.lorawanSettings?.deviceStatusBattery);
   }
 
-  getGenericHttpDeviceUrl(device: IotDevice): string {
-    return `${this.baseUrl}receive-data?apiKey=${device.apiKey}`;
+  private getGenericHttpDeviceUrl(): string {
+    return `${this.baseUrl}receive-data?apiKey=${this.device.apiKey}`;
   }
 
   ngOnDestroy(): void {}
