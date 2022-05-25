@@ -37,7 +37,7 @@
         [matTooltipClass]="'status-tooltip'"
         [ngClass]="gateway.statusTimestamps | gatewayStatusClass: time.exactTimestamp"></td>
       <td mat-footer-cell *matFooterCellDef=" let gateway"
-        [ngClass]="{'invisible': index % visibleFooterTimeInterval, 'text-center': true}">
+        [ngClass]="{'invisible': index % visibleFooterTimeInterval, 'text-center': true, 'text-nowrap': true}">
         {{time.datePart}}
         <br />
         {{time.timePart}}
