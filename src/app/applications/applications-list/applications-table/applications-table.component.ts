@@ -38,7 +38,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;
-  public canEdit = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -47,12 +46,10 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     public translate: TranslateService,
     private applicationService: ApplicationService,
     private router: Router,
-    private meService: MeService,
     private deleteDialogService: DeleteDialogService
   ) {}
 
   ngOnInit() {
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   ngAfterViewInit() {

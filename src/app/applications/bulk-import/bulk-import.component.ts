@@ -59,7 +59,6 @@ export class BulkImportComponent implements OnInit {
   private bulkMapper = new BulkMapping();
   public backButtonTitle: string;
   private applicationId;
-  canEdit: boolean;
 
   constructor(
     private papa: Papa,
@@ -80,9 +79,6 @@ export class BulkImportComponent implements OnInit {
       this.titleService.setTitle(translations['TITLE.BULKIMPORT']);
     });
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.canEdit = this.meService.hasAccessToTargetOrganization(
-      OrganizationAccessScope.ApplicationWrite
-    );
   }
 
   download({ name, url }: { name: string; url: string }) {

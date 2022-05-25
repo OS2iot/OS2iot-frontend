@@ -114,7 +114,7 @@ export class HttppushEditComponent
     }
     this.getPayloadDecoders();
     this.setDataSetExcists();
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.applicationId);
   }
 
   addRow() {

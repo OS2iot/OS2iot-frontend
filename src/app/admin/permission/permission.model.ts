@@ -23,6 +23,7 @@ export interface PermissionResponse {
   users?: UserResponse[];
   organization?: OrganisationResponse;
   applications?: Application[];
+  applicationIds?: number[];
   id: number;
   createdAt: Date;
   updatedAt: Date;

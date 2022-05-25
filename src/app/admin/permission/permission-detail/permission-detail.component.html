@@ -33,8 +33,7 @@
                         {{ 'PERMISSION.DETAIL.APPLICATIONS' | translate }}
                     </h3>
 
-                    <app-applications-table *ngIf="!isApplicationAdmin()" [permissionId]="id" [organizationId]="permission.organization?.id"></app-applications-table>
-                    <app-applications-table *ngIf="isApplicationAdmin()"></app-applications-table>
+                    <app-applications-table [permissionId]="id" [organizationId]="permission.organization?.id"></app-applications-table>
                 </div>
             </div>
         </div>

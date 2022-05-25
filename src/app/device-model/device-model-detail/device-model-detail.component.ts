@@ -37,6 +37,8 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const deviceModelId = +this.route.snapshot.paramMap.get('deviceId');
+    const appId: number = +this.route.snapshot.paramMap.get('id');
+
     if (deviceModelId) {
       this.getDeviceModel(deviceModelId);
       this.dropdownButton = {
@@ -53,7 +55,7 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
         this.title = translations['DEVICE-MODEL.DETAIL-TITLE'];
         this.errorTitle = translations['DEVICE-MODEL.DELETE-FAILED'];
       });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
   }
 
   private getDeviceModel(id: number) {

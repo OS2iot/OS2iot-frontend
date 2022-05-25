@@ -25,6 +25,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { IoTDeviceService } from '../iot-device.service';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -64,14 +65,16 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     public translate: TranslateService,
     public iotDeviceService: IoTDeviceService,
     private meService: MeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
   ) {
     translate.use('da');
     moment.locale('da');
   }
 
   ngOnInit() {
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    const applicationId = +this.route.snapshot.paramMap.get('id');
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, applicationId);
   }
 
   ngAfterViewInit() {

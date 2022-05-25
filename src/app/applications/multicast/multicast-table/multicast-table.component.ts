@@ -57,7 +57,9 @@ export class MulticastTableComponent
   ngOnInit(): void {
     this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
     this.canEdit = this.meService.hasAccessToTargetOrganization(
-      OrganizationAccessScope.ApplicationWrite
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      this.applicationId
     );
   }
 

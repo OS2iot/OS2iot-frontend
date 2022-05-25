@@ -12,6 +12,8 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { Subscription } from 'rxjs';
 import { Datatarget } from '../datatarget.model';
 import { DatatargetService } from '../datatarget.service';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-mqtt-detail',
@@ -28,6 +30,7 @@ export class MqttDetailComponent
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   arrowsAltH = faArrowsAltH;
+  canEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,11 +38,13 @@ export class MqttDetailComponent
     private location: Location,
     private datatargetRelationService: PayloadDeviceDatatargetService,
     private datatargetService: DatatargetService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private meService: MeService,
   ) {}
 
   ngOnInit(): void {
     const id: number = +this.route.snapshot.paramMap.get('datatargetId');
+    const appId: number = +this.route.snapshot.paramMap.get('id');
 
     if (id) {
       this.getDatatarget(id);
@@ -56,6 +61,7 @@ export class MqttDetailComponent
         this.backButton.label = translations['NAV.MY-DATATARGET'];
         this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
       });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
   }
 
   getDatatarget(id: number) {
