@@ -43,6 +43,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
 
   ngOnInit(): void {
       const id: number = +this.route.snapshot.paramMap.get('datatargetId');
+      const appId: number = +this.route.snapshot.paramMap.get('id');
 
       if (id) {
           this.getDatatarget(id);
@@ -58,7 +59,7 @@ export class FiwareDetailComponent  implements DatatargetDetail, OnInit, OnDestr
               this.backButton.label = translations['NAV.MY-DATATARGET'];
               this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
           });
-      this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+      this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
   }
 
   getDatatarget(id: number) {

@@ -57,7 +57,7 @@ export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  canEdit() {
+  private canEdit() {
     this.payloadDecoder.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, this.payloadDecoder?.organizationId);
   }
 

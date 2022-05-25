@@ -53,7 +53,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
         label: '',
         editRouterLink: '../../edit-application/' + this.id,
         isErasable: true,
-      };      
+      };
     }
 
     this.translate
@@ -68,7 +68,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
           translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
         this.titleService.setTitle(translations['TITLE.APPLICATION']);
       });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.id);
   }
 
   onDeleteApplication() {

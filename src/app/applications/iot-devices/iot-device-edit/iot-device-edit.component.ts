@@ -93,7 +93,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.getServiceProfiles();
         this.getDeviceProfiles();
         this.getDeviceModels();
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.iotDevice.applicationId);
     }
 
     public compare(o1: any, o2: any): boolean {

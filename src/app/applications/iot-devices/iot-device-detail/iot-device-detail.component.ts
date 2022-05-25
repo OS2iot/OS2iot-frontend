@@ -97,8 +97,9 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
         this.deviceId = +this.route.snapshot.paramMap.get('deviceId');
+        const appId: number = +this.route.snapshot.paramMap.get('id');
+        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
 
         if (this.deviceId) {
             this.bindIoTDeviceAndApplication(this.deviceId);
