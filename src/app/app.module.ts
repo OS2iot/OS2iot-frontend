@@ -29,6 +29,7 @@ import { NGMaterialModule } from '@shared/Modules/materiale.module';
 import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
 import { UserPageComponent } from './admin/users/user-page/user-page.component';
 import { SharedModule } from '@shared/shared.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,6 +82,7 @@ export function tokenGetter() {
         }),
         MonacoEditorModule.forRoot(),
         WelcomeDialogModule,
+        PipesModule,
     ],
     bootstrap: [AppComponent],
     exports: [TranslateModule],
