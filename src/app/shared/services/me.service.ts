@@ -21,7 +21,11 @@ export class MeService {
     organizationId: number = this.sharedVariableService.getSelectedOrganisationId(),
     applicationId?: number
   ): boolean {
-    const { permissions } = this.sharedVariableService.getUserInfo().user;
+    const { permissions } = this.sharedVariableService.getUserInfo()?.user ?? {};
+
+    if (!permissions) {
+      return false;
+    }
 
     if (
       permissions.some((p) =>

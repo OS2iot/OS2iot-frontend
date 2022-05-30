@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
 
   hasEmail(): string {
     this.userInfo = this.sharedVariableService.getUserInfo();
-    return this.userInfo.user.email;
+    return this.userInfo?.user?.email;
   }
 
   public goToHelp() {

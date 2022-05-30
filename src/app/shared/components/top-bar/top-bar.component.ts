@@ -147,11 +147,11 @@ export class TopBarComponent implements OnInit {
       }
 
       hasEmail(): boolean {
-          if (this.sharedVariableService.getUserInfo().user.email)
-          {
-              return true
-          }
-          else return false;
+        if (this.sharedVariableService.getUserInfo()?.user?.email) {
+          return true;
+        } else {
+          return false;
+        }
       }
 
       hasAnyPermission(): boolean {
