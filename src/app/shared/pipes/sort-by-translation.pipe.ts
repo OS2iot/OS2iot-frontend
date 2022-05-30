@@ -26,7 +26,6 @@ export class SortByTranslationPipe implements PipeTransform {
       order
     );
 
-    console.log('sorted', translationValues, prefix, '\n', res);
     return res;
   }
 }
