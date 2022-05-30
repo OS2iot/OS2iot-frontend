@@ -324,7 +324,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
               this.iotDeviceService
                 .resetHttpDeviceApiKey(this.device.id)
                 .subscribe((response) => {
-                  this.device.apiKey = response.apiKey;
+                  this.device = {
+                    ...this.device,
+                    apiKey: response.apiKey
+                  };
                 });
             }
           });
