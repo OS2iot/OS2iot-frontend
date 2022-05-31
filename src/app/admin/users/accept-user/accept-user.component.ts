@@ -31,6 +31,7 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   user: UserResponse;
   errorFields: string[];
   organizationId: number;
+  organizationName: string;
   public formFailedSubmit = false;
   errorMessages: any;
   allowedLevels: PermissionTypes[] = [
@@ -54,6 +55,7 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userId = +this.route.snapshot.paramMap.get('user-id');
     this.organizationId = +this.route.snapshot.paramMap.get('org-id');
+
     if (this.userId) {
       this.getUser(this.userId);
     }
@@ -93,6 +95,7 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
             (x) => x.organization?.id === this.organizationId
           );
           this.permissionsCtrl.setValue(this.permissions);
+          this.organizationName = permissionsResponse.data[0]?.organization?.name;
         },
         (error: HttpErrorResponse) => {
           this.showError(error);

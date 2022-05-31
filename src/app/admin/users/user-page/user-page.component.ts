@@ -48,25 +48,18 @@ export class UserPageComponent implements OnInit {
     private translate: TranslateService,
     private organizationService: OrganisationService,
     private sharedService: SharedVariableService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private sharedVariableService: SharedVariableService,
   ) {}
 
   ngOnInit(): void {
-    this.translate.get([
-      'USER_PAGE.AWAITING_CONFIRMATION',
-      'USER_PAGE.APPLY_ORGANISATIONS',
-      'USER_PAGE.APPLIED_ORGANISATIONS',
-      'USER_PAGE.QUESTION_APPLY_ORGANISAIONS',
-      'USER_PAGE.NO_APPLIED_ORGS',
-      'USER_PAGE.NO_ORGS',
-    ]);
-
     this.userInfo = this.sharedService.getUserInfo();
+    const hasSomePermission = this.sharedVariableService.getHasAnyPermission();
 
     this.userService
       .getOneSimple(this.userInfo.user.id)
       .subscribe((response: UserResponse) => {
-        //When used as user-page, check for users organizations so it's only possible to apply not already joined organizations
+        // When used as user-page, check for users organizations so it's only possible to apply not already joined organizations
         this.requestedUserOrganizations = response.requestedOrganizations;
         if (this.userInfo.organizations.length > 0) {
           this.compareRequestedAndAlreadyJoinedOrganizations(
@@ -80,7 +73,7 @@ export class UserPageComponent implements OnInit {
         }
 
         this.awaitingConfirmation = response.awaitingConfirmation;
-        if (!this.awaitingConfirmation) {
+        if (!this.awaitingConfirmation && hasSomePermission) {
           this.translate
             .get('GEN.BACK')
             .subscribe((translation) => (this.backButtonTitle = translation));

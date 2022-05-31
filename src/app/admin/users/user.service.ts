@@ -18,7 +18,7 @@ import {
 })
 export class UserService {
   URL = 'user';
-  URL_NEW_KOMBIT = "kombitCreation"
+  URL_NEW_KOMBIT = 'kombitCreation';
 
   constructor(
     private restService: RestService,
@@ -37,7 +37,7 @@ export class UserService {
 
   getOne(id: number, extendedInfo = false): Observable<UserResponse> {
     return this.restService
-      .get(this.URL, { extendedInfo: extendedInfo }, id)
+      .get(this.URL, { extendedInfo }, id)
       .pipe(
         map((response: UserResponse) => {
           response.createdByName = this.userMinimalService.getUserNameFrom(
@@ -60,13 +60,13 @@ export class UserService {
   ): Observable<UserGetManyResponse> {
     if (permissionId != null) {
       return this.restService.get(`permission/${permissionId}/users`, {
-        limit: limit,
-        offset: offset,
+        limit,
+        offset,
       });
     } else {
       return this.restService.get(this.URL, {
-        limit: limit,
-        offset: offset,
+        limit,
+        offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
       });
@@ -76,11 +76,10 @@ export class UserService {
   hideWelcome(id: number): Observable<boolean> {
     return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);
   }
-    
+
   getAwaitingUsers(
     limit: number = 1000,
     offset: number = 0,
-    organizationId: number,
     orderByColumn?: string,
     orderByDirection?: string
   ): Observable<UserGetManyResponse> {
@@ -92,7 +91,6 @@ export class UserService {
         orderOn: orderByColumn,
         sort: orderByDirection,
       },
-      organizationId
     );
   }
 
@@ -115,9 +113,14 @@ export class UserService {
   }
 
   updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
-    return this.restService.put(this.URL_NEW_KOMBIT + '/updateUserOrgs', body, undefined, {
-      observe: 'response',
-    });
+    return this.restService.put(
+      this.URL_NEW_KOMBIT + '/updateUserOrgs',
+      body,
+      undefined,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   rejectUser(body: RejectUserDto): Observable<Organisation> {
