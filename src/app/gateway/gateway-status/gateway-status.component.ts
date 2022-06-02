@@ -14,7 +14,7 @@ import { recordToEntries } from '@shared/helpers/record.helper';
 import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service';
 import * as moment from 'moment';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { GatewayStatusInterval } from '../enums/gateway-status-interval.enum';
+import { GatewayStatusInterval, gatewayStatusIntervalToDate } from '../enums/gateway-status-interval.enum';
 import { GatewayStatus, AllGatewayStatusResponse } from '../gateway.model';
 import { map } from 'rxjs/operators';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
@@ -46,7 +46,10 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
    * List of pre-processed timestamps for performance
    */
   timeColumns: TimeColumn[] = [];
-  displayedColumns: (TimeColumn | string)[] = [];
+  /**
+   * Columns to display. Must not contain objects in order for the table to render.
+   */
+  displayedColumns: string[] = [];
   nameText = '';
   neverSeenText = '';
   timestampText = '';
@@ -135,14 +138,16 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       timeInterval
     ).subscribe((response) => {
       this.isLoadingResults = false;
+      // Get the earliest date from the selected interval
+      const fromDate = gatewayStatusIntervalToDate(timeInterval);
 
-      if (response) {
-        this.handleStatusResponse(response);
+      if (Array.isArray(response?.data)) {
+        this.handleStatusResponse(response, fromDate);
       }
     });
   }
 
-  private handleStatusResponse(response: AllGatewayStatusResponse) {
+  private handleStatusResponse(response: AllGatewayStatusResponse, fromDate: Date) {
     this.resultsLength = response.count;
     const gatewaysWithLatestTimestampsPerHour = this.takeLatestTimestampInHour(
       response.data
@@ -151,11 +156,18 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       gatewaysWithLatestTimestampsPerHour
     );
 
+    // Sort the gateways and their status timestamps
     const sortedData = gatewaysWithWholeHourTimestamps
       .slice()
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((gateway) => ({
+        ...gateway,
+        statusTimestamps: gateway.statusTimestamps.sort(
+          (a, b) => a.timestamp.getTime() - b.timestamp.getTime()
+        ),
+      }));
 
-    this.buildColumns(sortedData);
+    this.buildColumns(sortedData, fromDate);
     this.visibleFooterTimeInterval = Math.round(
       this.clamp(this.timeColumns.length / 4, 1, 6)
     );
@@ -164,28 +176,26 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
 
-  private buildColumns(response: GatewayStatus[]) {
-    let minDate: Date | null | undefined;
+  private buildColumns(response: GatewayStatus[], fromDate: Date) {
+    // Ensure the first column is the (earliest) selected date
+    const minDate = fromDate;
     let maxDate: Date | null | undefined;
     this.timeColumns = [];
 
+    // Determine the date of the first and last column
     response.forEach((gateway) => {
       gateway.statusTimestamps.forEach(({ timestamp }) => {
-        if (!minDate) {
-          minDate = timestamp;
-        }
         if (!maxDate) {
           maxDate = timestamp;
         }
 
-        if (timestamp < minDate) {
-          minDate = timestamp;
-        } else if (timestamp > maxDate) {
+        if (timestamp > maxDate) {
           maxDate = timestamp;
         }
       });
     });
 
+    // If there's a date range, build the columns from them
     if (minDate && maxDate) {
       const currDate = moment(minDate).startOf('hour');
       const lastDate = moment(maxDate).startOf('hour');

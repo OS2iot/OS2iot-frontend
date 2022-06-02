@@ -1,5 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { StatusTimestamp } from '@app/gateway/gateway.model';
+import * as moment from 'moment';
+
+const neverSeenClass = 'never-seen';
+const offlineClass = 'offline';
+const onlineClass = 'online';
 
 @Pipe({
   name: 'gatewayStatusClass',
@@ -14,14 +19,27 @@ export class GatewayStatusClassPipe implements PipeTransform {
     timestamp: string,
     ..._: unknown[]
   ): string {
-    return !statusTimestamps.length
-      ? 'never-seen'
-      : statusTimestamps.some(
-          (gatewayTimestamp) =>
-            gatewayTimestamp.timestamp.toISOString() === timestamp &&
-            gatewayTimestamp.wasOnline
-        )
-      ? 'online'
-      : 'offline';
+    if (!statusTimestamps.length) {
+      return neverSeenClass;
+    }
+
+    let currentStatusClass = offlineClass;
+    const selectedDate = moment(timestamp).toDate();
+
+    for (const gatewayTimestamp of statusTimestamps) {
+      const isoGatewayTimestamp = gatewayTimestamp.timestamp.toISOString();
+
+      if (isoGatewayTimestamp === timestamp) {
+        return gatewayTimestamp.wasOnline ? onlineClass : offlineClass;
+      }
+
+      if (gatewayTimestamp.timestamp > selectedDate) {
+        return currentStatusClass;
+      }
+
+      currentStatusClass = gatewayTimestamp.wasOnline ? onlineClass : offlineClass;
+    }
+
+    return currentStatusClass;
   }
 }
