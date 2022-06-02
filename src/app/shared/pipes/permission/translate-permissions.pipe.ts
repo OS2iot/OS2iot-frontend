@@ -11,6 +11,7 @@ export class TranslatePermissionsPipe implements PipeTransform {
   transform(permissions: PermissionTypes[] | undefined): string {
     const formattedPermissions = permissions
       .map(({ type }) => this.translate.instant('PERMISSION-TYPE.' + type))
+      .sort()
       .join(', ');
 
     return formattedPermissions;

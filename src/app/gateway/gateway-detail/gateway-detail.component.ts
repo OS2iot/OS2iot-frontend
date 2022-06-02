@@ -120,7 +120,11 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     private buildGraphs() {
-      const { receivedDatasets, sentDatasets, labels } = this.gatewayStats.reduce(
+      const {
+        receivedDatasets,
+        sentDatasets,
+        labels,
+      } = this.gatewayStats.slice().reverse().reduce(
         (
           res: {
             receivedDatasets: ChartConfiguration['data']['datasets'];
@@ -139,10 +143,18 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         },
         {
           receivedDatasets: [
-            { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
+            {
+              data: [],
+              borderColor: ColorGraphBlue1,
+              backgroundColor: ColorGraphBlue1,
+            },
           ],
           sentDatasets: [
-            { data: [], borderColor: ColorGraphBlue1,  backgroundColor: ColorGraphBlue1 },
+            {
+              data: [],
+              borderColor: ColorGraphBlue1,
+              backgroundColor: ColorGraphBlue1,
+            },
           ],
           labels: [],
         }

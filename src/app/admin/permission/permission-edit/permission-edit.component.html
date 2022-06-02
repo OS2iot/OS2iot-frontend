@@ -29,7 +29,7 @@
             [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
             [compareWith]="compareLevels"
             [multiple]="true">
-            <mat-option *ngFor="let level of allowedLevels" [value]="level">
+            <mat-option *ngFor="let level of allowedLevels | sortByTranslation: 'type':'asc':'PERMISSION-TYPE.'" [value]="level">
               {{'PERMISSION-TYPE.' + level.type | translate}}
             </mat-option>
         </mat-select>

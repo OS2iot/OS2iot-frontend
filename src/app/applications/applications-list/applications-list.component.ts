@@ -14,6 +14,8 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { MeService } from '@shared/services/me.service';
 import { WelcomeDialogModel } from '@shared/models/dialog.model';
 
+const welcomeDialogId = 'welcome-dialog';
+
 @Component({
   providers: [NavbarComponent],
   selector: 'app-applications-list',
@@ -121,16 +123,19 @@ export class ApplicationsListComponent implements OnInit {
       this.isGlobalAdmin = this.meService.hasGlobalAdmin();
       const hasSeenWelcomeScreen = this.userMinimalService.getHasSeenWelcomeScreen();
       this.hasSomePermission = this.sharedVariableService.getHasAnyPermission();
+      const isOpen = !!this.dialog?.getDialogById(welcomeDialogId);
 
       if (
         !this.hasSomePermission ||
         (!this.isGlobalAdmin &&
           !hasSeenWelcomeScreen &&
-          userInfo?.user?.showWelcomeScreen)
+          userInfo?.user?.showWelcomeScreen &&
+          !isOpen)
       ) {
         this.userMinimalService.setHasSeenWelcomeScreen();
 
         this.dialog.open(WelcomeDialogComponent, {
+          id: welcomeDialogId,
           disableClose: true,
           closeOnNavigation: true,
           panelClass: 'welcome-screen',

@@ -75,11 +75,11 @@ export class SharedVariableService {
   }
 
   getUsername(): string {
-    return this.getUserInfo()?.user.name;
+    return this.getUserInfo()?.user?.name;
   }
 
   getHasAnyPermission(): boolean {
-    return this.getUserInfo().user.permissions.length > 0;
+    return this.getUserInfo()?.user?.permissions.length > 0;
   }
 
   getSelectedOrganisationId(): number {

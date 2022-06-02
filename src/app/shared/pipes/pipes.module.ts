@@ -11,6 +11,7 @@ import { SortByPipe } from './sort-by.pipe';
 import { GatewayStatusTooltipPipe } from './gateway/gateway-status-tooltip.pipe';
 import { GatewayStatusClassPipe } from './gateway/gateway-status-class.pipe';
 import { CanEditApplicationPipe } from './permission/can-edit-application.pipe';
+import { SortByTranslationPipe } from './sort-by-translation.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CanEditApplicationPipe } from './permission/can-edit-application.pipe';
     GatewayStatusTooltipPipe,
     GatewayStatusClassPipe,
     CanEditApplicationPipe,
+    SortByTranslationPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -43,6 +45,7 @@ import { CanEditApplicationPipe } from './permission/can-edit-application.pipe';
     GatewayStatusTooltipPipe,
     GatewayStatusClassPipe,
     CanEditApplicationPipe,
+    SortByTranslationPipe,
   ],
   providers: [
     DateOnlyPipe
