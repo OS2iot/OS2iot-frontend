@@ -46,7 +46,10 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
    * List of pre-processed timestamps for performance
    */
   timeColumns: TimeColumn[] = [];
-  displayedColumns: (TimeColumn | string)[] = [];
+  /**
+   * Columns to display. Must not contain objects in order for the table to render.
+   */
+  displayedColumns: string[] = [];
   nameText = '';
   neverSeenText = '';
   timestampText = '';
@@ -135,6 +138,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       timeInterval
     ).subscribe((response) => {
       this.isLoadingResults = false;
+      // Get the earliest date from the selected interval
       const fromDate = gatewayStatusIntervalToDate(timeInterval);
 
       if (Array.isArray(response?.data)) {
@@ -152,6 +156,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       gatewaysWithLatestTimestampsPerHour
     );
 
+    // Sort the gateways and their status timestamps
     const sortedData = gatewaysWithWholeHourTimestamps
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -172,10 +177,12 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   }
 
   private buildColumns(response: GatewayStatus[], fromDate: Date) {
+    // Ensure the first column is the (earliest) selected date
     const minDate = fromDate;
     let maxDate: Date | null | undefined;
     this.timeColumns = [];
 
+    // Determine the date of the first and last column
     response.forEach((gateway) => {
       gateway.statusTimestamps.forEach(({ timestamp }) => {
         if (!maxDate) {
@@ -188,6 +195,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
       });
     });
 
+    // If there's a date range, build the columns from them
     if (minDate && maxDate) {
       const currDate = moment(minDate).startOf('hour');
       const lastDate = moment(maxDate).startOf('hour');
