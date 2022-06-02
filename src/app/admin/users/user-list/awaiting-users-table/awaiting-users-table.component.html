@@ -61,14 +61,14 @@
                 [routerLink]="[
                   '/admin/users/accept-user/',
                   element.id,
-                  organizationId
+                  element.requestedOrganization.id
                 ]"
                 routerLinkActive="active"
                 >{{ 'USERS.TABLE-ROW.APPROVE' | translate }}
               </a>
             </li>
             <li class="dropdown-item">
-              <a (click)="rejectUser(element.id)" [routerLink]="">{{
+              <a (click)="rejectUser(element.id, element.requestedOrganization.id)" [routerLink]="">{{
                 'USERS.TABLE-ROW.REJECT' | translate
               }}</a>
             </li>

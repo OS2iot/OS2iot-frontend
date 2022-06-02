@@ -8,12 +8,11 @@ $spacing: 5rem;
 }
 
 .header {
-  h1 {
-    font-size: 3rem;
+  h2 {
     color: $color-white-001;
     margin-bottom: 0 !important;
   }
-  h2 {
+  p {
     color: $color-white-001;
   }
 }
@@ -47,7 +46,7 @@ $spacing: 5rem;
 }
 
 .btn.ok {
-  margin-top: 5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 
   background-color: #f79267;

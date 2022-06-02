@@ -11,7 +11,7 @@ export class UserRequest {
   password: string;
   active: boolean;
   globalAdmin: boolean;
-    showWelcomeScreen: boolean;
+  showWelcomeScreen: boolean;
 }
 
 export interface UserResponse {
@@ -31,6 +31,11 @@ export interface UserResponse {
   awaitingConfirmation: boolean;
   showWelcomeScreen: boolean;
   requestedOrganizations: OrganisationResponse[];
+}
+
+export interface UserResponsePerRequestedOrganization
+  extends Omit<UserResponse, 'requestedOrganizations'> {
+  requestedOrganization: OrganisationResponse;
 }
 
 export interface UserGetManyResponse {

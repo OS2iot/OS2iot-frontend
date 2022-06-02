@@ -3,6 +3,7 @@ import {
   RejectUserDto,
   UserGetManyResponse,
   UserResponse,
+  UserResponsePerRequestedOrganization,
 } from '../../user.model';
 import { UserService } from '../../user.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -22,7 +23,7 @@ import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 })
 export class AwaitingUsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'menu'];
-  users: UserResponse[];
+  users: UserResponsePerRequestedOrganization[];
 
   public pageSize = environment.tablePageSize;
   pageSizeOptions = DefaultPageSizeOptions;
@@ -30,7 +31,6 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
   resultsLength = 0;
   public errorMessage: string;
   isLoadingResults = true;
-  public organizationId: number;
   message: string;
   infoTitle: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -47,7 +47,6 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.organizationId = this.sharedService.getSelectedOrganisationId();
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -67,10 +66,24 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
         }),
         catchError(() => {
           this.isLoadingResults = false;
-          return observableOf([]);
+          return observableOf([] as UserResponse[]);
         })
       )
-      .subscribe((data) => (this.users = data));
+      .subscribe((userResponses) => {
+        this.users = [];
+
+        // Flatten users so each table row is exactly one request
+        for (const response of userResponses) {
+          const { requestedOrganizations, ...user} = response;
+
+          for (const organizationId of response.requestedOrganizations) {
+            this.users.push({
+              ...user,
+              requestedOrganization: organizationId,
+            });
+          }
+        }
+      });
 
     this.translate
       .get(['USERS.DIALOG.QUESTION-REJECT', 'USERS.DIALOG.HEAD-REJECT'])
@@ -87,22 +100,20 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
     return this.userService.getAwaitingUsers(
       this.paginator.pageSize,
       this.paginator.pageIndex * this.paginator.pageSize,
-      this.organizationId,
       orderByColumn,
       orderByDirection
     );
   }
 
-  rejectUser(userId: number) {
+  rejectUser(userId: number, organizationId: number) {
     this.deleteDialogService
       .showSimpleDialog(this.message, false, true, false, this.infoTitle, true)
       .subscribe((response) => {
-
         if (response) {
-		  const rejectUserOrgDto: RejectUserDto = {
-			  orgId: this.organizationId,
-			  userIdToReject: userId
-		  }
+          const rejectUserOrgDto: RejectUserDto = {
+            orgId: organizationId,
+            userIdToReject: userId,
+          };
 
           this.userService
             .rejectUser(rejectUserOrgDto)

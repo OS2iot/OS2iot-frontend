@@ -986,7 +986,8 @@
     },
     "ACCEPT-USER": {
       "ACCEPT": "Godkend bruger",
-      "QUESTION-ACCEPT": "Vælg brugergruppe til "
+      "QUESTION-ACCEPT": "Vælg brugergruppe til ",
+      "IN-ORGANIZATION": "i organisationen "
     }
   },
   "AUTH": {

@@ -3,10 +3,10 @@
 </div>
 <div class="container">
   <header mat-dialog-title class="text-center header">
-    <h1>
+    <h2>
       {{'WELCOME-DIALOG.WELCOME' | translate}}
-    </h1>
-    <h2>{{ (dialogModel?.hasSomePermission ? 'WELCOME-DIALOG.WELCOME-SUB' : 'WELCOME-DIALOG.NO-ACCESS') | translate}}</h2>
+    </h2>
+    <p>{{ (dialogModel?.hasSomePermission ? 'WELCOME-DIALOG.WELCOME-SUB' : 'WELCOME-DIALOG.NO-ACCESS') | translate}}</p>
   </header>
   <div mat-dialog-content class="col-md-12 px-md-4" *ngIf="dialogModel?.hasSomePermission">
     <p class="sub-header"><strong>{{'WELCOME-DIALOG.SUB-HEADER-1' | translate}}</strong></p>
@@ -33,7 +33,6 @@
     <button (click)="close()" mat-dialog-close class="btn ok text--big">
       {{'DIALOG.OK' | translate | uppercase}}
     </button>
-
   </div>
 </div>
 <mat-checkbox *ngIf="dialogModel?.hasSomePermission" [(ngModel)]="dontShowAgain" name="dontShowAgain"

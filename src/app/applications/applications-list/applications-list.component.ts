@@ -93,7 +93,7 @@ export class ApplicationsListComponent implements OnInit {
           });
         } else {
           // Clear the URL from the parameter
-          this.router.navigate(['/applications']);
+          this.router.navigate(['/applications'], { replaceUrl: true });
         }
       } else {
         const error = params['error'];
@@ -139,6 +139,13 @@ export class ApplicationsListComponent implements OnInit {
             hasSomePermission: this.hasSomePermission,
           } as WelcomeDialogModel,
         });
+
+        if (!this.hasSomePermission) {
+          // In case a previous .navigate() was fired, ensure this is called after
+          setTimeout(() => {
+            this.router.navigate(['/user-page'], { replaceUrl: true });
+          });
+        }
       }
 
       if (this.hasSomePermission) {
