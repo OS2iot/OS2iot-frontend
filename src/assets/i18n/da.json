@@ -1007,7 +1007,7 @@
     "WELCOME-MESSAGE-2": ". Her kan du stille spørgsmål, indrapportere fejl og dele dine udviklingsønsker. Ved fælles hjælp bliver løsningen bedre.",
     "WELCOME-MESSAGE-3": "OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan finde mere information om OS2iot på ",
     "WELCOME-MESSAGE-4": " og følge udviklingen på ",
-    "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Kontakt din administrator for at få tildelt rettigheder.",
+    "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Anmod om adgang til en organisation for at få tildelt rettigheder af din administrator.",
     "NO-JOB-ACCESS": "Du har ikke passende jobfunktionsrolle, og har derfor ikke adgang til OS2IoT.",
     "KOMBIT-LOGIN-ERROR": "Der skete en fejl ved login via KOMBIT adgangsstyring. Prøv igen senere.",
     "USER-INACTIVE": "Login successfuldt, men din bruger er deaktiveret i OS2IoT. Kontakt din administrator for at få tildelt rettigheder"

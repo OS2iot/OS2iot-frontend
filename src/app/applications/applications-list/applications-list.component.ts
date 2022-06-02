@@ -93,9 +93,11 @@ export class ApplicationsListComponent implements OnInit {
           this.router.navigate(['/new-user'], {
             state: { fromKombit: true },
           });
+          return;
         } else {
           // Clear the URL from the parameter
           this.router.navigate(['/applications'], { replaceUrl: true });
+          return;
         }
       } else {
         const error = params['error'];
@@ -116,6 +118,8 @@ export class ApplicationsListComponent implements OnInit {
               state: { message: this.unauthorizedMessage, code: 401 },
             });
           }
+
+          return;
         }
       }
 

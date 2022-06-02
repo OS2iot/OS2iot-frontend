@@ -167,7 +167,7 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
         ),
       }));
 
-    this.buildColumns(sortedData, fromDate);
+    this.buildColumns(fromDate, new Date());
     this.visibleFooterTimeInterval = Math.round(
       this.clamp(this.timeColumns.length / 4, 1, 6)
     );
@@ -176,29 +176,14 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
 
-  private buildColumns(response: GatewayStatus[], fromDate: Date) {
+  private buildColumns(fromDate: Date, toDate: Date) {
     // Ensure the first column is the (earliest) selected date
-    const minDate = fromDate;
-    let maxDate: Date | null | undefined;
     this.timeColumns = [];
 
-    // Determine the date of the first and last column
-    response.forEach((gateway) => {
-      gateway.statusTimestamps.forEach(({ timestamp }) => {
-        if (!maxDate) {
-          maxDate = timestamp;
-        }
-
-        if (timestamp > maxDate) {
-          maxDate = timestamp;
-        }
-      });
-    });
-
     // If there's a date range, build the columns from them
-    if (minDate && maxDate) {
-      const currDate = moment(minDate).startOf('hour');
-      const lastDate = moment(maxDate).startOf('hour');
+    if (fromDate && toDate) {
+      const currDate = moment(fromDate).startOf('hour');
+      const lastDate = moment(toDate).startOf('hour');
 
       do {
         this.timeColumns.push({
