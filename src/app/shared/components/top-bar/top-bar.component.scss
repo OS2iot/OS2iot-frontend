@@ -39,4 +39,9 @@ button:focus {
   align-items: center;
 }
 
-
+.invisible{
+  display: none;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}

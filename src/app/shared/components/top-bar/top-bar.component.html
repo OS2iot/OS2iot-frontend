@@ -1,3 +1,11 @@
+<ng-template #emptySearchForm>
+  <mat-form-field class="search-form--full-width invisible">
+    <input
+      matInput
+    />
+  </mat-form-field>
+</ng-template>
+
 <div class="row top-bar-wrapper">
   <div class="top-bar">
     <div class="topbarWidth">
@@ -102,28 +110,35 @@
           <div class="col-md-5 order-first order-md-last search-form-wrapper">
             <!-- Search  -->
 
-            <form *ngIf="hasEmail() && hasAnyPermission()" class="search-form">
-              <mat-form-field class="search-form--full-width">
-                <mat-label >{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
-                <input
-                  matInput
-                  id="searchQuery"
-                  class="search--input"
-                  aria-label="Search"
-                  #searchInput
-                  [value]="decode(searchQuery)"
-                  (keyup.enter)="search(searchInput.value)"
-                />
-                <a
-                  matSuffix
-                  class="has-pointer"
-                  (click)="search(searchInput.value)"
-                >
-                  <div class="search-icon">
-                    <fa-icon [icon]="faSearch"></fa-icon>
-                  </div>
-                </a>
-              </mat-form-field>
+            <form class="search-form">
+              <!--
+                Handle UI bug where mat-select-field isn't full width. Use an empty form if the
+                condition isn't true.
+                Material styling are not applied properly if the ng-container is moved inside the mat-form-field.
+              -->
+              <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
+                <mat-form-field class="search-form--full-width">
+                  <mat-label >{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
+                  <input
+                    matInput
+                    id="searchQuery"
+                    class="search--input"
+                    aria-label="Search"
+                    #searchInput
+                    [value]="decode(searchQuery)"
+                    (keyup.enter)="search(searchInput.value)"
+                  />
+                  <a
+                    matSuffix
+                    class="has-pointer"
+                    (click)="search(searchInput.value)"
+                  >
+                    <div class="search-icon">
+                      <fa-icon [icon]="faSearch"></fa-icon>
+                    </div>
+                  </a>
+                </mat-form-field>
+              </ng-container>
             </form>
           </div>
         </div>
