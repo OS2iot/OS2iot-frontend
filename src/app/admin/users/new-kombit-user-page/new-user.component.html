@@ -38,38 +38,35 @@
               />
             </div>
 
-            <div class="form-group mt-3 col-12">
-              <label class="form-label" for="groupType">{{
-                'NAV.ORGANISATIONS' | translate
-              }}</label
-              >*
-              <mat-form-field appearance="outline">
-                <mat-label>{{ 'NAV.ORGANISATIONS' | translate }}</mat-label>
-                <mat-select
-                  multiple
-                  name="organisations"
-                  [compareWith]="compare"
-                  [(ngModel)]="
-                    createNewKombitUserFromFrontend.requestedOrganizations
-                  "
-                  panelClass="overflow-x-hidden"
-                  aria-required="true"
-                >
-                  <mat-select-search
-                    [formControl]="organisationsFilterCtrl"
-                  ></mat-select-search>
+            <div class="form-group mt-3 mb-4 col-12">
+              <label class="form-label" for="organisations">{{'NAV.ORGANISATIONS' | translate}}</label>*
+              <mat-select
+                id="organisations"
+                name="organisations"
+                class="form-control"
+                [placeholder]="'NAV.ORGANISATIONS' | translate"
+                [multiple]="true"
+                [compareWith]="compare"
+                [(ngModel)]="
+                  createNewKombitUserFromFrontend.requestedOrganizations
+                "
+                panelClass="overflow-x-hidden"
+                aria-required="true"
+              >
+                <mat-select-search
+                  [formControl]="organisationsFilterCtrl"
+                ></mat-select-search>
 
-                  <mat-option
-                    *ngFor="let org of filteredOrganisations | async"
-                    [value]="org"
-                    >{{ org.name }}</mat-option
-                  >
+                <mat-option
+                  *ngFor="let org of filteredOrganisations | async"
+                  [value]="org"
+                  >{{ org.name }}</mat-option
+                >
                 </mat-select>
-              </mat-form-field>
             </div>
           </div>
           <div class="form-group mt-3">
-            <button class="btn btn-primary ml-2" type="submit">
+            <button class="btn btn-primary" type="submit">
               {{ 'USERS.SAVE' | translate }}
             </button>
           </div>
