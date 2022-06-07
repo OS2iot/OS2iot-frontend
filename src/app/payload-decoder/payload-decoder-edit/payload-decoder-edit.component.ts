@@ -60,10 +60,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   public application: Application;
   public iotDevices: IotDevice[];
   public iotDevice: IotDevice;
-  public pageLimit = environment.tablePageSize;
-  public pageTotal: number;
-  public pageOffset = 0;
-  public deviceSubscription: Subscription;
+    public deviceSubscription: Subscription;
 
   constructor(
     private translate: TranslateService,
@@ -182,8 +179,8 @@ export class PayloadDecoderEditComponent implements OnInit {
   getApplications(orgId?: number): void {
     this.applicationsSubscription = this.applicationService
       .getApplications(
-        this.pageLimit,
-        this.pageOffset * this.pageLimit,
+        null,
+        null,
         null,
         null,
         orgId ? orgId : this.getCurrentOrganisationId()
