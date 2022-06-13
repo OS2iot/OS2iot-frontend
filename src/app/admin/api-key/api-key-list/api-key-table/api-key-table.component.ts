@@ -9,6 +9,8 @@ import { merge, Observable, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { ApiKeyGetManyResponse, ApiKeyResponse } from '../../api-key.model';
 import { ApiKeyService } from '../../api-key.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-api-key-table',
@@ -29,6 +31,7 @@ export class ApiKeyTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   resultsLength = 0;
   public pageSize = environment.tablePageSize;
+  pageSizeOptions = DefaultPageSizeOptions;
 
   constructor(
     private meService: MeService,
@@ -81,7 +84,8 @@ export class ApiKeyTableComponent implements AfterViewInit {
   }
 
   canAccess(_element: ApiKeyResponse) {
-    return this.meService.hasAdminAccessInTargetOrganization(
+    return this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.UserAdministrationWrite,
       this.organisationId
     );
   }

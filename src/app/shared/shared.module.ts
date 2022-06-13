@@ -21,7 +21,6 @@ import { PipesModule } from './pipes/pipes.module';
 import { DynamicImgComponent } from './components/dynamic-img/dynamic-img.component';
 import { MetadataDetailsComponent } from './components/metadata-details/metadata-details.component';
 
-
 @NgModule({
   declarations: [
     AlertComponent,
@@ -34,7 +33,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     TopBarTableComponent,
     GeneralDetailsComponent,
     DynamicImgComponent,
-    MetadataDetailsComponent
+    MetadataDetailsComponent,
   ],
   imports: [
     DirectivesModule,
@@ -58,7 +57,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     TopBarTableComponent,
     GeneralDetailsComponent,
     DynamicImgComponent,
-    MetadataDetailsComponent
+    MetadataDetailsComponent,
   ],
 })
 export class SharedModule { }

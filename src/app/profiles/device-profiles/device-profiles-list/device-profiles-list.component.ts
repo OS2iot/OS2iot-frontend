@@ -9,6 +9,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-device-profiles-list',
@@ -30,7 +31,6 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private deviceProfileService: DeviceProfileService,
     private meService: MeService,
-    private sharedVariableService: SharedVariableService,
     private deleteDialogService: DeleteDialogService,
     private translateService: TranslateService
   ) { }
@@ -57,13 +57,13 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   }
 
   canCreate() {
-    return this.sharedVariableService.getHasWritePermission()
+    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   setCanEdit() {
     this.deviceProfiles.forEach(
       (deviceProfile) => {
-        deviceProfile.canEdit = this.meService.canWriteInTargetOrganization(deviceProfile.internalOrganizationId);
+        deviceProfile.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, deviceProfile.internalOrganizationId);
       }
     );
   }

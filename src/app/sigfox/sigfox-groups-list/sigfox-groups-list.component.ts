@@ -6,6 +6,8 @@ import { SigfoxGroup } from '@shared/models/sigfox-group.model';
 import { SigfoxService } from '@shared/services/sigfox.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable, Subscription } from 'rxjs';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-sigfox-groups-list',
@@ -18,12 +20,15 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   public sigfoxGroups: Observable<SigfoxGroup[]>;
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
     private globalService: SharedVariableService,
     private titleService: Title,
-    private sigfoxService: SigfoxService) {
+    private sigfoxService: SigfoxService,
+    private meService: MeService
+  ) {
     translate.use('da');
   }
 
@@ -33,6 +38,7 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
       .subscribe(translations => {
         this.titleService.setTitle(translations['TITLE.SIGFOX']);
     });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   getSigFoxGroups() {

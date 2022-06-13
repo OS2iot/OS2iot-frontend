@@ -8,6 +8,7 @@ import { PayloadDecoder, PayloadDecoderBodyResponse } from '@payload-decoder/pay
 import { MeService } from '@shared/services/me.service';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -56,8 +57,8 @@ export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  canEdit() {
-    this.payloadDecoder.canEdit = this.meService.canWriteInTargetOrganization(this.payloadDecoder?.organizationId);
+  private canEdit() {
+    this.payloadDecoder.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, this.payloadDecoder?.organizationId);
   }
 
   private getPayloadDecoder(id: number) {

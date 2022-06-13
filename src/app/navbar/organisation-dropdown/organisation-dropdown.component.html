@@ -19,13 +19,15 @@
         </a>
         <fa-icon [icon]="faToolbox" class="navbar-icon"></fa-icon>
     </li>
-    <li>
-        <a routerLink="/device-model" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
-            {{'NAV.DEVICE-MODEL' | translate}}
-        </a>
-        <fa-icon [icon]="faBurn" class="navbar-icon"></fa-icon>
-    </li>
-    <div *ngIf="user && isOrgAdmin && !isGlobalAdmin">
+	<div *ngIf="!isOnlyGatewayAdmin">
+		<li>
+			<a routerLink="/device-model" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
+				{{'NAV.DEVICE-MODEL' | translate}}
+			</a>
+			<fa-icon [icon]="faBurn" class="navbar-icon"></fa-icon>
+    	</li>
+	</div>    
+    <div *ngIf="user && isUserAdmin && !isGlobalAdmin">
         <li class="nav-item">
             <a routerLink="/admin/users" routerLinkActive="active" class="nav-link pl-5 position-relative rounded">
                 {{'NAV.USERS' | translate}}
@@ -40,7 +42,7 @@
             <fa-icon [icon]="faIdBadge" class="navbar-icon"></fa-icon>
         </li>
     </div>
-    <li *ngIf="user && (isOrgAdmin || isGlobalAdmin)" class="nav-item">
+    <li *ngIf="user && (isUserAdmin || isGlobalAdmin)" class="nav-item">
         <a routerLink="/admin/api-key" routerLinkActive="active"
             class="nav-link pl-5 position-relative rounded">
             {{'NAV.API-KEY' | translate}}

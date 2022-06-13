@@ -15,6 +15,8 @@ import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
+import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -41,6 +43,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   id: number;
   subscription: Subscription;
   permissions: PermissionResponse[];
+  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -49,7 +52,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private permissionsService: PermissionService,
     private deleteDialogService: DeleteDialogService,
     private location: Location,
-    private titleService: Title
+    private titleService: Title,
+    private meService: MeService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,8 +75,10 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
       .subscribe(translations => {
         this.backButton.label = translations['NAV.ORGANISATIONS'];
         this.dropdownButton.label = translations['ORGANISATION.DROPDOWN'];
-        this.titleService.setTitle(translations['TITLE.ORGANIZATION'])
+        this.titleService.setTitle(translations['TITLE.ORGANIZATION']);
       });
+
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
   ngOnDestroy() {
@@ -119,6 +125,6 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
           }
         });
       }
-    })
+    });
   }
 }

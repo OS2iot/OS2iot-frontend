@@ -16,7 +16,8 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { DeviceType } from '@shared/enums/device-type';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 /**
  * @title Table retrieving data through HTTP
@@ -33,10 +34,10 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   data: Application[] = [];
 
   public pageSize = environment.tablePageSize;
+  pageSizeOptions = DefaultPageSizeOptions;
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;
-  public canEdit = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -45,12 +46,10 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     public translate: TranslateService,
     private applicationService: ApplicationService,
     private router: Router,
-    private meService: MeService,
     private deleteDialogService: DeleteDialogService
   ) {}
 
   ngOnInit() {
-    this.canEdit = this.meService.canWriteInTargetOrganization();
   }
 
   ngAfterViewInit() {

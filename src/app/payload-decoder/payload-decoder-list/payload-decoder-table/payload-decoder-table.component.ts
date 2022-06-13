@@ -18,6 +18,8 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-payload-decoder-table',
@@ -30,6 +32,7 @@ export class PayloadDecoderTableComponent
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'id', 'organizationID', 'menu'];
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
 
   data: PayloadDecoder[] = [];
 
@@ -95,7 +98,7 @@ export class PayloadDecoderTableComponent
   }
 
   getCanEdit(organizationId: number) {
-    return this.meService.canWriteInTargetOrganization(organizationId);
+    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, organizationId);
   }
 
   public filterByOrgId(event: number) {

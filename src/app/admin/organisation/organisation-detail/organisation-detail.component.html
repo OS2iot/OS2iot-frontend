@@ -1,6 +1,13 @@
 <div [hidden]="!organisation" *ngIf="organisation">
-    <app-top-bar [data]="organisation" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-        [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+    <app-top-bar
+      [data]="organisation"
+      [backButton]="backButton"
+      [subPage]="true"
+      [addDetailDowndown]="true"
+      [dropDownButton]="dropdownButton"
+      (deleteSelectedInDropdown)="clickDelete()"
+      [canEdit]="canEdit"
+    >
     </app-top-bar>
     <div class="container-fluid">
         <div class="row">

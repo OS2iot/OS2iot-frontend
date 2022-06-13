@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ErrorMessage } from '@shared/models/error-message.model';
 import { MeService } from '@shared/services/me.service';
+import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 
 @Component({
@@ -66,7 +67,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
       this.sigfoxDeviceType.groupId = this.sigfoxGroupId;
     }
     this.getContracts(this.sigfoxGroupId);
-    this.canEdit = this.meService.canWriteInTargetOrganization()
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
   private getContracts(groupId: number) {

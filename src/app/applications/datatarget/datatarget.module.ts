@@ -21,9 +21,11 @@ import { HttppushDetailComponent } from './httppush/httppush-detail/httppush-det
 import { HttppushEditComponent } from './httppush/httppush-edit/httppush-edit.component';
 import { DatatargetDetailTypeSelectorDirective } from './datatarget-detail/datatarget-detail-type-selector.directive';
 import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarget-edit-type-selector.directive';
+import { MqttEditComponent } from './mqtt-edit/mqtt-edit.component';
+import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     DatatargetTableComponent,
     DatatargetEditComponent,
     DatatargetNewComponent,
@@ -35,6 +37,8 @@ import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarge
     OpendatadkComponent,
     OpendatadkEditComponent,
     OpendatadkDetailComponent,
+    MqttDetailComponent,
+    MqttEditComponent,
     DatatargetDetailTypeSelectorDirective,
     DatatargetEditTypeSelectorDirective],
   imports: [
@@ -53,7 +57,7 @@ import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarge
     DatatargetTableComponent,
     DatatargetEditComponent,
     DatatargetNewComponent,
-    DatatargetDetailComponent,    
+    DatatargetDetailComponent,
     FiwareDetailComponent,
     FiwareEditComponent,
     HttppushDetailComponent,

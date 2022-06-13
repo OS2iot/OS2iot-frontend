@@ -54,7 +54,7 @@ export class SharedVariableService {
 
   setOrganizationInfo() {
     return this.organisationService
-      .getMinimal()
+      .getMinimalNoPerm()
       .pipe(
         tap((response: OrganisationGetMinimalResponse) => {
           localStorage.setItem(
@@ -75,38 +75,11 @@ export class SharedVariableService {
   }
 
   getUsername(): string {
-    return this.getUserInfo()?.user.name;
+    return this.getUserInfo()?.user?.name;
   }
 
   getHasAnyPermission(): boolean {
-    return this.getUserInfo().user.permissions.length > 0;
-  }
-
-  getHasWritePermission(): boolean {
-    const permissions = this.getUserInfo().user.permissions;
-    return permissions.some(
-      (permission) =>
-        permission.type === PermissionType.GlobalAdmin ||
-        (permission.organization?.id === +this.selectedOrganisationId &&
-          (permission.type === PermissionType.OrganizationAdmin ||
-            permission.type === PermissionType.Write))
-    );
-  }
-
-  getHasAnyWritePermission(): boolean {
-    const permissions = this.getUserInfo().user.permissions;
-    return permissions.some(
-        (permission) =>
-            permission.type === PermissionType.GlobalAdmin ||
-            permission.type === PermissionType.OrganizationAdmin ||
-            permission.type === PermissionType.Write
-    );
-  }
-
-  isGlobalAdmin(): boolean {
-    return this.getUserInfo().user.permissions.some(
-      (permission) => permission.type === PermissionType.GlobalAdmin
-    );
+    return this.getUserInfo()?.user?.permissions.length > 0;
   }
 
   getSelectedOrganisationId(): number {

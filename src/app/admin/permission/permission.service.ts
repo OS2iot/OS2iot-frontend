@@ -5,6 +5,7 @@ import {
     PermissionGetManyResponse,
     PermissionResponse,
     PermissionRequest,
+    PermissionRequestAcceptUser,
 } from './permission.model';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '../users/user-minimal.service';
@@ -21,6 +22,12 @@ export class PermissionService {
 
     createPermission(body: PermissionRequest): Observable<PermissionResponse> {
         return this.restService.post(this.endpoint, body, {
+            observe: 'response',
+        });
+    }
+
+    createPermissionAcceptUser(body: PermissionRequestAcceptUser): Observable<PermissionResponse> {
+        return this.restService.put(this.endpoint + '/acceptUser', body, undefined, {
             observe: 'response',
         });
     }

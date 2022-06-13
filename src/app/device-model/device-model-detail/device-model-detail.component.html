@@ -1,6 +1,7 @@
 <div *ngIf="deviceModel">
     <app-top-bar [data]="deviceModel" [title]="deviceModel.body.name" [backButton]="backButton" [subPage]="true"
-        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()">
+        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()"
+        [canEdit]="canEdit">
     </app-top-bar>
     <div class="container-fluid">
         <div class="row" *ngIf="deviceModel">

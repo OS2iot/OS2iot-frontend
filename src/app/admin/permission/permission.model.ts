@@ -3,7 +3,7 @@ import { UserResponse } from '../users/user.model';
 import { Application } from '../../applications/application.model';
 
 export class PermissionRequest {
-  level: PermissionType;
+  levels: PermissionTypes[];
   name: string;
   organizationId: number;
   userIds: number[];
@@ -11,12 +11,19 @@ export class PermissionRequest {
   automaticallyAddNewApplications = true;
 }
 
+export class PermissionRequestAcceptUser {
+  organizationId: number;
+  userId: number;
+  permissionIds: number[];
+}
+
 export interface PermissionResponse {
-  type: PermissionType;
+  type: PermissionTypes[];
   name: string;
   users?: UserResponse[];
   organization?: OrganisationResponse;
   applications?: Application[];
+  applicationIds?: number[];
   id: number;
   createdAt: Date;
   updatedAt: Date;
@@ -32,11 +39,14 @@ export interface PermissionGetManyResponse {
   count: number;
 }
 
+export interface PermissionTypes {
+  type: PermissionType;
+}
+
 export enum PermissionType {
   GlobalAdmin = 'GlobalAdmin',
-  OrganizationAdmin = 'OrganizationAdmin',
-  Write = 'Write',
+  OrganizationUserAdmin = 'OrganizationUserAdmin',
+  OrganizationGatewayAdmin = 'OrganizationGatewayAdmin',
+  OrganizationApplicationAdmin = 'OrganizationApplicationAdmin',
   Read = 'Read',
-  OrganizationPermission = 'OrganizationPermission',
-  OrganizationApplicationPermissions = 'OrganizationApplicationPermissions',
 }

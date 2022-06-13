@@ -15,6 +15,7 @@ import { SharedVariableService } from '@shared/shared-variable/shared-variable.s
 import { Subscription } from 'rxjs';
 import { SearchResultDto, SearchResultType } from '../search-results.model';
 import { SearchService } from '../search.service';
+import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 
 @Component({
   selector: 'app-search-table',
@@ -33,6 +34,7 @@ export class SearchTableComponent implements OnInit {
   displayedColumns: string[] = ['icon', 'type', 'name', 'id', 'org'];
   dataSource: MatTableDataSource<SearchResultDto>;
   public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
 
   isLoadingResults = true;
   subscription: Subscription;

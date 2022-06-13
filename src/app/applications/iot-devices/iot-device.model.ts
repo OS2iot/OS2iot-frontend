@@ -68,3 +68,10 @@ export class IoTDevicesMinimalResponse {
   data: IoTDeviceMinimal[];
   count: number;
 }
+
+export class IoTDeviceStatsResponse {
+  timestamp: string;
+  rssi: number;
+  snr: number;
+  rxPacketsPerDr?: Record<number, number>;
+}

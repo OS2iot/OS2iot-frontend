@@ -20,7 +20,10 @@ export class DeleteDialogService {
     showAccept = true,
     showCancel = true,
     showOk = false,
-    infoTitle = ''
+    infoTitle = '',
+    showReject?: boolean,
+    acceptText?: string,
+    cancelText?: string
   ): Observable<any> {
     return new Observable((observer) => {
       const dialog = this.dialog.open(DeleteDialogComponent, {
@@ -29,7 +32,10 @@ export class DeleteDialogService {
           showOk,
           showAccept,
           showCancel,
-          message: message ? message : 'Er du sikker på at du vil slette?',
+          message: message ? message : this.translate.instant('DIALOG.DELETE.ARE-YOU-SURE'),
+          showReject,
+          acceptText,
+          cancelText
         },
       });
 
