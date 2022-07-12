@@ -31,6 +31,24 @@
               <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
             </ng-template>
 
+            <p><strong>{{ 'DATATARGET.TOKENENDPOINT' | translate }}</strong></p>
+            <code><pre *ngIf="datatarget.tokenEndpoint; else showNoTokenEndpointText">{{datatarget.tokenEndpoint}}</pre></code>
+            <ng-template #showNoTokenEndpointText>
+              <p>{{ 'DATATARGET.NO-TOKENENDPOINT' | translate }}</p>
+            </ng-template>
+
+            <p><strong>{{ 'DATATARGET.CLIENTID' | translate }}</strong></p>
+            <code><pre *ngIf="datatarget.clientId; else showNoClientIdText">{{datatarget.clientId}}</pre></code>
+            <ng-template #showNoClientIdText>
+              <p>{{ 'DATATARGET.NO-CLIENTID' | translate }}</p>
+            </ng-template>
+
+            <p><strong>{{ 'DATATARGET.CLIENTSECRET' | translate }}</strong></p>
+            <code><pre *ngIf="datatarget.clientSecret; else showNoClientSecretText">{{datatarget.clientSecret}}</pre></code>
+            <ng-template #showNoClientSecretText>
+              <p>{{ 'DATATARGET.NO-CLIENTSECRET' | translate }}</p>
+            </ng-template>
+
           </div>
         </div>
 

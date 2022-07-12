@@ -12,6 +12,9 @@ export class DatatargetResponse {
     tenant: string;
     context: string;
     authorizationHeader: string;
+    tokenEndpoint: string;
+    clientId: string;
+    clientSecret: string;
     openDataDkDataset: OpenDataDkDataset;
     mqttPort?: number;
     mqttTopic?: string;

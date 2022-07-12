@@ -85,11 +85,32 @@
 
   <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-        <label class="form-label" for="authorizationHeader">{{'QUESTION.GIVE-DATATARGET-AUTHORIZATIONHEADER' | translate}}</label>
-        <input type="text"
-          class="form-control" id="authorizationHeader" name="authorizationHeader" required
-          [(ngModel)]="datatarget.authorizationHeader"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorizationHeader'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorizationHeader')}">
+      <label class="form-label" for="authorizationHeader">{{'QUESTION.GIVE-DATATARGET-AUTHORIZATIONHEADER' | translate}}</label>
+      <input type="text"
+             class="form-control" id="authorizationHeader" name="authorizationHeader" required
+             [(ngModel)]="datatarget.authorizationHeader"
+             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorizationHeader'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorizationHeader')}">
+    </div>
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="tokenEndpoint">{{'QUESTION.GIVE-DATATARGET-TOKENENDPOINT' | translate}}</label>
+      <input type="text"
+             class="form-control" id="tokenEndpoint" name="tokenEndpoint" required
+             [(ngModel)]="datatarget.tokenEndpoint"
+             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('tokenEndpoint'), 'is-valid' : formFailedSubmit && !errorFields.includes('tokenEndpoint')}">
+    </div>
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="clientId">{{'QUESTION.GIVE-DATATARGET-CLIENTID' | translate}}</label>
+      <input type="text"
+             class="form-control" id="clientId" name="clientId" required
+             [(ngModel)]="datatarget.clientId"
+             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('clientId'), 'is-valid' : formFailedSubmit && !errorFields.includes('clientId')}">
+    </div>
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="clientSecret">{{'QUESTION.GIVE-DATATARGET-CLIENTSECRET' | translate}}</label>
+      <input type="text"
+             class="form-control" id="clientSecret" name="clientSecret" required
+             [(ngModel)]="datatarget.clientSecret"
+             [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('clientSecret'), 'is-valid' : formFailedSubmit && !errorFields.includes('clientSecret')}">
     </div>
     <div *ngIf="datatargetid === 0">
       <h6> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h6>
@@ -104,23 +125,20 @@
                 <div class="row">
                   <mat-form-field appearance="fill">
                     <mat-label>{{'QUESTION.DATATARGET.SELECT-DEVICES' | translate}}</mat-label>
-                    <mat-select
-                      multiple
-                      name="devices"
-                      [compareWith]="compare"
-                      [(value)]="element.iotDeviceIds">
+                    <mat-select multiple
+                                name="devices"
+                                [compareWith]="compare"
+                                [(value)]="element.iotDeviceIds">
                       <mat-option disabled="disabled"
-                      class="filter-option">
-                        <button
-                          mat-raised-button
-                          class="mat-primary fill text-sm"
-                          (click)="selectAllDevices(i)">
+                                  class="filter-option">
+                        <button mat-raised-button
+                                class="mat-primary fill text-sm"
+                                (click)="selectAllDevices(i)">
                           {{'QUESTION.DATATARGET.SELECTALLDEVICES' | translate}}
                         </button>
-                        <button
-                          mat-raised-button
-                          class="mat-primary fill text-sm"
-                          (click)="deSelectAllDevices(i)">
+                        <button mat-raised-button
+                                class="mat-primary fill text-sm"
+                                (click)="deSelectAllDevices(i)">
                           {{'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate}}
                         </button>
                       </mat-option>
@@ -134,8 +152,8 @@
                   <mat-form-field appearance="fill">
                     <mat-label>{{'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate}}</mat-label>
                     <mat-select matNativeControl
-                      name="payloadDecoderId"
-                      [(value)]="element.payloadDecoderId">
+                                name="payloadDecoderId"
+                                [(value)]="element.payloadDecoderId">
                       <mat-option [value]="0">
                         {{'QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED' | translate}}
                       </mat-option>
@@ -149,8 +167,8 @@
               <td>
                 <a (click)="openDeleteDialog(i)">
                   <div class="text-center m-2">
-                      <fa-icon [icon]="faTimesCircle"></fa-icon>
-                      <p>{{'DATATARGET.DELETE' | translate}}</p>
+                    <fa-icon [icon]="faTimesCircle"></fa-icon>
+                    <p>{{'DATATARGET.DELETE' | translate}}</p>
                   </div>
                 </a>
               </td>
