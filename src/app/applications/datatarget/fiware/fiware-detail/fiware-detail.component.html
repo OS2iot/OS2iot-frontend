@@ -44,7 +44,7 @@
             </ng-template>
 
             <p><strong>{{ 'DATATARGET.CLIENTSECRET' | translate }}</strong></p>
-            <code><pre *ngIf="datatarget.clientSecret; else showNoClientSecretText">{{datatarget.clientSecret}}</pre></code>
+            <code><pre *ngIf="datatarget.clientSecret; else showNoClientSecretText">{{''.padStart(20, '*')}}</pre></code>
             <ng-template #showNoClientSecretText>
               <p>{{ 'DATATARGET.NO-CLIENTSECRET' | translate }}</p>
             </ng-template>
