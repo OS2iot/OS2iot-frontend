@@ -125,20 +125,23 @@
                 <div class="row">
                   <mat-form-field appearance="fill">
                     <mat-label>{{'QUESTION.DATATARGET.SELECT-DEVICES' | translate}}</mat-label>
-                    <mat-select multiple
-                                name="devices"
-                                [compareWith]="compare"
-                                [(value)]="element.iotDeviceIds">
+                    <mat-select 
+                       multiple
+                       name="devices"
+                       [compareWith]="compare"
+                       [(value)]="element.iotDeviceIds">
                       <mat-option disabled="disabled"
                                   class="filter-option">
-                        <button mat-raised-button
-                                class="mat-primary fill text-sm"
-                                (click)="selectAllDevices(i)">
+                        <button 
+                          mat-raised-button
+                          class="mat-primary fill text-sm"
+                          (click)="selectAllDevices(i)">
                           {{'QUESTION.DATATARGET.SELECTALLDEVICES' | translate}}
                         </button>
-                        <button mat-raised-button
-                                class="mat-primary fill text-sm"
-                                (click)="deSelectAllDevices(i)">
+                        <button 
+                           mat-raised-button
+                           class="mat-primary fill text-sm"
+                           (click)="deSelectAllDevices(i)">
                           {{'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate}}
                         </button>
                       </mat-option>
