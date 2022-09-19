@@ -896,6 +896,7 @@
       "NAME": "Device profil navn",
       "NAME_PLACEHOLDER": "Device profil navn",
       "MACVERSION": "LoRaWAN MAC version ",
+      "ADRALGORITHM": "ADR algoritme ",
       "REGPARAMSREVISION": "LoRaWAN regional parameters revision ",
       "MAXEIRP": "Max EIRP ",
       "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
