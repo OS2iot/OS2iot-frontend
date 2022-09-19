@@ -539,7 +539,7 @@
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout i millisekunder",
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
-    "GIVE-DATATARGET-TOKENENDPOINT": "Angiv Token endpoint URL",
+    "GIVE-DATATARGET-TOKENENDPOINT": "Angiv token endpoint URL",
     "GIVE-DATATARGET-CLIENTID": "Angiv client ID",
     "GIVE-DATATARGET-CLIENTSECRET": "Angiv client secret",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
