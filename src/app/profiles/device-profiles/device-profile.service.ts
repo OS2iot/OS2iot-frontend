@@ -1,4 +1,3 @@
-import { BoundDirectivePropertyAst } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { RestService } from '@shared/services/rest.service';
