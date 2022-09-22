@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OpendatadkEditComponent } from './opendatadk-edit.component';
 
@@ -6,7 +6,7 @@ describe('OpendatadkEditComponent', () => {
   let component: OpendatadkEditComponent;
   let fixture: ComponentFixture<OpendatadkEditComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OpendatadkEditComponent ]
     })
