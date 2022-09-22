@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserRequest } from '../user.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +24,7 @@ export class UserEditComponent implements OnInit {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public backButtonTitle = '';
   public title = '';
   public submitButton = '';
