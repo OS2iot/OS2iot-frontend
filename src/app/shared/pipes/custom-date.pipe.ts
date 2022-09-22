@@ -24,7 +24,7 @@ export class CustomTableDatePipe extends DatePipe implements PipeTransform {
   name: 'dateOnly',
 })
 export class DateOnlyPipe extends DatePipe implements PipeTransform {
-  transform(value: unknown, _?: unknown): string {
+  transform(value: any, args?: any): any {
     return super.transform(value, 'dd MMM, yyyy');
   }
 }
