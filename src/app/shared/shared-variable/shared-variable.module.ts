@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { SharedVariableService } from './shared-variable.service';
 
 @NgModule({})
 export class SharedVariableModule {
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<SharedVariableModule> {
     return {
-      ngModule: SharedVariableModule,
-      providers: [SharedVariableService],
+        ngModule: SharedVariableModule,
+        providers: [SharedVariableService],
     };
-  }
+}
 }
