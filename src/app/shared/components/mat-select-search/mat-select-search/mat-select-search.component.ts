@@ -19,85 +19,8 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect} from '@angular/material/select';
 
-/* tslint:disable:member-ordering */
-/**
- * Component providing an input field for searching MatSelect options.
- *
- * Example usage:
- *
- * interface Bank {
- *  id: string;
- *  name: string;
- * }
- *
- * @Component({
- *   selector: 'my-app-data-selection',
- *   template: `
- *     <mat-form-field>
- *       <mat-select [formControl]="bankCtrl" placeholder="Bank">
- *         <mat-select-search [formControl]="bankFilterCtrl"></mat-select-search>
- *         <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank.id">
- *           {{bank.name}}
- *         </mat-option>
- *       </mat-select>
- *     </mat-form-field>
- *   `
- * })
- * export class DataSelectionComponent implements OnInit, OnDestroy {
- *
- *   // control for the selected bank
- *   public bankCtrl: FormControl = new FormControl();
- *   // control for the MatSelect filter keyword
- *   public bankFilterCtrl: FormControl = new FormControl();
- *
- *   // list of banks
- *   private banks: Bank[] = [{name: 'Bank A', id: 'A'}, {name: 'Bank B', id: 'B'}, {name: 'Bank C', id: 'C'}];
- *   // list of banks filtered by search keyword
- *   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
- *
- *   // Subject that emits when the component has been destroyed.
- *   private _onDestroy = new Subject<void>();
- *
- *
- *   ngOnInit() {
- *     // load the initial bank list
- *     this.filteredBanks.next(this.banks.slice());
- *     // listen for search field value changes
- *     this.bankFilterCtrl.valueChanges
- *       .pipe(takeUntil(this._onDestroy))
- *       .subscribe(() => {
- *         this.filterBanks();
- *       });
- *   }
- *
- *   ngOnDestroy() {
- *     this._onDestroy.next();
- *     this._onDestroy.complete();
- *   }
- *
- *   private filterBanks() {
- *     if (!this.banks) {
- *       return;
- *     }
- *
- *     // get the search keyword
- *     let search = this.bankFilterCtrl.value;
- *     if (!search) {
- *       this.filteredBanks.next(this.banks.slice());
- *       return;
- *     } else {
- *       search = search.toLowerCase();
- *     }
- *
- *     // filter the banks
- *     this.filteredBanks.next(
- *       this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
- *     );
- *   }
- * }
- */
 @Component({
-  selector: 'mat-select-search',
+  selector: 'app-mat-select-search',
   templateUrl: './mat-select-search.component.html',
   styleUrls: ['./mat-select-search.component.scss'],
   providers: [
