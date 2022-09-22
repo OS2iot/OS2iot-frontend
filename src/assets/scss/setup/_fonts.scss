@@ -10,11 +10,11 @@ $font-name: 'Roboto' !default; //'Roboto'!default;
 
 // @font-face {
 // font-family: $font-name;
-// src: url($font-path + $font-regular+'.eot'); /* IE9 Compat Modes */
-// src: url($font-path + $font-regular+'.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-//      url($font-path + $font-regular+'.woff') format('woff'), /* Modern Browsers */
-//      url($font-path + $font-regular+'.woff2') format('woff2'), /* Modern Browsers */
-//      url($font-path + $font-regular+'.ttf')  format('truetype'); /* Safari, Android, iOS */
+// src: url($font-path + $font-regular+'.eot'); __<<ngThemingMigrationEscapedComment0>>__
+// src: url($font-path + $font-regular+'.eot?#iefix') format('embedded-opentype'), __<<ngThemingMigrationEscapedComment1>>__
+//      url($font-path + $font-regular+'.woff') format('woff'), __<<ngThemingMigrationEscapedComment2>>__
+//      url($font-path + $font-regular+'.woff2') format('woff2'), __<<ngThemingMigrationEscapedComment3>>__
+//      url($font-path + $font-regular+'.ttf')  format('truetype'); __<<ngThemingMigrationEscapedComment4>>__
 //
 //   font-style:   $font-style-normal;
 //   font-weight:  $font-weight-normal;

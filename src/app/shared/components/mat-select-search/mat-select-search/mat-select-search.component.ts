@@ -300,13 +300,23 @@ export class MatSelectSearchComponent
     }
     const overlayClass = 'cdk-overlay-pane-select-search';
 
-    this.matSelect.overlayDir.attach
+    this.matSelect.openedChange
       .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // note: this is hacky, but currently there is no better way to do this
-        this.searchSelectInput.nativeElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add(
-          overlayClass
-        );
+      .subscribe((opened: boolean) => {
+        if (opened) {
+          // note: this is hacky, but currently there is no better way to do this
+          let element: HTMLElement = this.searchSelectInput.nativeElement;
+          let overlayElement: HTMLElement;
+          while (element = element.parentElement) {
+            if (element.classList.contains('cdk-overlay-pane')) {
+              overlayElement = element;
+              break;
+            }
+          }
+          if (overlayElement) {
+            overlayElement.classList.add(overlayClass);
+          }
+        }
       });
 
     this.overlayClassSet = true;
