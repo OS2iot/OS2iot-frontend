@@ -1,5 +1,5 @@
-@import '~src/assets/scss/setup/breakpoints';
-@import '~src/assets/scss/setup/variables';
+@import 'src/assets/scss/setup/breakpoints';
+@import 'src/assets/scss/setup/variables';
 
 .error-page {
   height: 85vh;
@@ -18,10 +18,10 @@
     .error-page-primary {
         color: $color-white-001;
         text-transform: uppercase;
-    
+
         backface-visibility: hidden;
         margin-bottom: 6rem;
-    
+
         &--main {
           display: block;
           font-size: 6rem;
@@ -29,7 +29,7 @@
           line-height: 6rem;
           margin-bottom: 3rem;
         }
-    
+
         &--sub {
           display: block;
           font-size: 2rem;
