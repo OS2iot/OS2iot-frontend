@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // These variables drive almost every aspect of the Frontend Styleguide.
 // Every variable is declared as !default so that it can be overridden
 // by a previous import.
@@ -50,7 +52,7 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 }
 
 @function calculateRem($size) {
-  $remSize: $size / $em-base;
+  $remSize: math.div($size, $em-base);
   @return #{$remSize}rem;
 }
 
