@@ -19,7 +19,7 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { DeviceType } from '@shared/enums/device-type';
 import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import * as moment from 'moment';
+import moment from 'moment';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { RestService } from 'src/app/shared/services/rest.service';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
 import { GatewayResponse, Gateway, GatewayData, GatewayRequest, GatewayResponseMany } from '@app/gateway/gateway.model';
-import * as moment from 'moment';
+import moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { map } from 'rxjs/operators';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';

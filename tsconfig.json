@@ -12,6 +12,7 @@
     "importHelpers": true,
     "target": "es2015",
     "lib": ["es2018", "dom"],
+    "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@shared-material": ["src/app/shared/modules/material.module"],

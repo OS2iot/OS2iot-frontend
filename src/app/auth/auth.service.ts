@@ -3,7 +3,7 @@ import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import jwtDecode from 'jwt-decode';
-import * as moment from 'moment';
+import moment from 'moment';
 import { RestService } from '@shared/services/rest.service';
 import { Observable, of } from 'rxjs';
 import { Organisation } from '@app/admin/organisation/organisation.model';

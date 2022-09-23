@@ -12,7 +12,7 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { recordToEntries } from '@shared/helpers/record.helper';
 import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { GatewayStatusInterval, gatewayStatusIntervalToDate } from '../enums/gateway-status-interval.enum';
 import { GatewayStatus, AllGatewayStatusResponse } from '../gateway.model';
