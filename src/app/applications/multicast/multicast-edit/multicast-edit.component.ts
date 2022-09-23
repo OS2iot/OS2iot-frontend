@@ -53,6 +53,9 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
+    this.applicationId = +this.route.snapshot.paramMap.get('id');
+
     this.translate
       .get([
         'FORM.CREATE-NEW-MULTICAST',
@@ -62,9 +65,6 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
         'GEN.BACK',
       ])
       .subscribe((translations) => {
-        this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
-        this.applicationId = +this.route.snapshot.paramMap.get('id');
-
         if (this.multicastId) {
           this.title = translations['FORM.EDIT-MULTICAST'];
         } else {
@@ -126,7 +126,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
 
   getApplication(id: number) {
     this.applicationService.getApplication(id).subscribe((application) => {
-      this.iotDevices = application.iotDevices;
+      this.iotDevices = application.iotDevices ?? [];
       this.filteredDevicesMulti.next(this.iotDevices.slice());
     });
   }
