@@ -8,7 +8,7 @@ import { ApplicationRequest, Application } from '@applications/application.model
 import { ApplicationService } from '@applications/application.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { ApplicationStatus, ApplicationStatusEntries } from '@applications/enums/status.enum';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ControlledPropertyTypes } from '@app/device-model/Enums/controlled-propperty.enum';
 import { ApplicationDeviceTypes, ApplicationDeviceTypeEntries } from '@shared/enums/device-type';
 import { isPhoneNumberValid } from '@shared/validators/phone-number.validator';
@@ -44,9 +44,9 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     application = new ApplicationRequest();
     model = new User();
     statuses: DropdownOption[] = [];
-    serializedStartDate = new FormControl();
-    serializedEndDate = new FormControl();
-    phoneCtrl: FormControl;
+    serializedStartDate = new UntypedFormControl();
+    serializedEndDate = new UntypedFormControl();
+    phoneCtrl: UntypedFormControl;
     controlledProperties = Object.values(ControlledPropertyTypes);
     deviceTypes: DropdownOption[] = [];
 
@@ -59,7 +59,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         private sharedVariableService: SharedVariableService
     ) {
       this.fillDefaultMetadata();
-      this.phoneCtrl = new FormControl(this.application.contactPhone, [isPhoneNumberValid()]);
+      this.phoneCtrl = new UntypedFormControl(this.application.contactPhone, [isPhoneNumberValid()]);
      }
 
     ngOnInit(): void {

@@ -1,16 +1,17 @@
+@use "sass:math";
+
 @import 'variables';
 @import 'breakpoints';
 @import 'fonts';
 
 // Bootstrap
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
 
 
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, ($value * 0 + 1));
 }
 
 @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import {
@@ -37,7 +37,7 @@ export class UserPageComponent implements OnInit {
   public checkForRemainingOrganizations = false;
   public userInfo: CurrentUserInfoResponse;
   public pressed = false;
-  public organisationsFilterCtrl: FormControl = new FormControl();
+  public organisationsFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredOrganisations: ReplaySubject<
     Organisation[]
   > = new ReplaySubject<Organisation[]>(1);

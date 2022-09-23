@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SigfoxDeviceTypesEditComponent } from './sigfox-device-types-edit.component';
 
@@ -6,7 +6,7 @@ describe('SigfoxDeviceTypesEditComponent', () => {
   let component: SigfoxDeviceTypesEditComponent;
   let fixture: ComponentFixture<SigfoxDeviceTypesEditComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SigfoxDeviceTypesEditComponent ]
     })

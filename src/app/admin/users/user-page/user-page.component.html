@@ -43,9 +43,9 @@
                 panelClass="overflow-x-hidden"
                 aria-required="true"
               >
-                <mat-select-search
+                <app-mat-select-search
                   [formControl]="organisationsFilterCtrl"
-                ></mat-select-search>
+                ></app-mat-select-search>
 
                 <mat-option
                   *ngFor="let org of filteredOrganisations | async | sortBy:'name'"

@@ -228,9 +228,9 @@
           [(ngModel)]="multicast.iotDevices"
           panelClass="overflow-x-hidden"
         >
-          <mat-select-search
+          <app-mat-select-search
             [formControl]="deviceFilterCtrl"
-          ></mat-select-search>
+          ></app-mat-select-search>
 
           <mat-option disabled="disabled" class="filter-option">
             <button

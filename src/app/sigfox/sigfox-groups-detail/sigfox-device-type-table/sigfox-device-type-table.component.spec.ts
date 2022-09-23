@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SigfoxDeviceTypeTableComponent } from './sigfox-device-type-table.component';
 
@@ -6,7 +6,7 @@ describe('SigfoxDeviceTypeTableComponent', () => {
   let component: SigfoxDeviceTypeTableComponent;
   let fixture: ComponentFixture<SigfoxDeviceTypeTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SigfoxDeviceTypeTableComponent ]
     })

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { StatusTimestamp } from '@app/gateway/gateway.model';
-import * as moment from 'moment';
+import moment from 'moment';
 
 const neverSeenClass = 'never-seen';
 const offlineClass = 'offline';

@@ -19,7 +19,7 @@
                   [icon]="faChevronLeft"
                   class="icon--primary mb-1"
                 ></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="">{{
+                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{
                   backButtonTitle
                 }}</a>
               </ng-template>
@@ -28,7 +28,7 @@
                   [icon]="faChevronLeft"
                   class="icon--primary mb-1"
                 ></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="">{{
+                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{
                   backButton.label
                 }}</a>
                 <h3 class="p-3">{{ subTitle || staticTitle }}</h3>

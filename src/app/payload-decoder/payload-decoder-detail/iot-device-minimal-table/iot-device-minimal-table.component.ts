@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import * as moment from 'moment';
+import moment from 'moment';
 import {
   IoTDeviceMinimal,
   IoTDevicesMinimalResponse,
