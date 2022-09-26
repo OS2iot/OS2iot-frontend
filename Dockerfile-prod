@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:12-alpine as builder
+FROM node:14-alpine as builder
 
 # removed this for now
 # install chrome for protractor tests
