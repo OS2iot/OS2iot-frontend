@@ -539,9 +539,6 @@
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
     "GIVE-DATATARGET-TIMEOUT": "Timeout i millisekunder",
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
-    "GIVE-DATATARGET-TOKENENDPOINT": "Angiv token endpoint URL",
-    "GIVE-DATATARGET-CLIENTID": "Angiv client ID",
-    "GIVE-DATATARGET-CLIENTSECRET": "Angiv client secret",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
     "GIVE-DATATARGET-URL-PLACEHOLDER": "https://datatarget.dk/data",
     "GIVE-PAYLOADDECODER-NAME": "Navngiv payload decoder",
@@ -562,7 +559,7 @@
     "GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON": "Det angivne JSON var ikke gyldigt i feltet payload",
     "GIVE-ORGANISATION-NAME": "Navngiv organisation",
     "GIVE-ORGANISATION-NAME-PLACEHOLDER": "F.eks. 'Aarhus Kommune'",
-    "GIVE-MULTICAST-NAME":"Navngiv multicast",
+    "GIVE-MULTICAST-NAME": "Navngiv multicast",
     "GIVE-MULTICAST-ADDRESS": "Angiv multicast adressen (mcAddr)",
     "GIVE-MULTICAST-NETWORK-KEY": "Angiv multicast network session key (mcNwkSKey)",
     "GIVE-MULTICAST-APPLICATION-KEY": "Angiv multicast application session key (mcAppSKey)",
@@ -1113,15 +1110,21 @@
   },
   "NoUsersAdded": "Ingen brugergrupper er tilføjet",
   "FIWARE": {
-      "QUESTION": {
-        "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
-        "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
-        "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
-        "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
-        "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
-        "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
-        "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
-        "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json"
-      }
+    "QUESTION": {
+      "GIVE-DATATARGET-CONTEXTBROKER-URL": "Angiv datatargets 'context broker' URL",
+      "GIVE-DATATARGET-CONTEXTBROKER-URL-PLACEHOLDER": "https://contextBroker.dk/",
+      "GIVE-DATATARGET-TENANT": "Angiv 'tenant'",
+      "GIVE-DATATARGET-TENANT-INFO": "hvis tom, vil default tenant blive brugt",
+      "GIVE-DATATARGET-TENANT-PLACEHOLDER": "Tenant's navn",
+      "GIVE-DATATARGET-CONTEXT": "Angiv 'context'",
+      "GIVE-DATATARGET-CONTEXT-INFO": "hvis tom, skal den angives i 'payload'",
+      "GIVE-DATATARGET-CONTEXT-PLACEHOLDER": "https://os2iot/context-file.json",
+      "GIVE-DATATARGET-TOKENENDPOINT": "Angiv token endpoint URL",
+      "GIVE-DATATARGET-TOKENENDPOINT-PLACEHOLDER": "https://os2iot/connect/token",
+      "GIVE-DATATARGET-CLIENTID": "Angiv client ID",
+      "GIVE-DATATARGET-CLIENTID-PLACEHOLDER": "Client's navn",
+      "GIVE-DATATARGET-CLIENTSECRET": "Angiv client secret",
+      "GIVE-DATATARGET-CLIENTSECRET-PLACEHOLDER": "Client's kode"
+    }
   }
 }
