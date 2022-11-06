@@ -14,6 +14,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { environment } from '@environments/environment';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 import { ActivatedRoute } from '@angular/router';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
     selector: 'app-user-table',
@@ -46,11 +47,14 @@ export class UserTableComponent implements AfterViewInit {
     @Input() permissionId?: number;
 
     @Input() canSort = true;
+    isGlobalAdmin: boolean;
 
     constructor(
         public translate: TranslateService,
-        private userService: UserService
+        private userService: UserService,
+        private meService: MeService
     ) {
+        this.isGlobalAdmin = this.meService.hasGlobalAdmin();
     }
 
     getUsers(
@@ -58,13 +62,22 @@ export class UserTableComponent implements AfterViewInit {
         orderByDirection: string
     ): Observable<UserGetManyResponse> {
         if (this.organizationId !== null && this.organizationId !== undefined) {
-            return this.userService.getMultipleByOrganization(
-                this.paginator.pageSize,
-                this.paginator.pageIndex * this.paginator.pageSize,
-                orderByColumn,
-                orderByDirection,
-                this.organizationId
-            );
+            if (this.isGlobalAdmin) {
+                return this.userService.getMultiple(
+                    this.paginator.pageSize,
+                    this.paginator.pageIndex * this.paginator.pageSize,
+                    orderByColumn,
+                    orderByDirection
+                );
+            } else {
+                return this.userService.getMultipleByOrganization(
+                    this.paginator.pageSize,
+                    this.paginator.pageIndex * this.paginator.pageSize,
+                    orderByColumn,
+                    orderByDirection,
+                    this.organizationId
+                );
+            }
         } else {
             return this.userService.getMultiple(
                 this.paginator.pageSize,
