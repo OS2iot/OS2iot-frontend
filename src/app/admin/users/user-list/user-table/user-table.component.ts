@@ -13,6 +13,7 @@ import { UserService } from '../../user.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { environment } from '@environments/environment';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-user-table',
@@ -35,27 +36,44 @@ export class UserTableComponent implements AfterViewInit {
     resultsLength = 0;
     isLoadingResults = true;
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatSort) sort: MatSort;    
 
+    // If supplied, users will only be retrieved for the specified organization
+    // If supplied, permissionId will ignored, even if supplied
+    @Input() organizationId?: number;
+
+    // If supplied, users will be retrieved on the permissionId (userGroup/brugerGruppe)    
     @Input() permissionId?: number;
+
     @Input() canSort = true;
 
     constructor(
         public translate: TranslateService,
         private userService: UserService
-    ) {}
+    ) {
+    }
 
     getUsers(
         orderByColumn: string,
         orderByDirection: string
     ): Observable<UserGetManyResponse> {
-        return this.userService.getMultiple(
-            this.paginator.pageSize,
-            this.paginator.pageIndex * this.paginator.pageSize,
-            orderByColumn,
-            orderByDirection,
-            this.permissionId
-        );
+        if (this.organizationId !== null && this.organizationId !== undefined) {
+            return this.userService.getMultipleByOrganization(
+                this.paginator.pageSize,
+                this.paginator.pageIndex * this.paginator.pageSize,
+                orderByColumn,
+                orderByDirection,
+                this.organizationId
+            );
+        } else {
+            return this.userService.getMultiple(
+                this.paginator.pageSize,
+                this.paginator.pageIndex * this.paginator.pageSize,
+                orderByColumn,
+                orderByDirection,
+                this.permissionId
+            );
+        }        
     }
 
     ngAfterViewInit() {

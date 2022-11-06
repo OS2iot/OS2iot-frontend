@@ -51,13 +51,15 @@ export class UserService {
       );
   }
 
+  
+
   getMultiple(
     limit: number = 1000,
     offset: number = 0,
     orderByColumn?: string,
     orderByDirection?: string,
     permissionId?: number
-  ): Observable<UserGetManyResponse> {
+  ): Observable<UserGetManyResponse> {    
     if (permissionId != null) {
       return this.restService.get(`permission/${permissionId}/users`, {
         limit,
@@ -72,6 +74,21 @@ export class UserService {
       });
     }
   }
+
+  getMultipleByOrganization(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string,
+    organizationId?: number
+  ): Observable<UserGetManyResponse> {    
+    return this.restService.get(this.URL + `/organizationUsers/${organizationId}`, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
+  }  
 
   hideWelcome(id: number): Observable<boolean> {
     return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);

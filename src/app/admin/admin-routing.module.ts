@@ -30,6 +30,7 @@ const adminRoutes: Routes = [
     {
         path: 'users', component: UsersComponent, children: [
             { path: '', component: UserListComponent },
+            { path: 'organization/:organization-id', component: UserListComponent },
             { path: 'new-user', component: UserEditComponent },
             { path: ':user-id', component: UserDetailComponent },
             { path: ':user-id/edit-user', component: UserEditComponent },
