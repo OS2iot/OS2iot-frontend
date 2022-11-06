@@ -51,8 +51,6 @@ export class UserService {
       );
   }
 
-  
-
   getMultiple(
     limit: number = 1000,
     offset: number = 0,
@@ -111,6 +109,24 @@ export class UserService {
     );
   }
 
+  getAwaitingUsersForOrganization(
+    limit: number = 1000,
+    offset: number = 0,
+    organizationId: number,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<UserGetManyResponse> {
+    return this.restService.get(
+      `${this.URL}/awaitingUsers/${organizationId}`,
+      {
+        limit,
+        offset,
+        orderOn: orderByColumn,
+        sort: orderByDirection,
+      },
+    );
+  }
+
   getOneSimple(id: number): Observable<UserResponse> {
     return this.restService.get(this.URL_NEW_KOMBIT, {}, id).pipe(
       map((response: UserResponse) => {
@@ -118,6 +134,7 @@ export class UserService {
       })
     );
   }
+
   updateNewKombit(body: CreateNewKombitUserDto): Observable<UserResponse> {
     return this.restService.put(
       this.URL_NEW_KOMBIT + '/createNewKombitUser',

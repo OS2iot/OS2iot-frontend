@@ -15,6 +15,7 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { MeService } from '@shared/services/me.service';
 
 @Component({
   selector: 'app-awaiting-users-table',
@@ -38,13 +39,17 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
 
   @Input() permissionId?: number;
   @Input() canSort = true;
+  organizationId: number;
 
   constructor(
     public translate: TranslateService,
     private userService: UserService,
     private sharedService: SharedVariableService,
-    private deleteDialogService: DeleteDialogService
-  ) {}
+    private deleteDialogService: DeleteDialogService,
+    private meService: MeService
+  ) {
+    this.organizationId = this.sharedService.getSelectedOrganisationId(); 
+  }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
@@ -97,12 +102,22 @@ export class AwaitingUsersTableComponent implements AfterViewInit {
     orderByColumn: string,
     orderByDirection: string
   ): Observable<UserGetManyResponse> {
-    return this.userService.getAwaitingUsers(
-      this.paginator.pageSize,
-      this.paginator.pageIndex * this.paginator.pageSize,
-      orderByColumn,
-      orderByDirection
-    );
+    if(this.meService.hasGlobalAdmin()) {
+        return this.userService.getAwaitingUsers(
+          this.paginator.pageSize,
+          this.paginator.pageIndex * this.paginator.pageSize,
+          orderByColumn,
+          orderByDirection
+        );
+    } else {
+      return this.userService.getAwaitingUsersForOrganization(
+        this.paginator.pageSize,
+        this.paginator.pageIndex * this.paginator.pageSize,
+        this.organizationId,
+        orderByColumn,
+        orderByDirection        
+      );
+    }    
   }
 
   rejectUser(userId: number, organizationId: number) {
