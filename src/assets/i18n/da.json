@@ -847,7 +847,9 @@
     "DUPLICATE-METADATA-KEY": "Metadata må ikke indeholde den samme nøgle flere gange",
     "INVALID-KEY-IN-KEY-VALUE-PAIR": "En eller flere nøgler er ugyldige. Det skal være en gyldig tekstværdi",
     "INVALID-VALUE-IN-KEY-VALUE-PAIR": "En eller flere værdier er ugyldige. Det skal være en gyldig tekstværdi",
-    "INVALID-DATE": "Datoen er ugyldig"
+    "INVALID-DATE": "Datoen er ugyldig",
+    "USER-ALREADY-HAVE-MAIL": "Brugeren har allerede sat en email",
+    "EMAIL-ALREADY-IN-USE": "Den valgte email er allerede i brug. Kontakt din lokale administrator for hjælp."
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
