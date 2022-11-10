@@ -12,6 +12,9 @@ export class Datatarget {
     // default 30 sec
     timeout = 30000;
     authorizationHeader: string;
+    tokenEndpoint: string;
+    clientId: string;
+    clientSecret: string;
     setToOpendataDk = false;
     openDataDkDataset: OpenDataDkDataset = new OpenDataDkDataset();
     mqttPort?: number;
