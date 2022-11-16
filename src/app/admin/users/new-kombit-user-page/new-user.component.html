@@ -13,6 +13,9 @@
               <li *ngFor="let error of errorMessages">
                 {{ error | translate }}
               </li>
+              <li *ngIf="errorMessage">
+                {{errorMessage | translate}}
+            </li>
             </ul>
           </div>
           <div class="form-group mt-3">

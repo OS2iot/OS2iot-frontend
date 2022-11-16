@@ -32,6 +32,7 @@ export class NewUserComponent implements OnInit {
   public filteredOrganisations: ReplaySubject<
     Organisation[]
   > = new ReplaySubject<Organisation[]>(1);
+  public errorMessage: string;
   private onDestroy = new Subject<void>();
 
   constructor(
@@ -146,8 +147,12 @@ export class NewUserComponent implements OnInit {
   }
 
   handleError(error: HttpErrorResponse) {
-    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-    this.errorFields = errors.errorFields;
-    this.errorMessages = errors.errorMessages;
+    if (typeof error.error === 'string' && typeof error.message === 'string') {
+      this.errorMessage = error.message;
+    } else {
+      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+      this.errorFields = errors.errorFields;
+      this.errorMessages = errors.errorMessages;
+    }    
   }
 }
