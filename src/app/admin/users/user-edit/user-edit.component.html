@@ -23,7 +23,7 @@
     <div class="row mb-5">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="email">{{'USERS.FORM.EMAIL' | translate}}</label>*
-            <input type="text" class="form-control" id="email" name="email" [disabled]="isKombit"
+            <input type="text" class="form-control" id="email" name="email"
                 [placeholder]="'USERS.FORM.EMAIL-PLACEHOLDER' | translate" maxlength="50" required
                 [(ngModel)]="user.email" email ngModel
                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('email'), 'is-valid' : formFailedSubmit && !errorFields.includes('email')}">

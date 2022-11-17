@@ -3,7 +3,7 @@ import { Organisation } from '@app/admin/organisation/organisation.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
 import { ChirpstackGatewayService } from '@shared/services/chirpstack-gateway.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';

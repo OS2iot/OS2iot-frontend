@@ -12,7 +12,7 @@ import { MulticastService } from '../multicast.service';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { ApplicationService } from '@applications/application.service';
 import { keyPressedHex } from '@shared/constants/regex-constants';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +25,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   public multicastId: number;
   public errorMessages: unknown;
   private multicastSubscription: Subscription;
-  public searchDevices: FormControl = new FormControl();
+  public searchDevices: UntypedFormControl = new UntypedFormControl();
   public errorFields: string[];
   public iotDevices: IotDevice[] = [];
   @Input() submitButton: string;
@@ -36,7 +36,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
-  public deviceFilterCtrl: FormControl = new FormControl();
+  public deviceFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<
     IotDevice[]
   >(1);
@@ -53,6 +53,9 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
+    this.applicationId = +this.route.snapshot.paramMap.get('id');
+
     this.translate
       .get([
         'FORM.CREATE-NEW-MULTICAST',
@@ -62,9 +65,6 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
         'GEN.BACK',
       ])
       .subscribe((translations) => {
-        this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
-        this.applicationId = +this.route.snapshot.paramMap.get('id');
-
         if (this.multicastId) {
           this.title = translations['FORM.EDIT-MULTICAST'];
         } else {
@@ -126,7 +126,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
 
   getApplication(id: number) {
     this.applicationService.getApplication(id).subscribe((application) => {
-      this.iotDevices = application.iotDevices;
+      this.iotDevices = application.iotDevices ?? [];
       this.filteredDevicesMulti.next(this.iotDevices.slice());
     });
   }

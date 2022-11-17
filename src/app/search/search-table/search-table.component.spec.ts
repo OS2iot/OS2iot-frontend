@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SearchTableComponent } from './search-table.component';
 
@@ -6,7 +6,7 @@ describe('SearchTableComponent', () => {
   let component: SearchTableComponent;
   let fixture: ComponentFixture<SearchTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchTableComponent ]
     })

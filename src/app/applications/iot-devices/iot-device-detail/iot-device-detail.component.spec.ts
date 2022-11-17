@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { IoTDeviceDetailComponent } from './iot-device-detail.component';
 
@@ -6,7 +6,7 @@ describe('IoTDeviceDetailComponent', () => {
   let component: IoTDeviceDetailComponent;
   let fixture: ComponentFixture<IoTDeviceDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [IoTDeviceDetailComponent]
     })

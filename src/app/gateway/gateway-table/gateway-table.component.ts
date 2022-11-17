@@ -5,7 +5,7 @@ import {
   faExclamationTriangle,
   faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, of as observableOf, Subject } from 'rxjs';

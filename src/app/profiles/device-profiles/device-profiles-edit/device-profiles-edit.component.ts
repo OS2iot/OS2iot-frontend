@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
 import { DeviceProfile } from '../device-profile.model';
 import { DeviceProfileService } from '../device-profile.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { AdrAlgorithm, AdrAlgorithmResponse } from '@app/network-server/adr-algorithm.model';
+import { NetworkServerService } from '@app/network-server/network-server.service';
 
 @Component({
   selector: 'app-device-profiles-edit',
@@ -27,6 +29,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public title = '';
   public backButton: BackButton = { label: '', routerLink: '/profiles' };
+  public adrAlgorithms: AdrAlgorithm[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +37,8 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     private deviceProfileService: DeviceProfileService,
     private location: Location,
     private meService: MeService,
-    private errorMessageService: ErrorMessageService
+    private errorMessageService: ErrorMessageService,
+    private networkServerService: NetworkServerService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +47,12 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
         this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
         this.backButton.label = translations['PROFILES.NAME'];
       });
+
+    this.networkServerService.getAllAdrAlgorithms()
+      .subscribe(
+        response => {
+          this.adrAlgorithms = response.adrAlgorithms;
+        });
 
     this.id = this.route.snapshot.paramMap.get('deviceId');
     if (this.id) {

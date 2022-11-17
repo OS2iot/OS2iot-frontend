@@ -57,7 +57,7 @@ export class UserService {
     orderByColumn?: string,
     orderByDirection?: string,
     permissionId?: number
-  ): Observable<UserGetManyResponse> {
+  ): Observable<UserGetManyResponse> {    
     if (permissionId != null) {
       return this.restService.get(`permission/${permissionId}/users`, {
         limit,
@@ -72,6 +72,21 @@ export class UserService {
       });
     }
   }
+
+  getMultipleByOrganization(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string,
+    organizationId?: number
+  ): Observable<UserGetManyResponse> {    
+    return this.restService.get(this.URL + `/organizationUsers/${organizationId}`, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
+  }  
 
   hideWelcome(id: number): Observable<boolean> {
     return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);
@@ -94,6 +109,24 @@ export class UserService {
     );
   }
 
+  getAwaitingUsersForOrganization(
+    limit: number = 1000,
+    offset: number = 0,
+    organizationId: number,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<UserGetManyResponse> {
+    return this.restService.get(
+      `${this.URL}/awaitingUsers/${organizationId}`,
+      {
+        limit,
+        offset,
+        orderOn: orderByColumn,
+        sort: orderByDirection,
+      },
+    );
+  }
+
   getOneSimple(id: number): Observable<UserResponse> {
     return this.restService.get(this.URL_NEW_KOMBIT, {}, id).pipe(
       map((response: UserResponse) => {
@@ -101,6 +134,7 @@ export class UserService {
       })
     );
   }
+
   updateNewKombit(body: CreateNewKombitUserDto): Observable<UserResponse> {
     return this.restService.put(
       this.URL_NEW_KOMBIT + '/createNewKombitUser',

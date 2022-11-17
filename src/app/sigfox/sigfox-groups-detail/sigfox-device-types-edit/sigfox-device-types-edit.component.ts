@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BackButton } from '@shared/models/back-button.model';
@@ -31,7 +31,7 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public backButton: BackButton = { label: '', routerLink: '/sigfox' };
   public title = '';
   public submitButton = '';

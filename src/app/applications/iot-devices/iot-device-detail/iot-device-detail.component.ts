@@ -17,7 +17,7 @@ import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChartConfiguration } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { recordToEntries } from '@shared/helpers/record.helper';
 import { ColorGraphBlue1 } from '@shared/constants/color-constants';
 

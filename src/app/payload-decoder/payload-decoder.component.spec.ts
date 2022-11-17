@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PayloadDecoderComponent } from './payload-decoder.component';
 
@@ -6,7 +6,7 @@ describe('PayloadDecoderComponent', () => {
   let component: PayloadDecoderComponent;
   let fixture: ComponentFixture<PayloadDecoderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PayloadDecoderComponent ]
     })

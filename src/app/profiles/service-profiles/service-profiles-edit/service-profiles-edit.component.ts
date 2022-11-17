@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ServiceProfile, ServiceProfileResponseOne } from '../service-profile.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { BackButton } from '@shared/models/back-button.model';
 import { ServiceProfileService } from '../service-profile.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -26,7 +26,7 @@ export class ServiceProfilesEditComponent implements OnInit {
   public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public submitButton = '';
   public canEdit = false;
   id: string;

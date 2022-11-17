@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PermissionDetailComponent } from './permission-detail.component';
 
@@ -6,7 +6,7 @@ describe('PermissionDetailComponent', () => {
   let component: PermissionDetailComponent;
   let fixture: ComponentFixture<PermissionDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PermissionDetailComponent ]
     })

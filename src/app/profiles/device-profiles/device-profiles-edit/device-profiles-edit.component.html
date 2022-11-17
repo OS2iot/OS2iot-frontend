@@ -67,6 +67,18 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
+            <div class="col-xs-12 form-group">
+                <label
+                    class="form-label asterisk-if-mandatory">{{ 'PROFILES.DEVICE_PROFILE.ADRALGORITHM' | translate }}</label>
+                <mat-form-field appearance="outline">
+                    <mat-select matNativeControl required name="adrAlgorithmID" [disabled]="!deviceProfile.canEdit"
+                        [(value)]="deviceProfile.adrAlgorithmID" [compareWith]="compare">
+                        <mat-option *ngFor="let adr of adrAlgorithms" [value]="adr.id">{{ adr.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
             <div class="col-xs-12 form-group">
                 <label for="maxEIRP"
                     class="form-label asterisk-if-mandatory">{{'PROFILES.DEVICE_PROFILE.MAXEIRP' | translate}}</label>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganisationService } from '@app/admin/organisation/organisation.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class OrganisationEditComponent implements OnInit {
   public errorMessage: string;
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public backButton: BackButton = { label: '', routerLink: '/admin/organisations' };
   public title = '';
   public submitButton = '';

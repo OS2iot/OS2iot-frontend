@@ -17,87 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect} from '@angular/material/select';
+import { MatSelect } from '@angular/material/select';
 
-/* tslint:disable:member-ordering */
-/**
- * Component providing an input field for searching MatSelect options.
- *
- * Example usage:
- *
- * interface Bank {
- *  id: string;
- *  name: string;
- * }
- *
- * @Component({
- *   selector: 'my-app-data-selection',
- *   template: `
- *     <mat-form-field>
- *       <mat-select [formControl]="bankCtrl" placeholder="Bank">
- *         <mat-select-search [formControl]="bankFilterCtrl"></mat-select-search>
- *         <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank.id">
- *           {{bank.name}}
- *         </mat-option>
- *       </mat-select>
- *     </mat-form-field>
- *   `
- * })
- * export class DataSelectionComponent implements OnInit, OnDestroy {
- *
- *   // control for the selected bank
- *   public bankCtrl: FormControl = new FormControl();
- *   // control for the MatSelect filter keyword
- *   public bankFilterCtrl: FormControl = new FormControl();
- *
- *   // list of banks
- *   private banks: Bank[] = [{name: 'Bank A', id: 'A'}, {name: 'Bank B', id: 'B'}, {name: 'Bank C', id: 'C'}];
- *   // list of banks filtered by search keyword
- *   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
- *
- *   // Subject that emits when the component has been destroyed.
- *   private _onDestroy = new Subject<void>();
- *
- *
- *   ngOnInit() {
- *     // load the initial bank list
- *     this.filteredBanks.next(this.banks.slice());
- *     // listen for search field value changes
- *     this.bankFilterCtrl.valueChanges
- *       .pipe(takeUntil(this._onDestroy))
- *       .subscribe(() => {
- *         this.filterBanks();
- *       });
- *   }
- *
- *   ngOnDestroy() {
- *     this._onDestroy.next();
- *     this._onDestroy.complete();
- *   }
- *
- *   private filterBanks() {
- *     if (!this.banks) {
- *       return;
- *     }
- *
- *     // get the search keyword
- *     let search = this.bankFilterCtrl.value;
- *     if (!search) {
- *       this.filteredBanks.next(this.banks.slice());
- *       return;
- *     } else {
- *       search = search.toLowerCase();
- *     }
- *
- *     // filter the banks
- *     this.filteredBanks.next(
- *       this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
- *     );
- *   }
- * }
- */
 @Component({
-  selector: 'mat-select-search',
+  selector: 'app-mat-select-search',
   templateUrl: './mat-select-search.component.html',
   styleUrls: ['./mat-select-search.component.scss'],
   providers: [
@@ -109,6 +32,11 @@ import { MatSelect} from '@angular/material/select';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * Custom search/filter dropdown for select. This is not supported by Angular as of yet.
+ *
+ * @see https://github.com/angular/components/issues/5697#issuecomment-493628695
+ */
 export class MatSelectSearchComponent
   implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   /** Label of the search placeholder */
@@ -119,7 +47,7 @@ export class MatSelectSearchComponent
 
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', { static: false, read: ElementRef })
-  searchSelectInput: ElementRef;
+  searchSelectInput: ElementRef<HTMLInputElement>;
 
   /** Current search value */
   get value(): string {
@@ -210,6 +138,7 @@ export class MatSelectSearchComponent
 
   ngAfterViewInit() {
     this.setOverlayClass();
+    this.HACK_setPlaceholder();
   }
 
   /**
@@ -293,23 +222,52 @@ export class MatSelectSearchComponent
   /**
    * Sets the overlay class  to correct offsetY
    * so that the selected option is at the position of the select box when opening
+   *
+   * @see https://github.com/bithost-gmbh/ngx-mat-select-search/issues/208#issue-563076204
    */
   private setOverlayClass() {
     if (this.overlayClassSet) {
       return;
     }
+
     const overlayClass = 'cdk-overlay-pane-select-search';
 
-    this.matSelect.overlayDir.attach
+    this.matSelect.openedChange
       .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // note: this is hacky, but currently there is no better way to do this
-        this.searchSelectInput.nativeElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add(
-          overlayClass
-        );
+      .subscribe((opened: boolean) => {
+        if (opened && this.searchSelectInput) {
+          // note: this is hacky, but currently there is no better way to do this
+          let element: HTMLElement | undefined = this.searchSelectInput
+            .nativeElement?.parentElement;
+          let overlayElement: HTMLElement;
+
+          while (element) {
+            if (element.classList.contains('cdk-overlay-pane')) {
+              overlayElement = element;
+              break;
+            }
+            element = element.parentElement;
+          }
+
+          if (overlayElement) {
+            overlayElement.classList.add(overlayClass);
+          }
+        }
       });
 
     this.overlayClassSet = true;
+  }
+
+  /**
+   * Depending on the component, placeholder will sometimes be missing or set to empty string.
+   * It happens on /edit-permission but not on /multicast-edit
+   */
+  private HACK_setPlaceholder() {
+    const element = this.searchSelectInput?.nativeElement;
+
+    if (element && element.placeholder !== this.placeholderLabel) {
+      element.placeholder = this.placeholderLabel;
+    }
   }
 
   /**

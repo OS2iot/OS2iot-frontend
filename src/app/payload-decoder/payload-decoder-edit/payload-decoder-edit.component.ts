@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -51,7 +51,7 @@ export class PayloadDecoderEditComponent implements OnInit {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public backButton: BackButton = { label: '', routerLink: '' };
   public title = '';
   public submitButton = '';

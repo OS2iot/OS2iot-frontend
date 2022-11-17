@@ -14,7 +14,7 @@ import { UserResponse } from '../user.model';
 import { UserService } from '../user.service';
 import { Location } from '@angular/common';
 import { PermissionService } from '@app/admin/permission/permission.service';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-accept-user',
@@ -40,7 +40,7 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
     { type: PermissionType.OrganizationGatewayAdmin },
     { type: PermissionType.Read },
   ];
-  public permissionsCtrl: FormControl = new FormControl();
+  public permissionsCtrl: UntypedFormControl = new UntypedFormControl();
   permissions: PermissionResponse[] = [];
 
   constructor(

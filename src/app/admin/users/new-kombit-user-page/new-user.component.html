@@ -8,11 +8,14 @@
           {{ 'NEW_USER.FIRST_LOGIN' | translate }}
         </h1>
         <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
-          <div *ngIf="errorMessages" class="error-messages p-3">
+          <div *ngIf="errorMessages || errorMessage" class="error-messages p-3">
             <ul class="mb-0">
               <li *ngFor="let error of errorMessages">
                 {{ error | translate }}
               </li>
+              <li *ngIf="errorMessage">
+                {{errorMessage | translate}}
+            </li>
             </ul>
           </div>
           <div class="form-group mt-3">
@@ -49,9 +52,9 @@
               panelClass="overflow-x-hidden"
               aria-required="true"
             >
-              <mat-select-search
+              <app-mat-select-search
                 [formControl]="organisationsFilterCtrl"
-              ></mat-select-search>
+              ></app-mat-select-search>
 
               <mat-option
                 *ngFor="let org of filteredOrganisations | async"

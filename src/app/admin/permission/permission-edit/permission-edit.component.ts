@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public backButton: BackButton = {
     label: '',
     routerLink: ['admin', 'permissions'],
@@ -53,19 +53,19 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     { type: PermissionType.Read },
   ];
 
-  public userMultiCtrl: FormControl = new FormControl();
-  public userMultiFilterCtrl: FormControl = new FormControl();
+  public userMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public userMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredUsersMulti: ReplaySubject<UserResponse[]> = new ReplaySubject<
     UserResponse[]
   >(1);
 
-  public applicationMultiCtrl: FormControl = new FormControl();
-  public applicationMultiFilterCtrl: FormControl = new FormControl();
+  public applicationMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public applicationMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredApplicationsMulti: ReplaySubject<
     Application[]
   > = new ReplaySubject<Application[]>(1);
 
-  public permissionLevelsCtrl: FormControl = new FormControl();
+  public permissionLevelsCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
