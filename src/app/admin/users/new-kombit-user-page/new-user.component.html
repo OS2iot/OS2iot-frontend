@@ -8,7 +8,7 @@
           {{ 'NEW_USER.FIRST_LOGIN' | translate }}
         </h1>
         <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
-          <div *ngIf="errorMessages" class="error-messages p-3">
+          <div *ngIf="errorMessages || errorMessage" class="error-messages p-3">
             <ul class="mb-0">
               <li *ngFor="let error of errorMessages">
                 {{ error | translate }}

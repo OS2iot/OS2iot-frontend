@@ -147,12 +147,12 @@ export class NewUserComponent implements OnInit {
   }
 
   handleError(error: HttpErrorResponse) {
-    if (typeof error.error === 'string' && typeof error.message === 'string') {
-      this.errorMessage = error.message;
+    if (typeof error.error?.error === 'string' && typeof error.error?.message === 'string') {
+      this.errorMessage = error.error?.message;
     } else {
       const errors = this.errorMessageService.handleErrorMessageWithFields(error);
       this.errorFields = errors.errorFields;
       this.errorMessages = errors.errorMessages;
-    }    
+    }
   }
 }
