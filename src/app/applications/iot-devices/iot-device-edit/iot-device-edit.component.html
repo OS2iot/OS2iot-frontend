@@ -64,7 +64,7 @@
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('comment'), 'is-valid' : formFailedSubmit && !errorFields.includes('comment')}">
     </div>
 
-    <div class="form-group mt-3 col-12" *ngIf="iotDevice">
+    <div class="form-group mt-3 col-12 thirty-height" *ngIf="iotDevice">
       <app-map [coordinates]="getCoordinates()" (updateCoordinates)="updateCoordinates($event)"></app-map>
     </div>
 

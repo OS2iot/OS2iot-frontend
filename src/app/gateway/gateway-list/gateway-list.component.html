@@ -16,7 +16,7 @@
         </div>
       </mat-tab>
       <mat-tab label="{{'GATEWAY.MAP-TAB' | translate}}">
-        <div class="jumbotron--table" *ngIf="showmap && gateways">
+        <div class="jumbotron--table sixty-height" *ngIf="showmap && gateways">
           <app-map [coordinateList]="coordinateList">
           </app-map>
         </div>
