@@ -15,19 +15,19 @@
       [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('type'), 'is-valid' : formFailedSubmit && !errorFields.includes('type')}">
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
-          <input attr.aria-label="{{'GEN.HTTP' | translate}}" type="radio" name="type" value="GENERIC_HTTP"
-            class="form-check-input" required [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <input attr.aria-label="LoRaWAN" type="radio" name="type" value="LORAWAN" class="form-check-input" required
+                 [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
-            <app-dynamic-img [altText]="'GEN.HTTP' | translate" [image]="'iot'"></app-dynamic-img>
+            <img src="assets/images/lora.png" alt="LoRaWAN">
           </div>
         </label>
       </div>
       <div class="form-check-inline radio-image">
         <label class="form-check-label d-flex flex-column-reverse">
-          <input attr.aria-label="LoRaWAN" type="radio" name="type" value="LORAWAN" class="form-check-input" required
-            [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
+          <input attr.aria-label="{{'GEN.HTTP' | translate}}" type="radio" name="type" value="GENERIC_HTTP"
+            class="form-check-input" required [(ngModel)]="iotDevice.type" [attr.disabled]="editmode ? '' : null">
           <div class="image-container">
-            <img src="assets/images/lora.png" alt="LoRaWAN">
+            <app-dynamic-img [altText]="'GEN.HTTP' | translate" [image]="'iot'"></app-dynamic-img>
           </div>
         </label>
       </div>
