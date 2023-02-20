@@ -6,7 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { PermissionService } from '../permission.service';
-import { PermissionRequest, PermissionType, PermissionTypes } from '../permission.model';
+import {
+  PermissionRequest,
+  PermissionType,
+  PermissionTypes,
+} from '../permission.model';
 import { OrganisationResponse } from '../../organisation/organisation.model';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { UserService } from '../../users/user.service';
@@ -80,8 +84,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     private location: Location,
     private errormEssageService: ErrorMessageService,
     private meService: MeService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getOrganizations();
@@ -167,7 +170,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
   private getOrganizations() {
     this.organisationSubscription = this.organisationService
-      .getMultiple()
+      .getMultiple(1000, 0, 'name', 'asc')
       .subscribe(
         (orgs) => {
           this.organisations = orgs.data;
@@ -179,15 +182,17 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   private getUsers() {
-    this.userSubscription = this.userService.getMultiple().subscribe(
-      (users) => {
-        this.users = users.data;
-        this.filteredUsersMulti.next(this.users.slice());
-      },
-      (error: HttpErrorResponse) => {
-        this.showError(error);
-      }
-    );
+    this.userSubscription = this.userService
+      .getMultiple(1000, 0, 'name', 'asc')
+      .subscribe(
+        (users) => {
+          this.users = users.data;
+          this.filteredUsersMulti.next(this.users.slice());
+        },
+        (error: HttpErrorResponse) => {
+          this.showError(error);
+        }
+      );
   }
 
   public compare(o1: any, o2: any): boolean {
@@ -207,7 +212,9 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       .getApplicationsByOrganizationId(organizationId)
       .subscribe(
         (res) => {
-          this.applications = res.data;
+          this.applications = res.data.sort((a, b) =>
+            a.name.localeCompare(b.name, 'en', { numeric: true })
+          );
           this.filteredApplicationsMulti.next(this.applications.slice());
         },
         (error: HttpErrorResponse) => {
@@ -251,7 +258,6 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
           );
           this.applicationMultiCtrl.setValue(this.permission.applicationIds);
         }
-
       },
       (error: HttpErrorResponse) => {
         this.showError(error);

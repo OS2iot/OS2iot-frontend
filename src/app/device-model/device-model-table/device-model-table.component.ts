@@ -1,21 +1,13 @@
-import { Location } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { MeService } from '@shared/services/me.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { merge, Observable, of as observableOf, Subscription } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DeviceModelService } from '../device-model.service';
 import { DeviceModel, DeviceModelResponse } from '../device.model';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
@@ -48,7 +40,9 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
     this.translateService
       .get(['DEVICE-MODEL.DELETE-FAILED'])
       .subscribe((translations) => {
@@ -72,7 +66,9 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
           this.isLoadingResults = false;
           this.resultsLength = data.count;
 
-          return data.data;
+          return data.data.sort((a, b) =>
+            a.body.name.localeCompare(b.body.name, 'en', { numeric: true })
+          );
         }),
         catchError(() => {
           this.isLoadingResults = false;

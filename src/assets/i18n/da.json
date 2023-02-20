@@ -90,7 +90,7 @@
     "PROFILES": {
       "NAME": "Sigfox enhedstyper",
       "DEVICE-TYPE": "Sigfox enhedstyper",
-      "DEVICE-TYPE-NAME": "navn",
+      "DEVICE-TYPE-NAME": "Navn",
       "DEVICE-TYPE-CONTRACT-ID": "kontrakt id",
       "DEVICE-TYPE-ALERT-EMAIL": "Alarm email",
       "CREATE-NEW-DEVICE-TYPE": "Opret ny enhedstype",

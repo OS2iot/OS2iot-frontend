@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Organisation } from '@app/admin/organisation/organisation.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Sort } from '@shared/models/sort.model';
@@ -19,7 +25,7 @@ const gatewayStatusTabIndex = 2;
 @Component({
   selector: 'app-gateway-list',
   templateUrl: './gateway-list.component.html',
-  styleUrls: ['./gateway-list.component.scss']
+  styleUrls: ['./gateway-list.component.scss'],
 })
 export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   isLoadingResults = true;
@@ -55,7 +61,7 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
     private deleteDialogService: DeleteDialogService,
     private meService: MeService,
     private titleService: Title,
-    private sharedVariableService: SharedVariableService,
+    private sharedVariableService: SharedVariableService
   ) {
     translate.use('da');
     moment.locale('da');
@@ -64,15 +70,18 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.getGateways();
     this.organisations = this.sharedVariableService.getOrganizationInfo();
-    this.translate.get(['TITLE.LORAWAN-GATEWAY'])
-      .subscribe(translations => {
-        this.titleService.setTitle(translations['TITLE.LORAWAN-GATEWAY']);
-      });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite);
+    this.organisations.sort((a, b) =>
+      a.name.localeCompare(b.name, 'en', { numeric: true })
+    );
+    this.translate.get(['TITLE.LORAWAN-GATEWAY']).subscribe((translations) => {
+      this.titleService.setTitle(translations['TITLE.LORAWAN-GATEWAY']);
+    });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.GatewayWrite
+    );
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() {}
 
   public filterGatewayByOrgId(event: number) {
     this.selectedOrg = event;
@@ -95,45 +104,39 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private getGateways(): void {
-    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
-      {
+    this.gatewaySubscription = this.chirpstackGatewayService
+      .getMultiple({
         limit: this.pageLimit,
         offset: this.pageOffset * this.pageLimit,
         sort: this.selectedSortObject.dir,
         orderOn: this.selectedSortObject.col,
-      }
-    )
-      .subscribe(
-        (gateways: GatewayResponseMany) => {
-          this.gateways = gateways.result;
-          this.mapToCoordinateList();
-          this.setCanEdit();
-          this.isLoadingResults = false;
-        }
-      );
+      })
+      .subscribe((gateways: GatewayResponseMany) => {
+        this.gateways = gateways.result;
+        this.mapToCoordinateList();
+        this.setCanEdit();
+        this.isLoadingResults = false;
+      });
   }
 
   private getGatewayWith(orgId: number): void {
-    this.gatewaySubscription = this.chirpstackGatewayService.getMultiple(
-      {
+    this.gatewaySubscription = this.chirpstackGatewayService
+      .getMultiple({
         limit: this.pageLimit,
         offset: this.pageOffset * this.pageLimit,
         sort: this.selectedSortObject.dir,
         orderOn: this.selectedSortObject.col,
         organizationId: orgId,
-      }
-    )
-      .subscribe(
-        (gateways: GatewayResponseMany) => {
-          this.gateways = gateways.result;
-          this.mapToCoordinateList();
-          this.setCanEdit();
-          this.isLoadingResults = false;
-        }
-      );
+      })
+      .subscribe((gateways: GatewayResponseMany) => {
+        this.gateways = gateways.result;
+        this.mapToCoordinateList();
+        this.setCanEdit();
+        this.isLoadingResults = false;
+      });
   }
 
-  selectedTabChange({index}: MatTabChangeEvent) {
+  selectedTabChange({ index }: MatTabChangeEvent) {
     this.tabIndex = index;
 
     if (index === 1) {
@@ -150,23 +153,21 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
 
   private mapToCoordinateList() {
     const tempcoordinateList = [];
-    this.gateways.map(
-      gateway => tempcoordinateList.push(
-        {
-          longitude: gateway.location.longitude,
-          latitude: gateway.location.latitude,
-          draggable: false,
-          editEnabled: false,
-          useGeolocation: false,
-          markerInfo: {
-            name: gateway.name,
-            active: this.gatewayStatus(gateway),
-            id: gateway.id,
-            internalOrganizationId: gateway.internalOrganizationId,
-            internalOrganizationName: gateway.internalOrganizationName
-          }
-        }
-      ),
+    this.gateways.map((gateway) =>
+      tempcoordinateList.push({
+        longitude: gateway.location.longitude,
+        latitude: gateway.location.latitude,
+        draggable: false,
+        editEnabled: false,
+        useGeolocation: false,
+        markerInfo: {
+          name: gateway.name,
+          active: this.gatewayStatus(gateway),
+          id: gateway.id,
+          internalOrganizationId: gateway.internalOrganizationId,
+          internalOrganizationName: gateway.internalOrganizationName,
+        },
+      })
     );
     this.coordinateList = tempcoordinateList;
   }
@@ -176,8 +177,9 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteGateway(id: string) {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
-      (response) => {
+    this.deleteDialogSubscription = this.deleteDialogService
+      .showSimpleDialog()
+      .subscribe((response) => {
         if (response) {
           this.chirpstackGatewayService.delete(id).subscribe((response) => {
             if (response.ok && response.body.success === true) {
@@ -187,21 +189,21 @@ export class GatewayListComponent implements OnInit, OnChanges, OnDestroy {
         } else {
           console.log(response);
         }
-      }
-    );
+      });
   }
 
   setCanEdit() {
-    this.gateways.forEach(
-      (gateway) => {
-        gateway.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, gateway.internalOrganizationId);
-      }
-    );
+    this.gateways.forEach((gateway) => {
+      gateway.canEdit = this.meService.hasAccessToTargetOrganization(
+        OrganizationAccessScope.GatewayWrite,
+        gateway.internalOrganizationId
+      );
+    });
   }
 
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
-      this.gatewaySubscription?.unsubscribe();
-      this.deleteDialogSubscription?.unsubscribe();
+    this.gatewaySubscription?.unsubscribe();
+    this.deleteDialogSubscription?.unsubscribe();
   }
 }

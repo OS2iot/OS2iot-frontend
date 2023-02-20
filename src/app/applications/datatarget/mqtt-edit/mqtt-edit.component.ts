@@ -84,7 +84,7 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   private getPayloadDecoders() {
     this.payloadDecoderSubscription = this.payloadDecoderService
-      .getMultiple(1000, 0, 'id', 'ASC')
+      .getMultiple(1000, 0, 'name', 'ASC')
       .subscribe((response: PayloadDecoderMappedResponse) => {
         this.payloadDecoders = response.data;
       });
