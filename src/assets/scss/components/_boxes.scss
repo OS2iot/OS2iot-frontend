@@ -35,11 +35,19 @@
 .box{
   width: 100%;
   @extend .p-3;
-  
+
   &--info{
     background-color: $color-bg-info;
     border: $info-border;
     border-radius: $border-radius-primary;
     @extend .mb-5;
   }
+}
+
+.sixty-height{
+  height: 60vh;
+}
+
+.thirty-height{
+  height: 30vh
 }

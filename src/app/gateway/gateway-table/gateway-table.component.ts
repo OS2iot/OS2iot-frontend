@@ -43,7 +43,7 @@ export class GatewayTableComponent implements AfterViewInit {
 
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
-
+  refetchIntervalId: NodeJS.Timeout;
   batteryStatusColor = 'green';
   batteryStatusPercentage = 50;
   resultsLength = 0;
@@ -67,8 +67,12 @@ export class GatewayTableComponent implements AfterViewInit {
       this.organizationId = x;
       this.refresh();
     });
-
+    this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000)
     this.refresh();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.refetchIntervalId)
   }
 
   private refresh() {
