@@ -11,12 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
+import { MulticastTabComponent } from './multicast-tab/multicast-tab.component';
 
 @NgModule({
   declarations: [
     MulticastDetailComponent,
     MulticastEditComponent,
     MulticastTableComponent,
+    MulticastTabComponent,
   ],
   imports: [
     CommonModule,

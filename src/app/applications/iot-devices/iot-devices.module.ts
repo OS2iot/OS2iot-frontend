@@ -21,6 +21,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
 import { GraphModule } from '@app/graph/graph.module';
+import { IotDevicesTabComponent } from './iot-devices-tab/iot-devices-tab.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { GraphModule } from '@app/graph/graph.module';
         DeviceModelComponent,
         DataPackageComponent,
         DataPackagesTimestampComponent,
+        IotDevicesTabComponent,
     ],
     exports: [
         IotDevicesTableComponent,

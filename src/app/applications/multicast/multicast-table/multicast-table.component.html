@@ -10,7 +10,7 @@
           {{ 'MULTICAST-TABLE.NAME' | translate }}
         </th>
         <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['multicast', element.id]" routerLinkActive="active"
+          <a [routerLink]="['../multicast', element.id]" routerLinkActive="active"
             class="application-link">{{element.groupName}}</a>
         </td>
       </ng-container>

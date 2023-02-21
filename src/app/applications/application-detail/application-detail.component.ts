@@ -26,11 +26,27 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 })
 export class ApplicationDetailComponent implements OnInit, OnDestroy {
   @Output() deleteApplication = new EventEmitter();
+  public navTabs: any[] = [
+    {
+      label: 'APPLICATION.IOT-DEVICES',
+      link: './iot-devices',
+      index: 0,
+    },
+    {
+      label: 'APPLICATION.MULTICAST-GROUPS',
+      link: './multicast-groups',
+      index: 1,
+    },
+    {
+      label: 'APPLICATION.DATATARGET-SHOW',
+      link: './data-targets',
+      index: 2,
+    },
+  ];
   public applicationsSubscription: Subscription;
   public application: Application;
   public backButton: BackButton = { label: '', routerLink: '/applications' };
   public id: number;
-  public pageLimit = environment.tablePageSize;
   public dropdownButton: DropdownButton;
   public errorMessage: string;
   public canEdit = false;
@@ -68,7 +84,16 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
           translations['APPLICATION-TABLE-ROW.SHOW-OPTIONS'];
         this.titleService.setTitle(translations['TITLE.APPLICATION']);
       });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.id);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      this.id
+    );
+    this.applicationService.canEdit = this.canEdit;
+    this.applicationService.id = this.id;
+    if (this.router.url.split('/').length <= 3) {
+      this.router.navigateByUrl(`/applications/${this.id}/iot-devices`);
+    }
   }
 
   onDeleteApplication() {

@@ -18,13 +18,13 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 @Component({
   selector: 'app-httppush-detail',
   templateUrl: './httppush-detail.component.html',
-  styleUrls: ['./httppush-detail.component.scss']
+  styleUrls: ['./httppush-detail.component.scss'],
 })
-export class HttppushDetailComponent  implements DatatargetDetail, OnInit, OnDestroy {
-
+export class HttppushDetailComponent
+  implements DatatargetDetail, OnInit, OnDestroy {
   public datatargetSubscription: Subscription;
   public datatarget: Datatarget;
-  public backButton: BackButton = { label: '', routerLink: '' };
+  public backButton: BackButton = { label: '', routerLink: undefined };
   public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
@@ -33,72 +33,73 @@ export class HttppushDetailComponent  implements DatatargetDetail, OnInit, OnDes
   canEdit: boolean;
 
   constructor(
-      private route: ActivatedRoute,
-      private deleteDialogService: DeleteDialogService,
-      private location: Location,
-      private datatargetRelationServicer: PayloadDeviceDatatargetService,
-      private datatargetService: DatatargetService,
-      public translate: TranslateService,
-      private meService: MeService) { }
+    private route: ActivatedRoute,
+    private deleteDialogService: DeleteDialogService,
+    private location: Location,
+    private datatargetRelationServicer: PayloadDeviceDatatargetService,
+    private datatargetService: DatatargetService,
+    public translate: TranslateService,
+    private meService: MeService
+  ) {}
 
   ngOnInit(): void {
-      const id: number = +this.route.snapshot.paramMap.get('datatargetId');
-      const appId: number = +this.route.snapshot.paramMap.get('id');
-      this.applicationName = this.route.snapshot.paramMap.get('name');
-      if (id) {
-          this.getDatatarget(id);
-          this.getDatatargetRelations(id);
-          this.dropdownButton = {
-              label: '',
-              editRouterLink: '../../datatarget-edit/' + id,
-              isErasable: true,
-          };
-      }
-      this.translate.get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
-          .subscribe(translations => {
-              this.backButton.label = translations['NAV.MY-DATATARGET'];
-              this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
-          });
-      this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
+    const id: number = +this.route.snapshot.paramMap.get('datatargetId');
+    const appId: number = +this.route.snapshot.paramMap.get('id');
+    this.applicationName = this.route.snapshot.paramMap.get('name');
+    if (id) {
+      this.getDatatarget(id);
+      this.getDatatargetRelations(id);
+      this.dropdownButton = {
+        label: '',
+        editRouterLink: '../../datatarget-edit/' + id,
+        isErasable: true,
+      };
+    }
+    this.translate
+      .get(['NAV.MY-DATATARGET', 'DATATARGET.SHOW-OPTIONS'])
+      .subscribe((translations) => {
+        this.backButton.label = translations['NAV.MY-DATATARGET'];
+        this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
+      });
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      appId
+    );
   }
 
   getDatatarget(id: number) {
-      this.datatargetService.get(id)
-          .subscribe((dataTarget: Datatarget) => {
-              this.datatarget = dataTarget;
-              this.setBackButton(this.datatarget.applicationId);
-          });
-  }
-
-  private setBackButton(applicationId: number) {
-    this.backButton.routerLink = ['applications', applicationId.toString()];
+    this.datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
+      this.datatarget = dataTarget;
+    });
   }
 
   onDeleteDatatarget() {
-      this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
-          (response) => {
-              if (response) {
-                  this.datatargetService.delete(this.datatarget.id).subscribe((response) => {
-                  });
-                  this.location.back();
-              } else {
-                  console.log(response);
-              }
-          }
-      );
+    this.deleteDialogSubscription = this.deleteDialogService
+      .showSimpleDialog()
+      .subscribe((response) => {
+        if (response) {
+          this.datatargetService
+            .delete(this.datatarget.id)
+            .subscribe((response) => {});
+          this.location.back();
+        } else {
+          console.log(response);
+        }
+      });
   }
 
   getDatatargetRelations(id: number) {
-      this.datatargetRelationServicer.getByDataTarget(id)
-          .subscribe((response) => {
-              this.dataTargetRelations = response.data;
-          });
+    this.datatargetRelationServicer
+      .getByDataTarget(id)
+      .subscribe((response) => {
+        this.dataTargetRelations = response.data;
+      });
   }
 
   ngOnDestroy(): void {
-      if (this.deleteDialogSubscription) {
-          this.deleteDialogSubscription.unsubscribe();
-      }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
   }
-
 }
