@@ -257,7 +257,9 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.applicationSubscription = this.applicationService
       .getApplication(this.applicationId)
       .subscribe((application: Application) => {
-        this.devices = application.iotDevices;
+        this.devices = application.iotDevices.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
@@ -273,9 +275,11 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   getPayloadDecoders() {
     this.payloadDecoderSubscription = this.payloadDecoderService
-      .getMultiple(1000, 0, 'name', 'ASC')
+      .getMultiple(1000, 0, 'id', 'ASC')
       .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data;
+        this.payloadDecoders = response.data.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
