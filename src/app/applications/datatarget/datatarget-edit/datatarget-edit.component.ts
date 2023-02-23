@@ -1,13 +1,10 @@
 import {
-  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   OnDestroy,
   OnInit,
-  QueryList,
   Type,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataTargetType } from '@shared/enums/datatarget-type';
