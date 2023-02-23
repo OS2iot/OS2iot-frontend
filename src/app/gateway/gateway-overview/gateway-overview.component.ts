@@ -66,7 +66,7 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
       OrganizationAccessScope.GatewayWrite
     );
     if (this.router.url === '/gateways') {
-      this.router.navigateByUrl('/gateways/list');
+      this.router.navigateByUrl('/gateways/list', { replaceUrl: true });
     }
   }
 

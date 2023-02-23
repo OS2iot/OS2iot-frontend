@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ApplicationsListComponent } from './applications-list/applications-list.component';
@@ -15,6 +15,10 @@ import { DatatargetNewComponent } from './datatarget/datatarget-new/datatarget-n
 import { IotDevicesTabComponent } from '@applications/iot-devices/iot-devices-tab/iot-devices-tab.component';
 import { MulticastTabComponent } from '@applications/multicast/multicast-tab/multicast-tab.component';
 import { DatatargetTabComponent } from '@applications/datatarget/datatarget-tab/datatarget-tab.component';
+import { IotDeviceDetailsTabComponent } from '@applications/iot-devices/iot-device-detail/iot-device-details-tab/iot-device-details-tab.component';
+import { IotDeviceHistoryTabComponent } from '@applications/iot-devices/iot-device-detail/iot-device-history-tab/iot-device-history-tab.component';
+import { IotDeviceDataPacketsTabComponent } from '@applications/iot-devices/iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component';
+import { IotDeviceDownlinkTabComponent } from '@applications/iot-devices/iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
 
 const applicationRoutes: Routes = [
   {
@@ -41,7 +45,22 @@ const applicationRoutes: Routes = [
             path: 'iot-device-edit/:deviceId',
             component: IotDeviceEditComponent,
           },
-          { path: 'iot-device/:deviceId', component: IoTDeviceDetailComponent },
+          {
+            path: 'iot-device/:deviceId',
+            component: IoTDeviceDetailComponent,
+            children: [
+              { path: 'details', component: IotDeviceDetailsTabComponent },
+              { path: 'history', component: IotDeviceHistoryTabComponent },
+              {
+                path: 'data-packets',
+                component: IotDeviceDataPacketsTabComponent,
+              },
+              {
+                path: 'downlink',
+                component: IotDeviceDownlinkTabComponent,
+              },
+            ],
+          },
           { path: 'datatarget-new', component: DatatargetNewComponent },
           { path: 'datatarget-edit', component: DatatargetEditComponent },
           {

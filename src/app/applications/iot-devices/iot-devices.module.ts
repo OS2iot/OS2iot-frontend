@@ -22,38 +22,43 @@ import { DataPackageComponent } from './iot-device-detail/data-package/data-pack
 import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
 import { GraphModule } from '@app/graph/graph.module';
 import { IotDevicesTabComponent } from './iot-devices-tab/iot-devices-tab.component';
+import { IotDeviceHistoryTabComponent } from './iot-device-detail/iot-device-history-tab/iot-device-history-tab.component';
+import { IotDeviceDetailsTabComponent } from './iot-device-detail/iot-device-details-tab/iot-device-details-tab.component';
+import { IotDeviceDataPacketsTabComponent } from './iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component';
+import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
 
 @NgModule({
-    declarations: [
-        IotDevicesTableComponent,
-        IoTDeviceDetailComponent,
-        IotDeviceEditComponent,
-        SigfoxDeviceEditComponent,
-        IotDeviceDetailGenericComponent,
-        IotDeviceDetailLorawanComponent,
-        IotDeviceDetailSigfoxComponent,
-        DownlinkComponent,
-        DownlinkDialogComponent,
-        DeviceModelComponent,
-        DataPackageComponent,
-        DataPackagesTimestampComponent,
-        IotDevicesTabComponent,
-    ],
-    exports: [
-        IotDevicesTableComponent,
-        IoTDeviceDetailComponent
-    ],
-    imports: [
-        SharedModule,
-        CommonModule,
-        RouterModule,
-        TranslateModule,
-        FormModule,
-        NGMaterialModule,
-        FormsModule,
-        PipesModule,
-        MonacoEditorModule,
-        GraphModule,
-    ],
+  declarations: [
+    IotDevicesTableComponent,
+    IoTDeviceDetailComponent,
+    IotDeviceEditComponent,
+    SigfoxDeviceEditComponent,
+    IotDeviceDetailGenericComponent,
+    IotDeviceDetailLorawanComponent,
+    IotDeviceDetailSigfoxComponent,
+    DownlinkComponent,
+    DownlinkDialogComponent,
+    DeviceModelComponent,
+    DataPackageComponent,
+    DataPackagesTimestampComponent,
+    IotDevicesTabComponent,
+    IotDeviceHistoryTabComponent,
+    IotDeviceDetailsTabComponent,
+    IotDeviceDataPacketsTabComponent,
+    IotDeviceDownlinkTabComponent,
+  ],
+  exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
+  imports: [
+    SharedModule,
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    FormModule,
+    NGMaterialModule,
+    FormsModule,
+    PipesModule,
+    MonacoEditorModule,
+    GraphModule,
+  ],
 })
-export class IotDevicesModule { }
+export class IotDevicesModule {}

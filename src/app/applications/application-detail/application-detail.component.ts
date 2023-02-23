@@ -9,10 +9,8 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from '@applications/application.model';
 import { ApplicationService } from '@applications/application.service';
-import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { DeviceType } from '@shared/enums/device-type';
 import { BackButton } from '@shared/models/back-button.model';
 import { DropdownButton } from '@shared/models/dropdown-button.model';
 import { MeService } from '@shared/services/me.service';
@@ -92,7 +90,9 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
     this.applicationService.canEdit = this.canEdit;
     this.applicationService.id = this.id;
     if (this.router.url.split('/').length <= 3) {
-      this.router.navigateByUrl(`/applications/${this.id}/iot-devices`);
+      this.router.navigateByUrl(`/applications/${this.id}/iot-devices`, {
+        replaceUrl: true,
+      });
     }
   }
 
