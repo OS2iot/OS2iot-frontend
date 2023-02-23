@@ -6,7 +6,10 @@ import { Observable, Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from '@payload-decoder/payload-device-data.model';
+import {
+  PayloadDeviceDatatarget,
+  PayloadDeviceDatatargetGetByDataTargetResponse,
+} from '@payload-decoder/payload-device-data.model';
 import { DatatargetService } from '../../datatarget.service';
 import { ApplicationService } from '@applications/application.service';
 import { PayloadDecoderService } from '@payload-decoder/payload-decoder.service';
@@ -27,11 +30,9 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 @Component({
   selector: 'app-fiware-edit',
   templateUrl: './fiware-edit.component.html',
-  styleUrls: ['./fiware-edit.component.scss']
+  styleUrls: ['./fiware-edit.component.scss'],
 })
 export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
-
-
   public multiPage = false;
   public title = '';
   public sectionTitle = '';
@@ -69,12 +70,10 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService,
-    private meService: MeService,
+    private meService: MeService
   ) {
     translate.use('da');
   }
-
-
 
   ngOnInit() {
     this.translate
@@ -108,15 +107,21 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       this.getDevices();
     }
     this.getPayloadDecoders();
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
   }
-
 
   addRow() {
     if (!this.payloadDeviceDatatarget) {
       this.payloadDeviceDatatarget = [];
     }
-    this.payloadDeviceDatatarget.push({ id: null, iotDeviceIds: [], payloadDecoderId: null, dataTargetId: this.datatargetid });
+    this.payloadDeviceDatatarget.push({
+      id: null,
+      iotDeviceIds: [],
+      payloadDecoderId: null,
+      dataTargetId: this.datatargetid,
+    });
   }
 
   private deleteRow(index) {
@@ -124,7 +129,8 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
     } else {
-      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id)
+      this.payloadDeviceDataTargetService
+        .delete(this.payloadDeviceDatatarget[index].id)
         .subscribe((response) => {
           this.payloadDeviceDatatarget.splice(index, 1);
         });
@@ -136,8 +142,8 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       data: {
         showAccept: true,
         showCancel: true,
-        message: 'Er du sikker på at du vil slette?'
-      }
+        message: 'Er du sikker på at du vil slette?',
+      },
     });
 
     dialog.afterClosed().subscribe((result) => {
@@ -163,28 +169,29 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   updateDatatarget() {
     this.resetErrors();
-    this.counter = 1 + (this.payloadDeviceDatatarget?.length ? this.payloadDeviceDatatarget?.length : 0);
-    this.datatargetService.update(this.datatarget)
-      .subscribe(
-        (response: Datatarget) => {
-          this.datatarget = response;
-          this.countToRedirect();
-        },
-        (error: HttpErrorResponse) => {
-          this.handleError(error);
-          this.formFailedSubmit = true;
-        }
-      );
+    this.counter =
+      1 +
+      (this.payloadDeviceDatatarget?.length
+        ? this.payloadDeviceDatatarget?.length
+        : 0);
+    this.datatargetService.update(this.datatarget).subscribe(
+      (response: Datatarget) => {
+        this.datatarget = response;
+        this.countToRedirect();
+      },
+      (error: HttpErrorResponse) => {
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   addPayloadDeviceDatatarget() {
-    this.payloadDeviceDatatarget.map(
-      pdd => {
-        if (pdd.payloadDecoderId === 0) {
-          pdd.payloadDecoderId = null;
-        }
+    this.payloadDeviceDatatarget.map((pdd) => {
+      if (pdd.payloadDecoderId === 0) {
+        pdd.payloadDecoderId = null;
       }
-    );
+    });
     this.payloadDeviceDatatarget.forEach((relation) => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
@@ -227,17 +234,17 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   createDatatarget() {
     this.resetErrors();
     this.datatarget.applicationId = this.applicationId;
-    this.datatargetService.create(this.datatarget)
-      .subscribe((response: Datatarget) => {
+    this.datatargetService.create(this.datatarget).subscribe(
+      (response: Datatarget) => {
         this.datatargetid = response.id;
         this.datatarget = response;
         this.showSavedSnack();
       },
-        (error: HttpErrorResponse) => {
-          this.handleError(error);
-          this.formFailedSubmit = true;
-        });
-
+      (error: HttpErrorResponse) => {
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   private resetErrors() {
@@ -246,17 +253,20 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.formFailedSubmit = false;
   }
 
-
-
   getDevices(): void {
-    this.applicationSubscription = this.applicationService.getApplication(this.applicationId)
+    this.applicationSubscription = this.applicationService
+      .getApplication(this.applicationId)
       .subscribe((application: Application) => {
-        this.devices = application.iotDevices;
+        this.devices = application.iotDevices.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
   public selectAllDevices(index: number) {
-    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
+    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(
+      (device) => device.id
+    );
   }
 
   public deSelectAllDevices(index: number) {
@@ -264,9 +274,12 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   }
 
   getPayloadDecoders() {
-    this.payloadDecoderSubscription = this.payloadDecoderService.getMultiple(1000, 0, 'id', 'ASC')
+    this.payloadDecoderSubscription = this.payloadDecoderService
+      .getMultiple(1000, 0, 'id', 'ASC')
       .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data;
+        this.payloadDecoders = response.data.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
@@ -283,10 +296,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
-      event.target.value = event.target.value.slice(
-        0,
-        event.target.maxLength
-      );
+      event.target.value = event.target.value.slice(0, event.target.maxLength);
     }
   }
 
@@ -323,17 +333,20 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     }
   }
 
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
+  private mapToDatatargetDevicePayload(
+    dto: PayloadDeviceDatatargetGetByDataTargetResponse
+  ) {
     this.payloadDeviceDatatarget = [];
-    dto.data.forEach(
-      (element) => {
-        this.payloadDeviceDatatarget.push({
-          id: element.id,
-          iotDeviceIds: element.iotDevices.map((x) => x.id),
-          payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
-          dataTargetId: element.dataTarget.id
-        });
-      }
-    );
+    dto.data.forEach((element) => {
+      this.payloadDeviceDatatarget.push({
+        id: element.id,
+        iotDeviceIds: element.iotDevices.map((x) => x.id),
+        payloadDecoderId:
+          element.payloadDecoder?.id === undefined
+            ? 0
+            : element.payloadDecoder?.id,
+        dataTargetId: element.dataTarget.id,
+      });
+    });
   }
 }

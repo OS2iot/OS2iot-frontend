@@ -78,7 +78,7 @@ export class HttppushEditComponent
     private opendatadkService: OpendatadkService,
     private opendatadkDialogService: OpendatadkDialogService,
     private scrollToTopService: ScrollToTopService,
-    private meService: MeService,
+    private meService: MeService
   ) {
     translate.use('da');
   }
@@ -114,7 +114,11 @@ export class HttppushEditComponent
     }
     this.getPayloadDecoders();
     this.setDataSetExcists();
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.applicationId);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      this.applicationId
+    );
   }
 
   addRow() {
@@ -279,7 +283,9 @@ export class HttppushEditComponent
     this.applicationSubscription = this.applicationService
       .getApplication(this.applicationId)
       .subscribe((application: Application) => {
-        this.devices = application.iotDevices;
+        this.devices = application.iotDevices.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
@@ -297,7 +303,9 @@ export class HttppushEditComponent
     this.payloadDecoderSubscription = this.payloadDecoderService
       .getMultiple(1000, 0, 'id', 'ASC')
       .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data;
+        this.payloadDecoders = response.data.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 

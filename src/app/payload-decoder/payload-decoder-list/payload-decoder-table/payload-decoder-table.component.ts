@@ -54,6 +54,9 @@ export class PayloadDecoderTableComponent
 
   ngOnInit(): void {
     this.organizations = this.sharedVariableService.getOrganizationInfo();
+    this.organizations.sort((a, b) =>
+      a.name.localeCompare(b.name, 'en', { numeric: true })
+    );
     this.translateService
       .get(['PAYLOAD-DECODER.DELETE-FAILED'])
       .subscribe((translations) => {
@@ -98,7 +101,10 @@ export class PayloadDecoderTableComponent
   }
 
   getCanEdit(organizationId: number) {
-    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, organizationId);
+    return this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      organizationId
+    );
   }
 
   public filterByOrgId(event: number) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PayloadDecoder } from 'src/app/payload-decoder/payload-decoder.model';
 import { TranslateService } from '@ngx-translate/core';
 import { UntypedFormGroup } from '@angular/forms';
@@ -21,19 +21,23 @@ import { TestPayloadDecoderService } from '@payload-decoder/test-payload-decoder
 import { SnackService } from '@shared/services/snack.service';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
-import { environment } from '@environments/environment';
 import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 
 @Component({
   selector: 'app-payload-decoder-edit',
   templateUrl: './payload-decoder-edit.component.html',
-  styleUrls: ['./payload-decoder-edit.component.scss']
+  styleUrls: ['./payload-decoder-edit.component.scss'],
 })
 export class PayloadDecoderEditComponent implements OnInit {
   faExchangeAlt = faExchangeAlt;
 
-  editorJavaScriptOptions = { theme: 'vs', language: 'javascript', autoIndent: true, roundedSelection: true, };
+  editorJavaScriptOptions = {
+    theme: 'vs',
+    language: 'javascript',
+    autoIndent: true,
+    roundedSelection: true,
+  };
   payloadData = '';
   metadata = '';
   payloadDataErrorMessage = '';
@@ -42,8 +46,21 @@ export class PayloadDecoderEditComponent implements OnInit {
   payloadInvalidJSONMessage: string;
   codeOutput = '';
   testPayloadDecoder = new TestPayloadDecoder();
-  editorJsonOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false } };
-  editorJsonOutpuOptions = { theme: 'vs', language: 'json', autoIndent: true, roundedSelection: true, minimap: { enabled: false }, readOnly: true };
+  editorJsonOptions = {
+    theme: 'vs',
+    language: 'json',
+    autoIndent: true,
+    roundedSelection: true,
+    minimap: { enabled: false },
+  };
+  editorJsonOutpuOptions = {
+    theme: 'vs',
+    language: 'json',
+    autoIndent: true,
+    roundedSelection: true,
+    minimap: { enabled: false },
+    readOnly: true,
+  };
 
   payloadDecoder = new PayloadDecoder();
   payloadDecoderBody: string;
@@ -79,33 +96,41 @@ export class PayloadDecoderEditComponent implements OnInit {
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService,
     private meService: MeService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.translate.get([
-      'NAV.PAYLOAD-DECODER',
-      'FORM.EDIT-PAYLOAD-DECODER',
-      'PAYLOAD-DECODER.SAVE',
-      'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER',
-      'QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER',
-      'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE',
-      'QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE',
-      'QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER',
-      'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON',
-      'QUESTION.GIVE-PAYLOADDECODER-METADATA-INVALID-JSON'
-    ])
-      .subscribe(translations => {
+    this.translate
+      .get([
+        'NAV.PAYLOAD-DECODER',
+        'FORM.EDIT-PAYLOAD-DECODER',
+        'PAYLOAD-DECODER.SAVE',
+        'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER',
+        'QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER',
+        'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE',
+        'QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE',
+        'QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER',
+        'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON',
+        'QUESTION.GIVE-PAYLOADDECODER-METADATA-INVALID-JSON',
+      ])
+      .subscribe((translations) => {
         this.backButton.label = translations['NAV.PAYLOAD-DECODER'];
         this.title = translations['FORM.EDIT-PAYLOAD-DECODER'];
         this.submitButton = translations['PAYLOAD-DECODER.SAVE'];
-        this.payloadData = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER'];
-        this.metadata = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER'];
-        this.payloadDataErrorMessage = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE'];
-        this.metadataErrorMessage = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE'];
-        this.codeOutput = translations['QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'];
-        this.metadataInvalidJSONMessage = translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-INVALID-JSON'];
-        this.payloadInvalidJSONMessage = translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON'];
+        this.payloadData =
+          translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-PLACEHOLDER'];
+        this.metadata =
+          translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-PLACEHOLDER'];
+        this.payloadDataErrorMessage =
+          translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-ERRORMESSAGE'];
+        this.metadataErrorMessage =
+          translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-ERRORMESSAGE'];
+        this.codeOutput =
+          translations['QUESTION.GIVE-PAYLOADDECODER-OUTPUT-PLACEHOLDER'];
+        this.metadataInvalidJSONMessage =
+          translations['QUESTION.GIVE-PAYLOADDECODER-METADATA-INVALID-JSON'];
+        this.payloadInvalidJSONMessage =
+          translations['QUESTION.GIVE-PAYLOADDECODER-PAYLOAD-INVALID-JSON'];
       });
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id > 0) {
@@ -117,24 +142,30 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.sharedVariableService.getValue().subscribe((organisationId) => {
       this.getApplications(organisationId);
     });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite
+    );
   }
 
   setBackButtonLink(payloadDecoderId: number) {
     if (payloadDecoderId) {
-      this.backButton.routerLink = ['payload-decoder', 'payload-decoder-detail', this.id.toString()];
+      this.backButton.routerLink = [
+        'payload-decoder',
+        'payload-decoder-detail',
+        this.id.toString(),
+      ];
     } else {
       this.backButton.routerLink = ['payload-decoder'];
     }
   }
 
   private getPayloadDecoder(id: number) {
-    this.subscription = this.payloadDecoderService.getOne(id)
-      .subscribe(
-        (response) => {
-          this.payloadDecoder = response;
-          this.payloadDecoderBody = response.decodingFunction;
-        });
+    this.subscription = this.payloadDecoderService
+      .getOne(id)
+      .subscribe((response) => {
+        this.payloadDecoder = response;
+        this.payloadDecoderBody = response.decodingFunction;
+      });
   }
 
   testPayloadFunction() {
@@ -154,7 +185,9 @@ export class PayloadDecoderEditComponent implements OnInit {
       }
     }
     try {
-      this.testPayloadDecoder.rawPayloadJsonString = JSON.parse(this.payloadData);
+      this.testPayloadDecoder.rawPayloadJsonString = JSON.parse(
+        this.payloadData
+      );
     } catch (err) {
       this.errorFields = ['payload'];
       this.errorMessages = [this.payloadInvalidJSONMessage];
@@ -162,19 +195,21 @@ export class PayloadDecoderEditComponent implements OnInit {
       return;
     }
 
-    this.testPayloadDecoderService.post(this.testPayloadDecoder)
-      .subscribe(
-        (response) => {
-          this.codeOutput = JSON.stringify(response, null, 4);
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.testPayloadDecoderService.post(this.testPayloadDecoder).subscribe(
+      (response) => {
+        this.codeOutput = JSON.stringify(response, null, 4);
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   private isMetadataDefaultOrEmpty() {
-    return this.metadata.trim() === '' || this.metadata.split('\n').every(x => x.trim().startsWith('//'));
+    return (
+      this.metadata.trim() === '' ||
+      this.metadata.split('\n').every((x) => x.trim().startsWith('//'))
+    );
   }
 
   getCurrentOrganisationId(): number {
@@ -191,15 +226,19 @@ export class PayloadDecoderEditComponent implements OnInit {
         orgId ? orgId : this.getCurrentOrganisationId()
       )
       .subscribe((applications) => {
-        this.applications = applications.data;
+        this.applications = applications.data.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
   getDevices(event: MatSelectChange): void {
-    this.applicationsSubscription = this.applicationService.getApplication(event.value)
+    this.applicationsSubscription = this.applicationService
+      .getApplication(event.value)
       .subscribe((application: Application) => {
-        this.iotDevices = application.iotDevices;
-
+        this.iotDevices = application.iotDevices.sort((a, b) =>
+          a.name.localeCompare(b.name, 'en', { numeric: true })
+        );
       });
   }
 
@@ -208,7 +247,11 @@ export class PayloadDecoderEditComponent implements OnInit {
       .getIoTDevice(event.value)
       .subscribe(async (device: IotDevice) => {
         if (device.latestReceivedMessage) {
-          this.payloadData = JSON.stringify(device.latestReceivedMessage.rawData, null, 4);
+          this.payloadData = JSON.stringify(
+            device.latestReceivedMessage.rawData,
+            null,
+            4
+          );
         } else {
           this.payloadData = this.payloadDataErrorMessage;
         }
@@ -250,28 +293,27 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.payloadDecoderService.post(this.payloadDecoder)
-      .subscribe(
-        (response) => {
-          this.routeBack();
-          this.showSavedSnack();
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.payloadDecoderService.post(this.payloadDecoder).subscribe(
+      (response) => {
+        this.routeBack();
+        this.showSavedSnack();
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   private update(): void {
-    this.payloadDecoderService.put(this.payloadDecoder, this.id)
-      .subscribe(
-        (response) => {
-          this.routeBack();
-          this.showSavedSnack();
-        },
-        (error) => {
-          this.showError(error);
-        });
+    this.payloadDecoderService.put(this.payloadDecoder, this.id).subscribe(
+      (response) => {
+        this.routeBack();
+        this.showSavedSnack();
+      },
+      (error) => {
+        this.showError(error);
+      }
+    );
   }
 
   onSubmit(): void {
@@ -281,11 +323,12 @@ export class PayloadDecoderEditComponent implements OnInit {
     } else {
       this.create();
     }
-
   }
 
   private showError(error: HttpErrorResponse) {
-    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
+    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(
+      error
+    );
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
     this.formFailedSubmit = true;
@@ -295,5 +338,4 @@ export class PayloadDecoderEditComponent implements OnInit {
   routeBack(): void {
     this.location.back();
   }
-
 }
