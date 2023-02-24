@@ -4,7 +4,7 @@
       <div class="jumbotron">
         <div *ngIf="applicationService.canEdit else readOnly">
           <app-top-bar-table [component]="true" [title]="'APPLICATION.DATATARGET-SHOW' | translate"
-                             [ctaLabelPrimary]="'FORM.CREATE-NEW-DATATARGET' | translate" [ctaRouterLinkPrimary]="'../datatarget-new'">
+            [ctaLabelPrimary]="'FORM.CREATE-NEW-DATATARGET' | translate" [ctaRouterLinkPrimary]="'../datatarget-new'">
           </app-top-bar-table>
         </div>
         <ng-template #readOnly>
