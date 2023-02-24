@@ -24,7 +24,7 @@ import { DownlinkService } from '@shared/services/downlink.service';
 })
 export class MulticastDetailComponent implements OnInit, OnDestroy {
   public multicast: Multicast;
-  public backButton: BackButton = { label: '', routerLink: '/multicast-list' };
+  public backButton: BackButton = { label: '', routerLink: undefined };
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public formFailedSubmit = false;
@@ -68,12 +68,7 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
   getMulticast(id: number) {
     this.multicastService.get(id).subscribe((multicast: Multicast) => {
       this.multicast = multicast;
-      this.setBackButton(this.applicationId);
     });
-  }
-
-  private setBackButton(applicationId: number) {
-    this.backButton.routerLink = ['applications', applicationId.toString()];
   }
 
   // Class-B:

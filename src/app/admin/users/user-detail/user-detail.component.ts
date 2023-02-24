@@ -16,7 +16,7 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.scss']
+  styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
@@ -30,7 +30,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   user: UserResponse;
   public backButton: BackButton = {
     label: '',
-    routerLink: '/admin/users',
+    routerLink: undefined,
   };
   public buttons: QuickActionButton[] = [
     {
@@ -53,7 +53,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private router: Router,
     private meService: MeService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -66,12 +66,15 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         isErasable: false,
       };
     }
-    this.translate.get(['NAV.USERS', 'USERS.DETAIL.DROPDOWN'])
-      .subscribe(translations => {
+    this.translate
+      .get(['NAV.USERS', 'USERS.DETAIL.DROPDOWN'])
+      .subscribe((translations) => {
         this.backButton.label = translations['NAV.USERS'];
         this.dropdownButton.label = translations['USERS.DETAIL.DROPDOWN'];
       });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.UserAdministrationWrite
+    );
   }
 
   private getUser(id: number) {

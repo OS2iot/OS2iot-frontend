@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { GatewayTableComponent } from './gateway-table/gateway-table.component';
 import { GatewaysComponent } from './gateways/gateways.component';
-import { GatewayListComponent } from './gateway-list/gateway-list.component';
+import { GatewayOverviewComponent } from './gateway-overview/gateway-overview.component';
 import { GatewayEditComponent } from './gateway-edit/gateway-edit.component';
 import { FormsModule } from '@angular/forms';
 import { GatewayDetailComponent } from './gateway-detail/gateway-detail.component';
@@ -15,29 +15,42 @@ import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { GatewayStatusComponent } from './gateway-status/gateway-status.component';
 import { GraphModule } from '@app/graph/graph.module';
+import { GatewayListComponent } from './gateway-overview/gateway-tabs/gateway-list/gateway-list.component';
+import { GatewayMapComponent } from './gateway-overview/gateway-tabs/gateway-map/gateway-map.component';
+import { GatewayStatusOverviewComponent } from './gateway-overview/gateway-tabs/gateway-status-overview/gateway-status-overview.component';
 
 const gatewayRoutes: Routes = [
   {
     path: '',
     component: GatewaysComponent,
     children: [
-      { path: '', component: GatewayListComponent },
+      {
+        path: '',
+        component: GatewayOverviewComponent,
+        children: [
+          { path: 'list', component: GatewayListComponent },
+          { path: 'map', component: GatewayMapComponent },
+          { path: 'status', component: GatewayStatusOverviewComponent },
+        ],
+      },
       { path: 'gateway-edit/:id', component: GatewayEditComponent },
       { path: 'gateway-edit', component: GatewayEditComponent },
-      { path: 'gateway-detail/:id', component: GatewayDetailComponent }
-    ]
-  }
+      { path: 'gateway-detail/:id', component: GatewayDetailComponent },
+    ],
+  },
 ];
-
 
 @NgModule({
   declarations: [
     GatewayTableComponent,
     GatewaysComponent,
-    GatewayListComponent,
+    GatewayOverviewComponent,
     GatewayDetailComponent,
     GatewayEditComponent,
     GatewayStatusComponent,
+    GatewayListComponent,
+    GatewayMapComponent,
+    GatewayStatusOverviewComponent,
   ],
   imports: [
     CommonModule,
@@ -55,10 +68,10 @@ const gatewayRoutes: Routes = [
   exports: [
     GatewayTableComponent,
     GatewaysComponent,
-    GatewayListComponent,
+    GatewayOverviewComponent,
     GatewayEditComponent,
     GatewayStatusComponent,
-    RouterModule
-  ]
+    RouterModule,
+  ],
 })
-export class GatewayModule { }
+export class GatewayModule {}

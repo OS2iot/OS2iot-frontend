@@ -53,10 +53,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
   batteryStatusColor = 'green';
-  batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
-  noValueText: string;
   toText: string;
 
   constructor(
@@ -66,7 +64,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     public iotDeviceService: IoTDeviceService,
     private meService: MeService,
     private dialog: MatDialog,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     translate.use('da');
     moment.locale('da');
@@ -74,7 +72,11 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     const applicationId = +this.route.snapshot.paramMap.get('id');
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, applicationId);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      applicationId
+    );
   }
 
   ngAfterViewInit() {

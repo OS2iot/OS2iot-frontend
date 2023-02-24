@@ -16,7 +16,7 @@
         {{ 'APPLICATION-TABLE.NAME' | translate }}
       </th>
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="['iot-device', element.id]" routerLinkActive="active" class="device-link">{{element.name}}</a>
+        <a [routerLink]="['../iot-device', element.id]" routerLinkActive="active" class="device-link">{{element.name}}</a>
       </td>
     </ng-container>
 
