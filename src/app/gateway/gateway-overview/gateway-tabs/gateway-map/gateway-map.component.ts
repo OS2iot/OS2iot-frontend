@@ -26,6 +26,13 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
+    this.gatewayService.organisationChangeSubject.subscribe((x) => {
+      if (x) {
+        this.getGatewayWith(x);
+      } else {
+        this.getGateways();
+      }
+    });
     if (this.gatewayService.selectedOrg) {
       this.getGatewayWith(this.gatewayService.selectedOrg);
     } else {
