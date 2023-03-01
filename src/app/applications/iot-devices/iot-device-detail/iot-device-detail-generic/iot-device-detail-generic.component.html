@@ -64,7 +64,9 @@
         <div class="jumbotron jumbotron--m-left jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.LOCATION' | translate }}</h3>
             <div *ngIf="device.location; else locationElseBlock">
+              <div class="thirty-height">
                 <app-map [coordinates]="getCoordinates()"></app-map>
+              </div>
                 <div class="row">
                     <div class="col-6">
                         <p><strong>{{ 'IOTDEVICE.LONGITUDE' | translate }}</strong>{{longitude | number:'2.1-6'}}</p>

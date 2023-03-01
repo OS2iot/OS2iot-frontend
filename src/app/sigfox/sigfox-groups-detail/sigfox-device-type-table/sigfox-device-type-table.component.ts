@@ -11,7 +11,7 @@ import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 @Component({
   selector: 'app-sigfox-device-type-table',
   templateUrl: './sigfox-device-type-table.component.html',
-  styleUrls: ['./sigfox-device-type-table.component.scss']
+  styleUrls: ['./sigfox-device-type-table.component.scss'],
 })
 export class SigfoxDeviceTypeTableComponent implements OnInit, OnChanges {
   @Input() sigfoxDevices: SigfoxDeviceType[];
@@ -28,24 +28,26 @@ export class SigfoxDeviceTypeTableComponent implements OnInit, OnChanges {
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router
+  ) {
     this.translate.use('da');
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges() {
     if (this.sigfoxDevices) {
-      this.dataSource.data = this.sigfoxDevices;
+      this.dataSource.data = this.sigfoxDevices.sort((a, b) =>
+        a.name.localeCompare(b.name, 'en', { numeric: true })
+      );
       this.dataSource.paginator = this.paginator;
       this.resultsLength = this.sigfoxDevices.length;
     }
   }
 
   editDeviceType(row: any) {
-    this.router.navigate([row.id, 'edit-device-type'], { relativeTo: this.route });
-    console.log(row);
+    this.router.navigate([row.id, 'edit-device-type'], {
+      relativeTo: this.route,
+    });
   }
-
 }

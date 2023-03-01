@@ -23,6 +23,7 @@ import { DatatargetDetailTypeSelectorDirective } from './datatarget-detail/datat
 import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarget-edit-type-selector.directive';
 import { MqttEditComponent } from './mqtt-edit/mqtt-edit.component';
 import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
+import { DatatargetTabComponent } from './datatarget-tab/datatarget-tab.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
     MqttDetailComponent,
     MqttEditComponent,
     DatatargetDetailTypeSelectorDirective,
-    DatatargetEditTypeSelectorDirective],
+    DatatargetEditTypeSelectorDirective,
+    DatatargetTabComponent],
   imports: [
     CommonModule,
     RouterModule,

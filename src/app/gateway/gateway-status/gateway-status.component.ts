@@ -14,7 +14,10 @@ import { recordToEntries } from '@shared/helpers/record.helper';
 import { LoRaWANGatewayService } from '@shared/services/lorawan-gateway.service';
 import moment from 'moment';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { GatewayStatusInterval, gatewayStatusIntervalToDate } from '../enums/gateway-status-interval.enum';
+import {
+  GatewayStatusInterval,
+  gatewayStatusIntervalToDate,
+} from '../enums/gateway-status-interval.enum';
 import { GatewayStatus, AllGatewayStatusResponse } from '../gateway.model';
 import { map } from 'rxjs/operators';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
@@ -147,7 +150,10 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     });
   }
 
-  private handleStatusResponse(response: AllGatewayStatusResponse, fromDate: Date) {
+  private handleStatusResponse(
+    response: AllGatewayStatusResponse,
+    fromDate: Date
+  ) {
     this.resultsLength = response.count;
     const gatewaysWithLatestTimestampsPerHour = this.takeLatestTimestampInHour(
       response.data

@@ -39,6 +39,7 @@ export class OrganisationDropdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllowedOrganizations();
+    this.organisations.sort((a, b) => a.name.localeCompare(b.name, 'en', {numeric: true}))
   }
 
   getAllowedOrganizations() {

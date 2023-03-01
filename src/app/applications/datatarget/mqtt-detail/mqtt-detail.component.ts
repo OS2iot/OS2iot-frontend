@@ -25,7 +25,7 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 export class MqttDetailComponent
   implements DatatargetDetail, OnInit, OnDestroy {
   public datatarget: Datatarget;
-  public backButton: BackButton = { label: '', routerLink: '' };
+  public backButton: BackButton = { label: '', routerLink: undefined };
   public dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
@@ -39,7 +39,7 @@ export class MqttDetailComponent
     private datatargetRelationService: PayloadDeviceDatatargetService,
     private datatargetService: DatatargetService,
     public translate: TranslateService,
-    private meService: MeService,
+    private meService: MeService
   ) {}
 
   ngOnInit(): void {
@@ -61,16 +61,16 @@ export class MqttDetailComponent
         this.backButton.label = translations['NAV.MY-DATATARGET'];
         this.dropdownButton.label = translations['DATATARGET.SHOW-OPTIONS'];
       });
-    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      appId
+    );
   }
 
   getDatatarget(id: number) {
     this.datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
       this.datatarget = dataTarget;
-      this.backButton.routerLink = [
-        'applications',
-        this.datatarget.applicationId.toString(),
-      ];
     });
   }
 
@@ -86,11 +86,9 @@ export class MqttDetailComponent
   }
 
   getDatatargetRelations(id: number) {
-    this.datatargetRelationService
-      .getByDataTarget(id)
-      .subscribe((response) => {
-        this.dataTargetRelations = response.data;
-      });
+    this.datatargetRelationService.getByDataTarget(id).subscribe((response) => {
+      this.dataTargetRelations = response.data;
+    });
   }
 
   ngOnDestroy(): void {
