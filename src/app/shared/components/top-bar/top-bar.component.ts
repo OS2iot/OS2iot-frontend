@@ -106,7 +106,6 @@ export class TopBarComponent implements OnInit {
     ) {
       this.router.navigate([this.backButton.routerLink]);
     } else {
-      console.log('back here');
       this.location.back();
     }
   }
