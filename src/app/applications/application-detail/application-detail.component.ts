@@ -65,7 +65,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy {
       this.bindApplication(this.id);
       this.dropdownButton = {
         label: '',
-        editRouterLink: '../../edit-application/' + this.id,
+        editRouterLink: '../edit-application/' + this.id,
         isErasable: true,
       };
     }
