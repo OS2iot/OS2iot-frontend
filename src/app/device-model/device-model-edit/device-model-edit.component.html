@@ -10,7 +10,7 @@
     <!-- Name -->
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="name">{{'QUESTION.DEVICE-MODEL.GIVE-NAME' | translate}}</label>
+            <label class="form-label" for="name">{{'QUESTION.DEVICE-MODEL.GIVE-NAME' | translate}}</label>*
             <input type="text" class="form-control" id="name" name="name"
                 [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-NAME-PLACEHOLDER' | translate" maxlength="50" required
                 [(ngModel)]="deviceModel.body.name"
@@ -63,14 +63,14 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="controlledProperty">{{'QUESTION.DEVICE-MODEL.SELECT-CONTROLLEDPROPERTY' | translate}}</label>*
-            <mat-select 
+            <mat-select
                 class="form-control"
-                multiple 
+                multiple
                 [compareWith]="compare"
                 name="controlledProperty"
                 [(ngModel)]="deviceModel.body.controlledProperty">
-                <mat-option 
-                    *ngFor="let control of controlledPropperties" 
+                <mat-option
+                    *ngFor="let control of controlledPropperties"
                     [value]="control">
                         {{control}}
                 </mat-option>
@@ -81,13 +81,13 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="categories">{{'QUESTION.DEVICE-MODEL.SELECT-CATEGORY' | translate}}</label>*
-            <mat-select 
-                class="form-control" 
+            <mat-select
+                class="form-control"
                 name="categories"
                 [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.category">
-                <mat-option 
-                    *ngFor="let category of categories" 
+                <mat-option
+                    *ngFor="let category of categories"
                     [value]="category">
                         {{category}}
                 </mat-option>
@@ -98,14 +98,14 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="supportedUnits">{{'QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDUNITS' | translate}}</label>
-            <mat-select 
-                class="form-control" 
+            <mat-select
+                class="form-control"
                 name="supportedUnits"
-                multiple 
+                multiple
                 [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.supportedUnits">
-                <mat-option 
-                    *ngFor="let unit of supportedUnits.units" 
+                <mat-option
+                    *ngFor="let unit of supportedUnits.units"
                     [value]="unit.code">
                         {{unit.name}}
                 </mat-option>
@@ -116,13 +116,13 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="devicefunction">{{'QUESTION.DEVICE-MODEL.SELECT-DEVICEFUNCTIONS' | translate}}</label>
-            <mat-select 
-                class="form-control" 
+            <mat-select
+                class="form-control"
                 name="devicefunction"
                 multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.function">
-                <mat-option 
-                    *ngFor="let function of deviceFunctions" 
+                <mat-option
+                    *ngFor="let function of deviceFunctions"
                     [value]="function">
                         {{function}}
                 </mat-option>
@@ -133,13 +133,13 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="energyLimitationClass">{{'QUESTION.DEVICE-MODEL.SELECT-ENERGYLIMITATIONCLASS' | translate}}</label>
-            <mat-select 
-                class="form-control" 
+            <mat-select
+                class="form-control"
                 name="energyLimitationClass"
                 [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.energyLimitationClass">
-                <mat-option 
-                    *ngFor="let elclass of energyLimitationClass.energyLimits" 
+                <mat-option
+                    *ngFor="let elclass of energyLimitationClass.energyLimits"
                     [value]="elclass.code">
                         {{elclass.name}}
                 </mat-option>
@@ -150,13 +150,13 @@
     <div class="row mb-2">
         <div class="form-group mt-3 col-12">
             <label class="form-label" for="supportedProtocol">{{'QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDPROTOCOL' | translate}}</label>
-            <mat-select 
-                class="form-control" 
+            <mat-select
+                class="form-control"
                 name="supportedProtocol"
                 multiple [compareWith]="compare"
                 [(ngModel)]="deviceModel.body.supportedProtocol">
-                <mat-option 
-                    *ngFor="let protocol of supportedProtocol" 
+                <mat-option
+                    *ngFor="let protocol of supportedProtocol"
                     [value]="protocol">
                         {{protocol}}
                 </mat-option>
@@ -168,7 +168,7 @@
         <div class="form-group mt-3 col-12">
             <a href="https://github.com/smart-data-models/dataModel.Device" target="_blank">
                 {{'QUESTION.DEVICE-MODEL.FIWARE-LINK-TEXT' | translate}}
-            </a> 
+            </a>
         </div>
     </div>
   <div class="form-group mt-5">

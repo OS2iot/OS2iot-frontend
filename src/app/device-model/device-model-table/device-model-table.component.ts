@@ -65,10 +65,14 @@ export class DeviceModelTableComponent implements OnInit, AfterViewInit {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.resultsLength = data.count;
-
-          return data.data.sort((a, b) =>
-            a.body.name.localeCompare(b.body.name, 'en', { numeric: true })
-          );
+          return data.data.sort((a, b) => {
+            if (a.body.name === undefined || b.body.name === undefined) {
+              return -1;
+            }
+            return a.body.name.localeCompare(b.body.name, 'en', {
+              numeric: true,
+            });
+          });
         }),
         catchError(() => {
           this.isLoadingResults = false;
