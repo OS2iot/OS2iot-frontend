@@ -8,19 +8,23 @@
           <h3>{{ 'DATATARGET.DETAILS' | translate }}</h3>
           <app-general-details [data]="datatarget"></app-general-details>
           <mat-divider></mat-divider>
-          <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
-          <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
+          <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
+            <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
+            <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
+          </span>
           <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{'DATATARGET.' + datatarget.type + '.TYPE' | translate}}</p>
-          <mat-divider></mat-divider>
-          <p><strong>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</strong></p>
-          <code><pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{datatarget.authorizationHeader}}</pre></code>
-          <ng-template #showNoAuthText>
-            <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
-          </ng-template>
+          <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
+            <mat-divider></mat-divider>
+            <p><strong>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</strong></p>
+            <code><pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{datatarget.authorizationHeader}}</pre></code>
+            <ng-template #showNoAuthText>
+              <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
+            </ng-template>
+          </span>
 
         </div>
       </div>
-      <div class="col-md-6 d-flex align-items-stretch">
+      <div *ngIf="datatarget.type === dataTargetType.OPENDATADK" class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-left jumbotron--full-width">
           <h3>{{ 'DATATARGET.OPENDATA-DK.TYPE' | translate }}</h3>
           <div *ngIf="datatarget.setToOpendataDk else noOpendataDk">

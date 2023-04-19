@@ -14,6 +14,7 @@ import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { DatatargetDetail } from '@applications/datatarget/datatarget-detail/datatarget-detail';
 import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DataTargetType } from '@shared/enums/datatarget-type';
 
 @Component({
   selector: 'app-httppush-detail',
@@ -22,6 +23,8 @@ import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 })
 export class HttppushDetailComponent
   implements DatatargetDetail, OnInit, OnDestroy {
+  dataTargetType = DataTargetType;
+
   public datatargetSubscription: Subscription;
   public datatarget: Datatarget;
   public backButton: BackButton = { label: '', routerLink: undefined };
@@ -29,7 +32,6 @@ export class HttppushDetailComponent
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   arrowsAltH = faArrowsAltH;
-  private applicationName: string;
   canEdit: boolean;
 
   constructor(
@@ -45,7 +47,6 @@ export class HttppushDetailComponent
   ngOnInit(): void {
     const id: number = +this.route.snapshot.paramMap.get('datatargetId');
     const appId: number = +this.route.snapshot.paramMap.get('id');
-    this.applicationName = this.route.snapshot.paramMap.get('name');
     if (id) {
       this.getDatatarget(id);
       this.getDatatargetRelations(id);

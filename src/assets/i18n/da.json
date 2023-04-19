@@ -237,6 +237,9 @@
       "QOS": "QoS",
       "USERNAME": "Brugernavn",
       "PASSWORD": "Adgangskode"
+    },
+    "OPENDATADK": {
+      "TYPE": "OpenDataDK"
     }
   },
   "MULTICAST": {
@@ -260,18 +263,35 @@
     }
   },
   "OPENDATADK": {
+    "INTRO": {
+      "GUIDE_HEADER": "Guide til Open Data DK-data target",
+      "GUIDE1": "Det er nemt at sende data fra OS2iot til Open Data DK (ODDK). Første gange der oprettes et ODDK-data target, bliver det muligt for ODDK at høste oplysninger om jeres datasæt til opendata.dk. Når først høstningen er sat op, vil alle jeres ODDK-data targets automatisk blive oprettet og opdateret på opendata.dk.",
+      "GUIDE2": "Senest modtagede datapakke udstilles via OS2iots API og kan hentes via en URL angivet på det enkelte ODDK-data target og på jeres datasæt på opendata.dk. Der opsamles og udstilles altså ikke historisk data i hverken OS2iot eller på opendata.dk.",
+      "GUIDE3": "Nye ODDK-data targets høstes automatisk, og I behøver ikke gøre noget aktivt for at gøre dem tilgængelige på opendata.dk. Hvis I sletter et ODDK-data target forsvinder det af sig selv fra opendata.dk.",
+      "GUIDE4": "Datasæt fra OS2iot publiceres under licensen",
+      "GUIDE5": "Open DATA DK Licens.",
+      "PROCEDURE_HEADER": "Procedure ved oprettelse af første data target",
+      "PROCEDURE1": "Bliv medlem af Open Data DK, hvis jeres myndighed ikke allerede er det:",
+      "PROCEDURE2": "Opret første ODDK-data target i OS2iot",
+      "PROCEDURE3": "Ved oprettelsen tilbyder OS2iot at sende en mail til Open Data DK's administrator, som sætter høstningen op. I må forvente op til 2-3 ugers behandlingstid.",
+      "PROCEDURE4": "Når høstningen er aktiv, kan datasæt findes og beriges på",
+      "PROCEDURE4_LINK": "ODDK administrationsmodulet"
+    },
     "QUESTION": {
       "GIVE-OPENDATADK-NAME": "Datasæt titel",
       "GIVE-OPENDATADK-NAME-PLACEHOLDER": "Datasæt titel",
-      "GIVE-OPENDATADK-RESOURCETITLE": "Datakilde titel",
+      "GIVE-OPENDATADK-NAME-INFO": "Overordnet titel på datasættet på opendata.dk",
+      "GIVE-OPENDATADK-RESOURCETITLE": "Data ressource titel",
       "GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER": "Kloaksensorer - Aarhus kommune",
+      "GIVE-OPENDATADK-RESOURCETITLE-INFO": "Titel på den ressource, der vises i datasættet på opendata.dk",
       "GIVE-OPENDATADK-DESCRIPTION": "Beskrivelse",
       "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "Beskrivelse",
-      "GIVE-OPENDATADK-KEYWORDS": "Angiv kommasepareret nøgleord",
+      "GIVE-OPENDATADK-KEYWORDS": "Angiv emneord",
       "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, sensor, LoRaWAN, temeratur",
-      "GIVE-OPENDATADK-AUTHORNAME": "Forfatter",
+      "GIVE-OPENDATADK-AUTHORNAME": "Dataejer",
       "GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER": "Jens Jensen",
-      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Forfatterens e-mail",
+      "GIVE-OPENDATADK-AUTHORNAME-INFO": "Ansvarlig afdeling eller person",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Dataejers e-mail",
       "GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER": "jens@jensen.dk",
       "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed de",
       "ACCEPT-TERMS-PART-TWO": "Heriblandt at data ikke indeholder følsomme personoplysninger eller personhenførbare informationer.",
@@ -537,6 +557,7 @@
     "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
+    "GIVE-DATATARGET-NAME-INFO": "Benyttes kun i OS2iot",
     "GIVE-DATATARGET-TIMEOUT": "Timeout i millisekunder",
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",

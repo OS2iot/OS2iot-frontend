@@ -78,6 +78,7 @@ export class DatatargetService {
       datatarget.openDataDkDataset = null;
     }
     if (datatarget.setToOpendataDk) {
+      //TODO: Probably not needed if we have multi-select drop-down..?
       datatarget.openDataDkDataset.keywords = datatarget.openDataDkDataset?.keywordsInput?.split(',');
       datatarget.openDataDkDataset.keywordsInput = undefined;
     }
