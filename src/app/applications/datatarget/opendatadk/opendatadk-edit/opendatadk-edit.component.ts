@@ -43,6 +43,23 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
 
   title = 'FORM.CREATE-NEW-DATATARGET';
 
+  selectableKeyword = [
+    'Befolkning og samfund',
+    'Energi',
+    'Internationale spørgsmål',
+    'Landbrug, fiskeri, skovbrug og fødevarer',
+    'Midlertidige data',
+    'Miljø',
+    'Regeringen og den offentlige sektor',
+    'Regioner og byer',
+    'Retfærdighed, retssystem og offentlig sikkerhed',
+    'Sundhed',
+    'Transport',
+    'Uddannelse, kultur og sport',
+    'Videnskab og teknologi',
+    'Økonomi og finanser',
+  ];
+
   errorMessages: any[];
   errorFields: string[];
 

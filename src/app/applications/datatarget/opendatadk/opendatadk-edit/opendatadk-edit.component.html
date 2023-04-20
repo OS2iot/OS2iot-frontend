@@ -243,44 +243,42 @@
   </div>
 
   <!-- Keywords -->
-  <!-- TODO: Change to multi-select dropdown?? -->
   <div class="row mb-2">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="openDataDkDataset.keywordsInput">
         {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS' | translate}}
       </label>
-      <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.keywordsInput"
-        name="openDataDkDataset.keywordsInput"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+      <mat-select
+        multiple
         required
-        [(ngModel)]="datatarget.openDataDkDataset.keywordsInput"
+        id="openDataDkDataset.keywords"
+        name="openDataDkDataset.keywords"
+        [(value)]="datatarget.openDataDkDataset.keywords"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+        class="form-control"
         [ngClass]="{
-          'is-invalid':
-            formFailedSubmit &&
-            errorFields.includes('openDataDkDataset.keywordsInput'),
-          'is-valid':
-            formFailedSubmit &&
-            !errorFields.includes('openDataDkDataset.keywordsInput')
-        }"
-      />
+              'is-invalid':
+                formFailedSubmit &&
+                errorFields.includes('openDataDkDataset.keywords'),
+              'is-valid':
+                formFailedSubmit &&
+                !errorFields.includes('openDataDkDataset.keywords')
+            }">
+        <mat-option *ngFor="let kw of selectableKeyword" [value]="kw">{{kw}}</mat-option>
+      </mat-select>
     </div>
   </div>
 
   <!-- Terms and conditions checkmark -->
-  <!-- TODO: Find out exactly what we want here? -->
   <div class="row mt-3">
     <div class="col-12">
       <mat-checkbox [(ngModel)]="datatarget.openDataDkDataset.acceptTerms" name="acceptTerms">
         <p>
           {{ 'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE' | translate }}
-          <a href="https://portal.opendata.dk/dataset/76b7c4cb-2e29-43aa-9b50-eec22b5c3b5e/resource/05e25340-ac7b-460f-a427-41eccb6c36ae/download/open-data-dk-vilkaar-og-betingelser.12.06.18.pdf">
+          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da">
             {{ 'OPENDATADK.QUESTION.TERMS-AND-CONDITIONS' | translate }}
           </a>
         </p>
-        <p>{{ 'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-TWO' | translate }}</p>
       </mat-checkbox>
     </div>
   </div>
