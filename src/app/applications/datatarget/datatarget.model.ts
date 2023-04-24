@@ -44,3 +44,10 @@ export class DatatargetTypeDescriptor {
     readMoreUrl: string;
     provider: string;
 }
+
+export class OddkMailInfo {
+    organizationId?: number;
+    organizationOddkAlias: string;
+    comment?: string;
+    sharingUrl?: string
+}

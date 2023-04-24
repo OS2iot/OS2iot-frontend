@@ -19,18 +19,19 @@ import {
 } from '@payload-decoder/payload-device-data.model';
 import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-datatarget.service';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { DataTargetType } from '@shared/enums/datatarget-type';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { MeService } from '@shared/services/me.service';
-import { OpendatadkService } from '@shared/services/opendatadk.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
 import { SnackService } from '@shared/services/snack.service';
-import { Observable, Subscription } from 'rxjs';
-import { Datatarget } from '../../datatarget.model';
+import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { first } from 'rxjs/operators';
+import { Datatarget, OddkMailInfo } from '../../datatarget.model';
 import { DatatargetService } from '../../datatarget.service';
 import { OpenDataDkDataset } from '../../opendatadk/opendatadk-dataset.model';
+import { OpenDataDkMailDialogComponent } from './opendatadk-mail-dialog/opendatadk-mail-dialog';
+import { OpenDataDkWarningDialogComponent } from './opendatadk-warning-dialog/opendatadk-warning-dialog';
 
 @Component({
   selector: 'app-opendatadk-edit',
@@ -64,23 +65,19 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   errorFields: string[];
 
   datatarget: Datatarget = new Datatarget();
-  private datatargetSubscription: Subscription;
-  private relationSubscription: Subscription;
-  private applicationSubscription: Subscription;
-  private payloadDecoderSubscription: Subscription;
-  private dataExistsSubscription: Subscription;
+  private subscriptions = [];
 
   formFailedSubmit = false;
   datatargetId: number;
   private applicationId: number;
   devices: IotDevice[];
   payloadDecoders = [];
-  private counter: number;
-  private dataSetExists = false;
-  private isMailDialogAlreadyShown = false;
+  private pendingRequestsCounter: number;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   canEdit: boolean;
+
+  private alreadySentOddkMail: boolean = false;
 
   constructor(
     translate: TranslateService,
@@ -93,10 +90,9 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     private saveSnackService: SnackService,
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
-    private opendatadkService: OpendatadkService,
-    private opendatadkDialogService: OpendatadkDialogService,
     private scrollToTopService: ScrollToTopService,
-    private meService: MeService
+    private meService: MeService,
+    private sharedVariableService: SharedVariableService
   ) {
     translate.use('da');
 
@@ -105,16 +101,17 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
 
     this.datatargetId = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
+    if (this.applicationId !== 0) {
+      this.getDevices();
+      this.getPayloadDecoders();
+    }
     if (this.datatargetId !== 0) {
       this.title = 'FORM.EDIT-DATATARGET';
       this.getDatatarget(this.datatargetId);
       this.getPayloadDeviceDatatarget(this.datatargetId);
     }
-    if (this.applicationId !== 0) {
-      this.getDevices();
-    }
-    this.getPayloadDecoders();
-    this.getDataSetExists();
+    this.getAlreadySentOddkMail();
+
     this.canEdit = this.meService.hasAccessToTargetOrganization(
       OrganizationAccessScope.ApplicationWrite,
       undefined,
@@ -123,53 +120,46 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.relationSubscription?.unsubscribe();
-    this.applicationSubscription?.unsubscribe();
-    this.datatargetSubscription?.unsubscribe();
-    this.payloadDecoderSubscription?.unsubscribe();
-    this.dataExistsSubscription?.unsubscribe();
+    this.subscriptions.forEach((s) => s?.unsubscribe());
   }
 
   private getPayloadDeviceDatatarget(id: number) {
-    this.relationSubscription = this.payloadDeviceDataTargetService
-      .getByDataTarget(id)
-      .subscribe((dto: PayloadDeviceDatatargetGetByDataTargetResponse) => {
-        this.payloadDeviceDatatarget = [];
-        dto.data.forEach((element) => {
-          this.payloadDeviceDatatarget.push({
-            id: element.id,
-            iotDeviceIds: element.iotDevices.map((x) => x.id),
-            payloadDecoderId:
-              element.payloadDecoder?.id === undefined
-                ? 0
-                : element.payloadDecoder?.id,
-            dataTargetId: element.dataTarget.id,
+    this.subscriptions.push(
+      this.payloadDeviceDataTargetService
+        .getByDataTarget(id)
+        .subscribe((dto: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+          this.payloadDeviceDatatarget = [];
+          dto.data.forEach((element) => {
+            this.payloadDeviceDatatarget.push({
+              id: element.id,
+              iotDeviceIds: element.iotDevices.map((x) => x.id),
+              payloadDecoderId:
+                element.payloadDecoder?.id === undefined
+                  ? 0
+                  : element.payloadDecoder?.id,
+              dataTargetId: element.dataTarget.id,
+            });
           });
-        });
-      });
+        })
+    );
   }
 
   private getDatatarget(id: number) {
-    this.datatargetSubscription = this.datatargetService
-      .get(id)
-      .subscribe((response: Datatarget) => {
+    this.subscriptions.push(
+      this.datatargetService.get(id).subscribe((response: Datatarget) => {
         this.datatarget = response;
         if (this.datatarget.openDataDkDataset != null) {
           this.datatarget.openDataDkDataset.acceptTerms = true;
         }
-      });
-  }
-  private getDataSetExists() {
-    this.dataExistsSubscription = this.opendatadkService
-      .get()
-      .subscribe((response) => {
-        this.dataSetExists = response.dataset.length !== 0;
-      });
+      })
+    );
   }
 
   onSubmit(): void {
     this.resetErrors();
     if (this.datatargetId) {
+      this.pendingRequestsCounter =
+        1 + (this.payloadDeviceDatatarget?.length ?? 0);
       this.updateDatatarget();
       this.addPayloadDeviceDatatarget();
     } else {
@@ -177,77 +167,80 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     }
   }
   private updateDatatarget() {
-    this.counter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
-    this.datatargetService.update(this.datatarget).subscribe(
-      (response: Datatarget) => {
-        this.datatarget = response;
-        if (this.datatarget.openDataDkDataset != null) {
-          this.datatarget.openDataDkDataset.acceptTerms = true;
-        }
-        this.shouldShowMailDialog().subscribe((response) => {
+    this.subscriptions.push(
+      this.datatargetService.update(this.datatarget).subscribe(
+        (response: Datatarget) => {
+          this.datatarget = response;
+          if (this.datatarget.openDataDkDataset != null) {
+            this.datatarget.openDataDkDataset.acceptTerms = true;
+          }
           this.countToRedirect();
-        });
-      },
-      (error: HttpErrorResponse) => {
-        this.checkDataTargetModelOpendatadkdatasaet();
-        this.handleError(error);
-        this.formFailedSubmit = true;
-      }
+        },
+        (error: HttpErrorResponse) => {
+          this.checkDataTargetModelOpendatadkdatasaet();
+          this.handleError(error);
+          this.formFailedSubmit = true;
+        }
+      )
     );
   }
   private addPayloadDeviceDatatarget() {
-    this.payloadDeviceDatatarget.map((pdd) => {
-      if (pdd.payloadDecoderId === 0) {
-        pdd.payloadDecoderId = null;
-      }
-    });
     this.payloadDeviceDatatarget.forEach((relation) => {
+      if (relation.payloadDecoderId === 0) {
+        relation.payloadDecoderId = null;
+      }
       if (relation.id) {
-        this.payloadDeviceDataTargetService.put(relation).subscribe(
-          (response) => {
-            this.countToRedirect();
-          },
-          (error) => {
-            this.handleError(error);
-          }
+        this.subscriptions.push(
+          this.payloadDeviceDataTargetService.put(relation).subscribe(
+            () => this.countToRedirect(),
+            (error) => this.handleError(error)
+          )
         );
       } else {
-        this.payloadDeviceDataTargetService.post(relation).subscribe(
-          (res: any) => {
-            this.countToRedirect();
-          },
-          (error) => {
-            this.handleError(error);
-          }
+        this.subscriptions.push(
+          this.payloadDeviceDataTargetService.post(relation).subscribe(
+            () => this.countToRedirect(),
+            (error) => this.handleError(error)
+          )
         );
       }
     });
   }
   private createDatatarget() {
-    this.counter = 0;
+    this.pendingRequestsCounter = 0;
     this.datatarget.applicationId = this.applicationId;
-    this.datatargetService.create(this.datatarget).subscribe(
-      (response: Datatarget) => {
-        this.datatargetId = response.id;
-        this.datatarget = response;
-        if (this.datatarget.openDataDkDataset != null) {
-          this.datatarget.openDataDkDataset.acceptTerms = true;
+    this.subscriptions.push(
+      this.datatargetService.create(this.datatarget).subscribe(
+        (response: Datatarget) => {
+          this.datatargetId = response.id;
+          this.datatarget = response;
+          if (this.datatarget.openDataDkDataset != null) {
+            this.datatarget.openDataDkDataset.acceptTerms = true;
+          }
+          this.saveSnackService.showSavedSnack();
+          this.showMailOrRedirect();
+        },
+        (error: HttpErrorResponse) => {
+          this.checkDataTargetModelOpendatadkdatasaet();
+          this.handleError(error);
+          this.formFailedSubmit = true;
         }
-        this.saveSnackService.showSavedSnack();
-        this.routeToDatatargets();
-      },
-      (error: HttpErrorResponse) => {
-        this.checkDataTargetModelOpendatadkdatasaet();
-        this.handleError(error);
-        this.formFailedSubmit = true;
-      }
+      )
     );
   }
-  private countToRedirect() {
-    this.counter -= 1;
-    if (this.counter <= 0 && !this.formFailedSubmit) {
-      this.saveSnackService.showSavedSnack();
+  private showMailOrRedirect = () => {
+    if (!this.alreadySentOddkMail) {
+      this.openMailDialog();
+    } else {
       this.routeToDatatargets();
+    }
+  };
+  // Note: When updating, we send multiple async request, and use this counter to know when everything is done, so we can redirect
+  private countToRedirect() {
+    this.pendingRequestsCounter -= 1;
+    if (this.pendingRequestsCounter <= 0 && !this.formFailedSubmit) {
+      this.saveSnackService.showSavedSnack();
+      this.showMailOrRedirect();
     }
   }
   private resetErrors() {
@@ -267,69 +260,83 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     this.errorMessages = errors.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
-  private shouldShowMailDialog(): Observable<any> {
-    return new Observable((observer) => {
-      if (
-        !this.dataSetExists &&
-        this.datatarget.setToOpendataDk &&
-        !this.isMailDialogAlreadyShown
-      ) {
-        this.isMailDialogAlreadyShown = true;
-        this.opendatadkDialogService.showDialog().subscribe((response) => {
-          if (response) {
-            this.showMailClient();
-          }
-          observer.next(response);
-        });
-      } else {
-        observer.next(true);
-      }
-    });
-  }
-  private showMailClient() {
-    if (!this.datatarget.openDataDkDataset.url) {
-      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl();
-    }
-    window.location.href =
-      'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrere%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' +
-      this.datatarget.openDataDkDataset.url;
-  }
 
   routeToDatatargets(): void {
     this.router.navigate(['applications', this.applicationId.toString()]);
   }
 
-  //TODO: Would be better to store this as a flag/field instead
-  disableSaveButton(): boolean {
-    let disable = true;
-    if (!this.datatarget.setToOpendataDk) {
-      disable = false;
-    } else if (this.datatarget.openDataDkDataset?.acceptTerms) {
-      disable = false;
-    } else {
-      disable = true;
-    }
-    return disable;
-  }
+  // For mail dialog
+  private getAlreadySentOddkMail = () => {
+    const orgId = this.sharedVariableService.getSelectedOrganisationId();
+    this.subscriptions.push(
+      this.datatargetService
+        .getOpenDataDkRegistered(orgId)
+        .subscribe((response) => {
+          this.alreadySentOddkMail = !!response;
+        })
+    );
+  };
+  private setAlreadySentOddkMail = async () => {
+    const orgId = this.sharedVariableService.getSelectedOrganisationId();
+    await this.datatargetService
+      .updateOpenDataDkRegistered(orgId)
+      .pipe(first())
+      .toPromise();
+  };
+  private openMailDialog = () => {
+    const dialog = this.dialog.open(OpenDataDkMailDialogComponent);
+    dialog.afterClosed().subscribe(async (result: OddkMailInfo) => {
+      if (result) {
+        // User accepted -> Send mail and continue
+        await this.datatargetService
+          .sendOpenDataDkMail(result)
+          .pipe(first())
+          .toPromise();
+        this.routeToDatatargets();
+      } else {
+        // User cancelled -> Show the warning
+        this.openMailWarningDialog();
+      }
+    });
+  };
+  private openMailWarningDialog = () => {
+    const dialog = this.dialog.open(OpenDataDkWarningDialogComponent);
+    dialog.afterClosed().subscribe(async (result) => {
+      if (result) {
+        // User accepted -> Save if 'never again' was checked, then continue
+        if (result.neverAgain) {
+          await this.setAlreadySentOddkMail();
+        }
+        this.routeToDatatargets();
+      } else {
+        // User cancelled -> Show the mail-dialog again
+        this.openMailDialog();
+      }
+    });
+  };
 
   // For list of devices / payload-decoders
   private getDevices(): void {
-    this.applicationSubscription = this.applicationService
-      .getApplication(this.applicationId)
-      .subscribe((application: Application) => {
-        this.devices = application.iotDevices.sort((a, b) =>
-          a.name.localeCompare(b.name, 'en', { numeric: true })
-        );
-      });
+    this.subscriptions.push(
+      this.applicationService
+        .getApplication(this.applicationId)
+        .subscribe((application: Application) => {
+          this.devices = application.iotDevices.sort((a, b) =>
+            a.name.localeCompare(b.name, 'en', { numeric: true })
+          );
+        })
+    );
   }
   private getPayloadDecoders() {
-    this.payloadDecoderSubscription = this.payloadDecoderService
-      .getMultiple(1000, 0, 'id', 'ASC')
-      .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data.sort((a, b) =>
-          a.name.localeCompare(b.name, 'en', { numeric: true })
-        );
-      });
+    this.subscriptions.push(
+      this.payloadDecoderService
+        .getMultiple(1000, 0, 'id', 'ASC')
+        .subscribe((response: PayloadDecoderMappedResponse) => {
+          this.payloadDecoders = response.data.sort((a, b) =>
+            a.name.localeCompare(b.name, 'en', { numeric: true })
+          );
+        })
+    );
   }
   addRow() {
     if (!this.payloadDeviceDatatarget) {
@@ -347,11 +354,13 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
     } else {
-      this.payloadDeviceDataTargetService
-        .delete(this.payloadDeviceDatatarget[index].id)
-        .subscribe((response) => {
-          this.payloadDeviceDatatarget.splice(index, 1);
-        });
+      this.subscriptions.push(
+        this.payloadDeviceDataTargetService
+          .delete(this.payloadDeviceDatatarget[index].id)
+          .subscribe((response) => {
+            this.payloadDeviceDatatarget.splice(index, 1);
+          })
+      );
     }
   }
   openDeleteDialog(index) {
