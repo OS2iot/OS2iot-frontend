@@ -705,6 +705,13 @@
       "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
       "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
+    },
+    "MQTT": {
+      "TITLE": "MQTT specifik opsætning",
+      "SUBTYPE": "Enheds type",
+      "MQTT_BROKER": "Broker",
+      "MQTT_CLIENT": "Klient",
+      "AUTHENTICATIONTYPE": "Autentifikation"
     }
   },
   "QUESTION-LORA-GATEWAY": {

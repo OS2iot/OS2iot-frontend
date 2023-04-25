@@ -50,7 +50,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   public OTAA = true;
   metadataTags: { key?: string; value?: string }[] = [];
   errorMetadataFieldId: string | undefined;
-
+  public console = console;
   public deviceSubscription: Subscription;
   private applicationsSubscription: Subscription;
   private serviceProfilesSubscription: Subscription;

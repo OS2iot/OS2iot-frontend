@@ -1,0 +1,34 @@
+<form>
+  <div class="row mb-5">
+    <h3>{{'QUESTION.MQTT.TITLE' | translate}}</h3>
+  </div>
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="subType">{{'QUESTION.MQTT.SUBTYPE' | translate}}*</label>
+    <select id="subType" class="form-select" name="subType"
+            [(ngModel)]="iotDevice.type"
+            [disabled]="editMode"
+            [value]="iotDevice.type"
+    >
+      <option *ngFor="let type of mqttDeviceTypes" [value]="type">
+        {{'QUESTION.MQTT.' + type | translate}}
+      </option>
+    </select>
+  </div>
+  <ng-container *ngIf="iotDevice.type == DeviceType.MQTT_BROKER">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="autheticationType">{{'QUESTION.MQTT.AUTHENTICATIONTYPE' | translate}}*</label>
+      <select id="autheticationType" class="form-select" name="autheticationType"
+              [(ngModel)]="iotDevice.mqttBrokerSettings.authenticationType"
+              [disabled]="editMode"
+              [value]="iotDevice.mqttBrokerSettings.authenticationType">
+        <option *ngFor="let type of AuthenticationType | keyvalue" [value]="type.key">
+          {{type.key}}
+        </option>
+      </select>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="iotDevice.type == DeviceType.MQTT_CLIENT">
+    client fields
+  </ng-container>
+</form>
