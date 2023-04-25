@@ -310,10 +310,6 @@ export class HttppushEditComponent
     this.saveSnackService.showSavedSnack();
   }
 
-  disableSaveButton(): boolean {
-    return false;
-  }
-
   ngOnDestroy(): void {
     if (this.relationSubscription) {
       this.relationSubscription.unsubscribe();

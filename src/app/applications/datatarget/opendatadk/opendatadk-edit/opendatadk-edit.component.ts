@@ -262,7 +262,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   }
 
   routeToDatatargets(): void {
-    this.router.navigate(['applications', this.applicationId.toString()]);
+    this.router.navigate(['applications', this.applicationId.toString(), 'data-targets']);
   }
 
   // For mail dialog
