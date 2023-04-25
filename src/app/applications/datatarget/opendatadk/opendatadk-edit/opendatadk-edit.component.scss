@@ -1,4 +1,15 @@
-.form-info-icon {
-  margin-left: 5px;
-  cursor: pointer;
+@import 'src/assets/scss/setup/fonts';
+
+:host {
+  .form-info-icon {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  mat-expansion-panel ol {
+    padding-left: 20px;
+    li {
+      font-family: $font-name, system;
+      display: list-item;
+    }
+  }
 }
