@@ -24,6 +24,8 @@ import { DatatargetEditTypeSelectorDirective } from './datatarget-edit/datatarge
 import { MqttEditComponent } from './mqtt-edit/mqtt-edit.component';
 import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
 import { DatatargetTabComponent } from './datatarget-tab/datatarget-tab.component';
+import { OpenDataDkMailDialogComponent } from './opendatadk/opendatadk-edit/opendatadk-mail-dialog/opendatadk-mail-dialog';
+import { OpenDataDkWarningDialogComponent } from './opendatadk/opendatadk-edit/opendatadk-warning-dialog/opendatadk-warning-dialog';
 
 @NgModule({
   declarations: [
@@ -38,11 +40,14 @@ import { DatatargetTabComponent } from './datatarget-tab/datatarget-tab.componen
     OpendatadkComponent,
     OpendatadkEditComponent,
     OpendatadkDetailComponent,
+    OpenDataDkMailDialogComponent,
+    OpenDataDkWarningDialogComponent,
     MqttDetailComponent,
     MqttEditComponent,
     DatatargetDetailTypeSelectorDirective,
     DatatargetEditTypeSelectorDirective,
-    DatatargetTabComponent],
+    DatatargetTabComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -64,7 +69,7 @@ import { DatatargetTabComponent } from './datatarget-tab/datatarget-tab.componen
     FiwareEditComponent,
     HttppushDetailComponent,
     HttppushEditComponent,
-    NGMaterialModule
-  ]
+    NGMaterialModule,
+  ],
 })
-export class DatatargetModule { }
+export class DatatargetModule {}

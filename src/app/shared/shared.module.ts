@@ -10,7 +10,6 @@ import { BatteriStatusComponent } from './components/batteri-status/batteri-stat
 import { MapComponent } from './components/map/map.component';
 import { NGMaterialModule } from './Modules/materiale.module';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
-import { OpendatadkDialogComponent } from './components/opendatadk-dialog/opendatadk-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -28,7 +27,6 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     BatteriStatusComponent,
     MapComponent,
     DeleteDialogComponent,
-    OpendatadkDialogComponent,
     TopBarComponent,
     TopBarTableComponent,
     GeneralDetailsComponent,
@@ -52,7 +50,6 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     BatteriStatusComponent,
     MapComponent,
     DeleteDialogComponent,
-    OpendatadkDialogComponent,
     TopBarComponent,
     TopBarTableComponent,
     GeneralDetailsComponent,
