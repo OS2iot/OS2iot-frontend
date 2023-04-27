@@ -12,14 +12,8 @@
         </li>
       </ul>
     </div>
-    <mat-slide-toggle
-        [(ngModel)]="datatarget.setToOpendataDk"
-        id="setToOpendataDk"
-        name="setToOpendataDk">
-        {{'DATATARGET.ADD-TO-OPENDATADK' | translate}}
-      </mat-slide-toggle>
     <div class="row mb-2">
-      <div class="form-group mt-3 col-12">
+      <div class="form-group col-12">
         <label class="form-label" for="name">{{'QUESTION.GIVE-DATATARGET-NAME' | translate}}</label>*
         <input type="text" class="form-control" id="name" name="name"
           [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate" maxlength="50" required
@@ -61,10 +55,8 @@
               [(ngModel)]="datatarget.authorizationHeader"
               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('authorizationHeader'), 'is-valid' : formFailedSubmit && !errorFields.includes('authorizationHeader')}">
         </div>
-      <div *ngIf="datatarget.setToOpendataDk">
-        <app-opendatadk-edit [openDataDk]="datatarget.openDataDkDataset" [errorFields]="errorFields" [formFailedSubmit]="formFailedSubmit"></app-opendatadk-edit>
       </div>
-      </div>
+
         <div *ngIf="datatargetid === 0">
           <h6> {{'QUESTION.DATATARGET.RELATIONS' | translate}} </h6>
         </div>
@@ -135,6 +127,6 @@
         </div>
       <div class="form-group mt-5">
           <button (click)="routeToDatatargets()" class="btn btn-light" type="button">{{ 'GEN.BACK' | translate}}</button>
-          <button [disabled]="disableSaveButton()" class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>
+          <button class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>
         </div>
   </form>

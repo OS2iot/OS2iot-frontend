@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
 import { RestService } from '@shared/services/rest.service';
-import { DatatargetData, Datatarget } from './datatarget.model';
+import { DatatargetData, Datatarget, OddkMailInfo } from './datatarget.model';
 import { map } from 'rxjs/operators';
 import { OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -77,10 +77,6 @@ export class DatatargetService {
     if (!datatarget.setToOpendataDk) {
       datatarget.openDataDkDataset = null;
     }
-    if (datatarget.setToOpendataDk) {
-      datatarget.openDataDkDataset.keywords = datatarget.openDataDkDataset?.keywordsInput?.split(',');
-      datatarget.openDataDkDataset.keywordsInput = undefined;
-    }
   }
 
   private mapToDatatarget(dataTargetResponse: DatatargetResponse): Datatarget {
@@ -120,4 +116,14 @@ export class DatatargetService {
     return this.restService.createResourceUrl('open-data-dk-sharing', this.sharedVariableService.getSelectedOrganisationId());
   }
 
+  getOpenDataDkRegistered(organizationId: number): Observable<boolean> {
+    return this.restService.get(this.dataTargetURL + '/getOpenDataDkRegistered', undefined, organizationId);
+  }
+  updateOpenDataDkRegistered(organizationId: number): Observable<boolean> {
+    return this.restService.put(this.dataTargetURL + '/updateOpenDataDkRegistered', undefined, organizationId);
+  }
+  sendOpenDataDkMail(mailDto: OddkMailInfo): Observable<boolean> {
+    mailDto.sharingUrl = this.getOpendataSharingApiUrl();
+    return this.restService.post(this.dataTargetURL + '/sendOpenDataDkMail', mailDto);
+  }
 }

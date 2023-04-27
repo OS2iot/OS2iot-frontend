@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Datatarget } from '../../datatarget.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';

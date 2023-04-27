@@ -16,6 +16,7 @@ export interface OrganisationResponse {
   createdByName: string;
   updatedByName: string;
   name: string;
+  openDataDkRegistered: boolean;
 
   payloadDecoders: PayloadDecoder[];
   applications: Application[];
