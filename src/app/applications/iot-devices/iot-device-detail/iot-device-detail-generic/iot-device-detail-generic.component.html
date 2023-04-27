@@ -2,43 +2,48 @@
     <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-right jumbotron--full-width">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
-            <!-- Battery -->
             <p class="mr-1"><strong>{{ 'IOT-TABLE.APPLICATION' | translate }}</strong>{{device.application.name}}</p>
             <app-general-details [data]="device"></app-general-details>
+            <!-- Battery -->
+            <ng-template [ngIf]="device.type === DeviceType.LORAWAN">
             <mat-divider></mat-divider>
-            <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center">
                 <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong></p>
-                <app-batteri-status *ngIf="device.type === 'LORAWAN'; else noBatteryStatus" [color]="batteryStatusColor"
-                    [percentage]="batteryStatusPercentage"></app-batteri-status>
+                <app-batteri-status *ngIf="device.type === DeviceType.LORAWAN; else noBatteryStatus" [color]="batteryStatusColor"
+                                    [percentage]="batteryStatusPercentage"></app-batteri-status>
                 <ng-template #noBatteryStatus>
-                    <div>
-                        <p>{{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}</p>
-                    </div>
+                  <div>
+                    <p>{{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}</p>
+                  </div>
                 </ng-template>
                 <ng-template #notAvailable>
                   <span>{{'IOTDEVICE-TABLE-ROW.NOT-AVAILABLE' | translate}}</span>
                 </ng-template>
-            </div>
+              </div>
+            </ng-template>
             <mat-divider></mat-divider>
 
             <!-- Unit type -->
             <p> <strong>{{ 'IOTDEVICE.TYPE' | translate }}</strong>{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}
             </p>
             <!-- IF  Lora device-->
-            <ng-container *ngIf="device.type === 'LORAWAN' && device.lorawanSettings">
+            <ng-container *ngIf="device.type === DeviceType.LORAWAN && device.lorawanSettings">
                 <app-iot-device-detail-lorawan [device]="device"></app-iot-device-detail-lorawan>
             </ng-container>
             <!-- SIGFOX DEVICE-->
-            <ng-container *ngIf="device.type === 'SIGFOX' && device.sigfoxSettings">
+            <ng-container *ngIf="device.type === DeviceType.SIGFOX && device.sigfoxSettings">
                 <app-iot-device-detail-sigfox [device]="device"></app-iot-device-detail-sigfox>
             </ng-container>
-            <ng-container  *ngIf="device.type === 'GENERIC_HTTP'">
+            <ng-container  *ngIf="device.type === DeviceType.GENERIC_HTTP">
                 <mat-divider></mat-divider>
                 <p>
                     <strong>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</strong>
                     <span class="pre text-break">{{ httpDeviceUrl }}</span>
                 </p>
             </ng-container>
+          <ng-container *ngIf="device.type === DeviceType.MQTT_BROKER">
+            <app-iot-device-details-mqtt-broker [device]="device" ></app-iot-device-details-mqtt-broker>
+          </ng-container>
             <!-- Comment -->
             <mat-divider></mat-divider>
             <p>

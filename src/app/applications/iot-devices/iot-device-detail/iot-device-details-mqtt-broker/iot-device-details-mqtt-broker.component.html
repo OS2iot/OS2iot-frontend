@@ -1,0 +1,10 @@
+<p><strong>{{ 'IOTDEVICE.MQTT.URL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttURL }}</p>
+<p><strong>{{ 'IOTDEVICE.MQTT.TOPIC_NAME' | translate }}</strong>{{device.mqttBrokerSettings.mqttTopicName}}</p>
+
+<div *ngIf="device.mqttBrokerSettings.authenticationType === AuthenticationType.PASSWORD; else certificate">
+  <p><strong>{{ 'QUESTION.MQTT.USERNAME-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttUsername }}</p>
+<!--  <p><strong>{{ 'QUESTION.MQTT.PASSWORD-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttPassword }}</p>-->
+</div>
+<ng-template #certificate>
+  <p><strong>{{ 'IOTDEVICE.MQTT.CERTIFICATE' | translate }}</strong>{{ device.mqttBrokerSettings.certificate }}</p>
+</ng-template>

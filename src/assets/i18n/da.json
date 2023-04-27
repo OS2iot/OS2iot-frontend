@@ -351,7 +351,7 @@
     "SHOW-OPTIONS": "Håndtér gateway"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWAN gateway"
+    "CREATE": "Opret LoRaWAfN gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -365,6 +365,7 @@
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
+    "MQTT_BROKER": "MQTT broker",
     "OTHER": "Andet"
   },
   "ACTIVITY": {
@@ -711,7 +712,13 @@
       "SUBTYPE": "Enheds type",
       "MQTT_BROKER": "Broker",
       "MQTT_CLIENT": "Klient",
-      "AUTHENTICATIONTYPE": "Autentifikation"
+      "AUTHENTICATIONTYPE": "Autentifikation",
+      "USERNAME-PLACEHOLDER": "Brugernavn til topicet på brokeren",
+      "PASSWORD-PLACEHOLDER": "Kodeordet til topicet på brokeren",
+      "CERTIFICATE": "Certifikat",
+      "PASSWORD": "Brugernavn & kodeord",
+      "USERNAME-LABEL": "Brugernavn",
+      "PASSWORD-LABEL": "Kodeord"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -830,6 +837,11 @@
       "SNR": "SNR",
       "RSSI": "RSSI",
       "HISTORY-NOT-SUPPORTED": "Understøttes ikke af denne teknologi"
+    },
+    "MQTT": {
+      "URL": "URL",
+      "TOPIC_NAME": "Topic navn",
+      "CERTIFICATE": "Certifikat værdi"
     }
   },
   "MESSAGE": {

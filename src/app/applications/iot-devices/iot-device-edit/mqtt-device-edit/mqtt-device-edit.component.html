@@ -22,7 +22,7 @@
               [disabled]="editMode"
               [value]="iotDevice.mqttBrokerSettings.authenticationType">
         <option *ngFor="let type of AuthenticationType | keyvalue" [value]="type.key">
-          {{type.key}}
+          {{'QUESTION.MQTT.' + type.key | translate}}
         </option>
       </select>
     </div>
@@ -31,4 +31,41 @@
   <ng-container *ngIf="iotDevice.type == DeviceType.MQTT_CLIENT">
     client fields
   </ng-container>
+
+  <ng-template [ngIf]="iotDevice.mqttBrokerSettings.authenticationType === AuthenticationType.PASSWORD">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="username">{{'QUESTION.MQTT.USERNAME-LABEL' | translate}}*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        [placeholder]="'QUESTION.MQTT.USERNAME-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="iotDevice.mqttBrokerSettings.mqttUsername"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttUsername'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttUsername')
+        }"
+      />
+    </div>
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="password">{{'QUESTION.MQTT.PASSWORD-LABEL' | translate}}*</label>
+      <input
+        [type]="editMode ? 'password' : 'text'"
+        class="form-control"
+        id="password"
+        name="password"
+        [placeholder]="'QUESTION.MQTT.PASSWORD-PLACEHOLDER' | translate"
+        required
+        datatype=""
+        [(ngModel)]="iotDevice.mqttBrokerSettings.mqttPassword"
+        [disabled]="editMode"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttPassword'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttPassword')
+        }"
+      />
+    </div>
+  </ng-template>
 </form>

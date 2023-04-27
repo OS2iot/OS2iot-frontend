@@ -221,7 +221,7 @@
     <div class="form-group mt-5">
       <label class="form-label" for="skipFCntCheck">{{'QUESTION.SKIPFCNTCHECK' | translate}}</label>
       <div>
-        <mat-checkbox [(ngModel)]="iotDevice.lorawanSettings.skipFCntCheck" name="skipFCntCheck">
+        <mat-checkbox [(ngModel)]="iotDevice.lorawanSettings.skipFCntCheck" name="skipFCntCheck" id="skipFCntCheck">
           {{'QUESTION.SKIPFCNTCHECK-YES' | translate}}
         </mat-checkbox>
       </div>
@@ -234,7 +234,7 @@
   </ng-container>
 
   <ng-container *ngIf="iotDevice.type.toString().includes('MQTT')">
-    <app-mqtt-device-edit [iotDevice]="iotDevice">
+    <app-mqtt-device-edit [iotDevice]="iotDevice" [formFailedSubmit]="formFailedSubmit" [errorFields]="errorFields" [editMode]="editmode">
     </app-mqtt-device-edit>
   </ng-container>
 

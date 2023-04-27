@@ -14,6 +14,7 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { jsonToList } from '@shared/helpers/json.helper';
 import { KeyValue } from '@shared/types/tuple.type';
+import { DeviceType } from '@shared/enums/device-type';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
@@ -83,4 +84,6 @@ export class IotDeviceDetailGenericComponent
   }
 
   ngOnDestroy(): void {}
+
+  protected readonly DeviceType = DeviceType;
 }

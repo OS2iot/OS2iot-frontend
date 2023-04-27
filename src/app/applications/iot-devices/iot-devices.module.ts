@@ -27,6 +27,7 @@ import { IotDeviceDetailsTabComponent } from './iot-device-detail/iot-device-det
 import { IotDeviceDataPacketsTabComponent } from './iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component';
 import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
 import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt-device-edit.component';
+import { IotDeviceDetailsMqttBrokerComponent } from './iot-device-detail/iot-device-details-mqtt-broker/iot-device-details-mqtt-broker.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt
     IotDeviceDataPacketsTabComponent,
     IotDeviceDownlinkTabComponent,
     MqttDeviceEditComponent,
+    IotDeviceDetailsMqttBrokerComponent,
   ],
   exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
   imports: [
