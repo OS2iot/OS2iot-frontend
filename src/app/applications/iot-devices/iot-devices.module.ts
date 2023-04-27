@@ -28,6 +28,7 @@ import { IotDeviceDataPacketsTabComponent } from './iot-device-detail/iot-device
 import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
 import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt-device-edit.component';
 import { IotDeviceDetailsMqttBrokerComponent } from './iot-device-detail/iot-device-details-mqtt-broker/iot-device-details-mqtt-broker.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { IotDeviceDetailsMqttBrokerComponent } from './iot-device-detail/iot-dev
     PipesModule,
     MonacoEditorModule,
     GraphModule,
+    FontAwesomeModule,
   ],
 })
 export class IotDevicesModule {}

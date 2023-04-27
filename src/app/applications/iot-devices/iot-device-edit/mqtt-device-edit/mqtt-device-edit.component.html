@@ -35,6 +35,14 @@
   <ng-template [ngIf]="iotDevice.mqttBrokerSettings.authenticationType === AuthenticationType.PASSWORD">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="username">{{'QUESTION.MQTT.USERNAME-LABEL' | translate}}*</label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'QUESTION.MQTT.USERNAME-HOVER' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
       <input
         type="text"
         class="form-control"
@@ -51,6 +59,14 @@
     </div>
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="password">{{'QUESTION.MQTT.PASSWORD-LABEL' | translate}}*</label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'QUESTION.MQTT.PASSWORD-HOVER' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
       <input
         [type]="editMode ? 'password' : 'text'"
         class="form-control"

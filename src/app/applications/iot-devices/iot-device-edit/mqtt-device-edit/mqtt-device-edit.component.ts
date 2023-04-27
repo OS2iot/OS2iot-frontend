@@ -3,6 +3,7 @@ import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeviceType } from '@shared/enums/device-type';
 import { AuthenticationType } from '@shared/enums/authentication-type';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-mqtt-device-edit',
@@ -27,4 +28,5 @@ export class MqttDeviceEditComponent implements OnInit {
 
   protected readonly DeviceType = DeviceType;
   protected readonly AuthenticationType = AuthenticationType;
+  protected readonly faQuestionCircle = faQuestionCircle;
 }

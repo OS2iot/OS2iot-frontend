@@ -752,7 +752,9 @@
       "CERTIFICATE": "Certifikat",
       "PASSWORD": "Brugernavn & kodeord",
       "USERNAME-LABEL": "Brugernavn",
-      "PASSWORD-LABEL": "Kodeord"
+      "USERNAME-HOVER": "Brugernavn som enheden sender med sine beskeder",
+      "PASSWORD-LABEL": "Kodeord",
+      "PASSWORD-HOVER": "Kodeordet som enheden sender med sine beskeder"
     }
   },
   "QUESTION-LORA-GATEWAY": {
