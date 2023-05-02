@@ -232,7 +232,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     if (!this.alreadySentOddkMail) {
       this.openMailDialog();
     } else {
-      this.routeToDatatargets();
+      this.routeToCreatedDatatarget();
     }
   };
   // Note: When updating, we send multiple async request, and use this counter to know when everything is done, so we can redirect
@@ -261,9 +261,12 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets(): void {
-    this.router.navigate(['applications', this.applicationId.toString(), 'data-targets']);
-  }
+  routeToDatatargets = () => this.router.navigate(['applications', this.applicationId, 'data-targets']);
+  routeToCreatedDatatarget = () =>
+    this.router.navigate(
+      ['applications', this.applicationId, 'datatarget', this.datatarget.id],
+      { replaceUrl: true }
+    );
 
   // For mail dialog
   private getAlreadySentOddkMail = () => {
@@ -292,7 +295,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
           .sendOpenDataDkMail(result)
           .pipe(first())
           .toPromise();
-        this.routeToDatatargets();
+        this.routeToCreatedDatatarget();
       } else {
         // User cancelled -> Show the warning
         this.openMailWarningDialog();
@@ -307,7 +310,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
         if (result.neverAgain) {
           await this.setAlreadySentOddkMail();
         }
-        this.routeToDatatargets();
+        this.routeToCreatedDatatarget();
       } else {
         // User cancelled -> Show the mail-dialog again
         this.openMailDialog();

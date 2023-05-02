@@ -167,14 +167,11 @@ export class HttppushEditComponent
 
   updateDatatarget() {
     this.resetErrors();
-    this.counter =
-      1 +
-      (this.payloadDeviceDatatarget?.length
-        ? this.payloadDeviceDatatarget?.length
-        : 0);
+    this.counter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
     this.datatargetService.update(this.datatarget).subscribe(
       (response: Datatarget) => {
         this.datatarget = response;
+        this.countToRedirect();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -236,7 +233,7 @@ export class HttppushEditComponent
         this.datatargetid = response.id;
         this.datatarget = response;
         this.showSavedSnack();
-        this.routeToDatatargets();
+        this.routeToCreatedDatatarget();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -288,9 +285,12 @@ export class HttppushEditComponent
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets(): void {
-    this.router.navigate(['applications', this.applicationId.toString()]);
-  }
+  routeToDatatargets = () => this.router.navigate(['applications', this.applicationId, 'data-targets']);
+  routeToCreatedDatatarget = () =>
+    this.router.navigate(
+      ['applications', this.applicationId, 'datatarget', this.datatarget.id],
+      { replaceUrl: true }
+    );
 
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
