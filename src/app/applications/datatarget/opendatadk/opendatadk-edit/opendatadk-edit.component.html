@@ -4,17 +4,9 @@
   [canEdit]="canEdit">
 </app-top-bar>
 
-<form
-  (ngSubmit)="onSubmit()"
-  #datatargetForm="ngForm"
-  class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">{{ error | translate }}</li>
-    </ul>
-  </div>
-
-  <!-- Foldable intro-texts -->
+<!-- Foldable intro-texts -->
+<div class="os2-form p-3 mt-4">
+  <h3>{{'GUIDE' | translate}}</h3>
   <mat-expansion-panel class="row mb-2">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -31,12 +23,12 @@
       {{ 'OPENDATADK.INTRO.GUIDE3' | translate }}
       <br><br>
       {{ 'OPENDATADK.INTRO.GUIDE4' | translate }}
-      <a href="http://portal.opendata.dk/dataset/open-data-dk-licens">{{ 'OPENDATADK.INTRO.GUIDE5' | translate }}</a>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.da">{{ 'OPENDATADK.INTRO.GUIDE5' | translate }}</a>
       <br><br>
     </p>
   </mat-expansion-panel>
   <mat-divider></mat-divider>
-  <mat-expansion-panel class="row mb-4 mt-2">
+  <mat-expansion-panel class="row mt-2">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <p>
@@ -57,9 +49,22 @@
       </p></li>
     </ol>
   </mat-expansion-panel>
+</div>
+
+<form
+  (ngSubmit)="onSubmit()"
+  #datatargetForm="ngForm"
+  class="os2-form p-3 mt-4">
+  <h3>{{'FORM.CREATE-NEW-DATATARGET' | translate}}</h3>
+
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">{{ error | translate }}</li>
+    </ul>
+  </div>
 
   <!-- Name of data target -->
-  <div class="row mb-2">
+  <div class="row mb-2 mt-4">
     <div class="form-group col-12">
       <label class="form-label" for="name">
         {{'QUESTION.GIVE-DATATARGET-NAME' | translate}}*
