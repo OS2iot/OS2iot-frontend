@@ -29,6 +29,9 @@ import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-do
 import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt-device-edit.component';
 import { IotDeviceDetailsMqttBrokerComponent } from './iot-device-detail/iot-device-details-mqtt-broker/iot-device-details-mqtt-broker.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MqttAuthenticationSelectComponent } from './iot-device-edit/mqtt-device-edit/mqtt-authentication-select/mqtt-authentication-select.component';
+import { IotDeviceDetailsMqttSubscriberComponent } from './iot-device-detail/iot-device-details-mqtt-subscriber/iot-device-details-mqtt-subscriber.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     IotDeviceDownlinkTabComponent,
     MqttDeviceEditComponent,
     IotDeviceDetailsMqttBrokerComponent,
+    MqttAuthenticationSelectComponent,
+    IotDeviceDetailsMqttSubscriberComponent,
   ],
   exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
   imports: [
@@ -65,6 +70,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MonacoEditorModule,
     GraphModule,
     FontAwesomeModule,
+    ClipboardModule,
   ],
 })
 export class IotDevicesModule {}

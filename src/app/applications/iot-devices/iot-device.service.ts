@@ -23,6 +23,7 @@ export class IoTDeviceService {
   ) {}
 
   createIoTDevice(body: IotDevice): Observable<IotDevice> {
+    console.log(body);
     return this.restService.post(this.BASEURL, body);
   }
 
@@ -68,6 +69,7 @@ export class IoTDeviceService {
           lorawanSettings: response.lorawanSettings,
           sigfoxSettings: response.sigfoxSettings,
           mqttBrokerSettings: response.mqttBrokerSettings,
+          mqttSubscriberSettings: response.mqttSubscriberSettings,
           createdBy: response.createdBy,
           updatedBy: response.updatedBy,
           createdByName: this.userMinimalService.getUserNameFrom(

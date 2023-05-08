@@ -399,6 +399,7 @@
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
     "MQTT_BROKER": "MQTT broker",
+    "MQTT_SUBSCRIBER": "MQTT Client",
     "OTHER": "Andet"
   },
   "ACTIVITY": {
@@ -745,16 +746,29 @@
       "TITLE": "MQTT specifik opsætning",
       "SUBTYPE": "Enheds type",
       "MQTT_BROKER": "Broker",
-      "MQTT_CLIENT": "Klient",
+      "MQTT_SUBSCRIBER": "Klient",
       "AUTHENTICATIONTYPE": "Autentifikation",
-      "USERNAME-PLACEHOLDER": "Brugernavn til topicet på brokeren",
-      "PASSWORD-PLACEHOLDER": "Kodeordet til topicet på brokeren",
+      "USERNAME-PLACEHOLDER": "EtBrugernavn",
+      "PASSWORD-PLACEHOLDER": "EtKodeord",
       "CERTIFICATE": "Certifikat",
+      "CERTIFICATE-PLACEHOLDER" : "-----BEGIN CERTIFICATE-----",
       "PASSWORD": "Brugernavn & kodeord",
       "USERNAME-LABEL": "Brugernavn",
       "USERNAME-HOVER": "Brugernavn som enheden sender med sine beskeder",
       "PASSWORD-LABEL": "Kodeord",
-      "PASSWORD-HOVER": "Kodeordet som enheden sender med sine beskeder"
+      "PASSWORD-HOVER": "Kodeordet som enheden sender med sine beskeder",
+      "BROKER-URL": "MQTT broker URL",
+      "BROKER-URL-PLACEHOLDER": "mqtts://someUrl",
+      "BROKER-PORT": "MQTT broker port",
+      "BROKER-PORT-PLACEHOLDER": "1883",
+      "TOPIC-PATH": "MQTT Topic",
+      "TOPIC-PATH-PLACEHOLDER": "some/topic/path",
+      "CA-CERTIFICATE": "CA Certifikat",
+      "CA-CERTIFICATE-HOVER": "Certifikatet som enhedens certifikat er lavet med",
+      "DEVICE-CERTIFICATE": "Enhedens certifikat",
+      "DEVICE-CERTIFICATE-HOVER": "Certifikatet som enheden har fået via CA'en",
+      "DEVICE-CERTIFICATE-KEY": "Enhedens certifikat nøgle",
+      "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----"
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -876,8 +890,10 @@
     },
     "MQTT": {
       "URL": "URL",
+      "PORT": "Port",
       "TOPIC_NAME": "Topic navn",
-      "CERTIFICATE": "Certifikat værdi"
+      "CERTIFICATE": "Certifikat værdi",
+      "COPY-TO-CLIPBOARD": "Kopier"
     }
   },
   "MESSAGE": {

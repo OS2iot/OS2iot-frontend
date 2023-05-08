@@ -46,7 +46,6 @@ export class IotDeviceDetailGenericComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
     this.httpDeviceUrl = this.getGenericHttpDeviceUrl();
-
     if (
       changes?.device?.previousValue?.metadata !==
         changes?.device?.currentValue?.metadata &&

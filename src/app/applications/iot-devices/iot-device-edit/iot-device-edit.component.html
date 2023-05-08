@@ -104,7 +104,8 @@
 
     <div class="form-group mt-5">
       <label class="form-label" for="deviceModel">{{'QUESTION.DEVICE-MODEL-SELECT' | translate}}</label>
-      <mat-select class="form-control" name="deviceModel" [compareWith]="compare" [(ngModel)]="iotDevice.deviceModelId"
+      <mat-select class="form-control" name="deviceModel" id="deviceModel" [compareWith]="compare"
+                  [(ngModel)]="iotDevice.deviceModelId"
                   [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('deviceModel'), 'is-valid' : formFailedSubmit && !errorFields.includes('deviceModel')}">
         <mat-option [value]="0">
           {{'QUESTION.DEVICE-MODEL-SELECT-NON' | translate }}
@@ -202,10 +203,12 @@
 
         <div class="form-group mt-5">
           <label class="form-label" for="fCntUp">{{'QUESTION.FCNTUP' | translate}}*</label>
-          <input type="number" id="fCntUp" name="fCntUp" maxLength="32"
-                 [placeholder]="'QUESTION.FCNTUP-PLACEHOLDER' | translate" class="form-control"
-                 [(ngModel)]="iotDevice.lorawanSettings.fCntUp"
-                 [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('fCntUp'), 'is-valid' : formFailedSubmit && !errorFields.includes('fCntUp')}">
+          <input
+            type="number" id="fCntUp" name="fCntUp" maxLength="32"
+            [placeholder]="'QUESTION.FCNTUP-PLACEHOLDER' | translate" class="form-control"
+            [(ngModel)]="iotDevice.lorawanSettings.fCntUp"
+            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('fCntUp'), 'is-valid' : formFailedSubmit && !errorFields.includes('fCntUp')}"
+          />
         </div>
 
         <div class="form-group mt-5">
@@ -234,7 +237,11 @@
   </ng-container>
 
   <ng-container *ngIf="iotDevice.type.toString().includes('MQTT')">
-    <app-mqtt-device-edit [iotDevice]="iotDevice" [formFailedSubmit]="formFailedSubmit" [errorFields]="errorFields" [editMode]="editmode">
+    <app-mqtt-device-edit
+      [iotDevice]="iotDevice"
+      [errorFields]="errorFields"
+      [formFailedSubmit]="formFailedSubmit"
+      [editMode]="editmode">
     </app-mqtt-device-edit>
   </ng-container>
 

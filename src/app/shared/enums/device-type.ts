@@ -6,7 +6,7 @@ export enum DeviceType {
   SIGFOX = 'SIGFOX',
   MQTT = 'MQTT',
   MQTT_BROKER = 'MQTT_BROKER',
-  MQTT_CLIENT = 'MQTT_CLIENT',
+  MQTT_SUBSCRIBER = 'MQTT_SUBSCRIBER',
 }
 
 enum ApplicationExtraDeviceType {

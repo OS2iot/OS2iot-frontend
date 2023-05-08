@@ -7,6 +7,7 @@ import { LorawanSettings } from '@shared/models/lorawan-settings.model';
 import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
 import { LatestReceivedMessage } from './latestReceivedMessage.model';
 import { MqttBrokerSettings } from '@shared/models/mqtt-broker-settings.model';
+import { MqttSubscriberSettings } from '@shared/models/mqtt-subscriber-settings.model';
 
 export class IotDevice {
   name: string;
@@ -14,7 +15,7 @@ export class IotDevice {
   location: JsonLocation;
   commentOnLocation: string;
   comment: string;
-  type: DeviceType = DeviceType.MQTT; //TODO REVERT
+  type: DeviceType = DeviceType.LORAWAN;
   receivedMessagesMetadata: ReceivedMessageMetadata[];
   metadata?: string;
   apiKey?: string;
@@ -33,6 +34,7 @@ export class IotDevice {
   lorawanSettings = new LorawanSettings();
   sigfoxSettings = new SigfoxSettings();
   mqttBrokerSettings = new MqttBrokerSettings();
+  mqttSubscriberSettings = new MqttSubscriberSettings();
   deviceModel?: DeviceModel;
 }
 

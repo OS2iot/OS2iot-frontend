@@ -74,6 +74,7 @@ export class BulkMapping {
       lorawanSettings: undefined,
       sigfoxSettings: undefined,
       mqttBrokerSettings: undefined,
+      mqttSubscriberSettings: undefined,
       createdBy: undefined,
       updatedBy: undefined,
       updatedByName: undefined,

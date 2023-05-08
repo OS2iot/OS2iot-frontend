@@ -1,10 +1,21 @@
 <p><strong>{{ 'IOTDEVICE.MQTT.URL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttURL }}</p>
-<p><strong>{{ 'IOTDEVICE.MQTT.TOPIC_NAME' | translate }}</strong>{{device.mqttBrokerSettings.mqttTopicName}}</p>
+<p><strong>{{ 'IOTDEVICE.MQTT.PORT' | translate }}</strong>{{ device.mqttBrokerSettings.mqttPort }}</p>
+<p><strong>{{ 'IOTDEVICE.MQTT.TOPIC_NAME' | translate }}</strong>{{device.mqttBrokerSettings.mqtttopicname}}</p>
 
-<div *ngIf="device.mqttBrokerSettings.authenticationType === AuthenticationType.PASSWORD; else certificate">
-  <p><strong>{{ 'QUESTION.MQTT.USERNAME-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttUsername }}</p>
-<!--  <p><strong>{{ 'QUESTION.MQTT.PASSWORD-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttPassword }}</p>-->
-</div>
+<ng-container *ngIf="device.mqttBrokerSettings.authenticationType === AuthenticationType.PASSWORD; else certificate">
+  <p><strong>{{ 'QUESTION.MQTT.USERNAME-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttusername }}</p>
+  <!--  <p><strong>{{ 'QUESTION.MQTT.PASSWORD-LABEL' | translate }}</strong>{{ device.mqttBrokerSettings.mqttPassword }}</p>-->
+</ng-container>
 <ng-template #certificate>
-  <p><strong>{{ 'IOTDEVICE.MQTT.CERTIFICATE' | translate }}</strong>{{ device.mqttBrokerSettings.certificate }}</p>
+  <p><strong>{{ 'QUESTION.MQTT.CA-CERTIFICATE' | translate }}</strong>
+    <button [cdkCopyToClipboard]="device.mqttBrokerSettings.caCertificate" class="btn">{{ 'IOTDEVICE.MQTT.COPY-TO-CLIPBOARD' | translate }}</button>
+    <textarea class="form-control" [readOnly]="true">{{ device.mqttBrokerSettings.caCertificate }}</textarea></p>
+  <p><strong>{{ 'QUESTION.MQTT.DEVICE-CERTIFICATE' | translate }}</strong>
+    <button [cdkCopyToClipboard]="device.mqttBrokerSettings.deviceCertificate" class="btn">{{ 'IOTDEVICE.MQTT.COPY-TO-CLIPBOARD' | translate }}</button>
+    <textarea class="form-control" [readOnly]="true">{{ device.mqttBrokerSettings.deviceCertificate }}</textarea>
+  </p>
+  <p><strong>{{ 'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY' | translate }}</strong>
+    <button [cdkCopyToClipboard]="device.mqttBrokerSettings.deviceCertificateKey" class="btn">{{ 'IOTDEVICE.MQTT.COPY-TO-CLIPBOARD' | translate }}</button>
+    <textarea class="form-control" [readOnly]="true">{{ device.mqttBrokerSettings.deviceCertificateKey }}</textarea>
+  </p>
 </ng-template>

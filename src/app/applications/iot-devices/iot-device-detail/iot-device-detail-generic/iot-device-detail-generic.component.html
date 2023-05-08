@@ -44,6 +44,9 @@
           <ng-container *ngIf="device.type === DeviceType.MQTT_BROKER">
             <app-iot-device-details-mqtt-broker [device]="device" ></app-iot-device-details-mqtt-broker>
           </ng-container>
+          <ng-container *ngIf="device.type === DeviceType.MQTT_SUBSCRIBER">
+            <app-iot-device-details-mqtt-subscriber [device]="device"></app-iot-device-details-mqtt-subscriber>
+          </ng-container>
             <!-- Comment -->
             <mat-divider></mat-divider>
             <p>

@@ -1,9 +1,17 @@
-import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeviceType } from '@shared/enums/device-type';
 import { AuthenticationType } from '@shared/enums/authentication-type';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { QoS } from '@shared/enums/qos.enum';
 
 @Component({
   selector: 'app-mqtt-device-edit',
@@ -15,7 +23,7 @@ export class MqttDeviceEditComponent implements OnInit {
   @Input() formFailedSubmit: boolean = false;
   @Input() errorFields: string[];
   @Input() editMode: boolean = false;
-  public mqttDeviceTypes = [DeviceType.MQTT_BROKER, DeviceType.MQTT_CLIENT];
+  public mqttDeviceTypes = [DeviceType.MQTT_BROKER, DeviceType.MQTT_SUBSCRIBER];
 
   constructor(public translate: TranslateService) {}
 
