@@ -109,7 +109,7 @@
     "DATATARGET-SHOW": "Tilknyttede data targets",
     "MULTICAST-SHOW": "Tilknyttede multicast",
     "MULTICAST-GROUPS": "Multicast-grupper",
-    "IMPORT-CSV": "Bulk import af IoT enheder",
+    "IMPORT-CSV": "Bulk import",
     "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {

@@ -54,6 +54,14 @@ export class BulkImportComponent implements OnInit {
       name: 'lorawan-abp-sample.csv',
       url: '../../../assets/docs/iotdevice_lorawan_abp.csv',
     },
+    {
+      name: 'mqtt-broker-sample.csv',
+      url: '../../../assets/docs/iotdevice_mqtt_broker.csv',
+    },
+    {
+      name: 'mqtt-subscriber-sample.csv',
+      url: '../../../assets/docs/iotdevice_mqtt_subscriber.csv',
+    },
   ];
   download$: Observable<Download>;
   private bulkMapper = new BulkMapping();

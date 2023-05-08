@@ -6,6 +6,10 @@ export class BulkMapping {
     switch (data.type.toUpperCase()) {
       case DeviceType.LORAWAN:
         return this.lorawanMapper(data, applicationId);
+      case DeviceType.MQTT_BROKER:
+        return this.mqttBrokerMapper(data, applicationId);
+      case DeviceType.MQTT_SUBSCRIBER:
+        return this.mqttSubscriberMapper(data, applicationId);
       case DeviceType.GENERIC_HTTP:
         return this.baseMapper(data, applicationId);
       default:
@@ -42,6 +46,40 @@ export class BulkMapping {
       deviceStatusMargin: undefined,
     };
     newDevice.type = DeviceType.LORAWAN;
+    return newDevice;
+  }
+
+  private mqttBrokerMapper(data: any, applicationId: number) {
+    const newDevice = this.baseMapper(data, applicationId);
+    newDevice.mqttBrokerSettings = {
+      caCertificate: undefined,
+      deviceCertificate: undefined,
+      deviceCertificateKey: undefined,
+      mqttPort: undefined,
+      mqttURL: undefined,
+      mqtttopicname: undefined,
+      authenticationType: data.authenticationType,
+      mqttusername: data.mqttusername,
+      mqttpassword: data.mqttpassword,
+    };
+    newDevice.type = DeviceType.MQTT_BROKER;
+    return newDevice;
+  }
+
+  private mqttSubscriberMapper(data: any, applicationId: number) {
+    const newDevice = this.baseMapper(data, applicationId);
+    newDevice.mqttSubscriberSettings = {
+      authenticationType: data.authenticationType,
+      caCertificate: data.caCertificate,
+      deviceCertificate: data.deviceCertificate,
+      deviceCertificateKey: data.deviceCertificateKey,
+      mqttPort: data.mqttPort,
+      mqttURL: data.mqttURL,
+      mqttpassword: data.mqttpassword,
+      mqtttopicname: data.mqtttopicname,
+      mqttusername: data.mqttusername,
+    };
+    newDevice.type = DeviceType.MQTT_SUBSCRIBER;
     return newDevice;
   }
 

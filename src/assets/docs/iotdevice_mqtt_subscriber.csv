@@ -1,0 +1,2 @@
+name,id,type,longitude,latitude,commentOnLocation,comment,deviceModelId,mqttURL,mqttPort,mqtttopicname,authenticationType,mqttusername,mqttpassword,caCertificate,deviceCertificate,deviceCertificateKey
+,,MQTT_SUBSCRIBER,,,,,,,,,,,,,,

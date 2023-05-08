@@ -1,0 +1,3 @@
+﻿name,id,type,longitude,latitude,commentOnLocation,comment,deviceModelId,authenticationType,mqttusername,mqttpassword
+,,MQTT_BROKER,,,,,,PASSWORD,,
+,,MQTT_BROKER,,,,,,CERTIFICATE,,
