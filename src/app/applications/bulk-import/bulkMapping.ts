@@ -1,5 +1,6 @@
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { DeviceType } from '@shared/enums/device-type';
+import { Buffer } from 'buffer';
 
 export class BulkMapping {
   public dataMapper(data: IotDevice, applicationId: number): IotDevice {
@@ -70,9 +71,9 @@ export class BulkMapping {
     const newDevice = this.baseMapper(data, applicationId);
     newDevice.mqttSubscriberSettings = {
       authenticationType: data.authenticationType,
-      caCertificate: data.caCertificate,
-      deviceCertificate: data.deviceCertificate,
-      deviceCertificateKey: data.deviceCertificateKey,
+      caCertificate: this.base64Decode(data.caCertificate),
+      deviceCertificate: this.base64Decode(data.deviceCertificate),
+      deviceCertificateKey: this.base64Decode(data.deviceCertificateKey),
       mqttPort: data.mqttPort,
       mqttURL: data.mqttURL,
       mqttpassword: data.mqttpassword,
@@ -81,6 +82,13 @@ export class BulkMapping {
     };
     newDevice.type = DeviceType.MQTT_SUBSCRIBER;
     return newDevice;
+  }
+
+  private base64Decode(input: string) {
+    if (!input) {
+      return undefined;
+    }
+    return Buffer.from(input, 'base64').toString('binary');
   }
 
   private convertToBoolean(text: string): boolean {

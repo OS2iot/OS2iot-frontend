@@ -23,7 +23,6 @@ export class IoTDeviceService {
   ) {}
 
   createIoTDevice(body: IotDevice): Observable<IotDevice> {
-    console.log(body);
     return this.restService.post(this.BASEURL, body);
   }
 
@@ -110,4 +109,12 @@ export class IoTDeviceService {
       id
     );
   }
+
+  // getDevicesMetadataCsv(applicationId: number): Observable<Blob> {
+  //   return this.restService.get(
+  //     `${this.BASEURL}/getDevicesMetadataCsv`,
+  //     null,
+  //     applicationId
+  //   );
+  // }
 }

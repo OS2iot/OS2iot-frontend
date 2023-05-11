@@ -5,7 +5,7 @@
   <p><strong>{{ 'QUESTION.MQTT.USERNAME-LABEL' | translate }}</strong>{{ device.mqttSubscriberSettings.mqttusername }}</p>
 </ng-container>
 <ng-template #certificate>
-  <p><strong>{{ 'IOTDEVICE.MQTT.CA-CERTIFICATE' | translate }}</strong>{{ device.mqttSubscriberSettings.caCertificate }}</p>
-  <p><strong>{{ 'IOTDEVICE.MQTT.DEVICE-CERTIFICATE' | translate }}</strong>{{ device.mqttSubscriberSettings.deviceCertificate }}</p>
-  <p><strong>{{ 'IOTDEVICE.MQTT.DEVICE-CERTIFICATE-KEY' | translate }}</strong>{{ device.mqttSubscriberSettings.deviceCertificateKey }}</p>
+  <p><strong>{{ 'QUESTION.MQTT.CA-CERTIFICATE' | translate }}</strong><textarea class="form-control" [readOnly]="true">{{ device.mqttSubscriberSettings.caCertificate }}</textarea></p>
+  <p><strong>{{ 'QUESTION.MQTT.DEVICE-CERTIFICATE' | translate }}</strong><textarea class="form-control" [readOnly]="true">{{ device.mqttSubscriberSettings.deviceCertificate }}</textarea></p>
+  <p><strong>{{ 'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY' | translate }}</strong><textarea class="form-control" [readOnly]="true">{{ device.mqttSubscriberSettings.deviceCertificateKey }}</textarea></p>
 </ng-template>

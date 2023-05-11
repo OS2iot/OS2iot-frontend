@@ -110,6 +110,7 @@
     "MULTICAST-SHOW": "Tilknyttede multicast",
     "MULTICAST-GROUPS": "Multicast-grupper",
     "IMPORT-CSV": "Bulk import",
+    "EXPORT-CSV": "Eksport (CSV)",
     "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {
@@ -1111,6 +1112,10 @@
     },
     "WELCOME": {
       "DONT-SHOW-AGAIN": "Vis ikke igen"
+    },
+    "EXPORT-CSV": {
+      "TITLE": "Eksportér metadata",
+      "BODY": "Igangsæt eksport af metadata om alle IoT-enheder i denne applikation i en CSV-fil?"
     }
   },
   "BATTERY": {
