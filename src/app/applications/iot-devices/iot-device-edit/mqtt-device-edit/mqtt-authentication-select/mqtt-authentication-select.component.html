@@ -30,6 +30,7 @@
       name="username"
       [placeholder]="'QUESTION.MQTT.USERNAME-PLACEHOLDER' | translate"
       required
+      [disabled]="editMode"
       [(ngModel)]="settings.mqttusername"
       [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mqttusername'),

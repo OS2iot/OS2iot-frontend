@@ -34,6 +34,7 @@
         class="form-control"
         id="brokerUrl"
         name="brokerUrl"
+        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.BROKER-URL-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttURL"
@@ -50,6 +51,7 @@
         class="form-control"
         id="brokerPort"
         name="brokerPort"
+        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.BROKER-PORT-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttPort"
@@ -66,6 +68,7 @@
         class="form-control"
         id="topicPath"
         name="topicPath"
+        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.TOPIC-PATH-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqtttopicname"
@@ -97,6 +100,7 @@
           class="form-control"
           id="topicPath"
           name="topicPath"
+          [disabled]="editMode"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.caCertificate"
@@ -121,6 +125,7 @@
           class="form-control"
           id="topicPath"
           name="topicPath"
+          [disabled]="editMode"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificate"
@@ -145,6 +150,7 @@
           class="form-control"
           id="topicPath"
           name="topicPath"
+          [disabled]="editMode"
           [placeholder]="'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificateKey"
