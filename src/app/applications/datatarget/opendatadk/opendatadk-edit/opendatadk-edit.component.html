@@ -55,7 +55,7 @@
   (ngSubmit)="onSubmit()"
   #datatargetForm="ngForm"
   class="os2-form p-3 mt-4">
-  <h3>{{'FORM.CREATE-NEW-DATATARGET' | translate}}</h3>
+  <h3>{{(datatargetId ? 'FORM.EDIT-DATATARGET' : 'FORM.CREATE-NEW-DATATARGET') | translate}}</h3>
 
   <div *ngIf="errorMessages" class="error-messages p-3">
     <ul class="mb-0">
