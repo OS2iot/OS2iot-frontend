@@ -399,6 +399,7 @@
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
+    "MQTT": "MQTT",
     "MQTT_BROKER": "MQTT broker",
     "MQTT_SUBSCRIBER": "MQTT Client",
     "OTHER": "Andet"

@@ -14,8 +14,9 @@ enum ApplicationExtraDeviceType {
 }
 
 export type ApplicationDeviceTypeUnion =
-  | DeviceType
+  | Exclude<DeviceType, DeviceType.MQTT_BROKER | DeviceType.MQTT_SUBSCRIBER>
   | ApplicationExtraDeviceType;
+
 // Enums cannot be extended like types
 export const ApplicationDeviceTypes = {
   ...DeviceType,
