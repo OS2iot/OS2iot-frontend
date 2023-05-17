@@ -162,4 +162,5 @@
       </div>
     </ng-template>
   </ng-container>
+  <div class="row mt-2" *ngIf="iotDevice.mqttSubscriberSettings.authenticationType || iotDevice.mqttBrokerSettings.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
 </form>

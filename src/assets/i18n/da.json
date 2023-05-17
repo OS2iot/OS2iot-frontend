@@ -770,7 +770,8 @@
       "DEVICE-CERTIFICATE": "Enhedens certifikat",
       "DEVICE-CERTIFICATE-HOVER": "Certifikatet som enheden har fået via CA'en",
       "DEVICE-CERTIFICATE-KEY": "Enhedens certifikat nøgle",
-      "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----"
+      "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----",
+      "CONFIG-HELP": "MQTT-specifikke oplysninger genereres automatisk og vises efter oprettelse af enheden"
     }
   },
   "QUESTION-LORA-GATEWAY": {
