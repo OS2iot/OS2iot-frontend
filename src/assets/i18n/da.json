@@ -895,7 +895,8 @@
       "PORT": "Port",
       "TOPIC_NAME": "Topic navn",
       "CERTIFICATE": "Certifikat værdi",
-      "COPY-TO-CLIPBOARD": "Kopier"
+      "COPY-TO-CLIPBOARD": "Kopier",
+      "DOWNLOAD": "Download"
     }
   },
   "MESSAGE": {

@@ -1,6 +1,8 @@
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { DeviceType } from '@shared/enums/device-type';
 import { Buffer } from 'buffer';
+import { MqttSubscriberSettings } from '@shared/models/mqtt-subscriber-settings.model';
+import { AuthenticationType } from '@shared/enums/authentication-type';
 
 export class BulkMapping {
   public dataMapper(data: IotDevice, applicationId: number): IotDevice {
@@ -52,13 +54,13 @@ export class BulkMapping {
   private mqttBrokerMapper(data: any, applicationId: number) {
     const newDevice = this.baseMapper(data, applicationId);
     newDevice.mqttBrokerSettings = {
+      authenticationType: data.authenticationType,
       caCertificate: undefined,
       deviceCertificate: undefined,
       deviceCertificateKey: undefined,
       mqttPort: undefined,
       mqttURL: undefined,
       mqtttopicname: undefined,
-      authenticationType: data.authenticationType,
       mqttusername: data.mqttusername,
       mqttpassword: data.mqttpassword,
     };
@@ -68,6 +70,9 @@ export class BulkMapping {
 
   private mqttSubscriberMapper(data: any, applicationId: number) {
     const newDevice = this.baseMapper(data, applicationId);
+    // if (!this.mqttSubscriberIsValid(data)) {
+    //   return;
+    // }
     newDevice.mqttSubscriberSettings = {
       authenticationType: data.authenticationType,
       caCertificate: this.base64Decode(data.caCertificate),
@@ -75,8 +80,8 @@ export class BulkMapping {
       deviceCertificateKey: this.base64Decode(data.deviceCertificateKey),
       mqttPort: data.mqttPort,
       mqttURL: data.mqttURL,
-      mqttpassword: data.mqttpassword,
       mqtttopicname: data.mqtttopicname,
+      mqttpassword: data.mqttpassword,
       mqttusername: data.mqttusername,
     };
     newDevice.type = DeviceType.MQTT_SUBSCRIBER;
