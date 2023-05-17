@@ -310,8 +310,19 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
   postIoTDevice() {
     this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
-      () => {
-        this.router.navigate(['applications/', this.iotDevice.applicationId]);
+      (response: IotDevice) => {
+        if (
+          response.type === DeviceType.MQTT_SUBSCRIBER ||
+          response.type === DeviceType.MQTT_BROKER
+        ) {
+          this.router.navigate([
+            'applications/' +
+              this.iotDevice.applicationId +
+              '/iot-device/' +
+              response.id +
+              '/details',
+          ]);
+        }
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
