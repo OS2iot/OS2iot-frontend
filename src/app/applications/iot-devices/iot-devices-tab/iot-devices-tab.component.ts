@@ -3,7 +3,7 @@ import { ApplicationService } from '@applications/application.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ExportCsvDialogComponent } from '@applications/iot-devices/iot-devices-tab/export-csv-dialog/export-csv-dialog.component';
 import { RestService } from '@shared/services/rest.service';
-import { Download, download } from '@shared/helpers/download.helper';
+import { Download } from '@shared/helpers/download.helper';
 import { DownloadService } from '@shared/services/download.service';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -20,7 +20,6 @@ export class IotDevicesTabComponent implements OnInit {
   constructor(
     public applicationService: ApplicationService,
     private dialog: MatDialog,
-    private restService: RestService,
     private downloader: DownloadService
   ) {}
   ngOnInit(): void {

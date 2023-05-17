@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticationType } from '@shared/enums/authentication-type';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { MqttSharedSettings } from '@shared/models/mqtt-shared-settings.model';
 
 @Component({

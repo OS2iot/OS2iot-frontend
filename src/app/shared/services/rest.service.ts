@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, of, from } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { AlertService } from './alert.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 import { Alert } from '@shared/models/alert.model';
 
 interface IHttpOptions {
@@ -127,7 +127,7 @@ export class RestService {
     return this.http.delete(resourceUrl, { observe: 'response' }).pipe(
       tap((_) =>
         this.log({
-          message: 'Succesfully deleted',
+          message: 'Successfully deleted',
           type: 'success',
         })
       ),

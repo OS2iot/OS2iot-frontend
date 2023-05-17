@@ -9,7 +9,6 @@ import {
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { splitList } from '@shared/helpers/array.helper';
 import { Download } from '@shared/helpers/download.helper';
@@ -20,7 +19,7 @@ import { Papa } from 'ngx-papaparse';
 import { Observable, Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { BulkImport } from './bulk-import.model';
-import { BulkMapping } from './bulkMapping';
+import { BulkMapping } from './bulk-mapping';
 
 @Component({
   selector: 'app-bulk-import',

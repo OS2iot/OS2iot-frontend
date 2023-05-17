@@ -9,16 +9,8 @@
             <mat-divider></mat-divider>
               <div class="d-flex align-items-center">
                 <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong></p>
-                <app-batteri-status *ngIf="device.type === DeviceType.LORAWAN; else noBatteryStatus" [color]="batteryStatusColor"
+                <app-batteri-status [color]="batteryStatusColor"
                                     [percentage]="batteryStatusPercentage"></app-batteri-status>
-                <ng-template #noBatteryStatus>
-                  <div>
-                    <p>{{ 'IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT' | translate }}</p>
-                  </div>
-                </ng-template>
-                <ng-template #notAvailable>
-                  <span>{{'IOTDEVICE-TABLE-ROW.NOT-AVAILABLE' | translate}}</span>
-                </ng-template>
               </div>
             </ng-template>
             <mat-divider></mat-divider>
@@ -34,7 +26,7 @@
             <ng-container *ngIf="device.type === DeviceType.SIGFOX && device.sigfoxSettings">
                 <app-iot-device-detail-sigfox [device]="device"></app-iot-device-detail-sigfox>
             </ng-container>
-            <ng-container  *ngIf="device.type === DeviceType.GENERIC_HTTP">
+            <ng-container *ngIf="device.type === DeviceType.GENERIC_HTTP">
                 <mat-divider></mat-divider>
                 <p>
                     <strong>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</strong>

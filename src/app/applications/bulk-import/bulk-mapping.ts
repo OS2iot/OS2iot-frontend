@@ -16,7 +16,6 @@ export class BulkMapping {
       default:
         break;
     }
-    //return new IotDevice();
   }
 
   private lorawanMapper(data: any, applicationId): IotDevice {

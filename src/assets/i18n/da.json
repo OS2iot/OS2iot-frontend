@@ -385,7 +385,7 @@
     "SHOW-OPTIONS": "Håndtér gateway"
   },
   "LORA-GATEWAY": {
-    "CREATE": "Opret LoRaWAfN gateway"
+    "CREATE": "Opret LoRaWAN gateway"
   },
   "DATATARGET-TABLE": {
     "NAME": "Navn",
@@ -400,7 +400,7 @@
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
     "MQTT": "MQTT",
-    "MQTT_BROKER": "MQTT broker",
+    "MQTT_BROKER": "MQTT Broker",
     "MQTT_SUBSCRIBER": "MQTT Client",
     "OTHER": "Andet"
   },
@@ -680,7 +680,7 @@
       "TITLE": "Sigfox specifikke felter",
       "CONNECTTOEXISTINGDEVICEINBACKEND": "Er enheden allerede registreret i Sigfox backend?",
       "GROUPID": "Vælg en Sigfox gruppe",
-      "DEVICEID": "Sigfox enheds Id",
+      "DEVICEID": "Sigfox enhedsid",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en Sigfox enhedstype",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
@@ -694,7 +694,7 @@
       "DISCLAIMER-CLICK": "Guide til unsubscripe",
       "PROTOTYPE": "Aktiver som prototype",
       "PROTOTYPE-TITLE": "Hvis enhedstypen endnu ikke har tildelt et produkt certifikat, kan enheden oprettes som en prototype",
-      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enhedstype",
       "DEVICETYPE": {
         "NAME": "Navngiv enhedstypen",
         "NAME-PLACEHOLDER": "XC-123",
@@ -746,7 +746,7 @@
     },
     "MQTT": {
       "TITLE": "MQTT specifik opsætning",
-      "SUBTYPE": "Enheds type",
+      "SUBTYPE": "Enhedstype",
       "MQTT_BROKER": "Broker",
       "MQTT_SUBSCRIBER": "Klient",
       "AUTHENTICATIONTYPE": "Autentifikation",
