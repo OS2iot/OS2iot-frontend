@@ -45,16 +45,7 @@ export class ErrorMessageService {
       errors.errorMessages.push(error.error.message);
     } else {
       error.error.message.forEach((err) => {
-        if (
-          err.property === 'lorawanSettings' ||
-          err.property === 'sigfoxSettings' ||
-          err.property === 'openDataDkDataset' ||
-          err.property === 'deviceProfile' ||
-          err.property === 'gateway' ||
-          err.property === nameof<IotDevice>('mqttBrokerSettings') ||
-          err.property === nameof<IotDevice>('mqttSubscriberSettings') ||
-          err.property === 'data'
-        ) {
+        if (err.children.length > 0) {
           this.handleNestedErrorFields(err.children, errors);
         } else if (err.message) {
           errors.errorFields.push(err.field);
