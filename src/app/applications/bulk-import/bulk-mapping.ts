@@ -1,8 +1,6 @@
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { DeviceType } from '@shared/enums/device-type';
 import { Buffer } from 'buffer';
-import { MqttSubscriberSettings } from '@shared/models/mqtt-subscriber-settings.model';
-import { AuthenticationType } from '@shared/enums/authentication-type';
 
 export class BulkMapping {
   public dataMapper(data: IotDevice, applicationId: number): IotDevice {
