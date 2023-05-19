@@ -52,7 +52,8 @@ export class ErrorMessageService {
           err.property === 'deviceProfile' ||
           err.property === 'gateway' ||
           err.property === nameof<IotDevice>('mqttBrokerSettings') ||
-          err.property === nameof<IotDevice>('mqttSubscriberSettings')
+          err.property === nameof<IotDevice>('mqttSubscriberSettings') ||
+          err.property === 'data'
         ) {
           err.children.forEach((element) => {
             if (element.constraints) {

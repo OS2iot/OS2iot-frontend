@@ -109,12 +109,4 @@ export class IoTDeviceService {
       id
     );
   }
-
-  // getDevicesMetadataCsv(applicationId: number): Observable<Blob> {
-  //   return this.restService.get(
-  //     `${this.BASEURL}/getDevicesMetadataCsv`,
-  //     null,
-  //     applicationId
-  //   );
-  // }
 }

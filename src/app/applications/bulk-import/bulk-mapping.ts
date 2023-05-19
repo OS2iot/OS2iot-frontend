@@ -68,15 +68,12 @@ export class BulkMapping {
 
   private mqttSubscriberMapper(data: any, applicationId: number) {
     const newDevice = this.baseMapper(data, applicationId);
-    // if (!this.mqttSubscriberIsValid(data)) {
-    //   return;
-    // }
     newDevice.mqttSubscriberSettings = {
       authenticationType: data.authenticationType,
       caCertificate: this.base64Decode(data.caCertificate),
       deviceCertificate: this.base64Decode(data.deviceCertificate),
       deviceCertificateKey: this.base64Decode(data.deviceCertificateKey),
-      mqttPort: data.mqttPort,
+      mqttPort: data.mqttPort ? Number(data.mqttPort) : undefined,
       mqttURL: data.mqttURL,
       mqtttopicname: data.mqtttopicname,
       mqttpassword: data.mqttpassword,
