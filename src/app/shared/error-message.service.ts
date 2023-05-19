@@ -55,31 +55,7 @@ export class ErrorMessageService {
           err.property === nameof<IotDevice>('mqttSubscriberSettings') ||
           err.property === 'data'
         ) {
-          err.children.forEach((element) => {
-            if (element.constraints) {
-              errors.errorFields.push(
-                err.property === 'openDataDkDataset'
-                  ? 'openDataDkDataset.' + element.property
-                  : element.property
-              );
-              errors.errorMessages = errors.errorMessages.concat(
-                Object.values(element.constraints)
-              );
-            } else if (element.children) {
-              element.children.forEach((child) => {
-                if (child.constraints) {
-                  errors.errorFields.push(
-                    err.property === 'openDataDkDataset'
-                      ? 'openDataDkDataset.' + element.property
-                      : element.property
-                  );
-                  errors.errorMessages = errors.errorMessages.concat(
-                    Object.values(child.constraints)
-                  );
-                }
-              });
-            }
-          });
+          this.handleNestedErrorFields(err.children, errors);
         } else if (err.message) {
           errors.errorFields.push(err.field);
           errors.errorMessages.push(err.message);
@@ -92,5 +68,22 @@ export class ErrorMessageService {
       });
     }
     return errors;
+  }
+
+  private handleNestedErrorFields(errorChildren: any, errors: ErrorMessage) {
+    errorChildren.forEach((error) => {
+      if (error.constraints) {
+        errors.errorFields.push(
+          error.property === 'openDataDkDataset'
+            ? 'openDataDkDataset.' + error.property
+            : error.property
+        );
+        errors.errorMessages = errors.errorMessages.concat(
+          Object.values(error.constraints)
+        );
+      } else if (error.children) {
+        this.handleNestedErrorFields(error.children, errors);
+      }
+    });
   }
 }
