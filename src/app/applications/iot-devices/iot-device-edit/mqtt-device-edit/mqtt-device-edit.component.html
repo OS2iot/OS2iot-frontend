@@ -17,16 +17,16 @@
       </option>
     </select>
   </div>
-  <ng-container *ngIf="iotDevice.type === DeviceType.MQTT_BROKER">
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_BROKER">
     <app-mqtt-authentication-select
       [settings]="iotDevice.mqttBrokerSettings"
       [editMode]="editMode"
       [formFailedSubmit]="formFailedSubmit"
       [errorFields]="errorFields"
     ></app-mqtt-authentication-select>
-  </ng-container>
+  </ng-template>
 
-  <ng-container *ngIf="iotDevice.type === DeviceType.MQTT_SUBSCRIBER">
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_SUBSCRIBER">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="brokerUrl">{{'QUESTION.MQTT.BROKER-URL' | translate}}*</label>
       <input
@@ -34,7 +34,6 @@
         class="form-control"
         id="brokerUrl"
         name="brokerUrl"
-        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.BROKER-URL-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttURL"
@@ -51,7 +50,6 @@
         class="form-control"
         id="brokerPort"
         name="brokerPort"
-        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.BROKER-PORT-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttPort"
@@ -68,7 +66,6 @@
         class="form-control"
         id="topicPath"
         name="topicPath"
-        [disabled]="editMode"
         [placeholder]="'QUESTION.MQTT.TOPIC-PATH-PLACEHOLDER' | translate"
         required
         [(ngModel)]="iotDevice.mqttSubscriberSettings.mqtttopicname"
@@ -84,9 +81,9 @@
       [formFailedSubmit]="formFailedSubmit"
       [errorFields]="errorFields"
     ></app-mqtt-authentication-select>
-    <ng-template [ngIf]="iotDevice.mqttSubscriberSettings.authenticationType === AuthenticationType.CERTIFICATE">
+    <ng-container *ngIf="iotDevice.mqttSubscriberSettings.authenticationType === AuthenticationType.CERTIFICATE">
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="topicPath">{{'QUESTION.MQTT.CA-CERTIFICATE' | translate}}*</label>
+        <label class="form-label" for="caCertificate">{{'QUESTION.MQTT.CA-CERTIFICATE' | translate}}*</label>
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
@@ -98,9 +95,8 @@
         <textarea
           type="text"
           class="form-control"
-          id="topicPath"
-          name="topicPath"
-          [disabled]="editMode"
+          id="caCertificate"
+          name="caCertificate"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.caCertificate"
@@ -111,7 +107,7 @@
         ></textarea>
       </div>
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="topicPath">{{'QUESTION.MQTT.DEVICE-CERTIFICATE' | translate}}*</label>
+        <label class="form-label" for="deviceCertificate">{{'QUESTION.MQTT.DEVICE-CERTIFICATE' | translate}}*</label>
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
@@ -123,9 +119,8 @@
         <textarea
           type="text"
           class="form-control"
-          id="topicPath"
-          name="topicPath"
-          [disabled]="editMode"
+          id="deviceCertificate"
+          name="deviceCertificate"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificate"
@@ -136,7 +131,7 @@
         ></textarea>
       </div>
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="topicPath">{{'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY' | translate}}*</label>
+        <label class="form-label" for="deviceCertificateKey">{{'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY' | translate}}*</label>
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
@@ -148,9 +143,8 @@
         <textarea
           type="text"
           class="form-control"
-          id="topicPath"
-          name="topicPath"
-          [disabled]="editMode"
+          id="deviceCertificateKey"
+          name="deviceCertificateKey"
           [placeholder]="'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY-PLACEHOLDER' | translate"
           required
           [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificateKey"
@@ -160,7 +154,7 @@
           }"
         ></textarea>
       </div>
-    </ng-template>
-  </ng-container>
-  <div class="row mt-2" *ngIf="iotDevice.mqttSubscriberSettings.authenticationType || iotDevice.mqttBrokerSettings.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
+    </ng-container>
+  </ng-template>
+  <div class="row mt-2" *ngIf="iotDevice.mqttSubscriberSettings?.authenticationType || iotDevice.mqttBrokerSettings?.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
 </form>

@@ -1,9 +1,8 @@
 <div class="form-group mt-3 col-12">
-  <label class="form-label" for="autheticationType">{{'QUESTION.MQTT.AUTHENTICATIONTYPE' | translate}}*</label>
+  <label class="form-label" for="authenticationType">{{'QUESTION.MQTT.AUTHENTICATIONTYPE' | translate}}*</label>
   <select
-    id="autheticationType" class="form-select" name="autheticationType"
+    id="authenticationType" class="form-select" name="authenticationType"
     [(ngModel)]="settings.authenticationType"
-    [disabled]="editMode"
     [value]="settings.authenticationType"
   >
     <option *ngFor="let type of AuthenticationType | keyvalue" [value]="type.key">
@@ -30,7 +29,6 @@
       name="username"
       [placeholder]="'QUESTION.MQTT.USERNAME-PLACEHOLDER' | translate"
       required
-      [disabled]="editMode"
       [(ngModel)]="settings.mqttusername"
       [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mqttusername'),
@@ -49,7 +47,7 @@
       matTooltipHideDelay="2000">
     </fa-icon>
     <input
-      [type]="editMode ? 'password' : 'text'"
+      type="text"
       class="form-control"
       id="password"
       name="password"
@@ -57,7 +55,6 @@
       required
       datatype=""
       [(ngModel)]="settings.mqttpassword"
-      [disabled]="editMode"
       [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mqttpassword'),
           'is-valid': formFailedSubmit && !errorFields.includes('mqttpassword')
