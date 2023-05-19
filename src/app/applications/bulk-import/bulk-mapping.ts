@@ -112,7 +112,7 @@ export class BulkMapping {
       receivedMessagesMetadata: undefined,
       metadata: undefined,
       apiKey: undefined,
-      id: data.id ? data.id : undefined,
+      id: undefined,
       createdAt: undefined,
       updatedAt: undefined,
       applicationId: applicationId,
