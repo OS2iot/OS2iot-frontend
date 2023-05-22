@@ -4,6 +4,14 @@
   </div>
   <div class="form-group mt-3 col-12">
     <label class="form-label" for="subType">{{'QUESTION.MQTT.SUBTYPE' | translate}}*</label>
+    <fa-icon
+      [icon]="faQuestionCircle"
+      class="form-info-icon"
+      [matTooltip]="'QUESTION.MQTT.SUBTYPE-HOVER' | translate"
+      matTooltipPosition="above"
+      matTooltipShowDelay="600"
+      matTooltipHideDelay="2000">
+    </fa-icon>
     <select
       id="subType"
       class="form-select"

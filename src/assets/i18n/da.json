@@ -747,6 +747,7 @@
     "MQTT": {
       "TITLE": "MQTT specifik opsætning",
       "SUBTYPE": "Enhedstype",
+      "SUBTYPE-HOVER": "Med en MQTT broker-enhed kan du sende data til OS2iots interne MQTT-broker. Med en MQTT klient-enhed kan du modtage data i OS2iot fra en ekstern MQTT-broker.",
       "MQTT_BROKER": "Broker",
       "MQTT_SUBSCRIBER": "Klient",
       "AUTHENTICATIONTYPE": "Autentifikation",
