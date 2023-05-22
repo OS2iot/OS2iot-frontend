@@ -128,6 +128,17 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       });
   }
 
+  isChecked(event) {
+    if (event.target.checked) {
+      this.iotDevice.type = event.target.name;
+    } else if (
+      !event.target.checked &&
+      this.iotDevice.type.toString().includes(event.target.name)
+    ) {
+      event.target.checked = true;
+    }
+  }
+
   getDevice(id: number): void {
     this.deviceSubscription = this.iotDeviceService
       .getIoTDevice(id)
