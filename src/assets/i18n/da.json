@@ -898,7 +898,8 @@
       "TOPIC_NAME": "Topic navn",
       "CERTIFICATE": "Certifikat værdi",
       "COPY-TO-CLIPBOARD": "Kopier",
-      "DOWNLOAD": "Download"
+      "DOWNLOAD": "Download",
+      "NOCONNECTION": "Denne enhed kunne ikke forbinde til den eksterne broker. Ret indstillingerne til eller slet enheden."
     }
   },
   "MESSAGE": {

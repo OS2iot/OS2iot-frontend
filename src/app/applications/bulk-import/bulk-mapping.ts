@@ -78,6 +78,7 @@ export class BulkMapping {
       mqtttopicname: data.mqtttopicname,
       mqttpassword: data.mqttpassword,
       mqttusername: data.mqttusername,
+      invalidMqttConfig: data.invalidMqttConfig
     };
     newDevice.type = DeviceType.MQTT_SUBSCRIBER;
     return newDevice;

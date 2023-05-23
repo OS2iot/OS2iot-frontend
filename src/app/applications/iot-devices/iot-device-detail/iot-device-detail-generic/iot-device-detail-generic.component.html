@@ -37,6 +37,7 @@
             <app-iot-device-details-mqtt-broker [device]="device" ></app-iot-device-details-mqtt-broker>
           </ng-container>
           <ng-container *ngIf="device.type === DeviceType.MQTT_SUBSCRIBER">
+            <p class="alarmText" *ngIf="device.mqttSubscriberSettings.invalidMqttConfig">{{ 'IOTDEVICE.MQTT.NOCONNECTION' | translate}}</p>
             <app-iot-device-details-mqtt-subscriber [device]="device"></app-iot-device-details-mqtt-subscriber>
           </ng-container>
             <!-- Comment -->
