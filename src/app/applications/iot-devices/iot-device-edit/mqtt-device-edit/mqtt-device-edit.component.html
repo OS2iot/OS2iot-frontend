@@ -164,5 +164,8 @@
       </div>
     </ng-container>
   </ng-template>
+  <div class="row mt-2" *ngIf="iotDevice.mqttInternalBrokerSettings?. authenticationType === AuthenticationType.PASSWORD">
+    <strong>OBS!</strong><p>{{ 'QUESTION.MQTT.CERTIFICATE-OBS' | translate }}</p>
+  </div>
   <div class="row mt-2" *ngIf="iotDevice.mqttExternalBrokerSettings?.authenticationType || iotDevice.mqttInternalBrokerSettings?.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
 </form>

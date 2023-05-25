@@ -772,7 +772,8 @@
       "DEVICE-CERTIFICATE-HOVER": "Certifikatet som enheden har fået via CA'en",
       "DEVICE-CERTIFICATE-KEY": "Enhedens certifikat nøgle",
       "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----",
-      "CONFIG-HELP": "MQTT-specifikke oplysninger genereres automatisk og vises efter oprettelse af enheden"
+      "CONFIG-HELP": "MQTT-specifikke oplysninger genereres automatisk og vises efter oprettelse af enheden",
+      "CERTIFICATE-OBS": "Der oprettes automatisk et certifikat, som skal benyttes sammen med brugernavn og kodeord for sikre forbindelsen mellem enheden og OS2iot."
     }
   },
   "QUESTION-LORA-GATEWAY": {
