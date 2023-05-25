@@ -400,8 +400,8 @@
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
     "MQTT": "MQTT",
-    "MQTT_BROKER": "MQTT Broker",
-    "MQTT_SUBSCRIBER": "MQTT Client",
+    "MQTT_INTERNAL_BROKER": "MQTT intern broker",
+    "MQTT_EXTERNAL_BROKER": "MQTT ekstern broker",
     "OTHER": "Andet"
   },
   "ACTIVITY": {
@@ -747,9 +747,9 @@
     "MQTT": {
       "TITLE": "MQTT specifik opsætning",
       "SUBTYPE": "Enhedstype",
-      "SUBTYPE-HOVER": "Med en MQTT broker-enhed kan du sende data til OS2iots interne MQTT-broker. Med en MQTT klient-enhed kan du modtage data i OS2iot fra en ekstern MQTT-broker.",
-      "MQTT_BROKER": "Broker",
-      "MQTT_SUBSCRIBER": "Klient",
+      "SUBTYPE-HOVER": "Med en MQTT internal broker-enhed kan du sende data til OS2iots interne MQTT-broker. Med en MQTT extern broker-enhed kan du modtage data i OS2iot fra en ekstern MQTT-broker.",
+      "MQTT_INTERNAL_BROKER": "Intern broker",
+      "MQTT_EXTERNAL_BROKER": "Ekstern broker",
       "AUTHENTICATIONTYPE": "Autentifikation",
       "USERNAME-PLACEHOLDER": "EtBrugernavn",
       "PASSWORD-PLACEHOLDER": "EtKodeord",

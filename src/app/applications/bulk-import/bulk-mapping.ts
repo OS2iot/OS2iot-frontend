@@ -7,10 +7,10 @@ export class BulkMapping {
     switch (data.type.toUpperCase()) {
       case DeviceType.LORAWAN:
         return this.lorawanMapper(data, applicationId);
-      case DeviceType.MQTT_BROKER:
-        return this.mqttBrokerMapper(data, applicationId);
-      case DeviceType.MQTT_SUBSCRIBER:
-        return this.mqttSubscriberMapper(data, applicationId);
+      case DeviceType.MQTT_INTERNAL_BROKER:
+        return this.mqttInternalBrokerMapper(data, applicationId);
+      case DeviceType.MQTT_EXTERNAL_BROKER:
+        return this.mqttExternalBrokerMapper(data, applicationId);
       case DeviceType.GENERIC_HTTP:
         return this.baseMapper(data, applicationId);
       default:
@@ -49,9 +49,9 @@ export class BulkMapping {
     return newDevice;
   }
 
-  private mqttBrokerMapper(data: any, applicationId: number) {
+  private mqttInternalBrokerMapper(data: any, applicationId: number) {
     const newDevice = this.baseMapper(data, applicationId);
-    newDevice.mqttBrokerSettings = {
+    newDevice.mqttInternalBrokerSettings = {
       authenticationType: data.authenticationType,
       caCertificate: undefined,
       deviceCertificate: undefined,
@@ -62,13 +62,13 @@ export class BulkMapping {
       mqttusername: data.mqttusername,
       mqttpassword: data.mqttpassword,
     };
-    newDevice.type = DeviceType.MQTT_BROKER;
+    newDevice.type = DeviceType.MQTT_INTERNAL_BROKER;
     return newDevice;
   }
 
-  private mqttSubscriberMapper(data: any, applicationId: number) {
+  private mqttExternalBrokerMapper(data: any, applicationId: number) {
     const newDevice = this.baseMapper(data, applicationId);
-    newDevice.mqttSubscriberSettings = {
+    newDevice.mqttExternalBrokerSettings = {
       authenticationType: data.authenticationType,
       caCertificate: this.base64Decode(data.caCertificate),
       deviceCertificate: this.base64Decode(data.deviceCertificate),
@@ -78,9 +78,9 @@ export class BulkMapping {
       mqtttopicname: data.mqtttopicname,
       mqttpassword: data.mqttpassword,
       mqttusername: data.mqttusername,
-      invalidMqttConfig: data.invalidMqttConfig
+      invalidMqttConfig: data.invalidMqttConfig,
     };
-    newDevice.type = DeviceType.MQTT_SUBSCRIBER;
+    newDevice.type = DeviceType.MQTT_EXTERNAL_BROKER;
     return newDevice;
   }
 
@@ -119,8 +119,8 @@ export class BulkMapping {
       latestReceivedMessage: undefined,
       lorawanSettings: undefined,
       sigfoxSettings: undefined,
-      mqttBrokerSettings: undefined,
-      mqttSubscriberSettings: undefined,
+      mqttInternalBrokerSettings: undefined,
+      mqttExternalBrokerSettings: undefined,
       createdBy: undefined,
       updatedBy: undefined,
       updatedByName: undefined,

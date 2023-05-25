@@ -15,7 +15,10 @@ export class MqttDeviceEditComponent implements OnInit {
   @Input() formFailedSubmit: boolean = false;
   @Input() errorFields: string[];
   @Input() editMode: boolean = false;
-  public mqttDeviceTypes = [DeviceType.MQTT_BROKER, DeviceType.MQTT_SUBSCRIBER];
+  public mqttDeviceTypes = [
+    DeviceType.MQTT_INTERNAL_BROKER,
+    DeviceType.MQTT_EXTERNAL_BROKER,
+  ];
 
   constructor(public translate: TranslateService) {}
 

@@ -27,12 +27,12 @@ import { IotDeviceDetailsTabComponent } from './iot-device-detail/iot-device-det
 import { IotDeviceDataPacketsTabComponent } from './iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component';
 import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
 import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt-device-edit.component';
-import { IotDeviceDetailsMqttBrokerComponent } from './iot-device-detail/iot-device-details-mqtt-broker/iot-device-details-mqtt-broker.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MqttAuthenticationSelectComponent } from './iot-device-edit/mqtt-device-edit/mqtt-authentication-select/mqtt-authentication-select.component';
-import { IotDeviceDetailsMqttSubscriberComponent } from './iot-device-detail/iot-device-details-mqtt-subscriber/iot-device-details-mqtt-subscriber.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ExportCsvDialogComponent } from './iot-devices-tab/export-csv-dialog/export-csv-dialog.component';
+import { IotDeviceDetailsMqttInternalBrokerComponent } from '@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-internal-broker/iot-device-details-mqtt-internal-broker.component';
+import { IotDeviceDetailsMqttExternalBrokerComponent } from '@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-external-broker/iot-device-details-mqtt-external-broker.component';
 
 @NgModule({
   declarations: [
@@ -54,9 +54,9 @@ import { ExportCsvDialogComponent } from './iot-devices-tab/export-csv-dialog/ex
     IotDeviceDataPacketsTabComponent,
     IotDeviceDownlinkTabComponent,
     MqttDeviceEditComponent,
-    IotDeviceDetailsMqttBrokerComponent,
+    IotDeviceDetailsMqttInternalBrokerComponent,
     MqttAuthenticationSelectComponent,
-    IotDeviceDetailsMqttSubscriberComponent,
+    IotDeviceDetailsMqttExternalBrokerComponent,
     ExportCsvDialogComponent,
   ],
   exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],

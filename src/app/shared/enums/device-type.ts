@@ -5,8 +5,8 @@ export enum DeviceType {
   LORAWAN = 'LORAWAN',
   SIGFOX = 'SIGFOX',
   MQTT = 'MQTT',
-  MQTT_BROKER = 'MQTT_BROKER',
-  MQTT_SUBSCRIBER = 'MQTT_SUBSCRIBER',
+  MQTT_INTERNAL_BROKER = 'MQTT_INTERNAL_BROKER',
+  MQTT_EXTERNAL_BROKER = 'MQTT_EXTERNAL_BROKER',
 }
 
 enum ApplicationExtraDeviceType {
@@ -14,7 +14,7 @@ enum ApplicationExtraDeviceType {
 }
 
 export type ApplicationDeviceTypeUnion =
-  | Exclude<DeviceType, DeviceType.MQTT_BROKER | DeviceType.MQTT_SUBSCRIBER>
+  | Exclude<DeviceType, DeviceType.MQTT_INTERNAL_BROKER | DeviceType.MQTT_EXTERNAL_BROKER>
   | ApplicationExtraDeviceType;
 
 // Enums cannot be extended like types

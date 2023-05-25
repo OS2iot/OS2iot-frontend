@@ -33,12 +33,12 @@
                     <span class="pre text-break">{{ httpDeviceUrl }}</span>
                 </p>
             </ng-container>
-          <ng-container *ngIf="device.type === DeviceType.MQTT_BROKER">
-            <app-iot-device-details-mqtt-broker [device]="device" ></app-iot-device-details-mqtt-broker>
+          <ng-container *ngIf="device.type === DeviceType.MQTT_INTERNAL_BROKER">
+            <app-iot-device-details-mqtt-internal-broker [device]="device" ></app-iot-device-details-mqtt-internal-broker>
           </ng-container>
-          <ng-container *ngIf="device.type === DeviceType.MQTT_SUBSCRIBER">
-            <p class="alarmText" *ngIf="device.mqttSubscriberSettings.invalidMqttConfig">{{ 'IOTDEVICE.MQTT.NOCONNECTION' | translate}}</p>
-            <app-iot-device-details-mqtt-subscriber [device]="device"></app-iot-device-details-mqtt-subscriber>
+          <ng-container *ngIf="device.type === DeviceType.MQTT_EXTERNAL_BROKER">
+            <p class="alarmText" *ngIf="device.mqttExternalBrokerSettings.invalidMqttConfig">{{ 'IOTDEVICE.MQTT.NOCONNECTION' | translate}}</p>
+            <app-iot-device-details-mqtt-external-broker [device]="device"></app-iot-device-details-mqtt-external-broker>
           </ng-container>
             <!-- Comment -->
             <mat-divider></mat-divider>

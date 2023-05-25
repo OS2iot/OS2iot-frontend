@@ -25,16 +25,16 @@
       </option>
     </select>
   </div>
-  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_BROKER">
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_INTERNAL_BROKER">
     <app-mqtt-authentication-select
-      [settings]="iotDevice.mqttBrokerSettings"
+      [settings]="iotDevice.mqttInternalBrokerSettings"
       [editMode]="editMode"
       [formFailedSubmit]="formFailedSubmit"
       [errorFields]="errorFields"
     ></app-mqtt-authentication-select>
   </ng-template>
 
-  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_SUBSCRIBER">
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_EXTERNAL_BROKER">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="brokerUrl">{{'QUESTION.MQTT.BROKER-URL' | translate}}*</label>
       <input
@@ -44,7 +44,7 @@
         name="brokerUrl"
         [placeholder]="'QUESTION.MQTT.BROKER-URL-PLACEHOLDER' | translate"
         required
-        [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttURL"
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttURL"
         [ngClass]="{
         'is-invalid': formFailedSubmit && errorFields.includes('mqttURL'),
         'is-valid': formFailedSubmit && !errorFields.includes('mqttURL')
@@ -60,7 +60,7 @@
         name="brokerPort"
         [placeholder]="'QUESTION.MQTT.BROKER-PORT-PLACEHOLDER' | translate"
         required
-        [(ngModel)]="iotDevice.mqttSubscriberSettings.mqttPort"
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttPort"
         [ngClass]="{
         'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
         'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
@@ -76,7 +76,7 @@
         name="topicPath"
         [placeholder]="'QUESTION.MQTT.TOPIC-PATH-PLACEHOLDER' | translate"
         required
-        [(ngModel)]="iotDevice.mqttSubscriberSettings.mqtttopicname"
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqtttopicname"
         [ngClass]="{
         'is-invalid': formFailedSubmit && errorFields.includes('mqtttopicname'),
         'is-valid': formFailedSubmit && !errorFields.includes('mqtttopicname')
@@ -84,12 +84,12 @@
       />
     </div>
     <app-mqtt-authentication-select
-      [settings]="iotDevice.mqttSubscriberSettings"
+      [settings]="iotDevice.mqttExternalBrokerSettings"
       [editMode]="editMode"
       [formFailedSubmit]="formFailedSubmit"
       [errorFields]="errorFields"
     ></app-mqtt-authentication-select>
-    <ng-container *ngIf="iotDevice.mqttSubscriberSettings.authenticationType === AuthenticationType.CERTIFICATE">
+    <ng-container *ngIf="iotDevice.mqttExternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="caCertificate">{{'QUESTION.MQTT.CA-CERTIFICATE' | translate}}*</label>
         <fa-icon
@@ -107,7 +107,7 @@
           name="caCertificate"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
-          [(ngModel)]="iotDevice.mqttSubscriberSettings.caCertificate"
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.caCertificate"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('caCertificate'),
             'is-valid': formFailedSubmit && !errorFields.includes('caCertificate')
@@ -131,7 +131,7 @@
           name="deviceCertificate"
           [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
           required
-          [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificate"
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificate"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificate'),
             'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificate')
@@ -155,7 +155,7 @@
           name="deviceCertificateKey"
           [placeholder]="'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY-PLACEHOLDER' | translate"
           required
-          [(ngModel)]="iotDevice.mqttSubscriberSettings.deviceCertificateKey"
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificateKey"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificateKey'),
             'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificateKey')
@@ -164,5 +164,5 @@
       </div>
     </ng-container>
   </ng-template>
-  <div class="row mt-2" *ngIf="iotDevice.mqttSubscriberSettings?.authenticationType || iotDevice.mqttBrokerSettings?.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
+  <div class="row mt-2" *ngIf="iotDevice.mqttExternalBrokerSettings?.authenticationType || iotDevice.mqttInternalBrokerSettings?.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
 </form>

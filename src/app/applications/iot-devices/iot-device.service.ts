@@ -67,8 +67,8 @@ export class IoTDeviceService {
           latestReceivedMessage: response.latestReceivedMessage,
           lorawanSettings: response.lorawanSettings,
           sigfoxSettings: response.sigfoxSettings,
-          mqttBrokerSettings: response.mqttBrokerSettings,
-          mqttSubscriberSettings: response.mqttSubscriberSettings,
+          mqttInternalBrokerSettings: response.mqttInternalBrokerSettings,
+          mqttExternalBrokerSettings: response.mqttExternalBrokerSettings,
           createdBy: response.createdBy,
           updatedBy: response.updatedBy,
           createdByName: this.userMinimalService.getUserNameFrom(
