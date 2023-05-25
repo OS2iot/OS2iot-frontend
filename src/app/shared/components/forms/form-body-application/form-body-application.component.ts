@@ -104,7 +104,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.statuses.push(...statusOptions);
 
         const deviceTypeOptions: DropdownOption[] = ApplicationDeviceTypeEntries.filter(
-          (e) => !['MQTT_INTERNAL_BROKER', 'MQTT_EXTERNAL_BROKER'].includes(e.key)
+          (e) => !['MQTT'].includes(e.key)
         ).map((entry) => ({
           label: translations[deviceTypeTranslationPrefix + entry.key],
           value: ApplicationDeviceTypes[entry.key],
