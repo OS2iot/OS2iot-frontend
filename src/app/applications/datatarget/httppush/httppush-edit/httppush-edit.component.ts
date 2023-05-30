@@ -154,6 +154,7 @@ export class HttppushEditComponent
   onSubmit(): void {
     this.counter = 0;
     if (this.datatargetid) {
+      if (!this.validatePayloadDeviceDatatarget()) return;
       this.updateDatatarget();
       this.addPayloadDeviceDatatarget();
     } else {
@@ -208,6 +209,20 @@ export class HttppushEditComponent
       }
     });
   }
+
+  private validatePayloadDeviceDatatarget = () => {
+    const isError = this.payloadDeviceDatatarget?.some(
+      (relation) => (relation.iotDeviceIds?.length ?? 0) < 1
+    );
+    if (isError) {
+      this.errorFields = ['devices'];
+      this.errorMessages = [
+        'Must attach at least one IoT-device for each element in list of devices / decoders',
+      ];
+      this.scrollToTopService.scrollToTop();
+    }
+    return !isError;
+  };
 
   countToRedirect() {
     this.counter -= 1;

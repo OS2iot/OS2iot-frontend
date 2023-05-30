@@ -158,6 +158,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   onSubmit(): void {
     this.resetErrors();
     if (this.datatargetId) {
+      if (!this.validatePayloadDeviceDatatarget()) return;
       this.pendingRequestsCounter =
         1 + (this.payloadDeviceDatatarget?.length ?? 0);
       this.updateDatatarget();
@@ -206,6 +207,19 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       }
     });
   }
+  private validatePayloadDeviceDatatarget = () => {
+    const isError = this.payloadDeviceDatatarget?.some(
+      (relation) => (relation.iotDeviceIds?.length ?? 0) < 1
+    );
+    if (isError) {
+      this.errorFields = ['devices'];
+      this.errorMessages = [
+        'Must attach at least one IoT-device for each element in list of devices / decoders',
+      ];
+      this.scrollToTopService.scrollToTop();
+    }
+    return !isError;
+  };
   private createDatatarget() {
     this.pendingRequestsCounter = 0;
     this.datatarget.applicationId = this.applicationId;
