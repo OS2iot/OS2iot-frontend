@@ -26,6 +26,13 @@ import { IotDeviceHistoryTabComponent } from './iot-device-detail/iot-device-his
 import { IotDeviceDetailsTabComponent } from './iot-device-detail/iot-device-details-tab/iot-device-details-tab.component';
 import { IotDeviceDataPacketsTabComponent } from './iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component';
 import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component';
+import { MqttDeviceEditComponent } from './iot-device-edit/mqtt-device-edit/mqtt-device-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MqttAuthenticationSelectComponent } from './iot-device-edit/mqtt-device-edit/mqtt-authentication-select/mqtt-authentication-select.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ExportCsvDialogComponent } from './iot-devices-tab/export-csv-dialog/export-csv-dialog.component';
+import { IotDeviceDetailsMqttInternalBrokerComponent } from '@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-internal-broker/iot-device-details-mqtt-internal-broker.component';
+import { IotDeviceDetailsMqttExternalBrokerComponent } from '@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-external-broker/iot-device-details-mqtt-external-broker.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +53,11 @@ import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-do
     IotDeviceDetailsTabComponent,
     IotDeviceDataPacketsTabComponent,
     IotDeviceDownlinkTabComponent,
+    MqttDeviceEditComponent,
+    IotDeviceDetailsMqttInternalBrokerComponent,
+    MqttAuthenticationSelectComponent,
+    IotDeviceDetailsMqttExternalBrokerComponent,
+    ExportCsvDialogComponent,
   ],
   exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
   imports: [
@@ -59,6 +71,8 @@ import { IotDeviceDownlinkTabComponent } from './iot-device-detail/iot-device-do
     PipesModule,
     MonacoEditorModule,
     GraphModule,
+    FontAwesomeModule,
+    ClipboardModule,
   ],
 })
 export class IotDevicesModule {}

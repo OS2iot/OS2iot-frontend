@@ -109,7 +109,8 @@
     "DATATARGET-SHOW": "Tilknyttede data targets",
     "MULTICAST-SHOW": "Tilknyttede multicast",
     "MULTICAST-GROUPS": "Multicast-grupper",
-    "IMPORT-CSV": "Bulk import af IoT enheder",
+    "IMPORT-CSV": "Bulk import",
+    "EXPORT-CSV": "Eksport (CSV)",
     "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {
@@ -398,6 +399,9 @@
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
+    "MQTT": "MQTT",
+    "MQTT_INTERNAL_BROKER": "MQTT intern broker",
+    "MQTT_EXTERNAL_BROKER": "MQTT ekstern broker",
     "OTHER": "Andet"
   },
   "ACTIVITY": {
@@ -676,7 +680,7 @@
       "TITLE": "Sigfox specifikke felter",
       "CONNECTTOEXISTINGDEVICEINBACKEND": "Er enheden allerede registreret i Sigfox backend?",
       "GROUPID": "Vælg en Sigfox gruppe",
-      "DEVICEID": "Sigfox enheds Id",
+      "DEVICEID": "Sigfox enhedsid",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en Sigfox enhedstype",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
@@ -690,7 +694,7 @@
       "DISCLAIMER-CLICK": "Guide til unsubscripe",
       "PROTOTYPE": "Aktiver som prototype",
       "PROTOTYPE-TITLE": "Hvis enhedstypen endnu ikke har tildelt et produkt certifikat, kan enheden oprettes som en prototype",
-      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enhedstype",
       "DEVICETYPE": {
         "NAME": "Navngiv enhedstypen",
         "NAME-PLACEHOLDER": "XC-123",
@@ -739,6 +743,37 @@
       "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
       "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
+    },
+    "MQTT": {
+      "TITLE": "MQTT specifik opsætning",
+      "SUBTYPE": "Enhedstype",
+      "SUBTYPE-HOVER": "Med en MQTT internal broker-enhed kan du sende data til OS2iots interne MQTT-broker. Med en MQTT extern broker-enhed kan du modtage data i OS2iot fra en ekstern MQTT-broker.",
+      "MQTT_INTERNAL_BROKER": "Intern broker",
+      "MQTT_EXTERNAL_BROKER": "Ekstern broker",
+      "AUTHENTICATIONTYPE": "Autentifikation",
+      "USERNAME-PLACEHOLDER": "EtBrugernavn",
+      "PASSWORD-PLACEHOLDER": "EtKodeord",
+      "CERTIFICATE": "Certifikat",
+      "CERTIFICATE-PLACEHOLDER" : "-----BEGIN CERTIFICATE-----",
+      "PASSWORD": "Brugernavn & kodeord",
+      "USERNAME-LABEL": "Brugernavn",
+      "USERNAME-HOVER": "Brugernavn som enheden sender med sine beskeder",
+      "PASSWORD-LABEL": "Kodeord",
+      "PASSWORD-HOVER": "Kodeordet som enheden sender med sine beskeder",
+      "BROKER-URL": "MQTT broker URL",
+      "BROKER-URL-PLACEHOLDER": "mqtts://someUrl",
+      "BROKER-PORT": "MQTT broker port",
+      "BROKER-PORT-PLACEHOLDER": "1883",
+      "TOPIC-PATH": "MQTT Topic",
+      "TOPIC-PATH-PLACEHOLDER": "some/topic/path",
+      "CA-CERTIFICATE": "CA Certifikat",
+      "CA-CERTIFICATE-HOVER": "Certifikatet som enhedens certifikat er lavet med",
+      "DEVICE-CERTIFICATE": "Enhedens certifikat",
+      "DEVICE-CERTIFICATE-HOVER": "Certifikatet som enheden har fået via CA'en",
+      "DEVICE-CERTIFICATE-KEY": "Enhedens certifikat nøgle",
+      "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----",
+      "CONFIG-HELP": "MQTT-specifikke oplysninger genereres automatisk og vises efter oprettelse af enheden",
+      "CERTIFICATE-OBS": "Der oprettes automatisk et certifikat, som skal benyttes sammen med brugernavn og kodeord for sikre forbindelsen mellem enheden og OS2iot."
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -857,6 +892,15 @@
       "SNR": "SNR",
       "RSSI": "RSSI",
       "HISTORY-NOT-SUPPORTED": "Understøttes ikke af denne teknologi"
+    },
+    "MQTT": {
+      "URL": "URL",
+      "PORT": "Port",
+      "TOPIC_NAME": "Topic navn",
+      "CERTIFICATE": "Certifikat værdi",
+      "COPY-TO-CLIPBOARD": "Kopier",
+      "DOWNLOAD": "Download",
+      "NOCONNECTION": "Denne enhed kunne ikke forbinde til den eksterne broker. Ret indstillingerne til eller slet enheden."
     }
   },
   "MESSAGE": {
@@ -1074,6 +1118,10 @@
     },
     "WELCOME": {
       "DONT-SHOW-AGAIN": "Vis ikke igen"
+    },
+    "EXPORT-CSV": {
+      "TITLE": "Eksportér metadata",
+      "BODY": "Igangsæt eksport af metadata om alle IoT-enheder i denne applikation i en CSV-fil?"
     }
   },
   "BATTERY": {
