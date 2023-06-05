@@ -50,7 +50,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   public OTAA = true;
   metadataTags: { key?: string; value?: string }[] = [];
   errorMetadataFieldId: string | undefined;
-
   public deviceSubscription: Subscription;
   private applicationsSubscription: Subscription;
   private serviceProfilesSubscription: Subscription;
@@ -127,6 +126,17 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       .subscribe((application: Application) => {
         this.application = application;
       });
+  }
+
+  isChecked(event) {
+    if (event.target.checked) {
+      this.iotDevice.type = event.target.name;
+    } else if (
+      !event.target.checked &&
+      this.iotDevice.type.toString().includes(event.target.name)
+    ) {
+      event.target.checked = true;
+    }
   }
 
   getDevice(id: number): void {
@@ -311,8 +321,14 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
   postIoTDevice() {
     this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
-      () => {
-        this.router.navigate(['applications/', this.iotDevice.applicationId]);
+      (response: IotDevice) => {
+        this.router.navigate([
+          'applications/' +
+            this.iotDevice.applicationId +
+            '/iot-device/' +
+            response.id +
+            '/details',
+        ]);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);

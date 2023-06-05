@@ -109,7 +109,8 @@
     "DATATARGET-SHOW": "Tilknyttede data targets",
     "MULTICAST-SHOW": "Tilknyttede multicast",
     "MULTICAST-GROUPS": "Multicast-grupper",
-    "IMPORT-CSV": "Bulk import af IoT enheder",
+    "IMPORT-CSV": "Bulk import",
+    "EXPORT-CSV": "Eksport (CSV)",
     "IOT-DEVICES": "IoT-enheder",
     "BULK": {
       "TEMPLATE": {
@@ -237,6 +238,9 @@
       "QOS": "QoS",
       "USERNAME": "Brugernavn",
       "PASSWORD": "Adgangskode"
+    },
+    "OPENDATADK": {
+      "TYPE": "OpenDataDK"
     }
   },
   "MULTICAST": {
@@ -260,33 +264,63 @@
     }
   },
   "OPENDATADK": {
+    "INTRO": {
+      "GUIDE_HEADER": "Guide til Open Data DK-data target",
+      "GUIDE1": "Det er nemt at sende data fra OS2iot til Open Data DK (ODDK). Første gange der oprettes et ODDK-data target, bliver det muligt for ODDK at høste oplysninger om jeres datasæt til opendata.dk. Når først høstningen er sat op, vil alle jeres ODDK-data targets automatisk blive oprettet og opdateret på opendata.dk.",
+      "GUIDE2": "Senest modtagede datapakke udstilles via OS2iots API og kan hentes via en URL angivet på det enkelte ODDK-data target og på jeres datasæt på opendata.dk. Der opsamles og udstilles altså ikke historisk data i hverken OS2iot eller på opendata.dk.",
+      "GUIDE3": "Nye ODDK-data targets høstes automatisk, og I behøver ikke gøre noget aktivt for at gøre dem tilgængelige på opendata.dk. Hvis I sletter et ODDK-data target forsvinder det af sig selv fra opendata.dk.",
+      "GUIDE4": "Datasæt fra OS2iot publiceres under licensen",
+      "GUIDE5": "Creative Commons CC0 1.0 Universel.",
+      "PROCEDURE_HEADER": "Procedure ved oprettelse af første data target",
+      "PROCEDURE1": "Bliv medlem af Open Data DK, hvis jeres myndighed ikke allerede er det:",
+      "PROCEDURE2": "Opret første ODDK-data target i OS2iot",
+      "PROCEDURE3": "Ved oprettelsen tilbyder OS2iot at sende en mail til Open Data DK's administrator, som sætter høstningen op. I må forvente op til 2-3 ugers behandlingstid.",
+      "PROCEDURE4": "Når høstningen er aktiv, kan datasæt findes og beriges på",
+      "PROCEDURE4_LINK": "ODDK administrationsmodulet"
+    },
     "QUESTION": {
       "GIVE-OPENDATADK-NAME": "Datasæt titel",
       "GIVE-OPENDATADK-NAME-PLACEHOLDER": "Datasæt titel",
-      "GIVE-OPENDATADK-RESOURCETITLE": "Datakilde titel",
+      "GIVE-OPENDATADK-NAME-INFO": "Overordnet titel på datasættet på opendata.dk",
+      "GIVE-OPENDATADK-RESOURCETITLE": "Data ressource titel",
       "GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER": "Kloaksensorer - Aarhus kommune",
+      "GIVE-OPENDATADK-RESOURCETITLE-INFO": "Titel på den ressource, der vises i datasættet på opendata.dk",
       "GIVE-OPENDATADK-DESCRIPTION": "Beskrivelse",
       "GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER": "Beskrivelse",
-      "GIVE-OPENDATADK-KEYWORDS": "Angiv kommasepareret nøgleord",
-      "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "IOT, sensor, LoRaWAN, temeratur",
-      "GIVE-OPENDATADK-AUTHORNAME": "Forfatter",
+      "GIVE-OPENDATADK-KEYWORDS": "Angiv emneord",
+      "GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER": "Vælg nøgleord fra drop-down",
+      "GIVE-OPENDATADK-AUTHORNAME": "Dataejer",
       "GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER": "Jens Jensen",
-      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Forfatterens e-mail",
+      "GIVE-OPENDATADK-AUTHORNAME-INFO": "Ansvarlig afdeling eller person",
+      "GIVE-OPENDATADK-AUTHOR-EMAIL": "Dataejers e-mail",
       "GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER": "jens@jensen.dk",
-      "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed de",
-      "ACCEPT-TERMS-PART-TWO": "Heriblandt at data ikke indeholder følsomme personoplysninger eller personhenførbare informationer.",
-      "TERMS-AND-CONDITIONS": "Gældende vilkår og betingelser for OpenDataDK"
+      "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed, at datasættet udgives under en",
+      "TERMS-AND-CONDITIONS": "Creative Commons CC0 1.0 Universel (CC0 1.0) licens"
     },
     "DETAILS": {
       "NAME": "Datasæt titel",
       "RESOURCETITLE": "Datakilde titel",
       "DESCRIPTION": "Beskrivelse",
-      "KEYWORDS": "Keywords",
+      "KEYWORDS": "Emneord",
       "LICENSE": "Licens",
       "AUTHORNAME": "Forfatterens navn",
       "AUTHOREMAIL": "Forfatterens email",
       "URL": "Endpoint til hentning af data",
       "NA": "Intet angivet"
+    },
+    "MAIL": {
+      "DIALOG_TITLE": "Anmod Open Data DK om høstning af data",
+      "DIALOG_TEXT1": "For at få",
+      "DIALOG_TEXT2": "s ODDK datatargets gjort synlige på opendata.dk, skal Open Data DK have en anmodning om at begynde at høste jeres oplysninger fra OS2iot. Hvis du udfylder oplysningerne herunder, sender OS2iot automatisk en mail til Open Data DK",
+      "DIALOG_CONFIRM": "Send mail",
+      "GIVE-OPENDATADK-ORGNAME": "Organisation (i Open Data DK)",
+      "GIVE-OPENDATADK-ORGNAME-PLACEHOLDER": "Organisation",
+      "GIVE-OPENDATADK-COMMENT": "Eventuel kommentar",
+      "GIVE-OPENDATADK-COMMENT-PLACEHOLDER": "Kort kommentar",
+      "SELECTED_ORG_FALLBACK": "organisationen",
+      "WARNING": "Advarsel",
+      "WARNING-TEXT": "Hvis Open Data DK ikke får besked om integrationen, vises datasættet ikke på opendata.dk",
+      "NEVER-AGAIN": "Vis ikke igen. Open Data DK høster allerede denne organisation fra OS2iot."
     }
   },
   "APPLICATION-TABLE": {
@@ -365,6 +399,9 @@
     "GENERIC_HTTP": "Generisk HTTP",
     "LORAWAN": "LoRaWAN",
     "SIGFOX": "Sigfox",
+    "MQTT": "MQTT",
+    "MQTT_INTERNAL_BROKER": "MQTT intern broker",
+    "MQTT_EXTERNAL_BROKER": "MQTT ekstern broker",
     "OTHER": "Andet"
   },
   "ACTIVITY": {
@@ -537,6 +574,7 @@
     "RELATION-APPLICATION": "Tilknyttet applikation: ",
     "GIVE-DATATARGET-NAME": "Navngiv datatarget",
     "GIVE-DATATARGET-NAME-PLACEHOLDER": "Datatarget's navn",
+    "GIVE-DATATARGET-NAME-INFO": "Benyttes kun i OS2iot",
     "GIVE-DATATARGET-TIMEOUT": "Timeout i millisekunder",
     "GIVE-DATATARGET-AUTHORIZATIONHEADER": "Angiv authorization header",
     "GIVE-DATATARGET-URL": "Angiv datatargets URL",
@@ -642,7 +680,7 @@
       "TITLE": "Sigfox specifikke felter",
       "CONNECTTOEXISTINGDEVICEINBACKEND": "Er enheden allerede registreret i Sigfox backend?",
       "GROUPID": "Vælg en Sigfox gruppe",
-      "DEVICEID": "Sigfox enheds Id",
+      "DEVICEID": "Sigfox enhedsid",
       "DEVICEID-PLACEHOLDER": "Enhedens unikke id",
       "DEVICETYPEID": "Vælg en Sigfox enhedstype",
       "DEVICETYPEID-PLACEHOLDER": "Enhedstype",
@@ -656,7 +694,7 @@
       "DISCLAIMER-CLICK": "Guide til unsubscripe",
       "PROTOTYPE": "Aktiver som prototype",
       "PROTOTYPE-TITLE": "Hvis enhedstypen endnu ikke har tildelt et produkt certifikat, kan enheden oprettes som en prototype",
-      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enheds type",
+      "SELECTGROUPFIRST": "Du skal vælge en gruppe før du kan udfylde kontrakt og enhedstype",
       "DEVICETYPE": {
         "NAME": "Navngiv enhedstypen",
         "NAME-PLACEHOLDER": "XC-123",
@@ -705,6 +743,37 @@
       "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
       "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
+    },
+    "MQTT": {
+      "TITLE": "MQTT specifik opsætning",
+      "SUBTYPE": "Enhedstype",
+      "SUBTYPE-HOVER": "Med en MQTT internal broker-enhed kan du sende data til OS2iots interne MQTT-broker. Med en MQTT extern broker-enhed kan du modtage data i OS2iot fra en ekstern MQTT-broker.",
+      "MQTT_INTERNAL_BROKER": "Intern broker",
+      "MQTT_EXTERNAL_BROKER": "Ekstern broker",
+      "AUTHENTICATIONTYPE": "Autentifikation",
+      "USERNAME-PLACEHOLDER": "EtBrugernavn",
+      "PASSWORD-PLACEHOLDER": "EtKodeord",
+      "CERTIFICATE": "Certifikat",
+      "CERTIFICATE-PLACEHOLDER" : "-----BEGIN CERTIFICATE-----",
+      "PASSWORD": "Brugernavn & kodeord",
+      "USERNAME-LABEL": "Brugernavn",
+      "USERNAME-HOVER": "Brugernavn som enheden sender med sine beskeder",
+      "PASSWORD-LABEL": "Kodeord",
+      "PASSWORD-HOVER": "Kodeordet som enheden sender med sine beskeder",
+      "BROKER-URL": "MQTT broker URL",
+      "BROKER-URL-PLACEHOLDER": "mqtts://someUrl",
+      "BROKER-PORT": "MQTT broker port",
+      "BROKER-PORT-PLACEHOLDER": "1883",
+      "TOPIC-PATH": "MQTT Topic",
+      "TOPIC-PATH-PLACEHOLDER": "some/topic/path",
+      "CA-CERTIFICATE": "CA Certifikat",
+      "CA-CERTIFICATE-HOVER": "Certifikatet som enhedens certifikat er lavet med",
+      "DEVICE-CERTIFICATE": "Enhedens certifikat",
+      "DEVICE-CERTIFICATE-HOVER": "Certifikatet som enheden har fået via CA'en",
+      "DEVICE-CERTIFICATE-KEY": "Enhedens certifikat nøgle",
+      "DEVICE-CERTIFICATE-KEY-PLACEHOLDER": "-----BEGIN PRIVATE KEY-----",
+      "CONFIG-HELP": "MQTT-specifikke oplysninger genereres automatisk og vises efter oprettelse af enheden",
+      "CERTIFICATE-OBS": "Der oprettes automatisk et certifikat, som skal benyttes sammen med brugernavn og kodeord for sikre forbindelsen mellem enheden og OS2iot."
     }
   },
   "QUESTION-LORA-GATEWAY": {
@@ -823,6 +892,15 @@
       "SNR": "SNR",
       "RSSI": "RSSI",
       "HISTORY-NOT-SUPPORTED": "Understøttes ikke af denne teknologi"
+    },
+    "MQTT": {
+      "URL": "URL",
+      "PORT": "Port",
+      "TOPIC_NAME": "Topic navn",
+      "CERTIFICATE": "Certifikat værdi",
+      "COPY-TO-CLIPBOARD": "Kopier",
+      "DOWNLOAD": "Download",
+      "NOCONNECTION": "Denne enhed kunne ikke forbinde til den eksterne broker. Ret indstillingerne til eller slet enheden."
     }
   },
   "MESSAGE": {
@@ -1040,6 +1118,10 @@
     },
     "WELCOME": {
       "DONT-SHOW-AGAIN": "Vis ikke igen"
+    },
+    "EXPORT-CSV": {
+      "TITLE": "Eksportér metadata",
+      "BODY": "Igangsæt eksport af metadata om alle IoT-enheder i denne applikation i en CSV-fil?"
     }
   },
   "BATTERY": {
@@ -1086,6 +1168,7 @@
   },
   "false": "Nej",
   "true": "Ja",
+  "GUIDE": "Guide",
   "HTTP_PUSH": "HTTP Push",
   "Forbidden": "Du har ikke rettigheder til at foretage denne handling",
   "Forbidden resource": "Du har ikke rettigheder til at foretage denne handling",

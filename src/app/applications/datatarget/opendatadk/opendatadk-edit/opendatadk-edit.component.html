@@ -1,86 +1,389 @@
-<div class="mt-2">
-    <h3>
-        OpenDataDK datasæt
-    </h3>
-</div>
-<div class="row mb-2">
-    <div class="form-group mt-3 col-12">
-        <label class="form-label" for="openDataDkDataset.name">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME' | translate}}</label>*
-        <input type="text" class="form-control" id="openDataDkDataset.name" ame="openDataDkDataset.name"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate" maxlength="120" required
-            [(ngModel)]="openDataDk.name"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.name'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.name')}">
-    </div>
+<app-top-bar
+  backButtonTitle="{{ 'NAV.DATATARGET' | translate }}"
+  title="{{ title | translate }}"
+  [canEdit]="canEdit">
+</app-top-bar>
+
+<!-- Foldable intro-texts -->
+<div class="os2-form p-3 mt-4">
+  <h3>{{'GUIDE' | translate}}</h3>
+  <mat-expansion-panel class="row mb-2">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <p>
+          <strong>{{ 'OPENDATADK.INTRO.GUIDE_HEADER' | translate }}</strong>
+        </p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      {{ 'OPENDATADK.INTRO.GUIDE1' | translate }}
+      <br><br>
+      {{ 'OPENDATADK.INTRO.GUIDE2' | translate }}
+      <br><br>
+      {{ 'OPENDATADK.INTRO.GUIDE3' | translate }}
+      <br><br>
+      {{ 'OPENDATADK.INTRO.GUIDE4' | translate }}
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.da">{{ 'OPENDATADK.INTRO.GUIDE5' | translate }}</a>
+      <br><br>
+    </p>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel class="row mt-2">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <p>
+          <strong>{{ 'OPENDATADK.INTRO.PROCEDURE_HEADER' | translate }}</strong>
+        </p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ol>
+      <li><p>
+        {{ 'OPENDATADK.INTRO.PROCEDURE1' | translate }}
+        <a href="https://www.opendata.dk/">https://www.opendata.dk/</a>
+      </p></li>
+      <li><p>{{ 'OPENDATADK.INTRO.PROCEDURE2' | translate }}</p></li>
+      <li><p>{{ 'OPENDATADK.INTRO.PROCEDURE3' | translate }}</p></li>
+      <li><p>
+        {{ 'OPENDATADK.INTRO.PROCEDURE4' | translate }}
+        <a href="http://admin.opendata.dk/">{{ 'OPENDATADK.INTRO.PROCEDURE4_LINK' | translate }}</a>
+      </p></li>
+    </ol>
+  </mat-expansion-panel>
 </div>
 
-<div class="row mb-2">
-    <div class="form-group mt-3 col-12">
-        <label class="form-label"
-            for="openDataDkDataset.description">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION' | translate}}*</label>
-        <input type="text" class="form-control" id="openDataDkDataset.description" name="openDataDkDataset.description"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate" required
-            [(ngModel)]="openDataDk.description"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.description'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.description')}">
-    </div>
-</div>
+<form
+  (ngSubmit)="onSubmit()"
+  #datatargetForm="ngForm"
+  class="os2-form p-3 mt-4">
+  <h3>{{(datatargetId ? 'FORM.EDIT-DATATARGET' : 'FORM.CREATE-NEW-DATATARGET') | translate}}</h3>
 
-<div class="row mb-2">
-    <div class="form-group mt-3 col-12">
-        <label class="form-label"
-            for="openDataDkDataset.authorName">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME' | translate}}</label>*
-        <input type="text" class="form-control" id="openDataDkDataset.authorName" name="openDataDkDataset.authorName"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate" required
-            [(ngModel)]="openDataDk.authorName"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.authorName'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.authorName')}">
-    </div>
-</div>
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">{{ error | translate }}</li>
+    </ul>
+  </div>
 
-<div class="row mb-2">
-    <div class="form-group mt-3 col-12">
-        <label class="form-label"
-            for="openDataDkDataset.authorEmail">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL' | translate}}</label>*
-        <input type="text" class="form-control" id="openDataDkDataset.authorEmail" name="openDataDkDataset.authorEmail"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate" required
-            [(ngModel)]="openDataDk.authorEmail"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.authorEmail'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.authorEmail')}">
+  <!-- Name of data target -->
+  <div class="row mb-2 mt-4">
+    <div class="form-group col-12">
+      <label class="form-label" for="name">
+        {{'QUESTION.GIVE-DATATARGET-NAME' | translate}}*
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'QUESTION.GIVE-DATATARGET-NAME-INFO' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="datatarget.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+      />
     </div>
-</div>
+  </div>
 
-<div class="row mb-2">
+  <!-- OpenDataDK dataset title -->
+  <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-        <label class="form-label"
-            for="openDataDkDataset.keywordsInput">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS' | translate}}</label>
-        <input type="text" class="form-control" id="openDataDkDataset.keywordsInput" name="openDataDkDataset.keywordsInput"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate" required
-            [(ngModel)]="openDataDk.keywordsInput"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.keywordsInput'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.keywordsInput')}">
+      <label class="form-label" for="openDataDkDataset.name">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME' | translate}}*
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-INFO' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
+      <input
+        type="text"
+        class="form-control"
+        id="openDataDkDataset.name"
+        name="openDataDkDataset.name"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate"
+        maxlength="120"
+        required
+        [(ngModel)]="datatarget.openDataDkDataset.name"
+        [ngClass]="{
+          'is-invalid':
+            formFailedSubmit && errorFields.includes('openDataDkDataset.name'),
+          'is-valid':
+            formFailedSubmit && !errorFields.includes('openDataDkDataset.name')
+        }"
+      />
     </div>
-</div>
+  </div>
 
-<div class="row mb-2">
+  <!-- OpenDataDK data source title -->
+  <div class="row mb-2">
     <div class="form-group mt-3 col-12">
-        <label class="form-label"
-            for="openDataDkDataset.resourceTitle">{{'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE' | translate}}*</label>
-        <input type="text" class="form-control" id="openDataDkDataset.resourceTitle" name="openDataDkDataset.resourceTitle"
-            [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate" maxlength="120"
-            required [(ngModel)]="openDataDk.resourceTitle"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('openDataDkDataset.resourceTitle'), 'is-valid' : formFailedSubmit && !errorFields.includes('openDataDkDataset.resourceTitle')}">
+      <label class="form-label" for="openDataDkDataset.resourceTitle">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE' | translate}}*
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-INFO' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
+      <input
+        type="text"
+        class="form-control"
+        id="openDataDkDataset.resourceTitle"
+        name="openDataDkDataset.resourceTitle"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate"
+        maxlength="120"
+        required
+        [(ngModel)]="datatarget.openDataDkDataset.resourceTitle"
+        [ngClass]="{
+            'is-invalid':
+                formFailedSubmit &&
+                errorFields.includes('openDataDkDataset.resourceTitle'),
+            'is-valid':
+                formFailedSubmit &&
+                !errorFields.includes('openDataDkDataset.resourceTitle')
+            }" />
     </div>
-</div>
+  </div>
 
-<div class="row mt-3">
+  <!-- Description -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.description">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION' | translate}}*
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="openDataDkDataset.description"
+        name="openDataDkDataset.description"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="datatarget.openDataDkDataset.description"
+        [ngClass]="{
+          'is-invalid':
+            formFailedSubmit &&
+            errorFields.includes('openDataDkDataset.description'),
+          'is-valid':
+            formFailedSubmit &&
+            !errorFields.includes('openDataDkDataset.description')
+        }"
+      />
+    </div>
+  </div>
+
+  <!-- Dataset owner / auther -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.authorName">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME' | translate}}*
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        class="form-info-icon"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-INFO' | translate"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+        matTooltipHideDelay="2000">
+      </fa-icon>
+      <input
+        type="text"
+        class="form-control"
+        id="openDataDkDataset.authorName"
+        name="openDataDkDataset.authorName"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="datatarget.openDataDkDataset.authorName"
+        [ngClass]="{
+          'is-invalid':
+            formFailedSubmit &&
+            errorFields.includes('openDataDkDataset.authorName'),
+          'is-valid':
+            formFailedSubmit &&
+            !errorFields.includes('openDataDkDataset.authorName')
+        }"
+      />
+    </div>
+  </div>
+
+  <!-- Email of dataset owner / auther -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.authorEmail">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL' | translate}}*
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="openDataDkDataset.authorEmail"
+        name="openDataDkDataset.authorEmail"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="datatarget.openDataDkDataset.authorEmail"
+        [ngClass]="{
+          'is-invalid':
+            formFailedSubmit &&
+            errorFields.includes('openDataDkDataset.authorEmail'),
+          'is-valid':
+            formFailedSubmit &&
+            !errorFields.includes('openDataDkDataset.authorEmail')
+        }"
+      />
+    </div>
+  </div>
+
+  <!-- Keywords -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.keywords">
+        {{'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS' | translate}}
+      </label>
+      <mat-select
+        multiple
+        required
+        id="openDataDkDataset.keywords"
+        name="openDataDkDataset.keywords"
+        [(value)]="datatarget.openDataDkDataset.keywords"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+        class="form-control"
+        [ngClass]="{
+              'is-invalid':
+                formFailedSubmit &&
+                errorFields.includes('openDataDkDataset.keywords'),
+              'is-valid':
+                formFailedSubmit &&
+                !errorFields.includes('openDataDkDataset.keywords')
+            }">
+        <mat-option *ngFor="let kw of selectableKeyword" [value]="kw">{{kw}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <!-- Terms and conditions checkmark -->
+  <div class="row mt-3">
     <div class="col-12">
-        <mat-checkbox [(ngModel)]="openDataDk.acceptTerms" name="acceptTerms">
-            <p>
-                {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE' | translate}}
-                <a
-                    href="https://portal.opendata.dk/dataset/76b7c4cb-2e29-43aa-9b50-eec22b5c3b5e/resource/05e25340-ac7b-460f-a427-41eccb6c36ae/download/open-data-dk-vilkaar-og-betingelser.12.06.18.pdf">
-                    {{'OPENDATADK.QUESTION.TERMS-AND-CONDITIONS' | translate}}
-                </a>
-            </p>
-            <p>
-                {{'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-TWO' | translate}}
-            </p>
-        </mat-checkbox>
+      <mat-checkbox [(ngModel)]="datatarget.openDataDkDataset.acceptTerms" name="acceptTerms">
+        <p>
+          {{ 'OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE' | translate }}
+          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da">
+            {{ 'OPENDATADK.QUESTION.TERMS-AND-CONDITIONS' | translate }}
+          </a>
+        </p>
+      </mat-checkbox>
     </div>
-</div>
+  </div>
+
+  <!-- For new data-targets, we show the notification about auto-pairing with payload-decoders -->
+  <h6 *ngIf="datatargetId === 0" class="mt-3">{{ 'QUESTION.DATATARGET.RELATIONS' | translate }}</h6>
+
+  <!-- For existing data-targets, we show list of payload-decoders and button etc. for adding new -->
+  <!-- TODO: Seems we have the exact same thing on HTTP, OpenDataDK, Fireware and MQTT... Why not make it a separate, re-usable component!? -->
+  <div *ngIf="datatargetId > 0" class="container row" class="mt-3">
+    <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">
+        {{'QUESTION.ADD-RELATIONS' | translate}}
+    </a>
+    <ng-container *ngIf="devices && payloadDecoders && payloadDeviceDatatarget?.length > 0">
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr *ngFor="let element of payloadDeviceDatatarget; let i = index" [attr.data-index]="i">
+            <td>
+              <div class="row">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{'QUESTION.DATATARGET.SELECT-DEVICES' | translate}}</mat-label>
+                  <mat-select
+                    multiple
+                    name="devices"
+                    [compareWith]="payloadDevicesDropdownCompare"
+                    [(value)]="element.iotDeviceIds">
+                    <mat-option disabled="disabled" class="filter-option">
+                      <button
+                        mat-raised-button
+                        class="mat-primary fill text-sm"
+                        (click)="selectAllDevices(i)">
+                          {{ 'QUESTION.DATATARGET.SELECTALLDEVICES' | translate }}
+                      </button>
+                      <button
+                        mat-raised-button
+                        class="mat-primary fill text-sm"
+                        (click)="deSelectAllDevices(i)"
+                      >
+                        {{
+                          'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate
+                        }}
+                      </button>
+                    </mat-option>
+                    <mat-option
+                      *ngFor="let device of devices"
+                      [value]="device.id"
+                      >{{ device.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{
+                    'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate
+                  }}</mat-label>
+                  <mat-select
+                    matNativeControl
+                    name="payloadDecoderId"
+                    [(value)]="element.payloadDecoderId"
+                  >
+                    <mat-option [value]="0">
+                      {{
+                        'QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED'
+                          | translate
+                      }}
+                    </mat-option>
+                    <mat-option
+                      *ngFor="let payloadDecoder of payloadDecoders"
+                      [value]="payloadDecoder.id"
+                    >
+                      {{ payloadDecoder.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <a (click)="openDeleteDialog(i)">
+                <div class="text-center m-2">
+                  <fa-icon [icon]="faTimesCircle"></fa-icon>
+                  <p>{{ 'DATATARGET.DELETE' | translate }}</p>
+                </div>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+
+  <!-- Save and back-buttons -->
+  <div class="form-group mt-5">
+    <button (click)="routeToDatatargets()" class="btn btn-light" type="button">
+      {{ 'GEN.BACK' | translate }}
+    </button>
+    <button [disabled]="!datatarget?.openDataDkDataset?.acceptTerms" class="btn btn-primary ml-2" type="submit">
+      {{ 'DATATARGET.SAVE' | translate }}
+    </button>
+  </div>
+</form>

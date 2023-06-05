@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Datatarget } from '../../datatarget.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Application } from '@applications/application.model';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -20,11 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PayloadDecoderMappedResponse } from '@payload-decoder/payload-decoder.model';
 import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
 import { ErrorMessageService } from '@shared/error-message.service';
-import { OpendatadkDialogService } from '@shared/components/opendatadk-dialog/opendatadk-dialog.service';
-import { OpendatadkService } from '@shared/services/opendatadk.service';
 import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
-import { OpenDataDkDataset } from '../../opendatadk/opendatadk-dataset.model';
-import { DataTargetType } from '@shared/enums/datatarget-type';
 import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatarget-edit';
 import { MeService } from '@shared/services/me.service';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
@@ -52,13 +48,10 @@ export class HttppushEditComponent
   public formFailedSubmit = false;
   public datatargetid: number;
   private applicationId: number;
-  private applicationName: string;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
   private counter: number;
-  private dataSetExcists = false;
-  private isMailDialogAlreadyShown = false;
 
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
@@ -75,8 +68,6 @@ export class HttppushEditComponent
     private saveSnackService: SnackService,
     private dialog: MatDialog,
     private errorMessageService: ErrorMessageService,
-    private opendatadkService: OpendatadkService,
-    private opendatadkDialogService: OpendatadkDialogService,
     private scrollToTopService: ScrollToTopService,
     private meService: MeService
   ) {
@@ -104,7 +95,6 @@ export class HttppushEditComponent
 
     this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
     this.applicationId = +this.route.snapshot.paramMap.get('id');
-    this.applicationName = this.route.snapshot.paramMap.get('name');
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -113,7 +103,6 @@ export class HttppushEditComponent
       this.getDevices();
     }
     this.getPayloadDecoders();
-    this.setDataSetExcists();
     this.canEdit = this.meService.hasAccessToTargetOrganization(
       OrganizationAccessScope.ApplicationWrite,
       undefined,
@@ -165,6 +154,7 @@ export class HttppushEditComponent
   onSubmit(): void {
     this.counter = 0;
     if (this.datatargetid) {
+      if (!this.validatePayloadDeviceDatatarget()) return;
       this.updateDatatarget();
       this.addPayloadDeviceDatatarget();
     } else {
@@ -178,23 +168,13 @@ export class HttppushEditComponent
 
   updateDatatarget() {
     this.resetErrors();
-    this.counter =
-      1 +
-      (this.payloadDeviceDatatarget?.length
-        ? this.payloadDeviceDatatarget?.length
-        : 0);
+    this.counter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
     this.datatargetService.update(this.datatarget).subscribe(
       (response: Datatarget) => {
         this.datatarget = response;
-        if (this.datatarget.openDataDkDataset != null) {
-          this.datatarget.openDataDkDataset.acceptTerms = true;
-        }
-        this.shouldShowMailDialog().subscribe((response) => {
-          this.countToRedirect();
-        });
+        this.countToRedirect();
       },
       (error: HttpErrorResponse) => {
-        this.checkDataTargetModelOpendatadkdatasaet();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -230,6 +210,20 @@ export class HttppushEditComponent
     });
   }
 
+  private validatePayloadDeviceDatatarget = () => {
+    const isError = this.payloadDeviceDatatarget?.some(
+      (relation) => (relation.iotDeviceIds?.length ?? 0) < 1
+    );
+    if (isError) {
+      this.errorFields = ['devices'];
+      this.errorMessages = [
+        'Must attach at least one IoT-device for each element in list of devices / decoders',
+      ];
+      this.scrollToTopService.scrollToTop();
+    }
+    return !isError;
+  };
+
   countToRedirect() {
     this.counter -= 1;
     if (this.counter <= 0 && !this.formFailedSubmit) {
@@ -253,14 +247,10 @@ export class HttppushEditComponent
       (response: Datatarget) => {
         this.datatargetid = response.id;
         this.datatarget = response;
-        if (this.datatarget.openDataDkDataset != null) {
-          this.datatarget.openDataDkDataset.acceptTerms = true;
-        }
         this.showSavedSnack();
-        this.routeToDatatargets();
+        this.routeToCreatedDatatarget();
       },
       (error: HttpErrorResponse) => {
-        this.checkDataTargetModelOpendatadkdatasaet();
         this.handleError(error);
         this.formFailedSubmit = true;
       }
@@ -271,12 +261,6 @@ export class HttppushEditComponent
     this.errorFields = [];
     this.errorMessages = undefined;
     this.formFailedSubmit = false;
-  }
-
-  checkDataTargetModelOpendatadkdatasaet() {
-    if (!this.datatarget.openDataDkDataset) {
-      this.datatarget.openDataDkDataset = new OpenDataDkDataset();
-    }
   }
 
   getDevices(): void {
@@ -316,9 +300,12 @@ export class HttppushEditComponent
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets(): void {
-    this.router.navigate(['applications', this.applicationId.toString()]);
-  }
+  routeToDatatargets = () => this.router.navigate(['applications', this.applicationId, 'data-targets']);
+  routeToCreatedDatatarget = () =>
+    this.router.navigate(
+      ['applications', this.applicationId, 'datatarget', this.datatarget.id],
+      { replaceUrl: true }
+    );
 
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
@@ -336,53 +323,6 @@ export class HttppushEditComponent
 
   showSavedSnack() {
     this.saveSnackService.showSavedSnack();
-  }
-
-  private setDataSetExcists() {
-    this.opendatadkService.get().subscribe((response) => {
-      this.dataSetExcists = response.dataset.length === 0 ? false : true;
-    });
-  }
-
-  private shouldShowMailDialog(): Observable<any> {
-    return new Observable((observer) => {
-      if (
-        !this.dataSetExcists &&
-        this.datatarget.setToOpendataDk &&
-        !this.isMailDialogAlreadyShown
-      ) {
-        this.isMailDialogAlreadyShown = true;
-        this.opendatadkDialogService.showDialog().subscribe((response) => {
-          if (response) {
-            this.showMailClient();
-          }
-          observer.next(response);
-        });
-      } else {
-        observer.next(true);
-      }
-    });
-  }
-
-  private showMailClient() {
-    if (!this.datatarget.openDataDkDataset.url) {
-      this.datatarget.openDataDkDataset.url = this.datatargetService.getOpendataSharingApiUrl();
-    }
-    window.location.href =
-      'mailto:FG2V@kk.dk?subject=Oprettelse%20af%20datas%C3%A6t%20i%20OpenDataDK&body=K%C3%A6re%20Frans%0D%0A%0D%0AHermed%20fremsendes%20linket%20til%20DCAT%20kataloget%20%2C%20du%20bedes%20registrere%20p%C3%A5%20Open%20Data%20DK%20platformen.%0D%0A%0D%0ALink%3A ' +
-      this.datatarget.openDataDkDataset.url;
-  }
-
-  disableSaveButton(): boolean {
-    let disable = true;
-    if (!this.datatarget.setToOpendataDk) {
-      disable = false;
-    } else if (this.datatarget.openDataDkDataset?.acceptTerms) {
-      disable = false;
-    } else {
-      disable = true;
-    }
-    return disable;
   }
 
   ngOnDestroy(): void {

@@ -9,7 +9,6 @@ import {
 import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
 import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { ErrorMessageService } from '@shared/error-message.service';
 import { splitList } from '@shared/helpers/array.helper';
 import { Download } from '@shared/helpers/download.helper';
@@ -20,7 +19,7 @@ import { Papa } from 'ngx-papaparse';
 import { Observable, Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { BulkImport } from './bulk-import.model';
-import { BulkMapping } from './bulkMapping';
+import { BulkMapping } from './bulk-mapping';
 
 @Component({
   selector: 'app-bulk-import',
@@ -53,6 +52,14 @@ export class BulkImportComponent implements OnInit {
     {
       name: 'lorawan-abp-sample.csv',
       url: '../../../assets/docs/iotdevice_lorawan_abp.csv',
+    },
+    {
+      name: 'mqtt-internal-broker-sample.csv',
+      url: '../../../assets/docs/mqtt_internal_broker_sample.csv',
+    },
+    {
+      name: 'mqtt-external-broker-sample.csv',
+      url: '../../../assets/docs/mqtt_external_broker_sample.csv',
     },
   ];
   download$: Observable<Download>;

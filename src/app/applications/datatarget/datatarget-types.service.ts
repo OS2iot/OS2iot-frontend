@@ -9,6 +9,7 @@ import { HttppushDetailComponent } from './httppush/httppush-detail/httppush-det
 import { HttppushEditComponent } from './httppush/httppush-edit/httppush-edit.component';
 import { MqttDetailComponent } from './mqtt-detail/mqtt-detail.component';
 import { MqttEditComponent } from './mqtt-edit/mqtt-edit.component';
+import { OpendatadkEditComponent } from './opendatadk/opendatadk-edit/opendatadk-edit.component';
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +78,7 @@ export class DatatargetTypesService {
     }
 
     if (dataTargetType === DataTargetType.OPENDATADK) {
-      return HttppushEditComponent;
+      return OpendatadkEditComponent;
     }
 
     if (dataTargetType === DataTargetType.FIWARE) {

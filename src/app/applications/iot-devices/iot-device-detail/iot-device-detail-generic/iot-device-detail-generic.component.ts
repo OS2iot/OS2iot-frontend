@@ -14,6 +14,7 @@ import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { jsonToList } from '@shared/helpers/json.helper';
 import { KeyValue } from '@shared/types/tuple.type';
+import { DeviceType } from '@shared/enums/device-type';
 
 @Component({
   selector: 'app-iot-device-detail-generic',
@@ -45,7 +46,6 @@ export class IotDeviceDetailGenericComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
     this.httpDeviceUrl = this.getGenericHttpDeviceUrl();
-
     if (
       changes?.device?.previousValue?.metadata !==
         changes?.device?.currentValue?.metadata &&
@@ -83,4 +83,6 @@ export class IotDeviceDetailGenericComponent
   }
 
   ngOnDestroy(): void {}
+
+  protected readonly DeviceType = DeviceType;
 }

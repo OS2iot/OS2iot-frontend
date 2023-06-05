@@ -2,10 +2,18 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="jumbotron">
+        <div class="col-12">
+          <mat-progress-bar *ngIf="download$ | async as download"
+                            [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'" [value]="download.progress" class="mb-5">
+          </mat-progress-bar>
+        </div>
         <div *ngIf="applicationService.canEdit else readOnly">
-          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
-                             [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'../new-iot-device'"
-                             [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'../bulk-import'">
+          <app-top-bar-table
+            [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"
+            [ctaLabelPrimary]="'FORM.CREATE-NEW-IOT-DEVICE' | translate" [ctaRouterLinkPrimary]="'../new-iot-device'"
+            [ctaLabelSecondary]="'APPLICATION.IMPORT-CSV' | translate" [ctaRouterLinkSecondary]="'../bulk-import'"
+            [ctaActionButtonLabel]="'APPLICATION.EXPORT-CSV' | translate" [ctaActionButtonOnClick]="openDialogFunc"
+          >
           </app-top-bar-table>
         </div>
         <ng-template #readOnly>
