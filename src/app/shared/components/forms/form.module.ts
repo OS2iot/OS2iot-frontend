@@ -9,7 +9,7 @@ import { FormBodyApplicationComponent } from './form-body-application/form-body-
 import { FormHeaderComponent } from './form-header/form-header.component';
 import { FormKeyValuePairComponent } from './form-key-value/form-key-value-pair/form-key-value-pair.component';
 import { FormKeyValueListComponent } from './form-key-value/form-key-value-list/form-key-value-list.component';
-
+import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-select-search.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { FormKeyValueListComponent } from './form-key-value/form-key-value-list/
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    NGMaterialModule
+    NGMaterialModule,
+    MatSelectSearchModule,
   ],
   exports: [
     FormHeaderComponent,
@@ -33,7 +34,6 @@ import { FormKeyValueListComponent } from './form-key-value/form-key-value-list/
     FormKeyValuePairComponent,
     FormKeyValueListComponent,
   ],
-  providers: [
-  ]
+  providers: [],
 })
-export class FormModule { }
+export class FormModule {}

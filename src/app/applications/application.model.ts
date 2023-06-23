@@ -30,6 +30,7 @@ export class Application {
   public hardware?: string;
   public controlledProperties?: ControlledProperty[];
   public deviceTypes?: ApplicationDeviceType[];
+  public permissionIds: number[];
 }
 
 export class ApplicationRequest {
@@ -48,6 +49,7 @@ export class ApplicationRequest {
   public hardware?: string;
   public controlledProperties?: ControlledPropertyTypes[];
   public deviceTypes?: ApplicationDeviceTypeUnion[];
+  public permissionIds: number[];
 }
 
 export interface ApplicationData {
