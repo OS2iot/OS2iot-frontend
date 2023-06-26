@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { RestService } from '@shared/services/rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,6 +21,10 @@ import {
   ApplicationDeviceTypeEntries,
 } from '@shared/enums/device-type';
 import { isPhoneNumberValid } from '@shared/validators/phone-number.validator';
+import { PermissionResponse } from '@app/admin/permission/permission.model';
+import { takeUntil } from 'rxjs/operators';
+import { PermissionService } from '@app/admin/permission/permission.service';
+import { MeService } from '@shared/services/me.service';
 
 export class User {
   public name: string;
@@ -58,13 +62,25 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   controlledProperties = Object.values(ControlledPropertyTypes);
   deviceTypes: DropdownOption[] = [];
 
+  permissionsSubscription: Subscription;
+  public permissions: PermissionResponse[];
+  public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  public permissionMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
+  public filteredPermissionsMulti: ReplaySubject<
+    PermissionResponse[]
+  > = new ReplaySubject<PermissionResponse[]>(1);
+
+  private _onDestroy = new Subject<void>();
+
   constructor(
     private restService: RestService,
     private applicationService: ApplicationService,
     private route: ActivatedRoute,
     public translate: TranslateService,
     private router: Router,
-    private sharedVariableService: SharedVariableService
+    private permissionService: PermissionService,
+    private sharedVariableService: SharedVariableService,
+    private meService: MeService
   ) {
     this.fillDefaultMetadata();
     this.phoneCtrl = new UntypedFormControl(this.application.contactPhone, [
@@ -78,6 +94,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.getApplication(this.id);
     }
+    this.getPermissions(this.sharedVariableService.getUserInfo().user.id);
 
     const statusTranslationPrefix = 'APPLICATION.STATUS.';
     const statusTranslationKeys = ApplicationStatusEntries.map(
@@ -111,6 +128,28 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         }));
         this.deviceTypes.push(...deviceTypeOptions);
       });
+
+    this.permissionMultiFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterPermissionsMulti();
+      });
+  }
+
+  filterPermissionsMulti() {
+    if (!this.permissions) {
+      return;
+    }
+    let search = this.permissionMultiFilterCtrl.value;
+    if (!search) {
+      this.filteredPermissionsMulti.next(this.permissions.slice());
+      return;
+    }
+
+    search = search.toLowerCase();
+    this.filteredPermissionsMulti.next(
+      this.permissions.filter((p) => p.name.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   fillDefaultMetadata() {
@@ -152,6 +191,8 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.deviceTypes = application.deviceTypes.map(
           (deviceType) => deviceType.type
         );
+        this.application.permissionIds = application.permissionIds;
+        this.permissionMultiCtrl.setValue(this.application.permissionIds);
 
         this.fillDefaultMetadata();
       });
@@ -256,10 +297,37 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/applications');
   }
 
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
+  }
+
+  getPermissions(userId: number) {
+    this.permissionsSubscription = this.permissionService
+      .getPermissions(
+        1000,
+        0,
+        undefined,
+        undefined,
+        this.meService.hasGlobalAdmin() ? undefined : userId
+      )
+      .subscribe((res) => {
+        this.permissions = res.data.sort((a, b) =>
+          a.name.localeCompare(b.name, 'da-DK', { numeric: true })
+        );
+        this.filteredPermissionsMulti.next(this.permissions.slice());
+        if (!this.id) {
+          this.application.permissionIds = [this.permissions[0].id];
+          this.permissionMultiCtrl.setValue(this.application.permissionIds);
+        }
+      });
+  }
+
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
     }
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 }
