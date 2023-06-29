@@ -308,7 +308,8 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         0,
         undefined,
         undefined,
-        this.meService.hasGlobalAdmin() ? undefined : userId
+        this.meService.hasGlobalAdmin() ? undefined : userId,
+        this.sharedVariableService.getSelectedOrganisationId()
       )
       .subscribe((res) => {
         this.permissions = res.data.sort((a, b) =>
