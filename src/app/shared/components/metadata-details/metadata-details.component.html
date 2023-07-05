@@ -1,3 +1,7 @@
+<p *ngIf="permissions.length !== 0"><strong>{{ 'APPLICATION.METADATA-FIELD.PERMISSIONS' | translate }}</strong></p>
+<ul *ngIf="permissions.length !== 0">
+  <li *ngFor="let permission of permissions">{{ permission.name }}</li>
+</ul>
 <p *ngIf="status && status !== ApplicationStatus.NONE">
   <strong>{{ 'APPLICATION.METADATA-FIELD.STATUS' | translate }}</strong>{{ 'APPLICATION.STATUS.' + status | translate }}
 </p>

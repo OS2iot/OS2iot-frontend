@@ -5,6 +5,7 @@ import { Organisation } from '../admin/organisation/organisation.model';
 import { ApplicationStatus } from './enums/status.enum';
 import { IotDevice } from './iot-devices/iot-device.model';
 import { ApplicationDeviceType } from './models/application-device-type.model';
+import { PermissionResponse } from '@app/admin/permission/permission.model';
 
 export class Application {
   public id: number;
@@ -30,6 +31,7 @@ export class Application {
   public hardware?: string;
   public controlledProperties?: ControlledProperty[];
   public deviceTypes?: ApplicationDeviceType[];
+  public permissions: PermissionResponse[];
   public permissionIds: number[];
 }
 

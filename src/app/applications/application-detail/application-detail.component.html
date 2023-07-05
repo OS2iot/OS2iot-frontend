@@ -1,7 +1,8 @@
 <div *ngIf="application">
   <app-top-bar [data]="application" [backButton]="backButton" [subPage]="true"
-    [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteApplication()"
-    [canEdit]="canEdit">
+               [addDetailDowndown]="true" [dropDownButton]="dropdownButton"
+               (deleteSelectedInDropdown)="onDeleteApplication()"
+               [canEdit]="canEdit">
   </app-top-bar>
   <div class="container-fluid">
     <div class="row">
@@ -15,17 +16,20 @@
           <p *ngIf="application.description">
             <strong>{{ 'APPLICATION.DESCRIPTION' | translate }}</strong></p>
           <pre><p>{{application.description}}</p></pre>
-          <app-metadata-details [status]="application.status" [startDate]="application.startDate"
-          [endDate]="application.endDate"
-          [category]="application.category"
-          [owner]="application.owner"
-          [contactPerson]="application.contactPerson"
-          [contactEmail]="application.contactEmail"
-          [contactPhone]="application.contactPhone"
-          [personalData]="application.personalData"
-          [hardware]="application.hardware"
-          [controlledProperties]="application.controlledProperties"
-          [deviceTypes]="application.deviceTypes"
+          <app-metadata-details
+            [permissions]="application.permissions"
+            [status]="application.status"
+            [startDate]="application.startDate"
+            [endDate]="application.endDate"
+            [category]="application.category"
+            [owner]="application.owner"
+            [contactPerson]="application.contactPerson"
+            [contactEmail]="application.contactEmail"
+            [contactPhone]="application.contactPhone"
+            [personalData]="application.personalData"
+            [hardware]="application.hardware"
+            [controlledProperties]="application.controlledProperties"
+            [deviceTypes]="application.deviceTypes"
           ></app-metadata-details>
         </div>
       </div>
@@ -36,7 +40,7 @@
          [routerLink]="link.link"
          routerLinkActive #rla="routerLinkActive"
          [active]="rla.isActive"
-         >{{ link.label | translate }}</a>
+      >{{ link.label | translate }}</a>
     </nav>
     <router-outlet></router-outlet>
   </div>
