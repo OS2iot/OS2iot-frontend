@@ -67,9 +67,15 @@
         <mat-form-field>
             <label class="form-label" for="name">{{'PERMISSION.EDIT.APPS' | translate}}</label>
             <div class="col-12">
-                <mat-select [formControl]="applicationMultiCtrl" [multiple]="true"
-                    panelClass="overflow-x-hidden" [(value)]="permission.applicationIds" id="applicationIds"
-                    name="applicationIds" #multiSelect [compareWith]="compare">
+                <mat-select
+                  id="applicationIds"
+                  [formControl]="applicationMultiCtrl"
+                  [multiple]="true"
+                  panelClass="overflow-x-hidden"
+                  [(value)]="permission.applicationIds"
+                  name="applicationIds"
+                  #multiSelect
+                  [compareWith]="compare">
                     <app-mat-select-search [formControl]="applicationMultiFilterCtrl"></app-mat-select-search>
                     <mat-option *ngFor="let app of filteredApplicationsMulti | async" [value]="app.id">
                         {{app.name}}

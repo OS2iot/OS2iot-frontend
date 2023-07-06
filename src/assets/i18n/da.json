@@ -137,6 +137,7 @@
     },
     "DETAILS": "Detaljer",
     "METADATA-FIELD": {
+      "PERMISSIONS": "Brugergrupper",
       "STATUS": "Status",
       "START-DATE": "Startdato",
       "END-DATE": "Slutdato",
@@ -742,7 +743,9 @@
       "PERSONAL-DATA-PLACEHOLDER": "Markér, hvis data i applikationen indeholder personoplysninger. Berører ikke funktionalitet i OS2iot",
       "HARDWARE-PLACEHOLDER": "Angiv hvad der bruges af sensorer/hardware, samt model",
       "CONTROLLED-PROPERTY-PLACEHOLDER": "Angiv hvilke datatyper der opsamles",
-      "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes"
+      "DEVICE-TYPE-PLACEHOLDER": "Angiv hvilke forbindelsesteknologier, der benyttes",
+      "PERMISSION-HINT": "Husk at alle med adgang til brugergruppen vil kunne se applikationen",
+      "ADD-PERMISSION": "Tilføj til brugergruppe"
     },
     "MQTT": {
       "TITLE": "MQTT specifik opsætning",
