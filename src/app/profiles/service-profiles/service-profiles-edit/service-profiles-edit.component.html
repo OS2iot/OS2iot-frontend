@@ -85,7 +85,7 @@
                 <input type="number" id="drMin" name="drMin" class="form-control" [(ngModel)]="serviceProfile.drMin" [disabled]="!canEdit"
                     [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('drMin'), 'is-valid' : formFailedSubmit && !errorFields.includes('drMin')}"
                     step="0" min="-180" max="180" maxlength="9" (keyup)="onCoordinateKey($event)" [placeholder]="0" />
-                <label>{{'PROFILES.SERVICE_PROFILE.DRRATEMINEXPLAINED' | translate}}</label>
+                <label class="line-break">{{'PROFILES.SERVICE_PROFILE.DRRATEMINEXPLAINED' | translate}}</label>
             </div>
         </div>
         <div class="col-6">
@@ -94,7 +94,7 @@
                 <input type="number" id="drMax" name="drMax" class="form-control" [(ngModel)]="serviceProfile.drMax" [disabled]="!canEdit"
                     [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('drMax'), 'is-valid' : formFailedSubmit && !errorFields.includes('drMax')}"
                     step="0" min="-180" max="180" maxlength="9" (keyup)="onCoordinateKey($event)" [placeholder]="0" />
-                <Label>{{'PROFILES.SERVICE_PROFILE.DRRATEMAXEXPLAINED' | translate}}</Label>
+                <Label class="line-break">{{'PROFILES.SERVICE_PROFILE.DRRATEMAXEXPLAINED' | translate}}</Label>
             </div>
         </div>
     </div>
