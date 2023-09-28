@@ -4,7 +4,7 @@
             <p>
                 <strong>{{'IOTDEVICE.LATEST-DATAPACKAGE' | translate}}</strong>
 
-                {{latestReceivedMessage.sentTime | tableDatePipe}}
+                {{latestReceivedMessage.sentTime | tableDateWithSecondsPipe}}
             </p>
         </mat-panel-title>
     </mat-expansion-panel-header>
