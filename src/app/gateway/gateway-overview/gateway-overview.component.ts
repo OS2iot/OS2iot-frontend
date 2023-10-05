@@ -9,7 +9,7 @@ import { environment } from '@environments/environment';
 import { Title } from '@angular/platform-browser';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { GatewayService } from '@app/gateway/gateway.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gateway-list',
@@ -40,6 +40,7 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
   organisations: Organisation[];
 
   private deleteDialogSubscription: Subscription;
+  private routerSubscription: Subscription;
   canEdit: boolean;
 
   constructor(
@@ -65,9 +66,12 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
     this.canEdit = this.meService.hasAccessToTargetOrganization(
       OrganizationAccessScope.GatewayWrite
     );
-    if (this.router.url === '/gateways') {
-      this.router.navigateByUrl('/gateways/list', { replaceUrl: true });
-    }
+    // Subscribe to route change to root and route to list view
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd && e.url === '/gateways') {
+        this.router.navigateByUrl('/gateways/list', { replaceUrl: true });
+      }
+    });
   }
 
   ngOnChanges() {}
@@ -82,5 +86,6 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
     // prevent memory leak by unsubscribing
     this.gatewaySubscription?.unsubscribe();
     this.deleteDialogSubscription?.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 }
