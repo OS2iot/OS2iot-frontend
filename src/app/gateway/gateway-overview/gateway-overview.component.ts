@@ -66,8 +66,11 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
     this.canEdit = this.meService.hasAccessToTargetOrganization(
       OrganizationAccessScope.GatewayWrite
     );
+    if (this.router.url === '/gateways') {
+      this.router.navigateByUrl('/gateways/list', { replaceUrl: true });
+    }
     // Subscribe to route change to root and route to list view
-    this.router.events.subscribe((e) => {
+    this.routerSubscription = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd && e.url === '/gateways') {
         this.router.navigateByUrl('/gateways/list', { replaceUrl: true });
       }
@@ -86,6 +89,6 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
     // prevent memory leak by unsubscribing
     this.gatewaySubscription?.unsubscribe();
     this.deleteDialogSubscription?.unsubscribe();
-    this.routerSubscription.unsubscribe();
+    this.routerSubscription?.unsubscribe();
   }
 }
