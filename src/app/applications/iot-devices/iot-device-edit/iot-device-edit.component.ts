@@ -320,6 +320,14 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   }
 
   postIoTDevice() {
+    // Sanitize devEUI for non-hex characters
+    if (this.iotDevice.type === DeviceType.LORAWAN) {
+      this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.replace(
+        /[^0-9A-Fa-f]/g,
+        ''
+      );
+    }
+
     this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
       (response: IotDevice) => {
         this.router.navigate([
