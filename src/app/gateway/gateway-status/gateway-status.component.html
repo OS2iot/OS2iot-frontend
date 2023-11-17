@@ -20,7 +20,7 @@
   <table #gatewayStatus mat-table [dataSource]="dataSource" class="status-table"
     *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData">
     <!-- Gateway name is the first column -->
-    <ng-container matColumnDef="gatewayName">
+    <ng-container matColumnDef="gatewayName" [sticky]="true">
       <td mat-cell *matCellDef="let element">
         <a [routerLink]="'/gateways/gateway-detail/' + element.id" routerLinkActive="active" *ngIf="shouldLinkToDetails">{{element.name}}</a>
         <span class="text--semibold" *ngIf="!shouldLinkToDetails">{{element.name}}</span>
