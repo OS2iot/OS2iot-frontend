@@ -10,7 +10,7 @@
                 {{ 'LORA-GATEWAY-TABLE.NAME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-                <a [routerLink]="'/gateways/gateway-detail/' + element.id" routerLinkActive="active" class="application-link">
+                <a [routerLink]="'/gateways/gateway-detail/' + element.gatewayId" routerLinkActive="active" class="application-link">
                     {{ element.name }}
                 </a>
             </td>
@@ -20,7 +20,7 @@
         <ng-container matColumnDef="gateway-id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-                {{ element.id }}
+                {{ element.gatewayId }}
             </td>
         </ng-container>
 
@@ -73,13 +73,13 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
                 <div class="dropdown" *ngIf="element.canEdit">
-                    <a href="#" role="button" id="tableRowDropdown-{{ element.id }}"
+                    <a href="#" role="button" id="tableRowDropdown-{{ element.gatewayId }}"
                         class="applicationRow__edit dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                         [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
                     <ul class="dropdown-menu dropdown-menu--table"
-                        attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
+                        attr.aria-labelledby="tableRowDropdown-{{ element.gatewayId }}">
                         <li class="dropdown-item">
-                            <a [routerLink]="['../gateway-edit', element.id]" routerLinkActive="active">{{ 'GEN.EDIT' |
+                            <a [routerLink]="['../gateway-edit', element.gatewayId]" routerLinkActive="active">{{ 'GEN.EDIT' |
                                 translate }}</a>
                         </li>
                         <li class="dropdown-item">

@@ -29,7 +29,7 @@
       <label class="form-label" for="id">{{'QUESTION-LORA-GATEWAY.GATEWAYID' | translate}}</label>*
       <input type="text" class="form-control" id="id" name="id"
         [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" maxlength="16" required
-        [(ngModel)]="gateway.id" [readonly]="editMode ? true : false"
+        [(ngModel)]="gateway.gatewayId" [readonly]="editMode ? true : false"
         [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
     </div>
 
