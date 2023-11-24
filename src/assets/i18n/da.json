@@ -350,7 +350,9 @@
     "ORGANISATION": "Organisation",
     "NAME": "Navn",
     "RSSI": "RSSI (dBm)",
-    "SNR": "SNR (dB)"
+    "SNR": "SNR (dB)",
+    "DEV-EUI": "DevEUI",
+    "APP-KEY": "AppKey (OTAA)"
   },
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
@@ -420,7 +422,8 @@
     "NEVER": "Aldrig set"
   },
   "TABLE": {
-    "PAGINATION": "Navigér tabel"
+    "PAGINATION": "Navigér tabel",
+    "COLUMNS": "Kolonner"
   },
   "APPLICATION-TABLE-ROW": {
     "DELETE": "Slet",

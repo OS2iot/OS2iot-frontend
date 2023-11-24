@@ -1,0 +1,28 @@
+<div class="select-container">
+  <mat-select
+    class="form-control table-select"
+    multiple="true"
+    [(value)]="optionalColumnsSelected"
+    (selectionChange)="handleColumnSelection($event)"
+    panelClass="tall"
+    [placeholder]="'TABLE.COLUMNS' | translate"
+  >
+    <mat-option disabled>
+      <button
+        mat-raised-button
+        class="mat-primary fill text-sm"
+        (click)="selectAll()">
+        {{'QUESTION.DATATARGET.SELECTALLDEVICES' | translate}}
+      </button>
+      <button
+        mat-raised-button
+        class="mat-primary fill text-sm"
+        (click)="deSelectAll()">
+        {{'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate}}
+      </button>
+    </mat-option>
+    <mat-option *ngFor="let option of optionalColumnOptions" [value]="option.id">
+      {{option.display | translate}}
+    </mat-option>
+  </mat-select>
+</div>
