@@ -46,8 +46,8 @@ export class GatewayDetailComponent
   public gatewaySubscription: Subscription;
   public gateway: Gateway;
   public backButton: BackButton = { label: '', routerLink: 0 as any };
-  id: string;
-  deleteGateway = new EventEmitter();
+  gatewayId: string;
+
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   isLoadingResults = true;
@@ -67,7 +67,7 @@ export class GatewayDetailComponent
 
   ngOnInit(): void {
     this.translate.use('da');
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.gatewayId = this.route.snapshot.paramMap.get('id');
     this.translate.get(['NAV.LORA-GATEWAYS']).subscribe((translations) => {
       this.backButton.label = translations['NAV.LORA-GATEWAYS'];
     });
@@ -75,14 +75,14 @@ export class GatewayDetailComponent
     if (this.gateway) {
       this.canEdit = this.meService.hasAccessToTargetOrganization(
         OrganizationAccessScope.GatewayWrite,
-        this.gateway.internalOrganizationId
+        this.gateway.organizationId
       );
     }
   }
 
   ngAfterViewInit() {
-    if (this.id) {
-      this.bindGateway(this.id);
+    if (this.gatewayId) {
+      this.bindGateway(this.gatewayId);
     }
   }
 
@@ -96,19 +96,19 @@ export class GatewayDetailComponent
       markerInfo: {
         name: this.gateway.name,
         active: this.gatewayService.isGatewayActive(this.gateway),
-        id: this.gateway.id,
-        internalOrganizationName: this.gateway.internalOrganizationName,
+        gatewayId: this.gateway.gatewayId,
+        internalOrganizationName: this.gateway.organizationName,
       },
     };
   }
 
-  bindGateway(id: string): void {
-    this.gatewayService.get(id).subscribe((result: GatewayResponse) => {
+  bindGateway(gatewayId: string): void {
+    this.gatewayService.get(gatewayId).subscribe((result: GatewayResponse) => {
       result.gateway.tagsString = JSON.stringify(result.gateway.tags);
       this.gateway = result.gateway;
       this.canEdit = this.meService.hasAccessToTargetOrganization(
         OrganizationAccessScope.GatewayWrite,
-        this.gateway.internalOrganizationId
+        this.gateway.organizationId
       );
       this.gateway.canEdit = this.canEdit;
       this.gatewayStats = result.stats;
@@ -131,7 +131,7 @@ export class GatewayDetailComponent
     this.dropdownButton = this.canEdit
       ? {
           label: 'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS',
-          editRouterLink: '../../gateway-edit/' + this.id,
+          editRouterLink: '../../gateway-edit/' + this.gatewayId,
           isErasable: true,
         }
       : null;
@@ -195,10 +195,12 @@ export class GatewayDetailComponent
       .showSimpleDialog()
       .subscribe((response) => {
         if (response) {
-          this.gatewayService.delete(this.gateway.id).subscribe((response) => {
-            if (response.ok && response.body.success === true) {
-            }
-          });
+          this.gatewayService
+            .delete(this.gateway.gatewayId)
+            .subscribe((response) => {
+              if (response.ok && response.body.success === true) {
+              }
+            });
           this.router.navigate(['gateways']);
         } else {
           console.log(response);

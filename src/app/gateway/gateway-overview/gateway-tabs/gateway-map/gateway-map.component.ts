@@ -89,8 +89,8 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
           name: gateway.name,
           active: this.gatewayStatus(gateway),
           id: gateway.id,
-          internalOrganizationId: gateway.internalOrganizationId,
-          internalOrganizationName: gateway.internalOrganizationName,
+          internalOrganizationId: gateway.organizationId,
+          internalOrganizationName: gateway.organizationName,
         },
       })
     );
@@ -105,7 +105,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.gateways.forEach((gateway) => {
       gateway.canEdit = this.meService.hasAccessToTargetOrganization(
         OrganizationAccessScope.GatewayWrite,
-        gateway.internalOrganizationId
+        gateway.organizationId
       );
     });
   }
