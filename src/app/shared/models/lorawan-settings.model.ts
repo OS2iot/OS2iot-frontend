@@ -8,7 +8,6 @@ export class LorawanSettings {
     devAddr?: string;
     networkSessionKey?: string;
     applicationSessionKey?: string;
-    serviceProfileID: string;
     deviceProfileID: string;
     fCntUp = 0;
     nFCntDown = 0;

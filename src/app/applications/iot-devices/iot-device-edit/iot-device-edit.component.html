@@ -129,20 +129,6 @@
              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('devEUI'), 'is-valid' : formFailedSubmit && !errorFields.includes('devEUI')}">
     </div>
 
-    <ng-container *ngIf="iotDevice.lorawanSettings.serviceProfileID || serviceProfiles">
-      <div class="form-group mt-3 col-12">
-        <label class="form-label" for="serviceProfileID">{{'QUESTION.CHOOSE-SERVICEPROFILE' | translate}}</label>*
-        <select id="serviceProfileID" class="form-select" name="serviceProfileID"
-                [(ngModel)]="iotDevice.lorawanSettings.serviceProfileID" required
-                [value]="iotDevice.lorawanSettings.serviceProfileID" [disabled]="editmode"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('serviceProfileID'), 'is-valid' : formFailedSubmit && !errorFields.includes('serviceProfileID')}">
-          <option *ngFor="let serviceProfile of serviceProfiles" [value]="serviceProfile.id"
-                  [selected]="serviceProfile.id === iotDevice.lorawanSettings.serviceProfileID">
-            {{serviceProfile.name}}
-          </option>
-        </select>
-      </div>
-    </ng-container>
     <ng-container *ngIf="iotDevice.lorawanSettings.deviceProfileID || deviceProfiles">
       <div class="form-group mt-3 col-12">
         <label class="form-label" for="deviceProfileID">{{'QUESTION.CHOOSE-DEVICE' | translate}}</label>*

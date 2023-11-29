@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IotDevice } from '@applications/iot-devices/iot-device.model';
 import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
-import { ServiceProfileResponseOne } from '@profiles/service-profiles/service-profile.model';
-import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
-import { Subscribable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-iot-device-detail-lorawan',
@@ -16,16 +14,13 @@ export class IotDeviceDetailLorawanComponent implements OnInit {
   deviceProfileSubscription: Subscription;
   public OTAA: boolean;
   public deviceProfileName: string;
-  public serviceProfileName: string;
 
   constructor(
     private deviceProfileService: DeviceProfileService,
-    private serviceProfileService: ServiceProfileService
   ) { }
 
   ngOnInit(): void {
     this.getDeviceProfil();
-    this.getServiceProfil();
   }
 
   getDeviceProfil() {
@@ -35,12 +30,4 @@ export class IotDeviceDetailLorawanComponent implements OnInit {
             this.deviceProfileName = response.deviceProfile.name;
         });
   }
-
-  getServiceProfil() {
-    this.deviceProfileSubscription = this.serviceProfileService.getOne(this.device.lorawanSettings?.serviceProfileID)
-        .subscribe((response: ServiceProfileResponseOne) => {
-            this.serviceProfileName = response.serviceProfile.name;
-        });
-  }
-
 }

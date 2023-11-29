@@ -635,7 +635,6 @@
     "OTAA": "Over The Air Activation",
     "OTAA-ABP-CONFIG-HELP": "Du vælger din aktivation type via device profile",
     "ABP": "Activation By Personalisation",
-    "CHOOSE-SERVICEPROFILE": "Vælg service profile",
     "CHOOSE-DEVICE": "Vælg device profile",
     "OTAA-ACTIVATE": "Opret forbindelse vha. OTAA",
     "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
@@ -869,7 +868,6 @@
     "DATAPACKAGE": "Datapakke",
     "LORA": {
       "DEVEUI": "Enheds EUI (DevEUI)",
-      "SERVICEPROFILE": "Service profil",
       "DEVICEPROFILE": "Device profil",
       "ACTIVATIONTYPE": "Aktivations type",
       "OTAA": "OTAA",
@@ -969,7 +967,6 @@
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",
-      "ADDSERVICEPROFILE": "Redigér service profile",
       "ID": "Service profilens id"
     },
     "DEVICE_PROFILE": {
@@ -986,6 +983,7 @@
       "NAME_PLACEHOLDER": "Device profil navn",
       "MACVERSION": "LoRaWAN MAC version ",
       "ADRALGORITHM": "ADR algoritme ",
+      "DEVSTATUSREQFREQ": "Device-status request frequency (req/day)",
       "REGPARAMSREVISION": "LoRaWAN regional parameters revision ",
       "MAXEIRP": "Max EIRP ",
       "GEOLOCBUFFERTTL": "Geolocation buffer TTL (seconds)",
@@ -1011,6 +1009,7 @@
       "MAXEIRP_PLACEHOLDER": "0",
       "GEOLOCBUFFERTTL_PLACEHOLDER": "0",
       "GEOLOCMINBUFFERSIZE_PLACEHOLDER": "0",
+      "DEVSTATUSREQFREQ_PLACEHOLDER": "1",
       "RXDROFFSET1_PLACEHOLDER": "0",
       "RXDATARATE2_PLACEHOLDER": "0",
       "RXFREQ2_PLACEHOLDER": "0",

@@ -10,11 +10,6 @@ import { DeviceModel } from '@app/device-model/device.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DeviceProfile } from '@profiles/device-profiles/device-profile.model';
 import { DeviceProfileService } from '@profiles/device-profiles/device-profile.service';
-import {
-  ServiceProfile,
-  ServiceProfileResponseMany,
-} from '@profiles/service-profiles/service-profile.model';
-import { ServiceProfileService } from '@profiles/service-profiles/service-profile.service';
 import { ActivationType } from '@shared/enums/activation-type';
 import { DeviceType } from '@shared/enums/device-type';
 import { ErrorMessageService } from '@shared/error-message.service';
@@ -42,7 +37,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   public disableChoseApplication = true;
   public loraDevice = DeviceType.LORAWAN;
   public sigfoxDevice = DeviceType.SIGFOX;
-  public serviceProfiles: ServiceProfile[];
   public deviceProfiles: DeviceProfile[];
   public deviceModels: DeviceModel[];
   iotDevice = new IotDevice();
@@ -52,7 +46,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   errorMetadataFieldId: string | undefined;
   public deviceSubscription: Subscription;
   private applicationsSubscription: Subscription;
-  private serviceProfilesSubscription: Subscription;
   private deviceProfileSubscription: Subscription;
   private devicesProfileSubscription: Subscription;
   canEdit: boolean;
@@ -61,7 +54,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public translate: TranslateService,
     private router: Router,
-    private serviceProfileService: ServiceProfileService,
     private deviceProfileService: DeviceProfileService,
     private applicationService: ApplicationService,
     private iotDeviceService: IoTDeviceService,
@@ -90,7 +82,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     });
 
     this.getApplication();
-    this.getServiceProfiles();
     this.getDeviceProfiles();
     this.getDeviceModels();
     this.canEdit = this.meService.hasAccessToTargetOrganization(
@@ -174,16 +165,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       .getOne(deviceProfileId)
       .subscribe((response) => {
         this.OTAA = response.deviceProfile.supportsJoin;
-      });
-  }
-
-  getServiceProfiles() {
-    this.serviceProfilesSubscription = this.serviceProfileService
-      .getMultiple()
-      .subscribe((result: ServiceProfileResponseMany) => {
-        this.serviceProfiles = result.result.sort((a, b) =>
-          a.name.localeCompare(b.name, 'en', { numeric: true })
-        );
       });
   }
 
@@ -394,9 +375,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
     if (this.devicesProfileSubscription) {
       this.devicesProfileSubscription.unsubscribe();
-    }
-    if (this.serviceProfilesSubscription) {
-      this.serviceProfilesSubscription.unsubscribe();
     }
   }
 }
