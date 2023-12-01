@@ -652,18 +652,19 @@
         "GIVE-URL-PLACEHOLDER": "https://min-mqtt-broker.dk",
         "GIVE-PORT": "Angiv datatargets broker port",
         "GIVE-PORT-PLACEHOLDER": "1883",
-        "GIVE-QOS": "Angiv hvilken QoS niveau data skal sendes med",
+        "GIVE-QOS": "Angiv hvilken QoS-niveau data skal sendes med",
         "GIVE-QOS-PLACEHOLDER": "0, 1, 2",
-        "GIVE-QOS-INFO": "QoS (Quality of Service) bestemmer vigtigheden af, at en besked leveres til modtageren. Se dokumentationen for at vide mere.",
+        "GIVE-QOS-INFO": "QoS (Quality of Service) fastlægger, hvor sikker leveringen af beskeden skal være. Der er tre muligheder: 0 (at most once), 1 (at least once) og 2 (exactly once)",
         "GIVE-TOPIC": "Angiv hvilket topic på brokeren der skal sendes til",
-        "GIVE-TOPIC-PLACEHOLDER": "device/+/event",
+        "GIVE-TOPIC-PLACEHOLDER": "Topic på ekstern broker",
+        "GIVE-TOPIC-INFO": "Topic'et kan være givet af den udbyder, som data skal sendes til. Der kan ikke bruges wildcards",
         "GIVE-AUTHENTICATION-METHOD": "Vælg autentificeringsmetode",
         "USERNAME-PASSWORD": "Brugernavn og password",
         "CERTIFICATE": "Certifikat",
         "USERNAME": "Brugernavn",
-        "GIVE-USERNAME": "Angiv et brugernavn med adgang til brokeren og den valgte topic",
+        "GIVE-USERNAME": "Angiv et brugernavn med adgang til brokeren og det valgte topic",
         "PASSWORD": "Adgangskode",
-        "GIVE-PASSWORD": "Angiv adgangskoden til brugeren"
+        "GIVE-PASSWORD": "Angiv adgangskoden"
       }
     },
     "MULTICAST": {
