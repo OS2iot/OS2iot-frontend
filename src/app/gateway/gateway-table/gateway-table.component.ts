@@ -6,9 +6,15 @@ import {
   faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Observable, of as observableOf, Subject } from 'rxjs';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MeService } from '@shared/services/me.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
@@ -24,7 +30,7 @@ import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
   templateUrl: './gateway-table.component.html',
   styleUrls: ['./gateway-table.component.scss'],
 })
-export class GatewayTableComponent implements AfterViewInit {
+export class GatewayTableComponent implements AfterViewInit, OnDestroy {
   @Input() organisationChangeSubject: Subject<any>;
   organizationId?: number;
   displayedColumns: string[] = [
@@ -44,10 +50,9 @@ export class GatewayTableComponent implements AfterViewInit {
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
   refetchIntervalId: NodeJS.Timeout;
-  batteryStatusColor = 'green';
-  batteryStatusPercentage = 50;
   resultsLength = 0;
   isLoadingResults = true;
+  private fetchSubscription: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -60,19 +65,20 @@ export class GatewayTableComponent implements AfterViewInit {
   ) {
     this.translate.use('da');
     moment.locale('da');
-}
+  }
 
   ngAfterViewInit() {
-    this.organisationChangeSubject.subscribe((x) => {
+    this.fetchSubscription = this.organisationChangeSubject.subscribe((x) => {
       this.organizationId = x;
       this.refresh();
     });
-    this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000)
+    this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000);
     this.refresh();
   }
 
   ngOnDestroy() {
-    clearInterval(this.refetchIntervalId)
+    clearInterval(this.refetchIntervalId);
+    this.fetchSubscription.unsubscribe();
   }
 
   private refresh() {
@@ -91,7 +97,10 @@ export class GatewayTableComponent implements AfterViewInit {
   }
 
   canEdit(internalOrganizationId: number): boolean {
-    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, internalOrganizationId);
+    return this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.GatewayWrite,
+      internalOrganizationId
+    );
   }
 
   private getGateways(): Observable<GatewayResponseMany> {

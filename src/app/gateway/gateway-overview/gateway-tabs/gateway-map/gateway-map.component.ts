@@ -15,6 +15,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public gateways: Gateway[];
   public coordinateList = [];
   private gatewaySubscription: Subscription;
+  private organizationChangeSubscription: Subscription;
   isLoadingResults = true;
 
   constructor(
@@ -26,13 +27,15 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.gatewayService.organisationChangeSubject.subscribe((x) => {
-      if (x) {
-        this.getGatewayWith(x);
-      } else {
-        this.getGateways();
+    this.organizationChangeSubscription = this.gatewayService.organisationChangeSubject.subscribe(
+      (x) => {
+        if (x) {
+          this.getGatewayWith(x);
+        } else {
+          this.getGateways();
+        }
       }
-    });
+    );
     if (this.gatewayService.selectedOrg) {
       this.getGatewayWith(this.gatewayService.selectedOrg);
     } else {
@@ -110,6 +113,6 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {
     // prevent memory leak by unsubscribing
     this.gatewaySubscription?.unsubscribe();
-    // this.deleteDialogSubscription?.unsubscribe();
+    this.organizationChangeSubscription.unsubscribe();
   }
 }
