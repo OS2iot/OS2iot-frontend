@@ -17,7 +17,7 @@ import { DownlinkDialogComponent } from './iot-device-detail/downlink/downlink-d
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { DeviceModelComponent } from './iot-device-detail/device-model/device-model.component';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { DataPackageComponent } from './iot-device-detail/data-package/data-package.component';
 import { DataPackagesTimestampComponent } from './iot-device-detail/data-packages-timestamp/data-packages-timestamp.component';
 import { GraphModule } from '@app/graph/graph.module';

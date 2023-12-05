@@ -1,9 +1,10 @@
 import {
-  Component,
-  ViewChild,
   AfterViewInit,
+  ChangeDetectorRef,
+  Component,
   Input,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,15 +14,103 @@ import { ApplicationService } from '@applications/application.service';
 import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MeService } from '@shared/services/me.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { ControlledProperty } from '@shared/models/controlled-property.model';
+import { ApplicationDeviceTypeEntries } from '@shared/enums/device-type';
+import { ApplicationDeviceType } from '@applications/models/application-device-type.model';
+import { Datatarget } from '@applications/datatarget/datatarget.model';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { TableColumn } from '@shared/types/table.type';
 
-/**
- * @title Table retrieving data through HTTP
- */
+const columnDefinitions: TableColumn[] = [
+  {
+    id: 'name',
+    display: 'APPLICATION-TABLE.NAME',
+    default: true,
+    toggleable: false,
+  },
+  {
+    id: 'owner',
+    display: 'APPLICATION-TABLE.OWNER',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'contactPerson',
+    display: 'APPLICATION-TABLE.CONTACT-PERSON',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'devices',
+    display: 'APPLICATION-TABLE.IOT-DEVICES',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'dataTargets',
+    display: 'APPLICATION-TABLE.DATA-TARGETS',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'openDataDkEnabled',
+    display: 'APPLICATION-TABLE.OPEN-DATA-DK',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'status',
+    display: 'APPLICATION-TABLE.STATUS',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'personalData',
+    display: 'APPLICATION-TABLE.PERSONAL-DATA',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'startDate',
+    display: 'APPLICATION-TABLE.START-DATE',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'endDate',
+    display: 'APPLICATION-TABLE.END-DATE',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'category',
+    display: 'APPLICATION-TABLE.CATEGORY',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'controlledProperties',
+    display: 'APPLICATION-TABLE.CONTROLLED-PROPERTIES',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'deviceTypes',
+    display: 'APPLICATION-TABLE.DEVICE-TYPES',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'menu',
+    display: '',
+    default: true,
+    toggleable: false,
+  },
+];
+
 @Component({
   selector: 'app-applications-table',
   styleUrls: ['./applications-table.component.scss'],
@@ -30,7 +119,11 @@ import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   @Input() organizationId: number;
   @Input() permissionId: number;
-  displayedColumns: string[] = ['name', 'devices', 'menu'];
+
+  faFlagIcon = faFlag;
+
+  displayedColumns: string[] = [];
+
   data: Application[] = [];
 
   public pageSize = environment.tablePageSize;
@@ -39,6 +132,8 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   isLoadingResults = true;
   public errorMessage: string;
 
+  applicationSavedColumns = 'applicationSavedColumns';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -46,10 +141,13 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     public translate: TranslateService,
     private applicationService: ApplicationService,
     private router: Router,
-    private deleteDialogService: DeleteDialogService
+    private deleteDialogService: DeleteDialogService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
+    // Detect changes done by child column selector
+    this.cdRef.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -115,7 +213,43 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         }
       });
   }
+
   navigateToEditPage(applicationId: string) {
     this.router.navigate(['applications', 'edit-application', applicationId]);
   }
+
+  mapControlledProperties(value: ControlledProperty[]) {
+    if (!value.length) return '-';
+
+    return value.map((p) => p.type).join(', ');
+  }
+
+  mapDeviceTypes(value: ApplicationDeviceType[]) {
+    const deviceTypeTranslationPrefix = 'IOT-DEVICE-TYPES.';
+    const deviceTypeTranslationKeys = ApplicationDeviceTypeEntries.map(
+      (x) => `${deviceTypeTranslationPrefix}${x.key}`
+    );
+
+    const result = [];
+
+    this.translate
+      .get([
+        ...deviceTypeTranslationKeys,
+        deviceTypeTranslationPrefix + 'OTHER',
+      ])
+      .subscribe((translations) => {
+        value.forEach((p) =>
+          result.push(translations[deviceTypeTranslationPrefix + p.type])
+        );
+      });
+    return result.length ? result.join(', ') : '-';
+  }
+
+  isOpenDataDK(dataTargets: Datatarget[]): boolean {
+    const result = dataTargets.find((t) => t.type === 'OPENDATADK');
+
+    return !!result;
+  }
+
+  protected readonly columnDefinitions = columnDefinitions;
 }

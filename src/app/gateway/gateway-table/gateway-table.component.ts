@@ -3,9 +3,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { Observable, Subject } from 'rxjs';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  OnDestroy,
+} from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MeService } from '@shared/services/me.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { environment } from '@environments/environment';
@@ -21,7 +28,7 @@ import { convertToDateFromTimestamp } from '@shared/helpers/time.helper';
     templateUrl: './gateway-table.component.html',
     styleUrls: ['./gateway-table.component.scss'],
 })
-export class GatewayTableComponent implements AfterViewInit {
+export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     @Input() organisationChangeSubject: Subject<any>;
     organizationId?: number;
     displayedColumns: string[] = [
@@ -45,6 +52,7 @@ export class GatewayTableComponent implements AfterViewInit {
     batteryStatusPercentage = 50;
     resultsLength = 0;
     isLoadingResults = true;
+  private fetchSubscription: Subscription;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -60,16 +68,17 @@ export class GatewayTableComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.organisationChangeSubject.subscribe((x) => {
+    this.fetchSubscription = this.organisationChangeSubject.subscribe((x) => {
             this.organizationId = x;
             this.refresh();
         });
-        this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000);
+    this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000);
         this.refresh();
     }
 
     ngOnDestroy() {
-        clearInterval(this.refetchIntervalId);
+    clearInterval(this.refetchIntervalId);
+    this.fetchSubscription.unsubscribe();
     }
 
     private refresh() {

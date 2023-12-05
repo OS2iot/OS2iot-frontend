@@ -327,7 +327,18 @@
   "APPLICATION-TABLE": {
     "NAME": "Navn",
     "IOT-DEVICES": "IoT enheder",
-    "UPDATED": "Senest opdateret"
+    "UPDATED": "Senest opdateret",
+    "DATA-TARGETS": "Datatarges",
+    "STATUS": "Status",
+    "START-DATE": "Startdato",
+    "END-DATE": "Slutdato",
+    "CATEGORY": "Kategori",
+    "OWNER": "Ejer",
+    "CONTACT-PERSON": "Kontaktperson",
+    "PERSONAL-DATA": "Persondata",
+    "CONTROLLED-PROPERTIES": "Data",
+    "DEVICE-TYPES": "Forbindelsesteknologi",
+    "OPEN-DATA-DK": "Open Data DK"
   },
   "IOT-TABLE": {
     "APPLICATION": "Applikation",
@@ -339,7 +350,9 @@
     "ORGANISATION": "Organisation",
     "NAME": "Navn",
     "RSSI": "RSSI (dBm)",
-    "SNR": "SNR (dB)"
+    "SNR": "SNR (dB)",
+    "DEV-EUI": "DevEUI",
+    "APP-KEY": "AppKey (OTAA)"
   },
   "LORA-GATEWAY-TABLE": {
     "NAME": "Navn",
@@ -409,7 +422,8 @@
     "NEVER": "Aldrig set"
   },
   "TABLE": {
-    "PAGINATION": "Navigér tabel"
+    "PAGINATION": "Navigér tabel",
+    "COLUMNS": "Kolonner"
   },
   "APPLICATION-TABLE-ROW": {
     "DELETE": "Slet",
@@ -628,7 +642,7 @@
     "NFCNTDOWN": "nfcntdown",
     "NFCNTDOWN-PLACEHOLDER": "Angiv download framerate",
     "DEVEUI": "Enheds EUI (DevEUI)",
-    "DEVEUI-PLACEHOLDER": "Enheds EUI (DevEUI)",
+    "DEVEUI-PLACEHOLDER": "Angiv DevEUI (16 tegn)",
     "SKIPFCNTCHECK": "SkipFCntCheck",
     "SKIPFCNTCHECK-NO": "Nej",
     "SKIPFCNTCHECK-YES": "Ja",
@@ -651,18 +665,19 @@
         "GIVE-URL-PLACEHOLDER": "https://min-mqtt-broker.dk",
         "GIVE-PORT": "Angiv datatargets broker port",
         "GIVE-PORT-PLACEHOLDER": "1883",
-        "GIVE-QOS": "Angiv hvilken QoS niveau data skal sendes med",
+        "GIVE-QOS": "Angiv hvilken QoS-niveau data skal sendes med",
         "GIVE-QOS-PLACEHOLDER": "0, 1, 2",
-        "GIVE-QOS-INFO": "QoS (Quality of Service) bestemmer vigtigheden af, at en besked leveres til modtageren. Se dokumentationen for at vide mere.",
+        "GIVE-QOS-INFO": "QoS (Quality of Service) fastlægger, hvor sikker leveringen af beskeden skal være. Der er tre muligheder: 0 (at most once), 1 (at least once) og 2 (exactly once)",
         "GIVE-TOPIC": "Angiv hvilket topic på brokeren der skal sendes til",
-        "GIVE-TOPIC-PLACEHOLDER": "device/+/event",
+        "GIVE-TOPIC-PLACEHOLDER": "Topic på ekstern broker",
+        "GIVE-TOPIC-INFO": "Topic'et kan være givet af den udbyder, som data skal sendes til. Der kan ikke bruges wildcards",
         "GIVE-AUTHENTICATION-METHOD": "Vælg autentificeringsmetode",
         "USERNAME-PASSWORD": "Brugernavn og password",
         "CERTIFICATE": "Certifikat",
         "USERNAME": "Brugernavn",
-        "GIVE-USERNAME": "Angiv et brugernavn med adgang til brokeren og den valgte topic",
+        "GIVE-USERNAME": "Angiv et brugernavn med adgang til brokeren og det valgte topic",
         "PASSWORD": "Adgangskode",
-        "GIVE-PASSWORD": "Angiv adgangskoden til brugeren"
+        "GIVE-PASSWORD": "Angiv adgangskoden"
       }
     },
     "MULTICAST": {
@@ -784,7 +799,7 @@
     "DESCRIPTION": "LoRaWAN gateway beskrivelse",
     "DESCRIPTION-PLACEHOLDER": "Beskrivelse af LoRaWAN gateway",
     "GATEWAYID": "Gateway id (EUI)",
-    "GATEWAYID-PLACEHOLDER": "0000-0000-0000-0000",
+    "GATEWAYID-PLACEHOLDER": "0000000000000000",
     "METADATA": "Gateway tags",
     "METADATA-PLACEHOLDER": "Angiv JSON her",
     "ALTITUDE": "Højde",
@@ -961,9 +976,9 @@
       "REPORTBATTERYSTATUS": "Rapporter enhedens batteriniveau til applikationsserveren",
       "REPORTBATTERYMARGIN": "Rapporter device link margin til applikationsserver",
       "DRRATEMIN": "Min data rate",
-      "DRRATEMINEXPLAINED": "Minimum tilladte data rate. Skal være et tal fra 0-7. \nBrugt til ADR",
+      "DRRATEMINEXPLAINED": "Minimum tilladte data rate. Brugt til ADR",
       "DRRATEMAX": "Max data rate",
-      "DRRATEMAXEXPLAINED": "Maximum tilladte data rate. Skal være et tal fra 0-7. \nBrugt til ADR",
+      "DRRATEMAXEXPLAINED": "Maximum tilladte data rate. Brugt til ADR",
       "SAVE": "Gem",
       "CANCEL": "Annuller",
       "GOBACK": "Gå tilbage",

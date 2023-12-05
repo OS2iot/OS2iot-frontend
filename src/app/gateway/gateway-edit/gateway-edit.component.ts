@@ -84,7 +84,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     }
 
     createGateway(): void {
-        this.loraGatewayService.post(this.gateway).subscribe(
+    this.gateway.id = this.gateway.id.replace(/[^0-9A-Fa-f]/g, '');
+    this.loraGatewayService.post(this.gateway).subscribe(
             (response) => {
                 this.routeBack();
             },
@@ -140,6 +141,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
     private showError(error: HttpErrorResponse) {
         const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
+      error
+    );
         this.errorFields = errorResponse.errorFields;
         this.errorMessages = errorResponse.errorMessages;
         this.scrollToTopService.scrollToTop();

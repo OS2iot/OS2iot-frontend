@@ -6,6 +6,7 @@ import { ApplicationStatus } from './enums/status.enum';
 import { IotDevice } from './iot-devices/iot-device.model';
 import { ApplicationDeviceType } from './models/application-device-type.model';
 import { PermissionResponse } from '@app/admin/permission/permission.model';
+import { Datatarget } from '@applications/datatarget/datatarget.model';
 
 export class Application {
   public id: number;
@@ -33,6 +34,7 @@ export class Application {
   public deviceTypes?: ApplicationDeviceType[];
   public permissions: PermissionResponse[];
   public permissionIds: number[];
+  public dataTargets: Datatarget[];
 }
 
 export class ApplicationRequest {
