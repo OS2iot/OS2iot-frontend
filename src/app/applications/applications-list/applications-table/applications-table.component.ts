@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -16,13 +17,12 @@ import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dia
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
-import { MatSelectChange } from '@angular/material/select';
 import { ControlledProperty } from '@shared/models/controlled-property.model';
 import { ApplicationDeviceTypeEntries } from '@shared/enums/device-type';
 import { ApplicationDeviceType } from '@applications/models/application-device-type.model';
 import { Datatarget } from '@applications/datatarget/datatarget.model';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
-import { FormControl, FormGroup } from '@angular/forms';
+import { TableColumn } from '@shared/types/table.type';
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -123,9 +123,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   faFlagIcon = faFlag;
 
   displayedColumns: string[] = [];
-  optionalColumnsSelected: string[] = [];
-  optionalColumnOptions: TableColumn[] = [];
-  d;
 
   data: Application[] = [];
 
@@ -144,27 +141,13 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     public translate: TranslateService,
     private applicationService: ApplicationService,
     private router: Router,
-    private deleteDialogService: DeleteDialogService
+    private deleteDialogService: DeleteDialogService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    this.optionalColumnOptions = columnDefinitions.filter((o) => o.toggleable);
-
-    const userDisplayedColumns = localStorage.getItem(
-      this.applicationSavedColumns
-    );
-    if (userDisplayedColumns) {
-      const chosenColumns = userDisplayedColumns.split(',');
-      this.displayedColumns = chosenColumns;
-      this.optionalColumnsSelected = chosenColumns;
-    } else {
-      this.optionalColumnsSelected = columnDefinitions
-        .filter((o) => o.toggleable && o.default)
-        .map((o) => o.id);
-      this.displayedColumns = columnDefinitions
-        .filter((o) => o.default)
-        .map((o) => o.id);
-    }
+    // Detect changes done by child column selector
+    this.cdRef.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -235,20 +218,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     this.router.navigate(['applications', 'edit-application', applicationId]);
   }
 
-  handleColumnSelection({
-    source: { value: selectedColumns },
-  }: MatSelectChange) {
-    const displayedColumns = columnDefinitions
-      .filter((o) => !o.toggleable || selectedColumns.includes(o.id))
-      .map((o) => o.id);
-
-    localStorage.setItem(
-      this.applicationSavedColumns,
-      displayedColumns.join(',')
-    );
-    this.displayedColumns = displayedColumns;
-  }
-
   mapControlledProperties(value: ControlledProperty[]) {
     if (!value.length) return '-';
 
@@ -282,23 +251,5 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     return !!result;
   }
 
-  selectAll() {
-    const allOptional = this.optionalColumnOptions.map((o) => o.id);
-    this.handleColumnSelection({
-      source: { value: allOptional },
-    } as MatSelectChange);
-    this.optionalColumnsSelected = allOptional;
-  }
-
-  deSelectAll() {
-    this.handleColumnSelection({ source: { value: [] } } as MatSelectChange);
-    this.optionalColumnsSelected = [];
-  }
-}
-
-interface TableColumn {
-  id: string;
-  display: string;
-  default: boolean;
-  toggleable: boolean;
+  protected readonly columnDefinitions = columnDefinitions;
 }

@@ -26,6 +26,82 @@ import { RestService } from 'src/app/shared/services/rest.service';
 import { IoTDeviceService } from '../iot-device.service';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 import { ActivatedRoute } from '@angular/router';
+import { TableColumn } from '@shared/types/table.type';
+
+const columnDefinitions: TableColumn[] = [
+  {
+    id: 'name',
+    display: 'APPLICATION-TABLE.NAME',
+    default: true,
+    toggleable: false,
+  },
+  {
+    id: 'type',
+    display: 'IOT-TABLE.NETWORK-TECHNOLOGY',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'deviceModel',
+    display: 'IOTDEVICE.DEVICEMODEL',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'deviceProfileName',
+    display: 'IOTDEVICE.LORA.DEVICEPROFILE',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'deviceEUI',
+    display: 'IOT-TABLE.DEV-EUI',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'OTAAapplicationKey',
+    display: 'IOT-TABLE.APP-KEY',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'rssi',
+    display: 'IOT-TABLE.RSSI',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'snr',
+    display: 'IOT-TABLE.SNR',
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: 'dataTargets',
+    display: 'APPLICATION-TABLE.DATA-TARGETS',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'battery',
+    display: 'IOT-TABLE.BATTERY',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'active',
+    display: 'IOT-TABLE.ACTIVE',
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: 'menu',
+    display: '',
+    default: true,
+    toggleable: false,
+  },
+];
 
 @Component({
   selector: 'app-iot-devices-table',
@@ -39,15 +115,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public pageSize = environment.tablePageSize;
   public pageSizeOptions = DefaultPageSizeOptions;
-  displayedColumns: string[] = [
-    'name',
-    'technology',
-    'battery',
-    'rssi',
-    'snr',
-    'active',
-    'menu',
-  ];
   public canEdit = false;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
@@ -55,7 +122,10 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   batteryStatusColor = 'green';
   resultsLength = 0;
   isLoadingResults = true;
-  toText: string;
+
+  displayedColumns: string[] = [];
+
+  iotDeviceSavedColumns = 'iotDeviceSavedColumns';
 
   constructor(
     private restService: RestService,
@@ -102,7 +172,10 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
           return observableOf([]);
         })
       )
-      .subscribe((data) => (this.data = data));
+      .subscribe((data) => {
+        this.data = data;
+        console.log(data);
+      });
   }
 
   public getBatteryProcentage(device: IotDevice): number {
@@ -170,4 +243,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
       },
     });
   }
+
+  protected readonly columnDefinitions = columnDefinitions;
 }
