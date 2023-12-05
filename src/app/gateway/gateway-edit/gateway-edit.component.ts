@@ -12,10 +12,9 @@ import { Gateway, GatewayResponse } from '../gateway.model';
 @Component({
   selector: 'app-gateway-edit',
   templateUrl: './gateway-edit.component.html',
-  styleUrls: ['./gateway-edit.component.scss']
+  styleUrls: ['./gateway-edit.component.scss'],
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
-
   public backButton: BackButton = { label: '', routerLink: ['gateways'] };
   public multiPage = false;
   public title = '';
@@ -39,7 +38,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     private loraGatewayService: ChirpstackGatewayService,
     private errorMessageService: ErrorMessageService,
     private scrollToTopService: ScrollToTopService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.use('da');
@@ -47,10 +46,11 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.getGateway(this.id);
       this.editMode = true;
-      this.backButton.routerLink = ['gateways', 'gateway-detail', this.id]
+      this.backButton.routerLink = ['gateways', 'gateway-detail', this.id];
     }
-    this.translate.get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
-      .subscribe(translations => {
+    this.translate
+      .get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
+      .subscribe((translations) => {
         this.backButton.label = translations['NAV.LORA-GATEWAYS'];
         this.title = translations['FORM.EDIT-NEW-GATEWAY'];
         this.submitButton = translations['GATEWAY.SAVE'];
@@ -72,36 +72,35 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
       latitude: this.gateway.location.latitude,
       draggable: true,
       useGeolocation: !this.editMode,
-      editMode: this.editMode
+      editMode: this.editMode,
     };
   }
 
   createGateway(): void {
-    this.loraGatewayService.post(this.gateway)
-      .subscribe(
-        (response) => {
-          this.routeBack();
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-          this.formFailedSubmit = true;
-        }
-      );
+    this.gateway.id = this.gateway.id.replace(/[^0-9A-Fa-f]/g, '');
+    this.loraGatewayService.post(this.gateway).subscribe(
+      (response) => {
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   updateGateway(): void {
     // Gateway ID not allowed in update.
     this.gateway.id = undefined;
-    this.loraGatewayService
-      .put(this.gateway, this.id)
-      .subscribe(
-        (response) => {
-          this.routeBack();
-        },
-        (error) => {
-          this.showError(error);
-          this.formFailedSubmit = true;
-        });
+    this.loraGatewayService.put(this.gateway, this.id).subscribe(
+      (response) => {
+        this.routeBack();
+      },
+      (error) => {
+        this.showError(error);
+        this.formFailedSubmit = true;
+      }
+    );
   }
 
   onSubmit(): void {
@@ -134,10 +133,11 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   }
 
   private showError(error: HttpErrorResponse) {
-    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
+    const errorResponse = this.errorMessageService.handleErrorMessageWithFields(
+      error
+    );
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
-
 }
