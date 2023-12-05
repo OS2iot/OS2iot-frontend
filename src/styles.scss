@@ -113,3 +113,8 @@ body {
 .line-break {
   white-space: pre-line;
 }
+
+.mat-select-panel.tall {
+  max-height: 400px;
+  height: 400px;
+}

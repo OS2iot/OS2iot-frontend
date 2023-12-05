@@ -41,7 +41,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     FormsModule,
     NGMaterialModule,
     FontAwesomeModule,
-    PipesModule
+    PipesModule,
   ],
   exports: [
     AlertComponent,
@@ -57,4 +57,4 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     MetadataDetailsComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}
