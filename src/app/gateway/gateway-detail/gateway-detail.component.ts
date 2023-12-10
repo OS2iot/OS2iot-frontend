@@ -100,15 +100,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     bindGateway(id: string): void {
         this.gatewayService.get(id).subscribe((result: GatewayResponse) => {
             // Mapping tuples to JSON
-            const jsonRepresentation: Record<string, string> = result.gateway.tagsMap.reduce(
-                (obj, [key, value]) => {
-                    obj[key] = value;
-                    return obj;
-                },
-                {}
-            );
-
-            result.gateway.tagsString = JSON.stringify(jsonRepresentation);
+            result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
             this.canEdit = this.meService.hasAccessToTargetOrganization(
                 OrganizationAccessScope.GatewayWrite,

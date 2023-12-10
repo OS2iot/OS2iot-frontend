@@ -35,9 +35,7 @@ export class ChirpstackGatewayService {
                     .getOrganizationInfo()
                     .find((org) => org.id === response.gateway.internalOrganizationId)?.name;
                 // Move createdat and updatedat to next level ease the use.
-                response.gateway.updatedAt = response.updatedAt;
-                response.gateway.createdAt = response.createdAt;
-                response.gateway.lastSeenAt = response.lastSeenAt;
+                response.gateway.tagsString = JSON.stringify(response.gateway.tags)
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(
                     response.gateway.createdBy
                 );
@@ -85,7 +83,7 @@ export class ChirpstackGatewayService {
         const errorTime = new Date();
         errorTime.setSeconds(errorTime.getSeconds() - 150);
         if (gateway?.lastSeenAt) {
-            const date = convertToDateFromTimestamp(gateway.lastSeenAt);
+            const date = gateway.lastSeenAt ?? convertToDateFromTimestamp(gateway.lastSeenAt);
             const lastSeenAtUnixTimestamp = moment(date).unix();
             const errorTimeUnixTimestamp = moment(errorTime).unix();
             return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;

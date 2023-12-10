@@ -61,14 +61,6 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
         this.gatewaySubscription = this.loraGatewayService
             .get(id)
             .subscribe((result: GatewayResponse) => {
-                const jsonRepresentation: Record<string, string> = result.gateway.tagsMap.reduce(
-                    (obj, [key, value]) => {
-                        obj[key] = value;
-                        return obj;
-                    },
-                    {}
-                );
-                result.gateway.tagsString = JSON.stringify(jsonRepresentation);
                 this.gateway = result.gateway;
             });
     }
@@ -84,8 +76,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     }
 
     createGateway(): void {
-    this.gateway.id = this.gateway.id.replace(/[^0-9A-Fa-f]/g, '');
-    this.loraGatewayService.post(this.gateway).subscribe(
+        this.gateway.gatewayId = this.gateway.gatewayId.replace(/[^0-9A-Fa-f]/g, '');
+        this.loraGatewayService.post(this.gateway).subscribe(
             (response) => {
                 this.routeBack();
             },
@@ -141,8 +133,6 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
     private showError(error: HttpErrorResponse) {
         const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
-      error
-    );
         this.errorFields = errorResponse.errorFields;
         this.errorMessages = errorResponse.errorMessages;
         this.scrollToTopService.scrollToTop();

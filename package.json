@@ -87,6 +87,9 @@
     "xml2js": "^0.6.2",
     "babel-plugin-polyfill-corejs3": "0.8.6",
     "babel-plugin-polyfill-corejs2": "0.4.6",
-    "babel-plugin-polyfill-regenerator": "0.5.3"
+    "babel-plugin-polyfill-regenerator": "0.5.3",
+    "ngx-monaco-editor-v2": {
+      "monaco-editor": "$monaco-editor"
+    }
   }
 }
