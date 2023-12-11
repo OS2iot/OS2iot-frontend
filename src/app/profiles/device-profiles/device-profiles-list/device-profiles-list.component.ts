@@ -5,7 +5,6 @@ import { DeviceProfile } from '../device-profile.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceProfileService } from '../device-profile.service';
 import { MeService } from '@shared/services/me.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment';
@@ -25,6 +24,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   public errorMessages: any;
   deleteDialogSubscription: Subscription;
   errorTitle: string;
+  isDeleting = true;
 
   constructor(
     private router: Router,
@@ -42,6 +42,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
         this.errorTitle = translations['PROFILES.DELETE-FAILED'];
       });
     this.getDeviceProfiles();
+    this.isDeleting = false;
   }
 
   getDeviceProfiles() {
@@ -73,6 +74,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
       this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
         (response) => {
           if (response) {
+            this.isDeleting = true;
             this.deviceProfileService.delete(id).subscribe((response) => {
               console.log(response);
               if (response.ok) {
@@ -91,9 +93,8 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
                 }
               }
             });
-          } else {
-            console.log(response);
-          }
+          } else {}
+          this.isDeleting = false;
         }
       );
     }

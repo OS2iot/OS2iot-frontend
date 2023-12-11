@@ -933,7 +933,7 @@
     "ID-INVALID-OR-ALREADY-IN-USE": "Id skal være unikt. Det pågældende Id er allerede brug",
     "DELETE-NOT-ALLOWED-ITEM-IS-IN-USE": "Dette element er i brug og kan derfor ikke slettes",
     "DELETE-NOT-ALLOWED-HAS-SIGFOX-DEVICE": "Applikation kan ikke blive slettet, da den indeholder en eller flere Sigfox enheder.",
-    "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Service profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder.",
+    "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Device profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder.",
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
     "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
     "DIFFERENT-SERVICE-PROFILE": "Dine devices har forskellige service profiles. De skal have den samme service profile!",
