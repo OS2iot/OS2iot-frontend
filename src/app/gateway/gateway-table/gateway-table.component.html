@@ -10,7 +10,6 @@
   </div>
   <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'LORA-GATEWAY-TABLE.NAME' | translate }}
@@ -22,7 +21,6 @@
       </td>
     </ng-container>
 
-    <!-- Id Column -->
     <ng-container matColumnDef="gateway-id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.GATEWAYID' | translate }}</th>
       <td mat-cell *matCellDef="let gateway">
@@ -30,7 +28,6 @@
       </td>
     </ng-container>
 
-    <!-- Organization Column -->
     <ng-container matColumnDef="internalOrganizationName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.ORGANIZATION' | translate }}
       </th>
@@ -40,14 +37,14 @@
     </ng-container>
 
     <ng-container matColumnDef="rxPacketsReceived">
-      <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.PACKETS-RECEIVED' | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.PACKETS-RECEIVED' | translate }}</th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.rxPacketsReceived }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="txPacketsEmitted">
-      <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.PACKETS-SENT' | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.PACKETS-SENT' | translate }}</th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.txPacketsEmitted }}
       </td>
@@ -60,7 +57,6 @@
       </td>
     </ng-container>
 
-    <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.LOCATION' | translate }}</th>
       <td mat-cell *matCellDef="let gateway">
@@ -70,13 +66,12 @@
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef>{{ 'LORA-GATEWAY-TABLE.CREATED-AT' | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LORA-GATEWAY-TABLE.CREATED-AT' | translate }}</th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.createdAt | dateOnly }}
       </td>
     </ng-container>
 
-    <!-- Last seen Column -->
     <ng-container matColumnDef="last-seen">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'LORA-GATEWAY-TABLE.LAST-SEEN-AT' | translate }}
@@ -86,7 +81,6 @@
       </td>
     </ng-container>
 
-    <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'LORA-GATEWAY-TABLE.STATUS' | translate }}
@@ -102,7 +96,6 @@
       </td>
     </ng-container>
 
-    <!-- Menu Column -->
     <ng-container matColumnDef="menu">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let gateway">
