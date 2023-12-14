@@ -2,7 +2,6 @@ import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gat
 import { TranslateService } from '@ngx-translate/core';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-  faExclamationTriangle,
 import moment from 'moment';
 import { Component, ViewChild, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,7 +15,6 @@ import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
 import { TableColumn } from '@shared/types/table.type';
-import { convertToDateFromTimestamp } from '@shared/helpers/time.helper';
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -187,7 +185,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
 
     lastActive(gateway: Gateway): string {
         if (gateway?.lastSeenAt) {
-            const date = gateway.lastSeenAt ?? convertToDateFromTimestamp(gateway.lastSeenAt);
+            const date = gateway.lastSeenAt ?? gateway.lastSeenAt
 
             const lastSeenAtUnixTimestamp = moment(date).valueOf();
             const now = moment(new Date()).valueOf();
