@@ -14,14 +14,14 @@ export class Gateway extends EditPermission {
   tags?: JSON;
   lastSeenAt: GrpcTime;
   organizationID?: number;
-  internalOrganizationId: number;
+  organizationId: number;
   createdAt: string;
   updatedAt: string;
   createdBy: number;
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
-  internalOrganizationName?: string;
+  organizationName?: string;
 }
 
 export interface GrpcTime {

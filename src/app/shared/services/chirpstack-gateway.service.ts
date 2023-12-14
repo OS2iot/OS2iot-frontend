@@ -31,9 +31,9 @@ export class ChirpstackGatewayService {
     public get(id: string, params = {}): Observable<GatewayResponse> {
         return this.restService.get(this.chripstackGatewayUrl, params, id).pipe(
             map((response: GatewayResponse) => {
-                response.gateway.internalOrganizationName = this.sharedVariableService
+                response.gateway.organizationName = this.sharedVariableService
                     .getOrganizationInfo()
-                    .find((org) => org.id === response.gateway.internalOrganizationId)?.name;
+                    .find((org) => org.id === response.gateway.organizationId)?.name;
                 // Move createdat and updatedat to next level ease the use.
                 response.gateway.tagsString = JSON.stringify(response.gateway.tags)
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(
@@ -51,9 +51,9 @@ export class ChirpstackGatewayService {
         return this.restService.get(this.chripstackGatewayUrl, params).pipe(
             map((response: GatewayResponseMany) => {
                 response.resultList.map((gateway) => {
-                    gateway.internalOrganizationName = this.sharedVariableService
+                    gateway.organizationName = this.sharedVariableService
                         .getOrganizationInfo()
-                        .find((org) => org.id === gateway.internalOrganizationId)?.name;
+                        .find((org) => org.id === gateway.organizationId)?.name;
                 });
                 return response;
             })

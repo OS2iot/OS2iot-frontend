@@ -7,6 +7,3 @@
 <app-device-profiles-item *ngFor="let deviceProfile of deviceProfiles; let i = index"
     (deleteDeviceProfile)="deleteDeviceProfile($event)" [deviceProfile]="deviceProfile">
 </app-device-profiles-item>
-<div class="loading-shade" *ngIf="isDeleting">
-  <mat-spinner *ngIf="isDeleting"></mat-spinner>
-</div>

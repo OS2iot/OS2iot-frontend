@@ -7,7 +7,7 @@
         <div class="jumbotron jumbotron--m-right jumbotron--full-width">
           <h3>{{ 'GATEWAY.DETAILS' | translate }}</h3>
           <p><strong>{{ 'GATEWAY.ID' | translate }}</strong>{{gateway.gatewayId}}</p>
-          <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.internalOrganizationName}}</p>
+          <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.organizationName}}</p>
           <app-general-details [data]="gateway"></app-general-details>
           <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
           <p *ngIf="gateway.description">

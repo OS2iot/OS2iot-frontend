@@ -77,7 +77,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     private refresh() {
         this.getGateways().subscribe((data) => {
             data.resultList.forEach((gw) => {
-                gw.canEdit = this.canEdit(gw.internalOrganizationId);
+                gw.canEdit = this.canEdit(gw.organizationId);
             });
             this.data = data.resultList;
             this.resultsLength = data.totalCount;

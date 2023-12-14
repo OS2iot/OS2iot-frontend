@@ -144,7 +144,7 @@ export class SearchTableComponent implements OnInit {
     } else if (searchResult.type === SearchResultType.Application) {
       this.router.navigate(['/applications', searchResult.id]);
     } else if (searchResult.type === SearchResultType.Gateway) {
-      this.router.navigate(['/gateways/gateway-detail', searchResult.id]);
+      this.router.navigate(['/gateways/gateway-detail', searchResult.gatewayId]);
     }
   }
 

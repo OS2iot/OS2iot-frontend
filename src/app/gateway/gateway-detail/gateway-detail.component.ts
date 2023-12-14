@@ -70,7 +70,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
         if (this.gateway) {
             this.canEdit = this.meService.hasAccessToTargetOrganization(
                 OrganizationAccessScope.GatewayWrite,
-                this.gateway.internalOrganizationId
+                this.gateway.organizationId
             );
         }
     }
@@ -92,7 +92,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
                 name: this.gateway.name,
                 active: this.gatewayService.isGatewayActive(this.gateway),
                 id: this.gateway.gatewayId,
-                internalOrganizationName: this.gateway.internalOrganizationName,
+                internalOrganizationName: this.gateway.organizationName,
             },
         };
     }
@@ -104,7 +104,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             this.gateway = result.gateway;
             this.canEdit = this.meService.hasAccessToTargetOrganization(
                 OrganizationAccessScope.GatewayWrite,
-                this.gateway.internalOrganizationId
+                this.gateway.organizationId
             );
             this.gateway.canEdit = this.canEdit;
             this.gatewayStats = result.stats;
