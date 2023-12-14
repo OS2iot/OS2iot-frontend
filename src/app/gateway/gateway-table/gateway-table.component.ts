@@ -2,6 +2,7 @@ import { ChirpstackGatewayService } from 'src/app/shared/services/chirpstack-gat
 import { TranslateService } from '@ngx-translate/core';
 import { Gateway, GatewayResponseMany } from '../gateway.model';
 import { faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+  faExclamationTriangle,
 import moment from 'moment';
 import { Component, ViewChild, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +15,77 @@ import { MatTableDataSource } from '@angular/material/table';
 import { tableSorter } from '@shared/helpers/table-sorting.helper';
 import { OrganizationAccessScope } from '@shared/enums/access-scopes';
 import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { TableColumn } from '@shared/types/table.type';
 import { convertToDateFromTimestamp } from '@shared/helpers/time.helper';
+
+const columnDefinitions: TableColumn[] = [
+  {
+    id: 'name',
+    display: 'LORA-GATEWAY-TABLE.NAME',
+    toggleable: false,
+    default: true,
+  },
+  {
+    id: 'gateway-id',
+    display: 'LORA-GATEWAY-TABLE.GATEWAYID',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'internalOrganizationName',
+    display: 'LORA-GATEWAY-TABLE.ORGANIZATION',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'rxPacketsReceived',
+    display: 'LORA-GATEWAY-TABLE.PACKETS-RECEIVED',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'txPacketsEmitted',
+    display: 'LORA-GATEWAY-TABLE.PACKETS-SENT',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'tags',
+    display: 'LORA-GATEWAY-TABLE.TAGS',
+    toggleable: true,
+    default: false,
+  },
+  {
+    id: 'location',
+    display: 'LORA-GATEWAY-TABLE.LOCATION',
+    toggleable: true,
+    default: false,
+  },
+  {
+    id: 'createdAt',
+    display: 'LORA-GATEWAY-TABLE.CREATED-AT',
+    toggleable: true,
+    default: false,
+  },
+  {
+    id: 'last-seen',
+    display: 'LORA-GATEWAY-TABLE.LAST-SEEN-AT',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'status',
+    display: 'LORA-GATEWAY-TABLE.STATUS',
+    toggleable: true,
+    default: true,
+  },
+  {
+    id: 'menu',
+    display: '',
+    toggleable: false,
+    default: true,
+  },
+];
 
 @Component({
     selector: 'app-gateway-table',
@@ -47,6 +118,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     isLoadingResults = true;
     private fetchSubscription: Subscription;
 
+  gatewayTableSavedColumns = 'gatewayTableSavedColumns';
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -77,7 +150,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     private refresh() {
         this.getGateways().subscribe((data) => {
             data.resultList.forEach((gw) => {
-                gw.canEdit = this.canEdit(gw.organizationId);
+        gw.canEdit = this.canEdit(gw.organizationId);
+        gw.tagsString = JSON.stringify(gw.tags ?? {});
             });
             this.data = data.resultList;
             this.resultsLength = data.totalCount;
@@ -123,21 +197,25 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    clickDelete(element) {
-        this.deleteGateway(element.gatewayId);
+  clickDelete(element: Gateway) {
+    this.deleteGateway(element.gatewayId);
     }
 
-    deleteGateway(id: string) {
+  deleteGateway(gatewayId: string) {
         this.deleteDialogService.showSimpleDialog().subscribe((response) => {
             if (response) {
-                this.chirpstackGatewayService.delete(id).subscribe((response) => {
-                    if (response.ok && response.body.success === true) {
-                        this.refresh();
-                    }
-                });
+        this.chirpstackGatewayService
+          .delete(gatewayId)
+          .subscribe((response) => {
+            if (response.ok && response.body.success === true) {
+              this.refresh();
+            }
+          });
             } else {
                 console.error(response);
             }
         });
     }
+
+  protected readonly columnDefinitions = columnDefinitions;
 }

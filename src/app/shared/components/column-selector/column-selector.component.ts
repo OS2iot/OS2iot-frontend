@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { TableColumn } from '@shared/types/table.type';
 import { MatSelectChange } from '@angular/material/select';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-column-selector',
@@ -20,6 +21,8 @@ export class ColumnSelectorComponent implements AfterContentInit {
 
   optionalColumnsSelected: string[];
   optionalColumnOptions: TableColumn[];
+
+  cogIcon = faCog;
 
   _displayedColumns: string[];
   @Input() set displayedColumns(val: string[]) {

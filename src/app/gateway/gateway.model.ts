@@ -4,29 +4,26 @@ import { GatewayStatusInterval } from './enums/gateway-status-interval.enum';
 
 export class Gateway extends EditPermission {
   id: number;
-  gatewayId?: string;
-  name?: string;
+  gatewayId: string;
+  name: string;
   description?: string;
   location: CommonLocation = new CommonLocation();
+  rxPacketsReceived: number;
+  txPacketsEmitted: number;
   discoveryEnabled = false;
   gatewayProfileID: string = null;
   tagsString = '{}';
   tags?: JSON;
-  lastSeenAt: GrpcTime;
-  organizationID?: number;
+  lastSeenAt: Date;
   organizationId: number;
-  createdAt: string;
-  updatedAt: string;
+  organizationName: string;
+  createdAt: Date;
+  updatedAt: Date;
   createdBy: number;
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
-  organizationName?: string;
 }
-
-export interface GrpcTime {
-  seconds: number;
-  nanos: number;
 }
 
 export class GatewayData {
@@ -49,7 +46,7 @@ export class GatewayResponse {
   createdAt: string;
   updatedAt: string;
   firstSeenAt: string;
-  lastSeenAt: GrpcTime;
+  lastSeenAt: string;
   gateway: Gateway;
   stats: GatewayStats[];
 }

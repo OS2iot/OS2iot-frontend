@@ -27,7 +27,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     public errorFields: string[];
     public formFailedSubmit = false;
     public editMode = false;
-    private id: string;
+  private gatewayId: string;
 
     gateway = new Gateway();
 
@@ -42,11 +42,15 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.translate.use('da');
-        this.id = this.route.snapshot.paramMap.get('id');
-        if (this.id) {
-            this.getGateway(this.id);
+    this.gatewayId = this.route.snapshot.paramMap.get('id');
+    if (this.gatewayId) {
+      this.getGateway(this.gatewayId);
             this.editMode = true;
-            this.backButton.routerLink = ['gateways', 'gateway-detail', this.id];
+      this.backButton.routerLink = [
+        'gateways',
+        'gateway-detail',
+        this.gatewayId,
+      ];
         }
         this.translate
             .get(['NAV.LORA-GATEWAYS', 'FORM.EDIT-NEW-GATEWAY', 'GATEWAY.SAVE'])
@@ -57,9 +61,9 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
             });
     }
 
-    getGateway(id: string): void {
+  getGateway(gatewayId: string): void {
         this.gatewaySubscription = this.loraGatewayService
-            .get(id)
+      .get(gatewayId)
             .subscribe((result: GatewayResponse) => {
                 this.gateway = result.gateway;
             });
@@ -76,7 +80,10 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     }
 
     createGateway(): void {
-        this.gateway.gatewayId = this.gateway.gatewayId.replace(/[^0-9A-Fa-f]/g, '');
+    this.gateway.gatewayId = this.gateway.gatewayId?.replace(
+      /[^0-9A-Fa-f]/g,
+      ''
+    );
         this.loraGatewayService.post(this.gateway).subscribe(
             (response) => {
                 this.routeBack();
@@ -90,8 +97,8 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
     updateGateway(): void {
         // Gateway ID not allowed in update.
-        this.gateway.gatewayId = undefined;
-        this.loraGatewayService.put(this.gateway, this.id).subscribe(
+    this.gateway.gatewayId = undefined;
+    this.loraGatewayService.put(this.gateway, this.gatewayId).subscribe(
             (response) => {
                 this.routeBack();
             },
@@ -103,7 +110,7 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
-        if (this.id) {
+    if (this.gatewayId) {
             this.updateGateway();
         } else {
             this.createGateway();

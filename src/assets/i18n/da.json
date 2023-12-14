@@ -360,7 +360,11 @@
     "LOCATION": "Placering",
     "LAST-SEEN-AT": "Seneste aktivitet",
     "STATUS": "Status",
-    "ORGANIZATION": "Organisation"
+    "ORGANIZATION": "Organisation",
+    "PACKETS-RECEIVED": "Pakker modtaget",
+    "PACKETS-SENT": "Pakker sendt",
+    "TAGS": "Tags",
+    "CREATED-AT": "Oprettelsesdato"
   },
   "LORA-GATEWAY-STATUS": {
     "TITLE": "LoRaWAN online status historik",

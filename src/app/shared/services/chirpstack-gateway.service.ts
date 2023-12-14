@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { RestService } from './rest.service';
 import { Observable } from 'rxjs';
 import {
-    GatewayResponse,
-    Gateway,
-    GatewayData,
-    GatewayRequest,
-    GatewayResponseMany,
+  GatewayResponse,
+  Gateway,
+  GatewayData,
+  GatewayRequest,
+  GatewayResponseMany,
 } from '@app/gateway/gateway.model';
 import moment from 'moment';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
@@ -15,7 +15,7 @@ import { UserMinimalService } from '@app/admin/users/user-minimal.service';
 import { convertToDateFromTimestamp } from '@shared/helpers/time.helper';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ChirpstackGatewayService {
     private chripstackGatewayUrl = 'chirpstack/gateway';
@@ -29,11 +29,12 @@ export class ChirpstackGatewayService {
     }
 
     public get(id: string, params = {}): Observable<GatewayResponse> {
-        return this.restService.get(this.chripstackGatewayUrl, params, id).pipe(
-            map((response: GatewayResponse) => {
-                response.gateway.organizationName = this.sharedVariableService
-                    .getOrganizationInfo()
-                    .find((org) => org.id === response.gateway.organizationId)?.name;
+    return this.restService.get(this.chripstackGatewayUrl, params, id).pipe(
+      map((response: GatewayResponse) => {
+        response.gateway.organizationName = this.sharedVariableService
+          .getOrganizationInfo()
+          .find((org) => org.id === response.gateway.organizationId)?.name;
+
                 // Move createdat and updatedat to next level ease the use.
                 response.gateway.tagsString = JSON.stringify(response.gateway.tags)
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(
@@ -75,8 +76,8 @@ export class ChirpstackGatewayService {
         return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id);
     }
 
-    public delete(id: string): Observable<any> {
-        return this.restService.delete(this.chripstackGatewayUrl, id);
+  public delete(gatewayId: string): Observable<any> {
+    return this.restService.delete(this.chripstackGatewayUrl, gatewayId);
     }
 
     public isGatewayActive(gateway: Gateway): boolean {

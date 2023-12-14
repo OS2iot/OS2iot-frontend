@@ -5,6 +5,9 @@
     [(value)]="optionalColumnsSelected"
     (selectionChange)="handleColumnSelection($event)"
     panelClass="tall"
+    [hidden]="false"
+    [disableOptionCentering]="true"
+    #Selector
     [placeholder]="'TABLE.COLUMNS' | translate"
   >
     <mat-option disabled>
@@ -25,4 +28,7 @@
       {{option.display | translate}}
     </mat-option>
   </mat-select>
+  <button mat-icon-button type="button" class="button-margin" (click)="Selector.open()">
+    <fa-icon [icon]="cogIcon" class="icon--medium cog-icon"></fa-icon>
+  </button>
 </div>
