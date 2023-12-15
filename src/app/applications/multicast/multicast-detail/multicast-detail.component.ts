@@ -116,7 +116,7 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
         this.multicastService
           .multicastGet(this.multicast.id)
           .subscribe((response: any) => {
-            if (response.totalCount > 0) {
+            if (response.deviceQueueItems.length > 0) {
               this.openDownlinkDialog();
             } else {
               this.startDownlink();

@@ -28,6 +28,8 @@ export class ChirpstackGatewayService {
                     .getOrganizationInfo()
                     .find(org => org.id === response.gateway.organizationId)?.name;
 
+                // Move createdat and updatedat to next level ease the use.
+                response.gateway.tagsString = JSON.stringify(response.gateway.tags);
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
 
                 response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
@@ -39,7 +41,7 @@ export class ChirpstackGatewayService {
     public getMultiple(params = {}): Observable<GatewayResponseMany> {
         return this.restService.get(this.chripstackGatewayUrl, params).pipe(
             map((response: GatewayResponseMany) => {
-                response.result.map(gateway => {
+                response.resultList.map(gateway => {
                     gateway.organizationName = this.sharedVariableService
                         .getOrganizationInfo()
                         .find(org => org.id === gateway.organizationId)?.name;
@@ -72,7 +74,8 @@ export class ChirpstackGatewayService {
         const errorTime = new Date();
         errorTime.setSeconds(errorTime.getSeconds() - 150);
         if (gateway?.lastSeenAt) {
-            const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).unix();
+            const date = gateway.lastSeenAt;
+            const lastSeenAtUnixTimestamp = moment(date).unix();
             const errorTimeUnixTimestamp = moment(errorTime).unix();
             return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
         } else {

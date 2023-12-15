@@ -16,7 +16,9 @@ import { Gateway, GatewayResponse } from "../gateway.model";
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
     public backButton: BackButton = { label: "", routerLink: ["gateways"] };
+    public multiPage = false;
     public title = "";
+    public sectionTitle = "";
     public submitButton = "";
 
     public gatewaySubscription: Subscription;
@@ -55,7 +57,6 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
     getGateway(gatewayId: string): void {
         this.gatewaySubscription = this.loraGatewayService.get(gatewayId).subscribe((result: GatewayResponse) => {
-            result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
         });
     }

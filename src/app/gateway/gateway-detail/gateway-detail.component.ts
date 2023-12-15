@@ -92,6 +92,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
     bindGateway(gatewayId: string): void {
         this.gatewayService.get(gatewayId).subscribe((result: GatewayResponse) => {
+            // Mapping tuples to JSON
             result.gateway.tagsString = JSON.stringify(result.gateway.tags);
             this.gateway = result.gateway;
             this.canEdit = this.meService.hasAccessToTargetOrganization(
@@ -177,9 +178,9 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
             if (response) {
                 this.gatewayService.delete(this.gateway.gatewayId).subscribe(response => {
                     if (response.ok && response.body.success === true) {
+                        this.router.navigate(["gateways"]);
                     }
                 });
-                this.router.navigate(["gateways"]);
             } else {
                 console.log(response);
             }

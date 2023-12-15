@@ -21,9 +21,10 @@ export class Gateway extends EditPermission {
     updatedBy: number;
     createdByName: string;
     updatedByName: string;
-    map(): Map<string, number> {
-        throw new Error("Method not implemented.");
-    }
+}
+export interface GrpcTime {
+    seconds: number;
+    nanos: number;
 }
 
 export class GatewayData {
@@ -38,7 +39,7 @@ export class GatewayRequest {
 }
 
 export class GatewayResponseMany {
-    result: Gateway[];
+    resultList: Gateway[];
     totalCount: number;
 }
 

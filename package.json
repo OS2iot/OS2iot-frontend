@@ -41,7 +41,7 @@
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.7.1",
     "moment": "^2.29.4",
-    "monaco-editor": "^0.44.0",
+    "monaco-editor": "^0.33.0",
     "ng": "0.0.0",
     "ng-inline-svg": "^11.0.0",
     "ngx-monaco-editor-v2": "^14.0.4",

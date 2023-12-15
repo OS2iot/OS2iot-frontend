@@ -110,6 +110,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     faExclamationTriangle = faExclamationTriangle;
     faCheckCircle = faCheckCircle;
     refetchIntervalId: NodeJS.Timeout;
+    batteryStatusColor = "green";
+    batteryStatusPercentage = 50;
     resultsLength = 0;
     isLoadingResults = true;
     private fetchSubscription: Subscription;
@@ -145,11 +147,11 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
 
     private refresh() {
         this.getGateways().subscribe(data => {
-            data.result.forEach(gw => {
+            data.resultList.forEach(gw => {
                 gw.canEdit = this.canEdit(gw.organizationId);
                 gw.tagsString = JSON.stringify(gw.tags ?? {});
             });
-            this.data = data.result;
+            this.data = data.resultList;
             this.resultsLength = data.totalCount;
             this.isLoadingResults = false;
             this.dataSource = new MatTableDataSource(this.data);
@@ -183,7 +185,9 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
 
     lastActive(gateway: Gateway): string {
         if (gateway?.lastSeenAt) {
-            const lastSeenAtUnixTimestamp = moment(gateway?.lastSeenAt).valueOf();
+            const date = gateway.lastSeenAt;
+
+            const lastSeenAtUnixTimestamp = moment(date).valueOf();
             const now = moment(new Date()).valueOf();
             return moment(Math.min(lastSeenAtUnixTimestamp, now)).fromNow();
         } else {
