@@ -3,18 +3,17 @@ import { TranslateService } from "@ngx-translate/core";
 import { Gateway, GatewayResponseMany } from "../gateway.model";
 import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
-import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
-import { Observable, Subject, Subscription } from "rxjs";
+import { merge, Observable, Subject, Subscription } from "rxjs";
 import { MeService } from "@shared/services/me.service";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { environment } from "@environments/environment";
 import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { tableSorter } from "@shared/helpers/table-sorting.helper";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { TableColumn } from "@shared/types/table.type";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
 
 const columnDefinitions: TableColumn[] = [
     {
@@ -24,13 +23,13 @@ const columnDefinitions: TableColumn[] = [
         default: true,
     },
     {
-        id: "gateway-id",
+        id: "gatewayId",
         display: "LORA-GATEWAY-TABLE.GATEWAYID",
         toggleable: true,
         default: true,
     },
     {
-        id: "internalOrganizationName",
+        id: "organizationName",
         display: "LORA-GATEWAY-TABLE.ORGANIZATION",
         toggleable: true,
         default: true,
@@ -66,7 +65,7 @@ const columnDefinitions: TableColumn[] = [
         default: false,
     },
     {
-        id: "last-seen",
+        id: "lastSeenAt",
         display: "LORA-GATEWAY-TABLE.LAST-SEEN-AT",
         toggleable: true,
         default: true,
@@ -90,28 +89,17 @@ const columnDefinitions: TableColumn[] = [
     templateUrl: "./gateway-table.component.html",
     styleUrls: ["./gateway-table.component.scss"],
 })
-export class GatewayTableComponent implements AfterViewInit, OnDestroy {
+export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     @Input() organisationChangeSubject: Subject<any>;
     organizationId?: number;
-    displayedColumns: string[] = [
-        "name",
-        "gateway-id",
-        "location",
-        "internalOrganizationName",
-        "last-seen",
-        "status",
-        "menu",
-    ];
+    displayedColumns: string[] = [];
     data: Gateway[] = [];
-    dataSource: MatTableDataSource<Gateway>;
     public pageSize = environment.tablePageSize;
     public pageSizeOptions = DefaultPageSizeOptions;
 
     faExclamationTriangle = faExclamationTriangle;
     faCheckCircle = faCheckCircle;
     refetchIntervalId: NodeJS.Timeout;
-    batteryStatusColor = "green";
-    batteryStatusPercentage = 50;
     resultsLength = 0;
     isLoadingResults = true;
     private fetchSubscription: Subscription;
@@ -125,10 +113,16 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
         private chirpstackGatewayService: ChirpstackGatewayService,
         public translate: TranslateService,
         private meService: MeService,
-        private deleteDialogService: DeleteDialogService
+        private deleteDialogService: DeleteDialogService,
+        private cdRef: ChangeDetectorRef
     ) {
         this.translate.use("da");
         moment.locale("da");
+    }
+
+    ngOnInit() {
+        // Detect changes done by child column selector
+        this.cdRef.detectChanges();
     }
 
     ngAfterViewInit() {
@@ -137,7 +131,35 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
             this.refresh();
         });
         this.refetchIntervalId = setInterval(() => this.refresh(), 60 * 1000);
-        this.refresh();
+
+        this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+        // TODO: Much of this is deprecated and should be redesigned, same case for the other tables
+        merge(this.sort.sortChange, this.paginator.page)
+            .pipe(
+                startWith({}),
+                switchMap(() => {
+                    this.isLoadingResults = true;
+                    return this.getGateways(this.sort.active, this.sort.direction);
+                }),
+                map(data => {
+                    this.isLoadingResults = false;
+                    this.resultsLength = data.totalCount;
+
+                    return data.resultList;
+                }),
+                catchError(() => {
+                    this.isLoadingResults = false;
+                    return [];
+                })
+            )
+            .subscribe(data => {
+                this.data = data;
+                data.forEach(gw => {
+                    gw.canEdit = this.canEdit(gw.organizationId);
+                    gw.tagsString = JSON.stringify(gw.tags ?? {});
+                });
+            });
     }
 
     ngOnDestroy() {
@@ -146,7 +168,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
     }
 
     private refresh() {
-        this.getGateways().subscribe(data => {
+        this.getGateways(this.sort.active, this.sort.direction).subscribe(data => {
             data.resultList.forEach(gw => {
                 gw.canEdit = this.canEdit(gw.organizationId);
                 gw.tagsString = JSON.stringify(gw.tags ?? {});
@@ -154,10 +176,6 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
             this.data = data.resultList;
             this.resultsLength = data.totalCount;
             this.isLoadingResults = false;
-            this.dataSource = new MatTableDataSource(this.data);
-            this.dataSource.sortingDataAccessor = tableSorter;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
         });
     }
 
@@ -168,10 +186,12 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy {
         );
     }
 
-    private getGateways(): Observable<GatewayResponseMany> {
+    private getGateways(orderByColumn: string, orderByDirection: string): Observable<GatewayResponseMany> {
         const params = {
             limit: this.paginator.pageSize,
             offset: this.paginator.pageIndex * this.paginator.pageSize,
+            orderOn: orderByColumn,
+            sort: orderByDirection,
         };
         if (this.organizationId > 0) {
             params["organizationId"] = this.organizationId;
