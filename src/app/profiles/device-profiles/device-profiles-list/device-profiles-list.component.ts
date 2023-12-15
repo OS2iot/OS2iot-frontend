@@ -1,19 +1,19 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnChanges, OnDestroy, Input } from "@angular/core";
+import { Subscription } from "rxjs";
 
-import { DeviceProfile } from '../device-profile.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DeviceProfileService } from '../device-profile.service';
-import { MeService } from '@shared/services/me.service';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@environments/environment';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+import { DeviceProfile } from "../device-profile.model";
+import { Router, ActivatedRoute } from "@angular/router";
+import { DeviceProfileService } from "../device-profile.service";
+import { MeService } from "@shared/services/me.service";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { TranslateService } from "@ngx-translate/core";
+import { environment } from "@environments/environment";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: 'app-device-profiles-list',
-    templateUrl: './device-profiles-list.component.html',
-    styleUrls: ['./device-profiles-list.component.scss'],
+    selector: "app-device-profiles-list",
+    templateUrl: "./device-profiles-list.component.html",
+    styleUrls: ["./device-profiles-list.component.scss"],
 })
 export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     deviceProfiles: DeviceProfile[];
@@ -35,21 +35,21 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.translateService.get(['PROFILES.DELETE-FAILED']).subscribe((translations) => {
-            this.errorTitle = translations['PROFILES.DELETE-FAILED'];
+        this.translateService.get(["PROFILES.DELETE-FAILED"]).subscribe(translations => {
+            this.errorTitle = translations["PROFILES.DELETE-FAILED"];
         });
         this.getDeviceProfiles();
     }
 
     getDeviceProfiles() {
-        this.subscription = this.deviceProfileService.getMultiple().subscribe((deviceProfiles) => {
+        this.subscription = this.deviceProfileService.getMultiple().subscribe(deviceProfiles => {
             this.deviceProfiles = deviceProfiles.result;
             this.setCanEdit();
         });
     }
 
     onNewDeviceProfile() {
-        this.router.navigate(['deviceprofil/edit']);
+        this.router.navigate(["deviceprofil/edit"]);
     }
 
     canCreate() {
@@ -57,7 +57,7 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     }
 
     setCanEdit() {
-        this.deviceProfiles.forEach((deviceProfile) => {
+        this.deviceProfiles.forEach(deviceProfile => {
             deviceProfile.canEdit = this.meService.hasAccessToTargetOrganization(
                 OrganizationAccessScope.ApplicationWrite,
                 deviceProfile.internalOrganizationId
@@ -66,28 +66,28 @@ export class DeviceProfilesListComponent implements OnInit, OnDestroy {
     }
 
     deleteDeviceProfile(id: string) {
-        if (id) {
-            this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe((response) => {
-                if (response) {
-                    this.deviceProfileService.delete(id).subscribe((response) => {
-                        console.log(response);
-                        if (response.ok) {
-                            this.getDeviceProfiles();
-                        } else {
-                            if (response?.error?.message === 'Internal server error') {
-                                this.errorMessages = 'Internal server error';
-                                return;
-                            } else {
-                                this.deleteDialogSubscription = this.deleteDialogService
-                                    .showSimpleDialog(response.error.message, false, false, true, this.errorTitle)
-                                    .subscribe();
-                            }
-                        }
-                    });
+        if (!id) {
+            return;
+        }
+
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
+            if (!response) {
+                return;
+            }
+            this.deviceProfileService.delete(id).subscribe(response => {
+                console.log(response);
+                if (response.ok) {
+                    this.getDeviceProfiles();
+                } else if (response?.error?.message === "Internal server error") {
+                    this.errorMessages = "Internal server error";
+                    return;
                 } else {
+                    this.deleteDialogSubscription = this.deleteDialogService
+                        .showSimpleDialog(response.error.message, false, false, true, this.errorTitle)
+                        .subscribe();
                 }
             });
-        }
+        });
     }
 
     ngOnDestroy() {

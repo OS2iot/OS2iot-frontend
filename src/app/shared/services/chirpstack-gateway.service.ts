@@ -73,7 +73,7 @@ export class ChirpstackGatewayService {
         const errorTime = new Date();
         errorTime.setSeconds(errorTime.getSeconds() - 150);
         if (gateway?.lastSeenAt) {
-            const date = gateway.lastSeenAt ?? gateway.lastSeenAt;
+            const date = gateway.lastSeenAt;
             const lastSeenAtUnixTimestamp = moment(date).unix();
             const errorTimeUnixTimestamp = moment(errorTime).unix();
             return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;

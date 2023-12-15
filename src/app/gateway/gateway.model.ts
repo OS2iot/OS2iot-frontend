@@ -1,6 +1,6 @@
-import { EditPermission } from '@shared/models/edit-permission.model';
-import { CommonLocation } from '../shared/models/common-location.model';
-import { GatewayStatusInterval } from './enums/gateway-status-interval.enum';
+import { EditPermission } from "@shared/models/edit-permission.model";
+import { CommonLocation } from "../shared/models/common-location.model";
+import { GatewayStatusInterval } from "./enums/gateway-status-interval.enum";
 
 export class Gateway extends EditPermission {
     id: number;
@@ -12,7 +12,7 @@ export class Gateway extends EditPermission {
     txPacketsEmitted: number;
     discoveryEnabled = false;
     gatewayProfileID: string = null;
-    tagsString = '{}';
+    tagsString = "{}";
     tags?: JSON;
     lastSeenAt: Date;
     organizationId: number;
@@ -25,8 +25,8 @@ export class Gateway extends EditPermission {
     updatedByName: string;
 }
 export interface GrpcTime {
-  seconds: number;
-  nanos: number;
+    seconds: number;
+    nanos: number;
 }
 
 export class GatewayData {
