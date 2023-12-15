@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+import { AdrAlgorithmResponse } from '@app/network-server/adr-algorithm.model';
 import { RestService } from '@shared/services/rest.service';
 import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
 import { Observable } from 'rxjs';
@@ -50,5 +51,9 @@ export class DeviceProfileService {
 
   delete(id: string) {
     return this.restService.delete(this.URL, id);
+  }
+
+  getAllAdrAlgorithms(): Observable<AdrAlgorithmResponse> {
+    return this.restService.get(`${this.URL}/adr-algorithms`, {});
   }
 }

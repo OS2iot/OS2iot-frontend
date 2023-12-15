@@ -119,8 +119,8 @@ table {
 
 .table-select {
   width: 180px !important;
-  margin: 5px;
-
+  visibility: hidden;
+  height: 10px;
 }
 
 .select-container {

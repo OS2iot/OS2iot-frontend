@@ -52,7 +52,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
         orderOn: null,
       })
       .subscribe((gateways: GatewayResponseMany) => {
-        this.gateways = gateways.result;
+        this.gateways = gateways.resultList;
         this.mapToCoordinateList();
         this.setCanEdit();
         this.isLoadingResults = false;
@@ -69,7 +69,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
         organizationId: orgId,
       })
       .subscribe((gateways: GatewayResponseMany) => {
-        this.gateways = gateways.result;
+        this.gateways = gateways.resultList;
         this.mapToCoordinateList();
         this.setCanEdit();
         this.isLoadingResults = false;
@@ -88,9 +88,9 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
         markerInfo: {
           name: gateway.name,
           active: this.gatewayStatus(gateway),
-          id: gateway.id,
-          internalOrganizationId: gateway.internalOrganizationId,
-          internalOrganizationName: gateway.internalOrganizationName,
+          id: gateway.gatewayId,
+          internalOrganizationId: gateway.organizationId,
+          internalOrganizationName: gateway.organizationName,
         },
       })
     );
@@ -105,7 +105,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.gateways.forEach((gateway) => {
       gateway.canEdit = this.meService.hasAccessToTargetOrganization(
         OrganizationAccessScope.GatewayWrite,
-        gateway.internalOrganizationId
+        gateway.organizationId
       );
     });
   }
