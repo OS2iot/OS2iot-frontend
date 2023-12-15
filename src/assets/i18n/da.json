@@ -940,7 +940,7 @@
     "DELETE-NOT-ALLOWED-HAS-LORAWAN-DEVICE": "Device profilen kan ikke blive slettet, da den er i brug af en eller flere LoRaWAN enheder.",
     "OTAA-INFO-MISSING": "OTAA nøgle mangler eller er ikke gyldig.",
     "ABP-INFO-MISSING": "ABP nøgle mangler eller er ikke gyldig.",
-    "DIFFERENT-SERVICE-PROFILE": "Dine devices har ved oprettelse haft forskellige service profiles. De skal have haft den samme service profile ved oprettelse!",
+    "DIFFERENT-CREATION-SERVICE-PROFILE": "Dine devices har ved oprettelse haft forskellige service profiles. De skal have haft den samme service profile ved oprettelse!",
     "WRONG-SERVICE-PROFILE": "Dine devices har forkert service profile. Vælg devices som har samme service profile som din multicast.",
     "ID-DOES-NOT-EXIST": "Id'et findes ikke",
     "APPLICATION-DOES-NOT-EXIST": "Den tilhørende applikation findes ikke",
