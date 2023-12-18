@@ -31,6 +31,7 @@ export class ChirpstackGatewayService {
                 // Move createdat and updatedat to next level ease the use.
                 response.gateway.tagsString = JSON.stringify(response.gateway.tags);
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
+
                 response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
                 return response;
             })

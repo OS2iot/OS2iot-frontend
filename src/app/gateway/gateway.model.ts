@@ -10,8 +10,6 @@ export class Gateway extends EditPermission {
     location: CommonLocation = new CommonLocation();
     rxPacketsReceived: number;
     txPacketsEmitted: number;
-    discoveryEnabled = false;
-    gatewayProfileID: string = null;
     tagsString = "{}";
     tags?: JSON;
     lastSeenAt: Date;

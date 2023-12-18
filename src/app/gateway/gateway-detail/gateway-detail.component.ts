@@ -35,7 +35,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     public gateway: Gateway;
     public backButton: BackButton = { label: "", routerLink: 0 as any };
     gatewayId: string;
-    deleteGateway = new EventEmitter();
+
     private deleteDialogSubscription: Subscription;
     public dropdownButton: DropdownButton;
     isLoadingResults = true;
