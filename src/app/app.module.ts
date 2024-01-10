@@ -34,6 +34,7 @@ import { MatSelectSearchModule } from '@shared/components/mat-select-search/mat-
 import { UserPageComponent } from './admin/users/user-page/user-page.component';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
+import { CookieService } from 'ngx-cookie-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,6 +99,7 @@ export function tokenGetter() {
     { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
     { provide: SAVER, useFactory: getSaver },
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
+    { provide: CookieService }
   ],
 })
 export class AppModule {}
