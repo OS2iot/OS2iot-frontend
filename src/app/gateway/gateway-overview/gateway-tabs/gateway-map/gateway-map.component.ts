@@ -47,7 +47,6 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
                 limit: null,
                 offset: null,
                 sort: null,
-                orderOn: null,
             })
             .subscribe((gateways: GatewayResponseMany) => {
         this.gateways = gateways.resultList;
@@ -63,7 +62,6 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
                 limit: null,
                 offset: null,
                 sort: null,
-                orderOn: null,
                 organizationId: orgId,
             })
             .subscribe((gateways: GatewayResponseMany) => {

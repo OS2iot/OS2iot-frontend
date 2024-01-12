@@ -8,6 +8,7 @@ import {
 import { TableColumn } from '@shared/types/table.type';
 import { MatSelectChange } from '@angular/material/select';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-column-selector',
@@ -24,6 +25,7 @@ export class ColumnSelectorComponent implements AfterContentInit {
 
   cogIcon = faCog;
 
+  _cookieService: CookieService
   _displayedColumns: string[];
   @Input() set displayedColumns(val: string[]) {
     this.displayedColumnsChange.emit(val);
@@ -36,14 +38,16 @@ export class ColumnSelectorComponent implements AfterContentInit {
     string[]
   >();
 
-  constructor() {}
+  constructor(cookieService: CookieService) {
+    this._cookieService = cookieService
+  }
 
   ngAfterContentInit(): void {
     this.optionalColumnOptions = this.columnDefinitions.filter(
       (o) => o.toggleable
     );
 
-    const userDisplayedColumns = localStorage.getItem(this.localStorageKey);
+    const userDisplayedColumns = this._cookieService.get(this.localStorageKey);
     if (userDisplayedColumns) {
       const chosenColumns = userDisplayedColumns.split(',');
       this.displayedColumns = chosenColumns;
@@ -65,7 +69,7 @@ export class ColumnSelectorComponent implements AfterContentInit {
       .filter((o) => !o.toggleable || selectedColumns.includes(o.id))
       .map((o) => o.id);
 
-    localStorage.setItem(this.localStorageKey, displayedColumns.join(','));
+    this._cookieService.set(this.localStorageKey, displayedColumns.join(','));
     this.displayedColumns = displayedColumns;
   }
 
