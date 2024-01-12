@@ -202,15 +202,16 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
 
                             if (valueA === "NONE" && valueB !== "NONE") {
                                 return orderByDirection === "asc" ? 1 : -1;
-                            } else if (valueA !== "NONE" && valueB === "NONE") {
-                                return orderByDirection === "asc" ? -1 : 1;
-                            } else {
-                                const translatedA = this.translate.instant("APPLICATION.STATUS." + valueA);
-                                const translatedB = this.translate.instant("APPLICATION.STATUS." + valueB);
-
-                                return translatedA.localeCompare(translatedB) * (orderByDirection === "asc" ? 1 : -1);
                             }
+                            if (valueA !== "NONE" && valueB === "NONE") {
+                                return orderByDirection === "asc" ? -1 : 1;
+                            }
+                            const translatedA = this.translate.instant("APPLICATION.STATUS." + valueA);
+                            const translatedB = this.translate.instant("APPLICATION.STATUS." + valueB);
+
+                            return translatedA.localeCompare(translatedB) * (orderByDirection === "asc" ? 1 : -1);
                         });
+
                         return data;
                     }
                 })

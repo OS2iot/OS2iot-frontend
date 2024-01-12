@@ -185,8 +185,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
             })
             .pipe(
                 map((data: IotDevicesResponse) => {
-                  // For some reason, the backend is not capable to sort MQTT_EXTERNAL_BROKER and MQTT_INTERNAL_BROKER.
-                  // Therefore we do it manually in the frontend.
+                    // For some reason, the backend is not capable to sort MQTT_EXTERNAL_BROKER and MQTT_INTERNAL_BROKER.
+                    // Therefore we do it manually in the frontend.
                     if (orderByColumn !== "type") {
                         return data;
                     } else {
@@ -196,11 +196,11 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
 
                             if (valueA < valueB) {
                                 return orderByDirection === "asc" ? -1 : 1;
-                            } else if (valueA > valueB) {
-                                return orderByDirection === "asc" ? 1 : -1;
-                            } else {
-                                return 0;
                             }
+                            if (valueA > valueB) {
+                                return orderByDirection === "asc" ? 1 : -1;
+                            }
+                            return 0;
                         });
                         return data;
                     }
