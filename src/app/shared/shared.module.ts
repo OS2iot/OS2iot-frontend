@@ -19,6 +19,7 @@ import { GeneralDetailsComponent } from './components/general-details/general-de
 import { PipesModule } from './pipes/pipes.module';
 import { DynamicImgComponent } from './components/dynamic-img/dynamic-img.component';
 import { MetadataDetailsComponent } from './components/metadata-details/metadata-details.component';
+import { ColumnSelectorComponent } from './components/column-selector/column-selector.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     GeneralDetailsComponent,
     DynamicImgComponent,
     MetadataDetailsComponent,
+    ColumnSelectorComponent,
   ],
   imports: [
     DirectivesModule,
@@ -41,7 +43,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     FormsModule,
     NGMaterialModule,
     FontAwesomeModule,
-    PipesModule
+    PipesModule,
   ],
   exports: [
     AlertComponent,
@@ -55,6 +57,7 @@ import { MetadataDetailsComponent } from './components/metadata-details/metadata
     GeneralDetailsComponent,
     DynamicImgComponent,
     MetadataDetailsComponent,
+    ColumnSelectorComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -26,11 +26,11 @@
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="id">{{'QUESTION-LORA-GATEWAY.GATEWAYID' | translate}}</label>*
-      <input type="text" class="form-control" id="id" name="id"
-        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" maxlength="16" required
-        [(ngModel)]="gateway.id" [readonly]="editMode ? true : false"
-        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('id'), 'is-valid' : formFailedSubmit && !errorFields.includes('id')}">
+      <label class="form-label" for="gatewayId">{{'QUESTION-LORA-GATEWAY.GATEWAYID' | translate}}</label>*
+      <input type="text" class="form-control" id="gatewayId" name="gatewayId"
+        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate" required
+        [(ngModel)]="gateway.gatewayId" [readonly]="editMode"
+        [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('gatewayId'), 'is-valid' : formFailedSubmit && !errorFields.includes('gatewayId')}">
     </div>
 
     <div class="row thirty-height" *ngIf="gateway.location">
@@ -40,26 +40,26 @@
     <div class="row mb-5">
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="longitude">{{'GATEWAY.LONGITUDE' | translate}}</label>
-        <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="00" required
-          [(ngModel)]="gateway.location.longitude" step=".000001" min="-180" max="180" maxlength="9"
-          (keyup)="onCoordinateKey($event)"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
+        <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="'00'" required
+               [(ngModel)]="gateway.location.longitude" step=".000001" min="-180" max="180" maxlength="9"
+               (keyup)="onCoordinateKey($event)"
+               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
       </div>
 
       <div class="form-group mt-3 col-6">
-        <label class="form-label" for="latitude">{{'GATEWAY.LATITUDE' | translate}}</label>
-        <input type="number" class="form-control" id="location.latitude" name="location.latitude" [placeholder]="00"
-          required [(ngModel)]="gateway.location.latitude" step=".000001" min="-180" max="180" maxlength="9"
-          (keyup)="onCoordinateKey($event)"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('latitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('latitude')}">
+        <label class="form-label" for="location.latitude">{{'GATEWAY.LATITUDE' | translate}}</label>
+        <input type="number" class="form-control" id="location.latitude" name="location.latitude" [placeholder]="'00'"
+               required [(ngModel)]="gateway.location.latitude" step=".000001" min="-180" max="180" maxlength="9"
+               (keyup)="onCoordinateKey($event)"
+               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('latitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('latitude')}">
       </div>
 
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="altitude">{{'GATEWAY.ALTITUDE' | translate}}</label>
         <input type="number" class="form-control" id="altitude" name="altitude" [placeholder]="00" required
-          [(ngModel)]="gateway.location.altitude" step=".000001" min="-180" max="180" maxlength="9"
-          (keyup)="onCoordinateKey($event)"
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('altitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('altitude')}">
+               [(ngModel)]="gateway.location.altitude" step=".000001" min="-180" max="180" maxlength="9"
+               (keyup)="onCoordinateKey($event)"
+               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('altitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('altitude')}">
       </div>
     </div>
     <div class="form-group mt-3">

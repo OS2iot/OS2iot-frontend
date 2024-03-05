@@ -15,9 +15,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
 import { DeviceProfilesEditComponent } from './device-profiles/device-profiles-edit/device-profiles-edit.component';
 import { DeviceProfilesItemComponent } from './device-profiles/device-profiles-list/device-profiles-item/device-profiles-item.component';
 import { DeviceProfilesListComponent } from './device-profiles/device-profiles-list/device-profiles-list.component';
-import { ServiceProfilesEditComponent } from './service-profiles/service-profiles-edit/service-profiles-edit.component';
-import { ServiceProfileItemComponent } from './service-profiles/service-profiles-list/service-profile-item/service-profile-item.component';
-import { ServiceProfilesListComponent } from './service-profiles/service-profiles-list/service-profiles-list.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +23,6 @@ import { ServiceProfilesListComponent } from './service-profiles/service-profile
     DeviceProfilesListComponent,
     DeviceProfilesItemComponent,
     DeviceProfilesEditComponent,
-    ServiceProfilesListComponent,
-    ServiceProfileItemComponent,
-    ServiceProfilesEditComponent,
   ],
   exports: [],
   imports: [

@@ -109,3 +109,13 @@ body {
     border-color: $color-white-001;
   }
 }
+
+.line-break {
+  white-space: pre-line;
+}
+
+.mat-select-panel.tall {
+  max-height: 400px;
+  height: 400px;
+  margin-right: 30px;
+}

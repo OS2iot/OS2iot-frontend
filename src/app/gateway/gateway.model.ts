@@ -1,29 +1,30 @@
-import { EditPermission } from '@shared/models/edit-permission.model';
-import { CommonLocation } from '../shared/models/common-location.model';
-import { GatewayStatusInterval } from './enums/gateway-status-interval.enum';
+import { EditPermission } from "@shared/models/edit-permission.model";
+import { CommonLocation } from "../shared/models/common-location.model";
+import { GatewayStatusInterval } from "./enums/gateway-status-interval.enum";
 
 export class Gateway extends EditPermission {
-    id?: string;
-    name?: string;
+    id: number;
+    gatewayId: string;
+    name: string;
     description?: string;
-    location: CommonLocation = new CommonLocation;
-    discoveryEnabled = false;
-    gatewayProfileID: string = null;
-    tagsString = '{}';
+    location: CommonLocation = new CommonLocation();
+    rxPacketsReceived: number;
+    txPacketsEmitted: number;
+    tagsString = "{}";
     tags?: JSON;
-    lastSeenAt: string;
-    organizationID?: number;
-    internalOrganizationId: number;
-    createdAt: string;
-    updatedAt: string;
+    lastSeenAt: Date;
+    organizationId: number;
+    organizationName: string;
+    createdAt: Date;
+    updatedAt: Date;
     createdBy: number;
     updatedBy: number;
     createdByName: string;
     updatedByName: string;
-    public internalOrganizationName?: string;
-    map(): Map<string, number> {
-        throw new Error('Method not implemented.');
-    }
+}
+export interface GrpcTime {
+    seconds: number;
+    nanos: number;
 }
 
 export class GatewayData {
@@ -38,7 +39,7 @@ export class GatewayRequest {
 }
 
 export class GatewayResponseMany {
-    result: Gateway[];
+    resultList: Gateway[];
     totalCount: number;
 }
 
@@ -60,28 +61,28 @@ export interface GatewayStats {
 }
 
 export interface GetAllGatewayStatusParameters {
-  limit?: number;
-  offset?: number;
-  organizationId?: number;
-  timeInterval?: GatewayStatusInterval;
+    limit?: number;
+    offset?: number;
+    organizationId?: number;
+    timeInterval?: GatewayStatusInterval;
 }
 
 export interface StatusTimestamp {
-  timestamp: Date;
-  wasOnline: boolean;
+    timestamp: Date;
+    wasOnline: boolean;
 }
 
 export interface GetGatewayStatusParameters {
-  timeInterval?: GatewayStatusInterval;
+    timeInterval?: GatewayStatusInterval;
 }
 
 export interface GatewayStatus {
-  id: string;
-  name: string;
-  statusTimestamps: StatusTimestamp[];
+    id: string;
+    name: string;
+    statusTimestamps: StatusTimestamp[];
 }
 
 export interface AllGatewayStatusResponse {
-  data: GatewayStatus[];
-  count: number;
+    data: GatewayStatus[];
+    count: number;
 }
