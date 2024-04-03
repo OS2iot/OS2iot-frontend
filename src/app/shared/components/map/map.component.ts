@@ -175,7 +175,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.coordinates.latitude = event.latlng.lat;
         this.coordinates.longitude = event.latlng.lng;
         this.setCoordinatesOutput();
-        this.updateMarker();
+        this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
     }
 
     setCoordinatesOutput() {
