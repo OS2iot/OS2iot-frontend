@@ -13,6 +13,7 @@ import * as L from "leaflet";
 import "leaflet.fullscreen";
 import { Subscription } from "rxjs";
 import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
+import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
 
 @Component({
     selector: "app-map",
@@ -31,7 +32,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private redMarker = "/assets/images/red-marker.png";
     private grenMarker = "/assets/images/green-marker.png";
     subscription: Subscription;
-
+    provider: OpenStreetMapProvider;
+    searchControl: L.Control;
     constructor() {}
 
     ngOnInit(): void {
@@ -63,6 +65,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     ngAfterViewInit(): void {
         this.initMap();
         this.placeMarkers();
+        this.provider = new OpenStreetMapProvider();
+
+        this.searchControl = GeoSearchControl({
+            provider: this.provider,
+            style: "bar",
+            showMarker: true,
+        });
+        this.map.addControl(this.searchControl);
+
+        this.map.on("dblclick", event => this.dblclick(event));
     }
 
     ngOnDestroy(): void {
@@ -159,6 +171,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.setCoordinatesOutput();
     }
 
+    private dblclick(event: any) {
+        this.coordinates.latitude = event.latlng.lat;
+        this.coordinates.longitude = event.latlng.lng;
+        this.setCoordinatesOutput();
+        this.updateMarker();
+    }
+
     setCoordinatesOutput() {
         this.updateCoordinates.emit({ latitude: this.coordinates.latitude, longitude: this.coordinates.longitude });
     }
@@ -172,10 +191,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     this.coordinateList ? this.coordinateList[0]?.longitude : this.coordinates?.longitude,
                 ],
                 zoom: this.zoomLevel,
+                doubleClickZoom: false,
                 fullscreenControl: true,
                 fullscreenControlOptions: {
                     position: "topleft",
-                    content: '<div class="fas fa-expand"></div>'
+                    content: '<div class="fas fa-expand"></div>',
                 },
             });
             const tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

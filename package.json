@@ -40,6 +40,7 @@
     "guid-typescript": "^1.0.9",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
+    "leaflet-geosearch": "^3.11.1",
     "leaflet.fullscreen": "^3.0.1",
     "moment": "^2.29.4",
     "monaco-editor": "^0.33.0",
@@ -56,6 +57,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.50.2",
     "@angular-devkit/build-angular": "^14.2.3",
     "@angular/cli": "^14.2.9",
     "@angular/compiler-cli": "^14.2.3",
