@@ -34,8 +34,9 @@
     </div>
 
     <div class="row thirty-height" *ngIf="gateway.location">
-      <app-map [coordinates]="getCoordinates()" (updateCoordinates)="updateCoordinates($event)"></app-map>
+      <app-map [coordinates]="getCoordinates()" (updateCoordinates)="updateCoordinates($event)" [isFromCreation]="true"></app-map>
     </div>
+    <p>{{'DBLCLICKINFO' | translate}}</p>
 
     <div class="row mb-5">
       <div class="form-group mt-3 col-6">

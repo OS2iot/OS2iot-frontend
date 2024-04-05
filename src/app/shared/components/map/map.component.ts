@@ -14,6 +14,9 @@ import "leaflet.fullscreen";
 import { Subscription } from "rxjs";
 import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
+import { TranslateService } from "@ngx-translate/core";
+import moment from "moment";
+import 'leaflet.markercluster';
 
 @Component({
     selector: "app-map",
@@ -25,16 +28,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     public mapId;
     private marker;
     private markers: any;
+    @Input() isFromApplication? = false;
+    @Input() isFromCreation? = false;
     @Input() coordinates?: MapCoordinates;
     @Input() coordinateList: [MapCoordinates];
     @Output() updateCoordinates = new EventEmitter();
     private zoomLevel = 15;
     private redMarker = "/assets/images/red-marker.png";
-    private grenMarker = "/assets/images/green-marker.png";
+    private greenMarker = "/assets/images/green-marker.png";
+    private greyMarker = "/assets/images/grey-marker.png";
     subscription: Subscription;
     provider: OpenStreetMapProvider;
     searchControl: L.Control;
-    constructor() {}
+    constructor(private translate: TranslateService) {}
 
     ngOnInit(): void {
         this.mapId = Math.random().toString();
@@ -55,22 +61,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         }
     }
 
-    changeMarkers() {
-        if (this.markers) {
-            this.markers.clearLayers();
-        }
-        this.placeMarkers();
-    }
-
     ngAfterViewInit(): void {
         this.initMap();
         this.placeMarkers();
+        if (!this.isFromCreation) {
+            return;
+        }
+
         this.provider = new OpenStreetMapProvider();
 
         this.searchControl = GeoSearchControl({
             provider: this.provider,
-            style: "bar",
-            showMarker: true,
+            showMarker: false,
         });
         this.map.addControl(this.searchControl);
 
@@ -82,6 +84,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             this.map.off();
             this.map.remove();
         }
+    }
+
+    changeMarkers() {
+        if (this.markers) {
+            this.markers.clearLayers();
+        }
+        this.placeMarkers();
     }
 
     setGeolocation() {
@@ -101,13 +110,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
 
     private placeMarkers() {
+        if (!this.map) {
+            return;
+        }
         if (this.coordinateList) {
+            const test = L.markerClusterGroup();
             const markerLayerGroup = [];
             this.coordinateList.forEach(coord => {
                 markerLayerGroup.push(
                     this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
                 );
-                this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
+                test.addLayer(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo))
+                this.markers = test.addTo(this.map);
+                // this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
             });
             this.fitToBounds(markerLayerGroup);
         } else {
@@ -122,15 +137,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
 
     private fitToBounds(markers: any[]) {
-        const group = L.featureGroup(markers);
+        //If it's the map from application details, then the gateways should not be included in the fit.
+        //Only way to know if it's NOT a gateway, is if the marker is the grey marker.
+        const group = !this.isFromApplication
+            ? L.featureGroup(markers)
+            : L.featureGroup(markers.filter(m => m.options.icon.options.iconUrl === this.greyMarker));
+
         this.map.fitBounds(group.getBounds(), { padding: [50, 50] });
     }
 
     private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
-        const markerIcon = this.getMarkerIcon(markerInfo?.active);
+        const markerIcon = this.getMarkerIcon(markerInfo?.active, markerInfo?.isDevice);
         const marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
         marker.on("dragend", event => this.dragend(event));
-        if (markerInfo) {
+        if (markerInfo && !markerInfo.isDevice) {
             const isActive = markerInfo.active ? "Aktiv" : "Inaktiv";
             marker.bindPopup(
                 // TODO: should be standardised when more components use this feature.
@@ -152,16 +172,43 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     markerInfo.internalOrganizationName +
                     "</p>"
             );
+        } else if (markerInfo) {
+            const lastActiveString = markerInfo.lastActive
+                ? moment(markerInfo.lastActive).fromNow()
+                : this.translate.instant("ACTIVITY.NEVER");
+            marker.bindPopup(
+                // TODO: should be standardised when more components use this feature.
+                '<a _ngcontent-gij-c367=""' +
+                    'routerlinkactive="active" class="application-link"' +
+                    'ng-reflect-router-link-active="active"' +
+                    'ng-reflect-router-link="gateway-detail,' +
+                    markerInfo.id +
+                    '" href="/applications/' +
+                    markerInfo.internalOrganizationId +
+                    "/iot-device/" +
+                    markerInfo.id +
+                    "/details" +
+                    '">' +
+                    markerInfo.name +
+                    "</a>" +
+                    "<p>" +
+                    "Netværksteknologi: " +
+                    this.translate.instant(markerInfo.networkTechnology) +
+                    "</p>" +
+                    "<p>" +
+                    "Sidst aktiv: " +
+                    lastActiveString +
+                    "</p>"
+            );
         }
         return marker;
     }
-
-    private getMarkerIcon(active = true): any {
+    private getMarkerIcon(active = true, isDevice = false): any {
         return L.icon({
-            iconUrl: active ? this.grenMarker : this.redMarker,
-            iconSize: [38, 38],
+            iconUrl: isDevice ? this.greyMarker : active ? this.greenMarker : this.redMarker,
+            iconSize: [30, 38],
             iconAnchor: [19, 38],
-            popupAnchor: [0, -38],
+            popupAnchor: [0, -35],
         });
     }
 
