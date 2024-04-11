@@ -116,19 +116,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         if (this.coordinateList) {
             const clusterGroup = L.markerClusterGroup({
                 maxClusterRadius: 80,
-                spiderfyOnMaxZoom: false,
             });
-            const markerLayerGroup = [];
+
             this.coordinateList.forEach(coord => {
-                markerLayerGroup.push(
-                    this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
-                );
                 clusterGroup.addLayer(
                     this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
                 );
-                this.markers = clusterGroup.addTo(this.map);
             });
-            this.fitToBounds(markerLayerGroup);
+
+            this.markers = clusterGroup.addTo(this.map);
+            this.fitToBounds(clusterGroup.getLayers());
         } else {
             this.marker = this.addMarker(
                 this.coordinates.latitude,
@@ -217,14 +214,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
 
     private dragend(event: any) {
-        this.coordinates.latitude = event.target._latlng.lat;
-        this.coordinates.longitude = event.target._latlng.lng;
+        this.coordinates.latitude = Number(event.target._latlng.lat.toFixed(9));
+        this.coordinates.longitude = Number(event.target._latlng.lng.toFixed(9));
         this.setCoordinatesOutput();
     }
 
     private dblclick(event: any) {
-        this.coordinates.latitude = event.latlng.lat;
-        this.coordinates.longitude = event.latlng.lng;
+        this.coordinates.latitude = Number(event.latlng.lat.toFixed(9));
+        this.coordinates.longitude = Number(event.latlng.lng.toFixed(9));
         this.setCoordinatesOutput();
         this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
     }
