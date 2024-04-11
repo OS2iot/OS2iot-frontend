@@ -16,7 +16,7 @@ import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
 import { TranslateService } from "@ngx-translate/core";
 import moment from "moment";
-import 'leaflet.markercluster';
+import "leaflet.markercluster";
 
 @Component({
     selector: "app-map",
@@ -114,15 +114,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             return;
         }
         if (this.coordinateList) {
-            const test = L.markerClusterGroup();
+            const clusterGroup = L.markerClusterGroup({
+                maxClusterRadius: 80,
+                spiderfyOnMaxZoom: false,
+            });
             const markerLayerGroup = [];
             this.coordinateList.forEach(coord => {
                 markerLayerGroup.push(
                     this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
                 );
-                test.addLayer(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo))
-                this.markers = test.addTo(this.map);
-                // this.markers = L.layerGroup(markerLayerGroup).addTo(this.map);
+                clusterGroup.addLayer(
+                    this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                );
+                this.markers = clusterGroup.addTo(this.map);
             });
             this.fitToBounds(markerLayerGroup);
         } else {
