@@ -75,19 +75,20 @@
     </div>
 
     <div class="form-group mt-3 col-12 thirty-height" *ngIf="iotDevice">
-      <app-map [coordinates]="getCoordinates()" (updateCoordinates)="updateCoordinates($event)"></app-map>
+      <app-map [coordinates]="getCoordinates()" (updateCoordinates)="updateCoordinates($event)" [isFromCreation]="true"></app-map>
     </div>
+    <p>{{'DBLCLICKINFO' | translate}}</p>
     <div class="form-group mt-3 col-6">
       <label class="form-label" for="latitude">{{'IOTDEVICE.LATITUDE' | translate}}</label>
       <input type="number" class="form-control" id="latitude" name="latitude" [placeholder]="'00'" required
-             [(ngModel)]="iotDevice.latitude" step=".000001" min="-90" max="90" maxlength="9"
+             [(ngModel)]="iotDevice.latitude" step=".000001" min="-90" max="90" maxlength="12"
              (keyup)="onCoordinateKey($event)"
              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('latitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('latitude')}">
     </div>
     <div class="form-group mt-3 col-6">
       <label class="form-label" for="longitude">{{'IOTDEVICE.LONGITUDE' | translate}}</label>
       <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="'00'" required
-             [(ngModel)]="iotDevice.longitude" step=".000001" min="-180" max="180" maxlength="9"
+             [(ngModel)]="iotDevice.longitude" step=".000001" min="-180" max="180" maxlength="12"
              (keyup)="onCoordinateKey($event)"
              [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
     </div>

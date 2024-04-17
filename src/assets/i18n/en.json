@@ -40,5 +40,6 @@
     "CREATED-DESCENDING": "Created: faldende",
     "NAME-ASCENDING": "Name: acsending",
     "NAME-DESCENDING": "Name: faldende"
-  }
+  },
+  "DBLCLICKINFO": "Doubleclick on the map or drag the marker to move the marker"
 }
