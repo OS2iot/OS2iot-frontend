@@ -49,7 +49,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     public dropdownButton: DropdownButton;
     public errorMessage: string;
     public canEdit = false;
-    public devs: IotDevicesApplicationMapResponse[];
+    public devices: IotDevicesApplicationMapResponse[];
     public coordinateList = [];
     private deviceSubscription: Subscription;
     private gatewaysSubscription: Subscription;
@@ -102,7 +102,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
 
     ngAfterViewInit() {
         this.deviceSubscription = this.getDevices().subscribe(devices => {
-            this.devs = devices;
+            this.devices = devices;
             this.mapDevicesToCoordinateList();
             this.getGateways();
         });
@@ -122,12 +122,12 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     }
 
     private mapDevicesToCoordinateList() {
-        const tempcoordinateList = [];
-        this.devs.map(dev => {
+        const tempCoordinateList = [];
+        this.devices.map(dev => {
             if (!dev.location) {
                 return;
             }
-            tempcoordinateList.push({
+            tempCoordinateList.push({
                 longitude: dev.location.coordinates[0],
                 latitude: dev.location.coordinates[1],
                 draggable: false,
@@ -145,7 +145,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
             });
         });
 
-        this.coordinateList = tempcoordinateList;
+        this.coordinateList = tempCoordinateList;
     }
 
     private mapGatewaysToCoordinateList() {
@@ -159,7 +159,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
               useGeolocation: false,
               markerInfo: {
                   name: gateway.name,
-                  active: this.gatewayStatus(gateway),
+                  active: this.getGatewayStatus(gateway),
                   id: gateway.gatewayId,
                   internalOrganizationId: gateway.organizationId,
                   internalOrganizationName: gateway.organizationName,
@@ -169,7 +169,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
       this.coordinateList.push.apply(this.coordinateList, tempcoordinateList);
   }
 
-  gatewayStatus(gateway: Gateway): boolean {
+  private getGatewayStatus(gateway: Gateway): boolean {
       return this.chirpstackGatewayService.isGatewayActive(gateway);
   }
 
