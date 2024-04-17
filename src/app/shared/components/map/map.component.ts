@@ -239,6 +239,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     this.coordinateList ? this.coordinateList[0]?.longitude : this.coordinates?.longitude,
                 ],
                 zoom: this.zoomLevel,
+                maxZoom: 19,
                 doubleClickZoom: false,
                 fullscreenControl: true,
                 fullscreenControlOptions: {
@@ -246,11 +247,36 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     content: '<div class="fas fa-expand"></div>',
                 },
             });
-            const tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            const streetTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            });
-            tiles.addTo(this.map);
+            }).addTo(this.map);
+
+            const ortofotowmts = L.tileLayer(
+                "https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar_wmts/1.0.0/WMTS?username=MSLFWDKAZS&password=Rosenkrantzgade1!&request=GetTile&version=1.0.0&service=WMTS&Layer=orto_foraar_wmts&style=default&format=image/jpeg&TileMatrixSet=KortforsyningTilingDK&TileMatrix={z}&TileRow={y}&TileCol={x}",
+                {
+                    maxZoom: 19,
+                    attribution: "test",
+                    noWrap: true,
+                }
+            );
+
+            // var hillshadeDAF = L.tileLayer(
+            //     "https://services.datafordeler.dk/DHMhoejdekurver/DHMhoejdekurver_GML3/1.0.0/WFS?username=MSLFWDKAZS&password=Rosenkrantzgade1!&service=WFS&request=getfeature&typename=Formkurve0_5&Version=2.0.0"
+            // )
+
+            // Define layer groups for layer control
+            var baseLayers = {
+                "Street view": streetTiles,
+                "Test - Datafordeleren": ortofotowmts,
+            };
+
+            var overlays = {
+                // "Street view": hillshadeDAF,
+            };
+
+            // Add layer control to map
+            L.control.layers(baseLayers, overlays).addTo(this.map);
         }
     }
 }
