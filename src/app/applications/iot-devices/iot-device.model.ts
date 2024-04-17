@@ -27,8 +27,8 @@ export class IotDevice {
   createdByName: string;
   updatedByName: string;
   applicationId: number;
-  longitude = 0;
-  latitude = 0;
+  longitude = 11.764445;
+  latitude = 55.959443;
   deviceModelId?: number;
   latestReceivedMessage: LatestReceivedMessage;
   lorawanSettings = new LorawanSettings();
