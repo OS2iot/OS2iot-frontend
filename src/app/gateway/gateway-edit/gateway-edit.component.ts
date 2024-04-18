@@ -8,6 +8,17 @@ import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
 import { Subscription } from "rxjs";
 import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
 import { Gateway, GatewayResponse } from "../gateway.model";
+import {
+    GatewayPlacement,
+    GatewayPlacementEntries,
+    GatewaySetupStatus,
+    GatewayStatusEntries,
+} from "@app/gateway/enums/gateway-status-interval.enum";
+
+interface DropdownOption {
+    label: string;
+    value: string | number;
+}
 
 @Component({
     selector: "app-gateway-edit",
@@ -16,9 +27,7 @@ import { Gateway, GatewayResponse } from "../gateway.model";
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
     public backButton: BackButton = { label: "", routerLink: ["gateways"] };
-    public multiPage = false;
     public title = "";
-    public sectionTitle = "";
     public submitButton = "";
 
     public gatewaySubscription: Subscription;
@@ -30,6 +39,9 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
     private gatewayId: string;
 
     gateway = new Gateway();
+
+    placements: DropdownOption[] = [];
+    statuses: DropdownOption[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -52,6 +64,24 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
             this.backButton.label = translations["NAV.LORA-GATEWAYS"];
             this.title = translations["FORM.EDIT-NEW-GATEWAY"];
             this.submitButton = translations["GATEWAY.SAVE"];
+        });
+
+        const placementTranslationPrefix = "GATEWAY.PLACEMENT.";
+        const placementTranslationKeys = GatewayPlacementEntries.map(x => placementTranslationPrefix + x.key);
+        const statusTranslationPrefix = "GATEWAY.STATUS.";
+        const statusTranslationKeys = GatewayStatusEntries.map(x => statusTranslationPrefix + x.key);
+
+        this.translate.get([...statusTranslationKeys, ...placementTranslationKeys]).subscribe(translations => {
+            const placementOptions: DropdownOption[] = GatewayPlacementEntries.map(entry => ({
+                label: translations[placementTranslationPrefix + entry.key],
+                value: GatewayPlacement[entry.key],
+            }));
+            this.placements.push(...placementOptions);
+            const statusOptions: DropdownOption[] = GatewayStatusEntries.map(entry => ({
+                label: translations[statusTranslationPrefix + entry.key],
+                value: GatewaySetupStatus[entry.key],
+            }));
+            this.statuses.push(...statusOptions);
         });
     }
 

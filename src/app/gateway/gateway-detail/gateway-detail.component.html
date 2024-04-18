@@ -10,6 +10,15 @@
           <p><strong>{{ 'GATEWAY.ORGANIZATION' | translate }}</strong>{{gateway.organizationName}}</p>
           <app-general-details [data]="gateway"></app-general-details>
           <p><strong>{{ 'GATEWAY.TAGS' | translate }}</strong>{{gateway.tagsString}}</p>
+          <p *ngIf="gateway.placement"><strong>{{ 'LORA-GATEWAY-TABLE.PLACEMENT' | translate }}</strong>{{'GATEWAY.PLACEMENT.' + gateway.placement | translate}}</p>
+          <p *ngIf="gateway.modelName"><strong>{{ 'LORA-GATEWAY-TABLE.MODEL-NAME' | translate }}</strong>{{gateway.modelName}}</p>
+          <p *ngIf="gateway.antennaType"><strong>{{ 'LORA-GATEWAY-TABLE.ANTENNA-TYPE' | translate }}</strong>{{gateway.antennaType}}</p>
+          <p *ngIf="gateway.status"><strong>{{ 'LORA-GATEWAY-TABLE.STATUS' | translate }}</strong>{{'GATEWAY.STATUS.' + gateway.status | translate}}</p>
+          <p *ngIf="gateway.gatewayResponsibleName"><strong>{{ 'LORA-GATEWAY-TABLE.RESPONSIBLE-NAME' | translate }}</strong>{{gateway.gatewayResponsibleName}}</p>
+          <p *ngIf="gateway.gatewayResponsibleEmail"><strong>{{ 'LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL' | translate }}</strong>{{gateway.gatewayResponsibleEmail}}</p>
+          <p *ngIf="gateway.gatewayResponsiblePhoneNumber"><strong>{{ 'LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER' | translate }}</strong>{{gateway.gatewayResponsiblePhoneNumber}}</p>
+          <p *ngIf="gateway.operationalResponsibleName"><strong>{{ 'LORA-GATEWAY-TABLE.OPERATIONAL-NAME' | translate }}</strong>{{gateway.operationalResponsibleName}}</p>
+          <p *ngIf="gateway.operationalResponsibleEmail"><strong>{{ 'LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL' | translate }}</strong>{{gateway.operationalResponsibleEmail}}</p>
           <p *ngIf="gateway.description">
             <strong>{{ 'GATEWAY.DESCRIPTION' | translate }}</strong>
           </p>

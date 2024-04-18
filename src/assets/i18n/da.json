@@ -175,7 +175,22 @@
     "MAP-TAB": "Kort",
     "ORGANIZATION": "Organisation",
     "ONLINE-STATUS": "Online status",
-    "DATA-PACKETS": "Datapakker"
+    "DATA-PACKETS": "Datapakker",
+    "PLACEMENT-LABEL": "Placering",
+    "PLACEMENT": {
+      "NONE" : "-",
+      "OUTDOORS" : "Udendørs",
+      "INDOORS" : "Indendørs",
+      "OTHER" : "Andet"
+    },
+    "STATUS-NAME": "Status",
+    "STATUS": {
+      "NONE": "-",
+      "IN-OPERATION": "I drift",
+      "PROJECT": "Projekt",
+      "PROTOTYPE": "Prototype",
+      "OTHER": "Andet"
+    }
   },
   "IOT-DEVICE": {
     "CREATE": "Gem IoT enhed",
@@ -363,6 +378,14 @@
     "ORGANIZATION": "Organisation",
     "PACKETS-RECEIVED": "Pakker modtaget",
     "PACKETS-SENT": "Pakker sendt",
+    "PLACEMENT": "Placering",
+    "MODEL-NAME": "Modelnavn",
+    "ANTENNA-TYPE": "Antennetype (dBi)",
+    "RESPONSIBLE-NAME": "Gateway-ansvarlig",
+    "RESPONSIBLE-EMAIL": "Kontaktmail",
+    "RESPONSIBLE-PHONE-NUMBER": "Kontakttelefon",
+    "OPERATIONAL-NAME": "Driftansvarlig",
+    "OPERATIONAL-EMAIL": "Kontaktmail - drift",
     "TAGS": "Tags",
     "CREATED-AT": "Oprettelsesdato"
   },
@@ -811,7 +834,21 @@
     "LONGITUDE": "Længdegrad",
     "LONGITUDE-PLACEHOLDER": "00",
     "LATITUDE": "Breddegrad",
-    "LATITUDE-PLACEHOLDER": "00"
+    "LATITUDE-PLACEHOLDER": "00",
+    "MODEL-NAME": "Modelnavn",
+    "MODEL-NAME-PLACEHOLDER": "Angiv gateway-modellens navn",
+    "ANTENNA-TYPE": "Antennetype (dBi)",
+    "ANTENNA-TYPE-PLACEHOLDER": "Angiv antennens dBi",
+    "GATEWAY-RESPONSIBLE": "Gateway-ansvarlig",
+    "GATEWAY-RESPONSIBLE-PLACEHOLDER": "Angiv navn på ansvarlig for gateways i organisationen",
+    "GATEWAY-RESPONSIBLE-CONTACT": "Kontaktmail",
+    "GATEWAY-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på gateway-ansvarlig",
+    "GATEWAY-RESPONSIBLE-CONTACT-NUMBER": "Kontakttelefon",
+    "GATEWAY-RESPONSIBLE-CONTACT-NUMBER-PLACEHOLDER": "Angiv telefonnummer på gateway-ansvarlig",
+    "OPERATION-RESPONSIBLE": "Driftansvarlig",
+    "OPERATION-RESPONSIBLE-PLACEHOLDER": "Angiv ansvarlig for den fysiske drift af gateway",
+    "OPERATION-RESPONSIBLE-CONTACT": "Kontaktmail - drift",
+    "OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på driftsansvarlig"
   },
   "SORT": {
     "SORT": "Sortér",
