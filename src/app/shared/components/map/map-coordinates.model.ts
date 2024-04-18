@@ -13,4 +13,7 @@ export class MarkerInfo {
     id: string | number;
     internalOrganizationId: number;
     internalOrganizationName: string;
+    isDevice = false;
+    networkTechnology: string;
+    lastActive: Date
 }

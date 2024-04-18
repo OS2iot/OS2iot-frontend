@@ -1241,5 +1241,6 @@
       "GIVE-DATATARGET-CLIENTSECRET": "Angiv client secret",
       "GIVE-DATATARGET-CLIENTSECRET-PLACEHOLDER": "Client's kode"
     }
-  }
+  },
+  "DBLCLICKINFO": "Dobbeltklik på kortet eller træk i markøren for at flytte markøren"
 }

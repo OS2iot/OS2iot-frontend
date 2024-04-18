@@ -363,8 +363,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   }
 
   onCoordinateKey(event: any) {
-    console.log(event.target.value);
-    console.log(event.target.maxLength);
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength);
     }
