@@ -1,6 +1,6 @@
 import { EditPermission } from "@shared/models/edit-permission.model";
-import { CommonLocation } from "../shared/models/common-location.model";
-import { GatewayStatusInterval } from "./enums/gateway-status-interval.enum";
+import { CommonLocation } from "@shared/models/common-location.model";
+import { GatewayPlacement, GatewaySetupStatus, GatewayStatusInterval } from "./enums/gateway-status-interval.enum";
 
 export class Gateway extends EditPermission {
     id: number;
@@ -8,10 +8,21 @@ export class Gateway extends EditPermission {
     name: string;
     description?: string;
     location: CommonLocation = new CommonLocation();
-    rxPacketsReceived: number;
-    txPacketsEmitted: number;
+
+    placement: GatewayPlacement = GatewayPlacement.NONE;
+    modelName?: string;
+    antennaType?: string;
+    status?: GatewaySetupStatus = GatewaySetupStatus.NONE;
+    gatewayResponsibleName?: string;
+    gatewayResponsibleEmail?: string;
+    gatewayResponsiblePhoneNumber?: string;
+    operationalResponsibleName?: string;
+    operationalResponsibleEmail?: string;
+
     tagsString = "{}";
     tags?: JSON;
+    rxPacketsReceived: number;
+    txPacketsEmitted: number;
     lastSeenAt: Date;
     organizationId: number;
     organizationName: string;
@@ -21,10 +32,6 @@ export class Gateway extends EditPermission {
     updatedBy: number;
     createdByName: string;
     updatedByName: string;
-}
-export interface GrpcTime {
-    seconds: number;
-    nanos: number;
 }
 
 export class GatewayData {
