@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7 d-flex align-items-stretch">
-                <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+                <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
                     <div *ngIf="errorMessage" class="error-messages p-3 my-3">
                         {{ errorMessage | translate }}
                     </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-md-5 d-flex align-items-stretch">
-                <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+                <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
                     <div class="thirty-height" *ngIf="devices && gateways">
                         <app-map [coordinateList]="coordinateList" [isFromApplication]="true"></app-map>
                     </div>

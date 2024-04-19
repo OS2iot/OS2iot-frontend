@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-right jumbotron--full-width">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
             <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
             <p class="mr-1"><strong>{{ 'IOT-TABLE.APPLICATION' | translate }}</strong>{{device.application.name}}</p>
             <app-general-details [data]="device"></app-general-details>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+        <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
             <h3>{{ 'IOTDEVICE.LOCATION' | translate }}</h3>
             <div *ngIf="device.location; else locationElseBlock">
               <div class="thirty-height">
