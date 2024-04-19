@@ -4,4 +4,6 @@
     window["env"].PRODUCTION = "${PRODUCTION}";
     window["env"].BASE_URL = "${BASE_URL}";
     window["env"].TABLE_PAGE_SIZE = "${TABLE_PAGE_SIZE}";
-  })(this);
+    window["env"].DAF_USERNAME = "${DAF_USERNAME}";
+    window["env"].DAF_PASSWORD = "${DAF_PASSWORD}";
+})(this);

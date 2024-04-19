@@ -11,31 +11,32 @@ import {
 } from "@angular/core";
 import * as L from "leaflet";
 import "leaflet.fullscreen";
-import { Subscription } from "rxjs";
 import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
 import { TranslateService } from "@ngx-translate/core";
 import moment from "moment";
 import "leaflet.markercluster";
 import "proj4leaflet";
-import proj4 from "proj4";
 import { environment } from "@environments/environment";
 
-proj4.defs("EPSG:25832", "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs");
-proj4.defs(
-    "EPSG:3857",
-    "+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs"
-);
 @Component({
     selector: "app-map",
     templateUrl: "./map.component.html",
     styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-    private map;
+    private satelliteCenterLat = 56.07900207957074;
+    private satelliteCenterLng = 9.998776628830988;
+    private streetViewName = "Street view";
+    private datafordelerName;
+    private heightCurvesName;
+    private ortofotowmts: L.TileLayer;
+    private streetMap: L.TileLayer;
+    private heightsMapWms: L.TileLayer.WMS;
+    private map: L.Map;
     public mapId;
-    private marker;
-    private markers: any;
+    private marker: L.Marker;
+    private markers: L.MarkerClusterGroup;
     @Input() isFromApplication? = false;
     @Input() isFromCreation? = false;
     @Input() coordinates?: MapCoordinates;
@@ -49,7 +50,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private dafpw = environment.dafpassword;
     private clusterMaxRadius = 80;
     //Datafordeler uses 25832 format for coordinates.
-    private crs = new L.Proj.CRS("EPSG:25832", "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs", {
+    private datafordelerCrs = new L.Proj.CRS("EPSG:25832", "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs", {
         resolutions: [1638.4, 819.2, 409.6, 204.8, 102.4, 51.2, 25.6, 12.8, 6.4, 3.2, 1.6, 0.8, 0.4, 0.2],
         origin: [120000, 6500000],
     });
@@ -58,9 +59,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private previousZoom: number | null = null;
     private provider: OpenStreetMapProvider;
     private searchControl: L.Control;
+
     constructor(private translate: TranslateService) {}
 
     ngOnInit(): void {
+        this.translate.get(["HEIGHTCURVES", "SATELLITEDENMARK"]).subscribe(translations => {
+            this.datafordelerName = translations["SATELLITEDENMARK"];
+            this.heightCurvesName = translations["HEIGHTCURVES"];
+        });
         this.mapId = Math.random().toString();
         if (this.coordinates?.useGeolocation) {
             this.setGeolocation();
@@ -115,12 +121,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             this.previousCenter = this.map.getCenter();
             this.previousZoom = this.map.getZoom();
 
-            if (layerName === "Street view") {
+            if (layerName === this.streetViewName) {
                 this.map.options.crs = L.CRS.EPSG3857; //Default CRS.
-                this.map.options.maxZoom = 18;
+                this.map.options.maxZoom = 18; // Max zoom for leaflet map.
             } else {
-                this.map.options.crs = this.crs; // Set back to custom CRS if needed
-                this.map.options.maxZoom = 15; // Max zoom for datafordeler map.
+                this.map.options.crs = this.datafordelerCrs; // Set back to custom CRS if needed
+                this.map.options.maxZoom = 13; // Max zoom for datafordeler map.
             }
 
             //Cluster groups has to be "updated" when change of layer.
@@ -129,14 +135,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             }
 
             // Re-center the map to the previous center and adjust zoom level after changing the base layer
-            if (this.previousCenter && this.previousZoom !== null) {
+            if (this.previousCenter && this.previousZoom) {
                 let newZoom: number;
 
                 //Zoom is different compared between leaflet and datafordeler map. Therefore, by testing, +-5 is close to the same.
-                if (layerName === "Street view") {
+                if (layerName === this.streetViewName) {
                     newZoom = Math.min(this.previousZoom + 5, this.map.options.maxZoom);
                 } else {
                     newZoom = Math.min(this.previousZoom - 5, this.map.options.maxZoom);
+                    //If zoom is below 7, then center the map to denmark in satellite.
+                    if (this.previousZoom < 7) {
+                        const latlng: L.LatLng = new L.LatLng(this.satelliteCenterLat, this.satelliteCenterLng);
+                        this.map.setView(latlng, 2);
+                        return;
+                    }
                 }
 
                 // Set the map's view to the previous center and adjusted zoom level.
@@ -179,7 +191,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     private updateMarker() {
         this.marker?.setLatLng([this.coordinates.latitude, this.coordinates.longitude]);
-        this.map?.setView(this.marker._latlng, this.zoomLevel);
+        this.map?.setView(this.marker.getLatLng(), this.zoomLevel);
     }
 
     private placeMarkers() {
@@ -321,30 +333,41 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     content: '<div class="fas fa-expand"></div>',
                 },
             });
-            const streetTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+
+            this.streetMap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             }).addTo(this.map);
 
-            const ortofotowmts = L.tileLayer(
-                `https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar_wmts/1.0.0/WMTS?username=${this.dafusername}&password=${this.dafpw}!&request=GetTile&version=1.0.0&service=WMTS&Layer=orto_foraar_wmts&style=default&format=image/jpeg&TileMatrixSet=KortforsyningTilingDK&TileMatrix={z}&TileRow={y}&TileCol={x}`,
+            this.ortofotowmts = L.tileLayer(
+                `https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar_wmts/1.0.0/WMTS?username=${this.dafusername}&password=${this.dafpw}&request=GetTile&version=1.0.0&service=WMTS&Layer=orto_foraar_wmts&style=default&format=image/jpeg&TileMatrixSet=KortforsyningTilingDK&TileMatrix={z}&TileRow={y}&TileCol={x}`,
                 {
                     attribution: '&copy; <a href="https://datafordeler.dk/vejledning/brugervilkaar/">Datafordeler</a>',
                     noWrap: true,
                 }
             );
 
-            // var hillshadeDAF = L.tileLayer(
-            //     "https://services.datafordeler.dk/DHMhoejdekurver/DHMhoejdekurver_GML3/1.0.0/WFS?username=MSLFWDKAZS&password=Rosenkrantzgade1!&service=WFS&request=getfeature&typename=Formkurve0_5&Version=2.0.0"
-            // )
+            this.heightsMapWms = L.tileLayer.wms(
+                `https://services.datafordeler.dk/DHMNedboer/dhm/1.0.0/WMS?username=${this.dafusername}&password=${this.dafpw}`,
+                {
+                    transparent: "TRUE",
+                    styles: "gul",
+                    format: "image/png",
+                    layers: "dhm_kurve_0_5_m",
+                    version: "1.3.0",
+                    attribution: '&copy; <a href="https://datafordeler.dk/vejledning/brugervilkaar/">Datafordeler</a>',
+                    noWrap: true,
+                    crs: this.datafordelerCrs,
+                } as any //has to be any since transparent has to be "TRUE" but the type expects a boolean
+            );
 
             // Define layer groups for layer control
-            var baseLayers = {
-                "Street view": streetTiles,
-                "Test - Datafordeleren": ortofotowmts,
+            var baseLayers: L.Control.LayersObject = {
+                [this.streetViewName]: this.streetMap,
+                [this.datafordelerName ?? "Satellit Danmark"]: this.ortofotowmts,
             };
 
-            var overlays = {
-                // "Street view": hillshadeDAF,
+            var overlays: L.Control.LayersObject = {
+                [this.heightCurvesName ?? "Højdekurver (0,5 m)"]: this.heightsMapWms,
             };
 
             const layerControl = L.control.layers(baseLayers, overlays).addTo(this.map);
@@ -354,12 +377,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 if (this.coordinateList) {
                     const currentZoom = this.map.getZoom();
 
+                    //The layerControl type doesnt have any way to check if map is set. Therefore we have to make it "any".
+                    //If layerControl._map is NOT set, then the picker on the map is not shown.
+                    var tempControl = layerControl as any;
+
                     if (currentZoom >= this.maxZoomToEnableLayerChange) {
                         layerControl.remove();
-                    } else {
-                        if (!this.map.hasLayer(layerControl)) {
-                            layerControl.addTo(this.map);
-                        }
+                    } else if (!tempControl._map) {
+                        //This seems to be the best way to remove and add the layer control, with fewest adds to layers.
+                        layerControl.addTo(this.map);
                     }
                 }
             });

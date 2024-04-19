@@ -1242,5 +1242,8 @@
       "GIVE-DATATARGET-CLIENTSECRET-PLACEHOLDER": "Client's kode"
     }
   },
-  "DBLCLICKINFO": "Dobbeltklik på kortet eller træk i markøren for at flytte markøren"
+  "DBLCLICKINFO": "Dobbeltklik på kortet eller træk i markøren for at flytte markøren",
+  "HEIGHTCURVESINFO": "Højdekurver vises kun det er valgt, og man er zoomet langt nok ind.",
+  "HEIGHTCURVES": "Højdekurver (0,5 m)",
+  "SATELLITEDENMARK": "Satellit Danmark"
 }
