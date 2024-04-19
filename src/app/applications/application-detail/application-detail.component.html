@@ -11,7 +11,7 @@
     </app-top-bar>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8 d-flex align-items-stretch">
+            <div class="col-md-7 d-flex align-items-stretch">
                 <div class="jumbotron jumbotron--m-left jumbotron--full-width">
                     <div *ngIf="errorMessage" class="error-messages p-3 my-3">
                         {{ errorMessage | translate }}
@@ -39,10 +39,24 @@
                     ></app-metadata-details>
                 </div>
             </div>
-            <div class="col-md-4 d-flex align-items-stretch">
+            <div class="col-md-5 d-flex align-items-stretch">
                 <div class="jumbotron jumbotron--m-left jumbotron--full-width">
                     <div class="thirty-height" *ngIf="devices && gateways">
                         <app-map [coordinateList]="coordinateList" [isFromApplication]="true"></app-map>
+                    </div>
+                    <div class="col d-flex markerDescriptionDiv">
+                        <div class="col d-flex">
+                            <img class="marker" src="{{ greyMarker }}" />
+                            <p>: IoT-Device</p>
+                        </div>
+                        <div class="col d-flex">
+                            <img class="marker" src="{{ redMarker }}" />
+                            <p>: Inaktiv gateway</p>
+                        </div>
+                        <div class="col d-flex">
+                            <img class="marker" src="{{ greenMarker }}" />
+                            <p>: Aktiv gateway</p>
+                        </div>
                     </div>
                 </div>
             </div>
