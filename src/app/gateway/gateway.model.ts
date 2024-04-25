@@ -19,7 +19,7 @@ export class Gateway extends EditPermission {
     operationalResponsibleName?: string;
     operationalResponsibleEmail?: string;
 
-    tagsString = "{}";
+    tagsString: string;
     tags?: JSON;
     rxPacketsReceived: number;
     txPacketsEmitted: number;

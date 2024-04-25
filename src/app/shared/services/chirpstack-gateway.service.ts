@@ -28,8 +28,11 @@ export class ChirpstackGatewayService {
                     .getOrganizationInfo()
                     .find(org => org.id === response.gateway.organizationId)?.name;
 
+                // We want to show helper text if tags is empty. To show empty text, the tagsString has to be undefined.
+                response.gateway.tagsString =
+                    Object.keys(response.gateway.tags).length === 0 ? undefined : JSON.stringify(response.gateway.tags);
+
                 // Move createdat and updatedat to next level ease the use.
-                response.gateway.tagsString = JSON.stringify(response.gateway.tags);
                 response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
 
                 response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);

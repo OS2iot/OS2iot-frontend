@@ -121,11 +121,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             const gatewayLayerGroup = [];
 
             this.coordinateList.forEach(coord => {
-                if (!coord.markerInfo.isDevice) {
-                    gatewayLayerGroup.push(
-                        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
-                    );
-                    this.markers = L.layerGroup(gatewayLayerGroup).addTo(this.map);
+                if (this.isFromApplication) {
+                    if (!coord.markerInfo.isDevice) {
+                        gatewayLayerGroup.push(
+                            this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                        );
+                        this.markers = L.layerGroup(gatewayLayerGroup).addTo(this.map);
+                    } else {
+                        clusterGroup.addLayer(
+                            this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                        );
+                    }
                 } else {
                     clusterGroup.addLayer(
                         this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
