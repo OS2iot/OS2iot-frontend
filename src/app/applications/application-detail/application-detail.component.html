@@ -42,7 +42,7 @@
             <div class="col-md-5 d-flex align-items-stretch">
                 <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
                     <div class="thirty-height" *ngIf="devices && gateways">
-                        <app-map [coordinateList]="coordinateList" [isFromApplication]="true"></app-map>
+                        <app-map [coordinateList]="coordinateList" [isFromApplication]="true" [applicationId]="application.id" ></app-map>
                     </div>
                     <div class="col d-flex markerDescriptionDiv">
                         <div class="col d-flex">

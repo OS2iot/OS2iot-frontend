@@ -29,6 +29,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private marker;
     private markers: any;
     @Input() isFromApplication? = false;
+    @Input() applicationId?: number;
     @Input() isFromCreation? = false;
     @Input() coordinates?: MapCoordinates;
     @Input() coordinateList: [MapCoordinates];
@@ -182,10 +183,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 '<a _ngcontent-gij-c367=""' +
                     'routerlinkactive="active" class="application-link"' +
                     'ng-reflect-router-link-active="active"' +
-                    'ng-reflect-router-link="gateway-detail,' +
+                    'ng-reflect-router-link="details,' +
                     markerInfo.id +
                     '" href="/applications/' +
-                    markerInfo.internalOrganizationId +
+                    this.applicationId +
                     "/iot-device/" +
                     markerInfo.id +
                     "/details" +
