@@ -69,10 +69,10 @@
                 <app-map [coordinates]="getCoordinates()"></app-map>
               </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 latLonWrapWidth">
                       <p><strong>{{ 'IOTDEVICE.LATITUDE' | translate }}</strong>{{latitude | number:'2.1-9'}}</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 latLonWrapWidth">
                         <p><strong>{{ 'IOTDEVICE.LONGITUDE' | translate }}</strong>{{longitude | number:'2.1-9'}}</p>
                     </div>
                 </div>
