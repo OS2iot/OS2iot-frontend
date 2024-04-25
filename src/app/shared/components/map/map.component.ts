@@ -118,11 +118,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             const clusterGroup = L.markerClusterGroup({
                 maxClusterRadius: 80,
             });
+            const gatewayLayerGroup = [];
 
             this.coordinateList.forEach(coord => {
-                clusterGroup.addLayer(
-                    this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
-                );
+                if (!coord.markerInfo.isDevice) {
+                    gatewayLayerGroup.push(
+                        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                    );
+                    this.markers = L.layerGroup(gatewayLayerGroup).addTo(this.map);
+                } else {
+                    clusterGroup.addLayer(
+                        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                    );
+                }
             });
 
             this.markers = clusterGroup.addTo(this.map);
