@@ -54,6 +54,9 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     private deviceSubscription: Subscription;
     private gatewaysSubscription: Subscription;
     public gateways: Gateway[];
+    public redMarker = "/assets/images/red-marker.png";
+    public greenMarker = "/assets/images/green-marker.png";
+    public greyMarker = "/assets/images/grey-marker.png";
 
     constructor(
         private applicationService: ApplicationService,
@@ -149,29 +152,29 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     }
 
     private mapGatewaysToCoordinateList() {
-      const tempcoordinateList = [];
-      this.gateways.map(gateway =>
-          tempcoordinateList.push({
-              longitude: gateway.location.longitude,
-              latitude: gateway.location.latitude,
-              draggable: false,
-              editEnabled: false,
-              useGeolocation: false,
-              markerInfo: {
-                  name: gateway.name,
-                  active: this.getGatewayStatus(gateway),
-                  id: gateway.gatewayId,
-                  internalOrganizationId: gateway.organizationId,
-                  internalOrganizationName: gateway.organizationName,
-              },
-          })
-      );
-      this.coordinateList.push.apply(this.coordinateList, tempcoordinateList);
-  }
+        const tempcoordinateList = [];
+        this.gateways.map(gateway =>
+            tempcoordinateList.push({
+                longitude: gateway.location.longitude,
+                latitude: gateway.location.latitude,
+                draggable: false,
+                editEnabled: false,
+                useGeolocation: false,
+                markerInfo: {
+                    name: gateway.name,
+                    active: this.getGatewayStatus(gateway),
+                    id: gateway.gatewayId,
+                    internalOrganizationId: gateway.organizationId,
+                    internalOrganizationName: gateway.organizationName,
+                },
+            })
+        );
+        this.coordinateList.push.apply(this.coordinateList, tempcoordinateList);
+    }
 
-  private getGatewayStatus(gateway: Gateway): boolean {
-      return this.chirpstackGatewayService.isGatewayActive(gateway);
-  }
+    private getGatewayStatus(gateway: Gateway): boolean {
+        return this.chirpstackGatewayService.isGatewayActive(gateway);
+    }
 
     onDeleteApplication() {
         this.deleteDialogService.showApplicationDialog(this.application).subscribe(response => {

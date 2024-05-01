@@ -41,19 +41,19 @@
 
     <div class="row mb-5">
       <div class="form-group mt-3 col-6">
-        <label class="form-label" for="longitude">{{ 'GATEWAY.LONGITUDE' | translate }}</label>
-        <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="'00'" required
-               [(ngModel)]="gateway.location.longitude" step=".000001" min="-180" max="180" maxlength="12"
-               (keyup)="onCoordinateKey($event)"
-               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
-      </div>
-
-      <div class="form-group mt-3 col-6">
         <label class="form-label" for="location.latitude">{{ 'GATEWAY.LATITUDE' | translate }}</label>
         <input type="number" class="form-control" id="location.latitude" name="location.latitude" [placeholder]="'00'"
                required [(ngModel)]="gateway.location.latitude" step=".000001" min="-180" max="180" maxlength="12"
                (keyup)="onCoordinateKey($event)"
                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('latitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('latitude')}">
+      </div>
+
+      <div class="form-group mt-3 col-6">
+        <label class="form-label" for="longitude">{{ 'GATEWAY.LONGITUDE' | translate }}</label>
+        <input type="number" class="form-control" id="longitude" name="longitude" [placeholder]="'00'" required
+               [(ngModel)]="gateway.location.longitude" step=".000001" min="-180" max="180" maxlength="12"
+               (keyup)="onCoordinateKey($event)"
+               [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('longitude'), 'is-valid' : formFailedSubmit && !errorFields.includes('longitude')}">
       </div>
 
       <div class="form-group mt-3 col-6">

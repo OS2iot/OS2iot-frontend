@@ -33,7 +33,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
     public gatewaySubscription: Subscription;
     public gateway: Gateway;
-    public backButton: BackButton = { label: "", routerLink: 0 as any };
+    public backButton: BackButton = { label: "", routerLink: "/gateways/list" };
     gatewayId: string;
 
     private deleteDialogSubscription: Subscription;
@@ -85,6 +85,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
                 name: this.gateway.name,
                 active: this.gatewayService.isGatewayActive(this.gateway),
                 gatewayId: this.gateway.gatewayId,
+                id: this.gateway.gatewayId,
                 internalOrganizationName: this.gateway.organizationName,
             },
         };
