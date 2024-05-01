@@ -33,6 +33,11 @@
       <td mat-cell *matCellDef="let iotDevice">{{"IOT-DEVICE-TYPES." + iotDevice.type | translate }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="commentOnLocation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'GATEWAY.PLACEMENT-LABEL' | translate }}</th>
+      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.commentOnLocation ? truncateText(iotDevice.commentOnLocation) : '-' }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="deviceModel">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'IOTDEVICE.DEVICEMODEL' | translate }}</th>
       <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.deviceModel?.body?.name ?? '-' }}</td>
