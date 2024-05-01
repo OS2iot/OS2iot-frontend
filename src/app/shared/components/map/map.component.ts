@@ -9,7 +9,7 @@ import {
     SimpleChanges,
     OnDestroy,
 } from "@angular/core";
-import * as L from "leaflet";
+import * as leaflet from "leaflet";
 import "leaflet.fullscreen";
 import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
@@ -18,6 +18,7 @@ import moment from "moment";
 import "leaflet.markercluster";
 import "proj4leaflet";
 import { environment } from "@environments/environment";
+import { satelliteCenterLatitudeDenmark, satelliteCenterLongitudeDenmark } from "@shared/constants/map-constants";
 
 @Component({
     selector: "app-map",
@@ -25,18 +26,16 @@ import { environment } from "@environments/environment";
     styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-    private satelliteCenterLat = 56.07900207957074;
-    private satelliteCenterLng = 9.998776628830988;
     private streetViewName = "Street view";
     private datafordelerName;
     private heightCurvesName;
-    private ortofotowmts: L.TileLayer;
-    private streetMap: L.TileLayer;
-    private heightsMapWms: L.TileLayer.WMS;
-    private map: L.Map;
+    private ortofotowmts: leaflet.TileLayer;
+    private streetMap: leaflet.TileLayer;
+    private heightsMapWms: leaflet.TileLayer.WMS;
+    private map: leaflet.Map;
     public mapId;
-    private marker: L.Marker;
-    private markers: L.MarkerClusterGroup;
+    private marker: leaflet.Marker;
+    private markers: leaflet.MarkerClusterGroup;
     @Input() isFromApplication? = false;
     @Input() isFromCreation? = false;
     @Input() coordinates?: MapCoordinates;
@@ -50,15 +49,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private dafpw = environment.dafpassword;
     private clusterMaxRadius = 80;
     //Datafordeler uses 25832 format for coordinates.
-    private datafordelerCrs = new L.Proj.CRS("EPSG:25832", "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs", {
+    private datafordelerCrs = new leaflet.Proj.CRS("EPSG:25832", "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs", {
         resolutions: [1638.4, 819.2, 409.6, 204.8, 102.4, 51.2, 25.6, 12.8, 6.4, 3.2, 1.6, 0.8, 0.4, 0.2],
         origin: [120000, 6500000],
     });
     private maxZoomToEnableLayerChange = 17;
-    private previousCenter: L.LatLngExpression | null = null;
+    private previousCenter: leaflet.LatLngExpression | null = null;
     private previousZoom: number | null = null;
     private provider: OpenStreetMapProvider;
-    private searchControl: L.Control;
+    private searchControl: leaflet.Control;
 
     constructor(private translate: TranslateService) {}
 
@@ -89,7 +88,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.initMap();
         this.placeMarkers();
 
-        this.changeLayerListener();
+        this.setupChangeLayerListener();
 
         if (!this.isFromCreation) {
             return;
@@ -113,8 +112,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         }
     }
 
-    private changeLayerListener() {
-        this.map.on("baselayerchange", (e: L.LayersControlEvent) => {
+    private setupChangeLayerListener() {
+        this.map.on("baselayerchange", (e: leaflet.LayersControlEvent) => {
             const layerName = e.name;
 
             // Save current center and zoom before changing the layer
@@ -122,7 +121,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             this.previousZoom = this.map.getZoom();
 
             if (layerName === this.streetViewName) {
-                this.map.options.crs = L.CRS.EPSG3857; //Default CRS.
+                this.map.options.crs = leaflet.CRS.EPSG3857; //Default CRS.
                 this.map.options.maxZoom = 18; // Max zoom for leaflet map.
             } else {
                 this.map.options.crs = this.datafordelerCrs; // Set back to custom CRS if needed
@@ -145,7 +144,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                     newZoom = Math.min(this.previousZoom - 5, this.map.options.maxZoom);
                     //If zoom is below 7, then center the map to denmark in satellite.
                     if (this.previousZoom < 7) {
-                        const latlng: L.LatLng = new L.LatLng(this.satelliteCenterLat, this.satelliteCenterLng);
+                        const latlng: leaflet.LatLng = new leaflet.LatLng(
+                            satelliteCenterLatitudeDenmark,
+                            satelliteCenterLongitudeDenmark
+                        );
                         this.map.setView(latlng, 2);
                         return;
                     }
@@ -166,7 +168,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     private makeClusterGroup() {
         this.markers.clearLayers();
-        const clusterGroup = L.markerClusterGroup({
+        const clusterGroup = leaflet.markerClusterGroup({
             maxClusterRadius: this.clusterMaxRadius,
         });
 
@@ -199,7 +201,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             return;
         }
         if (this.coordinateList) {
-            const clusterGroup = L.markerClusterGroup({
+            const clusterGroup = leaflet.markerClusterGroup({
                 maxClusterRadius: this.clusterMaxRadius,
             });
 
@@ -226,15 +228,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         //If it's the map from application details, then the gateways should not be included in the fit.
         //Only way to know if it's NOT a gateway, is if the marker is the grey marker.
         const group = !this.isFromApplication
-            ? L.featureGroup(markers)
-            : L.featureGroup(markers.filter(m => m.options.icon.options.iconUrl === this.greyMarker));
+            ? leaflet.featureGroup(markers)
+            : leaflet.featureGroup(markers.filter(m => m.options.icon.options.iconUrl === this.greyMarker));
 
         this.map.fitBounds(group.getBounds(), { padding: [50, 50] });
     }
 
     private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
         const markerIcon = this.getMarkerIcon(markerInfo?.active, markerInfo?.isDevice);
-        const marker = L.marker([latitude, longitude], { draggable, icon: markerIcon });
+        const marker = leaflet.marker([latitude, longitude], { draggable, icon: markerIcon });
         marker.on("dragend", event => this.dragend(event));
         if (markerInfo && !markerInfo.isDevice) {
             const isActive = markerInfo.active ? "Aktiv" : "Inaktiv";
@@ -290,7 +292,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         return marker;
     }
     private getMarkerIcon(active = true, isDevice = false): any {
-        return L.icon({
+        return leaflet.icon({
             iconUrl: isDevice ? this.greyMarker : active ? this.greenMarker : this.redMarker,
             iconSize: [30, 38],
             iconAnchor: [19, 38],
@@ -318,7 +320,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private initMap(): void {
         const container = document.getElementById(this.mapId);
         if (container) {
-            this.map = L.map(this.mapId, {
+            this.map = leaflet.map(this.mapId, {
                 center: [
                     this.coordinateList ? this.coordinateList[0]?.latitude : this.coordinates?.latitude,
                     this.coordinateList ? this.coordinateList[0]?.longitude : this.coordinates?.longitude,
@@ -326,7 +328,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 zoom: this.zoomLevel,
                 maxZoom: 18,
                 doubleClickZoom: false,
-                crs: L.CRS.EPSG3857,
+                crs: leaflet.CRS.EPSG3857,
                 fullscreenControl: true,
                 fullscreenControlOptions: {
                     position: "topleft",
@@ -334,11 +336,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 },
             });
 
-            this.streetMap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            }).addTo(this.map);
+            this.streetMap = leaflet
+                .tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                })
+                .addTo(this.map);
 
-            this.ortofotowmts = L.tileLayer(
+            this.ortofotowmts = leaflet.tileLayer(
                 `https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar_wmts/1.0.0/WMTS?username=${this.dafusername}&password=${this.dafpw}&request=GetTile&version=1.0.0&service=WMTS&Layer=orto_foraar_wmts&style=default&format=image/jpeg&TileMatrixSet=KortforsyningTilingDK&TileMatrix={z}&TileRow={y}&TileCol={x}`,
                 {
                     attribution: '&copy; <a href="https://datafordeler.dk/vejledning/brugervilkaar/">Datafordeler</a>',
@@ -346,7 +350,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 }
             );
 
-            this.heightsMapWms = L.tileLayer.wms(
+            this.heightsMapWms = leaflet.tileLayer.wms(
                 `https://services.datafordeler.dk/DHMNedboer/dhm/1.0.0/WMS?username=${this.dafusername}&password=${this.dafpw}`,
                 {
                     transparent: "TRUE",
@@ -361,16 +365,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             );
 
             // Define layer groups for layer control
-            var baseLayers: L.Control.LayersObject = {
+            const baseLayers: leaflet.Control.LayersObject = {
                 [this.streetViewName]: this.streetMap,
                 [this.datafordelerName ?? "Satellit Danmark"]: this.ortofotowmts,
             };
 
-            var overlays: L.Control.LayersObject = {
+            const overlays: leaflet.Control.LayersObject = {
                 [this.heightCurvesName ?? "Højdekurver (0,5 m)"]: this.heightsMapWms,
             };
 
-            const layerControl = L.control.layers(baseLayers, overlays).addTo(this.map);
+            const layerControl = leaflet.control.layers(baseLayers, overlays).addTo(this.map);
 
             //If it's a map with more than 1 marker, then the map change from street view to satelite will fail if zoom is above 16 for some reason.. Therefore, remove the possibility for it to happen.
             this.map.on("zoomend", () => {
@@ -379,7 +383,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
                     //The layerControl type doesnt have any way to check if map is set. Therefore we have to make it "any".
                     //If layerControl._map is NOT set, then the picker on the map is not shown.
-                    var tempControl = layerControl as any;
+                    const tempControl = layerControl as any;
 
                     if (currentZoom >= this.maxZoomToEnableLayerChange) {
                         layerControl.remove();
