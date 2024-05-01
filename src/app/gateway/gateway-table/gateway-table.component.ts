@@ -77,38 +77,8 @@ const columnDefinitions: TableColumn[] = [
         default: false,
     },
     {
-        id: "gatewayResponsibleEmail",
-        display: "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL",
-        toggleable: true,
-        default: false,
-    },
-    {
-        id: "gatewayResponsiblePhoneNumber",
-        display: "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER",
-        toggleable: true,
-        default: false,
-    },
-    {
-        id: "operationalResponsibleName",
-        display: "LORA-GATEWAY-TABLE.OPERATIONAL-NAME",
-        toggleable: true,
-        default: false,
-    },
-    {
-        id: "operationalResponsibleEmail",
-        display: "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL",
-        toggleable: true,
-        default: false,
-    },
-    {
         id: "tags",
         display: "LORA-GATEWAY-TABLE.TAGS",
-        toggleable: true,
-        default: false,
-    },
-    {
-        id: "location",
-        display: "LORA-GATEWAY-TABLE.LOCATION",
         toggleable: true,
         default: false,
     },

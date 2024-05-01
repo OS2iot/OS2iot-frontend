@@ -35,8 +35,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     private map: leaflet.Map;
     public mapId;
     private marker: leaflet.Marker;
-    private markers: leaflet.MarkerClusterGroup;
+    private markers: any;
     @Input() isFromApplication? = false;
+    @Input() applicationId?: number;
     @Input() isFromCreation? = false;
     @Input() coordinates?: MapCoordinates;
     @Input() coordinateList: [MapCoordinates];
@@ -204,11 +205,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
             const clusterGroup = leaflet.markerClusterGroup({
                 maxClusterRadius: this.clusterMaxRadius,
             });
+            const gatewayLayerGroup = [];
 
             this.coordinateList.forEach(coord => {
-                clusterGroup.addLayer(
-                    this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
-                );
+                if (this.isFromApplication) {
+                    if (!coord.markerInfo.isDevice) {
+                        gatewayLayerGroup.push(
+                            this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                        );
+                        this.markers = leaflet.layerGroup(gatewayLayerGroup).addTo(this.map);
+                    } else {
+                        clusterGroup.addLayer(
+                            this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                        );
+                    }
+                } else {
+                    clusterGroup.addLayer(
+                        this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo)
+                    );
+                }
             });
 
             this.markers = clusterGroup.addTo(this.map);
@@ -269,10 +284,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
                 '<a _ngcontent-gij-c367=""' +
                     'routerlinkactive="active" class="application-link"' +
                     'ng-reflect-router-link-active="active"' +
-                    'ng-reflect-router-link="gateway-detail,' +
+                    'ng-reflect-router-link="details,' +
                     markerInfo.id +
                     '" href="/applications/' +
-                    markerInfo.internalOrganizationId +
+                    this.applicationId +
                     "/iot-device/" +
                     markerInfo.id +
                     "/details" +

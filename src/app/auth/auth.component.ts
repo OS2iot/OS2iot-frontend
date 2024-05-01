@@ -69,7 +69,6 @@ export class AuthComponent implements OnInit {
     this.isLoading = true;
     this.authService.login(username, password).subscribe(
       (x: any) => {
-        console.log(x);
         if (x.accessToken) {
           this.success();
         } else {
