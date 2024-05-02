@@ -33,6 +33,12 @@ const columnDefinitions: TableColumn[] = [
         toggleable: true,
     },
     {
+        id: "commentOnLocation",
+        display: "GATEWAY.PLACEMENT-LABEL",
+        default: false,
+        toggleable: true,
+    },
+    {
         id: "deviceModel",
         display: "IOTDEVICE.DEVICEMODEL",
         default: true,
@@ -245,6 +251,14 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
                 showCancel: true,
             },
         });
+    }
+
+    public truncateText(text: string): string {
+        const maxLength = 32;
+        if (text.length <= maxLength) {
+            return text;
+        }
+        return text.substring(0, maxLength) + "...";
     }
 
     protected readonly columnDefinitions = columnDefinitions;
