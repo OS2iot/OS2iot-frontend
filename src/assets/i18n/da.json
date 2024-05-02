@@ -384,7 +384,7 @@
         "RESPONSIBLE-NAME": "Gateway-ansvarlig",
         "RESPONSIBLE-EMAIL": "Kontaktmail",
         "RESPONSIBLE-PHONE-NUMBER": "Kontakttelefon",
-    "OPERATIONAL-NAME": "Driftsansvarlig",
+        "OPERATIONAL-NAME": "Driftsansvarlig",
         "OPERATIONAL-EMAIL": "Kontaktmail - drift",
         "TAGS": "Tags",
         "CREATED-AT": "Oprettelsesdato"
@@ -828,7 +828,7 @@
         "GATEWAYID": "Gateway id (EUI)",
         "GATEWAYID-PLACEHOLDER": "0000000000000000",
         "METADATA": "Gateway tags",
-    "METADATA-PLACEHOLDER": "Angiv JSON her: {\"tagName\": \"tagValue\"}",
+        "METADATA-PLACEHOLDER": "Angiv JSON her: {\"tagName\": \"tagValue\"}",
         "ALTITUDE": "Højde",
         "ALTITUDE-PLACEHOLDER": "00",
         "LONGITUDE": "Længdegrad",
@@ -845,7 +845,7 @@
         "GATEWAY-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på gateway-ansvarlig",
         "GATEWAY-RESPONSIBLE-CONTACT-NUMBER": "Kontakttelefon",
         "GATEWAY-RESPONSIBLE-CONTACT-NUMBER-PLACEHOLDER": "Angiv telefonnummer på gateway-ansvarlig",
-    "OPERATION-RESPONSIBLE": "Driftsansvarlig",
+        "OPERATION-RESPONSIBLE": "Driftsansvarlig",
         "OPERATION-RESPONSIBLE-PLACEHOLDER": "Angiv ansvarlig for den fysiske drift af gateway",
         "OPERATION-RESPONSIBLE-CONTACT": "Kontaktmail - drift",
         "OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på driftsansvarlig"
