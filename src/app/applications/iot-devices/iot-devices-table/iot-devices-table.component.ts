@@ -257,9 +257,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
         const maxLength = 32;
         if (text.length <= maxLength) {
             return text;
-        } else {
-            return text.substring(0, maxLength) + "...";
         }
+        return text.substring(0, maxLength) + "...";
     }
 
     protected readonly columnDefinitions = columnDefinitions;
