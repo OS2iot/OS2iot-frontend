@@ -1,45 +1,48 @@
 {
-  "GEN": {
-    "CANCEL": "Cancel",
-    "SHOW": "Show",
-    "PER-PAGE": "Per page"
-  },
-  "NAV": {
-    "DASHBOARD": "Dashboard",
-    "APPLICATIONS": "Applications",
-    "ALL-IOT-DEVICES": "All IoT Devices"
-  },
-  "APPLICATION": {
-    "CREATE": "Create application",
-    "SAVE": "Save application"
-  },
-  "APPLICATION-TABLE": {
-    "NAME": "NAME",
-    "IOT-DEVICES": "IOT DEVICES",
-    "UPDATED": "LAST UPDATED"
-  },
-  "APPLICATION-TABLE-ROW": {
-    "DELETE": "Delete",
-    "EDIT": "Edit",
-    "SHOW-OPTIONS": "Show options"
-  },
-  "FORM": {
-    "CREATE-NEW-APPLICATION": "Create new application",
-    "EDIT-NEW-APPLICATION": "Edit application",
-    "CREATE-NEW-IOT-DEVICE": "Add IoT unit"
-  },
-  "QUESTION": {
-    "APPLICATION-NAME-PLACEHOLDER": "Name of the application",
-    "APPLICATION-DESCRIPTION-PLACEHOLDER": "Short description of the application"
-  },
-  "SORT": {
-    "SORT": "Sort by",
-    "UPDATED-ASCENDING": "Last updated: acsending",
-    "UPDATED-DESCENDING": "Last updated: faldende",
-    "CREATED-ASCENDING": "Created: acsending",
-    "CREATED-DESCENDING": "Created: faldende",
-    "NAME-ASCENDING": "Name: acsending",
-    "NAME-DESCENDING": "Name: faldende"
-  },
-  "DBLCLICKINFO": "Doubleclick on the map or drag the marker to move the marker"
+    "GEN": {
+        "CANCEL": "Cancel",
+        "SHOW": "Show",
+        "PER-PAGE": "Per page"
+    },
+    "NAV": {
+        "DASHBOARD": "Dashboard",
+        "APPLICATIONS": "Applications",
+        "ALL-IOT-DEVICES": "All IoT Devices"
+    },
+    "APPLICATION": {
+        "CREATE": "Create application",
+        "SAVE": "Save application"
+    },
+    "APPLICATION-TABLE": {
+        "NAME": "NAME",
+        "IOT-DEVICES": "IOT DEVICES",
+        "UPDATED": "LAST UPDATED"
+    },
+    "APPLICATION-TABLE-ROW": {
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "SHOW-OPTIONS": "Show options"
+    },
+    "FORM": {
+        "CREATE-NEW-APPLICATION": "Create new application",
+        "EDIT-NEW-APPLICATION": "Edit application",
+        "CREATE-NEW-IOT-DEVICE": "Add IoT unit"
+    },
+    "QUESTION": {
+        "APPLICATION-NAME-PLACEHOLDER": "Name of the application",
+        "APPLICATION-DESCRIPTION-PLACEHOLDER": "Short description of the application"
+    },
+    "SORT": {
+        "SORT": "Sort by",
+        "UPDATED-ASCENDING": "Last updated: acsending",
+        "UPDATED-DESCENDING": "Last updated: faldende",
+        "CREATED-ASCENDING": "Created: acsending",
+        "CREATED-DESCENDING": "Created: faldende",
+        "NAME-ASCENDING": "Name: acsending",
+        "NAME-DESCENDING": "Name: faldende"
+    },
+    "DBLCLICKINFO": "Doubleclick on the map or drag the marker to place the marker",
+    "HEIGHTCURVESINFO": "The activated contour lines are only displayed at the innermost zoom levels.",
+    "HEIGHTCURVES": "Height curves (0,5 m)",
+    "SATELLITEDENMARK": "Satellite Denmark"
 }
