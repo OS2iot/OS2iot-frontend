@@ -42,20 +42,24 @@
             <div class="col-md-5 d-flex align-items-stretch">
                 <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
                     <div class="thirty-height" *ngIf="devices && gateways">
-                        <app-map [coordinateList]="coordinateList" [isFromApplication]="true" [applicationId]="application.id" ></app-map>
+                        <app-map
+                            [coordinateList]="coordinateList"
+                            [isFromApplication]="true"
+                            [applicationId]="application.id"
+                        ></app-map>
                     </div>
                     <div class="col d-flex markerDescriptionDiv">
                         <div class="col d-flex">
                             <img alt="IoTDeviceMarker" class="marker" src="{{ greyMarker }}" />
-                            <p>: IoT-Enhed</p>
+                            <p>&nbsp; IoT-Enhed</p>
                         </div>
                         <div class="col d-flex">
                             <img alt="InactiveGatewayMarker" class="marker" src="{{ redMarker }}" />
-                            <p>: Inaktiv gateway</p>
+                            <p>&nbsp; Inaktiv gateway</p>
                         </div>
                         <div class="col d-flex">
                             <img alt="ActiveGatewayMarker" class="marker" src="{{ greenMarker }}" />
-                            <p>: Aktiv gateway</p>
+                            <p>&nbsp; Aktiv gateway</p>
                         </div>
                     </div>
                 </div>
