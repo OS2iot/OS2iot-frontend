@@ -1,21 +1,21 @@
-import { Location } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { BackButton } from '@shared/models/back-button.model';
-import { MeService } from '@shared/services/me.service';
-import { Subscription } from 'rxjs';
-import { DeviceProfile } from '../device-profile.model';
-import { DeviceProfileService } from '../device-profile.service';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import { AdrAlgorithm } from '@app/network-server/adr-algorithm.model';
+import { Location } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { BackButton } from "@shared/models/back-button.model";
+import { MeService } from "@shared/services/me.service";
+import { Subscription } from "rxjs";
+import { DeviceProfile } from "../device-profile.model";
+import { DeviceProfileService } from "../device-profile.service";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { AdrAlgorithm } from "@app/network-server/adr-algorithm.model";
 
 @Component({
-    selector: 'app-device-profiles-edit',
-    templateUrl: './device-profiles-edit.component.html',
-    styleUrls: ['./device-profiles-edit.component.scss'],
+    selector: "app-device-profiles-edit",
+    templateUrl: "./device-profiles-edit.component.html",
+    styleUrls: ["./device-profiles-edit.component.scss"],
 })
 export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     id: string;
@@ -26,8 +26,8 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     public errorMessages: string[];
     public errorFields: string[];
     public formFailedSubmit = false;
-    public title = '';
-    public backButton: BackButton = { label: '', routerLink: '/profiles' };
+    public title = "";
+    public backButton: BackButton = { label: "", routerLink: "/profiles" };
     public adrAlgorithms: AdrAlgorithm[] = [];
 
     public revision: Record<string, number> = {};
@@ -42,18 +42,16 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.translate
-            .get(['PROFILES.NAME', 'FORM.EDIT-DEVICE-PROFILE'])
-            .subscribe((translations) => {
-                this.title = translations['FORM.EDIT-DEVICE-PROFILE'];
-                this.backButton.label = translations['PROFILES.NAME'];
-            });
+        this.translate.get(["PROFILES.NAME", "FORM.EDIT-DEVICE-PROFILE"]).subscribe(translations => {
+            this.title = translations["FORM.EDIT-DEVICE-PROFILE"];
+            this.backButton.label = translations["PROFILES.NAME"];
+        });
 
-        this.deviceProfileService.getAllAdrAlgorithms().subscribe((response) => {
+        this.deviceProfileService.getAllAdrAlgorithms().subscribe(response => {
             this.adrAlgorithms = response.adrAlgorithms;
         });
 
-        this.id = this.route.snapshot.paramMap.get('deviceId');
+        this.id = this.route.snapshot.paramMap.get("deviceId");
         if (this.id) {
             this.getDeviceProfile(this.id);
         } else {
@@ -63,7 +61,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
     getDeviceProfile(id: string) {
         this.subscription = this.deviceProfileService.getOne(id).subscribe(
-            (response) => {
+            response => {
                 this.deviceProfile = response.deviceProfile;
                 this.canEdit();
                 this.shownRegParameters(this.deviceProfile.macVersion);
@@ -113,7 +111,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
     private create(): void {
         this.deviceProfileService.post(this.deviceProfile).subscribe(
-            (response) => {
+            response => {
                 console.log(response);
                 this.routeBack();
             },
@@ -125,10 +123,10 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
     private update(): void {
         this.deviceProfileService.put(this.deviceProfile).subscribe(
-            (response) => {
+            response => {
                 this.routeBack();
             },
-            (error) => {
+            error => {
                 this.showError(error);
             }
         );
@@ -144,7 +142,7 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
 
     private showError(error: HttpErrorResponse) {
         if (error.status == 403) {
-            this.errorMessages = ['Forbudt'];
+            this.errorMessages = ["Forbudt"];
         } else {
             const errors = this.errorMessageService.handleErrorMessageWithFields(error);
             this.errorFields = errors?.errorFields;

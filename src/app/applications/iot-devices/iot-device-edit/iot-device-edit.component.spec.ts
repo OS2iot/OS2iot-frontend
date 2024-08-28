@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { IotDeviceEditComponent } from './iot-device-edit.component';
+import { IotDeviceEditComponent } from "./iot-device-edit.component";
 
-describe('IotDeviceEditComponent', () => {
-  let component: IotDeviceEditComponent;
-  let fixture: ComponentFixture<IotDeviceEditComponent>;
+describe("IotDeviceEditComponent", () => {
+    let component: IotDeviceEditComponent;
+    let fixture: ComponentFixture<IotDeviceEditComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [IotDeviceEditComponent]
-    })
-      .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [IotDeviceEditComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(IotDeviceEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(IotDeviceEditComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

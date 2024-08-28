@@ -1,127 +1,126 @@
 //Animate.css
-@import 'animate.css/animate.min';
+@import "animate.css/animate.min";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap.scss';
+@import "bootstrap/scss/bootstrap.scss";
 
 //Animations
-@import 'assets/scss/animation/jumping-dots';
+@import "assets/scss/animation/jumping-dots";
 
 //Components
-@import 'assets/scss/components/boxes';
-@import 'assets/scss/components/bulk-import';
-@import 'assets/scss/components/date-picker';
-@import 'assets/scss/components/forms';
-@import 'assets/scss/components/list';
-@import 'assets/scss/components/loading-spinner';
-@import 'assets/scss/components/map';
-@import 'assets/scss/components/monaco-editor';
-@import 'assets/scss/components/navbar';
-@import 'assets/scss/components/tables';
-@import 'assets/scss/components/topbar';
+@import "assets/scss/components/boxes";
+@import "assets/scss/components/bulk-import";
+@import "assets/scss/components/date-picker";
+@import "assets/scss/components/forms";
+@import "assets/scss/components/list";
+@import "assets/scss/components/loading-spinner";
+@import "assets/scss/components/map";
+@import "assets/scss/components/monaco-editor";
+@import "assets/scss/components/navbar";
+@import "assets/scss/components/tables";
+@import "assets/scss/components/topbar";
 
 //Elements
-@import 'assets/scss/elements/links';
-@import 'assets/scss/elements/buttons';
-@import 'assets/scss/elements/icons';
-@import 'assets/scss/elements/img';
-@import 'assets/scss/elements/textfield';
-@import 'assets/scss/elements/labels';
+@import "assets/scss/elements/links";
+@import "assets/scss/elements/buttons";
+@import "assets/scss/elements/icons";
+@import "assets/scss/elements/img";
+@import "assets/scss/elements/textfield";
+@import "assets/scss/elements/labels";
 
 //Setup
-@import 'assets/scss/setup/base';
-@import 'assets/scss/setup/breakpoints';
+@import "assets/scss/setup/base";
+@import "assets/scss/setup/breakpoints";
 
-@import 'assets/scss/setup/typography';
-@import 'assets/scss/setup/utilities';
-@import 'assets/scss/setup/variables';
-@import 'assets/scss/setup/material-theme';
+@import "assets/scss/setup/typography";
+@import "assets/scss/setup/utilities";
+@import "assets/scss/setup/variables";
+@import "assets/scss/setup/material-theme";
 
 @import "~leaflet/dist/leaflet.css";
 
 @import "./app/shared/styles/leaflet-styles.scss";
 
-
 @font-face {
-  font-family: 'roboto-light';
-  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
+    font-family: "roboto-light";
+    src: url("./assets/fonts/Roboto-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'roboto';
-  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-family: "roboto";
+    src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'roboto-bold';
-  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+    font-family: "roboto-bold";
+    src: url("./assets/fonts/Roboto-Bold.ttf") format("truetype");
 }
 
 body {
-  // For Google Chrome
-  &::-webkit-scrollbar {
-    width:  5px;
-    height: 5px;
-  }
+    // For Google Chrome
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background: rgba($color: #000000, $alpha: 0.5);
-  }
+    &::-webkit-scrollbar-thumb {
+        background: rgba($color: #000000, $alpha: 0.5);
+    }
 
-  &::-webkit-scrollbar-track {
-    background: rgba($color: #000000, $alpha: 0.4);
-  }
+    &::-webkit-scrollbar-track {
+        background: rgba($color: #000000, $alpha: 0.4);
+    }
 
-  // For FireFox
-  scrollbar-width: 5px;
+    // For FireFox
+    scrollbar-width: 5px;
 
-  // For Internet Explorer
-  & {
-    scrollbar-face-color: rgba($color: #000000, $alpha: 0.5);
-    scrollbar-track-color: rgba($color: #000000, $alpha: 0.4);
-  }
+    // For Internet Explorer
+    & {
+        scrollbar-face-color: rgba($color: #000000, $alpha: 0.5);
+        scrollbar-track-color: rgba($color: #000000, $alpha: 0.4);
+    }
 }
 
-.snackBar.mat-snack-bar-container{
-  background: #f4f4f4;
-  color: #000;
+.snackBar.mat-snack-bar-container {
+    background: #f4f4f4;
+    color: #000;
 }
 
 .mat-tooltip {
-  font-size: 1rem !important;
+    font-size: 1rem !important;
 }
 
 .status-tooltip {
-  background: rgba(97, 97, 97, 1.0);
-  white-space: pre-line;
+    background: rgba(97, 97, 97, 1);
+    white-space: pre-line;
 }
 
 .mat-card-header-text-ml-0 .mat-card-header-text {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .welcome-screen .mat-dialog-container {
-  background-color: #55b156;
+    background-color: #55b156;
 }
 
 .hide-checkbox {
-  color: $color-white-001;
+    color: $color-white-001;
 
-  .mat-checkbox-frame {
-    border-color: $color-white-001;
-  }
+    .mat-checkbox-frame {
+        border-color: $color-white-001;
+    }
 }
 
 .line-break {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 .mat-select-panel.tall {
-  max-height: 400px;
-  height: 400px;
-  margin-right: 30px;
+    max-height: 400px;
+    height: 400px;
+    margin-right: 30px;
 }
 
 .width100percent {
-  width: 100%;
+    width: 100%;
 }

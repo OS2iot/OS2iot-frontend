@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { IotDeviceDetailsService } from '@applications/iot-devices/iot-device-details-service';
+import { Component, OnInit } from "@angular/core";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
 
 @Component({
-  selector: 'app-iot-device-data-packets-tab',
-  templateUrl: './iot-device-data-packets-tab.component.html',
-  styleUrls: ['./iot-device-data-packets-tab.component.scss'],
+    selector: "app-iot-device-data-packets-tab",
+    templateUrl: "./iot-device-data-packets-tab.component.html",
+    styleUrls: ["./iot-device-data-packets-tab.component.scss"],
 })
 export class IotDeviceDataPacketsTabComponent implements OnInit {
-  device: IotDevice;
-  constructor(private iotDeviceDetailsService: IotDeviceDetailsService) {}
+    device: IotDevice;
+    constructor(private iotDeviceDetailsService: IotDeviceDetailsService) {}
 
-  ngOnInit(): void {
-    this.device = this.iotDeviceDetailsService.device;
-  }
+    ngOnInit(): void {
+        this.device = this.iotDeviceDetailsService.device;
+    }
 }

@@ -1,24 +1,21 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import {
-    OrganisationGetManyResponse,
-    OrganisationResponse,
-} from '../../organisation.model';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MatSort } from '@angular/material/sort';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { environment } from '@environments/environment';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
+import { OrganisationService } from "@app/admin/organisation/organisation.service";
+import { OrganisationGetManyResponse, OrganisationResponse } from "../../organisation.model";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { MatSort } from "@angular/material/sort";
+import { merge, Observable, of as observableOf } from "rxjs";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { environment } from "@environments/environment";
+import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: 'app-organisation-tabel',
-    templateUrl: './organisation-tabel.component.html',
-    styleUrls: ['./organisation-tabel.component.scss'],
+    selector: "app-organisation-tabel",
+    templateUrl: "./organisation-tabel.component.html",
+    styleUrls: ["./organisation-tabel.component.scss"],
 })
 export class OrganisationTabelComponent implements AfterViewInit {
-    displayedColumns: string[] = ['name', 'applications', 'menu'];
+    displayedColumns: string[] = ["name", "applications", "menu"];
 
     data: OrganisationResponse[];
 
@@ -34,10 +31,7 @@ export class OrganisationTabelComponent implements AfterViewInit {
 
     isLoadingResults = true;
 
-    constructor(
-        private organisationService: OrganisationService,
-        private deleteDialogService: DeleteDialogService
-    ) {}
+    constructor(private organisationService: OrganisationService, private deleteDialogService: DeleteDialogService) {}
 
     ngAfterViewInit() {
         // If the user changes the sort order, reset back to the first page.
@@ -48,12 +42,9 @@ export class OrganisationTabelComponent implements AfterViewInit {
                 startWith({}),
                 switchMap(() => {
                     this.isLoadingResults = true;
-                    return this.getOrganisations(
-                        this.sort.active,
-                        this.sort.direction
-                    );
+                    return this.getOrganisations(this.sort.active, this.sort.direction);
                 }),
-                map((data) => {
+                map(data => {
                     // Flip flag to show that loading has finished.
                     this.isLoadingResults = false;
                     this.resultsLength = data.count;
@@ -65,13 +56,10 @@ export class OrganisationTabelComponent implements AfterViewInit {
                     return observableOf([]);
                 })
             )
-            .subscribe((data) => (this.data = data));
+            .subscribe(data => (this.data = data));
     }
 
-    getOrganisations(
-        orderByColumn: string,
-        orderByDirection: string
-    ): Observable<OrganisationGetManyResponse> {
+    getOrganisations(orderByColumn: string, orderByDirection: string): Observable<OrganisationGetManyResponse> {
         return this.organisationService.getMultiple(
             this.paginator.pageSize,
             this.paginator.pageIndex * this.paginator.pageSize,
@@ -81,15 +69,13 @@ export class OrganisationTabelComponent implements AfterViewInit {
     }
 
     clickDelete(element: any) {
-        this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+        this.deleteDialogService.showSimpleDialog().subscribe(response => {
             if (response) {
-                this.organisationService
-                    .delete(element.id)
-                    .subscribe((response) => {
-                        if (response.ok) {
-                            this.refresh();
-                        }
-                    });
+                this.organisationService.delete(element.id).subscribe(response => {
+                    if (response.ok) {
+                        this.refresh();
+                    }
+                });
             } else {
                 console.log(response);
             }

@@ -1,22 +1,31 @@
 <div class="row">
     <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
-            <h3>{{ 'IOTDEVICE.DETAIL' | translate }}</h3>
-            <p class="mr-1"><strong>{{ 'IOT-TABLE.APPLICATION' | translate }}</strong>{{device.application.name}}</p>
+            <h3>{{ "IOTDEVICE.DETAIL" | translate }}</h3>
+            <p class="mr-1">
+                <strong>{{ "IOT-TABLE.APPLICATION" | translate }}</strong
+                >{{ device.application.name }}
+            </p>
             <app-general-details [data]="device"></app-general-details>
             <!-- Battery -->
             <ng-template [ngIf]="device.type === DeviceType.LORAWAN">
-            <mat-divider></mat-divider>
-              <div class="d-flex align-items-center">
-                <p class="mr-1"><strong>{{ 'IOT-TABLE.BATTERY' | translate }}</strong></p>
-                <app-batteri-status [color]="batteryStatusColor"
-                                    [percentage]="batteryStatusPercentage"></app-batteri-status>
-              </div>
+                <mat-divider></mat-divider>
+                <div class="d-flex align-items-center">
+                    <p class="mr-1">
+                        <strong>{{ "IOT-TABLE.BATTERY" | translate }}</strong>
+                    </p>
+                    <app-batteri-status
+                        [color]="batteryStatusColor"
+                        [percentage]="batteryStatusPercentage"
+                    ></app-batteri-status>
+                </div>
             </ng-template>
             <mat-divider></mat-divider>
 
             <!-- Unit type -->
-            <p> <strong>{{ 'IOTDEVICE.TYPE' | translate }}</strong>{{ 'IOT-DEVICE-TYPES.' + device.type | translate}}
+            <p>
+                <strong>{{ "IOTDEVICE.TYPE" | translate }}</strong
+                >{{ "IOT-DEVICE-TYPES." + device.type | translate }}
             </p>
             <!-- IF  Lora device-->
             <ng-container *ngIf="device.type === DeviceType.LORAWAN && device.lorawanSettings">
@@ -29,66 +38,80 @@
             <ng-container *ngIf="device.type === DeviceType.GENERIC_HTTP">
                 <mat-divider></mat-divider>
                 <p>
-                    <strong>{{ 'IOTDEVICE.GENERIC_HTTP.APIKEY' | translate }}</strong>
+                    <strong>{{ "IOTDEVICE.GENERIC_HTTP.APIKEY" | translate }}</strong>
                     <span class="pre text-break">{{ httpDeviceUrl }}</span>
                 </p>
             </ng-container>
-          <ng-container *ngIf="device.type === DeviceType.MQTT_INTERNAL_BROKER">
-            <app-iot-device-details-mqtt-internal-broker [device]="device" ></app-iot-device-details-mqtt-internal-broker>
-          </ng-container>
-          <ng-container *ngIf="device.type === DeviceType.MQTT_EXTERNAL_BROKER">
-            <p class="alarmText" *ngIf="device.mqttExternalBrokerSettings.invalidMqttConfig">{{ 'IOTDEVICE.MQTT.NOCONNECTION' | translate}}</p>
-            <app-iot-device-details-mqtt-external-broker [device]="device"></app-iot-device-details-mqtt-external-broker>
-          </ng-container>
+            <ng-container *ngIf="device.type === DeviceType.MQTT_INTERNAL_BROKER">
+                <app-iot-device-details-mqtt-internal-broker
+                    [device]="device"
+                ></app-iot-device-details-mqtt-internal-broker>
+            </ng-container>
+            <ng-container *ngIf="device.type === DeviceType.MQTT_EXTERNAL_BROKER">
+                <p class="alarmText" *ngIf="device.mqttExternalBrokerSettings.invalidMqttConfig">
+                    {{ "IOTDEVICE.MQTT.NOCONNECTION" | translate }}
+                </p>
+                <app-iot-device-details-mqtt-external-broker
+                    [device]="device"
+                ></app-iot-device-details-mqtt-external-broker>
+            </ng-container>
             <!-- Comment -->
             <mat-divider></mat-divider>
             <p>
-                <strong>{{ 'IOTDEVICE.COMMENT' | translate }}</strong>
+                <strong>{{ "IOTDEVICE.COMMENT" | translate }}</strong>
                 <span *ngIf="device.comment; else elseBlock">
-                    {{device.comment}}
+                    {{ device.comment }}
                 </span>
                 <ng-template #elseBlock>
-                    {{ 'IOTDEVICE.NOCOMMENT' | translate}}
+                    {{ "IOTDEVICE.NOCOMMENT" | translate }}
                 </ng-template>
             </p>
             <ng-container *ngIf="metadataTags.length">
-              <mat-divider></mat-divider>
-              <p><strong>{{ 'QUESTION.METADATA' | translate }}</strong></p>
-              <p *ngFor="let tag of metadataTags; let i = index">
-                <strong>{{i + 1}}: {{ tag.key }}</strong>
-                <span>{{ tag.value }}</span>
-            </p>
+                <mat-divider></mat-divider>
+                <p>
+                    <strong>{{ "QUESTION.METADATA" | translate }}</strong>
+                </p>
+                <p *ngFor="let tag of metadataTags; let i = index">
+                    <strong>{{ i + 1 }}: {{ tag.key }}</strong>
+                    <span>{{ tag.value }}</span>
+                </p>
             </ng-container>
         </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
-            <h3>{{ 'IOTDEVICE.LOCATION' | translate }}</h3>
+            <h3>{{ "IOTDEVICE.LOCATION" | translate }}</h3>
             <div *ngIf="device.location; else locationElseBlock">
-              <div class="thirty-height">
-                <app-map [coordinates]="getCoordinates()"></app-map>
-              </div>
+                <div class="thirty-height">
+                    <app-map [coordinates]="getCoordinates()"></app-map>
+                </div>
                 <div class="row">
                     <div class="col-6 latLonWrapWidth">
-                      <p><strong>{{ 'IOTDEVICE.LATITUDE' | translate }}</strong>{{latitude | number:'2.1-9'}}</p>
+                        <p>
+                            <strong>{{ "IOTDEVICE.LATITUDE" | translate }}</strong
+                            >{{ latitude | number : "2.1-9" }}
+                        </p>
                     </div>
                     <div class="col-6 latLonWrapWidth">
-                        <p><strong>{{ 'IOTDEVICE.LONGITUDE' | translate }}</strong>{{longitude | number:'2.1-9'}}</p>
+                        <p>
+                            <strong>{{ "IOTDEVICE.LONGITUDE" | translate }}</strong
+                            >{{ longitude | number : "2.1-9" }}
+                        </p>
                     </div>
                 </div>
             </div>
             <ng-template #locationElseBlock>
-                <p>{{ 'IOTDEVICE.NOLOCATION' | translate}}</p>
+                <p>{{ "IOTDEVICE.NOLOCATION" | translate }}</p>
             </ng-template>
             <p>
                 <strong>
-                    {{ 'IOTDEVICE.COMMENTONLOCATION' | translate }}
+                    {{ "IOTDEVICE.COMMENTONLOCATION" | translate }}
                 </strong>
                 <span *ngIf="device.commentOnLocation; else locationCommentElseBlock">
-                    {{device.commentOnLocation}}
+                    {{ device.commentOnLocation }}
                 </span>
                 <ng-template #locationCommentElseBlock>
-                    {{ 'IOTDEVICE.NOCOMMENTONLOCATION' | translate}}
+                    {{ "IOTDEVICE.NOCOMMENTONLOCATION" | translate }}
                 </ng-template>
             </p>
         </div>

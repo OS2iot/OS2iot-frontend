@@ -1,7 +1,7 @@
-import { Organisation } from '@app/admin/organisation/organisation.model';
-import { EditPermission } from '@shared/models/edit-permission.model';
+import { Organisation } from "@app/admin/organisation/organisation.model";
+import { EditPermission } from "@shared/models/edit-permission.model";
 
-export class PayloadDecoder extends EditPermission{
+export class PayloadDecoder extends EditPermission {
     public name: string;
     public id: number;
     public organizationId?: number;
@@ -12,8 +12,7 @@ export class PayloadDecoder extends EditPermission{
     updatedBy: number;
     createdByName: string;
     updatedByName: string;
-    public decodingFunction = 
-    `function bin16dec(bin) {
+    public decodingFunction = `function bin16dec(bin) {
         var num = bin & 0xffff;
         if (0x8000 & num) num = -(0x010000 - num);
         return num;
@@ -45,24 +44,24 @@ export class PayloadDecoder extends EditPermission{
 }
 
 export interface PayloadDecoderMappedResponse {
-  data: PayloadDecoder[];
-  count: number;  
+    data: PayloadDecoder[];
+    count: number;
 }
 
 export interface PayloadDecoderResponse {
-  data: PayloadDecoderBodyResponse[];
-  count: number;
+    data: PayloadDecoderBodyResponse[];
+    count: number;
 }
 
 export class PayloadDecoderBodyResponse {
-  name: string;
-  id: number;
-  organization?: Organisation;
-  decodingFunction: string;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: number;
-  updatedBy: number;
+    name: string;
+    id: number;
+    organization?: Organisation;
+    decodingFunction: string;
+    createdAt: string;
+    updatedAt: string;
+    createdBy: number;
+    updatedBy: number;
 }
 
 export interface GetPayloadDecoderParameters {

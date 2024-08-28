@@ -1,35 +1,22 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { sortBy } from '@shared/helpers/array.helper';
-import { ReceivedMessageMetadata } from '@shared/models/received-message-metadata.model';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { sortBy } from "@shared/helpers/array.helper";
+import { ReceivedMessageMetadata } from "@shared/models/received-message-metadata.model";
 
 @Component({
-  selector: 'app-data-packages-timestamp',
-  templateUrl: './data-packages-timestamp.component.html',
-  styleUrls: ['./data-packages-timestamp.component.scss'],
+    selector: "app-data-packages-timestamp",
+    templateUrl: "./data-packages-timestamp.component.html",
+    styleUrls: ["./data-packages-timestamp.component.scss"],
 })
 export class DataPackagesTimestampComponent implements OnInit, OnChanges {
-  @Input() receivedMessagesMetadata: ReceivedMessageMetadata[] = [];
-  sortedMetadata: ReceivedMessageMetadata[] = [];
+    @Input() receivedMessagesMetadata: ReceivedMessageMetadata[] = [];
+    sortedMetadata: ReceivedMessageMetadata[] = [];
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const { receivedMessagesMetadata } = changes;
-    if (
-      receivedMessagesMetadata.currentValue !==
-      receivedMessagesMetadata.previousValue
-    ) {
-      this.sortedMetadata = sortBy(
-        receivedMessagesMetadata.currentValue,
-        'sentTime',
-        'desc'
-      );
+    ngOnChanges(changes: SimpleChanges): void {
+        const { receivedMessagesMetadata } = changes;
+        if (receivedMessagesMetadata.currentValue !== receivedMessagesMetadata.previousValue) {
+            this.sortedMetadata = sortBy(receivedMessagesMetadata.currentValue, "sentTime", "desc");
+        }
     }
-  }
 }

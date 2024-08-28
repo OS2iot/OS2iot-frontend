@@ -1,94 +1,142 @@
 <app-top-bar [backButton]="backButton" [title]="title" [subPage]="true" [canEdit]="canEdit"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
-  <div *ngIf="errorMessages" class="jumbotron">
-    <div class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{error | translate}}
-        </li>
-      </ul>
+    <div *ngIf="errorMessages" class="jumbotron">
+        <div class="error-messages p-3">
+            <ul class="mb-0">
+                <li *ngFor="let error of errorMessages">
+                    {{ error | translate }}
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-6">
-        <div class="form-group">
-          <label class="form-label" for="metadata">{{'QUESTION.GIVE-PAYLOADDECODER-NAME' | translate}}*</label>
-          <input class="form-control" type="text" id="name" name="name"
-            [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate" maxlength="50" required
-            [(ngModel)]="payloadDecoder.name"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label" for="metadata"
+                        >{{ "QUESTION.GIVE-PAYLOADDECODER-NAME" | translate }}*</label
+                    >
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="name"
+                        name="name"
+                        [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate"
+                        maxlength="50"
+                        required
+                        [(ngModel)]="payloadDecoder.name"
+                        [ngClass]="{
+                            'is-invalid': formFailedSubmit && errorFields.includes('name'),
+                            'is-valid': formFailedSubmit && !errorFields.includes('name')
+                        }"
+                    />
+                </div>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="metadata">Test din payload decoder</label>
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-APPLICATION" | translate }}</mat-label>
+                        <mat-select (selectionChange)="getDevices($event)">
+                            <mat-option *ngFor="let applicationEl of applications" [value]="applicationEl.id">
+                                {{ applicationEl.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-DEVICE" | translate }}</mat-label>
+                            <mat-select (selectionChange)="getDevice($event)" [disabled]="!iotDevices">
+                                <mat-option *ngFor="let iotDeviceEl of iotDevices" [value]="iotDeviceEl.id">
+                                    {{ iotDeviceEl.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-6">
-        <label class="form-label" for="metadata">Test din payload decoder</label>
-        <div class="form-group">
-          <mat-form-field appearance="fill">
-            <mat-label>{{'QUESTION.GIVE-PAYLOADDECODER-CHOOSE-APPLICATION' | translate}}</mat-label>
-            <mat-select (selectionChange)="getDevices($event)">
-              <mat-option *ngFor="let applicationEl of applications" [value]="applicationEl.id">
-                {{applicationEl.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="form-group">
-            <mat-form-field appearance="fill">
-              <mat-label>{{'QUESTION.GIVE-PAYLOADDECODER-CHOOSE-DEVICE' | translate}}</mat-label>
-              <mat-select (selectionChange)="getDevice($event)" [disabled]="!iotDevices">
-                <mat-option *ngFor="let iotDeviceEl of iotDevices" [value]="iotDeviceEl.id">
-                  {{iotDeviceEl.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label" for="decodingFunction">{{
+                        "QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION" | translate
+                    }}</label>
+                    <ngx-monaco-editor
+                        class="big-editor"
+                        [options]="editorJavaScriptOptions"
+                        [(ngModel)]="payloadDecoderBody"
+                        [ngModelOptions]="{ standalone: true }"
+                        [ngClass]="{
+                            'is-invalid': formFailedSubmit && errorFields.includes('decodingFunction'),
+                            'is-valid': formFailedSubmit && !errorFields.includes('decodingFunction')
+                        }"
+                    >
+                    </ngx-monaco-editor>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form-label" for="payload">{{
+                        "QUESTION.GIVE-PAYLOADDECODER-PAYLOAD" | translate
+                    }}</label>
+                    <ngx-monaco-editor
+                        [options]="editorJsonOptions"
+                        [(ngModel)]="payloadData"
+                        [ngModelOptions]="{ standalone: true }"
+                        [ngClass]="{
+                            'is-invalid': formFailedSubmit && errorFields.includes('payloadData'),
+                            'is-valid': formFailedSubmit && !errorFields.includes('payloadData')
+                        }"
+                    >
+                    </ngx-monaco-editor>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="metadata">{{
+                        "QUESTION.GIVE-PAYLOADDECODER-METADATA" | translate
+                    }}</label>
+                    <ngx-monaco-editor
+                        [options]="editorJsonOptions"
+                        [(ngModel)]="metadata"
+                        [ngModelOptions]="{ standalone: true }"
+                        [ngClass]="{
+                            'is-invalid': formFailedSubmit && errorFields.includes('metadata'),
+                            'is-valid': formFailedSubmit && !errorFields.includes('matadata')
+                        }"
+                    >
+                    </ngx-monaco-editor>
+                </div>
+                <div class="btn btn-secondary my-3" (click)="testPayloadFunction()">
+                    <div class="d-flex mx-3">
+                        <div class="mr-3">{{ "QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON" | translate }}</div>
+                        <fa-icon [icon]="faExchangeAlt" class=""></fa-icon>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="codePreview">{{
+                        "QUESTION.GIVE-PAYLOADDECODER-OUTPUT" | translate
+                    }}</label>
+                    <ngx-monaco-editor
+                        class="middle-editor"
+                        [options]="editorJsonOutpuOptions"
+                        [(ngModel)]="codeOutput"
+                        [ngModelOptions]="{ standalone: true }"
+                        [ngClass]="{
+                            'is-invalid': formFailedSubmit && errorFields.includes('codePreview'),
+                            'is-valid': formFailedSubmit && !errorFields.includes('codePreview')
+                        }"
+                    >
+                    </ngx-monaco-editor>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="form-group pull-right">
+                <button (click)="routeBack()" class="btn btn-secondary" type="button">
+                    {{ "GEN.CANCEL" | translate }}
+                </button>
+                <button class="btn btn-primary ml-2" type="submit">{{ "PAYLOAD-DECODER.SAVE" | translate }}</button>
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <div class="form-group">
-          <label class="form-label"
-            for="decodingFunction">{{'QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION' | translate}}</label>
-          <ngx-monaco-editor class="big-editor" [options]="editorJavaScriptOptions" [(ngModel)]="payloadDecoderBody"
-            [ngModelOptions]="{standalone: true}"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('decodingFunction'), 'is-valid' : formFailedSubmit && !errorFields.includes('decodingFunction')}">
-          </ngx-monaco-editor>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="form-group">
-          <label class="form-label" for="payload">{{'QUESTION.GIVE-PAYLOADDECODER-PAYLOAD' | translate}}</label>
-          <ngx-monaco-editor [options]="editorJsonOptions" [(ngModel)]="payloadData"
-            [ngModelOptions]="{standalone: true}"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('payloadData'), 'is-valid' : formFailedSubmit && !errorFields.includes('payloadData')}">
-          </ngx-monaco-editor>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="metadata">{{'QUESTION.GIVE-PAYLOADDECODER-METADATA' | translate}}</label>
-          <ngx-monaco-editor [options]="editorJsonOptions" [(ngModel)]="metadata" [ngModelOptions]="{standalone: true}"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('metadata'), 'is-valid' : formFailedSubmit && !errorFields.includes('matadata')}">
-          </ngx-monaco-editor>
-        </div>
-        <div class="btn btn-secondary my-3" (click)="testPayloadFunction()">
-          <div class="d-flex mx-3">
-            <div class="mr-3">{{'QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON' | translate}}</div>
-            <fa-icon [icon]="faExchangeAlt" class=""></fa-icon>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="codePreview">{{'QUESTION.GIVE-PAYLOADDECODER-OUTPUT' | translate}}</label>
-          <ngx-monaco-editor class="middle-editor" [options]="editorJsonOutpuOptions" [(ngModel)]="codeOutput"
-            [ngModelOptions]="{standalone: true}"
-            [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('codePreview'), 'is-valid' : formFailedSubmit && !errorFields.includes('codePreview')}">
-          </ngx-monaco-editor>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group pull-right">
-        <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>
-        <button class="btn btn-primary ml-2" type="submit">{{ 'PAYLOAD-DECODER.SAVE' | translate}}</button>
-      </div>
-    </div>
-  </div>
 </form>

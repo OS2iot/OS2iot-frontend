@@ -1,7 +1,4 @@
 <div class="jumbotron--table">
-  <app-top-bar-table
-    [component]="true"
-    [title]="'USERS.EXISTING-USERS' | translate"
-  ></app-top-bar-table>
-  <app-user-table [organizationId]="organizationId" *ngIf="organizationId"></app-user-table>
+    <app-top-bar-table [component]="true" [title]="'USERS.EXISTING-USERS' | translate"></app-top-bar-table>
+    <app-user-table [organizationId]="organizationId" *ngIf="organizationId"></app-user-table>
 </div>

@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DatatargetEditComponent } from './datatarget-edit.component';
+import { DatatargetEditComponent } from "./datatarget-edit.component";
 
-describe('DatatargetEditComponent', () => {
-  let component: DatatargetEditComponent;
-  let fixture: ComponentFixture<DatatargetEditComponent>;
+describe("DatatargetEditComponent", () => {
+    let component: DatatargetEditComponent;
+    let fixture: ComponentFixture<DatatargetEditComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DatatargetEditComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DatatargetEditComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DatatargetEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DatatargetEditComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

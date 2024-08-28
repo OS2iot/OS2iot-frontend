@@ -1,12 +1,18 @@
-<button (click)="addNewTag()" class="btn btn-secondary mb-3" type="button">{{ "FORM.ADD-METADATA-ROW" | translate
-  }}</button>
+<button (click)="addNewTag()" class="btn btn-secondary mb-3" type="button">
+    {{ "FORM.ADD-METADATA-ROW" | translate }}
+</button>
 
 <table class="table table-striped table-bordered">
-  <tbody>
-    <ng-container *ngFor="let pair of tags; let i = index">
-      <!-- Global table styling breaks if <tr> isn't a direct child of <tbody> -->
-      <tr app-form-key-value-pair [id]="i" [pair]="pair" [errorFieldId]="errorFieldId" (deletePair)="deleteTag($event)">
-      </tr>
-    </ng-container>
-  </tbody>
+    <tbody>
+        <ng-container *ngFor="let pair of tags; let i = index">
+            <!-- Global table styling breaks if <tr> isn't a direct child of <tbody> -->
+            <tr
+                app-form-key-value-pair
+                [id]="i"
+                [pair]="pair"
+                [errorFieldId]="errorFieldId"
+                (deletePair)="deleteTag($event)"
+            ></tr>
+        </ng-container>
+    </tbody>
 </table>

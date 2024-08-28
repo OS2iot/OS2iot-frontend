@@ -1,9 +1,9 @@
-import { EditPermission } from '@shared/models/edit-permission.model';
+import { EditPermission } from "@shared/models/edit-permission.model";
 
 export class DeviceProfile extends EditPermission {
     public id: string;
     public name: string;
-    public adrAlgorithmID = 'default';
+    public adrAlgorithmID = "default";
     public classBTimeout = 0;
     public classCTimeout = 0;
     public macVersion: MacVersionMap[keyof MacVersionMap];

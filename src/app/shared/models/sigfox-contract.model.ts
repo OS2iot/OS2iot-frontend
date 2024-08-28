@@ -1,4 +1,3 @@
-
 export interface SigfoxContract {
     id: string;
     name: string;

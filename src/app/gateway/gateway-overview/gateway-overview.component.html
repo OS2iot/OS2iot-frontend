@@ -1,21 +1,33 @@
-<app-top-bar [pageLimit]="pageLimit" [title]="'NAV.LORA-GATEWAYS' | translate"
-  [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate" [ctaRouterLink]="'gateway-edit'"
-  [canEdit]="canEdit">
+<app-top-bar
+    [pageLimit]="pageLimit"
+    [title]="'NAV.LORA-GATEWAYS' | translate"
+    [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate"
+    [ctaRouterLink]="'gateway-edit'"
+    [canEdit]="canEdit"
+>
 </app-top-bar>
 <div class="container-fluid">
-  <div class="jumbotron">
-    <app-top-bar-table [component]="true" [addDropdown]="true" [options]="organisations"
-      [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate" (updateSelectedOpt)="setOrgIdFilter($event)"
-      [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate">
-    </app-top-bar-table>
-    <nav mat-tab-nav-bar >
-      <a mat-tab-link
-        *ngFor="let link of navTabs"
-         [routerLink]="link.link"
-         routerLinkActive #rla="routerLinkActive"
-         [active]="rla.isActive"
-      >{{ link.label | translate }}</a>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
+    <div class="jumbotron">
+        <app-top-bar-table
+            [component]="true"
+            [addDropdown]="true"
+            [options]="organisations"
+            [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate"
+            (updateSelectedOpt)="setOrgIdFilter($event)"
+            [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate"
+        >
+        </app-top-bar-table>
+        <nav mat-tab-nav-bar>
+            <a
+                mat-tab-link
+                *ngFor="let link of navTabs"
+                [routerLink]="link.link"
+                routerLinkActive
+                #rla="routerLinkActive"
+                [active]="rla.isActive"
+                >{{ link.label | translate }}</a
+            >
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
 </div>

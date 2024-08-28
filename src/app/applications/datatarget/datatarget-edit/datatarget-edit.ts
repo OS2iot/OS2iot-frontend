@@ -1,2 +1,1 @@
-export interface DatatargetEdit {
-}
+export interface DatatargetEdit {}

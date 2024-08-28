@@ -39,5 +39,5 @@ export enum ControlledPropertyTypes {
     WEATHERCONDITIONS = "weatherConditions",
     WEIGHT = "weight",
     WINDDIRECTION = "windDirection",
-    WINDSPEED = "windSpeed"
+    WINDSPEED = "windSpeed",
 }

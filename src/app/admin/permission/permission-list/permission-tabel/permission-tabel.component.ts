@@ -1,35 +1,25 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
-import { environment } from '@environments/environment';
-import { TranslateService } from '@ngx-translate/core';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MeService } from '@shared/services/me.service';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import {
-    PermissionGetManyResponse,
-    PermissionResponse,
-    PermissionType,
-} from '../../permission.model';
-import { PermissionService } from '../../permission.service';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { Component, ViewChild, AfterViewInit, Input } from "@angular/core";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { Router } from "@angular/router";
+import { environment } from "@environments/environment";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { MeService } from "@shared/services/me.service";
+import { merge, Observable, of as observableOf } from "rxjs";
+import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { PermissionGetManyResponse, PermissionResponse, PermissionType } from "../../permission.model";
+import { PermissionService } from "../../permission.service";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: 'app-permission-tabel',
-    templateUrl: './permission-tabel.component.html',
-    styleUrls: ['./permission-tabel.component.scss'],
+    selector: "app-permission-tabel",
+    templateUrl: "./permission-tabel.component.html",
+    styleUrls: ["./permission-tabel.component.scss"],
 })
 export class PermissionTabelComponent implements AfterViewInit {
-    displayedColumns: string[] = [
-        'name',
-        'organisations',
-        'members',
-        'type',
-        'menu',
-    ];
+    displayedColumns: string[] = ["name", "organisations", "members", "type", "menu"];
     data: PermissionResponse[];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,9 +39,9 @@ export class PermissionTabelComponent implements AfterViewInit {
         private router: Router,
         private permissionService: PermissionService,
         private deleteDialogService: DeleteDialogService,
-        private meService: MeService,
+        private meService: MeService
     ) {
-        translate.use('da');
+        translate.use("da");
     }
 
     ngAfterViewInit() {
@@ -63,12 +53,9 @@ export class PermissionTabelComponent implements AfterViewInit {
                 startWith({}),
                 switchMap(() => {
                     this.isLoadingResults = true;
-                    return this.getPermissions(
-                        this.sort.active,
-                        this.sort.direction
-                    );
+                    return this.getPermissions(this.sort.active, this.sort.direction);
                 }),
-                map((data) => {
+                map(data => {
                     // Flip flag to show that loading has finished.
                     this.isLoadingResults = false;
                     this.resultsLength = data.count;
@@ -80,13 +67,10 @@ export class PermissionTabelComponent implements AfterViewInit {
                     return observableOf([]);
                 })
             )
-            .subscribe((data) => (this.data = data));
+            .subscribe(data => (this.data = data));
     }
 
-    getPermissions(
-        orderByColumn: string,
-        orderByDirection: string
-    ): Observable<PermissionGetManyResponse> {
+    getPermissions(orderByColumn: string, orderByDirection: string): Observable<PermissionGetManyResponse> {
         return this.permissionService.getPermissions(
             this.paginator.pageSize,
             this.paginator.pageIndex * this.paginator.pageSize,
@@ -98,13 +82,13 @@ export class PermissionTabelComponent implements AfterViewInit {
     }
 
     routeToPermissions(element: any) {
-        this.router.navigate(['admin/permissions', element.id]);
+        this.router.navigate(["admin/permissions", element.id]);
     }
 
     deletePermission(id: number) {
-        this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+        this.deleteDialogService.showSimpleDialog().subscribe(response => {
             if (response) {
-                this.permissionService.deletePermission(id).subscribe((response) => {
+                this.permissionService.deletePermission(id).subscribe(response => {
                     if (response.ok && response.body.affected > 0) {
                         this.refresh();
                     }
@@ -117,7 +101,10 @@ export class PermissionTabelComponent implements AfterViewInit {
         if (this.meService.hasPermissions(element, PermissionType.GlobalAdmin)) {
             return this.meService.hasGlobalAdmin();
         }
-        return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite, element.organization.id);
+        return this.meService.hasAccessToTargetOrganization(
+            OrganizationAccessScope.UserAdministrationWrite,
+            element.organization.id
+        );
     }
 
     private refresh() {

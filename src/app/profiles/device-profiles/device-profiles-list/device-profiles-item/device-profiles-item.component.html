@@ -1,4 +1,4 @@
-<div class=" list-group-item mb-1 clearfix" routerLinkActive="active">
+<div class="list-group-item mb-1 clearfix" routerLinkActive="active">
     <div class="row">
         <div class="col-9 pull-left d-flex align-items-center">
             <a [routerLink]="['device-profile', deviceProfile.id]" class="container-fluid">
@@ -9,7 +9,9 @@
             <a (click)="onDeleteDeviceProfile()">
                 <div class="icon-list-wrapper text-center">
                     <fa-icon [icon]="faTimesCircle" class="icon--primary icon--medium"></fa-icon>
-                    <label class="label label--icon">{{'PROFILES.DEVICE_PROFILE.DELETE-FROM-LIST' | translate}}</label>
+                    <label class="label label--icon">{{
+                        "PROFILES.DEVICE_PROFILE.DELETE-FROM-LIST" | translate
+                    }}</label>
                 </div>
             </a>
         </div>

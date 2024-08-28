@@ -1,36 +1,36 @@
-@import '../setup/variables';
-@import '../setup/typography';
+@import "../setup/variables";
+@import "../setup/typography";
 
 .icon {
-  &--primary {
-    font-size: $icon-size;
-    color: $color-Icons-alternative;
-  }
+    &--primary {
+        font-size: $icon-size;
+        color: $color-Icons-alternative;
+    }
 
-  &--secondary {
-    font-size: $icon-size-medium;
-    color: $color-Icons-secondary;
-  }
+    &--secondary {
+        font-size: $icon-size-medium;
+        color: $color-Icons-secondary;
+    }
 
-  &--small {
-    font-size: $icon-size;
-    line-height: 0;
-    margin-bottom: 0;
-    color: $color-icon-label;
-  }
+    &--small {
+        font-size: $icon-size;
+        line-height: 0;
+        margin-bottom: 0;
+        color: $color-icon-label;
+    }
 
-  &--medium {
-    font-size: $icon-size-medium;
-  }
+    &--medium {
+        font-size: $icon-size-medium;
+    }
 
-  &--disabled {
-    color: $color-Icons-light;
-  }
+    &--disabled {
+        color: $color-Icons-light;
+    }
 }
 
 .icon-list-wrapper {
-  display: inline-grid;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
+    display: inline-grid;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
 }

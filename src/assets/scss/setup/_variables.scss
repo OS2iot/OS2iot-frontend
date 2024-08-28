@@ -23,7 +23,7 @@ $screen-xxl-min: 1400px;
 //############################### Font and Font sizes ####################
 //###########################################################################
 
-$font-name: 'Roboto' !default;
+$font-name: "Roboto" !default;
 
 //----------------
 // -to-rem
@@ -48,20 +48,20 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 */
 
 @function strip-unit($num) {
-  @return $num / ($num * 0 + 1);
+    @return $num / ($num * 0 + 1);
 }
 
 @function calculateRem($size) {
-  $remSize: math.div($size, $em-base);
-  @return #{$remSize}rem;
+    $remSize: math.div($size, $em-base);
+    @return #{$remSize}rem;
 }
 
 // Paths
 // Relative font and image file paths
-$font-path: '../fonts/Roboto/' !default;
-$image-path: '../images/' !default;
-$node-modules-path: '../../../node_modules';
-$icons-folder-path: '../img/svg-icons/' !default;
+$font-path: "../fonts/Roboto/" !default;
+$image-path: "../images/" !default;
+$node-modules-path: "../../../node_modules";
+$icons-folder-path: "../img/svg-icons/" !default;
 
 //headline sizes
 $h1: 30 !default;
@@ -123,7 +123,7 @@ $font-style-normal: normal !default;
 $font-style-italic: italic !default;
 
 //fontname
-$font-family: 'Lato' !default;
+$font-family: "Lato" !default;
 
 //#######################Coloring ####################
 //####################################################
@@ -372,15 +372,15 @@ $red-light: #f8e7e9;
 $red: #dc3545;
 
 .overflow-x-hidden {
-  overflow-x: hidden !important;
+    overflow-x: hidden !important;
 }
 
 .overflow-y-hidden {
-  overflow-y: hidden !important;
+    overflow-y: hidden !important;
 }
 
 .mat-tab-group {
-  .mat-tab-body.mat-tab-body-active {
-    overflow-y: hidden;
-  }
+    .mat-tab-body.mat-tab-body-active {
+        overflow-y: hidden;
+    }
 }

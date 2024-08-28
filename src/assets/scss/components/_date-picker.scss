@@ -1,28 +1,28 @@
 mat-calendar.datepicker-table-fix {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 
-  table {
-    box-shadow: unset;
-    -webkit-box-shadow: unset;
-    -moz-box-shadow: unset;
+    table {
+        box-shadow: unset;
+        -webkit-box-shadow: unset;
+        -moz-box-shadow: unset;
 
-    thead {
-      background-color: unset;
-    }
-
-    tbody {
-      tr {
-        border-top: unset;
-
-        &:hover {
-          background-color: unset;
+        thead {
+            background-color: unset;
         }
 
-        // Fix border circle on selected date
-        td.mat-calendar-body-cell div.mat-calendar-body-today {
-          border-bottom-width: 1px !important;
+        tbody {
+            tr {
+                border-top: unset;
+
+                &:hover {
+                    background-color: unset;
+                }
+
+                // Fix border circle on selected date
+                td.mat-calendar-body-cell div.mat-calendar-body-today {
+                    border-bottom-width: 1px !important;
+                }
+            }
         }
-      }
     }
-  }
 }

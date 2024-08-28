@@ -1,14 +1,13 @@
 <div class="jumbotron jumbotron--full-width">
-  <ng-container *ngIf="device.latestReceivedMessage; else noSentTime">
-    <app-data-package [latestReceivedMessage]="device.latestReceivedMessage">
-    </app-data-package>
-    <mat-divider></mat-divider>
-    <app-data-packages-timestamp [receivedMessagesMetadata]="device.receivedMessagesMetadata">
-    </app-data-packages-timestamp>
-  </ng-container>
-  <ng-template #noSentTime>
-    <p class="my-2 mx-3">
-      {{ 'IOTDEVICE.NO-DATAPACKAGE' | translate }}
-    </p>
-  </ng-template>
+    <ng-container *ngIf="device.latestReceivedMessage; else noSentTime">
+        <app-data-package [latestReceivedMessage]="device.latestReceivedMessage"> </app-data-package>
+        <mat-divider></mat-divider>
+        <app-data-packages-timestamp [receivedMessagesMetadata]="device.receivedMessagesMetadata">
+        </app-data-packages-timestamp>
+    </ng-container>
+    <ng-template #noSentTime>
+        <p class="my-2 mx-3">
+            {{ "IOTDEVICE.NO-DATAPACKAGE" | translate }}
+        </p>
+    </ng-template>
 </div>

@@ -1,4 +1,4 @@
-import { ActivationType } from '@shared/enums/activation-type';
+import { ActivationType } from "@shared/enums/activation-type";
 
 export class LorawanSettings {
     devEUI: string;

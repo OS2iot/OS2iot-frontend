@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { DeviceProfileService } from './device-profile.service';
+import { DeviceProfileService } from "./device-profile.service";
 
-describe('DeviceProfileService', () => {
-  let service: DeviceProfileService;
+describe("DeviceProfileService", () => {
+    let service: DeviceProfileService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DeviceProfileService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(DeviceProfileService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it("should be created", () => {
+        expect(service).toBeTruthy();
+    });
 });

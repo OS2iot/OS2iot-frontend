@@ -1,28 +1,28 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
-import { Datatarget, DatatargetData } from '../datatarget.model';
-import { DatatargetService } from '../datatarget.service';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { environment } from '@environments/environment';
-import { tableSorter } from '@shared/helpers/table-sorting.helper';
-import { MeService } from '@shared/services/me.service';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute } from "@angular/router";
+import { Datatarget, DatatargetData } from "../datatarget.model";
+import { DatatargetService } from "../datatarget.service";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { environment } from "@environments/environment";
+import { tableSorter } from "@shared/helpers/table-sorting.helper";
+import { MeService } from "@shared/services/me.service";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: 'app-datatarget-table',
-    templateUrl: './datatarget-table.component.html',
-    styleUrls: ['./datatarget-table.component.scss']
+    selector: "app-datatarget-table",
+    templateUrl: "./datatarget-table.component.html",
+    styleUrls: ["./datatarget-table.component.scss"],
 })
 export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns: string[] = ['name', 'type', 'menu'];
+    displayedColumns: string[] = ["name", "type", "menu"];
     dataSource = new MatTableDataSource<Datatarget>();
     datatargets: Datatarget[];
     resultsLength = 0;
@@ -44,14 +44,19 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
         private deleteDialogService: DeleteDialogService,
         private datatargetService: DatatargetService,
         private meService: MeService,
-        public translate: TranslateService) {
-        translate.use('da');
+        public translate: TranslateService
+    ) {
+        translate.use("da");
     }
 
     ngOnInit(): void {
-        this.applicationId = +Number(this.route.parent.snapshot.paramMap.get('id'));
+        this.applicationId = +Number(this.route.parent.snapshot.paramMap.get("id"));
         this.getDatatarget();
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, this.applicationId);
+        this.canEdit = this.meService.hasAccessToTargetOrganization(
+            OrganizationAccessScope.ApplicationWrite,
+            undefined,
+            this.applicationId
+        );
     }
 
     ngAfterViewInit() {
@@ -63,11 +68,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
         const appId: number = this.applicationId;
         if (appId) {
             this.datatargetSubscription = this.datatargetService
-                .getByApplicationId(
-                    this.pageLimit,
-                    this.pageOffset * this.pageLimit,
-                    appId
-                )
+                .getByApplicationId(this.pageLimit, this.pageOffset * this.pageLimit, appId)
                 .subscribe((datatargets: DatatargetData) => {
                     this.datatargets = datatargets.data;
                     this.dataSource = new MatTableDataSource<Datatarget>(this.datatargets);
@@ -80,23 +81,20 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
                     }
                 });
         }
-
     }
 
     deleteDatatarget(element: any) {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(
-            (response) => {
-                if (response) {
-                    this.datatargetService.delete(element.id).subscribe((response) => {
-                        if (response.ok && response.body.affected > 0) {
-                            this.getDatatarget();
-                        }
-                    });
-                } else {
-                    console.log(response);
-                }
+        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
+            if (response) {
+                this.datatargetService.delete(element.id).subscribe(response => {
+                    if (response.ok && response.body.affected > 0) {
+                        this.getDatatarget();
+                    }
+                });
+            } else {
+                console.log(response);
             }
-        );
+        });
     }
 
     ngOnDestroy() {
@@ -108,5 +106,4 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
             this.deleteDialogSubscription.unsubscribe();
         }
     }
-
 }

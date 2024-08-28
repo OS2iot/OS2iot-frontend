@@ -1,8 +1,24 @@
-<p><strong>{{ 'IOTDEVICE.SIGFOX.DEVICEID' | translate }}</strong>{{device.sigfoxSettings.deviceId}}</p>
-<p><strong>{{ 'IOTDEVICE.SIGFOX.GROUP-NAME' | translate }}</strong>{{device.sigfoxSettings.groupName}}</p>
-<p><strong>{{ 'IOTDEVICE.SIGFOX.DEVICETYPE' | translate }}</strong>{{device.sigfoxSettings.deviceTypeName}}</p>
-<p><strong>{{ 'IOTDEVICE.SIGFOX.PAC' | translate }}</strong>{{device.sigfoxSettings.pac}}</p>
-<p><strong>{{ 'IOTDEVICE.SIGFOX.ENDPRODUCTCERTIFICATE' | translate }}</strong>{{device.sigfoxSettings.endProductCertificate}}
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.DEVICEID" | translate }}</strong
+    >{{ device.sigfoxSettings.deviceId }}
 </p>
-<p><strong>{{ 'IOTDEVICE.SIGFOX.PROTOTYPE' | translate }}</strong>{{device.sigfoxSettings.prototype ? 'true' : 'false' | translate}}
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.GROUP-NAME" | translate }}</strong
+    >{{ device.sigfoxSettings.groupName }}
+</p>
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.DEVICETYPE" | translate }}</strong
+    >{{ device.sigfoxSettings.deviceTypeName }}
+</p>
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.PAC" | translate }}</strong
+    >{{ device.sigfoxSettings.pac }}
+</p>
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.ENDPRODUCTCERTIFICATE" | translate }}</strong
+    >{{ device.sigfoxSettings.endProductCertificate }}
+</p>
+<p>
+    <strong>{{ "IOTDEVICE.SIGFOX.PROTOTYPE" | translate }}</strong
+    >{{ device.sigfoxSettings.prototype ? "true" : ("false" | translate) }}
 </p>

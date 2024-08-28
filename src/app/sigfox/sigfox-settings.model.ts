@@ -7,7 +7,7 @@ export class SigfoxSettings {
     connectToExistingDeviceInBackend = false;
     pac?: string;
     endProductCertificate?: string;
-    prototype =  false;
+    prototype = false;
     sigfoxGroupData: SigfoxGroupData;
 }
 

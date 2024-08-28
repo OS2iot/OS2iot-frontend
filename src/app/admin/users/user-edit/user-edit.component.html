@@ -1,56 +1,98 @@
-<app-top-bar backButtonTitle="{{backButtonTitle}}" title="{{title}}" [canEdit]="canEdit"></app-top-bar>
+<app-top-bar backButtonTitle="{{ backButtonTitle }}" title="{{ title }}" [canEdit]="canEdit"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
     <div *ngIf="errorMessages" class="error-messages p-3">
         <ul class="mb-0">
             <li *ngFor="let error of errorMessages">
-                {{error | translate}}
+                {{ error | translate }}
             </li>
             <li *ngIf="errorMessage">
-                {{errorMessage | translate}}
+                {{ errorMessage | translate }}
             </li>
         </ul>
     </div>
 
     <div class="row mb-5">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="name">{{'USERS.FORM.NAME' | translate}}</label>*
-            <input type="text" class="form-control" id="name" name="name" [disabled]="isKombit"
-                [placeholder]="'USERS.FORM.NAME-PLACEHOLDER' | translate" maxlength="50" required
+            <label class="form-label" for="name">{{ "USERS.FORM.NAME" | translate }}</label
+            >*
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                [disabled]="isKombit"
+                [placeholder]="'USERS.FORM.NAME-PLACEHOLDER' | translate"
+                maxlength="50"
+                required
                 [(ngModel)]="user.name"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('name'), 'is-valid' : formFailedSubmit && !errorFields.includes('name')}">
+                [ngClass]="{
+                    'is-invalid': formFailedSubmit && errorFields.includes('name'),
+                    'is-valid': formFailedSubmit && !errorFields.includes('name')
+                }"
+            />
         </div>
     </div>
     <div class="row mb-5">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="email">{{'USERS.FORM.EMAIL' | translate}}</label>*
-            <input type="text" class="form-control" id="email" name="email"
-                [placeholder]="'USERS.FORM.EMAIL-PLACEHOLDER' | translate" maxlength="50" required
-                [(ngModel)]="user.email" email ngModel
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('email'), 'is-valid' : formFailedSubmit && !errorFields.includes('email')}">
+            <label class="form-label" for="email">{{ "USERS.FORM.EMAIL" | translate }}</label
+            >*
+            <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                [placeholder]="'USERS.FORM.EMAIL-PLACEHOLDER' | translate"
+                maxlength="50"
+                required
+                [(ngModel)]="user.email"
+                email
+                ngModel
+                [ngClass]="{
+                    'is-invalid': formFailedSubmit && errorFields.includes('email'),
+                    'is-valid': formFailedSubmit && !errorFields.includes('email')
+                }"
+            />
         </div>
     </div>
 
     <div class="row mb-5">
         <div class="form-group mt-3 col-12">
-            <label class="form-label" for="password">{{'USERS.FORM.PASSWORD' | translate}}</label>*
-            <input type="text" class="form-control" id="password" name="password" [disabled]="isKombit"
-                [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate" minlength="6" maxlength="50" required
+            <label class="form-label" for="password">{{ "USERS.FORM.PASSWORD" | translate }}</label
+            >*
+            <input
+                type="text"
+                class="form-control"
+                id="password"
+                name="password"
+                [disabled]="isKombit"
+                [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate"
+                minlength="6"
+                maxlength="50"
+                required
                 [(ngModel)]="user.password"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('password'), 'is-valid' : formFailedSubmit && !errorFields.includes('password')}">
+                [ngClass]="{
+                    'is-invalid': formFailedSubmit && errorFields.includes('password'),
+                    'is-valid': formFailedSubmit && !errorFields.includes('password')
+                }"
+            />
         </div>
     </div>
     <div class="row mb-5">
         <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
-            {{'USERS.FORM.ACTIVE' | translate}}</mat-slide-toggle>
+            {{ "USERS.FORM.ACTIVE" | translate }}</mat-slide-toggle
+        >
     </div>
     <div class="row mb-3" *ngIf="isGlobalAdmin">
         <mat-slide-toggle [(ngModel)]="user.globalAdmin" id="globalAdmin" name="globalAdmin">
-            {{'USERS.FORM.GLOBAL-ADMIN' | translate}}</mat-slide-toggle>
+            {{ "USERS.FORM.GLOBAL-ADMIN" | translate }}</mat-slide-toggle
+        >
     </div>
     <div class="form-group mt-5 clearfix">
         <div class="col-12 d-flex justify-content-end">
-            <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ 'GEN.CANCEL' | translate}}</button>
-            <button class="btn btn-primary ml-2" type="submit">{{ 'USERS.FORM.SAVE' | translate}}</button>
+            <button (click)="routeBack()" class="btn btn-secondary" type="button">
+                {{ "GEN.CANCEL" | translate }}
+            </button>
+            <button class="btn btn-primary ml-2" type="submit">{{ "USERS.FORM.SAVE" | translate }}</button>
         </div>
     </div>
 </form>

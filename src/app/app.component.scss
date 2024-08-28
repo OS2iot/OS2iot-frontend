@@ -1,8 +1,8 @@
-@import 'src/assets/scss/setup/breakpoints';
-@import 'src/assets/scss/setup/variables';
+@import "src/assets/scss/setup/breakpoints";
+@import "src/assets/scss/setup/variables";
 
 #content {
-  @media(min-width: $screen-md-min) {
-    padding-left: $navWidth;
-  }
+    @media (min-width: $screen-md-min) {
+        padding-left: $navWidth;
+    }
 }

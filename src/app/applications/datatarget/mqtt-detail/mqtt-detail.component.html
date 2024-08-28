@@ -1,65 +1,116 @@
 <div *ngIf="datatarget">
-  <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()" [canEdit]="canEdit">
-  </app-top-bar>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
-          <h3>{{ 'DATATARGET.DETAILS' | translate }}</h3>
-          <app-general-details [data]="datatarget"></app-general-details>
-          <mat-divider></mat-divider>
-          <p><strong>{{ 'DATATARGET.MQTT.BROKER-URL' | translate }}</strong>{{datatarget.url}}</p>
-          <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
-          <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{'DATATARGET.' + datatarget.type + ".TYPE" |
-            translate}}</p>
-          <mat-divider></mat-divider>
-          <p><strong>{{ 'DATATARGET.MQTT.PORT' | translate }}</strong>{{datatarget.mqttPort}}</p>
-          <p><strong>{{ 'DATATARGET.MQTT.TOPIC' | translate }}</strong>{{datatarget.mqttTopic}}</p>
-          <p><strong>{{ 'DATATARGET.MQTT.QOS' | translate }}</strong>{{datatarget.mqttQos}}</p>
-          <p><strong>{{ 'DATATARGET.MQTT.USERNAME' | translate }}</strong>{{datatarget.mqttUsername}}</p>
-          <p><strong>{{ 'DATATARGET.MQTT.PASSWORD' | translate }}</strong>{{datatarget.mqttPassword}}</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class=" jumbotron">
-            <div class="form-group">
-              <h3>{{ 'DATATARGET.RELATIONS' | translate }}</h3>
-              <div *ngIf="dataTargetRelations?.length === 0">
-                <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
-              </div>
-              <div *ngIf="dataTargetRelations">
-                <div *ngFor="let relation of dataTargetRelations">
-                  <div class="row">
-                    <div class="col-md-4 d-flex align-items-center">
-                      <p><strong>{{'DATATARGET.PAYLOADEDECODER' | translate}}</strong><span
-                          *ngIf="relation.payloadDecoder; else noDecoder">
-                          <a
-                            [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{relation.payloadDecoder.name}}</a>
-                        </span>
-                        <ng-template #noDecoder>{{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}</ng-template>
-                      </p>
-                    </div>
-                    <div class="col-md-1 d-flex align-items-center justify-content-center">
-                      <fa-icon [icon]="arrowsAltH" class="icon--primary icon--medium icon--disabled"></fa-icon>
-                    </div>
-                    <div class="col-md-7 d-flex align-items-center">
-                      <p><strong>{{'DATATARGET.IOTDEVICE' | translate}}</strong>
-                        <span *ngFor="let device of relation.iotDevices; let first = first">
-                          <ng-container *ngIf="!first">, </ng-container> <a
-                            [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{device.name}}</a>
-                        </span>
-                      </p>
-                    </div>
+    <app-top-bar
+        [data]="datatarget"
+        [backButton]="backButton"
+        [subPage]="true"
+        [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton"
+        (deleteSelectedInDropdown)="onDeleteDatatarget()"
+        [canEdit]="canEdit"
+    >
+    </app-top-bar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
+                    <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
+                    <app-general-details [data]="datatarget"></app-general-details>
                     <mat-divider></mat-divider>
-                  </div>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.BROKER-URL" | translate }}</strong
+                        >{{ datatarget.url }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong
+                        >{{ datatarget.timeout }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.TYPE" | translate }}</strong
+                        >{{ "DATATARGET." + datatarget.type + ".TYPE" | translate }}
+                    </p>
+                    <mat-divider></mat-divider>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.PORT" | translate }}</strong
+                        >{{ datatarget.mqttPort }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.TOPIC" | translate }}</strong
+                        >{{ datatarget.mqttTopic }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.QOS" | translate }}</strong
+                        >{{ datatarget.mqttQos }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.USERNAME" | translate }}</strong
+                        >{{ datatarget.mqttUsername }}
+                    </p>
+                    <p>
+                        <strong>{{ "DATATARGET.MQTT.PASSWORD" | translate }}</strong
+                        >{{ datatarget.mqttPassword }}
+                    </p>
                 </div>
-              </div>
             </div>
-          </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="jumbotron">
+                        <div class="form-group">
+                            <h3>{{ "DATATARGET.RELATIONS" | translate }}</h3>
+                            <div *ngIf="dataTargetRelations?.length === 0">
+                                <p>{{ "DATATARGET.NO-RELATIONS" | translate }}</p>
+                            </div>
+                            <div *ngIf="dataTargetRelations">
+                                <div *ngFor="let relation of dataTargetRelations">
+                                    <div class="row">
+                                        <div class="col-md-4 d-flex align-items-center">
+                                            <p>
+                                                <strong>{{ "DATATARGET.PAYLOADEDECODER" | translate }}</strong
+                                                ><span *ngIf="relation.payloadDecoder; else noDecoder">
+                                                    <a
+                                                        [routerLink]="[
+                                                            '/payload-decoder/payload-decoder-detail/',
+                                                            relation.payloadDecoder.id
+                                                        ]"
+                                                        >{{ relation.payloadDecoder.name }}</a
+                                                    >
+                                                </span>
+                                                <ng-template #noDecoder>{{
+                                                    "DATATARGET.NO-PAYLOADDECODER" | translate
+                                                }}</ng-template>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                                            <fa-icon
+                                                [icon]="arrowsAltH"
+                                                class="icon--primary icon--medium icon--disabled"
+                                            ></fa-icon>
+                                        </div>
+                                        <div class="col-md-7 d-flex align-items-center">
+                                            <p>
+                                                <strong>{{ "DATATARGET.IOTDEVICE" | translate }}</strong>
+                                                <span *ngFor="let device of relation.iotDevices; let first = first">
+                                                    <ng-container *ngIf="!first">, </ng-container>
+                                                    <a
+                                                        [routerLink]="[
+                                                            '/applications',
+                                                            device.application.id,
+                                                            'iot-device',
+                                                            device.id
+                                                        ]"
+                                                        >{{ device.name }}</a
+                                                    >
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <mat-divider></mat-divider>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

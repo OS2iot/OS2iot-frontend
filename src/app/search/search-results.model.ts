@@ -1,29 +1,29 @@
 export class SearchResultDto {
-  id: number | string;
+    id: number | string;
 
-  createdAt: Date;
+    createdAt: Date;
 
-  updatedAt: Date;
+    updatedAt: Date;
 
-  name: string;
+    name: string;
 
-  type: SearchResultType;
+    type: SearchResultType;
 
-  applicationId?: number;
-  organizationId?: number;
-  organizationName?: string;
+    applicationId?: number;
+    organizationId?: number;
+    organizationName?: string;
 
-  deviceId?: string;
-  deviceEUI?: string;
-  apiKey?: string;
-  gatewayId?: string;
-  deviceType?: string;
+    deviceId?: string;
+    deviceEUI?: string;
+    apiKey?: string;
+    gatewayId?: string;
+    deviceType?: string;
 }
 
 export enum SearchResultType {
-  Gateway = 'Gateway',
-  IoTDevice = 'IoTDevice',
-  Application = 'Application',
+    Gateway = "Gateway",
+    IoTDevice = "IoTDevice",
+    Application = "Application",
 }
 
 export class ListAllSearchResultsResponseDto {

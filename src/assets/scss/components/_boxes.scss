@@ -1,53 +1,50 @@
-
-@import '../setup/variables';
+@import "../setup/variables";
 
 .jumbotron {
-  @extend .my-4;
-  @extend .m-md-4;
-  @extend .p-3;
-  background-color: $color-bg-normal;
-  &--m-right{
-    @extend .mr-md-2;
-  }
-  &--m-left{
-    @extend .ml-md-2;
-  }
-  &--full-width{
-    width: -webkit-fill-available;
-  }
-  h3{
-    @extend .pr-5;
-    @extend .mb-4;
-    display: block;
-    margin: 0;
-    border-bottom-width: 5px;
-    border-bottom-style: solid;
-    border-bottom-color: $color-primary;
-    width: fit-content;
-  }
-  &--table{
+    @extend .my-4;
     @extend .m-md-4;
-  }
+    @extend .p-3;
+    background-color: $color-bg-normal;
+    &--m-right {
+        @extend .mr-md-2;
+    }
+    &--m-left {
+        @extend .ml-md-2;
+    }
+    &--full-width {
+        width: -webkit-fill-available;
+    }
+    h3 {
+        @extend .pr-5;
+        @extend .mb-4;
+        display: block;
+        margin: 0;
+        border-bottom-width: 5px;
+        border-bottom-style: solid;
+        border-bottom-color: $color-primary;
+        width: fit-content;
+    }
+    &--table {
+        @extend .m-md-4;
+    }
 }
 
+.box {
+    width: 100%;
+    @extend .p-3;
 
-
-.box{
-  width: 100%;
-  @extend .p-3;
-
-  &--info{
-    background-color: $color-bg-info;
-    border: $info-border;
-    border-radius: $border-radius-primary;
-    @extend .mb-5;
-  }
+    &--info {
+        background-color: $color-bg-info;
+        border: $info-border;
+        border-radius: $border-radius-primary;
+        @extend .mb-5;
+    }
 }
 
-.sixty-height{
-  height: 60vh;
+.sixty-height {
+    height: 60vh;
 }
 
-.thirty-height{
-  height: 30vh
+.thirty-height {
+    height: 30vh;
 }

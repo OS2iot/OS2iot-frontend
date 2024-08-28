@@ -1,8 +1,7 @@
-
 export class DeviceModelBody {
     id?: string;
     name?: string;
-    private type = 'DeviceModel';
+    private type = "DeviceModel";
     brandName?: string;
     modelName?: string;
     manufacturerName?: string;
@@ -12,7 +11,6 @@ export class DeviceModelBody {
     supportedUnits?: string[];
     function?: string[];
     supportedProtocol?: string[];
-
 
     constructor(
         id?: string,
@@ -25,11 +23,11 @@ export class DeviceModelBody {
         controlledProperty?: string[],
         supportedUnits?: string[],
         sensorFunction?: string[],
-        supportedProtocol?: string[],
+        supportedProtocol?: string[]
     ) {
         this.id = id;
         this.name = name;
-        this.type = 'DeviceModel';
+        this.type = "DeviceModel";
         this.brandName = brandName;
         this.modelName = modelName;
         this.manufacturerName = manufacturerName;
@@ -39,7 +37,6 @@ export class DeviceModelBody {
         this.supportedUnits = supportedUnits;
         this.function = sensorFunction;
         this.supportedProtocol = supportedProtocol;
-
     }
 }
 
@@ -58,14 +55,16 @@ export class DeviceModel {
     createdByName: string;
     updatedByName: string;
 
-    constructor(id?: number,
+    constructor(
+        id?: number,
         body: DeviceModelBody = new DeviceModelBody(),
         createdAt?: string,
         updatedAt?: string,
         createdBy?: number,
         updatedBy?: number,
         createdByName?: string,
-        updatedByName?: string) {
+        updatedByName?: string
+    ) {
         this.id = id;
         this.body = body;
         this.createdAt = createdAt;

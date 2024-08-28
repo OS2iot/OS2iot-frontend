@@ -1,5 +1,5 @@
-import { DataTargetType } from '@shared/enums/datatarget-type';
-import { OpenDataDkDataset as OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
+import { DataTargetType } from "@shared/enums/datatarget-type";
+import { OpenDataDkDataset as OpenDataDkDataset } from "./opendatadk/opendatadk-dataset.model";
 
 export class Datatarget {
     id: number;
@@ -49,5 +49,5 @@ export class OddkMailInfo {
     organizationId?: number;
     organizationOddkAlias: string;
     comment?: string;
-    sharingUrl?: string
+    sharingUrl?: string;
 }

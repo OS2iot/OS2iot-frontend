@@ -1,72 +1,72 @@
-@import 'src/assets/scss/setup/utilities';
-@import 'src/assets/scss/setup/variables';
+@import "src/assets/scss/setup/utilities";
+@import "src/assets/scss/setup/variables";
 
-$fa-font-path : '~@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/brands';
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
 
 .choose-file:before {
-  content: attr(data-content);
-  width: 100%;
-  height: 100%;
-  background: $color-bg-normal !important;
-  opacity: 1 !important;
-  text-align: center;
-  line-height: 20vh;
+    content: attr(data-content);
+    width: 100%;
+    height: 100%;
+    background: $color-bg-normal !important;
+    opacity: 1 !important;
+    text-align: center;
+    line-height: 20vh;
 
-  &:hover {
-    background-color: lighten($color-primary, 35%);
-  }
+    &:hover {
+        background-color: lighten($color-primary, 35%);
+    }
 }
 
 .choose-file {
-  @include add-shadow;
-  content: attr(data-content);
-  width: 100%;
-  height: 15vh;
-  background: $color-bg-normal !important;
-  position: relative;
-  opacity: 1 !important;
-  text-align: center;
-  border: dashed 5px $color-primary;
+    @include add-shadow;
+    content: attr(data-content);
+    width: 100%;
+    height: 15vh;
+    background: $color-bg-normal !important;
+    position: relative;
+    opacity: 1 !important;
+    text-align: center;
+    border: dashed 5px $color-primary;
 
-  &:hover {
-    cursor: pointer;
-    background-color: lighten($color-primary, 35%) !important;
-    opacity: 0.8;
-  }
+    &:hover {
+        cursor: pointer;
+        background-color: lighten($color-primary, 35%) !important;
+        opacity: 0.8;
+    }
 }
 
 .choose-file:after {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: '\f093';
-  position: absolute;
-  font-size: $icon-size-big;
-  left: 50%;
-  transform: translate(-50%, 80%);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f093";
+    position: absolute;
+    font-size: $icon-size-big;
+    left: 50%;
+    transform: translate(-50%, 80%);
 }
 
 .files-list {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: 10px auto;
-  background: #ffffff;
-  border: 1px dashed;
-  border-radius: 12px;
-  padding: 5px;
-  color: $color-primary;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: $color-primary;
 }
 
 .files-list .delete-file {
-  background: transparent;
-  border: none;
-  cursor: pointer;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .files-list .delete-file fa-icon {
-  width: 30px;
+    width: 30px;
 }

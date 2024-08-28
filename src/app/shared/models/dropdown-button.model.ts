@@ -1,8 +1,8 @@
 import { PermissionType } from "@app/admin/permission/permission.model";
 
 export interface ExtraDropdownOption {
-  id: string | number;
-  label: string;
+    id: string | number;
+    label: string;
 }
 
 export interface DropdownButton {

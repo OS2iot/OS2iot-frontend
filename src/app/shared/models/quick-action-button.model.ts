@@ -1,4 +1,4 @@
 export interface QuickActionButton {
     label: string;
-    type: 'delete' | 'restart' | 'edit';
+    type: "delete" | "restart" | "edit";
 }

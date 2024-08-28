@@ -1,57 +1,53 @@
-@import '../setup/utilities';
+@import "../setup/utilities";
 
 ul {
-  padding-left: 0;
-  list-style-type: none;
-  color: $color-text;
-  line-height: $body-text-line-height;
-
-  li {
-    list-style: none;
-    position: relative;
-    //padding-left: 37px;
+    padding-left: 0;
+    list-style-type: none;
+    color: $color-text;
     line-height: $body-text-line-height;
-    outline: none;
 
-  }
+    li {
+        list-style: none;
+        position: relative;
+        //padding-left: 37px;
+        line-height: $body-text-line-height;
+        outline: none;
+    }
 }
 
 //Ol lists
 ol {
-  padding-left: 0;
-  counter-reset: item;
-  color: $color-text;
+    padding-left: 0;
+    counter-reset: item;
+    color: $color-text;
 
-  li {
-    display: block;
-    position: relative;
+    li {
+        display: block;
+        position: relative;
 
-    &:before {
-      font-weight: $font-weight-bold;
-      position: absolute;
-
+        &:before {
+            font-weight: $font-weight-bold;
+            position: absolute;
+        }
     }
-  }
 }
 
-
 .unstyled-list {
-  @include unstyled-list;
+    @include unstyled-list;
 
-  &.bottom-spacing {
-    li {
-      margin-bottom: 0;
+    &.bottom-spacing {
+        li {
+            margin-bottom: 0;
+        }
     }
-  }
 }
 
 .inline-list {
-  @include unstyled-list;
-  @include inline-list;
+    @include unstyled-list;
+    @include inline-list;
 }
 
-
 .list-group-item {
-  padding: 0 !important;
-  @include add-shadow;
+    padding: 0 !important;
+    @include add-shadow;
 }

@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DatatargetTableComponent } from './datatarget-table.component';
+import { DatatargetTableComponent } from "./datatarget-table.component";
 
-describe('DatatargetTabelComponent', () => {
-  let component: DatatargetTableComponent;
-  let fixture: ComponentFixture<DatatargetTableComponent>;
+describe("DatatargetTabelComponent", () => {
+    let component: DatatargetTableComponent;
+    let fixture: ComponentFixture<DatatargetTableComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DatatargetTableComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DatatargetTableComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DatatargetTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DatatargetTableComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

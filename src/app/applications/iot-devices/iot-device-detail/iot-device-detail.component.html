@@ -1,15 +1,25 @@
 <div *ngIf="device">
-  <app-top-bar [data]="device" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()"
-    (extraDropdownOptions)="clickExtraDropdownOption($event)" [canEdit]="canEdit">
-  </app-top-bar>
-  <nav mat-tab-nav-bar>
-    <a mat-tab-link
-       *ngFor="let link of navTabs"
-       [routerLink]="link.link"
-       routerLinkActive #rla="routerLinkActive"
-       [active]="rla.isActive"
-    >{{ link.label | translate }}</a>
-  </nav>
-  <router-outlet></router-outlet>
+    <app-top-bar
+        [data]="device"
+        [backButton]="backButton"
+        [subPage]="true"
+        [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton"
+        (deleteSelectedInDropdown)="clickDelete()"
+        (extraDropdownOptions)="clickExtraDropdownOption($event)"
+        [canEdit]="canEdit"
+    >
+    </app-top-bar>
+    <nav mat-tab-nav-bar>
+        <a
+            mat-tab-link
+            *ngFor="let link of navTabs"
+            [routerLink]="link.link"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [active]="rla.isActive"
+            >{{ link.label | translate }}</a
+        >
+    </nav>
+    <router-outlet></router-outlet>
 </div>

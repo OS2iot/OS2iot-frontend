@@ -1,23 +1,44 @@
 <div *ngIf="user">
-    <app-top-bar [data]="user" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-        [dropDownButton]="dropdownButton" [canEdit]="canEdit"></app-top-bar>
+    <app-top-bar
+        [data]="user"
+        [backButton]="backButton"
+        [subPage]="true"
+        [addDetailDowndown]="true"
+        [dropDownButton]="dropdownButton"
+        [canEdit]="canEdit"
+    ></app-top-bar>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class=" jumbotron">
-                    <h3>{{ 'USERS.DETAIL.HEADLINE' | translate }}</h3>
-                    <p><strong>{{ 'USERS.DETAIL.EMAIL' | translate }}</strong>{{user.email}}</p>
+                <div class="jumbotron">
+                    <h3>{{ "USERS.DETAIL.HEADLINE" | translate }}</h3>
+                    <p>
+                        <strong>{{ "USERS.DETAIL.EMAIL" | translate }}</strong
+                        >{{ user.email }}
+                    </p>
                     <app-general-details [data]="user"></app-general-details>
                     <p [ngClass]="user.active | activeDeactive">
-                        <strong>{{ 'USERS.DETAIL.STATUS' | translate }}</strong>{{user.active | activeDeactive}}</p>
+                        <strong>{{ "USERS.DETAIL.STATUS" | translate }}</strong
+                        >{{ user.active | activeDeactive }}
+                    </p>
                     <P *ngIf="user.lastLogin; else noLogin">
-                        <strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{user?.lastLogin | dkTime}}</P>
+                        <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
+                        >{{ user?.lastLogin | dkTime }}</P
+                    >
                     <ng-template #noLogin>
-                        <p><strong>{{ 'USERS.DETAIL.LAST-LOGIN' | translate }}</strong>{{ 'USERS.DETAIL.NO-LOGIN' | translate }}
+                        <p>
+                            <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
+                            >{{ "USERS.DETAIL.NO-LOGIN" | translate }}
                         </p>
                     </ng-template>
-                    <p><strong>{{ 'USERS.DETAIL.GLOBALADMIN' | translate }}</strong>
-                        {{((user.permissions | isGlobalAdmin) ? 'USERS.GLOBAL_ADMIN.TRUE' : 'USERS.GLOBAL_ADMIN.FALSE') | translate}}
+                    <p>
+                        <strong>{{ "USERS.DETAIL.GLOBALADMIN" | translate }}</strong>
+                        {{
+                            ((user.permissions | isGlobalAdmin)
+                                ? "USERS.GLOBAL_ADMIN.TRUE"
+                                : "USERS.GLOBAL_ADMIN.FALSE"
+                            ) | translate
+                        }}
                     </p>
                 </div>
             </div>
@@ -26,10 +47,9 @@
             <div class="col-12">
                 <div class="jumbotron">
                     <h3 class="">
-                        {{ 'USERS.DETAIL.PERMISSIONS' | translate }}
+                        {{ "USERS.DETAIL.PERMISSIONS" | translate }}
                     </h3>
-                    <app-permission-tabel [userId]="user?.id">
-                    </app-permission-tabel>
+                    <app-permission-tabel [userId]="user?.id"> </app-permission-tabel>
                 </div>
             </div>
         </div>

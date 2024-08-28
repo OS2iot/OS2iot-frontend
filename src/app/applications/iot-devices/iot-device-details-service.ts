@@ -1,9 +1,9 @@
-﻿import { Injectable } from '@angular/core';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
+﻿import { Injectable } from "@angular/core";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class IotDeviceDetailsService {
-  device: IotDevice;
-  latitude: number;
-  longitude: number;
+    device: IotDevice;
+    latitude: number;
+    longitude: number;
 }

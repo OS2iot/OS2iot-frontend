@@ -15,5 +15,5 @@ export class MarkerInfo {
     internalOrganizationName: string;
     isDevice = false;
     networkTechnology: string;
-    lastActive: Date
+    lastActive: Date;
 }
