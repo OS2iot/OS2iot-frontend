@@ -26,7 +26,7 @@ import { satelliteCenterLatitudeDenmark, satelliteCenterLongitudeDenmark } from 
     styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-    private streetViewName = "Street view";
+    private streetViewName = "OpenStreetMap";
     private datafordelerName;
     private heightCurvesName;
     private ortofotowmts: leaflet.TileLayer;
