@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:16-alpine as DEV
+FROM node:18-alpine as DEV
 
 # removed this for now
 # install chrome for protractor tests
@@ -17,7 +17,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY package.json /app/package.json
 RUN npm install
-RUN npm install -g @angular/cli@14.2.3
+RUN npm install -g @angular/cli@15.2.11
 
 # add app
 COPY . /app
