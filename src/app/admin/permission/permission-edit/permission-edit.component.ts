@@ -1,31 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
-import { Location } from '@angular/common';
-import { PermissionService } from '../permission.service';
-import {
-  PermissionRequest,
-  PermissionType,
-  PermissionTypes,
-} from '../permission.model';
-import { OrganisationResponse } from '../../organisation/organisation.model';
-import { OrganisationService } from '../../organisation/organisation.service';
-import { UserService } from '../../users/user.service';
-import { UserResponse } from '../../users/user.model';
-import { ApplicationService } from '@applications/application.service';
-import { Application } from '@applications/application.model';
-import { BackButton } from '@shared/models/back-button.model';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { takeUntil } from 'rxjs/operators';
-import { MeService } from '@shared/services/me.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { ReplaySubject, Subject, Subscription } from "rxjs";
+import { Location } from "@angular/common";
+import { PermissionService } from "../permission.service";
+import { PermissionRequest, PermissionType, PermissionTypes } from "../permission.model";
+import { OrganisationResponse } from "../../organisation/organisation.model";
+import { OrganisationService } from "../../organisation/organisation.service";
+import { UserService } from "../../users/user.service";
+import { UserResponse } from "../../users/user.model";
+import { ApplicationService } from "@applications/application.service";
+import { Application } from "@applications/application.model";
+import { BackButton } from "@shared/models/back-button.model";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { takeUntil } from "rxjs/operators";
+import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: 'app-permission-edit',
-  templateUrl: './permission-edit.component.html',
-  styleUrls: ['./permission-edit.component.scss'],
+  selector: "app-permission-edit",
+  templateUrl: "./permission-edit.component.html",
+  styleUrls: ["./permission-edit.component.scss"],
 })
 export class PermissionEditComponent implements OnInit, OnDestroy {
   permission = new PermissionRequest();
@@ -39,11 +35,11 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public form: UntypedFormGroup;
   public backButton: BackButton = {
-    label: '',
-    routerLink: ['admin', 'permissions'],
+    label: "",
+    routerLink: ["admin", "permissions"],
   };
-  public title = '';
-  public submitButton = '';
+  public title = "";
+  public submitButton = "";
   public isEditMode = false;
   id: number;
   subscription: Subscription;
@@ -59,15 +55,11 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
   public userMultiCtrl: UntypedFormControl = new UntypedFormControl();
   public userMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
-  public filteredUsersMulti: ReplaySubject<UserResponse[]> = new ReplaySubject<
-    UserResponse[]
-  >(1);
+  public filteredUsersMulti: ReplaySubject<UserResponse[]> = new ReplaySubject<UserResponse[]>(1);
 
   public applicationMultiCtrl: UntypedFormControl = new UntypedFormControl();
   public applicationMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
-  public filteredApplicationsMulti: ReplaySubject<
-    Application[]
-  > = new ReplaySubject<Application[]>(1);
+  public filteredApplicationsMulti: ReplaySubject<Application[]> = new ReplaySubject<Application[]>(1);
 
   public permissionLevelsCtrl: UntypedFormControl = new UntypedFormControl();
 
@@ -89,15 +81,13 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getOrganizations();
     this.getUsers();
-    this.translate.use('da');
-    this.translate
-      .get(['NAV.PERMISSIONS', 'FORM.EDIT-PERMISSION', 'PERMISSION.SAVE'])
-      .subscribe((translations) => {
-        this.backButton.label = translations['NAV.PERMISSIONS'];
-        this.title = translations['FORM.EDIT-PERMISSION'];
-        this.submitButton = translations['PERMISSION.SAVE'];
-      });
-    this.id = +this.route.snapshot.paramMap.get('permission-id');
+    this.translate.use("da");
+    this.translate.get(["NAV.PERMISSIONS", "FORM.EDIT-PERMISSION", "PERMISSION.SAVE"]).subscribe(translations => {
+      this.backButton.label = translations["NAV.PERMISSIONS"];
+      this.title = translations["FORM.EDIT-PERMISSION"];
+      this.submitButton = translations["PERMISSION.SAVE"];
+    });
+    this.id = +this.route.snapshot.paramMap.get("permission-id");
     if (this.id > 0) {
       this.getPermission(this.id);
       this.isEditMode = true;
@@ -105,17 +95,13 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       this.setBackButton();
     }
 
-    this.userMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterUsersMulti();
-      });
+    this.userMultiFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.filterUsersMulti();
+    });
 
-    this.applicationMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterApplicationsMulti();
-      });
+    this.applicationMultiFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.filterApplicationsMulti();
+    });
   }
 
   private filterApplicationsMulti() {
@@ -131,11 +117,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       search = search.toLowerCase();
     }
     // filter the banks
-    this.filteredApplicationsMulti.next(
-      this.applications.filter(
-        (app) => app.name.toLowerCase().indexOf(search) > -1
-      )
-    );
+    this.filteredApplicationsMulti.next(this.applications.filter(app => app.name.toLowerCase().indexOf(search) > -1));
   }
 
   private filterUsersMulti() {
@@ -150,10 +132,9 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     } else {
       search = search.toLowerCase();
     }
-    const filtered = this.users.filter((user) => {
+    const filtered = this.users.filter(user => {
       return (
-        user.name.toLocaleLowerCase().indexOf(search) > -1 ||
-        user?.email?.toLocaleLowerCase()?.indexOf(search) > -1
+        user.name.toLocaleLowerCase().indexOf(search) > -1 || user?.email?.toLocaleLowerCase()?.indexOf(search) > -1
       );
     });
     // filter the banks
@@ -165,34 +146,30 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   private setBackButton() {
-    this.backButton.routerLink = ['admin', 'permissions'];
+    this.backButton.routerLink = ["admin", "permissions"];
   }
 
   private getOrganizations() {
-    this.organisationSubscription = this.organisationService
-      .getMultiple(1000, 0, 'name', 'asc')
-      .subscribe(
-        (orgs) => {
-          this.organisations = orgs.data;
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.organisationSubscription = this.organisationService.getMultiple(1000, 0, "name", "asc").subscribe(
+      orgs => {
+        this.organisations = orgs.data;
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   private getUsers() {
-    this.userSubscription = this.userService
-      .getMultiple(1000, 0, 'name', 'asc')
-      .subscribe(
-        (users) => {
-          this.users = users.data;
-          this.filteredUsersMulti.next(this.users.slice());
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.userSubscription = this.userService.getMultiple(1000, 0, "name", "asc").subscribe(
+      users => {
+        this.users = users.data;
+        this.filteredUsersMulti.next(this.users.slice());
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   public compare(o1: any, o2: any): boolean {
@@ -208,35 +185,27 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   private getApplications(organizationId: number) {
-    this.applicationSubscription = this.applicationService
-      .getApplicationsByOrganizationId(organizationId)
-      .subscribe(
-        (res) => {
-          this.applications = res.data.sort((a, b) =>
-            a.name.localeCompare(b.name, 'en', { numeric: true })
-          );
-          this.filteredApplicationsMulti.next(this.applications.slice());
-        },
-        (error: HttpErrorResponse) => {
-          this.showError(error);
-        }
-      );
+    this.applicationSubscription = this.applicationService.getApplicationsByOrganizationId(organizationId).subscribe(
+      res => {
+        this.applications = res.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
+        this.filteredApplicationsMulti.next(this.applications.slice());
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
   }
 
   private getPermission(id: number) {
     this.subscription = this.permissionService.getPermission(id).subscribe(
-      (response) => {
+      response => {
         this.permission.name = response.name;
         this.permission.levels = response.type;
         this.permissionLevelsCtrl.setValue(this.permission.levels);
-        this.permission.userIds = response.users.map((x) => x.id);
+        this.permission.userIds = response.users.map(x => x.id);
         this.userMultiCtrl.setValue(this.permission.userIds);
-        this.permission.automaticallyAddNewApplications =
-          response.automaticallyAddNewApplications;
-        this.isNotGlobalAdmin = this.meService.hasNotTargetPermissions(
-          response,
-          PermissionType.GlobalAdmin
-        );
+        this.permission.automaticallyAddNewApplications = response.automaticallyAddNewApplications;
+        this.isNotGlobalAdmin = this.meService.hasNotTargetPermissions(response, PermissionType.GlobalAdmin);
 
         if (this.isNotGlobalAdmin) {
           this.permission.organizationId = response?.organization?.id;
@@ -245,17 +214,9 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
           this.allowedLevels = [{ type: PermissionType.GlobalAdmin }];
         }
 
-        if (
-          this.meService.hasPermissions(
-            response,
-            PermissionType.Read,
-            PermissionType.OrganizationApplicationAdmin
-          )
-        ) {
+        if (this.meService.hasPermissions(response, PermissionType.Read, PermissionType.OrganizationApplicationAdmin)) {
           this.getApplications(this.permission.organizationId);
-          this.permission.applicationIds = response.applications.map(
-            (x) => x.id
-          );
+          this.permission.applicationIds = response.applications.map(x => x.id);
           this.applicationMultiCtrl.setValue(this.permission.applicationIds);
         }
       },
@@ -267,7 +228,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
 
   private create(): void {
     this.permissionService.createPermission(this.permission).subscribe(
-      (_response) => {
+      _response => {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
@@ -281,7 +242,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       () => {
         this.routeBack();
       },
-      (error) => {
+      error => {
         this.showError(error);
       }
     );

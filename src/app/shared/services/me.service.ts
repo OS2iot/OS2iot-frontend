@@ -1,15 +1,11 @@
-import { Injectable } from '@angular/core';
-import {
-  PermissionResponse,
-  PermissionType,
-  PermissionTypes,
-} from '@app/admin/permission/permission.model';
-import { UserResponse } from '@app/admin/users/user.model';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Injectable } from "@angular/core";
+import { PermissionResponse, PermissionType, PermissionTypes } from "@app/admin/permission/permission.model";
+import { UserResponse } from "@app/admin/users/user.model";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class MeService {
   private user: UserResponse;
@@ -27,24 +23,15 @@ export class MeService {
       return false;
     }
 
-    if (
-      permissions.some((p) =>
-        this.hasPermissions(p, PermissionType.GlobalAdmin)
-      )
-    ) {
+    if (permissions.some(p => this.hasPermissions(p, PermissionType.GlobalAdmin))) {
       return true;
     }
 
-    let canWriteCallback: (
-      p: PermissionResponse,
-      appId: number | undefined
-    ) => boolean;
+    let canWriteCallback: (p: PermissionResponse, appId: number | undefined) => boolean;
 
     switch (scope) {
       case OrganizationAccessScope.ApplicationWrite:
-        canWriteCallback = this.canWriteApplicationInTargetOrganization.bind(
-          this
-        );
+        canWriteCallback = this.canWriteApplicationInTargetOrganization.bind(this);
         break;
       case OrganizationAccessScope.GatewayWrite:
         canWriteCallback = this.canWriteGatewayInTargetOrganization.bind(this);
@@ -58,31 +45,21 @@ export class MeService {
     }
 
     return permissions.some(
-      (permission) =>
+      permission =>
         this.hasPermissions(permission, PermissionType.GlobalAdmin) ||
-        (permission.organization.id === organizationId &&
-          canWriteCallback(permission, applicationId))
+        (permission.organization.id === organizationId && canWriteCallback(permission, applicationId))
     );
   }
 
-  hasPermissionTypes(
-    types: PermissionTypes[],
-    ...targetPermissions: PermissionType[]
-  ) {
+  hasPermissionTypes(types: PermissionTypes[], ...targetPermissions: PermissionType[]) {
     return types && this.hasPermissions({ type: types }, ...targetPermissions);
   }
 
-  hasPermissions(
-    { type }: Partial<PermissionResponse>,
-    ...targetPermissions: PermissionType[]
-  ) {
+  hasPermissions({ type }: Partial<PermissionResponse>, ...targetPermissions: PermissionType[]) {
     return type?.some(({ type }) => targetPermissions.includes(type));
   }
 
-  hasNotTargetPermissions(
-    response: PermissionResponse,
-    ...targetPermissions: PermissionType[]
-  ) {
+  hasNotTargetPermissions(response: PermissionResponse, ...targetPermissions: PermissionType[]) {
     return response.type.every(({ type }) => !targetPermissions.includes(type));
   }
 
@@ -91,37 +68,21 @@ export class MeService {
     targetAppId: number | undefined
   ): boolean {
     return (
-      this.hasPermissions(
-        permission,
-        PermissionType.OrganizationApplicationAdmin
-      ) &&
-      (!targetAppId ||
-        permission.applicationIds?.some((appId) => appId === targetAppId))
+      this.hasPermissions(permission, PermissionType.OrganizationApplicationAdmin) &&
+      (!targetAppId || permission.applicationIds?.some(appId => appId === targetAppId))
     );
   }
 
-  private canWriteGatewayInTargetOrganization(
-    permission: PermissionResponse
-  ): boolean {
-    return this.hasPermissions(
-      permission,
-      PermissionType.OrganizationGatewayAdmin
-    );
+  private canWriteGatewayInTargetOrganization(permission: PermissionResponse): boolean {
+    return this.hasPermissions(permission, PermissionType.OrganizationGatewayAdmin);
   }
 
-  private canWriteUserInTargetOrganization(
-    permission: PermissionResponse
-  ): boolean {
-    return this.hasPermissions(
-      permission,
-      PermissionType.OrganizationUserAdmin
-    );
+  private canWriteUserInTargetOrganization(permission: PermissionResponse): boolean {
+    return this.hasPermissions(permission, PermissionType.OrganizationUserAdmin);
   }
 
   hasGlobalAdmin() {
     const userInfo = this.sharedVariableService.getUserInfo();
-    return userInfo.user.permissions.some((permission) =>
-      this.hasPermissions(permission, PermissionType.GlobalAdmin)
-    );
+    return userInfo.user.permissions.some(permission => this.hasPermissions(permission, PermissionType.GlobalAdmin));
   }
 }

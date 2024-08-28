@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { RestService } from '@shared/services/rest.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Organisation } from '../organisation/organisation.model';
-import { UserMinimalService } from './user-minimal.service';
+import { Injectable } from "@angular/core";
+import { RestService } from "@shared/services/rest.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Organisation } from "../organisation/organisation.model";
+import { UserMinimalService } from "./user-minimal.service";
 import {
   UserResponse,
   UserRequest,
@@ -11,19 +11,16 @@ import {
   CreateNewKombitUserDto,
   UpdateUserOrgsDto,
   RejectUserDto,
-} from './user.model';
+} from "./user.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class UserService {
-  URL = 'user';
-  URL_NEW_KOMBIT = 'kombitCreation';
+  URL = "user";
+  URL_NEW_KOMBIT = "kombitCreation";
 
-  constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService
-  ) {}
+  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
   post(body: UserRequest): Observable<UserResponse> {
     return this.restService.post(this.URL, body);
@@ -31,24 +28,18 @@ export class UserService {
 
   put(body: UserRequest, id: number): Observable<UserResponse> {
     return this.restService.put(this.URL, body, id, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
   getOne(id: number, extendedInfo = false): Observable<UserResponse> {
-    return this.restService
-      .get(this.URL, { extendedInfo }, id)
-      .pipe(
-        map((response: UserResponse) => {
-          response.createdByName = this.userMinimalService.getUserNameFrom(
-            response.createdBy
-          );
-          response.updatedByName = this.userMinimalService.getUserNameFrom(
-            response.updatedBy
-          );
-          return response;
-        })
-      );
+    return this.restService.get(this.URL, { extendedInfo }, id).pipe(
+      map((response: UserResponse) => {
+        response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+        response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
+        return response;
+      })
+    );
   }
 
   getMultiple(
@@ -57,7 +48,7 @@ export class UserService {
     orderByColumn?: string,
     orderByDirection?: string,
     permissionId?: number
-  ): Observable<UserGetManyResponse> {    
+  ): Observable<UserGetManyResponse> {
     if (permissionId != null) {
       return this.restService.get(`permission/${permissionId}/users`, {
         limit,
@@ -79,14 +70,14 @@ export class UserService {
     orderByColumn?: string,
     orderByDirection?: string,
     organizationId?: number
-  ): Observable<UserGetManyResponse> {    
+  ): Observable<UserGetManyResponse> {
     return this.restService.get(this.URL + `/organizationUsers/${organizationId}`, {
       limit,
       offset,
       orderOn: orderByColumn,
       sort: orderByDirection,
     });
-  }  
+  }
 
   hideWelcome(id: number): Observable<boolean> {
     return this.restService.put(`${this.URL}/${id}/hide-welcome`, null, null);
@@ -98,15 +89,12 @@ export class UserService {
     orderByColumn?: string,
     orderByDirection?: string
   ): Observable<UserGetManyResponse> {
-    return this.restService.get(
-      this.URL + '/awaitingUsers',
-      {
-        limit,
-        offset,
-        orderOn: orderByColumn,
-        sort: orderByDirection,
-      },
-    );
+    return this.restService.get(this.URL + "/awaitingUsers", {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
   }
 
   getAwaitingUsersForOrganization(
@@ -116,15 +104,12 @@ export class UserService {
     orderByColumn?: string,
     orderByDirection?: string
   ): Observable<UserGetManyResponse> {
-    return this.restService.get(
-      `${this.URL}/awaitingUsers/${organizationId}`,
-      {
-        limit,
-        offset,
-        orderOn: orderByColumn,
-        sort: orderByDirection,
-      },
-    );
+    return this.restService.get(`${this.URL}/awaitingUsers/${organizationId}`, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
   }
 
   getOneSimple(id: number): Observable<UserResponse> {
@@ -136,30 +121,20 @@ export class UserService {
   }
 
   updateNewKombit(body: CreateNewKombitUserDto): Observable<UserResponse> {
-    return this.restService.put(
-      this.URL_NEW_KOMBIT + '/createNewKombitUser',
-      body,
-      undefined,
-      {
-        observe: 'response',
-      }
-    );
+    return this.restService.put(this.URL_NEW_KOMBIT + "/createNewKombitUser", body, undefined, {
+      observe: "response",
+    });
   }
 
   updateUserOrgs(body: UpdateUserOrgsDto): Observable<void> {
-    return this.restService.put(
-      this.URL_NEW_KOMBIT + '/updateUserOrgs',
-      body,
-      undefined,
-      {
-        observe: 'response',
-      }
-    );
+    return this.restService.put(this.URL_NEW_KOMBIT + "/updateUserOrgs", body, undefined, {
+      observe: "response",
+    });
   }
 
   rejectUser(body: RejectUserDto): Observable<Organisation> {
-    return this.restService.put(this.URL + '/rejectUser', body, undefined, {
-      observe: 'response',
+    return this.restService.put(this.URL + "/rejectUser", body, undefined, {
+      observe: "response",
     });
   }
 }

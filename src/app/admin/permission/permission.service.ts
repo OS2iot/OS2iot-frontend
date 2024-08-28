@@ -1,62 +1,45 @@
-import { Injectable } from '@angular/core';
-import { RestService } from '../../shared/services/rest.service';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { RestService } from "../../shared/services/rest.service";
+import { Observable } from "rxjs";
 import {
   PermissionGetManyResponse,
   PermissionResponse,
   PermissionRequest,
   PermissionRequestAcceptUser,
-} from './permission.model';
-import { map } from 'rxjs/operators';
-import { UserMinimalService } from '../users/user-minimal.service';
+} from "./permission.model";
+import { map } from "rxjs/operators";
+import { UserMinimalService } from "../users/user-minimal.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class PermissionService {
-  endpoint = 'permission';
-  constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService
-  ) {}
+  endpoint = "permission";
+  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
   createPermission(body: PermissionRequest): Observable<PermissionResponse> {
     return this.restService.post(this.endpoint, body, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
-  createPermissionAcceptUser(
-    body: PermissionRequestAcceptUser
-  ): Observable<PermissionResponse> {
-    return this.restService.put(
-      this.endpoint + '/acceptUser',
-      body,
-      undefined,
-      {
-        observe: 'response',
-      }
-    );
+  createPermissionAcceptUser(body: PermissionRequestAcceptUser): Observable<PermissionResponse> {
+    return this.restService.put(this.endpoint + "/acceptUser", body, undefined, {
+      observe: "response",
+    });
   }
 
-  updatePermission(
-    body: PermissionRequest,
-    id: number
-  ): Observable<PermissionResponse> {
+  updatePermission(body: PermissionRequest, id: number): Observable<PermissionResponse> {
     return this.restService.put(this.endpoint, body, id, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
   getPermission(id: number): Observable<PermissionResponse> {
     return this.restService.get(this.endpoint, {}, id).pipe(
       map((response: PermissionResponse) => {
-        response.createdByName = this.userMinimalService.getUserNameFrom(
-          response.createdBy
-        );
-        response.updatedByName = this.userMinimalService.getUserNameFrom(
-          response.updatedBy
-        );
+        response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+        response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
         return response;
       })
     );

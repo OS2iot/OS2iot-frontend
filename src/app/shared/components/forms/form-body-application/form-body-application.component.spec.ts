@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { FormBodyApplicationComponent } from './form-body-application.component';
+import { FormBodyApplicationComponent } from "./form-body-application.component";
 
-describe('FormBodyApplicationComponent', () => {
+describe("FormBodyApplicationComponent", () => {
   let component: FormBodyApplicationComponent;
   let fixture: ComponentFixture<FormBodyApplicationComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormBodyApplicationComponent ]
-    })
-    .compileComponents();
+      declarations: [FormBodyApplicationComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('FormBodyApplicationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

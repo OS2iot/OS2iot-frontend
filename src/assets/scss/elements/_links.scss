@@ -1,6 +1,4 @@
-@import '../setup//variables';
-
-
+@import "../setup//variables";
 
 // Links
 
@@ -22,7 +20,6 @@ a {
   &:visited:hover {
     color: $color-link-hover;
     border-bottom: 5px solid $color-link-hover-bg;
-
 
     &:disabled,
     .disabled {

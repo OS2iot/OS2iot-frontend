@@ -1,19 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
+import { DebugElement } from "@angular/core";
 
-import { HttppushEditComponent } from './httppush-edit.component';
+import { HttppushEditComponent } from "./httppush-edit.component";
 
-describe('HttppushEditComponent', () => {
+describe("HttppushEditComponent", () => {
   let component: HttppushEditComponent;
   let fixture: ComponentFixture<HttppushEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HttppushEditComponent ]
-    })
-    .compileComponents();
+      declarations: [HttppushEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,7 +21,7 @@ describe('HttppushEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

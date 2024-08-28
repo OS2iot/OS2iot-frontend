@@ -1,29 +1,20 @@
-import { Location } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
-import { environment } from '@environments/environment';
-import { TranslateService } from '@ngx-translate/core';
-import { jsonToList } from '@shared/helpers/json.helper';
-import { KeyValue } from '@shared/types/tuple.type';
-import { DeviceType } from '@shared/enums/device-type';
+import { Location } from "@angular/common";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { IoTDeviceService } from "@applications/iot-devices/iot-device.service";
+import { environment } from "@environments/environment";
+import { TranslateService } from "@ngx-translate/core";
+import { jsonToList } from "@shared/helpers/json.helper";
+import { KeyValue } from "@shared/types/tuple.type";
+import { DeviceType } from "@shared/enums/device-type";
 
 @Component({
-  selector: 'app-iot-device-detail-generic',
-  templateUrl: './iot-device-detail-generic.component.html',
-  styleUrls: ['./iot-device-detail-generic.component.scss'],
+  selector: "app-iot-device-detail-generic",
+  templateUrl: "./iot-device-detail-generic.component.html",
+  styleUrls: ["./iot-device-detail-generic.component.scss"],
 })
-export class IotDeviceDetailGenericComponent
-  implements OnInit, OnChanges, OnDestroy {
-  batteryStatusColor = 'green';
+export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDestroy {
+  batteryStatusColor = "green";
   batteryStatusPercentage: number;
   metadataTags: KeyValue[] = [];
   @Input() device: IotDevice;
@@ -46,11 +37,7 @@ export class IotDeviceDetailGenericComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.batteryStatusPercentage = this.getBatteryProcentage();
     this.httpDeviceUrl = this.getGenericHttpDeviceUrl();
-    if (
-      changes?.device?.previousValue?.metadata !==
-        changes?.device?.currentValue?.metadata &&
-      this.device.metadata
-    ) {
+    if (changes?.device?.previousValue?.metadata !== changes?.device?.currentValue?.metadata && this.device.metadata) {
       this.metadataTags = jsonToList(this.device.metadata);
     }
   }
@@ -69,10 +56,7 @@ export class IotDeviceDetailGenericComponent
   }
 
   private getBatteryProcentage(): number {
-    if (
-      this.device?.lorawanSettings?.deviceStatusBattery ===
-      this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE
-    ) {
+    if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
       return null;
     }
     return Math.round(this.device?.lorawanSettings?.deviceStatusBattery);

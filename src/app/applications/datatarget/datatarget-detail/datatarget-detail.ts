@@ -1,2 +1,1 @@
-export interface DatatargetDetail {
-}
+export interface DatatargetDetail {}

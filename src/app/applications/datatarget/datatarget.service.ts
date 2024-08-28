@@ -1,43 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DatatargetResponse } from '@applications/datatarget/datatarget-response.model';
-import { RestService } from '@shared/services/rest.service';
-import { DatatargetData, Datatarget, OddkMailInfo } from './datatarget.model';
-import { map } from 'rxjs/operators';
-import { OpenDataDkDataset } from './opendatadk/opendatadk-dataset.model';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { DatatargetResponse } from "@applications/datatarget/datatarget-response.model";
+import { RestService } from "@shared/services/rest.service";
+import { DatatargetData, Datatarget, OddkMailInfo } from "./datatarget.model";
+import { map } from "rxjs/operators";
+import { OpenDataDkDataset } from "./opendatadk/opendatadk-dataset.model";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DatatargetService {
-
-  private dataTargetURL = 'data-target';
+  private dataTargetURL = "data-target";
 
   constructor(
     private restService: RestService,
     private sharedVariableService: SharedVariableService,
-    private userMinimalService: UserMinimalService) { }
+    private userMinimalService: UserMinimalService
+  ) {}
 
   get(id: number): Observable<Datatarget> {
     return this.restService.get(this.dataTargetURL, null, id).pipe(
-      map(
-        (response: DatatargetResponse) => {
-          const datatarget = this.mapToDatatarget(response);
-          return datatarget;
-        }
-      )
+      map((response: DatatargetResponse) => {
+        const datatarget = this.mapToDatatarget(response);
+        return datatarget;
+      })
     );
   }
 
-  getByApplicationId(
-    limit: number, offset: number, applicationId: number
-  ): Observable<DatatargetData> {
+  getByApplicationId(limit: number, offset: number, applicationId: number): Observable<DatatargetData> {
     const body = {
       limit,
       offset,
-      applicationId
+      applicationId,
       // sort: sort,
       // orderOn: orderOn,
       // todo tilføj når iot-314 er tilføjet
@@ -47,25 +43,21 @@ export class DatatargetService {
 
   update(datatarget: Datatarget): Observable<Datatarget> {
     this.trimModel(datatarget);
-    return this.restService.put(this.dataTargetURL, datatarget, datatarget.id, { observe: 'response' }).pipe(
-      map(
-        (response: DatatargetResponse) => {
-          const datatarget = this.mapToDatatarget(response);
-          return datatarget;
-        }
-      )
+    return this.restService.put(this.dataTargetURL, datatarget, datatarget.id, { observe: "response" }).pipe(
+      map((response: DatatargetResponse) => {
+        const datatarget = this.mapToDatatarget(response);
+        return datatarget;
+      })
     );
   }
 
   create(datatarget: Datatarget): Observable<Datatarget> {
     this.trimModel(datatarget);
     return this.restService.post(this.dataTargetURL, datatarget).pipe(
-      map(
-        (response: DatatargetResponse) => {
-          const datatarget = this.mapToDatatarget(response);
-          return datatarget;
-        }
-      )
+      map((response: DatatargetResponse) => {
+        const datatarget = this.mapToDatatarget(response);
+        return datatarget;
+      })
     );
   }
 
@@ -94,7 +86,9 @@ export class DatatargetService {
       clientSecret: dataTargetResponse.clientSecret,
       applicationId: dataTargetResponse.application.id,
       setToOpendataDk: dataTargetResponse?.openDataDkDataset ? true : false,
-      openDataDkDataset: dataTargetResponse?.openDataDkDataset ? dataTargetResponse.openDataDkDataset : new OpenDataDkDataset(),
+      openDataDkDataset: dataTargetResponse?.openDataDkDataset
+        ? dataTargetResponse.openDataDkDataset
+        : new OpenDataDkDataset(),
       mqttPort: dataTargetResponse.mqttPort,
       mqttTopic: dataTargetResponse.mqttTopic,
       mqttQos: dataTargetResponse.mqttQos,
@@ -107,23 +101,26 @@ export class DatatargetService {
       createdByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.createdBy),
       updatedByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.updatedBy),
     };
-    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(', ');
+    model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(", ");
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
     return model;
   }
 
   getOpendataSharingApiUrl(): string {
-    return this.restService.createResourceUrl('open-data-dk-sharing', this.sharedVariableService.getSelectedOrganisationId());
+    return this.restService.createResourceUrl(
+      "open-data-dk-sharing",
+      this.sharedVariableService.getSelectedOrganisationId()
+    );
   }
 
   getOpenDataDkRegistered(organizationId: number): Observable<boolean> {
-    return this.restService.get(this.dataTargetURL + '/getOpenDataDkRegistered', undefined, organizationId);
+    return this.restService.get(this.dataTargetURL + "/getOpenDataDkRegistered", undefined, organizationId);
   }
   updateOpenDataDkRegistered(organizationId: number): Observable<boolean> {
-    return this.restService.put(this.dataTargetURL + '/updateOpenDataDkRegistered', undefined, organizationId);
+    return this.restService.put(this.dataTargetURL + "/updateOpenDataDkRegistered", undefined, organizationId);
   }
   sendOpenDataDkMail(mailDto: OddkMailInfo): Observable<boolean> {
     mailDto.sharingUrl = this.getOpendataSharingApiUrl();
-    return this.restService.post(this.dataTargetURL + '/sendOpenDataDkMail', mailDto);
+    return this.restService.post(this.dataTargetURL + "/sendOpenDataDkMail", mailDto);
   }
 }

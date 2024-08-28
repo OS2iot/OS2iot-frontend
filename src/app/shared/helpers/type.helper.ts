@@ -11,9 +11,4 @@ export const nameof = <T>(name: Extract<keyof T, string>): string => name;
  *
  * @see https://stackoverflow.com/a/56370310
  */
-export type Tail<T extends unknown[]> = ((...t: T) => void) extends (
-  h: unknown,
-  ...r: infer R
-) => void
-  ? R
-  : never;
+export type Tail<T extends unknown[]> = ((...t: T) => void) extends (h: unknown, ...r: infer R) => void ? R : never;

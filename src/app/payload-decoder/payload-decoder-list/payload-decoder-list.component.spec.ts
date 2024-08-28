@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { PayloadDecoderListComponent } from './payload-decoder-list.component';
+import { PayloadDecoderListComponent } from "./payload-decoder-list.component";
 
-describe('PayloadDecoderListComponent', () => {
+describe("PayloadDecoderListComponent", () => {
   let component: PayloadDecoderListComponent;
   let fixture: ComponentFixture<PayloadDecoderListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PayloadDecoderListComponent ]
-    })
-    .compileComponents();
+      declarations: [PayloadDecoderListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PayloadDecoderListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

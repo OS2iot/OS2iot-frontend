@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ScrollToTopService } from './scroll-to-top.service';
+import { ScrollToTopService } from "./scroll-to-top.service";
 
-describe('ScrollToTopService', () => {
+describe("ScrollToTopService", () => {
   let service: ScrollToTopService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('ScrollToTopService', () => {
     service = TestBed.inject(ScrollToTopService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

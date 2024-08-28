@@ -1,26 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import {
   IotDevice,
   IoTDevicesMinimalResponse,
   IotDevicesImportResponse,
   IotDeviceImportRequest,
   IoTDeviceStatsResponse,
-} from './iot-device.model';
-import { RestService } from 'src/app/shared/services/rest.service';
-import { map } from 'rxjs/operators';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+} from "./iot-device.model";
+import { RestService } from "src/app/shared/services/rest.service";
+import { map } from "rxjs/operators";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class IoTDeviceService {
-  private BASEURL = 'iot-device';
+  private BASEURL = "iot-device";
 
-  constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService
-  ) {}
+  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
   createIoTDevice(body: IotDevice): Observable<IotDevice> {
     return this.restService.post(this.BASEURL, body);
@@ -28,19 +25,15 @@ export class IoTDeviceService {
 
   updateIoTDevice(body: IotDevice, id: number): Observable<IotDevice> {
     return this.restService.put(this.BASEURL, body, id, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
-  createIoTDevices(
-    body: IotDeviceImportRequest
-  ): Observable<IotDevicesImportResponse[]> {
+  createIoTDevices(body: IotDeviceImportRequest): Observable<IotDevicesImportResponse[]> {
     return this.restService.post(`${this.BASEURL}/createMany`, body);
   }
 
-  updateIoTDevices(
-    body: IotDeviceImportRequest
-  ): Observable<IotDevicesImportResponse[]> {
+  updateIoTDevices(body: IotDeviceImportRequest): Observable<IotDevicesImportResponse[]> {
     return this.restService.post(`${this.BASEURL}/updateMany`, body);
   }
 
@@ -71,12 +64,8 @@ export class IoTDeviceService {
           mqttExternalBrokerSettings: response.mqttExternalBrokerSettings,
           createdBy: response.createdBy,
           updatedBy: response.updatedBy,
-          createdByName: this.userMinimalService.getUserNameFrom(
-            response.createdBy
-          ),
-          updatedByName: this.userMinimalService.getUserNameFrom(
-            response.updatedBy
-          ),
+          createdByName: this.userMinimalService.getUserNameFrom(response.createdBy),
+          updatedByName: this.userMinimalService.getUserNameFrom(response.updatedBy),
         };
       })
     );
@@ -87,11 +76,7 @@ export class IoTDeviceService {
     limit: number,
     offset: number
   ): Observable<IoTDevicesMinimalResponse> {
-    return this.restService.get(
-      `${this.BASEURL}/minimalByPayloadDecoder`,
-      { limit, offset },
-      payloadDecoderId
-    );
+    return this.restService.get(`${this.BASEURL}/minimalByPayloadDecoder`, { limit, offset }, payloadDecoderId);
   }
 
   deleteIoTDevice(id: number) {
@@ -102,11 +87,7 @@ export class IoTDeviceService {
     return this.restService.get(`${this.BASEURL}/stats`, null, id);
   }
 
-  resetHttpDeviceApiKey(id: number): Observable<Pick<IotDevice, 'apiKey'>> {
-    return this.restService.put(
-      `${this.BASEURL}/resetHttpDeviceApiKey`,
-      null,
-      id
-    );
+  resetHttpDeviceApiKey(id: number): Observable<Pick<IotDevice, "apiKey">> {
+    return this.restService.put(`${this.BASEURL}/resetHttpDeviceApiKey`, null, id);
   }
 }

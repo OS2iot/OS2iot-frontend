@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Alert } from '@shared/models/alert.model';
-
+import { Injectable } from "@angular/core";
+import { Alert } from "@shared/models/alert.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AlertService {
   alerts: Alert[] = [];

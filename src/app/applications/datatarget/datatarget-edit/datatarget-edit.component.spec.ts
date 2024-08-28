@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DatatargetEditComponent } from './datatarget-edit.component';
+import { DatatargetEditComponent } from "./datatarget-edit.component";
 
-describe('DatatargetEditComponent', () => {
+describe("DatatargetEditComponent", () => {
   let component: DatatargetEditComponent;
   let fixture: ComponentFixture<DatatargetEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatatargetEditComponent ]
-    })
-    .compileComponents();
+      declarations: [DatatargetEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DatatargetEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

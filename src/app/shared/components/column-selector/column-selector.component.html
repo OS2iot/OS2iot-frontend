@@ -11,21 +11,15 @@
     [placeholder]="'TABLE.COLUMNS' | translate"
   >
     <mat-option disabled>
-      <button
-        mat-raised-button
-        class="mat-primary fill text-sm"
-        (click)="selectAll()">
-        {{'QUESTION.DATATARGET.SELECTALLDEVICES' | translate}}
+      <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAll()">
+        {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
       </button>
-      <button
-        mat-raised-button
-        class="mat-primary fill text-sm"
-        (click)="deSelectAll()">
-        {{'QUESTION.DATATARGET.DESELECTALLDEVICES' | translate}}
+      <button mat-raised-button class="mat-primary fill text-sm" (click)="deSelectAll()">
+        {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
       </button>
     </mat-option>
     <mat-option *ngFor="let option of optionalColumnOptions" [value]="option.id">
-      {{option.display | translate}}
+      {{ option.display | translate }}
     </mat-option>
   </mat-select>
   <button mat-icon-button type="button" class="button-margin" (click)="Selector.open()">

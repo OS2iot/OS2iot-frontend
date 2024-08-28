@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Component, OnInit } from "@angular/core";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: 'app-user-table-tab',
-  templateUrl: './user-table-tab.component.html',
-  styleUrls: ['./user-table-tab.component.scss'],
+  selector: "app-user-table-tab",
+  templateUrl: "./user-table-tab.component.html",
+  styleUrls: ["./user-table-tab.component.scss"],
 })
 export class UserTableTabComponent implements OnInit {
   organizationId: number;

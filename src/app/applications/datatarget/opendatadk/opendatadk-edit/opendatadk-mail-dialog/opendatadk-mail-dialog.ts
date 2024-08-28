@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { OddkMailInfo } from '@applications/datatarget/datatarget.model';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
+import { Component } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
+import { OddkMailInfo } from "@applications/datatarget/datatarget.model";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: 'app-opendatadk-mail-dialog',
-  templateUrl: './opendatadk-mail-dialog.html',
-  styleUrls: ['./opendatadk-mail-dialog.scss'],
+  selector: "app-opendatadk-mail-dialog",
+  templateUrl: "./opendatadk-mail-dialog.html",
+  styleUrls: ["./opendatadk-mail-dialog.scss"],
 })
 export class OpenDataDkMailDialogComponent {
   sendAttempted: boolean = false;
-  organizationInput: string = '';
-  commentInput: string = '';
+  organizationInput: string = "";
+  commentInput: string = "";
 
   selectedOrganizationName: string;
 
@@ -22,7 +22,7 @@ export class OpenDataDkMailDialogComponent {
     const selectedOrganisationId = sharedVariableService.getSelectedOrganisationId();
     this.selectedOrganizationName = sharedVariableService
       .getOrganizationInfo()
-      ?.find((o) => o.id === selectedOrganisationId)?.name;
+      ?.find(o => o.id === selectedOrganisationId)?.name;
   }
 
   send() {

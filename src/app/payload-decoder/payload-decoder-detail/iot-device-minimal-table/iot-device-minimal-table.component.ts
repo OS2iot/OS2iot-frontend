@@ -1,28 +1,25 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import moment from 'moment';
-import {
-  IoTDeviceMinimal,
-  IoTDevicesMinimalResponse,
-} from '@applications/iot-devices/iot-device.model';
-import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
-import { PayloadDecoder } from '@payload-decoder/payload-decoder.model';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { Observable, of as observableOf } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@environments/environment';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import moment from "moment";
+import { IoTDeviceMinimal, IoTDevicesMinimalResponse } from "@applications/iot-devices/iot-device.model";
+import { IoTDeviceService } from "@applications/iot-devices/iot-device.service";
+import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Observable, of as observableOf } from "rxjs";
+import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
+import { environment } from "@environments/environment";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: 'app-iot-device-minimal-table',
-  templateUrl: './iot-device-minimal-table.component.html',
-  styleUrls: ['./iot-device-minimal-table.component.scss'],
+  selector: "app-iot-device-minimal-table",
+  templateUrl: "./iot-device-minimal-table.component.html",
+  styleUrls: ["./iot-device-minimal-table.component.scss"],
 })
 export class IoTDeviceMinimalTableComponent implements AfterViewInit {
   @Input() public payloadDecoder: PayloadDecoder;
 
-  displayedColumns: string[] = ['name', 'organization', 'updatedAt'];
+  displayedColumns: string[] = ["name", "organization", "updatedAt"];
   data: IoTDeviceMinimal[] = [];
 
   resultsLength = 0;
@@ -37,7 +34,7 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
     private sharedVariableService: SharedVariableService,
     public translate: TranslateService
   ) {
-    moment.locale('da');
+    moment.locale("da");
   }
 
   ngAfterViewInit() {
@@ -48,7 +45,7 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
           this.isLoadingResults = true;
           return this.getIoTDevices();
         }),
-        map((data) => {
+        map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.resultsLength = data.count;
@@ -60,7 +57,7 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
           return observableOf([]);
         })
       )
-      .subscribe((data) => (this.data = data));
+      .subscribe(data => (this.data = data));
   }
 
   getIoTDevices(): Observable<IoTDevicesMinimalResponse> {
@@ -72,14 +69,12 @@ export class IoTDeviceMinimalTableComponent implements AfterViewInit {
   }
 
   getOrganizationName(organizationId: number) {
-    return this.sharedVariableService
-      .getOrganizationInfo()
-      .find((org) => org.id === organizationId)?.name;
+    return this.sharedVariableService.getOrganizationInfo().find(org => org.id === organizationId)?.name;
   }
 
   public lastActive(device: IoTDeviceMinimal) {
     if (device.lastActiveTime == null) {
-      return this.translate.instant('ACTIVITY.NEVER');
+      return this.translate.instant("ACTIVITY.NEVER");
     } else {
       return moment(device.lastActiveTime).fromNow();
     }

@@ -1,7 +1,7 @@
-﻿import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+﻿import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class GatewayService {
   organisationChangeSubject: Subject<number> = new Subject();
   isGatewayStatusVisibleSubject: Subject<void> = new Subject();

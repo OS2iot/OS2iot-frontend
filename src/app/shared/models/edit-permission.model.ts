@@ -1,3 +1,3 @@
 export class EditPermission {
-    canEdit = false;
+  canEdit = false;
 }

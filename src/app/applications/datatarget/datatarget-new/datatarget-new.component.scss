@@ -5,8 +5,8 @@
   margin-left: 10px;
 }
 
-.mat-card{
-  display:flex;
+.mat-card {
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: 300px;
@@ -18,17 +18,15 @@
 
 .mat-card-header {
   flex-shrink: 1;
-    
 }
 
-.mat-card-content{
+.mat-card-content {
   flex-grow: 1;
   overflow: auto;
   margin-left: 10px;
 }
 
-
-mat-card img{
+mat-card img {
   object-fit: contain; /*this makes the image in src fit to the size specified below*/
   object-position: left;
   width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
@@ -38,7 +36,7 @@ mat-card img{
   margin-bottom: 3px;
 }
 
-.img-placeholder{  
-  height: 26px;  
+.img-placeholder {
+  height: 26px;
   clear: both;
 }

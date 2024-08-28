@@ -2,24 +2,18 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <p>
-        <strong>{{ 'IOTDEVICE.LATEST-DATAPACKAGES' | translate }}</strong>
+        <strong>{{ "IOTDEVICE.LATEST-DATAPACKAGES" | translate }}</strong>
       </p>
     </mat-panel-title>
   </mat-expansion-panel-header>
   <div class="timestamps-container">
     <div>
-      <p *ngFor="
-          let metadata of sortedMetadata;
-          let i = index
-        ">
+      <p *ngFor="let metadata of sortedMetadata; let i = index">
         <strong>{{ i + 1 }}</strong>
       </p>
     </div>
     <div>
-      <p *ngFor="
-          let metadata of sortedMetadata;
-          let i = index
-        ">
+      <p *ngFor="let metadata of sortedMetadata; let i = index">
         {{ metadata.sentTime | tableDateWithSecondsPipe }}
       </p>
     </div>

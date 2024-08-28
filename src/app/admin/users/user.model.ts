@@ -1,8 +1,5 @@
-import {
-  Organisation,
-  OrganisationResponse,
-} from '../organisation/organisation.model';
-import { PermissionResponse } from '../permission/permission.model';
+import { Organisation, OrganisationResponse } from "../organisation/organisation.model";
+import { PermissionResponse } from "../permission/permission.model";
 
 export class UserRequest {
   id: number;
@@ -33,8 +30,7 @@ export interface UserResponse {
   requestedOrganizations: OrganisationResponse[];
 }
 
-export interface UserResponsePerRequestedOrganization
-  extends Omit<UserResponse, 'requestedOrganizations'> {
+export interface UserResponsePerRequestedOrganization extends Omit<UserResponse, "requestedOrganizations"> {
   requestedOrganization: OrganisationResponse;
 }
 

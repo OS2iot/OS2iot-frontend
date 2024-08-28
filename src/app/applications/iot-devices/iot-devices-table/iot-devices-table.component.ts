@@ -20,246 +20,246 @@ import { ActivatedRoute } from "@angular/router";
 import { TableColumn } from "@shared/types/table.type";
 
 const columnDefinitions: TableColumn[] = [
-    {
-        id: "name",
-        display: "APPLICATION-TABLE.NAME",
-        default: true,
-        toggleable: false,
-    },
-    {
-        id: "type",
-        display: "IOT-TABLE.NETWORK-TECHNOLOGY",
-        default: true,
-        toggleable: true,
-    },
-    {
-        id: "commentOnLocation",
-        display: "GATEWAY.PLACEMENT-LABEL",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "deviceModel",
-        display: "IOTDEVICE.DEVICEMODEL",
-        default: true,
-        toggleable: true,
-    },
-    {
-        id: "deviceProfileName",
-        display: "IOTDEVICE.LORA.DEVICEPROFILE",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "deviceEUI",
-        display: "IOT-TABLE.DEV-EUI",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "OTAAapplicationKey",
-        display: "IOT-TABLE.APP-KEY",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "rssi",
-        display: "IOT-TABLE.RSSI",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "snr",
-        display: "IOT-TABLE.SNR",
-        default: false,
-        toggleable: true,
-    },
-    {
-        id: "dataTargets",
-        display: "APPLICATION-TABLE.DATA-TARGETS",
-        default: true,
-        toggleable: true,
-    },
-    {
-        id: "battery",
-        display: "IOT-TABLE.BATTERY",
-        default: true,
-        toggleable: true,
-    },
-    {
-        id: "active",
-        display: "IOT-TABLE.ACTIVE",
-        default: true,
-        toggleable: true,
-    },
-    {
-        id: "menu",
-        display: "",
-        default: true,
-        toggleable: false,
-    },
+  {
+    id: "name",
+    display: "APPLICATION-TABLE.NAME",
+    default: true,
+    toggleable: false,
+  },
+  {
+    id: "type",
+    display: "IOT-TABLE.NETWORK-TECHNOLOGY",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "commentOnLocation",
+    display: "GATEWAY.PLACEMENT-LABEL",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "deviceModel",
+    display: "IOTDEVICE.DEVICEMODEL",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "deviceProfileName",
+    display: "IOTDEVICE.LORA.DEVICEPROFILE",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "deviceEUI",
+    display: "IOT-TABLE.DEV-EUI",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "OTAAapplicationKey",
+    display: "IOT-TABLE.APP-KEY",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "rssi",
+    display: "IOT-TABLE.RSSI",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "snr",
+    display: "IOT-TABLE.SNR",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "dataTargets",
+    display: "APPLICATION-TABLE.DATA-TARGETS",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "battery",
+    display: "IOT-TABLE.BATTERY",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "active",
+    display: "IOT-TABLE.ACTIVE",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "menu",
+    display: "",
+    default: true,
+    toggleable: false,
+  },
 ];
 
 @Component({
-    selector: "app-iot-devices-table",
-    templateUrl: "./iot-devices-table.component.html",
-    styleUrls: ["./iot-devices-table.component.scss"],
+  selector: "app-iot-devices-table",
+  templateUrl: "./iot-devices-table.component.html",
+  styleUrls: ["./iot-devices-table.component.scss"],
 })
 export class IotDevicesTableComponent implements AfterViewInit, OnInit {
-    @Input() applicationId: number;
-    data: IotDevice[] = [];
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-    public pageSize = environment.tablePageSize;
-    public pageSizeOptions = DefaultPageSizeOptions;
-    public canEdit = false;
+  @Input() applicationId: number;
+  data: IotDevice[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  public pageSize = environment.tablePageSize;
+  public pageSizeOptions = DefaultPageSizeOptions;
+  public canEdit = false;
 
-    private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
+  private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
-    batteryStatusColor = "green";
-    resultsLength = 0;
-    isLoadingResults = true;
+  batteryStatusColor = "green";
+  resultsLength = 0;
+  isLoadingResults = true;
 
-    displayedColumns: string[] = [];
+  displayedColumns: string[] = [];
 
-    iotDeviceSavedColumns = "iotDeviceSavedColumns";
+  iotDeviceSavedColumns = "iotDeviceSavedColumns";
 
-    constructor(
-        private restService: RestService,
-        private deleteDialogService: DeleteDialogService,
-        public translate: TranslateService,
-        public iotDeviceService: IoTDeviceService,
-        private meService: MeService,
-        private dialog: MatDialog,
-        private route: ActivatedRoute
-    ) {
-        translate.use("da");
-        moment.locale("da");
+  constructor(
+    private restService: RestService,
+    private deleteDialogService: DeleteDialogService,
+    public translate: TranslateService,
+    public iotDeviceService: IoTDeviceService,
+    private meService: MeService,
+    private dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {
+    translate.use("da");
+    moment.locale("da");
+  }
+
+  ngOnInit() {
+    const applicationId = +this.route.snapshot.paramMap.get("id");
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      applicationId
+    );
+  }
+
+  ngAfterViewInit() {
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.getDevices(this.sort.active, this.sort.direction);
+        }),
+        map(data => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.resultsLength = data.count;
+
+          return data.data;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      )
+      .subscribe(data => {
+        this.data = data;
+      });
+  }
+
+  public getBatteryProcentage(device: IotDevice): number {
+    if (device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
+      return null;
     }
+    return Math.round(device?.lorawanSettings?.deviceStatusBattery);
+  }
 
-    ngOnInit() {
-        const applicationId = +this.route.snapshot.paramMap.get("id");
-        this.canEdit = this.meService.hasAccessToTargetOrganization(
-            OrganizationAccessScope.ApplicationWrite,
-            undefined,
-            applicationId
-        );
-    }
+  getDevices(orderByColumn: string, orderByDirection: string): Observable<IotDevicesResponse> {
+    return this.restService
+      .get(`application/${this.applicationId}/iot-devices`, {
+        limit: this.paginator.pageSize,
+        offset: this.paginator.pageIndex * this.paginator.pageSize,
+        sort: orderByDirection,
+        orderOn: orderByColumn,
+      })
+      .pipe(
+        map((data: IotDevicesResponse) => {
+          // For some reason, the backend is not capable to sort MQTT_EXTERNAL_BROKER and MQTT_INTERNAL_BROKER.
+          // Therefore we do it manually in the frontend.
+          if (orderByColumn !== "type") {
+            return data;
+          } else {
+            data.data.sort((a: IotDevice, b: IotDevice) => {
+              const valueA = a[orderByColumn];
+              const valueB = b[orderByColumn];
 
-    ngAfterViewInit() {
-        // If the user changes the sort order, reset back to the first page.
-        this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-
-        merge(this.sort.sortChange, this.paginator.page)
-            .pipe(
-                startWith({}),
-                switchMap(() => {
-                    this.isLoadingResults = true;
-                    return this.getDevices(this.sort.active, this.sort.direction);
-                }),
-                map(data => {
-                    // Flip flag to show that loading has finished.
-                    this.isLoadingResults = false;
-                    this.resultsLength = data.count;
-
-                    return data.data;
-                }),
-                catchError(() => {
-                    this.isLoadingResults = false;
-                    return observableOf([]);
-                })
-            )
-            .subscribe(data => {
-                this.data = data;
+              if (valueA < valueB) {
+                return orderByDirection === "asc" ? -1 : 1;
+              }
+              if (valueA > valueB) {
+                return orderByDirection === "asc" ? 1 : -1;
+              }
+              return 0;
             });
-    }
+            return data;
+          }
+        })
+      );
+  }
 
-    public getBatteryProcentage(device: IotDevice): number {
-        if (device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
-            return null;
-        }
-        return Math.round(device?.lorawanSettings?.deviceStatusBattery);
-    }
+  public lastActive(device: IotDevice) {
+    return device.latestReceivedMessage
+      ? moment(device.latestReceivedMessage.sentTime).fromNow()
+      : this.translate.instant("ACTIVITY.NEVER");
+  }
 
-    getDevices(orderByColumn: string, orderByDirection: string): Observable<IotDevicesResponse> {
-        return this.restService
-            .get(`application/${this.applicationId}/iot-devices`, {
-                limit: this.paginator.pageSize,
-                offset: this.paginator.pageIndex * this.paginator.pageSize,
-                sort: orderByDirection,
-                orderOn: orderByColumn,
-            })
-            .pipe(
-                map((data: IotDevicesResponse) => {
-                    // For some reason, the backend is not capable to sort MQTT_EXTERNAL_BROKER and MQTT_INTERNAL_BROKER.
-                    // Therefore we do it manually in the frontend.
-                    if (orderByColumn !== "type") {
-                        return data;
-                    } else {
-                        data.data.sort((a: IotDevice, b: IotDevice) => {
-                            const valueA = a[orderByColumn];
-                            const valueB = b[orderByColumn];
-
-                            if (valueA < valueB) {
-                                return orderByDirection === "asc" ? -1 : 1;
-                            }
-                            if (valueA > valueB) {
-                                return orderByDirection === "asc" ? 1 : -1;
-                            }
-                            return 0;
-                        });
-                        return data;
-                    }
-                })
-            );
-    }
-
-    public lastActive(device: IotDevice) {
-        return device.latestReceivedMessage
-            ? moment(device.latestReceivedMessage.sentTime).fromNow()
-            : this.translate.instant("ACTIVITY.NEVER");
-    }
-
-    clickDelete(element: any) {
-        if (element.type === DeviceType.SIGFOX) {
-            this.showSigfoxDeleteDialog();
+  clickDelete(element: any) {
+    if (element.type === DeviceType.SIGFOX) {
+      this.showSigfoxDeleteDialog();
+    } else {
+      this.deleteDialogService.showSimpleDialog().subscribe(response => {
+        if (response) {
+          this.iotDeviceService.deleteIoTDevice(element.id).subscribe(response => {
+            if (response.ok && response.body.affected > 0) {
+              this.paginator.page.emit({
+                pageIndex: this.paginator.pageIndex,
+                pageSize: this.paginator.pageSize,
+                length: this.resultsLength,
+              });
+            }
+          });
         } else {
-            this.deleteDialogService.showSimpleDialog().subscribe(response => {
-                if (response) {
-                    this.iotDeviceService.deleteIoTDevice(element.id).subscribe(response => {
-                        if (response.ok && response.body.affected > 0) {
-                            this.paginator.page.emit({
-                                pageIndex: this.paginator.pageIndex,
-                                pageSize: this.paginator.pageSize,
-                                length: this.resultsLength,
-                            });
-                        }
-                    });
-                } else {
-                    console.log(response);
-                }
-            });
+          console.log(response);
         }
+      });
     }
+  }
 
-    showSigfoxDeleteDialog() {
-        this.dialog.open(DeleteDialogComponent, {
-            data: {
-                message:
-                    "Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter",
-                showAccept: false,
-                showCancel: true,
-            },
-        });
+  showSigfoxDeleteDialog() {
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        message:
+          "Sigfox enheder kan ikke slettes fra OS2IoT, de skal slettes fra backend.sigfox.com, hvorefter de automatisk bliver slettet fra OS2IoT inden for få minutter",
+        showAccept: false,
+        showCancel: true,
+      },
+    });
+  }
+
+  public truncateText(text: string): string {
+    const maxLength = 32;
+    if (text.length <= maxLength) {
+      return text;
     }
+    return text.substring(0, maxLength) + "...";
+  }
 
-    public truncateText(text: string): string {
-        const maxLength = 32;
-        if (text.length <= maxLength) {
-            return text;
-        }
-        return text.substring(0, maxLength) + "...";
-    }
-
-    protected readonly columnDefinitions = columnDefinitions;
+  protected readonly columnDefinitions = columnDefinitions;
 }

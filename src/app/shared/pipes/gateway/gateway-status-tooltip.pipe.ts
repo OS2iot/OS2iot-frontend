@@ -1,7 +1,7 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'gatewayStatusTooltip',
+  name: "gatewayStatusTooltip",
 })
 /**
  * Separate pipe to format text to avoid renders if none of the values

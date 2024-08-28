@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { DeviceType } from '@shared/enums/device-type';
+import { Pipe, PipeTransform } from "@angular/core";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { DeviceType } from "@shared/enums/device-type";
 
 @Pipe({
-  name: 'filterDevices',
+  name: "filterDevices",
 })
 export class FilterDevicesPipe implements PipeTransform {
   transform(value: IotDevice[] | undefined, ..._: unknown[]): IotDevice[] {
@@ -13,7 +13,7 @@ export class FilterDevicesPipe implements PipeTransform {
     if (!value) {
       return lorawanDevices;
     }
-    value.forEach((device) => {
+    value.forEach(device => {
       if (device.type === DeviceType.LORAWAN) {
         lorawanDevices.push(device);
       }

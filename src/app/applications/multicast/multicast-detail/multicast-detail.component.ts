@@ -1,30 +1,30 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { BackButton } from '@shared/models/back-button.model';
-import { DropdownButton } from '@shared/models/dropdown-button.model';
-import { Subscription } from 'rxjs';
-import { Multicast } from '../multicast.model';
-import { Location } from '@angular/common';
-import { MulticastService } from '../multicast.service';
-import { SnackService } from '@shared/services/snack.service';
-import { Downlink } from '@applications/iot-devices/downlink.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DownlinkDialogComponent } from '@applications/iot-devices/iot-device-detail/downlink/downlink-dialog/downlink-dialog.component';
-import { keyPressedHex } from '@shared/constants/regex-constants';
-import { DownlinkService } from '@shared/services/downlink.service';
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { BackButton } from "@shared/models/back-button.model";
+import { DropdownButton } from "@shared/models/dropdown-button.model";
+import { Subscription } from "rxjs";
+import { Multicast } from "../multicast.model";
+import { Location } from "@angular/common";
+import { MulticastService } from "../multicast.service";
+import { SnackService } from "@shared/services/snack.service";
+import { Downlink } from "@applications/iot-devices/downlink.model";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { MatDialog } from "@angular/material/dialog";
+import { DownlinkDialogComponent } from "@applications/iot-devices/iot-device-detail/downlink/downlink-dialog/downlink-dialog.component";
+import { keyPressedHex } from "@shared/constants/regex-constants";
+import { DownlinkService } from "@shared/services/downlink.service";
 
 @Component({
-  selector: 'app-multicast-detail',
-  templateUrl: './multicast-detail.component.html',
-  styleUrls: ['./multicast-detail.component.scss'],
+  selector: "app-multicast-detail",
+  templateUrl: "./multicast-detail.component.html",
+  styleUrls: ["./multicast-detail.component.scss"],
 })
 export class MulticastDetailComponent implements OnInit, OnDestroy {
   public multicast: Multicast;
-  public backButton: BackButton = { label: '', routerLink: undefined };
+  public backButton: BackButton = { label: "", routerLink: undefined };
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public formFailedSubmit = false;
@@ -46,23 +46,20 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.errorMessages = [];
-    const id: number = +this.route.snapshot.paramMap.get('multicastId');
+    const id: number = +this.route.snapshot.paramMap.get("multicastId");
     if (id) {
       this.getMulticast(id);
       this.dropdownButton = {
-        label: '',
-        editRouterLink: '../../multicast-edit/' + id,
+        label: "",
+        editRouterLink: "../../multicast-edit/" + id,
         isErasable: true,
       };
-      this.applicationId = +this.route.snapshot.paramMap.get('id');
+      this.applicationId = +this.route.snapshot.paramMap.get("id");
     }
-    this.translate
-      .get(['GEN.BACK', 'MULTICAST-TABLE-ROW.SHOW-OPTIONS'])
-      .subscribe((translations) => {
-        this.backButton.label = translations['GEN.BACK'];
-        this.dropdownButton.label =
-          translations['MULTICAST-TABLE-ROW.SHOW-OPTIONS'];
-      });
+    this.translate.get(["GEN.BACK", "MULTICAST-TABLE-ROW.SHOW-OPTIONS"]).subscribe(translations => {
+      this.backButton.label = translations["GEN.BACK"];
+      this.dropdownButton.label = translations["MULTICAST-TABLE-ROW.SHOW-OPTIONS"];
+    });
   }
 
   getMulticast(id: number) {
@@ -80,23 +77,19 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
   // }
 
   onDeleteMulticast() {
-    this.deleteDialogSubscription = this.deleteDialogService
-      .showSimpleDialog()
-      .subscribe((response) => {
-        if (response) {
-          this.multicastService
-            .delete(this.multicast.id)
-            .subscribe((response) => {
-              if (response.status !== 0) {
-                this.snackService.showDeletedSnack();
-                this.location.back();
-              } else {
-                this.snackService.showFailSnack();
-              }
-            });
-        } else {
-        }
-      });
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
+      if (response) {
+        this.multicastService.delete(this.multicast.id).subscribe(response => {
+          if (response.status !== 0) {
+            this.snackService.showDeletedSnack();
+            this.location.back();
+          } else {
+            this.snackService.showFailSnack();
+          }
+        });
+      } else {
+      }
+    });
   }
 
   keyPressHexadecimal(event) {
@@ -113,15 +106,13 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
   clickDownlink() {
     if (this.multicast.iotDevices.length > 0) {
       if (this.validateHex(this.downlink.data)) {
-        this.multicastService
-          .multicastGet(this.multicast.id)
-          .subscribe((response: any) => {
-            if (response.deviceQueueItems.length > 0) {
-              this.openDownlinkDialog();
-            } else {
-              this.startDownlink();
-            }
-          });
+        this.multicastService.multicastGet(this.multicast.id).subscribe((response: any) => {
+          if (response.deviceQueueItems.length > 0) {
+            this.openDownlinkDialog();
+          } else {
+            this.startDownlink();
+          }
+        });
       }
     } else {
       this.downlinkService.showSendDownlinkFailNoDevices();
@@ -130,7 +121,7 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
   openDownlinkDialog() {
     const dialog = this.dialog.open(DownlinkDialogComponent, {});
 
-    dialog.afterClosed().subscribe((result) => {
+    dialog.afterClosed().subscribe(result => {
       if (result === true) {
         this.startDownlink();
       }
@@ -139,16 +130,14 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
 
   private startDownlink() {
     this.errorMessages = [];
-    this.multicastService
-      .multicastPost(this.downlink, this.multicast.id)
-      .subscribe(
-        () => {
-          this.snackService.showInQueueSnack();
-        },
-        (error) => {
-          this.handleError(error);
-        }
-      );
+    this.multicastService.multicastPost(this.downlink, this.multicast.id).subscribe(
+      () => {
+        this.snackService.showInQueueSnack();
+      },
+      error => {
+        this.handleError(error);
+      }
+    );
   }
 
   private validateHex(input: string): boolean {
@@ -157,13 +146,13 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
     if (isHexinput) {
       return true;
     } else {
-      this.addToErrorMessage('MULTICAST.DOWNLINK.NO-PORT-OR-PAYLOAD');
+      this.addToErrorMessage("MULTICAST.DOWNLINK.NO-PORT-OR-PAYLOAD");
       return false;
     }
   }
 
   addToErrorMessage(text: string) {
-    this.translate.get([text]).subscribe((translations) => {
+    this.translate.get([text]).subscribe(translations => {
       this.errorMessages.push(translations[text]);
     });
   }

@@ -1,25 +1,25 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import {
   PermissionRequestAcceptUser,
   PermissionType,
   PermissionTypes,
   PermissionResponse,
-} from '@app/admin/permission/permission.model';
-import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { Subscription } from 'rxjs';
-import { UserResponse } from '../user.model';
-import { UserService } from '../user.service';
-import { Location } from '@angular/common';
-import { PermissionService } from '@app/admin/permission/permission.service';
-import { UntypedFormControl } from '@angular/forms';
+} from "@app/admin/permission/permission.model";
+import { TranslateService } from "@ngx-translate/core";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { Subscription } from "rxjs";
+import { UserResponse } from "../user.model";
+import { UserService } from "../user.service";
+import { Location } from "@angular/common";
+import { PermissionService } from "@app/admin/permission/permission.service";
+import { UntypedFormControl } from "@angular/forms";
 
 @Component({
-  selector: 'app-accept-user',
-  templateUrl: './accept-user.component.html',
-  styleUrls: ['./accept-user.component.scss'],
+  selector: "app-accept-user",
+  templateUrl: "./accept-user.component.html",
+  styleUrls: ["./accept-user.component.scss"],
 })
 export class AcceptUserComponent implements OnInit, OnDestroy {
   public backButtonTitle: string;
@@ -53,47 +53,34 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.userId = +this.route.snapshot.paramMap.get('user-id');
-    this.organizationId = +this.route.snapshot.paramMap.get('org-id');
+    this.userId = +this.route.snapshot.paramMap.get("user-id");
+    this.organizationId = +this.route.snapshot.paramMap.get("org-id");
 
     if (this.userId) {
       this.getUser(this.userId);
     }
 
-    this.translate
-      .get(['GEN.BACK', 'USERS.ACCEPT-USER.ACCEPT'])
-      .subscribe((translations) => {
-        this.backButtonTitle = translations['GEN.BACK'];
-        this.title = translations['USERS.ACCEPT-USER.ACCEPT'];
-      });
+    this.translate.get(["GEN.BACK", "USERS.ACCEPT-USER.ACCEPT"]).subscribe(translations => {
+      this.backButtonTitle = translations["GEN.BACK"];
+      this.title = translations["USERS.ACCEPT-USER.ACCEPT"];
+    });
     this.permission.userId = this.userId;
     this.permission.organizationId = this.organizationId;
     this.getPermissionsForOrg(this.organizationId);
   }
 
   private getUser(id: number) {
-    this.subscription = this.userService
-      .getOne(id, false)
-      .subscribe((response) => {
-        this.user = response;
-      });
+    this.subscription = this.userService.getOne(id, false).subscribe(response => {
+      this.user = response;
+    });
   }
 
   private getPermissionsForOrg(orgId: number) {
     this.permissionsForOrgSubscription = this.permissionService
-      .getPermissions(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        orgId
-      )
+      .getPermissions(undefined, undefined, undefined, undefined, undefined, orgId)
       .subscribe(
-        (permissionsResponse) => {
-          this.permissions = permissionsResponse.data.filter(
-            (x) => x.organization?.id === this.organizationId
-          );
+        permissionsResponse => {
+          this.permissions = permissionsResponse.data.filter(x => x.organization?.id === this.organizationId);
           this.permissionsCtrl.setValue(this.permissions);
           this.organizationName = permissionsResponse.data[0]?.organization?.name;
         },
@@ -114,17 +101,15 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.permissionService
-      .createPermissionAcceptUser(this.permission)
-      .subscribe(
-        () => {
-          this.routeBack();
-        },
-        (error: HttpErrorResponse) => {
-          console.log(error);
-          this.showError(error);
-        }
-      );
+    this.permissionService.createPermissionAcceptUser(this.permission).subscribe(
+      () => {
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.showError(error);
+      }
+    );
   }
 
   ngOnDestroy() {

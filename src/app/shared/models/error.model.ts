@@ -1,4 +1,4 @@
 export interface Error {
-    field: string;
-    message: string;
+  field: string;
+  message: string;
 }

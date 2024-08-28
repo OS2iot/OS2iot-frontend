@@ -1,32 +1,63 @@
 <div *ngIf="deviceModel">
-    <app-top-bar [data]="deviceModel" [title]="deviceModel.body.name" [backButton]="backButton" [subPage]="true"
-        [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="clickDelete()"
-        [canEdit]="canEdit">
-    </app-top-bar>
-    <div class="container-fluid">
-        <div class="row" *ngIf="deviceModel">
-            <div class="col-12">
-                <div class="jumbotron">
-                    <h3>{{ 'DEVICE-MODEL.HEADLINE' | translate }}</h3>
-                    <app-general-details [data]="deviceModel"></app-general-details>
-                    <p><strong>{{ 'DEVICE-MODEL.ID' | translate }}</strong>{{deviceModel.body.id}}</p>
-                    <p><strong>{{ 'DEVICE-MODEL.BRANDNAME' | translate }}</strong>{{deviceModel.body.brandName}}</p>
-                    <p><strong>{{ 'DEVICE-MODEL.MODELNAME' | translate }}</strong>{{deviceModel.body.modelName}}</p>
-                    <p><strong>{{ 'DEVICE-MODEL.MANUFACTURERNAME' | translate }}</strong>{{deviceModel.body.manufacturerName}}
-                    </p>
-                    <p><strong>{{ 'DEVICE-MODEL.CONTROLLEDPROPERTY' | translate }}</strong>{{deviceModel.body.controlledProperty.join(', ')}}
-                    </p>
-                    <p><strong>{{ 'DEVICE-MODEL.CATEGORY' | translate }}</strong>{{deviceModel.body.category}}</p>
-                    <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDUNITS' | translate }}</strong>{{deviceModel.body.supportedUnits}}
-                    </p>
-                    <p><strong>{{ 'DEVICE-MODEL.FUNCTION' | translate }}</strong>{{deviceModel.body.function}}</p>
-                    <p><strong>{{ 'DEVICE-MODEL.ENERGYLIMITATIONCLASS' | translate }}</strong>{{deviceModel.body.energyLimitationClass}}
-                    </p>
-                    <p><strong>{{ 'DEVICE-MODEL.SUPPORTEDPROTOCOL' | translate }}</strong>{{deviceModel.body.supportedProtocol}}
-                    </p>
-                </div>
-
-            </div>
+  <app-top-bar
+    [data]="deviceModel"
+    [title]="deviceModel.body.name"
+    [backButton]="backButton"
+    [subPage]="true"
+    [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton"
+    (deleteSelectedInDropdown)="clickDelete()"
+    [canEdit]="canEdit"
+  >
+  </app-top-bar>
+  <div class="container-fluid">
+    <div class="row" *ngIf="deviceModel">
+      <div class="col-12">
+        <div class="jumbotron">
+          <h3>{{ "DEVICE-MODEL.HEADLINE" | translate }}</h3>
+          <app-general-details [data]="deviceModel"></app-general-details>
+          <p>
+            <strong>{{ "DEVICE-MODEL.ID" | translate }}</strong
+            >{{ deviceModel.body.id }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.BRANDNAME" | translate }}</strong
+            >{{ deviceModel.body.brandName }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.MODELNAME" | translate }}</strong
+            >{{ deviceModel.body.modelName }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.MANUFACTURERNAME" | translate }}</strong
+            >{{ deviceModel.body.manufacturerName }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.CONTROLLEDPROPERTY" | translate }}</strong
+            >{{ deviceModel.body.controlledProperty.join(", ") }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.CATEGORY" | translate }}</strong
+            >{{ deviceModel.body.category }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.SUPPORTEDUNITS" | translate }}</strong
+            >{{ deviceModel.body.supportedUnits }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.FUNCTION" | translate }}</strong
+            >{{ deviceModel.body.function }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.ENERGYLIMITATIONCLASS" | translate }}</strong
+            >{{ deviceModel.body.energyLimitationClass }}
+          </p>
+          <p>
+            <strong>{{ "DEVICE-MODEL.SUPPORTEDPROTOCOL" | translate }}</strong
+            >{{ deviceModel.body.supportedProtocol }}
+          </p>
         </div>
+      </div>
     </div>
+  </div>
 </div>

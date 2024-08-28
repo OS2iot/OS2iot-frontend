@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { IoTDeviceMinimalTableComponent } from './iot-device-minimal-table.component';
+import { IoTDeviceMinimalTableComponent } from "./iot-device-minimal-table.component";
 
-describe('IoTDeviceMinimalTableComponent', () => {
+describe("IoTDeviceMinimalTableComponent", () => {
   let component: IoTDeviceMinimalTableComponent;
   let fixture: ComponentFixture<IoTDeviceMinimalTableComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ IoTDeviceMinimalTableComponent ]
-    })
-    .compileComponents();
+      declarations: [IoTDeviceMinimalTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('IoTDeviceMinimalTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

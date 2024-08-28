@@ -1,44 +1,42 @@
 <div [hidden]="!organisation" *ngIf="organisation">
-    <app-top-bar
-      [data]="organisation"
-      [backButton]="backButton"
-      [subPage]="true"
-      [addDetailDowndown]="true"
-      [dropDownButton]="dropdownButton"
-      (deleteSelectedInDropdown)="clickDelete()"
-      [canEdit]="canEdit"
-    >
-    </app-top-bar>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 ">
-                <div class="jumbotron">
-                    <h3> {{'ORGANISATION.HEADLINE' | translate}}</h3>
-                    <app-general-details [data]="organisation"></app-general-details>
-                </div>
-            </div>
+  <app-top-bar
+    [data]="organisation"
+    [backButton]="backButton"
+    [subPage]="true"
+    [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton"
+    (deleteSelectedInDropdown)="clickDelete()"
+    [canEdit]="canEdit"
+  >
+  </app-top-bar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          <h3>{{ "ORGANISATION.HEADLINE" | translate }}</h3>
+          <app-general-details [data]="organisation"></app-general-details>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="jumbotron">
-                    <h3>
-                        {{ 'ORGANISATION.DETAIL.APPLICATIONS' | translate }}
-                    </h3>
-                    <app-applications-table [organizationId]="id">
-                    </app-applications-table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="jumbotron">
-                    <h3>
-                        {{ 'ORGANISATION.DETAIL.PERMISSIONS' | translate }}
-                    </h3>
-                    <app-permission-tabel [organisationId]="id">
-                    </app-permission-tabel>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          <h3>
+            {{ "ORGANISATION.DETAIL.APPLICATIONS" | translate }}
+          </h3>
+          <app-applications-table [organizationId]="id"> </app-applications-table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          <h3>
+            {{ "ORGANISATION.DETAIL.PERMISSIONS" | translate }}
+          </h3>
+          <app-permission-tabel [organisationId]="id"> </app-permission-tabel>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

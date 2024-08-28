@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { OrganisationDropdownComponent } from './organisation-dropdown.component';
+import { OrganisationDropdownComponent } from "./organisation-dropdown.component";
 
-describe('OrganisationDropdownComponent', () => {
+describe("OrganisationDropdownComponent", () => {
   let component: OrganisationDropdownComponent;
   let fixture: ComponentFixture<OrganisationDropdownComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrganisationDropdownComponent ]
-    })
-    .compileComponents();
+      declarations: [OrganisationDropdownComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('OrganisationDropdownComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

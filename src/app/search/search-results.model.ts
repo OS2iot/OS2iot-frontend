@@ -21,12 +21,12 @@ export class SearchResultDto {
 }
 
 export enum SearchResultType {
-  Gateway = 'Gateway',
-  IoTDevice = 'IoTDevice',
-  Application = 'Application',
+  Gateway = "Gateway",
+  IoTDevice = "IoTDevice",
+  Application = "Application",
 }
 
 export class ListAllSearchResultsResponseDto {
-    data: SearchResultDto[];
-    count: number;
+  data: SearchResultDto[];
+  count: number;
 }

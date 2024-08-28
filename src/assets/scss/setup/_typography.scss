@@ -1,6 +1,6 @@
-@import 'utilities';
-@import 'breakpoints';
-@import 'base';
+@import "utilities";
+@import "breakpoints";
+@import "base";
 
 $mod_1: 1.1; // mobile
 $mod_2: 1.4; // desktop
@@ -12,7 +12,7 @@ h4,
 h5,
 p,
 a {
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 /*####################### HEADLINE #########################*/
@@ -61,12 +61,7 @@ a {
   line-height: $h3-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
-  @include fluid-type(
-    $min_width,
-    $max_width,
-    $mod_1 * $mod_1 * $min_font,
-    $mod_2 * $mod_2 * $min_font
-  );
+  @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
 
   strong {
     font-weight: $font-weight-bold;
@@ -80,12 +75,7 @@ a {
   line-height: $h4-line-height;
   font-weight: $font-weight-normal;
   color: $color-text;
-  @include fluid-type(
-    $min_width,
-    $max_width,
-    $mod_1 * $mod_1 * $min_font,
-    $mod_2 * $mod_2 * $min_font
-  );
+  @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
 
   strong {
     font-weight: $font-weight-bold;
@@ -267,7 +257,7 @@ footer {
     br {
       display: block;
       @extend .mb-3;
-      content: ' ';
+      content: " ";
     }
   }
 

@@ -1,4 +1,4 @@
-import { PermissionResponse } from '../permission/permission.model';
+import { PermissionResponse } from "../permission/permission.model";
 
 export class ApiKeyRequest {
   id: number;

@@ -1,11 +1,11 @@
-@import 'src/assets/scss/setup/utilities';
-@import 'src/assets/scss/setup/variables';
+@import "src/assets/scss/setup/utilities";
+@import "src/assets/scss/setup/variables";
 
-$fa-font-path : '~@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/brands';
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
 
 .choose-file:before {
   content: attr(data-content);
@@ -42,7 +42,7 @@ $fa-font-path : '~@fortawesome/fontawesome-free/webfonts';
 .choose-file:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  content: '\f093';
+  content: "\f093";
   position: absolute;
   font-size: $icon-size-big;
   left: 50%;

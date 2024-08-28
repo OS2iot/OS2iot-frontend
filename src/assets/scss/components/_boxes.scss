@@ -1,21 +1,20 @@
-
-@import '../setup/variables';
+@import "../setup/variables";
 
 .jumbotron {
   @extend .my-4;
   @extend .m-md-4;
   @extend .p-3;
   background-color: $color-bg-normal;
-  &--m-right{
+  &--m-right {
     @extend .mr-md-2;
   }
-  &--m-left{
+  &--m-left {
     @extend .ml-md-2;
   }
-  &--full-width{
+  &--full-width {
     width: -webkit-fill-available;
   }
-  h3{
+  h3 {
     @extend .pr-5;
     @extend .mb-4;
     display: block;
@@ -25,18 +24,16 @@
     border-bottom-color: $color-primary;
     width: fit-content;
   }
-  &--table{
+  &--table {
     @extend .m-md-4;
   }
 }
 
-
-
-.box{
+.box {
   width: 100%;
   @extend .p-3;
 
-  &--info{
+  &--info {
     background-color: $color-bg-info;
     border: $info-border;
     border-radius: $border-radius-primary;
@@ -44,10 +41,10 @@
   }
 }
 
-.sixty-height{
+.sixty-height {
   height: 60vh;
 }
 
-.thirty-height{
-  height: 30vh
+.thirty-height {
+  height: 30vh;
 }

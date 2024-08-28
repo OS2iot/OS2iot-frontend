@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@environments/environment';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { LoggedInService } from '@shared/services/loggedin.service';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { environment } from "@environments/environment";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { LoggedInService } from "@shared/services/loggedin.service";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: "app-auth",
+  templateUrl: "./auth.component.html",
+  styleUrls: ["./auth.component.scss"],
 })
 export class AuthComponent implements OnInit {
   public errorMessage: string;
@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {}
 
   getKombitLoginUrl() {
-    const frontpage = encodeURI(window.location.origin + '/applications');
+    const frontpage = encodeURI(window.location.origin + "/applications");
     return `${environment.baseUrl}auth/kombit/login?redirect=${frontpage}`;
   }
 
@@ -49,13 +49,13 @@ export class AuthComponent implements OnInit {
     this.userMinimalService.setUserMinimalList();
     this.isLoading = false;
     this.loggedinService.emitChange(true);
-    this.router.navigateByUrl('/applications');
+    this.router.navigateByUrl("/applications");
   }
 
   fail() {
     this.isLoading = false;
-    this.errorFields = ['username', 'password'];
-    this.errorMessages = ['Login failed. Wrong username or password.'];
+    this.errorFields = ["username", "password"];
+    this.errorMessages = ["Login failed. Wrong username or password."];
     this.formFailedSubmit = true;
   }
 
@@ -75,7 +75,7 @@ export class AuthComponent implements OnInit {
           this.fail();
         }
       },
-      (err) => {
+      err => {
         console.log(err);
       }
     );

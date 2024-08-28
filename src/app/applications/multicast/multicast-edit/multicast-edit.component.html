@@ -11,9 +11,7 @@
 
   <div class="row">
     <div class="form-group mt-3">
-      <label class="form-label" for="name">{{
-        'QUESTION.GIVE-MULTICAST-NAME' | translate
-      }}</label
+      <label class="form-label" for="name">{{ "QUESTION.GIVE-MULTICAST-NAME" | translate }}</label
       >*
       <input
         type="text"
@@ -32,9 +30,7 @@
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="mcAddr">{{
-        'QUESTION.GIVE-MULTICAST-ADDRESS' | translate
-      }}</label
+      <label class="form-label" for="mcAddr">{{ "QUESTION.GIVE-MULTICAST-ADDRESS" | translate }}</label
       >*
       <input
         type="text"
@@ -53,14 +49,12 @@
         (keypress)="keyPressHexadecimal($event)"
       />
       <label>
-        {{'QUESTION.MULTICAST.HINT-8-HEXA' | translate}}
+        {{ "QUESTION.MULTICAST.HINT-8-HEXA" | translate }}
       </label>
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="mcNwkSKey">{{
-        'QUESTION.GIVE-MULTICAST-NETWORK-KEY' | translate
-      }}</label
+      <label class="form-label" for="mcNwkSKey">{{ "QUESTION.GIVE-MULTICAST-NETWORK-KEY" | translate }}</label
       >*
       <input
         type="text"
@@ -78,20 +72,16 @@
         (keypress)="keyPressHexadecimal($event)"
       />
       <label>
-        {{'QUESTION.MULTICAST.HINT-32-HEXA' | translate}}
+        {{ "QUESTION.MULTICAST.HINT-32-HEXA" | translate }}
       </label>
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="mcAppSKey">{{
-        'QUESTION.GIVE-MULTICAST-APPLICATION-KEY' | translate
-      }}</label
+      <label class="form-label" for="mcAppSKey">{{ "QUESTION.GIVE-MULTICAST-APPLICATION-KEY" | translate }}</label
       >*
       <input
         type="text"
-        [placeholder]="
-          'QUESTION.MULTICAST-APPLICATION-KEY-PLACEHOLDER' | translate
-        "
+        [placeholder]="'QUESTION.MULTICAST-APPLICATION-KEY-PLACEHOLDER' | translate"
         [maxLength]="32"
         required
         class="form-control"
@@ -105,14 +95,12 @@
         (keypress)="keyPressHexadecimal($event)"
       />
       <label>
-        {{'QUESTION.MULTICAST.HINT-32-HEXA' | translate}}
+        {{ "QUESTION.MULTICAST.HINT-32-HEXA" | translate }}
       </label>
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="fCnt">{{
-        'QUESTION.GIVE-MULTICAST-FRAMECOUNTER' | translate
-      }}</label
+      <label class="form-label" for="fCnt">{{ "QUESTION.GIVE-MULTICAST-FRAMECOUNTER" | translate }}</label
       >*
       <input
         type="number"
@@ -130,9 +118,7 @@
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="dr">{{
-        'QUESTION.GIVE-MULTICAST-DATARATE' | translate
-      }}</label
+      <label class="form-label" for="dr">{{ "QUESTION.GIVE-MULTICAST-DATARATE" | translate }}</label
       >*
       <input
         type="number"
@@ -148,14 +134,12 @@
         }"
       />
       <label>
-        {{'QUESTION.MULTICAST.HINT-DATA-RATE' | translate}}
+        {{ "QUESTION.MULTICAST.HINT-DATA-RATE" | translate }}
       </label>
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="frequency">{{
-        'QUESTION.GIVE-MULTICAST-FREQUENCY' | translate
-      }}</label
+      <label class="form-label" for="frequency">{{ "QUESTION.GIVE-MULTICAST-FREQUENCY" | translate }}</label
       >*
       <input
         type="number"
@@ -171,14 +155,12 @@
         }"
       />
       <label>
-        {{'QUESTION.MULTICAST.HINT-FREQUENCY' | translate}}
+        {{ "QUESTION.MULTICAST.HINT-FREQUENCY" | translate }}
       </label>
     </div>
 
     <div class="form-group mt-3">
-      <label class="form-label" for="groupType">{{
-        'QUESTION.MULTICAST-GROUPTYPE-PLACEHOLDER' | translate
-      }}</label
+      <label class="form-label" for="groupType">{{ "QUESTION.MULTICAST-GROUPTYPE-PLACEHOLDER" | translate }}</label
       >*
       <mat-select
         class="form-control"
@@ -190,10 +172,7 @@
           'is-valid': formFailedSubmit && !errorFields.includes('groupType')
         }"
       >
-        <mat-option
-          *ngFor="let multicastType of multicastTypes"
-          [value]="multicastType"
-        >
+        <mat-option *ngFor="let multicastType of multicastTypes" [value]="multicastType">
           {{ multicastType }}
         </mat-option>
       </mat-select>
@@ -212,15 +191,11 @@
   </div>
 
   <div class="form-group mt-3 col-12">
-    <label class="form-label" for="groupType">{{
-      'QUESTION.GIVE-MULTICAST-IOTDEVICES' | translate
-    }}</label>
+    <label class="form-label" for="groupType">{{ "QUESTION.GIVE-MULTICAST-IOTDEVICES" | translate }}</label>
 
     <div class="row">
       <mat-form-field appearance="fill">
-        <mat-label>{{
-          'QUESTION.MULTICAST.SELECT-DEVICES' | translate
-        }}</mat-label>
+        <mat-label>{{ "QUESTION.MULTICAST.SELECT-DEVICES" | translate }}</mat-label>
         <mat-select
           multiple
           name="devices"
@@ -228,41 +203,27 @@
           [(ngModel)]="multicast.iotDevices"
           panelClass="overflow-x-hidden"
         >
-          <app-mat-select-search
-            [formControl]="deviceFilterCtrl"
-          ></app-mat-select-search>
+          <app-mat-select-search [formControl]="deviceFilterCtrl"></app-mat-select-search>
 
           <mat-option disabled="disabled" class="filter-option">
-            <button
-              mat-raised-button
-              class="mat-primary fill text-sm"
-              (click)="selectAll()"
-            >
-              {{ 'QUESTION.MULTICAST.SELECTALLDEVICES' | translate }}
+            <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAll()">
+              {{ "QUESTION.MULTICAST.SELECTALLDEVICES" | translate }}
             </button>
-            <button
-              mat-raised-button
-              class="mat-primary fill text-sm"
-              (click)="unSelectAll()"
-            >
-              {{ 'QUESTION.MULTICAST.DESELECTALLDEVICES' | translate }}
+            <button mat-raised-button class="mat-primary fill text-sm" (click)="unSelectAll()">
+              {{ "QUESTION.MULTICAST.DESELECTALLDEVICES" | translate }}
             </button>
-            <label class="onlyLorawan">{{
-              'QUESTION.MULTICAST.ONLY-LORAWAN' | translate
-            }}</label>
+            <label class="onlyLorawan">{{ "QUESTION.MULTICAST.ONLY-LORAWAN" | translate }}</label>
           </mat-option>
-          <mat-option
-            *ngFor="let device of filteredDevicesMulti | async | filterDevices"
-            [value]="device"
-            >{{ device.name }}</mat-option
-          >
+          <mat-option *ngFor="let device of filteredDevicesMulti | async | filterDevices" [value]="device">{{
+            device.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
   </div>
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">
-      {{ 'GEN.CANCEL' | translate }}
+      {{ "GEN.CANCEL" | translate }}
     </button>
     <button class="btn btn-primary ml-2" type="submit">
       {{ submitButton }}

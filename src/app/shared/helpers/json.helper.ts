@@ -1,9 +1,6 @@
-import { KeyValue } from '@shared/types/tuple.type';
+import { KeyValue } from "@shared/types/tuple.type";
 
-export const jsonToList = (
-  json: string,
-  shouldThrowOnError = false
-): KeyValue[] => {
+export const jsonToList = (json: string, shouldThrowOnError = false): KeyValue[] => {
   try {
     const deserialized = JSON.parse(json) as Record<string, string>;
 

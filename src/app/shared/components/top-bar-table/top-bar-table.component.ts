@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Location } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Location } from "@angular/common";
+import { TranslateService } from "@ngx-translate/core";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-top-bar-table',
-  templateUrl: './top-bar-table.component.html',
-  styleUrls: ['./top-bar-table.component.scss'],
+  selector: "app-top-bar-table",
+  templateUrl: "./top-bar-table.component.html",
+  styleUrls: ["./top-bar-table.component.scss"],
 })
 export class TopBarTableComponent implements OnInit {
   @Input() title: string;
@@ -27,7 +27,7 @@ export class TopBarTableComponent implements OnInit {
   @Input() dropdownDefaultOption: string;
 
   constructor(public translate: TranslateService, private location: Location) {
-    translate.use('da');
+    translate.use("da");
   }
 
   ngOnInit(): void {}

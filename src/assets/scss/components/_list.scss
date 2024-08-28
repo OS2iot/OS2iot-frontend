@@ -1,4 +1,4 @@
-@import '../setup/utilities';
+@import "../setup/utilities";
 
 ul {
   padding-left: 0;
@@ -12,7 +12,6 @@ ul {
     //padding-left: 37px;
     line-height: $body-text-line-height;
     outline: none;
-
   }
 }
 
@@ -29,11 +28,9 @@ ol {
     &:before {
       font-weight: $font-weight-bold;
       position: absolute;
-
     }
   }
 }
-
 
 .unstyled-list {
   @include unstyled-list;
@@ -49,7 +46,6 @@ ol {
   @include unstyled-list;
   @include inline-list;
 }
-
 
 .list-group-item {
   padding: 0 !important;

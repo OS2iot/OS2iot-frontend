@@ -1,38 +1,30 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import {
-  IotDeviceImportRequest,
-  IotDevicesImportResponse,
-} from '@applications/iot-devices/iot-device.model';
-import { IoTDeviceService } from '@applications/iot-devices/iot-device.service';
-import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { splitList } from '@shared/helpers/array.helper';
-import { Download } from '@shared/helpers/download.helper';
-import { BulkImportService } from '@shared/services/bulk-import.service';
-import { DownloadService } from '@shared/services/download.service';
-import { MeService } from '@shared/services/me.service';
-import { Papa } from 'ngx-papaparse';
-import { Observable, Subject } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
-import { BulkImport } from './bulk-import.model';
-import { BulkMapping } from './bulk-mapping';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
+import { IotDeviceImportRequest, IotDevicesImportResponse } from "@applications/iot-devices/iot-device.model";
+import { IoTDeviceService } from "@applications/iot-devices/iot-device.service";
+import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { splitList } from "@shared/helpers/array.helper";
+import { Download } from "@shared/helpers/download.helper";
+import { BulkImportService } from "@shared/services/bulk-import.service";
+import { DownloadService } from "@shared/services/download.service";
+import { MeService } from "@shared/services/me.service";
+import { Papa } from "ngx-papaparse";
+import { Observable, Subject } from "rxjs";
+import { takeWhile } from "rxjs/operators";
+import { BulkImport } from "./bulk-import.model";
+import { BulkMapping } from "./bulk-mapping";
 
 @Component({
-  selector: 'app-bulk-import',
-  templateUrl: './bulk-import.component.html',
-  styleUrls: ['./bulk-import.component.scss'],
+  selector: "app-bulk-import",
+  templateUrl: "./bulk-import.component.html",
+  styleUrls: ["./bulk-import.component.scss"],
 })
 export class BulkImportComponent implements OnInit {
-  displayedColumns: string[] = [
-    'name',
-    'type',
-    'importStatus',
-    'errorMessages',
-  ];
+  displayedColumns: string[] = ["name", "type", "importStatus", "errorMessages"];
   isLoading = false;
   bulkImport: BulkImport[];
   bulkImportResult: BulkImport[];
@@ -42,24 +34,24 @@ export class BulkImportComponent implements OnInit {
   faDownload = faDownload;
   samples = [
     {
-      name: 'generic-http-sample.csv',
-      url: '../../../assets/docs/iotdevice_generichttp.csv',
+      name: "generic-http-sample.csv",
+      url: "../../../assets/docs/iotdevice_generichttp.csv",
     },
     {
-      name: 'lorawan-otaa-sample.csv',
-      url: '../../../assets/docs/iotdevice_lorawan_otaa.csv',
+      name: "lorawan-otaa-sample.csv",
+      url: "../../../assets/docs/iotdevice_lorawan_otaa.csv",
     },
     {
-      name: 'lorawan-abp-sample.csv',
-      url: '../../../assets/docs/iotdevice_lorawan_abp.csv',
+      name: "lorawan-abp-sample.csv",
+      url: "../../../assets/docs/iotdevice_lorawan_abp.csv",
     },
     {
-      name: 'mqtt-internal-broker-sample.csv',
-      url: '../../../assets/docs/mqtt_internal_broker_sample.csv',
+      name: "mqtt-internal-broker-sample.csv",
+      url: "../../../assets/docs/mqtt_internal_broker_sample.csv",
     },
     {
-      name: 'mqtt-external-broker-sample.csv',
-      url: '../../../assets/docs/mqtt_external_broker_sample.csv',
+      name: "mqtt-external-broker-sample.csv",
+      url: "../../../assets/docs/mqtt_external_broker_sample.csv",
     },
   ];
   download$: Observable<Download>;
@@ -78,14 +70,14 @@ export class BulkImportComponent implements OnInit {
     private meService: MeService,
     private bulkImportService: BulkImportService
   ) {
-    this.translate.use('da');
+    this.translate.use("da");
   }
 
   ngOnInit(): void {
-    this.translate.get(['TITLE.BULKIMPORT']).subscribe((translations) => {
-      this.titleService.setTitle(translations['TITLE.BULKIMPORT']);
+    this.translate.get(["TITLE.BULKIMPORT"]).subscribe(translations => {
+      this.titleService.setTitle(translations["TITLE.BULKIMPORT"]);
     });
-    this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.applicationId = +this.route.snapshot.paramMap.get("id");
   }
 
   download({ name, url }: { name: string; url: string }) {
@@ -99,7 +91,7 @@ export class BulkImportComponent implements OnInit {
   handleDropedFile(evt: any) {
     this.fileFormatErrorMessage = false;
     if (!this.validateFile(evt[0].name)) {
-      console.log('Selected file format is not supported');
+      console.log("Selected file format is not supported");
       this.fileFormatErrorMessage = true;
       return false;
     }
@@ -121,12 +113,12 @@ export class BulkImportComponent implements OnInit {
       this.papa.parse(csv, {
         skipEmptyLines: true,
         header: true,
-        complete: (results) => {
+        complete: results => {
           this.mapData(results.data);
           // this step ensures material can read from the array - should be fixed.
           this.bulkImportResult = this.bulkImport;
           if (this.bulkImport?.length === 0) {
-            alert('no data in csv');
+            alert("no data in csv");
           } else {
             return this.bulkImport;
           }
@@ -137,8 +129,8 @@ export class BulkImportComponent implements OnInit {
   }
 
   private validateFile(name: string) {
-    const ext = name.substring(name.lastIndexOf('.') + 1);
-    if (ext.toLowerCase() === 'csv') {
+    const ext = name.substring(name.lastIndexOf(".") + 1);
+    if (ext.toLowerCase() === "csv") {
       return true;
     } else {
       return false;
@@ -146,18 +138,13 @@ export class BulkImportComponent implements OnInit {
   }
 
   private mapData(data: any[]) {
-    data.forEach((device) => {
-      const mappedDevice = this.bulkMapper.dataMapper(
-        device,
-        this.applicationId
-      );
+    data.forEach(device => {
+      const mappedDevice = this.bulkMapper.dataMapper(device, this.applicationId);
       if (mappedDevice) {
         this.bulkImport.push(new BulkImport(mappedDevice));
       } else {
-        this.translate.get(['ERROR.SEMANTIC']).subscribe((translations) => {
-          this.bulkImport.push(
-            new BulkImport(null, [translations['ERROR.SEMANTIC']])
-          );
+        this.translate.get(["ERROR.SEMANTIC"]).subscribe(translations => {
+          this.bulkImport.push(new BulkImport(null, [translations["ERROR.SEMANTIC"]]));
         });
       }
     });
@@ -183,9 +170,7 @@ export class BulkImportComponent implements OnInit {
   private postBulkImportPayload(
     bulkDevices: BulkImport[][],
     batchIndex$: Subject<void>,
-    importDevices: (
-      payload: IotDeviceImportRequest
-    ) => Observable<IotDevicesImportResponse[]>
+    importDevices: (payload: IotDeviceImportRequest) => Observable<IotDevicesImportResponse[]>
   ): void {
     if (!bulkDevices.length) {
       return;
@@ -198,20 +183,18 @@ export class BulkImportComponent implements OnInit {
       () => {
         const requestItems = bulkDevices[batchIndex];
         const devices: IotDeviceImportRequest = {
-          data: requestItems.map((bulkResult) => bulkResult.device),
+          data: requestItems.map(bulkResult => bulkResult.device),
         };
         importDevices(devices).subscribe(
-          (response) => {
+          response => {
             this.onSuccessfulImport(response, requestItems);
             ++batchIndex;
             batchIndex$.next();
           },
           (error: HttpErrorResponse) => {
-            requestItems.forEach((item) => {
-              item.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
-                error
-              ).errorMessages;
-              item.importStatus = 'Failed';
+            requestItems.forEach(item => {
+              item.errorMessages = this.errorMessageService.handleErrorMessageWithFields(error).errorMessages;
+              item.importStatus = "Failed";
             });
             // Continue processing the next batches
             ++batchIndex;
@@ -232,28 +215,24 @@ export class BulkImportComponent implements OnInit {
     batchIndex$.next();
   }
 
-  private onSuccessfulImport(
-    response: IotDevicesImportResponse[],
-    requestItems: BulkImport[]
-  ) {
-    response.forEach((responseItem) => {
+  private onSuccessfulImport(response: IotDevicesImportResponse[], requestItems: BulkImport[]) {
+    response.forEach(responseItem => {
       const match = requestItems.find(
         ({ device }) =>
-          device.name === responseItem.idMetadata.name &&
-          device.applicationId === responseItem.idMetadata.applicationId
+          device.name === responseItem.idMetadata.name && device.applicationId === responseItem.idMetadata.applicationId
       );
       if (!match) {
         return;
       }
 
       if (responseItem.error && match) {
-        match.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
-          { error: responseItem.error }
-        ).errorMessages;
-        match.importStatus = 'Failed';
+        match.errorMessages = this.errorMessageService.handleErrorMessageWithFields({
+          error: responseItem.error,
+        }).errorMessages;
+        match.importStatus = "Failed";
       } else {
         match.errorMessages = [];
-        match.importStatus = 'Success';
+        match.importStatus = "Success";
       }
     });
   }
@@ -262,14 +241,12 @@ export class BulkImportComponent implements OnInit {
     for (const bulk of devicesBulk) {
       for (const device of bulk) {
         if (!device.importStatus) {
-          device.importStatus = 'Failed';
-          device.errorMessages = this.errorMessageService.handleErrorMessageWithFields(
-            {
-              error: {
-                message: 'MESSAGE.FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE',
-              },
-            }
-          ).errorMessages;
+          device.importStatus = "Failed";
+          device.errorMessages = this.errorMessageService.handleErrorMessageWithFields({
+            error: {
+              message: "MESSAGE.FAILED-TO-CREATE-OR-UPDATE-IOT-DEVICE",
+            },
+          }).errorMessages;
         }
       }
     }

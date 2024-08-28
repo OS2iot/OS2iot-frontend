@@ -1,30 +1,25 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
-import { environment } from '@environments/environment';
-import { DeleteDialogService } from '@shared/components/delete-dialog/delete-dialog.service';
-import { MeService } from '@shared/services/me.service';
-import { merge, Observable, of } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ApiKeyGetManyResponse, ApiKeyResponse } from '../../api-key.model';
-import { ApiKeyService } from '../../api-key.service';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
+import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { Router } from "@angular/router";
+import { environment } from "@environments/environment";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { MeService } from "@shared/services/me.service";
+import { merge, Observable, of } from "rxjs";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { ApiKeyGetManyResponse, ApiKeyResponse } from "../../api-key.model";
+import { ApiKeyService } from "../../api-key.service";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: 'app-api-key-table',
-  templateUrl: './api-key-table.component.html',
-  styleUrls: ['./api-key-table.component.scss'],
+  selector: "app-api-key-table",
+  templateUrl: "./api-key-table.component.html",
+  styleUrls: ["./api-key-table.component.scss"],
 })
 export class ApiKeyTableComponent implements AfterViewInit {
   @Input() organisationId: number;
-  displayedColumns: string[] = [
-    'name',
-    'permissions',
-    'key',
-    'menu',
-  ];
+  displayedColumns: string[] = ["name", "permissions", "key", "menu"];
   data: ApiKeyResponse[] = [];
   isLoadingResults = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,12 +44,9 @@ export class ApiKeyTableComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.getApiKeysByOrganisationId(
-            this.sort.active,
-            this.sort.direction
-          );
+          return this.getApiKeysByOrganisationId(this.sort.active, this.sort.direction);
         }),
-        map((data) => {
+        map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.resultsLength = data.count;
@@ -66,13 +58,10 @@ export class ApiKeyTableComponent implements AfterViewInit {
           return of([]);
         })
       )
-      .subscribe((data) => (this.data = data));
+      .subscribe(data => (this.data = data));
   }
 
-  getApiKeysByOrganisationId(
-    orderByColumn: string,
-    orderByDirection: string
-  ): Observable<ApiKeyGetManyResponse> {
+  getApiKeysByOrganisationId(orderByColumn: string, orderByDirection: string): Observable<ApiKeyGetManyResponse> {
     return this.apiKeyService.getApiKeys(
       this.paginator.pageSize,
       this.paginator.pageIndex * this.paginator.pageSize,
@@ -91,13 +80,13 @@ export class ApiKeyTableComponent implements AfterViewInit {
   }
 
   routeToPermissions(element: any) {
-    this.router.navigate(['admin/api-key', element.id]);
+    this.router.navigate(["admin/api-key", element.id]);
   }
 
   deleteApiKey(id: number) {
-    this.deleteDialogService.showSimpleDialog().subscribe((response) => {
+    this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
-        this.apiKeyService.delete(id).subscribe((response) => {
+        this.apiKeyService.delete(id).subscribe(response => {
           if (response.ok && response.body.affected > 0) {
             this.refresh();
           }

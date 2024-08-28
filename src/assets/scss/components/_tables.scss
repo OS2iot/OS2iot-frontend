@@ -1,4 +1,4 @@
-@import '../setup/variables';
+@import "../setup/variables";
 
 .table,
 table {
@@ -7,12 +7,10 @@ table {
   // -webkit-border-radius: .25rem;
   // -moz-border-radius: .25rem;
   // border-radius: .25rem;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03),
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03),
     0px 0px 1px rgba(0, 0, 0, 0.22);
-  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14),
-    0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
-  -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14),
-    0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
   // border: $grey-border solid 1px;
 
   * {

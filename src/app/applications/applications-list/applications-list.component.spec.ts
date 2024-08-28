@@ -1,17 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ApplicationsListComponent } from './applications-list.component';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ApplicationsListComponent } from "./applications-list.component";
 
-
-
-describe('ListApplicationsComponent', () => {
+describe("ListApplicationsComponent", () => {
   let component: ApplicationsListComponent;
   let fixture: ComponentFixture<ApplicationsListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ApplicationsListComponent]
-    })
-      .compileComponents();
+      declarations: [ApplicationsListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -20,7 +17,7 @@ describe('ListApplicationsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

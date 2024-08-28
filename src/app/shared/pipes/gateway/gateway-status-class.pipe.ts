@@ -1,24 +1,20 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { StatusTimestamp } from '@app/gateway/gateway.model';
-import moment from 'moment';
+import { Pipe, PipeTransform } from "@angular/core";
+import { StatusTimestamp } from "@app/gateway/gateway.model";
+import moment from "moment";
 
-const neverSeenClass = 'never-seen';
-const offlineClass = 'offline';
-const onlineClass = 'online';
+const neverSeenClass = "never-seen";
+const offlineClass = "offline";
+const onlineClass = "online";
 
 @Pipe({
-  name: 'gatewayStatusClass',
+  name: "gatewayStatusClass",
 })
 /**
  * Separate pipe to format text to avoid renders if none of the values
  * have changed.
  */
 export class GatewayStatusClassPipe implements PipeTransform {
-  transform(
-    statusTimestamps: StatusTimestamp[],
-    timestamp: string,
-    ..._: unknown[]
-  ): string {
+  transform(statusTimestamps: StatusTimestamp[], timestamp: string, ..._: unknown[]): string {
     if (!statusTimestamps.length) {
       return neverSeenClass;
     }

@@ -1,25 +1,21 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
-import { Organisation } from '@app/admin/organisation/organisation.model';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import {
-  UpdateUserOrgFromFrontend,
-  UpdateUserOrgsDto,
-  UserResponse,
-} from '@app/admin/users/user.model';
-import { UserService } from '@app/admin/users/user.service';
-import { CurrentUserInfoResponse } from '@auth/auth.service';
-import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { UntypedFormControl } from "@angular/forms";
+import { Organisation } from "@app/admin/organisation/organisation.model";
+import { OrganisationService } from "@app/admin/organisation/organisation.service";
+import { UpdateUserOrgFromFrontend, UpdateUserOrgsDto, UserResponse } from "@app/admin/users/user.model";
+import { UserService } from "@app/admin/users/user.service";
+import { CurrentUserInfoResponse } from "@auth/auth.service";
+import { TranslateService } from "@ngx-translate/core";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { ReplaySubject, Subject, Subscription } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'app-user-page',
-  templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.scss'],
+  selector: "app-user-page",
+  templateUrl: "./user-page.component.html",
+  styleUrls: ["./user-page.component.scss"],
 })
 export class UserPageComponent implements OnInit {
   public updateUserOrgs: UpdateUserOrgsDto = new UpdateUserOrgsDto();
@@ -38,9 +34,7 @@ export class UserPageComponent implements OnInit {
   public userInfo: CurrentUserInfoResponse;
   public pressed = false;
   public organisationsFilterCtrl: UntypedFormControl = new UntypedFormControl();
-  public filteredOrganisations: ReplaySubject<
-    Organisation[]
-  > = new ReplaySubject<Organisation[]>(1);
+  public filteredOrganisations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
   private onDestroy = new Subject<void>();
 
   constructor(
@@ -49,47 +43,41 @@ export class UserPageComponent implements OnInit {
     private organizationService: OrganisationService,
     private sharedService: SharedVariableService,
     private errorMessageService: ErrorMessageService,
-    private sharedVariableService: SharedVariableService,
+    private sharedVariableService: SharedVariableService
   ) {}
 
   ngOnInit(): void {
     this.userInfo = this.sharedService.getUserInfo();
     const hasSomePermission = this.sharedVariableService.getHasAnyPermission();
 
-    this.userService
-      .getOneSimple(this.userInfo.user.id)
-      .subscribe((response: UserResponse) => {
-        // When used as user-page, check for users organizations so it's only possible to apply not already joined organizations
-        this.requestedUserOrganizations = response.requestedOrganizations;
-        if (this.userInfo.organizations.length > 0) {
-          this.compareRequestedAndAlreadyJoinedOrganizations(
-            this.requestedUserOrganizations,
-            this.userInfo.organizations
-          );
-        }
+    this.userService.getOneSimple(this.userInfo.user.id).subscribe((response: UserResponse) => {
+      // When used as user-page, check for users organizations so it's only possible to apply not already joined organizations
+      this.requestedUserOrganizations = response.requestedOrganizations;
+      if (this.userInfo.organizations.length > 0) {
+        this.compareRequestedAndAlreadyJoinedOrganizations(
+          this.requestedUserOrganizations,
+          this.userInfo.organizations
+        );
+      }
 
-        if (this.requestedUserOrganizations.length === 0) {
-          this.checkForNoUserOrganizations = true;
-        }
+      if (this.requestedUserOrganizations.length === 0) {
+        this.checkForNoUserOrganizations = true;
+      }
 
-        this.awaitingConfirmation = response.awaitingConfirmation;
-        if (!this.awaitingConfirmation && hasSomePermission) {
-          this.translate
-            .get('GEN.BACK')
-            .subscribe((translation) => (this.backButtonTitle = translation));
-        }
-        this.translate.get('USER_PAGE.USER_PAGE').subscribe((translation) => {
-          this.title = translation;
-        });
-
-        this.getOrganisations();
+      this.awaitingConfirmation = response.awaitingConfirmation;
+      if (!this.awaitingConfirmation && hasSomePermission) {
+        this.translate.get("GEN.BACK").subscribe(translation => (this.backButtonTitle = translation));
+      }
+      this.translate.get("USER_PAGE.USER_PAGE").subscribe(translation => {
+        this.title = translation;
       });
 
-    this.organisationsFilterCtrl.valueChanges
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(() => {
-        this.filterOrganisations();
-      });
+      this.getOrganisations();
+    });
+
+    this.organisationsFilterCtrl.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(() => {
+      this.filterOrganisations();
+    });
   }
   private filterOrganisations() {
     if (!this.requestOrganizationsList) {
@@ -103,7 +91,7 @@ export class UserPageComponent implements OnInit {
     } else {
       search = search.toLowerCase();
     }
-    const filtered = this.requestOrganizationsList.filter((org) => {
+    const filtered = this.requestOrganizationsList.filter(org => {
       return org.name.toLocaleLowerCase().indexOf(search) > -1;
     });
     this.filteredOrganisations.next(filtered);
@@ -113,31 +101,26 @@ export class UserPageComponent implements OnInit {
     requestedOrganizations: Organisation[],
     alreadyJoinedOrganizations: Organisation[]
   ) {
-    alreadyJoinedOrganizations.forEach((actOrg) => {
-      if (!requestedOrganizations.find((org) => org.id === actOrg.id)) {
+    alreadyJoinedOrganizations.forEach(actOrg => {
+      if (!requestedOrganizations.find(org => org.id === actOrg.id)) {
         this.requestedUserOrganizations.push(actOrg);
       }
     });
   }
 
-  public compare(
-    o1: Organisation | undefined,
-    o2: Organisation | undefined
-  ): boolean {
+  public compare(o1: Organisation | undefined, o2: Organisation | undefined): boolean {
     return o1?.id === o2?.id;
   }
 
   public getOrganisations() {
-    this.organisationSubscription = this.organizationService
-      .getMinimalNoPerm()
-      .subscribe((orgs) => {
-        this.requestOrganizationsList = orgs.data;
-        this.requestOrganizationsList = this.filterChosenOrganizations(
-          this.requestedUserOrganizations,
-          this.requestOrganizationsList
-        );
-        this.filteredOrganisations.next(this.requestOrganizationsList.slice());
-      });
+    this.organisationSubscription = this.organizationService.getMinimalNoPerm().subscribe(orgs => {
+      this.requestOrganizationsList = orgs.data;
+      this.requestOrganizationsList = this.filterChosenOrganizations(
+        this.requestedUserOrganizations,
+        this.requestOrganizationsList
+      );
+      this.filteredOrganisations.next(this.requestOrganizationsList.slice());
+    });
   }
 
   public filterChosenOrganizations(
@@ -146,8 +129,8 @@ export class UserPageComponent implements OnInit {
   ): Organisation[] {
     const filteredChosenOrganizations: Organisation[] = [];
 
-    allOrganizations.forEach((allOrg) => {
-      if (!requestedUserOrganizations.find((org) => org.id === allOrg.id)) {
+    allOrganizations.forEach(allOrg => {
+      if (!requestedUserOrganizations.find(org => org.id === allOrg.id)) {
         filteredChosenOrganizations.push(allOrg);
       }
     });
@@ -163,7 +146,7 @@ export class UserPageComponent implements OnInit {
   public mapToDto(body: UpdateUserOrgFromFrontend) {
     this.updateUserOrgs.requestedOrganizationIds = [];
     if (body.requestedOrganizations) {
-      body.requestedOrganizations.forEach((organization) => {
+      body.requestedOrganizations.forEach(organization => {
         this.updateUserOrgs.requestedOrganizationIds.push(organization.id);
       });
     } else {

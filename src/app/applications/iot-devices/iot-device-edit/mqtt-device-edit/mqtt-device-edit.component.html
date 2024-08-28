@@ -1,16 +1,17 @@
 <form>
   <div class="row mb-5">
-    <h3>{{'QUESTION.MQTT.TITLE' | translate}}</h3>
+    <h3>{{ "QUESTION.MQTT.TITLE" | translate }}</h3>
   </div>
   <div class="form-group mt-3 col-12">
-    <label class="form-label" for="subType">{{'QUESTION.MQTT.SUBTYPE' | translate}}*</label>
+    <label class="form-label" for="subType">{{ "QUESTION.MQTT.SUBTYPE" | translate }}*</label>
     <fa-icon
       [icon]="faQuestionCircle"
       class="form-info-icon"
       [matTooltip]="'QUESTION.MQTT.SUBTYPE-HOVER' | translate"
       matTooltipPosition="above"
       matTooltipShowDelay="600"
-      matTooltipHideDelay="2000">
+      matTooltipHideDelay="2000"
+    >
     </fa-icon>
     <select
       id="subType"
@@ -21,7 +22,7 @@
       [value]="iotDevice.type"
     >
       <option *ngFor="let type of mqttDeviceTypes" [value]="type">
-        {{'QUESTION.MQTT.' + type | translate}}
+        {{ "QUESTION.MQTT." + type | translate }}
       </option>
     </select>
   </div>
@@ -36,7 +37,7 @@
 
   <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_EXTERNAL_BROKER">
     <div class="form-group mt-3 col-12">
-      <label class="form-label" for="brokerUrl">{{'QUESTION.MQTT.BROKER-URL' | translate}}*</label>
+      <label class="form-label" for="brokerUrl">{{ "QUESTION.MQTT.BROKER-URL" | translate }}*</label>
       <input
         type="text"
         class="form-control"
@@ -46,13 +47,13 @@
         required
         [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttURL"
         [ngClass]="{
-        'is-invalid': formFailedSubmit && errorFields.includes('mqttURL'),
-        'is-valid': formFailedSubmit && !errorFields.includes('mqttURL')
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttURL'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttURL')
         }"
       />
     </div>
     <div class="form-group mt-3 col-12">
-      <label class="form-label" for="brokerPort">{{'QUESTION.MQTT.BROKER-PORT' | translate}}*</label>
+      <label class="form-label" for="brokerPort">{{ "QUESTION.MQTT.BROKER-PORT" | translate }}*</label>
       <input
         type="number"
         class="form-control"
@@ -62,13 +63,13 @@
         required
         [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttPort"
         [ngClass]="{
-        'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
-        'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
         }"
       />
     </div>
     <div class="form-group mt-3 col-12">
-      <label class="form-label" for="topicPath">{{'QUESTION.MQTT.TOPIC-PATH' | translate}}*</label>
+      <label class="form-label" for="topicPath">{{ "QUESTION.MQTT.TOPIC-PATH" | translate }}*</label>
       <input
         type="text"
         class="form-control"
@@ -78,8 +79,8 @@
         required
         [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqtttopicname"
         [ngClass]="{
-        'is-invalid': formFailedSubmit && errorFields.includes('mqtttopicname'),
-        'is-valid': formFailedSubmit && !errorFields.includes('mqtttopicname')
+          'is-invalid': formFailedSubmit && errorFields.includes('mqtttopicname'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqtttopicname')
         }"
       />
     </div>
@@ -91,14 +92,15 @@
     ></app-mqtt-authentication-select>
     <ng-container *ngIf="iotDevice.mqttExternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE">
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="caCertificate">{{'QUESTION.MQTT.CA-CERTIFICATE' | translate}}*</label>
+        <label class="form-label" for="caCertificate">{{ "QUESTION.MQTT.CA-CERTIFICATE" | translate }}*</label>
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
           [matTooltip]="'QUESTION.MQTT.CA-CERTIFICATE-HOVER' | translate"
           matTooltipPosition="above"
           matTooltipShowDelay="600"
-          matTooltipHideDelay="2000">
+          matTooltipHideDelay="2000"
+        >
         </fa-icon>
         <textarea
           type="text"
@@ -115,14 +117,15 @@
         ></textarea>
       </div>
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="deviceCertificate">{{'QUESTION.MQTT.DEVICE-CERTIFICATE' | translate}}*</label>
+        <label class="form-label" for="deviceCertificate">{{ "QUESTION.MQTT.DEVICE-CERTIFICATE" | translate }}*</label>
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
           [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
           matTooltipPosition="above"
           matTooltipShowDelay="600"
-          matTooltipHideDelay="2000">
+          matTooltipHideDelay="2000"
+        >
         </fa-icon>
         <textarea
           type="text"
@@ -139,14 +142,17 @@
         ></textarea>
       </div>
       <div class="form-group mt-3 col-12">
-        <label class="form-label" for="deviceCertificateKey">{{'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY' | translate}}*</label>
+        <label class="form-label" for="deviceCertificateKey"
+          >{{ "QUESTION.MQTT.DEVICE-CERTIFICATE-KEY" | translate }}*</label
+        >
         <fa-icon
           [icon]="faQuestionCircle"
           class="form-info-icon"
           [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
           matTooltipPosition="above"
           matTooltipShowDelay="600"
-          matTooltipHideDelay="2000">
+          matTooltipHideDelay="2000"
+        >
         </fa-icon>
         <textarea
           type="text"
@@ -164,8 +170,20 @@
       </div>
     </ng-container>
   </ng-template>
-  <div class="row mt-2" *ngIf="iotDevice.mqttInternalBrokerSettings?. authenticationType === AuthenticationType.PASSWORD">
-    <strong>OBS!</strong><p>{{ 'QUESTION.MQTT.CERTIFICATE-OBS' | translate }}</p>
+  <div
+    class="row mt-2"
+    *ngIf="iotDevice.mqttInternalBrokerSettings?.authenticationType === AuthenticationType.PASSWORD"
+  >
+    <strong>OBS!</strong>
+    <p>{{ "QUESTION.MQTT.CERTIFICATE-OBS" | translate }}</p>
   </div>
-  <div class="row mt-2" *ngIf="iotDevice.mqttExternalBrokerSettings?.authenticationType || iotDevice.mqttInternalBrokerSettings?.authenticationType"><p>{{ 'QUESTION.MQTT.CONFIG-HELP' | translate }}</p></div>
+  <div
+    class="row mt-2"
+    *ngIf="
+      iotDevice.mqttExternalBrokerSettings?.authenticationType ||
+      iotDevice.mqttInternalBrokerSettings?.authenticationType
+    "
+  >
+    <p>{{ "QUESTION.MQTT.CONFIG-HELP" | translate }}</p>
+  </div>
 </form>

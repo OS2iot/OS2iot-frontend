@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { IotDeviceEditComponent } from './iot-device-edit.component';
+import { IotDeviceEditComponent } from "./iot-device-edit.component";
 
-describe('IotDeviceEditComponent', () => {
+describe("IotDeviceEditComponent", () => {
   let component: IotDeviceEditComponent;
   let fixture: ComponentFixture<IotDeviceEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [IotDeviceEditComponent]
-    })
-      .compileComponents();
+      declarations: [IotDeviceEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('IotDeviceEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

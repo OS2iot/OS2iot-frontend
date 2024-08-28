@@ -1,24 +1,21 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Organisation } from '@app/admin/organisation/organisation.model';
-import { OrganisationService } from '@app/admin/organisation/organisation.service';
-import {
-  CreateNewKombitUserDto,
-  CreateNewKombitUserFromFrontend,
-} from '@app/admin/users/user.model';
-import { UserService } from '@app/admin/users/user.service';
-import { TranslateService } from '@ngx-translate/core';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { UntypedFormControl } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Organisation } from "@app/admin/organisation/organisation.model";
+import { OrganisationService } from "@app/admin/organisation/organisation.service";
+import { CreateNewKombitUserDto, CreateNewKombitUserFromFrontend } from "@app/admin/users/user.model";
+import { UserService } from "@app/admin/users/user.service";
+import { TranslateService } from "@ngx-translate/core";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { ReplaySubject, Subject, Subscription } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.scss'],
+  selector: "app-new-user",
+  templateUrl: "./new-user.component.html",
+  styleUrls: ["./new-user.component.scss"],
 })
 export class NewUserComponent implements OnInit {
   public organisationSubscription: Subscription;
@@ -29,9 +26,7 @@ export class NewUserComponent implements OnInit {
   public errorMessages: unknown;
   public createNewKombitUserFromFrontend: CreateNewKombitUserFromFrontend = new CreateNewKombitUserFromFrontend();
   public organisationsFilterCtrl: UntypedFormControl = new UntypedFormControl();
-  public filteredOrganisations: ReplaySubject<
-    Organisation[]
-  > = new ReplaySubject<Organisation[]>(1);
+  public filteredOrganisations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
   public errorMessage: string;
   private onDestroy = new Subject<void>();
 
@@ -46,23 +41,15 @@ export class NewUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (history.state.fromKombit) {
-      this.translate.get([
-        'NEW_USER.FIRST_LOGIN',
-        'USERS.EMAIL',
-        'NAV.ORGANISATIONS',
-        'NAV.BACK',
-        'USERS.SAVE',
-      ]);
+      this.translate.get(["NEW_USER.FIRST_LOGIN", "USERS.EMAIL", "NAV.ORGANISATIONS", "NAV.BACK", "USERS.SAVE"]);
 
       this.getOrganisations();
 
-      this.organisationsFilterCtrl.valueChanges
-        .pipe(takeUntil(this.onDestroy))
-        .subscribe(() => {
-          this.filterOrganisations();
-        });
+      this.organisationsFilterCtrl.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(() => {
+        this.filterOrganisations();
+      });
     } else {
-      this.router.navigate(['/not-found']);
+      this.router.navigate(["/not-found"]);
     }
   }
 
@@ -80,7 +67,7 @@ export class NewUserComponent implements OnInit {
       search = search.toLowerCase();
     }
 
-    const filtered = this.organisations.filter((org) => {
+    const filtered = this.organisations.filter(org => {
       return org.name.toLocaleLowerCase().indexOf(search) > -1;
     });
 
@@ -90,13 +77,11 @@ export class NewUserComponent implements OnInit {
   onSubmit(): void {
     this.resetErrors();
 
-    const createNewKombitUserDTO = this.mapToDto(
-      this.createNewKombitUserFromFrontend
-    );
+    const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);
 
     this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
       () => {
-        this.router.navigate(['/applications']);
+        this.router.navigate(["/applications"]);
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -105,24 +90,19 @@ export class NewUserComponent implements OnInit {
     );
   }
 
-  private mapToDto(
-    frontendModel: CreateNewKombitUserFromFrontend
-  ): CreateNewKombitUserDto {
+  private mapToDto(frontendModel: CreateNewKombitUserFromFrontend): CreateNewKombitUserDto {
     const createNewKombitUserDTO = new CreateNewKombitUserDto();
     createNewKombitUserDTO.email = frontendModel.email;
     createNewKombitUserDTO.requestedOrganizationIds = [];
 
-    frontendModel.requestedOrganizations.forEach((organization) => {
+    frontendModel.requestedOrganizations.forEach(organization => {
       createNewKombitUserDTO.requestedOrganizationIds.push(organization.id);
     });
 
     return createNewKombitUserDTO;
   }
 
-  public compare(
-    o1: Organisation | undefined,
-    o2: Organisation | undefined
-  ): boolean {
+  public compare(o1: Organisation | undefined, o2: Organisation | undefined): boolean {
     return o1?.id === o2?.id;
   }
 
@@ -131,12 +111,10 @@ export class NewUserComponent implements OnInit {
     if (!this.organisations) {
       this.filteredOrganisations.next(this.organisations.slice());
     } else {
-      this.organisationSubscription = this.organisationService
-        .getMinimalNoPerm()
-        .subscribe((orgs) => {
-          this.organisations = orgs.data;
-          this.filteredOrganisations.next(this.organisations.slice());
-        });
+      this.organisationSubscription = this.organisationService.getMinimalNoPerm().subscribe(orgs => {
+        this.organisations = orgs.data;
+        this.filteredOrganisations.next(this.organisations.slice());
+      });
     }
   }
 
@@ -147,7 +125,7 @@ export class NewUserComponent implements OnInit {
   }
 
   handleError(error: HttpErrorResponse) {
-    if (typeof error.error?.error === 'string' && typeof error.error?.message === 'string') {
+    if (typeof error.error?.error === "string" && typeof error.error?.message === "string") {
       this.errorMessage = error.error?.message;
     } else {
       const errors = this.errorMessageService.handleErrorMessageWithFields(error);

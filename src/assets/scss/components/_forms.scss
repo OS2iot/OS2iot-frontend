@@ -1,16 +1,13 @@
-@import '../setup/variables';
+@import "../setup/variables";
 
 .os2-form {
   width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: $white;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
 
   @include media-breakpoint-up(md) {
     width: 510px;
@@ -57,7 +54,6 @@
   &:hover {
     border: $border-input-hover;
     cursor: pointer;
-
   }
 }
 
@@ -75,7 +71,6 @@
   &:hover {
     border: $border-input-hover;
     cursor: pointer;
-
   }
 }
 
@@ -103,12 +98,9 @@ textarea {
   background-repeat: no-repeat;
   background-position: calc(100% - 10px);
   background-size: 12px;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
 }
 
 .select-box-sm {
@@ -193,14 +185,14 @@ textarea {
     margin: 1rem auto 0rem;
   }
 
-  .form-check-input:checked+.image-container {
+  .form-check-input:checked + .image-container {
     border: solid 1px $color-primary;
     box-shadow: 0 0 0 0.2rem $color-primary;
   }
 }
 
 .error-messages {
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: solid 1px $red;
   background-color: $red-light;
 }

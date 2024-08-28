@@ -1,24 +1,21 @@
-import { Injectable } from '@angular/core';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
-import { Downlink } from '@applications/iot-devices/downlink.model';
-import { RestService } from '@shared/services/rest.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { MulticastResponse } from './multicast-response.model';
-import { Multicast, MulticastData } from './multicast.model';
+import { Injectable } from "@angular/core";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
+import { Downlink } from "@applications/iot-devices/downlink.model";
+import { RestService } from "@shared/services/rest.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { MulticastResponse } from "./multicast-response.model";
+import { Multicast, MulticastData } from "./multicast.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class MulticastService {
-  constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService
-  ) {}
+  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
-  private multicastURL = 'multicast';
-  private multicastDownlinkURL = 'multicast/';
-  private DOWNLINKMULTICASTURL = 'downlink-multicast';
+  private multicastURL = "multicast";
+  private multicastDownlinkURL = "multicast/";
+  private DOWNLINKMULTICASTURL = "downlink-multicast";
 
   getMulticastsByApplicationId(
     limit: number,
@@ -63,8 +60,7 @@ export class MulticastService {
       name: multicastResponse.groupName,
       groupType: multicastResponse.lorawanMulticastDefinition.groupType,
       mcAddr: multicastResponse.lorawanMulticastDefinition.address,
-      mcAppSKey:
-        multicastResponse.lorawanMulticastDefinition.applicationSessionKey,
+      mcAppSKey: multicastResponse.lorawanMulticastDefinition.applicationSessionKey,
       dr: multicastResponse.lorawanMulticastDefinition.dataRate,
       fCnt: multicastResponse.lorawanMulticastDefinition.frameCounter,
       frequency: multicastResponse.lorawanMulticastDefinition.frequency,
@@ -75,28 +71,18 @@ export class MulticastService {
       updatedAt: multicastResponse.updatedAt,
       createdBy: multicastResponse.createdBy,
       updatedBy: multicastResponse.updatedBy,
-      createdByName: this.userMinimalService.getUserNameFrom(
-        multicastResponse.createdBy
-      ),
-      updatedByName: this.userMinimalService.getUserNameFrom(
-        multicastResponse.updatedBy
-      ),
+      createdByName: this.userMinimalService.getUserNameFrom(multicastResponse.createdBy),
+      updatedByName: this.userMinimalService.getUserNameFrom(multicastResponse.updatedBy),
     };
     return model;
   }
 
   public multicastGet(multicastId: number, params = {}): Observable<unknown> {
-    const url =
-      this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
+    const url = this.multicastDownlinkURL + multicastId + "/" + this.DOWNLINKMULTICASTURL;
     return this.restService.get(url, params);
   }
-  public multicastPost(
-    downlink: Downlink,
-    multicastId: number,
-    params = {}
-  ): Observable<unknown> {
-    const url =
-      this.multicastDownlinkURL + multicastId + '/' + this.DOWNLINKMULTICASTURL;
+  public multicastPost(downlink: Downlink, multicastId: number, params = {}): Observable<unknown> {
+    const url = this.multicastDownlinkURL + multicastId + "/" + this.DOWNLINKMULTICASTURL;
     return this.restService.post(url, downlink, params);
   }
 }

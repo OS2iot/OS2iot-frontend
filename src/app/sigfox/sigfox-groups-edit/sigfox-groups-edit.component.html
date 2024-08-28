@@ -1,37 +1,55 @@
-<app-top-bar title="{{'FORM.EDIT-SIGFOX-GROUP' | translate}}" backButtonTitle="{{'SIGFOX-GROUP.SIGFOX-GROUP' | translate}}" [canEdit]="canEdit"></app-top-bar>
+<app-top-bar
+  title="{{ 'FORM.EDIT-SIGFOX-GROUP' | translate }}"
+  backButtonTitle="{{ 'SIGFOX-GROUP.SIGFOX-GROUP' | translate }}"
+  [canEdit]="canEdit"
+></app-top-bar>
 
 <div class="row">
-    <div class="col-xs-12 col-md-6 offset-md-3 mt-5">
-        <div *ngIf="errorMessages" class="error-messages p-3">
-            <ul class="mb-0">
-                <li *ngFor="let error of errorMessages">
-                    {{error | translate}}
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="isLoading">
-            <app-loading-spinner></app-loading-spinner>
-        </div>
-        <form class="p-5 jumbotron" #sigFoxForm="ngForm" (ngSubmit)="onSubmit(sigFoxForm)" *ngIf="!isLoading">
-            <p>{{'SIGFOX-GROUP.API-ACCESS' | translate}} <span><a
-                        href="https://support.sigfox.com/docs/api-credential-creation">API credential
-                        creation</a></span>
-            </p>
-            <mat-divider class="my-5"></mat-divider>
-            <div class="form-group col-8">
-                <label for="username">
-                    {{'SIGFOX-GROUP.SIGFOX-LOGIN' | translate}}</label>
-                <input type="username" id="username" class="form-control" name="username" required
-                    [(ngModel)]="sigfoxGroup.username">
-            </div>
-            <div class="form-group col-8">
-                <label for="password">Kode</label>
-                <input type="password" id="password" class="form-control" ngModel name="password" required
-                    [(ngModel)]="sigfoxGroup.password">
-            </div>
-            <div class="mt-5">
-                <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">{{'SIGFOX-GROUP.LOGIN' | translate }}</button>
-            </div>
-        </form>
+  <div class="col-xs-12 col-md-6 offset-md-3 mt-5">
+    <div *ngIf="errorMessages" class="error-messages p-3">
+      <ul class="mb-0">
+        <li *ngFor="let error of errorMessages">
+          {{ error | translate }}
+        </li>
+      </ul>
     </div>
+    <div *ngIf="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form class="p-5 jumbotron" #sigFoxForm="ngForm" (ngSubmit)="onSubmit(sigFoxForm)" *ngIf="!isLoading">
+      <p>
+        {{ "SIGFOX-GROUP.API-ACCESS" | translate }}
+        <span><a href="https://support.sigfox.com/docs/api-credential-creation">API credential creation</a></span>
+      </p>
+      <mat-divider class="my-5"></mat-divider>
+      <div class="form-group col-8">
+        <label for="username"> {{ "SIGFOX-GROUP.SIGFOX-LOGIN" | translate }}</label>
+        <input
+          type="username"
+          id="username"
+          class="form-control"
+          name="username"
+          required
+          [(ngModel)]="sigfoxGroup.username"
+        />
+      </div>
+      <div class="form-group col-8">
+        <label for="password">Kode</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          ngModel
+          name="password"
+          required
+          [(ngModel)]="sigfoxGroup.password"
+        />
+      </div>
+      <div class="mt-5">
+        <button class="btn btn-primary" type="submit" [disabled]="!sigFoxForm.valid">
+          {{ "SIGFOX-GROUP.LOGIN" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

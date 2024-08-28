@@ -1,66 +1,65 @@
 //Animate.css
-@import 'animate.css/animate.min';
+@import "animate.css/animate.min";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap.scss';
+@import "bootstrap/scss/bootstrap.scss";
 
 //Animations
-@import 'assets/scss/animation/jumping-dots';
+@import "assets/scss/animation/jumping-dots";
 
 //Components
-@import 'assets/scss/components/boxes';
-@import 'assets/scss/components/bulk-import';
-@import 'assets/scss/components/date-picker';
-@import 'assets/scss/components/forms';
-@import 'assets/scss/components/list';
-@import 'assets/scss/components/loading-spinner';
-@import 'assets/scss/components/map';
-@import 'assets/scss/components/monaco-editor';
-@import 'assets/scss/components/navbar';
-@import 'assets/scss/components/tables';
-@import 'assets/scss/components/topbar';
+@import "assets/scss/components/boxes";
+@import "assets/scss/components/bulk-import";
+@import "assets/scss/components/date-picker";
+@import "assets/scss/components/forms";
+@import "assets/scss/components/list";
+@import "assets/scss/components/loading-spinner";
+@import "assets/scss/components/map";
+@import "assets/scss/components/monaco-editor";
+@import "assets/scss/components/navbar";
+@import "assets/scss/components/tables";
+@import "assets/scss/components/topbar";
 
 //Elements
-@import 'assets/scss/elements/links';
-@import 'assets/scss/elements/buttons';
-@import 'assets/scss/elements/icons';
-@import 'assets/scss/elements/img';
-@import 'assets/scss/elements/textfield';
-@import 'assets/scss/elements/labels';
+@import "assets/scss/elements/links";
+@import "assets/scss/elements/buttons";
+@import "assets/scss/elements/icons";
+@import "assets/scss/elements/img";
+@import "assets/scss/elements/textfield";
+@import "assets/scss/elements/labels";
 
 //Setup
-@import 'assets/scss/setup/base';
-@import 'assets/scss/setup/breakpoints';
+@import "assets/scss/setup/base";
+@import "assets/scss/setup/breakpoints";
 
-@import 'assets/scss/setup/typography';
-@import 'assets/scss/setup/utilities';
-@import 'assets/scss/setup/variables';
-@import 'assets/scss/setup/material-theme';
+@import "assets/scss/setup/typography";
+@import "assets/scss/setup/utilities";
+@import "assets/scss/setup/variables";
+@import "assets/scss/setup/material-theme";
 
 @import "~leaflet/dist/leaflet.css";
 
 @import "./app/shared/styles/leaflet-styles.scss";
 
-
 @font-face {
-  font-family: 'roboto-light';
-  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
+  font-family: "roboto-light";
+  src: url("./assets/fonts/Roboto-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'roboto';
-  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-family: "roboto";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'roboto-bold';
-  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-family: "roboto-bold";
+  src: url("./assets/fonts/Roboto-Bold.ttf") format("truetype");
 }
 
 body {
   // For Google Chrome
   &::-webkit-scrollbar {
-    width:  5px;
+    width: 5px;
     height: 5px;
   }
 
@@ -82,7 +81,7 @@ body {
   }
 }
 
-.snackBar.mat-snack-bar-container{
+.snackBar.mat-snack-bar-container {
   background: #f4f4f4;
   color: #000;
 }
@@ -92,7 +91,7 @@ body {
 }
 
 .status-tooltip {
-  background: rgba(97, 97, 97, 1.0);
+  background: rgba(97, 97, 97, 1);
   white-space: pre-line;
 }
 
