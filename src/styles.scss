@@ -115,10 +115,9 @@ body {
   white-space: pre-line;
 }
 
-.mat-select-panel.tall {
-  max-height: 400px;
-  height: 400px;
-  margin-right: 30px;
+.mdc-menu-surface.mat-mdc-select-panel {
+  max-height: 400px !important;
+  height: 400px !important;
 }
 
 .width100percent {

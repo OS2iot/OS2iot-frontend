@@ -189,7 +189,7 @@
 
     <ng-container matColumnDef="menu">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let gateway">
+      <td mat-cell *matCellDef="let gateway" class="overflowVisible">
         <div class="dropdown" *ngIf="gateway.canEdit">
           <a
             href="#"
