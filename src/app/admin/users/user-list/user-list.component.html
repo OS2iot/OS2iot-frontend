@@ -1,24 +1,24 @@
 <app-top-bar
-    [title]="'NAV.USERS' | translate"
-    [ctaLabel]="'USERS.CREATE' | translate"
-    [ctaRouterLink]="'new-user'"
-    [canEdit]="canEdit"
+  [title]="'NAV.USERS' | translate"
+  [ctaLabel]="'USERS.CREATE' | translate"
+  [ctaRouterLink]="'new-user'"
+  [canEdit]="canEdit"
 ></app-top-bar>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <nav mat-tab-nav-bar>
-                <a
-                    mat-tab-link
-                    *ngFor="let link of navTabs"
-                    [routerLink]="link.link"
-                    routerLinkActive
-                    #rla="routerLinkActive"
-                    [active]="rla.isActive"
-                    >{{ link.label | translate }}</a
-                >
-            </nav>
-            <router-outlet></router-outlet>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <nav mat-tab-nav-bar>
+        <a
+          mat-tab-link
+          *ngFor="let link of navTabs"
+          [routerLink]="link.link"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [active]="rla.isActive"
+          >{{ link.label | translate }}</a
+        >
+      </nav>
+      <router-outlet></router-outlet>
     </div>
+  </div>
 </div>

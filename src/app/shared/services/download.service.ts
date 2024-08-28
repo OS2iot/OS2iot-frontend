@@ -6,21 +6,21 @@ import { SAVER, Saver } from "../providers/saver.provider";
 
 @Injectable({ providedIn: "root" })
 export class DownloadService {
-    constructor(private http: HttpClient, @Inject(SAVER) private save: Saver) {}
+  constructor(private http: HttpClient, @Inject(SAVER) private save: Saver) {}
 
-    download(url: string, filename?: string): Observable<Download> {
-        return this.http
-            .get(url, {
-                reportProgress: true,
-                observe: "events",
-                responseType: "blob",
-            })
-            .pipe(download(blob => this.save(blob, filename)));
-    }
+  download(url: string, filename?: string): Observable<Download> {
+    return this.http
+      .get(url, {
+        reportProgress: true,
+        observe: "events",
+        responseType: "blob",
+      })
+      .pipe(download(blob => this.save(blob, filename)));
+  }
 
-    blob(url: string, filename?: string): Observable<Blob> {
-        return this.http.get(url, {
-            responseType: "blob",
-        });
-    }
+  blob(url: string, filename?: string): Observable<Blob> {
+    return this.http.get(url, {
+      responseType: "blob",
+    });
+  }
 }

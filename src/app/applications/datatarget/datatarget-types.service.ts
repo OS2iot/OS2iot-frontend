@@ -12,81 +12,81 @@ import { MqttEditComponent } from "./mqtt-edit/mqtt-edit.component";
 import { OpendatadkEditComponent } from "./opendatadk/opendatadk-edit/opendatadk-edit.component";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class DatatargetTypesService {
-    constructor() {}
+  constructor() {}
 
-    getAvailableDataTargetTypes(): DatatargetTypeDescriptor[] {
-        return [
-            {
-                name: "DATATARGET.HTTP_PUSH.NAME",
-                type: DataTargetType.HTTPPUSH,
-                icon: null,
-                description: "DATATARGET.HTTP_PUSH.DESCRIPTION",
-                readMoreUrl: "",
-                provider: "OS2",
-            },
-            {
-                name: "DATATARGET.OPENDATA-DK.NAME",
-                type: DataTargetType.OPENDATADK,
-                icon: "/assets/images/logo_opendatadk.svg",
-                description: "DATATARGET.OPENDATA-DK.DESCRIPTION",
-                readMoreUrl: "https://www.opendata.dk/",
-                provider: "OS2",
-            },
-            {
-                name: "DATATARGET.FIWARE.NAME",
-                type: DataTargetType.FIWARE,
-                icon: "/assets/images/logo_FIWARE.png",
-                description: "DATATARGET.FIWARE.DESCRIPTION",
-                readMoreUrl: "https://www.kmd.dk",
-                provider: "KMD A/S",
-            },
-            {
-                name: "DATATARGET.MQTT.NAME",
-                type: DataTargetType.MQTT,
-                icon: "/assets/images/logo_mqtt.png",
-                description: "DATATARGET.MQTT.DESCRIPTION",
-                readMoreUrl: "https://mqtt.org/",
-                provider: "OS2",
-            },
-        ];
+  getAvailableDataTargetTypes(): DatatargetTypeDescriptor[] {
+    return [
+      {
+        name: "DATATARGET.HTTP_PUSH.NAME",
+        type: DataTargetType.HTTPPUSH,
+        icon: null,
+        description: "DATATARGET.HTTP_PUSH.DESCRIPTION",
+        readMoreUrl: "",
+        provider: "OS2",
+      },
+      {
+        name: "DATATARGET.OPENDATA-DK.NAME",
+        type: DataTargetType.OPENDATADK,
+        icon: "/assets/images/logo_opendatadk.svg",
+        description: "DATATARGET.OPENDATA-DK.DESCRIPTION",
+        readMoreUrl: "https://www.opendata.dk/",
+        provider: "OS2",
+      },
+      {
+        name: "DATATARGET.FIWARE.NAME",
+        type: DataTargetType.FIWARE,
+        icon: "/assets/images/logo_FIWARE.png",
+        description: "DATATARGET.FIWARE.DESCRIPTION",
+        readMoreUrl: "https://www.kmd.dk",
+        provider: "KMD A/S",
+      },
+      {
+        name: "DATATARGET.MQTT.NAME",
+        type: DataTargetType.MQTT,
+        icon: "/assets/images/logo_mqtt.png",
+        description: "DATATARGET.MQTT.DESCRIPTION",
+        readMoreUrl: "https://mqtt.org/",
+        provider: "OS2",
+      },
+    ];
+  }
+
+  getDetailComponent(dataTargetType: DataTargetType): Type<DatatargetDetail> {
+    if (dataTargetType === DataTargetType.HTTPPUSH) {
+      return HttppushDetailComponent;
     }
 
-    getDetailComponent(dataTargetType: DataTargetType): Type<DatatargetDetail> {
-        if (dataTargetType === DataTargetType.HTTPPUSH) {
-            return HttppushDetailComponent;
-        }
-
-        if (dataTargetType === DataTargetType.OPENDATADK) {
-            return HttppushDetailComponent;
-        }
-
-        if (dataTargetType === DataTargetType.FIWARE) {
-            return FiwareDetailComponent;
-        }
-
-        if (dataTargetType === DataTargetType.MQTT) {
-            return MqttDetailComponent;
-        }
+    if (dataTargetType === DataTargetType.OPENDATADK) {
+      return HttppushDetailComponent;
     }
 
-    getEditComponent(dataTargetType: DataTargetType): Type<DatatargetEdit> {
-        if (dataTargetType === DataTargetType.HTTPPUSH) {
-            return HttppushEditComponent;
-        }
-
-        if (dataTargetType === DataTargetType.OPENDATADK) {
-            return OpendatadkEditComponent;
-        }
-
-        if (dataTargetType === DataTargetType.FIWARE) {
-            return FiwareEditComponent;
-        }
-
-        if (dataTargetType === DataTargetType.MQTT) {
-            return MqttEditComponent;
-        }
+    if (dataTargetType === DataTargetType.FIWARE) {
+      return FiwareDetailComponent;
     }
+
+    if (dataTargetType === DataTargetType.MQTT) {
+      return MqttDetailComponent;
+    }
+  }
+
+  getEditComponent(dataTargetType: DataTargetType): Type<DatatargetEdit> {
+    if (dataTargetType === DataTargetType.HTTPPUSH) {
+      return HttppushEditComponent;
+    }
+
+    if (dataTargetType === DataTargetType.OPENDATADK) {
+      return OpendatadkEditComponent;
+    }
+
+    if (dataTargetType === DataTargetType.FIWARE) {
+      return FiwareEditComponent;
+    }
+
+    if (dataTargetType === DataTargetType.MQTT) {
+      return MqttEditComponent;
+    }
+  }
 }

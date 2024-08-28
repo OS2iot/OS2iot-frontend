@@ -1,22 +1,21 @@
 <div class="jumbotron--table">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="jumbotron">
-                <div *ngIf="applicationService.canEdit; else readOnly">
-                    <app-top-bar-table
-                        [component]="true"
-                        [title]="'APPLICATION.DATATARGET-SHOW' | translate"
-                        [ctaLabelPrimary]="'FORM.CREATE-NEW-DATATARGET' | translate"
-                        [ctaRouterLinkPrimary]="'../datatarget-new'"
-                    >
-                    </app-top-bar-table>
-                </div>
-                <ng-template #readOnly>
-                    <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate">
-                    </app-top-bar-table>
-                </ng-template>
-                <app-datatarget-table [pageLimit]="pageLimit"></app-datatarget-table>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron">
+        <div *ngIf="applicationService.canEdit; else readOnly">
+          <app-top-bar-table
+            [component]="true"
+            [title]="'APPLICATION.DATATARGET-SHOW' | translate"
+            [ctaLabelPrimary]="'FORM.CREATE-NEW-DATATARGET' | translate"
+            [ctaRouterLinkPrimary]="'../datatarget-new'"
+          >
+          </app-top-bar-table>
         </div>
+        <ng-template #readOnly>
+          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"> </app-top-bar-table>
+        </ng-template>
+        <app-datatarget-table [pageLimit]="pageLimit"></app-datatarget-table>
+      </div>
     </div>
+  </div>
 </div>

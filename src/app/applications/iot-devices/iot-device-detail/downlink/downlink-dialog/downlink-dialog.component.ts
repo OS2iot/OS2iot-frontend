@@ -4,18 +4,18 @@ import { TranslateService } from "@ngx-translate/core";
 import { DownlinkComponent } from "../downlink.component";
 
 @Component({
-    selector: "app-downlink-dialog",
-    templateUrl: "./downlink-dialog.component.html",
-    styleUrls: ["./downlink-dialog.component.scss"],
+  selector: "app-downlink-dialog",
+  templateUrl: "./downlink-dialog.component.html",
+  styleUrls: ["./downlink-dialog.component.scss"],
 })
 export class DownlinkDialogComponent implements OnInit {
-    constructor(private translate: TranslateService, public dialog: MatDialogRef<DownlinkComponent>) {}
+  constructor(private translate: TranslateService, public dialog: MatDialogRef<DownlinkComponent>) {}
 
-    ngOnInit(): void {
-        this.translate.use("da");
-    }
+  ngOnInit(): void {
+    this.translate.use("da");
+  }
 
-    cancel() {
-        this.dialog.close();
-    }
+  cancel() {
+    this.dialog.close();
+  }
 }

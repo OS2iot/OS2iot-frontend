@@ -20,58 +20,58 @@ import { GatewayMapComponent } from "./gateway-overview/gateway-tabs/gateway-map
 import { GatewayStatusOverviewComponent } from "./gateway-overview/gateway-tabs/gateway-status-overview/gateway-status-overview.component";
 
 const gatewayRoutes: Routes = [
-    {
+  {
+    path: "",
+    component: GatewaysComponent,
+    children: [
+      {
         path: "",
-        component: GatewaysComponent,
+        component: GatewayOverviewComponent,
         children: [
-            {
-                path: "",
-                component: GatewayOverviewComponent,
-                children: [
-                    { path: "list", component: GatewayListComponent },
-                    { path: "map", component: GatewayMapComponent },
-                    { path: "status", component: GatewayStatusOverviewComponent },
-                ],
-            },
-            { path: "gateway-edit/:id", component: GatewayEditComponent },
-            { path: "gateway-edit", component: GatewayEditComponent },
-            { path: "gateway-detail/:id", component: GatewayDetailComponent },
+          { path: "list", component: GatewayListComponent },
+          { path: "map", component: GatewayMapComponent },
+          { path: "status", component: GatewayStatusOverviewComponent },
         ],
-    },
+      },
+      { path: "gateway-edit/:id", component: GatewayEditComponent },
+      { path: "gateway-edit", component: GatewayEditComponent },
+      { path: "gateway-detail/:id", component: GatewayDetailComponent },
+    ],
+  },
 ];
 
 @NgModule({
-    declarations: [
-        GatewayTableComponent,
-        GatewaysComponent,
-        GatewayOverviewComponent,
-        GatewayDetailComponent,
-        GatewayEditComponent,
-        GatewayStatusComponent,
-        GatewayListComponent,
-        GatewayMapComponent,
-        GatewayStatusOverviewComponent,
-    ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        TranslateModule,
-        FormModule,
-        FormsModule,
-        FontAwesomeModule,
-        NGMaterialModule,
-        RouterModule.forChild(gatewayRoutes),
-        SharedModule,
-        PipesModule,
-        GraphModule,
-    ],
-    exports: [
-        GatewayTableComponent,
-        GatewaysComponent,
-        GatewayOverviewComponent,
-        GatewayEditComponent,
-        GatewayStatusComponent,
-        RouterModule,
-    ],
+  declarations: [
+    GatewayTableComponent,
+    GatewaysComponent,
+    GatewayOverviewComponent,
+    GatewayDetailComponent,
+    GatewayEditComponent,
+    GatewayStatusComponent,
+    GatewayListComponent,
+    GatewayMapComponent,
+    GatewayStatusOverviewComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    FormModule,
+    FormsModule,
+    FontAwesomeModule,
+    NGMaterialModule,
+    RouterModule.forChild(gatewayRoutes),
+    SharedModule,
+    PipesModule,
+    GraphModule,
+  ],
+  exports: [
+    GatewayTableComponent,
+    GatewaysComponent,
+    GatewayOverviewComponent,
+    GatewayEditComponent,
+    GatewayStatusComponent,
+    RouterModule,
+  ],
 })
 export class GatewayModule {}

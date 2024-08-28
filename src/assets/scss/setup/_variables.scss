@@ -48,12 +48,12 @@ Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 */
 
 @function strip-unit($num) {
-    @return $num / ($num * 0 + 1);
+  @return $num / ($num * 0 + 1);
 }
 
 @function calculateRem($size) {
-    $remSize: math.div($size, $em-base);
-    @return #{$remSize}rem;
+  $remSize: math.div($size, $em-base);
+  @return #{$remSize}rem;
 }
 
 // Paths
@@ -372,15 +372,15 @@ $red-light: #f8e7e9;
 $red: #dc3545;
 
 .overflow-x-hidden {
-    overflow-x: hidden !important;
+  overflow-x: hidden !important;
 }
 
 .overflow-y-hidden {
-    overflow-y: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .mat-tab-group {
-    .mat-tab-body.mat-tab-body-active {
-        overflow-y: hidden;
-    }
+  .mat-tab-body.mat-tab-body-active {
+    overflow-y: hidden;
+  }
 }

@@ -1,34 +1,34 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-    <div *ngIf="errorMessage" class="error-messages p-3">
-        {{ errorMessage | translate }}
-    </div>
+  <div *ngIf="errorMessage" class="error-messages p-3">
+    {{ errorMessage | translate }}
+  </div>
 
-    <div class="row mb-5">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="name">{{ "ORGANISATION.FORM.NAME" | translate }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="name"
-                [placeholder]="'ORGANISATION.FORM.NAME-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="organisation.name"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('name'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('name')
-                }"
-            />
-        </div>
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{ "ORGANISATION.FORM.NAME" | translate }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [placeholder]="'ORGANISATION.FORM.NAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="organisation.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+      />
     </div>
+  </div>
 
-    <div class="form-group mt-5">
-        <button (click)="routeBack()" class="btn btn-secondary" type="button">
-            {{ "ORGANISATION.FORM.CANCEL" | translate }}
-        </button>
-        <button class="btn btn-primary ml-2" type="submit">{{ "ORGANISATION.FORM.SAVE" | translate }}</button>
-    </div>
+  <div class="form-group mt-5">
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">
+      {{ "ORGANISATION.FORM.CANCEL" | translate }}
+    </button>
+    <button class="btn btn-primary ml-2" type="submit">{{ "ORGANISATION.FORM.SAVE" | translate }}</button>
+  </div>
 </form>

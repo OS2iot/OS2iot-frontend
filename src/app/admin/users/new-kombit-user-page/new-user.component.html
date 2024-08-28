@@ -1,71 +1,67 @@
 <app-top-bar></app-top-bar>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron">
-                <h1>
-                    {{ "NEW_USER.FIRST_LOGIN" | translate }}
-                </h1>
-                <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
-                    <div *ngIf="errorMessages || errorMessage" class="error-messages p-3">
-                        <ul class="mb-0">
-                            <li *ngFor="let error of errorMessages">
-                                {{ error | translate }}
-                            </li>
-                            <li *ngIf="errorMessage">
-                                {{ errorMessage | translate }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label class="form-label" for="createNewKombitUserDto.email">{{
-                            "USERS.EMAIL" | translate
-                        }}</label
-                        >*
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron">
+        <h1>
+          {{ "NEW_USER.FIRST_LOGIN" | translate }}
+        </h1>
+        <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
+          <div *ngIf="errorMessages || errorMessage" class="error-messages p-3">
+            <ul class="mb-0">
+              <li *ngFor="let error of errorMessages">
+                {{ error | translate }}
+              </li>
+              <li *ngIf="errorMessage">
+                {{ errorMessage | translate }}
+              </li>
+            </ul>
+          </div>
+          <div class="form-group mt-3">
+            <label class="form-label" for="createNewKombitUserDto.email">{{ "USERS.EMAIL" | translate }}</label
+            >*
 
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            maxlength="50"
-                            required
-                            name="email"
-                            [(ngModel)]="createNewKombitUserFromFrontend.email"
-                            [ngClass]="{
-                                'is-invalid': formFailedSubmit && errorFields.includes('email'),
-                                'is-valid': formFailedSubmit && !errorFields.includes('email')
-                            }"
-                        />
-                    </div>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              maxlength="50"
+              required
+              name="email"
+              [(ngModel)]="createNewKombitUserFromFrontend.email"
+              [ngClass]="{
+                'is-invalid': formFailedSubmit && errorFields.includes('email'),
+                'is-valid': formFailedSubmit && !errorFields.includes('email')
+              }"
+            />
+          </div>
 
-                    <div class="form-group mt-3 mb-5">
-                        <label class="form-label" for="new-organisations">{{ "NAV.ORGANISATIONS" | translate }}</label
-                        >*
-                        <mat-select
-                            class="form-control"
-                            [placeholder]="'NAV.ORGANISATIONS' | translate"
-                            [multiple]="true"
-                            name="new-organisations"
-                            [compareWith]="compare"
-                            [(ngModel)]="createNewKombitUserFromFrontend.requestedOrganizations"
-                            panelClass="overflow-x-hidden"
-                            aria-required="true"
-                        >
-                            <app-mat-select-search [formControl]="organisationsFilterCtrl"></app-mat-select-search>
+          <div class="form-group mt-3 mb-5">
+            <label class="form-label" for="new-organisations">{{ "NAV.ORGANISATIONS" | translate }}</label
+            >*
+            <mat-select
+              class="form-control"
+              [placeholder]="'NAV.ORGANISATIONS' | translate"
+              [multiple]="true"
+              name="new-organisations"
+              [compareWith]="compare"
+              [(ngModel)]="createNewKombitUserFromFrontend.requestedOrganizations"
+              panelClass="overflow-x-hidden"
+              aria-required="true"
+            >
+              <app-mat-select-search [formControl]="organisationsFilterCtrl"></app-mat-select-search>
 
-                            <mat-option *ngFor="let org of filteredOrganisations | async" [value]="org">{{
-                                org.name
-                            }}</mat-option>
-                        </mat-select>
-                    </div>
-                    <div class="form-group mt-3">
-                        <button class="btn btn-primary" type="submit">
-                            {{ "USERS.SAVE" | translate }}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+              <mat-option *ngFor="let org of filteredOrganisations | async" [value]="org">{{ org.name }}</mat-option>
+            </mat-select>
+          </div>
+          <div class="form-group mt-3">
+            <button class="btn btn-primary" type="submit">
+              {{ "USERS.SAVE" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

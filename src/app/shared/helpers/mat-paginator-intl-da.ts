@@ -11,42 +11,42 @@ const OF = "PAGINATOR.OF";
 
 @Injectable()
 export class MatPaginatorIntlDa extends MatPaginatorIntl {
-    public constructor(private translate: TranslateService) {
-        super();
+  public constructor(private translate: TranslateService) {
+    super();
 
-        this.translate.onLangChange.subscribe((e: Event) => {
-            this.getAndInitTranslations();
-        });
+    this.translate.onLangChange.subscribe((e: Event) => {
+      this.getAndInitTranslations();
+    });
 
-        this.getAndInitTranslations();
+    this.getAndInitTranslations();
+  }
+  ofLabel: string;
+
+  public getRangeLabel = (page: number, pageSize: number, length: number): string => {
+    if (length === 0 || pageSize === 0) {
+      return `0 ${this.ofLabel} ${length}`;
     }
-    ofLabel: string;
 
-    public getRangeLabel = (page: number, pageSize: number, length: number): string => {
-        if (length === 0 || pageSize === 0) {
-            return `0 ${this.ofLabel} ${length}`;
-        }
+    length = Math.max(length, 0);
 
-        length = Math.max(length, 0);
+    const startIndex: number = page * pageSize;
+    const endIndex: number = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
 
-        const startIndex: number = page * pageSize;
-        const endIndex: number = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+    return `${startIndex + 1} - ${endIndex} ${this.ofLabel} ${length}`;
+  };
 
-        return `${startIndex + 1} - ${endIndex} ${this.ofLabel} ${length}`;
-    };
+  public getAndInitTranslations(): void {
+    this.translate
+      .get([ITEMS_PER_PAGE, NEXT_PAGE, PREV_PAGE, FIRST_PAGE, LAST_PAGE, OF])
+      .subscribe((translation: any) => {
+        this.itemsPerPageLabel = translation[ITEMS_PER_PAGE];
+        this.nextPageLabel = translation[NEXT_PAGE];
+        this.previousPageLabel = translation[PREV_PAGE];
+        this.firstPageLabel = translation[FIRST_PAGE];
+        this.lastPageLabel = translation[LAST_PAGE];
+        this.ofLabel = translation[OF];
 
-    public getAndInitTranslations(): void {
-        this.translate
-            .get([ITEMS_PER_PAGE, NEXT_PAGE, PREV_PAGE, FIRST_PAGE, LAST_PAGE, OF])
-            .subscribe((translation: any) => {
-                this.itemsPerPageLabel = translation[ITEMS_PER_PAGE];
-                this.nextPageLabel = translation[NEXT_PAGE];
-                this.previousPageLabel = translation[PREV_PAGE];
-                this.firstPageLabel = translation[FIRST_PAGE];
-                this.lastPageLabel = translation[LAST_PAGE];
-                this.ofLabel = translation[OF];
-
-                this.changes.next();
-            });
-    }
+        this.changes.next();
+      });
+  }
 }

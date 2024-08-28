@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class GatewayService {
-    organisationChangeSubject: Subject<number> = new Subject();
-    isGatewayStatusVisibleSubject: Subject<void> = new Subject();
-    selectedOrg: number;
+  organisationChangeSubject: Subject<number> = new Subject();
+  isGatewayStatusVisibleSubject: Subject<void> = new Subject();
+  selectedOrg: number;
 }

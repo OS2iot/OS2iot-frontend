@@ -42,85 +42,85 @@
 @import "./app/shared/styles/leaflet-styles.scss";
 
 @font-face {
-    font-family: "roboto-light";
-    src: url("./assets/fonts/Roboto-Light.ttf") format("truetype");
+  font-family: "roboto-light";
+  src: url("./assets/fonts/Roboto-Light.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "roboto";
-    src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-family: "roboto";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "roboto-bold";
-    src: url("./assets/fonts/Roboto-Bold.ttf") format("truetype");
+  font-family: "roboto-bold";
+  src: url("./assets/fonts/Roboto-Bold.ttf") format("truetype");
 }
 
 body {
-    // For Google Chrome
-    &::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-    }
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background: rgba($color: #000000, $alpha: 0.5);
-    }
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color: #000000, $alpha: 0.5);
+  }
 
-    &::-webkit-scrollbar-track {
-        background: rgba($color: #000000, $alpha: 0.4);
-    }
+  &::-webkit-scrollbar-track {
+    background: rgba($color: #000000, $alpha: 0.4);
+  }
 
-    // For FireFox
-    scrollbar-width: 5px;
+  // For FireFox
+  scrollbar-width: 5px;
 
-    // For Internet Explorer
-    & {
-        scrollbar-face-color: rgba($color: #000000, $alpha: 0.5);
-        scrollbar-track-color: rgba($color: #000000, $alpha: 0.4);
-    }
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: rgba($color: #000000, $alpha: 0.5);
+    scrollbar-track-color: rgba($color: #000000, $alpha: 0.4);
+  }
 }
 
 .snackBar.mat-snack-bar-container {
-    background: #f4f4f4;
-    color: #000;
+  background: #f4f4f4;
+  color: #000;
 }
 
 .mat-tooltip {
-    font-size: 1rem !important;
+  font-size: 1rem !important;
 }
 
 .status-tooltip {
-    background: rgba(97, 97, 97, 1);
-    white-space: pre-line;
+  background: rgba(97, 97, 97, 1);
+  white-space: pre-line;
 }
 
 .mat-card-header-text-ml-0 .mat-card-header-text {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .welcome-screen .mat-dialog-container {
-    background-color: #55b156;
+  background-color: #55b156;
 }
 
 .hide-checkbox {
-    color: $color-white-001;
+  color: $color-white-001;
 
-    .mat-checkbox-frame {
-        border-color: $color-white-001;
-    }
+  .mat-checkbox-frame {
+    border-color: $color-white-001;
+  }
 }
 
 .line-break {
-    white-space: pre-line;
+  white-space: pre-line;
 }
 
 .mat-select-panel.tall {
-    max-height: 400px;
-    height: 400px;
-    margin-right: 30px;
+  max-height: 400px;
+  height: 400px;
+  margin-right: 30px;
 }
 
 .width100percent {
-    width: 100%;
+  width: 100%;
 }

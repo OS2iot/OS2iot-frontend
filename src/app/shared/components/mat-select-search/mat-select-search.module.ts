@@ -6,8 +6,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatInputModule],
-    declarations: [MatSelectSearchComponent],
-    exports: [MatButtonModule, MatInputModule, MatSelectSearchComponent],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatInputModule],
+  declarations: [MatSelectSearchComponent],
+  exports: [MatButtonModule, MatInputModule, MatSelectSearchComponent],
 })
 export class MatSelectSearchModule {}

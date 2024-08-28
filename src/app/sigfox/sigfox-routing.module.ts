@@ -7,26 +7,26 @@ import { SigfoxDeviceTypesEditComponent } from "./sigfox-groups-detail/sigfox-de
 import { SigfoxGroupsListComponent } from "./sigfox-groups-list/sigfox-groups-list.component";
 
 const routes: Routes = [
-    {
-        path: "",
+  {
+    path: "",
+    children: [
+      { path: "", component: SigfoxGroupsListComponent },
+      { path: "new-group", component: SigfoxGroupsEditComponent },
+      { path: ":groupId/edit-group", component: SigfoxGroupsEditComponent },
+      {
+        path: ":groupId",
         children: [
-            { path: "", component: SigfoxGroupsListComponent },
-            { path: "new-group", component: SigfoxGroupsEditComponent },
-            { path: ":groupId/edit-group", component: SigfoxGroupsEditComponent },
-            {
-                path: ":groupId",
-                children: [
-                    { path: "", component: SigfoxGroupsDetailComponent },
-                    { path: ":deviceTypeId/edit-device-type", component: SigfoxDeviceTypesEditComponent },
-                    { path: "new-device-type", component: SigfoxDeviceTypesEditComponent },
-                ],
-            },
+          { path: "", component: SigfoxGroupsDetailComponent },
+          { path: ":deviceTypeId/edit-device-type", component: SigfoxDeviceTypesEditComponent },
+          { path: "new-device-type", component: SigfoxDeviceTypesEditComponent },
         ],
-    },
+      },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class SigfoxRoutingModule {}

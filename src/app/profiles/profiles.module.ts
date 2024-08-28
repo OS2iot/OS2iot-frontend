@@ -17,28 +17,28 @@ import { DeviceProfilesItemComponent } from "./device-profiles/device-profiles-l
 import { DeviceProfilesListComponent } from "./device-profiles/device-profiles-list/device-profiles-list.component";
 
 @NgModule({
-    declarations: [
-        ProfilesComponent,
-        ProfilesListComponent,
-        DeviceProfilesListComponent,
-        DeviceProfilesItemComponent,
-        DeviceProfilesEditComponent,
-    ],
-    exports: [],
-    imports: [
-        ProfilesRoutingModule,
-        RouterModule,
-        SharedModule,
-        FormModule,
-        TranslateModule,
-        FontAwesomeModule,
-        DirectivesModule,
-        CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        NGMaterialModule,
-        SharedModule,
-        PipesModule,
-    ],
+  declarations: [
+    ProfilesComponent,
+    ProfilesListComponent,
+    DeviceProfilesListComponent,
+    DeviceProfilesItemComponent,
+    DeviceProfilesEditComponent,
+  ],
+  exports: [],
+  imports: [
+    ProfilesRoutingModule,
+    RouterModule,
+    SharedModule,
+    FormModule,
+    TranslateModule,
+    FontAwesomeModule,
+    DirectivesModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NGMaterialModule,
+    SharedModule,
+    PipesModule,
+  ],
 })
 export class ProfilesModule {}

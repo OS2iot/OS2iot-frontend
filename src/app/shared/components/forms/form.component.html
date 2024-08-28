@@ -1,8 +1,8 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 
 <app-form-body-application
-    *ngIf="formType == 'application'"
-    [submitButton]="submitButton"
-    [questions]="applicationQuestions$ | async"
+  *ngIf="formType == 'application'"
+  [submitButton]="submitButton"
+  [questions]="applicationQuestions$ | async"
 >
 </app-form-body-application>

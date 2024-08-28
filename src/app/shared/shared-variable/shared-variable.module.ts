@@ -3,10 +3,10 @@ import { SharedVariableService } from "./shared-variable.service";
 
 @NgModule({})
 export class SharedVariableModule {
-    static forRoot(): ModuleWithProviders<SharedVariableModule> {
-        return {
-            ngModule: SharedVariableModule,
-            providers: [SharedVariableService],
-        };
-    }
+  static forRoot(): ModuleWithProviders<SharedVariableModule> {
+    return {
+      ngModule: SharedVariableModule,
+      providers: [SharedVariableService],
+    };
+  }
 }

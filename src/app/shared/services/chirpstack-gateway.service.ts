@@ -8,81 +8,81 @@ import { map } from "rxjs/operators";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class ChirpstackGatewayService {
-    private chripstackGatewayUrl = "chirpstack/gateway";
+  private chripstackGatewayUrl = "chirpstack/gateway";
 
-    constructor(
-        private restService: RestService,
-        private sharedVariableService: SharedVariableService,
-        private userMinimalService: UserMinimalService
-    ) {
-        moment.locale("da");
-    }
+  constructor(
+    private restService: RestService,
+    private sharedVariableService: SharedVariableService,
+    private userMinimalService: UserMinimalService
+  ) {
+    moment.locale("da");
+  }
 
-    public get(id: string, params = {}): Observable<GatewayResponse> {
-        return this.restService.get(this.chripstackGatewayUrl, params, id).pipe(
-            map((response: GatewayResponse) => {
-                response.gateway.organizationName = this.sharedVariableService
-                    .getOrganizationInfo()
-                    .find(org => org.id === response.gateway.organizationId)?.name;
+  public get(id: string, params = {}): Observable<GatewayResponse> {
+    return this.restService.get(this.chripstackGatewayUrl, params, id).pipe(
+      map((response: GatewayResponse) => {
+        response.gateway.organizationName = this.sharedVariableService
+          .getOrganizationInfo()
+          .find(org => org.id === response.gateway.organizationId)?.name;
 
-                // We want to show helper text if tags is empty. To show empty text, the tagsString has to be undefined.
-                response.gateway.tagsString =
-                    Object.keys(response.gateway.tags).length === 0 ? undefined : JSON.stringify(response.gateway.tags);
+        // We want to show helper text if tags is empty. To show empty text, the tagsString has to be undefined.
+        response.gateway.tagsString =
+          Object.keys(response.gateway.tags).length === 0 ? undefined : JSON.stringify(response.gateway.tags);
 
-                // Move createdat and updatedat to next level ease the use.
-                response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
+        // Move createdat and updatedat to next level ease the use.
+        response.gateway.createdByName = this.userMinimalService.getUserNameFrom(response.gateway.createdBy);
 
-                response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
-                return response;
-            })
-        );
-    }
+        response.gateway.updatedByName = this.userMinimalService.getUserNameFrom(response.gateway.updatedBy);
+        return response;
+      })
+    );
+  }
 
-    public getMultiple(params = {}): Observable<GatewayResponseMany> {
-        return this.restService.get(this.chripstackGatewayUrl, params).pipe(
-            map((response: GatewayResponseMany) => {
-                response.resultList.map(gateway => {
-                    gateway.organizationName = this.sharedVariableService
-                        .getOrganizationInfo()
-                        .find(org => org.id === gateway.organizationId)?.name;
-                });
-                return response;
-            })
-        );
-    }
-
-    public post(gateway: Gateway): Observable<GatewayData> {
-        const gatewayRequest: GatewayRequest = new GatewayRequest();
-        gatewayRequest.gateway = gateway;
-        gatewayRequest.organizationId = this.sharedVariableService.getSelectedOrganisationId();
-        return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, {
-            observe: "response",
+  public getMultiple(params = {}): Observable<GatewayResponseMany> {
+    return this.restService.get(this.chripstackGatewayUrl, params).pipe(
+      map((response: GatewayResponseMany) => {
+        response.resultList.map(gateway => {
+          gateway.organizationName = this.sharedVariableService
+            .getOrganizationInfo()
+            .find(org => org.id === gateway.organizationId)?.name;
         });
-    }
+        return response;
+      })
+    );
+  }
 
-    public put(gateway: Gateway, id: string): Observable<GatewayResponse> {
-        const gatewayRequest: GatewayRequest = new GatewayRequest();
-        gatewayRequest.gateway = gateway;
-        return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id);
-    }
+  public post(gateway: Gateway): Observable<GatewayData> {
+    const gatewayRequest: GatewayRequest = new GatewayRequest();
+    gatewayRequest.gateway = gateway;
+    gatewayRequest.organizationId = this.sharedVariableService.getSelectedOrganisationId();
+    return this.restService.post(this.chripstackGatewayUrl, gatewayRequest, {
+      observe: "response",
+    });
+  }
 
-    public delete(gatewayId: string): Observable<any> {
-        return this.restService.delete(this.chripstackGatewayUrl, gatewayId);
-    }
+  public put(gateway: Gateway, id: string): Observable<GatewayResponse> {
+    const gatewayRequest: GatewayRequest = new GatewayRequest();
+    gatewayRequest.gateway = gateway;
+    return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id);
+  }
 
-    public isGatewayActive(gateway: Gateway): boolean {
-        const errorTime = new Date();
-        errorTime.setSeconds(errorTime.getSeconds() - 150);
-        if (gateway?.lastSeenAt) {
-            const date = gateway.lastSeenAt;
-            const lastSeenAtUnixTimestamp = moment(date).unix();
-            const errorTimeUnixTimestamp = moment(errorTime).unix();
-            return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
-        } else {
-            return false;
-        }
+  public delete(gatewayId: string): Observable<any> {
+    return this.restService.delete(this.chripstackGatewayUrl, gatewayId);
+  }
+
+  public isGatewayActive(gateway: Gateway): boolean {
+    const errorTime = new Date();
+    errorTime.setSeconds(errorTime.getSeconds() - 150);
+    if (gateway?.lastSeenAt) {
+      const date = gateway.lastSeenAt;
+      const lastSeenAtUnixTimestamp = moment(date).unix();
+      const errorTimeUnixTimestamp = moment(errorTime).unix();
+      return errorTimeUnixTimestamp < lastSeenAtUnixTimestamp;
+    } else {
+      return false;
     }
+  }
 }

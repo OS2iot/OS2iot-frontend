@@ -9,8 +9,8 @@ import { GraphComponent } from "./graph.component";
 Chart.register(...registerables);
 
 @NgModule({
-    declarations: [GraphComponent],
-    imports: [CommonModule, NGMaterialModule, TranslateModule],
-    exports: [GraphComponent],
+  declarations: [GraphComponent],
+  imports: [CommonModule, NGMaterialModule, TranslateModule],
+  exports: [GraphComponent],
 })
 export class GraphModule {}

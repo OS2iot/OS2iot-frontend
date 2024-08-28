@@ -1,243 +1,243 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-    <div *ngIf="errorMessages" class="error-messages p-3">
-        <ul class="mb-0">
-            <li *ngFor="let error of errorMessages">
-                {{ error | translate }}
-            </li>
-        </ul>
+  <div *ngIf="errorMessages" class="error-messages p-3">
+    <ul class="mb-0">
+      <li *ngFor="let error of errorMessages">
+        {{ error | translate }}
+      </li>
+    </ul>
+  </div>
+  <!-- Name -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{ "QUESTION.DEVICE-MODEL.GIVE-NAME" | translate }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-NAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="deviceModel.body.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+      />
     </div>
-    <!-- Name -->
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="name">{{ "QUESTION.DEVICE-MODEL.GIVE-NAME" | translate }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="name"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-NAME-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="deviceModel.body.name"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('name'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('name')
-                }"
-            />
-        </div>
+  </div>
+  <!-- id -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="id">{{ "QUESTION.DEVICE-MODEL.GIVE-ID" | translate }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="id"
+        name="id"
+        [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-ID-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="deviceModel.body.id"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('id'),
+          'is-valid': formFailedSubmit && !errorFields.includes('id')
+        }"
+      />
     </div>
-    <!-- id -->
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="id">{{ "QUESTION.DEVICE-MODEL.GIVE-ID" | translate }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="id"
-                name="id"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-ID-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="deviceModel.body.id"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('id'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('id')
-                }"
-            />
-        </div>
+  </div>
+  <!-- brandName -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="brandName">{{ "QUESTION.DEVICE-MODEL.GIVE-BRANDNAME" | translate }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="brandName"
+        name="brandName"
+        [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-BRANDNAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="deviceModel.body.brandName"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('brandName'),
+          'is-valid': formFailedSubmit && !errorFields.includes('brandName')
+        }"
+      />
     </div>
-    <!-- brandName -->
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="brandName">{{ "QUESTION.DEVICE-MODEL.GIVE-BRANDNAME" | translate }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="brandName"
-                name="brandName"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-BRANDNAME-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="deviceModel.body.brandName"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('brandName'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('brandName')
-                }"
-            />
-        </div>
-    </div>
+  </div>
 
-    <!-- modelName -->
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="modelName">{{ "QUESTION.DEVICE-MODEL.GIVE-MODELNAME" | translate }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="modelName"
-                name="modelName"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MODELNAME-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="deviceModel.body.modelName"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('modelName'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('modelName')
-                }"
-            />
-        </div>
+  <!-- modelName -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="modelName">{{ "QUESTION.DEVICE-MODEL.GIVE-MODELNAME" | translate }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="modelName"
+        name="modelName"
+        [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MODELNAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="deviceModel.body.modelName"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('modelName'),
+          'is-valid': formFailedSubmit && !errorFields.includes('modelName')
+        }"
+      />
     </div>
+  </div>
 
-    <!-- manufacturerName -->
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="manufacturerName">{{
-                "QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME" | translate
-            }}</label
-            >*
-            <input
-                type="text"
-                class="form-control"
-                id="manufacturerName"
-                name="manufacturerName"
-                [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME-PLACEHOLDER' | translate"
-                maxlength="50"
-                required
-                [(ngModel)]="deviceModel.body.manufacturerName"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('manufacturerName'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('manufacturerName')
-                }"
-            />
-        </div>
+  <!-- manufacturerName -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="manufacturerName">{{
+        "QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME" | translate
+      }}</label
+      >*
+      <input
+        type="text"
+        class="form-control"
+        id="manufacturerName"
+        name="manufacturerName"
+        [placeholder]="'QUESTION.DEVICE-MODEL.GIVE-MANUFACTURERNAME-PLACEHOLDER' | translate"
+        maxlength="50"
+        required
+        [(ngModel)]="deviceModel.body.manufacturerName"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('manufacturerName'),
+          'is-valid': formFailedSubmit && !errorFields.includes('manufacturerName')
+        }"
+      />
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="controlledProperty">{{
-                "QUESTION.DEVICE-MODEL.SELECT-CONTROLLEDPROPERTY" | translate
-            }}</label
-            >*
-            <mat-select
-                class="form-control"
-                multiple
-                [compareWith]="compare"
-                name="controlledProperty"
-                [(ngModel)]="deviceModel.body.controlledProperty"
-            >
-                <mat-option *ngFor="let control of controlledPropperties" [value]="control">
-                    {{ control }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="controlledProperty">{{
+        "QUESTION.DEVICE-MODEL.SELECT-CONTROLLEDPROPERTY" | translate
+      }}</label
+      >*
+      <mat-select
+        class="form-control"
+        multiple
+        [compareWith]="compare"
+        name="controlledProperty"
+        [(ngModel)]="deviceModel.body.controlledProperty"
+      >
+        <mat-option *ngFor="let control of controlledPropperties" [value]="control">
+          {{ control }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="categories">{{ "QUESTION.DEVICE-MODEL.SELECT-CATEGORY" | translate }}</label
-            >*
-            <mat-select
-                class="form-control"
-                name="categories"
-                [compareWith]="compare"
-                [(ngModel)]="deviceModel.body.category"
-            >
-                <mat-option *ngFor="let category of categories" [value]="category">
-                    {{ category }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="categories">{{ "QUESTION.DEVICE-MODEL.SELECT-CATEGORY" | translate }}</label
+      >*
+      <mat-select
+        class="form-control"
+        name="categories"
+        [compareWith]="compare"
+        [(ngModel)]="deviceModel.body.category"
+      >
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="supportedUnits">{{
-                "QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDUNITS" | translate
-            }}</label>
-            <mat-select
-                class="form-control"
-                name="supportedUnits"
-                multiple
-                [compareWith]="compare"
-                [(ngModel)]="deviceModel.body.supportedUnits"
-            >
-                <mat-option *ngFor="let unit of supportedUnits.units" [value]="unit.code">
-                    {{ unit.name }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="supportedUnits">{{
+        "QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDUNITS" | translate
+      }}</label>
+      <mat-select
+        class="form-control"
+        name="supportedUnits"
+        multiple
+        [compareWith]="compare"
+        [(ngModel)]="deviceModel.body.supportedUnits"
+      >
+        <mat-option *ngFor="let unit of supportedUnits.units" [value]="unit.code">
+          {{ unit.name }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="devicefunction">{{
-                "QUESTION.DEVICE-MODEL.SELECT-DEVICEFUNCTIONS" | translate
-            }}</label>
-            <mat-select
-                class="form-control"
-                name="devicefunction"
-                multiple
-                [compareWith]="compare"
-                [(ngModel)]="deviceModel.body.function"
-            >
-                <mat-option *ngFor="let function of deviceFunctions" [value]="function">
-                    {{ function }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="devicefunction">{{
+        "QUESTION.DEVICE-MODEL.SELECT-DEVICEFUNCTIONS" | translate
+      }}</label>
+      <mat-select
+        class="form-control"
+        name="devicefunction"
+        multiple
+        [compareWith]="compare"
+        [(ngModel)]="deviceModel.body.function"
+      >
+        <mat-option *ngFor="let function of deviceFunctions" [value]="function">
+          {{ function }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="energyLimitationClass">{{
-                "QUESTION.DEVICE-MODEL.SELECT-ENERGYLIMITATIONCLASS" | translate
-            }}</label>
-            <mat-select
-                class="form-control"
-                name="energyLimitationClass"
-                [compareWith]="compare"
-                [(ngModel)]="deviceModel.body.energyLimitationClass"
-            >
-                <mat-option *ngFor="let elclass of energyLimitationClass.energyLimits" [value]="elclass.code">
-                    {{ elclass.name }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="energyLimitationClass">{{
+        "QUESTION.DEVICE-MODEL.SELECT-ENERGYLIMITATIONCLASS" | translate
+      }}</label>
+      <mat-select
+        class="form-control"
+        name="energyLimitationClass"
+        [compareWith]="compare"
+        [(ngModel)]="deviceModel.body.energyLimitationClass"
+      >
+        <mat-option *ngFor="let elclass of energyLimitationClass.energyLimits" [value]="elclass.code">
+          {{ elclass.name }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="supportedProtocol">{{
-                "QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDPROTOCOL" | translate
-            }}</label>
-            <mat-select
-                class="form-control"
-                name="supportedProtocol"
-                multiple
-                [compareWith]="compare"
-                [(ngModel)]="deviceModel.body.supportedProtocol"
-            >
-                <mat-option *ngFor="let protocol of supportedProtocol" [value]="protocol">
-                    {{ protocol }}
-                </mat-option>
-            </mat-select>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="supportedProtocol">{{
+        "QUESTION.DEVICE-MODEL.SELECT-SUPPORTEDPROTOCOL" | translate
+      }}</label>
+      <mat-select
+        class="form-control"
+        name="supportedProtocol"
+        multiple
+        [compareWith]="compare"
+        [(ngModel)]="deviceModel.body.supportedProtocol"
+      >
+        <mat-option *ngFor="let protocol of supportedProtocol" [value]="protocol">
+          {{ protocol }}
+        </mat-option>
+      </mat-select>
     </div>
+  </div>
 
-    <div class="row mb-2">
-        <div class="form-group mt-3 col-12">
-            <a href="https://github.com/smart-data-models/dataModel.Device" target="_blank">
-                {{ "QUESTION.DEVICE-MODEL.FIWARE-LINK-TEXT" | translate }}
-            </a>
-        </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <a href="https://github.com/smart-data-models/dataModel.Device" target="_blank">
+        {{ "QUESTION.DEVICE-MODEL.FIWARE-LINK-TEXT" | translate }}
+      </a>
     </div>
-    <div class="form-group mt-5">
-        <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ "GEN.CANCEL" | translate }}</button>
-        <button class="btn btn-primary ml-2" type="submit">{{ "GEN.SAVE" | translate }}</button>
-    </div>
+  </div>
+  <div class="form-group mt-5">
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ "GEN.CANCEL" | translate }}</button>
+    <button class="btn btn-primary ml-2" type="submit">{{ "GEN.SAVE" | translate }}</button>
+  </div>
 </form>

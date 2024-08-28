@@ -1,110 +1,107 @@
 <app-top-bar [backButtonTitle]="'NAV.APPLICATION' | translate" [title]="'APPLICATION.BULK.TITLE' | translate">
 </app-top-bar>
 <div class="row">
-    <div class="col-12">
-        <mat-progress-bar
-            *ngIf="download$ | async as download"
-            [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
-            [value]="download.progress"
-            class="mb-5"
-        >
-        </mat-progress-bar>
+  <div class="col-12">
+    <mat-progress-bar
+      *ngIf="download$ | async as download"
+      [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
+      [value]="download.progress"
+      class="mb-5"
+    >
+    </mat-progress-bar>
+  </div>
+  <div *ngIf="fileFormatErrorMessage" class="error-messages p-3 col-md-10 offset-md-1 mb-5">
+    <ul class="mb-0">
+      {{
+        "APPLICATION.BULK.FILEFORMATERRORMESSAGE" | translate
+      }}
+    </ul>
+  </div>
+  <div class="col-12">
+    <div class="btn-group float-md-right dropdown">
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ "APPLICATION.BULK.DOWNLOAD" | translate }} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{ 'APPLICATION.BULK.DOWNLOAD' | translate }}">
+        <li class="dropdown-item" *ngFor="let sample of samples">
+          <a class="a" (click)="download(sample)">
+            <fa-icon [icon]="faDownload"></fa-icon>
+            {{ sample.name }}
+          </a>
+        </li>
+      </ul>
     </div>
-    <div *ngIf="fileFormatErrorMessage" class="error-messages p-3 col-md-10 offset-md-1 mb-5">
-        <ul class="mb-0">
-            {{
-                "APPLICATION.BULK.FILEFORMATERRORMESSAGE" | translate
-            }}
-        </ul>
-    </div>
-    <div class="col-12">
-        <div class="btn-group float-md-right dropdown">
-            <button
-                type="button"
-                class="btn btn-primary dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-            >
-                {{ "APPLICATION.BULK.DOWNLOAD" | translate }} <span class="caret"></span>
-            </button>
-            <ul
-                class="dropdown-menu"
-                attr.aria-labelledby="tableRowDropdown-{{ 'APPLICATION.BULK.DOWNLOAD' | translate }}"
-            >
-                <li class="dropdown-item" *ngFor="let sample of samples">
-                    <a class="a" (click)="download(sample)">
-                        <fa-icon [icon]="faDownload"></fa-icon>
-                        {{ sample.name }}
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+  </div>
 </div>
 <div class="row m-3">
-    <div class="col-md-6 offset-md-3 mb-5">
-        <div
-            class="choose-file"
-            attr.data-content="{{ 'APPLICATION.BULK.DROPFILE' | translate }}"
-            (click)="fileInput.click()"
-            appDragDrop
-            (onFileDropped)="handleDropedFile($event)"
-        >
-            <input
-                hidden
-                accept=".csv"
-                type="file"
-                ngf-max-size="20MB"
-                #fileInput
-                (change)="handleDropedFile($event.target.files)"
-            />
-        </div>
-        <div class="files-list" *ngFor="let file of files; let i = index">
-            <p>{{ file }}</p>
-            <button class="delete-file" (click)="deleteAttachment(i)">
-                <fa-icon [icon]="faTrash"></fa-icon>
-            </button>
-        </div>
+  <div class="col-md-6 offset-md-3 mb-5">
+    <div
+      class="choose-file"
+      attr.data-content="{{ 'APPLICATION.BULK.DROPFILE' | translate }}"
+      (click)="fileInput.click()"
+      appDragDrop
+      (onFileDropped)="handleDropedFile($event)"
+    >
+      <input
+        hidden
+        accept=".csv"
+        type="file"
+        ngf-max-size="20MB"
+        #fileInput
+        (change)="handleDropedFile($event.target.files)"
+      />
     </div>
-    <div class="col-md-6 offset-md-3 mb-5 d-flex justify-content-center">
-        <button (click)="addIoTDevice()" class="btn btn-primary">Overfør data</button>
+    <div class="files-list" *ngFor="let file of files; let i = index">
+      <p>{{ file }}</p>
+      <button class="delete-file" (click)="deleteAttachment(i)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
     </div>
-    <div class="col-md-6 mb-5">
-        <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-    </div>
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="bulkImportResult" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.NAME" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.device?.name }}</td>
-            </ng-container>
+  </div>
+  <div class="col-md-6 offset-md-3 mb-5 d-flex justify-content-center">
+    <button (click)="addIoTDevice()" class="btn btn-primary">Overfør data</button>
+  </div>
+  <div class="col-md-6 mb-5">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="bulkImportResult" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.NAME" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.device?.name }}</td>
+      </ng-container>
 
-            <ng-container matColumnDef="type">
-                <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.TYPE" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ "IOT-DEVICE-TYPES." + element.device?.type | translate }}</td>
-            </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.TYPE" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ "IOT-DEVICE-TYPES." + element.device?.type | translate }}</td>
+      </ng-container>
 
-            <ng-container matColumnDef="importStatus">
-                <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.IMPORTSTATUS" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.importStatus }}</td>
-            </ng-container>
+      <ng-container matColumnDef="importStatus">
+        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.IMPORTSTATUS" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.importStatus }}</td>
+      </ng-container>
 
-            <ng-container matColumnDef="errorMessages">
-                <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.ERROR" | translate }}</th>
-                <td mat-cell *matCellDef="let element">
-                    <ul class="mb-0">
-                        <li *ngFor="let error of element.errorMessages">
-                            {{ error | translate }}
-                        </li>
-                    </ul>
-                </td>
-            </ng-container>
+      <ng-container matColumnDef="errorMessages">
+        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.ERROR" | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          <ul class="mb-0">
+            <li *ngFor="let error of element.errorMessages">
+              {{ error | translate }}
+            </li>
+          </ul>
+        </td>
+      </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>
 <!-- <div class="col-md-6 offset-md-3 mb-5">
     <p>{{ 'APPLICATION.BULK.EMPTY' | translate }}</p>

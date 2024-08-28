@@ -4,15 +4,15 @@ import { RestService } from "./rest.service";
 import { Observable } from "rxjs";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class OpendatadkService {
-    private OPENDATADKSHARINGURL = "open-data-dk-sharing";
+  private OPENDATADKSHARINGURL = "open-data-dk-sharing";
 
-    constructor(private restService: RestService, private sharedVariableService: SharedVariableService) {}
+  constructor(private restService: RestService, private sharedVariableService: SharedVariableService) {}
 
-    get(): Observable<any> {
-        const organizationId = this.sharedVariableService.getSelectedOrganisationId();
-        return this.restService.get(this.OPENDATADKSHARINGURL, null, organizationId);
-    }
+  get(): Observable<any> {
+    const organizationId = this.sharedVariableService.getSelectedOrganisationId();
+    return this.restService.get(this.OPENDATADKSHARINGURL, null, organizationId);
+  }
 }

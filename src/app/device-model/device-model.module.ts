@@ -13,22 +13,22 @@ import { FormModule } from "@shared/components/forms/form.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
 
 @NgModule({
-    declarations: [
-        DeviceModelListComponent,
-        DeviceModelTableComponent,
-        DeviceModelDetailComponent,
-        DeviceModelEditComponent,
-    ],
-    imports: [
-        CommonModule,
-        DeviceModelRoutingModule,
-        NGMaterialModule,
-        TranslateModule,
-        SharedModule,
-        FormsModule,
-        FormModule,
-        ReactiveFormsModule,
-        PipesModule,
-    ],
+  declarations: [
+    DeviceModelListComponent,
+    DeviceModelTableComponent,
+    DeviceModelDetailComponent,
+    DeviceModelEditComponent,
+  ],
+  imports: [
+    CommonModule,
+    DeviceModelRoutingModule,
+    NGMaterialModule,
+    TranslateModule,
+    SharedModule,
+    FormsModule,
+    FormModule,
+    ReactiveFormsModule,
+    PipesModule,
+  ],
 })
 export class DeviceModelModule {}

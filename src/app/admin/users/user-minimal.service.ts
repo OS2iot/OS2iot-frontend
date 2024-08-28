@@ -4,47 +4,47 @@ import { Observable } from "rxjs";
 import { UserMinimal, UserMinimalResponse } from "./user-minimal.model";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class UserMinimalService {
-    URL = "user/minimal";
-    URL_NEW_KOMBIT = "kombitCreation/minimalUsers";
-    private userMinimalList: UserMinimal[];
+  URL = "user/minimal";
+  URL_NEW_KOMBIT = "kombitCreation/minimalUsers";
+  private userMinimalList: UserMinimal[];
 
-    constructor(private restService: RestService) {}
+  constructor(private restService: RestService) {}
 
-    getUserMinimalRest(): Observable<UserMinimalResponse> {
-        return this.restService.get(this.URL);
+  getUserMinimalRest(): Observable<UserMinimalResponse> {
+    return this.restService.get(this.URL);
+  }
+
+  getUserMinimalRestNewKombit(): Observable<UserMinimalResponse> {
+    return this.restService.get(this.URL_NEW_KOMBIT);
+  }
+
+  setUserMinimalList() {
+    return this.getUserMinimalRestNewKombit().subscribe((response: UserMinimalResponse) => {
+      localStorage.setItem("userMinimalList", JSON.stringify(response.users));
+      this.userMinimalList = response.users;
+    });
+  }
+
+  private getUserMinimalList(): UserMinimal[] {
+    if (this.userMinimalList) {
+      return this.userMinimalList;
     }
+    return new Object(JSON.parse(localStorage.getItem("userMinimalList"))) as UserMinimal[];
+  }
 
-    getUserMinimalRestNewKombit(): Observable<UserMinimalResponse> {
-        return this.restService.get(this.URL_NEW_KOMBIT);
-    }
+  getUserNameFrom(id: number): string {
+    const username = this.getUserMinimalList().find(user => user.id === id)?.name;
+    return username;
+  }
 
-    setUserMinimalList() {
-        return this.getUserMinimalRestNewKombit().subscribe((response: UserMinimalResponse) => {
-            localStorage.setItem("userMinimalList", JSON.stringify(response.users));
-            this.userMinimalList = response.users;
-        });
-    }
+  setHasSeenWelcomeScreen(): void {
+    localStorage.setItem("hasSeenWelcomeScreen", true.toString());
+  }
 
-    private getUserMinimalList(): UserMinimal[] {
-        if (this.userMinimalList) {
-            return this.userMinimalList;
-        }
-        return new Object(JSON.parse(localStorage.getItem("userMinimalList"))) as UserMinimal[];
-    }
-
-    getUserNameFrom(id: number): string {
-        const username = this.getUserMinimalList().find(user => user.id === id)?.name;
-        return username;
-    }
-
-    setHasSeenWelcomeScreen(): void {
-        localStorage.setItem("hasSeenWelcomeScreen", true.toString());
-    }
-
-    getHasSeenWelcomeScreen(): boolean {
-        return !!localStorage.getItem("hasSeenWelcomeScreen");
-    }
+  getHasSeenWelcomeScreen(): boolean {
+    return !!localStorage.getItem("hasSeenWelcomeScreen");
+  }
 }

@@ -33,64 +33,64 @@ import { PipesModule } from "@shared/pipes/pipes.module";
 import { CookieService } from "ngx-cookie-service";
 
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 export function tokenGetter() {
-    return localStorage.getItem("id_token");
+  return localStorage.getItem("id_token");
 }
 
 @NgModule({
-    declarations: [AppComponent, ErrorPageComponent, NewUserComponent, UserPageComponent],
-    imports: [
-        SharedVariableModule.forRoot(),
-        AuthModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        NavbarModule,
-        ProfilesModule,
-        TranslateModule.forRoot({
-            defaultLanguage: "da",
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-        }),
-        NgbModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        NGMaterialModule,
-        GatewayModule,
-        MatSelectSearchModule,
-        SearchModule,
-        SharedModule,
-        HttpClientModule,
-        MatInputModule,
-        MatTooltipModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter,
-            },
-        }),
-        MonacoEditorModule.forRoot(),
-        WelcomeDialogModule,
-        PipesModule,
-    ],
-    bootstrap: [AppComponent],
-    exports: [TranslateModule],
-    providers: [
-        // use these two providers only in dev environment
-        //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
-        //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
-        Title,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
-        { provide: SAVER, useFactory: getSaver },
-        { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
-        { provide: CookieService },
-    ],
+  declarations: [AppComponent, ErrorPageComponent, NewUserComponent, UserPageComponent],
+  imports: [
+    SharedVariableModule.forRoot(),
+    AuthModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NavbarModule,
+    ProfilesModule,
+    TranslateModule.forRoot({
+      defaultLanguage: "da",
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NGMaterialModule,
+    GatewayModule,
+    MatSelectSearchModule,
+    SearchModule,
+    SharedModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTooltipModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+      },
+    }),
+    MonacoEditorModule.forRoot(),
+    WelcomeDialogModule,
+    PipesModule,
+  ],
+  bootstrap: [AppComponent],
+  exports: [TranslateModule],
+  providers: [
+    // use these two providers only in dev environment
+    //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
+    //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+    Title,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
+    { provide: SAVER, useFactory: getSaver },
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
+    { provide: CookieService },
+  ],
 })
 export class AppModule {}

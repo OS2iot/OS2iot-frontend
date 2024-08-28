@@ -12,261 +12,261 @@ h4,
 h5,
 p,
 a {
-    font-family: "Roboto";
+  font-family: "Roboto";
 }
 
 /*####################### HEADLINE #########################*/
 @mixin h1 {
-    @extend .mb-3;
-    font-family: $font-name;
-    font-size: $h1-font-size;
-    line-height: $h1-line-height;
-    font-weight: $font-weight-bold;
-    color: $color-primary;
-    @include fluid-type(
-        $min_width,
-        $max_width,
-        $mod_1 * $mod_1 * $mod_1 * $min_font,
-        $mod_2 * $mod_2 * $mod_2 * $min_font
-    );
+  @extend .mb-3;
+  font-family: $font-name;
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $mod_2 * $min_font
+  );
 }
 
 @mixin h2 {
-    @extend .mb-4;
-    font-family: $font-name;
-    font-size: $h2-font-size;
-    line-height: $h2-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
-    @include fluid-type(
-        $min_width,
-        $max_width,
-        $mod_1 * $mod_1 * $mod_1 * $min_font,
-        $mod_2 * $mod_2 * $mod_2 * $min_font
-    );
+  @extend .mb-4;
+  font-family: $font-name;
+  font-size: $h2-font-size;
+  line-height: $h2-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
+  @include fluid-type(
+    $min_width,
+    $max_width,
+    $mod_1 * $mod_1 * $mod_1 * $min_font,
+    $mod_2 * $mod_2 * $mod_2 * $min_font
+  );
 
-    p {
-        @extend h2;
-    }
+  p {
+    @extend h2;
+  }
 
-    strong {
-        font-weight: $font-weight-bold;
-    }
+  strong {
+    font-weight: $font-weight-bold;
+  }
 }
 
 @mixin h3 {
-    @extend .mb-3;
-    font-family: $font-name;
-    font-size: $h3-font-size;
-    line-height: $h3-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
-    @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
+  @extend .mb-3;
+  font-family: $font-name;
+  font-size: $h3-font-size;
+  line-height: $h3-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
+  @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
 
-    strong {
-        font-weight: $font-weight-bold;
-    }
+  strong {
+    font-weight: $font-weight-bold;
+  }
 }
 
 @mixin h4 {
-    @extend .mb-3;
-    font-family: $font-name;
-    font-size: $h4-font-size;
-    line-height: $h4-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
-    @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
+  @extend .mb-3;
+  font-family: $font-name;
+  font-size: $h4-font-size;
+  line-height: $h4-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
+  @include fluid-type($min_width, $max_width, $mod_1 * $mod_1 * $min_font, $mod_2 * $mod_2 * $min_font);
 
-    strong {
-        font-weight: $font-weight-bold;
-    }
+  strong {
+    font-weight: $font-weight-bold;
+  }
 }
 
 @mixin h5 {
-    @extend .mb-4;
-    font-family: $font-name;
-    font-size: $h5-font-size;
-    line-height: $h5-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
+  @extend .mb-4;
+  font-family: $font-name;
+  font-size: $h5-font-size;
+  line-height: $h5-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
 
-    strong {
-        font-weight: $font-weight-medium;
-    }
+  strong {
+    font-weight: $font-weight-medium;
+  }
 }
 
 @mixin h6 {
-    @extend .mb-4;
-    font-family: $font-name;
-    font-size: 1rem;
-    line-height: 1.2;
-    font-weight: 500;
-    color: $color-text;
+  @extend .mb-4;
+  font-family: $font-name;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 500;
+  color: $color-text;
 
-    strong {
-        font-weight: $font-weight-medium;
-    }
+  strong {
+    font-weight: $font-weight-medium;
+  }
 }
 
 @mixin body-text {
-    font-family: $font-name;
-    font-size: $body-text;
-    line-height: $body-text-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
+  font-family: $font-name;
+  font-size: $body-text;
+  line-height: $body-text-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
 }
 
 @mixin body-text-small {
-    font-family: $font-name;
-    font-size: $small-text;
-    line-height: $small-text-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
+  font-family: $font-name;
+  font-size: $small-text;
+  line-height: $small-text-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
 }
 
 @mixin body-text-big {
-    font-family: $font-name;
-    font-size: $big-text;
-    line-height: $big-text-line-height;
-    font-weight: $font-weight-normal;
-    color: $color-text;
+  font-family: $font-name;
+  font-size: $big-text;
+  line-height: $big-text-line-height;
+  font-weight: $font-weight-normal;
+  color: $color-text;
 }
 
 /*###################### HEADLINE TO USE #####################*/
 
 h1,
 .h1 {
-    @include h1;
+  @include h1;
 }
 
 h2,
 .h2 {
-    @include h2;
+  @include h2;
 }
 
 h3,
 .h3 {
-    @include h3;
+  @include h3;
 }
 
 h4,
 .h4 {
-    @include h4;
+  @include h4;
 }
 
 h5,
 .h5 {
-    @include h5;
+  @include h5;
 }
 
 h6,
 .h6 {
-    @include h6;
+  @include h6;
 }
 
 h1 + h4 {
-    margin-top: calculateRem(-16);
+  margin-top: calculateRem(-16);
 }
 
 p,
 body,
 .body-text {
-    @include body-text;
-    letter-spacing: $letter-spacing;
-    @extend .my-2;
+  @include body-text;
+  letter-spacing: $letter-spacing;
+  @extend .my-2;
 }
 
 p {
-    strong {
-        @include h6;
-        line-height: none;
-        @extend .mr-3;
-    }
+  strong {
+    @include h6;
+    line-height: none;
+    @extend .mr-3;
+  }
 }
 
 pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
 }
 
 .text {
-    // Transforms
-    &--uppercase {
-        text-transform: uppercase;
-    }
+  // Transforms
+  &--uppercase {
+    text-transform: uppercase;
+  }
 
-    &--light {
-        font-weight: 300;
-    }
+  &--light {
+    font-weight: 300;
+  }
 
-    &--normal {
-        font-weight: 400;
-    }
+  &--normal {
+    font-weight: 400;
+  }
 
-    &--semibold {
-        font-weight: 500;
-    }
+  &--semibold {
+    font-weight: 500;
+  }
 
-    &--semibolder {
-        font-weight: 600;
-    }
+  &--semibolder {
+    font-weight: 600;
+  }
 
-    &--bold {
-        font-weight: 700;
-    }
+  &--bold {
+    font-weight: 700;
+  }
 
-    &--bolder {
-        font-weight: 800;
-    }
+  &--bolder {
+    font-weight: 800;
+  }
 
-    &--boldest {
-        font-weight: 900;
-    }
+  &--boldest {
+    font-weight: 900;
+  }
 
-    // Decoration
-    &--underline {
-        text-decoration: underline;
-    }
+  // Decoration
+  &--underline {
+    text-decoration: underline;
+  }
 
-    //Colours
-    &--green {
-        color: $color-primary !important;
-    }
+  //Colours
+  &--green {
+    color: $color-primary !important;
+  }
 
-    &--grey {
-        color: $color-text-grey-02 !important;
-    }
+  &--grey {
+    color: $color-text-grey-02 !important;
+  }
 
-    &--black {
-        color: $color-text-black !important;
-    }
+  &--black {
+    color: $color-text-black !important;
+  }
 
-    //Sizes
-    &--small {
-        @include body-text-small;
-    }
+  //Sizes
+  &--small {
+    @include body-text-small;
+  }
 
-    &--big {
-        @include body-text-big;
-    }
+  &--big {
+    @include body-text-big;
+  }
 }
 
 footer {
-    p {
-        br {
-            display: block;
-            @extend .mb-3;
-            content: " ";
-        }
+  p {
+    br {
+      display: block;
+      @extend .mb-3;
+      content: " ";
     }
+  }
 
-    p,
-    li {
-        @extend .mb-3;
-    }
+  p,
+  li {
+    @extend .mb-3;
+  }
 
-    ul {
-        @include unstyled-list;
-    }
+  ul {
+    @include unstyled-list;
+  }
 }

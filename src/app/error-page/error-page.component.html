@@ -1,23 +1,23 @@
 <div *ngIf="errorMessage" class="container-flud">
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron">
-                <div class="error-page">
-                    <div class="error-page__text-box">
-                        <h1 class="error-page-primary mb-5">
-                            <span class="error-page-primary--main">
-                                {{ errorMessage.code | translate }}
-                            </span>
-                            <span class="error-page-primary--sub">
-                                {{ errorMessage.message | translate }}
-                            </span>
-                        </h1>
-                    </div>
-                </div>
-                <div class="error-page__logo-box">
-                    <img src="../../assets/images/os2iot.png" alt="Logo" class="error-page__logo" />
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron">
+        <div class="error-page">
+          <div class="error-page__text-box">
+            <h1 class="error-page-primary mb-5">
+              <span class="error-page-primary--main">
+                {{ errorMessage.code | translate }}
+              </span>
+              <span class="error-page-primary--sub">
+                {{ errorMessage.message | translate }}
+              </span>
+            </h1>
+          </div>
         </div>
+        <div class="error-page__logo-box">
+          <img src="../../assets/images/os2iot.png" alt="Logo" class="error-page__logo" />
+        </div>
+      </div>
     </div>
+  </div>
 </div>

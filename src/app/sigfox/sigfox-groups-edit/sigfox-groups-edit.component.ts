@@ -15,112 +15,112 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-sigfox-groups-edit",
-    templateUrl: "./sigfox-groups-edit.component.html",
-    styleUrls: ["./sigfox-groups-edit.component.scss"],
+  selector: "app-sigfox-groups-edit",
+  templateUrl: "./sigfox-groups-edit.component.html",
+  styleUrls: ["./sigfox-groups-edit.component.scss"],
 })
 export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
-    sigfoxGroupId: number;
-    sigfoxGroup = new SigfoxGroup();
-    subscription: Subscription;
-    isLoading = false;
+  sigfoxGroupId: number;
+  sigfoxGroup = new SigfoxGroup();
+  subscription: Subscription;
+  isLoading = false;
 
-    public errorMessage: string;
-    public errorMessages: string[];
-    public errorFields = [];
-    public formFailedSubmit = false;
-    public title = "";
-    public backButton: BackButton = { label: "", routerLink: "/administration" };
-    canEdit: boolean;
+  public errorMessage: string;
+  public errorMessages: string[];
+  public errorFields = [];
+  public formFailedSubmit = false;
+  public title = "";
+  public backButton: BackButton = { label: "", routerLink: "/administration" };
+  canEdit: boolean;
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private translate: TranslateService,
-        private sigfoxService: SigfoxService,
-        private location: Location,
-        private sharedVariable: SharedVariableService,
-        private errorMessageService: ErrorMessageService,
-        private meService: MeService
-    ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private translate: TranslateService,
+    private sigfoxService: SigfoxService,
+    private location: Location,
+    private sharedVariable: SharedVariableService,
+    private errorMessageService: ErrorMessageService,
+    private meService: MeService
+  ) {}
 
-    ngOnInit(): void {
-        this.translate.get(["SIGFOX-GROUP.SIGFOX-GROUP", "FORM.EDIT-SIGFOX-GROUPS"]).subscribe(translations => {
-            this.title = translations["FORM.EDIT-SIGFOX-GROUPS"];
-            this.backButton.label = translations["SIGFOX-GROUP.SIGFOX-GROUP"];
-        });
+  ngOnInit(): void {
+    this.translate.get(["SIGFOX-GROUP.SIGFOX-GROUP", "FORM.EDIT-SIGFOX-GROUPS"]).subscribe(translations => {
+      this.title = translations["FORM.EDIT-SIGFOX-GROUPS"];
+      this.backButton.label = translations["SIGFOX-GROUP.SIGFOX-GROUP"];
+    });
 
-        this.sigfoxGroupId = +this.route.snapshot.paramMap.get("groupId");
-        if (this.sigfoxGroupId) {
-            this.getSigfoxGroup(this.sigfoxGroupId);
-        }
-        this.sigfoxGroup.organizationId = this.sharedVariable.getSelectedOrganisationId();
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+    this.sigfoxGroupId = +this.route.snapshot.paramMap.get("groupId");
+    if (this.sigfoxGroupId) {
+      this.getSigfoxGroup(this.sigfoxGroupId);
+    }
+    this.sigfoxGroup.organizationId = this.sharedVariable.getSelectedOrganisationId();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+  }
+
+  getSigfoxGroup(id: number) {
+    this.subscription = this.sigfoxService.getGroup(id).subscribe(
+      response => {
+        this.sigfoxGroup = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
+
+  private create(): void {
+    this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe(
+      response => {
+        console.log(response);
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
+  }
+
+  private update(): void {
+    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe(
+      response => {
+        this.routeBack();
+      },
+      error => {
+        this.showError(error);
+      }
+    );
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
+  private showError(error: HttpErrorResponse) {
+    const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorMessages = errorMessages.errorMessages;
+    this.errorFields = errorMessages.errorFields;
+    this.formFailedSubmit = true;
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
     }
 
-    getSigfoxGroup(id: number) {
-        this.subscription = this.sigfoxService.getGroup(id).subscribe(
-            response => {
-                this.sigfoxGroup = response;
-            },
-            (error: HttpErrorResponse) => {
-                console.log(error);
-            }
-        );
-    }
+    this.sigfoxService.getGroup(this.sigfoxGroupId).subscribe((response: any) => {
+      if (response) {
+        this.update();
+      } else {
+        this.create();
+      }
+    });
+  }
 
-    private create(): void {
-        this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe(
-            response => {
-                console.log(response);
-                this.routeBack();
-            },
-            (error: HttpErrorResponse) => {
-                this.showError(error);
-            }
-        );
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
-
-    private update(): void {
-        this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe(
-            response => {
-                this.routeBack();
-            },
-            error => {
-                this.showError(error);
-            }
-        );
-    }
-
-    routeBack(): void {
-        this.location.back();
-    }
-
-    private showError(error: HttpErrorResponse) {
-        const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
-        this.errorMessages = errorMessages.errorMessages;
-        this.errorFields = errorMessages.errorFields;
-        this.formFailedSubmit = true;
-    }
-
-    onSubmit(form: NgForm) {
-        if (!form.valid) {
-            return;
-        }
-
-        this.sigfoxService.getGroup(this.sigfoxGroupId).subscribe((response: any) => {
-            if (response) {
-                this.update();
-            } else {
-                this.create();
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        // prevent memory leak by unsubscribing
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
+  }
 }

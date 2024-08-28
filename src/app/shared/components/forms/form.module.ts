@@ -12,23 +12,23 @@ import { FormKeyValueListComponent } from "./form-key-value/form-key-value-list/
 import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-select-search.module";
 
 @NgModule({
-    declarations: [
-        FormHeaderComponent,
-        FormBodyApplicationComponent,
-        FormKeyValuePairComponent,
-        FormKeyValueListComponent,
-    ],
-    imports: [
-        CommonModule,
-        FontAwesomeModule,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        NGMaterialModule,
-        MatSelectSearchModule,
-    ],
-    exports: [FormHeaderComponent, FormBodyApplicationComponent, FormKeyValuePairComponent, FormKeyValueListComponent],
-    providers: [],
+  declarations: [
+    FormHeaderComponent,
+    FormBodyApplicationComponent,
+    FormKeyValuePairComponent,
+    FormKeyValueListComponent,
+  ],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    NGMaterialModule,
+    MatSelectSearchModule,
+  ],
+  exports: [FormHeaderComponent, FormBodyApplicationComponent, FormKeyValuePairComponent, FormKeyValueListComponent],
+  providers: [],
 })
 export class FormModule {}

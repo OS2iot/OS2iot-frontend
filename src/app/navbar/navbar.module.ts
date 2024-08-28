@@ -18,17 +18,17 @@ import { OrganisationDropdownComponent } from "./organisation-dropdown/organisat
 import { InlineSVGModule } from "ng-inline-svg";
 
 @NgModule({
-    declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        TranslateModule,
-        FontAwesomeModule,
-        NGMaterialModule,
-        InlineSVGModule,
-    ],
-    exports: [NavbarComponent],
-    providers: [RestService, NavbarComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    TranslateModule,
+    FontAwesomeModule,
+    NGMaterialModule,
+    InlineSVGModule,
+  ],
+  exports: [NavbarComponent],
+  providers: [RestService, NavbarComponent],
 })
 export class NavbarModule {}

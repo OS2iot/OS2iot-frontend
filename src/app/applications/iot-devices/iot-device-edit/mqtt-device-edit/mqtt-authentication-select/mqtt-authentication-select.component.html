@@ -1,68 +1,68 @@
 <div class="form-group mt-3 col-12">
-    <label class="form-label" for="authenticationType">{{ "QUESTION.MQTT.AUTHENTICATIONTYPE" | translate }}*</label>
-    <select
-        id="authenticationType"
-        class="form-select"
-        name="authenticationType"
-        [(ngModel)]="settings.authenticationType"
-        [value]="settings.authenticationType"
-    >
-        <option *ngFor="let type of AuthenticationType | keyvalue" [value]="type.key">
-            {{ "QUESTION.MQTT." + type.key | translate }}
-        </option>
-    </select>
+  <label class="form-label" for="authenticationType">{{ "QUESTION.MQTT.AUTHENTICATIONTYPE" | translate }}*</label>
+  <select
+    id="authenticationType"
+    class="form-select"
+    name="authenticationType"
+    [(ngModel)]="settings.authenticationType"
+    [value]="settings.authenticationType"
+  >
+    <option *ngFor="let type of AuthenticationType | keyvalue" [value]="type.key">
+      {{ "QUESTION.MQTT." + type.key | translate }}
+    </option>
+  </select>
 </div>
 
 <ng-template [ngIf]="settings.authenticationType === AuthenticationType.PASSWORD">
-    <div class="form-group mt-3 col-12">
-        <label class="form-label" for="username">{{ "QUESTION.MQTT.USERNAME-LABEL" | translate }}*</label>
-        <fa-icon
-            [icon]="faQuestionCircle"
-            class="form-info-icon"
-            [matTooltip]="'QUESTION.MQTT.USERNAME-HOVER' | translate"
-            matTooltipPosition="above"
-            matTooltipShowDelay="600"
-            matTooltipHideDelay="2000"
-        >
-        </fa-icon>
-        <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            [placeholder]="'QUESTION.MQTT.USERNAME-PLACEHOLDER' | translate"
-            required
-            [(ngModel)]="settings.mqttusername"
-            [ngClass]="{
-                'is-invalid': formFailedSubmit && errorFields.includes('mqttusername'),
-                'is-valid': formFailedSubmit && !errorFields.includes('mqttusername')
-            }"
-        />
-    </div>
-    <div class="form-group mt-3 col-12">
-        <label class="form-label" for="password">{{ "QUESTION.MQTT.PASSWORD-LABEL" | translate }}*</label>
-        <fa-icon
-            [icon]="faQuestionCircle"
-            class="form-info-icon"
-            [matTooltip]="'QUESTION.MQTT.PASSWORD-HOVER' | translate"
-            matTooltipPosition="above"
-            matTooltipShowDelay="600"
-            matTooltipHideDelay="2000"
-        >
-        </fa-icon>
-        <input
-            type="text"
-            class="form-control"
-            id="password"
-            name="password"
-            [placeholder]="'QUESTION.MQTT.PASSWORD-PLACEHOLDER' | translate"
-            required
-            datatype=""
-            [(ngModel)]="settings.mqttpassword"
-            [ngClass]="{
-                'is-invalid': formFailedSubmit && errorFields.includes('mqttpassword'),
-                'is-valid': formFailedSubmit && !errorFields.includes('mqttpassword')
-            }"
-        />
-    </div>
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="username">{{ "QUESTION.MQTT.USERNAME-LABEL" | translate }}*</label>
+    <fa-icon
+      [icon]="faQuestionCircle"
+      class="form-info-icon"
+      [matTooltip]="'QUESTION.MQTT.USERNAME-HOVER' | translate"
+      matTooltipPosition="above"
+      matTooltipShowDelay="600"
+      matTooltipHideDelay="2000"
+    >
+    </fa-icon>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      name="username"
+      [placeholder]="'QUESTION.MQTT.USERNAME-PLACEHOLDER' | translate"
+      required
+      [(ngModel)]="settings.mqttusername"
+      [ngClass]="{
+        'is-invalid': formFailedSubmit && errorFields.includes('mqttusername'),
+        'is-valid': formFailedSubmit && !errorFields.includes('mqttusername')
+      }"
+    />
+  </div>
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="password">{{ "QUESTION.MQTT.PASSWORD-LABEL" | translate }}*</label>
+    <fa-icon
+      [icon]="faQuestionCircle"
+      class="form-info-icon"
+      [matTooltip]="'QUESTION.MQTT.PASSWORD-HOVER' | translate"
+      matTooltipPosition="above"
+      matTooltipShowDelay="600"
+      matTooltipHideDelay="2000"
+    >
+    </fa-icon>
+    <input
+      type="text"
+      class="form-control"
+      id="password"
+      name="password"
+      [placeholder]="'QUESTION.MQTT.PASSWORD-PLACEHOLDER' | translate"
+      required
+      datatype=""
+      [(ngModel)]="settings.mqttpassword"
+      [ngClass]="{
+        'is-invalid': formFailedSubmit && errorFields.includes('mqttpassword'),
+        'is-valid': formFailedSubmit && !errorFields.includes('mqttpassword')
+      }"
+    />
+  </div>
 </ng-template>

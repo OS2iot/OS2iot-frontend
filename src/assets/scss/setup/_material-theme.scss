@@ -39,9 +39,9 @@ $OS2IoT-frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $OS2IoT-frontend-theme: mat.define-light-theme(
-    $OS2IoT-frontend-primary,
-    $OS2IoT-frontend-accent,
-    $OS2IoT-frontend-warn
+  $OS2IoT-frontend-primary,
+  $OS2IoT-frontend-accent,
+  $OS2IoT-frontend-warn
 );
 
 // Include theme styles for core and each component used in your app.
@@ -52,101 +52,101 @@ $OS2IoT-frontend-theme: mat.define-light-theme(
 ////////////////////////////// CHECKBOX  ///////////////////////////////////////////
 
 .mat-checkbox-layout {
-    white-space: normal !important;
+  white-space: normal !important;
 }
 ////////////////////////////// EXPANSION PANELS ///////////////////////////////////////////
 .mat-expansion-panel:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .mat-expansion-panel {
-    .mat-expansion-panel-header {
-        padding: 0;
-    }
+  .mat-expansion-panel-header {
+    padding: 0;
+  }
 
-    .mat-expansion-panel-content {
-        font: initial;
-        letter-spacing: initial;
-    }
+  .mat-expansion-panel-content {
+    font: initial;
+    letter-spacing: initial;
+  }
 
-    .mat-expansion-panel-body {
-        padding: 0;
-    }
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
 }
 
 ///////////////////////////////////////// FORM FIELDS //////////////////////////////////////////////////
 
 .mat-form-field {
-    width: 100%;
+  width: 100%;
 
-    .mat-form-field-wrapper {
-        .mat-form-field-appearance-fill .mat-form-field-flex {
-            background-color: $color-bg-normal !important;
-        }
+  .mat-form-field-wrapper {
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: $color-bg-normal !important;
     }
+  }
 }
 
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: $color-bg-normal !important;
-    border: $border-input !important;
+  background-color: $color-bg-normal !important;
+  border: $border-input !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-    border-radius: $border-radius-primary;
+  border-radius: $border-radius-primary;
 
-    .mat-form-field-outline-start {
-        border: $border-input;
-        border-right-style: none;
-    }
+  .mat-form-field-outline-start {
+    border: $border-input;
+    border-right-style: none;
+  }
 
-    .mat-form-field-outline-end {
-        border: $border-input;
-        border-left-style: none;
-    }
+  .mat-form-field-outline-end {
+    border: $border-input;
+    border-left-style: none;
+  }
 }
 
 .search-form {
-    .mat-form-field-flex {
-        @extend .mb-2;
-        .mat-form-field-suffix {
-            align-self: flex-end;
-        }
+  .mat-form-field-flex {
+    @extend .mb-2;
+    .mat-form-field-suffix {
+      align-self: flex-end;
     }
+  }
 }
 
 //////////////////////// MAT TABLES //////////////////////////////////////////
 
 .mat-elevation-z8 {
-    margin: 15px;
+  margin: 15px;
 }
 
 .mat-header-cell {
-    font-family: roboto-light;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 24px;
-    color: $grey-tablehead;
-    background-color: $grey-dark;
-    width: min-content;
+  font-family: roboto-light;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 24px;
+  color: $grey-tablehead;
+  background-color: $grey-dark;
+  width: min-content;
 }
 
 .mat-sort-header-arrow {
-    color: $grey-tablehead;
-    opacity: 1 !important;
+  color: $grey-tablehead;
+  opacity: 1 !important;
 }
 
 tr.mat-row {
-    word-break: break-word;
+  word-break: break-word;
 }
 
 .mat-elevation-z8 {
-    margin: 0;
+  margin: 0;
 }
 
 .mat-sort-header-content {
-    text-align: left !important;
+  text-align: left !important;
 }

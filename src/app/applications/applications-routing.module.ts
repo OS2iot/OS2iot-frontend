@@ -21,74 +21,74 @@ import { IotDeviceDataPacketsTabComponent } from "@applications/iot-devices/iot-
 import { IotDeviceDownlinkTabComponent } from "@applications/iot-devices/iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component";
 
 const applicationRoutes: Routes = [
-    {
-        path: "",
-        component: ApplicationsComponent,
+  {
+    path: "",
+    component: ApplicationsComponent,
+    children: [
+      { path: "", component: ApplicationsListComponent },
+      { path: "new-application", component: ApplicationEditComponent },
+      { path: "edit-application/:id", component: ApplicationEditComponent },
+      {
+        path: ":id",
         children: [
-            { path: "", component: ApplicationsListComponent },
-            { path: "new-application", component: ApplicationEditComponent },
-            { path: "edit-application/:id", component: ApplicationEditComponent },
-            {
-                path: ":id",
-                children: [
-                    {
-                        path: "",
-                        component: ApplicationDetailComponent,
-                        children: [
-                            { path: "iot-devices", component: IotDevicesTabComponent },
-                            { path: "multicast-groups", component: MulticastTabComponent },
-                            { path: "data-targets", component: DatatargetTabComponent },
-                        ],
-                    },
-                    { path: "new-iot-device", component: IotDeviceEditComponent },
-                    {
-                        path: "iot-device-edit/:deviceId",
-                        component: IotDeviceEditComponent,
-                    },
-                    {
-                        path: "iot-device/:deviceId",
-                        component: IoTDeviceDetailComponent,
-                        children: [
-                            { path: "details", component: IotDeviceDetailsTabComponent },
-                            { path: "history", component: IotDeviceHistoryTabComponent },
-                            {
-                                path: "data-packets",
-                                component: IotDeviceDataPacketsTabComponent,
-                            },
-                            {
-                                path: "downlink",
-                                component: IotDeviceDownlinkTabComponent,
-                            },
-                        ],
-                    },
-                    { path: "datatarget-new", component: DatatargetNewComponent },
-                    { path: "datatarget-edit", component: DatatargetEditComponent },
-                    {
-                        path: "datatarget-edit/:datatargetId",
-                        component: DatatargetEditComponent,
-                    },
-                    {
-                        path: "datatarget/:datatargetId",
-                        component: DatatargetDetailComponent,
-                    },
-                    { path: "multicast-edit", component: MulticastEditComponent },
-                    {
-                        path: "multicast-edit/:multicastId",
-                        component: MulticastEditComponent,
-                    },
-                    {
-                        path: "multicast/:multicastId",
-                        component: MulticastDetailComponent,
-                    },
-                    { path: "bulk-import", component: BulkImportComponent },
-                ],
-            },
+          {
+            path: "",
+            component: ApplicationDetailComponent,
+            children: [
+              { path: "iot-devices", component: IotDevicesTabComponent },
+              { path: "multicast-groups", component: MulticastTabComponent },
+              { path: "data-targets", component: DatatargetTabComponent },
+            ],
+          },
+          { path: "new-iot-device", component: IotDeviceEditComponent },
+          {
+            path: "iot-device-edit/:deviceId",
+            component: IotDeviceEditComponent,
+          },
+          {
+            path: "iot-device/:deviceId",
+            component: IoTDeviceDetailComponent,
+            children: [
+              { path: "details", component: IotDeviceDetailsTabComponent },
+              { path: "history", component: IotDeviceHistoryTabComponent },
+              {
+                path: "data-packets",
+                component: IotDeviceDataPacketsTabComponent,
+              },
+              {
+                path: "downlink",
+                component: IotDeviceDownlinkTabComponent,
+              },
+            ],
+          },
+          { path: "datatarget-new", component: DatatargetNewComponent },
+          { path: "datatarget-edit", component: DatatargetEditComponent },
+          {
+            path: "datatarget-edit/:datatargetId",
+            component: DatatargetEditComponent,
+          },
+          {
+            path: "datatarget/:datatargetId",
+            component: DatatargetDetailComponent,
+          },
+          { path: "multicast-edit", component: MulticastEditComponent },
+          {
+            path: "multicast-edit/:multicastId",
+            component: MulticastEditComponent,
+          },
+          {
+            path: "multicast/:multicastId",
+            component: MulticastDetailComponent,
+          },
+          { path: "bulk-import", component: BulkImportComponent },
         ],
-    },
+      },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(applicationRoutes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(applicationRoutes)],
+  exports: [RouterModule],
 })
 export class ApplicaitonsRoutingModule {}

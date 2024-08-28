@@ -1,42 +1,42 @@
 .data-component {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 10px;
 }
 
 .mat-card {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 300px;
-    min-width: 300px;
-    max-width: 400px;
-    height: 320px;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 300px;
+  min-width: 300px;
+  max-width: 400px;
+  height: 320px;
+  margin: 10px;
 }
 
 .mat-card-header {
-    flex-shrink: 1;
+  flex-shrink: 1;
 }
 
 .mat-card-content {
-    flex-grow: 1;
-    overflow: auto;
-    margin-left: 10px;
+  flex-grow: 1;
+  overflow: auto;
+  margin-left: 10px;
 }
 
 mat-card img {
-    object-fit: contain; /*this makes the image in src fit to the size specified below*/
-    object-position: left;
-    width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-    height: 20px;
-    margin-left: 3px;
-    margin-top: 3px;
-    margin-bottom: 3px;
+  object-fit: contain; /*this makes the image in src fit to the size specified below*/
+  object-position: left;
+  width: 50%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 20px;
+  margin-left: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .img-placeholder {
-    height: 26px;
-    clear: both;
+  height: 26px;
+  clear: both;
 }

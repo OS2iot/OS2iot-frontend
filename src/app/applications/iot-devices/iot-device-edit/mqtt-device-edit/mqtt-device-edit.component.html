@@ -1,193 +1,189 @@
 <form>
-    <div class="row mb-5">
-        <h3>{{ "QUESTION.MQTT.TITLE" | translate }}</h3>
+  <div class="row mb-5">
+    <h3>{{ "QUESTION.MQTT.TITLE" | translate }}</h3>
+  </div>
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="subType">{{ "QUESTION.MQTT.SUBTYPE" | translate }}*</label>
+    <fa-icon
+      [icon]="faQuestionCircle"
+      class="form-info-icon"
+      [matTooltip]="'QUESTION.MQTT.SUBTYPE-HOVER' | translate"
+      matTooltipPosition="above"
+      matTooltipShowDelay="600"
+      matTooltipHideDelay="2000"
+    >
+    </fa-icon>
+    <select
+      id="subType"
+      class="form-select"
+      name="subType"
+      [(ngModel)]="iotDevice.type"
+      [disabled]="editMode"
+      [value]="iotDevice.type"
+    >
+      <option *ngFor="let type of mqttDeviceTypes" [value]="type">
+        {{ "QUESTION.MQTT." + type | translate }}
+      </option>
+    </select>
+  </div>
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_INTERNAL_BROKER">
+    <app-mqtt-authentication-select
+      [settings]="iotDevice.mqttInternalBrokerSettings"
+      [editMode]="editMode"
+      [formFailedSubmit]="formFailedSubmit"
+      [errorFields]="errorFields"
+    ></app-mqtt-authentication-select>
+  </ng-template>
+
+  <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_EXTERNAL_BROKER">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="brokerUrl">{{ "QUESTION.MQTT.BROKER-URL" | translate }}*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="brokerUrl"
+        name="brokerUrl"
+        [placeholder]="'QUESTION.MQTT.BROKER-URL-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttURL"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttURL'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttURL')
+        }"
+      />
     </div>
     <div class="form-group mt-3 col-12">
-        <label class="form-label" for="subType">{{ "QUESTION.MQTT.SUBTYPE" | translate }}*</label>
+      <label class="form-label" for="brokerPort">{{ "QUESTION.MQTT.BROKER-PORT" | translate }}*</label>
+      <input
+        type="number"
+        class="form-control"
+        id="brokerPort"
+        name="brokerPort"
+        [placeholder]="'QUESTION.MQTT.BROKER-PORT-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttPort"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
+        }"
+      />
+    </div>
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="topicPath">{{ "QUESTION.MQTT.TOPIC-PATH" | translate }}*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="topicPath"
+        name="topicPath"
+        [placeholder]="'QUESTION.MQTT.TOPIC-PATH-PLACEHOLDER' | translate"
+        required
+        [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqtttopicname"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqtttopicname'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqtttopicname')
+        }"
+      />
+    </div>
+    <app-mqtt-authentication-select
+      [settings]="iotDevice.mqttExternalBrokerSettings"
+      [editMode]="editMode"
+      [formFailedSubmit]="formFailedSubmit"
+      [errorFields]="errorFields"
+    ></app-mqtt-authentication-select>
+    <ng-container *ngIf="iotDevice.mqttExternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE">
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="caCertificate">{{ "QUESTION.MQTT.CA-CERTIFICATE" | translate }}*</label>
         <fa-icon
-            [icon]="faQuestionCircle"
-            class="form-info-icon"
-            [matTooltip]="'QUESTION.MQTT.SUBTYPE-HOVER' | translate"
-            matTooltipPosition="above"
-            matTooltipShowDelay="600"
-            matTooltipHideDelay="2000"
+          [icon]="faQuestionCircle"
+          class="form-info-icon"
+          [matTooltip]="'QUESTION.MQTT.CA-CERTIFICATE-HOVER' | translate"
+          matTooltipPosition="above"
+          matTooltipShowDelay="600"
+          matTooltipHideDelay="2000"
         >
         </fa-icon>
-        <select
-            id="subType"
-            class="form-select"
-            name="subType"
-            [(ngModel)]="iotDevice.type"
-            [disabled]="editMode"
-            [value]="iotDevice.type"
+        <textarea
+          type="text"
+          class="form-control"
+          id="caCertificate"
+          name="caCertificate"
+          [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
+          required
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.caCertificate"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('caCertificate'),
+            'is-valid': formFailedSubmit && !errorFields.includes('caCertificate')
+          }"
+        ></textarea>
+      </div>
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="deviceCertificate">{{ "QUESTION.MQTT.DEVICE-CERTIFICATE" | translate }}*</label>
+        <fa-icon
+          [icon]="faQuestionCircle"
+          class="form-info-icon"
+          [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
+          matTooltipPosition="above"
+          matTooltipShowDelay="600"
+          matTooltipHideDelay="2000"
         >
-            <option *ngFor="let type of mqttDeviceTypes" [value]="type">
-                {{ "QUESTION.MQTT." + type | translate }}
-            </option>
-        </select>
-    </div>
-    <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_INTERNAL_BROKER">
-        <app-mqtt-authentication-select
-            [settings]="iotDevice.mqttInternalBrokerSettings"
-            [editMode]="editMode"
-            [formFailedSubmit]="formFailedSubmit"
-            [errorFields]="errorFields"
-        ></app-mqtt-authentication-select>
-    </ng-template>
-
-    <ng-template [ngIf]="iotDevice.type === DeviceType.MQTT_EXTERNAL_BROKER">
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="brokerUrl">{{ "QUESTION.MQTT.BROKER-URL" | translate }}*</label>
-            <input
-                type="text"
-                class="form-control"
-                id="brokerUrl"
-                name="brokerUrl"
-                [placeholder]="'QUESTION.MQTT.BROKER-URL-PLACEHOLDER' | translate"
-                required
-                [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttURL"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('mqttURL'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('mqttURL')
-                }"
-            />
-        </div>
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="brokerPort">{{ "QUESTION.MQTT.BROKER-PORT" | translate }}*</label>
-            <input
-                type="number"
-                class="form-control"
-                id="brokerPort"
-                name="brokerPort"
-                [placeholder]="'QUESTION.MQTT.BROKER-PORT-PLACEHOLDER' | translate"
-                required
-                [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqttPort"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
-                }"
-            />
-        </div>
-        <div class="form-group mt-3 col-12">
-            <label class="form-label" for="topicPath">{{ "QUESTION.MQTT.TOPIC-PATH" | translate }}*</label>
-            <input
-                type="text"
-                class="form-control"
-                id="topicPath"
-                name="topicPath"
-                [placeholder]="'QUESTION.MQTT.TOPIC-PATH-PLACEHOLDER' | translate"
-                required
-                [(ngModel)]="iotDevice.mqttExternalBrokerSettings.mqtttopicname"
-                [ngClass]="{
-                    'is-invalid': formFailedSubmit && errorFields.includes('mqtttopicname'),
-                    'is-valid': formFailedSubmit && !errorFields.includes('mqtttopicname')
-                }"
-            />
-        </div>
-        <app-mqtt-authentication-select
-            [settings]="iotDevice.mqttExternalBrokerSettings"
-            [editMode]="editMode"
-            [formFailedSubmit]="formFailedSubmit"
-            [errorFields]="errorFields"
-        ></app-mqtt-authentication-select>
-        <ng-container
-            *ngIf="iotDevice.mqttExternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE"
+        </fa-icon>
+        <textarea
+          type="text"
+          class="form-control"
+          id="deviceCertificate"
+          name="deviceCertificate"
+          [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
+          required
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificate"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificate'),
+            'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificate')
+          }"
+        ></textarea>
+      </div>
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="deviceCertificateKey"
+          >{{ "QUESTION.MQTT.DEVICE-CERTIFICATE-KEY" | translate }}*</label
         >
-            <div class="form-group mt-3 col-12">
-                <label class="form-label" for="caCertificate">{{ "QUESTION.MQTT.CA-CERTIFICATE" | translate }}*</label>
-                <fa-icon
-                    [icon]="faQuestionCircle"
-                    class="form-info-icon"
-                    [matTooltip]="'QUESTION.MQTT.CA-CERTIFICATE-HOVER' | translate"
-                    matTooltipPosition="above"
-                    matTooltipShowDelay="600"
-                    matTooltipHideDelay="2000"
-                >
-                </fa-icon>
-                <textarea
-                    type="text"
-                    class="form-control"
-                    id="caCertificate"
-                    name="caCertificate"
-                    [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
-                    required
-                    [(ngModel)]="iotDevice.mqttExternalBrokerSettings.caCertificate"
-                    [ngClass]="{
-                        'is-invalid': formFailedSubmit && errorFields.includes('caCertificate'),
-                        'is-valid': formFailedSubmit && !errorFields.includes('caCertificate')
-                    }"
-                ></textarea>
-            </div>
-            <div class="form-group mt-3 col-12">
-                <label class="form-label" for="deviceCertificate"
-                    >{{ "QUESTION.MQTT.DEVICE-CERTIFICATE" | translate }}*</label
-                >
-                <fa-icon
-                    [icon]="faQuestionCircle"
-                    class="form-info-icon"
-                    [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
-                    matTooltipPosition="above"
-                    matTooltipShowDelay="600"
-                    matTooltipHideDelay="2000"
-                >
-                </fa-icon>
-                <textarea
-                    type="text"
-                    class="form-control"
-                    id="deviceCertificate"
-                    name="deviceCertificate"
-                    [placeholder]="'QUESTION.MQTT.CERTIFICATE-PLACEHOLDER' | translate"
-                    required
-                    [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificate"
-                    [ngClass]="{
-                        'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificate'),
-                        'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificate')
-                    }"
-                ></textarea>
-            </div>
-            <div class="form-group mt-3 col-12">
-                <label class="form-label" for="deviceCertificateKey"
-                    >{{ "QUESTION.MQTT.DEVICE-CERTIFICATE-KEY" | translate }}*</label
-                >
-                <fa-icon
-                    [icon]="faQuestionCircle"
-                    class="form-info-icon"
-                    [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
-                    matTooltipPosition="above"
-                    matTooltipShowDelay="600"
-                    matTooltipHideDelay="2000"
-                >
-                </fa-icon>
-                <textarea
-                    type="text"
-                    class="form-control"
-                    id="deviceCertificateKey"
-                    name="deviceCertificateKey"
-                    [placeholder]="'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY-PLACEHOLDER' | translate"
-                    required
-                    [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificateKey"
-                    [ngClass]="{
-                        'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificateKey'),
-                        'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificateKey')
-                    }"
-                ></textarea>
-            </div>
-        </ng-container>
-    </ng-template>
-    <div
-        class="row mt-2"
-        *ngIf="iotDevice.mqttInternalBrokerSettings?.authenticationType === AuthenticationType.PASSWORD"
-    >
-        <strong>OBS!</strong>
-        <p>{{ "QUESTION.MQTT.CERTIFICATE-OBS" | translate }}</p>
-    </div>
-    <div
-        class="row mt-2"
-        *ngIf="
-            iotDevice.mqttExternalBrokerSettings?.authenticationType ||
-            iotDevice.mqttInternalBrokerSettings?.authenticationType
-        "
-    >
-        <p>{{ "QUESTION.MQTT.CONFIG-HELP" | translate }}</p>
-    </div>
+        <fa-icon
+          [icon]="faQuestionCircle"
+          class="form-info-icon"
+          [matTooltip]="'QUESTION.MQTT.DEVICE-CERTIFICATE-HOVER' | translate"
+          matTooltipPosition="above"
+          matTooltipShowDelay="600"
+          matTooltipHideDelay="2000"
+        >
+        </fa-icon>
+        <textarea
+          type="text"
+          class="form-control"
+          id="deviceCertificateKey"
+          name="deviceCertificateKey"
+          [placeholder]="'QUESTION.MQTT.DEVICE-CERTIFICATE-KEY-PLACEHOLDER' | translate"
+          required
+          [(ngModel)]="iotDevice.mqttExternalBrokerSettings.deviceCertificateKey"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('deviceCertificateKey'),
+            'is-valid': formFailedSubmit && !errorFields.includes('deviceCertificateKey')
+          }"
+        ></textarea>
+      </div>
+    </ng-container>
+  </ng-template>
+  <div
+    class="row mt-2"
+    *ngIf="iotDevice.mqttInternalBrokerSettings?.authenticationType === AuthenticationType.PASSWORD"
+  >
+    <strong>OBS!</strong>
+    <p>{{ "QUESTION.MQTT.CERTIFICATE-OBS" | translate }}</p>
+  </div>
+  <div
+    class="row mt-2"
+    *ngIf="
+      iotDevice.mqttExternalBrokerSettings?.authenticationType ||
+      iotDevice.mqttInternalBrokerSettings?.authenticationType
+    "
+  >
+    <p>{{ "QUESTION.MQTT.CONFIG-HELP" | translate }}</p>
+  </div>
 </form>

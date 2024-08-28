@@ -21,146 +21,146 @@ import { LoggedInService } from "@shared/services/loggedin.service";
 import { environment } from "@environments/environment";
 
 @Component({
-    selector: "app-top-bar",
-    templateUrl: "./top-bar.component.html",
-    styleUrls: ["./top-bar.component.scss"],
+  selector: "app-top-bar",
+  templateUrl: "./top-bar.component.html",
+  styleUrls: ["./top-bar.component.scss"],
 })
 export class TopBarComponent implements OnInit {
-    @Input() data:
-        | Application
-        | IotDevice
-        | DatatargetResponse
-        | PayloadDecoder
-        | Gateway
-        | PermissionResponse
-        | UserResponse
-        | OrganisationResponse;
-    @Input() buttons?: QuickActionButton[];
-    @Input() backButton: BackButton;
-    @Input() subPage: boolean;
-    @Input()
-    public subTitle: string;
-    faChevronLeft = faChevronLeft;
-    faQuestionCircle = faQuestionCircle;
-    faUser = faUser;
+  @Input() data:
+    | Application
+    | IotDevice
+    | DatatargetResponse
+    | PayloadDecoder
+    | Gateway
+    | PermissionResponse
+    | UserResponse
+    | OrganisationResponse;
+  @Input() buttons?: QuickActionButton[];
+  @Input() backButton: BackButton;
+  @Input() subPage: boolean;
+  @Input()
+  public subTitle: string;
+  faChevronLeft = faChevronLeft;
+  faQuestionCircle = faQuestionCircle;
+  faUser = faUser;
 
-    @Input() staticTitle: string;
-    @Input() title: string;
-    @Input() ctaLabel: string;
-    @Input() ctaRouterLink: string;
-    @Input() dtLabel: string;
-    @Input() dtRouterLink: string;
-    @Input() sort: Sort[];
-    @Input() pageLimit: number;
-    @Input() selectedSortId: number;
-    @Input() component: false;
-    @Input() showSelectedSort = true;
-    @Input() backButtonTitle: string;
-    @Input() searchQuery: string;
-    @Output() selectedSortChange = new EventEmitter();
-    @Output() updatePageLimit = new EventEmitter();
+  @Input() staticTitle: string;
+  @Input() title: string;
+  @Input() ctaLabel: string;
+  @Input() ctaRouterLink: string;
+  @Input() dtLabel: string;
+  @Input() dtRouterLink: string;
+  @Input() sort: Sort[];
+  @Input() pageLimit: number;
+  @Input() selectedSortId: number;
+  @Input() component: false;
+  @Input() showSelectedSort = true;
+  @Input() backButtonTitle: string;
+  @Input() searchQuery: string;
+  @Output() selectedSortChange = new EventEmitter();
+  @Output() updatePageLimit = new EventEmitter();
 
-    @Output() deleteSelectedInDropdown = new EventEmitter();
-    @Output() extraDropdownOptions = new EventEmitter();
-    @Input() addDetailDowndown: boolean;
-    @Input() dropDownButton: DropdownButton;
-    @Input() canEdit = false;
+  @Output() deleteSelectedInDropdown = new EventEmitter();
+  @Output() extraDropdownOptions = new EventEmitter();
+  @Input() addDetailDowndown: boolean;
+  @Input() dropDownButton: DropdownButton;
+  @Input() canEdit = false;
 
-    faSearch = faSearch;
+  faSearch = faSearch;
 
-    constructor(
-        public translate: TranslateService,
-        private location: Location,
-        private router: Router,
-        private sharedVariableService: SharedVariableService,
-        private authService: AuthService,
-        private loggedInService: LoggedInService
-    ) {
-        translate.use("da");
+  constructor(
+    public translate: TranslateService,
+    private location: Location,
+    private router: Router,
+    private sharedVariableService: SharedVariableService,
+    private authService: AuthService,
+    private loggedInService: LoggedInService
+  ) {
+    translate.use("da");
+  }
+
+  ngOnInit(): void {
+    if (this.data) {
+      this.subTitle = this.data.name;
     }
+  }
 
-    ngOnInit(): void {
-        if (this.data) {
-            this.subTitle = this.data.name;
-        }
+  changeSort(id: number) {
+    this.selectedSortChange.emit(id);
+  }
+
+  routeTo(): void {
+    if (this.backButton?.routerLink && Array.isArray(this.backButton.routerLink)) {
+      this.router.navigate(this.backButton.routerLink);
+    } else if (this.backButton?.routerLink && typeof this.backButton.routerLink === "string") {
+      this.router.navigate([this.backButton.routerLink]);
+    } else {
+      this.location.back();
     }
+  }
 
-    changeSort(id: number) {
-        this.selectedSortChange.emit(id);
+  search(value: string): void {
+    // Redirect to search results page and do search
+    const urlEncoded = encodeURIComponent(value);
+
+    if (value) {
+      this.router.navigate(["/search"], { queryParams: { q: urlEncoded } });
+    } else {
+      this.decode("");
     }
+  }
 
-    routeTo(): void {
-        if (this.backButton?.routerLink && Array.isArray(this.backButton.routerLink)) {
-            this.router.navigate(this.backButton.routerLink);
-        } else if (this.backButton?.routerLink && typeof this.backButton.routerLink === "string") {
-            this.router.navigate([this.backButton.routerLink]);
-        } else {
-            this.location.back();
-        }
+  decode(val: string): string {
+    if (val === undefined) {
+      return "";
     }
+    return decodeURIComponent(val);
+  }
 
-    search(value: string): void {
-        // Redirect to search results page and do search
-        const urlEncoded = encodeURIComponent(value);
+  onClickDelete() {
+    this.deleteSelectedInDropdown.emit();
+  }
 
-        if (value) {
-            this.router.navigate(["/search"], { queryParams: { q: urlEncoded } });
-        } else {
-            this.decode("");
-        }
+  onClickExtraDropdownOption(id: string) {
+    this.extraDropdownOptions.emit(id);
+  }
+
+  public goToHelp() {
+    window.open("https://os2iot.os2.eu/");
+  }
+
+  getUsername(): string {
+    return this.sharedVariableService.getUsername();
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigateByUrl("auth");
+    this.loggedInService.emitChange(false);
+  }
+
+  getKombitLogoutUrl() {
+    const jwt = this.authService.getJwt();
+    if (this.authService.isLoggedInWithKombit()) {
+      return `${environment.baseUrl}auth/kombit/logout?secret_token=${jwt}`;
+    } else {
+      return "";
     }
+  }
 
-    decode(val: string): string {
-        if (val === undefined) {
-            return "";
-        }
-        return decodeURIComponent(val);
-    }
+  isLoggedInWithKombit() {
+    return this.authService.isLoggedInWithKombit();
+  }
 
-    onClickDelete() {
-        this.deleteSelectedInDropdown.emit();
+  hasEmail(): boolean {
+    if (this.sharedVariableService.getUserInfo()?.user?.email) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    onClickExtraDropdownOption(id: string) {
-        this.extraDropdownOptions.emit(id);
-    }
-
-    public goToHelp() {
-        window.open("https://os2iot.os2.eu/");
-    }
-
-    getUsername(): string {
-        return this.sharedVariableService.getUsername();
-    }
-
-    onLogout() {
-        this.authService.logout();
-        this.router.navigateByUrl("auth");
-        this.loggedInService.emitChange(false);
-    }
-
-    getKombitLogoutUrl() {
-        const jwt = this.authService.getJwt();
-        if (this.authService.isLoggedInWithKombit()) {
-            return `${environment.baseUrl}auth/kombit/logout?secret_token=${jwt}`;
-        } else {
-            return "";
-        }
-    }
-
-    isLoggedInWithKombit() {
-        return this.authService.isLoggedInWithKombit();
-    }
-
-    hasEmail(): boolean {
-        if (this.sharedVariableService.getUserInfo()?.user?.email) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    hasAnyPermission(): boolean {
-        return this.sharedVariableService.getHasAnyPermission();
-    }
+  hasAnyPermission(): boolean {
+    return this.sharedVariableService.getHasAnyPermission();
+  }
 }

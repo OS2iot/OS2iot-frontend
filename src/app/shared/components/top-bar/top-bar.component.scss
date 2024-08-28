@@ -2,46 +2,46 @@
 @import "src/assets/scss/setup/variables";
 
 .per-page {
-    line-height: 40px;
-    margin-right: 8px;
+  line-height: 40px;
+  margin-right: 8px;
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 .userName {
-    pointer-events: none;
+  pointer-events: none;
 }
 .userNameFont {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .mobileMedia {
-    @media (max-width: $screen-md-min) {
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: column;
-    }
+  @media (max-width: $screen-md-min) {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
 }
 
 ::ng-deep .matMenuMargin {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .marginLeft {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
 .topbarWidth {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .invisible {
-    display: none;
-    visibility: hidden;
-    height: 0;
-    width: 0;
+  display: none;
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }

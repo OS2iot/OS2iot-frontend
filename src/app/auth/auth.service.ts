@@ -11,98 +11,98 @@ import { UserResponse } from "../admin/users/user.model";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 export interface AuthResponseData {
-    accessToken: string;
+  accessToken: string;
 }
 
 export interface CurrentUserInfoResponse {
-    user: UserResponse;
-    organizations: Organisation[];
+  user: UserResponse;
+  organizations: Organisation[];
 }
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class AuthService {
-    private baseUrl = environment.baseUrl;
-    private URL = "auth/login";
+  private baseUrl = environment.baseUrl;
+  private URL = "auth/login";
 
-    private readonly LOCAL_STORAGE_JWT_LOCATION = "id_token";
+  private readonly LOCAL_STORAGE_JWT_LOCATION = "id_token";
 
-    constructor(private http: HttpClient, private restService: RestService, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private restService: RestService, private jwtHelper: JwtHelperService) {}
 
-    isAuthenticated(): boolean {
-        const token = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
-        return !this.jwtHelper.isTokenExpired(token);
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  // global-admin@os2iot.dk
+  // hunter2
+
+  login(username: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(this.baseUrl + this.URL, {
+        username: username,
+        password: password,
+      })
+      .pipe(
+        tap(res => this.setSession(res.accessToken)),
+        catchError((error: HttpErrorResponse) => {
+          return of(error.status);
+        })
+      );
+  }
+
+  me(): Observable<CurrentUserInfoResponse> {
+    return this.restService.get("auth/me").pipe(shareReplay(1));
+  }
+
+  setSession(jwt: string) {
+    localStorage.setItem(this.LOCAL_STORAGE_JWT_LOCATION, jwt);
+  }
+
+  getJwt() {
+    return localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+  }
+
+  isLoggedInWithKombit() {
+    const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+
+    const token = this.getDecodedAccessToken(jwt);
+    return token?.isKombit == true;
+  }
+
+  logout() {
+    localStorage.clear();
+  }
+
+  public isLoggedIn() {
+    const exp = this.getExpiration();
+    const now = moment();
+    return now.isBefore(exp);
+  }
+
+  getExpiration() {
+    const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
+
+    if (!jwt) {
+      return moment(0);
     }
 
-    // global-admin@os2iot.dk
-    // hunter2
-
-    login(username: string, password: string) {
-        return this.http
-            .post<AuthResponseData>(this.baseUrl + this.URL, {
-                username: username,
-                password: password,
-            })
-            .pipe(
-                tap(res => this.setSession(res.accessToken)),
-                catchError((error: HttpErrorResponse) => {
-                    return of(error.status);
-                })
-            );
+    const decoded_jwt = this.getDecodedAccessToken(jwt);
+    if (decoded_jwt.exp) {
+      return moment.unix(decoded_jwt.exp);
     }
 
-    me(): Observable<CurrentUserInfoResponse> {
-        return this.restService.get("auth/me").pipe(shareReplay(1));
+    return moment.unix(0);
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded;
+    } catch (Error) {
+      console.log("Tried to decode jwt but failed? ", Error);
+      return null;
     }
-
-    setSession(jwt: string) {
-        localStorage.setItem(this.LOCAL_STORAGE_JWT_LOCATION, jwt);
-    }
-
-    getJwt() {
-        return localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
-    }
-
-    isLoggedInWithKombit() {
-        const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
-
-        const token = this.getDecodedAccessToken(jwt);
-        return token?.isKombit == true;
-    }
-
-    logout() {
-        localStorage.clear();
-    }
-
-    public isLoggedIn() {
-        const exp = this.getExpiration();
-        const now = moment();
-        return now.isBefore(exp);
-    }
-
-    getExpiration() {
-        const jwt = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
-
-        if (!jwt) {
-            return moment(0);
-        }
-
-        const decoded_jwt = this.getDecodedAccessToken(jwt);
-        if (decoded_jwt.exp) {
-            return moment.unix(decoded_jwt.exp);
-        }
-
-        return moment.unix(0);
-    }
-
-    getDecodedAccessToken(token: string): any {
-        try {
-            const decoded = jwtDecode(token);
-            return decoded;
-        } catch (Error) {
-            console.log("Tried to decode jwt but failed? ", Error);
-            return null;
-        }
-    }
+  }
 }

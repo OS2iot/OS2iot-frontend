@@ -21,29 +21,29 @@ import { MulticastModule } from "./multicast/multicast.module";
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-    declarations: [
-        ApplicationsComponent,
-        ApplicationDetailComponent,
-        ApplicationEditComponent,
-        ApplicationsListComponent,
-        ApplicationsTableComponent,
-        BulkImportComponent,
-    ],
-    exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        TranslateModule,
-        IotDevicesModule,
-        DatatargetModule,
-        DirectivesModule,
-        FormModule,
-        SharedModule,
-        FontAwesomeModule,
-        NGMaterialModule,
-        PipesModule,
-        MulticastModule,
-        ReactiveFormsModule,
-    ],
+  declarations: [
+    ApplicationsComponent,
+    ApplicationDetailComponent,
+    ApplicationEditComponent,
+    ApplicationsListComponent,
+    ApplicationsTableComponent,
+    BulkImportComponent,
+  ],
+  exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    IotDevicesModule,
+    DatatargetModule,
+    DirectivesModule,
+    FormModule,
+    SharedModule,
+    FontAwesomeModule,
+    NGMaterialModule,
+    PipesModule,
+    MulticastModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ApplicationsModule {}

@@ -1,19 +1,19 @@
 @import "src/assets/scss/setup/variables";
 
 .pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
-    font-family: monospace;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  font-family: monospace;
 }
 
 .alarmText {
-    color: #ff0000;
-    font-size: 1em;
+  color: #ff0000;
+  font-size: 1em;
 }
 
 .latLonWrapWidth {
-    @media (max-width: 1250px) {
-        width: 100%;
-    }
+  @media (max-width: 1250px) {
+    width: 100%;
+  }
 }

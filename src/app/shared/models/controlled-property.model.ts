@@ -2,6 +2,6 @@ import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-prop
 import { Application } from "@applications/application.model";
 
 export class ControlledProperty {
-    public applications: Application[];
-    public type: ControlledPropertyTypes;
+  public applications: Application[];
+  public type: ControlledPropertyTypes;
 }

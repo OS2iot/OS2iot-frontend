@@ -1,5 +1,5 @@
 export enum OrganizationAccessScope {
-    ApplicationWrite,
-    GatewayWrite,
-    UserAdministrationWrite,
+  ApplicationWrite,
+  GatewayWrite,
+  UserAdministrationWrite,
 }

@@ -2,9 +2,9 @@
 @import "../setup/variables";
 
 .label {
-    @include body-text-small;
+  @include body-text-small;
 
-    &--icon {
-        color: $color-icon-label;
-    }
+  &--icon {
+    color: $color-icon-label;
+  }
 }

@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from "@angular/core";
 
 @Directive({
-    selector: "[edit-component]",
+  selector: "[edit-component]",
 })
 export class DatatargetEditTypeSelectorDirective {
-    constructor(public viewContainerRef: ViewContainerRef) {}
+  constructor(public viewContainerRef: ViewContainerRef) {}
 }

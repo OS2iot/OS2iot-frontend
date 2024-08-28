@@ -4,17 +4,17 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { TestPayloadDecoder } from "./test-payload-decoder.model";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class TestPayloadDecoderService {
-    URL = "test-payload-decoder";
+  URL = "test-payload-decoder";
 
-    constructor(private restService: RestService) {}
+  constructor(private restService: RestService) {}
 
-    post(body: TestPayloadDecoder) {
-        body.code = JSON.stringify(body.code);
-        body.iotDeviceJsonString = JSON.stringify(body.iotDeviceJsonString);
-        body.rawPayloadJsonString = JSON.stringify(body.rawPayloadJsonString);
-        return this.restService.post(this.URL, body);
-    }
+  post(body: TestPayloadDecoder) {
+    body.code = JSON.stringify(body.code);
+    body.iotDeviceJsonString = JSON.stringify(body.iotDeviceJsonString);
+    body.rawPayloadJsonString = JSON.stringify(body.rawPayloadJsonString);
+    return this.restService.post(this.URL, body);
+  }
 }

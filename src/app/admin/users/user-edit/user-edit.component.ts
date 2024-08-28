@@ -14,124 +14,124 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-user-edit",
-    templateUrl: "./user-edit.component.html",
-    styleUrls: ["./user-edit.component.scss"],
+  selector: "app-user-edit",
+  templateUrl: "./user-edit.component.html",
+  styleUrls: ["./user-edit.component.scss"],
 })
 export class UserEditComponent implements OnInit {
-    user = new UserRequest();
-    public errorMessage: string;
-    public errorMessages: any;
-    public errorFields: string[];
-    public formFailedSubmit = false;
-    public form: UntypedFormGroup;
-    public backButtonTitle = "";
-    public title = "";
-    public submitButton = "";
-    id: number;
-    subscription: Subscription;
-    isGlobalAdmin = false;
-    isKombit: boolean;
-    canEdit: boolean;
+  user = new UserRequest();
+  public errorMessage: string;
+  public errorMessages: any;
+  public errorFields: string[];
+  public formFailedSubmit = false;
+  public form: UntypedFormGroup;
+  public backButtonTitle = "";
+  public title = "";
+  public submitButton = "";
+  id: number;
+  subscription: Subscription;
+  isGlobalAdmin = false;
+  isKombit: boolean;
+  canEdit: boolean;
 
-    constructor(
-        private translate: TranslateService,
-        private route: ActivatedRoute,
-        private userService: UserService,
-        private location: Location,
-        private authService: AuthService,
-        private sharedVariableService: SharedVariableService,
-        private meService: MeService
-    ) {}
+  constructor(
+    private translate: TranslateService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private location: Location,
+    private authService: AuthService,
+    private sharedVariableService: SharedVariableService,
+    private meService: MeService
+  ) {}
 
-    ngOnInit(): void {
-        this.translate.use("da");
-        this.translate.get(["NAV.USERS", "FORM.EDIT-USERS", "USERS.SAVE"]).subscribe(translations => {
-            this.backButtonTitle = translations["NAV.USERS"];
-            this.title = translations["FORM.EDIT-USERS"];
-            this.submitButton = translations["USERS.SAVE"];
-        });
-        this.id = +this.route.snapshot.paramMap.get("user-id");
-        if (this.id > 0) {
-            this.getUser(this.id);
-        } else {
-            // Default active to be true if we're creating a new user.
-            this.user.active = true;
-        }
-        this.amIGlobalAdmin();
-        this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
+  ngOnInit(): void {
+    this.translate.use("da");
+    this.translate.get(["NAV.USERS", "FORM.EDIT-USERS", "USERS.SAVE"]).subscribe(translations => {
+      this.backButtonTitle = translations["NAV.USERS"];
+      this.title = translations["FORM.EDIT-USERS"];
+      this.submitButton = translations["USERS.SAVE"];
+    });
+    this.id = +this.route.snapshot.paramMap.get("user-id");
+    if (this.id > 0) {
+      this.getUser(this.id);
+    } else {
+      // Default active to be true if we're creating a new user.
+      this.user.active = true;
     }
+    this.amIGlobalAdmin();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
+  }
 
-    private getUser(id: number) {
-        this.subscription = this.userService.getOne(id).subscribe(response => {
-            this.user.name = response.name;
-            this.user.email = response.email;
-            this.user.id = response.id;
-            this.user.active = response.active;
-            this.user.globalAdmin = response.permissions.some(response =>
-                this.meService.hasPermissions(response, PermissionType.GlobalAdmin)
-            );
-            this.isKombit = response.nameId != null;
-            // We cannot set the password.
-        });
+  private getUser(id: number) {
+    this.subscription = this.userService.getOne(id).subscribe(response => {
+      this.user.name = response.name;
+      this.user.email = response.email;
+      this.user.id = response.id;
+      this.user.active = response.active;
+      this.user.globalAdmin = response.permissions.some(response =>
+        this.meService.hasPermissions(response, PermissionType.GlobalAdmin)
+      );
+      this.isKombit = response.nameId != null;
+      // We cannot set the password.
+    });
+  }
+
+  amIGlobalAdmin() {
+    this.isGlobalAdmin = this.meService.hasGlobalAdmin();
+  }
+
+  private create(): void {
+    this.userService.post(this.user).subscribe(
+      response => {
+        console.log(response);
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        this.showError(error);
+      }
+    );
+  }
+
+  private update(): void {
+    this.userService.put(this.user, this.id).subscribe(
+      response => {
+        this.routeBack();
+      },
+      error => {
+        this.showError(error);
+      }
+    );
+  }
+
+  onSubmit(): void {
+    if (this.user.id) {
+      this.update();
+    } else {
+      this.create();
     }
+  }
 
-    amIGlobalAdmin() {
-        this.isGlobalAdmin = this.meService.hasGlobalAdmin();
+  private showError(error: HttpErrorResponse) {
+    this.errorFields = [];
+    this.errorMessages = [];
+
+    if (typeof error.error?.message === "string") {
+      this.errorMessage = error.error.message;
+      if (error.error.message === "MESSAGE.PASSWORD-DOES-NOT-MEET-REQUIREMENTS") {
+        this.errorFields.push("password");
+      }
+    } else if (error.error?.message?.length > 0) {
+      error.error.message.forEach(err => {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(Object.values(err.constraints));
+      });
+    } else {
+      this.errorMessage = error.message;
     }
+    this.formFailedSubmit = true;
+  }
 
-    private create(): void {
-        this.userService.post(this.user).subscribe(
-            response => {
-                console.log(response);
-                this.routeBack();
-            },
-            (error: HttpErrorResponse) => {
-                this.showError(error);
-            }
-        );
-    }
-
-    private update(): void {
-        this.userService.put(this.user, this.id).subscribe(
-            response => {
-                this.routeBack();
-            },
-            error => {
-                this.showError(error);
-            }
-        );
-    }
-
-    onSubmit(): void {
-        if (this.user.id) {
-            this.update();
-        } else {
-            this.create();
-        }
-    }
-
-    private showError(error: HttpErrorResponse) {
-        this.errorFields = [];
-        this.errorMessages = [];
-
-        if (typeof error.error?.message === "string") {
-            this.errorMessage = error.error.message;
-            if (error.error.message === "MESSAGE.PASSWORD-DOES-NOT-MEET-REQUIREMENTS") {
-                this.errorFields.push("password");
-            }
-        } else if (error.error?.message?.length > 0) {
-            error.error.message.forEach(err => {
-                this.errorFields.push(err.property);
-                this.errorMessages = this.errorMessages.concat(Object.values(err.constraints));
-            });
-        } else {
-            this.errorMessage = error.message;
-        }
-        this.formFailedSubmit = true;
-    }
-
-    routeBack(): void {
-        this.location.back();
-    }
+  routeBack(): void {
+    this.location.back();
+  }
 }

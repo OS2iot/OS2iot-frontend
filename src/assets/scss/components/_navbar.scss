@@ -3,66 +3,66 @@
 @import "src/assets/scss/setup/utilities";
 
 .navbar {
-    top: 0;
-    bottom: 0;
-    background-color: $white;
-    border-bottom: $outer-border;
-    @include add-shadow;
+  top: 0;
+  bottom: 0;
+  background-color: $white;
+  border-bottom: $outer-border;
+  @include add-shadow;
 
-    @media (min-width: $screen-md-min) {
-        border-bottom: none;
-        border-right: $outer-border;
-        width: $navWidth;
-        position: fixed;
+  @media (min-width: $screen-md-min) {
+    border-bottom: none;
+    border-right: $outer-border;
+    width: $navWidth;
+    position: fixed;
+  }
+
+  .navbar-nav {
+    width: 100%;
+
+    .nav-link + fa-icon {
+      color: $black;
+      line-height: 19px;
+      float: left;
+      margin-top: -2.2rem;
+      margin-left: 10px;
+      pointer-events: none;
+      background-color: #fff;
+      padding-left: 5px;
+      border: none;
+
+      &.active {
+        font-family: roboto-bold;
+      }
+
+      &.active,
+      &:hover {
+        background-color: $grey-highlight;
+      }
     }
 
-    .navbar-nav {
-        width: 100%;
-
-        .nav-link + fa-icon {
-            color: $black;
-            line-height: 19px;
-            float: left;
-            margin-top: -2.2rem;
-            margin-left: 10px;
-            pointer-events: none;
-            background-color: #fff;
-            padding-left: 5px;
-            border: none;
-
-            &.active {
-                font-family: roboto-bold;
-            }
-
-            &.active,
-            &:hover {
-                background-color: $grey-highlight;
-            }
-        }
-
-        .navbar-icon {
-            font-size: $icon-size;
-        }
+    .navbar-icon {
+      font-size: $icon-size;
     }
+  }
 }
 
 select.input-lg {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  border: none;
 }
 
 select + fa-icon {
-    float: right;
-    margin-top: -30px;
-    margin-right: 5px;
-    pointer-events: none;
-    background-color: #fff;
-    padding-right: 5px;
+  float: right;
+  margin-top: -30px;
+  margin-right: 5px;
+  pointer-events: none;
+  background-color: #fff;
+  padding-right: 5px;
 }
 
 .mat-expansion-indicator {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }

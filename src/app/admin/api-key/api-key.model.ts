@@ -1,23 +1,23 @@
 import { PermissionResponse } from "../permission/permission.model";
 
 export class ApiKeyRequest {
-    id: number;
-    name: string;
-    permissionIds?: number[];
+  id: number;
+  name: string;
+  permissionIds?: number[];
 }
 
 export interface ApiKeyResponse {
-    id: number;
-    name: string;
-    key: string;
-    permissions?: PermissionResponse[];
-    createdBy: number;
-    updatedBy: number;
-    createdByName: string;
-    updatedByName: string;
+  id: number;
+  name: string;
+  key: string;
+  permissions?: PermissionResponse[];
+  createdBy: number;
+  updatedBy: number;
+  createdByName: string;
+  updatedByName: string;
 }
 
 export interface ApiKeyGetManyResponse {
-    data: ApiKeyResponse[];
-    count: number;
+  data: ApiKeyResponse[];
+  count: number;
 }

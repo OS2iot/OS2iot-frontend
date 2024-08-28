@@ -3,12 +3,12 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { MeService } from "@shared/services/me.service";
 
 @Pipe({
-    name: "canEditApplication",
+  name: "canEditApplication",
 })
 export class CanEditApplicationPipe implements PipeTransform {
-    constructor(private meService: MeService) {}
+  constructor(private meService: MeService) {}
 
-    transform(id: number | undefined): boolean {
-        return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, id);
-    }
+  transform(id: number | undefined): boolean {
+    return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, id);
+  }
 }

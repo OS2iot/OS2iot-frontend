@@ -20,67 +20,67 @@ import { UserTableTabComponent } from "@app/admin/users/user-list/user-table-tab
 import { AwaitingUsersTableTabComponent } from "@app/admin/users/user-list/awaiting-user-tab/awaiting-users-table-tab.component";
 
 const adminRoutes: Routes = [
-    {
-        path: "organisations",
-        component: OrganisationComponent,
+  {
+    path: "organisations",
+    component: OrganisationComponent,
+    children: [
+      { path: "", component: OrganisationListComponent },
+      { path: "new-organisation", component: OrganisationEditComponent },
+      { path: ":org-id", component: OrganisationDetailComponent },
+      {
+        path: ":org-id/edit-organisation",
+        component: OrganisationEditComponent,
+      },
+    ],
+  },
+  {
+    path: "users",
+    component: UsersComponent,
+    children: [
+      {
+        path: "",
+        component: UserListComponent,
         children: [
-            { path: "", component: OrganisationListComponent },
-            { path: "new-organisation", component: OrganisationEditComponent },
-            { path: ":org-id", component: OrganisationDetailComponent },
-            {
-                path: ":org-id/edit-organisation",
-                component: OrganisationEditComponent,
-            },
+          { path: "existing", component: UserTableTabComponent },
+          { path: "awaiting", component: AwaitingUsersTableTabComponent },
         ],
-    },
-    {
-        path: "users",
-        component: UsersComponent,
-        children: [
-            {
-                path: "",
-                component: UserListComponent,
-                children: [
-                    { path: "existing", component: UserTableTabComponent },
-                    { path: "awaiting", component: AwaitingUsersTableTabComponent },
-                ],
-            },
-            { path: "organization/:organization-id", component: UserListComponent },
-            { path: "new-user", component: UserEditComponent },
-            { path: ":user-id", component: UserDetailComponent },
-            { path: ":user-id/edit-user", component: UserEditComponent },
-            { path: "accept-user/:user-id/:org-id", component: AcceptUserComponent },
-        ],
-    },
-    {
-        path: "permissions",
-        component: PermissionComponent,
-        children: [
-            { path: "", component: PermissionListComponent },
-            { path: "new-permission", component: PermissionEditComponent },
-            { path: ":permission-id", component: PermissionDetailComponent },
-            {
-                path: ":permission-id/edit-permission",
-                component: PermissionEditComponent,
-            },
-        ],
-    },
-    {
-        path: "api-key",
-        component: ApiKeyComponent,
-        children: [
-            { path: "", component: ApiKeyListComponent },
-            { path: "new-api-key", component: ApiKeyEditComponent },
-            {
-                path: ":api-key-id/edit-api-key",
-                component: ApiKeyEditComponent,
-            },
-        ],
-    },
+      },
+      { path: "organization/:organization-id", component: UserListComponent },
+      { path: "new-user", component: UserEditComponent },
+      { path: ":user-id", component: UserDetailComponent },
+      { path: ":user-id/edit-user", component: UserEditComponent },
+      { path: "accept-user/:user-id/:org-id", component: AcceptUserComponent },
+    ],
+  },
+  {
+    path: "permissions",
+    component: PermissionComponent,
+    children: [
+      { path: "", component: PermissionListComponent },
+      { path: "new-permission", component: PermissionEditComponent },
+      { path: ":permission-id", component: PermissionDetailComponent },
+      {
+        path: ":permission-id/edit-permission",
+        component: PermissionEditComponent,
+      },
+    ],
+  },
+  {
+    path: "api-key",
+    component: ApiKeyComponent,
+    children: [
+      { path: "", component: ApiKeyListComponent },
+      { path: "new-api-key", component: ApiKeyEditComponent },
+      {
+        path: ":api-key-id/edit-api-key",
+        component: ApiKeyEditComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(adminRoutes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(adminRoutes)],
+  exports: [RouterModule],
 })
 export class AdminRoutingModule {}

@@ -2,15 +2,15 @@ import { AfterContentInit, AfterViewChecked, AfterViewInit, Component } from "@a
 import { GatewayService } from "@app/gateway/gateway.service";
 
 @Component({
-    selector: "app-gateway-status-overview",
-    templateUrl: "./gateway-status-overview.component.html",
-    styleUrls: ["./gateway-status-overview.component.scss"],
+  selector: "app-gateway-status-overview",
+  templateUrl: "./gateway-status-overview.component.html",
+  styleUrls: ["./gateway-status-overview.component.scss"],
 })
 export class GatewayStatusOverviewComponent implements AfterViewInit {
-    constructor(public gatewayService: GatewayService) {}
+  constructor(public gatewayService: GatewayService) {}
 
-    ngAfterViewInit(): void {
-        this.gatewayService.organisationChangeSubject.next(this.gatewayService.selectedOrg);
-        this.gatewayService.isGatewayStatusVisibleSubject.next();
-    }
+  ngAfterViewInit(): void {
+    this.gatewayService.organisationChangeSubject.next(this.gatewayService.selectedOrg);
+    this.gatewayService.isGatewayStatusVisibleSubject.next();
+  }
 }

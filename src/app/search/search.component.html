@@ -1,10 +1,10 @@
 <app-top-bar [title]="'NAV.SEARCH' | translate" [searchQuery]="query" [canEdit]="canEdit"></app-top-bar>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="jumbotron--table">
-                <app-search-table [searchText]="decode(query)"> </app-search-table>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="jumbotron--table">
+        <app-search-table [searchText]="decode(query)"> </app-search-table>
+      </div>
     </div>
+  </div>
 </div>

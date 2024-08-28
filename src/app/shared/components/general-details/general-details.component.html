@@ -1,9 +1,9 @@
 <p>
-    <strong>{{ "ORGANISATION.CREATED" | translate }}</strong
-    >{{ data.createdAt | dkTime }}<span *ngIf="data.createdByName">{{ data.createdByName | createdUpdatedBy }}</span>
+  <strong>{{ "ORGANISATION.CREATED" | translate }}</strong
+  >{{ data.createdAt | dkTime }}<span *ngIf="data.createdByName">{{ data.createdByName | createdUpdatedBy }}</span>
 </p>
 <p *ngIf="data.createdAt !== data.updatedAt">
-    <strong>{{ "ORGANISATION.UPDATED" | translate }}</strong
-    >{{ data.updatedAt | dkTime }}
-    <span *ngIf="data.updatedByName">{{ data.updatedByName | createdUpdatedBy }}</span>
+  <strong>{{ "ORGANISATION.UPDATED" | translate }}</strong
+  >{{ data.updatedAt | dkTime }}
+  <span *ngIf="data.updatedByName">{{ data.updatedByName | createdUpdatedBy }}</span>
 </p>

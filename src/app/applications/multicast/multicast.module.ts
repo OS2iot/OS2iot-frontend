@@ -14,19 +14,19 @@ import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-
 import { MulticastTabComponent } from "./multicast-tab/multicast-tab.component";
 
 @NgModule({
-    declarations: [MulticastDetailComponent, MulticastEditComponent, MulticastTableComponent, MulticastTabComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        TranslateModule,
-        NGMaterialModule,
-        FontAwesomeModule,
-        ReactiveFormsModule,
-        FormsModule,
-        SharedModule,
-        PipesModule,
-        MatSelectSearchModule,
-    ],
-    exports: [MulticastDetailComponent, MulticastEditComponent, MulticastTableComponent],
+  declarations: [MulticastDetailComponent, MulticastEditComponent, MulticastTableComponent, MulticastTabComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    NGMaterialModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+    PipesModule,
+    MatSelectSearchModule,
+  ],
+  exports: [MulticastDetailComponent, MulticastEditComponent, MulticastTableComponent],
 })
 export class MulticastModule {}

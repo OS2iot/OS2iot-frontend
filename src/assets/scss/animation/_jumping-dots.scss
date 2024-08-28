@@ -2,51 +2,51 @@
 //###########################################################################
 
 .jumping-dots span {
-    position: relative;
-    bottom: 0px;
-    -webkit-animation: jump 1500ms infinite;
-    animation: jump 2s infinite;
+  position: relative;
+  bottom: 0px;
+  -webkit-animation: jump 1500ms infinite;
+  animation: jump 2s infinite;
 }
 
 .jumping-dots .dot-1 {
-    -webkit-animation-delay: 150ms;
-    animation-delay: 150ms;
+  -webkit-animation-delay: 150ms;
+  animation-delay: 150ms;
 }
 
 .jumping-dots .dot-2 {
-    -webkit-animation-delay: 300ms;
-    animation-delay: 300ms;
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms;
 }
 
 .jumping-dots .dot-3 {
-    -webkit-animation-delay: 450ms;
-    animation-delay: 450ms;
+  -webkit-animation-delay: 450ms;
+  animation-delay: 450ms;
 }
 
 @-webkit-keyframes jump {
-    0% {
-        bottom: 0px;
-    }
+  0% {
+    bottom: 0px;
+  }
 
-    20% {
-        bottom: 3px;
-    }
+  20% {
+    bottom: 3px;
+  }
 
-    40% {
-        bottom: 0px;
-    }
+  40% {
+    bottom: 0px;
+  }
 }
 
 @keyframes jump {
-    0% {
-        bottom: 0px;
-    }
+  0% {
+    bottom: 0px;
+  }
 
-    20% {
-        bottom: 3px;
-    }
+  20% {
+    bottom: 3px;
+  }
 
-    40% {
-        bottom: 0px;
-    }
+  40% {
+    bottom: 0px;
+  }
 }

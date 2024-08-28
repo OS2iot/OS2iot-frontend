@@ -17,24 +17,24 @@ import { SigfoxGroupsListItemComponent } from "./sigfox-groups-list/sigfox-group
 import { PipesModule } from "@shared/pipes/pipes.module";
 
 @NgModule({
-    declarations: [
-        SigfoxGroupsEditComponent,
-        SigfoxDeviceTypesEditComponent,
-        SigfoxDeviceTypeTableComponent,
-        SigfoxGroupsListComponent,
-        SigfoxGroupsDetailComponent,
-        SigfoxGroupsListItemComponent,
-    ],
-    imports: [
-        CommonModule,
-        SigfoxRoutingModule,
-        FormsModule,
-        FormModule,
-        NGMaterialModule,
-        TranslateModule,
-        SharedModule,
-        FontAwesomeModule,
-        PipesModule,
-    ],
+  declarations: [
+    SigfoxGroupsEditComponent,
+    SigfoxDeviceTypesEditComponent,
+    SigfoxDeviceTypeTableComponent,
+    SigfoxGroupsListComponent,
+    SigfoxGroupsDetailComponent,
+    SigfoxGroupsListItemComponent,
+  ],
+  imports: [
+    CommonModule,
+    SigfoxRoutingModule,
+    FormsModule,
+    FormModule,
+    NGMaterialModule,
+    TranslateModule,
+    SharedModule,
+    FontAwesomeModule,
+    PipesModule,
+  ],
 })
 export class SigfoxModule {}

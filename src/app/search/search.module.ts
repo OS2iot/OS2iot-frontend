@@ -11,17 +11,17 @@ import { SharedModule } from "@shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
-    declarations: [SearchComponent, SearchTableComponent],
-    imports: [
-        CommonModule,
-        TranslateModule,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FormModule,
-        NGMaterialModule,
-        SharedModule,
-        FontAwesomeModule,
-    ],
+  declarations: [SearchComponent, SearchTableComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormModule,
+    NGMaterialModule,
+    SharedModule,
+    FontAwesomeModule,
+  ],
 })
 export class SearchModule {}

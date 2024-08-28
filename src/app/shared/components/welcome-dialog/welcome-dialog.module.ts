@@ -7,7 +7,7 @@ import { SharedModule } from "@shared/shared.module";
 import { WelcomeDialogComponent } from "./welcome-dialog.component";
 
 @NgModule({
-    declarations: [WelcomeDialogComponent],
-    imports: [CommonModule, SharedModule, RouterModule, NGMaterialModule, FormsModule],
+  declarations: [WelcomeDialogComponent],
+  imports: [CommonModule, SharedModule, RouterModule, NGMaterialModule, FormsModule],
 })
 export class WelcomeDialogModule {}

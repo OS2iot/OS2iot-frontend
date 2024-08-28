@@ -4,18 +4,18 @@ import { Observable } from "rxjs";
 import { ListAllSearchResultsResponseDto } from "./search-results.model";
 
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class SearchService {
-    URL = "search";
+  URL = "search";
 
-    constructor(private restService: RestService) {}
+  constructor(private restService: RestService) {}
 
-    search(query: string, limit: number, offset: number): Observable<ListAllSearchResultsResponseDto> {
-        return this.restService.get(this.URL, {
-            q: query,
-            limit: limit,
-            offset: offset,
-        });
-    }
+  search(query: string, limit: number, offset: number): Observable<ListAllSearchResultsResponseDto> {
+    return this.restService.get(this.URL, {
+      q: query,
+      limit: limit,
+      offset: offset,
+    });
+  }
 }

@@ -3,13 +3,13 @@ import { sortBy } from "@shared/helpers/array.helper";
 
 @Pipe({ name: "sortBy" })
 export class SortByPipe implements PipeTransform {
-    /**
-     * Example:
-     * ```
-     * *ngFor="let c of arrayOfObjects | sortBy:<propertyName>:'asc'"
-     * ```
-     */
-    transform<T>(value: T[], column: keyof T, order: "asc" | "desc" = "asc"): T[] {
-        return sortBy(value, column, order);
-    }
+  /**
+   * Example:
+   * ```
+   * *ngFor="let c of arrayOfObjects | sortBy:<propertyName>:'asc'"
+   * ```
+   */
+  transform<T>(value: T[], column: keyof T, order: "asc" | "desc" = "asc"): T[] {
+    return sortBy(value, column, order);
+  }
 }

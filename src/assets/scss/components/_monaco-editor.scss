@@ -1,14 +1,14 @@
 ngx-monaco-editor {
-    width: 100%;
-    padding: 15px;
-    //border: $border-input-hover;
-    @include add-shadow;
+  width: 100%;
+  padding: 15px;
+  //border: $border-input-hover;
+  @include add-shadow;
 }
 
 .big-editor {
-    height: 100vh !important;
+  height: 100vh !important;
 }
 
 .middle-editor {
-    height: 40vh !important;
+  height: 40vh !important;
 }

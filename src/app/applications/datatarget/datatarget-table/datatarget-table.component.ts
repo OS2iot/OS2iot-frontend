@@ -15,95 +15,95 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: "app-datatarget-table",
-    templateUrl: "./datatarget-table.component.html",
-    styleUrls: ["./datatarget-table.component.scss"],
+  selector: "app-datatarget-table",
+  templateUrl: "./datatarget-table.component.html",
+  styleUrls: ["./datatarget-table.component.scss"],
 })
 export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestroy {
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-    displayedColumns: string[] = ["name", "type", "menu"];
-    dataSource = new MatTableDataSource<Datatarget>();
-    datatargets: Datatarget[];
-    resultsLength = 0;
-    public canEdit = false;
-    @Input() isLoadingResults = true;
-    public pageSize = environment.tablePageSize;
-    pageSizeOptions = DefaultPageSizeOptions;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ["name", "type", "menu"];
+  dataSource = new MatTableDataSource<Datatarget>();
+  datatargets: Datatarget[];
+  resultsLength = 0;
+  public canEdit = false;
+  @Input() isLoadingResults = true;
+  public pageSize = environment.tablePageSize;
+  pageSizeOptions = DefaultPageSizeOptions;
 
-    @Input() pageLimit: number;
-    public pageOffset = 0;
-    public pageTotal: number;
-    public applicationId: number;
+  @Input() pageLimit: number;
+  public pageOffset = 0;
+  public pageTotal: number;
+  public applicationId: number;
 
-    private datatargetSubscription: Subscription;
-    private deleteDialogSubscription: Subscription;
+  private datatargetSubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
-    constructor(
-        private route: ActivatedRoute,
-        private deleteDialogService: DeleteDialogService,
-        private datatargetService: DatatargetService,
-        private meService: MeService,
-        public translate: TranslateService
-    ) {
-        translate.use("da");
-    }
+  constructor(
+    private route: ActivatedRoute,
+    private deleteDialogService: DeleteDialogService,
+    private datatargetService: DatatargetService,
+    private meService: MeService,
+    public translate: TranslateService
+  ) {
+    translate.use("da");
+  }
 
-    ngOnInit(): void {
-        this.applicationId = +Number(this.route.parent.snapshot.paramMap.get("id"));
-        this.getDatatarget();
-        this.canEdit = this.meService.hasAccessToTargetOrganization(
-            OrganizationAccessScope.ApplicationWrite,
-            undefined,
-            this.applicationId
-        );
-    }
+  ngOnInit(): void {
+    this.applicationId = +Number(this.route.parent.snapshot.paramMap.get("id"));
+    this.getDatatarget();
+    this.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      undefined,
+      this.applicationId
+    );
+  }
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-    }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
-    getDatatarget(): void {
-        const appId: number = this.applicationId;
-        if (appId) {
-            this.datatargetSubscription = this.datatargetService
-                .getByApplicationId(this.pageLimit, this.pageOffset * this.pageLimit, appId)
-                .subscribe((datatargets: DatatargetData) => {
-                    this.datatargets = datatargets.data;
-                    this.dataSource = new MatTableDataSource<Datatarget>(this.datatargets);
-                    this.dataSource.paginator = this.paginator;
-                    this.dataSource.sort = this.sort;
-                    this.dataSource.sortingDataAccessor = tableSorter;
-                    this.isLoadingResults = false;
-                    if (this.pageLimit) {
-                        this.pageTotal = Math.ceil(datatargets.count / this.pageLimit);
-                    }
-                });
-        }
-    }
-
-    deleteDatatarget(element: any) {
-        this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
-            if (response) {
-                this.datatargetService.delete(element.id).subscribe(response => {
-                    if (response.ok && response.body.affected > 0) {
-                        this.getDatatarget();
-                    }
-                });
-            } else {
-                console.log(response);
-            }
+  getDatatarget(): void {
+    const appId: number = this.applicationId;
+    if (appId) {
+      this.datatargetSubscription = this.datatargetService
+        .getByApplicationId(this.pageLimit, this.pageOffset * this.pageLimit, appId)
+        .subscribe((datatargets: DatatargetData) => {
+          this.datatargets = datatargets.data;
+          this.dataSource = new MatTableDataSource<Datatarget>(this.datatargets);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = tableSorter;
+          this.isLoadingResults = false;
+          if (this.pageLimit) {
+            this.pageTotal = Math.ceil(datatargets.count / this.pageLimit);
+          }
         });
     }
+  }
 
-    ngOnDestroy() {
-        // prevent memory leak by unsubscribing
-        if (this.datatargetSubscription) {
-            this.datatargetSubscription.unsubscribe();
-        }
-        if (this.deleteDialogSubscription) {
-            this.deleteDialogSubscription.unsubscribe();
-        }
+  deleteDatatarget(element: any) {
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
+      if (response) {
+        this.datatargetService.delete(element.id).subscribe(response => {
+          if (response.ok && response.body.affected > 0) {
+            this.getDatatarget();
+          }
+        });
+      } else {
+        console.log(response);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.datatargetSubscription) {
+      this.datatargetSubscription.unsubscribe();
     }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
+  }
 }

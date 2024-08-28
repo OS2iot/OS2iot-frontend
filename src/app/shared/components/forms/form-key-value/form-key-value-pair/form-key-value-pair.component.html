@@ -1,38 +1,38 @@
 <td>
-    <div class="row px-2">
-        <input
-            type="text"
-            id="keyValuePairKey"
-            name="keyValuePairKey"
-            maxLength="100"
-            [placeholder]="'GEN.KEY' | translate"
-            class="form-control border-bottom-i-1"
-            [(ngModel)]="pair.key"
-            [ngClass]="{
-                'is-invalid': errorFieldId && errorFieldId === pair.key,
-                'is-valid': errorFieldId && errorFieldId !== pair.key
-            }"
-        />
-    </div>
+  <div class="row px-2">
+    <input
+      type="text"
+      id="keyValuePairKey"
+      name="keyValuePairKey"
+      maxLength="100"
+      [placeholder]="'GEN.KEY' | translate"
+      class="form-control border-bottom-i-1"
+      [(ngModel)]="pair.key"
+      [ngClass]="{
+        'is-invalid': errorFieldId && errorFieldId === pair.key,
+        'is-valid': errorFieldId && errorFieldId !== pair.key
+      }"
+    />
+  </div>
 </td>
 <td>
-    <div class="row px-2">
-        <input
-            type="text"
-            id="keyValuePairValue"
-            name="keyValuePairValue"
-            maxLength="100"
-            [placeholder]="'GEN.VALUE' | translate"
-            class="form-control border-bottom-i-1"
-            [(ngModel)]="pair.value"
-        />
-    </div>
+  <div class="row px-2">
+    <input
+      type="text"
+      id="keyValuePairValue"
+      name="keyValuePairValue"
+      maxLength="100"
+      [placeholder]="'GEN.VALUE' | translate"
+      class="form-control border-bottom-i-1"
+      [(ngModel)]="pair.value"
+    />
+  </div>
 </td>
 <td>
-    <a (click)="openDeleteDialog()">
-        <div class="text-center">
-            <fa-icon [icon]="faTimesCircle"></fa-icon>
-            <p class="mt-i-0">{{ "DATATARGET.DELETE" | translate }}</p>
-        </div>
-    </a>
+  <a (click)="openDeleteDialog()">
+    <div class="text-center">
+      <fa-icon [icon]="faTimesCircle"></fa-icon>
+      <p class="mt-i-0">{{ "DATATARGET.DELETE" | translate }}</p>
+    </div>
+  </a>
 </td>

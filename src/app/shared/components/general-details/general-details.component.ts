@@ -10,23 +10,23 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 
 @Component({
-    selector: "app-general-details",
-    templateUrl: "./general-details.component.html",
-    styleUrls: ["./general-details.component.scss"],
+  selector: "app-general-details",
+  templateUrl: "./general-details.component.html",
+  styleUrls: ["./general-details.component.scss"],
 })
 export class GeneralDetailsComponent implements OnInit {
-    @Input() data:
-        | OrganisationResponse
-        | PermissionResponse
-        | UserResponse
-        | Application
-        | IotDevice
-        | Datatarget
-        | DeviceModel
-        | Gateway
-        | PayloadDecoder;
+  @Input() data:
+    | OrganisationResponse
+    | PermissionResponse
+    | UserResponse
+    | Application
+    | IotDevice
+    | Datatarget
+    | DeviceModel
+    | Gateway
+    | PayloadDecoder;
 
-    constructor() {}
+  constructor() {}
 
-    ngOnInit(): void {}
+  ngOnInit(): void {}
 }

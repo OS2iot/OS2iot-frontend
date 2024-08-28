@@ -5,8 +5,8 @@ import { PlaceholderDirective } from "./placeholder.directive";
 import { DragDropDirective } from "./drag-drop.directive";
 
 @NgModule({
-    declarations: [DropdownDirective, PlaceholderDirective, DragDropDirective],
-    imports: [CommonModule],
-    exports: [DropdownDirective, PlaceholderDirective, DragDropDirective],
+  declarations: [DropdownDirective, PlaceholderDirective, DragDropDirective],
+  imports: [CommonModule],
+  exports: [DropdownDirective, PlaceholderDirective, DragDropDirective],
 })
 export class DirectivesModule {}

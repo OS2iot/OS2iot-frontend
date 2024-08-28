@@ -6,22 +6,22 @@ import { DebugElement } from "@angular/core";
 import { FiwareDetailComponent } from "./fiware-detail.component";
 
 describe("FiwareDetailComponent", () => {
-    let component: FiwareDetailComponent;
-    let fixture: ComponentFixture<FiwareDetailComponent>;
+  let component: FiwareDetailComponent;
+  let fixture: ComponentFixture<FiwareDetailComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [FiwareDetailComponent],
-        }).compileComponents();
-    }));
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FiwareDetailComponent],
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(FiwareDetailComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FiwareDetailComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it("should create", () => {
-        expect(component).toBeTruthy();
-    });
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
 });

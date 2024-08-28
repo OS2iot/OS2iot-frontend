@@ -1,49 +1,49 @@
 <div class="row sub-bar-wrapper no-margin">
-    <div class="col-12 d-flex sub-bar align-items-center">
-        <h3 *ngIf="title" class="mb-0">{{ title }}</h3>
-        <div class="ml-auto d-flex">
-            <div>
-                <button
-                    *ngIf="ctaActionButtonOnClick"
-                    (click)="ctaActionButtonOnClick()"
-                    class="btn btn-secondary"
-                    type="button"
-                    [attr.aria-label]="ctaActionButtonLabel"
-                >
-                    {{ ctaActionButtonLabel }}
-                </button>
-                <button
-                    *ngIf="ctaRouterLinkSecondary"
-                    [routerLink]="ctaRouterLinkSecondary"
-                    routerLinkActive="active"
-                    class="btn btn-secondary"
-                    type="button"
-                    [attr.aria-label]="ctaLabelSecondary"
-                >
-                    {{ ctaLabelSecondary }}
-                </button>
+  <div class="col-12 d-flex sub-bar align-items-center">
+    <h3 *ngIf="title" class="mb-0">{{ title }}</h3>
+    <div class="ml-auto d-flex">
+      <div>
+        <button
+          *ngIf="ctaActionButtonOnClick"
+          (click)="ctaActionButtonOnClick()"
+          class="btn btn-secondary"
+          type="button"
+          [attr.aria-label]="ctaActionButtonLabel"
+        >
+          {{ ctaActionButtonLabel }}
+        </button>
+        <button
+          *ngIf="ctaRouterLinkSecondary"
+          [routerLink]="ctaRouterLinkSecondary"
+          routerLinkActive="active"
+          class="btn btn-secondary"
+          type="button"
+          [attr.aria-label]="ctaLabelSecondary"
+        >
+          {{ ctaLabelSecondary }}
+        </button>
 
-                <button
-                    *ngIf="ctaRouterLinkPrimary"
-                    [routerLink]="ctaRouterLinkPrimary"
-                    routerLinkActive="active"
-                    class="btn btn-primary"
-                    type="button"
-                    [attr.aria-label]="ctaLabelPrimary"
-                >
-                    {{ ctaLabelPrimary }}
-                </button>
+        <button
+          *ngIf="ctaRouterLinkPrimary"
+          [routerLink]="ctaRouterLinkPrimary"
+          routerLinkActive="active"
+          class="btn btn-primary"
+          type="button"
+          [attr.aria-label]="ctaLabelPrimary"
+        >
+          {{ ctaLabelPrimary }}
+        </button>
 
-                <mat-form-field appearance="fill" *ngIf="addDropdown">
-                    <mat-label>{{ dropdownLabel }}</mat-label>
-                    <mat-select [placeholder]="dropdownLabel" [(value)]="selectedOpt">
-                        <mat-option (click)="setOptionToNull()">--{{ dropdownDefaultOption }}--</mat-option>
-                        <mat-option *ngFor="let option of options" [value]="option.id" (click)="setOptionToParent()">
-                            {{ option.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </div>
+        <mat-form-field appearance="fill" *ngIf="addDropdown">
+          <mat-label>{{ dropdownLabel }}</mat-label>
+          <mat-select [placeholder]="dropdownLabel" [(value)]="selectedOpt">
+            <mat-option (click)="setOptionToNull()">--{{ dropdownDefaultOption }}--</mat-option>
+            <mat-option *ngFor="let option of options" [value]="option.id" (click)="setOptionToParent()">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
+  </div>
 </div>
