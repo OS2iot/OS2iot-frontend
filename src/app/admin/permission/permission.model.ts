@@ -1,6 +1,6 @@
-import { OrganisationResponse } from '../organisation/organisation.model';
-import { UserResponse } from '../users/user.model';
-import { Application } from '../../applications/application.model';
+import { OrganisationResponse } from "../organisation/organisation.model";
+import { UserResponse } from "../users/user.model";
+import { Application } from "../../applications/application.model";
 
 export class PermissionRequest {
   levels: PermissionTypes[];
@@ -44,9 +44,9 @@ export interface PermissionTypes {
 }
 
 export enum PermissionType {
-  GlobalAdmin = 'GlobalAdmin',
-  OrganizationUserAdmin = 'OrganizationUserAdmin',
-  OrganizationGatewayAdmin = 'OrganizationGatewayAdmin',
-  OrganizationApplicationAdmin = 'OrganizationApplicationAdmin',
-  Read = 'Read',
+  GlobalAdmin = "GlobalAdmin",
+  OrganizationUserAdmin = "OrganizationUserAdmin",
+  OrganizationGatewayAdmin = "OrganizationGatewayAdmin",
+  OrganizationApplicationAdmin = "OrganizationApplicationAdmin",
+  Read = "Read",
 }

@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ChirpstackGatewayService } from './chirpstack-gateway.service';
+import { ChirpstackGatewayService } from "./chirpstack-gateway.service";
 
-describe('ChirpstackGatewayService', () => {
+describe("ChirpstackGatewayService", () => {
   let service: ChirpstackGatewayService;
 
   beforeEach(() => {
@@ -10,9 +10,9 @@ describe('ChirpstackGatewayService', () => {
     service = TestBed.inject(ChirpstackGatewayService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
-    const test = service.get('1');
+    const test = service.get("1");
     console.log(test);
   });
 });

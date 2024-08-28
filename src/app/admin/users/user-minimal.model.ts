@@ -1,8 +1,8 @@
 export interface UserMinimalResponse {
-    users: UserMinimal[];
+  users: UserMinimal[];
 }
 
 export interface UserMinimal {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }

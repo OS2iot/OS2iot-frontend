@@ -1,5 +1,5 @@
-@import 'src/assets/scss/setup/breakpoints';
-@import 'src/assets/scss/setup/variables';
+@import "src/assets/scss/setup/breakpoints";
+@import "src/assets/scss/setup/variables";
 
 .per-page {
   line-height: 40px;
@@ -39,7 +39,7 @@ button:focus {
   align-items: center;
 }
 
-.invisible{
+.invisible {
   display: none;
   visibility: hidden;
   height: 0;

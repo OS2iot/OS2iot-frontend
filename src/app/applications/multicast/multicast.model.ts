@@ -1,5 +1,5 @@
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { MulticastType } from '@shared/enums/multicast-type';
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { MulticastType } from "@shared/enums/multicast-type";
 
 export class Multicast {
   id: number;

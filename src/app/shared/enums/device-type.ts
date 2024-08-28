@@ -1,16 +1,16 @@
-import { recordToEntries } from '@shared/helpers/record.helper';
+import { recordToEntries } from "@shared/helpers/record.helper";
 
 export enum DeviceType {
-  GENERIC_HTTP = 'GENERIC_HTTP',
-  LORAWAN = 'LORAWAN',
-  SIGFOX = 'SIGFOX',
-  MQTT = 'MQTT',
-  MQTT_INTERNAL_BROKER = 'MQTT_INTERNAL_BROKER',
-  MQTT_EXTERNAL_BROKER = 'MQTT_EXTERNAL_BROKER',
+  GENERIC_HTTP = "GENERIC_HTTP",
+  LORAWAN = "LORAWAN",
+  SIGFOX = "SIGFOX",
+  MQTT = "MQTT",
+  MQTT_INTERNAL_BROKER = "MQTT_INTERNAL_BROKER",
+  MQTT_EXTERNAL_BROKER = "MQTT_EXTERNAL_BROKER",
 }
 
 enum ApplicationExtraDeviceType {
-  OTHER = 'OTHER',
+  OTHER = "OTHER",
 }
 
 export type ApplicationDeviceTypeUnion =
@@ -22,6 +22,4 @@ export const ApplicationDeviceTypes = {
   ...DeviceType,
   ...ApplicationExtraDeviceType,
 };
-export const ApplicationDeviceTypeEntries = recordToEntries(
-  ApplicationDeviceTypes
-);
+export const ApplicationDeviceTypeEntries = recordToEntries(ApplicationDeviceTypes);

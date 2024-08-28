@@ -1,23 +1,16 @@
-import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { TranslateService } from '@ngx-translate/core';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { KeyValue } from '@shared/types/tuple.type';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
+import { KeyValue } from "@shared/types/tuple.type";
 
 @Component({
   // Require this tag to be used with <tr> to preserve global table styling
   // tslint:disable-next-line: component-selector
-  selector: 'tr[app-form-key-value-pair]',
-  templateUrl: './form-key-value-pair.component.html',
-  styleUrls: ['./form-key-value-pair.component.scss'],
+  selector: "tr[app-form-key-value-pair]",
+  templateUrl: "./form-key-value-pair.component.html",
+  styleUrls: ["./form-key-value-pair.component.scss"],
 })
 export class FormKeyValuePairComponent implements OnInit {
   @Input() id: number;
@@ -31,8 +24,8 @@ export class FormKeyValuePairComponent implements OnInit {
   constructor(private dialog: MatDialog, private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.translate.get(['DIALOG.DELETE.ARE-YOU-SURE']).subscribe((translations) => {
-      this.deleteMessage = translations['DIALOG.DELETE.ARE-YOU-SURE'];
+    this.translate.get(["DIALOG.DELETE.ARE-YOU-SURE"]).subscribe(translations => {
+      this.deleteMessage = translations["DIALOG.DELETE.ARE-YOU-SURE"];
     });
   }
 
@@ -45,7 +38,7 @@ export class FormKeyValuePairComponent implements OnInit {
       },
     });
 
-    dialog.afterClosed().subscribe((result) => {
+    dialog.afterClosed().subscribe(result => {
       if (result === true) {
         this.deletePair.emit(this.id);
       }

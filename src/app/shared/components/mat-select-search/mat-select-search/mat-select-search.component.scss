@@ -14,10 +14,7 @@ $multiple-check-width: 33px;
   background: white;
   z-index: 100;
   &.mat-select-search-inner-multiple {
-    width: calc(
-      100% + #{2 * $mat-menu-side-padding - $scrollbar-width +
-        $multiple-check-width}
-    );
+    width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width + $multiple-check-width});
   }
 }
 

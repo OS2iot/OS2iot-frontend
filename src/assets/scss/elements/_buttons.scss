@@ -1,4 +1,4 @@
-@import '../setup/variables';
+@import "../setup/variables";
 
 // Buttons
 button,
@@ -17,11 +17,7 @@ a {
       @extend .btn;
       color: $color-text-white;
       border: solid calculateRem(1) $button-primary-border-color;
-      background: linear-gradient(
-        180deg,
-        $button-primary-bg 0%,
-        $button-primary-bg 100%
-      );
+      background: linear-gradient(180deg, $button-primary-bg 0%, $button-primary-bg 100%);
       box-shadow: none;
 
       &:hover,
@@ -120,12 +116,9 @@ a {
 }
 
 .btn {
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03),
-    0px 0px 1px rgba(0, 0, 0, 0.24);
-  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12),
-    0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 1px 16px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.24);
   padding: 0.4rem;
   white-space: normal;
 

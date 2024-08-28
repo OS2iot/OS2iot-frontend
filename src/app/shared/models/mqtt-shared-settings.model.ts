@@ -1,4 +1,4 @@
-﻿import { AuthenticationType } from '@shared/enums/authentication-type';
+﻿import { AuthenticationType } from "@shared/enums/authentication-type";
 
 export class MqttSharedSettings {
   mqttURL: string;

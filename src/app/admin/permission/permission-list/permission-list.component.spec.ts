@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { PermissionListComponent } from './permission-list.component';
+import { PermissionListComponent } from "./permission-list.component";
 
-describe('PermissionListComponent', () => {
+describe("PermissionListComponent", () => {
   let component: PermissionListComponent;
   let fixture: ComponentFixture<PermissionListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PermissionListComponent ]
-    })
-    .compileComponents();
+      declarations: [PermissionListComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PermissionListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

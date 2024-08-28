@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { OpendatadkComponent } from './opendatadk.component';
+import { OpendatadkComponent } from "./opendatadk.component";
 
-describe('OpendatadkComponent', () => {
+describe("OpendatadkComponent", () => {
   let component: OpendatadkComponent;
   let fixture: ComponentFixture<OpendatadkComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OpendatadkComponent ]
-    })
-    .compileComponents();
+      declarations: [OpendatadkComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('OpendatadkComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

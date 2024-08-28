@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { SigfoxDeviceTypesEditComponent } from './sigfox-device-types-edit.component';
+import { SigfoxDeviceTypesEditComponent } from "./sigfox-device-types-edit.component";
 
-describe('SigfoxDeviceTypesEditComponent', () => {
+describe("SigfoxDeviceTypesEditComponent", () => {
   let component: SigfoxDeviceTypesEditComponent;
   let fixture: ComponentFixture<SigfoxDeviceTypesEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SigfoxDeviceTypesEditComponent ]
-    })
-    .compileComponents();
+      declarations: [SigfoxDeviceTypesEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SigfoxDeviceTypesEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

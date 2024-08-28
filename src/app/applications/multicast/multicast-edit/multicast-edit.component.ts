@@ -1,24 +1,24 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { MulticastType } from '@shared/enums/multicast-type';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { SnackService } from '@shared/services/snack.service';
-import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
-import { Multicast } from '../multicast.model';
-import { MulticastService } from '../multicast.service';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { ApplicationService } from '@applications/application.service';
-import { keyPressedHex } from '@shared/constants/regex-constants';
-import { UntypedFormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { MulticastType } from "@shared/enums/multicast-type";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { SnackService } from "@shared/services/snack.service";
+import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
+import { ReplaySubject, Subject, Subscription } from "rxjs";
+import { Multicast } from "../multicast.model";
+import { MulticastService } from "../multicast.service";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { ApplicationService } from "@applications/application.service";
+import { keyPressedHex } from "@shared/constants/regex-constants";
+import { UntypedFormControl } from "@angular/forms";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'app-multicast-edit',
-  templateUrl: './multicast-edit.component.html',
-  styleUrls: ['./multicast-edit.component.scss'],
+  selector: "app-multicast-edit",
+  templateUrl: "./multicast-edit.component.html",
+  styleUrls: ["./multicast-edit.component.scss"],
 })
 export class MulticastEditComponent implements OnInit, OnDestroy {
   public title: string;
@@ -37,9 +37,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   public multicastTypes: string[] = Object.values(MulticastType);
   // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
   public deviceFilterCtrl: UntypedFormControl = new UntypedFormControl();
-  public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<
-    IotDevice[]
-  >(1);
+  public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<IotDevice[]>(1);
 
   constructor(
     private translate: TranslateService,
@@ -53,25 +51,19 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.multicastId = +this.route.snapshot.paramMap.get('multicastId');
-    this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.multicastId = +this.route.snapshot.paramMap.get("multicastId");
+    this.applicationId = +this.route.snapshot.paramMap.get("id");
 
     this.translate
-      .get([
-        'FORM.CREATE-NEW-MULTICAST',
-        'FORM.EDIT-MULTICAST',
-        'MULTICAST.SAVE',
-        'NAV.MULTICAST',
-        'GEN.BACK',
-      ])
-      .subscribe((translations) => {
+      .get(["FORM.CREATE-NEW-MULTICAST", "FORM.EDIT-MULTICAST", "MULTICAST.SAVE", "NAV.MULTICAST", "GEN.BACK"])
+      .subscribe(translations => {
         if (this.multicastId) {
-          this.title = translations['FORM.EDIT-MULTICAST'];
+          this.title = translations["FORM.EDIT-MULTICAST"];
         } else {
-          this.title = translations['FORM.CREATE-NEW-MULTICAST'];
+          this.title = translations["FORM.CREATE-NEW-MULTICAST"];
         }
-        this.submitButton = translations['MULTICAST.SAVE'];
-        this.backButtonTitle = translations['GEN.BACK'];
+        this.submitButton = translations["MULTICAST.SAVE"];
+        this.backButtonTitle = translations["GEN.BACK"];
       });
 
     this.getApplication(this.applicationId);
@@ -81,11 +73,9 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
       this.getMulticast(this.multicastId);
     }
 
-    this.deviceFilterCtrl.valueChanges
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(() => {
-        this.filterDevicesMulti();
-      });
+    this.deviceFilterCtrl.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(() => {
+      this.filterDevicesMulti();
+    });
   }
 
   private filterDevicesMulti() {
@@ -100,7 +90,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
     } else {
       search = search.toLowerCase();
     }
-    const filtered = this.iotDevices.filter((device) => {
+    const filtered = this.iotDevices.filter(device => {
       return device.name.toLocaleLowerCase().indexOf(search) > -1;
     });
     this.filteredDevicesMulti.next(filtered);
@@ -117,15 +107,13 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   }
 
   getMulticast(id: number) {
-    this.multicastSubscription = this.multicastService
-      .get(id)
-      .subscribe((response: Multicast) => {
-        this.multicast = response; // gets the multicast and set's local multicast. Used when update.
-      });
+    this.multicastSubscription = this.multicastService.get(id).subscribe((response: Multicast) => {
+      this.multicast = response; // gets the multicast and set's local multicast. Used when update.
+    });
   }
 
   getApplication(id: number) {
-    this.applicationService.getApplication(id).subscribe((application) => {
+    this.applicationService.getApplication(id).subscribe(application => {
       this.iotDevices = application.iotDevices ?? [];
       this.filteredDevicesMulti.next(this.iotDevices.slice());
     });
@@ -170,10 +158,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
       }
     );
   }
-  public compare(
-    o1: IotDevice | undefined,
-    o2: IotDevice | undefined
-  ): boolean {
+  public compare(o1: IotDevice | undefined, o2: IotDevice | undefined): boolean {
     return o1?.id === o2?.id;
   }
 
@@ -185,7 +170,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   }
 
   routeBack(): void {
-    this.router.navigate(['applications', this.applicationId.toString()]);
+    this.router.navigate(["applications", this.applicationId.toString()]);
   }
   keyPressHexadecimal(event) {
     keyPressedHex(event);

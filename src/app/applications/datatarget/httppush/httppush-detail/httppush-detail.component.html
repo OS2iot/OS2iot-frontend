@@ -1,37 +1,58 @@
 <div *ngIf="datatarget">
-  <app-top-bar [data]="datatarget" [backButton]="backButton" [subPage]="true" [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()" [canEdit]="canEdit"></app-top-bar>
+  <app-top-bar
+    [data]="datatarget"
+    [backButton]="backButton"
+    [subPage]="true"
+    [addDetailDowndown]="true"
+    [dropDownButton]="dropdownButton"
+    (deleteSelectedInDropdown)="onDeleteDatatarget()"
+    [canEdit]="canEdit"
+  ></app-top-bar>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
-          <h3>{{ 'DATATARGET.DETAILS' | translate }}</h3>
+          <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
           <app-general-details [data]="datatarget"></app-general-details>
           <mat-divider></mat-divider>
           <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
-            <p><strong>{{ 'DATATARGET.URL' | translate }}</strong>{{datatarget.url}}</p>
-            <p><strong>{{ 'DATATARGET.TIMEOUT' | translate }}</strong>{{datatarget.timeout}}</p>
+            <p>
+              <strong>{{ "DATATARGET.URL" | translate }}</strong
+              >{{ datatarget.url }}
+            </p>
+            <p>
+              <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong
+              >{{ datatarget.timeout }}
+            </p>
           </span>
-          <p><strong>{{ 'DATATARGET.TYPE' | translate }}</strong>{{'DATATARGET.' + datatarget.type + '.TYPE' | translate}}</p>
+          <p>
+            <strong>{{ "DATATARGET.TYPE" | translate }}</strong
+            >{{ "DATATARGET." + datatarget.type + ".TYPE" | translate }}
+          </p>
           <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
             <mat-divider></mat-divider>
-            <p><strong>{{ 'DATATARGET.AUTHORIZATIONHEADER' | translate }}</strong></p>
-            <code><pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{datatarget.authorizationHeader}}</pre></code>
+            <p>
+              <strong>{{ "DATATARGET.AUTHORIZATIONHEADER" | translate }}</strong>
+            </p>
+            <code>
+              <pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{
+                datatarget.authorizationHeader
+              }}</pre>
+            </code>
             <ng-template #showNoAuthText>
-              <p>{{ 'DATATARGET.NO-AUTHORIZATIONHEADER' | translate }}</p>
+              <p>{{ "DATATARGET.NO-AUTHORIZATIONHEADER" | translate }}</p>
             </ng-template>
           </span>
-
         </div>
       </div>
       <div *ngIf="datatarget.type === dataTargetType.OPENDATADK" class="col-md-6 d-flex align-items-stretch">
         <div class="jumbotron jumbotron--m-left jumbotron--full-width">
-          <h3>{{ 'DATATARGET.OPENDATA-DK.TYPE' | translate }}</h3>
-          <div *ngIf="datatarget.setToOpendataDk else noOpendataDk">
+          <h3>{{ "DATATARGET.OPENDATA-DK.TYPE" | translate }}</h3>
+          <div *ngIf="datatarget.setToOpendataDk; else noOpendataDk">
             <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
           </div>
           <ng-template #noOpendataDk>
-            <p>{{ 'DATATARGET.NO-OPENDATA-DK' | translate }}</p>
+            <p>{{ "DATATARGET.NO-OPENDATA-DK" | translate }}</p>
           </ng-template>
         </div>
       </div>
@@ -39,30 +60,37 @@
 
     <div class="row">
       <div class="col-12">
-        <div class=" jumbotron">
+        <div class="jumbotron">
           <div class="form-group">
-            <h3>{{ 'DATATARGET.RELATIONS' | translate }}</h3>
+            <h3>{{ "DATATARGET.RELATIONS" | translate }}</h3>
             <div *ngIf="dataTargetRelations?.length === 0">
-              <p>{{'DATATARGET.NO-RELATIONS' | translate}}</p>
+              <p>{{ "DATATARGET.NO-RELATIONS" | translate }}</p>
             </div>
             <div *ngIf="dataTargetRelations">
               <div *ngFor="let relation of dataTargetRelations">
                 <div class="row">
                   <div class="col-md-4 d-flex align-items-center">
-                    <p><strong>{{'DATATARGET.PAYLOADEDECODER' | translate}}</strong><span
-                        *ngIf="relation.payloadDecoder; else noDecoder">
-                        <a [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{relation.payloadDecoder.name}}</a>
+                    <p>
+                      <strong>{{ "DATATARGET.PAYLOADEDECODER" | translate }}</strong
+                      ><span *ngIf="relation.payloadDecoder; else noDecoder">
+                        <a [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{
+                          relation.payloadDecoder.name
+                        }}</a>
                       </span>
-                      <ng-template #noDecoder>{{ 'DATATARGET.NO-PAYLOADDECODER' | translate}}</ng-template>
+                      <ng-template #noDecoder>{{ "DATATARGET.NO-PAYLOADDECODER" | translate }}</ng-template>
                     </p>
                   </div>
                   <div class="col-md-1 d-flex align-items-center justify-content-center">
                     <fa-icon [icon]="arrowsAltH" class="icon--primary icon--medium icon--disabled"></fa-icon>
                   </div>
                   <div class="col-md-7 d-flex align-items-center">
-                    <p><strong>{{'DATATARGET.IOTDEVICE' | translate}}</strong>
+                    <p>
+                      <strong>{{ "DATATARGET.IOTDEVICE" | translate }}</strong>
                       <span *ngFor="let device of relation.iotDevices; let first = first">
-                        <ng-container *ngIf="!first">, </ng-container> <a [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{device.name}}</a>
+                        <ng-container *ngIf="!first">, </ng-container>
+                        <a [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{
+                          device.name
+                        }}</a>
                       </span>
                     </p>
                   </div>

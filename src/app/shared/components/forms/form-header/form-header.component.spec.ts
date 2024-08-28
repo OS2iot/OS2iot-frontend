@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { FormHeaderComponent } from './form-header.component';
+import { FormHeaderComponent } from "./form-header.component";
 
-describe('FormHeaderComponent', () => {
+describe("FormHeaderComponent", () => {
   let component: FormHeaderComponent;
   let fixture: ComponentFixture<FormHeaderComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [FormHeaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('FormHeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

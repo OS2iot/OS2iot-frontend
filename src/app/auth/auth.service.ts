@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '@environments/environment';
-import jwtDecode from 'jwt-decode';
-import moment from 'moment';
-import { RestService } from '@shared/services/rest.service';
-import { Observable, of } from 'rxjs';
-import { Organisation } from '@app/admin/organisation/organisation.model';
-import { UserResponse } from '../admin/users/user.model';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Injectable } from "@angular/core";
+import { catchError, shareReplay, tap } from "rxjs/operators";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { environment } from "@environments/environment";
+import jwtDecode from "jwt-decode";
+import moment from "moment";
+import { RestService } from "@shared/services/rest.service";
+import { Observable, of } from "rxjs";
+import { Organisation } from "@app/admin/organisation/organisation.model";
+import { UserResponse } from "../admin/users/user.model";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 export interface AuthResponseData {
   accessToken: string;
@@ -20,18 +20,15 @@ export interface CurrentUserInfoResponse {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
-  private URL = 'auth/login';
+  private URL = "auth/login";
 
-  private readonly LOCAL_STORAGE_JWT_LOCATION = 'id_token';
+  private readonly LOCAL_STORAGE_JWT_LOCATION = "id_token";
 
-  constructor(
-    private http: HttpClient,
-    private restService: RestService,
-    private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private restService: RestService, private jwtHelper: JwtHelperService) {}
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem(this.LOCAL_STORAGE_JWT_LOCATION);
@@ -48,7 +45,7 @@ export class AuthService {
         password: password,
       })
       .pipe(
-        tap((res) => this.setSession(res.accessToken)),
+        tap(res => this.setSession(res.accessToken)),
         catchError((error: HttpErrorResponse) => {
           return of(error.status);
         })
@@ -56,9 +53,7 @@ export class AuthService {
   }
 
   me(): Observable<CurrentUserInfoResponse> {
-    return this.restService.get('auth/me').pipe(
-      shareReplay(1)
-    );
+    return this.restService.get("auth/me").pipe(shareReplay(1));
   }
 
   setSession(jwt: string) {
@@ -106,7 +101,7 @@ export class AuthService {
       const decoded = jwtDecode(token);
       return decoded;
     } catch (Error) {
-      console.log('Tried to decode jwt but failed? ', Error);
+      console.log("Tried to decode jwt but failed? ", Error);
       return null;
     }
   }

@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { DeviceProfileService } from './device-profile.service';
+import { DeviceProfileService } from "./device-profile.service";
 
-describe('DeviceProfileService', () => {
+describe("DeviceProfileService", () => {
   let service: DeviceProfileService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('DeviceProfileService', () => {
     service = TestBed.inject(DeviceProfileService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

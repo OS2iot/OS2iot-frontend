@@ -1,8 +1,6 @@
 <ng-template #emptySearchForm>
   <mat-form-field class="search-form--full-width invisible">
-    <input
-      matInput
-    />
+    <input matInput />
   </mat-form-field>
 </ng-template>
 
@@ -15,22 +13,12 @@
             <!-- Breadcrumb -->
             <nav class="top-bar--menu--breadcrumb">
               <ng-template [ngIf]="backButtonTitle">
-                <fa-icon
-                  [icon]="faChevronLeft"
-                  class="icon--primary mb-1"
-                ></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{
-                  backButtonTitle
-                }}</a>
+                <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButtonTitle }}</a>
               </ng-template>
               <ng-template [ngIf]="data || subPage === true">
-                <fa-icon
-                  [icon]="faChevronLeft"
-                  class="icon--primary mb-1"
-                ></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{
-                  backButton.label
-                }}</a>
+                <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButton.label }}</a>
                 <h3 class="p-3">{{ subTitle || staticTitle }}</h3>
               </ng-template>
               <ng-template [ngIf]="title">
@@ -81,27 +69,17 @@
                 >
                   {{ dropDownButton.label }} <span class="caret"></span>
                 </button>
-                <ul
-                  class="dropdown-menu"
-                  attr.aria-labelledby="dropdown-{{ data.name }}"
-                >
+                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data.name }}">
                   <li class="dropdown-item">
-                    <a [routerLink]="dropDownButton.editRouterLink"
-                      >{{ 'TOPBAR.DROPDOWN.EDIT' | translate }}
-                    </a>
+                    <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
                   </li>
-                <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
-                  <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
-                    <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
-                  </li>
-                </ng-container>
-                 <li
-                   class="dropdown-item"
-                   *ngIf="dropDownButton.isErasable === true"
-                 >
-                   <a (click)="onClickDelete()"
-                      >{{ 'TOPBAR.DROPDOWN.DELETE' | translate }}
-                    </a>
+                  <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
+                    <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+                      <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+                    </li>
+                  </ng-container>
+                  <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
+                    <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
                   </li>
                 </ul>
               </div>
@@ -118,7 +96,7 @@
               -->
               <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
                 <mat-form-field class="search-form--full-width">
-                  <mat-label >{{ 'SEARCH.PLACEHOLDER' | translate }}</mat-label>
+                  <mat-label>{{ "SEARCH.PLACEHOLDER" | translate }}</mat-label>
                   <input
                     matInput
                     id="searchQuery"
@@ -128,11 +106,7 @@
                     [value]="decode(searchQuery)"
                     (keyup.enter)="search(searchInput.value)"
                   />
-                  <a
-                    matSuffix
-                    class="has-pointer"
-                    (click)="search(searchInput.value)"
-                  >
+                  <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
                     <div class="search-icon">
                       <fa-icon [icon]="faSearch"></fa-icon>
                     </div>
@@ -152,22 +126,17 @@
             <button mat-menu-item class="userNameFont userName">
               {{ getUsername() }}
             </button>
-            <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page"
-              >{{ 'USER_PAGE.USER_PAGE' | translate }}
-            </a>
+            <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
             <a
               mat-menu-item
               [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
               target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
               (click)="onLogout()"
-              >{{ 'NAV.LOGOUT' | translate }}
+              >{{ "NAV.LOGOUT" | translate }}
             </a>
           </mat-menu>
           <button mat-icon-button type="button" id="help" (click)="goToHelp()">
-            <fa-icon
-              [icon]="faQuestionCircle"
-              class="icon--primary mb-1"
-            ></fa-icon>
+            <fa-icon [icon]="faQuestionCircle" class="icon--primary mb-1"></fa-icon>
           </button>
         </div>
       </div>

@@ -3,13 +3,11 @@
  */
 export const toKebabCase = (str: string) => {
   return str
-    .split('')
+    .split("")
     .map((letter, idx) => {
-      return letter.toUpperCase() === letter
-        ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
-        : letter;
+      return letter.toUpperCase() === letter ? `${idx !== 0 ? "-" : ""}${letter.toLowerCase()}` : letter;
     })
-    .join('');
+    .join("");
 };
 
 export const toPascalKebabCase = (str: string) => toKebabCase(str).toUpperCase();

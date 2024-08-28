@@ -1,1 +1,1 @@
-export const ColorGraphBlue1 = '#03AEEF';
+export const ColorGraphBlue1 = "#03AEEF";

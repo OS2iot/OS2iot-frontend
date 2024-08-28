@@ -11,9 +11,7 @@
 
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
-      <label class="form-label" for="name">{{
-        'API-KEY.EDIT.NAME' | translate
-      }}</label
+      <label class="form-label" for="name">{{ "API-KEY.EDIT.NAME" | translate }}</label
       >*
       <input
         type="text"
@@ -34,9 +32,7 @@
 
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
-      <label class="form-label" for="permissions">{{
-        'QUESTION.PERMISSION.SELECT-PERMISSION' | translate
-      }}</label
+      <label class="form-label" for="permissions">{{ "QUESTION.PERMISSION.SELECT-PERMISSION" | translate }}</label
       >*
       <mat-select
         class="form-control"
@@ -45,10 +41,7 @@
         [(ngModel)]="apiKeyRequest.permissionIds"
         [multiple]="true"
       >
-        <mat-option
-          *ngFor="let permission of permissions"
-          [value]="permission.id"
-        >
+        <mat-option *ngFor="let permission of permissions" [value]="permission.id">
           {{ permission.name }}
         </mat-option>
       </mat-select>
@@ -57,10 +50,10 @@
 
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">
-      {{ 'GEN.CANCEL' | translate }}
+      {{ "GEN.CANCEL" | translate }}
     </button>
     <button class="btn btn-primary ml-2" type="submit">
-      {{ 'GEN.SAVE' | translate }}
+      {{ "GEN.SAVE" | translate }}
     </button>
   </div>
 </form>

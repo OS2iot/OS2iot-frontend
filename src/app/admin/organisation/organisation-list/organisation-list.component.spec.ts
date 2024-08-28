@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { OrganisationListComponent } from './organisation-list.component';
+import { OrganisationListComponent } from "./organisation-list.component";
 
-describe('OrganisationListComponent', () => {
+describe("OrganisationListComponent", () => {
   let component: OrganisationListComponent;
   let fixture: ComponentFixture<OrganisationListComponent>;
 
@@ -18,7 +18,7 @@ describe('OrganisationListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

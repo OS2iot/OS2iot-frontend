@@ -1,19 +1,25 @@
-<h1 mat-dialog-title *ngIf="dialogModel.showAccept && dialogModel.showCancel">{{'DIALOG.SAVE.TITLE' | translate}}</h1>
-<h1 mat-dialog-title *ngIf="dialogModel.showOk">{{dialogModel.infoTitle | translate}}</h1>
+<h1 mat-dialog-title *ngIf="dialogModel.showAccept && dialogModel.showCancel">{{ "DIALOG.SAVE.TITLE" | translate }}</h1>
+<h1 mat-dialog-title *ngIf="dialogModel.showOk">{{ dialogModel.infoTitle | translate }}</h1>
 <div mat-dialog-content>
-    {{dialogModel.message | translate}}
+  {{ dialogModel.message | translate }}
 </div>
 <div mat-dialog-actions class="d-flex flex-row-reverse">
-    <button *ngIf="dialogModel.showCancel" click="close()" mat-dialog-close class="btn btn-primary ml-2">
-        {{ dialogModel.cancelText || 'DIALOG.CLOSE' | translate}}
-    </button>
-    <button *ngIf="dialogModel.showAccept" [mat-dialog-close]="true" mat-dialog-close class="btn btn-secondary ml-2">
-        {{ dialogModel.acceptText || 'DIALOG.DIALOG-CONFIRM' | translate}}
-    </button>
-    <button *ngIf="dialogModel.showOk" click="close()" mat-dialog-close class="btn btn-primary ml-2">
-        {{'DIALOG.OK' | translate}}
-    </button>
-    <button *ngIf="dialogModel.showReject" click="close()" [mat-dialog-close]="true" mat-dialog-close class="btn btn-secondary ml-2">
-        {{'DIALOG.DIALOG-REJECT' | translate}}
-    </button>
+  <button *ngIf="dialogModel.showCancel" click="close()" mat-dialog-close class="btn btn-primary ml-2">
+    {{ dialogModel.cancelText || "DIALOG.CLOSE" | translate }}
+  </button>
+  <button *ngIf="dialogModel.showAccept" [mat-dialog-close]="true" mat-dialog-close class="btn btn-secondary ml-2">
+    {{ dialogModel.acceptText || "DIALOG.DIALOG-CONFIRM" | translate }}
+  </button>
+  <button *ngIf="dialogModel.showOk" click="close()" mat-dialog-close class="btn btn-primary ml-2">
+    {{ "DIALOG.OK" | translate }}
+  </button>
+  <button
+    *ngIf="dialogModel.showReject"
+    click="close()"
+    [mat-dialog-close]="true"
+    mat-dialog-close
+    class="btn btn-secondary ml-2"
+  >
+    {{ "DIALOG.DIALOG-REJECT" | translate }}
+  </button>
 </div>

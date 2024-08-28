@@ -1,68 +1,69 @@
-import { Injectable } from '@angular/core';
-import { UserMinimalService } from '@app/admin/users/user-minimal.service';
-import { GetPayloadDecoderParameters } from '@payload-decoder/payload-decoder.model';
-import { RestService } from '@shared/services/rest.service';
-import { SharedVariableService } from '@shared/shared-variable/shared-variable.service';
-import { buildDriverProvider } from 'protractor/built/driverProviders';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { DeviceModel, DeviceModelBody, DeviceModelRequest, DeviceModelResponse } from './device.model';
+import { Injectable } from "@angular/core";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
+import { GetPayloadDecoderParameters } from "@payload-decoder/payload-decoder.model";
+import { RestService } from "@shared/services/rest.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { buildDriverProvider } from "protractor/built/driverProviders";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { DeviceModel, DeviceModelBody, DeviceModelRequest, DeviceModelResponse } from "./device.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DeviceModelService {
-
-  private DEVICEMODELURL = 'device-model';
+  private DEVICEMODELURL = "device-model";
 
   constructor(
     private restService: RestService,
     private sharedVariable: SharedVariableService,
-    private userMinimalService: UserMinimalService) { }
+    private userMinimalService: UserMinimalService
+  ) {}
 
   create(deviceModel: DeviceModel): Observable<any> {
     this.trimModel(deviceModel.body);
     const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
-    return this.restService.post(this.DEVICEMODELURL, body, { observe: 'response' });
+    return this.restService.post(this.DEVICEMODELURL, body, { observe: "response" });
   }
 
   update(deviceModel: DeviceModel, id: number): Observable<any> {
     this.trimModel(deviceModel.body);
     const body = new DeviceModelRequest(deviceModel.body, +this.sharedVariable.getSelectedOrganisationId());
     return this.restService.put(this.DEVICEMODELURL, body, id, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
   get(id: number): Observable<any> {
-    return this.restService.get(this.DEVICEMODELURL, {}, id).pipe(
-      map(
-        response =>
-          new DeviceModel(
-            response.id,
-            new DeviceModelBody(
-              response.body.id,
-              response.body.name,
-              response.body.brandName,
-              response.body.modelName,
-              response.body.manufacturerName,
-              response.body.category,
-              response.body.energyLimitationClass,
-              response.body.controlledProperty,
-              response.body.supportedUnits,
-              response.body.function,
-              response.body.supportedProtocol,
-
-            ),
-            response.createdAt,
-            response.updatedAt,
-            response.createdBy,
-            response.updatedBy,
-            this.userMinimalService.getUserNameFrom(response.createdBy),
-            this.userMinimalService.getUserNameFrom(response.updatedBy),
-          )
-      )
-    );
+    return this.restService
+      .get(this.DEVICEMODELURL, {}, id)
+      .pipe(
+        map(
+          response =>
+            new DeviceModel(
+              response.id,
+              new DeviceModelBody(
+                response.body.id,
+                response.body.name,
+                response.body.brandName,
+                response.body.modelName,
+                response.body.manufacturerName,
+                response.body.category,
+                response.body.energyLimitationClass,
+                response.body.controlledProperty,
+                response.body.supportedUnits,
+                response.body.function,
+                response.body.supportedProtocol
+              ),
+              response.createdAt,
+              response.updatedAt,
+              response.createdBy,
+              response.updatedBy,
+              this.userMinimalService.getUserNameFrom(response.createdBy),
+              this.userMinimalService.getUserNameFrom(response.updatedBy)
+            )
+        )
+      );
   }
 
   getMultiple(
@@ -73,45 +74,42 @@ export class DeviceModelService {
     organizationId?: number
   ): Observable<DeviceModelResponse> {
     const body: GetPayloadDecoderParameters = {
-        limit: limit,
-        offset: offset,
-        sort: sort,
-        orderOn: orderOn,
-        organizationId: undefined,
+      limit: limit,
+      offset: offset,
+      sort: sort,
+      orderOn: orderOn,
+      organizationId: undefined,
     };
     if (organizationId) {
       body.organizationId = organizationId;
     }
-    return this.restService
-      .get(this.DEVICEMODELURL, body)
-      .pipe(
-        map((response) => {
-          return {
-            data: response.data.map(
-              (item: any) =>
-                new DeviceModel(
-                  item.id,
-                  new DeviceModelBody(
-                    item.body.id,
-                    item.body.name,
-                    item.body.brandName,
-                    item.body.modelName,
-                    item.body.manufacturerName,
-                    item.body.category,
-                    item.body.energyLimitationClass,
-                    item.body.controlledProperty,
-                    item.body.supportedUnits,
-                    item.body.function,
-                    item.body.supportedProtocol
-                  )
+    return this.restService.get(this.DEVICEMODELURL, body).pipe(
+      map(response => {
+        return {
+          data: response.data.map(
+            (item: any) =>
+              new DeviceModel(
+                item.id,
+                new DeviceModelBody(
+                  item.body.id,
+                  item.body.name,
+                  item.body.brandName,
+                  item.body.modelName,
+                  item.body.manufacturerName,
+                  item.body.category,
+                  item.body.energyLimitationClass,
+                  item.body.controlledProperty,
+                  item.body.supportedUnits,
+                  item.body.function,
+                  item.body.supportedProtocol
                 )
-            ),
-            count: response.count,
-          };
-        })
-      );
-  };
-  
+              )
+          ),
+          count: response.count,
+        };
+      })
+    );
+  }
 
   delete(id: number) {
     return this.restService.delete(this.DEVICEMODELURL, id);

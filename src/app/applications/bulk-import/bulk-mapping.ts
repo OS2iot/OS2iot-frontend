@@ -1,6 +1,6 @@
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { DeviceType } from '@shared/enums/device-type';
-import { Buffer } from 'buffer';
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { DeviceType } from "@shared/enums/device-type";
+import { Buffer } from "buffer";
 
 export class BulkMapping {
   public dataMapper(data: IotDevice, applicationId: number): IotDevice {
@@ -22,20 +22,12 @@ export class BulkMapping {
     const newDevice = this.baseMapper(data, applicationId);
     newDevice.lorawanSettings = {
       devEUI: data.devEUI,
-      skipFCntCheck: data.skipFCntCheck
-        ? this.convertToBoolean(data.skipFCntCheck)
-        : undefined,
+      skipFCntCheck: data.skipFCntCheck ? this.convertToBoolean(data.skipFCntCheck) : undefined,
       activationType: data.activationType ? data.activationType : undefined,
-      OTAAapplicationKey: data.OTAAapplicationKey
-        ? data.OTAAapplicationKey
-        : undefined,
+      OTAAapplicationKey: data.OTAAapplicationKey ? data.OTAAapplicationKey : undefined,
       devAddr: data.devAddr ? data.devAddr : undefined,
-      networkSessionKey: data.networkSessionKey
-        ? data.networkSessionKey
-        : undefined,
-      applicationSessionKey: data.applicationSessionKey
-        ? data.applicationSessionKey
-        : undefined,
+      networkSessionKey: data.networkSessionKey ? data.networkSessionKey : undefined,
+      applicationSessionKey: data.applicationSessionKey ? data.applicationSessionKey : undefined,
       deviceProfileID: data.deviceProfileID ? data.deviceProfileID : undefined,
       fCntUp: data.fCntUp ? +data.fCntUp : undefined,
       nFCntDown: data.nFCntDown ? +data.nFCntDown : undefined,
@@ -85,11 +77,11 @@ export class BulkMapping {
     if (!input) {
       return undefined;
     }
-    return Buffer.from(input, 'base64').toString('binary');
+    return Buffer.from(input, "base64").toString("binary");
   }
 
   private convertToBoolean(text: string): boolean {
-    if (text.toUpperCase() === 'TRUE') {
+    if (text.toUpperCase() === "TRUE") {
       return true;
     } else {
       return false;
@@ -122,7 +114,7 @@ export class BulkMapping {
       updatedBy: undefined,
       updatedByName: undefined,
       createdByName: undefined,
-      deviceModelId: data.deviceModelId != '' ? +data.deviceModelId : undefined,
+      deviceModelId: data.deviceModelId != "" ? +data.deviceModelId : undefined,
     };
   }
 }

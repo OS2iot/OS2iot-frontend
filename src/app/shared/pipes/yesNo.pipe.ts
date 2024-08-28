@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'yesNo'
+  name: "yesNo",
 })
 export class YesNoPipe implements PipeTransform {
-    transform(value: any, ...args: any[]): any {
-        return value ? 'Ja' : 'Nej';
-    }
+  transform(value: any, ...args: any[]): any {
+    return value ? "Ja" : "Nej";
+  }
 }

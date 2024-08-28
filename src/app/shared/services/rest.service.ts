@@ -1,37 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { AlertService } from './alert.service';
-import { environment } from '@environments/environment';
-import { Alert } from '@shared/models/alert.model';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { AlertService } from "./alert.service";
+import { environment } from "@environments/environment";
+import { Alert } from "@shared/models/alert.model";
 
 interface IHttpOptions {
   headers?: HttpHeaders;
-  observe?: 'body';
+  observe?: "body";
   params?: HttpParams;
   reportProgress?: boolean;
-  responseType?: 'json';
+  responseType?: "json";
   withCredentials?: boolean;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class RestService {
   constructor(private http: HttpClient, private alertService: AlertService) {
     this.options = {
-      responseType: 'json',
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: "json",
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
   }
 
   private readonly options: IHttpOptions;
   private baseUrl = environment.baseUrl;
 
-  public get(
-    url: string,
-    params?: { [index: string]: any },
-    id?: string | number
-  ): Observable<any> {
+  public get(url: string, params?: { [index: string]: any }, id?: string | number): Observable<any> {
     const resourceUrl = this.createResourceUrl(url, id);
     const httpParams = this.buildParams(params);
 
@@ -41,40 +37,32 @@ export class RestService {
         params: httpParams,
       })
       .pipe(
-        tap((_) => this.log({ message: 'Success', type: 'success' })),
-        catchError(this.handleError<any>('get', []))
+        tap(_ => this.log({ message: "Success", type: "success" })),
+        catchError(this.handleError<any>("get", []))
       );
   }
 
-  public create(
-    url: string,
-    object: any,
-    params?: { [index: string]: any }
-  ): Observable<any> {
+  public create(url: string, object: any, params?: { [index: string]: any }): Observable<any> {
     const httpParams = this.buildParams(params);
 
     return this.http
       .post(this.baseUrl + url, object, {
         ...this.options,
         params: httpParams,
-        observe: 'response',
+        observe: "response",
       })
       .pipe(
-        tap((_) =>
+        tap(_ =>
           this.log({
-            message: 'Succesfully created',
-            type: 'success',
+            message: "Succesfully created",
+            type: "success",
           })
         ),
-        catchError(this.handleError<any>('create', []))
+        catchError(this.handleError<any>("create", []))
       );
   }
 
-  public createAt(
-    url: string,
-    object: any,
-    params?: { [index: string]: any }
-  ): Observable<any> {
+  public createAt(url: string, object: any, params?: { [index: string]: any }): Observable<any> {
     const httpParams = this.buildParams(params);
     const path = this.baseUrl + url;
 
@@ -82,25 +70,20 @@ export class RestService {
       .post(path, object, {
         ...this.options,
         params: httpParams,
-        observe: 'response',
+        observe: "response",
       })
       .pipe(
-        tap((_) =>
+        tap(_ =>
           this.log({
-            message: 'Succesfully created',
-            type: 'success',
+            message: "Succesfully created",
+            type: "success",
           })
         ),
-        catchError(this.handleError<any>('createAt', []))
+        catchError(this.handleError<any>("createAt", []))
       );
   }
 
-  public update(
-    url: string,
-    object: any,
-    id?: string | number,
-    params?: { [index: string]: any }
-  ): Observable<any> {
+  public update(url: string, object: any, id?: string | number, params?: { [index: string]: any }): Observable<any> {
     const resourceUrl = this.createResourceUrl(url, id);
     const httpParams = this.buildParams(params);
 
@@ -108,39 +91,34 @@ export class RestService {
       .patch(resourceUrl, object, {
         ...this.options,
         params: httpParams,
-        observe: 'response',
+        observe: "response",
       })
       .pipe(
-        tap((_) =>
+        tap(_ =>
           this.log({
-            message: 'Succesfully patched',
-            type: 'success',
+            message: "Succesfully patched",
+            type: "success",
           })
         ),
-        catchError(this.handleError<any>('patch', []))
+        catchError(this.handleError<any>("patch", []))
       );
   }
 
   public delete(url: string, id: string | number): Observable<any> {
     const resourceUrl = this.createResourceUrl(url, id);
 
-    return this.http.delete(resourceUrl, { observe: 'response' }).pipe(
-      tap((_) =>
+    return this.http.delete(resourceUrl, { observe: "response" }).pipe(
+      tap(_ =>
         this.log({
-          message: 'Successfully deleted',
-          type: 'success',
+          message: "Successfully deleted",
+          type: "success",
         })
       ),
-      catchError(this.handleError<any>('delete', []))
+      catchError(this.handleError<any>("delete", []))
     );
   }
 
-  public put(
-    url: string,
-    object: any,
-    id?: string | number,
-    params?: { [index: string]: any }
-  ): Observable<any> {
+  public put(url: string, object: any, id?: string | number, params?: { [index: string]: any }): Observable<any> {
     const resourceUrl = this.createResourceUrl(url, id);
     const httpParams = this.buildParams(params);
     return this.http
@@ -149,21 +127,17 @@ export class RestService {
         params: httpParams,
       })
       .pipe(
-        tap((_) =>
+        tap(_ =>
           this.log({
-            message: 'Succesfully updated',
-            type: 'success',
+            message: "Succesfully updated",
+            type: "success",
           })
         )
         // catchError(this.handleError<any>('replace', []))
       );
   }
 
-  public post(
-    url: string,
-    body: any,
-    params?: { [index: string]: any }
-  ): Observable<any> {
+  public post(url: string, body: any, params?: { [index: string]: any }): Observable<any> {
     const httpParams = this.buildParams(params);
 
     return this.http
@@ -172,7 +146,7 @@ export class RestService {
         params: httpParams,
       })
       .pipe(
-        tap((_) => this.log({ message: 'Succesfully added', type: 'success' }))
+        tap(_ => this.log({ message: "Succesfully added", type: "success" }))
         // catchError(this.handleError<any>('post', []))
       );
   }
@@ -181,7 +155,7 @@ export class RestService {
     let resourceUrl = this.baseUrl + url;
 
     if (id != null) {
-      resourceUrl += '/' + id;
+      resourceUrl += "/" + id;
     }
 
     return resourceUrl;
@@ -214,13 +188,13 @@ export class RestService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
 
       this.log({
         message: `${operation} failed: ${error.message}`,
-        type: 'danger',
+        type: "danger",
       });
 
       return of(error as T);

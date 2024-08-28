@@ -1,3 +1,3 @@
 export class OrganizationInterface {
-    organizationId: number;
+  organizationId: number;
 }

@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { GeneralDetailsComponent } from './general-details.component';
+import { GeneralDetailsComponent } from "./general-details.component";
 
-describe('GeneralDetailsComponent', () => {
+describe("GeneralDetailsComponent", () => {
   let component: GeneralDetailsComponent;
   let fixture: ComponentFixture<GeneralDetailsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralDetailsComponent ]
-    })
-    .compileComponents();
+      declarations: [GeneralDetailsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('GeneralDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

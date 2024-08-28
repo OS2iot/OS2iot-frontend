@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DatatargetDetailComponent } from './datatarget-detail.component';
+import { DatatargetDetailComponent } from "./datatarget-detail.component";
 
-describe('DatatargetComponent', () => {
+describe("DatatargetComponent", () => {
   let component: DatatargetDetailComponent;
   let fixture: ComponentFixture<DatatargetDetailComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DatatargetDetailComponent]
-    })
-      .compileComponents();
+      declarations: [DatatargetDetailComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DatatargetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

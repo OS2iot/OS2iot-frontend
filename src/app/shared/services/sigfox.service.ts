@@ -1,22 +1,20 @@
-import { Injectable } from '@angular/core';
-import { RestService } from './rest.service';
-import { Observable } from 'rxjs';
-import { SigfoxGroup } from '@shared/models/sigfox-group.model';
-import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from '@shared/models/sigfox-device-type.model';
-import { SigfoxDevicesResponse } from '@app/sigfox/sigfox-device.model';
+import { Injectable } from "@angular/core";
+import { RestService } from "./rest.service";
+import { Observable } from "rxjs";
+import { SigfoxGroup } from "@shared/models/sigfox-group.model";
+import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from "@shared/models/sigfox-device-type.model";
+import { SigfoxDevicesResponse } from "@app/sigfox/sigfox-device.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class SigfoxService {
+  private SIGFOXCONTRACTURL = "sigfox-contract";
+  private SIGFOXDEVICEURL = "sigfox-api-device";
+  private SIGFOXGROUPURL = "sigfox-group";
+  private SIGFOXDEVICETYPEURL = "sigfox-device-type";
 
-  private SIGFOXCONTRACTURL = 'sigfox-contract';
-  private SIGFOXDEVICEURL = 'sigfox-api-device';
-  private SIGFOXGROUPURL = 'sigfox-group';
-  private SIGFOXDEVICETYPEURL = 'sigfox-device-type';
-
-  constructor(
-    private restService: RestService) { }
+  constructor(private restService: RestService) {}
 
   // Contract
   public getContracts(groupId: number): Observable<any> {
@@ -60,13 +58,13 @@ export class SigfoxService {
   }
 
   public postDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
-    const url = this.SIGFOXDEVICETYPEURL + '?groupId=' + sigfoxGroup.groupId.toString();
+    const url = this.SIGFOXDEVICETYPEURL + "?groupId=" + sigfoxGroup.groupId.toString();
     console.log(url);
-    return this.restService.post(url, sigfoxGroup, { observe: 'response' });
+    return this.restService.post(url, sigfoxGroup, { observe: "response" });
   }
 
   public putDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
-    const url = this.SIGFOXDEVICETYPEURL + '/' + sigfoxGroup.id + '?groupId=' + sigfoxGroup.groupId;
+    const url = this.SIGFOXDEVICETYPEURL + "/" + sigfoxGroup.id + "?groupId=" + sigfoxGroup.groupId;
     console.log(url);
     return this.restService.put(url, sigfoxGroup);
   }

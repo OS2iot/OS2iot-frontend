@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DeviceModelTableComponent } from './device-model-table.component';
+import { DeviceModelTableComponent } from "./device-model-table.component";
 
-describe('DeviceModelTableComponent', () => {
+describe("DeviceModelTableComponent", () => {
   let component: DeviceModelTableComponent;
   let fixture: ComponentFixture<DeviceModelTableComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeviceModelTableComponent ]
-    })
-    .compileComponents();
+      declarations: [DeviceModelTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DeviceModelTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

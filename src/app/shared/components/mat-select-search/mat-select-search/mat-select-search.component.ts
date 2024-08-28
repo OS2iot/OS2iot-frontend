@@ -12,17 +12,17 @@ import {
   OnInit,
   QueryList,
   ViewChild,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect } from '@angular/material/select';
+} from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { MatOption } from "@angular/material/core";
+import { Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
+import { MatSelect } from "@angular/material/select";
 
 @Component({
-  selector: 'app-mat-select-search',
-  templateUrl: './mat-select-search.component.html',
-  styleUrls: ['./mat-select-search.component.scss'],
+  selector: "app-mat-select-search",
+  templateUrl: "./mat-select-search.component.html",
+  styleUrls: ["./mat-select-search.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -37,16 +37,15 @@ import { MatSelect } from '@angular/material/select';
  *
  * @see https://github.com/angular/components/issues/5697#issuecomment-493628695
  */
-export class MatSelectSearchComponent
-  implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   /** Label of the search placeholder */
-  @Input() placeholderLabel = 'Søg efter ...';
+  @Input() placeholderLabel = "Søg efter ...";
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
-  @Input() noEntriesFoundLabel = 'Ingen elementer blev fundet';
+  @Input() noEntriesFoundLabel = "Ingen elementer blev fundet";
 
   /** Reference to the search input field */
-  @ViewChild('searchSelectInput', { static: false, read: ElementRef })
+  @ViewChild("searchSelectInput", { static: false, read: ElementRef })
   searchSelectInput: ElementRef<HTMLInputElement>;
 
   /** Current search value */
@@ -73,20 +72,17 @@ export class MatSelectSearchComponent
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
 
-  constructor(
-    @Inject(MatSelect) public matSelect: MatSelect,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(@Inject(MatSelect) public matSelect: MatSelect, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     // set custom panel class
-    const panelClass = 'mat-select-search-panel';
+    const panelClass = "mat-select-search-panel";
     if (this.matSelect.panelClass) {
       if (Array.isArray(this.matSelect.panelClass)) {
         this.matSelect.panelClass.push(panelClass);
-      } else if (typeof this.matSelect.panelClass === 'string') {
+      } else if (typeof this.matSelect.panelClass === "string") {
         this.matSelect.panelClass = [this.matSelect.panelClass, panelClass];
-      } else if (typeof this.matSelect.panelClass === 'object') {
+      } else if (typeof this.matSelect.panelClass === "object") {
         this.matSelect.panelClass[panelClass] = true;
       }
     } else {
@@ -94,17 +90,15 @@ export class MatSelectSearchComponent
     }
 
     // when the select dropdown panel is opened or closed
-    this.matSelect.openedChange
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe((opened) => {
-        if (opened) {
-          // focus the search field when opening
-          this._focus();
-        } else {
-          // clear it when closing
-          this._reset();
-        }
-      });
+    this.matSelect.openedChange.pipe(takeUntil(this._onDestroy)).subscribe(opened => {
+      if (opened) {
+        // focus the search field when opening
+        this._focus();
+      } else {
+        // clear it when closing
+        this._reset();
+      }
+    });
 
     // set the first item active after the options changed
     this.matSelect.openedChange
@@ -212,8 +206,8 @@ export class MatSelectSearchComponent
     if (!this.searchSelectInput) {
       return;
     }
-    this.searchSelectInput.nativeElement.value = '';
-    this.onInputChange('');
+    this.searchSelectInput.nativeElement.value = "";
+    this.onInputChange("");
     if (focus) {
       this._focus();
     }
@@ -230,30 +224,27 @@ export class MatSelectSearchComponent
       return;
     }
 
-    const overlayClass = 'cdk-overlay-pane-select-search';
+    const overlayClass = "cdk-overlay-pane-select-search";
 
-    this.matSelect.openedChange
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe((opened: boolean) => {
-        if (opened && this.searchSelectInput) {
-          // note: this is hacky, but currently there is no better way to do this
-          let element: HTMLElement | undefined = this.searchSelectInput
-            .nativeElement?.parentElement;
-          let overlayElement: HTMLElement;
+    this.matSelect.openedChange.pipe(takeUntil(this._onDestroy)).subscribe((opened: boolean) => {
+      if (opened && this.searchSelectInput) {
+        // note: this is hacky, but currently there is no better way to do this
+        let element: HTMLElement | undefined = this.searchSelectInput.nativeElement?.parentElement;
+        let overlayElement: HTMLElement;
 
-          while (element) {
-            if (element.classList.contains('cdk-overlay-pane')) {
-              overlayElement = element;
-              break;
-            }
-            element = element.parentElement;
+        while (element) {
+          if (element.classList.contains("cdk-overlay-pane")) {
+            overlayElement = element;
+            break;
           }
-
-          if (overlayElement) {
-            overlayElement.classList.add(overlayClass);
-          }
+          element = element.parentElement;
         }
-      });
+
+        if (overlayElement) {
+          overlayElement.classList.add(overlayClass);
+        }
+      }
+    });
 
     this.overlayClassSet = true;
   }
@@ -278,42 +269,35 @@ export class MatSelectSearchComponent
     // if <mat-select [multiple]="true">
     // store previously selected values and restore them when they are deselected
     // because the option is not available while we are currently filtering
-    this.matSelect.valueChange
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe((values) => {
-        if (this.matSelect.multiple) {
-          let restoreSelectedValues = false;
-          if (
-            this._value &&
-            this._value.length &&
-            this.previousSelectedValues &&
-            Array.isArray(this.previousSelectedValues)
-          ) {
-            if (!values || !Array.isArray(values)) {
-              values = [];
+    this.matSelect.valueChange.pipe(takeUntil(this._onDestroy)).subscribe(values => {
+      if (this.matSelect.multiple) {
+        let restoreSelectedValues = false;
+        if (
+          this._value &&
+          this._value.length &&
+          this.previousSelectedValues &&
+          Array.isArray(this.previousSelectedValues)
+        ) {
+          if (!values || !Array.isArray(values)) {
+            values = [];
+          }
+          const optionValues = this.matSelect.options.map(option => option.value);
+          this.previousSelectedValues.forEach(previousValue => {
+            if (values.indexOf(previousValue) === -1 && optionValues.indexOf(previousValue) === -1) {
+              // if a value that was selected before is deselected and not found in the options, it was deselected
+              // due to the filtering, so we restore it.
+              values.push(previousValue);
+              restoreSelectedValues = true;
             }
-            const optionValues = this.matSelect.options.map(
-              (option) => option.value
-            );
-            this.previousSelectedValues.forEach((previousValue) => {
-              if (
-                values.indexOf(previousValue) === -1 &&
-                optionValues.indexOf(previousValue) === -1
-              ) {
-                // if a value that was selected before is deselected and not found in the options, it was deselected
-                // due to the filtering, so we restore it.
-                values.push(previousValue);
-                restoreSelectedValues = true;
-              }
-            });
-          }
-
-          if (restoreSelectedValues) {
-            this.matSelect._onChange(values);
-          }
-
-          this.previousSelectedValues = values;
+          });
         }
-      });
+
+        if (restoreSelectedValues) {
+          this.matSelect._onChange(values);
+        }
+
+        this.previousSelectedValues = values;
+      }
+    });
   }
 }

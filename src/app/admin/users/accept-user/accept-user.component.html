@@ -14,23 +14,32 @@
         <div class="col-12">
           <div class="jumbotron">
             <h3>
-              {{ 'USERS.ACCEPT-USER.QUESTION-ACCEPT' | translate }}
+              {{ "USERS.ACCEPT-USER.QUESTION-ACCEPT" | translate }}
               {{ user.name }}
               <ng-container *ngIf="organizationName">
-                {{ 'USERS.ACCEPT-USER.IN-ORGANIZATION' | translate }}
-                {{ organizationName}}
+                {{ "USERS.ACCEPT-USER.IN-ORGANIZATION" | translate }}
+                {{ organizationName }}
               </ng-container>
             </h3>
             <mat-divider></mat-divider>
 
             <div class="form-group mt-3 col-12">
-              <label class="form-label" for="level">{{
-                'PERMISSION.EDIT.TYPE' | translate
-                }}</label>*
-              <mat-select id="permissionIds" class="form-control" name="permissionIds" required
-                [formControl]="permissionsCtrl" [(value)]="permission.permissionIds"
-                [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('permissionIds'), 'is-valid' : formFailedSubmit && !errorFields.includes('permissionIds')}"
-                [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate" [multiple]="true">
+              <label class="form-label" for="level">{{ "PERMISSION.EDIT.TYPE" | translate }}</label
+              >*
+              <mat-select
+                id="permissionIds"
+                class="form-control"
+                name="permissionIds"
+                required
+                [formControl]="permissionsCtrl"
+                [(value)]="permission.permissionIds"
+                [ngClass]="{
+                  'is-invalid': formFailedSubmit && errorFields.includes('permissionIds'),
+                  'is-valid': formFailedSubmit && !errorFields.includes('permissionIds')
+                }"
+                [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
+                [multiple]="true"
+              >
                 <mat-option *ngFor="let permission of permissions" [value]="permission.id">
                   {{ permission.name }}
                 </mat-option>
@@ -38,10 +47,10 @@
             </div>
             <div class="form-group mt-5">
               <button (click)="routeBack()" class="btn btn-secondary" type="button">
-                {{ 'GEN.CANCEL' | translate }}
+                {{ "GEN.CANCEL" | translate }}
               </button>
               <button class="btn btn-primary ml-2" type="submit">
-                {{ 'USERS.ACCEPT-USER.ACCEPT' | translate }}
+                {{ "USERS.ACCEPT-USER.ACCEPT" | translate }}
               </button>
             </div>
           </div>

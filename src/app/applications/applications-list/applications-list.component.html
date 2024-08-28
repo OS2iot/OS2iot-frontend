@@ -1,19 +1,23 @@
 <ng-template #noPermissions>
   <header class="header p-3">
-    <div class="header__text-box ">
-      <div class="heading-primary ">
+    <div class="header__text-box">
+      <div class="heading-primary">
         <span class="row heading-primary--main mb-5">
           <div class="col-12">
-            <h1>{{'WELCOME-DIALOG.WELCOME' | translate}}</h1>
-            <h2>{{'WELCOME-DIALOG.NO-ACCESS' | translate}}</h2>
+            <h1>{{ "WELCOME-DIALOG.WELCOME" | translate }}</h1>
+            <h2>{{ "WELCOME-DIALOG.NO-ACCESS" | translate }}</h2>
           </div>
         </span>
       </div>
     </div>
   </header>
 </ng-template>
-<app-top-bar [title]="'NAV.APPLICATIONS' | translate" [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
-  [ctaRouterLink]="'new-application'" [canEdit]="canEdit">
+<app-top-bar
+  [title]="'NAV.APPLICATIONS' | translate"
+  [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
+  [ctaRouterLink]="'new-application'"
+  [canEdit]="canEdit"
+>
 </app-top-bar>
 <div class="container-fluid d-flex flex-column">
   <ng-container *ngIf="!isLoadingResults">
@@ -27,5 +31,5 @@
       </div>
     </ng-container>
   </ng-container>
-  <mat-spinner ngClass="align-self-center" *ngIf="isLoadingResults" ></mat-spinner>
+  <mat-spinner ngClass="align-self-center" *ngIf="isLoadingResults"></mat-spinner>
 </div>

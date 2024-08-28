@@ -1,14 +1,13 @@
 @use "sass:math";
 
-@import 'variables';
-@import 'breakpoints';
-@import 'fonts';
+@import "variables";
+@import "breakpoints";
+@import "fonts";
 
 // Bootstrap
 
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
 
 @function strip-unit($value) {
   @return math.div($value, ($value * 0 + 1));
@@ -25,7 +24,10 @@
       font-size: $min-font-size;
 
       @media screen and (min-width: $min-vw) {
-        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+        font-size: calc(
+          #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
       }
 
       @media screen and (min-width: $max-vw) {
@@ -34,8 +36,6 @@
     }
   }
 }
-
-
 
 html {
   font-family: $font-name, system;
@@ -58,6 +58,8 @@ body {
 }
 
 // Bootstrap overrides
-$theme-colors: ('primary': $color-primary,
-  'success': $color-success,
-  'dark': $color-secondary) !default;
+$theme-colors: (
+  "primary": $color-primary,
+  "success": $color-success,
+  "dark": $color-secondary,
+) !default;

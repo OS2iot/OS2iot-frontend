@@ -1,15 +1,18 @@
 <ng-template #noGatewayStatusData>
   <ng-container *ngIf="!isLoadingResults">
-    <p>{{ 'GEN.NO-DATA' | translate }}</p>
+    <p>{{ "GEN.NO-DATA" | translate }}</p>
   </ng-container>
 </ng-template>
 
 <div class="d-flex mb-3">
-  <h3 *ngIf="title" class="title">{{title}}</h3>
+  <h3 *ngIf="title" class="title">{{ title }}</h3>
   <mat-select class="form-control ml-auto status-interval" name="statusIntervals" [(ngModel)]="selectedStatusInterval">
-    <mat-option *ngFor="let interval of statusIntervals" [value]="interval"
-      (onSelectionChange)="onSelectInterval($event)">
-      {{ 'LORA-GATEWAY-STATUS.INTERVAL.' + interval | translate }}
+    <mat-option
+      *ngFor="let interval of statusIntervals"
+      [value]="interval"
+      (onSelectionChange)="onSelectInterval($event)"
+    >
+      {{ "LORA-GATEWAY-STATUS.INTERVAL." + interval | translate }}
     </mat-option>
   </mat-select>
 </div>
@@ -17,54 +20,78 @@
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  <table #gatewayStatus mat-table [dataSource]="dataSource" class="status-table"
-    *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData">
+  <table
+    #gatewayStatus
+    mat-table
+    [dataSource]="dataSource"
+    class="status-table"
+    *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData"
+  >
     <!-- Gateway name is the first column -->
     <ng-container matColumnDef="gatewayName" [sticky]="true">
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="'/gateways/gateway-detail/' + element.id" routerLinkActive="active" *ngIf="shouldLinkToDetails">{{element.name}}</a>
-        <span class="text--semibold" *ngIf="!shouldLinkToDetails">{{element.name}}</span>
+        <a
+          [routerLink]="'/gateways/gateway-detail/' + element.id"
+          routerLinkActive="active"
+          *ngIf="shouldLinkToDetails"
+          >{{ element.name }}</a
+        >
+        <span class="text--semibold" *ngIf="!shouldLinkToDetails">{{ element.name }}</span>
       </td>
       <td mat-footer-cell *matFooterCellDef class="text--semibold">
-        {{'GEN.DATE' | translate}}
+        {{ "GEN.DATE" | translate }}
         <br />
-        {{'LORA-GATEWAY-STATUS.TIMESTAMP' | translate}}
+        {{ "LORA-GATEWAY-STATUS.TIMESTAMP" | translate }}
       </td>
     </ng-container>
 
     <!-- Timestamp columns which are dynamically generated -->
-    <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{time.exactTimestamp}}">
-      <td mat-cell *matCellDef="let gateway"
-        [matTooltip]="!!gateway.statusTimestamps.length | gatewayStatusTooltip: neverSeenText:timestampText:time.tooltip:nameText:gateway.name"
+    <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{ time.exactTimestamp }}">
+      <td
+        mat-cell
+        *matCellDef="let gateway"
+        [matTooltip]="
+          !!gateway.statusTimestamps.length
+            | gatewayStatusTooltip : neverSeenText : timestampText : time.tooltip : nameText : gateway.name
+        "
         [matTooltipClass]="'status-tooltip'"
-        [ngClass]="gateway.statusTimestamps | gatewayStatusClass: time.exactTimestamp"></td>
-      <td mat-footer-cell *matFooterCellDef=" let gateway"
-        [ngClass]="{'invisible': index % visibleFooterTimeInterval, 'text-center': true, 'text-nowrap': true}">
-        {{time.datePart}}
+        [ngClass]="gateway.statusTimestamps | gatewayStatusClass : time.exactTimestamp"
+      ></td>
+      <td
+        mat-footer-cell
+        *matFooterCellDef="let gateway"
+        [ngClass]="{ invisible: index % visibleFooterTimeInterval, 'text-center': true, 'text-nowrap': true }"
+      >
+        {{ time.datePart }}
         <br />
-        {{time.timePart}}
+        {{ time.timePart }}
       </td>
     </ng-container>
 
     <!-- The columns for a row must be an array of simple types (string, number, ...) -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
 </div>
-<mat-paginator [ngClass]="paginatorClass" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
-  [length]="resultsLength" showFirstLastButtons>
+<mat-paginator
+  [ngClass]="paginatorClass"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize"
+  [length]="resultsLength"
+  showFirstLastButtons
+>
 </mat-paginator>
 <div class="status-legend d-flex flex-row mt-3">
   <div class="d-flex flex-column">
     <div class="legend online"></div>
-    <span class="text-center">{{ "GEN.ONLINE" | translate}}</span>
+    <span class="text-center">{{ "GEN.ONLINE" | translate }}</span>
   </div>
   <div class="d-flex flex-column">
     <div class="legend offline"></div>
-    <span class="text-center">{{ "GEN.OFFLINE" | translate}}</span>
+    <span class="text-center">{{ "GEN.OFFLINE" | translate }}</span>
   </div>
   <div class="d-flex flex-column">
     <div class="legend never-seen"></div>
-    <span class="text-center">{{ "GEN.NEVER-SEEN" | translate}}</span>
+    <span class="text-center">{{ "GEN.NEVER-SEEN" | translate }}</span>
   </div>
 </div>

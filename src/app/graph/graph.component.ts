@@ -1,24 +1,17 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { Chart, ChartConfiguration } from 'chart.js';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from "@angular/core";
+import { Chart, ChartConfiguration } from "chart.js";
 
-const canvasId = 'someGraph';
+const canvasId = "someGraph";
 
 @Component({
-  selector: 'app-graph',
-  templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.scss'],
+  selector: "app-graph",
+  templateUrl: "./graph.component.html",
+  styleUrls: ["./graph.component.scss"],
 })
 export class GraphComponent implements OnChanges {
-  @Input() data: ChartConfiguration['data'];
-  @Input() type: ChartConfiguration['type'];
-  @Input() options: ChartConfiguration['options'] = {
+  @Input() data: ChartConfiguration["data"];
+  @Input() type: ChartConfiguration["type"];
+  @Input() options: ChartConfiguration["options"] = {
     plugins: { legend: { display: false } },
     responsive: true,
     layout: {
@@ -57,7 +50,7 @@ export class GraphComponent implements OnChanges {
 
     const options = this.buildOptionsForNoData(this.options);
 
-    this.chartInstance = new Chart(this.chart.nativeElement.getContext('2d'), {
+    this.chartInstance = new Chart(this.chart.nativeElement.getContext("2d"), {
       data: this.data,
       type: this.type,
       options,
@@ -69,15 +62,11 @@ export class GraphComponent implements OnChanges {
     return (
       !this.data?.datasets?.length ||
       (this.data.datasets.length === 1 &&
-        !this.data.datasets[0].data.some(
-          (point) => point !== null && point !== undefined
-        ))
+        !this.data.datasets[0].data.some(point => point !== null && point !== undefined))
     );
   }
 
-  private buildOptionsForNoData(
-    options: ChartConfiguration['options']
-  ): typeof options {
+  private buildOptionsForNoData(options: ChartConfiguration["options"]): typeof options {
     this.isGraphEmpty = this.checkIfGraphIsEmpty();
 
     return this.isGraphEmpty

@@ -1,17 +1,40 @@
-<p><strong>{{ 'IOTDEVICE.LORA.DEVEUI' | translate }}</strong>{{device.lorawanSettings.devEUI}}</p>
-<p><strong>{{ 'IOTDEVICE.LORA.DEVICEPROFILE' | translate }}</strong>{{deviceProfileName}}</p>
+<p>
+  <strong>{{ "IOTDEVICE.LORA.DEVEUI" | translate }}</strong
+  >{{ device.lorawanSettings.devEUI }}
+</p>
+<p>
+  <strong>{{ "IOTDEVICE.LORA.DEVICEPROFILE" | translate }}</strong
+  >{{ deviceProfileName }}
+</p>
 <ng-container *ngIf="OTAA">
-    <p><strong>{{ 'IOTDEVICE.LORA.OTAAAPPLICATIONKEY' | translate }}</strong>{{device.lorawanSettings?.OTAAapplicationKey}}
-    </p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.OTAAAPPLICATIONKEY" | translate }}</strong
+    >{{ device.lorawanSettings?.OTAAapplicationKey }}
+  </p>
 </ng-container>
 <ng-container *ngIf="!OTAA">
-    <p><strong>{{ 'IOTDEVICE.LORA.DEVADDR' | translate }}</strong>{{device.lorawanSettings?.devAddr}}</p>
-    <p><strong>{{ 'IOTDEVICE.LORA.NETWORKSESSIONKEY' | translate }}</strong>{{device.lorawanSettings?.activationType}}
-    </p>
-    <p><strong>{{ 'IOTDEVICE.LORA.APPLICATIONSESSIONKEY' | translate }}</strong>{{device.lorawanSettings?.applicationSessionKey}}
-    </p>
-    <p><strong>{{ 'IOTDEVICE.LORA.FCNTUP' | translate }}</strong>{{device.lorawanSettings?.fCntUp}}</p>
-    <p><strong>{{ 'IOTDEVICE.LORA.NFCNTDOWN' | translate }}</strong>{{device.lorawanSettings?.nFCntDown }}</p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.DEVADDR" | translate }}</strong
+    >{{ device.lorawanSettings?.devAddr }}
+  </p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.NETWORKSESSIONKEY" | translate }}</strong
+    >{{ device.lorawanSettings?.activationType }}
+  </p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.APPLICATIONSESSIONKEY" | translate }}</strong
+    >{{ device.lorawanSettings?.applicationSessionKey }}
+  </p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.FCNTUP" | translate }}</strong
+    >{{ device.lorawanSettings?.fCntUp }}
+  </p>
+  <p>
+    <strong>{{ "IOTDEVICE.LORA.NFCNTDOWN" | translate }}</strong
+    >{{ device.lorawanSettings?.nFCntDown }}
+  </p>
 </ng-container>
-<p><strong>{{ 'IOTDEVICE.LORA.SKIPFCNTCHECK' | translate }}</strong>{{device.lorawanSettings?.skipFCntCheck | yesNo}}
+<p>
+  <strong>{{ "IOTDEVICE.LORA.SKIPFCNTCHECK" | translate }}</strong
+  >{{ device.lorawanSettings?.skipFCntCheck | yesNo }}
 </p>

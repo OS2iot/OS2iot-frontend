@@ -1,41 +1,40 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Datatarget } from '../../datatarget.model';
-import { Subscription } from 'rxjs';
-import { Application } from '@applications/application.model';
-import { IotDevice } from '@applications/iot-devices/iot-device.model';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Datatarget } from "../../datatarget.model";
+import { Subscription } from "rxjs";
+import { Application } from "@applications/application.model";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   PayloadDeviceDatatarget,
   PayloadDeviceDatatargetGetByDataTargetResponse,
-} from '@payload-decoder/payload-device-data.model';
-import { DatatargetService } from '../../datatarget.service';
-import { ApplicationService } from '@applications/application.service';
-import { PayloadDecoderService } from '@payload-decoder/payload-decoder.service';
-import { PayloadDeviceDatatargetService } from '@payload-decoder/payload-device-datatarget.service';
-import { SnackService } from '@shared/services/snack.service';
-import { MatDialog } from '@angular/material/dialog';
-import { HttpErrorResponse } from '@angular/common/http';
-import { PayloadDecoderMappedResponse } from '@payload-decoder/payload-decoder.model';
-import { DeleteDialogComponent } from '@shared/components/delete-dialog/delete-dialog.component';
-import { ErrorMessageService } from '@shared/error-message.service';
-import { ScrollToTopService } from '@shared/services/scroll-to-top.service';
-import { DatatargetEdit } from '@applications/datatarget/datatarget-edit/datatarget-edit';
-import { MeService } from '@shared/services/me.service';
-import { OrganizationAccessScope } from '@shared/enums/access-scopes';
+} from "@payload-decoder/payload-device-data.model";
+import { DatatargetService } from "../../datatarget.service";
+import { ApplicationService } from "@applications/application.service";
+import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
+import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
+import { SnackService } from "@shared/services/snack.service";
+import { MatDialog } from "@angular/material/dialog";
+import { HttpErrorResponse } from "@angular/common/http";
+import { PayloadDecoderMappedResponse } from "@payload-decoder/payload-decoder.model";
+import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
+import { DatatargetEdit } from "@applications/datatarget/datatarget-edit/datatarget-edit";
+import { MeService } from "@shared/services/me.service";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: 'app-httppush-edit',
-  templateUrl: './httppush-edit.component.html',
-  styleUrls: ['./httppush-edit.component.scss'],
+  selector: "app-httppush-edit",
+  templateUrl: "./httppush-edit.component.html",
+  styleUrls: ["./httppush-edit.component.scss"],
 })
-export class HttppushEditComponent
-  implements DatatargetEdit, OnInit, OnDestroy {
+export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public multiPage = false;
-  public title = '';
-  public sectionTitle = '';
-  public backButtonTitle = '';
+  public title = "";
+  public sectionTitle = "";
+  public backButtonTitle = "";
   public submitButton: string;
   public datatarget: Datatarget = new Datatarget();
   faTimesCircle = faTimesCircle;
@@ -71,30 +70,25 @@ export class HttppushEditComponent
     private scrollToTopService: ScrollToTopService,
     private meService: MeService
   ) {
-    translate.use('da');
+    translate.use("da");
   }
 
   ngOnInit() {
     this.translate
-      .get([
-        'FORM.CREATE-NEW-DATATARGET',
-        'FORM.EDIT-DATATARGET',
-        'DATATARGET.SAVE',
-        'NAV.DATATARGET',
-      ])
-      .subscribe((translations) => {
-        const datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
+      .get(["FORM.CREATE-NEW-DATATARGET", "FORM.EDIT-DATATARGET", "DATATARGET.SAVE", "NAV.DATATARGET"])
+      .subscribe(translations => {
+        const datatargetid = +this.route.snapshot.paramMap.get("datatargetId");
         if (datatargetid !== 0) {
-          this.title = translations['FORM.EDIT-DATATARGET'];
+          this.title = translations["FORM.EDIT-DATATARGET"];
         } else {
-          this.title = translations['FORM.CREATE-NEW-DATATARGET'];
+          this.title = translations["FORM.CREATE-NEW-DATATARGET"];
         }
-        this.submitButton = translations['DATATARGET.SAVE'];
-        this.backButtonTitle = translations['NAV.DATATARGET'];
+        this.submitButton = translations["DATATARGET.SAVE"];
+        this.backButtonTitle = translations["NAV.DATATARGET"];
       });
 
-    this.datatargetid = +this.route.snapshot.paramMap.get('datatargetId');
-    this.applicationId = +this.route.snapshot.paramMap.get('id');
+    this.datatargetid = +this.route.snapshot.paramMap.get("datatargetId");
+    this.applicationId = +this.route.snapshot.paramMap.get("id");
     if (this.datatargetid !== 0) {
       this.getDatatarget(this.datatargetid);
       this.getPayloadDeviceDatatarget(this.datatargetid);
@@ -127,11 +121,9 @@ export class HttppushEditComponent
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
       this.payloadDeviceDatatarget.splice(index, 1);
     } else {
-      this.payloadDeviceDataTargetService
-        .delete(this.payloadDeviceDatatarget[index].id)
-        .subscribe((response) => {
-          this.payloadDeviceDatatarget.splice(index, 1);
-        });
+      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(response => {
+        this.payloadDeviceDatatarget.splice(index, 1);
+      });
     }
   }
 
@@ -140,11 +132,11 @@ export class HttppushEditComponent
       data: {
         showAccept: true,
         showCancel: true,
-        message: 'Er du sikker på at du vil slette?',
+        message: "Er du sikker på at du vil slette?",
       },
     });
 
-    dialog.afterClosed().subscribe((result) => {
+    dialog.afterClosed().subscribe(result => {
       if (result === true) {
         this.deleteRow(index);
       }
@@ -182,18 +174,18 @@ export class HttppushEditComponent
   }
 
   addPayloadDeviceDatatarget() {
-    this.payloadDeviceDatatarget.map((pdd) => {
+    this.payloadDeviceDatatarget.map(pdd => {
       if (pdd.payloadDecoderId === 0) {
         pdd.payloadDecoderId = null;
       }
     });
-    this.payloadDeviceDatatarget.forEach((relation) => {
+    this.payloadDeviceDatatarget.forEach(relation => {
       if (relation.id) {
         this.payloadDeviceDataTargetService.put(relation).subscribe(
-          (response) => {
+          response => {
             this.countToRedirect();
           },
-          (error) => {
+          error => {
             this.handleError(error);
           }
         );
@@ -202,7 +194,7 @@ export class HttppushEditComponent
           (res: any) => {
             this.countToRedirect();
           },
-          (error) => {
+          error => {
             this.handleError(error);
           }
         );
@@ -211,14 +203,10 @@ export class HttppushEditComponent
   }
 
   private validatePayloadDeviceDatatarget = () => {
-    const isError = this.payloadDeviceDatatarget?.some(
-      (relation) => (relation.iotDeviceIds?.length ?? 0) < 1
-    );
+    const isError = this.payloadDeviceDatatarget?.some(relation => (relation.iotDeviceIds?.length ?? 0) < 1);
     if (isError) {
-      this.errorFields = ['devices'];
-      this.errorMessages = [
-        'Must attach at least one IoT-device for each element in list of devices / decoders',
-      ];
+      this.errorFields = ["devices"];
+      this.errorMessages = ["Must attach at least one IoT-device for each element in list of devices / decoders"];
       this.scrollToTopService.scrollToTop();
     }
     return !isError;
@@ -267,16 +255,12 @@ export class HttppushEditComponent
     this.applicationSubscription = this.applicationService
       .getApplication(this.applicationId)
       .subscribe((application: Application) => {
-        this.devices = application.iotDevices.sort((a, b) =>
-          a.name.localeCompare(b.name, 'en', { numeric: true })
-        );
+        this.devices = application.iotDevices.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
       });
   }
 
   public selectAllDevices(index: number) {
-    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(
-      (device) => device.id
-    );
+    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
   }
 
   public deSelectAllDevices(index: number) {
@@ -285,11 +269,9 @@ export class HttppushEditComponent
 
   getPayloadDecoders() {
     this.payloadDecoderSubscription = this.payloadDecoderService
-      .getMultiple(1000, 0, 'id', 'ASC')
+      .getMultiple(1000, 0, "id", "ASC")
       .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data.sort((a, b) =>
-          a.name.localeCompare(b.name, 'en', { numeric: true })
-        );
+        this.payloadDecoders = response.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
       });
   }
 
@@ -300,12 +282,11 @@ export class HttppushEditComponent
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets = () => this.router.navigate(['applications', this.applicationId, 'data-targets']);
+  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
   routeToCreatedDatatarget = () =>
-    this.router.navigate(
-      ['applications', this.applicationId, 'datatarget', this.datatarget.id],
-      { replaceUrl: true }
-    );
+    this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
+      replaceUrl: true,
+    });
 
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
@@ -314,11 +295,9 @@ export class HttppushEditComponent
   }
 
   getDatatarget(id: number) {
-    this.datatargetSubscription = this.datatargetService
-      .get(id)
-      .subscribe((response: Datatarget) => {
-        this.datatarget = response;
-      });
+    this.datatargetSubscription = this.datatargetService.get(id).subscribe((response: Datatarget) => {
+      this.datatarget = response;
+    });
   }
 
   showSavedSnack() {
@@ -340,18 +319,13 @@ export class HttppushEditComponent
     }
   }
 
-  private mapToDatatargetDevicePayload(
-    dto: PayloadDeviceDatatargetGetByDataTargetResponse
-  ) {
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
     this.payloadDeviceDatatarget = [];
-    dto.data.forEach((element) => {
+    dto.data.forEach(element => {
       this.payloadDeviceDatatarget.push({
         id: element.id,
-        iotDeviceIds: element.iotDevices.map((x) => x.id),
-        payloadDecoderId:
-          element.payloadDecoder?.id === undefined
-            ? 0
-            : element.payloadDecoder?.id,
+        iotDeviceIds: element.iotDevices.map(x => x.id),
+        payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
         dataTargetId: element.dataTarget.id,
       });
     });

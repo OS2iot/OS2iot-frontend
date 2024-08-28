@@ -1,16 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ApplicationEditComponent } from './application-edit.component';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ApplicationEditComponent } from "./application-edit.component";
 
-
-describe('EditApplicationComponent', () => {
+describe("EditApplicationComponent", () => {
   let component: ApplicationEditComponent;
   let fixture: ComponentFixture<ApplicationEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ApplicationEditComponent]
-    })
-      .compileComponents();
+      declarations: [ApplicationEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +17,7 @@ describe('EditApplicationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

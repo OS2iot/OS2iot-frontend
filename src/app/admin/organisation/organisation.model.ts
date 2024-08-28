@@ -1,6 +1,6 @@
-import { Application } from '@applications/application.model';
-import { PayloadDecoder } from '../../payload-decoder/payload-decoder.model';
-import { PermissionResponse } from '../permission/permission.model';
+import { Application } from "@applications/application.model";
+import { PayloadDecoder } from "../../payload-decoder/payload-decoder.model";
+import { PermissionResponse } from "../permission/permission.model";
 
 export class Organisation {
   id?: number;

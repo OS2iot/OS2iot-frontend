@@ -1,17 +1,15 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { GatewayService } from '@app/gateway/gateway.service';
+import { AfterViewInit, Component } from "@angular/core";
+import { GatewayService } from "@app/gateway/gateway.service";
 
 @Component({
-  selector: 'app-gateway-list',
-  templateUrl: './gateway-list.component.html',
-  styleUrls: ['./gateway-list.component.scss'],
+  selector: "app-gateway-list",
+  templateUrl: "./gateway-list.component.html",
+  styleUrls: ["./gateway-list.component.scss"],
 })
 export class GatewayListComponent implements AfterViewInit {
   constructor(public gatewayService: GatewayService) {}
 
   ngAfterViewInit(): void {
-    this.gatewayService.organisationChangeSubject.next(
-      this.gatewayService.selectedOrg
-    );
+    this.gatewayService.organisationChangeSubject.next(this.gatewayService.selectedOrg);
   }
 }

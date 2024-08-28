@@ -1,19 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
+import { DebugElement } from "@angular/core";
 
-import { FiwareEditComponent } from './fiware-edit.component';
+import { FiwareEditComponent } from "./fiware-edit.component";
 
-describe('FiwareEditComponent', () => {
+describe("FiwareEditComponent", () => {
   let component: FiwareEditComponent;
   let fixture: ComponentFixture<FiwareEditComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FiwareEditComponent ]
-    })
-    .compileComponents();
+      declarations: [FiwareEditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,7 +21,7 @@ describe('FiwareEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

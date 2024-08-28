@@ -1,7 +1,7 @@
-@import 'src/assets/scss/setup/breakpoints';
-@import 'src/assets/scss/setup/variables';
-@import 'bootstrap/scss/variables';
-@import '../setup/utilities';
+@import "src/assets/scss/setup/breakpoints";
+@import "src/assets/scss/setup/variables";
+@import "bootstrap/scss/variables";
+@import "../setup/utilities";
 
 .top-bar-wrapper {
   margin: 0;
@@ -72,7 +72,6 @@
       @extend .mx-2;
     }
   }
-
 }
 
 .no-margin {

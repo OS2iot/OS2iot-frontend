@@ -1,19 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
+import { DebugElement } from "@angular/core";
 
-import { DatatargetNewComponent } from './datatarget-new.component';
+import { DatatargetNewComponent } from "./datatarget-new.component";
 
-describe('DatatargetNewComponent', () => {
+describe("DatatargetNewComponent", () => {
   let component: DatatargetNewComponent;
   let fixture: ComponentFixture<DatatargetNewComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatatargetNewComponent ]
-    })
-    .compileComponents();
+      declarations: [DatatargetNewComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,7 +21,7 @@ describe('DatatargetNewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

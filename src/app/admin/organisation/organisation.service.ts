@@ -1,28 +1,25 @@
-import { Injectable } from '@angular/core';
-import { RestService } from '../../shared/services/rest.service';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { RestService } from "../../shared/services/rest.service";
+import { Observable } from "rxjs";
 import {
   Organisation,
   OrganisationResponse,
   OrganisationGetManyResponse,
   OrganisationGetMinimalResponse,
-} from './organisation.model';
-import { map, shareReplay } from 'rxjs/operators';
-import { UserMinimalService } from '../users/user-minimal.service';
-import { UpdateUserOrgsDto } from '../users/user.model';
+} from "./organisation.model";
+import { map, shareReplay } from "rxjs/operators";
+import { UserMinimalService } from "../users/user-minimal.service";
+import { UpdateUserOrgsDto } from "../users/user.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class OrganisationService {
-  URL = 'organization';
-  URLMINIMAL = 'organization/minimal';
-  URLMINIMAL_NEWKOMBIT = 'kombitCreation/minimal';
+  URL = "organization";
+  URLMINIMAL = "organization/minimal";
+  URLMINIMAL_NEWKOMBIT = "kombitCreation/minimal";
 
-  constructor(
-    private restService: RestService,
-    private userMinimalService: UserMinimalService
-  ) {}
+  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
   post(body: Organisation): Observable<OrganisationResponse> {
     return this.restService.post(this.URL, body);
@@ -30,19 +27,15 @@ export class OrganisationService {
 
   put(body: Organisation, id: number): Observable<OrganisationResponse> {
     return this.restService.put(this.URL, body, id, {
-      observe: 'response',
+      observe: "response",
     });
   }
 
   getOne(id: number): Observable<OrganisationResponse> {
     return this.restService.get(this.URL, {}, id).pipe(
       map((response: OrganisationResponse) => {
-        response.createdByName = this.userMinimalService.getUserNameFrom(
-          response.createdBy
-        );
-        response.updatedByName = this.userMinimalService.getUserNameFrom(
-          response.updatedBy
-        );
+        response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
+        response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
         return response;
       })
     );

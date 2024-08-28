@@ -1,29 +1,22 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { TranslateService } from '@ngx-translate/core';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { UserGetManyResponse, UserResponse } from '../../user.model';
-import { UserService } from '../../user.service';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { environment } from '@environments/environment';
-import { DefaultPageSizeOptions } from '@shared/constants/page.constants';
-import { MeService } from '@shared/services/me.service';
+import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { TranslateService } from "@ngx-translate/core";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { UserGetManyResponse, UserResponse } from "../../user.model";
+import { UserService } from "../../user.service";
+import { merge, Observable, of as observableOf } from "rxjs";
+import { environment } from "@environments/environment";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss'],
+  selector: "app-user-table",
+  templateUrl: "./user-table.component.html",
+  styleUrls: ["./user-table.component.scss"],
 })
 export class UserTableComponent implements AfterViewInit {
-  displayedColumns: string[] = [
-    'name',
-    'email',
-    'global',
-    'status',
-    'lastLogin',
-    'menu',
-  ];
+  displayedColumns: string[] = ["name", "email", "global", "status", "lastLogin", "menu"];
   data: UserResponse[];
 
   public pageSize = environment.tablePageSize;
@@ -43,18 +36,11 @@ export class UserTableComponent implements AfterViewInit {
   @Input() canSort = true;
   isGlobalAdmin: boolean;
 
-  constructor(
-    public translate: TranslateService,
-    private userService: UserService,
-    private meService: MeService
-  ) {
+  constructor(public translate: TranslateService, private userService: UserService, private meService: MeService) {
     this.isGlobalAdmin = this.meService.hasGlobalAdmin();
   }
 
-  getUsers(
-    orderByColumn: string,
-    orderByDirection: string
-  ): Observable<UserGetManyResponse> {
+  getUsers(orderByColumn: string, orderByDirection: string): Observable<UserGetManyResponse> {
     if (this.organizationId !== null && this.organizationId !== undefined) {
       if (this.isGlobalAdmin) {
         return this.userService.getMultiple(
@@ -94,7 +80,7 @@ export class UserTableComponent implements AfterViewInit {
           this.isLoadingResults = true;
           return this.getUsers(this.sort.active, this.sort.direction);
         }),
-        map((data) => {
+        map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.resultsLength = data.count;
@@ -106,6 +92,6 @@ export class UserTableComponent implements AfterViewInit {
           return observableOf([]);
         })
       )
-      .subscribe((data) => (this.data = data));
+      .subscribe(data => (this.data = data));
   }
 }
