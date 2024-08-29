@@ -61,7 +61,7 @@ const applicationRoutes: Routes = [
               },
             ],
           },
-          { path: "datatarget-new", component: DatatargetNewComponent },
+          { path: "datatarget-new", component: DatatargetNewComponent,  },
           { path: "datatarget-edit", component: DatatargetEditComponent },
           {
             path: "datatarget-edit/:datatargetId",

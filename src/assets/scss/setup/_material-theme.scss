@@ -1,5 +1,4 @@
 @use "@angular/material" as mat;
-@import "@angular/material/theming";
 @import "variables";
 @include mat.core();
 
@@ -9,17 +8,34 @@ $OS2IoT-accent: mat.define-palette(mat.$deep-orange-palette, 100, 500, A100);
 $OS2IoT-warn: mat.define-palette(mat.$red-palette);
 
 // Light theme
-$OS2IoT-theme: mat.define-light-theme($OS2IoT-primary, $OS2IoT-accent, $OS2IoT-warn);
+$OS2IoT-theme: mat.define-light-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: $OS2IoT-primary,
+      accent: $OS2IoT-accent,
+      warn: $OS2IoT-warn,
+    ),
+  )
+);
 
 // Dark theme
-$OS2IoT-theme: mat.define-dark-theme($OS2IoT-primary, $OS2IoT-accent, $OS2IoT-warn);
+$OS2IoT-theme: mat.define-dark-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: $OS2IoT-primary,
+      accent: $OS2IoT-accent,
+      warn: $OS2IoT-warn,
+    ),
+  )
+);
 
 // Main theme defination
 @include mat.all-component-themes($OS2IoT-theme);
 
 // Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import "@angular/material/theming";
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -39,9 +55,14 @@ $OS2IoT-frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $OS2IoT-frontend-theme: mat.define-light-theme(
-  $OS2IoT-frontend-primary,
-  $OS2IoT-frontend-accent,
-  $OS2IoT-frontend-warn
+  (
+    color: (
+      theme-type: light,
+      primary: $OS2IoT-frontend-primary,
+      accent: $OS2IoT-frontend-accent,
+      warn: $OS2IoT-frontend-warn,
+    ),
+  )
 );
 
 // Include theme styles for core and each component used in your app.
@@ -135,7 +156,7 @@ $OS2IoT-frontend-theme: mat.define-light-theme(
 }
 
 .mat-sort-header-arrow {
-  color: $grey-tablehead;
+  color: $grey-tablehead !important;
   opacity: 1 !important;
 }
 
@@ -149,4 +170,14 @@ tr.mat-row {
 
 .mat-sort-header-content {
   text-align: left !important;
+}
+
+.mdc-data-table__cell {
+  overflow: visible !important;
+}
+
+//////////////////////// COLUMN SELECTOR SELECT PANEL //////////////////////////////////////////
+
+.mdc-menu-surface.mat-mdc-select-panel {
+  max-height: 400px !important;
 }

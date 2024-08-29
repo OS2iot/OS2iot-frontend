@@ -20,7 +20,6 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
   private datatargetType: DataTargetType;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private datatargetService: DatatargetService,
     private route: ActivatedRoute,
     private datatargetTypesService: DatatargetTypesService

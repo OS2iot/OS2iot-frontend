@@ -41,10 +41,6 @@ table {
   }
 }
 
-.mdc-data-table__cell {
-  overflow: visible !important;
-}
-
 .dropdown {
   .applicationRow__edit {
     width: 10px;
@@ -119,7 +115,7 @@ table {
 }
 
 .table-select {
-  width: 500px !important;
+  width: 400px !important;
   visibility: hidden;
   height: 10px;
 }

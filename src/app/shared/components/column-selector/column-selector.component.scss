@@ -1,5 +1,7 @@
 @import "../../../../assets/scss/setup/variables";
 
+$deselectSelectButtonBottomMargin: 5px;
+
 .cog-icon {
   color: $grey-dark;
 }
@@ -9,4 +11,14 @@
   margin-bottom: 2px;
   display: flex;
   justify-content: center;
+}
+
+.choose-all {
+  margin-left: 5px;
+  margin-bottom: $deselectSelectButtonBottomMargin;
+}
+
+.deselect-all {
+  margin-left: 5px;
+  margin-bottom: $deselectSelectButtonBottomMargin;
 }

@@ -123,8 +123,8 @@
             <fa-icon [icon]="faUser" class="icon--primary mb-1"></fa-icon>
           </button>
           <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
-            <button mat-menu-item class="userNameFont userName">
-              {{ getUsername() }}
+            <button mat-menu-item class="userName">
+              <div class="userNameFont">{{ getUsername() }}</div>
             </button>
             <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
             <a
