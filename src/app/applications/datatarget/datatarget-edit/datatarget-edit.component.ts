@@ -29,8 +29,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   loadComponent(componentType: Type<any>) {
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    viewContainerRef.createComponent<DatatargetEdit>(factory);
+    viewContainerRef.createComponent<DatatargetEdit>(componentType);
   }
 
   ngOnInit(): void {

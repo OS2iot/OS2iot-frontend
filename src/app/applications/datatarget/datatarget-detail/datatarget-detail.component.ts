@@ -30,8 +30,8 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     const viewContainerRef = this.adHost.viewContainerRef;
 
     viewContainerRef.clear();
-    const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    viewContainerRef.createComponent<DatatargetDetail>(factory);
+
+    viewContainerRef.createComponent<DatatargetDetail>(componentType);
   }
 
   ngOnInit(): void {
