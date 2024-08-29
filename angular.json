@@ -112,7 +112,6 @@
       }
     }
   },
-  "defaultProject": "OS2IoT-frontend",
   "cli": {
     "analytics": "5e34252a-5088-421b-bb34-6ef89cd9f167"
   }
