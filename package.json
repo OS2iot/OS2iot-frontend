@@ -55,7 +55,7 @@
     "tslib": "^2.0.0",
     "tslint": "~6.1.0",
     "ua-parser-js": "^1.0.33",
-    "zone.js": "~0.13.3"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.14",
@@ -86,7 +86,7 @@
     "ts-node": "~8.3.0",
     "tslint-angular": "^3.0.3",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "~4.9.5"
+    "typescript": "~5.5.4"
   },
   "overrides": {
     "postcss": "^8.4.31",
