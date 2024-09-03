@@ -208,7 +208,7 @@
             <tr *ngFor="let element of payloadDeviceDatatarget; let i = index" [attr.data-index]="i">
               <td>
                 <div class="row">
-                  <mat-form-field appearance="fill">
+                  <mat-form-field appearance="outline">
                     <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
                     <mat-select multiple name="devices" [compareWith]="compare" [(value)]="element.iotDeviceIds">
                       <mat-option disabled="disabled" class="filter-option">
@@ -226,7 +226,7 @@
               </td>
               <td>
                 <div class="row">
-                  <mat-form-field appearance="fill">
+                  <mat-form-field appearance="outline">
                     <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
                     <mat-select matNativeControl name="payloadDecoderId" [(value)]="element.payloadDecoderId">
                       <mat-option [value]="0">

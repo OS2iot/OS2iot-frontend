@@ -31,9 +31,9 @@
         </div>
       </div>
       <div class="col-6">
-        <label class="form-label" for="metadata">Test din payload decoder</label>
+        <label class="form-label" for="metadata">{{ "PAYLOAD-DECODER.TEST-YOUR-DECODER" | translate }}</label>
         <div class="form-group">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-APPLICATION" | translate }}</mat-label>
             <mat-select (selectionChange)="getDevices($event)">
               <mat-option *ngFor="let applicationEl of applications" [value]="applicationEl.id">
@@ -42,7 +42,7 @@
             </mat-select>
           </mat-form-field>
           <div class="form-group">
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
               <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-DEVICE" | translate }}</mat-label>
               <mat-select (selectionChange)="getDevice($event)" [disabled]="!iotDevices">
                 <mat-option *ngFor="let iotDeviceEl of iotDevices" [value]="iotDeviceEl.id">

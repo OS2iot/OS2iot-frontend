@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <nav mat-tab-nav-bar>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
       <a
         mat-tab-link
         *ngFor="let link of navTabs"
@@ -76,6 +76,7 @@
         >{{ link.label | translate }}</a
       >
     </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
     <router-outlet></router-outlet>
   </div>
 </div>

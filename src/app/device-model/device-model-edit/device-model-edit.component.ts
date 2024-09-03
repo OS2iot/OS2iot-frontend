@@ -85,6 +85,13 @@ export class DeviceModelEditComponent implements OnInit {
     );
   }
 
+  handleNameNull() {
+    //Apparently, if field is filled out, and then removed, it will still success even though it's mandatory.
+    if (this.deviceModel.body.name === "") {
+      this.deviceModel.body.name = undefined;
+    }
+  }
+
   handleError(err: HttpErrorResponse) {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(err);
     this.errorMessages = errorResponse.errorMessages;

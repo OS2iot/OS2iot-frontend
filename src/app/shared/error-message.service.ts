@@ -36,7 +36,7 @@ export class ErrorMessageService {
       errors.errorMessages.push(error.error.message);
     } else {
       error.error.message.forEach(err => {
-        if (err.children.length > 0) {
+        if (err.children?.length > 0) {
           this.handleNestedErrorFields(err.children, errors);
         } else if (err.message) {
           errors.errorFields.push(err.field);
