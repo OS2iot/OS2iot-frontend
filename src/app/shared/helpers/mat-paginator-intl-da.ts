@@ -15,7 +15,7 @@ export class MatPaginatorIntlDa extends MatPaginatorIntl {
   public constructor(private translate: TranslateService) {
     super();
 
-    this.translate.onLangChange.subscribe((e: Event|RouterEvent) => {
+    this.translate.onLangChange.subscribe((e: Event | RouterEvent) => {
       this.getAndInitTranslations();
     });
 

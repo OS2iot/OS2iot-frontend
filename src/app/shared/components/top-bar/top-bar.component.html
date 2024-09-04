@@ -95,7 +95,7 @@
                 Material styling are not applied properly if the ng-container is moved inside the mat-form-field.
               -->
               <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
-                <mat-form-field class="search-form--full-width">
+                <mat-form-field class="search-form--full-width" appearance="fill">
                   <mat-label>{{ "SEARCH.PLACEHOLDER" | translate }}</mat-label>
                   <input
                     matInput
