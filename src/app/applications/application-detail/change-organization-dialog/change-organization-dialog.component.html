@@ -1,0 +1,19 @@
+<h2>{{ "APPLICATION.CHANGE_ORGANIZATION" | translate }}</h2>
+<div class="form-group mt-3 col-12">
+  <label class="form-label" for="userGroup">{{ "QUESTION.APPLICATION.ADD-PERMISSION" | translate }}</label>
+  <mat-select
+    id="userGroup"
+    class="form-control"
+    [formControl]="permissionMultiCtrl"
+    [multiple]="true"
+    panelClass="overflow-x-hidden"
+    [(value)]="application.permissionIds"
+    [compareWith]="compare"
+  >
+    <app-mat-select-search [formControl]="permissionMultiFilterCtrl"></app-mat-select-search>
+    <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
+      {{ permission.name }}
+    </mat-option>
+  </mat-select>
+  <mat-hint>{{ "QUESTION.APPLICATION.PERMISSION-HINT" | translate }}</mat-hint>
+</div>

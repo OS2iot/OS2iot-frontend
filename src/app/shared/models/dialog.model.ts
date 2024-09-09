@@ -12,3 +12,7 @@ export class DialogModel {
 export class WelcomeDialogModel {
   hasSomePermission: boolean;
 }
+
+export class ApplicationDialogModel {
+  id: number;
+}

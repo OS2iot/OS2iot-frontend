@@ -150,7 +150,8 @@
             "HARDWARE": "Hardware",
             "CONTROLLED-PROPERTY": "Data",
             "DEVICE-TYPE": "Forbindelsesteknologi"
-        }
+        },
+        "CHANGE_ORGANIZATION": "Skift organisation"
     },
     "GATEWAY": {
         "DETAILS": "Detaljer",

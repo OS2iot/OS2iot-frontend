@@ -17,6 +17,9 @@ import { map } from "rxjs/operators";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { Gateway, GatewayResponseMany } from "@app/gateway/gateway.model";
+import { MatDialog } from "@angular/material/dialog";
+import { ChangeOrganizationDialogComponent } from "./change-organization-dialog/change-organization-dialog.component";
+import { ApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-application",
@@ -57,6 +60,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   public redMarker = "/assets/images/red-marker.png";
   public greenMarker = "/assets/images/green-marker.png";
   public greyMarker = "/assets/images/grey-marker.png";
+  private dropdownButtonExtraOptionsHandlers: Map<number, () => void> = new Map();
 
   constructor(
     private applicationService: ApplicationService,
@@ -68,7 +72,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     private deleteDialogService: DeleteDialogService,
     private restService: RestService,
     private sharedVariableService: SharedVariableService,
-    private chirpstackGatewayService: ChirpstackGatewayService
+    private chirpstackGatewayService: ChirpstackGatewayService,
+    private changeOrganizationDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +84,18 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
         label: "",
         editRouterLink: "../edit-application/" + this.id,
         isErasable: true,
+        extraOptions: [],
       };
+
+      this.translate.get("APPLICATION.CHANGE_ORGANIZATION").subscribe(translation => {
+        const changeOrganizationButton = {
+          id: this.id,
+          label: translation,
+          onClick: () => this.onOpenChangeOrganizationDialog(),
+        };
+        this.dropdownButton.extraOptions.push(changeOrganizationButton);
+        this.dropdownButtonExtraOptionsHandlers.set(changeOrganizationButton.id, changeOrganizationButton.onClick);
+      });
     }
 
     this.translate
@@ -191,6 +207,20 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
         console.log(response);
       }
     });
+  }
+
+  onOpenChangeOrganizationDialog() {
+    this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
+      data: {
+        id: this.id,
+      } as ApplicationDialogModel,
+    });
+  }
+
+  onExtraDropdownOptionClicked(id: string) {
+    const handler = this.dropdownButtonExtraOptionsHandlers.get(Number(id));
+
+    handler && handler();
   }
 
   bindApplication(id: number): void {

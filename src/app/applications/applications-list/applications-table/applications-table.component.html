@@ -162,6 +162,11 @@
                 }}</a>
               </li>
               <li class="dropdown-item">
+                <a (click)="onOpenChangeOrganizationDialog(element.id)" routerLinkActive="active">{{
+                  "APPLICATION.CHANGE_ORGANIZATION" | translate
+                }}</a>
+              </li>
+              <li class="dropdown-item">
                 <a (click)="deleteApplication(element.id)" [routerLink]="[]">{{
                   "APPLICATION-TABLE-ROW.DELETE" | translate
                 }}</a>

@@ -24,6 +24,9 @@ import { ApplicationDeviceType } from "@applications/models/application-device-t
 import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { TableColumn } from "@shared/types/table.type";
+import { MatDialog } from "@angular/material/dialog";
+import { ApplicationDialogModel } from "@shared/models/dialog.model";
+import { ChangeOrganizationDialogComponent } from "@applications/application-detail/change-organization-dialog/change-organization-dialog.component";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -144,7 +147,8 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     private applicationService: ApplicationService,
     private router: Router,
     private deleteDialogService: DeleteDialogService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private changeOrganizationDialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -266,6 +270,14 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     const result = dataTargets.find(t => t.type === "OPENDATADK");
 
     return !!result;
+  }
+
+  onOpenChangeOrganizationDialog(id: number) {
+    this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
+      data: {
+        id: id,
+      } as ApplicationDialogModel,
+    });
   }
 
   protected readonly columnDefinitions = columnDefinitions;
