@@ -1,42 +1,44 @@
-<h1 mat-dialog-title>{{ "APPLICATION.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
-<div mat-dialog-content>
-  <label class="form-label" for="userGroup">{{
-    "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
-  }}</label>
-  <mat-select
-    id="userGroup"
-    class="form-control"
-    panelClass="overflow-x-hidden"
-    [(value)]="application.organizationId"
-    [compareWith]="compare"
-    (selectionChange)="onOrganizationChange()"
-  >
-    <mat-option *ngFor="let organization of filteredOrganizations | async" [value]="organization.id">
-      {{ organization.name }}
-    </mat-option>
-  </mat-select>
-  <label class="form-label" for="userGroup">{{
-    "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-USER-GROUPS" | translate
-  }}</label>
-  <mat-select
-    id="userGroup"
-    class="form-control"
-    [multiple]="true"
-    panelClass="overflow-x-hidden"
-    [(value)]="application.permissionIds"
-    [compareWith]="compare"
-  >
-    <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
-      {{ permission.name }}
-    </mat-option>
-  </mat-select>
-  <mat-hint>{{ "APPLICATION.CHANGE-ORGANIZATION.USER-GROUP-AUTO-SELECT" | translate }}</mat-hint>
-</div>
-<div mat-dialog-actions class="d-flex flex-row">
-  <button (click)="onSubmit()" class="btn btn-primary">
-    {{ "GEN.SAVE" | translate }}
-  </button>
-  <button mat-dialog-close [mat-dialog-close]="false" class="btn btn-secondary ml-2">
-    {{ "GEN.CANCEL" | translate }}
-  </button>
+<div class="change-organization-dialog">
+  <h1 mat-dialog-title>{{ "APPLICATION.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
+  <div mat-dialog-content>
+    <label class="form-label" for="userGroup">{{
+      "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
+    }}</label>
+    <mat-select
+      id="userGroup"
+      class="form-control"
+      panelClass="overflow-x-hidden"
+      [(value)]="application.organizationId"
+      [compareWith]="compare"
+      (selectionChange)="onOrganizationChange()"
+    >
+      <mat-option *ngFor="let organization of filteredOrganizations | async" [value]="organization.id">
+        {{ organization.name }}
+      </mat-option>
+    </mat-select>
+    <label class="form-label" for="userGroup">{{
+      "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-USER-GROUPS" | translate
+    }}</label>
+    <mat-select
+      id="userGroup"
+      class="form-control"
+      [multiple]="true"
+      panelClass="overflow-x-hidden"
+      [(value)]="application.permissionIds"
+      [compareWith]="compare"
+    >
+      <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
+        {{ permission.name }}
+      </mat-option>
+    </mat-select>
+    <mat-hint>{{ "APPLICATION.CHANGE-ORGANIZATION.USER-GROUP-AUTO-SELECT" | translate }}</mat-hint>
+  </div>
+  <div mat-dialog-actions class="d-flex flex-row">
+    <button (click)="onSubmit()" class="btn btn-primary">
+      {{ "GEN.SAVE" | translate }}
+    </button>
+    <button mat-dialog-close [mat-dialog-close]="false" class="btn btn-secondary ml-2">
+      {{ "GEN.CANCEL" | translate }}
+    </button>
+  </div>
 </div>
