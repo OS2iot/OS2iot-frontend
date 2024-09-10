@@ -156,7 +156,7 @@
       "CHOOSE-ORGANIZATION": "Vælg hvilken organisation denne applikation skal tilhøre",
       "CHOOSE-USER-GROUPS": "Vælg hvilke brugergrupper, der skal have adgang",
       "USER-GROUP-AUTO-SELECT": "Brugergruppe med automatisk tilføjelse af nye applikationer er allerede valgt",
-      "SNACKBAR-SAVED": " [Applikationsnavn] tilhører nu [Organisationsnavn]"
+      "SNACKBAR-SAVED": "{{applicationName}} tilhører nu {{organizationName}}"
     }
   },
   "GATEWAY": {

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { UntypedFormControl } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { OrganisationService } from "@app/admin/organisation/organisation.service";
 import { PermissionResponse } from "@app/admin/permission/permission.model";
@@ -21,7 +22,6 @@ export class ChangeOrganizationDialogComponent implements OnInit {
   public applicationsSubscription: Subscription;
   public permissionsSubscription: Subscription;
   public organizationsSubscription: Subscription;
-  public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
   public application: UpdateApplicationOrganization;
   public permissions: PermissionResponse[];
   public organizations: Organisation[];
@@ -34,6 +34,7 @@ export class ChangeOrganizationDialogComponent implements OnInit {
     private permissionService: PermissionService,
     private organizationService: OrganisationService,
     private sharedVariableService: SharedVariableService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialogRef<ChangeOrganizationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogModel: ApplicationDialogModel
   ) {
@@ -41,7 +42,6 @@ export class ChangeOrganizationDialogComponent implements OnInit {
       organizationId: this.dialogModel.organizationId ?? this.sharedVariableService.getSelectedOrganisationId(),
       permissionIds: [],
     };
-    this.permissionMultiCtrl.setValue(this.application.permissionIds);
   }
 
   ngOnInit(): void {
@@ -56,7 +56,6 @@ export class ChangeOrganizationDialogComponent implements OnInit {
   getApplication(id: number): void {
     this.applicationsSubscription = this.applicationService.getApplication(id).subscribe((application: Application) => {
       this.application.permissionIds = application.permissionIds;
-      this.permissionMultiCtrl.setValue(this.application.permissionIds);
     });
   }
 
@@ -85,17 +84,27 @@ export class ChangeOrganizationDialogComponent implements OnInit {
       this.permissions.filter(p => p?.organization?.id === this?.application?.organizationId)
     );
     this.filteredPermissionsMulti.subscribe(res => {
-      this.permissionMultiCtrl.setValue(
-        res.filter(permission => permission.automaticallyAddNewApplications).map(permission => permission.id)
-      );
+      this.application.permissionIds = res
+        .filter(permission => permission.automaticallyAddNewApplications)
+        .map(permission => permission.id);
     });
   }
 
   onSubmit() {
     this.applicationsSubscription = this.applicationService
       .updateApplicationOrganization(this.application, this.dialogModel.id)
-      .subscribe(() => {
-        this.dialog.close();
+      .subscribe(savedApplication => {
+        this.snackBar.open(
+          this.translate.instant("APPLICATION.CHANGE-ORGANIZATION.SNACKBAR-SAVED", {
+            applicationName: savedApplication.name,
+            organizationName: savedApplication.belongsTo.name,
+          }),
+          "",
+          {
+            duration: 10000,
+          }
+        );
+        this.dialog.close(true);
       });
   }
 }

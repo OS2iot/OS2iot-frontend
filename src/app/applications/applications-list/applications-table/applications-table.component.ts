@@ -273,10 +273,16 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   onOpenChangeOrganizationDialog(id: number) {
-    this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
+    const dialog = this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
       data: {
         id: id,
       } as ApplicationDialogModel,
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      if (!res) return;
+
+      location.reload();
     });
   }
 

@@ -88,8 +88,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
       };
 
       this.translate.get("APPLICATION.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
-        if (!this.meService.hasGlobalAdmin()) return;
-
         const changeOrganizationButton = {
           id: this.id,
           label: translation,
