@@ -63,7 +63,6 @@ export interface ApplicationData {
 }
 
 export class UpdateApplicationOrganization {
-  public applicationId: number;
   public organizationId: number;
   public permissionIds: number[];
 }
