@@ -87,7 +87,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
         extraOptions: [],
       };
 
-      this.translate.get("APPLICATION.CHANGE_ORGANIZATION").subscribe(translation => {
+      this.translate.get("APPLICATION.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
         const changeOrganizationButton = {
           id: this.id,
           label: translation,
@@ -213,6 +213,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
       data: {
         id: this.id,
+        organizationId: this.application.belongsTo.id,
       } as ApplicationDialogModel,
     });
   }

@@ -1,6 +1,23 @@
-<h2>{{ "APPLICATION.CHANGE_ORGANIZATION" | translate }}</h2>
-<div class="form-group mt-3 col-12">
-  <label class="form-label" for="userGroup">{{ "QUESTION.APPLICATION.ADD-PERMISSION" | translate }}</label>
+<h1 mat-dialog-title>{{ "APPLICATION.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
+<div mat-dialog-content>
+  <label class="form-label" for="userGroup">{{
+    "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
+  }}</label>
+  <mat-select
+    id="userGroup"
+    class="form-control"
+    panelClass="overflow-x-hidden"
+    [(value)]="application.organizationId"
+    [compareWith]="compare"
+    (selectionChange)="onOrganizationChange()"
+  >
+    <mat-option *ngFor="let organization of filteredOrganizationsMulti | async" [value]="organization.id">
+      {{ organization.name }}
+    </mat-option>
+  </mat-select>
+  <label class="form-label" for="userGroup">{{
+    "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-USER-GROUPS" | translate
+  }}</label>
   <mat-select
     id="userGroup"
     class="form-control"
@@ -15,5 +32,13 @@
       {{ permission.name }}
     </mat-option>
   </mat-select>
-  <mat-hint>{{ "QUESTION.APPLICATION.PERMISSION-HINT" | translate }}</mat-hint>
+  <mat-hint>{{ "APPLICATION.CHANGE-ORGANIZATION.USER-GROUP-AUTO-SELECT" | translate }}</mat-hint>
+</div>
+<div mat-dialog-actions class="d-flex flex-row">
+  <button mat-dialog-close [mat-dialog-close]="true" class="btn btn-primary">
+    {{ "GEN.SAVE" | translate }}
+  </button>
+  <button mat-dialog-close [mat-dialog-close]="false" class="btn btn-secondary ml-2">
+    {{ "GEN.CANCEL" | translate }}
+  </button>
 </div>
