@@ -16,6 +16,9 @@ import { ChartConfiguration } from "chart.js";
 import { ColorGraphBlue1 } from "@shared/constants/color-constants";
 import { formatDate } from "@angular/common";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { MatDialog } from "@angular/material/dialog";
+import { GatewayChangeOrganizationDialogComponent } from "../gateway-change-organization-dialog/gateway-change-organization-dialog.component";
+import { GatewayDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-gateway-detail",
@@ -43,6 +46,7 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   isGatewayStatusVisibleSubject = new Subject<void>();
   receivedGraphData: ChartConfiguration["data"] = { datasets: [] };
   sentGraphData: ChartConfiguration["data"] = { datasets: [] };
+  private dropdownButtonExtraOptionsHandlers: Map<string, () => void> = new Map();
 
   constructor(
     private gatewayService: ChirpstackGatewayService,
@@ -50,7 +54,8 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     private translate: TranslateService,
     private router: Router,
     private meService: MeService,
-    private deleteDialogService: DeleteDialogService
+    private deleteDialogService: DeleteDialogService,
+    private changeOrganizationDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -120,8 +125,20 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
           label: "LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS",
           editRouterLink: "../../gateway-edit/" + this.gatewayId,
           isErasable: true,
+          extraOptions: [],
         }
       : null;
+
+    this.translate.get("GATEWAY.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
+      const changeOrganizationButton = {
+        id: this.gatewayId,
+        label: translation,
+        onClick: () => this.onOpenChangeOrganizationDialog(),
+      };
+
+      this.dropdownButton.extraOptions.push(changeOrganizationButton);
+      this.dropdownButtonExtraOptionsHandlers.set(changeOrganizationButton.id, changeOrganizationButton.onClick);
+    });
 
     this.translate.get(["LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS"]).subscribe(translations => {
       if (this.dropdownButton) {
@@ -185,6 +202,27 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
       } else {
         console.log(response);
       }
+    });
+  }
+
+  onExtraDropdownOptionClicked(id: string) {
+    const handler = this.dropdownButtonExtraOptionsHandlers.get(id);
+
+    handler && handler();
+  }
+
+  onOpenChangeOrganizationDialog() {
+    const dialog = this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
+      data: {
+        id: this.gateway.id,
+        organizationId: this.gateway.organizationId,
+      } as GatewayDialogModel,
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      if (!res) return;
+
+      location.reload();
     });
   }
 

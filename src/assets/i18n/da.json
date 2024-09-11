@@ -197,6 +197,11 @@
       "PROJECT": "Projekt",
       "PROTOTYPE": "Prototype",
       "OTHER": "Andet"
+    },
+    "CHANGE-ORGANIZATION": {
+      "TITLE": "Skift organisation",
+      "CHOOSE-ORGANIZATION": "Vælg hvilken organisation denne gateway skal tilhøre",
+      "SNACKBAR-SAVED": "{{gatewayName}} tilhører nu {{organizationName}}"
     }
   },
   "IOT-DEVICE": {

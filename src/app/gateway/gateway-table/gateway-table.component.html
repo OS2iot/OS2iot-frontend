@@ -207,6 +207,11 @@
               }}</a>
             </li>
             <li class="dropdown-item">
+              <a (click)="onOpenChangeOrganizationDialog(gateway.id)" routerLinkActive="active">{{
+                "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate
+              }}</a>
+            </li>
+            <li class="dropdown-item">
               <a (click)="clickDelete(gateway)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
             </li>
           </ul>

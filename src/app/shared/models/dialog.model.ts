@@ -17,3 +17,8 @@ export class ApplicationDialogModel {
   id: number;
   organizationId?: number;
 }
+
+export class GatewayDialogModel {
+  id: number;
+  organizationId?: number;
+}
