@@ -19,6 +19,6 @@ export class ApplicationDialogModel {
 }
 
 export class GatewayDialogModel {
-  id: number;
+  gatewayDbId: number;
   organizationId?: number;
 }

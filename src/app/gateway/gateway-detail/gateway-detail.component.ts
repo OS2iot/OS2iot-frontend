@@ -46,7 +46,6 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   isGatewayStatusVisibleSubject = new Subject<void>();
   receivedGraphData: ChartConfiguration["data"] = { datasets: [] };
   sentGraphData: ChartConfiguration["data"] = { datasets: [] };
-  private dropdownButtonExtraOptionsHandlers: Map<string, () => void> = new Map();
 
   constructor(
     private gatewayService: ChirpstackGatewayService,
@@ -130,14 +129,11 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
       : null;
 
     this.translate.get("GATEWAY.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
-      const changeOrganizationButton = {
+      this.dropdownButton.extraOptions.push({
         id: this.gatewayId,
         label: translation,
         onClick: () => this.onOpenChangeOrganizationDialog(),
-      };
-
-      this.dropdownButton.extraOptions.push(changeOrganizationButton);
-      this.dropdownButtonExtraOptionsHandlers.set(changeOrganizationButton.id, changeOrganizationButton.onClick);
+      });
     });
 
     this.translate.get(["LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS"]).subscribe(translations => {
@@ -205,16 +201,10 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
-  onExtraDropdownOptionClicked(id: string) {
-    const handler = this.dropdownButtonExtraOptionsHandlers.get(id);
-
-    handler && handler();
-  }
-
   onOpenChangeOrganizationDialog() {
     const dialog = this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
       data: {
-        id: this.gateway.id,
+        gatewayDbId: this.gateway.id,
         organizationId: this.gateway.organizationId,
       } as GatewayDialogModel,
     });

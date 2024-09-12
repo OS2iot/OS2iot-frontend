@@ -261,7 +261,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   onOpenChangeOrganizationDialog(id: number) {
     const dialog = this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
       data: {
-        id: id,
+        gatewayDbId: id,
       } as GatewayDialogModel,
     });
 

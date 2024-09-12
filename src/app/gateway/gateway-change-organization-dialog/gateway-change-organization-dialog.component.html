@@ -1,11 +1,11 @@
 <div class="gateway-change-organization-dialog">
   <h1 mat-dialog-title>{{ "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
   <div mat-dialog-content>
-    <label class="form-label" for="userGroup">{{
+    <label class="form-label" for="organizationSelect">{{
       "GATEWAY.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
     }}</label>
     <mat-select
-      id="userGroup"
+      id="organizationSelect"
       class="form-control"
       panelClass="overflow-x-hidden"
       [(value)]="gateway.organizationId"

@@ -4,12 +4,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { OrganisationService } from "@app/admin/organisation/organisation.service";
 import { TranslateService } from "@ngx-translate/core";
-import { ApplicationDialogModel } from "@shared/models/dialog.model";
+import { GatewayDialogModel } from "@shared/models/dialog.model";
+import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ReplaySubject, Subscription } from "rxjs";
 import { UpdateGatewayOrganization } from "../gateway.model";
-import { GatewayService } from "../gateway.service";
-import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 
 @Component({
   selector: "app-gateway-change-organization-dialog",
@@ -30,7 +29,7 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     private snackBar: MatSnackBar,
     private dialog: MatDialogRef<GatewayChangeOrganizationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogModel: ApplicationDialogModel
+    @Inject(MAT_DIALOG_DATA) public dialogModel: GatewayDialogModel
   ) {
     this.gateway = {
       organizationId: this.dialogModel.organizationId ?? this.sharedVariableService.getSelectedOrganisationId(),
@@ -43,7 +42,7 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
   }
 
   getOrganizations() {
-    this.organizationsSubscription = this.organizationService.getMinimal().subscribe(res => {
+    this.organizationsSubscription = this.organizationService.getMultiple().subscribe(res => {
       this.organizations = res.data;
       this.filteredOrganizations.next(this.organizations.slice());
     });
@@ -55,7 +54,7 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
 
   onSubmit() {
     this.gatewaysSubscription = this.gatewayService
-      .updateGatewayOrganization(this.gateway, this.dialogModel.id)
+      .updateGatewayOrganization(this.gateway, this.dialogModel.gatewayDbId)
       .subscribe(gateway => {
         this.snackBar.open(
           this.translate.instant("GATEWAY.CHANGE-ORGANIZATION.SNACKBAR-SAVED", {
