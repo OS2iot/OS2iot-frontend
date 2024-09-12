@@ -6,5 +6,4 @@ export class DownlinkQueueDto {
   acknowledgedAt: Date;
   acknowledged: boolean;
   createdAt: Date;
-  flushed: boolean;
 }
