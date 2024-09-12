@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <nav mat-tab-nav-bar>
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
         <a
           mat-tab-link
           *ngFor="let link of navTabs"
@@ -18,6 +18,8 @@
           >{{ link.label | translate }}</a
         >
       </nav>
+      <mat-divider></mat-divider>
+      <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       <router-outlet></router-outlet>
     </div>
   </div>

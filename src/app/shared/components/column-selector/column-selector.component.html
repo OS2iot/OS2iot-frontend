@@ -10,19 +10,18 @@
     #Selector
     [placeholder]="'TABLE.COLUMNS' | translate"
   >
-    <mat-option disabled>
-      <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAll()">
-        {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
-      </button>
-      <button mat-raised-button class="mat-primary fill text-sm" (click)="deSelectAll()">
-        {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
-      </button>
-    </mat-option>
+    <button mat-raised-button class="mat-primary fill text-sm choose-all" (click)="selectAll()">
+      {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
+    </button>
+    <button mat-raised-button class="mat-primary fill text-sm deselect-all" (click)="deSelectAll()">
+      {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
+    </button>
+
     <mat-option *ngFor="let option of optionalColumnOptions" [value]="option.id">
       {{ option.display | translate }}
     </mat-option>
   </mat-select>
   <button mat-icon-button type="button" class="button-margin" (click)="Selector.open()">
-    <fa-icon [icon]="cogIcon" class="icon--medium cog-icon"></fa-icon>
+    <fa-icon [icon]="cogIcon" class="cog-icon"></fa-icon>
   </button>
 </div>

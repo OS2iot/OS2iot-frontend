@@ -20,7 +20,6 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   private datatargetType: DataTargetType;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private datatargetService: DatatargetService,
     private route: ActivatedRoute,
     private datatargetTypesService: DatatargetTypesService
@@ -29,8 +28,7 @@ export class DatatargetEditComponent implements OnInit, OnDestroy {
   loadComponent(componentType: Type<any>) {
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    viewContainerRef.createComponent<DatatargetEdit>(factory);
+    viewContainerRef.createComponent<DatatargetEdit>(componentType);
   }
 
   ngOnInit(): void {

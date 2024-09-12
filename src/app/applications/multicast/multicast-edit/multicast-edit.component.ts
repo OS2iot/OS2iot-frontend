@@ -36,6 +36,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   public formFailedSubmit = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
+  public deviceCtrl: UntypedFormControl = new UntypedFormControl();
   public deviceFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<IotDevice[]>(1);
 
@@ -109,6 +110,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   getMulticast(id: number) {
     this.multicastSubscription = this.multicastService.get(id).subscribe((response: Multicast) => {
       this.multicast = response; // gets the multicast and set's local multicast. Used when update.
+      this.deviceCtrl.setValue(this.multicast.iotDevices);
     });
   }
 

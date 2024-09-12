@@ -2,3 +2,7 @@
   margin-left: 5px;
   cursor: pointer;
 }
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+}

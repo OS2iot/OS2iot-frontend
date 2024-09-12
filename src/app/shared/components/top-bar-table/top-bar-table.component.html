@@ -1,5 +1,5 @@
 <div class="row sub-bar-wrapper no-margin">
-  <div class="col-12 d-flex sub-bar align-items-center">
+  <div class="col-12 d-flex sub-bar align-items-center buttonMarginBottom">
     <h3 *ngIf="title" class="mb-0">{{ title }}</h3>
     <div class="ml-auto d-flex">
       <div>
@@ -34,7 +34,7 @@
           {{ ctaLabelPrimary }}
         </button>
 
-        <mat-form-field appearance="fill" *ngIf="addDropdown">
+        <mat-form-field appearance="outline" *ngIf="addDropdown">
           <mat-label>{{ dropdownLabel }}</mat-label>
           <mat-select [placeholder]="dropdownLabel" [(value)]="selectedOpt">
             <mat-option (click)="setOptionToNull()">--{{ dropdownDefaultOption }}--</mat-option>
