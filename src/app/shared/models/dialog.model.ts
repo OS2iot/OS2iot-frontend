@@ -14,6 +14,6 @@ export class WelcomeDialogModel {
 }
 
 export class ApplicationDialogModel {
-  id: number;
+  applicationId: number;
   organizationId?: number;
 }

@@ -275,7 +275,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   onOpenChangeOrganizationDialog(id: number) {
     const dialog = this.changeOrganizationDialog.open(ApplicationChangeOrganizationDialogComponent, {
       data: {
-        id: id,
+        applicationId: id,
       } as ApplicationDialogModel,
     });
 

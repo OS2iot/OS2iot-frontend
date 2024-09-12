@@ -46,8 +46,8 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use("da");
-    if (this.dialogModel.id) {
-      this.getApplication(this.dialogModel.id);
+    if (this.dialogModel.applicationId) {
+      this.getApplication(this.dialogModel.applicationId);
     }
     this.getOrganizations();
     this.getPermissions();
@@ -60,7 +60,7 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   }
 
   getOrganizations() {
-    this.organizationsSubscription = this.organizationService.getMinimal().subscribe(res => {
+    this.organizationsSubscription = this.organizationService.getMultiple().subscribe(res => {
       this.organizations = res.data;
       this.filteredOrganizations.next(this.organizations.slice());
     });
@@ -92,7 +92,7 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
 
   onSubmit() {
     this.applicationsSubscription = this.applicationService
-      .updateApplicationOrganization(this.application, this.dialogModel.id)
+      .updateApplicationOrganization(this.application, this.dialogModel.applicationId)
       .subscribe(savedApplication => {
         this.snackBar.open(
           this.translate.instant("APPLICATION.CHANGE-ORGANIZATION.SNACKBAR-SAVED", {

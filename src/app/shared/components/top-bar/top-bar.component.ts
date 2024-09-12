@@ -123,6 +123,9 @@ export class TopBarComponent implements OnInit {
 
   onClickExtraDropdownOption(id: string) {
     this.extraDropdownOptions.emit(id);
+    const extraDropdownOption = this.dropDownButton.extraOptions.find(opt => opt.id === id);
+
+    extraDropdownOption?.onClick();
   }
 
   public goToHelp() {

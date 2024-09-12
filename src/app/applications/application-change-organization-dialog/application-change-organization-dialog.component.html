@@ -1,11 +1,11 @@
 <div class="application-change-organization-dialog">
   <h1 mat-dialog-title>{{ "APPLICATION.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
   <div mat-dialog-content>
-    <label class="form-label" for="userGroup">{{
+    <label class="form-label" for="organizationSelect">{{
       "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
     }}</label>
     <mat-select
-      id="userGroup"
+      id="organizationSelect"
       class="form-control"
       panelClass="overflow-x-hidden"
       [(value)]="application.organizationId"
@@ -16,11 +16,11 @@
         {{ organization.name }}
       </mat-option>
     </mat-select>
-    <label class="form-label" for="userGroup">{{
+    <label class="form-label" for="permissionSelect">{{
       "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-USER-GROUPS" | translate
     }}</label>
     <mat-select
-      id="userGroup"
+      id="permissionSelect"
       class="form-control"
       [multiple]="true"
       panelClass="overflow-x-hidden"

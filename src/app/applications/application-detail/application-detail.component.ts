@@ -60,7 +60,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   public redMarker = "/assets/images/red-marker.png";
   public greenMarker = "/assets/images/green-marker.png";
   public greyMarker = "/assets/images/grey-marker.png";
-  private dropdownButtonExtraOptionsHandlers: Map<number, () => void> = new Map();
 
   constructor(
     private applicationService: ApplicationService,
@@ -88,13 +87,11 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
       };
 
       this.translate.get("APPLICATION.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
-        const changeOrganizationButton = {
+        this.dropdownButton.extraOptions.push({
           id: this.id,
           label: translation,
           onClick: () => this.onOpenChangeOrganizationDialog(),
-        };
-        this.dropdownButton.extraOptions.push(changeOrganizationButton);
-        this.dropdownButtonExtraOptionsHandlers.set(changeOrganizationButton.id, changeOrganizationButton.onClick);
+        });
       });
     }
 
@@ -212,16 +209,10 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   onOpenChangeOrganizationDialog() {
     this.changeOrganizationDialog.open(ApplicationChangeOrganizationDialogComponent, {
       data: {
-        id: this.id,
+        applicationId: this.id,
         organizationId: this.application.belongsTo.id,
       } as ApplicationDialogModel,
     });
-  }
-
-  onExtraDropdownOptionClicked(id: string) {
-    const handler = this.dropdownButtonExtraOptionsHandlers.get(Number(id));
-
-    handler && handler();
   }
 
   bindApplication(id: number): void {
