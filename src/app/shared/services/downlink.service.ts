@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import { Downlink } from "@applications/iot-devices/iot-device-detail/downlink/downlink.model";
-import { DownlinkQueueDto } from "@applications/iot-devices/iot-device-detail/downlink/downlink-queue-dto";
 
 @Injectable({
   providedIn: "root",
