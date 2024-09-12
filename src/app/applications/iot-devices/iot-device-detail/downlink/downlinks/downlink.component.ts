@@ -2,13 +2,13 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Downlink } from "@applications/iot-devices/downlink.model";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { TranslateService } from "@ngx-translate/core";
 import { DeviceType } from "@shared/enums/device-type";
 import { ErrorMessageService } from "@shared/error-message.service";
 import { DownlinkService } from "@shared/services/downlink.service";
-import { DownlinkDialogComponent } from "./downlink-dialog/downlink-dialog.component";
+import { Downlink } from "../downlink.model";
+import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
   selector: "app-downlink",
@@ -18,8 +18,9 @@ import { DownlinkDialogComponent } from "./downlink-dialog/downlink-dialog.compo
 export class DownlinkComponent implements OnInit {
   @Input() device: IotDevice;
   @Input() errorMessages: string[];
-  public downlinkText: string;
   public downlink = new Downlink();
+  public downlinkQueue: DownlinkQueueDto[];
+  public isLoadingResults = false;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -31,23 +32,28 @@ export class DownlinkComponent implements OnInit {
 
   ngOnInit(): void {
     this.errorMessages = [];
+    this.isLoadingResults = true;
+
+    this.getDownlinksQueue();
+  }
+
+  getDownlinksQueue() {
+    this.downlinkService.getDownlinkQueue(this.device.id).subscribe(
+      (response: DownlinkQueueDto[]) => {
+        this.downlinkQueue = response;
+        this.isLoadingResults = false;
+      },
+      error => {
+        this.handleError(error);
+        console.log(error);
+        this.isLoadingResults = false;
+      }
+    );
   }
 
   clickDownlink() {
     if (this.validateHex(this.downlink.data)) {
-      this.downlinkService.get(this.device.id).subscribe(
-        (response: any) => {
-          if (response.totalCount > 0) {
-            this.openDownlinkDialog();
-          } else {
-            this.startDownlink();
-          }
-        },
-        error => {
-          this.handleError(error);
-          console.log(error);
-        }
-      );
+      this.startDownlink();
     }
   }
 
@@ -61,16 +67,18 @@ export class DownlinkComponent implements OnInit {
 
   private startDownlink() {
     this.errorMessages = [];
-    this.downlinkService.post(this.downlink, this.device.id).subscribe(
+    this.downlinkService.postDownlink(this.downlink, this.device.id).subscribe(
       response => {
         this.snackBar.open("Element sat i kø", "Downlink", {
           duration: 10000,
         });
       },
       error => {
+        console.log(error);
         this.handleError(error);
       }
     );
+    this.getDownlinksQueue();
   }
 
   private validateHex(input: string): boolean {
@@ -103,16 +111,5 @@ export class DownlinkComponent implements OnInit {
     } else {
       return 256;
     }
-  }
-
-  openDownlinkDialog() {
-    const dialog = this.dialog.open(DownlinkDialogComponent, {});
-
-    dialog.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.startDownlink();
-        console.log(`Dialog result: ${result}`);
-      }
-    });
   }
 }
