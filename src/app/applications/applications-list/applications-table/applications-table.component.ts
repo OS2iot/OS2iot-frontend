@@ -26,7 +26,7 @@ import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { TableColumn } from "@shared/types/table.type";
 import { MatDialog } from "@angular/material/dialog";
 import { ApplicationDialogModel } from "@shared/models/dialog.model";
-import { ChangeOrganizationDialogComponent } from "@applications/application-detail/change-organization-dialog/change-organization-dialog.component";
+import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -273,7 +273,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   onOpenChangeOrganizationDialog(id: number) {
-    const dialog = this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
+    const dialog = this.changeOrganizationDialog.open(ApplicationChangeOrganizationDialogComponent, {
       data: {
         id: id,
       } as ApplicationDialogModel,

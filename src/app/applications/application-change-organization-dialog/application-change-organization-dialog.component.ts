@@ -15,10 +15,10 @@ import { ReplaySubject, Subscription } from "rxjs";
 
 @Component({
   selector: "app-change-organization-dialog",
-  templateUrl: "./change-organization-dialog.component.html",
-  styleUrls: ["./change-organization-dialog.component.scss"],
+  templateUrl: "./application-change-organization-dialog.component.html",
+  styleUrls: ["./application-change-organization-dialog.component.scss"],
 })
-export class ChangeOrganizationDialogComponent implements OnInit {
+export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   public applicationsSubscription: Subscription;
   public permissionsSubscription: Subscription;
   public organizationsSubscription: Subscription;
@@ -35,7 +35,7 @@ export class ChangeOrganizationDialogComponent implements OnInit {
     private organizationService: OrganisationService,
     private sharedVariableService: SharedVariableService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialogRef<ChangeOrganizationDialogComponent>,
+    private dialog: MatDialogRef<ApplicationChangeOrganizationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogModel: ApplicationDialogModel
   ) {
     this.application = {

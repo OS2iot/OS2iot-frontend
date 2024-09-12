@@ -18,7 +18,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { Gateway, GatewayResponseMany } from "@app/gateway/gateway.model";
 import { MatDialog } from "@angular/material/dialog";
-import { ChangeOrganizationDialogComponent } from "./change-organization-dialog/change-organization-dialog.component";
+import { ApplicationChangeOrganizationDialogComponent } from "../application-change-organization-dialog/application-change-organization-dialog.component";
 import { ApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
@@ -210,7 +210,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   onOpenChangeOrganizationDialog() {
-    this.changeOrganizationDialog.open(ChangeOrganizationDialogComponent, {
+    this.changeOrganizationDialog.open(ApplicationChangeOrganizationDialogComponent, {
       data: {
         id: this.id,
         organizationId: this.application.belongsTo.id,
