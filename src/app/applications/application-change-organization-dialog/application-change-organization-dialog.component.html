@@ -19,19 +19,21 @@
     <label class="form-label" for="permissionSelect">{{
       "APPLICATION.CHANGE-ORGANIZATION.CHOOSE-USER-GROUPS" | translate
     }}</label>
-    <mat-select
-      id="permissionSelect"
-      class="form-control"
-      [multiple]="true"
-      panelClass="overflow-x-hidden"
-      [(value)]="application.permissionIds"
-      [compareWith]="compare"
-    >
-      <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
-        {{ permission.name }}
-      </mat-option>
-    </mat-select>
-    <mat-hint>{{ "APPLICATION.CHANGE-ORGANIZATION.USER-GROUP-AUTO-SELECT" | translate }}</mat-hint>
+    <div *ngIf="permissions.length > 0">
+      <mat-select
+        id="permissionSelect"
+        class="form-control"
+        [multiple]="true"
+        panelClass="overflow-x-hidden"
+        [(value)]="application.permissionIds"
+        [compareWith]="compare"
+      >
+        <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
+          {{ permission.name }}
+        </mat-option>
+      </mat-select>
+      <mat-hint>{{ "APPLICATION.CHANGE-ORGANIZATION.USER-GROUP-AUTO-SELECT" | translate }}</mat-hint>
+    </div>
   </div>
   <div mat-dialog-actions class="d-flex flex-row">
     <button (click)="onSubmit()" class="btn btn-primary">
