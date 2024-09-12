@@ -15,10 +15,10 @@ import { ReplaySubject, Subscription } from "rxjs";
 
 @Component({
   selector: "app-change-organization-dialog",
-  templateUrl: "./change-organization-dialog.component.html",
-  styleUrls: ["./change-organization-dialog.component.scss"],
+  templateUrl: "./application-change-organization-dialog.component.html",
+  styleUrls: ["./application-change-organization-dialog.component.scss"],
 })
-export class ChangeOrganizationDialogComponent implements OnInit {
+export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   public applicationsSubscription: Subscription;
   public permissionsSubscription: Subscription;
   public organizationsSubscription: Subscription;
@@ -35,7 +35,7 @@ export class ChangeOrganizationDialogComponent implements OnInit {
     private organizationService: OrganisationService,
     private sharedVariableService: SharedVariableService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialogRef<ChangeOrganizationDialogComponent>,
+    private dialog: MatDialogRef<ApplicationChangeOrganizationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogModel: ApplicationDialogModel
   ) {
     this.application = {
@@ -46,8 +46,8 @@ export class ChangeOrganizationDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.use("da");
-    if (this.dialogModel.id) {
-      this.getApplication(this.dialogModel.id);
+    if (this.dialogModel.applicationId) {
+      this.getApplication(this.dialogModel.applicationId);
     }
     this.getOrganizations();
     this.getPermissions();
@@ -60,7 +60,7 @@ export class ChangeOrganizationDialogComponent implements OnInit {
   }
 
   getOrganizations() {
-    this.organizationsSubscription = this.organizationService.getMinimal().subscribe(res => {
+    this.organizationsSubscription = this.organizationService.getMultiple().subscribe(res => {
       this.organizations = res.data;
       this.filteredOrganizations.next(this.organizations.slice());
     });
@@ -92,7 +92,7 @@ export class ChangeOrganizationDialogComponent implements OnInit {
 
   onSubmit() {
     this.applicationsSubscription = this.applicationService
-      .updateApplicationOrganization(this.application, this.dialogModel.id)
+      .updateApplicationOrganization(this.application, this.dialogModel.applicationId)
       .subscribe(savedApplication => {
         this.snackBar.open(
           this.translate.instant("APPLICATION.CHANGE-ORGANIZATION.SNACKBAR-SAVED", {

@@ -19,7 +19,7 @@ import { PipesModule } from "@shared/pipes/pipes.module";
 import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
 import { MulticastModule } from "./multicast/multicast.module";
 import { ReactiveFormsModule } from "@angular/forms";
-import { ChangeOrganizationDialogComponent } from "./application-detail/change-organization-dialog/change-organization-dialog.component";
+import { ApplicationChangeOrganizationDialogComponent } from "./application-change-organization-dialog/application-change-organization-dialog.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { ChangeOrganizationDialogComponent } from "./application-detail/change-o
     ApplicationsListComponent,
     ApplicationsTableComponent,
     BulkImportComponent,
-    ChangeOrganizationDialogComponent,
+    ApplicationChangeOrganizationDialogComponent,
   ],
   exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
   imports: [
