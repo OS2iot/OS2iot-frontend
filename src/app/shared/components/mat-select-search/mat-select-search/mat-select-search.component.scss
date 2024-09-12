@@ -9,7 +9,7 @@ $multiple-check-width: 33px;
 .mat-select-search-inner {
   position: absolute;
   top: 0;
-  width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width});
+  width: calc(100% - $scrollbar-width) !important;
   border-bottom: 1px solid #cccccc;
   background: white;
   z-index: 100;
@@ -29,7 +29,10 @@ $multiple-check-width: 33px;
   padding: $mat-menu-side-padding;
   padding-right: $mat-menu-side-padding + $clear-button-width;
   box-sizing: border-box;
+  width: 100%;
+  border-width: 0px;
 }
+
 .mat-select-search-no-entries-found {
   padding: $mat-menu-side-padding;
 }

@@ -1,5 +1,18 @@
+$deselectSelectButtonBottomMargin: 5px;
+
 .onlyLorawan {
   font-weight: bold;
   font-size: 13px;
   margin-left: 10px;
+  color: #00000061
+}
+
+.choose-all {
+  margin-left: 5px;
+  margin-bottom: $deselectSelectButtonBottomMargin;
+}
+
+.deselect-all {
+  margin-left: 5px;
+  margin-bottom: $deselectSelectButtonBottomMargin;
 }

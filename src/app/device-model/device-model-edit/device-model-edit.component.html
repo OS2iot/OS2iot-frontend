@@ -13,6 +13,7 @@
       <label class="form-label" for="name">{{ "QUESTION.DEVICE-MODEL.GIVE-NAME" | translate }}</label
       >*
       <input
+        (change)="handleNameNull()"
         type="text"
         class="form-control"
         id="name"

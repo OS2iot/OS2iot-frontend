@@ -15,7 +15,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { GlobalAdminComponent } from "./global-admin/global-admin.component";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { OrganisationDropdownComponent } from "./organisation-dropdown/organisation-dropdown.component";
-import { InlineSVGModule } from "ng-inline-svg";
+import { InlineSVGModule } from "ng-inline-svg-2";
 
 @NgModule({
   declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],

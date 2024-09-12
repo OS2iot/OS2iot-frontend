@@ -5,7 +5,7 @@
   margin-left: 10px;
 }
 
-.mat-card {
+.mdc-card {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -14,16 +14,20 @@
   max-width: 400px;
   height: 320px;
   margin: 10px;
+  padding: 16px;
 }
 
-.mat-card-header {
+.mat-mdc-card-header {
   flex-shrink: 1;
+  margin-left: 10px;
+  margin-bottom: 18px;
+  padding: 0 16px 16px 8px
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   flex-grow: 1;
   overflow: auto;
-  margin-left: 10px;
+  font-size: 14px;
 }
 
 mat-card img {

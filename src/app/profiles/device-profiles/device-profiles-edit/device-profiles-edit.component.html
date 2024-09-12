@@ -25,9 +25,9 @@
       </li>
     </ul>
   </div>
-  <mat-tab-group animationDuration="0ms">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
     <mat-tab label="Generelt">
-      <div class="col-xs-12 form-group">
+      <div class="input-container col-xs-12 form-group">
         <label for="name" class="form-label asterisk-if-mandatory">{{
           "PROFILES.DEVICE_PROFILE.NAME" | translate
         }}</label>
@@ -44,7 +44,7 @@
         />
       </div>
 
-      <div class="col-xs-12 form-group" *ngIf="deviceProfile.id">
+      <div class="input-container col-xs-12 form-group" *ngIf="deviceProfile.id">
         <label for="id" class="form-label asterisk-if-mandatory">{{ "PROFILES.DEVICE_PROFILE.ID" | translate }}</label>
         <input
           type="text"
@@ -60,7 +60,7 @@
         />
       </div>
 
-      <div class="col-xs-12 form-group">
+      <div class="input-container col-xs-12 form-group">
         <label for="macVersion" class="form-label asterisk-if-mandatory">{{
           "PROFILES.DEVICE_PROFILE.MACVERSION" | translate
         }}</label>
@@ -86,7 +86,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-xs-12 form-group">
+      <div class="input-container col-xs-12 form-group">
         <label class="form-label asterisk-if-mandatory">{{
           "PROFILES.DEVICE_PROFILE.REGPARAMSREVISION" | translate
         }}</label>
@@ -106,7 +106,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-xs-12 form-group">
+      <div class="input-container col-xs-12 form-group">
         <label class="form-label asterisk-if-mandatory">{{ "PROFILES.DEVICE_PROFILE.ADRALGORITHM" | translate }}</label>
         <mat-form-field appearance="outline">
           <mat-select
@@ -122,7 +122,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-xs-12 form-group">
+      <div class="input-container col-xs-12 form-group">
         <label for="devStatusReqFreq" class="form-label">{{
           "PROFILES.DEVICE_PROFILE.DEVSTATUSREQFREQ" | translate
         }}</label>
@@ -251,7 +251,7 @@
           />
         </div>
 
-        <div class="col-xs-12 form-group mt-3">
+        <div class="input-container col-xs-12 form-group mt-3">
           <label for="pingSlotPeriod" class="form-label asterisk-if-mandatory">{{
             "PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD" | translate
           }}</label>

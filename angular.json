@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "OS2IoT-frontend:build"
+            "buildTarget": "OS2IoT-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "OS2IoT-frontend:build:production"
+              "buildTarget": "OS2IoT-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OS2IoT-frontend:build"
+            "buildTarget": "OS2IoT-frontend:build"
           }
         },
         "test": {
@@ -112,7 +112,6 @@
       }
     }
   },
-  "defaultProject": "OS2IoT-frontend",
   "cli": {
     "analytics": "5e34252a-5088-421b-bb34-6ef89cd9f167"
   }

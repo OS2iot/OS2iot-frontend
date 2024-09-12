@@ -1,3 +1,7 @@
 .timestamps-container {
   display: flex;
 }
+
+mat-expansion-panel {
+  box-shadow: none !important;
+}

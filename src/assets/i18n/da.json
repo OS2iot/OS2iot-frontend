@@ -419,7 +419,7 @@
     "ENERGYLIMITATIONCLASS": "Energibegrænsningsklassen",
     "SUPPORTEDPROTOCOL": "Understøttede protokoller",
     "DETAIL-TITLE": "Device model detalje",
-    "DEVICE-MODEL": "Device nodel",
+        "DEVICE-MODEL": "Device model",
     "SHOW-OPTIONS": "Håndter device model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
@@ -494,7 +494,8 @@
       "EDIT": "Redigér",
       "DELETE": "Slet"
     },
-    "IOT-DEVICES": "Tilknyttede IoT enheder"
+        "IOT-DEVICES": "Tilknyttede IoT enheder",
+        "TEST-YOUR-DECODER": "Test din payload decoder"
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",

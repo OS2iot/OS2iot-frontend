@@ -20,7 +20,6 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
   private datatargetType: DataTargetType;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     private datatargetService: DatatargetService,
     private route: ActivatedRoute,
     private datatargetTypesService: DatatargetTypesService
@@ -30,8 +29,8 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     const viewContainerRef = this.adHost.viewContainerRef;
 
     viewContainerRef.clear();
-    const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    viewContainerRef.createComponent<DatatargetDetail>(factory);
+
+    viewContainerRef.createComponent<DatatargetDetail>(componentType);
   }
 
   ngOnInit(): void {
