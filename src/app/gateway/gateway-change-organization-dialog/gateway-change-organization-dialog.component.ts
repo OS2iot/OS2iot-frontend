@@ -42,7 +42,7 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
   }
 
   getOrganizations() {
-    this.organizationsSubscription = this.organizationService.getMultiple().subscribe(res => {
+    this.organizationsSubscription = this.organizationService.getMultipleWithGatewayAdmin().subscribe(res => {
       this.organizations = res.data;
       this.filteredOrganizations.next(this.organizations.slice());
     });
