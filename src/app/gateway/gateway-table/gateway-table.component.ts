@@ -14,6 +14,9 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { TableColumn } from "@shared/types/table.type";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { MatDialog } from "@angular/material/dialog";
+import { GatewayDialogModel } from "@shared/models/dialog.model";
+import { GatewayChangeOrganizationDialogComponent } from "../gateway-change-organization-dialog/gateway-change-organization-dialog.component";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -138,7 +141,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     public translate: TranslateService,
     private meService: MeService,
     private deleteDialogService: DeleteDialogService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private changeOrganizationDialog: MatDialog
   ) {
     this.translate.use("da");
     moment.locale("da");
@@ -251,6 +255,20 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
       } else {
         console.error(response);
       }
+    });
+  }
+
+  onOpenChangeOrganizationDialog(id: number) {
+    const dialog = this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
+      data: {
+        gatewayDbId: id,
+      } as GatewayDialogModel,
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      if (!res) return;
+
+      location.reload();
     });
   }
 
