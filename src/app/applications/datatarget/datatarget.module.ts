@@ -7,7 +7,6 @@ import { TranslateModule } from "@ngx-translate/core";
 import { RouterModule } from "@angular/router";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormModule } from "@shared/components/forms/form.module";
-import { OpendatadkComponent } from "./opendatadk/opendatadk.component";
 import { OpendatadkEditComponent } from "./opendatadk/opendatadk-edit/opendatadk-edit.component";
 import { OpendatadkDetailComponent } from "./opendatadk/opendatadk-detail/opendatadk-detail.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -39,7 +38,6 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/o
     HttppushDetailTabsComponent,
     HttppushDetailComponent,
     HttppushEditComponent,
-    OpendatadkComponent,
     OpendatadkEditComponent,
     OpendatadkDetailComponent,
     OpenDataDkMailDialogComponent,
