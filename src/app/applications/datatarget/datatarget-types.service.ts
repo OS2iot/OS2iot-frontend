@@ -10,6 +10,7 @@ import { HttppushEditComponent } from "./httppush/httppush-edit/httppush-edit.co
 import { MqttDetailComponent } from "./mqtt-detail/mqtt-detail.component";
 import { MqttEditComponent } from "./mqtt-edit/mqtt-edit.component";
 import { OpendatadkEditComponent } from "./opendatadk/opendatadk-edit/opendatadk-edit.component";
+import { HttppushDetailTabsComponent } from "./httppush/httppush-detail-tabs/httppush-detail-tabs.component";
 
 @Injectable({
   providedIn: "root",
@@ -56,10 +57,12 @@ export class DatatargetTypesService {
 
   getDetailComponent(dataTargetType: DataTargetType): Type<DatatargetDetail> {
     if (dataTargetType === DataTargetType.HTTPPUSH) {
+      return HttppushDetailTabsComponent;
       return HttppushDetailComponent;
     }
 
     if (dataTargetType === DataTargetType.OPENDATADK) {
+      return HttppushDetailTabsComponent;
       return HttppushDetailComponent;
     }
 

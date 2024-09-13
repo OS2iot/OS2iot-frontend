@@ -19,6 +19,7 @@ import { IotDeviceDetailsTabComponent } from "@applications/iot-devices/iot-devi
 import { IotDeviceHistoryTabComponent } from "@applications/iot-devices/iot-device-detail/iot-device-history-tab/iot-device-history-tab.component";
 import { IotDeviceDataPacketsTabComponent } from "@applications/iot-devices/iot-device-detail/iot-device-data-packets-tab/iot-device-data-packets-tab.component";
 import { IotDeviceDownlinkTabComponent } from "@applications/iot-devices/iot-device-detail/iot-device-downlink-tab/iot-device-downlink-tab.component";
+import { HttppushDetailComponent } from "./datatarget/httppush/httppush-detail/httppush-detail.component";
 
 const applicationRoutes: Routes = [
   {
@@ -70,6 +71,9 @@ const applicationRoutes: Routes = [
           {
             path: "datatarget/:datatargetId",
             component: DatatargetDetailComponent,
+            children: [
+              {path: "httppush-detail", component: HttppushDetailComponent }
+            ]
           },
           { path: "multicast-edit", component: MulticastEditComponent },
           {

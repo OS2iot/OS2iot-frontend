@@ -61,7 +61,7 @@
               >
                 <button
                   type="button"
-                  id="dropdown-{{ data.name }}"
+                  id="dropdown-{{ data?.name }}"
                   class="btn btn-primary dropdown-toggle"
                   data-toggle="dropdown"
                   aria-haspopup="true"
@@ -69,7 +69,7 @@
                 >
                   {{ dropDownButton.label }} <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data.name }}">
+                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data?.name }}">
                   <li class="dropdown-item">
                     <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
                   </li>

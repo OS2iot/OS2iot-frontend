@@ -16,6 +16,7 @@ import { SharedModule } from "@shared/shared.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
 import { DatatargetNewComponent } from "./datatarget-new/datatarget-new.component";
 import { FiwareEditComponent } from "./fiware/fiware-edit/fiware-edit.component";
+import { HttppushDetailTabsComponent } from "./httppush/httppush-detail-tabs/httppush-detail-tabs.component";
 import { FiwareDetailComponent } from "./fiware/fiware-detail/fiware-detail.component";
 import { HttppushDetailComponent } from "./httppush/httppush-detail/httppush-detail.component";
 import { HttppushEditComponent } from "./httppush/httppush-edit/httppush-edit.component";
@@ -35,6 +36,7 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/o
     DatatargetDetailComponent,
     FiwareDetailComponent,
     FiwareEditComponent,
+    HttppushDetailTabsComponent,
     HttppushDetailComponent,
     HttppushEditComponent,
     OpendatadkComponent,
