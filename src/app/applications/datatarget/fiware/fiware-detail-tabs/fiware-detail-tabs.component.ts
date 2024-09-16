@@ -5,19 +5,16 @@ import { DatatargetDetailTabsCommon } from "@applications/datatarget/datatarget-
 import { DatatargetService } from "@applications/datatarget/datatarget.service";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
-import { DataTargetType } from "@shared/enums/datatarget-type";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-httppush-detail-tabs",
-  templateUrl: "./httppush-detail-tabs.component.html",
-  styleUrl: "./httppush-detail-tabs.component.scss",
+  selector: "app-fiware-detail-tabs",
+  templateUrl: "./fiware-detail-tabs.component.html",
+  styleUrl: "./fiware-detail-tabs.component.scss",
 })
-export class HttppushDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
-  dataTargetType = DataTargetType;
-
+export class FiwareDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
   protected override getDetailsLink() {
-    return "httppush-detail";
+    return "fiware-detail";
   }
 
   constructor(

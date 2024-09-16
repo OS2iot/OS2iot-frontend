@@ -1,0 +1,13 @@
+<app-top-bar *ngIf="datatarget" [data]="datatarget" [backButton]="backButton" [subPage]="true"
+    [addDetailDowndown]="true" [dropDownButton]="dropdownButton" (deleteSelectedInDropdown)="onDeleteDatatarget()"
+    [canEdit]="canEdit">
+</app-top-bar>
+
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link *ngFor="let link of navTabs" [routerLink]="'./' + link.link" routerLinkActive
+        #rla="routerLinkActive" [active]="rla.isActive">{{ link.label | translate }}</a>
+</nav>
+<mat-divider></mat-divider>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<router-outlet></router-outlet>
