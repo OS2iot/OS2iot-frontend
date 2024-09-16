@@ -30,7 +30,7 @@ export class HttppushDetailTabsComponent implements DatatargetDetail, OnDestroy 
       index: 0,
     },
     {
-      label: "IOTDEVICE.HISTORY",
+      label: "GEN.LOG",
       link: "datatarget-log",
       index: 1,
     },

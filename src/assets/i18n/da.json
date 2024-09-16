@@ -19,6 +19,8 @@
         "NEVER-SEEN": "Aldrig set",
         "DATE": "Dato",
         "LOG": "Log",
+        "MESSAGE": "Besked",
+        "DEVICE": "Enhed",
         "NO-DATA": "Der er ingen data at vise"
     },
     "NAV": {

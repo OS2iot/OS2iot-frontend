@@ -26,6 +26,7 @@ import { MqttDetailComponent } from "./mqtt-detail/mqtt-detail.component";
 import { DatatargetTabComponent } from "./datatarget-tab/datatarget-tab.component";
 import { OpenDataDkMailDialogComponent } from "./opendatadk/opendatadk-edit/opendatadk-mail-dialog/opendatadk-mail-dialog";
 import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/opendatadk-warning-dialog/opendatadk-warning-dialog";
+import { DatatargetLogComponent } from "./datatarget-log/datatarget-log.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/o
     DatatargetEditComponent,
     DatatargetNewComponent,
     DatatargetDetailComponent,
+    DatatargetLogComponent,
     FiwareDetailComponent,
     FiwareEditComponent,
     HttppushDetailTabsComponent,

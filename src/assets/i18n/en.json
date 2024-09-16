@@ -3,6 +3,8 @@
         "CANCEL": "Cancel",
         "SHOW": "Show",
         "LOG": "Log",
+        "MESSAGE": "Message",
+        "DEVICE": "Device",
         "PER-PAGE": "Per page"
     },
     "NAV": {
