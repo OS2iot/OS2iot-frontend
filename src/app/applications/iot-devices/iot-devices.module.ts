@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { FormModule } from "@shared/components/forms/form.module";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
-import { DownlinkComponent } from "./iot-device-detail/downlink/downlink.component";
+import { DownlinkComponent } from "./iot-device-detail/downlink/downlinks/downlink.component";
 import { IotDeviceDetailGenericComponent } from "./iot-device-detail/iot-device-detail-generic/iot-device-detail-generic.component";
 import { IotDeviceDetailLorawanComponent } from "./iot-device-detail/iot-device-detail-lorawan/iot-device-detail-lorawan.component";
 import { IotDeviceDetailSigfoxComponent } from "./iot-device-detail/iot-device-detail-sigfox/iot-device-detail-sigfox.component";
@@ -33,6 +33,7 @@ import { ClipboardModule } from "@angular/cdk/clipboard";
 import { ExportCsvDialogComponent } from "./iot-devices-tab/export-csv-dialog/export-csv-dialog.component";
 import { IotDeviceDetailsMqttInternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-internal-broker/iot-device-details-mqtt-internal-broker.component";
 import { IotDeviceDetailsMqttExternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-external-broker/iot-device-details-mqtt-external-broker.component";
+import { DownlinkTablesComponent } from "./iot-device-detail/downlink/downlink-tables/downlink-tables.component";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { IotDeviceDetailsMqttExternalBrokerComponent } from "@applications/iot-d
     IotDeviceDetailSigfoxComponent,
     DownlinkComponent,
     DownlinkDialogComponent,
+    DownlinkTablesComponent,
     DeviceModelComponent,
     DataPackageComponent,
     DataPackagesTimestampComponent,
