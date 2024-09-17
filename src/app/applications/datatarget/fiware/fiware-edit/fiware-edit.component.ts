@@ -272,13 +272,15 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
+  routeToDatatargets() {
+    this.router.navigate(["applications", this.applicationId, "data-targets"]);
+  }
 
-  routeToCreatedDatatarget = () =>
+  routeToCreatedDatatarget() {
     this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
       replaceUrl: true,
     });
-
+  }
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength);

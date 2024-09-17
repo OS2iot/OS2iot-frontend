@@ -90,12 +90,15 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.errorMessages = errors.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
-  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
+  routeToDatatargets() {
+    this.router.navigate(["applications", this.applicationId, "data-targets"]);
+  }
 
-  routeToCreatedDatatarget = () =>
+  routeToCreatedDatatarget() {
     this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
       replaceUrl: true,
     });
+  }
 
   getDatatarget(id: number) {
     this.datatargetSubscription = this.datatargetService.get(id).subscribe((response: Datatarget) => {
