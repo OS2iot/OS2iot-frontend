@@ -99,22 +99,30 @@ body {
   margin-left: 0;
 }
 
-.welcome-screen .mat-dialog-container {
-  background-color: #55b156;
-}
-
-.hide-checkbox {
-  color: $color-white-001;
-
-  .mat-checkbox-frame {
-    border-color: $color-white-001;
-  }
-}
-
 .line-break {
   white-space: pre-line;
 }
 
 .width100percent {
   width: 100%;
+}
+
+.welcome-screen .mat-mdc-dialog-surface {
+  background-color: #55b156 !important;
+  overflow: hidden;
+  padding: 24px;
+}
+
+app-welcome-dialog .hide-checkbox .mdc-checkbox {
+  .mdc-checkbox__native-control:enabled:focus:focus:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
+    border-color: $color-white-001 !important;
+  }
+  .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate="true"])
+    ~ .mdc-checkbox__background {
+    border-color: $color-white-001 !important;
+  }
+}
+
+app-welcome-dialog .mdc-label {
+  color: $color-white-001 !important;
 }

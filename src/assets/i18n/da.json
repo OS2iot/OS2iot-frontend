@@ -1126,13 +1126,9 @@
   "WELCOME-DIALOG": {
     "WELCOME": "VELKOMMEN TIL OS2iot",
     "WELCOME-SUB": " Din indgang til administration af IoT enheder",
-    "LINK-1": "OS2iot's brugerforum",
     "LINK-2": "produktsiden",
     "LINK-3": "Github",
-    "SUB-HEADER-1": "Brugerforum",
     "SUB-HEADER-2": "Om OS2iot",
-    "WELCOME-MESSAGE": "Bliv en aktiv del af ",
-    "WELCOME-MESSAGE-2": ". Her kan du stille spørgsmål, indrapportere fejl og dele dine udviklingsønsker. Ved fælles hjælp bliver løsningen bedre.",
     "WELCOME-MESSAGE-3": "OS2iot er en open source løsning organiseret igennem OS2-fællesskabet. Du kan finde mere information om OS2iot på ",
     "WELCOME-MESSAGE-4": " og følge udviklingen på ",
     "NO-ACCESS": "Du har endnu ikke de fornødne rettigheder i OS2iot. Anmod om adgang til en organisation for at få tildelt rettigheder af din administrator.",
