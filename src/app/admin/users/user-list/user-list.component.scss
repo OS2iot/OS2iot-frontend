@@ -1,0 +1,47 @@
+@import "src/assets/scss/setup/variables";
+
+a {
+  color: $color-link;
+  border-bottom: 0px transparent !important;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &.link-hover,
+  &:visited:hover {
+    color: $color-link-hover;
+    border-bottom: 0px $color-link-hover-bg !important;
+
+    &:disabled,
+    .disabled {
+      background-color: transparent !important;
+    }
+  }
+
+  &:active,
+  &.link-active {
+    background-color: inherit;
+    color: $color-active;
+    border-bottom: 0px $color-link-active-bg !important;
+  }
+
+  &:focus,
+  &.link-focus {
+    color: $color-link-focus;
+    background-color: transparent;
+    border-bottom: 0px $color-link-focus-bg !important;
+  }
+
+  &:disabled,
+  &.disabled {
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    //color: #000 !important; // FIXME: Hvad skal der der være her?
+    outline-offset: inherit !important;
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+  }
+}

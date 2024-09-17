@@ -19,6 +19,7 @@ import { PipesModule } from "@shared/pipes/pipes.module";
 import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
 import { MulticastModule } from "./multicast/multicast.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ApplicationChangeOrganizationDialogComponent } from "./application-change-organization-dialog/application-change-organization-dialog.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ApplicationsListComponent,
     ApplicationsTableComponent,
     BulkImportComponent,
+    ApplicationChangeOrganizationDialogComponent,
   ],
   exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
   imports: [

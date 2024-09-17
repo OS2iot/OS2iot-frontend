@@ -150,6 +150,13 @@
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
       "DEVICE-TYPE": "Forbindelsesteknologi"
+    },
+    "CHANGE-ORGANIZATION": {
+      "TITLE": "Skift organisation",
+      "CHOOSE-ORGANIZATION": "Vælg hvilken organisation denne applikation skal tilhøre",
+      "CHOOSE-USER-GROUPS": "Vælg hvilke brugergrupper, der skal have adgang",
+      "USER-GROUP-AUTO-SELECT": "Brugergruppe med automatisk tilføjelse af nye applikationer er allerede valgt",
+      "SNACKBAR-SAVED": "{{applicationName}} tilhører nu {{organizationName}}"
     }
   },
   "GATEWAY": {
@@ -190,6 +197,11 @@
       "PROJECT": "Projekt",
       "PROTOTYPE": "Prototype",
       "OTHER": "Andet"
+    },
+    "CHANGE-ORGANIZATION": {
+      "TITLE": "Skift organisation",
+      "CHOOSE-ORGANIZATION": "Vælg hvilken organisation denne gateway skal tilhøre",
+      "SNACKBAR-SAVED": "{{gatewayName}} tilhører nu {{organizationName}}"
     }
   },
   "IOT-DEVICE": {
@@ -419,7 +431,7 @@
     "ENERGYLIMITATIONCLASS": "Energibegrænsningsklassen",
     "SUPPORTEDPROTOCOL": "Understøttede protokoller",
     "DETAIL-TITLE": "Device model detalje",
-        "DEVICE-MODEL": "Device model",
+    "DEVICE-MODEL": "Device model",
     "SHOW-OPTIONS": "Håndter device model"
   },
   "LORA-GATEWAY-TABLE-ROW": {
@@ -494,8 +506,8 @@
       "EDIT": "Redigér",
       "DELETE": "Slet"
     },
-        "IOT-DEVICES": "Tilknyttede IoT enheder",
-        "TEST-YOUR-DECODER": "Test din payload decoder"
+    "IOT-DEVICES": "Tilknyttede IoT enheder",
+    "TEST-YOUR-DECODER": "Test din payload decoder"
   },
   "PAYLOAD-DECODER-TABLE-ROW": {
     "EDIT": "Redigér",
