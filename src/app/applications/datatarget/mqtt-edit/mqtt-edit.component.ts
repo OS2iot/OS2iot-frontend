@@ -90,10 +90,12 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.errorMessages = errors.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
+  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
 
-  routeToDatatargets(): void {
-    this.router.navigate(["applications", this.applicationId.toString()]);
-  }
+  routeToCreatedDatatarget = () =>
+    this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
+      replaceUrl: true,
+    });
 
   getDatatarget(id: number) {
     this.datatargetSubscription = this.datatargetService.get(id).subscribe((response: Datatarget) => {
@@ -214,7 +216,7 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
         this.datatargetId = response.id;
         this.datatarget = response;
         this.snackService.showSavedSnack();
-        this.routeToDatatargets();
+        this.routeToCreatedDatatarget();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
