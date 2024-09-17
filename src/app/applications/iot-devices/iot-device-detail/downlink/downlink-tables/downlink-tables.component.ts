@@ -113,10 +113,6 @@ export class DownlinkTablesComponent implements OnInit {
     });
   }
 
-  checkForLoRaWAN(device: IotDevice) {
-    return device.type === DeviceType.LORAWAN;
-  }
-
   getStatus(downlink: DownlinkQueueDto) {
     if (!downlink.acknowledgedAt && !downlink.sendAt) {
       return this.translate.instant("IOTDEVICE.DOWNLINK.IN-QUEUE");
