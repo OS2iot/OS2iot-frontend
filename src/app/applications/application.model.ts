@@ -61,3 +61,8 @@ export interface ApplicationData {
   ok?: boolean;
   count?: number;
 }
+
+export class UpdateApplicationOrganization {
+  public organizationId: number;
+  public permissionIds: number[];
+}

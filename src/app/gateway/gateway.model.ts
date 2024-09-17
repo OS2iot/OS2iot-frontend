@@ -1,6 +1,7 @@
 import { EditPermission } from "@shared/models/edit-permission.model";
 import { CommonLocation } from "@shared/models/common-location.model";
 import { GatewayPlacement, GatewaySetupStatus, GatewayStatusInterval } from "./enums/gateway-status-interval.enum";
+import { Organisation } from "@app/admin/organisation/organisation.model";
 
 export class Gateway extends EditPermission {
   id: number;
@@ -26,6 +27,7 @@ export class Gateway extends EditPermission {
   lastSeenAt: Date;
   organizationId: number;
   organizationName: string;
+  organization: Organisation;
   createdAt: Date;
   updatedAt: Date;
   createdBy: number;
@@ -92,4 +94,8 @@ export interface GatewayStatus {
 export interface AllGatewayStatusResponse {
   data: GatewayStatus[];
   count: number;
+}
+
+export class UpdateGatewayOrganization {
+  public organizationId: number;
 }
