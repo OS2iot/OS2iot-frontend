@@ -9,13 +9,13 @@ import { Multicast } from "../multicast.model";
 import { Location } from "@angular/common";
 import { MulticastService } from "../multicast.service";
 import { SnackService } from "@shared/services/snack.service";
-import { Downlink } from "@applications/iot-devices/downlink.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorMessageService } from "@shared/error-message.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DownlinkDialogComponent } from "@applications/iot-devices/iot-device-detail/downlink/downlink-dialog/downlink-dialog.component";
 import { keyPressedHex } from "@shared/constants/regex-constants";
 import { DownlinkService } from "@shared/services/downlink.service";
+import { Downlink } from "@applications/iot-devices/iot-device-detail/downlink/downlink.model";
 
 @Component({
   selector: "app-multicast-detail",

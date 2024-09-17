@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
-import { Downlink } from "@applications/iot-devices/downlink.model";
 import { RestService } from "@shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { MulticastResponse } from "./multicast-response.model";
 import { Multicast, MulticastData } from "./multicast.model";
+import { Downlink } from "@applications/iot-devices/iot-device-detail/downlink/downlink.model";
 
 @Injectable({
   providedIn: "root",
