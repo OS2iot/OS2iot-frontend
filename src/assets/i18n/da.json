@@ -914,7 +914,8 @@
       "RECEIVEDAT": "Modtaget",
       "CONFIRMED": "Bekræftet (Ja/nej)",
       "NOT-RECEIVED": "Ikke bekræftet modtaget",
-      "IN-QUEUE": "I kø"
+      "IN-QUEUE": "I kø",
+      "QUEUE-FLUSHED": "Kø ryddet"
     },
     "CREATED": "Oprettet",
     "UPDATED": "Senest opdateret",

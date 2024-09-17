@@ -51,7 +51,7 @@ export class DownlinkComponent implements OnInit {
     );
   }
 
-  clickDownlink() {
+  handleQueueDownlink() {
     if (this.validateHex(this.downlink.data)) {
       this.startDownlink();
     }
@@ -74,7 +74,6 @@ export class DownlinkComponent implements OnInit {
         });
       },
       error => {
-        console.log(error);
         this.handleError(error);
       }
     );

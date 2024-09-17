@@ -8,7 +8,6 @@ import { DeviceType } from "@shared/enums/device-type";
 import { ErrorMessageService } from "@shared/error-message.service";
 import { DownlinkService } from "@shared/services/downlink.service";
 import { DownlinkDialogComponent } from "../downlink-dialog/downlink-dialog.component";
-import { Downlink } from "../downlink.model";
 import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
@@ -29,7 +28,7 @@ export class DownlinkTablesComponent implements OnInit {
     "acknowledgedAt",
     "status",
     "fCntDown",
-    "acknowlegded",
+    "acknowledged",
     "payload",
     "port",
   ];
@@ -77,12 +76,12 @@ export class DownlinkTablesComponent implements OnInit {
     );
   }
 
-  clickReload() {
+  handleReload() {
     this.getDownlinksQueue();
     this.getHistoricalDownlinksQueue();
   }
 
-  clickFlushQueue() {
+  handleFlushQueue() {
     this.openDownlinkDialog();
   }
 
@@ -97,13 +96,16 @@ export class DownlinkTablesComponent implements OnInit {
       if (result === true) {
         this.downlinkService.flushQueue(this.device.id).subscribe(
           response => {
-            this.snackBar.open("Kø ryddet", "OK", {
-              duration: 10000,
-            });
+            this.snackBar.open(
+              this.translate.instant("IOTDEVICE.DOWNLINK.QUEUE-FLUSHED"),
+              this.translate.instant("DIALOG.OK"),
+              {
+                duration: 10000,
+              }
+            );
             this.getDownlinksQueue();
           },
           error => {
-            console.log(error);
             this.handleError(error);
           }
         );
@@ -127,10 +129,6 @@ export class DownlinkTablesComponent implements OnInit {
   }
 
   isAcknowledged(downlink: DownlinkQueueDto) {
-    if (!downlink.acknowledged) {
-      return this.translate.instant("false");
-    } else {
-      return this.translate.instant("true");
-    }
+    return !downlink.acknowledged ? this.translate.instant("false") : this.translate.instant("true");
   }
 }
