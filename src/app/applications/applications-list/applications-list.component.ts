@@ -134,7 +134,7 @@ export class ApplicationsListComponent implements OnInit {
           disableClose: true,
           closeOnNavigation: true,
           panelClass: "welcome-screen",
-          maxWidth: "60vw",
+          maxWidth: "40vw",
           data: {
             hasSomePermission: this.hasSomePermission,
           } as WelcomeDialogModel,
