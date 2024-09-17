@@ -7,25 +7,25 @@
         <!-- Timestamp column -->
         <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "GATEWAY.STATS-TIMESTAMP" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.createdAt | tableDateWithSecondsPipe }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.createdAt | date:'dd-MM-yyyy - HH:mm:ss' }}</td>
         </ng-container>
 
         <!-- Type column -->
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "DATATARGET-TABLE.TYPE" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+            <td mat-cell *matCellDef="let element">{{ ('DATATARGET.RESPONSE_TYPE.' + element.type) | translate }}</td>
         </ng-container>
 
         <!-- Message column -->
         <ng-container matColumnDef="message">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "GEN.MESSAGE" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.message }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.statusCode }} {{ element.message }}</td>
         </ng-container>
 
         <!-- Device column -->
         <ng-container matColumnDef="device">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "GEN.DEVICE" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.device }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.iotDevice?.name }}</td>
         </ng-container>
 
         <!-- Actually showing the data -->

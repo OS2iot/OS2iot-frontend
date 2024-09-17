@@ -260,6 +260,10 @@
         },
         "OPENDATADK": {
             "TYPE": "OpenDataDK"
+        },
+        "RESPONSE_TYPE": {
+            "ERROR": "Fejl",
+            "OK": "Ok"
         }
     },
     "MULTICAST": {

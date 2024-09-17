@@ -1,11 +1,10 @@
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
+
 export class DatatargetLog {
   createdAt: Date;
 
-  // TODO: Enum??
   type: string;
-
   message: string;
-
-  // TODO: Reference to devices?
-  device?: string;
+  statusCode?: number;
+  iotDevice?: IotDevice;
 }

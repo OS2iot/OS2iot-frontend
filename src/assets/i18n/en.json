@@ -26,6 +26,12 @@
         "EDIT": "Edit",
         "SHOW-OPTIONS": "Show options"
     },
+    "DATATARGET": {
+        "RESPONSE_TYPE": {
+            "ERROR": "Fejl",
+            "OK": "Ok"
+        }
+    },
     "FORM": {
         "CREATE-NEW-APPLICATION": "Create new application",
         "EDIT-NEW-APPLICATION": "Edit application",
