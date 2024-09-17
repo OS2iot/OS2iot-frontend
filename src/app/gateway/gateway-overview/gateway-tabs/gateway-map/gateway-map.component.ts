@@ -42,26 +42,17 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private getGateways(): void {
-    this.gatewaySubscription = this.chirpstackGatewayService
-      .getMultiple({
-        limit: null,
-        offset: null,
-        sort: null,
-      })
-      .subscribe((gateways: GatewayResponseMany) => {
-        this.gateways = gateways.resultList;
-        this.mapToCoordinateList();
-        this.setCanEdit();
-        this.isLoadingResults = false;
-      });
+    this.gatewaySubscription = this.chirpstackGatewayService.getForMaps().subscribe((gateways: GatewayResponseMany) => {
+      this.gateways = gateways.resultList;
+      this.mapToCoordinateList();
+      this.setCanEdit();
+      this.isLoadingResults = false;
+    });
   }
 
   private getGatewayWith(orgId: number): void {
     this.gatewaySubscription = this.chirpstackGatewayService
-      .getMultiple({
-        limit: null,
-        offset: null,
-        sort: null,
+      .getForMaps({
         organizationId: orgId,
       })
       .subscribe((gateways: GatewayResponseMany) => {
