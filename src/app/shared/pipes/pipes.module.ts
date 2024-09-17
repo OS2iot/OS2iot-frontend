@@ -4,7 +4,7 @@ import { YesNoPipe } from "./yesNo.pipe";
 import { ActiveDeactivePipe } from "./activeDeactive.pipe";
 import { IsGlobalAdminPipe } from "./permission/is-global-admin.pipe";
 import { CreatedUpdatedByPipe } from "./created-updated-by.pipe";
-import { CustomDatePipe, CustomTableDatePipe, CustomTableDateWithSecondsPipe, DateOnlyPipe } from "./custom-date.pipe";
+import { CustomDatePipe, CustomDatePipeWithSeconds, CustomTableDatePipe, CustomTableDateWithSecondsPipe, DateOnlyPipe } from "./custom-date.pipe";
 import { FilterDevicesPipe } from "./filter-devices.pipe";
 import { TranslatePermissionsPipe } from "./permission/translate-permissions.pipe";
 import { SortByPipe } from "./sort-by.pipe";
@@ -19,6 +19,7 @@ import { SortByTranslationPipe } from "./sort-by-translation.pipe";
     ActiveDeactivePipe,
     YesNoPipe,
     CustomDatePipe,
+    CustomDatePipeWithSeconds,
     CustomTableDatePipe,
     CustomTableDateWithSecondsPipe,
     DateOnlyPipe,
@@ -37,6 +38,7 @@ import { SortByTranslationPipe } from "./sort-by-translation.pipe";
     ActiveDeactivePipe,
     YesNoPipe,
     CustomDatePipe,
+    CustomDatePipeWithSeconds,
     CustomTableDatePipe,
     CustomTableDateWithSecondsPipe,
     DateOnlyPipe,

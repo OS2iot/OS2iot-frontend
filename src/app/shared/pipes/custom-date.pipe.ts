@@ -11,6 +11,15 @@ export class CustomDatePipe extends DatePipe implements PipeTransform {
 }
 
 @Pipe({
+  name: "dkTimeWithSeconds",
+})
+export class CustomDatePipeWithSeconds extends DatePipe implements PipeTransform {
+  transform(value: any, args?: any): any {
+    return super.transform(value, " 'den' dd-MM-yyyy kl. HH:mm:ss");
+  }
+}
+
+@Pipe({
   name: "tableDatePipe",
 })
 export class CustomTableDatePipe extends DatePipe implements PipeTransform {
