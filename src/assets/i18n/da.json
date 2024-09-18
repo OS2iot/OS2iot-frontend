@@ -984,6 +984,14 @@
       "COPY-TO-CLIPBOARD": "Kopier",
       "DOWNLOAD": "Download",
       "NOCONNECTION": "Denne enhed kunne ikke forbinde til den eksterne broker. Ret indstillingerne til eller slet enheden."
+    },
+    "CHANGE-APPLICATION": {
+      "TITLE": "Skift applikation",
+      "CHOOSE-ORGANIZATION": "Vælg den organisation som ejer den applikationen, du vil skifte til",
+      "CHOOSE-APPLICATION": "Vælg hvilken applikation du vil skifte til",
+      "CHOOSE-DEVICE-MODEL": "Vælg device model",
+      "CHOOSE-DATA-TARGET": "Tilknyt data target",
+      "SNACKBAR-SAVED": "{{deviceName}} er nu tilknyttet {{applicationName}}"
     }
   },
   "MESSAGE": {

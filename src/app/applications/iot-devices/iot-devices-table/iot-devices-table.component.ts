@@ -18,6 +18,8 @@ import { IoTDeviceService } from "../iot-device.service";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { ActivatedRoute } from "@angular/router";
 import { TableColumn } from "@shared/types/table.type";
+import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-application-dialog/iot-device-change-application-dialog.component";
+import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -113,6 +115,7 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   public pageSize = environment.tablePageSize;
   public pageSizeOptions = DefaultPageSizeOptions;
   public canEdit = false;
+  deviceTypes = DeviceType;
 
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
@@ -131,7 +134,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     public iotDeviceService: IoTDeviceService,
     private meService: MeService,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private changeApplicationDialog: MatDialog
   ) {
     translate.use("da");
     moment.locale("da");
@@ -240,6 +244,15 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
         }
       });
     }
+  }
+
+  onOpenChangeApplicationDialog(id: number) {
+    this.data[0].type === DeviceType.SIGFOX;
+    this.changeApplicationDialog.open(IoTDeviceChangeApplicationDialogComponent, {
+      data: {
+        deviceId: id,
+      } as IoTDeviceApplicationDialogModel,
+    });
   }
 
   showSigfoxDeleteDialog() {

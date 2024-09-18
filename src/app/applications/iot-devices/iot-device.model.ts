@@ -87,3 +87,10 @@ export class IoTDeviceStatsResponse {
   snr: number;
   rxPacketsPerDr?: Record<number, number>;
 }
+
+export class UpdateIoTDeviceApplication {
+  public deviceModelId: number;
+  public organizationId: number;
+  public applicationId: number;
+  public dataTargetIds: number[];
+}
