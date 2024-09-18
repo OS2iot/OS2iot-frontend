@@ -4,6 +4,9 @@
       <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
         <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
         <app-general-details [data]="datatarget"></app-general-details>
+        <p>
+          <strong>{{ "DATATARGET.LATEST_MESSAGE" | translate }}</strong>{{ datatarget.lastMessageDate | dkTime }}
+        </p>
         <mat-divider></mat-divider>
         <p><strong>Context Broker</strong>{{ datatarget.url }}</p>
         <p>

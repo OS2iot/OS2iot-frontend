@@ -4,6 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
 import { environment } from "@environments/environment";
+import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { Subscription } from "rxjs";
 import { DatatargetLog } from "./datatarget-log.model";
@@ -21,6 +22,8 @@ export class DatatargetLogComponent implements OnDestroy, AfterViewInit {
   displayedColumns: string[] = ["createdAt", "type", "message", "device"];
   pageSizeOptions = DefaultPageSizeOptions;
   pageSize = environment.tablePageSize;
+  faExclamationTriangle = faExclamationTriangle;
+  faCheckCircle = faCheckCircle;
 
   dataSource = new MatTableDataSource<DatatargetLog>();
   isLoadingResults = true;

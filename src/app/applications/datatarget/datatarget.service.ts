@@ -100,6 +100,7 @@ export class DatatargetService {
       updatedBy: dataTargetResponse.updatedBy,
       createdByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.createdBy),
       updatedByName: this.userMinimalService.getUserNameFrom(dataTargetResponse.updatedBy),
+      lastMessageDate: dataTargetResponse.lastMessageDate
     };
     model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(", ");
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();

@@ -28,6 +28,7 @@ export class Datatarget {
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
+  lastMessageDate?: Date
 }
 
 export class DatatargetData {

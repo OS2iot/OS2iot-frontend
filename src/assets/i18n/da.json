@@ -230,6 +230,7 @@
         "NO-TOKENENDPOINT": "Ingen token endpoint URL",
         "NO-CLIENTID": "Ingen client ID",
         "NO-CLIENTSECRET": "Ingen client secret",
+        "LATEST_MESSAGE": "Seneste besked",
         "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
         "OPENDATA-DK": {
             "TYPE": "OpenDataDK",

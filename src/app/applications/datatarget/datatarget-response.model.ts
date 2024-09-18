@@ -25,4 +25,5 @@ export class DatatargetResponse {
   updatedAt: string;
   createdBy: number;
   updatedBy: number;
+  lastMessageDate?: Date
 }

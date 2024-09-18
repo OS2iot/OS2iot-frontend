@@ -1,5 +1,11 @@
 :host {
-    .datatarget-log-container {
-        margin: 2em;
-    }
+  .datatarget-log-container {
+    margin: 2em;
+  }
+  .fa-ok {
+    color: green !important;
+  }
+  .fa-error {
+    color: red !important;
+  }
 }
