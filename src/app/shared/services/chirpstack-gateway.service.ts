@@ -61,6 +61,19 @@ export class ChirpstackGatewayService {
     );
   }
 
+  public getForMaps(params = {}): Observable<GatewayResponseMany> {
+    return this.restService.get(`${this.chripstackGatewayUrl}/getAllForMaps`, params).pipe(
+      map((response: GatewayResponseMany) => {
+        response.resultList.map(gateway => {
+          gateway.organizationName = this.sharedVariableService
+            .getOrganizationInfo()
+            .find(org => org.id === gateway.organizationId)?.name;
+        });
+        return response;
+      })
+    );
+  }
+
   public post(gateway: Gateway): Observable<GatewayData> {
     const gatewayRequest: GatewayRequest = new GatewayRequest();
     gatewayRequest.gateway = gateway;

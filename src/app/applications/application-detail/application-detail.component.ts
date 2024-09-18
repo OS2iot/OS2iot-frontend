@@ -10,7 +10,7 @@ import { DropdownButton } from "@shared/models/dropdown-button.model";
 import { MeService } from "@shared/services/me.service";
 import { Subscription } from "rxjs";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { IotDevicesApplicationMapResponse, IotDevicesResponse } from "@applications/iot-devices/iot-device.model";
+import { IotDevicesApplicationMapResponse } from "@applications/iot-devices/iot-device.model";
 import { RestService } from "@shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -126,11 +126,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
 
   private getGateways(): void {
     this.gatewaysSubscription = this.chirpstackGatewayService
-      .getMultiple({
-        limit: null,
-        offset: null,
-        sort: null,
-      })
+      .getForMaps()
       .subscribe((gateways: GatewayResponseMany) => {
         this.gateways = gateways.resultList;
         this.mapGatewaysToCoordinateList();
