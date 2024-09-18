@@ -1,25 +1,27 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { UntypedFormGroup } from "@angular/forms";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { UserRequest } from "../user.model";
 import { TranslateService } from "@ngx-translate/core";
 import { UserService } from "../user.service";
-import { Subscription } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { Location } from "@angular/common";
-import { PermissionType } from "@app/admin/permission/permission.model";
-import { AuthService, CurrentUserInfoResponse } from "@auth/auth.service";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { PermissionResponse, PermissionType } from "@app/admin/permission/permission.model";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { PermissionService } from "@app/admin/permission/permission.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
   selector: "app-user-edit",
   templateUrl: "./user-edit.component.html",
   styleUrls: ["./user-edit.component.scss"],
 })
-export class UserEditComponent implements OnInit {
-  user = new UserRequest();
+export class UserEditComponent implements OnInit, OnDestroy {
+  public user = new UserRequest();
+  public permissions: PermissionResponse[];
+  public permissionsSubscription: Subscription;
   public errorMessage: string;
   public errorMessages: any;
   public errorFields: string[];
@@ -28,20 +30,22 @@ export class UserEditComponent implements OnInit {
   public backButtonTitle = "";
   public title = "";
   public submitButton = "";
-  id: number;
-  subscription: Subscription;
-  isGlobalAdmin = false;
-  isKombit: boolean;
-  canEdit: boolean;
+  public id: number;
+  public subscription: Subscription;
+  public isGlobalAdmin = false;
+  public isKombit: boolean;
+  public canEdit: boolean;
+  public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  private _onDestroy = new Subject<void>();
 
   constructor(
     private translate: TranslateService,
     private route: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-    private authService: AuthService,
-    private sharedVariableService: SharedVariableService,
-    private meService: MeService
+    private meService: MeService,
+    private permissionService: PermissionService,
+    private sharedVariableService: SharedVariableService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +64,7 @@ export class UserEditComponent implements OnInit {
     }
     this.amIGlobalAdmin();
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
+    this.getPermissions(this.sharedVariableService.getUserInfo().user.id);
   }
 
   private getUser(id: number) {
@@ -70,6 +75,8 @@ export class UserEditComponent implements OnInit {
       this.user.active = response.active;
       this.user.globalAdmin = response.permissions.some(perm => perm.name === PermissionType.GlobalAdmin);
       this.isKombit = response.nameId != null;
+      this.user.permissionIds = response.permissions.map(pm => pm.id);
+
       // We cannot set the password.
     });
   }
@@ -80,8 +87,7 @@ export class UserEditComponent implements OnInit {
 
   private create(): void {
     this.userService.post(this.user).subscribe(
-      response => {
-        console.log(response);
+      () => {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
@@ -131,5 +137,37 @@ export class UserEditComponent implements OnInit {
 
   routeBack(): void {
     this.location.back();
+  }
+
+  public compare(matOptionValue: number, ngModelObject: number): boolean {
+    return matOptionValue === ngModelObject;
+  }
+
+  private getPermissions(userId: number) {
+    this.permissionsSubscription = this.permissionService
+      .getPermissionsWithoutUsers(
+        1000,
+        0,
+        undefined,
+        undefined,
+        this.meService.hasGlobalAdmin() ? undefined : userId,
+        undefined,
+        true
+      )
+      .subscribe(res => {
+        this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
+        if (!this.id) {
+          this.permissionMultiCtrl.setValue(this.user.permissionIds);
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.permissionsSubscription) {
+      this.permissionsSubscription.unsubscribe();
+    }
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 }

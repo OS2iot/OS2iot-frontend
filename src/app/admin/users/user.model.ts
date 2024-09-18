@@ -9,6 +9,7 @@ export class UserRequest {
   active: boolean;
   globalAdmin: boolean;
   showWelcomeScreen: boolean;
+  permissionIds: number[]
 }
 
 export interface UserResponse {
