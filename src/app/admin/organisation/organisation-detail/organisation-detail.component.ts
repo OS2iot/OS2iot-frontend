@@ -17,6 +17,8 @@ import { environment } from "@environments/environment";
 import { Title } from "@angular/platform-browser";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-organisation-detail",
@@ -34,6 +36,7 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   private applicationsSubscription: Subscription;
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
+  public errorMessages: string[];
 
   organisation: OrganisationResponse;
   public backButton: BackButton = {
@@ -53,7 +56,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     private deleteDialogService: DeleteDialogService,
     private location: Location,
     private titleService: Title,
-    private meService: MeService
+    private meService: MeService,
+    private errorMessageService: ErrorMessageService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -100,6 +104,10 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
         this.organisationService.delete(this.organisation.id).subscribe(response => {
+          if (response instanceof HttpErrorResponse) {
+            this.errorMessages = this.errorMessageService.handleErrorMessageWithFields(response).errorMessages;
+            return;
+          }
           this.location.back();
         });
       } else {

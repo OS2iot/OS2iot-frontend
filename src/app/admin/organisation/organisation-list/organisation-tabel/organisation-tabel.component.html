@@ -1,3 +1,10 @@
+<div *ngIf="errorMessages" class="error-messages p-3">
+  <ul class="mb-0">
+    <li *ngFor="let error of errorMessages">
+      {{ error | translate }}
+    </li>
+  </ul>
+</div>
 <div class="mat-elevation-z8">
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>

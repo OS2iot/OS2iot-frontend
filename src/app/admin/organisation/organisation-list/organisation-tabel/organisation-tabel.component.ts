@@ -8,6 +8,8 @@ import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { environment } from "@environments/environment";
 import { startWith, switchMap, map, catchError } from "rxjs/operators";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { ErrorMessageService } from "@shared/error-message.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-organisation-tabel",
@@ -30,8 +32,13 @@ export class OrganisationTabelComponent implements AfterViewInit {
   pageSizeOptions = DefaultPageSizeOptions;
 
   isLoadingResults = true;
+  public errorMessages: string[];
 
-  constructor(private organisationService: OrganisationService, private deleteDialogService: DeleteDialogService) {}
+  constructor(
+    private organisationService: OrganisationService,
+    private deleteDialogService: DeleteDialogService,
+    private errorMessageService: ErrorMessageService
+  ) {}
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
@@ -72,6 +79,10 @@ export class OrganisationTabelComponent implements AfterViewInit {
     this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
         this.organisationService.delete(element.id).subscribe(response => {
+          if (response instanceof HttpErrorResponse) {
+            this.errorMessages = this.errorMessageService.handleErrorMessageWithFields(response).errorMessages;
+            return;
+          }
           if (response.ok) {
             this.refresh();
           }
