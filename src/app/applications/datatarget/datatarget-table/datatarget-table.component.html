@@ -11,7 +11,7 @@
       <td mat-cell *matCellDef="let element">
         <a [routerLink]="['../datatarget', element.id]" routerLinkActive="active" class="application-link">{{
           element.name
-        }}</a>
+          }}</a>
       </td>
     </ng-container>
 
@@ -25,25 +25,30 @@
       </td>
     </ng-container>
 
+    <!-- 24h Status Column -->
+    <ng-container matColumnDef="24h_status">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "DATATARGET.24H_STATUS" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <fa-icon *ngIf="!element.hasRecentErrors" [icon]="faCheckCircle" class="fa-ok"></fa-icon>
+        <fa-icon *ngIf="element.hasRecentErrors" [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
+      </td>
+    </ng-container>
+
     <!-- Menu Column -->
     <ng-container matColumnDef="menu">
       <th mat-header-cell *matHeaderCellDef class="col-1"></th>
       <td mat-cell *matCellDef="let element">
         <div class="dropdown" *ngIf="canEdit">
-          <a
-            href="#"
-            role="button"
-            id="tableRowDropdown-{{ element.id }}"
-            class="applicationRow__edit dropdown-toggle"
-            data-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate"
-          ></a>
+          <a href="#" role="button" id="tableRowDropdown-{{ element.id }}" class="applicationRow__edit dropdown-toggle"
+            data-toggle="dropdown" aria-expanded="false"
+            [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate"></a>
           <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
             <li class="dropdown-item">
               <a [routerLink]="['../datatarget-edit', element.id]" routerLinkActive="active">{{
                 "GEN.EDIT" | translate
-              }}</a>
+                }}</a>
             </li>
             <li class="dropdown-item">
               <a (click)="deleteDatatarget(element)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
@@ -56,11 +61,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <mat-paginator
-    [pageSizeOptions]="pageSizeOptions"
-    [pageSize]="pageSize"
-    [length]="resultsLength"
-    showFirstLastButtons
-  >
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" [length]="resultsLength"
+    showFirstLastButtons>
   </mat-paginator>
 </div>

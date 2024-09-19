@@ -5,7 +5,12 @@
 
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
     <a mat-tab-link *ngFor="let link of navTabs" [routerLink]="'./' + link.link" routerLinkActive
-        #rla="routerLinkActive" [active]="rla.isActive">{{ link.label | translate }}</a>
+        #rla="routerLinkActive" [active]="rla.isActive">
+        {{ link.label | translate }}
+        <fa-icon *ngIf="link.link === logLink && datatarget?.hasRecentErrors" [icon]="faExclamationTriangle"
+            class="fa-error">
+        </fa-icon>
+    </a>
 </nav>
 <mat-divider></mat-divider>
 <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

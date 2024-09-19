@@ -25,5 +25,6 @@ export class DatatargetResponse {
   updatedAt: string;
   createdBy: number;
   updatedBy: number;
-  lastMessageDate?: Date
+  lastMessageDate?: Date;
+  hasRecentErrors?: boolean;
 }

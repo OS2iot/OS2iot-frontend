@@ -28,7 +28,8 @@ export class Datatarget {
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
-  lastMessageDate?: Date
+  lastMessageDate?: Date;
+  hasRecentErrors?: boolean;
 }
 
 export class DatatargetData {

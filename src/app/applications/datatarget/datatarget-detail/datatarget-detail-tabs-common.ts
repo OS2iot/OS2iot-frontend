@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DatatargetDetail } from "@applications/datatarget/datatarget-detail/datatarget-detail";
 import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { DatatargetService } from "@applications/datatarget/datatarget.service";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
@@ -16,6 +17,9 @@ import { Subscription } from "rxjs";
 export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
   protected abstract getDetailsLink(): string;
 
+  faExclamationTriangle = faExclamationTriangle;
+
+  logLink: "datatarget-log" = "datatarget-log";
   navTabs: NavTab[] = [
     {
       label: "APPLICATION.DETAILS",
@@ -24,7 +28,7 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
     },
     {
       label: "GEN.LOG",
-      link: "datatarget-log",
+      link: this.logLink,
       index: 1,
     },
   ];

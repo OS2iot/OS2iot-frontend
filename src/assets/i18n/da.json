@@ -231,6 +231,7 @@
         "NO-CLIENTID": "Ingen client ID",
         "NO-CLIENTSECRET": "Ingen client secret",
         "LATEST_MESSAGE": "Seneste besked",
+        "24H_STATUS": "Status (24 timer)",
         "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
         "OPENDATA-DK": {
             "TYPE": "OpenDataDK",
