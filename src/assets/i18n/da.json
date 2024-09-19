@@ -991,6 +991,7 @@
       "CHOOSE-APPLICATION": "Vælg hvilken applikation du vil skifte til",
       "CHOOSE-DEVICE-MODEL": "Vælg device model",
       "CHOOSE-DATA-TARGET": "Tilknyt data target",
+      "ADD-DATA-TARGET": "Vælg data target",
       "SNACKBAR-SAVED": "{{deviceName}} er nu tilknyttet {{applicationName}}"
     }
   },

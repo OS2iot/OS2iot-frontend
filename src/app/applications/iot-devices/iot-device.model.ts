@@ -92,5 +92,5 @@ export class UpdateIoTDeviceApplication {
   public deviceModelId: number;
   public organizationId: number;
   public applicationId: number;
-  public dataTargetIds: number[];
+  public dataTargetToPayloadDecoderIds: { dataTargetId: number; payloadDecoderId: number }[];
 }

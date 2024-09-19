@@ -41,32 +41,31 @@
       [(value)]="iotDeviceUpdate.deviceModelId"
       [compareWith]="compare"
     >
-      <mat-option *ngFor="let deviceModel of filteredDeviceModels | async" [value]="deviceModel.id">
+      <mat-option *ngFor="let deviceModel of deviceModels" [value]="deviceModel.id">
         {{ deviceModel.body.name }}
       </mat-option>
     </mat-select>
   </div>
 
-  <div class="container row" class="mt-3">
-    <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">{{ "QUESTION.ADD-RELATIONS" | translate }}</a>
-    <ng-container *ngIf="devices && payloadDecoders && payloadDeviceDatatarget?.length > 0">
+  <div class="container row" class="mt-3" mat-dialog-content>
+    <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">{{
+      "IOTDEVICE.CHANGE-APPLICATION.CHOOSE-DATA-TARGET" | translate
+    }}</a>
+    <ng-container *ngIf="payloadDecoders && iotDeviceUpdate.dataTargetToPayloadDecoderIds?.length > 0">
       <table class="table table-striped table-bordered">
         <tbody>
-          <tr *ngFor="let element of payloadDeviceDatatarget; let i = index" [attr.data-index]="i">
+          <tr
+            *ngFor="let element of iotDeviceUpdate.dataTargetToPayloadDecoderIds; let i = index"
+            [attr.data-index]="i"
+          >
             <td>
               <div class="row">
                 <mat-form-field appearance="fill">
-                  <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
-                  <mat-select multiple name="devices" [(value)]="element.iotDeviceIds">
-                    <mat-option disabled="disabled" class="filter-option">
-                      <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAllDevices(i)">
-                        {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
-                      </button>
-                      <button mat-raised-button class="mat-primary fill text-sm" (click)="deselectAllDevices(i)">
-                        {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
-                      </button>
-                    </mat-option>
-                    <mat-option *ngFor="let device of devices" [value]="device.id">{{ device.name }}</mat-option>
+                  <mat-label>{{ "IOTDEVICE.CHANGE-APPLICATION.ADD-DATA-TARGET" | translate }}</mat-label>
+                  <mat-select name="dataTarget" [(value)]="element.dataTargetId">
+                    <mat-option *ngFor="let dataTarget of dataTargets" [value]="dataTarget.id">{{
+                      dataTarget.name
+                    }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -75,7 +74,7 @@
               <div class="row">
                 <mat-form-field appearance="fill">
                   <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
-                  <mat-select matNativeControl name="payloadDecoderId" [(value)]="element.payloadDecoderId">
+                  <mat-select matNativeControl name="payloadDecoder" [(value)]="element.payloadDecoderId">
                     <mat-option [value]="0">
                       {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
                     </mat-option>
@@ -87,12 +86,12 @@
               </div>
             </td>
             <td>
-              <!-- <a (click)="openDeleteDialog(i)">
+              <a (click)="deleteRow(i)">
                 <div class="text-center m-2">
                   <fa-icon [icon]="faTimesCircle"></fa-icon>
                   <p>{{ "DATATARGET.DELETE" | translate }}</p>
                 </div>
-              </a> -->
+              </a>
             </td>
           </tr>
         </tbody>
