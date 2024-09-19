@@ -97,7 +97,7 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
       .getByIoTDevice(id)
       .subscribe(dataTargetsAndPayloadDecoders => {
         const dataTargetsAndPayloadIds = dataTargetsAndPayloadDecoders.data.map(val => {
-          return { dataTargetId: val.dataTarget.id, payloadDecoderId: val.payloadDecoder.id };
+          return { dataTargetId: val.dataTarget.id, payloadDecoderId: val.payloadDecoder?.id };
         });
         this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.push(...dataTargetsAndPayloadIds);
       });
@@ -179,7 +179,8 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
     if (
       !this.iotDeviceUpdate.applicationId ||
       !this.iotDeviceUpdate.organizationId ||
-      !this.iotDeviceUpdate.deviceModelId
+      !this.iotDeviceUpdate.deviceModelId ||
+      this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.some(val => !val.dataTargetId)
     )
       return;
 
@@ -187,9 +188,9 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
       .changeIoTDeviceApplication(this.iotDevice.id, this.iotDeviceUpdate)
       .subscribe(savedIoTDevice => {
         this.snackBar.open(
-          this.translate.instant("APPLICATION.CHANGE-ORGANIZATION.SNACKBAR-SAVED", {
-            applicationName: savedIoTDevice.name,
-            organizationName: savedIoTDevice.application.belongsTo.name,
+          this.translate.instant("IOTDEVICE.CHANGE-APPLICATION.SNACKBAR-SAVED", {
+            deviceName: savedIoTDevice.name,
+            applicationName: savedIoTDevice.application.name,
           }),
           "",
           {
