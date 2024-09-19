@@ -10,13 +10,16 @@ import { DropdownButton } from "@shared/models/dropdown-button.model";
 import { MeService } from "@shared/services/me.service";
 import { Subscription } from "rxjs";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { IotDevicesApplicationMapResponse, IotDevicesResponse } from "@applications/iot-devices/iot-device.model";
+import { IotDevicesApplicationMapResponse } from "@applications/iot-devices/iot-device.model";
 import { RestService } from "@shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { Gateway, GatewayResponseMany } from "@app/gateway/gateway.model";
+import { MatDialog } from "@angular/material/dialog";
+import { ApplicationChangeOrganizationDialogComponent } from "../application-change-organization-dialog/application-change-organization-dialog.component";
+import { ApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-application",
@@ -68,7 +71,8 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     private deleteDialogService: DeleteDialogService,
     private restService: RestService,
     private sharedVariableService: SharedVariableService,
-    private chirpstackGatewayService: ChirpstackGatewayService
+    private chirpstackGatewayService: ChirpstackGatewayService,
+    private changeOrganizationDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +83,16 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
         label: "",
         editRouterLink: "../edit-application/" + this.id,
         isErasable: true,
+        extraOptions: [],
       };
+
+      this.translate.get("APPLICATION.CHANGE-ORGANIZATION.TITLE").subscribe(translation => {
+        this.dropdownButton.extraOptions.push({
+          id: this.id,
+          label: translation,
+          onClick: () => this.onOpenChangeOrganizationDialog(),
+        });
+      });
     }
 
     this.translate
@@ -113,11 +126,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
 
   private getGateways(): void {
     this.gatewaysSubscription = this.chirpstackGatewayService
-      .getMultiple({
-        limit: null,
-        offset: null,
-        sort: null,
-      })
+      .getForMaps()
       .subscribe((gateways: GatewayResponseMany) => {
         this.gateways = gateways.resultList;
         this.mapGatewaysToCoordinateList();
@@ -190,6 +199,15 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
       } else {
         console.log(response);
       }
+    });
+  }
+
+  onOpenChangeOrganizationDialog() {
+    this.changeOrganizationDialog.open(ApplicationChangeOrganizationDialogComponent, {
+      data: {
+        applicationId: this.id,
+        organizationId: this.application.belongsTo.id,
+      } as ApplicationDialogModel,
     });
   }
 

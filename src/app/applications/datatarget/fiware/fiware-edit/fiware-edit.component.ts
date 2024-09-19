@@ -226,6 +226,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
         this.datatargetid = response.id;
         this.datatarget = response;
         this.showSavedSnack();
+        this.routeToCreatedDatatarget();
       },
       (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -271,10 +272,15 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.scrollToTopService.scrollToTop();
   }
 
-  routeToDatatargets(): void {
-    this.router.navigate(["applications", this.applicationId.toString()]);
+  routeToDatatargets() {
+    this.router.navigate(["applications", this.applicationId, "data-targets"]);
   }
 
+  routeToCreatedDatatarget() {
+    this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
+      replaceUrl: true,
+    });
+  }
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength);

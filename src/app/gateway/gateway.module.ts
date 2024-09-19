@@ -18,6 +18,7 @@ import { GraphModule } from "@app/graph/graph.module";
 import { GatewayListComponent } from "./gateway-overview/gateway-tabs/gateway-list/gateway-list.component";
 import { GatewayMapComponent } from "./gateway-overview/gateway-tabs/gateway-map/gateway-map.component";
 import { GatewayStatusOverviewComponent } from "./gateway-overview/gateway-tabs/gateway-status-overview/gateway-status-overview.component";
+import { GatewayChangeOrganizationDialogComponent } from "./gateway-change-organization-dialog/gateway-change-organization-dialog.component";
 
 const gatewayRoutes: Routes = [
   {
@@ -51,6 +52,7 @@ const gatewayRoutes: Routes = [
     GatewayListComponent,
     GatewayMapComponent,
     GatewayStatusOverviewComponent,
+    GatewayChangeOrganizationDialogComponent,
   ],
   imports: [
     CommonModule,

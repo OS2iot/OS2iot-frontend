@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Application, ApplicationData } from "@applications/application.model";
+import { Application, ApplicationData, UpdateApplicationOrganization } from "@applications/application.model";
 import { RestService } from "../shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -75,5 +75,11 @@ export class ApplicationService {
 
   deleteApplication(id: number) {
     return this.restService.delete("application", id);
+  }
+
+  updateApplicationOrganization(body: UpdateApplicationOrganization, id: number): Observable<Application> {
+    return this.restService.put("application/updateApplicationOrganization", body, id, {
+      observe: "response",
+    });
   }
 }

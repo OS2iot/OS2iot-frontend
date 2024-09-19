@@ -1,7 +1,14 @@
 import { Injectable } from "@angular/core";
 import { RestService } from "./rest.service";
 import { Observable } from "rxjs";
-import { GatewayResponse, Gateway, GatewayData, GatewayRequest, GatewayResponseMany } from "@app/gateway/gateway.model";
+import {
+  GatewayResponse,
+  Gateway,
+  GatewayData,
+  GatewayRequest,
+  GatewayResponseMany,
+  UpdateGatewayOrganization,
+} from "@app/gateway/gateway.model";
 import moment from "moment";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { map } from "rxjs/operators";
@@ -54,6 +61,19 @@ export class ChirpstackGatewayService {
     );
   }
 
+  public getForMaps(params = {}): Observable<GatewayResponseMany> {
+    return this.restService.get(`${this.chripstackGatewayUrl}/getAllForMaps`, params).pipe(
+      map((response: GatewayResponseMany) => {
+        response.resultList.map(gateway => {
+          gateway.organizationName = this.sharedVariableService
+            .getOrganizationInfo()
+            .find(org => org.id === gateway.organizationId)?.name;
+        });
+        return response;
+      })
+    );
+  }
+
   public post(gateway: Gateway): Observable<GatewayData> {
     const gatewayRequest: GatewayRequest = new GatewayRequest();
     gatewayRequest.gateway = gateway;
@@ -67,6 +87,10 @@ export class ChirpstackGatewayService {
     const gatewayRequest: GatewayRequest = new GatewayRequest();
     gatewayRequest.gateway = gateway;
     return this.restService.put(this.chripstackGatewayUrl, gatewayRequest, id);
+  }
+
+  public updateGatewayOrganization(body: UpdateGatewayOrganization, id: number): Observable<Gateway> {
+    return this.restService.put(`${this.chripstackGatewayUrl}/updateGatewayOrganization`, body, id);
   }
 
   public delete(gatewayId: string): Observable<any> {

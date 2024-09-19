@@ -63,6 +63,34 @@ export class OrganisationService {
     });
   }
 
+  getMultipleWithApplicationAdmin(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<OrganisationGetManyResponse> {
+    return this.restService.get(`${this.URL}/applicationAdmin`, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
+  }
+
+  getMultipleWithGatewayAdmin(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string
+  ): Observable<OrganisationGetManyResponse> {
+    return this.restService.get(`${this.URL}/gatewayAdmin`, {
+      limit,
+      offset,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    });
+  }
+
   delete(id: number) {
     return this.restService.delete(this.URL, id);
   }

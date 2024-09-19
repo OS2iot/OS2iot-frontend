@@ -1,6 +1,6 @@
 @import "src/assets/scss/setup/variables";
 
-$spacing: 5rem;
+$spacing: 3rem;
 
 .container {
   padding-left: $spacing;
@@ -17,7 +17,7 @@ $spacing: 5rem;
   }
 }
 
-.mat-dialog-content {
+.mat-mdc-dialog-content {
   p {
     &.sub-header {
       strong {

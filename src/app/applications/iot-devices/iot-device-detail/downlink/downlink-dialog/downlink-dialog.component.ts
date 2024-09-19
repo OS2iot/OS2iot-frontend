@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
-import { DownlinkComponent } from "../downlink.component";
+import { DownlinkComponent } from "../downlinks/downlink.component";
 
 @Component({
   selector: "app-downlink-dialog",

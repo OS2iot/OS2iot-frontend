@@ -68,9 +68,7 @@ export class UserEditComponent implements OnInit {
       this.user.email = response.email;
       this.user.id = response.id;
       this.user.active = response.active;
-      this.user.globalAdmin = response.permissions.some(response =>
-        this.meService.hasPermissions(response, PermissionType.GlobalAdmin)
-      );
+      this.user.globalAdmin = response.permissions.some(perm => perm.name === PermissionType.GlobalAdmin);
       this.isKombit = response.nameId != null;
       // We cannot set the password.
     });
