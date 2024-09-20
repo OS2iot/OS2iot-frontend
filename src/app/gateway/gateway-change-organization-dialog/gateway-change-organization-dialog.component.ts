@@ -43,7 +43,7 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
 
   getOrganizations() {
     this.organizationsSubscription = this.organizationService.getMultipleWithGatewayAdmin().subscribe(res => {
-      this.organizations = res.data;
+      this.organizations = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
       this.filteredOrganizations.next(this.organizations.slice());
     });
   }
@@ -61,12 +61,13 @@ export class GatewayChangeOrganizationDialogComponent implements OnInit {
             gatewayName: gateway.name,
             organizationName: gateway.organization.name,
           }),
-          "",
+          this.translate.instant("DIALOG.OK"),
           {
             duration: 10000,
           }
         );
         this.dialog.close(true);
+        this.snackBar._openedSnackBarRef.afterDismissed().subscribe(() => location.reload());
       });
   }
 }
