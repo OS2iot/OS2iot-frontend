@@ -70,7 +70,6 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
     this.permissionsSubscription = this.permissionService
       .getPermissionsWhereApplicationAdmin(1000, 0)
       .subscribe(res => {
-        console.log(res.data, "dat");
         this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
         this.filteredPermissionsMulti.next(
           this.permissions.filter(p => p?.organization?.id === this?.application?.organizationId)
