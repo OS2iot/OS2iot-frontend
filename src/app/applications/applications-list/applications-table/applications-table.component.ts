@@ -278,12 +278,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         applicationId: id,
       } as ApplicationDialogModel,
     });
-
-    dialog.afterClosed().subscribe(res => {
-      if (!res) return;
-
-      location.reload();
-    });
   }
 
   protected readonly columnDefinitions = columnDefinitions;

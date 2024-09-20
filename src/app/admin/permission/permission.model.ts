@@ -39,6 +39,16 @@ export interface PermissionGetManyResponse {
   count: number;
 }
 
+export type PermissionsSlimDto = Pick<
+  PermissionResponse,
+  "id" | "name" | "automaticallyAddNewApplications" | "organization"
+>;
+
+export interface PermissionGetManyWhereApplicationAdminResponse {
+  data: PermissionsSlimDto[];
+  count: number;
+}
+
 export interface PermissionTypes {
   type: PermissionType;
 }
