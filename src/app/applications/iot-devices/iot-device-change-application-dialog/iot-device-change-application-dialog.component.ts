@@ -192,12 +192,13 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
             deviceName: savedIoTDevice.name,
             applicationName: savedIoTDevice.application.name,
           }),
-          "",
+          this.translate.instant("DIALOG.OK"),
           {
             duration: 10000,
           }
         );
         this.dialog.close(true);
+        this.snackBar._openedSnackBarRef.afterDismissed().subscribe(() => location.reload());
       });
   }
 }
