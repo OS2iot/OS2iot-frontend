@@ -8,8 +8,6 @@ import { UserService } from "../user.service";
 import { Subscription } from "rxjs";
 import { Location } from "@angular/common";
 import { PermissionType } from "@app/admin/permission/permission.model";
-import { AuthService, CurrentUserInfoResponse } from "@auth/auth.service";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
@@ -39,8 +37,6 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-    private authService: AuthService,
-    private sharedVariableService: SharedVariableService,
     private meService: MeService
   ) {}
 
@@ -81,7 +77,6 @@ export class UserEditComponent implements OnInit {
   private create(): void {
     this.userService.post(this.user).subscribe(
       response => {
-        console.log(response);
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
