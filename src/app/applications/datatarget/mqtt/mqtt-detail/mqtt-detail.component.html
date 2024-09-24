@@ -8,7 +8,9 @@
           <strong>{{ "DATATARGET.LATEST_MESSAGE" | translate }}</strong>{{ datatarget.lastMessageDate | dkTime }}
         </p>
         <mat-divider></mat-divider>
-        <p><strong>Context Broker</strong>{{ datatarget.url }}</p>
+        <p>
+          <strong>{{ "DATATARGET.MQTT.BROKER-URL" | translate }}</strong>{{ datatarget.url }}
+        </p>
         <p>
           <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong>{{ datatarget.timeout }}
         </p>
@@ -17,66 +19,21 @@
           }}
         </p>
         <mat-divider></mat-divider>
-
         <p>
-          <strong>{{ "DATATARGET.TENANT" | translate }}</strong>
+          <strong>{{ "DATATARGET.MQTT.PORT" | translate }}</strong>{{ datatarget.mqttPort }}
         </p>
-        <code>
-            <pre *ngIf="datatarget.tenant; else showNoTenantText">{{ datatarget.tenant }}</pre>
-          </code>
-        <ng-template #showNoTenantText>
-          <p>{{ "DATATARGET.NO-TENANT" | translate }}</p>
-        </ng-template>
-
         <p>
-          <strong>{{ "DATATARGET.CONTEXT" | translate }}</strong>
+          <strong>{{ "DATATARGET.MQTT.TOPIC" | translate }}</strong>{{ datatarget.mqttTopic }}
         </p>
-        <code>
-            <pre *ngIf="datatarget.context; else showNoContextText">{{ datatarget.context }}</pre>
-          </code>
-        <ng-template #showNoContextText>
-          <p>{{ "DATATARGET.NO-CONTEXT" | translate }}</p>
-        </ng-template>
-
         <p>
-          <strong>{{ "DATATARGET.AUTHORIZATIONHEADER" | translate }}</strong>
+          <strong>{{ "DATATARGET.MQTT.QOS" | translate }}</strong>{{ datatarget.mqttQos }}
         </p>
-        <code>
-            <pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{ datatarget.authorizationHeader }}</pre>
-          </code>
-        <ng-template #showNoAuthText>
-          <p>{{ "DATATARGET.NO-AUTHORIZATIONHEADER" | translate }}</p>
-        </ng-template>
-
         <p>
-          <strong>{{ "DATATARGET.TOKENENDPOINT" | translate }}</strong>
+          <strong>{{ "DATATARGET.MQTT.USERNAME" | translate }}</strong>{{ datatarget.mqttUsername }}
         </p>
-        <code>
-            <pre *ngIf="datatarget.tokenEndpoint; else showNoTokenEndpointText">{{ datatarget.tokenEndpoint }}</pre>
-          </code>
-        <ng-template #showNoTokenEndpointText>
-          <p>{{ "DATATARGET.NO-TOKENENDPOINT" | translate }}</p>
-        </ng-template>
-
         <p>
-          <strong>{{ "DATATARGET.CLIENTID" | translate }}</strong>
+          <strong>{{ "DATATARGET.MQTT.PASSWORD" | translate }}</strong>{{ datatarget.mqttPassword }}
         </p>
-        <code>
-            <pre *ngIf="datatarget.clientId; else showNoClientIdText">{{ datatarget.clientId }}</pre>
-          </code>
-        <ng-template #showNoClientIdText>
-          <p>{{ "DATATARGET.NO-CLIENTID" | translate }}</p>
-        </ng-template>
-
-        <p>
-          <strong>{{ "DATATARGET.CLIENTSECRET" | translate }}</strong>
-        </p>
-        <code>
-            <pre *ngIf="datatarget.clientSecret; else showNoClientSecretText">{{ "".padStart(20, "*") }}</pre>
-          </code>
-        <ng-template #showNoClientSecretText>
-          <p>{{ "DATATARGET.NO-CLIENTSECRET" | translate }}</p>
-        </ng-template>
       </div>
     </div>
 

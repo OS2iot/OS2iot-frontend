@@ -3,12 +3,12 @@ import { DataTargetType } from "@shared/enums/datatarget-type";
 import { DatatargetDetail } from "./datatarget-detail/datatarget-detail";
 import { DatatargetEdit } from "./datatarget-edit/datatarget-edit";
 import { DatatargetTypeDescriptor } from "./datatarget.model";
-import { FiwareDetailComponent } from "./fiware/fiware-detail/fiware-detail.component";
+import { FiwareDetailTabsComponent } from "./fiware/fiware-detail-tabs/fiware-detail-tabs.component";
 import { FiwareEditComponent } from "./fiware/fiware-edit/fiware-edit.component";
-import { HttppushDetailComponent } from "./httppush/httppush-detail/httppush-detail.component";
+import { HttppushDetailTabsComponent } from "./httppush/httppush-detail-tabs/httppush-detail-tabs.component";
 import { HttppushEditComponent } from "./httppush/httppush-edit/httppush-edit.component";
-import { MqttDetailComponent } from "./mqtt-detail/mqtt-detail.component";
-import { MqttEditComponent } from "./mqtt-edit/mqtt-edit.component";
+import { MqttDetailTabsComponent } from "./mqtt/mqtt-detail-tabs/mqtt-detail-tabs.component";
+import { MqttEditComponent } from "./mqtt/mqtt-edit/mqtt-edit.component";
 import { OpendatadkEditComponent } from "./opendatadk/opendatadk-edit/opendatadk-edit.component";
 
 @Injectable({
@@ -56,19 +56,19 @@ export class DatatargetTypesService {
 
   getDetailComponent(dataTargetType: DataTargetType): Type<DatatargetDetail> {
     if (dataTargetType === DataTargetType.HTTPPUSH) {
-      return HttppushDetailComponent;
+      return HttppushDetailTabsComponent;
     }
 
     if (dataTargetType === DataTargetType.OPENDATADK) {
-      return HttppushDetailComponent;
+      return HttppushDetailTabsComponent;
     }
 
     if (dataTargetType === DataTargetType.FIWARE) {
-      return FiwareDetailComponent;
+      return FiwareDetailTabsComponent;
     }
 
     if (dataTargetType === DataTargetType.MQTT) {
-      return MqttDetailComponent;
+      return MqttDetailTabsComponent;
     }
   }
 
