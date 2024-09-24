@@ -861,7 +861,17 @@
     "OPERATION-RESPONSIBLE": "Driftsansvarlig",
     "OPERATION-RESPONSIBLE-PLACEHOLDER": "Angiv ansvarlig for den fysiske drift af gateway",
     "OPERATION-RESPONSIBLE-CONTACT": "Kontaktmail - drift",
-    "OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på driftsansvarlig"
+    "OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER": "Angiv mailadresse på driftsansvarlig",
+    "CONTACT": "Kontakt",
+    "ALARMS": "Alarmering",
+    "SET-ALARMS": "Opsæt alarmering, som sendes til den angivne mailadresse.",
+    "HOW-MANY-MINUTES": "Angiv hvor mange minutter gateway'en skal være offline, før der sendes en alarm. Alarmen sendes kun en gang, når minuttallet nås. Herefter gives først besked, når gateway'en er online igen.",
+    "AMOUNT-OF-MINUTES": "Antal minutter",
+    "UNUSUAL-PACKAGES": "Uregelmæssigt pakkemønster",
+    "SET-INTERVAL": "Angiv hvilket interval modtagne pakker pr. time skal ligge indenfor. Hvis der modtages færre eller flere pakker sendes en alarm. Alarmen sendes en gang pr. time indtil, det definerede interval igen nås.",
+    "MINIMUM-AMOUNT": "Minimum antal",
+    "MAXIMUM-AMOUNT": "Maksimum antal",
+    "SET-EMAIL": "Angiv mailadresse som skal modtage alarm"
   },
   "SORT": {
     "SORT": "Sortér",
