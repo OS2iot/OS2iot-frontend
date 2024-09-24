@@ -1,6 +1,7 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, Type, ViewChild } from "@angular/core";
+import { Component, OnDestroy, Type, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DataTargetType } from "@shared/enums/datatarget-type";
+import { Subscription } from "rxjs";
 import { DatatargetTypesService } from "../datatarget-types.service";
 import { Datatarget } from "../datatarget.model";
 import { DatatargetService } from "../datatarget.service";
@@ -12,18 +13,31 @@ import { DatatargetDetailTypeSelectorDirective } from "./datatarget-detail-type-
   templateUrl: "./datatarget-detail.component.html",
   styleUrls: ["./datatarget-detail.component.scss"],
 })
-export class DatatargetDetailComponent implements OnInit, OnDestroy {
+export class DatatargetDetailComponent implements OnDestroy {
   @ViewChild(DatatargetDetailTypeSelectorDirective, { static: true })
   adHost!: DatatargetDetailTypeSelectorDirective;
 
   public datatarget: Datatarget;
   private datatargetType: DataTargetType;
 
+  private datatargetSubscription: Subscription;
+
   constructor(
-    private datatargetService: DatatargetService,
-    private route: ActivatedRoute,
-    private datatargetTypesService: DatatargetTypesService
-  ) {}
+    datatargetService: DatatargetService,
+    route: ActivatedRoute,
+    datatargetTypesService: DatatargetTypesService
+  ) {
+    const id: number = +route.snapshot.paramMap.get("datatargetId");
+
+    this.datatargetSubscription = datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
+      this.datatarget = dataTarget;
+      this.datatargetType = dataTarget.type;
+
+      const component = datatargetTypesService.getDetailComponent(this.datatargetType);
+
+      this.loadComponent(component);
+    });
+  }
 
   loadComponent(componentType: Type<any>) {
     const viewContainerRef = this.adHost.viewContainerRef;
@@ -33,18 +47,7 @@ export class DatatargetDetailComponent implements OnInit, OnDestroy {
     viewContainerRef.createComponent<DatatargetDetail>(componentType);
   }
 
-  ngOnInit(): void {
-    const id: number = +this.route.snapshot.paramMap.get("datatargetId");
-
-    this.datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
-      this.datatarget = dataTarget;
-      this.datatargetType = dataTarget.type;
-
-      const component = this.datatargetTypesService.getDetailComponent(this.datatargetType);
-
-      this.loadComponent(component);
-    });
+  ngOnDestroy() {
+    this.datatargetSubscription?.unsubscribe();
   }
-
-  ngOnDestroy() {}
 }

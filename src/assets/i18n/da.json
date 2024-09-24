@@ -18,6 +18,9 @@
     "OFFLINE": "Offline",
     "NEVER-SEEN": "Aldrig set",
     "DATE": "Dato",
+    "LOG": "Log",
+    "MESSAGE": "Besked",
+    "DEVICE": "Enhed",
     "NO-DATA": "Der er ingen data at vise"
   },
   "NAV": {
@@ -239,6 +242,8 @@
     "NO-TOKENENDPOINT": "Ingen token endpoint URL",
     "NO-CLIENTID": "Ingen client ID",
     "NO-CLIENTSECRET": "Ingen client secret",
+    "LATEST_MESSAGE": "Seneste besked",
+    "24H_STATUS": "Status (24 timer)",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "OPENDATA-DK": {
       "TYPE": "OpenDataDK",
@@ -269,6 +274,10 @@
     },
     "OPENDATADK": {
       "TYPE": "OpenDataDK"
+    },
+    "RESPONSE_TYPE": {
+      "ERROR": "Fejl",
+      "OK": "Ok"
     }
   },
   "MULTICAST": {

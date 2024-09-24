@@ -9,11 +9,11 @@ import { Datatarget } from "../../datatarget.model";
 import { DatatargetService } from "../../datatarget.service";
 
 @Component({
-  selector: "app-fiware-detail",
-  templateUrl: "./fiware-detail.component.html",
-  styleUrls: ["./fiware-detail.component.scss"],
+  selector: "app-mqtt-detail",
+  templateUrl: "./mqtt-detail.component.html",
+  styleUrls: ["./mqtt-detail.component.scss"],
 })
-export class FiwareDetailComponent implements DatatargetDetail, OnDestroy {
+export class MqttDetailComponent implements DatatargetDetail, OnDestroy {
   arrowsAltH = faArrowsAltH;
 
   datatarget: Datatarget;

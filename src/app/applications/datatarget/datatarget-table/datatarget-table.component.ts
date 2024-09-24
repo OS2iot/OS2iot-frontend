@@ -1,18 +1,19 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit } from "@angular/core";
-import { Subscription } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
-import { ActivatedRoute } from "@angular/router";
-import { Datatarget, DatatargetData } from "../datatarget.model";
-import { DatatargetService } from "../datatarget.service";
-import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
 import { environment } from "@environments/environment";
+import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { tableSorter } from "@shared/helpers/table-sorting.helper";
 import { MeService } from "@shared/services/me.service";
-import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { Subscription } from "rxjs";
+import { Datatarget, DatatargetData } from "../datatarget.model";
+import { DatatargetService } from "../datatarget.service";
 
 @Component({
   selector: "app-datatarget-table",
@@ -22,7 +23,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ["name", "type", "menu"];
+  displayedColumns: string[] = ["name", "type", "24h_status", "menu"];
   dataSource = new MatTableDataSource<Datatarget>();
   datatargets: Datatarget[];
   resultsLength = 0;
@@ -30,6 +31,8 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
   @Input() isLoadingResults = true;
   public pageSize = environment.tablePageSize;
   pageSizeOptions = DefaultPageSizeOptions;
+  faExclamationTriangle = faExclamationTriangle;
+  faCheckCircle = faCheckCircle;
 
   @Input() pageLimit: number;
   public pageOffset = 0;
