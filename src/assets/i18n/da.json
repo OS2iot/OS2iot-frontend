@@ -877,7 +877,7 @@
     "HOW-MANY-MINUTES": "Angiv hvor mange minutter gateway'en skal være offline, før der sendes en alarm. Alarmen sendes kun en gang, når minuttallet nås. Herefter gives først besked, når gateway'en er online igen.",
     "AMOUNT-OF-MINUTES": "Antal minutter",
     "UNUSUAL-PACKAGES": "Uregelmæssigt pakkemønster",
-    "SET-INTERVAL": "Angiv hvilket interval modtagne pakker pr. time skal ligge indenfor. Hvis der modtages færre eller flere pakker sendes en alarm. Alarmen sendes en gang pr. time indtil, det definerede interval igen nås.",
+    "SET-INTERVAL": "Angiv hvilket interval modtagne pakker pr. døgn skal ligge indenfor. Hvis der modtages færre eller flere pakker sendes en alarm. Alarmen sendes en gang pr. døgn, indtil det definerede interval igen nås.",
     "MINIMUM-AMOUNT": "Minimum antal",
     "MAXIMUM-AMOUNT": "Maksimum antal",
     "SET-EMAIL": "Angiv mailadresse som skal modtage alarm"
