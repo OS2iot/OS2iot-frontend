@@ -8,9 +8,11 @@ import {
   forwardRef,
   Inject,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   QueryList,
+  SimpleChanges,
   ViewChild,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -37,12 +39,13 @@ import { MatSelect } from "@angular/material/select";
  *
  * @see https://github.com/angular/components/issues/5697#issuecomment-493628695
  */
-export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, OnChanges {
   /** Label of the search placeholder */
   @Input() placeholderLabel = "Søg efter ...";
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = "Ingen elementer blev fundet";
+  @Input() initialValues: any[];
 
   /** Reference to the search input field */
   @ViewChild("searchSelectInput", { static: false, read: ElementRef })
@@ -123,6 +126,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     });
 
     this.initMultipleHandling();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.initialValues) {
+      this.previousSelectedValues = this.initialValues;
+    }
   }
 
   ngOnDestroy() {
