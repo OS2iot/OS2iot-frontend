@@ -145,15 +145,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   private getPermissions(userId: number) {
     this.permissionsSubscription = this.permissionService
-      .getPermissionsWithoutUsers(
-        1000,
-        0,
-        undefined,
-        undefined,
-        this.meService.hasGlobalAdmin() ? undefined : userId,
-        undefined,
-        true
-      )
+      .getPermissionsWithoutUsers(this.meService.hasGlobalAdmin() ? undefined : userId)
       .subscribe(res => {
         this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
         if (!this.id) {
