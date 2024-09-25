@@ -20,6 +20,7 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
   faExclamationTriangle = faExclamationTriangle;
 
   logLink: "datatarget-log" = "datatarget-log";
+  testConnectionLink: "datatarget-test-connection" = "datatarget-test-connection";
   navTabs: NavTab[] = [
     {
       label: "APPLICATION.DETAILS",
@@ -30,6 +31,11 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
       label: "GEN.LOG",
       link: this.logLink,
       index: 1,
+    },
+    {
+      label: "Test forbindelse",
+      link: this.testConnectionLink,
+      index: 2,
     },
   ];
 

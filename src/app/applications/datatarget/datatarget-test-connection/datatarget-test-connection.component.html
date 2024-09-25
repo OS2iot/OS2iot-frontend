@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--full-width">
+        <h3>{{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}</h3>
+        <button class="mt-3 btn btn-primary">{{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}</button>
+        <p class="mt-2">{{ "DATATARGET.TEST_CONNECTION.SEND-PING-TO-DATATARGET" | translate }}</p>
+        <mat-divider></mat-divider>
+        <p class="mt-3 font-weight-bold">{{ "DATATARGET.TEST_CONNECTION.SEND-LATEST-PACKAGE" | translate }}</p>
+        <mat-select
+          id="level"
+          class="mt-3 form-control"
+          name="level"
+          required
+          [placeholder]="'DATATARGET.TEST_CONNECTION.CHOOSE-IOT-DEVICE' | translate"
+        >
+        </mat-select>
+        <button class="mt-3 btn btn-primary">{{ "DATATARGET.TEST_CONNECTION.SEND-DATA-PACKAGE" | translate }}</button>
+        <p class="mt-2">
+          {{ "DATATARGET.TEST_CONNECTION.SEND-DATA-PACKAGE-DESCRIPTION" | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--full-width">
+        <h3>{{ "DATATARGET.TEST_CONNECTION.CHOSEN-DATA-PACKAGE" | translate }}</h3>
+        <ngx-monaco-editor
+          style="height: 85%"
+          [options]="editorJsonOutpuOptions"
+          [(ngModel)]="codeOutput"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ngx-monaco-editor>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--full-width">
+        <h3>{{ "DATATARGET.TEST_CONNECTION.SENT-HTTP-REQUEST" | translate }}</h3>
+        <p>{{ "DATATARGET.TEST_CONNECTION.HEADERS" | translate }}</p>
+        <ngx-monaco-editor
+          [options]="editorJsonOutpuOptions"
+          [(ngModel)]="codeOutput"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ngx-monaco-editor>
+
+        <p>{{ "DATATARGET.TEST_CONNECTION.BODY" | translate }}</p>
+        <ngx-monaco-editor
+          [options]="editorJsonOutpuOptions"
+          [(ngModel)]="codeOutput"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ngx-monaco-editor>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="jumbotron jumbotron--full-width">
+        <h3>{{ "DATATARGET.TEST_CONNECTION.RECEIVED-HTTP-RESPONSE" | translate }}</h3>
+        <p>{{ "DATATARGET.TEST_CONNECTION.HEADERS" | translate }}</p>
+        <ngx-monaco-editor
+          [options]="editorJsonOutpuOptions"
+          [(ngModel)]="codeOutput"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ngx-monaco-editor>
+
+        <p>{{ "DATATARGET.TEST_CONNECTION.BODY" | translate }}</p>
+
+        <ngx-monaco-editor
+          [options]="editorJsonOutpuOptions"
+          [(ngModel)]="codeOutput"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ngx-monaco-editor>
+      </div>
+    </div>
+  </div>
+</div>

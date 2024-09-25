@@ -278,6 +278,19 @@
     "RESPONSE_TYPE": {
       "ERROR": "Fejl",
       "OK": "Ok"
+    },
+    "TEST_CONNECTION": {
+      "TEST-CONNECTION": "Test forbindelse",
+      "SEND-PING-TO-DATATARGET": "Send et ping til dette datatarget",
+      "SEND-LATEST-PACKAGE": "Send seneste datapakke",
+      "CHOOSE-IOT-DEVICE": "Vælg IoT-enhed",
+      "SEND-DATA-PACKAGE": "Send datapakke",
+      "SEND-DATA-PACKAGE-DESCRIPTION": "Send seneste datapakke fra den valgte IoT-enhed til dette data target Bemærk at datapakken potentielt indgår i jeres driftsdata, hvis det modtages succesfuldt",
+      "CHOSEN-DATA-PACKAGE": "Valgt datapakke",
+      "SENT-HTTP-REQUEST": "Sendt - HTTP request",
+      "RECEIVED-HTTP-RESPONSE": "Modtaget - HTTP response",
+      "HEADERS": "Headers",
+      "BODY": "Body"
     }
   },
   "MULTICAST": {
