@@ -4,7 +4,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { TranslateService } from "@ngx-translate/core";
-import { DeviceType } from "@shared/enums/device-type";
 import { ErrorMessageService } from "@shared/error-message.service";
 import { DownlinkService } from "@shared/services/downlink.service";
 import { DownlinkDialogComponent } from "../downlink-dialog/downlink-dialog.component";
@@ -90,7 +89,10 @@ export class DownlinkTablesComponent implements OnInit {
   }
 
   openDownlinkDialog() {
-    const dialog = this.dialog.open(DownlinkDialogComponent, {});
+    const dialog = this.dialog.open(DownlinkDialogComponent, {
+      width: "300px",
+      height: "200px",
+    });
 
     dialog.afterClosed().subscribe(result => {
       if (result === true) {
