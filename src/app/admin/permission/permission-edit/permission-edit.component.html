@@ -69,7 +69,10 @@
       [compareWith]="compare"
       #multiSelect
     >
-      <app-mat-select-search [formControl]="userMultiFilterCtrl"></app-mat-select-search>
+      <app-mat-select-search
+        [initialValues]="this.permission.userIds"
+        [formControl]="userMultiFilterCtrl"
+      ></app-mat-select-search>
       <mat-option *ngFor="let user of filteredUsersMulti | async" [value]="user.id">
         {{ getTextForUser(user) }}
       </mat-option>
@@ -102,25 +105,28 @@
   </div>
 
   <div class="form-group mt-3 col-12" *ngIf="isOrganizationApplicationPermission()">
-      <label class="form-label" for="name">{{ "PERMISSION.EDIT.APPS" | translate }}</label>
-      <div class="col-12">
-        <mat-select
-          id="applicationIds"
-          [formControl]="applicationMultiCtrl"
-          [multiple]="true"
-          class="form-control"
-          panelClass="overflow-x-hidden"
-          [(value)]="permission.applicationIds"
-          name="applicationIds"
-          #multiSelect
-          [compareWith]="compare"
-        >
-          <app-mat-select-search [formControl]="applicationMultiFilterCtrl"></app-mat-select-search>
-          <mat-option *ngFor="let app of filteredApplicationsMulti | async" [value]="app.id">
-            {{ app.name }}
-          </mat-option>
-        </mat-select>
-      </div>
+    <label class="form-label" for="name">{{ "PERMISSION.EDIT.APPS" | translate }}</label>
+    <div class="col-12">
+      <mat-select
+        id="applicationIds"
+        [formControl]="applicationMultiCtrl"
+        [multiple]="true"
+        class="form-control"
+        panelClass="overflow-x-hidden"
+        [(value)]="permission.applicationIds"
+        name="applicationIds"
+        #multiSelect
+        [compareWith]="compare"
+      >
+        <app-mat-select-search
+          [initialValues]="this.permission.applicationIds"
+          [formControl]="applicationMultiFilterCtrl"
+        ></app-mat-select-search>
+        <mat-option *ngFor="let app of filteredApplicationsMulti | async" [value]="app.id">
+          {{ app.name }}
+        </mat-option>
+      </mat-select>
+    </div>
   </div>
 
   <div *ngIf="isReadOrWrite()">

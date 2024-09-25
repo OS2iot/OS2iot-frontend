@@ -54,7 +54,10 @@
         [(value)]="application.permissionIds"
         [compareWith]="compare"
       >
-        <app-mat-select-search [formControl]="permissionMultiFilterCtrl"></app-mat-select-search>
+        <app-mat-select-search
+          [initialValues]="this.application.permissionIds"
+          [formControl]="permissionMultiFilterCtrl"
+        ></app-mat-select-search>
         <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
           {{ permission.name }}
         </mat-option>

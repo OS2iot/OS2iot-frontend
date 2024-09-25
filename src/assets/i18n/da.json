@@ -929,7 +929,7 @@
       "STARTDOWNLINK": "Start downlink til enhed",
       "HISTORICQUEUE": "Historisk kø",
       "FRAMECOUNTER": "Frame counter",
-      "SENDAT": "Leveret",
+      "SENDAT": "Afsendt",
       "RECEIVEDAT": "Modtaget",
       "CONFIRMED": "Bekræftet (Ja/nej)",
       "NOT-RECEIVED": "Ikke bekræftet modtaget",
