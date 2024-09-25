@@ -77,6 +77,25 @@
       />
     </div>
   </div>
+
+  <div class="row mb-5">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" id="permissions" for="permissions">{{ "QUESTION.PERMISSION.SELECT-PERMISSION" | translate }}</label
+      >*
+      <mat-select
+        class="form-control"
+        name="permissions"
+        [compareWith]="compare"
+        [(ngModel)]="user.permissionIds"
+        [multiple]="true"
+      >
+        <mat-option *ngFor="let permission of permissions" [value]="permission.id">
+          {{ permission.name }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
   <div class="row mb-5">
     <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
       {{ "USERS.FORM.ACTIVE" | translate }}</mat-slide-toggle
