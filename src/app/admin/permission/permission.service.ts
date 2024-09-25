@@ -51,7 +51,8 @@ export class PermissionService {
     orderByColumn?: string,
     orderByDirection?: string,
     userId?: number,
-    organisationId?: number
+    organisationId?: number,
+    ignoreGlobalAdmin?: boolean
   ): Observable<PermissionGetManyResponse> {
     if (userId || organisationId) {
       return this.restService.get(this.endpoint, {
@@ -61,6 +62,7 @@ export class PermissionService {
         sort: orderByDirection,
         userId: userId,
         organisationId: organisationId,
+        ignoreGlobalAdmin: ignoreGlobalAdmin,
       });
     } else {
       return this.restService.get(this.endpoint, {
@@ -68,8 +70,18 @@ export class PermissionService {
         offset: offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
+        ignoreGlobalAdmin: ignoreGlobalAdmin,
       });
     }
+  }
+
+  getPermissionsWithoutUsers(userId?: number): Observable<PermissionGetManyResponse> {
+    return this.restService.get(this.endpoint + "/getAllPermissionsWithoutUsers", {
+      limit: 1000,
+      offset: 0,
+      userId: userId ?? undefined,
+      ignoreGlobalAdmin: true,
+    });
   }
 
   deletePermission(id: number) {
