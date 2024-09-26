@@ -6,7 +6,7 @@ import {
   PermissionResponse,
   PermissionRequest,
   PermissionRequestAcceptUser,
-  PermissionGetManyWhereApplicationAdminResponse,
+  PermissionGetManySlimResponse,
 } from "./permission.model";
 import { map } from "rxjs/operators";
 import { UserMinimalService } from "../users/user-minimal.service";
@@ -72,6 +72,7 @@ export class PermissionService {
         offset: offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
+        ignoreGlobalAdmin: ignoreGlobalAdmin,
       });
     }
   }
@@ -83,7 +84,7 @@ export class PermissionService {
     orderByDirection?: string,
     userId?: number,
     organisationId?: number
-  ): Observable<PermissionGetManyWhereApplicationAdminResponse> {
+  ): Observable<PermissionGetManySlimResponse> {
     if (userId || organisationId) {
       return this.restService.get(this.endpoint + this.applicationAdmin, {
         limit: limit,
@@ -99,7 +100,6 @@ export class PermissionService {
         offset: offset,
         orderOn: orderByColumn,
         sort: orderByDirection,
-        ignoreGlobalAdmin: ignoreGlobalAdmin,
       });
     }
   }
