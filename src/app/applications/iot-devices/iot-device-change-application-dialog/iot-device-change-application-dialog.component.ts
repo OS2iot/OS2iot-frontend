@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Organisation } from "@app/admin/organisation/organisation.model";
@@ -9,18 +9,13 @@ import { Application } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
 import { TranslateService } from "@ngx-translate/core";
 import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { ReplaySubject, Subscription } from "rxjs";
+import { ReplaySubject } from "rxjs";
 import { IotDevice, UpdateIoTDeviceApplication } from "../iot-device.model";
 import { IoTDeviceService } from "../iot-device.service";
 import { PayloadDecoder, PayloadDecoderMappedResponse } from "@payload-decoder/payload-decoder.model";
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
 import { DatatargetService } from "@applications/datatarget/datatarget.service";
 import { Datatarget } from "@applications/datatarget/datatarget.model";
-import {
-  PayloadDeviceDatatarget,
-  PayloadDeviceDatatargetGetByDataTargetResponse,
-} from "@payload-decoder/payload-device-data.model";
 import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,14 +24,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
   templateUrl: "./iot-device-change-application-dialog.component.html",
   styleUrls: ["./iot-device-change-application-dialog.component.scss"],
 })
-export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
-  public iotDevicesSubscription: Subscription;
-  public applicationsSubscription: Subscription;
-  public organizationsSubscription: Subscription;
-  public deviceModelSubscription: Subscription;
-  private payloadDecoderSubscription: Subscription;
-  private dataTargetSubscription: Subscription;
-  private payloadDeviceDatatargetSubscription: Subscription;
+export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDestroy {
   public iotDevice: IotDevice;
   public iotDeviceUpdate: UpdateIoTDeviceApplication;
   public organizations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
@@ -47,6 +35,7 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
   public payloadDecoders: PayloadDecoder[] = [];
   public dataTargets: Datatarget[] = [];
   faTimesCircle = faTimesCircle;
+  private subscriptions = [];
 
   constructor(
     private iotDeviceService: IoTDeviceService,
@@ -74,8 +63,12 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
     this.getIoTDeviceAndDefaultData(this.dialogModel.deviceId);
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s?.unsubscribe());
+  }
+
   getIoTDeviceAndDefaultData(id: number): void {
-    this.iotDevicesSubscription = this.iotDeviceService.getIoTDevice(id).subscribe((iotDevice: IotDevice) => {
+    const iotDevicesSubscription = this.iotDeviceService.getIoTDevice(id).subscribe((iotDevice: IotDevice) => {
       this.iotDevice = iotDevice;
       this.getOrganizations();
       this.getApplications();
@@ -90,10 +83,12 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
 
       this.getIoTDeviceCurrentDataTargetsAndPayloadDecoders(this.dialogModel.deviceId);
     });
+
+    this.subscriptions.push(iotDevicesSubscription);
   }
 
   getIoTDeviceCurrentDataTargetsAndPayloadDecoders(id: number): void {
-    this.payloadDeviceDatatargetSubscription = this.payloadDeviceDatatargetService
+    const payloadDeviceDatatargetSubscription = this.payloadDeviceDatatargetService
       .getByIoTDevice(id)
       .subscribe(dataTargetsAndPayloadDecoders => {
         const dataTargetsAndPayloadIds = dataTargetsAndPayloadDecoders.data.map(val => {
@@ -101,16 +96,20 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
         });
         this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.push(...dataTargetsAndPayloadIds);
       });
+
+    this.subscriptions.push(payloadDeviceDatatargetSubscription);
   }
 
   getOrganizations() {
-    this.organizationsSubscription = this.organizationService.getMultipleWithApplicationAdmin().subscribe(res => {
+    const organizationsSubscription = this.organizationService.getMultipleWithApplicationAdmin().subscribe(res => {
       this.organizations.next(res.data.slice());
     });
+
+    this.subscriptions.push(organizationsSubscription);
   }
 
   getApplications(): void {
-    this.applicationsSubscription = this.applicationService
+    const applicationsSubscription = this.applicationService
       .getApplications(1000, 0, "asc", "id")
       .subscribe(applicationData => {
         this.applications = applicationData.data;
@@ -118,30 +117,38 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
           this.applications.filter(app => app.belongsTo.id === this.iotDevice.application.belongsTo.id)
         );
       });
+
+    this.subscriptions.push(applicationsSubscription);
   }
 
   getPayloadDecoders() {
-    this.payloadDecoderSubscription = this.payloadDecoderService
+    const payloadDecoderSubscription = this.payloadDecoderService
       .getMultiple(1000, 0, "id", "ASC")
       .subscribe((response: PayloadDecoderMappedResponse) => {
         this.payloadDecoders = response.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
       });
+
+    this.subscriptions.push(payloadDecoderSubscription);
   }
 
   getDataTargets(applicationId: number) {
-    this.dataTargetSubscription = this.dateTargetService
+    const dataTargetSubscription = this.dateTargetService
       .getByApplicationId(1000, 0, applicationId)
       .subscribe(response => {
         this.dataTargets = response.data;
       });
+
+    this.subscriptions.push(dataTargetSubscription);
   }
 
   getDeviceModels(organizationId: number) {
-    this.deviceModelSubscription = this.deviceModelService
+    const deviceModelSubscription = this.deviceModelService
       .getMultiple(1000, 0, "asc", "id", organizationId)
       .subscribe(res => {
-        this.deviceModels = res.data;
+        this.deviceModels = res.data.sort((a, b) => a.body.name.localeCompare(b.body.name, "en", { numeric: true }));
       });
+
+    this.subscriptions.push(deviceModelSubscription);
   }
 
   public addRow() {
@@ -179,12 +186,12 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
     if (
       !this.iotDeviceUpdate.applicationId ||
       !this.iotDeviceUpdate.organizationId ||
-      !this.iotDeviceUpdate.deviceModelId ||
+      this.iotDeviceUpdate.deviceModelId == null ||
       this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.some(val => !val.dataTargetId)
     )
       return;
 
-    this.iotDevicesSubscription = this.iotDeviceService
+    const iotDevicesSubscription = this.iotDeviceService
       .changeIoTDeviceApplication(this.iotDevice.id, this.iotDeviceUpdate)
       .subscribe(savedIoTDevice => {
         this.snackBar.open(
@@ -200,5 +207,7 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit {
         this.dialog.close(true);
         this.snackBar._openedSnackBarRef.afterDismissed().subscribe(() => location.reload());
       });
+
+    this.subscriptions.push(iotDevicesSubscription);
   }
 }

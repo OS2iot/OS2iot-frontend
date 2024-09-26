@@ -116,16 +116,13 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   public pageSizeOptions = DefaultPageSizeOptions;
   public canEdit = false;
   deviceTypes = DeviceType;
-
-  private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
-
   batteryStatusColor = "green";
   resultsLength = 0;
   isLoadingResults = true;
-
   displayedColumns: string[] = [];
-
   iotDeviceSavedColumns = "iotDeviceSavedColumns";
+  protected readonly columnDefinitions = columnDefinitions;
+  private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
   constructor(
     private restService: RestService,
@@ -247,7 +244,6 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   }
 
   onOpenChangeApplicationDialog(id: number) {
-    this.data[0].type === DeviceType.SIGFOX;
     this.changeApplicationDialog.open(IoTDeviceChangeApplicationDialogComponent, {
       data: {
         deviceId: id,
@@ -273,6 +269,4 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     }
     return text.substring(0, maxLength) + "...";
   }
-
-  protected readonly columnDefinitions = columnDefinitions;
 }
