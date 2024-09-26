@@ -202,17 +202,11 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   onOpenChangeOrganizationDialog() {
-    const dialog = this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
+    this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
       data: {
         gatewayDbId: this.gateway.id,
         organizationId: this.gateway.organizationId,
       } as GatewayDialogModel,
-    });
-
-    dialog.afterClosed().subscribe(res => {
-      if (!res) return;
-
-      location.reload();
     });
   }
 
