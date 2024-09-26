@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { OrganisationService } from "@app/admin/organisation/organisation.service";
-import { PermissionResponse } from "@app/admin/permission/permission.model";
+import { PermissionResponse, PermissionsSlimDto } from "@app/admin/permission/permission.model";
 import { PermissionService } from "@app/admin/permission/permission.service";
 import { Application, UpdateApplicationOrganization } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
@@ -23,9 +23,9 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   public permissionsSubscription: Subscription;
   public organizationsSubscription: Subscription;
   public application: UpdateApplicationOrganization;
-  public permissions: PermissionResponse[];
+  public permissions: PermissionsSlimDto[];
   public organizations: Organisation[];
-  public filteredPermissionsMulti: ReplaySubject<PermissionResponse[]> = new ReplaySubject<PermissionResponse[]>(1);
+  public filteredPermissionsMulti: ReplaySubject<PermissionsSlimDto[]> = new ReplaySubject<PermissionsSlimDto[]>(1);
   public filteredOrganizations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
 
   constructor(
@@ -61,18 +61,20 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
 
   getOrganizations() {
     this.organizationsSubscription = this.organizationService.getMultipleWithApplicationAdmin().subscribe(res => {
-      this.organizations = res.data;
+      this.organizations = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
       this.filteredOrganizations.next(this.organizations.slice());
     });
   }
 
   getPermissions() {
-    this.permissionsSubscription = this.permissionService.getPermissions(1000, 0).subscribe(res => {
-      this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
-      this.filteredPermissionsMulti.next(
-        this.permissions.filter(p => p?.organization?.id === this?.application?.organizationId)
-      );
-    });
+    this.permissionsSubscription = this.permissionService
+      .getPermissionsWhereApplicationAdmin(1000, 0)
+      .subscribe(res => {
+        this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
+        this.filteredPermissionsMulti.next(
+          this.permissions.filter(p => p?.organization?.id === this?.application?.organizationId)
+        );
+      });
   }
 
   public compare(o1: any, o2: any): boolean {
@@ -99,12 +101,13 @@ export class ApplicationChangeOrganizationDialogComponent implements OnInit {
             applicationName: savedApplication.name,
             organizationName: savedApplication.belongsTo.name,
           }),
-          "",
+          this.translate.instant("DIALOG.OK"),
           {
             duration: 10000,
           }
         );
         this.dialog.close(true);
+        this.snackBar._openedSnackBarRef.afterDismissed().subscribe(() => location.reload());
       });
   }
 }

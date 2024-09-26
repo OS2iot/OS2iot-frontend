@@ -6,6 +6,7 @@ import {
   PermissionResponse,
   PermissionRequest,
   PermissionRequestAcceptUser,
+  PermissionGetManySlimResponse,
 } from "./permission.model";
 import { map } from "rxjs/operators";
 import { UserMinimalService } from "../users/user-minimal.service";
@@ -15,6 +16,7 @@ import { UserMinimalService } from "../users/user-minimal.service";
 })
 export class PermissionService {
   endpoint = "permission";
+  applicationAdmin = "/applicationAdmin";
   constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
 
   createPermission(body: PermissionRequest): Observable<PermissionResponse> {
@@ -71,6 +73,33 @@ export class PermissionService {
         orderOn: orderByColumn,
         sort: orderByDirection,
         ignoreGlobalAdmin: ignoreGlobalAdmin,
+      });
+    }
+  }
+
+  getPermissionsWhereApplicationAdmin(
+    limit: number = 1000,
+    offset: number = 0,
+    orderByColumn?: string,
+    orderByDirection?: string,
+    userId?: number,
+    organisationId?: number
+  ): Observable<PermissionGetManySlimResponse> {
+    if (userId || organisationId) {
+      return this.restService.get(this.endpoint + this.applicationAdmin, {
+        limit: limit,
+        offset: offset,
+        orderOn: orderByColumn,
+        sort: orderByDirection,
+        userId: userId,
+        organisationId: organisationId,
+      });
+    } else {
+      return this.restService.get(this.endpoint + this.applicationAdmin, {
+        limit: limit,
+        offset: offset,
+        orderOn: orderByColumn,
+        sort: orderByDirection,
       });
     }
   }
