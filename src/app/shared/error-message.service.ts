@@ -28,12 +28,12 @@ export class ErrorMessageService {
 
   public handleErrorMessageWithFields(error: HttpErrorResponse | Pick<HttpErrorResponse, "error">): ErrorMessage {
     const errors: ErrorMessage = { errorFields: [], errorMessages: [] };
-    if (typeof error.error === "string") {
+    if (typeof error.error?.message === "string") {
+      errors.errorMessages.push(error.error.message);
+    } else if (typeof error.error === "string") {
       errors.errorMessages.push(error.error);
     } else if (typeof error.error?.error === "string" && !Array.isArray(error.error?.message)) {
       errors.errorMessages.push(error.error.error);
-    } else if (typeof error.error?.message === "string") {
-      errors.errorMessages.push(error.error.message);
     } else {
       error.error.message.forEach(err => {
         if (err.children?.length > 0) {

@@ -1034,7 +1034,8 @@
     "INVALID-VALUE-IN-KEY-VALUE-PAIR": "En eller flere værdier er ugyldige. Det skal være en gyldig tekstværdi",
     "INVALID-DATE": "Datoen er ugyldig",
     "USER-ALREADY-HAVE-MAIL": "Brugeren har allerede sat en email",
-    "EMAIL-ALREADY-IN-USE": "Den valgte email er allerede i brug. Kontakt din lokale administrator for hjælp."
+    "EMAIL-ALREADY-IN-USE": "Den valgte email er allerede i brug. Kontakt din lokale administrator for hjælp.",
+    "ORGANIZATION-GATEWAYS-EXISTS": "Denne organisation kan ikke slettes, fordi der er tilknyttet en eller flere gateways. Slet først disse eller flyt dem til en ny organisation."
   },
   "PROFILES": {
     "NAME": "LoRaWAN profiler",
