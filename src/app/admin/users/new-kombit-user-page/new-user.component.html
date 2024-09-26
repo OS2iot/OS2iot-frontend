@@ -50,7 +50,9 @@
               panelClass="overflow-x-hidden"
               aria-required="true"
             >
-              <app-mat-select-search [formControl]="organisationsFilterCtrl"></app-mat-select-search>
+              <app-mat-select-search
+                [formControl]="organisationsFilterCtrl"
+              ></app-mat-select-search>
 
               <mat-option *ngFor="let org of filteredOrganisations | async" [value]="org">{{ org.name }}</mat-option>
             </mat-select>

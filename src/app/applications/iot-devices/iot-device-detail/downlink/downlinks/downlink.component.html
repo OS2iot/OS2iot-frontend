@@ -1,5 +1,5 @@
 <div class="jumbotron jumbotron--full-width">
-  <div *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else notImplemented" class="my-2 mx-3">
+  <div *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else notImplemented">
     <div *ngIf="errorMessages && errorMessages?.length !== 0" class="error-messages p-3">
       <ul class="mb-0">
         <li *ngFor="let error of errorMessages">
