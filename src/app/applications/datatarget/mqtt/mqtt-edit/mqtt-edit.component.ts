@@ -4,6 +4,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Application } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
+import { DatatargetEdit } from "@applications/datatarget/datatarget-edit/datatarget-edit";
+import { Datatarget } from "@applications/datatarget/datatarget.model";
+import { DatatargetService } from "@applications/datatarget/datatarget.service";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { faQuestionCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { PayloadDecoder, PayloadDecoderMappedResponse } from "@payload-decoder/payload-decoder.model";
@@ -19,9 +22,6 @@ import { ErrorMessageService } from "@shared/error-message.service";
 import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
 import { SnackService } from "@shared/services/snack.service";
 import { Subscription } from "rxjs";
-import { DatatargetEdit } from "../datatarget-edit/datatarget-edit";
-import { Datatarget } from "../datatarget.model";
-import { DatatargetService } from "../datatarget.service";
 
 @Component({
   selector: "app-mqtt-edit",

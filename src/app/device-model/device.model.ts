@@ -1,3 +1,5 @@
+import { Organisation } from "@app/admin/organisation/organisation.model";
+
 export class DeviceModelBody {
   id?: string;
   name?: string;
@@ -48,6 +50,7 @@ export class DeviceModelResponse {
 export class DeviceModel {
   id: number;
   body: DeviceModelBody = new DeviceModelBody();
+  belongsTo: Organisation;
   createdAt: string;
   updatedAt: string;
   createdBy: number;

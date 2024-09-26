@@ -142,6 +142,11 @@
                 >{{ "IOTDEVICE-TABLE-ROW.EDIT" | translate }}
               </a>
             </li>
+            <li class="dropdown-item" *ngIf="iotDevice.type!==deviceTypes.SIGFOX">
+              <a (click)="onOpenChangeApplicationDialog(iotDevice.id)" routerLinkActive="active">{{
+                "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
+              }}</a>
+            </li>
             <li class="dropdown-item">
               <a (click)="clickDelete(iotDevice)" [routerLink]="[]">{{ "IOTDEVICE-TABLE-ROW.DELETE" | translate }}</a>
             </li>

@@ -1,24 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { Location } from "@angular/common";
-import { Sort } from "@shared/models/sort.model";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
-import { faSearch, faChevronLeft, faUser, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-import { Application } from "@applications/application.model";
-import { IotDevice } from "@applications/iot-devices/iot-device.model";
-import { BackButton } from "@shared/models/back-button.model";
-import { QuickActionButton } from "@shared/models/quick-action-button.model";
 import { OrganisationResponse } from "@app/admin/organisation/organisation.model";
-import { Gateway } from "@app/gateway/gateway.model";
-import { DatatargetResponse } from "@applications/datatarget/datatarget-response.model";
-import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 import { PermissionResponse } from "@app/admin/permission/permission.model";
 import { UserResponse } from "@app/admin/users/user.model";
-import { DropdownButton } from "@shared/models/dropdown-button.model";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Gateway } from "@app/gateway/gateway.model";
+import { Application } from "@applications/application.model";
+import { DatatargetResponse } from "@applications/datatarget/datatarget-response.model";
+import { Datatarget } from "@applications/datatarget/datatarget.model";
+import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { AuthService } from "@auth/auth.service";
-import { LoggedInService } from "@shared/services/loggedin.service";
 import { environment } from "@environments/environment";
+import { faChevronLeft, faQuestionCircle, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
+import { BackButton } from "@shared/models/back-button.model";
+import { DropdownButton } from "@shared/models/dropdown-button.model";
+import { QuickActionButton } from "@shared/models/quick-action-button.model";
+import { Sort } from "@shared/models/sort.model";
+import { LoggedInService } from "@shared/services/loggedin.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
   selector: "app-top-bar",
@@ -30,6 +31,7 @@ export class TopBarComponent implements OnInit {
     | Application
     | IotDevice
     | DatatargetResponse
+    | Datatarget
     | PayloadDecoder
     | Gateway
     | PermissionResponse

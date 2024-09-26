@@ -78,7 +78,6 @@ export class DeviceModelService {
       offset: offset,
       sort: sort,
       orderOn: orderOn,
-      organizationId: undefined,
     };
     if (organizationId) {
       body.organizationId = organizationId;
@@ -86,25 +85,26 @@ export class DeviceModelService {
     return this.restService.get(this.DEVICEMODELURL, body).pipe(
       map(response => {
         return {
-          data: response.data.map(
-            (item: any) =>
-              new DeviceModel(
-                item.id,
-                new DeviceModelBody(
-                  item.body.id,
-                  item.body.name,
-                  item.body.brandName,
-                  item.body.modelName,
-                  item.body.manufacturerName,
-                  item.body.category,
-                  item.body.energyLimitationClass,
-                  item.body.controlledProperty,
-                  item.body.supportedUnits,
-                  item.body.function,
-                  item.body.supportedProtocol
-                )
+          data: response.data.map((item: any) => {
+            let deviceModel = new DeviceModel(
+              item.id,
+              new DeviceModelBody(
+                item.body.id,
+                item.body.name,
+                item.body.brandName,
+                item.body.modelName,
+                item.body.manufacturerName,
+                item.body.category,
+                item.body.energyLimitationClass,
+                item.body.controlledProperty,
+                item.body.supportedUnits,
+                item.body.function,
+                item.body.supportedProtocol
               )
-          ),
+            );
+            deviceModel.belongsTo = item.belongsTo;
+            return deviceModel;
+          }),
           count: response.count,
         };
       })

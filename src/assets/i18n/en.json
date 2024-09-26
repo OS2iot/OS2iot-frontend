@@ -2,6 +2,9 @@
   "GEN": {
     "CANCEL": "Cancel",
     "SHOW": "Show",
+    "LOG": "Log",
+    "MESSAGE": "Message",
+    "DEVICE": "Device",
     "PER-PAGE": "Per page"
   },
   "NAV": {
@@ -22,6 +25,14 @@
     "DELETE": "Delete",
     "EDIT": "Edit",
     "SHOW-OPTIONS": "Show options"
+  },
+  "DATATARGET": {
+    "LATEST_MESSAGE": "Latest message",
+    "24H_STATUS": "Status (24 hours)",
+    "RESPONSE_TYPE": {
+      "ERROR": "Fejl",
+      "OK": "Ok"
+    }
   },
   "FORM": {
     "CREATE-NEW-APPLICATION": "Create new application",
