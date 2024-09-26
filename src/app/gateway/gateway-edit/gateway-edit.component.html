@@ -142,7 +142,7 @@
           }"
         />
       </div>
-      <div class="form-group mt-3">
+      <div class="form-group mt-3 col-6">
         <label class="form-label" for="placement">{{ "GATEWAY.PLACEMENT-LABEL" | translate }}</label>
         <mat-select
           class="form-control"
@@ -159,7 +159,8 @@
           </mat-option>
         </mat-select>
       </div>
-      <div class="form-group mt-3">
+      <h3 class="h3">{{ "QUESTION.METADATA" | translate }}</h3>
+      <div class="form-group">
         <label class="form-label" for="modelName">{{ "QUESTION-LORA-GATEWAY.MODEL-NAME" | translate }}</label>
         <input
           type="text"
@@ -207,6 +208,23 @@
         </mat-select>
       </div>
       <div class="form-group mt-3">
+        <label class="form-label" for="tagsString">{{ "QUESTION-LORA-GATEWAY.METADATA" | translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          id="tagsString"
+          name="tagsString"
+          [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"
+          required
+          [(ngModel)]="gateway.tagsString"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('tagsString'),
+            'is-valid': formFailedSubmit && !errorFields.includes('tagsString')
+          }"
+        />
+      </div>
+      <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.CONTACT" | translate }}</h3>
+      <div class="form-group">
         <label class="form-label" for="gatewayResponsible">{{
           "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE" | translate
         }}</label>
@@ -291,22 +309,109 @@
           }"
         />
       </div>
-    </div>
-    <div class="form-group mt-3">
-      <label class="form-label" for="tagsString">{{ "QUESTION-LORA-GATEWAY.METADATA" | translate }}</label>
-      <input
-        type="text"
-        class="form-control"
-        id="tagsString"
-        name="tagsString"
-        [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"
-        required
-        [(ngModel)]="gateway.tagsString"
-        [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('tagsString'),
-          'is-valid': formFailedSubmit && !errorFields.includes('tagsString')
-        }"
-      />
+      <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.ALARMS" | translate }}</h3>
+      <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.SET-ALARMS" | translate }}</label>
+      <div class="row mt-3">
+        <mat-slide-toggle [(ngModel)]="gateway.notifyOffline" id="notifyOffline" name="notifyOffline">
+          {{ "GEN.OFFLINE" | translate }}</mat-slide-toggle
+        >
+      </div>
+      <div *ngIf="gateway.notifyOffline">
+        <div class="form-group mt-3">
+          <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.HOW-MANY-MINUTES" | translate }}</label>
+        </div>
+
+        <div class="form-group mt-3">
+          <label class="form-label" for="offlineAlarmThresholdMinutes">{{
+            "QUESTION-LORA-GATEWAY.AMOUNT-OF-MINUTES" | translate
+          }}</label>
+          <input
+            type="number"
+            class="form-control"
+            id="offlineAlarmThresholdMinutes"
+            name="offlineAlarmThresholdMinutes"
+            [(ngModel)]="gateway.offlineAlarmThresholdMinutes"
+            step="1"
+            maxlength="9"
+            (keyup)="onCoordinateKey($event)"
+            [ngClass]="{
+              'is-invalid': formFailedSubmit && errorFields.includes('offlineAlarmThresholdMinutes'),
+              'is-valid': formFailedSubmit && !errorFields.includes('offlineAlarmThresholdMinutes')
+            }"
+          />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <mat-slide-toggle
+          [(ngModel)]="gateway.notifyUnusualPackages"
+          id="notifyUnusualPackages"
+          name="notifyUnusualPackages"
+        >
+          {{ "QUESTION-LORA-GATEWAY.UNUSUAL-PACKAGES" | translate }}</mat-slide-toggle
+        >
+      </div>
+      <div *ngIf="gateway.notifyUnusualPackages">
+        <div class="form-group mt-3">
+          <label for="minimumPackages">{{ "QUESTION-LORA-GATEWAY.SET-INTERVAL" | translate }}</label>
+        </div>
+        <div class="row d-flex">
+          <div class="form-group mt-3 col-6">
+            <label class="form-label" for="minimumPackages">{{
+              "QUESTION-LORA-GATEWAY.MINIMUM-AMOUNT" | translate
+            }}</label>
+            <input
+              type="number"
+              class="form-control"
+              id="minimumPackages"
+              name="minimumPackages"
+              required
+              [(ngModel)]="gateway.minimumPackages"
+              step="1"
+              maxlength="9"
+              (keyup)="onCoordinateKey($event)"
+              [ngClass]="{
+                'is-invalid': formFailedSubmit && errorFields.includes('minimumPackages'),
+                'is-valid': formFailedSubmit && !errorFields.includes('minimumPackages')
+              }"
+            />
+          </div>
+          <div class="form-group mt-3 col-6">
+            <label class="form-label" for="maximumPackages">{{
+              "QUESTION-LORA-GATEWAY.MAXIMUM-AMOUNT" | translate
+            }}</label>
+            <input
+              type="number"
+              class="form-control"
+              id="maximumPackages"
+              name="maximumPackages"
+              required
+              [(ngModel)]="gateway.maximumPackages"
+              step="1"
+              maxlength="9"
+              (keyup)="onCoordinateKey($event)"
+              [ngClass]="{
+                'is-invalid': formFailedSubmit && errorFields.includes('maximumPackages'),
+                'is-valid': formFailedSubmit && !errorFields.includes('maximumPackages')
+              }"
+            />
+          </div>
+        </div>
+      </div>
+      <div *ngIf="gateway.notifyOffline || gateway.notifyUnusualPackages" class="form-group mt-3">
+        <label class="form-label" for="alarmMail">{{ "QUESTION-LORA-GATEWAY.SET-EMAIL" | translate }}*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="alarmMail"
+          name="alarmMail"
+          [placeholder]="'USERS.EMAIL' | translate"
+          [(ngModel)]="gateway.alarmMail"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('alarmMail'),
+            'is-valid': formFailedSubmit && !errorFields.includes('alarmMail')
+          }"
+        />
+      </div>
     </div>
   </div>
 
