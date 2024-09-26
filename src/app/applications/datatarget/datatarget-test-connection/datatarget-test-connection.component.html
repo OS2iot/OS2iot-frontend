@@ -8,12 +8,15 @@
         <mat-divider></mat-divider>
         <p class="mt-3 font-weight-bold">{{ "DATATARGET.TEST_CONNECTION.SEND-LATEST-PACKAGE" | translate }}</p>
         <mat-select
-          id="level"
-          class="mt-3 form-control"
-          name="level"
-          required
+          (selectionChange)="getLastPackage($event)"
           [placeholder]="'DATATARGET.TEST_CONNECTION.CHOOSE-IOT-DEVICE' | translate"
+          class="mt-3 form-control"
+          id="level"
+          name="level"
         >
+          <mat-option *ngFor="let iotDevice of iotDevices" [value]="iotDevice.id">
+            {{ iotDevice.name }}
+          </mat-option>
         </mat-select>
         <button class="mt-3 btn btn-primary">{{ "DATATARGET.TEST_CONNECTION.SEND-DATA-PACKAGE" | translate }}</button>
         <p class="mt-2">
@@ -25,10 +28,10 @@
       <div class="jumbotron jumbotron--full-width">
         <h3>{{ "DATATARGET.TEST_CONNECTION.CHOSEN-DATA-PACKAGE" | translate }}</h3>
         <ngx-monaco-editor
-          style="height: 85%"
-          [options]="editorJsonOutpuOptions"
-          [(ngModel)]="codeOutput"
+          [(ngModel)]="payloadData"
           [ngModelOptions]="{ standalone: true }"
+          [options]="editorJsonOutpuOptions"
+          style="height: 85%"
         >
         </ngx-monaco-editor>
       </div>
@@ -38,17 +41,17 @@
         <h3>{{ "DATATARGET.TEST_CONNECTION.SENT-HTTP-REQUEST" | translate }}</h3>
         <p>{{ "DATATARGET.TEST_CONNECTION.HEADERS" | translate }}</p>
         <ngx-monaco-editor
-          [options]="editorJsonOutpuOptions"
           [(ngModel)]="codeOutput"
           [ngModelOptions]="{ standalone: true }"
+          [options]="editorJsonOutpuOptions"
         >
         </ngx-monaco-editor>
 
         <p>{{ "DATATARGET.TEST_CONNECTION.BODY" | translate }}</p>
         <ngx-monaco-editor
-          [options]="editorJsonOutpuOptions"
           [(ngModel)]="codeOutput"
           [ngModelOptions]="{ standalone: true }"
+          [options]="editorJsonOutpuOptions"
         >
         </ngx-monaco-editor>
       </div>
@@ -58,18 +61,18 @@
         <h3>{{ "DATATARGET.TEST_CONNECTION.RECEIVED-HTTP-RESPONSE" | translate }}</h3>
         <p>{{ "DATATARGET.TEST_CONNECTION.HEADERS" | translate }}</p>
         <ngx-monaco-editor
-          [options]="editorJsonOutpuOptions"
           [(ngModel)]="codeOutput"
           [ngModelOptions]="{ standalone: true }"
+          [options]="editorJsonOutpuOptions"
         >
         </ngx-monaco-editor>
 
         <p>{{ "DATATARGET.TEST_CONNECTION.BODY" | translate }}</p>
 
         <ngx-monaco-editor
-          [options]="editorJsonOutpuOptions"
           [(ngModel)]="codeOutput"
           [ngModelOptions]="{ standalone: true }"
+          [options]="editorJsonOutpuOptions"
         >
         </ngx-monaco-editor>
       </div>

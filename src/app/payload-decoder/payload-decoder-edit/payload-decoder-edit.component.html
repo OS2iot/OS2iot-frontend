@@ -1,4 +1,4 @@
-<app-top-bar [backButton]="backButton" [title]="title" [subPage]="true" [canEdit]="canEdit"></app-top-bar>
+<app-top-bar [backButton]="backButton" [canEdit]="canEdit" [subPage]="true" [title]="title"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
   <div *ngIf="errorMessages" class="jumbotron">
     <div class="error-messages p-3">
@@ -13,20 +13,20 @@
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label class="form-label" for="metadata">{{ "QUESTION.GIVE-PAYLOADDECODER-NAME" | translate }}*</label>
+          <label class="form-label" for="name">{{ "QUESTION.GIVE-PAYLOADDECODER-NAME" | translate }}*</label>
           <input
-            class="form-control"
-            type="text"
-            id="name"
-            name="name"
-            [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate"
-            maxlength="50"
-            required
             [(ngModel)]="payloadDecoder.name"
             [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('name'),
               'is-valid': formFailedSubmit && !errorFields.includes('name')
             }"
+            [placeholder]="'QUESTION.GIVE-PAYLOADDECODER-NAME-PLACEHOLDER' | translate"
+            class="form-control"
+            id="name"
+            maxlength="50"
+            name="name"
+            required
+            type="text"
           />
         </div>
       </div>
@@ -58,17 +58,17 @@
       <div class="col-6">
         <div class="form-group">
           <label class="form-label" for="decodingFunction">{{
-            "QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION" | translate
-          }}</label>
+              "QUESTION.GIVE-PAYLOADDECODER-DECODINGFUNCTION" | translate
+            }}</label>
           <ngx-monaco-editor
-            class="big-editor"
-            [options]="editorJavaScriptOptions"
             [(ngModel)]="payloadDecoderBody"
-            [ngModelOptions]="{ standalone: true }"
             [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('decodingFunction'),
               'is-valid': formFailedSubmit && !errorFields.includes('decodingFunction')
             }"
+            [ngModelOptions]="{ standalone: true }"
+            [options]="editorJavaScriptOptions"
+            class="big-editor"
           >
           </ngx-monaco-editor>
         </div>
@@ -77,30 +77,30 @@
         <div class="form-group">
           <label class="form-label" for="payload">{{ "QUESTION.GIVE-PAYLOADDECODER-PAYLOAD" | translate }}</label>
           <ngx-monaco-editor
-            [options]="editorJsonOptions"
             [(ngModel)]="payloadData"
-            [ngModelOptions]="{ standalone: true }"
             [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('payloadData'),
               'is-valid': formFailedSubmit && !errorFields.includes('payloadData')
             }"
+            [ngModelOptions]="{ standalone: true }"
+            [options]="editorJsonOptions"
           >
           </ngx-monaco-editor>
         </div>
         <div class="form-group">
           <label class="form-label" for="metadata">{{ "QUESTION.GIVE-PAYLOADDECODER-METADATA" | translate }}</label>
           <ngx-monaco-editor
-            [options]="editorJsonOptions"
             [(ngModel)]="metadata"
-            [ngModelOptions]="{ standalone: true }"
             [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('metadata'),
               'is-valid': formFailedSubmit && !errorFields.includes('matadata')
             }"
+            [ngModelOptions]="{ standalone: true }"
+            [options]="editorJsonOptions"
           >
           </ngx-monaco-editor>
         </div>
-        <div class="btn btn-secondary my-3" (click)="testPayloadFunction()">
+        <div (click)="testPayloadFunction()" class="btn btn-secondary my-3">
           <div class="d-flex mx-3">
             <div class="mr-3">{{ "QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON" | translate }}</div>
             <fa-icon [icon]="faExchangeAlt" class=""></fa-icon>
@@ -109,14 +109,14 @@
         <div class="form-group">
           <label class="form-label" for="codePreview">{{ "QUESTION.GIVE-PAYLOADDECODER-OUTPUT" | translate }}</label>
           <ngx-monaco-editor
-            class="middle-editor"
-            [options]="editorJsonOutpuOptions"
             [(ngModel)]="codeOutput"
-            [ngModelOptions]="{ standalone: true }"
             [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('codePreview'),
               'is-valid': formFailedSubmit && !errorFields.includes('codePreview')
             }"
+            [ngModelOptions]="{ standalone: true }"
+            [options]="editorJsonOutpuOptions"
+            class="middle-editor"
           >
           </ngx-monaco-editor>
         </div>
