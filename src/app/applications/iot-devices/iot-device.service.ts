@@ -6,6 +6,7 @@ import {
   IotDevicesImportResponse,
   IotDeviceImportRequest,
   IoTDeviceStatsResponse,
+  UpdateIoTDeviceApplication,
 } from "./iot-device.model";
 import { RestService } from "src/app/shared/services/rest.service";
 import { map } from "rxjs/operators";
@@ -66,6 +67,7 @@ export class IoTDeviceService {
           updatedBy: response.updatedBy,
           createdByName: this.userMinimalService.getUserNameFrom(response.createdBy),
           updatedByName: this.userMinimalService.getUserNameFrom(response.updatedBy),
+          deviceModel: response.deviceModel,
         };
       })
     );
@@ -89,5 +91,9 @@ export class IoTDeviceService {
 
   resetHttpDeviceApiKey(id: number): Observable<Pick<IotDevice, "apiKey">> {
     return this.restService.put(`${this.BASEURL}/resetHttpDeviceApiKey`, null, id);
+  }
+
+  changeIoTDeviceApplication(id: number, body: UpdateIoTDeviceApplication): Observable<IotDevice> {
+    return this.restService.put(`${this.BASEURL}/changeApplication`, body, id);
   }
 }

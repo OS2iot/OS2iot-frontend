@@ -34,6 +34,7 @@ import { ExportCsvDialogComponent } from "./iot-devices-tab/export-csv-dialog/ex
 import { IotDeviceDetailsMqttInternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-internal-broker/iot-device-details-mqtt-internal-broker.component";
 import { IotDeviceDetailsMqttExternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-external-broker/iot-device-details-mqtt-external-broker.component";
 import { DownlinkTablesComponent } from "./iot-device-detail/downlink/downlink-tables/downlink-tables.component";
+import { IoTDeviceChangeApplicationDialogComponent } from "./iot-device-change-application-dialog/iot-device-change-application-dialog.component";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DownlinkTablesComponent } from "./iot-device-detail/downlink/downlink-t
     MqttAuthenticationSelectComponent,
     IotDeviceDetailsMqttExternalBrokerComponent,
     ExportCsvDialogComponent,
+    IoTDeviceChangeApplicationDialogComponent,
   ],
   exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
   imports: [
