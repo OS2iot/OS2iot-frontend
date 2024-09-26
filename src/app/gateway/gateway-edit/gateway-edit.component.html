@@ -310,47 +310,47 @@
         />
       </div>
       <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.ALARMS" | translate }}</h3>
-      <label for="notificationOffline">{{ "QUESTION-LORA-GATEWAY.SET-ALARMS" | translate }}</label>
+      <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.SET-ALARMS" | translate }}</label>
       <div class="row mt-3">
-        <mat-slide-toggle [(ngModel)]="gateway.notificationOffline" id="notificationOffline" name="notificationOffline">
+        <mat-slide-toggle [(ngModel)]="gateway.notifyOffline" id="notifyOffline" name="notifyOffline">
           {{ "GEN.OFFLINE" | translate }}</mat-slide-toggle
         >
       </div>
-      <div *ngIf="gateway.notificationOffline">
+      <div *ngIf="gateway.notifyOffline">
         <div class="form-group mt-3">
-          <label for="notificationOffline">{{ "QUESTION-LORA-GATEWAY.HOW-MANY-MINUTES" | translate }}</label>
+          <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.HOW-MANY-MINUTES" | translate }}</label>
         </div>
 
         <div class="form-group mt-3">
-          <label class="form-label" for="amountOfMinutes">{{
+          <label class="form-label" for="offlineAlarmThresholdMinutes">{{
             "QUESTION-LORA-GATEWAY.AMOUNT-OF-MINUTES" | translate
           }}</label>
           <input
             type="number"
             class="form-control"
-            id="amountOfMinutes"
-            name="amountOfMinutes"
-            [(ngModel)]="gateway.amountOfMinutes"
+            id="offlineAlarmThresholdMinutes"
+            name="offlineAlarmThresholdMinutes"
+            [(ngModel)]="gateway.offlineAlarmThresholdMinutes"
             step="1"
             maxlength="9"
             (keyup)="onCoordinateKey($event)"
             [ngClass]="{
-              'is-invalid': formFailedSubmit && errorFields.includes('amountOfMinutes'),
-              'is-valid': formFailedSubmit && !errorFields.includes('amountOfMinutes')
+              'is-invalid': formFailedSubmit && errorFields.includes('offlineAlarmThresholdMinutes'),
+              'is-valid': formFailedSubmit && !errorFields.includes('offlineAlarmThresholdMinutes')
             }"
           />
         </div>
       </div>
       <div class="row mt-3">
         <mat-slide-toggle
-          [(ngModel)]="gateway.notificationUnusualPackages"
-          id="notificationUnusualPackages"
-          name="notificationUnusualPackages"
+          [(ngModel)]="gateway.notifyUnusualPackages"
+          id="notifyUnusualPackages"
+          name="notifyUnusualPackages"
         >
           {{ "QUESTION-LORA-GATEWAY.UNUSUAL-PACKAGES" | translate }}</mat-slide-toggle
         >
       </div>
-      <div *ngIf="gateway.notificationUnusualPackages">
+      <div *ngIf="gateway.notifyUnusualPackages">
         <div class="form-group mt-3">
           <label for="minimumPackages">{{ "QUESTION-LORA-GATEWAY.SET-INTERVAL" | translate }}</label>
         </div>
@@ -397,7 +397,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="gateway.notificationOffline || gateway.notificationUnusualPackages" class="form-group mt-3">
+      <div *ngIf="gateway.notifyOffline || gateway.notifyUnusualPackages" class="form-group mt-3">
         <label class="form-label" for="alarmMail">{{ "QUESTION-LORA-GATEWAY.SET-EMAIL" | translate }}*</label>
         <input
           type="text"
