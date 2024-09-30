@@ -15,6 +15,8 @@ import { Title } from "@angular/platform-browser";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
+import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-application-dialog/iot-device-change-application-dialog.component";
+import { ApplicationDialogModel, IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-iot-device",
@@ -70,7 +72,8 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private titleService: Title,
     private meService: MeService,
-    private iotDeviceDetailsService: IotDeviceDetailsService
+    private iotDeviceDetailsService: IotDeviceDetailsService,
+    private changeApplicationDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +92,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         label: "",
         editRouterLink: "../../iot-device-edit/" + this.deviceId,
         isErasable: true,
+        extraOptions: [],
       };
     }
 
@@ -115,7 +119,6 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         this.resetApiKeyCancel = translations["GEN.CANCEL"];
       });
 
-    this.dropdownButton.extraOptions = [];
     if (this.router.url.split("/").length <= 5) {
       this.router.navigateByUrl(this.router.url + "/details", {
         replaceUrl: true,
@@ -135,6 +138,16 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
 
       if (this.canEdit && this.device.type === DeviceType.GENERIC_HTTP) {
         this.dropdownButton.extraOptions.push(this.resetApiKeyOption);
+      }
+
+      if (this.device?.type !== DeviceType.SIGFOX) {
+        this.translate.get("IOTDEVICE.CHANGE-APPLICATION.TITLE").subscribe(translation => {
+          this.dropdownButton.extraOptions.push({
+            id: this.deviceId,
+            label: translation,
+            onClick: () => this.onOpenChangeApplicationDialog(),
+          });
+        });
       }
     });
   }
@@ -168,6 +181,14 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  onOpenChangeApplicationDialog() {
+    this.changeApplicationDialog.open(IoTDeviceChangeApplicationDialogComponent, {
+      data: {
+        deviceId: this.deviceId,
+      } as IoTDeviceApplicationDialogModel,
+    });
   }
 
   ngOnDestroy() {

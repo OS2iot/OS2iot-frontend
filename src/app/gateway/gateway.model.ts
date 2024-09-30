@@ -19,6 +19,12 @@ export class Gateway extends EditPermission {
   gatewayResponsiblePhoneNumber?: string;
   operationalResponsibleName?: string;
   operationalResponsibleEmail?: string;
+  notifyOffline?: boolean;
+  notifyUnusualPackages?: boolean;
+  offlineAlarmThresholdMinutes?: number;
+  minimumPackages?: number;
+  maximumPackages?: number;
+  alarmMail?: string;
 
   tagsString: string;
   tags?: JSON;

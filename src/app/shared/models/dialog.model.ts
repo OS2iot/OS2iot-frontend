@@ -22,3 +22,7 @@ export class GatewayDialogModel {
   gatewayDbId: number;
   organizationId?: number;
 }
+
+export class IoTDeviceApplicationDialogModel {
+  deviceId: number;
+}
