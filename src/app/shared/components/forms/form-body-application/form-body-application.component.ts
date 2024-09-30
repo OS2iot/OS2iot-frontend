@@ -12,7 +12,7 @@ import { UntypedFormControl } from "@angular/forms";
 import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-propperty.enum";
 import { ApplicationDeviceTypes, ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
 import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
-import { PermissionResponse } from "@app/admin/permission/permission.model";
+import { PermissionResponse, PermissionType } from "@app/admin/permission/permission.model";
 import { takeUntil } from "rxjs/operators";
 import { PermissionService } from "@app/admin/permission/permission.service";
 import { MeService } from "@shared/services/me.service";
@@ -268,7 +268,18 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.permissions = res.data.sort((a, b) => a.name.localeCompare(b.name, "da-DK", { numeric: true }));
         this.filteredPermissionsMulti.next(this.permissions.slice());
         if (!this.id) {
-          this.application.permissionIds = [this.permissions[0].id];
+          this.application.permissionIds = this.permissions.map(permission => {
+            if (
+              permission.automaticallyAddNewApplications &&
+              permission.type.find(
+                permissionType =>
+                  permissionType.type === PermissionType.OrganizationApplicationAdmin ||
+                  permissionType.type === PermissionType.Read
+              )
+            ) {
+              return permission.id;
+            }
+          });
           this.permissionMultiCtrl.setValue(this.application.permissionIds);
         }
       });
