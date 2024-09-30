@@ -9,7 +9,7 @@ import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetManyResponse } from 
 export class PayloadDeviceDatatargetService {
   private BASEURL = "iot-device-payload-decoder-data-target-connection";
   private BYDATATARGETURL = "/byDataTarget";
-  private BYDIOTDEVICEIDURL = "/byIoTDevice";
+  private BYIOTDEVICEIURL = "/byIoTDevice";
 
   constructor(private restService: RestService) {}
 
@@ -36,7 +36,7 @@ export class PayloadDeviceDatatargetService {
   }
 
   getByIoTDevice(id: number): Observable<PayloadDeviceDatatargetGetManyResponse> {
-    return this.restService.get(this.BASEURL + this.BYDIOTDEVICEIDURL, null, id);
+    return this.restService.get(this.BASEURL + this.BYIOTDEVICEIURL, null, id);
   }
 
   mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse): PayloadDeviceDatatarget[] {
