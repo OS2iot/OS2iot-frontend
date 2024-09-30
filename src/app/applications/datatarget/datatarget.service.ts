@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { DatatargetResponse } from "@applications/datatarget/datatarget-response.model";
 import { RestService } from "@shared/services/rest.service";
-import { DatatargetData, Datatarget, OddkMailInfo } from "./datatarget.model";
+import { Datatarget, DatatargetData, OddkMailInfo, TestDataTargetDto } from "./datatarget.model";
 import { map } from "rxjs/operators";
 import { OpenDataDkDataset } from "./opendatadk/opendatadk-dataset.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
@@ -34,9 +34,6 @@ export class DatatargetService {
       limit,
       offset,
       applicationId,
-      // sort: sort,
-      // orderOn: orderOn,
-      // todo tilføj når iot-314 er tilføjet
     };
     return this.restService.get(this.dataTargetURL, body);
   }
@@ -63,6 +60,30 @@ export class DatatargetService {
 
   delete(id: number) {
     return this.restService.delete(this.dataTargetURL, id);
+  }
+
+  getOpendataSharingApiUrl(): string {
+    return this.restService.createResourceUrl(
+      "open-data-dk-sharing",
+      this.sharedVariableService.getSelectedOrganisationId()
+    );
+  }
+
+  getOpenDataDkRegistered(organizationId: number): Observable<boolean> {
+    return this.restService.get(this.dataTargetURL + "/getOpenDataDkRegistered", undefined, organizationId);
+  }
+
+  updateOpenDataDkRegistered(organizationId: number): Observable<boolean> {
+    return this.restService.put(this.dataTargetURL + "/updateOpenDataDkRegistered", undefined, organizationId);
+  }
+
+  sendOpenDataDkMail(mailDto: OddkMailInfo): Observable<boolean> {
+    mailDto.sharingUrl = this.getOpendataSharingApiUrl();
+    return this.restService.post(this.dataTargetURL + "/sendOpenDataDkMail", mailDto);
+  }
+
+  testDataTarget(testDataTargetDto: TestDataTargetDto): Observable<any> {
+    return this.restService.post(this.dataTargetURL + "/testDataTarget", testDataTargetDto);
   }
 
   private trimModel(datatarget: Datatarget) {
@@ -106,23 +127,5 @@ export class DatatargetService {
     model.openDataDkDataset.keywordsInput = dataTargetResponse.openDataDkDataset?.keywords?.join(", ");
     model.openDataDkDataset.url = this.getOpendataSharingApiUrl();
     return model;
-  }
-
-  getOpendataSharingApiUrl(): string {
-    return this.restService.createResourceUrl(
-      "open-data-dk-sharing",
-      this.sharedVariableService.getSelectedOrganisationId()
-    );
-  }
-
-  getOpenDataDkRegistered(organizationId: number): Observable<boolean> {
-    return this.restService.get(this.dataTargetURL + "/getOpenDataDkRegistered", undefined, organizationId);
-  }
-  updateOpenDataDkRegistered(organizationId: number): Observable<boolean> {
-    return this.restService.put(this.dataTargetURL + "/updateOpenDataDkRegistered", undefined, organizationId);
-  }
-  sendOpenDataDkMail(mailDto: OddkMailInfo): Observable<boolean> {
-    mailDto.sharingUrl = this.getOpendataSharingApiUrl();
-    return this.restService.post(this.dataTargetURL + "/sendOpenDataDkMail", mailDto);
   }
 }

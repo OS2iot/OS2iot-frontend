@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Datatarget } from "../../datatarget.model";
 import { Subscription } from "rxjs";
 import { Application } from "@applications/application.model";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   PayloadDeviceDatatarget,
-  PayloadDeviceDatatargetGetByDataTargetResponse,
+  PayloadDeviceDatatargetGetManyResponse,
 } from "@payload-decoder/payload-device-data.model";
 import { DatatargetService } from "../../datatarget.service";
 import { ApplicationService } from "@applications/application.service";
@@ -22,7 +22,6 @@ import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-d
 import { ErrorMessageService } from "@shared/error-message.service";
 import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
 import { DataTargetType } from "@shared/enums/datatarget-type";
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { DatatargetEdit } from "@applications/datatarget/datatarget-edit/datatarget-edit";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
@@ -48,15 +47,15 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public errorFields: string[];
   public formFailedSubmit = false;
   public datatargetid: number;
-  private applicationId: number;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
-  private counter: number;
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
   faQuestionCircle = faQuestionCircle;
   canEdit: boolean;
+  private applicationId: number;
+  private counter: number;
 
   constructor(
     public translate: TranslateService,
@@ -115,17 +114,6 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       payloadDecoderId: null,
       dataTargetId: this.datatargetid,
     });
-  }
-
-  private deleteRow(index) {
-    if (this.payloadDeviceDatatarget.length === 0) {
-    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
-      this.payloadDeviceDatatarget.splice(index, 1);
-    } else {
-      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(response => {
-        this.payloadDeviceDatatarget.splice(index, 1);
-      });
-    }
   }
 
   openDeleteDialog(index) {
@@ -213,7 +201,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   getPayloadDeviceDatatarget(id: number) {
     this.relationSubscription = this.payloadDeviceDataTargetService
       .getByDataTarget(id)
-      .subscribe((response: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+      .subscribe((response: PayloadDeviceDatatargetGetManyResponse) => {
         this.mapToDatatargetDevicePayload(response);
       });
   }
@@ -233,12 +221,6 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
         this.formFailedSubmit = true;
       }
     );
-  }
-
-  private resetErrors() {
-    this.errorFields = [];
-    this.errorMessages = undefined;
-    this.formFailedSubmit = false;
   }
 
   getDevices(): void {
@@ -281,6 +263,7 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       replaceUrl: true,
     });
   }
+
   onCoordinateKey(event: any) {
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength);
@@ -318,7 +301,24 @@ export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     }
   }
 
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
+  private deleteRow(index) {
+    if (this.payloadDeviceDatatarget.length === 0) {
+    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
+      this.payloadDeviceDatatarget.splice(index, 1);
+    } else {
+      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(response => {
+        this.payloadDeviceDatatarget.splice(index, 1);
+      });
+    }
+  }
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
+  }
+
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse) {
     this.payloadDeviceDatatarget = [];
     dto.data.forEach(element => {
       this.payloadDeviceDatatarget.push({

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PayloadDeviceDatatargetGetByDataTarget } from "@app/payload-decoder/payload-device-data.model";
+import { PayloadDeviceDatatargetResponse } from "@app/payload-decoder/payload-device-data.model";
 import { PayloadDeviceDatatargetService } from "@app/payload-decoder/payload-device-datatarget.service";
 import { DatatargetDetail } from "@applications/datatarget/datatarget-detail/datatarget-detail";
 import { faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ export class MqttDetailComponent implements DatatargetDetail, OnDestroy {
   arrowsAltH = faArrowsAltH;
 
   datatarget: Datatarget;
-  dataTargetRelations: PayloadDeviceDatatargetGetByDataTarget[];
+  dataTargetRelations: PayloadDeviceDatatargetResponse[];
 
   private subscriptions: Subscription[];
 

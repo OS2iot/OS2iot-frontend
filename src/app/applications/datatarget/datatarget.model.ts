@@ -53,3 +53,10 @@ export class OddkMailInfo {
   comment?: string;
   sharingUrl?: string;
 }
+
+export class TestDataTargetDto {
+  dataTargetId: number;
+  iotDeviceId?: number;
+  payloadDecoderId?: number;
+  dataPackage?: string;
+}

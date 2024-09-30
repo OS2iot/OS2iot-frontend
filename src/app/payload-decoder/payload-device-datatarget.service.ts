@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RestService } from "@shared/services/rest.service";
 import { Observable } from "rxjs";
-import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetByDataTargetResponse } from "./payload-device-data.model";
+import { PayloadDeviceDatatarget, PayloadDeviceDatatargetGetManyResponse } from "./payload-device-data.model";
 
 @Injectable({
   providedIn: "root",
@@ -30,11 +30,11 @@ export class PayloadDeviceDatatargetService {
     return this.restService.delete(this.BASEURL, id);
   }
 
-  getByDataTarget(id: number): Observable<PayloadDeviceDatatargetGetByDataTargetResponse> {
+  getByDataTarget(id: number): Observable<PayloadDeviceDatatargetGetManyResponse> {
     return this.restService.get(this.BASEURL + this.BYDATATARGETURL, null, id);
   }
 
-  mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse): PayloadDeviceDatatarget[] {
+  mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse): PayloadDeviceDatatarget[] {
     const payloadDeviceDatatargetList = [];
     dto.data.forEach(element => {
       payloadDeviceDatatargetList.push({

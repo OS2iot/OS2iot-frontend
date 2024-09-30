@@ -9,11 +9,11 @@ export class PayloadDeviceDatatarget {
   dataTargetId: number;
 }
 
-export interface PayloadDeviceDatatargetGetByDataTargetResponse {
-  data: PayloadDeviceDatatargetGetByDataTarget[];
+export interface PayloadDeviceDatatargetGetManyResponse {
+  data: PayloadDeviceDatatargetResponse[];
 }
 
-export interface PayloadDeviceDatatargetGetByDataTarget {
+export interface PayloadDeviceDatatargetResponse {
   id: number;
   iotDevices: IotDevice[];
   payloadDecoder: PayloadDecoder;
