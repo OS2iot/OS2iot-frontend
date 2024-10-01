@@ -2,7 +2,7 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarModule } from "./navbar/navbar.module";
@@ -31,6 +31,8 @@ import { UserPageComponent } from "./admin/users/user-page/user-page.component";
 import { SharedModule } from "@shared/shared.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
 import { CookieService } from "ngx-cookie-service";
+import { CsrfInterceptor } from "@shared/helpers/csrf-interceptor";
+import { CsrfCookieName, CsrfHeaderName } from "@shared/constants/csrf-constants";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -79,6 +81,11 @@ export function tokenGetter() {
     MonacoEditorModule.forRoot(),
     WelcomeDialogModule,
     PipesModule,
+    HttpClientXsrfModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: CsrfCookieName, // Match the cookie name used by the backend
+      headerName: CsrfHeaderName, // Match the header name expected by the backend
+    }),
   ],
   bootstrap: [AppComponent],
   exports: [TranslateModule],
@@ -87,6 +94,7 @@ export function tokenGetter() {
     //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
     //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
     Title,
+    { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
     { provide: SAVER, useFactory: getSaver },
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
