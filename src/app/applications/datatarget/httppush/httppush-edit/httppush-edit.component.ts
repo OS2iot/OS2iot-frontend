@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Datatarget } from "../../datatarget.model";
@@ -8,7 +8,7 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   PayloadDeviceDatatarget,
-  PayloadDeviceDatatargetGetByDataTargetResponse,
+  PayloadDeviceDatatargetGetManyResponse,
 } from "@payload-decoder/payload-device-data.model";
 import { DatatargetService } from "../../datatarget.service";
 import { ApplicationService } from "@applications/application.service";
@@ -46,15 +46,14 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
   public errorFields: string[];
   public formFailedSubmit = false;
   public datatargetid: number;
-  private applicationId: number;
   public application: Application;
   public devices: IotDevice[];
   public payloadDecoders = [];
-  private counter: number;
-
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   newDynamic: any = {};
   canEdit: boolean;
+  private applicationId: number;
+  private counter: number;
 
   constructor(
     public translate: TranslateService,
@@ -114,17 +113,6 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
       payloadDecoderId: null,
       dataTargetId: this.datatargetid,
     });
-  }
-
-  private deleteRow(index) {
-    if (this.payloadDeviceDatatarget.length === 0) {
-    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
-      this.payloadDeviceDatatarget.splice(index, 1);
-    } else {
-      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(response => {
-        this.payloadDeviceDatatarget.splice(index, 1);
-      });
-    }
   }
 
   openDeleteDialog(index) {
@@ -202,16 +190,6 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
     });
   }
 
-  private validatePayloadDeviceDatatarget = () => {
-    const isError = this.payloadDeviceDatatarget?.some(relation => (relation.iotDeviceIds?.length ?? 0) < 1);
-    if (isError) {
-      this.errorFields = ["devices"];
-      this.errorMessages = ["Must attach at least one IoT-device for each element in list of devices / decoders"];
-      this.scrollToTopService.scrollToTop();
-    }
-    return !isError;
-  };
-
   countToRedirect() {
     this.counter -= 1;
     if (this.counter <= 0 && !this.formFailedSubmit) {
@@ -223,7 +201,7 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
   getPayloadDeviceDatatarget(id: number) {
     this.relationSubscription = this.payloadDeviceDataTargetService
       .getByDataTarget(id)
-      .subscribe((response: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+      .subscribe((response: PayloadDeviceDatatargetGetManyResponse) => {
         this.mapToDatatargetDevicePayload(response);
       });
   }
@@ -243,12 +221,6 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
         this.formFailedSubmit = true;
       }
     );
-  }
-
-  private resetErrors() {
-    this.errorFields = [];
-    this.errorMessages = undefined;
-    this.formFailedSubmit = false;
   }
 
   getDevices(): void {
@@ -323,7 +295,34 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
     }
   }
 
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
+  private deleteRow(index) {
+    if (this.payloadDeviceDatatarget.length === 0) {
+    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
+      this.payloadDeviceDatatarget.splice(index, 1);
+    } else {
+      this.payloadDeviceDataTargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(response => {
+        this.payloadDeviceDatatarget.splice(index, 1);
+      });
+    }
+  }
+
+  private validatePayloadDeviceDatatarget = () => {
+    const isError = this.payloadDeviceDatatarget?.some(relation => (relation.iotDeviceIds?.length ?? 0) < 1);
+    if (isError) {
+      this.errorFields = ["devices"];
+      this.errorMessages = ["Must attach at least one IoT-device for each element in list of devices / decoders"];
+      this.scrollToTopService.scrollToTop();
+    }
+    return !isError;
+  };
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
+  }
+
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse) {
     this.payloadDeviceDatatarget = [];
     dto.data.forEach(element => {
       this.payloadDeviceDatatarget.push({

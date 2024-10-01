@@ -12,7 +12,7 @@ import { PayloadDecoderMappedResponse } from "@payload-decoder/payload-decoder.m
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
 import {
   PayloadDeviceDatatarget,
-  PayloadDeviceDatatargetGetByDataTargetResponse,
+  PayloadDeviceDatatargetGetManyResponse,
 } from "@payload-decoder/payload-device-data.model";
 import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
 import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
@@ -62,18 +62,15 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   errorFields: string[];
 
   datatarget: Datatarget = new Datatarget();
-  private subscriptions = [];
-
   formFailedSubmit = false;
   datatargetId: number;
-  private applicationId: number;
   devices: IotDevice[];
   payloadDecoders = [];
-  private pendingRequestsCounter: number;
-
   payloadDeviceDatatarget: PayloadDeviceDatatarget[];
   canEdit: boolean;
-
+  private subscriptions = [];
+  private applicationId: number;
+  private pendingRequestsCounter: number;
   private alreadySentOddkMail: boolean = false;
 
   constructor(
@@ -120,11 +117,67 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     this.subscriptions.forEach(s => s?.unsubscribe());
   }
 
+  onSubmit(): void {
+    this.resetErrors();
+    if (this.datatargetId) {
+      if (!this.validatePayloadDeviceDatatarget()) return;
+      this.pendingRequestsCounter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
+      this.updateDatatarget();
+      this.addPayloadDeviceDatatarget();
+    } else {
+      this.createDatatarget();
+    }
+  }
+
+  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
+
+  routeToCreatedDatatarget = () =>
+    this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
+      replaceUrl: true,
+    });
+
+  addRow() {
+    if (!this.payloadDeviceDatatarget) {
+      this.payloadDeviceDatatarget = [];
+    }
+    this.payloadDeviceDatatarget.push({
+      id: null,
+      iotDeviceIds: [],
+      payloadDecoderId: null,
+      dataTargetId: this.datatargetId,
+    });
+  }
+
+  openDeleteDialog(index) {
+    const dialog = this.dialog.open(DeleteDialogComponent, {
+      data: {
+        showAccept: true,
+        showCancel: true,
+        message: "Er du sikker på at du vil slette?",
+      },
+    });
+    dialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteRow(index);
+      }
+    });
+  }
+
+  payloadDevicesDropdownCompare = (o1: any, o2: any): boolean => o1 === o2;
+
+  selectAllDevices(index: number) {
+    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
+  }
+
+  deSelectAllDevices(index: number) {
+    this.payloadDeviceDatatarget[index].iotDeviceIds = [];
+  }
+
   private getPayloadDeviceDatatarget(id: number) {
     this.subscriptions.push(
       this.payloadDeviceDataTargetService
         .getByDataTarget(id)
-        .subscribe((dto: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+        .subscribe((dto: PayloadDeviceDatatargetGetManyResponse) => {
           this.payloadDeviceDatatarget = [];
           dto.data.forEach(element => {
             this.payloadDeviceDatatarget.push({
@@ -149,17 +202,6 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     );
   }
 
-  onSubmit(): void {
-    this.resetErrors();
-    if (this.datatargetId) {
-      if (!this.validatePayloadDeviceDatatarget()) return;
-      this.pendingRequestsCounter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
-      this.updateDatatarget();
-      this.addPayloadDeviceDatatarget();
-    } else {
-      this.createDatatarget();
-    }
-  }
   private updateDatatarget() {
     this.subscriptions.push(
       this.datatargetService.update(this.datatarget).subscribe(
@@ -178,6 +220,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       )
     );
   }
+
   private addPayloadDeviceDatatarget() {
     this.payloadDeviceDatatarget.forEach(relation => {
       if (relation.payloadDecoderId === 0) {
@@ -200,6 +243,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       }
     });
   }
+
   private validatePayloadDeviceDatatarget = () => {
     const isError = this.payloadDeviceDatatarget?.some(relation => (relation.iotDeviceIds?.length ?? 0) < 1);
     if (isError) {
@@ -209,6 +253,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     }
     return !isError;
   };
+
   private createDatatarget() {
     this.pendingRequestsCounter = 0;
     this.datatarget.applicationId = this.applicationId;
@@ -231,6 +276,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       )
     );
   }
+
   private showMailOrRedirect = () => {
     if (!this.alreadySentOddkMail) {
       this.openMailDialog();
@@ -238,6 +284,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       this.routeToCreatedDatatarget();
     }
   };
+
   // Note: When updating, we send multiple async request, and use this counter to know when everything is done, so we can redirect
   private countToRedirect() {
     this.pendingRequestsCounter -= 1;
@@ -246,29 +293,26 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       this.showMailOrRedirect();
     }
   }
+
   private resetErrors() {
     this.errorFields = [];
     this.errorMessages = undefined;
     this.formFailedSubmit = false;
   }
+
   private checkDataTargetModelOpendatadkdatasaet() {
     this.datatarget.setToOpendataDk = true;
     if (!this.datatarget.openDataDkDataset) {
       this.datatarget.openDataDkDataset = new OpenDataDkDataset();
     }
   }
+
   private handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errors.errorFields;
     this.errorMessages = errors.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
-
-  routeToDatatargets = () => this.router.navigate(["applications", this.applicationId, "data-targets"]);
-  routeToCreatedDatatarget = () =>
-    this.router.navigate(["applications", this.applicationId, "datatarget", this.datatarget.id], {
-      replaceUrl: true,
-    });
 
   // For mail dialog
   private getAlreadySentOddkMail = () => {
@@ -279,10 +323,12 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       })
     );
   };
+
   private setAlreadySentOddkMail = async () => {
     const orgId = this.sharedVariableService.getSelectedOrganisationId();
     await this.datatargetService.updateOpenDataDkRegistered(orgId).pipe(first()).toPromise();
   };
+
   private openMailDialog = () => {
     const dialog = this.dialog.open(OpenDataDkMailDialogComponent);
     dialog.afterClosed().subscribe(async (result: OddkMailInfo) => {
@@ -296,6 +342,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       }
     });
   };
+
   private openMailWarningDialog = () => {
     const dialog = this.dialog.open(OpenDataDkWarningDialogComponent);
     dialog.afterClosed().subscribe(async result => {
@@ -320,6 +367,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       })
     );
   }
+
   private getPayloadDecoders() {
     this.subscriptions.push(
       this.payloadDecoderService
@@ -329,17 +377,7 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
         })
     );
   }
-  addRow() {
-    if (!this.payloadDeviceDatatarget) {
-      this.payloadDeviceDatatarget = [];
-    }
-    this.payloadDeviceDatatarget.push({
-      id: null,
-      iotDeviceIds: [],
-      payloadDecoderId: null,
-      dataTargetId: this.datatargetId,
-    });
-  }
+
   private deleteRow(index) {
     if (this.payloadDeviceDatatarget.length === 0) {
     } else if (this.payloadDeviceDatatarget[index]?.id === null) {
@@ -351,26 +389,5 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
         })
       );
     }
-  }
-  openDeleteDialog(index) {
-    const dialog = this.dialog.open(DeleteDialogComponent, {
-      data: {
-        showAccept: true,
-        showCancel: true,
-        message: "Er du sikker på at du vil slette?",
-      },
-    });
-    dialog.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.deleteRow(index);
-      }
-    });
-  }
-  payloadDevicesDropdownCompare = (o1: any, o2: any): boolean => o1 === o2;
-  selectAllDevices(index: number) {
-    this.payloadDeviceDatatarget[index].iotDeviceIds = this.devices.map(device => device.id);
-  }
-  deSelectAllDevices(index: number) {
-    this.payloadDeviceDatatarget[index].iotDeviceIds = [];
   }
 }

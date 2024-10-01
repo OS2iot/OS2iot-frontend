@@ -29,6 +29,8 @@ import { OpendatadkDetailComponent } from "./opendatadk/opendatadk-detail/openda
 import { OpendatadkEditComponent } from "./opendatadk/opendatadk-edit/opendatadk-edit.component";
 import { OpenDataDkMailDialogComponent } from "./opendatadk/opendatadk-edit/opendatadk-mail-dialog/opendatadk-mail-dialog";
 import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/opendatadk-warning-dialog/opendatadk-warning-dialog";
+import { DatatargetTestConnectionComponent } from "./datatarget-test-connection/datatarget-test-connection.component";
+import { MonacoEditorModule } from "ngx-monaco-editor-v2";
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/o
     DatatargetDetailTypeSelectorDirective,
     DatatargetEditTypeSelectorDirective,
     DatatargetTabComponent,
+    DatatargetTestConnectionComponent,
   ],
   imports: [
     CommonModule,
@@ -65,6 +68,7 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk/opendatadk-edit/o
     FormsModule,
     SharedModule,
     PipesModule,
+    MonacoEditorModule,
   ],
   exports: [
     DatatargetTableComponent,

@@ -13,7 +13,7 @@ import { PayloadDecoder, PayloadDecoderMappedResponse } from "@payload-decoder/p
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
 import {
   PayloadDeviceDatatarget,
-  PayloadDeviceDatatargetGetByDataTargetResponse,
+  PayloadDeviceDatatargetGetManyResponse,
 } from "@payload-decoder/payload-device-data.model";
 import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
 import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
@@ -36,17 +36,17 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public formFailedSubmit = false;
   public datatarget: Datatarget = new Datatarget();
   public datatargetId: number;
+  public payloadDecoders: PayloadDecoder[] = [];
+  public payloadDeviceDatatarget: PayloadDeviceDatatarget[];
+  public devices: IotDevice[];
+  faTimesCircle = faTimesCircle;
+  faQuestionCircle = faQuestionCircle;
   private applicationId: number;
   private datatargetSubscription: Subscription;
   private applicationSubscription: Subscription;
   private relationSubscription: Subscription;
   private payloadDecoderSubscription: Subscription;
-  public payloadDecoders: PayloadDecoder[] = [];
-  public payloadDeviceDatatarget: PayloadDeviceDatatarget[];
-  public devices: IotDevice[];
   private activeApiCalls: number;
-  faTimesCircle = faTimesCircle;
-  faQuestionCircle = faQuestionCircle;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,20 +76,6 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     this.getPayloadDecoders();
   }
 
-  private getPayloadDecoders() {
-    this.payloadDecoderSubscription = this.payloadDecoderService
-      .getMultiple(1000, 0, "id", "ASC")
-      .subscribe((response: PayloadDecoderMappedResponse) => {
-        this.payloadDecoders = response.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
-      });
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-    this.errorFields = errors.errorFields;
-    this.errorMessages = errors.errorMessages;
-    this.scrollToTopService.scrollToTop();
-  }
   routeToDatatargets() {
     this.router.navigate(["applications", this.applicationId, "data-targets"]);
   }
@@ -117,21 +103,9 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   getPayloadDeviceDatatarget(id: number) {
     this.relationSubscription = this.payloadDeviceDatatargetService
       .getByDataTarget(id)
-      .subscribe((response: PayloadDeviceDatatargetGetByDataTargetResponse) => {
+      .subscribe((response: PayloadDeviceDatatargetGetManyResponse) => {
         this.mapToDatatargetDevicePayload(response);
       });
-  }
-
-  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetByDataTargetResponse) {
-    this.payloadDeviceDatatarget = [];
-    dto.data.forEach(element => {
-      this.payloadDeviceDatatarget.push({
-        id: element.id,
-        iotDeviceIds: element.iotDevices.map(x => x.id),
-        payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
-        dataTargetId: element.dataTarget.id,
-      });
-    });
   }
 
   public selectAllDevices(index: number) {
@@ -154,17 +128,6 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     });
   }
 
-  private deleteRow(index) {
-    if (this.payloadDeviceDatatarget.length === 0) {
-    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
-      this.payloadDeviceDatatarget.splice(index, 1);
-    } else {
-      this.payloadDeviceDatatargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(() => {
-        this.payloadDeviceDatatarget.splice(index, 1);
-      });
-    }
-  }
-
   openDeleteDialog(index) {
     const dialog = this.dialog.open(DeleteDialogComponent, {
       data: {
@@ -181,13 +144,6 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     });
   }
 
-  private resetErrors() {
-    this.errorFields = [];
-    this.errorMessages = undefined;
-    this.formFailedSubmit = false;
-    this.activeApiCalls = 0;
-  }
-
   onSubmit(): void {
     this.resetErrors();
     if (this.datatargetId) {
@@ -196,6 +152,58 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
     } else {
       this.createDatatarget();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.relationSubscription?.unsubscribe();
+    this.applicationSubscription?.unsubscribe();
+    this.datatargetSubscription?.unsubscribe();
+    this.payloadDecoderSubscription?.unsubscribe();
+  }
+
+  private getPayloadDecoders() {
+    this.payloadDecoderSubscription = this.payloadDecoderService
+      .getMultiple(1000, 0, "id", "ASC")
+      .subscribe((response: PayloadDecoderMappedResponse) => {
+        this.payloadDecoders = response.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
+      });
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorFields = errors.errorFields;
+    this.errorMessages = errors.errorMessages;
+    this.scrollToTopService.scrollToTop();
+  }
+
+  private mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse) {
+    this.payloadDeviceDatatarget = [];
+    dto.data.forEach(element => {
+      this.payloadDeviceDatatarget.push({
+        id: element.id,
+        iotDeviceIds: element.iotDevices.map(x => x.id),
+        payloadDecoderId: element.payloadDecoder?.id === undefined ? 0 : element.payloadDecoder?.id,
+        dataTargetId: element.dataTarget.id,
+      });
+    });
+  }
+
+  private deleteRow(index) {
+    if (this.payloadDeviceDatatarget.length === 0) {
+    } else if (this.payloadDeviceDatatarget[index]?.id === null) {
+      this.payloadDeviceDatatarget.splice(index, 1);
+    } else {
+      this.payloadDeviceDatatargetService.delete(this.payloadDeviceDatatarget[index].id).subscribe(() => {
+        this.payloadDeviceDatatarget.splice(index, 1);
+      });
+    }
+  }
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
+    this.activeApiCalls = 0;
   }
 
   private updateDatatarget(): void {
@@ -265,12 +273,5 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       this.snackService.showSavedSnack();
       this.routeToDatatargets();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.relationSubscription?.unsubscribe();
-    this.applicationSubscription?.unsubscribe();
-    this.datatargetSubscription?.unsubscribe();
-    this.payloadDecoderSubscription?.unsubscribe();
   }
 }

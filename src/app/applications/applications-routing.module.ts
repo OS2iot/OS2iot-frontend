@@ -23,6 +23,7 @@ import { IoTDeviceDetailComponent } from "./iot-devices/iot-device-detail/iot-de
 import { IotDeviceEditComponent } from "./iot-devices/iot-device-edit/iot-device-edit.component";
 import { MulticastDetailComponent } from "./multicast/multicast-detail/multicast-detail.component";
 import { MulticastEditComponent } from "./multicast/multicast-edit/multicast-edit.component";
+import { DatatargetTestConnectionComponent } from "./datatarget/datatarget-test-connection/datatarget-test-connection.component";
 
 const applicationRoutes: Routes = [
   {
@@ -76,6 +77,7 @@ const applicationRoutes: Routes = [
             component: DatatargetDetailComponent,
             children: [
               { path: "datatarget-log", component: DatatargetLogComponent },
+              { path: "datatarget-test-connection", component: DatatargetTestConnectionComponent },
               { path: "httppush-detail", component: HttppushDetailComponent },
               { path: "fiware-detail", component: FiwareDetailComponent },
               { path: "mqtt-detail", component: MqttDetailComponent },

@@ -15,11 +15,9 @@ import { NavTab } from "@shared/types/nav-tabs.type";
 import { Subscription } from "rxjs";
 
 export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
-  protected abstract getDetailsLink(): string;
-
   faExclamationTriangle = faExclamationTriangle;
-
   logLink: "datatarget-log" = "datatarget-log";
+  testConnectionLink: "datatarget-test-connection" = "datatarget-test-connection";
   navTabs: NavTab[] = [
     {
       label: "APPLICATION.DETAILS",
@@ -31,13 +29,16 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
       link: this.logLink,
       index: 1,
     },
+    {
+      label: "DATATARGET.TEST_CONNECTION.TEST-CONNECTION",
+      link: this.testConnectionLink,
+      index: 2,
+    },
   ];
-
   datatarget: Datatarget;
   backButton: BackButton = { label: "", routerLink: undefined };
   dropdownButton: DropdownButton;
   canEdit: boolean;
-
   private subscriptions: Subscription[] = [];
   private deleteDialogSubscription: Subscription;
 
@@ -79,16 +80,6 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
     this.canEdit = meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite, undefined, appId);
   }
 
-  protected onDestroy(): void {
-    this.subscriptions?.forEach(s => s?.unsubscribe());
-    this.deleteDialogSubscription?.unsubscribe();
-  }
-
-  private getDatatarget = (id: number) =>
-    this.datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
-      this.datatarget = dataTarget;
-    });
-
   onDeleteDatatarget() {
     this.deleteDialogSubscription?.unsubscribe();
     this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
@@ -106,4 +97,16 @@ export abstract class DatatargetDetailTabsCommon implements DatatargetDetail {
       );
     });
   }
+
+  protected abstract getDetailsLink(): string;
+
+  protected onDestroy(): void {
+    this.subscriptions?.forEach(s => s?.unsubscribe());
+    this.deleteDialogSubscription?.unsubscribe();
+  }
+
+  private getDatatarget = (id: number) =>
+    this.datatargetService.get(id).subscribe((dataTarget: Datatarget) => {
+      this.datatarget = dataTarget;
+    });
 }
