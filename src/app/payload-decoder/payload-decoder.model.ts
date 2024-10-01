@@ -71,3 +71,13 @@ export interface GetPayloadDecoderParameters {
   orderOn: string;
   organizationId?: number;
 }
+
+export class PayloadDecoderMinimal {
+  name: string;
+  id: number;
+}
+
+export interface PayloadDecoderMinimalResponse {
+  data: PayloadDecoderMinimal[];
+  count: number;
+}

@@ -8,7 +8,7 @@ import { MatSelectChange } from "@angular/material/select";
 import { DatatargetService } from "@applications/datatarget/datatarget.service";
 import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { DataTargetType } from "@shared/enums/datatarget-type";
-import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
+import { PayloadDecoderMinimal } from "@payload-decoder/payload-decoder.model";
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
 import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
 
@@ -28,7 +28,7 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
   };
 
   public iotDevices: IotDevice[];
-  public payloadDecoders: PayloadDecoder[];
+  public payloadDecoders: PayloadDecoderMinimal[];
   public payloadData = "";
   public testResponse = "";
   public decodedData = "";
@@ -120,8 +120,8 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
   }
 
   private getPayloadDecoders() {
-    const sub = this.payloadDecoderService.getMultiple(100, 0, "asc", "name").subscribe(({ data }) => {
-      this.payloadDecoders = data;
+    const sub = this.payloadDecoderService.getMinimal().subscribe(result => {
+      this.payloadDecoders = result.data;
     });
 
     this.subscriptions.push(sub);

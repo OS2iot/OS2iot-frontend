@@ -41,42 +41,44 @@
         </p>
       </div>
     </div>
-    <div class="col-md-6 d-flex align-items-stretch">
+    <div class="col-md-6 d-flex align-items-stretch min-height-400">
       <div class="jumbotron jumbotron--full-width">
         <h3>{{ "DATATARGET.TEST_CONNECTION.CHOSEN-DATA-PACKAGE" | translate }}</h3>
         <ngx-monaco-editor
           [(ngModel)]="payloadData"
           [ngModelOptions]="{ standalone: true }"
           [options]="editorJsonOutpuOptions"
-          style="height: 85%"
+          class="height-85"
         >
         </ngx-monaco-editor>
       </div>
     </div>
-    <div class="col-md-6 d-flex align-items-stretch">
+    <div class="col-md-6 d-flex align-items-stretch min-height-400">
       <div class="jumbotron jumbotron--full-width">
         <h3>{{ "DATATARGET.TEST_CONNECTION.SENT-DECODED-REQUEST" | translate }}</h3>
         <ngx-monaco-editor
           [(ngModel)]="decodedData"
           [ngModelOptions]="{ standalone: true }"
           [options]="editorJsonOutpuOptions"
+          class="height-85"
         >
         </ngx-monaco-editor>
       </div>
     </div>
-    <div class="col-md-6 d-flex align-items-stretch">
+    <div class="col-md-6 d-flex align-items-stretch min-height-400">
       <div class="jumbotron jumbotron--full-width">
         <h3>{{ "DATATARGET.TEST_CONNECTION.RECEIVED-RESPONSE" | translate }}</h3>
-        <div *ngIf="loading">
-          <app-loading-spinner></app-loading-spinner>
-        </div>
         <ngx-monaco-editor
           [(ngModel)]="testResponse"
           [ngModelOptions]="{ standalone: true }"
           [options]="editorJsonOutpuOptions"
+          class="height-85"
         >
         </ngx-monaco-editor>
       </div>
+    </div>
+    <div *ngIf="loading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
   </div>
 </div>

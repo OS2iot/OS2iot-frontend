@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 import { RestService } from "../shared/services/rest.service";
 import { Observable } from "rxjs";
 import {
-  PayloadDecoderResponse,
+  GetPayloadDecoderParameters,
   PayloadDecoder,
   PayloadDecoderBodyResponse,
   PayloadDecoderMappedResponse,
-  GetPayloadDecoderParameters,
+  PayloadDecoderMinimalResponse,
+  PayloadDecoderResponse,
 } from "src/app/payload-decoder/payload-decoder.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { map } from "rxjs/operators";
@@ -99,6 +100,10 @@ export class PayloadDecoderService {
         };
       })
     );
+  }
+
+  getMinimal(): Observable<PayloadDecoderMinimalResponse> {
+    return this.restService.get(this.URL + "/minimal");
   }
 
   delete(id: number) {
