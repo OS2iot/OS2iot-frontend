@@ -101,12 +101,12 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
         response => {
           this.testResponse = response?.result ? JSON.stringify(response.result, null, 2) : "";
           this.decodedData = response?.decodedPayload ? JSON.stringify(response.decodedPayload, null, 2) : "";
+          this.loading = false;
         },
         error => {
-          console.log(error);
-        },
-        () => {
           this.loading = false;
+          this.decodedData = JSON.stringify(error.error, null, 2);
+          this.testResponse = "";
         }
       );
   }
