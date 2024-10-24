@@ -11,6 +11,7 @@ import { DataTargetType } from "@shared/enums/datatarget-type";
 import { PayloadDecoderMinimal } from "@payload-decoder/payload-decoder.model";
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
 import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-datatarget-test-connection",
@@ -43,6 +44,7 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
 
   constructor(
     private deviceService: IoTDeviceService,
+    public translate: TranslateService,
     private dataTargetService: DatatargetService,
     private route: ActivatedRoute,
     private payloadDecoderService: PayloadDecoderService,
@@ -99,7 +101,11 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
       })
       .subscribe(
         response => {
-          this.testResponse = response?.result ? JSON.stringify(response.result, null, 2) : "";
+          this.testResponse = response?.result
+            ? JSON.stringify(response.result, null, 2)
+            : this.dataTarget.type === DataTargetType.MQTT
+            ? this.translate.instant("DATATARGET.SEE-RESULT-IN-LOG")
+            : "";
           this.decodedData = response?.decodedPayload ? JSON.stringify(response.decodedPayload, null, 2) : "";
           this.loading = false;
         },

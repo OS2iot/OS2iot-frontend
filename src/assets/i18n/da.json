@@ -245,6 +245,7 @@
     "LATEST_MESSAGE": "Seneste besked",
     "24H_STATUS": "Status (24 timer)",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
+    "SEE-RESULT-IN-LOG": "// Se resultatet i loggen.",
     "OPENDATA-DK": {
       "TYPE": "OpenDataDK",
       "NAME": "Open Data DK",

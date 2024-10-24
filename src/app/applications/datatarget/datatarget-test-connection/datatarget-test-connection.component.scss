@@ -5,3 +5,13 @@
 .min-height-400 {
   min-height: 400px;
 }
+
+::ng-deep.loading-wrapper {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.spinner-placeholder{
+  width: 80px;
+  height: 80px;
+}
