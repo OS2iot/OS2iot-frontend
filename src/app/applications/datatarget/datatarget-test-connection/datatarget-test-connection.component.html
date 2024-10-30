@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 d-flex align-items-stretch">
-      <div class="jumbotron jumbotron--full-width">
+      <div class="jumbotron jumbotron--full-width width100percent">
         <div class="d-flex align-items-start justify-content-between">
           <h3>{{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}</h3>
           <div class="spinner-placeholder">
@@ -51,36 +51,36 @@
       </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch min-height-400">
-      <div class="jumbotron jumbotron--full-width">
+      <div class="jumbotron jumbotron--full-width width100percent">
         <h3>{{ "DATATARGET.TEST_CONNECTION.CHOSEN-DATA-PACKAGE" | translate }}</h3>
         <ngx-monaco-editor
           [(ngModel)]="payloadData"
           [ngModelOptions]="{ standalone: true }"
-          [options]="editorJsonOutpuOptions"
+          [options]="editorJsonInputOptions"
           class="height-85"
         >
         </ngx-monaco-editor>
       </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch min-height-400">
-      <div class="jumbotron jumbotron--full-width">
+      <div class="jumbotron jumbotron--full-width width100percent">
         <h3>{{ "DATATARGET.TEST_CONNECTION.SENT-DECODED-REQUEST" | translate }}</h3>
         <ngx-monaco-editor
           [(ngModel)]="decodedData"
           [ngModelOptions]="{ standalone: true }"
-          [options]="editorJsonOutpuOptions"
+          [options]="editorJsonOutputOptions"
           class="height-85"
         >
         </ngx-monaco-editor>
       </div>
     </div>
     <div class="col-md-6 d-flex align-items-stretch min-height-400">
-      <div class="jumbotron jumbotron--full-width">
+      <div class="jumbotron jumbotron--full-width width100percent">
         <h3>{{ "DATATARGET.TEST_CONNECTION.RECEIVED-RESPONSE" | translate }}</h3>
         <ngx-monaco-editor
           [(ngModel)]="testResponse"
           [ngModelOptions]="{ standalone: true }"
-          [options]="editorJsonOutpuOptions"
+          [options]="editorJsonOutputOptions"
           class="height-85"
         >
         </ngx-monaco-editor>

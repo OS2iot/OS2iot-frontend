@@ -19,13 +19,21 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrl: "./datatarget-test-connection.component.scss",
 })
 export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
-  editorJsonOutpuOptions = {
+  editorJsonOutputOptions = {
     theme: "vs",
     language: "json",
     autoIndent: true,
     roundedSelection: true,
     minimap: { enabled: false },
     readOnly: true,
+  };
+  editorJsonInputOptions = {
+    theme: "vs",
+    language: "json",
+    autoIndent: true,
+    roundedSelection: true,
+    minimap: { enabled: false },
+    readOnly: false,
   };
 
   public iotDevices: IotDevice[];
