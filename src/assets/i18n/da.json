@@ -328,9 +328,7 @@
       "PROCEDURE_HEADER": "Procedure ved oprettelse af første data target",
       "PROCEDURE1": "Bliv medlem af Open Data DK, hvis jeres myndighed ikke allerede er det:",
       "PROCEDURE2": "Opret første ODDK-data target i OS2iot",
-      "PROCEDURE3": "Ved oprettelsen tilbyder OS2iot at sende en mail til Open Data DK's administrator, som sætter høstningen op. I må forvente op til 2-3 ugers behandlingstid.",
-      "PROCEDURE4": "Når høstningen er aktiv, kan datasæt findes og beriges på",
-      "PROCEDURE4_LINK": "ODDK administrationsmodulet"
+      "PROCEDURE3": "Ved oprettelsen tilbyder OS2iot at sende en mail til Open Data DK's administrator, som sætter høstningen op. I må forvente op til 2-3 ugers behandlingstid."
     },
     "QUESTION": {
       "GIVE-OPENDATADK-NAME": "Datasæt titel",
