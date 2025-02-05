@@ -20,17 +20,11 @@ table {
   }
 
   th {
-    color: $grey-tablehead !important;
     font-weight: normal !important;
-  }
-
-  thead {
-    background-color: $grey-dark !important;
   }
 
   tbody {
     tr {
-      border-top: $grey-border solid 1px;
       line-height: $body-text-line-height;
       color: $black;
 
@@ -39,6 +33,10 @@ table {
       }
     }
   }
+}
+
+.mat-sort-header-arrow {
+  display: none;
 }
 
 .dropdown {

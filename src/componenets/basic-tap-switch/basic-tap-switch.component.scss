@@ -1,0 +1,53 @@
+.main-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-bottom: 1px;
+}
+
+.active-tap {
+  height: 40px !important;
+  background-color: #ffff !important;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 0 !important;
+  justify-content: center;
+}
+
+.inactive-tap {
+  font-size: 14px;
+  padding: 0 20px;
+  height: 40px !important;
+  background-color: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-default {
+  background-color: red;
+}
+
+.counter-warning {
+  background-color: blue($color: #000000);
+}
+
+.counter-stable {
+  background-color: green;
+}
+
+.counter-alert {
+  background-color: yellow;
+}
+
+.counter-base {
+  font-size: 14px;
+  padding: 0 5px;
+  border-radius: 10px;
+  height: 16px;
+  margin-left: 5px;
+  line-height: 16px;
+  color: #ffff;
+}

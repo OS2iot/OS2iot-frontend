@@ -4,15 +4,15 @@ import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
-import { Application } from "@applications/application.model";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { MeService } from "@shared/services/me.service";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
+import { MeService } from "@shared/services/me.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Tap } from "src/componenets/basic-tap-switch/basic-tap-switch.component";
 
 const welcomeDialogId = "welcome-dialog";
 
@@ -23,12 +23,28 @@ const welcomeDialogId = "welcome-dialog";
   styleUrls: ["./applications-list.component.scss"],
 })
 export class ApplicationsListComponent implements OnInit {
+  taps: Tap[] = [
+    {
+      Title: "Applikationer",
+      icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 },
+      counters: [
+        {
+          color: "default",
+          value: "22",
+        },
+      ],
+    },
+    { Title: "Kort", icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 } },
+    { Title: "Visualisering", icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 } },
+  ];
+
+  index = 0;
   isLoadingResults = true;
 
   public pageLimit = environment.tablePageSize;
   public resultsLength: number;
   public pageOffset = 0;
-  public applications: Application[];
+
   @Input() organizationId: number;
   canEdit: boolean;
   private unauthorizedMessage: string;
@@ -155,5 +171,9 @@ export class ApplicationsListComponent implements OnInit {
 
       this.isLoadingResults = false;
     });
+  }
+
+  onNewSwitchIndex(index: number) {
+    this.index = index;
   }
 }

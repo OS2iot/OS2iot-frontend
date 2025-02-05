@@ -1,0 +1,106 @@
+.main-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: space;
+  height: 50px;
+  gap: 10px;
+  background-color: white;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.mat-mdc-select {
+  height: 15px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 10px !important;
+  color: rgb(227, 224, 224) !important;
+}
+
+.pages-of {
+  height: 23px;
+  min-width: 100;
+  border: 2px solid rgb(227, 224, 224);
+  border-radius: 3px;
+  padding: 0 15px;
+  margin-top: 1px;
+  font-size: 14px;
+}
+
+.arrow-button {
+  height: 25px !important;
+  width: 35px !important;
+  margin: 5px;
+  margin-top: 2px;
+  background-color: rgb(227, 224, 224) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 35px !important;
+}
+
+.mat-mdc-form-field {
+  height: 5px !important;
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-text-field-wrapper {
+  height: 25px !important;
+  display: flex;
+  align-items: center;
+  font-size: 8;
+  color: red;
+}
+
+.select-container {
+  margin-top: 2px;
+  justify-self: left;
+  width: 150px;
+}
+
+.spacer {
+  width: 150px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-success {
+  background-color: green;
+  color: #fff;
+}
+
+.left-arrow {
+  margin-top: 8px;
+  margin-left: 5px;
+}
+.right-arrow {
+  margin-top: 10px;
+  margin-left: 1px;
+}
+
+.mat-mdc-select {
+  height: 15px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 8px !important;
+  color: rgb(227, 224, 224) !important;
+}
+
+.mat-mdc-option {
+  font-size: 10px !important;
+  color: rgb(227, 224, 224) !important;
+}
+
+.mat-mdc-select-value {
+  font-size: 10px !important;
+  color: rgb(227, 224, 224) !important;
+}

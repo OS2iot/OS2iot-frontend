@@ -1,0 +1,21 @@
+<div class="main-container">
+  @for (tap of taps; track tap.Title; let idx = $index) {
+  <div [ngClass]="index === idx ? 'active-tap' : 'inactive-tap'" (click)="onClick(idx)">
+    @if(tap.icon){
+    <img
+      class="left-arrow"
+      ngSrc="{{ tap.icon.iconSrc }}"
+      width="{{ tap.icon.width }}"
+      height="{{ tap.icon.height }}"
+      priority
+    />
+    }
+    {{ tap.Title }}
+    @for (counter of tap.counters; track counter; let idx = $index) {
+    <div class="counter-base {{ 'counter-' + counter.color }}">
+      {{ counter.value }}
+    </div>
+    }
+  </div>
+  }
+</div>

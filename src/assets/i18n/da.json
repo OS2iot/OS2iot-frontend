@@ -379,7 +379,7 @@
   },
   "APPLICATION-TABLE": {
     "NAME": "Navn",
-    "IOT-DEVICES": "IoT enheder",
+    "IOT-DEVICES": "Enheder",
     "UPDATED": "Senest opdateret",
     "DATA-TARGETS": "Datatargets",
     "STATUS": "Status",
@@ -391,7 +391,9 @@
     "PERSONAL-DATA": "Persondata",
     "CONTROLLED-PROPERTIES": "Data",
     "DEVICE-TYPES": "Forbindelsesteknologi",
-    "OPEN-DATA-DK": "Open Data DK"
+    "OPEN-DATA-DK": "Open Data DK",
+    "DATA": "Data",
+    "STATE": "State"
   },
   "IOT-TABLE": {
     "APPLICATION": "Applikation",

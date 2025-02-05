@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { Application, ApplicationData, UpdateApplicationOrganization } from "@applications/application.model";
-import { RestService } from "../shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { UserMinimalService } from "@app/admin/users/user-minimal.service";
+import { RestService } from "../shared/services/rest.service";
 
 interface GetApplicationParameters {
   limit: number;

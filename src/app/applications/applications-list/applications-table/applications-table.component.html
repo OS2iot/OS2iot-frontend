@@ -1,46 +1,100 @@
-<app-column-selector
-  [(displayedColumns)]="displayedColumns"
-  [columnDefinitions]="columnDefinitions"
-  [localStorageKey]="applicationSavedColumns"
-></app-column-selector>
-
-<div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div>
-    <div *ngIf="errorMessage" class="error-messages p-3 m-2">
-      {{ errorMessage | translate }}
-    </div>
-
+<div class="loading-shade" *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<div *ngIf="errorMessage" class="error-messages p-3 m-2">
+  {{ errorMessage | translate }}
+</div>
+<div class="main-container-table mat-elevation-z0"></div>
+<div class="table-container">
+  <div class="table-container">
     <table
       mat-table
       [dataSource]="data"
-      class="example-table"
+      class="mat-elevation-z0"
       matSort
       matSortActive="name"
       matSortDisableClear
       matSortDirection="asc"
+      (matSortChange)="announceSortChange($event)"
     >
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="">
+          {{ "APPLICATION-TABLE.STATUS" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('status')" />
+        </th>
+        <td mat-cell *matCellDef="let application" class="status-container">
+          <app-status-icon />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ "APPLICATION-TABLE.STATE" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('state')" />
+        </th>
+        <td mat-cell *matCellDef="let application">
+          <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-2">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ "APPLICATION-TABLE.NAME" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('name')" />
         </th>
         <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['/applications', element.id]" routerLinkActive="active" class="application-link">{{
-            element.name
-          }}</a>
+          <div class="name-and-description">
+            <div class="application-name">
+              {{ element.name }}
+            </div>
+            <div class="application-description">
+              {{ element.description }}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ "APPLICATION-TABLE.DATA" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('data')" />
+        </th>
+        <td mat-cell *matCellDef="let application">
+          <!-- TODO:: add @for when data is found  -->
+          <div class="options-container">
+            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="devices">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ "APPLICATION-TABLE.IOT-DEVICES" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('devices')" />
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.iotDevices?.length ?? 0 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="owner">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ "APPLICATION-TABLE.OWNER" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('owner')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ application.owner ?? "-" }}
         </td>
       </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <!-- No used
 
       <ng-container matColumnDef="contactPerson">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
@@ -48,15 +102,6 @@
         </th>
         <td mat-cell *matCellDef="let application">
           {{ application.contactPerson ?? "-" }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="devices">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-2">
-          {{ "APPLICATION-TABLE.IOT-DEVICES" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element?.iotDevices?.length ?? 0 }}
         </td>
       </ng-container>
 
@@ -75,15 +120,6 @@
         </th>
         <td mat-cell *matCellDef="let application">
           {{ isOpenDataDK(application.dataTargets) | yesNo }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
-          {{ "APPLICATION-TABLE.STATUS" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">
-          {{ application.status ? ("APPLICATION.STATUS." + application.status | translate) : "-" }}
         </td>
       </ng-container>
 
@@ -140,7 +176,7 @@
         <td mat-cell *matCellDef="let application">
           {{ mapDeviceTypes(application.deviceTypes) ?? "-" }}
         </td>
-      </ng-container>
+      </ng-container>  -->
 
       <ng-container matColumnDef="menu">
         <th mat-header-cell *matHeaderCellDef class="col-1"></th>
@@ -177,15 +213,18 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="['/applications', row.id]"></tr>
     </table>
+    <mat-paginator [length]="resultsLength" [pageSizeOptions]="pageSizeOptions"> </mat-paginator>
   </div>
-
-  <mat-paginator
-    [length]="resultsLength"
-    [pageSizeOptions]="pageSizeOptions"
-    [pageSize]="pageSize"
-    showFirstLastButtons
-  >
-  </mat-paginator>
+  <div class="tool-container">
+    <app-column-selector
+      [(displayedColumns)]="displayedColumns"
+      [columnDefinitions]="columnDefinitions"
+      [localStorageKey]="applicationSavedColumns"
+    ></app-column-selector>
+  </div>
+</div>
+<div>
+  <app-table-paginator [paginator]="paginator" />
 </div>

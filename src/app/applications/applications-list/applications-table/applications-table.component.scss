@@ -1,3 +1,70 @@
 .flag-icon {
   color: red;
 }
+
+.name-and-description {
+  max-width: 300px;
+}
+
+.application-name {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.application-description {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.options-container {
+  display: flex;
+  width: fit-content;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+.status-container {
+  width: 10px;
+}
+
+.mat-sort-header-arrow {
+  display: none !important;
+}
+
+.mat-paginator {
+  overflow: hidden;
+  display: none !important;
+}
+
+.mat-mdc-paginator {
+  display: none !important;
+}
+
+.main-container-table {
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-container {
+  width: 35px;
+  background-color: #ffff;
+}
+
+.table-container {
+  display: flex;
+  flex: 1;
+}

@@ -7,28 +7,39 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Router } from "@angular/router";
+import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
 import { Application, ApplicationData } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
-import { environment } from "@environments/environment";
+import { Datatarget } from "@applications/datatarget/datatarget.model";
+import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
+import { ControlledProperty } from "@shared/models/controlled-property.model";
+import { ApplicationDialogModel } from "@shared/models/dialog.model";
+import { TableColumn } from "@shared/types/table.type";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
-import { ControlledProperty } from "@shared/models/controlled-property.model";
-import { ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
-import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
-import { faFlag } from "@fortawesome/free-solid-svg-icons";
-import { TableColumn } from "@shared/types/table.type";
-import { MatDialog } from "@angular/material/dialog";
-import { ApplicationDialogModel } from "@shared/models/dialog.model";
-import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
 
 const columnDefinitions: TableColumn[] = [
+  {
+    id: "status",
+    display: "APPLICATION-TABLE.STATUS",
+    default: true,
+    toggleable: true,
+  },
+  {
+    id: "state",
+    display: "APPLICATION-TABLE.STATE",
+    default: true,
+    toggleable: true,
+  },
   {
     id: "name",
     display: "APPLICATION-TABLE.NAME",
@@ -36,16 +47,10 @@ const columnDefinitions: TableColumn[] = [
     toggleable: false,
   },
   {
-    id: "owner",
-    display: "APPLICATION-TABLE.OWNER",
+    id: "data",
+    display: "APPLICATION-TABLE.DATA",
     default: true,
-    toggleable: true,
-  },
-  {
-    id: "contactPerson",
-    display: "APPLICATION-TABLE.CONTACT-PERSON",
-    default: false,
-    toggleable: true,
+    toggleable: false,
   },
   {
     id: "devices",
@@ -54,64 +59,10 @@ const columnDefinitions: TableColumn[] = [
     toggleable: true,
   },
   {
-    id: "dataTargets",
-    display: "APPLICATION-TABLE.DATA-TARGETS",
+    id: "owner",
+    display: "APPLICATION-TABLE.OWNER",
     default: true,
     toggleable: true,
-  },
-  {
-    id: "openDataDkEnabled",
-    display: "APPLICATION-TABLE.OPEN-DATA-DK",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "status",
-    display: "APPLICATION-TABLE.STATUS",
-    default: true,
-    toggleable: true,
-  },
-  {
-    id: "personalData",
-    display: "APPLICATION-TABLE.PERSONAL-DATA",
-    default: true,
-    toggleable: true,
-  },
-  {
-    id: "startDate",
-    display: "APPLICATION-TABLE.START-DATE",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "endDate",
-    display: "APPLICATION-TABLE.END-DATE",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "category",
-    display: "APPLICATION-TABLE.CATEGORY",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "controlledProperties",
-    display: "APPLICATION-TABLE.CONTROLLED-PROPERTIES",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "deviceTypes",
-    display: "APPLICATION-TABLE.DEVICE-TYPES",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "menu",
-    display: "",
-    default: true,
-    toggleable: false,
   },
 ];
 
@@ -131,14 +82,12 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
 
   data: Application[] = [];
 
-  public pageSize = environment.tablePageSize;
   pageSizeOptions = DefaultPageSizeOptions;
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;
 
   applicationSavedColumns = "applicationSavedColumns";
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -157,6 +106,9 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     this.translate.use("da");
   }
 
+  announceSortChange(event: { active: string; direction: string }) {
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "acs" | "desc";
+  }
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
@@ -180,7 +132,9 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
           return observableOf([]);
         })
       )
-      .subscribe(data => (this.data = data));
+      .subscribe(data => {
+        this.data = data;
+      });
   }
 
   getApplications(orderByColumn: string, orderByDirection: string): Observable<ApplicationData> {
@@ -279,6 +233,9 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
       } as ApplicationDialogModel,
     });
   }
+  getSortDirection(id: string) {
+    return columnDefinitions.find(c => c.id === id).sort;
+  }
 
-  protected readonly columnDefinitions = columnDefinitions;
+  protected columnDefinitions = columnDefinitions;
 }

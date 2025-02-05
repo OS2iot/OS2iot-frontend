@@ -1,25 +1,35 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
-import { ApplicationsComponent } from "./applications.component";
-import { FormModule } from "@shared/components/forms/form.module";
-import { ApplicationDetailComponent } from "./application-detail/application-detail.component";
-import { ApplicationEditComponent } from "./application-edit/application-edit.component";
-import { ApplicationsListComponent } from "./applications-list/applications-list.component";
-import { ApplicaitonsRoutingModule } from "./applications-routing.module";
-import { DatatargetModule } from "./datatarget/datatarget.module";
-import { IotDevicesModule } from "./iot-devices/iot-devices.module";
-import { SharedModule } from "@shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { TranslateModule } from "@ngx-translate/core";
+import { FormModule } from "@shared/components/forms/form.module";
 import { DirectivesModule } from "@shared/directives/directives.module";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
-import { BulkImportComponent } from "./bulk-import/bulk-import.component";
 import { PipesModule } from "@shared/pipes/pipes.module";
-import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
-import { MulticastModule } from "./multicast/multicast.module";
-import { ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "@shared/shared.module";
+import { BasicInformationBoxComponent } from "src/componenets/basic-information-box/basic-information-box.component";
+import { BasicTapSwitchComponent } from "src/componenets/basic-tap-switch/basic-tap-switch.component";
+import { OptionFieldComponent } from "src/componenets/option-field/option-fieldcomponent";
+import { StatusIconComponent } from "src/componenets/status-icon/status-icon.component";
+import { TablePaginatorComponent } from "src/componenets/table-pagiantor.ts/table-paginator.component";
+import { TableSortIconComponent } from "src/componenets/table-sort-icon/table-sort-icon.component";
 import { ApplicationChangeOrganizationDialogComponent } from "./application-change-organization-dialog/application-change-organization-dialog.component";
+import { ApplicationDetailComponent } from "./application-detail/application-detail.component";
+import { ApplicationEditComponent } from "./application-edit/application-edit.component";
+import { ApplicationMapComponent } from "./applications-list/application-map/application-map.component";
+import { ApplicationVisualizationFailedRequestsComponent } from "./applications-list/application-visualization/application-visualization-failed-requests/application-visualization-failed-requests.component";
+import { ApplicationVisualizationTopCodesComponent } from "./applications-list/application-visualization/application-visualization-top-codes/application-visualization-top-codes.component";
+import { ApplicationVisualizationComponent } from "./applications-list/application-visualization/application-visualization.component";
+import { ApplicationsListComponent } from "./applications-list/applications-list.component";
+import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
+import { ApplicaitonsRoutingModule } from "./applications-routing.module";
+import { ApplicationsComponent } from "./applications.component";
+import { BulkImportComponent } from "./bulk-import/bulk-import.component";
+import { DatatargetModule } from "./datatarget/datatarget.module";
+import { IotDevicesModule } from "./iot-devices/iot-devices.module";
+import { MulticastModule } from "./multicast/multicast.module";
 
 @NgModule({
   declarations: [
@@ -27,8 +37,8 @@ import { ApplicationChangeOrganizationDialogComponent } from "./application-chan
     ApplicationDetailComponent,
     ApplicationEditComponent,
     ApplicationsListComponent,
-    ApplicationsTableComponent,
     BulkImportComponent,
+    ApplicationsTableComponent,
     ApplicationChangeOrganizationDialogComponent,
   ],
   exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
@@ -46,6 +56,16 @@ import { ApplicationChangeOrganizationDialogComponent } from "./application-chan
     PipesModule,
     MulticastModule,
     ReactiveFormsModule,
+    OptionFieldComponent,
+    StatusIconComponent,
+    TableSortIconComponent,
+    TablePaginatorComponent,
+    BasicTapSwitchComponent,
+    ApplicationMapComponent,
+    ApplicationVisualizationComponent,
+    BasicInformationBoxComponent,
+    ApplicationVisualizationTopCodesComponent,
+    ApplicationVisualizationFailedRequestsComponent,
   ],
 })
 export class ApplicationsModule {}

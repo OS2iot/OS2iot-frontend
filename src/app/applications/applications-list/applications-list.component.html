@@ -20,14 +20,25 @@
 >
 </app-top-bar>
 <div class="container-fluid d-flex flex-column">
+  <div class="">
+    <app-basic-information-box></app-basic-information-box>
+  </div>
   <ng-container *ngIf="!isLoadingResults">
     <ng-container *ngIf="hasSomePermission" ; else noPermissions>
-      <div class="row">
-        <div class="col-12">
-          <div class="jumbotron--table">
-            <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
-          </div>
-        </div>
+      <div>
+        <app-basic-tap-switch [taps]="taps" (newItemEvent)="onNewSwitchIndex($event)"> </app-basic-tap-switch>
+        @switch (index) { @case (1) {
+
+        <app-application-map></app-application-map>
+        } @case (2) {
+
+        <app-application-visualization />
+
+        } @default {
+
+        <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
+
+        } }
       </div>
     </ng-container>
   </ng-container>

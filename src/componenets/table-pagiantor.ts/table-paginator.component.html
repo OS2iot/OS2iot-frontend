@@ -1,0 +1,26 @@
+<div class="main-container">
+  <div class="select-container">
+    <mat-form-field appearance="outline">
+      <mat-select [(value)]="selected" (selectionChange)="onSelected($event)">
+        <option value=""></option>
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-flat-button class="arrow-button" color="success" (click)="onLeft()">
+      <img class="left-arrow" ngSrc="../../assets/images/arrow_back.png" width="10" height="11" priority />
+    </button>
+    <div class="pages-of">
+      {{ currentPage + "/" + numberOfPages }}
+    </div>
+    <div class="">
+      <button mat-button class="arrow-button" color="success" (click)="onRight()">
+        <img class="right-arrow" ngSrc="../../assets/images/arrow_forward.png" width="10" height="11" priority />
+      </button>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
