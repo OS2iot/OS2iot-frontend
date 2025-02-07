@@ -5,41 +5,40 @@
   margin-bottom: 1px;
 }
 
-.active-tap {
-  height: 40px !important;
-  background-color: #ffff !important;
+.tap-base {
   display: flex;
+  height: 46px !important;
   align-items: center;
-  padding: 0 20px;
-  font-size: 14px;
-  border-radius: 0 !important;
+  flex-direction: row;
+  gap: 10px;
   justify-content: center;
+  font-size: 16px;
+  padding: 0 20px;
+}
+.active-tap {
+  background-color: #ffff !important;
+  color: #404040;
 }
 
 .inactive-tap {
-  font-size: 14px;
-  padding: 0 20px;
-  height: 40px !important;
+  color: black;
   background-color: transparent !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .counter-default {
-  background-color: red;
+  background-color: #404040;
 }
 
 .counter-warning {
-  background-color: blue($color: #000000);
+  background-color: #fde047;
 }
 
 .counter-stable {
-  background-color: green;
+  background-color: #047857;
 }
 
 .counter-alert {
-  background-color: yellow;
+  background-color: #991b1b;
 }
 
 .counter-base {

@@ -1,5 +1,14 @@
-<div class="chart-container">
-  <h2>Top 3 rest codes</h2>
+<div style="display: flex; flex-direction: column; align-items: center">
+  <canvas #chartCanvas></canvas>
 
-  <canvas id="MyChart">{{ chart }}</canvas>
+  <!-- Custom legend below the chart -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 10px">
+    <div *ngFor="let item of legendData" style="display: flex; align-items: center; margin: 5px">
+      <div
+        style="width: 12px; height: 12px; border-radius: 50%; margin-right: 5px"
+        [style.backgroundColor]="item.color"
+      ></div>
+      <span>{{ item.status }}</span>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Chart } from "chart.js";
+import { Component } from "@angular/core";
+import { ChartOptions } from "chart.js";
 interface RESTCode {
   status: string;
   color: string;
@@ -43,32 +43,62 @@ const codes: RESTCode[] = [
   templateUrl: "./application-visualization-failed-requests.component.html",
   styleUrl: "./application-visualization-failed-requests.component.scss",
 })
-export class ApplicationVisualizationFailedRequestsComponent implements OnInit {
-  public chart: any;
-
-  ngOnInit(): void {
-    this.createChart();
-  }
-
-  createChart() {
-    this.chart = new Chart("requestChart", {
-      type: "doughnut", //this denotes tha type of chart
-      data: {
-        // values on X-Axis
-        labels: ["Red", "Pink", "Green", "Yellow", "Orange", "Blue"],
-        datasets: [
-          {
-            label: "My First Dataset",
-
-            data: [300, 240, 100, 432, 253, 34],
-            backgroundColor: ["200 OK", "201 Created", "400 Bad Request", "yellow", "orange", "blue"],
-            hoverOffset: 4,
-          },
-        ],
+export class ApplicationVisualizationFailedRequestsComponent {
+  public chartData: any;
+  public chartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Tidsrum",
+        },
       },
-      options: {
-        aspectRatio: 2.5,
+      y: {
+        title: {
+          display: true,
+          text: "Antal forespørgsler",
+        },
+        beginAtZero: true,
       },
-    });
+    },
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+  };
+
+  constructor() {
+    this.chartData = {
+      labels: ["08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30"],
+      datasets: [
+        {
+          label: "Antal forespørgsler",
+          data: [40, 35, 38, 36, 34, 33, 37], // Example data
+          borderColor: "green",
+          borderWidth: 2,
+          borderDash: [5, 5], // Dashed line
+          fill: false,
+          type: "line",
+          pointRadius: 4,
+        },
+        {
+          label: "Fejlede forespørgsler",
+          data: [20, 18, 2, 3, 10, 2, 1], // Example failed requests
+          backgroundColor: "red",
+          stack: "requests",
+          type: "bar",
+        },
+        {
+          label: "Succesfulde forespørgsler",
+          data: [20, 17, 36, 33, 24, 31, 36], // Derived from total - failed
+          backgroundColor: "green",
+          stack: "requests",
+          type: "bar",
+        },
+      ],
+    };
   }
 }

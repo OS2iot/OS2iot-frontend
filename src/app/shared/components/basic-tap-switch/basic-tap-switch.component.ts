@@ -1,6 +1,7 @@
-import { NgClass, NgOptimizedImage } from "@angular/common";
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from "@angular/core";
+import { NgClass, NgStyle } from "@angular/common";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
 
 export interface Counter {
   value: string;
@@ -14,9 +15,9 @@ export interface Icon {
 }
 
 export interface Tap {
-  Title: string;
+  title: string;
   counters?: Counter[];
-  icon?: Icon;
+  matIconName: string;
 }
 
 export interface isActive {
@@ -26,12 +27,18 @@ export interface isActive {
 @Component({
   selector: "app-basic-tap-switch",
   standalone: true,
-  imports: [MatButtonModule, NgClass, NgOptimizedImage],
+  imports: [MatButtonModule, NgClass, MatIcon, NgStyle],
   templateUrl: "./basic-tap-switch.component.html",
   styleUrl: "./basic-tap-switch.component.scss",
-  encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class BasicTapSwitchComponent {
+export class BasicTapSwitchComponent implements OnInit {
+  ngOnInit(): void {
+    this.currentStyles = {
+      color: "black",
+    };
+  }
+
+  currentStyles: Record<string, string> = {};
   index: number = 0;
   @Input() taps!: Tap[];
 

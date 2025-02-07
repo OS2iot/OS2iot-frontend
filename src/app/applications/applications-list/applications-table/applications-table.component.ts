@@ -26,6 +26,7 @@ import { ApplicationDialogModel } from "@shared/models/dialog.model";
 import { TableColumn } from "@shared/types/table.type";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { ApplicationsFilterService } from "../applications-filter.service";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -97,7 +98,8 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     private router: Router,
     private deleteDialogService: DeleteDialogService,
     private cdRef: ChangeDetectorRef,
-    private changeOrganizationDialog: MatDialog
+    private changeOrganizationDialog: MatDialog,
+    private filterService: ApplicationsFilterService
   ) {}
 
   ngOnInit() {
@@ -113,7 +115,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.sort.sortChange, this.paginator.page, this.filterService.filterChanges$)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -125,7 +127,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = false;
           this.resultsLength = data.count;
 
-          return data.data;
+          return this.filterService.SortApplications(data.data);
         }),
         catchError(() => {
           this.isLoadingResults = false;

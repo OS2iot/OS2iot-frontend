@@ -22,12 +22,12 @@
 }
 
 .pages-of {
-  height: 23px;
+  height: 24px;
   min-width: 100;
-  border: 2px solid rgb(227, 224, 224);
+  border: 1px solid rgb(227, 224, 224);
   border-radius: 3px;
   padding: 0 15px;
-  margin-top: 1px;
+  margin-top: 2px;
   font-size: 14px;
 }
 
@@ -43,24 +43,13 @@
   min-width: 35px !important;
 }
 
-.mat-mdc-form-field {
-  height: 5px !important;
-  display: flex;
-  align-items: center;
+.left-arrow {
+  margin-top: 8px;
+  margin-left: 5px;
 }
-
-.mat-mdc-text-field-wrapper {
-  height: 25px !important;
-  display: flex;
-  align-items: center;
-  font-size: 8;
-  color: red;
-}
-
-.select-container {
-  margin-top: 2px;
-  justify-self: left;
-  width: 150px;
+.right-arrow {
+  margin-top: 10px;
+  margin-left: 1px;
 }
 
 .spacer {
@@ -77,21 +66,12 @@
   color: #fff;
 }
 
-.left-arrow {
-  margin-top: 8px;
-  margin-left: 5px;
-}
-.right-arrow {
-  margin-top: 10px;
-  margin-left: 1px;
-}
-
 .mat-mdc-select {
-  height: 15px;
-  line-height: 15px;
+  height: 25px;
+  line-height: 20px;
   display: flex;
   align-items: center;
-  font-size: 8px !important;
+  font-size: 10px !important;
   color: rgb(227, 224, 224) !important;
 }
 
@@ -101,6 +81,19 @@
 }
 
 .mat-mdc-select-value {
-  font-size: 10px !important;
+  font-size: 15px !important;
   color: rgb(227, 224, 224) !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  height: 25px !important;
+  display: flex;
+  align-items: center;
+  font-size: 10 !important;
+}
+
+.select-container {
+  margin-top: 5px;
+  justify-self: left;
+  width: 150px;
 }

@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { Application, ApplicationData, UpdateApplicationOrganization } from "@applications/application.model";
-import { Observable } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { RestService } from "../shared/services/rest.service";
+import { IotDevicesApplicationMapResponse } from "./iot-devices/iot-device.model";
 
 interface GetApplicationParameters {
   limit: number;
@@ -38,6 +39,21 @@ export class ApplicationService {
         response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
         response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
         return response;
+      })
+    );
+  }
+  getApplicationDevicesForMap(applicationIds: number[]): Observable<IotDevicesApplicationMapResponse[]> {
+    const requests = applicationIds.map(applicationId =>
+      this.restService.get(`application/${applicationId}/iot-devices-map`).pipe(
+        map((data: IotDevicesApplicationMapResponse[]) => {
+          return data;
+        })
+      )
+    );
+
+    return forkJoin(requests).pipe(
+      map((responses: IotDevicesApplicationMapResponse[][]) => {
+        return responses.reduce((acc, val) => acc.concat(val), []);
       })
     );
   }

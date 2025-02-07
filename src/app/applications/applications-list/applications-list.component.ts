@@ -7,12 +7,12 @@ import { NavbarComponent } from "@app/navbar/navbar.component";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
+import { Tap } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
 import { MeService } from "@shared/services/me.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { Tap } from "src/componenets/basic-tap-switch/basic-tap-switch.component";
 
 const welcomeDialogId = "welcome-dialog";
 
@@ -23,10 +23,11 @@ const welcomeDialogId = "welcome-dialog";
   styleUrls: ["./applications-list.component.scss"],
 })
 export class ApplicationsListComponent implements OnInit {
+  currentSubPath: string = "";
   taps: Tap[] = [
     {
-      Title: "Applikationer",
-      icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 },
+      title: "Applikationer",
+      matIconName: "layers",
       counters: [
         {
           color: "default",
@@ -34,8 +35,8 @@ export class ApplicationsListComponent implements OnInit {
         },
       ],
     },
-    { Title: "Kort", icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 } },
-    { Title: "Visualisering", icon: { iconSrc: "../../assets/images/arrow_back.png", height: 10, width: 20 } },
+    { title: "Kort", matIconName: "location_on" },
+    { title: "Visualisering", matIconName: "show_chart" },
   ];
 
   index = 0;
@@ -69,6 +70,10 @@ export class ApplicationsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.url.subscribe(urlSegments => {
+      this.currentSubPath = urlSegments.map(segment => segment.path).join("/");
+    });
+
     this.translate.get(["TITLE.APPLICATION"]).subscribe(translations => {
       this.titleService.setTitle(translations["TITLE.APPLICATION"]);
     });

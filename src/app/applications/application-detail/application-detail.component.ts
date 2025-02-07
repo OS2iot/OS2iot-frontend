@@ -1,25 +1,24 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Gateway, GatewayResponseMany } from "@app/gateway/gateway.model";
 import { Application } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
+import { IotDevicesApplicationMapResponse } from "@applications/iot-devices/iot-device.model";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
-import { BackButton } from "@shared/models/back-button.model";
-import { DropdownButton } from "@shared/models/dropdown-button.model";
-import { MeService } from "@shared/services/me.service";
-import { Subscription } from "rxjs";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { IotDevicesApplicationMapResponse } from "@applications/iot-devices/iot-device.model";
-import { RestService } from "@shared/services/rest.service";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
-import { Gateway, GatewayResponseMany } from "@app/gateway/gateway.model";
-import { MatDialog } from "@angular/material/dialog";
-import { ApplicationChangeOrganizationDialogComponent } from "../application-change-organization-dialog/application-change-organization-dialog.component";
+import { BackButton } from "@shared/models/back-button.model";
 import { ApplicationDialogModel } from "@shared/models/dialog.model";
+import { DropdownButton } from "@shared/models/dropdown-button.model";
+import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
+import { MeService } from "@shared/services/me.service";
+import { RestService } from "@shared/services/rest.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Observable, Subscription } from "rxjs";
+import { map } from "rxjs/operators";
+import { ApplicationChangeOrganizationDialogComponent } from "../application-change-organization-dialog/application-change-organization-dialog.component";
 
 @Component({
   selector: "app-application",
@@ -147,9 +146,9 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
         useGeolocation: false,
         markerInfo: {
           name: dev.name,
-          active: false,
+          active: dev.type,
           id: dev.id,
-          isDevice: true,
+          isDevice: false,
           internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
           networkTechnology: dev.type,
           lastActive: dev.latestSentMessage,

@@ -4,20 +4,21 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TranslateModule } from "@ngx-translate/core";
+import { BasicInformationBoxComponent } from "@shared/components/basic-information-box/basic-information-box.component";
+import { BasicTapSwitchComponent } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { FormModule } from "@shared/components/forms/form.module";
+import { OptionFieldComponent } from "@shared/components/option-field/option-fieldcomponent";
+import { StatusIconComponent } from "@shared/components/status-icon/status-icon.component";
+import { TablePaginatorComponent } from "@shared/components/table-pagiantor.ts/table-paginator.component";
+import { TableSortIconComponent } from "@shared/components/table-sort-icon/table-sort-icon.component";
 import { DirectivesModule } from "@shared/directives/directives.module";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
 import { SharedModule } from "@shared/shared.module";
-import { BasicInformationBoxComponent } from "src/componenets/basic-information-box/basic-information-box.component";
-import { BasicTapSwitchComponent } from "src/componenets/basic-tap-switch/basic-tap-switch.component";
-import { OptionFieldComponent } from "src/componenets/option-field/option-fieldcomponent";
-import { StatusIconComponent } from "src/componenets/status-icon/status-icon.component";
-import { TablePaginatorComponent } from "src/componenets/table-pagiantor.ts/table-paginator.component";
-import { TableSortIconComponent } from "src/componenets/table-sort-icon/table-sort-icon.component";
 import { ApplicationChangeOrganizationDialogComponent } from "./application-change-organization-dialog/application-change-organization-dialog.component";
 import { ApplicationDetailComponent } from "./application-detail/application-detail.component";
 import { ApplicationEditComponent } from "./application-edit/application-edit.component";
+import { ApplicationFilterComponent } from "./applications-list/application-filter/application-filter.component";
 import { ApplicationMapComponent } from "./applications-list/application-map/application-map.component";
 import { ApplicationVisualizationFailedRequestsComponent } from "./applications-list/application-visualization/application-visualization-failed-requests/application-visualization-failed-requests.component";
 import { ApplicationVisualizationTopCodesComponent } from "./applications-list/application-visualization/application-visualization-top-codes/application-visualization-top-codes.component";
@@ -66,6 +67,7 @@ import { MulticastModule } from "./multicast/multicast.module";
     BasicInformationBoxComponent,
     ApplicationVisualizationTopCodesComponent,
     ApplicationVisualizationFailedRequestsComponent,
+    ApplicationFilterComponent,
   ],
 })
 export class ApplicationsModule {}

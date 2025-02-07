@@ -1,0 +1,42 @@
+<div class="filter-container">
+  <div class="filter-selector-container">
+    <div class="filter-title">Status</div>
+    <mat-form-field appearance="outline">
+      <mat-select class="withoutArrow" [(value)]="state" placeholder="test" (selectionChange)="onStatus($event)">
+        <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-selector-container">
+    <div class="filter-title">Tilstand</div>
+    <mat-form-field appearance="outline">
+      <mat-select class="withoutArrow" [(value)]="status" (selectionChange)="onState($event)">
+        <mat-option *ngFor="let option of stateOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-selector-container">
+    <div class="filter-title">Ejer</div>
+    <mat-form-field appearance="outline">
+      <mat-select class="withoutArrow" [(value)]="owner" (selectionChange)="onOwner($event)">
+        <mat-option *ngFor="let option of ownerOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="spacer"></div>
+  <button class="filter-button" mat-flat-button (click)="onButtonClick()">
+    <div class="filter-icon-container">
+      <img class="filter-icon" ngSrc="../../../../assets/images/filter.png" width="25" height="25" priority />
+      Reset filtre
+    </div>
+  </button>
+</div>

@@ -39,9 +39,10 @@ export class TablePaginatorComponent implements OnInit {
   ];
   selected: number = 25;
   currentPage: number = 1;
-  numberOfPages: number = 0;
+  numberOfPages: number = 1;
   ngAfterViewChecked() {
-    if (this.paginator) this.numberOfPages = this.paginator.getNumberOfPages();
+    if (this.paginator && this.paginator.getNumberOfPages())
+      this.numberOfPages = this.paginator.getNumberOfPages() ?? 0;
   }
 
   onRight(): void {

@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { NewUserComponent } from "./admin/users/new-kombit-user-page/new-user.component";
+import { UserPageComponent } from "./admin/users/user-page/user-page.component";
+import { AuthGuardService as AuthGuard } from "./auth/auth-guard.service";
 import { AuthComponent } from "./auth/auth.component";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { SearchComponent } from "./search/search.component";
-import { AuthGuardService as AuthGuard } from "./auth/auth-guard.service";
-import { NewUserComponent } from "./admin/users/new-kombit-user-page/new-user.component";
-import { UserPageComponent } from "./admin/users/user-page/user-page.component";
 
 const routes: Routes = [
   {

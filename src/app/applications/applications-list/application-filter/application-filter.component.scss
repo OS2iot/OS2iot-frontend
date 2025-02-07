@@ -1,0 +1,70 @@
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 65px;
+  margin-bottom: 25px;
+}
+
+.filter-selector-container {
+  width: 200;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-title {
+  font-size: 14px;
+}
+
+.spacer {
+  display: flex;
+  flex: 1;
+}
+
+.filter-button {
+  align-self: flex-end;
+  height: 35px !important;
+  width: 170px !important;
+  min-width: 170px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3px;
+  border: 1px solid black !important;
+}
+
+.filter-icon-container {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 150px;
+  font-size: 16px;
+}
+
+.mat-mdc-select {
+  height: 20px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  font-size: 16px !important;
+  color: rgb(186, 183, 183) !important;
+}
+
+.mat-mdc-form-field {
+  height: 20px !important;
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: #ffff !important;
+  height: 35px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mat-mdc-select-arrow {
+  display: none;
+}

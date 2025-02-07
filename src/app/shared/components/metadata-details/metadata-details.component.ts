@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { ApplicationStatus } from "@applications/enums/status.enum";
+import { PermissionResponse } from "@app/admin/permission/permission.model";
+import { ApplicationState } from "@applications/enums/status.enum";
 import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
 import { TranslateService } from "@ngx-translate/core";
 import { toPascalKebabCase } from "@shared/helpers/string.helper";
 import { ControlledProperty } from "@shared/models/controlled-property.model";
-import { PermissionResponse } from "@app/admin/permission/permission.model";
 
 @Component({
   selector: "app-metadata-details",
@@ -13,7 +13,7 @@ import { PermissionResponse } from "@app/admin/permission/permission.model";
 })
 export class MetadataDetailsComponent implements OnInit {
   @Input() permissions?: PermissionResponse[];
-  @Input() status?: ApplicationStatus;
+  @Input() status?: ApplicationState;
   @Input() startDate?: Date;
   @Input() endDate?: Date;
   @Input() category?: string;
@@ -30,7 +30,7 @@ export class MetadataDetailsComponent implements OnInit {
 
   entries = Object.entries;
   toPascalKebabCase = toPascalKebabCase;
-  ApplicationStatus = ApplicationStatus;
+  ApplicationStatus = ApplicationState;
 
   constructor(private translate: TranslateService) {}
 

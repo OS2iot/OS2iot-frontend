@@ -20,11 +20,38 @@
 >
 </app-top-bar>
 <div class="container-fluid d-flex flex-column">
-  <div class="">
-    <app-basic-information-box></app-basic-information-box>
-  </div>
+  <div class=""></div>
   <ng-container *ngIf="!isLoadingResults">
     <ng-container *ngIf="hasSomePermission" ; else noPermissions>
+      <app-application-filter />
+      <div class="info-box-containers">
+        <app-basic-information-box
+          [matIconName]="'warning'"
+          [type]="'warning'"
+          [count]="133"
+          [countOf]="1223"
+          [description]="'Applikationerder kræver opmærksonhed'"
+        />
+        <app-basic-information-box
+          [matIconName]="'check_circle'"
+          [type]="'stable'"
+          [count]="133"
+          [countOf]="1223"
+          [description]="'Applikationerder uden fejl'"
+        />
+        <app-basic-information-box
+          [matIconName]="'memory'"
+          [type]="'default'"
+          [count]="133"
+          [description]="'Enheder'"
+        />
+        <app-basic-information-box
+          [matIconName]="'satellite_alt'"
+          [type]="'default'"
+          [count]="133"
+          [description]="'Gateways'"
+        />
+      </div>
       <div>
         <app-basic-tap-switch [taps]="taps" (newItemEvent)="onNewSwitchIndex($event)"> </app-basic-tap-switch>
         @switch (index) { @case (1) {

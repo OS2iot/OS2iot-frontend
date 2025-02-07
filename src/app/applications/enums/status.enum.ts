@@ -1,6 +1,6 @@
 import { recordToEntries } from "@shared/helpers/record.helper";
 
-export enum ApplicationStatus {
+export enum ApplicationState {
   "NONE" = "NONE",
   "IN-OPERATION" = "IN-OPERATION",
   "PROJECT" = "PROJECT",
@@ -8,4 +8,10 @@ export enum ApplicationStatus {
   "OTHER" = "OTHER",
 }
 
-export const ApplicationStatusEntries = recordToEntries(ApplicationStatus);
+export enum ApplicationStatus {
+  WARNING = "WARNING",
+  ALERT = "ALERT",
+  STABLE = "STABLE",
+}
+
+export const ApplicationStateEntries = recordToEntries(ApplicationState);
