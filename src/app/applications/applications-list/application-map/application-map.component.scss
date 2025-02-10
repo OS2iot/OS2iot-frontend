@@ -1,5 +1,17 @@
 .map-page {
   background-color: #ffff;
   padding: 20px;
-  height: 500px;
+  height: 600px;
+  position: relative;
+}
+
+.map-overlay {
+  height: 89px;
+  width: 132px;
+  background-color: #ffff;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10000;
+  border-radius: 4px;
 }

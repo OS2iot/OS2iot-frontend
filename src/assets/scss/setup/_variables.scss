@@ -249,15 +249,15 @@ $color-Icons-light: $color-grey-009 !default;
 $color-icon-label: $color-text-light !default;
 
 // //Links color
-$color-link: $color-primary !default;
+$color-link: black !default;
 $color-link-hover: $color-hover !default;
-$color-link-hover-bg: $color-primary !default;
-$color-link-active: $color-active !default;
-$color-link-active-bg: $color-primary !default;
-$color-link-focus: $color-focus !default;
+$color-link-hover-bg: #404040 !default;
+$color-link-active: white !default;
+$color-link-active-bg: #404040 !default;
+$color-link-focus: #404040 !default;
 $color-link-focus-bg: $color-primary !default;
-$color-link-visited: $color-visited !default;
-$color-link-visited-bg: $color-primary !default;
+$color-link-visited: white !default;
+$color-link-visited-bg: #404040 !default;
 
 // Colors for borders
 $color-border: $color-black-004 !default;

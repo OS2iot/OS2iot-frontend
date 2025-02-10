@@ -33,7 +33,10 @@
           <app-table-sort-icon [sortDirection]="getSortDirection('state')" />
         </th>
         <td mat-cell *matCellDef="let application">
-          <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+          <app-option-field
+            [title]="'APPLICATION.STATUS.' + application.status | translate"
+            [type]="application.status === 'IN-OPERATION' ? 'warring' : ''"
+          />
         </td>
       </ng-container>
 

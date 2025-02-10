@@ -27,12 +27,12 @@
     "APPLICATIONS": "Applikationer",
     "APPLICATION": "Applikation",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
-    "LORA-GATEWAYS": "LoRaWAN gateways",
+    "LORA-GATEWAYS": "Gateways",
     "DATATARGET": "Datatarget",
     "MULTICAST": "Multicast",
     "MY-DATATARGET": "Tilbage",
     "DATATARGET-APPLIKATION": "for applikation:",
-    "PROFILES": "LoRaWAN profiler",
+    "PROFILES": "Profiler",
     "PAYLOAD-DECODER": "Payload decoder",
     "ORGANISATIONS": "Organisationer",
     "PERMISSIONS": "Brugergrupper",
@@ -48,7 +48,12 @@
     "BACK": "Tilbage",
     "LOGOUT": "Log ud",
     "HELP": "Hjælp",
-    "API-KEY": "API nøgler"
+    "API-KEY": "API nøgler",
+    "TITLES": {
+      "LORAWAN": "LoRaWAN",
+      "SYSTEM": "System",
+      "ADMINISTRATION": "Administration"
+    }
   },
   "TOPBAR": {
     "SEARCH": {
@@ -160,6 +165,13 @@
       "CHOOSE-USER-GROUPS": "Vælg hvilke brugergrupper, der skal have adgang",
       "USER-GROUP-AUTO-SELECT": "Brugergruppe med automatisk tilføjelse af nye applikationer er allerede valgt",
       "SNACKBAR-SAVED": "{{applicationName}} tilhører nu {{organizationName}}"
+    },
+    "APPLICATION-LIST": {
+      "DASHBOARD-WARNING-TEXT": "Applikationer der kræver opmærksomhed",
+      "DASHBOARD-STABLE-TEXT": "Applicationer uden fejl",
+      "DASHBOARD-GATEWAY-TEXT": "Gateway",
+      "DASHBOARD-DEVICES-TEXT": "Enheder",
+      "MAP": "Kort"
     }
   },
   "GATEWAY": {

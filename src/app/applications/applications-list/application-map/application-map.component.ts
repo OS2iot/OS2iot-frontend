@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { Application } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
 import { ApplicationState, ApplicationStatus } from "@applications/enums/status.enum";
@@ -13,7 +14,7 @@ import { ApplicationsFilterService } from "../applications-filter.service";
 @Component({
   selector: "app-application-map",
   standalone: true,
-  imports: [SharedModule],
+  imports: [MatCheckboxModule, SharedModule],
   templateUrl: "./application-map.component.html",
   styleUrls: ["./application-map.component.scss"],
 })
@@ -71,7 +72,6 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     }
 
     this.coordinateList = tempCoordinateList;
-    console.log("Mapped Coordinates:", this.coordinateList);
   }
 
   getApplications(): void {

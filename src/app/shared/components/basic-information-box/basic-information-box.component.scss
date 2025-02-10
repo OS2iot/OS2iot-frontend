@@ -13,6 +13,7 @@
   justify-content: space-between;
   flex-direction: row;
   margin-bottom: 10px;
+  line-height: 36px;
 }
 
 .count-of-title {
@@ -53,6 +54,9 @@
   line-height: 15px;
 }
 
-.material-symbols-rounded {
-  width: 28;
+.icon-continer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
 }

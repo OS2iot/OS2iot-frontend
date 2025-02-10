@@ -23,6 +23,7 @@ import { ApplicationMapComponent } from "./applications-list/application-map/app
 import { ApplicationVisualizationFailedRequestsComponent } from "./applications-list/application-visualization/application-visualization-failed-requests/application-visualization-failed-requests.component";
 import { ApplicationVisualizationTopCodesComponent } from "./applications-list/application-visualization/application-visualization-top-codes/application-visualization-top-codes.component";
 import { ApplicationVisualizationComponent } from "./applications-list/application-visualization/application-visualization.component";
+import { ApplicationsListDashboardComponent } from "./applications-list/applications-list-dashboard/applications-list-dashboard.component";
 import { ApplicationsListComponent } from "./applications-list/applications-list.component";
 import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
 import { ApplicaitonsRoutingModule } from "./applications-routing.module";
@@ -68,6 +69,7 @@ import { MulticastModule } from "./multicast/multicast.module";
     ApplicationVisualizationTopCodesComponent,
     ApplicationVisualizationFailedRequestsComponent,
     ApplicationFilterComponent,
+    ApplicationsListDashboardComponent,
   ],
 })
 export class ApplicationsModule {}

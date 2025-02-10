@@ -1,0 +1,36 @@
+<div class="info-box-containers">
+  <app-basic-information-box
+    [matSVGSrc]="'exclamation-triangle'"
+    [type]="'warning'"
+    [count]="133"
+    [countOf]="1223"
+    [description]="'API-KEY.EDIT.NAME-PLACEHOLDER' | translate"
+    [height]="35"
+    [width]="25"
+  />
+  <app-basic-information-box
+    [matSVGSrc]="'check-circle'"
+    [type]="'check-circle'"
+    [count]="28"
+    [countOf]="28"
+    [description]="'Applikationerder uden fejl'"
+    [height]="30"
+    [width]="25"
+  />
+  <app-basic-information-box
+    [height]="35"
+    [width]="25"
+    [matSVGSrc]="'micro-chip'"
+    [type]="'default'"
+    [count]="133"
+    [description]="'Enheder'"
+  />
+  <app-basic-information-box
+    [height]="35"
+    [width]="25"
+    [matSVGSrc]="'satellite-dish'"
+    [type]="'default'"
+    [count]="gateways"
+    [description]="'Gateways'"
+  />
+</div>

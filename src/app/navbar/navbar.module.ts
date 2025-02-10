@@ -1,5 +1,5 @@
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 // Components
 import { NavbarComponent } from "./navbar.component";
@@ -8,17 +8,16 @@ import { NavbarComponent } from "./navbar.component";
 import { SharedModule } from "../shared/shared.module";
 
 // Services
-import { RestService } from "../shared/services/rest.service";
 import { RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { GlobalAdminComponent } from "./global-admin/global-admin.component";
+import { TranslateModule } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
-import { OrganisationDropdownComponent } from "./organisation-dropdown/organisation-dropdown.component";
 import { InlineSVGModule } from "ng-inline-svg-2";
+import { RestService } from "../shared/services/rest.service";
+import { GlobalAdminComponent } from "./global-admin/global-admin.component";
 
 @NgModule({
-  declarations: [NavbarComponent, GlobalAdminComponent, OrganisationDropdownComponent],
+  declarations: [NavbarComponent, GlobalAdminComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -27,6 +26,7 @@ import { InlineSVGModule } from "ng-inline-svg-2";
     FontAwesomeModule,
     NGMaterialModule,
     InlineSVGModule,
+    NgOptimizedImage,
   ],
   exports: [NavbarComponent],
   providers: [RestService, NavbarComponent],

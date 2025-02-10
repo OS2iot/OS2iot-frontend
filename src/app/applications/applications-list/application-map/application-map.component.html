@@ -1,7 +1,9 @@
-<div class="map-page thirty-height">
+<div class="map-page">
   @if(coordinateList){
-
   <app-map [coordinateList]="coordinateList" [isFromApplication]="true" [applicationId]="22"></app-map>
-
   }
+  <div class="map-overlay">
+    <mat-checkbox class="example-margin" />
+    <mat-checkbox class="example-margin" />
+  </div>
 </div>

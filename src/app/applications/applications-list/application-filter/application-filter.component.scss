@@ -23,14 +23,13 @@
 }
 
 .filter-button {
-  align-self: flex-end;
-  height: 35px !important;
+  margin-top: 26px;
+  height: 40px !important;
   width: 170px !important;
   min-width: 170px !important;
+  justify-content: center;
   display: flex !important;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 3px;
   border: 1px solid black !important;
 }
 
@@ -49,7 +48,7 @@
   display: flex;
   align-items: center;
   font-size: 16px !important;
-  color: rgb(186, 183, 183) !important;
+  color: #737373 !important;
 }
 
 .mat-mdc-form-field {
@@ -60,7 +59,7 @@
 
 .mat-mdc-text-field-wrapper {
   background-color: #ffff !important;
-  height: 35px !important;
+  height: 40px !important;
   display: flex !important;
   align-items: center !important;
 }

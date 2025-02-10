@@ -9,32 +9,28 @@ export interface Counter {
 }
 
 export interface Icon {
-  iconSrc?: string;
-  width: number;
-  height: number;
+  matSVGSrc: string;
+  width?: number;
+  height?: number;
 }
 
 export interface Tap {
   title: string;
   counters?: Counter[];
-  matIconName: string;
-}
-
-export interface isActive {
-  isActive: boolean;
+  icon?: Icon;
 }
 
 @Component({
   selector: "app-basic-tap-switch",
   standalone: true,
-  imports: [MatButtonModule, NgClass, MatIcon, NgStyle],
+  imports: [MatButtonModule, NgClass, NgStyle, MatIcon],
   templateUrl: "./basic-tap-switch.component.html",
   styleUrl: "./basic-tap-switch.component.scss",
 })
 export class BasicTapSwitchComponent implements OnInit {
   ngOnInit(): void {
     this.currentStyles = {
-      color: "black",
+      color: "",
     };
   }
 
@@ -50,6 +46,4 @@ export class BasicTapSwitchComponent implements OnInit {
     this.index = index;
     this.newItemEvent.emit(index);
   }
-
-  onTap;
 }

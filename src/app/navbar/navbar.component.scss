@@ -1,0 +1,63 @@
+.nav-bar-title {
+  color: #525252;
+  font-size: 14;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  margin-top: 40px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+.nav-bar-selector-building-icon {
+  background-color: #404040;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-right: 10px;
+}
+
+.nav-bar-selector-trigger {
+  align-items: center;
+  display: flex;
+  margin-top: 10px;
+}
+
+.custom-dropdown-icon {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+::ng-deep .mat-mdc-select-arrow-wrapper {
+  display: none !important;
+}
+
+::ng-deep .mat-mdc-select {
+  height: 57px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 57px !important;
+  width: 234px !important;
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-select {
+  height: 15px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 16px !important;
+  color: black !important;
+}

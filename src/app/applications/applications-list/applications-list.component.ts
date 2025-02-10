@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Title } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer, Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
@@ -27,7 +28,7 @@ export class ApplicationsListComponent implements OnInit {
   taps: Tap[] = [
     {
       title: "Applikationer",
-      matIconName: "layers",
+      icon: { matSVGSrc: "layers-tap", height: 16, width: 16 },
       counters: [
         {
           color: "default",
@@ -35,8 +36,7 @@ export class ApplicationsListComponent implements OnInit {
         },
       ],
     },
-    { title: "Kort", matIconName: "location_on" },
-    { title: "Visualisering", matIconName: "show_chart" },
+    { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 } },
   ];
 
   index = 0;
@@ -64,9 +64,23 @@ export class ApplicationsListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private userMinimalService: UserMinimalService
+    private userMinimalService: UserMinimalService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
     translate.use("da");
+
+    this.matIconRegistry.addSvgIcon(
+      "layers-tap",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/layers.svg"),
+      {}
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "map-tap",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/circle-dot.svg"),
+      {}
+    );
   }
 
   ngOnInit(): void {

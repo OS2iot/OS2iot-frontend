@@ -33,13 +33,17 @@ export class BasicInformationBoxComponent implements OnInit {
 
     this.currentStyles[0] = {
       color: color,
+      height: this.height.toString() + "px",
+      width: this.width.toString() + "px",
     };
   }
   currentStyles: Record<string, string>[] = [];
 
   @Input() type!: "default" | "warning" | "stable";
   @Input() count!: number;
+  @Input() width!: number;
+  @Input() height!: number;
   @Input() countOf!: number;
   @Input() description!: string;
-  @Input() matIconName!: string;
+  @Input() matSVGSrc!: string;
 }

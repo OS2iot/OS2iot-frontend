@@ -61,10 +61,29 @@ export class ApplicationsFilterService {
     );
   }
 
+  private checkApplicationStatus() {
+    //   this.applicationService
+    //     .getApplications(100000, 0, "asc", "id")
+    //     .pipe(
+    //       map(applicationData => {
+    //         const filteredApplications = this.filterService.SortApplications(applicationData.data as Application[]);
+    //         return filteredApplications.map(app => app.id);
+    //       })
+    //     )
+    //     .subscribe(mappedCoordinates => {
+    //       this.applicationService.getApplicationDevicesForMap(mappedCoordinates).subscribe(data => {
+    //         this.devices = data;
+    //         this.mapDevicesToCoordinateList();
+    //       });
+    //     });
+    // }
+    this.applicationService.getApplicationDevicesForMap;
+  }
+
   constructor(private applicationService: ApplicationService) {}
 
   getAppLicationIds(): Observable<{ label: string; value: string }[]> {
-    return this.applicationService.getApplications(100000, 0, "asc", "id").pipe(
+    return this.applicationService.getApplications(1000000, 0, "asc", "id").pipe(
       map(applicationData =>
         applicationData.data.map(data => ({
           label: data.owner,
@@ -75,7 +94,7 @@ export class ApplicationsFilterService {
   }
 
   getOwnerOptions(): Observable<{ label: string; value: string }[]> {
-    return this.applicationService.getApplications(100000, 0, "asc", "id").pipe(
+    return this.applicationService.getApplications(1000000, 0, "asc", "id").pipe(
       map(applicationData =>
         applicationData.data.map(data => ({
           label: data.owner,

@@ -1,10 +1,7 @@
 .main-container {
   display: flex;
-  flex: 1;
-  flex-direction: row;
-  margin-bottom: 1px;
+  height: 46px !important;
 }
-
 .tap-base {
   display: flex;
   height: 46px !important;
@@ -18,13 +15,24 @@
 .active-tap {
   background-color: #ffff !important;
   color: #404040;
+  fill: #404040;
 }
-
 .inactive-tap {
+  fill: black !important;
   color: black;
   background-color: transparent !important;
 }
+.active-tap-icon {
+  color: #404040;
+  width: 16px; //height
+  margin-bottom: 5px;
+}
 
+.inactive-tap-icon {
+  margin-bottom: 5px;
+  width: 16px; //height
+  color: black;
+}
 .counter-default {
   background-color: #404040;
 }
@@ -40,7 +48,6 @@
 .counter-alert {
   background-color: #991b1b;
 }
-
 .counter-base {
   font-size: 14px;
   padding: 0 5px;

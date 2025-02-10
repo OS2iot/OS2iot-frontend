@@ -14,13 +14,13 @@ export class OptionFieldComponent implements OnInit {
 
     switch (this.type) {
       case "alert":
-        color = "red";
+        color = "#991B1B";
         break;
       case "warring":
-        color = "yellow";
+        color = "#FDE047";
         break;
       default:
-        color = "#aebabe";
+        color = "#E5E5E5";
         break;
     }
 

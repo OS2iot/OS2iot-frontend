@@ -1,51 +1,15 @@
-@import "src/assets/scss/setup/breakpoints";
-@import "src/assets/scss/setup/variables";
-
-.per-page {
-  line-height: 40px;
-  margin-right: 8px;
-}
-
-button:focus {
-  outline: none;
-}
-
-.userName {
-  pointer-events: none;
-}
-.userNameFont {
-  font-weight: bold !important;
-}
-
-.mobileMedia {
-  @media (max-width: $screen-md-min) {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-  }
-}
-
-::ng-deep .matMenuMargin {
-  margin-right: 5px;
-}
-
-.marginLeft {
-  margin-left: 16px;
-}
-
-.topbarWidth {
-  width: 100%;
+.top-main-container {
+  background-color: #ffff;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.invisible {
-  display: none;
-  visibility: hidden;
-  height: 0;
-  width: 0;
-}
-
-::ng-deep .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
-  width: 100% !important;
+.bottom-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

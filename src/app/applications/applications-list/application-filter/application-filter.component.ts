@@ -31,7 +31,7 @@ export class ApplicationFilterComponent implements OnInit {
     this.loadOwnerOptions();
   }
 
-  statusOptions: { label: string; value: ApplicationState | "All" }[] = [
+  stateOptions: { label: string; value: ApplicationState | "All" }[] = [
     { label: "Alle", value: "All" },
     { label: "Ingen", value: ApplicationState["NONE"] },
     { label: "In operation", value: ApplicationState["IN-OPERATION"] },
@@ -40,9 +40,8 @@ export class ApplicationFilterComponent implements OnInit {
     { label: "other", value: ApplicationState["OTHER"] },
   ];
 
-  stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [
+  statusOptions: { label: string; value: ApplicationStatus | "All" }[] = [
     { label: "Alle", value: "All" },
-    { label: "Warning", value: ApplicationStatus.WARNING },
     { label: "Alert", value: ApplicationStatus.WARNING },
     { label: "Stable", value: ApplicationStatus.STABLE },
   ];

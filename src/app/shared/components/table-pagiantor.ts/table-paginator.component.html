@@ -10,15 +10,15 @@
     </mat-form-field>
   </div>
   <div class="button-container">
-    <button mat-flat-button class="arrow-button" color="success" (click)="onLeft()">
-      <img class="left-arrow" ngSrc="../../assets/images/arrow_back.png" width="10" height="11" priority />
+    <button [disabled]="currentPage <= 1" mat-flat-button class="arrow-button" color="success" (click)="onLeft()">
+      <img class="left-arrow" ngSrc="../../assets/images/arrow_back.png" width="16" height="16" priority />
     </button>
     <div class="pages-of">
       {{ currentPage + "/" + numberOfPages }}
     </div>
     <div class="">
-      <button mat-button class="arrow-button" color="success" (click)="onRight()">
-        <img class="right-arrow" ngSrc="../../assets/images/arrow_forward.png" width="10" height="11" priority />
+      <button [disabled]="!hasNextPage" mat-button class="arrow-button" color="success" (click)="onRight()">
+        <img class="right-arrow" ngSrc="../../assets/images/arrow_forward.png" width="16" height="16" priority />
       </button>
     </div>
   </div>

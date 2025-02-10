@@ -1,8 +1,8 @@
 <div class="main-container">
   @for (tap of taps; track tap.title; let idx = $index) {
   <div [ngClass]="index === idx ? 'active-tap' : 'inactive-tap'" class="tap-base" (click)="onClick(idx)">
-    @if(tap.matIconName){
-    <mat-icon [ngStyle]="currentStyles" fontIcon="{{ tap.matIconName }}" />
+    @if(tap.icon){
+    <mat-icon [ngClass]="index === idx ? 'active-tap-icon' : 'inactive-tap-icon'" svgIcon="{{ tap.icon.matSVGSrc }}" />
     }
     {{ tap.title }}
     @for (counter of tap.counters; track counter; let idx = $index) {

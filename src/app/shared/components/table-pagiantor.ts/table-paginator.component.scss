@@ -12,35 +12,29 @@
   overflow: hidden;
 }
 
-.mat-mdc-select {
-  height: 15px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  font-size: 10px !important;
-  color: rgb(227, 224, 224) !important;
-}
-
 .pages-of {
-  height: 24px;
-  min-width: 100;
+  height: 32px;
+  line-height: 10px;
   border: 1px solid rgb(227, 224, 224);
   border-radius: 3px;
   padding: 0 15px;
-  margin-top: 2px;
-  font-size: 14px;
+  font-size: 16px;
+  color: #404040;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .arrow-button {
-  height: 25px !important;
-  width: 35px !important;
-  margin: 5px;
-  margin-top: 2px;
+  height: 32px !important;
+  min-width: 42px !important;
+  width: 42px !important;
   background-color: rgb(227, 224, 224) !important;
   display: flex;
+  margin-left: 5px;
+  margin-right: 5px;
   align-items: center;
   justify-content: center;
-  min-width: 35px !important;
 }
 
 .left-arrow {
@@ -56,44 +50,38 @@
   width: 150px;
 }
 
-.button-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.mat-success {
-  background-color: green;
-  color: #fff;
-}
-
 .mat-mdc-select {
   height: 25px;
   line-height: 20px;
   display: flex;
   align-items: center;
   font-size: 10px !important;
-  color: rgb(227, 224, 224) !important;
+  color: #737373 !important;
 }
 
 .mat-mdc-option {
   font-size: 10px !important;
-  color: rgb(227, 224, 224) !important;
+  color: #737373 !important;
 }
 
 .mat-mdc-select-value {
   font-size: 15px !important;
-  color: rgb(227, 224, 224) !important;
+  color: #737373 !important;
 }
 
 .mat-mdc-text-field-wrapper {
-  height: 25px !important;
+  height: 32px !important;
   display: flex;
   align-items: center;
   font-size: 10 !important;
 }
 
 .select-container {
-  margin-top: 5px;
-  justify-self: left;
-  width: 150px;
+  min-width: 150px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  width: 100px;
 }

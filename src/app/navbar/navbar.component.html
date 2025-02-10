@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-2"
+  class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3"
   aria-expanded="false"
 >
   <img class="img-logo" alt="OS2IoT-logo" [src]="imagePath" />
@@ -34,55 +34,109 @@
       [ngClass]="{ collapse: !isCollapsed }"
     >
       <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
-        <div>
+        <!-- <div>
           <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em"></fa-icon>
           {{ getUsername() }}
-        </div>
+        </div> -->
+
         <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
           <li class="nav-item">
-            <app-global-admin></app-global-admin>
+            <mat-form-field appearance="outline">
+              <mat-select (selectionChange)="onChange($event.value)" [value]="selected">
+                <mat-select-trigger>
+                  <div class="nav-bar-selector-trigger">
+                    <div class="nav-bar-selector-building-icon">
+                      <img src="assets/images/building.svg" width="20" height="20" />
+                    </div>
+                    test
+                  </div>
+                </mat-select-trigger>
+                <mat-option *ngFor="let org of organisations" [value]="org.id">
+                  {{ org.name + "www" }}
+                </mat-option>
+              </mat-select>
+
+              <div matSuffix class="custom-dropdown-icon">
+                <img src="assets/images/angle-up.svg" class="dropdown-up" width="11" height="7" />
+                <img src="assets/images/angle-down.svg" class="dropdown-down" width="11" height="7" />
+              </div>
+            </mat-form-field>
+
+            <ul class="navbar-nav flex-column mb-2">
+              <li class="nav-item">
+                <a routerLink="/applications" routerLinkActive="active" id="applications">
+                  {{ "NAV.APPLICATIONS" | translate }}
+                </a>
+              </li>
+              <li>
+                <a routerLink="/sigfox" routerLinkActive="active">
+                  {{ "NAV.SIGFOX-ADMIN" | translate }}
+                </a>
+              </li>
+              <div *ngIf="!isOnlyGatewayAdmin">
+                <li>
+                  <a routerLink="/device-model" routerLinkActive="active">
+                    {{ "NAV.DEVICE-MODEL" | translate }}
+                  </a>
+                </li>
+              </div>
+              <div *ngIf="user && isUserAdmin && !isGlobalAdmin">
+                <li class="nav-item">
+                  <a routerLink="/admin/users" routerLinkActive="active">
+                    {{ "NAV.USERS" | translate }}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="/admin/permissions" routerLinkActive="active">
+                    {{ "NAV.PERMISSIONS" | translate }}
+                  </a>
+                </li>
+              </div>
+              <li *ngIf="user && (isUserAdmin || isGlobalAdmin)" class="nav-item">
+                <a routerLink="/admin/api-key" routerLinkActive="active">
+                  {{ "NAV.API-KEY" | translate }}
+                </a>
+              </li>
+            </ul>
+
+            <mat-divider class="m-1 mt-3"></mat-divider>
           </li>
+          <div class="nav-bar-title">{{ "NAV.TITLES.LORAWAN" | translate }}</div>
           <li class="nav-item">
-            <app-organisation-dropdown></app-organisation-dropdown>
+            <ul class="navbar-nav flex-column">
+              <li class="nav-item">
+                <a routerLink="/gateways" [routerLinkActive]="['active']" id="myLoraGateway">
+                  {{ "NAV.LORA-GATEWAYS" | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/profiles" [routerLinkActive]="['active']" id="profiles">
+                  {{ "NAV.PROFILES" | translate }}
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <div class="nav-bar-title">{{ "NAV.TITLES.SYSTEM" | translate }}</div>
+          <li>
+            <a routerLink="/device-model" routerLinkActive="active">
+              {{ "NAV.DEVICE-MODEL" | translate }}
+            </a>
           </li>
           <li class="nav-item">
             <ul class="navbar-nav flex-column">
-              <p class="ml-2">{{ "NAV.MENU-ITEM-MISC" | translate }}</p>
-              <mat-divider></mat-divider>
               <li class="nav-item">
-                <a
-                  routerLink="/gateways"
-                  [routerLinkActive]="['active']"
-                  class="nav-link pl-5 position-relative rounded"
-                  id="myLoraGateway"
-                >
-                  {{ "NAV.LORA-GATEWAYS" | translate }}
-                </a>
-                <fa-icon [icon]="faBroadcastTower" class="navbar-icon"></fa-icon>
-              </li>
-              <li class="nav-item">
-                <a
-                  routerLink="/profiles"
-                  [routerLinkActive]="['active']"
-                  class="nav-link pl-5 position-relative rounded"
-                  id="profiles"
-                >
-                  {{ "NAV.PROFILES" | translate }}
-                </a>
-                <fa-icon [icon]="faSlidersH" class="navbar-icon"></fa-icon>
-              </li>
-              <li class="nav-item">
-                <a
-                  routerLink="/payload-decoder"
-                  [routerLinkActive]="['active']"
-                  class="nav-link pl-5 position-relative rounded"
-                  id="payload-decoder"
-                >
+                <a routerLink="/payload-decoder" [routerLinkActive]="['active']" id="payload-decoder">
                   {{ "NAV.PAYLOAD-DECODER" | translate }}
                 </a>
-                <fa-icon [icon]="faNetworkWired" class="navbar-icon"></fa-icon>
               </li>
             </ul>
+          </li>
+
+          <div class="nav-bar-title">{{ "NAV.TITLES.ADMINISTRATION" | translate }}</div>
+
+          <li class="nav-item">
+            <app-global-admin></app-global-admin>
           </li>
         </div>
       </ul>
