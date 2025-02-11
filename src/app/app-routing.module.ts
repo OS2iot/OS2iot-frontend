@@ -5,7 +5,6 @@ import { UserPageComponent } from "./admin/users/user-page/user-page.component";
 import { AuthGuardService as AuthGuard } from "./auth/auth-guard.service";
 import { AuthComponent } from "./auth/auth.component";
 import { ErrorPageComponent } from "./error-page/error-page.component";
-import { SearchComponent } from "./search/search.component";
 
 const routes: Routes = [
   {
@@ -44,7 +43,6 @@ const routes: Routes = [
     loadChildren: () => import("./device-model/device-model.module").then(m => m.DeviceModelModule),
     canActivate: [AuthGuard],
   },
-  { path: "search", component: SearchComponent, canActivate: [AuthGuard] },
   { path: "not-found", component: ErrorPageComponent, data: { message: "not-found", code: 404 } },
   { path: "not-authorized", component: ErrorPageComponent },
   { path: "new-user", component: NewUserComponent, canActivate: [AuthGuard] },

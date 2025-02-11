@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 .filter-container {
   display: flex;
   flex-direction: row;
@@ -30,7 +32,7 @@
   justify-content: center;
   display: flex !important;
   align-items: center;
-  border: 1px solid black !important;
+  border: 1px solid $color-link !important;
 }
 
 .filter-icon-container {
@@ -42,28 +44,28 @@
   font-size: 16px;
 }
 
-.mat-mdc-select {
+:host .mat-mdc-select {
   height: 20px;
   line-height: 35px;
   display: flex;
   align-items: center;
   font-size: 16px !important;
-  color: #737373 !important;
+  color: $selector-font-color !important;
 }
 
-.mat-mdc-form-field {
+:host .mat-mdc-form-field {
   height: 20px !important;
   display: flex;
   align-items: center;
 }
 
-.mat-mdc-text-field-wrapper {
-  background-color: #ffff !important;
+:host .mat-mdc-text-field-wrapper {
+  background-color: $white !important;
   height: 40px !important;
   display: flex !important;
   align-items: center !important;
 }
 
-.mat-mdc-select-arrow {
+:host .mat-mdc-select-arrow {
   display: none;
 }

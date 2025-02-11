@@ -80,7 +80,7 @@
     "NAME": "Navn",
     "ID": "Id",
     "ORGANISATION": "Organisation",
-    "PLACEHOLDER": "Der kan søges efter IoT enheder, applikationer og gateways",
+    "PLACEHOLDER": "Skriv her for at søge ..",
     "QUERY": "resultater for",
     "NO-RESULTS": "Du kun kan søge efter IoT enheder, applikationer og gateways",
     "FETCHING": "Henter søgeresultater"

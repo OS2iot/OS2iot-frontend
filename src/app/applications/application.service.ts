@@ -89,6 +89,10 @@ export class ApplicationService {
     return this.restService.get("application", body);
   }
 
+  getApplicationFilterOptions(id: number): Observable<string[]> {
+    return this.restService.get(`application/${id}/filter-information`, {}, id);
+  }
+
   deleteApplication(id: number) {
     return this.restService.delete("application", id);
   }

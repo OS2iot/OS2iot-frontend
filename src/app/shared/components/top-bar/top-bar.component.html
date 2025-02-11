@@ -5,34 +5,35 @@
 </ng-template>
 
 <div class="top-main-container">
-  <div class="search-form-wrapper">
-    <!-- Search  -->
+  <!-- Search  -->
+  <form class="search-form">
+    <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
+      <div class="custom-search-field">
+        <input
+          placeholder="{{ 'SEARCH.PLACEHOLDER' | translate }}"
+          type="text"
+          id="searchQuery"
+          class="search-input"
+          aria-label="Search"
+          #searchInput
+          [value]="searchText"
+          (keyup.enter)="search(searchInput.value)"
+          (input)="search(searchInput.value)"
+        />
+      </div>
+    </ng-container>
+  </form>
 
-    <form class="search-form">
-      <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
-        <mat-form-field class="search-form--full-width" appearance="fill">
-          <mat-label>{{ "SEARCH.PLACEHOLDER" | translate }}</mat-label>
-          <input
-            matInput
-            id="searchQuery"
-            class="search--input"
-            aria-label="Search"
-            #searchInput
-            [value]="decode(searchQuery)"
-            (keyup.enter)="search(searchInput.value)"
-          />
-          <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
-            <div class="search-icon">
-              <fa-icon [icon]="faSearch"></fa-icon>
-            </div>
-          </a>
-        </mat-form-field>
-      </ng-container>
-    </form>
-  </div>
-
-  <button mat-icon-button [matMenuTriggerFor]="menu" id="userDropdown">
-    <fa-icon [icon]="faUser" class="icon--primary mb-1"></fa-icon>
+  <button class="profile-button" [matMenuTriggerFor]="menu" id="userDropdown">
+    <div class="user-information-container">
+      <div class="name-and-title-container">
+        <div class="name-container">Ole jensen</div>
+        <div class="title-container">Global Admin</div>
+      </div>
+      <div>
+        <mat-icon svgIcon="angle-down" class="angle-down-icon"></mat-icon>
+      </div>
+    </div>
   </button>
   <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
     <button mat-menu-item class="userName">
@@ -65,7 +66,6 @@
   </nav>
 
   <!-- action buttons -->
-
   <button
     *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
     [routerLink]="ctaRouterLink"
@@ -74,7 +74,23 @@
     type="button"
     [attr.aria-label]="ctaLabel"
   >
-    <mat-icon svgIcon="../../../../assets/images/angle-up.svg" class="h-20 w-30"></mat-icon>
-    {{ ctaLabel }}
+    <div class="create-application-button">
+      <mat-icon svgIcon="plus-circle" class="plus-circle-icon"></mat-icon>
+      {{ ctaLabel }}
+    </div>
   </button>
 </div>
+
+@if(searchText){
+<div class="search-view">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron--table">
+          <app-search-table [searchText]="searchText"></app-search-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

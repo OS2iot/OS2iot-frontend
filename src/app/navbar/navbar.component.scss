@@ -1,5 +1,7 @@
+@import "../../assets/scss/setup/variables";
+
 .nav-bar-title {
-  color: #525252;
+  color: $default-color;
   font-size: 14;
   font-weight: 400;
   font-family: "Inter", sans-serif;
@@ -9,7 +11,7 @@
 }
 
 .nav-bar-selector-building-icon {
-  background-color: #404040;
+  background-color: $default-icon-color;
   width: 32px;
   height: 32px;
   border-radius: 32px;
@@ -35,29 +37,84 @@
   margin-right: 10px;
 }
 
-::ng-deep .mat-mdc-select-arrow-wrapper {
+:host ::ng-deep .mat-mdc-select-arrow-wrapper {
   display: none !important;
 }
 
-::ng-deep .mat-mdc-select {
+:host ::ng-deep .mat-mdc-select {
   height: 57px;
   line-height: 20px;
   display: flex;
   align-items: center;
 }
 
-::ng-deep .mat-mdc-text-field-wrapper {
+:host ::ng-deep .mat-mdc-text-field-wrapper {
   height: 57px !important;
   width: 234px !important;
   display: flex;
   align-items: center;
 }
 
-.mat-mdc-select {
+:host .mat-mdc-select {
   height: 15px;
   line-height: 15px;
   display: flex;
   align-items: center;
   font-size: 16px !important;
   color: black !important;
+}
+
+:host a:focus,
+button:focus,
+.focus {
+  outline-offset: 0;
+  transition: all 0.2s;
+}
+
+:host a {
+  color: $color-link;
+  border-bottom: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  font-weight: 500;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 33px;
+  line-height: 14px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+  &:hover,
+  &.link-hover,
+  &:visited:hover {
+    color: $white;
+    background-color: $color-link-active-bg;
+  }
+
+  &:active,
+  &.link-active {
+    background-color: $color-link-active-bg;
+    color: $color-link;
+  }
+
+  &:focus,
+  &.link-focus {
+    color: $white;
+    background-color: $color-link-active-bg;
+  }
+
+  &:disabled,
+  &.disabled {
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    outline-offset: inherit !important;
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+  }
 }

@@ -1,5 +1,7 @@
+@import "../../../../assets/scss/setup/variables";
+
 .basic-information-box {
-  background-color: #ffff;
+  background-color: $white;
   display: flex;
   flex-grow: 1;
   width: 260px;
@@ -33,24 +35,24 @@
 }
 
 .info-text-color-default {
-  color: black;
+  color: $color-link;
 }
 
 .info-text-color-warning {
-  color: #991b1b;
+  color: $alert-color;
 }
 
 .info-text-color-stable {
-  color: #047857;
+  color: $stable-color;
 }
 
 .info-border-color-warning {
-  border: 2px solid #991b1b;
+  border: 2px solid $alert-color;
 }
 
 .information-box-description {
   font-size: 14px;
-  color: #525252;
+  color: $default-color;
   line-height: 15px;
 }
 

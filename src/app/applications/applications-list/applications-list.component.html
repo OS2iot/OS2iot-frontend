@@ -29,10 +29,6 @@
         @switch (index) { @case (1) {
 
         <app-application-map></app-application-map>
-        } @case (2) {
-
-        <app-application-visualization />
-
         } @default {
 
         <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>

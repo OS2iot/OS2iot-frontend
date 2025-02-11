@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { ApplicationService } from "@applications/application.service";
 import { ApplicationState, ApplicationStatus } from "@applications/enums/status.enum";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ApplicationsFilterService } from "../applications-filter.service";
 
 @Component({
@@ -26,9 +27,15 @@ import { ApplicationsFilterService } from "../applications-filter.service";
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class ApplicationFilterComponent implements OnInit {
-  constructor(private applicationService: ApplicationService, private filterService: ApplicationsFilterService) {}
+  constructor(
+    private applicationService: ApplicationService,
+    private filterService: ApplicationsFilterService,
+    private sharedVariableService: SharedVariableService
+  ) {}
   ngOnInit(): void {
-    this.loadOwnerOptions();
+    this.sharedVariableService.getValue().subscribe(organizationId => {
+      this.loadOwnerOptions(organizationId);
+    });
   }
 
   stateOptions: { label: string; value: ApplicationState | "All" }[] = [
@@ -48,10 +55,12 @@ export class ApplicationFilterComponent implements OnInit {
 
   ownerOptions: { label: string; value: string | "All" }[] = [];
 
-  loadOwnerOptions(): void {
-    this.filterService.getOwnerOptions().subscribe(options => {
-      options.push({ label: "Alle", value: "All" });
-      this.ownerOptions = options;
+  loadOwnerOptions(orgId: number): void {
+    this.applicationService.getApplicationFilterOptions(orgId).subscribe(options => {
+      console.log(options);
+      const optionsArray: { label: string; value: string }[] = [{ label: "Alle", value: "All" }];
+      options.forEach(option => optionsArray.push({ label: option, value: option }));
+      this.ownerOptions = optionsArray;
     });
   }
 

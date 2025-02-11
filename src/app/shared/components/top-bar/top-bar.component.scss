@@ -1,8 +1,11 @@
 .top-main-container {
   background-color: #ffff;
   display: flex;
+  flex: 1;
   flex-direction: row;
+  height: 72px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .bottom-main-container {
@@ -11,5 +14,117 @@
   justify-content: space-between;
   margin: 30px;
   margin-top: 40px;
+  overflow: none;
   margin-bottom: 40px;
+}
+
+:host .search-view {
+  position: absolute;
+  top: 70px;
+  left: 268px;
+  right: 0;
+  height: 65%;
+  z-index: 1000;
+  background-color: #ffff;
+}
+
+@media only screen and (max-width: 768px) {
+  :host .search-view {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 65%;
+    z-index: 1000;
+    background-color: #ffff;
+  }
+}
+
+:host .angle-down-icon {
+  height: 25px;
+  width: 12px;
+  color: #525252;
+  margin-right: 30px;
+  margin-left: 20px;
+}
+
+:host .plus-circle-icon {
+  height: 20px;
+  width: 16px;
+  color: #ffff;
+}
+
+:host .top-bar-profile-icon {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+  background-color: #ffff;
+}
+
+:host .top-bar-search {
+  display: flex;
+  flex: 3;
+  justify-content: start;
+}
+
+:host .search-input {
+  border-radius: 0px;
+  border-width: 0px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: transparent;
+  margin-left: 30px;
+}
+
+:host input:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+:host .user-information-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+:host .name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  font-size: 14;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+:host .title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  font-size: 12;
+  font-weight: 500;
+  line-height: 16px;
+  color: #525252;
+}
+
+:host .profile-button {
+  background-color: #ffff;
+  border-width: 0px;
+}
+
+:host .profile-button:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+:host .create-application-button {
+  display: flex;
+  justify-content: start;
 }

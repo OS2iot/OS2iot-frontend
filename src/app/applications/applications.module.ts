@@ -20,9 +20,6 @@ import { ApplicationDetailComponent } from "./application-detail/application-det
 import { ApplicationEditComponent } from "./application-edit/application-edit.component";
 import { ApplicationFilterComponent } from "./applications-list/application-filter/application-filter.component";
 import { ApplicationMapComponent } from "./applications-list/application-map/application-map.component";
-import { ApplicationVisualizationFailedRequestsComponent } from "./applications-list/application-visualization/application-visualization-failed-requests/application-visualization-failed-requests.component";
-import { ApplicationVisualizationTopCodesComponent } from "./applications-list/application-visualization/application-visualization-top-codes/application-visualization-top-codes.component";
-import { ApplicationVisualizationComponent } from "./applications-list/application-visualization/application-visualization.component";
 import { ApplicationsListDashboardComponent } from "./applications-list/applications-list-dashboard/applications-list-dashboard.component";
 import { ApplicationsListComponent } from "./applications-list/applications-list.component";
 import { ApplicationsTableComponent } from "./applications-list/applications-table/applications-table.component";
@@ -64,10 +61,7 @@ import { MulticastModule } from "./multicast/multicast.module";
     TablePaginatorComponent,
     BasicTapSwitchComponent,
     ApplicationMapComponent,
-    ApplicationVisualizationComponent,
     BasicInformationBoxComponent,
-    ApplicationVisualizationTopCodesComponent,
-    ApplicationVisualizationFailedRequestsComponent,
     ApplicationFilterComponent,
     ApplicationsListDashboardComponent,
   ],
