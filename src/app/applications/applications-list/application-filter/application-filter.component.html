@@ -13,7 +13,7 @@
   <div class="filter-selector-container">
     <div class="filter-title">Tilstand</div>
     <mat-form-field appearance="outline">
-      <mat-select class="withoutArrow" [(value)]="status" (selectionChange)="onState($event)">
+      <mat-select class="withoutArrow" [(value)]="status" (selectionChange)="onStatusCheck($event)">
         <mat-option *ngFor="let option of stateOptions" [value]="option.value">
           {{ option.label }}
         </mat-option>

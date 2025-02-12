@@ -9,5 +9,5 @@ import { Component, Input } from "@angular/core";
   imports: [NgOptimizedImage],
 })
 export class StatusIconComponent {
-  @Input() iconType: "default" | "warring" = "default";
+  @Input() iconType: "alert" | "stable" = "stable";
 }

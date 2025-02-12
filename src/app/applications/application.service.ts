@@ -4,6 +4,8 @@ import { Application, ApplicationData, UpdateApplicationOrganization } from "@ap
 import { forkJoin, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { RestService } from "../shared/services/rest.service";
+import { ApplicationsFilterService } from "./applications-list/application-filter/applications-filter.service";
+import { ApplicationStatus, ApplicationStatusCheck } from "./enums/status.enum";
 import { IotDevicesApplicationMapResponse } from "./iot-devices/iot-device.model";
 
 interface GetApplicationParameters {
@@ -13,6 +15,9 @@ interface GetApplicationParameters {
   orderOn: string;
   organizationId?: number;
   permissionId?: number;
+  status?: ApplicationStatus;
+  statusCheck?: ApplicationStatusCheck;
+  owner?: string;
 }
 
 @Injectable({
@@ -21,7 +26,11 @@ interface GetApplicationParameters {
 export class ApplicationService {
   public id: number;
   public canEdit = false;
-  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService,
+    private filterService: ApplicationsFilterService
+  ) {}
 
   createApplication(body: any): Observable<ApplicationData> {
     return this.restService.post("application", body, { observe: "response" });
@@ -58,6 +67,10 @@ export class ApplicationService {
     );
   }
 
+  getApplicationFilterOptions(id: number): Observable<string[]> {
+    return this.restService.get(`application/${id}/filter-information`);
+  }
+
   getApplications(
     limit: number,
     offset: number,
@@ -71,6 +84,9 @@ export class ApplicationService {
       offset,
       sort,
       orderOn,
+      statusCheck: this.filterService.statusCheck === "All" ? null : this.filterService.statusCheck,
+      status: this.filterService.status === "All" ? null : this.filterService.status,
+      owner: this.filterService.owner === "All" ? null : this.filterService.owner,
     };
     if (permissionId) {
       body.permissionId = permissionId;
@@ -87,10 +103,6 @@ export class ApplicationService {
       organizationId,
     };
     return this.restService.get("application", body);
-  }
-
-  getApplicationFilterOptions(id: number): Observable<string[]> {
-    return this.restService.get(`application/${id}/filter-information`, {}, id);
   }
 
   deleteApplication(id: number) {

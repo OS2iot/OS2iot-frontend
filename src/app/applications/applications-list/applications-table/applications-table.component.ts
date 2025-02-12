@@ -26,7 +26,7 @@ import { ApplicationDialogModel } from "@shared/models/dialog.model";
 import { TableColumn } from "@shared/types/table.type";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
-import { ApplicationsFilterService } from "../applications-filter.service";
+import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -127,7 +127,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = false;
           this.resultsLength = data.count;
 
-          return this.filterService.SortApplications(data.data);
+          return data.data;
         }),
         catchError(() => {
           this.isLoadingResults = false;

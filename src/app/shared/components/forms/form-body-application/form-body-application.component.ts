@@ -7,7 +7,7 @@ import { PermissionService } from "@app/admin/permission/permission.service";
 import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-propperty.enum";
 import { Application, ApplicationRequest } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
-import { ApplicationState, ApplicationStateEntries } from "@applications/enums/status.enum";
+import { ApplicationStatus, ApplicationStatusEntries } from "@applications/enums/status.enum";
 import { TranslateService } from "@ngx-translate/core";
 import { ApplicationDeviceTypeEntries, ApplicationDeviceTypes } from "@shared/enums/device-type";
 import { MeService } from "@shared/services/me.service";
@@ -84,16 +84,16 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     this.getPermissions(this.sharedVariableService.getUserInfo().user.id);
 
     const statusTranslationPrefix = "APPLICATION.STATUS.";
-    const statusTranslationKeys = ApplicationStateEntries.map(x => `${statusTranslationPrefix}${x.key}`);
+    const statusTranslationKeys = ApplicationStatusEntries.map(x => `${statusTranslationPrefix}${x.key}`);
     const deviceTypeTranslationPrefix = "IOT-DEVICE-TYPES.";
     const deviceTypeTranslationKeys = ApplicationDeviceTypeEntries.map(x => `${deviceTypeTranslationPrefix}${x.key}`);
     this.translate
       .get([...statusTranslationKeys, ...deviceTypeTranslationKeys, deviceTypeTranslationPrefix + "OTHER"])
       .subscribe(translations => {
         // Populate the dropdown options with a translated label and the enum value
-        const statusOptions: DropdownOption[] = ApplicationStateEntries.map(entry => ({
+        const statusOptions: DropdownOption[] = ApplicationStatusEntries.map(entry => ({
           label: translations[statusTranslationPrefix + entry.key],
-          value: ApplicationState[entry.key],
+          value: ApplicationStatus[entry.key],
         }));
         this.statuses.push(...statusOptions);
 
@@ -126,7 +126,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   }
 
   fillDefaultMetadata() {
-    this.application.status = this.application.status ?? ApplicationState["NONE"];
+    this.application.status = this.application.status ?? ApplicationStatus["NONE"];
   }
 
   getApplication(id: number): void {

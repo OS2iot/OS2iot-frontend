@@ -6,9 +6,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { ApplicationService } from "@applications/application.service";
-import { ApplicationState, ApplicationStatus } from "@applications/enums/status.enum";
+import { ApplicationStatus, ApplicationStatusCheck } from "@applications/enums/status.enum";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { ApplicationsFilterService } from "../applications-filter.service";
+import { ApplicationsFilterService } from "./applications-filter.service";
 
 @Component({
   selector: "app-application-filter",
@@ -38,26 +38,26 @@ export class ApplicationFilterComponent implements OnInit {
     });
   }
 
-  stateOptions: { label: string; value: ApplicationState | "All" }[] = [
+  stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [
     { label: "Alle", value: "All" },
-    { label: "Ingen", value: ApplicationState["NONE"] },
-    { label: "In operation", value: ApplicationState["IN-OPERATION"] },
-    { label: "Project", value: ApplicationState["PROJECT"] },
-    { label: "Prototype", value: ApplicationState["PROTOTYPE"] },
-    { label: "other", value: ApplicationState["OTHER"] },
+    { label: "Ingen", value: ApplicationStatus["NONE"] },
+    { label: "In operation", value: ApplicationStatus["IN-OPERATION"] },
+    { label: "Project", value: ApplicationStatus["PROJECT"] },
+    { label: "Prototype", value: ApplicationStatus["PROTOTYPE"] },
+    { label: "other", value: ApplicationStatus["OTHER"] },
   ];
 
-  statusOptions: { label: string; value: ApplicationStatus | "All" }[] = [
+  statusOptions: { label: string; value: ApplicationStatusCheck | "All" }[] = [
     { label: "Alle", value: "All" },
-    { label: "Alert", value: ApplicationStatus.WARNING },
-    { label: "Stable", value: ApplicationStatus.STABLE },
+    { label: "Alert", value: "alert" },
+    { label: "Stable", value: "stable" },
   ];
 
   ownerOptions: { label: string; value: string | "All" }[] = [];
 
   loadOwnerOptions(orgId: number): void {
-    this.applicationService.getApplicationFilterOptions(orgId).subscribe(options => {
-      console.log(options);
+    this.applicationService.getApplicationFilterOptions(1).subscribe(options => {
+      console.log(options[0]);
       const optionsArray: { label: string; value: string }[] = [{ label: "Alle", value: "All" }];
       options.forEach(option => optionsArray.push({ label: option, value: option }));
       this.ownerOptions = optionsArray;
@@ -68,9 +68,9 @@ export class ApplicationFilterComponent implements OnInit {
   status: string = "All";
   owner: string = "All";
 
-  onState(event: any): void {
+  onStatusCheck(event: any): void {
     console.log("Tilstand changed:", event.value);
-    this.filterService.updateState(event.value);
+    this.filterService.updateStatusCheck(event.value);
   }
 
   onStatus(event: any): void {

@@ -23,7 +23,7 @@
           <app-table-sort-icon [sortDirection]="getSortDirection('status')" />
         </th>
         <td mat-cell *matCellDef="let application" class="status-container">
-          <app-status-icon />
+          <app-status-icon [iconType]="application.statusCheck" />
         </td>
       </ng-container>
 

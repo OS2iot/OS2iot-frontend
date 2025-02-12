@@ -4,9 +4,11 @@ import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { ApplicationDeviceTypeUnion } from "@shared/enums/device-type";
 import { ControlledProperty } from "@shared/models/controlled-property.model";
 import { Organisation } from "../admin/organisation/organisation.model";
-import { ApplicationState } from "./enums/status.enum";
+import { ApplicationStatus } from "./enums/status.enum";
 import { IotDevice } from "./iot-devices/iot-device.model";
 import { ApplicationDeviceType } from "./models/application-device-type.model";
+
+export type ApplicationWithStatus = Application & { statusCheck: "stable" | "alert" };
 
 export class Application {
   public id: number;
@@ -20,7 +22,7 @@ export class Application {
   public updatedBy: number;
   public createdByName: string;
   public updatedByName: string;
-  public status?: ApplicationState;
+  public status?: ApplicationStatus;
   public startDate?: Date;
   public endDate?: Date;
   public category?: string;
@@ -41,7 +43,7 @@ export class ApplicationRequest {
   public name: string;
   public description: string;
   public organizationId: number;
-  public status?: ApplicationState;
+  public status?: ApplicationStatus;
   public startDate?: Date;
   public endDate?: Date;
   public category?: string;

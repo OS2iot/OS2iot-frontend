@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { Application } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
-import { ApplicationState, ApplicationStatus } from "@applications/enums/status.enum";
+import { ApplicationStatus, ApplicationStatusCheck } from "@applications/enums/status.enum";
 import { IotDevicesApplicationMapResponse } from "@applications/iot-devices/iot-device.model";
 import { MapCoordinates } from "@shared/components/map/map-coordinates.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { Subscription } from "rxjs";
-import { map } from "rxjs/operators";
 import { SharedModule } from "../../../shared/shared.module";
-import { ApplicationsFilterService } from "../applications-filter.service";
+import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
 
 @Component({
   selector: "app-application-map",
@@ -20,7 +18,11 @@ import { ApplicationsFilterService } from "../applications-filter.service";
 })
 export class ApplicationMapComponent implements OnInit, OnDestroy {
   public devices: IotDevicesApplicationMapResponse[] = [];
-  filterValues: { status: ApplicationStatus | "All"; state: ApplicationState | "All"; owner: string | "All" };
+  filterValues: {
+    status: ApplicationStatus | "All";
+    statusCheck: ApplicationStatusCheck | "All";
+    owner: string | "All";
+  };
   private valueSubscription!: Subscription;
 
   constructor(
@@ -75,19 +77,19 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
   }
 
   getApplications(): void {
-    this.applicationService
-      .getApplications(100000, 0, "asc", "id")
-      .pipe(
-        map(applicationData => {
-          const filteredApplications = this.filterService.SortApplications(applicationData.data as Application[]);
-          return filteredApplications.map(app => app.id);
-        })
-      )
-      .subscribe(mappedCoordinates => {
-        this.applicationService.getApplicationDevicesForMap(mappedCoordinates).subscribe(data => {
-          this.devices = data;
-          this.mapDevicesToCoordinateList();
-        });
-      });
+    // this.applicationService
+    //   .getApplications(100000, 0, "asc", "id")
+    //   .pipe(
+    //     map(applicationData => {
+    //       const filteredApplications = this.filterService.SortApplications(applicationData.data as Application[]);
+    //       return filteredApplications.map(app => app.id);
+    //     })
+    //   )
+    //   .subscribe(mappedCoordinates => {
+    //     this.applicationService.getApplicationDevicesForMap(mappedCoordinates).subscribe(data => {
+    //       this.devices = data;
+    //       this.mapDevicesToCoordinateList();
+    //     });
+    //   });
   }
 }
