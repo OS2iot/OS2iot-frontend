@@ -407,6 +407,27 @@
     "DATA": "Data",
     "STATE": "State"
   },
+  "APPLICATION-FILTER": {
+    "OWNER": "Ejer",
+    "STATE": "Tilstand",
+    "STATUS": "Status",
+    "RESET-FILTER": "Nulstil filter",
+    "ALL": "Alle",
+    "ALERT": "Alert",
+    "STABLE": "Stable",
+    "NONE": "Ingen",
+    "IN-OPERATION": "I drift",
+    "PROJECT": "Projekt",
+    "PROTOTYPE": "Prototype",
+    "OTHER": "Andet"
+  },
+  "APPLICATION-INFORMATION-BOX": {
+    "DEVICES": "Enheder",
+    "GATEWAYS": "Gateways",
+    "APPLICATIONS-WITH-ERROR": "Applikationer med fejl",
+    "APPLICATIONS-WITHOUT-ERROR": "Applikationer uden fejl"
+  },
+
   "IOT-TABLE": {
     "APPLICATION": "Applikation",
     "NETWORK-TECHNOLOGY": "Netværksteknologi",

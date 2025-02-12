@@ -40,6 +40,13 @@
       <div class="userNameFont">{{ getUsername() }}</div>
     </button>
     <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
+    <a
+      mat-menu-item
+      [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+      target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
+      (click)="onLogout()"
+      >{{ "NAV.LOGOUT" | translate }}
+    </a>
   </mat-menu>
 </div>
 

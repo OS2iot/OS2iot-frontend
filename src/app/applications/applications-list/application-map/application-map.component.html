@@ -3,7 +3,13 @@
   <app-map [coordinateList]="coordinateList" [isFromApplication]="true" [applicationId]="22"></app-map>
   }
   <div class="map-overlay">
-    <mat-checkbox class="example-margin" />
-    <mat-checkbox class="example-margin" />
+    <div class="check-box-container">
+      <mat-checkbox class="example-margin" />
+      <div>{{ "APPLICATION-INFORMATION-BOX.DEVICES" | translate }}</div>
+    </div>
+    <div class="check-box-container">
+      <mat-checkbox class="example-margin" />
+      <div>{{ "APPLICATION-INFORMATION-BOX.GATEWAYS" | translate }}</div>
+    </div>
   </div>
 </div>

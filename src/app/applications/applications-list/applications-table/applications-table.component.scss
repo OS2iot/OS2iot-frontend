@@ -31,11 +31,6 @@
   flex-wrap: wrap;
 }
 
-.mat-paginator {
-  display: flex;
-  justify-content: center;
-}
-
 .status-container {
   width: 10px;
 }
@@ -54,4 +49,8 @@
 .table-container {
   display: flex;
   flex: 1;
+}
+
+.paginator {
+  display: none !important;
 }

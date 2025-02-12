@@ -51,9 +51,13 @@
 .counter-base {
   font-size: 14px;
   padding: 0 5px;
+  padding-top: 1px;
   border-radius: 10px;
   height: 16px;
-  margin-left: 5px;
-  line-height: 16px;
+  min-width: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: 3px;
   color: #ffff;
 }

@@ -148,7 +148,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
           name: dev.name,
           active: dev.type,
           id: dev.id,
-          isDevice: false,
+          isDevice: true,
           internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
           networkTechnology: dev.type,
           lastActive: dev.latestSentMessage,

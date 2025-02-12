@@ -5,10 +5,11 @@ import { DomSanitizer, Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
+import { ApplicationService } from "@applications/application.service";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
-import { Tap } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
+import { Counter, Tap } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
@@ -25,19 +26,7 @@ const welcomeDialogId = "welcome-dialog";
 })
 export class ApplicationsListComponent implements OnInit {
   currentSubPath: string = "";
-  taps: Tap[] = [
-    {
-      title: "Applikationer",
-      icon: { matSVGSrc: "layers-tap", height: 16, width: 16 },
-      counters: [
-        {
-          color: "default",
-          value: "22",
-        },
-      ],
-    },
-    { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 } },
-  ];
+  taps: Tap[];
 
   index = 0;
   isLoadingResults = true;
@@ -54,6 +43,9 @@ export class ApplicationsListComponent implements OnInit {
   hasSomePermission: boolean;
   isGlobalAdmin = false;
 
+  applicationWithError = 0;
+  totalApplication = 0;
+
   constructor(
     public translate: TranslateService,
     private titleService: Title,
@@ -66,7 +58,8 @@ export class ApplicationsListComponent implements OnInit {
     private dialog: MatDialog,
     private userMinimalService: UserMinimalService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private applicationService: ApplicationService
   ) {
     translate.use("da");
 
@@ -93,6 +86,30 @@ export class ApplicationsListComponent implements OnInit {
     });
     this.organizationId = this.globalService.getSelectedOrganisationId();
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+
+    this.applicationService
+      .getApplicationsWithError(this.sharedVariableService.getSelectedOrganisationId())
+      .subscribe(data => {
+        const counters: Counter[] = [
+          {
+            color: "default",
+            value: data.total.toString(),
+          },
+        ];
+
+        if (data.withError) {
+          counters.push({ color: "alert", value: data.withError.toString() });
+        }
+
+        this.taps = [
+          {
+            title: "Applikationer",
+            icon: { matSVGSrc: "layers-tap", height: 16, width: 16 },
+            counters: counters,
+          },
+          { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 } },
+        ];
+      });
 
     // Authenticate user
     this.verifyUserAndInit();

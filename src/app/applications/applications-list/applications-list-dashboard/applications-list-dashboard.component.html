@@ -2,18 +2,18 @@
   <app-basic-information-box
     [matSVGSrc]="'exclamation-triangle'"
     [type]="'warning'"
-    [count]="133"
-    [countOf]="1223"
-    [description]="'API-KEY.EDIT.NAME-PLACEHOLDER' | translate"
+    [count]="withError"
+    [countOf]="total"
+    [description]="'APPLICATION-INFORMATION-BOX.APPLICATIONS-WITH-ERROR' | translate"
     [height]="35"
     [width]="25"
   />
   <app-basic-information-box
     [matSVGSrc]="'check-circle'"
-    [type]="'check-circle'"
-    [count]="28"
-    [countOf]="28"
-    [description]="'Applikationerder uden fejl'"
+    [type]="'stable'"
+    [count]="withoutError"
+    [countOf]="total"
+    [description]="'APPLICATION-INFORMATION-BOX.APPLICATIONS-WITHOUT-ERROR' | translate"
     [height]="30"
     [width]="25"
   />
@@ -22,8 +22,8 @@
     [width]="25"
     [matSVGSrc]="'micro-chip'"
     [type]="'default'"
-    [count]="133"
-    [description]="'Enheder'"
+    [count]="totalDevices"
+    [description]="'APPLICATION-INFORMATION-BOX.DEVICES' | translate"
   />
   <app-basic-information-box
     [height]="35"
@@ -31,6 +31,6 @@
     [matSVGSrc]="'satellite-dish'"
     [type]="'default'"
     [count]="gateways"
-    [description]="'Gateways'"
+    [description]="'APPLICATION-INFORMATION-BOX.GATEWAYS' | translate"
   />
 </div>

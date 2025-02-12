@@ -7,6 +7,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { ApplicationService } from "@applications/application.service";
 import { ApplicationStatus, ApplicationStatusCheck } from "@applications/enums/status.enum";
+
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ApplicationsFilterService } from "./applications-filter.service";
 
@@ -21,6 +23,7 @@ import { ApplicationsFilterService } from "./applications-filter.service";
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
+    TranslateModule,
   ],
   templateUrl: "./application-filter.component.html",
   styleUrl: "./application-filter.component.scss",
@@ -30,38 +33,38 @@ export class ApplicationFilterComponent implements OnInit {
   constructor(
     private applicationService: ApplicationService,
     private filterService: ApplicationsFilterService,
-    private sharedVariableService: SharedVariableService
+    private sharedVariableService: SharedVariableService,
+    public translate: TranslateService
   ) {}
   ngOnInit(): void {
-    this.sharedVariableService.getValue().subscribe(organizationId => {
-      this.loadOwnerOptions(organizationId);
-    });
+    this.loadOwnerOptions();
   }
 
   stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [
-    { label: "Alle", value: "All" },
-    { label: "Ingen", value: ApplicationStatus["NONE"] },
-    { label: "In operation", value: ApplicationStatus["IN-OPERATION"] },
-    { label: "Project", value: ApplicationStatus["PROJECT"] },
-    { label: "Prototype", value: ApplicationStatus["PROTOTYPE"] },
-    { label: "other", value: ApplicationStatus["OTHER"] },
+    { label: "APPLICATION-FILTER.ALL", value: "All" },
+    { label: "APPLICATION-FILTER.NONE", value: ApplicationStatus["NONE"] },
+    { label: "APPLICATION-FILTER.IN-OPERATION", value: ApplicationStatus["IN-OPERATION"] },
+    { label: "APPLICATION-FILTER.PROJECT", value: ApplicationStatus["PROJECT"] },
+    { label: "APPLICATION-FILTER.PROTOTYPE", value: ApplicationStatus["PROTOTYPE"] },
+    { label: "APPLICATION-FILTER.OTHER", value: ApplicationStatus["OTHER"] },
   ];
 
   statusOptions: { label: string; value: ApplicationStatusCheck | "All" }[] = [
-    { label: "Alle", value: "All" },
-    { label: "Alert", value: "alert" },
-    { label: "Stable", value: "stable" },
+    { label: "APPLICATION-FILTER.ALL", value: "All" },
+    { label: "APPLICATION-FILTER.ALERT", value: "alert" },
+    { label: "APPLICATION-FILTER.STABLE", value: "stable" },
   ];
 
   ownerOptions: { label: string; value: string | "All" }[] = [];
 
-  loadOwnerOptions(orgId: number): void {
-    this.applicationService.getApplicationFilterOptions(1).subscribe(options => {
-      console.log(options[0]);
-      const optionsArray: { label: string; value: string }[] = [{ label: "Alle", value: "All" }];
-      options.forEach(option => optionsArray.push({ label: option, value: option }));
-      this.ownerOptions = optionsArray;
-    });
+  loadOwnerOptions(): void {
+    this.applicationService
+      .getApplicationFilterOptions(this.sharedVariableService.getSelectedOrganisationId())
+      .subscribe(options => {
+        const optionsArray: { label: string; value: string }[] = [];
+        options.forEach(option => optionsArray.push({ label: option, value: option }));
+        this.ownerOptions = optionsArray;
+      });
   }
 
   state: string = "All";
@@ -69,17 +72,14 @@ export class ApplicationFilterComponent implements OnInit {
   owner: string = "All";
 
   onStatusCheck(event: any): void {
-    console.log("Tilstand changed:", event.value);
     this.filterService.updateStatusCheck(event.value);
   }
 
   onStatus(event: any): void {
-    console.log("Status changed:", event.value);
     this.filterService.updateStatus(event.value);
   }
 
   onOwner(event: any): void {
-    console.log("Ejer changed:", event.value);
     this.filterService.updateOwner(event.value);
   }
 

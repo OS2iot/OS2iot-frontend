@@ -218,7 +218,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="['/applications', row.id]"></tr>
     </table>
-    <mat-paginator [length]="resultsLength" [pageSizeOptions]="pageSizeOptions"> </mat-paginator>
+    <mat-paginator class="paginator" [length]="resultsLength" [pageSizeOptions]="pageSizeOptions"> </mat-paginator>
   </div>
   <div class="tool-container">
     <app-column-selector

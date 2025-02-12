@@ -1,17 +1,25 @@
-.map-page {
-  background-color: #ffff;
+:host .map-page {
+  background-color: #ffffff;
   padding: 20px;
   height: 600px;
   position: relative;
 }
 
-.map-overlay {
+:host .map-overlay {
   height: 89px;
   width: 132px;
-  background-color: #ffff;
+  background-color: #ffffff;
   position: absolute;
   bottom: 30px;
   left: 30px;
   z-index: 10000;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.check-box-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

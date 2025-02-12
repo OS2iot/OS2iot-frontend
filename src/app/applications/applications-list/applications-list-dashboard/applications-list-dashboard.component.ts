@@ -4,6 +4,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { ApplicationService } from "@applications/application.service";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { BasicInformationBoxComponent } from "../../../shared/components/basic-information-box/basic-information-box.component";
 
 @Component({
@@ -15,13 +16,19 @@ import { BasicInformationBoxComponent } from "../../../shared/components/basic-i
 })
 export class ApplicationsListDashboardComponent implements OnInit {
   gateways: number = 0;
+  total: number = 0;
+  withError: number = 0;
+  withoutError: number = 0;
+  totalDevices: number = 0;
+  totalGateways: number;
 
   constructor(
     private gatewayService: ChirpstackGatewayService,
     private applicationService: ApplicationService,
     private translate: TranslateService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private sharedVariableService: SharedVariableService
   ) {
     this.matIconRegistry.addSvgIcon(
       "micro-chip",
@@ -49,9 +56,22 @@ export class ApplicationsListDashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     this.gatewayService.getMultiple().subscribe(data => (this.gateways = data.totalCount));
+    this.applicationService
+      .getApplicationsWithError(this.sharedVariableService.getSelectedOrganisationId())
+      .subscribe(data => {
+        this.withError = data.withError;
+        this.totalDevices = data.withError;
+        this.withoutError = data.total - data.withError;
+        this.total = data.total;
+      });
 
-    //TODO:: Number of devices
-    //TODO:: status stable of .....
-    //TODO:: status error of .....
+    this.gatewayService
+      .getMultiple()
+      .subscribe(
+        data =>
+          (this.totalGateways = data.resultList.filter(
+            gw => gw.organizationId === this.sharedVariableService.getSelectedOrganisationId()
+          ).length)
+      );
   }
 }
