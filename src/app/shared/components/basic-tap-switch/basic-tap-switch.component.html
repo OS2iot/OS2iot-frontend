@@ -6,7 +6,11 @@
     }
     {{ tap.title }}
     @for (counter of tap.counters; track counter; let idx = $index) {
-    <div class="counter-base {{ 'counter-' + counter.color }}">
+    <div
+      class="counter-base {{
+        'counter-' + (counter.color === 'default' && index !== idx ? 'default-inactive' : counter.color)
+      }}"
+    >
       {{ counter.value }}
     </div>
     }

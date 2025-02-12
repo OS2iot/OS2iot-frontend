@@ -4,11 +4,11 @@
   }
   <div class="map-overlay">
     <div class="check-box-container">
-      <mat-checkbox class="example-margin" />
+      <mat-checkbox class="example-margin" [checked]="device" />
       <div>{{ "APPLICATION-INFORMATION-BOX.DEVICES" | translate }}</div>
     </div>
     <div class="check-box-container">
-      <mat-checkbox class="example-margin" />
+      <mat-checkbox class="example-margin" [checked]="gateway" />
       <div>{{ "APPLICATION-INFORMATION-BOX.GATEWAYS" | translate }}</div>
     </div>
   </div>

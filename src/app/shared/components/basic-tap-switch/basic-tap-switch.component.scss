@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 .main-container {
   display: flex;
   height: 46px !important;
@@ -13,17 +15,17 @@
   padding: 0 20px;
 }
 .active-tap {
-  background-color: #ffff !important;
-  color: #404040;
-  fill: #404040;
+  background-color: $white !important;
+  color: $default-icon-color;
+  fill: $default-icon-color;
 }
 .inactive-tap {
-  fill: black !important;
-  color: black;
+  fill: $color-link !important;
+  color: $color-link;
   background-color: transparent !important;
 }
 .active-tap-icon {
-  color: #404040;
+  color: $default-icon-color;
   width: 16px; //height
   margin-bottom: 5px;
 }
@@ -31,22 +33,26 @@
 .inactive-tap-icon {
   margin-bottom: 5px;
   width: 16px; //height
-  color: black;
+  color: $color-link;
 }
 .counter-default {
-  background-color: #404040;
+  background-color: $default-icon-color;
+}
+
+.counter-default-inactive {
+  background-color: $color-link;
 }
 
 .counter-warning {
-  background-color: #fde047;
+  background-color: $warning-color;
 }
 
 .counter-stable {
-  background-color: #047857;
+  background-color: $stable-color;
 }
 
 .counter-alert {
-  background-color: #991b1b;
+  background-color: $alert-color;
 }
 .counter-base {
   font-size: 14px;
@@ -59,5 +65,5 @@
   align-items: center;
   display: flex;
   margin-left: 3px;
-  color: #ffff;
+  color: $white;
 }

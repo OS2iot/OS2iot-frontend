@@ -19,6 +19,8 @@ import { ApplicationsFilterService } from "../application-filter/applications-fi
 })
 export class ApplicationMapComponent implements OnInit, OnDestroy {
   public devices: IotDevice[] = [];
+  public device: boolean = true;
+  public gateway: boolean = true;
   filterValues: {
     status: ApplicationStatus | "All";
     statusCheck: ApplicationStatusCheck | "All";
