@@ -27,8 +27,8 @@
   <button class="profile-button" [matMenuTriggerFor]="menu" id="userDropdown">
     <div class="user-information-container">
       <div class="name-and-title-container">
-        <div class="name-container">Ole jensen</div>
-        <div class="title-container">Global Admin</div>
+        <div class="name-container">{{ getUsername() }}</div>
+        <!-- <div class="title-container">Global Admin</div> -->
       </div>
       <div>
         <mat-icon svgIcon="angle-down" class="angle-down-icon"></mat-icon>

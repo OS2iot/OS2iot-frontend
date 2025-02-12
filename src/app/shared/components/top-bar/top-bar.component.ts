@@ -94,6 +94,8 @@ export class TopBarComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/angle-down.svg"),
       {}
     );
+
+    this.sharedVariableService.getUserInfo;
   }
 
   ngOnInit(): void {
