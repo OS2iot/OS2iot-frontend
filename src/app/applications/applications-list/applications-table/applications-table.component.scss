@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 .name-and-description {
   max-width: 300px;
 }
@@ -33,14 +35,14 @@
 }
 
 .main-container-table {
-  background-color: #ffff;
+  background-color: $white;
   display: flex;
   flex-direction: column;
 }
 
 .tool-container {
   width: 35px;
-  background-color: #ffff;
+  background-color: $white;
 }
 
 .table-container {
@@ -54,4 +56,12 @@
 
 .mat-sort-header-arrow {
   display: none !important;
+}
+
+.column-title-color {
+  color: $color-link;
+}
+
+.column-title-color-inactive {
+  color: $default-icon-color;
 }
