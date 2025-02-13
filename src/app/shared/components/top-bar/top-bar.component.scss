@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 .top-main-container {
   background-color: #ffff;
   display: flex;
@@ -17,6 +19,12 @@
   margin-bottom: 40px;
 }
 
+@media (max-width: 768px) {
+  .bottom-main-container {
+    flex-direction: column;
+  }
+}
+
 :host .search-view {
   position: absolute;
   top: 70px;
@@ -24,7 +32,7 @@
   right: 0;
   height: 65%;
   z-index: 1000;
-  background-color: #ffff;
+  background-color: $white;
 }
 
 @media only screen and (max-width: 768px) {
@@ -35,7 +43,7 @@
     right: 0;
     height: 65%;
     z-index: 1000;
-    background-color: #ffff;
+    background-color: $white;
   }
 }
 
@@ -43,21 +51,22 @@
   height: 25px;
   width: 12px;
   color: #525252;
-  margin-right: 30px;
-  margin-left: 20px;
+  margin-right: 20px;
+  margin-left: 50px;
 }
 
 :host .plus-circle-icon {
-  height: 20px;
-  width: 16px;
-  color: #ffff;
+  height: 25px;
+  width: 20px;
+  color: $white;
+  margin-right: 20px;
 }
 
 :host .top-bar-profile-icon {
   display: flex;
   flex: 1;
   justify-content: end;
-  background-color: #ffff;
+  background-color: $white;
 }
 
 :host .top-bar-search {
@@ -108,11 +117,11 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #525252;
+  color: $default-color;
 }
 
 :host .profile-button {
-  background-color: #ffff;
+  background-color: $white;
   border-width: 0px;
 }
 
@@ -123,7 +132,29 @@
   border-color: transparent !important;
 }
 
-:host .create-application-button {
+:host .create-application-button-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: $white;
+  line-height: 22px;
+  height: 20px;
+}
+
+:host .create-application {
+  height: 40px;
+  border: none;
+  background-color: $color-primary;
   display: flex;
+  align-items: center;
   justify-content: start;
+  border-radius: 5px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+:host .page-title {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 20px;
 }

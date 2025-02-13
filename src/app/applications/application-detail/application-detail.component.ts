@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -71,11 +71,13 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     private restService: RestService,
     private sharedVariableService: SharedVariableService,
     private chirpstackGatewayService: ChirpstackGatewayService,
-    private changeOrganizationDialog: MatDialog
+    private changeOrganizationDialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get("id");
+
     if (this.id) {
       this.bindApplication(this.id);
       this.dropdownButton = {
@@ -213,6 +215,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   bindApplication(id: number): void {
     this.applicationsSubscription = this.applicationService.getApplication(id).subscribe(application => {
       this.application = application;
+      this.cdr.detectChanges();
     });
   }
 

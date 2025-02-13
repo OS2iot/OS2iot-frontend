@@ -187,7 +187,7 @@ $color-purple-002: rgba(81, 45, 109, 0.75) !default;
 $color-purple-003: rgba(81, 45, 109, 0.5) !default;
 $color-purple-004: rgba(81, 45, 109, 0.25) !default;
 
-$color-orange-001: rgba(245, 122, 47, 1) !default;
+$color-orange-001: #c2410c !default;
 $color-orange-002: rgba(245, 122, 47, 0.75) !default;
 $color-orange-003: rgba(245, 122, 47, 0.5) !default;
 $color-orange-004: rgba(245, 122, 47, 0.25) !default;
@@ -384,12 +384,12 @@ $red: #dc3545;
     overflow-y: hidden;
   }
 }
-
 $alert-color: #991b1b;
 $stable-color: #047857;
 $warning-color: #fde047;
 
 $default-color: #525252;
+$default-neutral-color: #d4d4d4;
 $default-icon-color: #404040;
 
 $selector-font-color: #737373;

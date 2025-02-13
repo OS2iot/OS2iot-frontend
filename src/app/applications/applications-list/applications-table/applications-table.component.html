@@ -17,20 +17,20 @@
       matSortDirection="asc"
       (matSortChange)="announceSortChange($event)"
     >
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="">
+      <ng-container matColumnDef="statusCheck">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ "APPLICATION-TABLE.STATUS" | translate }}
-          <app-table-sort-icon [sortDirection]="getSortDirection('status')" />
+          <app-table-sort-icon [sortDirection]="getSortDirection('statusCheck')" />
         </th>
-        <td mat-cell *matCellDef="let application" class="status-container">
+        <td mat-cell *matCellDef="let application">
           <app-status-icon [iconType]="application.statusCheck" />
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="state">
+      <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ "APPLICATION-TABLE.STATE" | translate }}
-          <app-table-sort-icon [sortDirection]="getSortDirection('state')" />
+          <app-table-sort-icon [sortDirection]="getSortDirection('status')" />
         </th>
         <td mat-cell *matCellDef="let application">
           <app-option-field
@@ -45,7 +45,7 @@
           {{ "APPLICATION-TABLE.NAME" | translate }}
           <app-table-sort-icon [sortDirection]="getSortDirection('name')" />
         </th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element" class="name-and-description">
           <div class="name-and-description">
             <div class="application-name">
               {{ element.name }}
@@ -59,16 +59,15 @@
 
       <ng-container matColumnDef="data">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ "APPLICATION-TABLE.DATA" | translate }}
+          {{ "APPLICATION-TABLE.CONTROLLED-PROPERTIES" | translate }}
           <app-table-sort-icon [sortDirection]="getSortDirection('data')" />
         </th>
         <td mat-cell *matCellDef="let application">
           <!-- TODO:: add @for when data is found  -->
           <div class="options-container">
-            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
-            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
-            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
-            <app-option-field [title]="'APPLICATION.STATUS.' + application.status | translate" />
+            @for (property of application.controlledProperties; track $index) {
+            <app-option-field [title]="property.type" />
+            }
           </div>
         </td>
       </ng-container>
@@ -93,15 +92,12 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-      </ng-container>
-
-      <!-- No used
+      <!-- Not default columns -->
 
       <ng-container matColumnDef="contactPerson">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.CONTACT-PERSON" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('contactPerson')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ application.contactPerson ?? "-" }}
@@ -111,6 +107,7 @@
       <ng-container matColumnDef="dataTargets">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.DATA-TARGETS" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ application?.dataTargets?.length ?? 0 }}
@@ -120,6 +117,7 @@
       <ng-container matColumnDef="openDataDkEnabled">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.OPEN-DATA-DK" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('openDataDkEnabled')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ isOpenDataDK(application.dataTargets) | yesNo }}
@@ -129,6 +127,7 @@
       <ng-container matColumnDef="personalData">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.PERSONAL-DATA" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('personalData')" />
         </th>
         <td mat-cell *matCellDef="let application">
           <fa-icon *ngIf="application.personalData" [icon]="faFlagIcon" class="flag-icon"></fa-icon>
@@ -139,6 +138,7 @@
       <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.START-DATE" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('startDate')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ (application.startDate | dateOnly) ?? "-" }}
@@ -148,6 +148,7 @@
       <ng-container matColumnDef="endDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-1">
           {{ "APPLICATION-TABLE.END-DATE" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('endDate')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ (application.endDate | dateOnly) ?? "-" }}
@@ -157,32 +158,26 @@
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef class="col-1">
           {{ "APPLICATION-TABLE.CATEGORY" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('category')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ application.category ?? "-" }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="controlledProperties">
-        <th mat-header-cell *matHeaderCellDef class="col-1">
-          {{ "APPLICATION-TABLE.CONTROLLED-PROPERTIES" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let application">
-          {{ mapControlledProperties(application.controlledProperties) ?? "-" }}
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="deviceTypes">
         <th mat-header-cell *matHeaderCellDef class="col-1">
           {{ "APPLICATION-TABLE.DEVICE-TYPES" | translate }}
+          <app-table-sort-icon [sortDirection]="getSortDirection('deviceTypes')" />
         </th>
         <td mat-cell *matCellDef="let application">
           {{ mapDeviceTypes(application.deviceTypes) ?? "-" }}
         </td>
-      </ng-container>  -->
+      </ng-container>
 
       <ng-container matColumnDef="menu">
         <th mat-header-cell *matHeaderCellDef class="col-1"></th>
+        ½
         <td mat-cell *matCellDef="let element">
           <div class="dropdown" *ngIf="element?.id | canEditApplication">
             <a

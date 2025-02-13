@@ -7,20 +7,39 @@
           {{ option.label }}
         </mat-option>
       </mat-select>
+      <img
+        class="angle-down-selector-icon"
+        ngSrc="../../assets/images/angle-down.svg"
+        width="14"
+        height="16"
+        priority
+      />
     </mat-form-field>
   </div>
   <div class="button-container">
-    <button [disabled]="currentPage <= 1" mat-flat-button class="arrow-button" color="success" (click)="onLeft()">
-      <img class="left-arrow" ngSrc="../../assets/images/arrow_back.png" width="16" height="16" priority />
+    <button
+      [ngClass]="currentPage <= 1 ? 'inactive-color' : 'active-color'"
+      [disabled]="currentPage <= 1"
+      mat-flat-button
+      class="arrow-button"
+      color="success"
+      (click)="onLeft()"
+    >
+      <img class="icon-arrow" ngSrc="../../assets/images/angle-left.svg" width="16" height="16" priority />
     </button>
     <div class="pages-of">
-      {{ currentPage + "/" + numberOfPages }}
+      {{ currentPage + " / " + numberOfPages }}
     </div>
-    <div class="">
-      <button [disabled]="!hasNextPage" mat-button class="arrow-button" color="success" (click)="onRight()">
-        <img class="right-arrow" ngSrc="../../assets/images/arrow_forward.png" width="16" height="16" priority />
-      </button>
-    </div>
+    <button
+      [ngClass]="!hasNextPage ? 'inactive-color' : 'active-color'"
+      [disabled]="!hasNextPage"
+      mat-button
+      class="arrow-button"
+      color="success"
+      (click)="onRight()"
+    >
+      <img class="icon-arrow" ngSrc="../../assets/images/angle-right.svg" width="16" height="16" priority />
+    </button>
   </div>
   <div class="spacer"></div>
 </div>

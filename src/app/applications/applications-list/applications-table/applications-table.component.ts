@@ -30,13 +30,13 @@ import { ApplicationsFilterService } from "../application-filter/applications-fi
 
 const columnDefinitions: TableColumn[] = [
   {
-    id: "status",
+    id: "statusCheck",
     display: "APPLICATION-TABLE.STATUS",
     default: true,
-    toggleable: true,
+    toggleable: false,
   },
   {
-    id: "state",
+    id: "status",
     display: "APPLICATION-TABLE.STATE",
     default: true,
     toggleable: true,
@@ -49,9 +49,9 @@ const columnDefinitions: TableColumn[] = [
   },
   {
     id: "data",
-    display: "APPLICATION-TABLE.DATA",
+    display: "APPLICATION-TABLE.CATEGORY",
     default: true,
-    toggleable: false,
+    toggleable: true,
   },
   {
     id: "devices",
@@ -64,6 +64,61 @@ const columnDefinitions: TableColumn[] = [
     display: "APPLICATION-TABLE.OWNER",
     default: true,
     toggleable: true,
+  },
+  {
+    id: "dataTargets",
+    display: "APPLICATION-TABLE.DATA-TARGETS",
+    default: true,
+    toggleable: true,
+  },
+  // Not default columns
+  {
+    id: "contactPerson",
+    display: "APPLICATION-TABLE.CONTACT-PERSON",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "openDataDkEnabled",
+    display: "APPLICATION-TABLE.OPEN-DATA-DK",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "personalData",
+    display: "APPLICATION-TABLE.PERSONAL-DATA",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "startDate",
+    display: "APPLICATION-TABLE.START-DATE",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "endDate",
+    display: "APPLICATION-TABLE.END-DATE",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "category",
+    display: "APPLICATION-TABLE.CATEGORY",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "deviceTypes",
+    display: "APPLICATION-TABLE.DEVICE-TYPES",
+    default: false,
+    toggleable: true,
+  },
+  {
+    id: "menu",
+    display: "",
+    default: true,
+    toggleable: false,
   },
 ];
 
@@ -153,9 +208,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         map((data: ApplicationData) => {
           // Status is getting translated in frontend, and therefore sorting is not working since the backend doesn't know the translation
           // Therefore we do it manually in the frontend.
-          if (orderByColumn !== "status") {
-            return data;
-          } else {
+          if (orderByColumn === "status") {
             data.data.sort((a: Application, b: Application) => {
               const valueA = a[orderByColumn];
               const valueB = b[orderByColumn];
@@ -172,6 +225,24 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
               return translatedA.localeCompare(translatedB) * (orderByDirection === "asc" ? 1 : -1);
             });
 
+            return data;
+          } else if (orderByColumn === "statusCheck") {
+            data.data.sort((a: Application, b: Application) => {
+              const valueA = a[orderByColumn];
+              const valueB = b[orderByColumn];
+
+              if (valueA === "alert" && valueB !== "alert") {
+                return orderByDirection === "asc" ? 1 : -1;
+              }
+              if (valueA !== "alert" && valueB === "alert") {
+                return orderByDirection === "asc" ? -1 : 1;
+              }
+
+              return 0;
+            });
+
+            return data;
+          } else {
             return data;
           }
         })

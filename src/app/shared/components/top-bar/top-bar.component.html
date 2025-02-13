@@ -52,7 +52,7 @@
 
 <div class="bottom-main-container">
   <!-- Breadcrumb -->
-  <nav class="top-bar--menu--breadcrumb">
+  <nav>
     <ng-template [ngIf]="backButtonTitle">
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
       <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButtonTitle }}</a>
@@ -60,33 +60,59 @@
     <ng-template [ngIf]="data || subPage === true">
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
       <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButton.label }}</a>
-      <h3 class="p-3">{{ subTitle || staticTitle }}</h3>
+      <h3 class="pl-md-3">{{ subTitle || staticTitle }}</h3>
     </ng-template>
     <ng-template [ngIf]="title">
-      <h4 *ngIf="component; else notComponent">
-        {{ title || staticTitle }}
-      </h4>
-      <ng-template #notComponent>
-        <h3 class="pl-md-3">{{ title || staticTitle }}</h3>
-      </ng-template>
+      <div class="page-title">{{ title || staticTitle }}</div>
     </ng-template>
   </nav>
 
+  <!-- action buttons start -->
+
+  <div *ngIf="dropDownButton && addDetailDowndown === true && canEdit">
+    <button
+      type="button"
+      id="dropdown-{{ data?.name }}"
+      class="btn btn-primary dropdown-toggle"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      {{ dropDownButton.label }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data?.name }}">
+      <li class="dropdown-item">
+        <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
+      </li>
+      <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
+        <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+          <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+        </li>
+      </ng-container>
+      <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
+        <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
+      </li>
+    </ul>
+  </div>
+
   <!-- action buttons -->
+
   <button
     *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
     [routerLink]="ctaRouterLink"
     routerLinkActive="active"
-    class="btn btn-primary mr-1"
+    class="create-application"
     type="button"
     [attr.aria-label]="ctaLabel"
   >
-    <div class="create-application-button">
-      <mat-icon svgIcon="plus-circle" class="plus-circle-icon"></mat-icon>
+    <mat-icon svgIcon="plus-circle" class="plus-circle-icon"></mat-icon>
+    <div class="create-application-button-label">
       {{ ctaLabel }}
     </div>
   </button>
 </div>
+
+<!-- action buttons end -->
 
 @if(searchText){
 <div class="search-view">

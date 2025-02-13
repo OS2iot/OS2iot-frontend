@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 :host .main-container {
   display: flex;
   flex: 1;
@@ -5,7 +7,7 @@
   align-items: space;
   height: 50px;
   gap: 10px;
-  background-color: white;
+  background-color: $white;
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
@@ -13,13 +15,15 @@
 }
 
 :host .pages-of {
-  height: 32px;
-  line-height: 10px;
-  border: 1px solid rgb(227, 224, 224);
+  height: 30px;
+  min-width: 64px;
+  line-height: 24px;
+  font-weight: 500;
+  border: 1px solid $default-neutral-color;
   border-radius: 3px;
-  padding: 0 15px;
+
   font-size: 16px;
-  color: #404040;
+  color: $default-icon-color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +33,6 @@
   height: 32px !important;
   min-width: 42px !important;
   width: 42px !important;
-  background-color: rgb(227, 224, 224) !important;
   display: flex;
   margin-left: 5px;
   margin-right: 5px;
@@ -37,13 +40,10 @@
   justify-content: center;
 }
 
-:host .left-arrow {
-  margin-top: 8px;
-  margin-left: 5px;
-}
-:host .right-arrow {
-  margin-top: 10px;
-  margin-left: 1px;
+:host .icon-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 :host .spacer {
@@ -56,17 +56,17 @@
   display: flex;
   align-items: center;
   font-size: 10px !important;
-  color: #737373 !important;
+  color: $selector-font-color !important;
 }
 
 :host .mat-mdc-option {
   font-size: 10px !important;
-  color: #737373 !important;
+  color: $selector-font-color !important;
 }
 
 :host .mat-mdc-select-value {
   font-size: 15px !important;
-  color: #737373 !important;
+  color: $selector-font-color !important;
 }
 
 :host .mat-mdc-text-field-wrapper {
@@ -77,11 +77,33 @@
 }
 
 :host .select-container {
-  min-width: 150px;
+  min-width: 250px;
+  flex-shrink: 0;
 }
 
 :host .button-container {
   display: flex;
   flex-direction: row;
   width: 100px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+:host .angle-down-selector-icon {
+  position: absolute;
+  z-index: 100 !important;
+  top: 20px;
+  right: 0px;
+}
+
+:host .mat-mdc-select-arrow-wrapper {
+  display: none !important;
+}
+
+:host .active-color {
+  background-color: $default-color !important;
+}
+
+:host .inactive-color {
+  background-color: $default-neutral-color !important;
 }

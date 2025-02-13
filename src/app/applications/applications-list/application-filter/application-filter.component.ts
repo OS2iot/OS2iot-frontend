@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { ApplicationService } from "@applications/application.service";
 import { ApplicationStatus, ApplicationStatusCheck } from "@applications/enums/status.enum";
+import { ChirpstackGatewayService } from "./../../../shared/services/chirpstack-gateway.service";
 
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
@@ -34,10 +35,12 @@ export class ApplicationFilterComponent implements OnInit {
     private applicationService: ApplicationService,
     private filterService: ApplicationsFilterService,
     private sharedVariableService: SharedVariableService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public ChirpstackGatewayService: ChirpstackGatewayService
   ) {}
   ngOnInit(): void {
     this.loadOwnerOptions();
+    this.ChirpstackGatewayService.getMultiple().subscribe(data => data);
   }
 
   stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [

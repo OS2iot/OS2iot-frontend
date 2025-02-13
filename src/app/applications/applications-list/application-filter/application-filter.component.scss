@@ -4,8 +4,15 @@
   display: flex;
   flex-direction: row;
   flex: 1;
-  height: 65px;
+  min-height: 65px;
   margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+  }
 }
 
 .filter-selector-container {
@@ -13,6 +20,7 @@
   margin-right: 30px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .filter-title {
@@ -41,12 +49,15 @@
   justify-content: center;
   gap: 10px;
   width: 150px;
+}
+
+.filter-label {
   font-size: 16px;
+  font-weight: 500;
 }
 
 :host .mat-mdc-select {
-  height: 20px;
-  line-height: 35px;
+  height: 24px;
   display: flex;
   align-items: center;
   font-size: 16px !important;
@@ -64,6 +75,7 @@
   height: 40px !important;
   display: flex !important;
   align-items: center !important;
+  font-size: 16px !important;
 }
 
 :host .mat-mdc-select-arrow {

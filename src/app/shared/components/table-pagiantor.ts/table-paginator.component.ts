@@ -1,4 +1,4 @@
-import { NgFor, NgOptimizedImage } from "@angular/common";
+import { NgClass, NgFor, NgOptimizedImage } from "@angular/common";
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
@@ -25,6 +25,7 @@ export interface Option {
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
+    NgClass,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
