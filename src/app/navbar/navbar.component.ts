@@ -132,7 +132,9 @@ export class NavbarComponent implements OnInit {
     }
     this.setLocalPermissionCheck(userInfo.organizations[0]?.id);
   }
-
+  getOrgName(id: number) {
+    return this.organisations.find(org => org.id === id).name ?? "";
+  }
   private setLocalPermissionCheck(orgId: number) {
     this.isUserAdmin = this.meService.hasAccessToTargetOrganization(
       OrganizationAccessScope.UserAdministrationWrite,
