@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer, Title } from "@angular/platform-browser";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
 import { ApplicationService } from "@applications/application.service";
@@ -115,11 +115,7 @@ export class ApplicationsListComponent implements OnInit {
     // Authenticate user
     this.verifyUserAndInit();
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.currentPath = event.url;
-      }
-    });
+    this.currentPath = this.router.url;
   }
 
   verifyUserAndInit() {
@@ -214,5 +210,9 @@ export class ApplicationsListComponent implements OnInit {
 
       this.isLoadingResults = false;
     });
+  }
+
+  onTapClicked(url: string) {
+    this.currentPath = url;
   }
 }

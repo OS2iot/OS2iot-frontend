@@ -25,10 +25,11 @@
       <app-application-filter />
       <app-applications-list-dashboard />
       <div class="switch-content-container">
-        <app-basic-tap-switch [tabs]="tabs"> </app-basic-tap-switch>
-        @if(router.url === mapRoute){
+        <app-basic-tap-switch [tabs]="tabs" [currentUrl]="currentPath" (tabClicked)="onTapClicked($event)">
+        </app-basic-tap-switch>
+        @if(currentPath === mapRoute){
         <app-application-map></app-application-map>
-        } @if(router.url === listRoute){
+        } @if(currentPath === listRoute){
         <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
         }
       </div>

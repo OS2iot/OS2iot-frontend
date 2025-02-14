@@ -1,14 +1,17 @@
 <div class="main-container">
-  @for (tab of tabs; track tab.title; let idx = $index) {
-  <div [ngClass]="index === idx ? 'active-tap' : 'inactive-tap'" class="tap-base" (click)="onClick(tab.uri)">
+  @for (tab of tabs; track tab.title;) {
+  <div [ngClass]="currentUrl === tab.uri ? 'active-tap' : 'inactive-tap'" class="tap-base" (click)="onClick(tab.uri)">
     @if(tab.icon){
-    <mat-icon [ngClass]="index === idx ? 'active-tap-icon' : 'inactive-tap-icon'" svgIcon="{{ tab.icon.matSVGSrc }}" />
+    <mat-icon
+      [ngClass]="currentUrl === tab.uri ? 'active-tap-icon' : 'inactive-tap-icon'"
+      svgIcon="{{ tab.icon.matSVGSrc }}"
+    />
     }
     {{ tab.title }}
-    @for (counter of tab.counters; track counter; let idx = $index) {
+    @for (counter of tab.counters; track counter;) {
     <div
       class="counter-base {{
-        'counter-' + (counter.color === 'default' && index !== idx ? 'default-inactive' : counter.color)
+        'counter-' + (counter.color === 'default' && currentUrl === tab.uri ? 'default-inactive' : counter.color)
       }}"
     >
       {{ counter.value }}

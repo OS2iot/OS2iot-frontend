@@ -1,5 +1,5 @@
 import { Location, NgClass } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { Router } from "@angular/router";
@@ -30,14 +30,15 @@ export interface Tab {
   styleUrl: "./basic-tap-switch.component.scss",
 })
 export class BasicTapSwitchComponent {
-  index: number = 0;
-  @Input() tabs!: Tab[];
+  @Input() currentUrl: string;
+  @Input() tabs: Tab[];
+
+  @Output() tabClicked = new EventEmitter<string>();
 
   constructor(private router: Router, private _location: Location) {}
 
   onClick(uri: string) {
-    this.router.navigateByUrl(uri, {
-      replaceUrl: true,
-    });
+    this._location.go(uri);
+    this.tabClicked.emit(uri);
   }
 }
