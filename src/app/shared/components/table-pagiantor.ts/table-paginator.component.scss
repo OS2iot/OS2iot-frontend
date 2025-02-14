@@ -4,17 +4,18 @@
   display: flex;
   flex: 1;
   justify-content: space-between;
-  height: 50px;
+  align-items: center;
+  height: 80px;
   gap: 10px;
   background-color: $white;
-  padding-top: 30px;
+
   padding-left: 20px;
   padding-right: 20px;
   overflow: hidden;
 }
 
 :host .pages-of {
-  height: 30px;
+  height: 32px;
   min-width: 64px;
   line-height: 24px;
   font-weight: 500;
@@ -32,25 +33,38 @@
   height: 32px !important;
   min-width: 42px !important;
   width: 42px !important;
-  display: flex;
   margin-left: 5px;
-  margin-right: 5px;
-  align-items: center;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 }
 
-:host .icon-arrow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:host .icon-arrow-left {
+  transform: scale(0.8);
+  height: 25px;
+  margin-left: 8px;
+}
+
+:host .icon-arrow-right {
+  transform: scale(1);
+  height: 25px;
+  margin-left: 10px;
+}
+
+:host .icon-arrow-down {
+  transform: scale(0.4);
+  height: 25px;
+  margin-left: -25px;
+  margin-bottom: 20px;
 }
 
 :host .spacer {
   width: 150px;
 }
 
-:host .mat-mdc-select {
-  height: 25px;
+:host ::ng-deep .mat-mdc-select {
+  height: 25px !important;
   line-height: 20px;
   display: flex;
   align-items: center;
@@ -58,17 +72,17 @@
   color: $selector-font-color !important;
 }
 
-:host .mat-mdc-option {
+:host ::ng-deep .mat-mdc-option {
   font-size: 10px !important;
   color: $selector-font-color !important;
 }
 
-:host .mat-mdc-select-value {
+:host ::ng-deep .mat-mdc-select-value {
   font-size: 15px !important;
   color: $selector-font-color !important;
 }
 
-:host .mat-mdc-text-field-wrapper {
+:host ::ng-deep .mat-mdc-text-field-wrapper {
   height: 32px !important;
   display: flex;
   align-items: center;
@@ -78,6 +92,11 @@
 :host .select-container {
   min-width: 250px;
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  margin-right: 10px;
 }
 
 :host .button-container {
@@ -95,7 +114,7 @@
   right: 0px;
 }
 
-:host .mat-mdc-select-arrow-wrapper {
+:host ::ng-deep .mat-mdc-select-arrow-wrapper {
   display: none !important;
 }
 

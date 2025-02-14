@@ -7,25 +7,18 @@
           {{ option.label }}
         </mat-option>
       </mat-select>
-      <img
-        class="angle-down-selector-icon"
-        ngSrc="../../assets/images/angle-down.svg"
-        width="14"
-        height="16"
-        priority
-      />
     </mat-form-field>
+    <mat-icon class="icon-arrow-down" svgIcon="down-angle"></mat-icon>
   </div>
   <div class="button-container">
     <button
       [ngClass]="currentPage <= 1 ? 'inactive-color' : 'active-color'"
       [disabled]="currentPage <= 1"
-      mat-flat-button
+      mat-button
       class="arrow-button"
-      color="success"
       (click)="onLeft()"
     >
-      <img class="icon-arrow" ngSrc="../../assets/images/angle-left.svg" width="16" height="16" priority />
+      <mat-icon class="icon-arrow-left" svgIcon="left-angle"></mat-icon>
     </button>
     <div class="pages-of">
       {{ currentPage + " / " + numberOfPages }}
@@ -35,10 +28,9 @@
       [disabled]="!hasNextPage"
       mat-button
       class="arrow-button"
-      color="success"
       (click)="onRight()"
     >
-      <img class="icon-arrow" ngSrc="../../assets/images/angle-right.svg" width="16" height="16" priority />
+      <mat-icon class="icon-arrow-right" svgIcon="right-angle"></mat-icon>
     </button>
   </div>
   <div class="spacer"></div>
