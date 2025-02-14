@@ -46,7 +46,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private redMarker = "/assets/images/red-marker.png";
   private greenMarker = "/assets/images/green-marker.png";
   private greyMarker = "/assets/images/grey-marker.png";
-  private stableDevice = "/assets/images/stable-device-pin-r.png";
+  private stableDevice = "/assets/images/stable-device-pin.svg";
   private alertDevice = "/assets/images/alert-device-pin.svg";
   private stableGateway = "/assets/images/stable-gateway-pin.svg";
   private alertGateway = "/assets/images/alert-gateway-pin.svg";
@@ -307,6 +307,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
   private getMarkerIcon(active = true, isDevice = false, isGateway = false): any {
     let uri;
+
     switch (true) {
       case isDevice && active:
         uri = this.stableDevice;
