@@ -1,5 +1,5 @@
 @switch (iconType) { @case ("stable") {
-<img ngSrc="../../../../assets/images/check.svg" width="25" height="25" priority />
+<mat-icon matTooltip="{{ 'STATUS-ICON-TOOLTIP.STABLE' | translate }}" svgIcon="stable-icon" class="icon"></mat-icon>
 } @case ("alert") {
-<img ngSrc="../../../../assets/images/alert.svg" width="25" height="25" priority />
+<mat-icon matTooltip="{{ 'STATUS-ICON-TOOLTIP.ALERT' | translate }}" svgIcon="alert-icon" class="icon"></mat-icon>
 } }

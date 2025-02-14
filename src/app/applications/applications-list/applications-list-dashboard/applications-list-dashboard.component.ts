@@ -15,7 +15,6 @@ import { BasicInformationBoxComponent } from "../../../shared/components/basic-i
   styleUrl: "./applications-list-dashboard.component.scss",
 })
 export class ApplicationsListDashboardComponent implements OnInit {
-  gateways: number = 0;
   total: number = 0;
   withError: number = 0;
   withoutError: number = 0;
@@ -55,12 +54,11 @@ export class ApplicationsListDashboardComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.gatewayService.getMultiple().subscribe(data => (this.gateways = data.totalCount));
     this.applicationService
       .getApplicationsWithError(this.sharedVariableService.getSelectedOrganisationId())
       .subscribe(data => {
         this.withError = data.withError;
-        this.totalDevices = data.withError;
+        this.totalDevices = data.totalDevices;
         this.withoutError = data.total - data.withError;
         this.total = data.total;
       });

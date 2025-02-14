@@ -1,11 +1,11 @@
 <div class="main-container">
-  @for (tap of taps; track tap.title; let idx = $index) {
-  <div [ngClass]="index === idx ? 'active-tap' : 'inactive-tap'" class="tap-base" (click)="onClick(idx)">
-    @if(tap.icon){
-    <mat-icon [ngClass]="index === idx ? 'active-tap-icon' : 'inactive-tap-icon'" svgIcon="{{ tap.icon.matSVGSrc }}" />
+  @for (tab of tabs; track tab.title; let idx = $index) {
+  <div [ngClass]="index === idx ? 'active-tap' : 'inactive-tap'" class="tap-base" (click)="onClick(tab.uri)">
+    @if(tab.icon){
+    <mat-icon [ngClass]="index === idx ? 'active-tap-icon' : 'inactive-tap-icon'" svgIcon="{{ tab.icon.matSVGSrc }}" />
     }
-    {{ tap.title }}
-    @for (counter of tap.counters; track counter; let idx = $index) {
+    {{ tab.title }}
+    @for (counter of tab.counters; track counter; let idx = $index) {
     <div
       class="counter-base {{
         'counter-' + (counter.color === 'default' && index !== idx ? 'default-inactive' : counter.color)

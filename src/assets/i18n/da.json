@@ -1345,5 +1345,9 @@
   "DBLCLICKINFO": "Dobbeltklik på kortet eller træk i markøren for at placere markøren",
   "HEIGHTCURVESINFO": "Aktiverede højdekurver vises kun på de inderste zoomniveauer",
   "HEIGHTCURVES": "Højdekurver (0,5 m)",
-  "SATELLITEDENMARK": "Satellit Danmark"
+  "SATELLITEDENMARK": "Satellit Danmark",
+  "STATUS-ICON-TOOLTIP": {
+    "STABLE": "Har data target og har ingen fejl på enhederne",
+    "ALERT": "Mangler data target eller har fejl på enhederne"
+  }
 }

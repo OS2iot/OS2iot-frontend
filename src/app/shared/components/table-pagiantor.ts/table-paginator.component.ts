@@ -1,5 +1,5 @@
-import { NgClass, NgFor, NgOptimizedImage } from "@angular/common";
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { NgClass, NgFor } from "@angular/common";
+import { AfterViewChecked, Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -17,19 +17,10 @@ export interface Option {
   templateUrl: "./table-paginator.component.html",
   styleUrls: ["./table-paginator.component.scss"],
   standalone: true,
-  imports: [
-    NgOptimizedImage,
-    NgFor,
-    MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
-    NgClass,
-  ],
+  imports: [NgFor, MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatButtonModule, NgClass],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class TablePaginatorComponent implements OnInit {
+export class TablePaginatorComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {}
   @Input() paginator: MatPaginator;
 
@@ -58,7 +49,6 @@ export class TablePaginatorComponent implements OnInit {
   }
 
   onSelected(event: any): void {
-    console.log(event.value);
     this.selected = event.value;
     this.paginator._changePageSize(event.value);
   }

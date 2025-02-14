@@ -2,14 +2,14 @@ import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer, Title } from "@angular/platform-browser";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
 import { ApplicationService } from "@applications/application.service";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
-import { Counter, Tap } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
+import { Counter, Tab } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
@@ -26,14 +26,15 @@ const welcomeDialogId = "welcome-dialog";
 })
 export class ApplicationsListComponent implements OnInit {
   currentSubPath: string = "";
-  taps: Tap[];
+  tabs: Tab[];
 
-  index = 0;
   isLoadingResults = true;
 
   public pageLimit = environment.tablePageSize;
   public resultsLength: number;
   public pageOffset = 0;
+  mapRoute = "/applications/map";
+  listRoute = "/applications";
 
   @Input() organizationId: number;
   canEdit: boolean;
@@ -43,8 +44,7 @@ export class ApplicationsListComponent implements OnInit {
   hasSomePermission: boolean;
   isGlobalAdmin = false;
 
-  applicationWithError = 0;
-  totalApplication = 0;
+  currentPath = "";
 
   constructor(
     public translate: TranslateService,
@@ -53,8 +53,8 @@ export class ApplicationsListComponent implements OnInit {
     private meService: MeService,
     private sharedVariableService: SharedVariableService,
     private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
+    public route: ActivatedRoute,
+    public router: Router,
     private dialog: MatDialog,
     private userMinimalService: UserMinimalService,
     private matIconRegistry: MatIconRegistry,
@@ -101,18 +101,25 @@ export class ApplicationsListComponent implements OnInit {
           counters.push({ color: "alert", value: data.withError.toString() });
         }
 
-        this.taps = [
+        this.tabs = [
           {
             title: "Applikationer",
             icon: { matSVGSrc: "layers-tap", height: 16, width: 16 },
             counters: counters,
+            uri: this.listRoute,
           },
-          { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 } },
+          { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 }, uri: this.mapRoute },
         ];
       });
 
     // Authenticate user
     this.verifyUserAndInit();
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentPath = event.url;
+      }
+    });
   }
 
   verifyUserAndInit() {
@@ -207,9 +214,5 @@ export class ApplicationsListComponent implements OnInit {
 
       this.isLoadingResults = false;
     });
-  }
-
-  onNewSwitchIndex(index: number) {
-    this.index = index;
   }
 }

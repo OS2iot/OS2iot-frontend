@@ -3,5 +3,5 @@
   display: string;
   default: boolean;
   toggleable: boolean;
-  sort?: "acs" | "desc";
+  sort?: "asc" | "desc";
 }

@@ -164,7 +164,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   }
 
   announceSortChange(event: { active: string; direction: string }) {
-    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "acs" | "desc";
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
   }
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.

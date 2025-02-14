@@ -4,7 +4,6 @@
   display: flex;
   flex: 1;
   justify-content: space-between;
-  align-items: space;
   height: 50px;
   gap: 10px;
   background-color: $white;
@@ -73,7 +72,7 @@
   height: 32px !important;
   display: flex;
   align-items: center;
-  font-size: 10 !important;
+  font-size: 10px !important;
 }
 
 :host .select-container {

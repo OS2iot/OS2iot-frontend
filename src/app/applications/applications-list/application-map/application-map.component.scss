@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/setup/variables";
+
 :host .map-page {
   background-color: #ffffff;
   padding: 20px;
@@ -6,9 +8,9 @@
 }
 
 :host .map-overlay {
-  height: 89px;
+  height: 50px;
   width: 132px;
-  background-color: #ffffff;
+  background-color: $white;
   position: absolute;
   bottom: 30px;
   left: 30px;
@@ -23,4 +25,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.mdc-checkbox__background {
+  background-color: $white !important;
+}
+
+.mdc-checkbox {
+  background-color: $white !important;
 }

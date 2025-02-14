@@ -35,11 +35,6 @@
       [ngClass]="{ collapse: !isCollapsed }"
     >
       <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
-        <!-- <div>
-          <fa-icon [icon]="faUser" class="navbar-icon" style="margin-right: 1em; margin-left: 1em"></fa-icon>
-          {{ getUsername() }}
-        </div> -->
-
         <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
           <li class="nav-item">
             <mat-form-field appearance="outline">

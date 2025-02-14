@@ -1,12 +1,12 @@
 <div class="basic-information-box {{ 'info-border-color-' + type }}">
   <div class="top-info">
-    <div class="icon-continer">
+    <div class="icon-container">
       <mat-icon [ngStyle]="currentStyles[0]" class="material-symbols-rounded" svgIcon="{{ matSVGSrc }}" />
     </div>
     <div class="flex-row">
       <div class="count-title {{ 'info-text-color-' + type }}">{{ count }}</div>
       @if(countOf){
-      <div class="count-of-title">{{ "  " }}/ {{ " " + countOf }}</div>
+      <div class="count-of-title">/ {{ countOf }}</div>
       }
     </div>
   </div>

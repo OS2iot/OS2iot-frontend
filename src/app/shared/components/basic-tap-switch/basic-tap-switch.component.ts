@@ -1,7 +1,8 @@
-import { NgClass, NgStyle } from "@angular/common";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Location, NgClass } from "@angular/common";
+import { Component, Input } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
+import { Router } from "@angular/router";
 
 export interface Counter {
   value: string;
@@ -14,36 +15,29 @@ export interface Icon {
   height?: number;
 }
 
-export interface Tap {
+export interface Tab {
   title: string;
   counters?: Counter[];
   icon?: Icon;
+  uri: string;
 }
 
 @Component({
   selector: "app-basic-tap-switch",
   standalone: true,
-  imports: [MatButtonModule, NgClass, NgStyle, MatIcon],
+  imports: [MatButtonModule, NgClass, MatIcon],
   templateUrl: "./basic-tap-switch.component.html",
   styleUrl: "./basic-tap-switch.component.scss",
 })
-export class BasicTapSwitchComponent implements OnInit {
-  ngOnInit(): void {
-    this.currentStyles = {
-      color: "",
-    };
-  }
-
-  currentStyles: Record<string, string> = {};
+export class BasicTapSwitchComponent {
   index: number = 0;
-  @Input() taps!: Tap[];
+  @Input() tabs!: Tab[];
 
-  boxStyles: Record<string, string> = {};
+  constructor(private router: Router, private _location: Location) {}
 
-  @Output() newItemEvent = new EventEmitter<number>();
-
-  onClick(index: number) {
-    this.index = index;
-    this.newItemEvent.emit(index);
+  onClick(uri: string) {
+    this.router.navigateByUrl(uri, {
+      replaceUrl: true,
+    });
   }
 }

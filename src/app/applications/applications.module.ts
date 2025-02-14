@@ -7,7 +7,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { BasicInformationBoxComponent } from "@shared/components/basic-information-box/basic-information-box.component";
 import { BasicTapSwitchComponent } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { FormModule } from "@shared/components/forms/form.module";
-import { OptionFieldComponent } from "@shared/components/option-field/option-fieldcomponent";
+import { OptionFieldComponent } from "@shared/components/option-field/option-field.component";
 import { StatusIconComponent } from "@shared/components/status-icon/status-icon.component";
 import { TablePaginatorComponent } from "@shared/components/table-pagiantor.ts/table-paginator.component";
 import { TableSortIconComponent } from "@shared/components/table-sort-icon/table-sort-icon.component";

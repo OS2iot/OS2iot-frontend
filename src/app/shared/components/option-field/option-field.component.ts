@@ -9,6 +9,9 @@ import { Component, Input, OnInit } from "@angular/core";
   imports: [NgStyle],
 })
 export class OptionFieldComponent implements OnInit {
+  @Input() title = "";
+  @Input() type: "default" | "warning" | "alert" = "default";
+
   ngOnInit(): void {
     let color;
 
@@ -16,7 +19,7 @@ export class OptionFieldComponent implements OnInit {
       case "alert":
         color = "#991B1B";
         break;
-      case "warring":
+      case "warning":
         color = "#FDE047";
         break;
       default:
@@ -28,7 +31,6 @@ export class OptionFieldComponent implements OnInit {
       "background-color": color,
     };
   }
-  @Input() title = "";
-  @Input() type: "default" | "warring" | "alert" = "default";
+
   boxStyles: Record<string, string> = {};
 }

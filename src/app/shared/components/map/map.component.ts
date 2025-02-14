@@ -1,24 +1,24 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
-  EventEmitter,
   SimpleChanges,
-  OnDestroy,
 } from "@angular/core";
-import * as leaflet from "leaflet";
-import "leaflet.fullscreen";
-import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
-import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
-import { TranslateService } from "@ngx-translate/core";
-import moment from "moment";
-import "leaflet.markercluster";
-import "proj4leaflet";
 import { environment } from "@environments/environment";
+import { TranslateService } from "@ngx-translate/core";
 import { satelliteCenterLatitudeDenmark, satelliteCenterLongitudeDenmark } from "@shared/constants/map-constants";
+import * as leaflet from "leaflet";
+import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import "leaflet.fullscreen";
+import "leaflet.markercluster";
+import moment from "moment";
+import "proj4leaflet";
+import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 
 @Component({
   selector: "app-map",
@@ -46,6 +46,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private redMarker = "/assets/images/red-marker.png";
   private greenMarker = "/assets/images/green-marker.png";
   private greyMarker = "/assets/images/grey-marker.png";
+  private stableDevice = "/assets/images/stable-device-pin-r.png";
+  private alertDevice = "/assets/images/alert-device-pin.svg";
+  private stableGateway = "/assets/images/stable-gateway-pin.svg";
+  private alertGateway = "/assets/images/alert-gateway-pin.svg";
+
   private dafusername = environment.dafusername;
   private dafpw = environment.dafpassword;
   private clusterMaxRadius = 80;
@@ -164,7 +169,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (this.markers) {
       this.markers.clearLayers();
     }
-    this.placeMarkers();
+    if (this.coordinateList) this.placeMarkers();
   }
 
   private makeClusterGroup() {
@@ -240,7 +245,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       ? leaflet.featureGroup(markers)
       : leaflet.featureGroup(markers.filter(m => m.options.icon.options.iconUrl === this.greyMarker));
 
-    this.map.fitBounds(group.getBounds(), { padding: [50, 50] });
+    this.map.fitBounds(group.getBounds(), { padding: [30, 30] });
   }
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
@@ -300,11 +305,30 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
     return marker;
   }
-  private getMarkerIcon(active = true, isDevice = false): any {
+  private getMarkerIcon(active = true, isDevice = false, isGateway = false): any {
+    let uri;
+    switch (true) {
+      case isDevice && active:
+        uri = this.stableDevice;
+        break;
+      case isDevice && !active:
+        uri = this.alertDevice;
+        break;
+      case isGateway && active:
+        uri = this.stableGateway;
+        break;
+      case isGateway && !active:
+        uri = this.alertGateway;
+        break;
+      default:
+        uri = active ? this.greenMarker : this.redMarker;
+        break;
+    }
+
     return leaflet.icon({
-      iconUrl: isDevice ? this.greyMarker : active ? this.greenMarker : this.redMarker,
-      iconSize: [30, 38],
-      iconAnchor: [19, 38],
+      iconUrl: uri,
+      iconSize: [34, 50],
+      iconAnchor: [19, 50],
       popupAnchor: [0, -35],
     });
   }

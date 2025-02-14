@@ -4,22 +4,7 @@ import { Organisation } from "@app/admin/organisation/organisation.model";
 import { PermissionType } from "@app/admin/permission/permission.model";
 import { AuthService, CurrentUserInfoResponse } from "@app/auth/auth.service";
 import { environment } from "@environments/environment";
-import {
-  faBroadcastTower,
-  faBurn,
-  faExchangeAlt,
-  faIdBadge,
-  faKey,
-  faLayerGroup,
-  faNetworkWired,
-  faQuestionCircle,
-  faSignInAlt,
-  faSignOutAlt,
-  faSlidersH,
-  faToolbox,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { User } from "@shared/components/forms/form-body-application/form-body-application.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
@@ -41,24 +26,12 @@ export class NavbarComponent implements OnInit {
   public isGlobalAdmin = false;
   public isOnlyGatewayAdmin = false;
 
-  faExchangeAlt = faExchangeAlt;
-  faLayergroup = faLayerGroup;
-  faUsers = faUsers;
-  faIdBadge = faIdBadge;
-  faToolbox = faToolbox;
-  faBurn = faBurn;
-  faKey = faKey;
   isCollapsed = false;
   isLoginMode = true;
   user: User;
-  faBroadcastTower = faBroadcastTower;
+
   userInfo: CurrentUserInfoResponse;
-  faSlidersH = faSlidersH;
-  faNetworkWired = faNetworkWired;
-  faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
-  faUser = faUser;
-  faQuestionCircle = faQuestionCircle;
   imagePath = "../../assets/images/os2iot.png ";
 
   constructor(
@@ -159,11 +132,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  setSelectedOrganisation(value) {
+  setSelectedOrganisation(value: number) {
     this.sharedVariableService.setSelectedOrganisationId(value);
-  }
-
-  getSelectedOrganisation(): number {
-    return +this.sharedVariableService.getSelectedOrganisationId();
   }
 }
