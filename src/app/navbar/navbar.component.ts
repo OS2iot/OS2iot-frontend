@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { PermissionType } from "@app/admin/permission/permission.model";
 import { AuthService, CurrentUserInfoResponse } from "@app/auth/auth.service";
-import { environment } from "@environments/environment";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { User } from "@shared/components/forms/form-body-application/form-body-application.component";
@@ -27,7 +26,6 @@ export class NavbarComponent implements OnInit {
   public isOnlyGatewayAdmin = false;
 
   isCollapsed = false;
-  isLoginMode = true;
   user: User;
 
   userInfo: CurrentUserInfoResponse;
@@ -46,44 +44,12 @@ export class NavbarComponent implements OnInit {
     translate.use("da");
   }
 
-  onLogout() {
-    this.authService.logout();
-    this.router.navigateByUrl("auth");
-    this.loggedInService.emitChange(false);
-  }
-
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }
 
   hasSomePermissions(): boolean {
     return this.sharedVariableService.getHasAnyPermission();
-  }
-
-  getUsername(): string {
-    return this.sharedVariableService.getUsername();
-  }
-
-  isLoggedInWithKombit() {
-    return this.authService.isLoggedInWithKombit();
-  }
-
-  hasEmail(): string {
-    this.userInfo = this.sharedVariableService.getUserInfo();
-    return this.userInfo?.user?.email;
-  }
-
-  public goToHelp() {
-    window.open("https://os2iot.os2.eu/");
-  }
-
-  getKombitLogoutUrl() {
-    const jwt = this.authService.getJwt();
-    if (this.authService.isLoggedInWithKombit()) {
-      return `${environment.baseUrl}auth/kombit/logout?secret_token=${jwt}`;
-    } else {
-      return "";
-    }
   }
 
   ngOnInit(): void {
@@ -105,20 +71,9 @@ export class NavbarComponent implements OnInit {
     }
     this.setLocalPermissionCheck(userInfo.organizations[0]?.id);
   }
+
   getOrgName(id: number) {
     return this.organisations.find(org => org.id === id).name ?? "";
-  }
-  private setLocalPermissionCheck(orgId: number) {
-    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(
-      OrganizationAccessScope.UserAdministrationWrite,
-      orgId
-    );
-    this.isGlobalAdmin = this.userResponse?.permissions?.some(({ type: pmTypes }) =>
-      pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin)
-    );
-    this.isOnlyGatewayAdmin = this.userResponse.permissions.every(({ type: pmTypes }) =>
-      pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin)
-    );
   }
 
   public onChange(organizationId: string) {
@@ -134,5 +89,18 @@ export class NavbarComponent implements OnInit {
 
   setSelectedOrganisation(value: number) {
     this.sharedVariableService.setSelectedOrganisationId(value);
+  }
+
+  private setLocalPermissionCheck(orgId: number) {
+    this.isUserAdmin = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.UserAdministrationWrite,
+      orgId
+    );
+    this.isGlobalAdmin = this.userResponse?.permissions?.some(({ type: pmTypes }) =>
+      pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin)
+    );
+    this.isOnlyGatewayAdmin = this.userResponse.permissions.every(({ type: pmTypes }) =>
+      pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin)
+    );
   }
 }

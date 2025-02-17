@@ -26,6 +26,13 @@ import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
   styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  public mapId;
+  @Input() isFromApplication? = false;
+  @Input() applicationId?: number;
+  @Input() isFromCreation? = false;
+  @Input() coordinates?: MapCoordinates;
+  @Input() coordinateList: [MapCoordinates];
+  @Output() updateCoordinates = new EventEmitter();
   private streetViewName = "OpenStreetMap";
   private datafordelerName;
   private heightCurvesName;
@@ -33,15 +40,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private streetMap: leaflet.TileLayer;
   private heightsMapWms: leaflet.TileLayer.WMS;
   private map: leaflet.Map;
-  public mapId;
   private marker: leaflet.Marker;
   private markers: any;
-  @Input() isFromApplication? = false;
-  @Input() applicationId?: number;
-  @Input() isFromCreation? = false;
-  @Input() coordinates?: MapCoordinates;
-  @Input() coordinateList: [MapCoordinates];
-  @Output() updateCoordinates = new EventEmitter();
   private zoomLevel = 13;
   private redMarker = "/assets/images/red-marker.png";
   private greenMarker = "/assets/images/green-marker.png";
@@ -249,7 +249,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   private addMarker(latitude: number, longitude: number, draggable = true, markerInfo: MarkerInfo = null) {
-    const markerIcon = this.getMarkerIcon(markerInfo?.active, markerInfo?.isDevice);
+    const markerIcon = this.getMarkerIcon(markerInfo?.active, markerInfo?.isDevice, markerInfo?.isGateway);
     const marker = leaflet.marker([latitude, longitude], { draggable, icon: markerIcon });
     marker.on("dragend", event => this.dragend(event));
     if (markerInfo && !markerInfo.isDevice) {
@@ -305,6 +305,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
     return marker;
   }
+
   private getMarkerIcon(active = true, isDevice = false, isGateway = false): any {
     let uri;
 
