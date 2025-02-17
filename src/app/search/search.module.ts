@@ -1,17 +1,15 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SearchComponent } from "../search/search.component";
+import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TranslateModule } from "@ngx-translate/core";
 import { FormModule } from "@shared/components/forms/form.module";
-import { SearchTableComponent } from "./search-table/search-table.component";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
-import { SharedModule } from "@shared/shared.module";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SearchTableComponent } from "./search-table.component";
 
 @NgModule({
-  declarations: [SearchComponent, SearchTableComponent],
+  declarations: [SearchTableComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -20,8 +18,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     ReactiveFormsModule,
     FormModule,
     NGMaterialModule,
-    SharedModule,
     FontAwesomeModule,
   ],
+  exports: [SearchTableComponent],
 })
 export class SearchModule {}

@@ -7,28 +7,40 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Router } from "@angular/router";
+import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
 import { Application, ApplicationData } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
-import { environment } from "@environments/environment";
+import { Datatarget } from "@applications/datatarget/datatarget.model";
+import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
+import { ControlledProperty } from "@shared/models/controlled-property.model";
+import { ApplicationDialogModel } from "@shared/models/dialog.model";
+import { TableColumn } from "@shared/types/table.type";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
-import { ControlledProperty } from "@shared/models/controlled-property.model";
-import { ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
-import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
-import { faFlag } from "@fortawesome/free-solid-svg-icons";
-import { TableColumn } from "@shared/types/table.type";
-import { MatDialog } from "@angular/material/dialog";
-import { ApplicationDialogModel } from "@shared/models/dialog.model";
-import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
+import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
 
 const columnDefinitions: TableColumn[] = [
+  {
+    id: "statusCheck",
+    display: "APPLICATION-TABLE.STATUS",
+    default: true,
+    toggleable: false,
+  },
+  {
+    id: "status",
+    display: "APPLICATION-TABLE.STATE",
+    default: true,
+    toggleable: true,
+  },
   {
     id: "name",
     display: "APPLICATION-TABLE.NAME",
@@ -36,15 +48,9 @@ const columnDefinitions: TableColumn[] = [
     toggleable: false,
   },
   {
-    id: "owner",
-    display: "APPLICATION-TABLE.OWNER",
+    id: "data",
+    display: "APPLICATION-TABLE.CATEGORY",
     default: true,
-    toggleable: true,
-  },
-  {
-    id: "contactPerson",
-    display: "APPLICATION-TABLE.CONTACT-PERSON",
-    default: false,
     toggleable: true,
   },
   {
@@ -54,9 +60,22 @@ const columnDefinitions: TableColumn[] = [
     toggleable: true,
   },
   {
+    id: "owner",
+    display: "APPLICATION-TABLE.OWNER",
+    default: true,
+    toggleable: true,
+  },
+  {
     id: "dataTargets",
     display: "APPLICATION-TABLE.DATA-TARGETS",
     default: true,
+    toggleable: true,
+  },
+  // Not default columns
+  {
+    id: "contactPerson",
+    display: "APPLICATION-TABLE.CONTACT-PERSON",
+    default: false,
     toggleable: true,
   },
   {
@@ -66,15 +85,9 @@ const columnDefinitions: TableColumn[] = [
     toggleable: true,
   },
   {
-    id: "status",
-    display: "APPLICATION-TABLE.STATUS",
-    default: true,
-    toggleable: true,
-  },
-  {
     id: "personalData",
     display: "APPLICATION-TABLE.PERSONAL-DATA",
-    default: true,
+    default: false,
     toggleable: true,
   },
   {
@@ -92,12 +105,6 @@ const columnDefinitions: TableColumn[] = [
   {
     id: "category",
     display: "APPLICATION-TABLE.CATEGORY",
-    default: false,
-    toggleable: true,
-  },
-  {
-    id: "controlledProperties",
-    display: "APPLICATION-TABLE.CONTROLLED-PROPERTIES",
     default: false,
     toggleable: true,
   },
@@ -131,14 +138,12 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
 
   data: Application[] = [];
 
-  public pageSize = environment.tablePageSize;
   pageSizeOptions = DefaultPageSizeOptions;
   resultsLength = 0;
   isLoadingResults = true;
   public errorMessage: string;
 
   applicationSavedColumns = "applicationSavedColumns";
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -148,7 +153,8 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     private router: Router,
     private deleteDialogService: DeleteDialogService,
     private cdRef: ChangeDetectorRef,
-    private changeOrganizationDialog: MatDialog
+    private changeOrganizationDialog: MatDialog,
+    private filterService: ApplicationsFilterService
   ) {}
 
   ngOnInit() {
@@ -157,11 +163,14 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     this.translate.use("da");
   }
 
+  announceSortChange(event: { active: string; direction: string }) {
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
+  }
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.sort.sortChange, this.paginator.page, this.filterService.filterChanges$)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -180,7 +189,9 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
           return observableOf([]);
         })
       )
-      .subscribe(data => (this.data = data));
+      .subscribe(data => {
+        this.data = data;
+      });
   }
 
   getApplications(orderByColumn: string, orderByDirection: string): Observable<ApplicationData> {
@@ -197,9 +208,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
         map((data: ApplicationData) => {
           // Status is getting translated in frontend, and therefore sorting is not working since the backend doesn't know the translation
           // Therefore we do it manually in the frontend.
-          if (orderByColumn !== "status") {
-            return data;
-          } else {
+          if (orderByColumn === "status") {
             data.data.sort((a: Application, b: Application) => {
               const valueA = a[orderByColumn];
               const valueB = b[orderByColumn];
@@ -216,6 +225,24 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
               return translatedA.localeCompare(translatedB) * (orderByDirection === "asc" ? 1 : -1);
             });
 
+            return data;
+          } else if (orderByColumn === "statusCheck") {
+            data.data.sort((a: Application, b: Application) => {
+              const valueA = a[orderByColumn];
+              const valueB = b[orderByColumn];
+
+              if (valueA === "alert" && valueB !== "alert") {
+                return orderByDirection === "asc" ? 1 : -1;
+              }
+              if (valueA !== "alert" && valueB === "alert") {
+                return orderByDirection === "asc" ? -1 : 1;
+              }
+
+              return 0;
+            });
+
+            return data;
+          } else {
             return data;
           }
         })
@@ -279,6 +306,9 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
       } as ApplicationDialogModel,
     });
   }
+  getSortDirection(id: string) {
+    return columnDefinitions.find(c => c.id === id).sort;
+  }
 
-  protected readonly columnDefinitions = columnDefinitions;
+  protected columnDefinitions = columnDefinitions;
 }

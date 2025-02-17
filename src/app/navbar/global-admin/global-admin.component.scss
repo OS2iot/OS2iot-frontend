@@ -1,3 +1,57 @@
+@import "../../../assets/scss/setup/variables";
+
 mat-expansion-panel {
   box-shadow: none !important;
+}
+
+:host a:focus,
+button:focus,
+.focus {
+  outline-offset: 0;
+  transition: all 0.2s;
+}
+
+:host a {
+  color: $color-link;
+  border-bottom: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  font-weight: 500;
+  border-radius: 3px;
+  height: 33px;
+  line-height: 14px;
+  margin: 2px 10px;
+
+  &:hover,
+  &.link-hover,
+  &:visited:hover {
+    color: $white;
+    background-color: $color-link-active-bg;
+  }
+
+  &:active,
+  &.link-active {
+    background-color: $color-link-active-bg;
+    color: $color-link;
+  }
+
+  &:focus,
+  &.link-focus {
+    color: $white;
+    background-color: $color-link-active-bg;
+  }
+
+  &:disabled,
+  &.disabled {
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    outline-offset: inherit !important;
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+  }
 }

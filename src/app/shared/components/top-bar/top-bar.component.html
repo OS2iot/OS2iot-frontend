@@ -4,142 +4,126 @@
   </mat-form-field>
 </ng-template>
 
-<div class="row top-bar-wrapper">
-  <div class="top-bar">
-    <div class="topbarWidth">
-      <div class="col">
-        <div class="row">
-          <div class="col-md-7 my-3 m-md-0 top-bar--menu">
-            <!-- Breadcrumb -->
-            <nav class="top-bar--menu--breadcrumb">
-              <ng-template [ngIf]="backButtonTitle">
-                <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButtonTitle }}</a>
-              </ng-template>
-              <ng-template [ngIf]="data || subPage === true">
-                <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
-                <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButton.label }}</a>
-                <h3 class="p-3">{{ subTitle || staticTitle }}</h3>
-              </ng-template>
-              <ng-template [ngIf]="title">
-                <h4 *ngIf="component; else notComponent">
-                  {{ title || staticTitle }}
-                </h4>
-                <ng-template #notComponent>
-                  <h3 class="pl-md-3">{{ title || staticTitle }}</h3>
-                </ng-template>
-              </ng-template>
-            </nav>
-
-            <!-- action buttons -->
-            <div class="action-group d-flex justify-content-end">
-              <button
-                *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
-                [routerLink]="ctaRouterLink"
-                routerLinkActive="active"
-                class="btn btn-primary mr-1"
-                type="button"
-                [attr.aria-label]="ctaLabel"
-              >
-                {{ ctaLabel }}
-              </button>
-
-              <button
-                *ngIf="dtRouterLink && dtRouterLink != ''"
-                [routerLink]="dtRouterLink"
-                routerLinkActive="active"
-                class="btn btn-primary mr-1"
-                type="button"
-                [attr.aria-label]="dtLabel"
-              >
-                {{ dtLabel }}
-              </button>
-
-              <div
-                class="btn-group float-md-right dropdown"
-                *ngIf="dropDownButton && addDetailDowndown === true && canEdit"
-              >
-                <button
-                  type="button"
-                  id="dropdown-{{ data?.name }}"
-                  class="btn btn-primary dropdown-toggle"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {{ dropDownButton.label }} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data?.name }}">
-                  <li class="dropdown-item">
-                    <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
-                  </li>
-                  <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
-                    <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
-                      <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
-                    </li>
-                  </ng-container>
-                  <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
-                    <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-5 order-first order-md-last search-form-wrapper">
-            <!-- Search  -->
-
-            <form class="search-form">
-              <!--
-                Handle UI bug where mat-select-field isn't full width. Use an empty form if the
-                condition isn't true.
-                Material styling are not applied properly if the ng-container is moved inside the mat-form-field.
-              -->
-              <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
-                <mat-form-field class="search-form--full-width" appearance="fill">
-                  <mat-label>{{ "SEARCH.PLACEHOLDER" | translate }}</mat-label>
-                  <input
-                    matInput
-                    id="searchQuery"
-                    class="search--input"
-                    aria-label="Search"
-                    #searchInput
-                    [value]="decode(searchQuery)"
-                    (keyup.enter)="search(searchInput.value)"
-                  />
-                  <a matSuffix class="has-pointer" (click)="search(searchInput.value)">
-                    <div class="search-icon">
-                      <fa-icon [icon]="faSearch"></fa-icon>
-                    </div>
-                  </a>
-                </mat-form-field>
-              </ng-container>
-            </form>
-          </div>
-        </div>
+<div class="top-main-container">
+  <!-- Search  -->
+  <form class="search-form">
+    <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
+      <div class="custom-search-field">
+        <input
+          placeholder="{{ 'SEARCH.PLACEHOLDER' | translate }}"
+          type="text"
+          id="searchQuery"
+          class="search-input"
+          aria-label="Search"
+          #searchInput
+          [value]="searchText"
+          (keyup.enter)="search(searchInput.value)"
+          (input)="search(searchInput.value)"
+        />
       </div>
-      <div class="marginLeft col-md-auto order-md-last search-form-wrapper">
-        <div class="mobileMedia">
-          <button mat-icon-button [matMenuTriggerFor]="menu" id="userDropdown">
-            <fa-icon [icon]="faUser" class="icon--primary mb-1"></fa-icon>
-          </button>
-          <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
-            <button mat-menu-item class="userName">
-              <div class="userNameFont">{{ getUsername() }}</div>
-            </button>
-            <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
-            <a
-              mat-menu-item
-              [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-              target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
-              (click)="onLogout()"
-              >{{ "NAV.LOGOUT" | translate }}
-            </a>
-          </mat-menu>
-          <button mat-icon-button type="button" id="help" (click)="goToHelp()">
-            <fa-icon [icon]="faQuestionCircle" class="icon--primary mb-1"></fa-icon>
-          </button>
+    </ng-container>
+  </form>
+
+  <button class="profile-button" [matMenuTriggerFor]="menu" id="userDropdown">
+    <div class="user-information-container">
+      <div class="name-and-title-container">
+        <div class="name-container">{{ getUsername() }}</div>
+        <!-- <div class="title-container">Global Admin</div> -->
+      </div>
+      <div>
+        <mat-icon svgIcon="angle-down" class="angle-down-icon"></mat-icon>
+      </div>
+    </div>
+  </button>
+  <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
+    <button mat-menu-item class="userName">
+      <div class="userNameFont">{{ getUsername() }}</div>
+    </button>
+    <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
+    <a
+      mat-menu-item
+      [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+      target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
+      (click)="onLogout()"
+      >{{ "NAV.LOGOUT" | translate }}
+    </a>
+  </mat-menu>
+</div>
+
+<div class="bottom-main-container">
+  <!-- Breadcrumb -->
+  <nav>
+    <ng-template [ngIf]="backButtonTitle">
+      <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+      <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButtonTitle }}</a>
+    </ng-template>
+    <ng-template [ngIf]="data || subPage === true">
+      <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
+      <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButton.label }}</a>
+      <h3 class="pl-md-3">{{ subTitle || staticTitle }}</h3>
+    </ng-template>
+    <ng-template [ngIf]="title">
+      <div class="page-title">{{ title || staticTitle }}</div>
+    </ng-template>
+  </nav>
+
+  <!-- action buttons start -->
+
+  <div *ngIf="dropDownButton && addDetailDowndown === true && canEdit">
+    <button
+      type="button"
+      id="dropdown-{{ data?.name }}"
+      class="btn btn-primary dropdown-toggle"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      {{ dropDownButton.label }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data?.name }}">
+      <li class="dropdown-item">
+        <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
+      </li>
+      <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
+        <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+          <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+        </li>
+      </ng-container>
+      <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
+        <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- action buttons -->
+
+  <button
+    *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
+    [routerLink]="ctaRouterLink"
+    routerLinkActive="active"
+    class="create-application"
+    type="button"
+    [attr.aria-label]="ctaLabel"
+  >
+    <mat-icon svgIcon="plus-circle" class="plus-circle-icon"></mat-icon>
+    <div class="create-application-button-label">
+      {{ ctaLabel }}
+    </div>
+  </button>
+</div>
+
+<!-- action buttons end -->
+
+@if(searchText){
+<div class="search-view">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron--table">
+          <app-search-table [searchText]="searchText"></app-search-table>
         </div>
       </div>
     </div>
   </div>
 </div>
+}

@@ -16,6 +16,7 @@ import { DatatargetDetailComponent } from "./datatarget/datatarget-detail/datata
 import { DatatargetEditComponent } from "./datatarget/datatarget-edit/datatarget-edit.component";
 import { DatatargetLogComponent } from "./datatarget/datatarget-log/datatarget-log.component";
 import { DatatargetNewComponent } from "./datatarget/datatarget-new/datatarget-new.component";
+import { DatatargetTestConnectionComponent } from "./datatarget/datatarget-test-connection/datatarget-test-connection.component";
 import { FiwareDetailComponent } from "./datatarget/fiware/fiware-detail/fiware-detail.component";
 import { HttppushDetailComponent } from "./datatarget/httppush/httppush-detail/httppush-detail.component";
 import { MqttDetailComponent } from "./datatarget/mqtt/mqtt-detail/mqtt-detail.component";
@@ -23,7 +24,6 @@ import { IoTDeviceDetailComponent } from "./iot-devices/iot-device-detail/iot-de
 import { IotDeviceEditComponent } from "./iot-devices/iot-device-edit/iot-device-edit.component";
 import { MulticastDetailComponent } from "./multicast/multicast-detail/multicast-detail.component";
 import { MulticastEditComponent } from "./multicast/multicast-edit/multicast-edit.component";
-import { DatatargetTestConnectionComponent } from "./datatarget/datatarget-test-connection/datatarget-test-connection.component";
 
 const applicationRoutes: Routes = [
   {
@@ -31,6 +31,7 @@ const applicationRoutes: Routes = [
     component: ApplicationsComponent,
     children: [
       { path: "", component: ApplicationsListComponent },
+      { path: "map", component: ApplicationsListComponent },
       { path: "new-application", component: ApplicationEditComponent },
       { path: "edit-application/:id", component: ApplicationEditComponent },
       {

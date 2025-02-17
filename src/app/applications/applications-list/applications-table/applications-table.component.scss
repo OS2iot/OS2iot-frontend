@@ -1,3 +1,68 @@
-.flag-icon {
-  color: red;
+@import "../../../../assets/scss/setup/variables";
+
+.name-and-description {
+  max-width: 300px;
+}
+
+.application-name {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.application-description {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.options-container {
+  display: flex;
+  width: fit-content;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.status-container {
+  width: 10px;
+}
+
+.main-container-table {
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-container {
+  width: 35px;
+  background-color: $white;
+}
+
+.table-container {
+  display: flex;
+  flex: 1;
+}
+
+.paginator {
+  display: none !important;
+}
+
+.mat-sort-header-arrow {
+  display: none !important;
+}
+
+.column-title-color {
+  color: $color-link;
+  font-weight: bold;
+}
+
+.column-title-color-inactive {
+  color: $default-icon-color;
 }

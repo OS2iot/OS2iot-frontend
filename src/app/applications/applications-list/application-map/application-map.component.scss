@@ -1,0 +1,36 @@
+@import "../../../../assets/scss/setup/variables";
+
+:host .map-page {
+  background-color: #ffffff;
+  padding: 20px;
+  height: 600px;
+  position: relative;
+}
+
+:host .map-overlay {
+  height: 50px;
+  width: 132px;
+  background-color: $white;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10000;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+}
+
+.check-box-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mdc-checkbox__background {
+  background-color: $white !important;
+}
+
+.mdc-checkbox {
+  background-color: $white !important;
+}

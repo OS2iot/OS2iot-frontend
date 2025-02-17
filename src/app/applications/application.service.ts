@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
+import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { Application, ApplicationData, UpdateApplicationOrganization } from "@applications/application.model";
-import { RestService } from "../shared/services/rest.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { UserMinimalService } from "@app/admin/users/user-minimal.service";
+import { RestService } from "../shared/services/rest.service";
+import { ApplicationsFilterService } from "./applications-list/application-filter/applications-filter.service";
+import { ApplicationStatus, ApplicationStatusCheck } from "./enums/status.enum";
+import { IotDevice } from "./iot-devices/iot-device.model";
 
 interface GetApplicationParameters {
   limit: number;
@@ -12,6 +15,15 @@ interface GetApplicationParameters {
   orderOn: string;
   organizationId?: number;
   permissionId?: number;
+  status?: ApplicationStatus;
+  statusCheck?: ApplicationStatusCheck;
+  owner?: string;
+}
+
+interface GetDevicesParameters {
+  status?: ApplicationStatus;
+  statusCheck?: ApplicationStatusCheck;
+  owner?: string;
 }
 
 @Injectable({
@@ -20,7 +32,11 @@ interface GetApplicationParameters {
 export class ApplicationService {
   public id: number;
   public canEdit = false;
-  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService,
+    private filterService: ApplicationsFilterService
+  ) {}
 
   createApplication(body: any): Observable<ApplicationData> {
     return this.restService.post("application", body, { observe: "response" });
@@ -41,6 +57,17 @@ export class ApplicationService {
       })
     );
   }
+  getApplicationFilterOptions(id: number): Observable<string[]> {
+    return this.restService.get(`application/${id}/filter-information`);
+  }
+
+  getApplicationsWithError(id: number): Observable<{
+    total: number;
+    withError: number;
+    totalDevices: number;
+  }> {
+    return this.restService.get(`application/${id}/application-dashboard-data`);
+  }
 
   getApplications(
     limit: number,
@@ -55,6 +82,9 @@ export class ApplicationService {
       offset,
       sort,
       orderOn,
+      statusCheck: this.filterService.statusCheck === "All" ? null : this.filterService.statusCheck,
+      status: this.filterService.status === "All" ? null : this.filterService.status,
+      owner: this.filterService.owner === "All" ? null : this.filterService.owner,
     };
     if (permissionId) {
       body.permissionId = permissionId;
@@ -64,6 +94,16 @@ export class ApplicationService {
       return this.restService.get("application", body);
     }
     return this.restService.get("application", body);
+  }
+
+  getApplicationDevices(organizationId?: number): Observable<IotDevice[]> {
+    const body: GetDevicesParameters = {
+      statusCheck: this.filterService.statusCheck === "All" ? null : this.filterService.statusCheck,
+      status: this.filterService.status === "All" ? null : this.filterService.status,
+      owner: this.filterService.owner === "All" ? null : this.filterService.owner,
+    };
+
+    return this.restService.get(`application/${organizationId}/iot-devices-org`, body);
   }
 
   getApplicationsByOrganizationId(organizationId: number): Observable<ApplicationData> {

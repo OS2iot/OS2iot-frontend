@@ -13,23 +13,28 @@
   </header>
 </ng-template>
 <app-top-bar
-  [title]="'NAV.APPLICATIONS' | translate"
+  [canEdit]="canEdit"
   [ctaLabel]="'FORM.CREATE-NEW-APPLICATION' | translate"
   [ctaRouterLink]="'new-application'"
-  [canEdit]="canEdit"
+  [title]="'NAV.APPLICATIONS' | translate"
 >
 </app-top-bar>
-<div class="container-fluid d-flex flex-column">
+<div class="main-page d-flex flex-column">
   <ng-container *ngIf="!isLoadingResults">
     <ng-container *ngIf="hasSomePermission" ; else noPermissions>
-      <div class="row">
-        <div class="col-12">
-          <div class="jumbotron--table">
-            <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
-          </div>
-        </div>
+      <app-application-filter/>
+      <app-applications-list-dashboard/>
+      <div class="switch-content-container">
+        <app-basic-tab-switch (tabClicked)="onTapClicked($event)" [currentUrl]="currentPath" [tabs]="tabs">
+        </app-basic-tab-switch>
+        @if (currentPath === mapRoute) {
+          <app-application-map></app-application-map>
+        }
+        @if (currentPath === listRoute) {
+          <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
+        }
       </div>
     </ng-container>
   </ng-container>
-  <mat-spinner ngClass="align-self-center" *ngIf="isLoadingResults"></mat-spinner>
+  <mat-spinner *ngIf="isLoadingResults" ngClass="align-self-center"></mat-spinner>
 </div>

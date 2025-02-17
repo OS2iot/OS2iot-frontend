@@ -7,5 +7,6 @@ export enum ApplicationStatus {
   "PROTOTYPE" = "PROTOTYPE",
   "OTHER" = "OTHER",
 }
+export type ApplicationStatusCheck = "stable" | "alert";
 
 export const ApplicationStatusEntries = recordToEntries(ApplicationStatus);

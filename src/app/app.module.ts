@@ -1,36 +1,37 @@
-import { BrowserModule, Title } from "@angular/platform-browser";
+import { NgIf } from "@angular/common";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { NavbarModule } from "./navbar/navbar.module";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ProfilesModule } from "./profiles/profiles.module";
-import { AuthJwtInterceptor } from "@shared/helpers/auth-jwt.interceptor";
-import { AuthModule } from "./auth/auth.module";
-import { GatewayModule } from "./gateway/gateway.module";
-import { SharedVariableModule } from "@shared/shared-variable/shared-variable.module";
-import { SAVER, getSaver } from "@shared/providers/saver.provider";
-import { ErrorPageComponent } from "./error-page/error-page.component";
-import { SearchModule } from "./search/search.module";
-import { JwtModule } from "@auth0/angular-jwt";
-import { MonacoEditorModule } from "ngx-monaco-editor-v2";
 import { MatInputModule } from "@angular/material/input";
 import { MatPaginatorIntl } from "@angular/material/paginator";
-import { MatPaginatorIntlDa } from "@shared/helpers/mat-paginator-intl-da";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { NewUserComponent } from "./admin/users/new-kombit-user-page/new-user.component";
-import { WelcomeDialogModule } from "@shared/components/welcome-dialog/welcome-dialog.module";
-import { NGMaterialModule } from "@shared/Modules/materiale.module";
+import { BrowserModule, Title } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { JwtModule } from "@auth0/angular-jwt";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-select-search.module";
-import { UserPageComponent } from "./admin/users/user-page/user-page.component";
-import { SharedModule } from "@shared/shared.module";
+import { WelcomeDialogModule } from "@shared/components/welcome-dialog/welcome-dialog.module";
+import { AuthJwtInterceptor } from "@shared/helpers/auth-jwt.interceptor";
+import { MatPaginatorIntlDa } from "@shared/helpers/mat-paginator-intl-da";
+import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
+import { SAVER, getSaver } from "@shared/providers/saver.provider";
+import { SharedVariableModule } from "@shared/shared-variable/shared-variable.module";
+import { SharedModule } from "@shared/shared.module";
 import { CookieService } from "ngx-cookie-service";
+import { MonacoEditorModule } from "ngx-monaco-editor-v2";
+import { NewUserComponent } from "./admin/users/new-kombit-user-page/new-user.component";
+import { UserPageComponent } from "./admin/users/user-page/user-page.component";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AuthModule } from "./auth/auth.module";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { GatewayModule } from "./gateway/gateway.module";
+import { NavbarModule } from "./navbar/navbar.module";
+import { ProfilesModule } from "./profiles/profiles.module";
+import { SearchModule } from "./search/search.module";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -60,6 +61,7 @@ export function tokenGetter() {
       },
     }),
     NgbModule,
+    NgIf,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

@@ -1,18 +1,20 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Title } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer, Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { NavbarComponent } from "@app/navbar/navbar.component";
-import { Application } from "@applications/application.model";
+import { ApplicationService } from "@applications/application.service";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { MeService } from "@shared/services/me.service";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
+import { MeService } from "@shared/services/me.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Counter, Tab } from "@shared/components/basic-tab-switch/basic-tab-switch.component";
 
 const welcomeDialogId = "welcome-dialog";
 
@@ -23,19 +25,24 @@ const welcomeDialogId = "welcome-dialog";
   styleUrls: ["./applications-list.component.scss"],
 })
 export class ApplicationsListComponent implements OnInit {
+  currentSubPath: string = "";
+  tabs: Tab[];
+
   isLoadingResults = true;
 
   public pageLimit = environment.tablePageSize;
   public resultsLength: number;
-  public pageOffset = 0;
-  public applications: Application[];
+  mapRoute = "/applications/map";
+  listRoute = "/applications";
+
   @Input() organizationId: number;
   canEdit: boolean;
+  hasSomePermission: boolean;
+  isGlobalAdmin = false;
+  currentPath = "";
   private unauthorizedMessage: string;
   private kombitError: string;
   private noAccess: string;
-  hasSomePermission: boolean;
-  isGlobalAdmin = false;
 
   constructor(
     public translate: TranslateService,
@@ -44,23 +51,69 @@ export class ApplicationsListComponent implements OnInit {
     private meService: MeService,
     private sharedVariableService: SharedVariableService,
     private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
+    public route: ActivatedRoute,
+    public router: Router,
     private dialog: MatDialog,
-    private userMinimalService: UserMinimalService
+    private userMinimalService: UserMinimalService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private applicationService: ApplicationService
   ) {
     translate.use("da");
+
+    this.matIconRegistry.addSvgIcon(
+      "layers-tap",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/layers.svg"),
+      {}
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "map-tap",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/circle-dot.svg"),
+      {}
+    );
   }
 
   ngOnInit(): void {
+    this.route.url.subscribe(urlSegments => {
+      this.currentSubPath = urlSegments.map(segment => segment.path).join("/");
+    });
+
     this.translate.get(["TITLE.APPLICATION"]).subscribe(translations => {
       this.titleService.setTitle(translations["TITLE.APPLICATION"]);
     });
     this.organizationId = this.globalService.getSelectedOrganisationId();
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
 
+    this.applicationService
+      .getApplicationsWithError(this.sharedVariableService.getSelectedOrganisationId())
+      .subscribe(data => {
+        const counters: Counter[] = [
+          {
+            color: "default",
+            value: data.total.toString(),
+          },
+        ];
+
+        if (data.withError) {
+          counters.push({ color: "alert", value: data.withError.toString() });
+        }
+
+        this.tabs = [
+          {
+            title: "Applikationer",
+            icon: { matSVGSrc: "layers-tap", height: 16, width: 16 },
+            counters: counters,
+            uri: this.listRoute,
+          },
+          { title: "Kort", icon: { matSVGSrc: "map-tap", height: 17, width: 18 }, uri: this.mapRoute },
+        ];
+      });
+
     // Authenticate user
     this.verifyUserAndInit();
+
+    this.currentPath = this.router.url;
   }
 
   verifyUserAndInit() {
@@ -155,5 +208,9 @@ export class ApplicationsListComponent implements OnInit {
 
       this.isLoadingResults = false;
     });
+  }
+
+  onTapClicked(url: string) {
+    this.currentPath = url;
   }
 }

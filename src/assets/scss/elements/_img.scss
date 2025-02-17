@@ -1,9 +1,10 @@
 .img-logo {
   background-color: transparent;
-  width: 50px;
+  width: 64px;
   @media (min-width: $screen-md-min) {
-    width: 100px;
+    width: 60px;
   }
+  margin-bottom: 15px;
 }
 
 @mixin img-cover($url) {

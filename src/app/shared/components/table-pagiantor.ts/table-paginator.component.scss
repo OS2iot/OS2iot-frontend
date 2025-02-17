@@ -1,0 +1,127 @@
+@import "../../../../assets/scss/setup/variables";
+
+:host .main-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  gap: 10px;
+  background-color: $white;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+:host .pages-of {
+  height: 32px;
+  min-width: 64px;
+  line-height: 24px;
+  font-weight: 500;
+  border: 1px solid $default-neutral-color;
+  border-radius: 3px;
+
+  font-size: 16px;
+  color: $default-icon-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host .arrow-button {
+  height: 32px !important;
+  min-width: 42px !important;
+  width: 42px !important;
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+:host .icon-arrow-left {
+  transform: scale(0.8);
+  height: 25px;
+  margin-left: 8px;
+}
+
+:host .icon-arrow-right {
+  transform: scale(1);
+  height: 25px;
+  margin-left: 10px;
+}
+
+:host .icon-arrow-down {
+  transform: scale(0.4);
+  height: 25px;
+  margin-left: -25px;
+  margin-bottom: 20px;
+}
+
+:host .spacer {
+  width: 150px;
+}
+
+:host ::ng-deep .mat-mdc-select {
+  height: 25px !important;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 10px !important;
+  color: $selector-font-color !important;
+}
+
+:host ::ng-deep .mat-mdc-option {
+  font-size: 10px !important;
+  color: $selector-font-color !important;
+}
+
+:host ::ng-deep .mat-mdc-select-value {
+  font-size: 15px !important;
+  color: $selector-font-color !important;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  height: 32px !important;
+  display: flex;
+  align-items: center;
+  font-size: 10px !important;
+}
+
+:host .select-container {
+  min-width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  margin-right: 10px;
+}
+
+:host .button-container {
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+:host .angle-down-selector-icon {
+  position: absolute;
+  z-index: 100 !important;
+  top: 20px;
+  right: 0px;
+}
+
+:host ::ng-deep .mat-mdc-select-arrow-wrapper {
+  display: none !important;
+}
+
+:host .active-color {
+  background-color: $default-color !important;
+}
+
+:host .inactive-color {
+  background-color: $default-neutral-color !important;
+}

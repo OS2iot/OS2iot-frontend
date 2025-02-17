@@ -1,7 +1,9 @@
 import { AfterContentInit, Component, EventEmitter, Input, Output } from "@angular/core";
-import { TableColumn } from "@shared/types/table.type";
+import { MatIconRegistry } from "@angular/material/icon";
 import { MatSelectChange } from "@angular/material/select";
+import { DomSanitizer } from "@angular/platform-browser";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { TableColumn } from "@shared/types/table.type";
 import { CookieService } from "ngx-cookie-service";
 
 @Component({
@@ -30,7 +32,16 @@ export class ColumnSelectorComponent implements AfterContentInit {
   }
   @Output() displayedColumnsChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  constructor(cookieService: CookieService) {
+  constructor(
+    cookieService: CookieService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      "table-tool",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/table-tool.svg"),
+      {}
+    );
     this._cookieService = cookieService;
   }
 

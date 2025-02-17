@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -6,19 +6,19 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "@environments/environment";
 import { faBroadcastTower, faLayerGroup, faMicrochip } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { tableSorter } from "@shared/helpers/table-sorting.helper";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { Subscription } from "rxjs";
-import { SearchResultDto, SearchResultType } from "../search-results.model";
-import { SearchService } from "../search.service";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { SearchResultDto, SearchResultType } from "./search-results.model";
+import { SearchService } from "./search.service";
 
 @Component({
   selector: "app-search-table",
   templateUrl: "./search-table.component.html",
   styleUrls: ["./search-table.component.scss"],
 })
-export class SearchTableComponent implements OnInit {
+export class SearchTableComponent implements OnChanges, OnInit {
   private readonly faBroadcastTower = faBroadcastTower;
   private readonly faLayerGroup = faLayerGroup;
   private readonly faMicrochip = faMicrochip;
@@ -39,7 +39,6 @@ export class SearchTableComponent implements OnInit {
   searchResults: SearchResultDto[];
   pageTotal: number;
   pageOffset = 0;
-
   pageEvent: PageEvent;
 
   constructor(
@@ -57,6 +56,10 @@ export class SearchTableComponent implements OnInit {
         this.search(this.searchText, this.pageSize, this.pageOffset);
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.search(changes.searchText.currentValue, this.pageSize, this.pageOffset);
   }
 
   search(query: string, limit: number, offset: number) {
@@ -127,7 +130,6 @@ export class SearchTableComponent implements OnInit {
       this.router.navigate(["/gateways/gateway-detail", searchResult.gatewayId]);
     }
   }
-
   decode(val: string): string {
     if (val === undefined) {
       return "";

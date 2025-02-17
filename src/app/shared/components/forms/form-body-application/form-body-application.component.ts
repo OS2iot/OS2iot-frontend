@@ -1,21 +1,21 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ReplaySubject, Subject, Subscription } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
-import { RestService } from "@shared/services/rest.service";
 import { HttpErrorResponse } from "@angular/common/http";
-import { ApplicationRequest, Application } from "@applications/application.model";
-import { ApplicationService } from "@applications/application.service";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { ApplicationStatus, ApplicationStatusEntries } from "@applications/enums/status.enum";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { UntypedFormControl } from "@angular/forms";
-import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-propperty.enum";
-import { ApplicationDeviceTypes, ApplicationDeviceTypeEntries } from "@shared/enums/device-type";
-import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PermissionResponse, PermissionType } from "@app/admin/permission/permission.model";
-import { takeUntil } from "rxjs/operators";
 import { PermissionService } from "@app/admin/permission/permission.service";
+import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-propperty.enum";
+import { Application, ApplicationRequest } from "@applications/application.model";
+import { ApplicationService } from "@applications/application.service";
+import { ApplicationStatus, ApplicationStatusEntries } from "@applications/enums/status.enum";
+import { TranslateService } from "@ngx-translate/core";
+import { ApplicationDeviceTypeEntries, ApplicationDeviceTypes } from "@shared/enums/device-type";
 import { MeService } from "@shared/services/me.service";
+import { RestService } from "@shared/services/rest.service";
+import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
+import { ReplaySubject, Subject, Subscription } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 export class User {
   public name: string;

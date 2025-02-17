@@ -1,0 +1,64 @@
+@import "../../../../assets/scss/setup/variables";
+
+.basic-information-box {
+  background-color: $white;
+  display: flex;
+  flex-grow: 1;
+  width: 260px;
+  height: 122px;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.top-info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 10px;
+  line-height: 36px;
+}
+
+.count-of-title {
+  font-size: 16px;
+  margin-left: 2px;
+  margin-top: 6px;
+}
+
+.count-title {
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.info-text-color-default {
+  color: $color-link;
+}
+
+.info-text-color-warning {
+  color: $alert-color;
+}
+
+.info-text-color-stable {
+  color: $stable-color;
+}
+
+.info-border-color-warning {
+  border: 2px solid $alert-color;
+}
+
+.information-box-description {
+  font-size: 14px;
+  color: $default-color;
+  line-height: 15px;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+}

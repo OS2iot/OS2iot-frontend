@@ -1,5 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { OrganisationResponse } from "@app/admin/organisation/organisation.model";
 import { PermissionResponse } from "@app/admin/permission/permission.model";
@@ -11,7 +13,7 @@ import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
-import { faChevronLeft, faQuestionCircle, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faQuestionCircle, faUser } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
 import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 import { BackButton } from "@shared/models/back-button.model";
@@ -45,6 +47,7 @@ export class TopBarComponent implements OnInit {
   faChevronLeft = faChevronLeft;
   faQuestionCircle = faQuestionCircle;
   faUser = faUser;
+  searchText: string = "";
 
   @Input() staticTitle: string;
   @Input() title: string;
@@ -68,17 +71,31 @@ export class TopBarComponent implements OnInit {
   @Input() dropDownButton: DropdownButton;
   @Input() canEdit = false;
 
-  faSearch = faSearch;
-
   constructor(
     public translate: TranslateService,
     private location: Location,
     private router: Router,
     private sharedVariableService: SharedVariableService,
     private authService: AuthService,
-    private loggedInService: LoggedInService
+    private loggedInService: LoggedInService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
     translate.use("da");
+
+    this.matIconRegistry.addSvgIcon(
+      "plus-circle",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/plus-circle.svg"),
+      {}
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "angle-down",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/angle-down.svg"),
+      {}
+    );
+
+    this.sharedVariableService.getUserInfo;
   }
 
   ngOnInit(): void {
@@ -102,14 +119,7 @@ export class TopBarComponent implements OnInit {
   }
 
   search(value: string): void {
-    // Redirect to search results page and do search
-    const urlEncoded = encodeURIComponent(value);
-
-    if (value) {
-      this.router.navigate(["/search"], { queryParams: { q: urlEncoded } });
-    } else {
-      this.decode("");
-    }
+    this.searchText = value;
   }
 
   decode(val: string): string {

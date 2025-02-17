@@ -1,0 +1,75 @@
+@import "../../../../assets/scss/setup/variables";
+
+.main-container {
+  display: flex;
+  height: 46px !important;
+}
+
+.tab-base {
+  display: flex;
+  height: 46px !important;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0 20px;
+}
+
+.active-tab {
+  background-color: $white !important;
+  color: $default-icon-color;
+  fill: $default-icon-color;
+}
+
+.inactive-tab {
+  fill: $color-link !important;
+  color: $color-link;
+  background-color: transparent !important;
+}
+
+.active-tab-icon {
+  color: $default-icon-color;
+  width: 16px; //height
+  margin-bottom: 5px;
+}
+
+.inactive-tab-icon {
+  margin-bottom: 5px;
+  width: 16px; //height
+  color: $color-link;
+}
+
+.counter-default {
+  background-color: $default-icon-color;
+}
+
+.counter-default-inactive {
+  background-color: $color-link;
+}
+
+.counter-warning {
+  background-color: $warning-color;
+}
+
+.counter-stable {
+  background-color: $stable-color;
+}
+
+.counter-alert {
+  background-color: $alert-color;
+}
+
+.counter-base {
+  font-size: 14px;
+  padding: 0 5px;
+  padding-top: 1px;
+  border-radius: 10px;
+  height: 16px;
+  min-width: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: 3px;
+  color: $white;
+}

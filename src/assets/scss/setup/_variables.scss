@@ -187,7 +187,7 @@ $color-purple-002: rgba(81, 45, 109, 0.75) !default;
 $color-purple-003: rgba(81, 45, 109, 0.5) !default;
 $color-purple-004: rgba(81, 45, 109, 0.25) !default;
 
-$color-orange-001: rgba(245, 122, 47, 1) !default;
+$color-orange-001: #c2410c !default;
 $color-orange-002: rgba(245, 122, 47, 0.75) !default;
 $color-orange-003: rgba(245, 122, 47, 0.5) !default;
 $color-orange-004: rgba(245, 122, 47, 0.25) !default;
@@ -249,15 +249,15 @@ $color-Icons-light: $color-grey-009 !default;
 $color-icon-label: $color-text-light !default;
 
 // //Links color
-$color-link: $color-primary !default;
+$color-link: black !default;
 $color-link-hover: $color-hover !default;
-$color-link-hover-bg: $color-primary !default;
-$color-link-active: $color-active !default;
-$color-link-active-bg: $color-primary !default;
-$color-link-focus: $color-focus !default;
+$color-link-hover-bg: #404040 !default;
+$color-link-active: white !default;
+$color-link-active-bg: #404040 !default;
+$color-link-focus: #404040 !default;
 $color-link-focus-bg: $color-primary !default;
-$color-link-visited: $color-visited !default;
-$color-link-visited-bg: $color-primary !default;
+$color-link-visited: white !default;
+$color-link-visited-bg: #404040 !default;
 
 // Colors for borders
 $color-border: $color-black-004 !default;
@@ -384,3 +384,12 @@ $red: #dc3545;
     overflow-y: hidden;
   }
 }
+$alert-color: #991b1b;
+$stable-color: #047857;
+$warning-color: #fde047;
+
+$default-color: #525252;
+$default-neutral-color: #d4d4d4;
+$default-icon-color: #404040;
+
+$selector-font-color: #737373;

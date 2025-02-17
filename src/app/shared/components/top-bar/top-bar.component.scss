@@ -1,51 +1,160 @@
-@import "src/assets/scss/setup/breakpoints";
-@import "src/assets/scss/setup/variables";
+@import "../../../../assets/scss/setup/variables";
 
-.per-page {
-  line-height: 40px;
-  margin-right: 8px;
+.top-main-container {
+  background-color: #ffff;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 72px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-button:focus {
-  outline: none;
+.bottom-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
-.userName {
-  pointer-events: none;
-}
-.userNameFont {
-  font-weight: bold !important;
-}
-
-.mobileMedia {
-  @media (max-width: $screen-md-min) {
-    display: flex;
-    justify-content: flex-end;
+@media (max-width: 768px) {
+  .bottom-main-container {
     flex-direction: column;
   }
 }
 
-::ng-deep .matMenuMargin {
-  margin-right: 5px;
+:host .search-view {
+  position: absolute;
+  top: 70px;
+  left: 268px;
+  right: 0;
+  height: 65%;
+  z-index: 1000;
+  background-color: $white;
 }
 
-.marginLeft {
-  margin-left: 16px;
+@media only screen and (max-width: 768px) {
+  :host .search-view {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 65%;
+    z-index: 1000;
+    background-color: $white;
+  }
 }
 
-.topbarWidth {
-  width: 100%;
+:host .angle-down-icon {
+  height: 25px;
+  width: 12px;
+  color: #525252;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+:host .plus-circle-icon {
+  height: 25px;
+  width: 20px;
+  color: $white;
+  margin-right: 20px;
+}
+
+:host .top-bar-profile-icon {
   display: flex;
+  flex: 1;
+  justify-content: end;
+  background-color: $white;
+}
+
+:host .top-bar-search {
+  display: flex;
+  flex: 3;
+  justify-content: start;
+}
+
+:host .search-input {
+  border-radius: 0px;
+  border-width: 0px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: transparent;
+  margin-left: 30px;
+}
+
+:host input:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+:host .user-information-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 
-.invisible {
-  display: none;
-  visibility: hidden;
-  height: 0;
-  width: 0;
+:host .name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
 }
 
-::ng-deep .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
-  width: 100% !important;
+:host .title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: $default-color;
+}
+
+:host .profile-button {
+  background-color: $white;
+  border-width: 0px;
+}
+
+:host .profile-button:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+:host .create-application-button-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: $white;
+  line-height: 22px;
+  height: 20px;
+}
+
+:host .create-application {
+  height: 40px;
+  border: none;
+  background-color: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 5px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+:host .page-title {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 20px;
 }
