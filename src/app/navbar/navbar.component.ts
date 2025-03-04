@@ -79,6 +79,7 @@ export class NavbarComponent implements OnInit {
   public onChange(organizationId: string) {
     this.sharedVariableService.setValue(+organizationId);
     this.setLocalPermissionCheck(+organizationId);
+    this.selected = +organizationId;
 
     if (this.route.url === "/" || this.route.url === "/applications") {
       window.location.reload();
