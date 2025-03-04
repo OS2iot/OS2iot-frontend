@@ -55,7 +55,7 @@
 }
 
 .mat-sort-header-arrow {
-  display: none !important;
+  display: none;
 }
 
 .column-title-color {
@@ -65,4 +65,8 @@
 
 .column-title-color-inactive {
   color: $default-icon-color;
+}
+
+.table-row-pointer {
+  cursor: pointer;
 }
