@@ -5,9 +5,7 @@ import { PermissionType } from "@app/admin/permission/permission.model";
 import { AuthService, CurrentUserInfoResponse } from "@app/auth/auth.service";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
-import { User } from "@shared/components/forms/form-body-application/form-body-application.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { LoggedInService } from "@shared/services/loggedin.service";
 import { MeService } from "@shared/services/me.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { UserResponse } from "./../admin/users/user.model";
@@ -26,7 +24,6 @@ export class NavbarComponent implements OnInit {
   public isOnlyGatewayAdmin = false;
 
   isCollapsed = false;
-  user: User;
 
   userInfo: CurrentUserInfoResponse;
   faSignInAlt = faSignInAlt;
@@ -35,9 +32,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public translate: TranslateService,
-    private router: Router,
     private sharedVariableService: SharedVariableService,
-    private loggedInService: LoggedInService,
     private meService: MeService,
     private route: Router
   ) {
@@ -97,9 +92,7 @@ export class NavbarComponent implements OnInit {
       OrganizationAccessScope.UserAdministrationWrite,
       orgId
     );
-    this.isGlobalAdmin = this.userResponse?.permissions?.some(({ type: pmTypes }) =>
-      pmTypes.some(pmType => pmType.type === PermissionType.GlobalAdmin)
-    );
+    this.isGlobalAdmin = this.meService.hasGlobalAdmin();
     this.isOnlyGatewayAdmin = this.userResponse.permissions.every(({ type: pmTypes }) =>
       pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin)
     );

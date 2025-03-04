@@ -76,19 +76,7 @@
                   </a>
                 </li>
               </div>
-              <div *ngIf="user && isUserAdmin && !isGlobalAdmin">
-                <li class="nav-item">
-                  <a routerLink="/admin/users" routerLinkActive="active">
-                    {{ "NAV.USERS" | translate }}
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a routerLink="/admin/permissions" routerLinkActive="active">
-                    {{ "NAV.PERMISSIONS" | translate }}
-                  </a>
-                </li>
-              </div>
-              <li *ngIf="user && (isUserAdmin || isGlobalAdmin)" class="nav-item">
+              <li *ngIf="userResponse && (isUserAdmin || isGlobalAdmin)" class="nav-item">
                 <a routerLink="/admin/api-key" routerLinkActive="active">
                   {{ "NAV.API-KEY" | translate }}
                 </a>
