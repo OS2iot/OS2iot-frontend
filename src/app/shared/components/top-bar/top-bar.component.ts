@@ -95,6 +95,12 @@ export class TopBarComponent implements OnInit {
       {}
     );
 
+    this.matIconRegistry.addSvgIcon(
+      "search-icon",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/search.svg"),
+      {}
+    );
+
     this.sharedVariableService.getUserInfo;
   }
 

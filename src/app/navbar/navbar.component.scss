@@ -83,6 +83,7 @@ button:focus,
   height: 33px;
   line-height: 14px;
   margin: 2px 10px;
+  font-size: 14px;
 
   &:hover,
   &.link-hover,
@@ -114,4 +115,21 @@ button:focus,
       background-color: transparent;
     }
   }
+}
+
+.no-shadow {
+  box-shadow: none;
+  z-index: 10000;
+}
+
+::ng-deep .mdc-notched-outline__leading {
+  border-color: $light-border-color !important;
+}
+
+::ng-deep .mdc-notched-outline__notch {
+  border-color: $light-border-color !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-color: $light-border-color !important;
 }

@@ -1,36 +1,36 @@
 <div class="info-box-containers">
   <app-basic-information-box
-    [matSVGSrc]="'exclamation-triangle'"
-    [type]="'warning'"
-    [count]="withError"
     [countOf]="total"
+    [count]="withError"
     [description]="'APPLICATION-INFORMATION-BOX.APPLICATIONS-WITH-ERROR' | translate"
     [height]="35"
+    [matSVGSrc]="'exclamation-triangle'"
+    [type]="'warning'"
     [width]="25"
   />
   <app-basic-information-box
-    [matSVGSrc]="'check-circle'"
-    [type]="'stable'"
-    [count]="withoutError"
     [countOf]="total"
+    [count]="withoutError"
     [description]="'APPLICATION-INFORMATION-BOX.APPLICATIONS-WITHOUT-ERROR' | translate"
     [height]="30"
+    [matSVGSrc]="'check-circle'"
+    [type]="'stable'"
     [width]="25"
   />
   <app-basic-information-box
-    [height]="35"
-    [width]="25"
-    [matSVGSrc]="'micro-chip'"
-    [type]="'default'"
     [count]="totalDevices"
     [description]="'APPLICATION-INFORMATION-BOX.DEVICES' | translate"
+    [height]="35"
+    [matSVGSrc]="'micro-chip'"
+    [type]="'default'"
+    [width]="25"
   />
   <app-basic-information-box
-    [height]="35"
-    [width]="25"
-    [matSVGSrc]="'satellite-dish'"
-    [type]="'default'"
     [count]="totalGateways"
     [description]="'APPLICATION-INFORMATION-BOX.GATEWAYS' | translate"
+    [height]="35"
+    [matSVGSrc]="'satellite-dish'"
+    [type]="'default'"
+    [width]="25"
   />
 </div>
