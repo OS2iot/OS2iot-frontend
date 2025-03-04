@@ -405,7 +405,7 @@
     "DEVICE-TYPES": "Forbindelsesteknologi",
     "OPEN-DATA-DK": "Open Data DK",
     "DATA": "Data",
-    "STATE": "State"
+    "STATE": "Tilstand"
   },
   "APPLICATION-FILTER": {
     "OWNER": "Ejer",
@@ -427,7 +427,6 @@
     "APPLICATIONS-WITH-ERROR": "Applikationer med fejl",
     "APPLICATIONS-WITHOUT-ERROR": "Applikationer uden fejl"
   },
-
   "IOT-TABLE": {
     "APPLICATION": "Applikation",
     "NETWORK-TECHNOLOGY": "Netværksteknologi",

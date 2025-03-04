@@ -70,3 +70,9 @@
 .table-row-pointer {
   cursor: pointer;
 }
+
+.applications-table {
+  .mat-sort-header-arrow {
+    display: none;
+  }
+}
