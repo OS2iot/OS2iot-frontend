@@ -9,22 +9,24 @@ import { MapCoordinates } from "@shared/components/map/map-coordinates.model";
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { forkJoin, Subscription } from "rxjs";
-import { SharedModule } from "../../../shared/shared.module";
+import { SharedModule } from "@shared/shared.module";
 import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
 import moment from "moment";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-application-map",
   standalone: true,
-  imports: [MatCheckboxModule, SharedModule],
+  imports: [MatCheckboxModule, SharedModule, FormsModule],
   templateUrl: "./application-map.component.html",
   styleUrls: ["./application-map.component.scss"],
 })
 export class ApplicationMapComponent implements OnInit, OnDestroy {
   public devices: IotDevice[] = [];
   public gateways: Gateway[] = [];
-  public device: boolean = true;
-  public gateway: boolean = true;
+  public displayDevices: boolean = true;
+  public displayGateways: boolean = true;
+
   filterValues: {
     status: ApplicationStatus | "All";
     statusCheck: ApplicationStatusCheck | "All";
@@ -55,22 +57,10 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadMapData(): void {
-    forkJoin({
-      devices: this.applicationService.getApplicationDevices(this.sharedVariableService.getSelectedOrganisationId()),
-      gateways: this.gatewayService.getForMaps(),
-    }).subscribe(({ devices, gateways }) => {
-      this.devices = devices;
-      this.gateways = gateways.resultList;
-
-      this.mapToCoordinateList();
-    });
-  }
-
-  private mapToCoordinateList() {
+  public mapToCoordinateList() {
     const tempCoordinateList: MapCoordinates[] = [];
 
-    if (Array.isArray(this.devices)) {
+    if (Array.isArray(this.devices) && this.displayDevices) {
       this.devices.forEach(dev => {
         const [longitude, latitude] = dev.location.coordinates;
 
@@ -99,7 +89,7 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (Array.isArray(this.gateways)) {
+    if (Array.isArray(this.gateways) && this.displayGateways) {
       this.gateways.forEach(gw => {
         tempCoordinateList.push({
           longitude: gw.location.longitude,
@@ -123,5 +113,17 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     }
 
     this.coordinateList = tempCoordinateList;
+  }
+
+  private loadMapData(): void {
+    forkJoin({
+      devices: this.applicationService.getApplicationDevices(this.sharedVariableService.getSelectedOrganisationId()),
+      gateways: this.gatewayService.getForMaps(),
+    }).subscribe(({ devices, gateways }) => {
+      this.devices = devices;
+      this.gateways = gateways.resultList;
+
+      this.mapToCoordinateList();
+    });
   }
 }
