@@ -1,22 +1,31 @@
-import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
-import { TranslateService } from "@ngx-translate/core";
-import { Gateway, GatewayResponseMany } from "../gateway.model";
-import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { merge, Observable, Subject, Subscription } from "rxjs";
-import { MeService } from "@shared/services/me.service";
-import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
-import { environment } from "@environments/environment";
-import { MatSort } from "@angular/material/sort";
-import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
-import { TableColumn } from "@shared/types/table.type";
-import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { environment } from "@environments/environment";
+import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { GatewayDialogModel } from "@shared/models/dialog.model";
+import { MeService } from "@shared/services/me.service";
+import { TableColumn } from "@shared/types/table.type";
+import moment from "moment";
+import { merge, Observable, Subject, Subscription } from "rxjs";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
 import { GatewayChangeOrganizationDialogComponent } from "../gateway-change-organization-dialog/gateway-change-organization-dialog.component";
+import { Gateway, GatewayResponseMany } from "../gateway.model";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -115,6 +124,7 @@ const columnDefinitions: TableColumn[] = [
   selector: "app-gateway-table",
   templateUrl: "./gateway-table.component.html",
   styleUrls: ["./gateway-table.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   @Input() organisationChangeSubject: Subject<any>;
@@ -264,6 +274,9 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
         gatewayDbId: id,
       } as GatewayDialogModel,
     });
+  }
+  getSortDirection(id: string) {
+    return columnDefinitions.find(c => c.id === id).sort;
   }
 
   protected readonly columnDefinitions = columnDefinitions;

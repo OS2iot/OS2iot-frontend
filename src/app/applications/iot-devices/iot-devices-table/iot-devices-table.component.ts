@@ -1,25 +1,25 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { ActivatedRoute } from "@angular/router";
 import { IotDevice, IotDevicesResponse } from "@applications/iot-devices/iot-device.model";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
-import { DeviceType } from "@shared/enums/device-type";
-import { MeService } from "@shared/services/me.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { DeviceType } from "@shared/enums/device-type";
+import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
+import { MeService } from "@shared/services/me.service";
+import { TableColumn } from "@shared/types/table.type";
 import moment from "moment";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { RestService } from "src/app/shared/services/rest.service";
-import { IoTDeviceService } from "../iot-device.service";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
-import { ActivatedRoute } from "@angular/router";
-import { TableColumn } from "@shared/types/table.type";
 import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-application-dialog/iot-device-change-application-dialog.component";
-import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
+import { IoTDeviceService } from "../iot-device.service";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -106,6 +106,7 @@ const columnDefinitions: TableColumn[] = [
   selector: "app-iot-devices-table",
   templateUrl: "./iot-devices-table.component.html",
   styleUrls: ["./iot-devices-table.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   @Input() applicationId: number;
@@ -260,6 +261,10 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
         showCancel: true,
       },
     });
+  }
+
+  getSortDirection(id: string) {
+    return columnDefinitions.find(c => c.id === id).sort;
   }
 
   public truncateText(text: string): string {

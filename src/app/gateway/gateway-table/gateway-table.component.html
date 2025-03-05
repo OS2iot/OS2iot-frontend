@@ -11,7 +11,10 @@
   <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.NAME" | translate }}
+        <div [ngClass]="this.sort.active === 'name' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         <a
@@ -26,7 +29,10 @@
 
     <ng-container matColumnDef="gatewayId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.GATEWAYID" | translate }}
+        <div [ngClass]="this.sort.active === 'gatewayId' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.GATEWAYID" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.gatewayId }}
@@ -35,7 +41,10 @@
 
     <ng-container matColumnDef="organizationName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.ORGANIZATION" | translate }}
+        <div [ngClass]="this.sort.active === 'organizationName' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.ORGANIZATION" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.organizationName }}
@@ -44,7 +53,12 @@
 
     <ng-container matColumnDef="rxPacketsReceived">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.PACKETS-RECEIVED" | translate }}
+        <div
+          [ngClass]="this.sort.active === 'rxPacketsReceived' ? 'column-title-color' : 'column-title-color-inactive'"
+        >
+          {{ "LORA-GATEWAY-TABLE.PACKETS-RECEIVED" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.rxPacketsReceived }}
@@ -53,7 +67,10 @@
 
     <ng-container matColumnDef="txPacketsEmitted">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.PACKETS-SENT" | translate }}
+        <div [ngClass]="this.sort.active === 'txPacketsEmitted' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.PACKETS-SENT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.txPacketsEmitted }}
@@ -61,7 +78,14 @@
     </ng-container>
 
     <ng-container matColumnDef="placement">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div [ngClass]="this.sort.active === 'placement' ? 'column-title-color' : 'column-title-color-inactive'">
+          '
+
+          {{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
+      </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.placement ? ("GATEWAY.PLACEMENT." + gateway.placement | translate) : "" }}
       </td>
@@ -69,7 +93,10 @@
 
     <ng-container matColumnDef="modelName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}
+        <div [ngClass]="this.sort.active === 'modelName' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.modelName }}
@@ -78,7 +105,10 @@
 
     <ng-container matColumnDef="antennaType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}
+        <div [ngClass]="this.sort.active === 'antennaType' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.antennaType }}
@@ -86,7 +116,12 @@
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.STATUS" | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div [ngClass]="this.sort.active === 'status' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
+      </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.status ? ("GATEWAY.STATUS." + gateway.status | translate) : "" }}
       </td>
@@ -94,7 +129,14 @@
 
     <ng-container matColumnDef="gatewayResponsibleName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsibleName' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.gatewayResponsibleName }}
@@ -103,7 +145,14 @@
 
     <ng-container matColumnDef="gatewayResponsibleEmail">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsibleEmail' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.gatewayResponsibleEmail }}
@@ -112,7 +161,14 @@
 
     <ng-container matColumnDef="gatewayResponsiblePhoneNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsiblePhoneNumber' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.gatewayResponsiblePhoneNumber }}
@@ -121,7 +177,14 @@
 
     <ng-container matColumnDef="operationalResponsibleName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}
+        <div
+          [ngClass]="
+            this.sort.active === 'operationalResponsibleName' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.operationalResponsibleName }}
@@ -130,7 +193,14 @@
 
     <ng-container matColumnDef="operationalResponsibleEmail">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}
+        <div
+          [ngClass]="
+            this.sort.active === 'operationalResponsibleEmail' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.operationalResponsibleEmail }}
@@ -139,7 +209,10 @@
 
     <ng-container matColumnDef="tags">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-250">
-        {{ "LORA-GATEWAY-TABLE.TAGS" | translate }}
+        <div [ngClass]="this.sort.active === 'tags' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.TAGS" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.tagsString }}
@@ -148,7 +221,10 @@
 
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.LOCATION" | translate }}
+        <div [ngClass]="this.sort.active === 'location' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.LOCATION" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.location.latitude | number : "2.1-6" }},
@@ -157,7 +233,12 @@
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.CREATED-AT" | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div [ngClass]="this.sort.active === 'createdAt' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.CREATED-AT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
+      </th>
       <td mat-cell *matCellDef="let gateway">
         {{ gateway.createdAt | dateOnly }}
       </td>
@@ -165,7 +246,10 @@
 
     <ng-container matColumnDef="lastSeenAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.LAST-SEEN-AT" | translate }}
+        <div [ngClass]="this.sort.active === 'lastSeenAt' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.LAST-SEEN-AT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         {{ lastActive(gateway) }}
@@ -174,7 +258,10 @@
 
     <ng-container matColumnDef="onlineStatus">
       <th mat-header-cell *matHeaderCellDef>
-        {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
+        <div [ngClass]="this.sort.active === 'onlineStatus' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td mat-cell *matCellDef="let gateway">
         <ng-container *ngIf="gatewayStatus(gateway); then statusOk; else statusError"></ng-container>

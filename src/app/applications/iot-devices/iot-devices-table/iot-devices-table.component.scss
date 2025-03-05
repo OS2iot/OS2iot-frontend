@@ -1,0 +1,13 @@
+@import "../../../../assets/scss/setup/variables";
+.column-title-color {
+  color: $color-link;
+  font-weight: bold;
+}
+
+.column-title-color-inactive {
+  color: $default-icon-color;
+}
+
+.mat-sort-header-arrow {
+  display: none !important;
+}
