@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -20,35 +19,6 @@ import { UserResponse } from "./../admin/users/user.model";
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"],
-  animations: [
-    trigger("navAnimation", [
-      state(
-        "void",
-        style({
-          transform: "translateX(-100%)",
-          opacity: 0,
-        })
-      ),
-      transition(":enter", [
-        animate(
-          "0.3s ease-out",
-          style({
-            transform: "translateX(0)",
-            opacity: 1,
-          })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "0.3s ease-in",
-          style({
-            transform: "translateX(-100%)",
-            opacity: 0,
-          })
-        ),
-      ]),
-    ]),
-  ],
 })
 export class NavbarComponent implements OnInit {
   public organisations: Organisation[];

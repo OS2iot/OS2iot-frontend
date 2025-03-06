@@ -116,26 +116,19 @@ button:focus,
   }
 }
 
-.hide-button {
-  right: 0px;
-  padding-left: 2px;
-  border-radius: 5px 0 0 5px;
-}
-
-.show-button {
-  border-radius: 0 5px 5px 0;
-  padding-right: 2px;
-}
-
 .toggle-button {
   top: 50%;
   position: absolute;
   width: 18px;
   height: 40px;
+  left: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $color-neutral-200;
+  padding: 0 2px 0 0;
+  border-radius: 0 5px 5px 0;
+  transition: left 0.3s ease-in-out, border-radius 0.3s ease-in-out;
 
   &:hover {
     background-color: $color-link-active-bg;
@@ -144,24 +137,40 @@ button:focus,
   &:hover .icon-arrow-nav {
     color: $white;
   }
-}
 
-.rotate {
-  transform: rotate(180deg);
+  &.nav-visible-button {
+    border-radius: 5px 0 0 5px;
+    left: 248px;
+    padding: 0 0 0 2px;
+    .icon-arrow-nav {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 .icon-arrow-nav {
   color: $default-color;
   height: 40px;
   width: 10px;
+  transform: rotate(180deg);
 }
 
 @media (max-width: 768px) {
   .icon-arrow-nav,
   .toggle-button,
   .show-button,
-  .hide-button,
-  .rotate {
+  .hide-button {
     display: none;
+  }
+}
+
+.navbar-container {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  &.nav-visible {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
