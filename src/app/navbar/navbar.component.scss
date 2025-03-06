@@ -115,3 +115,53 @@ button:focus,
     }
   }
 }
+
+.hide-button {
+  right: 0px;
+  padding-left: 2px;
+  border-radius: 5px 0 0 5px;
+}
+
+.show-button {
+  border-radius: 0 5px 5px 0;
+  padding-right: 2px;
+}
+
+.toggle-button {
+  top: 50%;
+  position: absolute;
+  width: 18px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-neutral-200;
+
+  &:hover {
+    background-color: $color-link-active-bg;
+  }
+
+  &:hover .icon-arrow-nav {
+    color: $white;
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.icon-arrow-nav {
+  color: $default-color;
+  height: 40px;
+  width: 10px;
+}
+
+@media (max-width: 768px) {
+  .icon-arrow-nav,
+  .toggle-button,
+  .show-button,
+  .hide-button,
+  .rotate {
+    display: none;
+  }
+}

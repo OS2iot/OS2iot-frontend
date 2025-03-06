@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Organisation, OrganisationGetMinimalResponse } from "@app/admin/organisation/organisation.model";
 import { OrganisationService } from "@app/admin/organisation/organisation.service";
-import { PermissionType } from "@app/admin/permission/permission.model";
-import { UserMinimal, UserMinimalResponse } from "@app/admin/users/user-minimal.model";
+import { UserMinimal } from "@app/admin/users/user-minimal.model";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { AuthService, CurrentUserInfoResponse } from "@auth/auth.service";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -66,6 +65,10 @@ export class SharedVariableService {
     }
     this.organizationInfo = new Object(JSON.parse(localStorage.getItem("organizationInfo"))) as Organisation[];
     return this.organizationInfo;
+  }
+
+  getCurrentOrgRole(): string {
+    return "ss";
   }
 
   getUsername(): string {

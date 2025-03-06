@@ -10,6 +10,12 @@ export class AppComponent {
   title = "OS2IoT-frontend";
   isLoggedIn = true;
 
+  isNavVisible = false;
+
+  onNavToggle(isVisible: boolean) {
+    this.isNavVisible = isVisible;
+  }
+
   constructor(private loggedInService: LoggedInService) {
     loggedInService.changeEmitted?.subscribe(change => {
       this.isLoggedIn = change;

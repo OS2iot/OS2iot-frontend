@@ -1,4 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { PermissionType } from "@app/admin/permission/permission.model";
@@ -17,6 +20,35 @@ import { UserResponse } from "./../admin/users/user.model";
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"],
+  animations: [
+    trigger("navAnimation", [
+      state(
+        "void",
+        style({
+          transform: "translateX(-100%)",
+          opacity: 0,
+        })
+      ),
+      transition(":enter", [
+        animate(
+          "0.3s ease-out",
+          style({
+            transform: "translateX(0)",
+            opacity: 1,
+          })
+        ),
+      ]),
+      transition(":leave", [
+        animate(
+          "0.3s ease-in",
+          style({
+            transform: "translateX(-100%)",
+            opacity: 0,
+          })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class NavbarComponent implements OnInit {
   public organisations: Organisation[];
@@ -30,6 +62,8 @@ export class NavbarComponent implements OnInit {
   isLoginMode = true;
   user: User;
 
+  isVisible = true;
+
   userInfo: CurrentUserInfoResponse;
   faSignInAlt = faSignInAlt;
   imagePath = "../../assets/images/os2iot.png ";
@@ -41,10 +75,20 @@ export class NavbarComponent implements OnInit {
     private sharedVariableService: SharedVariableService,
     private loggedInService: LoggedInService,
     private meService: MeService,
-    private route: Router
+    private route: Router,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
+    this.matIconRegistry.addSvgIcon(
+      "nav-arrow",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/arrows-up-to-line.svg"),
+      {}
+    );
+
     translate.use("da");
   }
+
+  @Output() navToggle = new EventEmitter<boolean>();
 
   onLogout() {
     this.authService.logout();
@@ -90,6 +134,7 @@ export class NavbarComponent implements OnInit {
     this.getAllowedOrganizations();
     this.organisations.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
     this.selected = this.sharedVariableService.getSelectedOrganisationId();
+    this.navToggle.emit(this.isVisible);
   }
 
   getAllowedOrganizations() {
@@ -130,6 +175,11 @@ export class NavbarComponent implements OnInit {
     } else {
       this.route.navigateByUrl("/", { skipLocationChange: false }).then(() => this.route.navigate(["applications"]));
     }
+  }
+
+  public toggleNavbar() {
+    this.isVisible = !this.isVisible;
+    this.navToggle.emit(this.isVisible);
   }
 
   setSelectedOrganisation(value: number) {
