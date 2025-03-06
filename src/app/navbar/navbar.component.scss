@@ -166,11 +166,9 @@ button:focus,
 
 .navbar-container {
   transform: translateX(-100%);
-  opacity: 0;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   &.nav-visible {
     transform: translateX(0);
-    opacity: 1;
   }
 }
