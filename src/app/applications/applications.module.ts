@@ -5,7 +5,6 @@ import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TranslateModule } from "@ngx-translate/core";
 import { BasicInformationBoxComponent } from "@shared/components/basic-information-box/basic-information-box.component";
-import { BasicTapSwitchComponent } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { FormModule } from "@shared/components/forms/form.module";
 import { OptionFieldComponent } from "@shared/components/option-field/option-field.component";
 import { StatusIconComponent } from "@shared/components/status-icon/status-icon.component";
@@ -29,6 +28,7 @@ import { BulkImportComponent } from "./bulk-import/bulk-import.component";
 import { DatatargetModule } from "./datatarget/datatarget.module";
 import { IotDevicesModule } from "./iot-devices/iot-devices.module";
 import { MulticastModule } from "./multicast/multicast.module";
+import { BasicTabSwitchComponent } from "@shared/components/basic-tab-switch/basic-tab-switch.component";
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { MulticastModule } from "./multicast/multicast.module";
     StatusIconComponent,
     TableSortIconComponent,
     TablePaginatorComponent,
-    BasicTapSwitchComponent,
+    BasicTabSwitchComponent,
     ApplicationMapComponent,
     BasicInformationBoxComponent,
     ApplicationFilterComponent,

@@ -1,0 +1,22 @@
+<div class="main-container">
+  @for (tab of tabs; track tab.title; ) {
+    <div [ngClass]="currentUrl === tab.uri ? 'active-tab' : 'inactive-tab'" class="tab-base" (click)="onClick(tab.uri)">
+      @if (tab.icon) {
+        <mat-icon
+          [ngClass]="currentUrl === tab.uri ? 'active-tab-icon' : 'inactive-tab-icon'"
+          svgIcon="{{ tab.icon.matSVGSrc }}"
+        />
+      }
+      {{ tab.title }}
+      @for (counter of tab.counters; track counter; ) {
+        <div
+          class="counter-base {{
+        'counter-' + (counter.color === 'default' && currentUrl === tab.uri ? 'default-inactive' : counter.color)
+      }}"
+        >
+          {{ counter.value }}
+        </div>
+      }
+    </div>
+  }
+</div>
