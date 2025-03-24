@@ -36,7 +36,7 @@ const columnDefinitions: TableColumn[] = [
   },
   {
     id: "gatewayId",
-    display: "LORA-GATEWAY-TABLE.GATEWAYID",
+    display: "LORA-GATEWAY-TABLE.ID",
     toggleable: true,
     default: true,
   },
@@ -250,8 +250,12 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
+  announceSortChange(event: { active: string; direction: string }) {
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
+  }
+
   getSortDirection(id: string) {
-    return columnDefinitions.find(c => c.id === id)?.sort ?? "asc";
+    return columnDefinitions.find(c => c.id === id).sort;
   }
 
   private refresh() {

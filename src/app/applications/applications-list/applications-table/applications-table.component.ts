@@ -146,6 +146,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   applicationSavedColumns = "applicationSavedColumns";
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  protected columnDefinitions = columnDefinitions;
 
   constructor(
     public translate: TranslateService,
@@ -163,9 +164,6 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     this.translate.use("da");
   }
 
-  announceSortChange(event: { active: string; direction: string }) {
-    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
-  }
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
@@ -306,9 +304,12 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
       } as ApplicationDialogModel,
     });
   }
+
+  announceSortChange(event: { active: string; direction: string }) {
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
+  }
+
   getSortDirection(id: string) {
     return columnDefinitions.find(c => c.id === id).sort;
   }
-
-  protected columnDefinitions = columnDefinitions;
 }

@@ -6,10 +6,17 @@
 ></app-column-selector>
 
 <div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="isLoadingResults">
+  <div *ngIf="isLoadingResults" class="loading-shade">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+  <table
+    (matSortChange)="announceSortChange($event)"
+    [dataSource]="data"
+    mat-table
+    matSort
+    matSortActive="name"
+    matSortDirection="asc"
+    matSortDisableClear>
     <ng-template #notSupported>
       <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
     </ng-template>
@@ -19,86 +26,86 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-sort-header="name" *matHeaderCellDef mat-header-cell>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="name">
         <div [ngClass]="this.sort.active === 'name' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "APPLICATION-TABLE.NAME" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('name')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('name')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">
-        <a [routerLink]="['../iot-device', iotDevice.id]" routerLinkActive="active" class="device-link">{{
-          iotDevice.name
-        }}</a>
+      <td *matCellDef="let iotDevice" mat-cell>
+        <a [routerLink]="['../iot-device', iotDevice.id]" class="device-link" routerLinkActive="active">{{
+            iotDevice.name
+          }}</a>
       </td>
     </ng-container>
 
     <!-- Technology Column -->
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div [ngClass]="this.sort.active === 'type' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.NETWORK-TECHNOLOGY" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('type')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('type')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ "IOT-DEVICE-TYPES." + iotDevice.type | translate }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ "IOT-DEVICE-TYPES." + iotDevice.type | translate }}</td>
     </ng-container>
 
     <ng-container matColumnDef="commentOnLocation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div
           [ngClass]="this.sort.active === 'commentOnLocation' ? 'column-title-color' : 'column-title-color-inactive'"
         >
           {{ "GATEWAY.PLACEMENT-LABEL" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('commentOnLocation')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('commentOnLocation')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">
+      <td *matCellDef="let iotDevice" mat-cell>
         {{ iotDevice.commentOnLocation ? truncateText(iotDevice.commentOnLocation) : "-" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="deviceModel">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div [ngClass]="this.sort.active === 'deviceModel' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOTDEVICE.DEVICEMODEL" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceModel')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceModel')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.deviceModel?.body?.name ?? "-" }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceModel?.body?.name ?? "-" }}</td>
     </ng-container>
 
     <ng-container matColumnDef="deviceProfileName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div
           [ngClass]="this.sort.active === 'deviceProfileName' ? 'column-title-color' : 'column-title-color-inactive'"
         >
           {{ "IOTDEVICE.LORA.DEVICEPROFILE" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceProfileName')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceProfileName')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.deviceProfileName ?? "-" }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceProfileName ?? "-" }}</td>
     </ng-container>
 
     <ng-container matColumnDef="deviceEUI">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div [ngClass]="this.sort.active === 'deviceEUI' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.DEV-EUI" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceEUI')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceEUI')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.deviceEUI ?? "-" }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceEUI ?? "-" }}</td>
     </ng-container>
 
     <ng-container matColumnDef="OTAAapplicationKey">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div
           [ngClass]="this.sort.active === 'OTAAapplicationKey' ? 'column-title-color' : 'column-title-color-inactive'"
         >
           {{ "IOT-TABLE.APP-KEY" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('OTAAapplicationKey')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('OTAAapplicationKey')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.OTAAapplicationKey ?? "-" }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.OTAAapplicationKey ?? "-" }}</td>
     </ng-container>
 
     <!-- RSSI column -->
@@ -107,9 +114,9 @@
         <div [ngClass]="this.sort.active === 'rssi' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.RSSI" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('rssi')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('rssi')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">
+      <td *matCellDef="let iotDevice" mat-cell>
         <ng-container *ngIf="iotDevice.type === 'LORAWAN' || iotDevice.type === 'SIGFOX'; else notSupported">
           <div *ngIf="iotDevice.latestReceivedMessage?.rssi; else notAvailable">
             {{ iotDevice.latestReceivedMessage.rssi }}
@@ -124,9 +131,9 @@
         <div [ngClass]="this.sort.active === 'snr' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.SNR" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('snr')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('snr')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">
+      <td *matCellDef="let iotDevice" mat-cell>
         <ng-container *ngIf="iotDevice.type === 'LORAWAN' || iotDevice.type === 'SIGFOX'; else notSupported">
           <div *ngIf="iotDevice.latestReceivedMessage?.snr; else notAvailable">
             {{ iotDevice.latestReceivedMessage?.snr }}
@@ -136,13 +143,13 @@
     </ng-container>
 
     <ng-container matColumnDef="dataTargets">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
         <div [ngClass]="this.sort.active === 'dataTargets' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "APPLICATION-TABLE.DATA-TARGETS" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ iotDevice.connections?.length ?? 0 }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.connections?.length ?? 0 }}</td>
     </ng-container>
 
     <!-- Battery Column -->
@@ -150,7 +157,7 @@
       <th *matHeaderCellDef mat-header-cell>
         {{ "IOT-TABLE.BATTERY" | translate }}
       </th>
-      <td mat-cell *matCellDef="let iotDevice">
+      <td *matCellDef="let iotDevice" mat-cell>
         <div *ngIf="iotDevice.type === 'LORAWAN'; else noBatteryStatus">
           <app-batteri-status [color]="batteryStatusColor" [percentage]="getBatteryProcentage(iotDevice)">
           </app-batteri-status>
@@ -165,38 +172,38 @@
 
     <!-- Active Column -->
     <ng-container matColumnDef="active">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="active">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="active">
         <div [ngClass]="this.sort.active === 'active' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.ACTIVE" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let iotDevice">{{ lastActive(iotDevice) }}</td>
+      <td *matCellDef="let iotDevice" mat-cell>{{ lastActive(iotDevice) }}</td>
     </ng-container>
 
     <ng-container matColumnDef="menu">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let iotDevice">
-        <div class="dropdown" *ngIf="canEdit">
+      <th *matHeaderCellDef mat-header-cell></th>
+      <td *matCellDef="let iotDevice" mat-cell>
+        <div *ngIf="canEdit" class="dropdown">
           <a
-            href="#"
-            role="button"
-            id="tableRowDropdown-{{ iotDevice.id }}"
+            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+            aria-expanded="false"
             class="applicationRow__edit dropdown-toggle"
             data-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+            href="#"
+            id="tableRowDropdown-{{ iotDevice.id }}"
+            role="button"
           ></a>
-          <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{ iotDevice.id }}">
+          <ul attr.aria-labelledby="tableRowDropdown-{{ iotDevice.id }}" class="dropdown-menu dropdown-menu--table">
             <li class="dropdown-item">
               <a [routerLink]="['../iot-device-edit', iotDevice.id]" routerLinkActive="active"
-                >{{ "IOTDEVICE-TABLE-ROW.EDIT" | translate }}
+              >{{ "IOTDEVICE-TABLE-ROW.EDIT" | translate }}
               </a>
             </li>
-            <li class="dropdown-item" *ngIf="iotDevice.type !== deviceTypes.SIGFOX">
+            <li *ngIf="iotDevice.type !== deviceTypes.SIGFOX" class="dropdown-item">
               <a (click)="onOpenChangeApplicationDialog(iotDevice.id)" routerLinkActive="active">{{
-                "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
-              }}</a>
+                  "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
+                }}</a>
             </li>
             <li class="dropdown-item">
               <a (click)="clickDelete(iotDevice)" [routerLink]="[]">{{ "IOTDEVICE-TABLE-ROW.DELETE" | translate }}</a>
@@ -206,13 +213,13 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
   <mat-paginator
+    [length]="resultsLength"
     [pageSizeOptions]="pageSizeOptions"
     [pageSize]="pageSize"
-    [length]="resultsLength"
     showFirstLastButtons
   >
   </mat-paginator>
