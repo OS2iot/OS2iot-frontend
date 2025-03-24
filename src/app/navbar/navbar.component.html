@@ -1,13 +1,14 @@
 <nav
-  class="navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3"
+  class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3"
   aria-expanded="false"
+  [class.nav-visible]="isVisible"
 >
-  <img class="img-logo" alt="OS2IoT-logo" [src]="imagePath" />
+  <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo"/>
 
-  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar">
+  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar-login">
     <ul class="navbar-nav flex-column">
       <li class="nav-item">
-        <a routerLink="/auth" [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth">
+        <a [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth" routerLink="/auth">
           {{ "NAV.LOGIN" | translate }}
         </a>
         <fa-icon [icon]="faSignInAlt" class="navbar-icon"></fa-icon>
@@ -18,23 +19,23 @@
   <ng-template #loggedInBlock>
     <div class="navbar-header">
       <button
-        type="button"
-        class="navbar-toggler collapsed"
-        aria-label="Toggle navigation"
-        data-target="#navbar"
-        aria-controls="navbar"
         (click)="isCollapsed = !isCollapsed"
+        aria-controls="navbar"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        data-target="#navbar"
+        type="button"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
     <div
-      class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
-      id="navbar"
       [attr.aria-expanded]="!isCollapsed"
       [ngClass]="{ collapse: !isCollapsed }"
+      class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
+      id="navbar"
     >
-      <ul class="navbar-nav d-flex flex-column h-100" (click)="isCollapsed = !isCollapsed">
+      <ul (click)="isCollapsed = !isCollapsed" class="navbar-nav d-flex flex-column h-100">
         <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
           <li class="nav-item">
             <mat-form-field appearance="outline">
@@ -42,7 +43,7 @@
                 <mat-select-trigger>
                   <div class="nav-bar-selector-trigger">
                     <div class="nav-bar-selector-building-icon">
-                      <img src="assets/images/building.svg" width="20" height="20" />
+                      <img height="20" src="assets/images/building.svg" width="20"/>
                     </div>
                     {{ getOrgName(selected) }}
                   </div>
@@ -52,15 +53,15 @@
                 </mat-option>
               </mat-select>
 
-              <div matSuffix class="custom-dropdown-icon">
-                <img src="assets/images/angle-up.svg" class="dropdown-up" width="11" height="7" />
-                <img src="assets/images/angle-down.svg" class="dropdown-down" width="11" height="7" />
+              <div class="custom-dropdown-icon" matSuffix>
+                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11"/>
+                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11"/>
               </div>
             </mat-form-field>
 
             <ul class="navbar-nav flex-column mb-2">
               <li class="nav-item">
-                <a routerLink="/applications" routerLinkActive="active" id="applications">
+                <a id="applications" routerLink="/applications" routerLinkActive="active">
                   {{ "NAV.APPLICATIONS" | translate }}
                 </a>
               </li>
@@ -101,12 +102,12 @@
           <li class="nav-item">
             <ul class="navbar-nav flex-column">
               <li class="nav-item">
-                <a routerLink="/gateways" [routerLinkActive]="['active']" id="myLoraGateway">
+                <a [routerLinkActive]="['active']" id="myLoraGateway" routerLink="/gateways">
                   {{ "NAV.LORA-GATEWAYS" | translate }}
                 </a>
               </li>
               <li class="nav-item">
-                <a routerLink="/profiles" [routerLinkActive]="['active']" id="profiles">
+                <a [routerLinkActive]="['active']" id="profiles" routerLink="/profiles">
                   {{ "NAV.PROFILES" | translate }}
                 </a>
               </li>
@@ -122,7 +123,7 @@
           <li class="nav-item">
             <ul class="navbar-nav flex-column">
               <li class="nav-item">
-                <a routerLink="/payload-decoder" [routerLinkActive]="['active']" id="payload-decoder">
+                <a [routerLinkActive]="['active']" id="payload-decoder" routerLink="/payload-decoder">
                   {{ "NAV.PAYLOAD-DECODER" | translate }}
                 </a>
               </li>
@@ -139,3 +140,7 @@
     </div>
   </ng-template>
 </nav>
+
+<div [class.nav-visible-button]="isVisible" class="toggle-button" (click)="toggleNavbar()">
+  <mat-icon class="icon-arrow-nav rotate" svgIcon="nav-arrow"></mat-icon>
+</div>

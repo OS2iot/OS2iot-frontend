@@ -9,12 +9,12 @@ import { ApplicationService } from "@applications/application.service";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
-import { Counter, Tab } from "@shared/components/basic-tap-switch/basic-tap-switch.component";
 import { WelcomeDialogComponent } from "@shared/components/welcome-dialog/welcome-dialog.component";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { WelcomeDialogModel } from "@shared/models/dialog.model";
 import { MeService } from "@shared/services/me.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { Counter, Tab } from "@shared/components/basic-tab-switch/basic-tab-switch.component";
 
 const welcomeDialogId = "welcome-dialog";
 
@@ -32,19 +32,17 @@ export class ApplicationsListComponent implements OnInit {
 
   public pageLimit = environment.tablePageSize;
   public resultsLength: number;
-  public pageOffset = 0;
   mapRoute = "/applications/map";
   listRoute = "/applications";
 
   @Input() organizationId: number;
   canEdit: boolean;
+  hasSomePermission: boolean;
+  isGlobalAdmin = false;
+  currentPath = "";
   private unauthorizedMessage: string;
   private kombitError: string;
   private noAccess: string;
-  hasSomePermission: boolean;
-  isGlobalAdmin = false;
-
-  currentPath = "";
 
   constructor(
     public translate: TranslateService,

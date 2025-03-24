@@ -3,6 +3,10 @@
 
 #content {
   @media (min-width: $screen-md-min) {
-    padding-left: $navWidth;
+    padding-left: 0;
+    transition: padding-left 0.3s ease-in-out;
+    &.nav-visible {
+      padding-left: $navWidth;
+    }
   }
 }

@@ -11,6 +11,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { forkJoin, Subscription } from "rxjs";
 import { SharedModule } from "../../../shared/shared.module";
 import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
+import moment from "moment";
 
 @Component({
   selector: "app-application-map",
@@ -29,6 +30,7 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     statusCheck: ApplicationStatusCheck | "All";
     owner: string | "All";
   };
+  coordinateList: MapCoordinates[] = null;
   private valueSubscription!: Subscription;
 
   constructor(
@@ -53,7 +55,17 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     }
   }
 
-  coordinateList: MapCoordinates[] = null;
+  private loadMapData(): void {
+    forkJoin({
+      devices: this.applicationService.getApplicationDevices(this.sharedVariableService.getSelectedOrganisationId()),
+      gateways: this.gatewayService.getForMaps(),
+    }).subscribe(({ devices, gateways }) => {
+      this.devices = devices;
+      this.gateways = gateways.resultList;
+
+      this.mapToCoordinateList();
+    });
+  }
 
   private mapToCoordinateList() {
     const tempCoordinateList: MapCoordinates[] = [];
@@ -61,6 +73,10 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
     if (Array.isArray(this.devices)) {
       this.devices.forEach(dev => {
         const [longitude, latitude] = dev.location.coordinates;
+
+        const isActive = dev.latestReceivedMessage?.sentTime
+          ? moment(dev.latestReceivedMessage?.sentTime).unix() > moment(new Date()).subtract(1, "day").unix()
+          : false;
 
         tempCoordinateList.push({
           longitude: longitude,
@@ -71,12 +87,13 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
           markerInfo: {
             internalOrganizationName: "s",
             name: dev.name,
-            active: true,
+            active: isActive,
+            isGateway: false,
             id: dev.id,
             isDevice: true,
             internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
             networkTechnology: dev.type,
-            lastActive: dev?.latestReceivedMessage ? dev?.latestReceivedMessage.sentTime : null,
+            lastActive: dev?.latestReceivedMessage?.sentTime,
           },
         });
       });
@@ -91,32 +108,20 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
           editEnabled: false,
           useGeolocation: false,
           markerInfo: {
-            internalOrganizationName: "s",
+            internalOrganizationName: gw.organizationName,
             name: gw.name,
-            active: true,
+            active: this.gatewayService.isGatewayActive(gw),
             id: gw.id,
             isDevice: false,
             isGateway: true,
             internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
-            networkTechnology: "loRaWAN",
-            lastActive: undefined,
+            networkTechnology: "",
+            lastActive: gw.lastSeenAt,
           },
         });
       });
     }
 
     this.coordinateList = tempCoordinateList;
-  }
-
-  loadMapData(): void {
-    forkJoin({
-      devices: this.applicationService.getApplicationDevices(this.sharedVariableService.getSelectedOrganisationId()),
-      gateways: this.gatewayService.getForMaps(),
-    }).subscribe(({ devices, gateways }) => {
-      this.devices = devices;
-      this.gateways = gateways.resultList;
-
-      this.mapToCoordinateList();
-    });
   }
 }

@@ -4,7 +4,8 @@
   display: flex;
   height: 46px !important;
 }
-.tap-base {
+
+.tab-base {
   display: flex;
   height: 46px !important;
   align-items: center;
@@ -14,27 +15,31 @@
   font-size: 16px;
   padding: 0 20px;
 }
-.active-tap {
+
+.active-tab {
   background-color: $white !important;
   color: $default-icon-color;
   fill: $default-icon-color;
 }
-.inactive-tap {
+
+.inactive-tab {
   fill: $color-link !important;
   color: $color-link;
   background-color: transparent !important;
 }
-.active-tap-icon {
+
+.active-tab-icon {
   color: $default-icon-color;
   width: 16px; //height
   margin-bottom: 5px;
 }
 
-.inactive-tap-icon {
+.inactive-tab-icon {
   margin-bottom: 5px;
   width: 16px; //height
   color: $color-link;
 }
+
 .counter-default {
   background-color: $default-icon-color;
 }
@@ -54,6 +59,7 @@
 .counter-alert {
   background-color: $alert-color;
 }
+
 .counter-base {
   font-size: 14px;
   padding: 0 5px;

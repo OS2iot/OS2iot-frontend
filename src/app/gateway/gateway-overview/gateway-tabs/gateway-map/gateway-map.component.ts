@@ -14,9 +14,9 @@ import { MeService } from "@shared/services/me.service";
 export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public gateways: Gateway[];
   public coordinateList = [];
+  isLoadingResults = true;
   private gatewaySubscription: Subscription;
   private organizationChangeSubscription: Subscription;
-  isLoadingResults = true;
 
   constructor(
     private chirpstackGatewayService: ChirpstackGatewayService,
@@ -39,6 +39,25 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.getGateways();
     }
+  }
+
+  gatewayStatus(gateway: Gateway): boolean {
+    return this.chirpstackGatewayService.isGatewayActive(gateway);
+  }
+
+  setCanEdit() {
+    this.gateways.forEach(gateway => {
+      gateway.canEdit = this.meService.hasAccessToTargetOrganization(
+        OrganizationAccessScope.GatewayWrite,
+        gateway.organizationId
+      );
+    });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    this.gatewaySubscription?.unsubscribe();
+    this.organizationChangeSubscription.unsubscribe();
   }
 
   private getGateways(): void {
@@ -75,6 +94,7 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
         markerInfo: {
           name: gateway.name,
           active: this.gatewayStatus(gateway),
+          isGateway: true,
           id: gateway.gatewayId,
           internalOrganizationId: gateway.organizationId,
           internalOrganizationName: gateway.organizationName,
@@ -82,24 +102,5 @@ export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     );
     this.coordinateList = tempcoordinateList;
-  }
-
-  gatewayStatus(gateway: Gateway): boolean {
-    return this.chirpstackGatewayService.isGatewayActive(gateway);
-  }
-
-  setCanEdit() {
-    this.gateways.forEach(gateway => {
-      gateway.canEdit = this.meService.hasAccessToTargetOrganization(
-        OrganizationAccessScope.GatewayWrite,
-        gateway.organizationId
-      );
-    });
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    this.gatewaySubscription?.unsubscribe();
-    this.organizationChangeSubscription.unsubscribe();
   }
 }
