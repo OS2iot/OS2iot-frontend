@@ -39,7 +39,7 @@
         <td *matCellDef="let application" mat-cell>
           <div class="options-container">
             <app-option-field
-              [title]="'APPLICATION.STATUS.' + application.status | translate"
+              [title]="'APPLICATION.STATUS.' + (application.status ?? 'NONE') | translate"
               [type]="application.status === 'IN-OPERATION' ? 'warning' : 'default'"
             />
           </div>
