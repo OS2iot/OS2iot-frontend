@@ -139,12 +139,11 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   refetchIntervalId: NodeJS.Timeout;
   resultsLength = 0;
   isLoadingResults = true;
-  private fetchSubscription: Subscription;
-
   gatewayTableSavedColumns = "gatewayTableSavedColumns";
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  protected readonly columnDefinitions = columnDefinitions;
+  private fetchSubscription: Subscription;
 
   constructor(
     private chirpstackGatewayService: ChirpstackGatewayService,
@@ -205,33 +204,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     this.fetchSubscription.unsubscribe();
   }
 
-  private refresh() {
-    this.getGateways(this.sort.active, this.sort.direction).subscribe(data => {
-      data.resultList.forEach(gw => {
-        gw.canEdit = this.canEdit(gw.organizationId);
-        gw.tagsString = JSON.stringify(gw.tags ?? {});
-      });
-      this.data = data.resultList;
-      this.resultsLength = data.totalCount;
-      this.isLoadingResults = false;
-    });
-  }
-
   canEdit(internalOrganizationId: number): boolean {
     return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, internalOrganizationId);
-  }
-
-  private getGateways(orderByColumn: string, orderByDirection: string): Observable<GatewayResponseMany> {
-    const params = {
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      orderOn: orderByColumn,
-      sort: orderByDirection,
-    };
-    if (this.organizationId > 0) {
-      params["organizationId"] = this.organizationId;
-    }
-    return this.chirpstackGatewayService.getMultiple(params);
   }
 
   gatewayStatus(gateway: Gateway): boolean {
@@ -275,9 +249,33 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
       } as GatewayDialogModel,
     });
   }
+
   getSortDirection(id: string) {
-    return columnDefinitions.find(c => c.id === id).sort;
+    return columnDefinitions.find(c => c.id === id)?.sort ?? "asc";
   }
 
-  protected readonly columnDefinitions = columnDefinitions;
+  private refresh() {
+    this.getGateways(this.sort.active, this.sort.direction).subscribe(data => {
+      data.resultList.forEach(gw => {
+        gw.canEdit = this.canEdit(gw.organizationId);
+        gw.tagsString = JSON.stringify(gw.tags ?? {});
+      });
+      this.data = data.resultList;
+      this.resultsLength = data.totalCount;
+      this.isLoadingResults = false;
+    });
+  }
+
+  private getGateways(orderByColumn: string, orderByDirection: string): Observable<GatewayResponseMany> {
+    const params = {
+      limit: this.paginator.pageSize,
+      offset: this.paginator.pageIndex * this.paginator.pageSize,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    };
+    if (this.organizationId > 0) {
+      params["organizationId"] = this.organizationId;
+    }
+    return this.chirpstackGatewayService.getMultiple(params);
+  }
 }
