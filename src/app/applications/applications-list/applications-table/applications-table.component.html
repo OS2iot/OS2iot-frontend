@@ -208,7 +208,6 @@
 
       <ng-container matColumnDef="menu">
         <th *matHeaderCellDef class="col-1" mat-header-cell></th>
-
         <td *matCellDef="let element" mat-cell>
           <div *ngIf="element?.id | canEditApplication" class="dropdown">
             <a

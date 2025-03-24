@@ -9,6 +9,11 @@ import { LoggedInService } from "@shared/services/loggedin.service";
 export class AppComponent {
   title = "OS2IoT-frontend";
   isLoggedIn = true;
+  isNavVisible = true;
+
+  onNavToggle(isVisible: boolean) {
+    this.isNavVisible = isVisible;
+  }
 
   constructor(private loggedInService: LoggedInService) {
     loggedInService.changeEmitted?.subscribe(change => {

@@ -1,24 +1,25 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
-import { GatewayTableComponent } from "./gateway-table/gateway-table.component";
-import { GatewaysComponent } from "./gateways/gateways.component";
-import { GatewayOverviewComponent } from "./gateway-overview/gateway-overview.component";
-import { GatewayEditComponent } from "./gateway-edit/gateway-edit.component";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { GatewayDetailComponent } from "./gateway-detail/gateway-detail.component";
+import { RouterModule, Routes } from "@angular/router";
+import { GraphModule } from "@app/graph/graph.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { TranslateModule } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormModule } from "@shared/components/forms/form.module";
-import { SharedModule } from "@shared/shared.module";
+import { TableSortIconComponent } from "@shared/components/table-sort-icon/table-sort-icon.component";
 import { PipesModule } from "@shared/pipes/pipes.module";
-import { GatewayStatusComponent } from "./gateway-status/gateway-status.component";
-import { GraphModule } from "@app/graph/graph.module";
+import { SharedModule } from "@shared/shared.module";
+import { GatewayChangeOrganizationDialogComponent } from "./gateway-change-organization-dialog/gateway-change-organization-dialog.component";
+import { GatewayDetailComponent } from "./gateway-detail/gateway-detail.component";
+import { GatewayEditComponent } from "./gateway-edit/gateway-edit.component";
+import { GatewayOverviewComponent } from "./gateway-overview/gateway-overview.component";
 import { GatewayListComponent } from "./gateway-overview/gateway-tabs/gateway-list/gateway-list.component";
 import { GatewayMapComponent } from "./gateway-overview/gateway-tabs/gateway-map/gateway-map.component";
 import { GatewayStatusOverviewComponent } from "./gateway-overview/gateway-tabs/gateway-status-overview/gateway-status-overview.component";
-import { GatewayChangeOrganizationDialogComponent } from "./gateway-change-organization-dialog/gateway-change-organization-dialog.component";
+import { GatewayStatusComponent } from "./gateway-status/gateway-status.component";
+import { GatewayTableComponent } from "./gateway-table/gateway-table.component";
+import { GatewaysComponent } from "./gateways/gateways.component";
 
 const gatewayRoutes: Routes = [
   {
@@ -66,6 +67,7 @@ const gatewayRoutes: Routes = [
     SharedModule,
     PipesModule,
     GraphModule,
+    TableSortIconComponent,
   ],
   exports: [
     GatewayTableComponent,

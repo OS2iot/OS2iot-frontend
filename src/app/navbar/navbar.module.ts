@@ -8,6 +8,7 @@ import { NavbarComponent } from "./navbar.component";
 import { SharedModule } from "../shared/shared.module";
 
 // Services
+import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TranslateModule } from "@ngx-translate/core";
@@ -27,6 +28,7 @@ import { GlobalAdminComponent } from "./global-admin/global-admin.component";
     NGMaterialModule,
     InlineSVGModule,
     NgOptimizedImage,
+    MatIconModule,
   ],
   exports: [NavbarComponent],
   providers: [RestService, NavbarComponent],

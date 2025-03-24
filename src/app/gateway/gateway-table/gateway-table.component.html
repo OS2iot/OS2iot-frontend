@@ -5,19 +5,22 @@
 ></app-column-selector>
 
 <div class="mat-elevation-z8 overflow-auto">
-  <div class="loading-shade" *ngIf="isLoadingResults">
+  <div *ngIf="isLoadingResults" class="loading-shade">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+  <table [dataSource]="data" mat-table matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.NAME" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'name' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         <a
           [routerLink]="'/gateways/gateway-detail/' + gateway.gatewayId"
-          routerLinkActive="active"
           class="application-link"
+          routerLinkActive="active"
         >
           {{ gateway.name }}
         </a>
@@ -25,158 +28,239 @@
     </ng-container>
 
     <ng-container matColumnDef="gatewayId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.GATEWAYID" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'gatewayId' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.GATEWAYID" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.gatewayId }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="organizationName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.ORGANIZATION" | translate }}
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'organizationName' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.ORGANIZATION" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.organizationName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="rxPacketsReceived">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.PACKETS-RECEIVED" | translate }}
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="this.sort.active === 'rxPacketsReceived' ? 'column-title-color' : 'column-title-color-inactive'"
+        >
+          {{ "LORA-GATEWAY-TABLE.PACKETS-RECEIVED" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.rxPacketsReceived }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="txPacketsEmitted">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.PACKETS-SENT" | translate }}
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'txPacketsEmitted' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.PACKETS-SENT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.txPacketsEmitted }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="placement">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}</th>
-      <td mat-cell *matCellDef="let gateway">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'placement' ? 'column-title-color' : 'column-title-color-inactive'">
+          '
+
+          {{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
+      </th>
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.placement ? ("GATEWAY.PLACEMENT." + gateway.placement | translate) : "" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="modelName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'modelName' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.modelName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="antennaType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'antennaType' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.antennaType }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.STATUS" | translate }}</th>
-      <td mat-cell *matCellDef="let gateway">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'status' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
+      </th>
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.status ? ("GATEWAY.STATUS." + gateway.status | translate) : "" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="gatewayResponsibleName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsibleName' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.gatewayResponsibleName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="gatewayResponsibleEmail">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsibleEmail' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.gatewayResponsibleEmail }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="gatewayResponsiblePhoneNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="
+            this.sort.active === 'gatewayResponsiblePhoneNumber' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.gatewayResponsiblePhoneNumber }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="operationalResponsibleName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="
+            this.sort.active === 'operationalResponsibleName' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.operationalResponsibleName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="operationalResponsibleEmail">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div
+          [ngClass]="
+            this.sort.active === 'operationalResponsibleEmail' ? 'column-title-color' : 'column-title-color-inactive'
+          "
+        >
+          {{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.operationalResponsibleEmail }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="tags">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-250">
-        {{ "LORA-GATEWAY-TABLE.TAGS" | translate }}
+      <th *matHeaderCellDef class="min-width-250" mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'tags' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.TAGS" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.tagsString }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.LOCATION" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell>
+        <div [ngClass]="this.sort.active === 'location' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.LOCATION" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.location.latitude | number : "2.1-6" }},
         {{ gateway.location.longitude | number : "2.1-6" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "LORA-GATEWAY-TABLE.CREATED-AT" | translate }}</th>
-      <td mat-cell *matCellDef="let gateway">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'createdAt' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.CREATED-AT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
+      </th>
+      <td *matCellDef="let gateway" mat-cell>
         {{ gateway.createdAt | dateOnly }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="lastSeenAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="min-width-150">
-        {{ "LORA-GATEWAY-TABLE.LAST-SEEN-AT" | translate }}
+      <th *matHeaderCellDef class="min-width-150" mat-header-cell mat-sort-header>
+        <div [ngClass]="this.sort.active === 'lastSeenAt' ? 'column-title-color' : 'column-title-color-inactive'">
+          {{ "LORA-GATEWAY-TABLE.LAST-SEEN-AT" | translate }}
+        </div>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         {{ lastActive(gateway) }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="onlineStatus">
-      <th mat-header-cell *matHeaderCellDef>
+      <th *matHeaderCellDef mat-header-cell>
         {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
       </th>
-      <td mat-cell *matCellDef="let gateway">
+      <td *matCellDef="let gateway" mat-cell>
         <ng-container *ngIf="gatewayStatus(gateway); then statusOk; else statusError"></ng-container>
         <ng-template #statusOk>
           <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
@@ -188,28 +272,28 @@
     </ng-container>
 
     <ng-container matColumnDef="menu">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let gateway" class="overflowVisible">
-        <div class="dropdown" *ngIf="gateway.canEdit">
+      <th *matHeaderCellDef mat-header-cell></th>
+      <td *matCellDef="let gateway" class="overflowVisible" mat-cell>
+        <div *ngIf="gateway.canEdit" class="dropdown">
           <a
-            href="#"
-            role="button"
-            id="tableRowDropdown-{{ gateway.id }}"
+            [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
+            aria-expanded="false"
             class="applicationRow__edit dropdown-toggle"
             data-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
+            href="#"
+            id="tableRowDropdown-{{ gateway.id }}"
+            role="button"
           ></a>
-          <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}">
+          <ul attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}" class="dropdown-menu dropdown-menu--table">
             <li class="dropdown-item">
               <a [routerLink]="['../gateway-edit', gateway.gatewayId]" routerLinkActive="active">{{
-                "GEN.EDIT" | translate
-              }}</a>
+                  "GEN.EDIT" | translate
+                }}</a>
             </li>
             <li class="dropdown-item">
               <a (click)="onOpenChangeOrganizationDialog(gateway.id)" routerLinkActive="active">{{
-                "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate
-              }}</a>
+                  "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate
+                }}</a>
             </li>
             <li class="dropdown-item">
               <a (click)="clickDelete(gateway)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
@@ -219,13 +303,13 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
   <mat-paginator
+    [length]="resultsLength"
     [pageSizeOptions]="pageSizeOptions"
     [pageSize]="pageSize"
-    [length]="resultsLength"
     showFirstLastButtons
   >
   </mat-paginator>
