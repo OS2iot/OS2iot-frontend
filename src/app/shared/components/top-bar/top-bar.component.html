@@ -1,6 +1,6 @@
 <ng-template #emptySearchForm>
   <mat-form-field class="search-form--full-width invisible">
-    <input matInput />
+    <input matInput/>
   </mat-form-field>
 </ng-template>
 
@@ -9,43 +9,45 @@
   <form class="search-form">
     <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
       <div class="custom-search-field">
+        <mat-icon class="icon" svgIcon="search-icon"></mat-icon>
         <input
+          #searchInput
+          (keyup.enter)="search(searchInput.value)"
+          [value]="searchText"
+          aria-label="Search"
+          class="search-input"
+          id="searchQuery"
           placeholder="{{ 'SEARCH.PLACEHOLDER' | translate }}"
           type="text"
-          id="searchQuery"
-          class="search-input"
-          aria-label="Search"
-          #searchInput
-          [value]="searchText"
-          (keyup.enter)="search(searchInput.value)"
-          (input)="search(searchInput.value)"
         />
       </div>
     </ng-container>
   </form>
 
-  <button class="profile-button" [matMenuTriggerFor]="menu" id="userDropdown">
+  <button [matMenuTriggerFor]="menu" class="profile-button" id="userDropdown">
     <div class="user-information-container">
       <div class="name-and-title-container">
         <div class="name-container">{{ getUsername() }}</div>
-        <!-- <div class="title-container">Global Admin</div> -->
+        <div *ngIf="meService.hasGlobalAdmin()"
+             class="title-container">{{ 'PERMISSION-TYPE.GlobalAdmin' | translate }}
+        </div>
       </div>
       <div>
-        <mat-icon svgIcon="angle-down" class="angle-down-icon"></mat-icon>
+        <mat-icon class="angle-down-icon" svgIcon="angle-down"></mat-icon>
       </div>
     </div>
   </button>
-  <mat-menu class="matMenuMargin" xPosition="before" #menu="matMenu">
-    <button mat-menu-item class="userName">
+  <mat-menu #menu="matMenu" class="matMenuMargin" xPosition="before">
+    <button class="userName" mat-menu-item>
       <div class="userNameFont">{{ getUsername() }}</div>
     </button>
     <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
     <a
-      mat-menu-item
-      [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
-      target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
       (click)="onLogout()"
-      >{{ "NAV.LOGOUT" | translate }}
+      [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
+      mat-menu-item
+      target="{{ isLoggedInWithKombit() ? '_blank' : undefined }}"
+    >{{ "NAV.LOGOUT" | translate }}
     </a>
   </mat-menu>
 </div>
@@ -55,11 +57,11 @@
   <nav>
     <ng-template [ngIf]="backButtonTitle">
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
-      <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButtonTitle }}</a>
+      <a (click)="routeTo()" [routerLink]="[]" class="back-button">{{ backButtonTitle }}</a>
     </ng-template>
     <ng-template [ngIf]="data || subPage === true">
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
-      <a (click)="routeTo()" class="back-button" [routerLink]="[]">{{ backButton.label }}</a>
+      <a (click)="routeTo()" [routerLink]="[]" class="back-button">{{ backButton.label }}</a>
       <h3 class="pl-md-3">{{ subTitle || staticTitle }}</h3>
     </ng-template>
     <ng-template [ngIf]="title">
@@ -71,25 +73,25 @@
 
   <div *ngIf="dropDownButton && addDetailDowndown === true && canEdit">
     <button
-      type="button"
-      id="dropdown-{{ data?.name }}"
+      aria-expanded="false"
+      aria-haspopup="true"
       class="btn btn-primary dropdown-toggle"
       data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
+      id="dropdown-{{ data?.name }}"
+      type="button"
     >
       {{ dropDownButton.label }} <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" attr.aria-labelledby="dropdown-{{ data?.name }}">
+    <ul attr.aria-labelledby="dropdown-{{ data?.name }}" class="dropdown-menu">
       <li class="dropdown-item">
         <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
       </li>
       <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
-        <li class="dropdown-item" *ngFor="let option of dropDownButton.extraOptions">
+        <li *ngFor="let option of dropDownButton.extraOptions" class="dropdown-item">
           <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
         </li>
       </ng-container>
-      <li class="dropdown-item" *ngIf="dropDownButton.isErasable === true">
+      <li *ngIf="dropDownButton.isErasable === true" class="dropdown-item">
         <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
       </li>
     </ul>
@@ -99,13 +101,13 @@
 
   <button
     *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
-    [routerLink]="ctaRouterLink"
-    routerLinkActive="active"
-    class="create-application"
-    type="button"
     [attr.aria-label]="ctaLabel"
+    [routerLink]="ctaRouterLink"
+    class="create-application"
+    routerLinkActive="active"
+    type="button"
   >
-    <mat-icon svgIcon="plus-circle" class="plus-circle-icon"></mat-icon>
+    <mat-icon class="plus-circle-icon" svgIcon="plus-circle"></mat-icon>
     <div class="create-application-button-label">
       {{ ctaLabel }}
     </div>
@@ -114,16 +116,16 @@
 
 <!-- action buttons end -->
 
-@if(searchText){
-<div class="search-view">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron--table">
-          <app-search-table [searchText]="searchText"></app-search-table>
+@if (searchText) {
+  <div class="search-view">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron--table">
+            <app-search-table [searchText]="searchText"></app-search-table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 }

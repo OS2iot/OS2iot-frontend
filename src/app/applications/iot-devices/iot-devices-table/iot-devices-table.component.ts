@@ -263,6 +263,10 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     });
   }
 
+  announceSortChange(event: { active: string; direction: string }) {
+    this.columnDefinitions.find(column => column.id === event.active).sort = event.direction as "asc" | "desc";
+  }
+
   getSortDirection(id: string) {
     return columnDefinitions.find(c => c.id === id).sort;
   }

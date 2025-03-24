@@ -1,7 +1,7 @@
 <nav
-  class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3"
-  aria-expanded="false"
   [class.nav-visible]="isVisible"
+  aria-expanded="false"
+  class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3 no-shadow"
 >
   <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo"/>
 
@@ -77,19 +77,7 @@
                   </a>
                 </li>
               </div>
-              <div *ngIf="user && isUserAdmin && !isGlobalAdmin">
-                <li class="nav-item">
-                  <a routerLink="/admin/users" routerLinkActive="active">
-                    {{ "NAV.USERS" | translate }}
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a routerLink="/admin/permissions" routerLinkActive="active">
-                    {{ "NAV.PERMISSIONS" | translate }}
-                  </a>
-                </li>
-              </div>
-              <li *ngIf="user && (isUserAdmin || isGlobalAdmin)" class="nav-item">
+              <li *ngIf="userResponse && (isUserAdmin || isGlobalAdmin)" class="nav-item">
                 <a routerLink="/admin/api-key" routerLinkActive="active">
                   {{ "NAV.API-KEY" | translate }}
                 </a>
@@ -141,6 +129,6 @@
   </ng-template>
 </nav>
 
-<div [class.nav-visible-button]="isVisible" class="toggle-button" (click)="toggleNavbar()">
+<div (click)="toggleNavbar()" [class.nav-visible-button]="isVisible" class="toggle-button">
   <mat-icon class="icon-arrow-nav rotate" svgIcon="nav-arrow"></mat-icon>
 </div>

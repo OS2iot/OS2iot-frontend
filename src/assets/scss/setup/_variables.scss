@@ -192,6 +192,8 @@ $color-orange-002: rgba(245, 122, 47, 0.75) !default;
 $color-orange-003: rgba(245, 122, 47, 0.5) !default;
 $color-orange-004: rgba(245, 122, 47, 0.25) !default;
 
+$light-border-color: #e0e0e0;
+
 // // Colors used for alert boxes
 $color-base-001: $color-white-001 !default;
 $color-base-002: $color-black-001 !default;
@@ -274,7 +276,7 @@ $border-width: 5px;
 $border-width-small: 1px;
 $border-radius-primary: 0.25rem;
 $border-radius-secondary: 20px;
-$outer-border: $border-width-small solid $color-border;
+$outer-border: $border-width-small solid $light-border-color;
 $inner-border: $border-width solid lighten($color-border, 50%);
 $focus-border: $border-width solid $color-border;
 $focus-outline: $border-width solid $color-border;
@@ -384,6 +386,7 @@ $red: #dc3545;
     overflow-y: hidden;
   }
 }
+
 $alert-color: #991b1b;
 $stable-color: #047857;
 $warning-color: #fde047;

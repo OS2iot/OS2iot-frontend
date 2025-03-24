@@ -1,5 +1,11 @@
 <div class="map-page">
-  @if(coordinateList){
-  <app-map [coordinateList]="coordinateList" [isFromApplication]="true"></app-map>
+  @if (coordinateList) {
+    <app-map [coordinateList]="coordinateList" [isFromApplication]="true"></app-map>
   }
+  <mat-checkbox (change)="mapToCoordinateList()" [(ngModel)]="displayDevices">
+    Devices
+  </mat-checkbox>
+  <mat-checkbox (change)="mapToCoordinateList()" [(ngModel)]="displayGateways">
+    Gateways
+  </mat-checkbox>
 </div>

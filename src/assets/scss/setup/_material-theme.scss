@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @import "variables";
+
 @include mat.core();
 
 /* ======== angular material custom theme ======== */
@@ -9,26 +10,26 @@ $OS2IoT-warn: mat.define-palette(mat.$red-palette);
 
 // Light theme
 $OS2IoT-theme: mat.define-light-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: $OS2IoT-primary,
-      accent: $OS2IoT-accent,
-      warn: $OS2IoT-warn,
-    ),
-  )
+    (
+      color: (
+        theme-type: light,
+        primary: $OS2IoT-primary,
+        accent: $OS2IoT-accent,
+        warn: $OS2IoT-warn,
+      ),
+    )
 );
 
 // Dark theme
 $OS2IoT-theme: mat.define-dark-theme(
-  (
-    color: (
-      theme-type: dark,
-      primary: $OS2IoT-primary,
-      accent: $OS2IoT-accent,
-      warn: $OS2IoT-warn,
-    ),
-  )
+    (
+      color: (
+        theme-type: dark,
+        primary: $OS2IoT-primary,
+        accent: $OS2IoT-accent,
+        warn: $OS2IoT-warn,
+      ),
+    )
 );
 
 // Main theme defination
@@ -55,14 +56,14 @@ $OS2IoT-frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $OS2IoT-frontend-theme: mat.define-light-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: $OS2IoT-frontend-primary,
-      accent: $OS2IoT-frontend-accent,
-      warn: $OS2IoT-frontend-warn,
-    ),
-  )
+    (
+      color: (
+        theme-type: light,
+        primary: $OS2IoT-frontend-primary,
+        accent: $OS2IoT-frontend-accent,
+        warn: $OS2IoT-frontend-warn,
+      ),
+    )
 );
 
 // Include theme styles for core and each component used in your app.
@@ -75,6 +76,7 @@ $OS2IoT-frontend-theme: mat.define-light-theme(
 .mat-checkbox-layout {
   white-space: normal !important;
 }
+
 ////////////////////////////// EXPANSION PANELS ///////////////////////////////////////////
 .mat-expansion-panel:not([class*="mat-elevation-z"]) {
   box-shadow: none;
@@ -133,6 +135,7 @@ $OS2IoT-frontend-theme: mat.define-light-theme(
 .search-form {
   .mat-form-field-flex {
     @extend .mb-2;
+
     .mat-form-field-suffix {
       align-self: flex-end;
     }
@@ -156,8 +159,8 @@ $OS2IoT-frontend-theme: mat.define-light-theme(
 }
 
 .mat-sort-header-arrow {
-  color: $grey-tablehead !important;
-  opacity: 1 !important;
+  color: red;
+  opacity: 1;
 }
 
 tr.mat-row {
@@ -186,6 +189,6 @@ tr.mat-row {
   width: 20% !important
 }
 
-.mdc-checkbox__checkmark{
+.mdc-checkbox__checkmark {
   color: white !important
 }

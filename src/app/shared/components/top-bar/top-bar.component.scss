@@ -8,6 +8,7 @@
   height: 72px;
   justify-content: space-between;
   align-items: center;
+  border-bottom: $light-border-color 1px solid;
 }
 
 .bottom-main-container {
@@ -76,13 +77,18 @@
 }
 
 :host .search-input {
-  border-radius: 0px;
-  border-width: 0px;
   display: flex;
   flex-direction: row;
   width: 100%;
-  border: transparent;
-  margin-left: 30px;
+  border: 0 transparent;
+}
+
+input::placeholder {
+  color: $selector-font-color !important;
+}
+
+input::-ms-input-placeholder {
+  color: $selector-font-color !important;
 }
 
 :host input:focus {
@@ -157,4 +163,11 @@
   font-weight: 500;
   line-height: 36px;
   margin-bottom: 20px;
+}
+
+.custom-search-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 32px;
 }

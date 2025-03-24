@@ -42,6 +42,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   private map: leaflet.Map;
   private marker: leaflet.Marker;
   private markers: any;
+  private gatewayMarkers: any;
   private zoomLevel = 13;
   private redMarker = "/assets/images/red-marker.png";
   private greenMarker = "/assets/images/green-marker.png";
@@ -169,6 +170,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (this.markers) {
       this.markers.clearLayers();
     }
+    if (this.gatewayMarkers) {
+      this.gatewayMarkers.clearLayers();
+    }
     if (this.coordinateList) this.placeMarkers();
   }
 
@@ -216,7 +220,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         if (this.isFromApplication) {
           if (!coord.markerInfo.isDevice) {
             gatewayLayerGroup.push(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo));
-            this.markers = leaflet.layerGroup(gatewayLayerGroup).addTo(this.map);
+            this.gatewayMarkers = leaflet.layerGroup(gatewayLayerGroup).addTo(this.map);
           } else {
             clusterGroup.addLayer(this.addMarker(coord.latitude, coord.longitude, coord.draggable, coord.markerInfo));
           }

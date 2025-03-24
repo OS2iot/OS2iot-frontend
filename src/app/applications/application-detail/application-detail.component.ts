@@ -19,6 +19,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { ApplicationChangeOrganizationDialogComponent } from "../application-change-organization-dialog/application-change-organization-dialog.component";
+import moment from "moment/moment";
 
 @Component({
   selector: "app-application",
@@ -53,12 +54,12 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   public canEdit = false;
   public devices: IotDevicesApplicationMapResponse[];
   public coordinateList = [];
-  private deviceSubscription: Subscription;
-  private gatewaysSubscription: Subscription;
   public gateways: Gateway[];
   public redMarker = "/assets/images/red-marker.png";
   public greenMarker = "/assets/images/green-marker.png";
   public greyMarker = "/assets/images/grey-marker.png";
+  private deviceSubscription: Subscription;
+  private gatewaysSubscription: Subscription;
 
   constructor(
     private applicationService: ApplicationService,
@@ -125,67 +126,6 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     });
   }
 
-  private getGateways(): void {
-    this.gatewaysSubscription = this.chirpstackGatewayService
-      .getForMaps()
-      .subscribe((gateways: GatewayResponseMany) => {
-        this.gateways = gateways.resultList;
-        this.mapGatewaysToCoordinateList();
-      });
-  }
-
-  private mapDevicesToCoordinateList() {
-    const tempCoordinateList = [];
-    this.devices.map(dev => {
-      if (!dev.location) {
-        return;
-      }
-      tempCoordinateList.push({
-        longitude: dev.location.coordinates[0],
-        latitude: dev.location.coordinates[1],
-        draggable: false,
-        editEnabled: false,
-        useGeolocation: false,
-        markerInfo: {
-          name: dev.name,
-          active: dev.type,
-          id: dev.id,
-          isDevice: true,
-          internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
-          networkTechnology: dev.type,
-          lastActive: dev.latestSentMessage,
-        },
-      });
-    });
-
-    this.coordinateList = tempCoordinateList;
-  }
-
-  private mapGatewaysToCoordinateList() {
-    const tempcoordinateList = [];
-    this.gateways.map(gateway =>
-      tempcoordinateList.push({
-        longitude: gateway.location.longitude,
-        latitude: gateway.location.latitude,
-        draggable: false,
-        editEnabled: false,
-        useGeolocation: false,
-        markerInfo: {
-          name: gateway.name,
-          active: this.getGatewayStatus(gateway),
-          id: gateway.gatewayId,
-          internalOrganizationId: gateway.organizationId,
-          internalOrganizationName: gateway.organizationName,
-        },
-      })
-    );
-    this.coordinateList.push.apply(this.coordinateList, tempcoordinateList);
-  }
-
-  private getGatewayStatus(gateway: Gateway): boolean {
-    return this.chirpstackGatewayService.isGatewayActive(gateway);
-  }
-
   onDeleteApplication() {
     this.deleteDialogService.showApplicationDialog(this.application).subscribe(response => {
       if (response) {
@@ -235,5 +175,73 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
     }
+  }
+
+  private getGateways(): void {
+    this.gatewaysSubscription = this.chirpstackGatewayService
+      .getForMaps()
+      .subscribe((gateways: GatewayResponseMany) => {
+        this.gateways = gateways.resultList;
+        this.mapGatewaysToCoordinateList();
+      });
+  }
+
+  private mapDevicesToCoordinateList() {
+    const tempCoordinateList = [];
+    this.devices.map(dev => {
+      if (!dev.location) {
+        return;
+      }
+      const isActive = dev.latestSentMessage
+        ? moment(dev.latestSentMessage).unix() > moment(new Date()).subtract(1, "day").unix()
+        : false;
+
+      tempCoordinateList.push({
+        longitude: dev.location.coordinates[0],
+        latitude: dev.location.coordinates[1],
+        draggable: false,
+        editEnabled: false,
+        useGeolocation: false,
+        markerInfo: {
+          name: dev.name,
+          active: isActive,
+          id: dev.id,
+          isDevice: true,
+          isGateway: false,
+          internalOrganizationId: this.sharedVariableService.getSelectedOrganisationId(),
+          networkTechnology: dev.type,
+          lastActive: dev.latestSentMessage,
+        },
+      });
+    });
+
+    this.coordinateList = tempCoordinateList;
+  }
+
+  private mapGatewaysToCoordinateList() {
+    const tempcoordinateList = [];
+    this.gateways.map(gateway =>
+      tempcoordinateList.push({
+        longitude: gateway.location.longitude,
+        latitude: gateway.location.latitude,
+        draggable: false,
+        editEnabled: false,
+        useGeolocation: false,
+        markerInfo: {
+          name: gateway.name,
+          active: this.getGatewayStatus(gateway),
+          id: gateway.gatewayId,
+          isDevice: false,
+          isGateway: true,
+          internalOrganizationId: gateway.organizationId,
+          internalOrganizationName: gateway.organizationName,
+        },
+      })
+    );
+    this.coordinateList.push.apply(this.coordinateList, tempcoordinateList);
+  }
+
+  private getGatewayStatus(gateway: Gateway): boolean {
+    return this.chirpstackGatewayService.isGatewayActive(gateway);
   }
 }
