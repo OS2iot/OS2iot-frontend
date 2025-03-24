@@ -119,7 +119,7 @@ button:focus,
 
 .no-shadow {
   box-shadow: none;
-  z-index: 10000;
+  z-index: 100;
 }
 
 ::ng-deep .mdc-notched-outline__leading {
@@ -147,6 +147,7 @@ button:focus,
   padding: 0 2px 0 0;
   border-radius: 0 5px 5px 0;
   transition: left 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  z-index: 101;
 
   &:hover {
     background-color: $color-link-active-bg;
@@ -160,6 +161,7 @@ button:focus,
     border-radius: 5px 0 0 5px;
     left: 248px;
     padding: 0 0 0 2px;
+
     .icon-arrow-nav {
       transform: rotate(0deg);
     }

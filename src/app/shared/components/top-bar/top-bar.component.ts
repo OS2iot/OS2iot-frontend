@@ -22,6 +22,7 @@ import { QuickActionButton } from "@shared/models/quick-action-button.model";
 import { Sort } from "@shared/models/sort.model";
 import { LoggedInService } from "@shared/services/loggedin.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
+import { MeService } from "@shared/services/me.service";
 
 @Component({
   selector: "app-top-bar",
@@ -79,7 +80,8 @@ export class TopBarComponent implements OnInit {
     private authService: AuthService,
     private loggedInService: LoggedInService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    public meService: MeService
   ) {
     translate.use("da");
 
@@ -100,8 +102,6 @@ export class TopBarComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/search.svg"),
       {}
     );
-
-    this.sharedVariableService.getUserInfo;
   }
 
   ngOnInit(): void {

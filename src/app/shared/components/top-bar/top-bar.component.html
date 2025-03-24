@@ -28,7 +28,9 @@
     <div class="user-information-container">
       <div class="name-and-title-container">
         <div class="name-container">{{ getUsername() }}</div>
-        <!-- <div class="title-container">Global Admin</div> -->
+        <div *ngIf="meService.hasGlobalAdmin()"
+             class="title-container">{{ 'PERMISSION-TYPE.GlobalAdmin' | translate }}
+        </div>
       </div>
       <div>
         <mat-icon class="angle-down-icon" svgIcon="angle-down"></mat-icon>

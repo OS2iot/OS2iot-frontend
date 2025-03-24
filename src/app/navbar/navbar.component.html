@@ -1,7 +1,7 @@
 <nav
-  class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3 no-shadow"
-  aria-expanded="false"
   [class.nav-visible]="isVisible"
+  aria-expanded="false"
+  class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3 no-shadow"
 >
   <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo"/>
 
@@ -129,6 +129,6 @@
   </ng-template>
 </nav>
 
-<div [class.nav-visible-button]="isVisible" class="toggle-button" (click)="toggleNavbar()">
+<div (click)="toggleNavbar()" [class.nav-visible-button]="isVisible" class="toggle-button">
   <mat-icon class="icon-arrow-nav rotate" svgIcon="nav-arrow"></mat-icon>
 </div>
