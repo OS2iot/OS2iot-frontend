@@ -1,22 +1,31 @@
-import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
-import { TranslateService } from "@ngx-translate/core";
-import { Gateway, GatewayResponseMany } from "../gateway.model";
-import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { merge, Observable, Subject, Subscription } from "rxjs";
-import { MeService } from "@shared/services/me.service";
-import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
-import { environment } from "@environments/environment";
-import { MatSort } from "@angular/material/sort";
-import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
-import { TableColumn } from "@shared/types/table.type";
-import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { environment } from "@environments/environment";
+import { faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { TranslateService } from "@ngx-translate/core";
+import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
+import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
+import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { GatewayDialogModel } from "@shared/models/dialog.model";
+import { MeService } from "@shared/services/me.service";
+import { TableColumn } from "@shared/types/table.type";
+import moment from "moment";
+import { merge, Observable, Subject, Subscription } from "rxjs";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
+import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
 import { GatewayChangeOrganizationDialogComponent } from "../gateway-change-organization-dialog/gateway-change-organization-dialog.component";
+import { Gateway, GatewayResponseMany } from "../gateway.model";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -115,6 +124,7 @@ const columnDefinitions: TableColumn[] = [
   selector: "app-gateway-table",
   templateUrl: "./gateway-table.component.html",
   styleUrls: ["./gateway-table.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   @Input() organisationChangeSubject: Subject<any>;
@@ -129,12 +139,11 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   refetchIntervalId: NodeJS.Timeout;
   resultsLength = 0;
   isLoadingResults = true;
-  private fetchSubscription: Subscription;
-
   gatewayTableSavedColumns = "gatewayTableSavedColumns";
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  protected readonly columnDefinitions = columnDefinitions;
+  private fetchSubscription: Subscription;
 
   constructor(
     private chirpstackGatewayService: ChirpstackGatewayService,
@@ -195,33 +204,8 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     this.fetchSubscription.unsubscribe();
   }
 
-  private refresh() {
-    this.getGateways(this.sort.active, this.sort.direction).subscribe(data => {
-      data.resultList.forEach(gw => {
-        gw.canEdit = this.canEdit(gw.organizationId);
-        gw.tagsString = JSON.stringify(gw.tags ?? {});
-      });
-      this.data = data.resultList;
-      this.resultsLength = data.totalCount;
-      this.isLoadingResults = false;
-    });
-  }
-
   canEdit(internalOrganizationId: number): boolean {
     return this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.GatewayWrite, internalOrganizationId);
-  }
-
-  private getGateways(orderByColumn: string, orderByDirection: string): Observable<GatewayResponseMany> {
-    const params = {
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      orderOn: orderByColumn,
-      sort: orderByDirection,
-    };
-    if (this.organizationId > 0) {
-      params["organizationId"] = this.organizationId;
-    }
-    return this.chirpstackGatewayService.getMultiple(params);
   }
 
   gatewayStatus(gateway: Gateway): boolean {
@@ -266,5 +250,32 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
-  protected readonly columnDefinitions = columnDefinitions;
+  getSortDirection(id: string) {
+    return columnDefinitions.find(c => c.id === id)?.sort ?? "asc";
+  }
+
+  private refresh() {
+    this.getGateways(this.sort.active, this.sort.direction).subscribe(data => {
+      data.resultList.forEach(gw => {
+        gw.canEdit = this.canEdit(gw.organizationId);
+        gw.tagsString = JSON.stringify(gw.tags ?? {});
+      });
+      this.data = data.resultList;
+      this.resultsLength = data.totalCount;
+      this.isLoadingResults = false;
+    });
+  }
+
+  private getGateways(orderByColumn: string, orderByDirection: string): Observable<GatewayResponseMany> {
+    const params = {
+      limit: this.paginator.pageSize,
+      offset: this.paginator.pageIndex * this.paginator.pageSize,
+      orderOn: orderByColumn,
+      sort: orderByDirection,
+    };
+    if (this.organizationId > 0) {
+      params["organizationId"] = this.organizationId;
+    }
+    return this.chirpstackGatewayService.getMultiple(params);
+  }
 }

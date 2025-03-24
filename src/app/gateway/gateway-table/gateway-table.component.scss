@@ -1,10 +1,4 @@
-.fa-error {
-  color: red !important;
-}
-
-.fa-ok {
-  color: green !important;
-}
+@import "../../../assets/scss/setup/variables";
 
 .min-width-150 {
   min-width: 150px;
@@ -12,4 +6,17 @@
 
 .min-width-250 {
   min-width: 250px;
+}
+
+.column-title-color {
+  color: $color-link;
+  font-weight: bold;
+}
+
+.column-title-color-inactive {
+  color: $default-icon-color;
+}
+
+.mat-sort-header-arrow {
+  display: none !important;
 }
