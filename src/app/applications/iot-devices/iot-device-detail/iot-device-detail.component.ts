@@ -16,7 +16,7 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
 import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-application-dialog/iot-device-change-application-dialog.component";
-import { ApplicationDialogModel, IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
+import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-iot-device",
@@ -56,6 +56,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public canEdit = false;
+  private copyDeviceButtonId = "COPY-DEVICE";
 
   private resetApiKeyId = "RESET-API-KEY";
   private resetApiKeyOption: ExtraDropdownOption;
@@ -148,6 +149,14 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             onClick: () => this.onOpenChangeApplicationDialog(),
           });
         });
+
+        this.translate.get("IOTDEVICE.COPY-SETTINGS-TO-NEW-DEVICE").subscribe(translation => {
+          this.dropdownButton.extraOptions.push({
+            id: this.copyDeviceButtonId,
+            label: translation,
+            onClick: () => this.navigateToCopy(),
+          });
+        });
       }
     });
   }
@@ -189,6 +198,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         deviceId: this.deviceId,
       } as IoTDeviceApplicationDialogModel,
     });
+  }
+
+  navigateToCopy() {
+    this.router.navigate(["applications", this.application.id, "iot-device-copy", this.deviceId]);
   }
 
   ngOnDestroy() {

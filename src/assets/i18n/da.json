@@ -1063,7 +1063,9 @@
       "CHOOSE-DATA-TARGET": "Tilknyt data target",
       "ADD-DATA-TARGET": "Vælg data target",
       "SNACKBAR-SAVED": "{{deviceName}} er nu tilknyttet {{applicationName}}"
-    }
+    },
+    "COPY-SETTINGS-TO-NEW-DEVICE": "Kopier opsætning til ny enhed",
+    "COPY-DATATAGET-AND-PAYLOAD": "Kopier opsætning for datatargets og payload decoders"
   },
   "MESSAGE": {
     "NAME-INVALID-OR-ALREADY-IN-USE": "Dette navn er allerede i brug",

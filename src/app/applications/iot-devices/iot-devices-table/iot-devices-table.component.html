@@ -16,7 +16,8 @@
     matSort
     matSortActive="name"
     matSortDirection="asc"
-    matSortDisableClear>
+    matSortDisableClear
+  >
     <ng-template #notSupported>
       <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
     </ng-template>
@@ -30,12 +31,12 @@
         <div [ngClass]="this.sort.active === 'name' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "APPLICATION-TABLE.NAME" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('name')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('name')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>
         <a [routerLink]="['../iot-device', iotDevice.id]" class="device-link" routerLinkActive="active">{{
-            iotDevice.name
-          }}</a>
+          iotDevice.name
+        }}</a>
       </td>
     </ng-container>
 
@@ -45,7 +46,7 @@
         <div [ngClass]="this.sort.active === 'type' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.NETWORK-TECHNOLOGY" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('type')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('type')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ "IOT-DEVICE-TYPES." + iotDevice.type | translate }}</td>
     </ng-container>
@@ -57,7 +58,7 @@
         >
           {{ "GATEWAY.PLACEMENT-LABEL" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('commentOnLocation')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('commentOnLocation')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>
         {{ iotDevice.commentOnLocation ? truncateText(iotDevice.commentOnLocation) : "-" }}
@@ -69,7 +70,7 @@
         <div [ngClass]="this.sort.active === 'deviceModel' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOTDEVICE.DEVICEMODEL" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceModel')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceModel')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceModel?.body?.name ?? "-" }}</td>
     </ng-container>
@@ -81,7 +82,7 @@
         >
           {{ "IOTDEVICE.LORA.DEVICEPROFILE" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceProfileName')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceProfileName')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceProfileName ?? "-" }}</td>
     </ng-container>
@@ -91,7 +92,7 @@
         <div [ngClass]="this.sort.active === 'deviceEUI' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.DEV-EUI" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('deviceEUI')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('deviceEUI')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.deviceEUI ?? "-" }}</td>
     </ng-container>
@@ -103,7 +104,7 @@
         >
           {{ "IOT-TABLE.APP-KEY" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('OTAAapplicationKey')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('OTAAapplicationKey')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.OTAAapplicationKey ?? "-" }}</td>
     </ng-container>
@@ -114,7 +115,7 @@
         <div [ngClass]="this.sort.active === 'rssi' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.RSSI" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('rssi')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('rssi')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>
         <ng-container *ngIf="iotDevice.type === 'LORAWAN' || iotDevice.type === 'SIGFOX'; else notSupported">
@@ -131,7 +132,7 @@
         <div [ngClass]="this.sort.active === 'snr' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.SNR" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('snr')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('snr')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>
         <ng-container *ngIf="iotDevice.type === 'LORAWAN' || iotDevice.type === 'SIGFOX'; else notSupported">
@@ -147,7 +148,7 @@
         <div [ngClass]="this.sort.active === 'dataTargets' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "APPLICATION-TABLE.DATA-TARGETS" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ iotDevice.connections?.length ?? 0 }}</td>
     </ng-container>
@@ -176,7 +177,7 @@
         <div [ngClass]="this.sort.active === 'active' ? 'column-title-color' : 'column-title-color-inactive'">
           {{ "IOT-TABLE.ACTIVE" | translate }}
         </div>
-        <app-table-sort-icon [sortDirection]="getSortDirection('active')"/>
+        <app-table-sort-icon [sortDirection]="getSortDirection('active')" />
       </th>
       <td *matCellDef="let iotDevice" mat-cell>{{ lastActive(iotDevice) }}</td>
     </ng-container>
@@ -197,13 +198,18 @@
           <ul attr.aria-labelledby="tableRowDropdown-{{ iotDevice.id }}" class="dropdown-menu dropdown-menu--table">
             <li class="dropdown-item">
               <a [routerLink]="['../iot-device-edit', iotDevice.id]" routerLinkActive="active"
-              >{{ "IOTDEVICE-TABLE-ROW.EDIT" | translate }}
+                >{{ "IOTDEVICE-TABLE-ROW.EDIT" | translate }}
               </a>
             </li>
             <li *ngIf="iotDevice.type !== deviceTypes.SIGFOX" class="dropdown-item">
               <a (click)="onOpenChangeApplicationDialog(iotDevice.id)" routerLinkActive="active">{{
-                  "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
-                }}</a>
+                "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
+              }}</a>
+            </li>
+            <li *ngIf="iotDevice.type !== deviceTypes.SIGFOX" class="dropdown-item">
+              <a (click)="navigateToCopy(iotDevice.id)" routerLinkActive="active">{{
+                "IOTDEVICE.COPY-SETTINGS-TO-NEW-DEVICE" | translate
+              }}</a>
             </li>
             <li class="dropdown-item">
               <a (click)="clickDelete(iotDevice)" [routerLink]="[]">{{ "IOTDEVICE-TABLE-ROW.DELETE" | translate }}</a>
