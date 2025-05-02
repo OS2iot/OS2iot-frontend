@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Application } from "@app/applications/application.model";
@@ -17,11 +17,13 @@ import { jsonToList } from "@shared/helpers/json.helper";
 import { ErrorMessage } from "@shared/models/error-message.model";
 import { ScrollToTopService } from "@shared/services/scroll-to-top.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { Subscription } from "rxjs";
+import { forkJoin, Subscription } from "rxjs";
 import { IotDevice } from "../iot-device.model";
 import { IoTDeviceService } from "../iot-device.service";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
+import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
+import { PayloadDeviceDatatargetGetManyResponse } from "@payload-decoder/payload-device-data.model";
 
 @Component({
   selector: "app-iot-device-edit",
@@ -29,6 +31,8 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   styleUrls: ["./iot-device-edit.component.scss"],
 })
 export class IotDeviceEditComponent implements OnInit, OnDestroy {
+  @Input() isDeviceCopy: boolean = false;
+  public copyPayloadAndDatatarget: boolean = false;
   public errorMessages: any;
   public errorFields: string[];
   public formFailedSubmit = false;
@@ -57,6 +61,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private deviceProfileService: DeviceProfileService,
     private applicationService: ApplicationService,
     private iotDeviceService: IoTDeviceService,
+    private datatargetPayloadService: PayloadDeviceDatatargetService,
     private location: Location,
     private shareVariable: SharedVariableService,
     private deviceModelService: DeviceModelService,
@@ -113,12 +118,16 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  isChecked(event) {
+  isDeviceTypeChecked(event) {
     if (event.target.checked) {
       this.iotDevice.type = event.target.name;
     } else if (!event.target.checked && this.iotDevice.type.toString().includes(event.target.name)) {
       event.target.checked = true;
     }
+  }
+
+  isCopyPayloadAndDatatargetChecked(event) {
+    this.copyPayloadAndDatatarget = event.target.checked;
   }
 
   getDevice(id: number): void {
@@ -139,6 +148,46 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       }
       if (device.metadata) {
         this.metadataTags = jsonToList(device.metadata);
+      }
+
+      //If coming from copy, reset all these properties
+      if (this.isDeviceCopy) {
+        this.iotDevice.id = undefined;
+        this.iotDevice.name = undefined;
+        this.iotDevice.createdAt = undefined;
+        this.iotDevice.createdBy = undefined;
+        this.iotDevice.createdByName = undefined;
+        this.iotDevice.updatedAt = undefined;
+        this.iotDevice.updatedBy = undefined;
+        this.iotDevice.updatedByName = undefined;
+        this.copyPayloadAndDatatarget = true;
+
+        switch (this.iotDevice.type) {
+          case DeviceType.GENERIC_HTTP: {
+            this.iotDevice.apiKey = undefined;
+            break;
+          }
+          case DeviceType.LORAWAN: {
+            this.iotDevice.lorawanSettings.devEUI = undefined;
+            this.iotDevice.lorawanSettings.OTAAapplicationKey = undefined;
+            this.iotDevice.lorawanSettings.applicationSessionKey = undefined;
+            this.iotDevice.lorawanSettings.networkSessionKey = undefined;
+            this.iotDevice.lorawanSettings.devAddr = undefined;
+            this.iotDevice.lorawanSettings.fCntUp = undefined;
+            this.iotDevice.lorawanSettings.nFCntDown = undefined;
+            break;
+          }
+          case DeviceType.MQTT_INTERNAL_BROKER: {
+            this.iotDevice.mqttInternalBrokerSettings.caCertificate = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.deviceCertificate = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.deviceCertificateKey = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.mqttPort = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.mqttURL = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.mqttpassword = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.mqtttopicname = undefined;
+            this.iotDevice.mqttInternalBrokerSettings.mqttusername = undefined;
+          }
+        }
       }
     });
   }
@@ -190,7 +239,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.deviceId !== 0) {
+    if (this.deviceId !== 0 && !this.isDeviceCopy) {
       this.updateIoTDevice(this.deviceId);
     } else {
       this.postIoTDevice();
@@ -275,23 +324,55 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  private navigateToDeviceDetails(device: IotDevice) {
+    this.router.navigate(["applications/" + this.iotDevice.applicationId + "/iot-device/" + device.id + "/details"]);
+  }
+
   postIoTDevice() {
-    // Sanitize devEUI for non-hex characters
+    // Sanitize devEUI
     if (this.iotDevice.type === DeviceType.LORAWAN && this.iotDevice.lorawanSettings.devEUI) {
       this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.replace(/[^0-9A-Fa-f]/g, "");
     }
 
-    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe(
-      (response: IotDevice) => {
-        this.router.navigate([
-          "applications/" + this.iotDevice.applicationId + "/iot-device/" + response.id + "/details",
-        ]);
+    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe({
+      next: (createdDevice: IotDevice) => {
+        if (!this.copyPayloadAndDatatarget) {
+          this.navigateToDeviceDetails(createdDevice);
+          return;
+        }
+
+        this.datatargetPayloadService.getByIoTDevice(this.deviceId).subscribe({
+          next: (result: PayloadDeviceDatatargetGetManyResponse) => {
+            const appendObservables = result.data.map(element =>
+              this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })
+            );
+
+            if (appendObservables.length === 0) {
+              this.navigateToDeviceDetails(createdDevice);
+              return;
+            }
+
+            forkJoin(appendObservables).subscribe({
+              next: () => this.navigateToDeviceDetails(createdDevice),
+              error: (error: HttpErrorResponse) => {
+                this.formFailedSubmitHandleError(error);
+              },
+            });
+          },
+          error: (error: HttpErrorResponse) => {
+            this.formFailedSubmitHandleError(error);
+          },
+        });
       },
-      (error: HttpErrorResponse) => {
-        this.handleError(error);
-        this.formFailedSubmit = true;
-      }
-    );
+      error: (error: HttpErrorResponse) => {
+        this.formFailedSubmitHandleError(error);
+      },
+    });
+  }
+
+  formFailedSubmitHandleError(error: HttpErrorResponse) {
+    this.handleError(error);
+    this.formFailedSubmit = true;
   }
 
   updateIoTDevice(id: number) {
@@ -301,8 +382,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.routeBack();
       },
       (error: HttpErrorResponse) => {
-        this.handleError(error);
-        this.formFailedSubmit = true;
+        this.formFailedSubmitHandleError(error);
       }
     );
   }

@@ -24,6 +24,7 @@ import { IoTDeviceDetailComponent } from "./iot-devices/iot-device-detail/iot-de
 import { IotDeviceEditComponent } from "./iot-devices/iot-device-edit/iot-device-edit.component";
 import { MulticastDetailComponent } from "./multicast/multicast-detail/multicast-detail.component";
 import { MulticastEditComponent } from "./multicast/multicast-edit/multicast-edit.component";
+import { IotDeviceCopyComponent } from "./iot-devices/iot-device-copy/iot-device-copy.component";
 
 const applicationRoutes: Routes = [
   {
@@ -66,6 +67,10 @@ const applicationRoutes: Routes = [
                 component: IotDeviceDownlinkTabComponent,
               },
             ],
+          },
+          {
+            path: "iot-device-copy/:deviceId",
+            component: IotDeviceCopyComponent,
           },
           { path: "datatarget-new", component: DatatargetNewComponent },
           { path: "datatarget-edit", component: DatatargetEditComponent },
