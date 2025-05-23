@@ -14,18 +14,18 @@
       <label class="form-label" for="name">{{ "API-KEY.EDIT.NAME" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'API-KEY.EDIT.NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="apiKeyRequest.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'API-KEY.EDIT.NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -35,17 +35,32 @@
       <label class="form-label" for="permissions">{{ "QUESTION.PERMISSION.SELECT-PERMISSION" | translate }}</label
       >*
       <mat-select
+        [(ngModel)]="apiKeyRequest.permissionIds"
+        [compareWith]="compare"
+        [multiple]="true"
         class="form-control"
         name="permissions"
-        [compareWith]="compare"
-        [(ngModel)]="apiKeyRequest.permissionIds"
-        [multiple]="true"
       >
         <mat-option *ngFor="let permission of permissions" [value]="permission.id">
           {{ permission.name }}
         </mat-option>
       </mat-select>
     </div>
+  </div>
+
+  <div class="row form-group mt-3">
+    <label class="form-label">{{ "API-KEY.EDIT.EXPIRATION-DATE" | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "API-KEY.EDIT.EXPIRATION-DATE-PLACEHOLDER" | translate }}</mat-label>
+      <input
+        [formControl]="serializedExpirationDate"
+        [matDatepicker]="expirationDatePicker"
+        matInput
+      />
+      <mat-datepicker-toggle [for]="expirationDatePicker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #expirationDatePicker panelClass="datepicker-table-fix"></mat-datepicker>
+      <mat-hint>{{ "API-KEY.EDIT.EXPIRATION-DATE-DESCRIPTION" | translate }}</mat-hint>
+    </mat-form-field>
   </div>
 
   <div class="form-group mt-5">

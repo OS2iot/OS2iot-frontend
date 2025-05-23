@@ -10,6 +10,7 @@ import { BackButton } from "@shared/models/back-button.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { ApiKeyRequest } from "../api-key.model";
 import { ApiKeyService } from "../api-key.service";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-api-key-edit",
@@ -29,6 +30,8 @@ export class ApiKeyEditComponent implements OnInit {
   public errorFields: string[];
   public formFailedSubmit = false;
   public permissions: PermissionResponse[] = [];
+
+  serializedExpirationDate = new FormControl<Date | undefined>(undefined);
   private organizationId: number;
   private id: number;
 
@@ -59,6 +62,24 @@ export class ApiKeyEditComponent implements OnInit {
     this.organizationId = this.sharedVariableService.getSelectedOrganisationId();
   }
 
+  onSubmit(): void {
+    this.id ? this.update() : this.create();
+  }
+
+  public compare(matOptionValue: number, ngModelObject: number): boolean {
+    return matOptionValue === ngModelObject;
+  }
+
+  showError(err: HttpErrorResponse) {
+    const result = this.errorMessageService.handleErrorMessageWithFields(err);
+    this.errorFields = result.errorFields;
+    this.errorMessages = result.errorMessages;
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
   private getPermissions() {
     this.permissionService
       .getPermissions(undefined, undefined, undefined, undefined, undefined, this.organizationId)
@@ -77,14 +98,14 @@ export class ApiKeyEditComponent implements OnInit {
       this.apiKeyRequest.id = key.id;
       this.apiKeyRequest.name = key.name;
       this.apiKeyRequest.permissionIds = key.permissions.map(pm => pm.id);
+      if (key.expiresOn) {
+        this.serializedExpirationDate.setValue(key.expiresOn);
+      }
     });
   }
 
-  onSubmit(): void {
-    this.id ? this.update() : this.create();
-  }
-
   private create(): void {
+    this.apiKeyRequest.expiresOn = this.serializedExpirationDate.value;
     this.apiKeyService.create(this.apiKeyRequest).subscribe(
       () => this.routeBack(),
       err => this.showError(err)
@@ -92,23 +113,10 @@ export class ApiKeyEditComponent implements OnInit {
   }
 
   private update(): void {
+    this.apiKeyRequest.expiresOn = this.serializedExpirationDate.value;
     this.apiKeyService.update(this.apiKeyRequest, this.id).subscribe(
       () => this.routeBack(),
       err => this.showError(err)
     );
-  }
-
-  public compare(matOptionValue: number, ngModelObject: number): boolean {
-    return matOptionValue === ngModelObject;
-  }
-
-  showError(err: HttpErrorResponse) {
-    const result = this.errorMessageService.handleErrorMessageWithFields(err);
-    this.errorFields = result.errorFields;
-    this.errorMessages = result.errorMessages;
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

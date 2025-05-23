@@ -16,7 +16,7 @@ import { MeService } from "@shared/services/me.service";
   styleUrls: ["./user-table.component.scss"],
 })
 export class UserTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ["name", "email", "global", "status", "lastLogin", "menu"];
+  displayedColumns: string[] = ["name", "email", "global", "status", "expiresOn", "lastLogin", "menu"];
   data: UserResponse[];
 
   public pageSize = environment.tablePageSize;

@@ -1,11 +1,11 @@
 <div *ngIf="user">
   <app-top-bar
-    [data]="user"
-    [backButton]="backButton"
-    [subPage]="true"
     [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton"
+    [backButton]="backButton"
     [canEdit]="canEdit"
+    [data]="user"
+    [dropDownButton]="dropdownButton"
+    [subPage]="true"
   ></app-top-bar>
   <div class="container-fluid">
     <div class="row">
@@ -20,6 +20,10 @@
           <p [ngClass]="user.active | activeDeactive">
             <strong>{{ "USERS.DETAIL.STATUS" | translate }}</strong
             >{{ user.active | activeDeactive }}
+          </p>
+          <p *ngIf="user.expiresOn">
+            <strong>{{ "API-KEY.EXPIRES-ON" | translate }}</strong>
+            {{ (user.expiresOn) | dateOnly }}
           </p>
           <P *ngIf="user.lastLogin; else noLogin">
             <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
@@ -46,7 +50,7 @@
           <h3 class="">
             {{ "USERS.DETAIL.PERMISSIONS" | translate }}
           </h3>
-          <app-permission-tabel [userId]="user?.id"> </app-permission-tabel>
+          <app-permission-tabel [userId]="user?.id"></app-permission-tabel>
         </div>
       </div>
     </div>
