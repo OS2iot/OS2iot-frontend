@@ -1184,7 +1184,8 @@
       "PASSWORD-PLACEHOLDER": "Indtast eller redigér password",
       "ACTIVE": "Aktiveret",
       "GLOBAL-ADMIN": "Skal den nye bruger være global administrator?",
-      "SAVE": "Gem Bruger"
+      "SAVE": "Gem Bruger",
+      "EXPIRATION-DATE-DESCRIPTION": "Bruger deaktiveres automatisk på denne dato"
     },
     "DETAIL": {
       "DROPDOWN": "Håndter Bruger",
@@ -1315,12 +1316,17 @@
       "NAME-PLACEHOLDER": "Indtast nøglens navn",
       "CANCEL": "Annuller",
       "SAVE": "Gem nøgle",
-      "CREATE-API-KEY": "Opret nøgle"
+      "CREATE-API-KEY": "Opret nøgle",
+      "EXPIRATION-DATE": "Udløbsdato",
+      "EXPIRATION-DATE-PLACEHOLDER": "Udløbsdato",
+      "EXPIRATION-DATE-DESCRIPTION": "Nøgle deaktiveres automatisk på denne dato"
     },
     "TABLE-ROW": {
       "EDIT": "Redigér",
       "DELETE": "Slet"
-    }
+    },
+    "STATUS": "Status",
+    "EXPIRES-ON": "Udløbsdato"
   },
   "NoUsersAdded": "Ingen brugergrupper er tilføjet",
   "FIWARE": {

@@ -9,7 +9,8 @@ export class UserRequest {
   active: boolean;
   globalAdmin: boolean;
   showWelcomeScreen: boolean;
-  permissionIds: number[]
+  permissionIds: number[];
+  expiresOn?: Date;
 }
 
 export interface UserResponse {
@@ -29,6 +30,7 @@ export interface UserResponse {
   awaitingConfirmation: boolean;
   showWelcomeScreen: boolean;
   requestedOrganizations: OrganisationResponse[];
+  expiresOn?: Date;
 }
 
 export interface UserResponsePerRequestedOrganization extends Omit<UserResponse, "requestedOrganizations"> {
