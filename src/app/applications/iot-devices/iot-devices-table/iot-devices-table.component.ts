@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation }
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { IotDevice, IotDevicesResponse } from "@applications/iot-devices/iot-device.model";
 import { environment } from "@environments/environment";
 import { TranslateService } from "@ngx-translate/core";
@@ -133,7 +133,8 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
     private meService: MeService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private changeApplicationDialog: MatDialog
+    private changeApplicationDialog: MatDialog,
+    private router: Router
   ) {
     translate.use("da");
     moment.locale("da");
@@ -250,6 +251,10 @@ export class IotDevicesTableComponent implements AfterViewInit, OnInit {
         deviceId: id,
       } as IoTDeviceApplicationDialogModel,
     });
+  }
+
+  navigateToCopy(id: number) {
+    this.router.navigate(["applications", this.applicationId, "iot-device-copy", id]);
   }
 
   showSigfoxDeleteDialog() {

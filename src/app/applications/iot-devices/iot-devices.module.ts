@@ -36,12 +36,14 @@ import { SigfoxDeviceEditComponent } from "./iot-device-edit/sigfox-device-edit/
 import { ExportCsvDialogComponent } from "./iot-devices-tab/export-csv-dialog/export-csv-dialog.component";
 import { IotDevicesTabComponent } from "./iot-devices-tab/iot-devices-tab.component";
 import { IotDevicesTableComponent } from "./iot-devices-table/iot-devices-table.component";
+import { IotDeviceCopyComponent } from "./iot-device-copy/iot-device-copy.component";
 
 @NgModule({
   declarations: [
     IotDevicesTableComponent,
     IoTDeviceDetailComponent,
     IotDeviceEditComponent,
+    IotDeviceCopyComponent,
     SigfoxDeviceEditComponent,
     IotDeviceDetailGenericComponent,
     IotDeviceDetailLorawanComponent,
@@ -64,7 +66,7 @@ import { IotDevicesTableComponent } from "./iot-devices-table/iot-devices-table.
     ExportCsvDialogComponent,
     IoTDeviceChangeApplicationDialogComponent,
   ],
-  exports: [IotDevicesTableComponent, IoTDeviceDetailComponent],
+  exports: [IotDevicesTableComponent, IoTDeviceDetailComponent, IotDeviceEditComponent],
   imports: [
     SharedModule,
     CommonModule,
