@@ -105,9 +105,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         "IOTDEVICE-TABLE-ROW.RESET-API-KEY",
         "IOTDEVICE.GENERIC_HTTP.RESET-API-KEY",
         "GEN.CANCEL",
+        "GEN.BACK"
       ])
       .subscribe(translations => {
-        this.backButton.label = translations["NAV.APPLICATIONS"];
+        this.backButton.label = translations["GEN.BACK"];
         this.dropdownButton.label = translations["IOTDEVICE-TABLE-ROW.SHOW-OPTIONS"];
         this.titleService.setTitle(translations["TITLE.IOTDEVICE"]);
 

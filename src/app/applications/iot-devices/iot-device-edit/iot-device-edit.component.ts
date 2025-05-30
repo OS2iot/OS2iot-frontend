@@ -181,8 +181,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
             this.iotDevice.mqttInternalBrokerSettings.caCertificate = undefined;
             this.iotDevice.mqttInternalBrokerSettings.deviceCertificate = undefined;
             this.iotDevice.mqttInternalBrokerSettings.deviceCertificateKey = undefined;
-            this.iotDevice.mqttInternalBrokerSettings.mqttPort = undefined;
-            this.iotDevice.mqttInternalBrokerSettings.mqttURL = undefined;
             this.iotDevice.mqttInternalBrokerSettings.mqttpassword = undefined;
             this.iotDevice.mqttInternalBrokerSettings.mqtttopicname = undefined;
             this.iotDevice.mqttInternalBrokerSettings.mqttusername = undefined;
@@ -334,40 +332,34 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
       this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.replace(/[^0-9A-Fa-f]/g, "");
     }
 
-    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe({
-      next: (createdDevice: IotDevice) => {
-        if (!this.copyPayloadAndDatatarget) {
-          this.navigateToDeviceDetails(createdDevice);
-          return;
-        }
+    //First create the device
+    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe((createdDevice: IotDevice) => {
+      if (!this.copyPayloadAndDatatarget) {
+        this.navigateToDeviceDetails(createdDevice);
+        return;
+      }
 
-        this.datatargetPayloadService.getByIoTDevice(this.deviceId).subscribe({
-          next: (result: PayloadDeviceDatatargetGetManyResponse) => {
-            const appendObservables = result.data.map(element =>
-              this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })
-            );
+      //If it's the copy device flow, then get all datatargets from the device that we want to copy.
+      this.datatargetPayloadService
+        .getByIoTDevice(this.deviceId)
+        .subscribe((result: PayloadDeviceDatatargetGetManyResponse) => {
+          //For each of these datatargets, append the copied device to that datatarget. First we make the observables
+          const appendToDatatargetObservables = result.data.map(element =>
+            this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })
+          );
 
-            if (appendObservables.length === 0) {
-              this.navigateToDeviceDetails(createdDevice);
-              return;
-            }
+          if (appendToDatatargetObservables.length === 0) {
+            this.navigateToDeviceDetails(createdDevice);
+            return;
+          }
 
-            forkJoin(appendObservables).subscribe({
-              next: () => this.navigateToDeviceDetails(createdDevice),
-              error: (error: HttpErrorResponse) => {
-                this.formFailedSubmitHandleError(error);
-              },
-            });
-          },
-          error: (error: HttpErrorResponse) => {
-            this.formFailedSubmitHandleError(error);
-          },
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        this.formFailedSubmitHandleError(error);
-      },
-    });
+          //Forkjoin is running all observables in parallel and when all are done it returns.
+          forkJoin(appendToDatatargetObservables).subscribe(
+            () => this.navigateToDeviceDetails(createdDevice),
+            this.formFailedSubmitHandleError
+          );
+        }, this.formFailedSubmitHandleError);
+    }, this.formFailedSubmitHandleError);
   }
 
   formFailedSubmitHandleError(error: HttpErrorResponse) {

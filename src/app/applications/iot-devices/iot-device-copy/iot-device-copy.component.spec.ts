@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { IotDeviceEditComponent } from "./iot-device-edit.component";
+import { IotDeviceEditComponent } from "../iot-device-edit/iot-device-edit.component";
 
 describe("IotDeviceEditComponent", () => {
   let component: IotDeviceEditComponent;
