@@ -104,6 +104,7 @@
       <input
         [formControl]="serializedExpirationDate"
         [matDatepicker]="expirationDatePicker"
+        [min]="now"
         matInput
       />
       <mat-datepicker-toggle [for]="expirationDatePicker" matSuffix></mat-datepicker-toggle>

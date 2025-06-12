@@ -37,6 +37,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public canEdit: boolean;
   public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
   serializedExpirationDate = new FormControl<Date | undefined>(undefined);
+  protected readonly now = new Date();
   private _onDestroy = new Subject<void>();
 
   constructor(
