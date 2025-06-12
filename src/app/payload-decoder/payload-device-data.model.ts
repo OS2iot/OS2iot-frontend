@@ -19,3 +19,7 @@ export interface PayloadDeviceDatatargetResponse {
   payloadDecoder: PayloadDecoder;
   dataTarget: Datatarget;
 }
+
+export class AppendCopiedDeviceDto {
+  deviceId: number;
+}

@@ -31,7 +31,7 @@
             class="form-check-input"
             required
             [attr.disabled]="editmode ? '' : null"
-            (change)="isChecked($event)"
+            (change)="isDeviceTypeChecked($event)"
             [checked]="iotDevice.type.toString().includes('LORAWAN')"
           />
           <div class="image-container">
@@ -48,7 +48,7 @@
             class="form-check-input"
             required
             [attr.disabled]="editmode ? '' : null"
-            (change)="isChecked($event)"
+            (change)="isDeviceTypeChecked($event)"
             [checked]="iotDevice.type.toString().includes('GENERIC_HTTP')"
           />
           <div class="image-container">
@@ -65,7 +65,7 @@
             required
             class="form-check-input"
             [attr.disabled]="editmode ? '' : null"
-            (change)="isChecked($event)"
+            (change)="isDeviceTypeChecked($event)"
             [checked]="iotDevice.type.toString().includes('MQTT')"
           />
           <div class="image-container">
@@ -82,7 +82,7 @@
             class="form-check-input"
             required
             [attr.disabled]="editmode ? '' : null"
-            (change)="isChecked($event)"
+            (change)="isDeviceTypeChecked($event)"
             [checked]="iotDevice.type.toString().includes('SIGFOX')"
           />
           <div class="image-container">
@@ -238,7 +238,7 @@
         [placeholder]="'QUESTION.DEVEUI-PLACEHOLDER' | translate"
         class="form-control"
         [(ngModel)]="iotDevice.lorawanSettings.devEUI"
-        [disabled]="editmode"
+        [disabled]="editmode && !isDeviceCopy"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('devEUI'),
           'is-valid': formFailedSubmit && !errorFields.includes('devEUI')
@@ -416,6 +416,20 @@
   <div class="mt-5 row">
     <h3>{{ "QUESTION.METADATA" | translate }}</h3>
     <app-form-key-value-list [(tags)]="metadataTags" [errorFieldId]="errorMetadataFieldId"> </app-form-key-value-list>
+  </div>
+  <div *ngIf="isDeviceCopy" class="form-group mt-5">
+    <label class="form-label" for="copyPayloadAndDatatarget">{{
+      "IOTDEVICE.COPY-DATATAGET-AND-PAYLOAD" | translate
+    }}</label>
+    <div>
+      <mat-checkbox
+        [(ngModel)]="copyPayloadAndDatatarget"
+        name="copyPayloadAndDatatarget"
+        id="copyPayloadAndDatatarget"
+      >
+        {{ "QUESTION.SKIPFCNTCHECK-YES" | translate }}
+      </mat-checkbox>
+    </div>
   </div>
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ "GEN.CANCEL" | translate }}</button>

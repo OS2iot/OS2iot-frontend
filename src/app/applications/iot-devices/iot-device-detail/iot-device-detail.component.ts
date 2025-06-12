@@ -16,7 +16,7 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
 import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-application-dialog/iot-device-change-application-dialog.component";
-import { ApplicationDialogModel, IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
+import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
   selector: "app-iot-device",
@@ -56,6 +56,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
   private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public canEdit = false;
+  private copyDeviceButtonId = "COPY-DEVICE";
 
   private resetApiKeyId = "RESET-API-KEY";
   private resetApiKeyOption: ExtraDropdownOption;
@@ -104,9 +105,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         "IOTDEVICE-TABLE-ROW.RESET-API-KEY",
         "IOTDEVICE.GENERIC_HTTP.RESET-API-KEY",
         "GEN.CANCEL",
+        "GEN.BACK"
       ])
       .subscribe(translations => {
-        this.backButton.label = translations["NAV.APPLICATIONS"];
+        this.backButton.label = translations["GEN.BACK"];
         this.dropdownButton.label = translations["IOTDEVICE-TABLE-ROW.SHOW-OPTIONS"];
         this.titleService.setTitle(translations["TITLE.IOTDEVICE"]);
 
@@ -146,6 +148,14 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
             id: this.deviceId,
             label: translation,
             onClick: () => this.onOpenChangeApplicationDialog(),
+          });
+        });
+
+        this.translate.get("IOTDEVICE.COPY-SETTINGS-TO-NEW-DEVICE").subscribe(translation => {
+          this.dropdownButton.extraOptions.push({
+            id: this.copyDeviceButtonId,
+            label: translation,
+            onClick: () => this.navigateToCopy(),
           });
         });
       }
@@ -189,6 +199,10 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         deviceId: this.deviceId,
       } as IoTDeviceApplicationDialogModel,
     });
+  }
+
+  navigateToCopy() {
+    this.router.navigate(["applications", this.application.id, "iot-device-copy", this.deviceId]);
   }
 
   ngOnDestroy() {
