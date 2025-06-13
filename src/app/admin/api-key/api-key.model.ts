@@ -4,6 +4,7 @@ export class ApiKeyRequest {
   id: number;
   name: string;
   permissionIds?: number[];
+  expiresOn?: Date;
 }
 
 export interface ApiKeyResponse {
@@ -15,6 +16,7 @@ export interface ApiKeyResponse {
   updatedBy: number;
   createdByName: string;
   updatedByName: string;
+  expiresOn?: Date;
 }
 
 export interface ApiKeyGetManyResponse {

@@ -1,4 +1,4 @@
-<app-top-bar backButtonTitle="{{ backButtonTitle }}" title="{{ title }}" [canEdit]="canEdit"></app-top-bar>
+<app-top-bar [canEdit]="canEdit" backButtonTitle="{{ backButtonTitle }}" title="{{ title }}"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
   <div *ngIf="errorMessages" class="error-messages p-3">
     <ul class="mb-0">
@@ -16,19 +16,19 @@
       <label class="form-label" for="name">{{ "USERS.FORM.NAME" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [disabled]="isKombit"
-        [placeholder]="'USERS.FORM.NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="user.name"
+        [disabled]="isKombit"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'USERS.FORM.NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -37,20 +37,20 @@
       <label class="form-label" for="email">{{ "USERS.FORM.EMAIL" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="email"
-        name="email"
-        [placeholder]="'USERS.FORM.EMAIL-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="user.email"
-        email
-        ngModel
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('email'),
           'is-valid': formFailedSubmit && !errorFields.includes('email')
         }"
+        [placeholder]="'USERS.FORM.EMAIL-PLACEHOLDER' | translate"
+        class="form-control"
+        email
+        id="email"
+        maxlength="50"
+        name="email"
+        ngModel
+        required
+        type="text"
       />
     </div>
   </div>
@@ -60,34 +60,35 @@
       <label class="form-label" for="password">{{ "USERS.FORM.PASSWORD" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="password"
-        name="password"
-        [disabled]="isKombit"
-        [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate"
-        minlength="6"
-        maxlength="50"
-        required
         [(ngModel)]="user.password"
+        [disabled]="isKombit"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('password'),
           'is-valid': formFailedSubmit && !errorFields.includes('password')
         }"
+        [placeholder]="'USERS.FORM.PASSWORD-PLACEHOLDER' | translate"
+        class="form-control"
+        id="password"
+        maxlength="50"
+        minlength="6"
+        name="password"
+        required
+        type="text"
       />
     </div>
   </div>
 
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
-      <label class="form-label" id="permissions" for="permissions">{{ "QUESTION.PERMISSION.SELECT-PERMISSION" | translate }}</label
+      <label class="form-label" for="permissions"
+             id="permissions">{{ "QUESTION.PERMISSION.SELECT-PERMISSION" | translate }}</label
       >*
       <mat-select
+        [(ngModel)]="user.permissionIds"
+        [compareWith]="compare"
+        [multiple]="true"
         class="form-control"
         name="permissions"
-        [compareWith]="compare"
-        [(ngModel)]="user.permissionIds"
-        [multiple]="true"
       >
         <mat-option *ngFor="let permission of permissions" [value]="permission.id">
           {{ permission.name }}
@@ -96,14 +97,32 @@
     </div>
   </div>
 
+  <div class="row form-group mb-5">
+    <label class="form-label">{{ "API-KEY.EDIT.EXPIRATION-DATE" | translate }}</label>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "API-KEY.EDIT.EXPIRATION-DATE-PLACEHOLDER" | translate }}</mat-label>
+      <input
+        [formControl]="serializedExpirationDate"
+        [matDatepicker]="expirationDatePicker"
+        [min]="now"
+        matInput
+      />
+      <mat-datepicker-toggle [for]="expirationDatePicker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #expirationDatePicker panelClass="datepicker-table-fix"></mat-datepicker>
+      <mat-hint>{{ "USERS.FORM.EXPIRATION-DATE-DESCRIPTION" | translate }}</mat-hint>
+    </mat-form-field>
+  </div>
+
   <div class="row mb-5">
     <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
-      {{ "USERS.FORM.ACTIVE" | translate }}</mat-slide-toggle
+      {{ "USERS.FORM.ACTIVE" | translate }}
+    </mat-slide-toggle
     >
   </div>
-  <div class="row mb-3" *ngIf="isGlobalAdmin">
+  <div *ngIf="isGlobalAdmin" class="row mb-3">
     <mat-slide-toggle [(ngModel)]="user.globalAdmin" id="globalAdmin" name="globalAdmin">
-      {{ "USERS.FORM.GLOBAL-ADMIN" | translate }}</mat-slide-toggle
+      {{ "USERS.FORM.GLOBAL-ADMIN" | translate }}
+    </mat-slide-toggle
     >
   </div>
   <div class="form-group mt-5 clearfix">

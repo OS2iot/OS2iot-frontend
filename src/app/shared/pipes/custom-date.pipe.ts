@@ -33,7 +33,7 @@ export class CustomDatePipeWithSecondsNoPrefix extends DatePipe implements PipeT
 })
 export class CustomTableDatePipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    return super.transform(value, "dd MMM, yyyy - HH:mm");
+    return super.transform(value, "dd-MM-yyyy kl. HH:mm");
   }
 }
 
@@ -42,7 +42,7 @@ export class CustomTableDatePipe extends DatePipe implements PipeTransform {
 })
 export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    return super.transform(value, "dd MMM, yyyy - HH:mm:ss");
+    return super.transform(value, "dd-MM-yyyy - HH:mm:ss");
   }
 }
 
@@ -51,6 +51,6 @@ export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTran
 })
 export class DateOnlyPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    return super.transform(value, "dd MMM, yyyy");
+    return super.transform(value, "dd-MM-yyyy");
   }
 }

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
+import { FormControl, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { UserRequest } from "../user.model";
 import { TranslateService } from "@ngx-translate/core";
@@ -36,6 +36,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public isKombit: boolean;
   public canEdit: boolean;
   public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
+  serializedExpirationDate = new FormControl<Date | undefined>(undefined);
+  protected readonly now = new Date();
   private _onDestroy = new Subject<void>();
 
   constructor(
@@ -67,6 +69,35 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.getPermissions(this.sharedVariableService.getUserInfo().user.id);
   }
 
+  amIGlobalAdmin() {
+    this.isGlobalAdmin = this.meService.hasGlobalAdmin();
+  }
+
+  onSubmit(): void {
+    if (this.user.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
+  public compare(matOptionValue: number, ngModelObject: number): boolean {
+    return matOptionValue === ngModelObject;
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.permissionsSubscription) {
+      this.permissionsSubscription.unsubscribe();
+    }
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
   private getUser(id: number) {
     this.subscription = this.userService.getOne(id).subscribe(response => {
       this.user.name = response.name;
@@ -76,16 +107,16 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.user.globalAdmin = response.permissions.some(perm => perm.name === PermissionType.GlobalAdmin);
       this.isKombit = response.nameId != null;
       this.user.permissionIds = response.permissions.map(pm => pm.id);
+      if (response.expiresOn) {
+        this.serializedExpirationDate.setValue(response.expiresOn);
+      }
 
       // We cannot set the password.
     });
   }
 
-  amIGlobalAdmin() {
-    this.isGlobalAdmin = this.meService.hasGlobalAdmin();
-  }
-
   private create(): void {
+    this.user.expiresOn = this.serializedExpirationDate.value;
     this.userService.post(this.user).subscribe(
       () => {
         this.routeBack();
@@ -97,6 +128,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   private update(): void {
+    this.user.expiresOn = this.serializedExpirationDate.value;
     this.userService.put(this.user, this.id).subscribe(
       response => {
         this.routeBack();
@@ -105,14 +137,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
         this.showError(error);
       }
     );
-  }
-
-  onSubmit(): void {
-    if (this.user.id) {
-      this.update();
-    } else {
-      this.create();
-    }
   }
 
   private showError(error: HttpErrorResponse) {
@@ -135,14 +159,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.formFailedSubmit = true;
   }
 
-  routeBack(): void {
-    this.location.back();
-  }
-
-  public compare(matOptionValue: number, ngModelObject: number): boolean {
-    return matOptionValue === ngModelObject;
-  }
-
   private getPermissions(userId: number) {
     this.permissionsSubscription = this.permissionService
       .getPermissionsWithoutUsers(this.meService.hasGlobalAdmin() ? undefined : userId)
@@ -152,14 +168,5 @@ export class UserEditComponent implements OnInit, OnDestroy {
           this.permissionMultiCtrl.setValue(this.user.permissionIds);
         }
       });
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.permissionsSubscription) {
-      this.permissionsSubscription.unsubscribe();
-    }
-    this._onDestroy.next();
-    this._onDestroy.complete();
   }
 }
