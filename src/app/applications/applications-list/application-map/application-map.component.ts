@@ -62,8 +62,9 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
 
     if (Array.isArray(this.devices) && this.displayDevices) {
       this.devices.forEach(dev => {
-        const [longitude, latitude] = dev.location.coordinates;
+        if (!dev.location) return;
 
+        const [longitude, latitude] = dev.location.coordinates;
         const isActive = dev.latestReceivedMessage?.sentTime
           ? moment(dev.latestReceivedMessage?.sentTime).unix() > moment(new Date()).subtract(1, "day").unix()
           : false;
@@ -91,6 +92,8 @@ export class ApplicationMapComponent implements OnInit, OnDestroy {
 
     if (Array.isArray(this.gateways) && this.displayGateways) {
       this.gateways.forEach(gw => {
+        if (!gw.location) return;
+
         tempCoordinateList.push({
           longitude: gw.location.longitude,
           latitude: gw.location.latitude,
