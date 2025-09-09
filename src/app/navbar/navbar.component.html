@@ -3,7 +3,7 @@
   aria-expanded="false"
   class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3 no-shadow"
 >
-  <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo"/>
+  <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo" />
 
   <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar-login">
     <ul class="navbar-nav flex-column">
@@ -43,7 +43,7 @@
                 <mat-select-trigger>
                   <div class="nav-bar-selector-trigger">
                     <div class="nav-bar-selector-building-icon">
-                      <img height="20" src="assets/images/building.svg" width="20"/>
+                      <img height="20" src="assets/images/building.svg" width="20" />
                     </div>
                     {{ getOrgName(selected) }}
                   </div>
@@ -54,8 +54,8 @@
               </mat-select>
 
               <div class="custom-dropdown-icon" matSuffix>
-                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11"/>
-                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11"/>
+                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11" />
+                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11" />
               </div>
             </mat-form-field>
 
@@ -118,10 +118,8 @@
             </ul>
           </li>
 
-          <div class="nav-bar-title">{{ "NAV.TITLES.ADMINISTRATION" | translate }}</div>
-
           <li class="nav-item">
-            <app-global-admin></app-global-admin>
+            <app-administration [orgId]="selected"></app-administration>
           </li>
         </div>
       </ul>

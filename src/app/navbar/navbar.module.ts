@@ -15,10 +15,10 @@ import { TranslateModule } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { InlineSVGModule } from "ng-inline-svg-2";
 import { RestService } from "../shared/services/rest.service";
-import { GlobalAdminComponent } from "./global-admin/global-admin.component";
+import { AdministrationComponent } from "./administration/administration.component";
 
 @NgModule({
-  declarations: [NavbarComponent, GlobalAdminComponent],
+  declarations: [NavbarComponent, AdministrationComponent],
   imports: [
     CommonModule,
     SharedModule,

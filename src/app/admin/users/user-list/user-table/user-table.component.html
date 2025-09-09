@@ -1,15 +1,15 @@
 <div class="mat-elevation-z8">
-  <div class="loading-shade" *ngIf="isLoadingResults">
+  <div *ngIf="isLoadingResults" class="loading-shade">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  <table mat-table [dataSource]="data" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+  <table [dataSource]="data" mat-table matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!canSort">
+      <th *matHeaderCellDef [disabled]="!canSort" mat-header-cell mat-sort-header>
         {{ "USERS.NAME" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">
-        <a [routerLink]="['/admin/users', element.id]" routerLinkActive="active" class="application-link">
+      <td *matCellDef="let element" mat-cell>
+        <a [routerLink]="['/admin/users', element.id]" class="application-link" routerLinkActive="active">
           {{ element.name }}</a
         >
       </td>
@@ -17,20 +17,20 @@
 
     <!-- email Column -->
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>
+      <th *matHeaderCellDef mat-header-cell>
         {{ "USERS.EMAIL" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td *matCellDef="let element" mat-cell>
         <p>{{ element.email }}</p>
       </td>
     </ng-container>
 
     <!-- global admin Column -->
     <ng-container matColumnDef="global">
-      <th mat-header-cell *matHeaderCellDef>
+      <th *matHeaderCellDef mat-header-cell>
         {{ "USERS.GLOBALADMIN" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td *matCellDef="let element" mat-cell>
         <p>
           {{
             ((element.permissions | isGlobalAdmin) ? "USERS.GLOBAL_ADMIN.TRUE" : "USERS.GLOBAL_ADMIN.FALSE") | translate
@@ -41,20 +41,30 @@
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>
+      <th *matHeaderCellDef mat-header-cell>
         {{ "USERS.STATUS" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td *matCellDef="let element" mat-cell>
         <p [ngClass]="element.active | activeDeactive">{{ element.active | activeDeactive }}</p>
+      </td>
+    </ng-container>
+
+    <!--  Expiration Column  -->
+    <ng-container matColumnDef="expiresOn">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "API-KEY.EXPIRES-ON" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        {{ (element.expiresOn | dateOnly) ?? '-' }}
       </td>
     </ng-container>
 
     <!-- lastLogin Column -->
     <ng-container matColumnDef="lastLogin">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!canSort">
+      <th *matHeaderCellDef [disabled]="!canSort" mat-header-cell mat-sort-header>
         {{ "USERS.LOGIN" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">
+      <td *matCellDef="let element" mat-cell>
         <div *ngIf="element.lastLogin; else noLogin">
           <P> {{ element.lastLogin | tableDatePipe }}</P>
         </div>
@@ -66,22 +76,22 @@
 
     <!-- Menu Column -->
     <ng-container matColumnDef="menu">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
+      <th *matHeaderCellDef mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell>
         <div class="dropdown">
           <a
-            href="#"
-            role="button"
-            id="tableRowDropdown-{{ element.id }}"
+            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+            aria-expanded="false"
             class="applicationRow__edit dropdown-toggle"
             data-toggle="dropdown"
-            aria-expanded="false"
-            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+            href="#"
+            id="tableRowDropdown-{{ element.id }}"
+            role="button"
           ></a>
-          <ul class="dropdown-menu dropdown-menu--table" attr.aria-labelledby="tableRowDropdown-{{ element.id }}">
+          <ul attr.aria-labelledby="tableRowDropdown-{{ element.id }}" class="dropdown-menu dropdown-menu--table">
             <li class="dropdown-item">
               <a [routerLink]="['/admin/users', element.id, 'edit-user']" routerLinkActive="active"
-                >{{ "USERS.TABLE-ROW.EDIT" | translate }}
+              >{{ "USERS.TABLE-ROW.EDIT" | translate }}
               </a>
             </li>
           </ul>
@@ -89,13 +99,13 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
   <mat-paginator
+    [length]="resultsLength"
     [pageSizeOptions]="pageSizeOptions"
     [pageSize]="pageSize"
-    [length]="resultsLength"
     showFirstLastButtons
   >
   </mat-paginator>

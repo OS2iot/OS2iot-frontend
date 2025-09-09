@@ -19,7 +19,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 })
 export class ApiKeyTableComponent implements AfterViewInit {
   @Input() organisationId: number;
-  displayedColumns: string[] = ["name", "permissions", "key", "menu"];
+  displayedColumns: string[] = ["name", "permissions", "key", "expiresOn", "status", "menu"];
   data: ApiKeyResponse[] = [];
   isLoadingResults = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,6 +27,7 @@ export class ApiKeyTableComponent implements AfterViewInit {
   resultsLength = 0;
   public pageSize = environment.tablePageSize;
   pageSizeOptions = DefaultPageSizeOptions;
+  now = new Date();
 
   constructor(
     private meService: MeService,
@@ -93,6 +94,10 @@ export class ApiKeyTableComponent implements AfterViewInit {
         });
       }
     });
+  }
+
+  isKeyExpired(element: ApiKeyResponse) {
+    return element.expiresOn != null && new Date(element.expiresOn) < new Date();
   }
 
   private refresh() {

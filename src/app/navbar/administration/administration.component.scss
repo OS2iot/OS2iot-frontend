@@ -1,5 +1,15 @@
 @import "../../../assets/scss/setup/variables";
 
+.nav-bar-title {
+  color: $default-color;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  margin-top: 40px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
 mat-expansion-panel {
   box-shadow: none !important;
 }
