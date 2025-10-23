@@ -21,9 +21,10 @@ import { GatewayChangeOrganizationDialogComponent } from "../gateway-change-orga
 import { GatewayDialogModel } from "@shared/models/dialog.model";
 
 @Component({
-  selector: "app-gateway-detail",
-  templateUrl: "./gateway-detail.component.html",
-  styleUrls: ["./gateway-detail.component.scss"],
+    selector: "app-gateway-detail",
+    templateUrl: "./gateway-detail.component.html",
+    styleUrls: ["./gateway-detail.component.scss"],
+    standalone: false
 })
 export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ["rxPacketsReceived", "txPacketsEmitted", "txPacketsReceived"];

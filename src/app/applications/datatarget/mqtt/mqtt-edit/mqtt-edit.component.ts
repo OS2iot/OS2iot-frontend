@@ -24,9 +24,10 @@ import { SnackService } from "@shared/services/snack.service";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-mqtt-edit",
-  templateUrl: "./mqtt-edit.component.html",
-  styleUrls: ["./mqtt-edit.component.scss"],
+    selector: "app-mqtt-edit",
+    templateUrl: "./mqtt-edit.component.html",
+    styleUrls: ["./mqtt-edit.component.scss"],
+    standalone: false
 })
 // TODO: Most of the code is duplicated from other datatarget edit components.
 // Same applies to the html file. One solution is extending a base datatarget-edit component

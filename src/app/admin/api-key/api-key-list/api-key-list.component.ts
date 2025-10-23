@@ -6,9 +6,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-api-key-list",
-  templateUrl: "./api-key-list.component.html",
-  styleUrls: ["./api-key-list.component.scss"],
+    selector: "app-api-key-list",
+    templateUrl: "./api-key-list.component.html",
+    styleUrls: ["./api-key-list.component.scss"],
+    standalone: false
 })
 export class ApiKeyListComponent implements OnInit {
   @Input() organisationId: number;

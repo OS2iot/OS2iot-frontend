@@ -16,6 +16,7 @@ import { takeUntil } from "rxjs/operators";
   selector: "app-new-user",
   templateUrl: "./new-user.component.html",
   styleUrls: ["./new-user.component.scss"],
+  standalone: false,
 })
 export class NewUserComponent implements OnInit {
   public organisationSubscription: Subscription;
@@ -23,7 +24,7 @@ export class NewUserComponent implements OnInit {
   public organisations: Organisation[];
   public formFailedSubmit = false;
   public errorFields: string[];
-  public errorMessages: unknown;
+  public errorMessages: any[];
   public createNewKombitUserFromFrontend: CreateNewKombitUserFromFrontend = new CreateNewKombitUserFromFrontend();
   public organisationsFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredOrganisations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
@@ -53,6 +54,48 @@ export class NewUserComponent implements OnInit {
     }
   }
 
+  onSubmit(): void {
+    this.resetErrors();
+
+    const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);
+
+    this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
+      () => {
+        this.router.navigate(["/applications"]);
+      },
+      (error: HttpErrorResponse) => {
+        this.handleError(error);
+        this.formFailedSubmit = true;
+      }
+    );
+  }
+
+  public compare(o1: Organisation | undefined, o2: Organisation | undefined): boolean {
+    return o1?.id === o2?.id;
+  }
+
+  public getOrganisations() {
+    this.organisations = this.sharedService.getOrganizationInfo();
+    if (!this.organisations) {
+      this.filteredOrganisations.next(this.organisations.slice());
+    } else {
+      this.organisationSubscription = this.organisationService.getMinimalNoPerm().subscribe(orgs => {
+        this.organisations = orgs.data;
+        this.filteredOrganisations.next(this.organisations.slice());
+      });
+    }
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (typeof error.error?.error === "string" && typeof error.error?.message === "string") {
+      this.errorMessage = error.error?.message;
+    } else {
+      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+      this.errorFields = errors.errorFields;
+      this.errorMessages = errors.errorMessages;
+    }
+  }
+
   private filterOrganisations() {
     if (!this.organisations) {
       return;
@@ -74,22 +117,6 @@ export class NewUserComponent implements OnInit {
     this.filteredOrganisations.next(filtered);
   }
 
-  onSubmit(): void {
-    this.resetErrors();
-
-    const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);
-
-    this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
-      () => {
-        this.router.navigate(["/applications"]);
-      },
-      (error: HttpErrorResponse) => {
-        this.handleError(error);
-        this.formFailedSubmit = true;
-      }
-    );
-  }
-
   private mapToDto(frontendModel: CreateNewKombitUserFromFrontend): CreateNewKombitUserDto {
     const createNewKombitUserDTO = new CreateNewKombitUserDto();
     createNewKombitUserDTO.email = frontendModel.email;
@@ -102,35 +129,9 @@ export class NewUserComponent implements OnInit {
     return createNewKombitUserDTO;
   }
 
-  public compare(o1: Organisation | undefined, o2: Organisation | undefined): boolean {
-    return o1?.id === o2?.id;
-  }
-
-  public getOrganisations() {
-    this.organisations = this.sharedService.getOrganizationInfo();
-    if (!this.organisations) {
-      this.filteredOrganisations.next(this.organisations.slice());
-    } else {
-      this.organisationSubscription = this.organisationService.getMinimalNoPerm().subscribe(orgs => {
-        this.organisations = orgs.data;
-        this.filteredOrganisations.next(this.organisations.slice());
-      });
-    }
-  }
-
   private resetErrors() {
     this.errorFields = [];
     this.errorMessages = undefined;
     this.formFailedSubmit = false;
-  }
-
-  handleError(error: HttpErrorResponse) {
-    if (typeof error.error?.error === "string" && typeof error.error?.message === "string") {
-      this.errorMessage = error.error?.message;
-    } else {
-      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-      this.errorFields = errors.errorFields;
-      this.errorMessages = errors.errorMessages;
-    }
   }
 }

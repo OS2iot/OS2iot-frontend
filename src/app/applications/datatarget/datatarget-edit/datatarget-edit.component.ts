@@ -8,9 +8,10 @@ import { DatatargetEdit } from "./datatarget-edit";
 import { DatatargetEditTypeSelectorDirective } from "./datatarget-edit-type-selector.directive";
 
 @Component({
-  selector: "app-datatarget-edit",
-  templateUrl: "./datatarget-edit.component.html",
-  styleUrls: ["./datatarget-edit.component.scss"],
+    selector: "app-datatarget-edit",
+    templateUrl: "./datatarget-edit.component.html",
+    styleUrls: ["./datatarget-edit.component.scss"],
+    standalone: false
 })
 export class DatatargetEditComponent implements OnInit, OnDestroy {
   @ViewChild(DatatargetEditTypeSelectorDirective, { static: true })

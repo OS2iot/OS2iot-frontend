@@ -13,9 +13,10 @@ import { ApiKeyService } from "../api-key.service";
 import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: "app-api-key-edit",
-  templateUrl: "./api-key-edit.component.html",
-  styleUrls: ["./api-key-edit.component.scss"],
+    selector: "app-api-key-edit",
+    templateUrl: "./api-key-edit.component.html",
+    styleUrls: ["./api-key-edit.component.scss"],
+    standalone: false
 })
 export class ApiKeyEditComponent implements OnInit {
   apiKeyRequest = new ApiKeyRequest();

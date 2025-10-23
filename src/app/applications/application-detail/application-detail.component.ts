@@ -22,9 +22,10 @@ import { ApplicationChangeOrganizationDialogComponent } from "../application-cha
 import moment from "moment/moment";
 
 @Component({
-  selector: "app-application",
-  templateUrl: "./application-detail.component.html",
-  styleUrls: ["./application-detail.component.scss"],
+    selector: "app-application",
+    templateUrl: "./application-detail.component.html",
+    styleUrls: ["./application-detail.component.scss"],
+    standalone: false
 })
 export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() deleteApplication = new EventEmitter();

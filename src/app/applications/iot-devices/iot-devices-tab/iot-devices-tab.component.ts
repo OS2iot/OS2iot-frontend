@@ -9,9 +9,10 @@ import { environment } from "@environments/environment";
 import { Observable } from "rxjs";
 
 @Component({
-  selector: "app-iot-devices-tab",
-  templateUrl: "./iot-devices-tab.component.html",
-  styleUrls: ["./iot-devices-tab.component.scss"],
+    selector: "app-iot-devices-tab",
+    templateUrl: "./iot-devices-tab.component.html",
+    styleUrls: ["./iot-devices-tab.component.scss"],
+    standalone: false
 })
 export class IotDevicesTabComponent implements OnInit {
   download$: Observable<Download>;

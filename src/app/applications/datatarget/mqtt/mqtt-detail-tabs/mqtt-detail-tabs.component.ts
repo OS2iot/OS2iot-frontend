@@ -8,9 +8,10 @@ import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dia
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-mqtt-detail-tabs",
-  templateUrl: "./mqtt-detail-tabs.component.html",
-  styleUrl: "./mqtt-detail-tabs.component.scss",
+    selector: "app-mqtt-detail-tabs",
+    templateUrl: "./mqtt-detail-tabs.component.html",
+    styleUrl: "./mqtt-detail-tabs.component.scss",
+    standalone: false
 })
 export class MqttDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
   protected override getDetailsLink() {

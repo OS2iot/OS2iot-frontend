@@ -13,9 +13,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { AdrAlgorithm } from "@app/network-server/adr-algorithm.model";
 
 @Component({
-  selector: "app-device-profiles-edit",
-  templateUrl: "./device-profiles-edit.component.html",
-  styleUrls: ["./device-profiles-edit.component.scss"],
+    selector: "app-device-profiles-edit",
+    templateUrl: "./device-profiles-edit.component.html",
+    styleUrls: ["./device-profiles-edit.component.scss"],
+    standalone: false
 })
 export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;

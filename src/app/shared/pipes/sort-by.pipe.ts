@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { sortBy } from "@shared/helpers/array.helper";
 
-@Pipe({ name: "sortBy" })
+@Pipe({
+    name: "sortBy",
+    standalone: false
+})
 export class SortByPipe implements PipeTransform {
   /**
    * Example:

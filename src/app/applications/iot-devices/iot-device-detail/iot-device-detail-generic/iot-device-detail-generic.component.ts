@@ -9,9 +9,10 @@ import { KeyValue } from "@shared/types/tuple.type";
 import { DeviceType } from "@shared/enums/device-type";
 
 @Component({
-  selector: "app-iot-device-detail-generic",
-  templateUrl: "./iot-device-detail-generic.component.html",
-  styleUrls: ["./iot-device-detail-generic.component.scss"],
+    selector: "app-iot-device-detail-generic",
+    templateUrl: "./iot-device-detail-generic.component.html",
+    styleUrls: ["./iot-device-detail-generic.component.scss"],
+    standalone: false
 })
 export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDestroy {
   batteryStatusColor = "green";

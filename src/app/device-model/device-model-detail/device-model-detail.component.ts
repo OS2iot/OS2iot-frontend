@@ -12,9 +12,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-device-model-detail",
-  templateUrl: "./device-model-detail.component.html",
-  styleUrls: ["./device-model-detail.component.scss"],
+    selector: "app-device-model-detail",
+    templateUrl: "./device-model-detail.component.html",
+    styleUrls: ["./device-model-detail.component.scss"],
+    standalone: false
 })
 export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   deviceModel: DeviceModel;

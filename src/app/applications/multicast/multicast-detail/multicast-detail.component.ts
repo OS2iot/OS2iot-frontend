@@ -18,9 +18,10 @@ import { DownlinkService } from "@shared/services/downlink.service";
 import { Downlink } from "@applications/iot-devices/iot-device-detail/downlink/downlink.model";
 
 @Component({
-  selector: "app-multicast-detail",
-  templateUrl: "./multicast-detail.component.html",
-  styleUrls: ["./multicast-detail.component.scss"],
+    selector: "app-multicast-detail",
+    templateUrl: "./multicast-detail.component.html",
+    styleUrls: ["./multicast-detail.component.scss"],
+    standalone: false
 })
 export class MulticastDetailComponent implements OnInit, OnDestroy {
   public multicast: Multicast;

@@ -26,9 +26,10 @@ import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-
 import { PayloadDeviceDatatargetGetManyResponse } from "@payload-decoder/payload-device-data.model";
 
 @Component({
-  selector: "app-iot-device-edit",
-  templateUrl: "./iot-device-edit.component.html",
-  styleUrls: ["./iot-device-edit.component.scss"],
+    selector: "app-iot-device-edit",
+    templateUrl: "./iot-device-edit.component.html",
+    styleUrls: ["./iot-device-edit.component.scss"],
+    standalone: false
 })
 export class IotDeviceEditComponent implements OnInit, OnDestroy {
   @Input() isDeviceCopy: boolean = false;

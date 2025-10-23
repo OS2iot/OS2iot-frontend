@@ -14,9 +14,10 @@ import { SearchResultDto, SearchResultType } from "./search-results.model";
 import { SearchService } from "./search.service";
 
 @Component({
-  selector: "app-search-table",
-  templateUrl: "./search-table.component.html",
-  styleUrls: ["./search-table.component.scss"],
+    selector: "app-search-table",
+    templateUrl: "./search-table.component.html",
+    styleUrls: ["./search-table.component.scss"],
+    standalone: false
 })
 export class SearchTableComponent implements OnChanges, OnInit {
   private readonly faBroadcastTower = faBroadcastTower;

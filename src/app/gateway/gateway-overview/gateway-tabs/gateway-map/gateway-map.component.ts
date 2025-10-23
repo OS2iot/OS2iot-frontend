@@ -7,9 +7,10 @@ import { GatewayService } from "@app/gateway/gateway.service";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-gateway-map",
-  templateUrl: "./gateway-map.component.html",
-  styleUrls: ["./gateway-map.component.scss"],
+    selector: "app-gateway-map",
+    templateUrl: "./gateway-map.component.html",
+    styleUrls: ["./gateway-map.component.scss"],
+    standalone: false
 })
 export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public gateways: Gateway[];

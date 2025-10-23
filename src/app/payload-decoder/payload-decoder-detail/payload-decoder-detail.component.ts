@@ -11,9 +11,10 @@ import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dia
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-payload-decoder-detail",
-  templateUrl: "./payload-decoder-detail.component.html",
-  styleUrls: ["./payload-decoder-detail.component.scss"],
+    selector: "app-payload-decoder-detail",
+    templateUrl: "./payload-decoder-detail.component.html",
+    styleUrls: ["./payload-decoder-detail.component.scss"],
+    standalone: false
 })
 export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
   payloadDecoder: PayloadDecoder;

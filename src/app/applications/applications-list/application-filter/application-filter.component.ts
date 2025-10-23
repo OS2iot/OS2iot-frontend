@@ -14,21 +14,20 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { ApplicationsFilterService } from "./applications-filter.service";
 
 @Component({
-  selector: "app-application-filter",
-  standalone: true,
-  imports: [
-    NgFor,
-    NgOptimizedImage,
-    MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
-    TranslatePipe,
-  ],
-  templateUrl: "./application-filter.component.html",
-  styleUrl: "./application-filter.component.scss",
-  encapsulation: ViewEncapsulation.ShadowDom,
+    selector: "app-application-filter",
+    imports: [
+        NgFor,
+        NgOptimizedImage,
+        MatIconModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatButtonModule,
+        TranslatePipe,
+    ],
+    templateUrl: "./application-filter.component.html",
+    styleUrl: "./application-filter.component.scss",
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ApplicationFilterComponent implements OnInit {
   stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [

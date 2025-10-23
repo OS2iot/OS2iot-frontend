@@ -3,9 +3,10 @@ import { sortBy } from "@shared/helpers/array.helper";
 import { ReceivedMessageMetadata } from "@shared/models/received-message-metadata.model";
 
 @Component({
-  selector: "app-data-packages-timestamp",
-  templateUrl: "./data-packages-timestamp.component.html",
-  styleUrls: ["./data-packages-timestamp.component.scss"],
+    selector: "app-data-packages-timestamp",
+    templateUrl: "./data-packages-timestamp.component.html",
+    styleUrls: ["./data-packages-timestamp.component.scss"],
+    standalone: false
 })
 export class DataPackagesTimestampComponent implements OnInit, OnChanges {
   @Input() receivedMessagesMetadata: ReceivedMessageMetadata[] = [];

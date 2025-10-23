@@ -7,9 +7,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from "@shared/models/sigfox-device-type.model";
 import { SigfoxDevice, SigfoxDevicesResponse } from "@app/sigfox/sigfox-device.model";
 @Component({
-  selector: "app-sigfox-device-edit",
-  templateUrl: "./sigfox-device-edit.component.html",
-  styleUrls: ["./sigfox-device-edit.component.scss"],
+    selector: "app-sigfox-device-edit",
+    templateUrl: "./sigfox-device-edit.component.html",
+    styleUrls: ["./sigfox-device-edit.component.scss"],
+    standalone: false
 })
 export class SigfoxDeviceEditComponent implements OnInit {
   @Input() iotDevice: IotDevice;

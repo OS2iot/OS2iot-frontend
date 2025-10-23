@@ -11,9 +11,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-sigfox-groups-detail",
-  templateUrl: "./sigfox-groups-detail.component.html",
-  styleUrls: ["./sigfox-groups-detail.component.scss"],
+    selector: "app-sigfox-groups-detail",
+    templateUrl: "./sigfox-groups-detail.component.html",
+    styleUrls: ["./sigfox-groups-detail.component.scss"],
+    standalone: false
 })
 export class SigfoxGroupsDetailComponent implements OnInit {
   isLoadingResults = true;

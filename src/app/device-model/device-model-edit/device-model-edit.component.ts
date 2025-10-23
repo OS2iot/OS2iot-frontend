@@ -16,9 +16,10 @@ import { SupportedProtocol } from "../Enums/supported-protocol.enum";
 import { SupportedUnit } from "../supported-unit.model";
 
 @Component({
-  selector: "app-device-model-edit",
-  templateUrl: "./device-model-edit.component.html",
-  styleUrls: ["./device-model-edit.component.scss"],
+    selector: "app-device-model-edit",
+    templateUrl: "./device-model-edit.component.html",
+    styleUrls: ["./device-model-edit.component.scss"],
+    standalone: false
 })
 export class DeviceModelEditComponent implements OnInit {
   public errorMessages: string[];

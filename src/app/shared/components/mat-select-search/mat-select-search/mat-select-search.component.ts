@@ -22,17 +22,18 @@ import { take, takeUntil } from "rxjs/operators";
 import { MatSelect } from "@angular/material/select";
 
 @Component({
-  selector: "app-mat-select-search",
-  templateUrl: "./mat-select-search.component.html",
-  styleUrls: ["./mat-select-search.component.scss"],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MatSelectSearchComponent),
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-mat-select-search",
+    templateUrl: "./mat-select-search.component.html",
+    styleUrls: ["./mat-select-search.component.scss"],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MatSelectSearchComponent),
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 /**
  * Custom search/filter dropdown for select. This is not supported by Angular as of yet.

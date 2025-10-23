@@ -21,9 +21,10 @@ import { ErrorMessageService } from "@shared/error-message.service";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-  selector: "app-organisation-detail",
-  templateUrl: "./organisation-detail.component.html",
-  styleUrls: ["./organisation-detail.component.scss"],
+    selector: "app-organisation-detail",
+    templateUrl: "./organisation-detail.component.html",
+    styleUrls: ["./organisation-detail.component.scss"],
+    standalone: false
 })
 export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy {
   isLoadingResults = true;

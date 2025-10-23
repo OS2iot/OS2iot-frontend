@@ -5,9 +5,10 @@ import { MeService } from "@shared/services/me.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: "app-administration",
-  templateUrl: "./administration.component.html",
-  styleUrls: ["./administration.component.scss"],
+    selector: "app-administration",
+    templateUrl: "./administration.component.html",
+    styleUrls: ["./administration.component.scss"],
+    standalone: false
 })
 export class AdministrationComponent implements OnInit {
   public user: UserResponse;

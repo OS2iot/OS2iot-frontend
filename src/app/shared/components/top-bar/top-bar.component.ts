@@ -25,9 +25,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-top-bar",
-  templateUrl: "./top-bar.component.html",
-  styleUrls: ["./top-bar.component.scss"],
+    selector: "app-top-bar",
+    templateUrl: "./top-bar.component.html",
+    styleUrls: ["./top-bar.component.scss"],
+    standalone: false
 })
 export class TopBarComponent implements OnInit {
   @Input() data:

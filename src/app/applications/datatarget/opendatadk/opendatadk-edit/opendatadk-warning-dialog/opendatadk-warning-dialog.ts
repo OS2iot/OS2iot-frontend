@@ -2,9 +2,10 @@ import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
-  selector: "app-opendatadk-warning-dialog",
-  templateUrl: "./opendatadk-warning-dialog.html",
-  styleUrls: ["./opendatadk-warning-dialog.scss"],
+    selector: "app-opendatadk-warning-dialog",
+    templateUrl: "./opendatadk-warning-dialog.html",
+    styleUrls: ["./opendatadk-warning-dialog.scss"],
+    standalone: false
 })
 export class OpenDataDkWarningDialogComponent {
   neverAgain: boolean = false;

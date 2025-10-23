@@ -17,9 +17,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-sigfox-device-types-edit",
-  templateUrl: "./sigfox-device-types-edit.component.html",
-  styleUrls: ["./sigfox-device-types-edit.component.scss"],
+    selector: "app-sigfox-device-types-edit",
+    templateUrl: "./sigfox-device-types-edit.component.html",
+    styleUrls: ["./sigfox-device-types-edit.component.scss"],
+    standalone: false
 })
 export class SigfoxDeviceTypesEditComponent implements OnInit {
   sigfoxDeviceType = new SigfoxDeviceType();

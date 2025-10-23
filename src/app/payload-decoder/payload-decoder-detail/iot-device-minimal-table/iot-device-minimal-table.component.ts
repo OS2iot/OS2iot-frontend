@@ -12,9 +12,10 @@ import { environment } from "@environments/environment";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: "app-iot-device-minimal-table",
-  templateUrl: "./iot-device-minimal-table.component.html",
-  styleUrls: ["./iot-device-minimal-table.component.scss"],
+    selector: "app-iot-device-minimal-table",
+    templateUrl: "./iot-device-minimal-table.component.html",
+    styleUrls: ["./iot-device-minimal-table.component.scss"],
+    standalone: false
 })
 export class IoTDeviceMinimalTableComponent implements AfterViewInit {
   @Input() public payloadDecoder: PayloadDecoder;

@@ -12,9 +12,10 @@ import { ErrorMessageService } from "@shared/error-message.service";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-  selector: "app-organisation-tabel",
-  templateUrl: "./organisation-tabel.component.html",
-  styleUrls: ["./organisation-tabel.component.scss"],
+    selector: "app-organisation-tabel",
+    templateUrl: "./organisation-tabel.component.html",
+    styleUrls: ["./organisation-tabel.component.scss"],
+    standalone: false
 })
 export class OrganisationTabelComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "applications", "menu"];

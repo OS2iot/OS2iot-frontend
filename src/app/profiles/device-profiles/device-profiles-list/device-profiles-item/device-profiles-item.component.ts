@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { faPen, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: "app-device-profiles-item",
-  templateUrl: "./device-profiles-item.component.html",
-  styleUrls: ["./device-profiles-item.component.scss"],
+    selector: "app-device-profiles-item",
+    templateUrl: "./device-profiles-item.component.html",
+    styleUrls: ["./device-profiles-item.component.scss"],
+    standalone: false
 })
 export class DeviceProfilesItemComponent implements OnInit {
   @Input() deviceProfile: DeviceProfile;

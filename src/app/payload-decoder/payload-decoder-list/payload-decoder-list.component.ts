@@ -6,9 +6,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-payload-decoder-list",
-  templateUrl: "./payload-decoder-list.component.html",
-  styleUrls: ["./payload-decoder-list.component.scss"],
+    selector: "app-payload-decoder-list",
+    templateUrl: "./payload-decoder-list.component.html",
+    styleUrls: ["./payload-decoder-list.component.scss"],
+    standalone: false
 })
 export class PayloadDecoderListComponent implements OnInit {
   canEdit: boolean;

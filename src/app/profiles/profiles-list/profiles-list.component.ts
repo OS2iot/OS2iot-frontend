@@ -5,9 +5,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-profiles-list",
-  templateUrl: "./profiles-list.component.html",
-  styleUrls: ["./profiles-list.component.scss"],
+    selector: "app-profiles-list",
+    templateUrl: "./profiles-list.component.html",
+    styleUrls: ["./profiles-list.component.scss"],
+    standalone: false
 })
 export class ProfilesListComponent implements OnInit {
   canEdit: boolean;

@@ -7,7 +7,8 @@ const offlineClass = "offline";
 const onlineClass = "online";
 
 @Pipe({
-  name: "gatewayStatusClass",
+    name: "gatewayStatusClass",
+    standalone: false
 })
 /**
  * Separate pipe to format text to avoid renders if none of the values

@@ -25,9 +25,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-payload-decoder-edit",
-  templateUrl: "./payload-decoder-edit.component.html",
-  styleUrls: ["./payload-decoder-edit.component.scss"],
+    selector: "app-payload-decoder-edit",
+    templateUrl: "./payload-decoder-edit.component.html",
+    styleUrls: ["./payload-decoder-edit.component.scss"],
+    standalone: false
 })
 export class PayloadDecoderEditComponent implements OnInit {
   faExchangeAlt = faExchangeAlt;

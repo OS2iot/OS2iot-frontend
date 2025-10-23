@@ -3,7 +3,8 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { MeService } from "@shared/services/me.service";
 
 @Pipe({
-  name: "canEditApplication",
+    name: "canEditApplication",
+    standalone: false
 })
 export class CanEditApplicationPipe implements PipeTransform {
   constructor(private meService: MeService) {}

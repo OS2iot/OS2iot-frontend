@@ -11,9 +11,10 @@ import { environment } from "@environments/environment";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-device-profiles-list",
-  templateUrl: "./device-profiles-list.component.html",
-  styleUrls: ["./device-profiles-list.component.scss"],
+    selector: "app-device-profiles-list",
+    templateUrl: "./device-profiles-list.component.html",
+    styleUrls: ["./device-profiles-list.component.scss"],
+    standalone: false
 })
 export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   deviceProfiles: DeviceProfile[];

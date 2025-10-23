@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { DatePipe } from "@angular/common";
 
 @Pipe({
-  name: "dkTime",
+    name: "dkTime",
+    standalone: false
 })
 export class CustomDatePipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -11,7 +12,8 @@ export class CustomDatePipe extends DatePipe implements PipeTransform {
 }
 
 @Pipe({
-  name: "dkTimeWithSeconds",
+    name: "dkTimeWithSeconds",
+    standalone: false
 })
 export class CustomDatePipeWithSeconds extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -20,7 +22,8 @@ export class CustomDatePipeWithSeconds extends DatePipe implements PipeTransform
 }
 
 @Pipe({
-  name: "dkTimeWithSecondsNoPrefix",
+    name: "dkTimeWithSecondsNoPrefix",
+    standalone: false
 })
 export class CustomDatePipeWithSecondsNoPrefix extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -29,7 +32,8 @@ export class CustomDatePipeWithSecondsNoPrefix extends DatePipe implements PipeT
 }
 
 @Pipe({
-  name: "tableDatePipe",
+    name: "tableDatePipe",
+    standalone: false
 })
 export class CustomTableDatePipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -38,7 +42,8 @@ export class CustomTableDatePipe extends DatePipe implements PipeTransform {
 }
 
 @Pipe({
-  name: "tableDateWithSecondsPipe",
+    name: "tableDateWithSecondsPipe",
+    standalone: false
 })
 export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -47,7 +52,8 @@ export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTran
 }
 
 @Pipe({
-  name: "dateOnly",
+    name: "dateOnly",
+    standalone: false
 })
 export class DateOnlyPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {

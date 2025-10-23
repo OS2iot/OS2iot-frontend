@@ -14,9 +14,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: "app-permission-tabel",
-  templateUrl: "./permission-tabel.component.html",
-  styleUrls: ["./permission-tabel.component.scss"],
+    selector: "app-permission-tabel",
+    templateUrl: "./permission-tabel.component.html",
+    styleUrls: ["./permission-tabel.component.scss"],
+    standalone: false
 })
 export class PermissionTabelComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "organisations", "members", "type", "menu"];

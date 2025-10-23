@@ -26,9 +26,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-httppush-edit",
-  templateUrl: "./httppush-edit.component.html",
-  styleUrls: ["./httppush-edit.component.scss"],
+    selector: "app-httppush-edit",
+    templateUrl: "./httppush-edit.component.html",
+    styleUrls: ["./httppush-edit.component.scss"],
+    standalone: false
 })
 export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public multiPage = false;

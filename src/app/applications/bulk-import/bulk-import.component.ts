@@ -19,9 +19,10 @@ import { BulkImport } from "./bulk-import.model";
 import { BulkMapping } from "./bulk-mapping";
 
 @Component({
-  selector: "app-bulk-import",
-  templateUrl: "./bulk-import.component.html",
-  styleUrls: ["./bulk-import.component.scss"],
+    selector: "app-bulk-import",
+    templateUrl: "./bulk-import.component.html",
+    styleUrls: ["./bulk-import.component.scss"],
+    standalone: false
 })
 export class BulkImportComponent implements OnInit {
   displayedColumns: string[] = ["name", "type", "importStatus", "errorMessages"];

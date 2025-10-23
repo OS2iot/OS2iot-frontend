@@ -9,9 +9,10 @@ import { Datatarget } from "../../datatarget.model";
 import { DatatargetService } from "../../datatarget.service";
 
 @Component({
-  selector: "app-fiware-detail",
-  templateUrl: "./fiware-detail.component.html",
-  styleUrls: ["./fiware-detail.component.scss"],
+    selector: "app-fiware-detail",
+    templateUrl: "./fiware-detail.component.html",
+    styleUrls: ["./fiware-detail.component.scss"],
+    standalone: false
 })
 export class FiwareDetailComponent implements DatatargetDetail, OnDestroy {
   arrowsAltH = faArrowsAltH;

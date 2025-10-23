@@ -11,9 +11,10 @@ import { BackButton } from "@shared/models/back-button.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: "app-organisation-edit",
-  templateUrl: "./organisation-edit.component.html",
-  styleUrls: ["./organisation-edit.component.scss"],
+    selector: "app-organisation-edit",
+    templateUrl: "./organisation-edit.component.html",
+    styleUrls: ["./organisation-edit.component.scss"],
+    standalone: false
 })
 export class OrganisationEditComponent implements OnInit {
   organisation = new Organisation();

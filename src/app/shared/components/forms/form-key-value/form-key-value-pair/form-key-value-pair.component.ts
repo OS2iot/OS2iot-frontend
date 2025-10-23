@@ -6,11 +6,12 @@ import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-d
 import { KeyValue } from "@shared/types/tuple.type";
 
 @Component({
-  // Require this tag to be used with <tr> to preserve global table styling
-  // tslint:disable-next-line: component-selector
-  selector: "tr[app-form-key-value-pair]",
-  templateUrl: "./form-key-value-pair.component.html",
-  styleUrls: ["./form-key-value-pair.component.scss"],
+    // Require this tag to be used with <tr> to preserve global table styling
+    // tslint:disable-next-line: component-selector
+    selector: "tr[app-form-key-value-pair]",
+    templateUrl: "./form-key-value-pair.component.html",
+    styleUrls: ["./form-key-value-pair.component.scss"],
+    standalone: false
 })
 export class FormKeyValuePairComponent implements OnInit {
   @Input() id: number;

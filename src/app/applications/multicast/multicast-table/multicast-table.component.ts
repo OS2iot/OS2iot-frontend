@@ -15,9 +15,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: "app-multicast-table",
-  templateUrl: "./multicast-table.component.html",
-  styleUrls: ["./multicast-table.component.scss"],
+    selector: "app-multicast-table",
+    templateUrl: "./multicast-table.component.html",
+    styleUrls: ["./multicast-table.component.scss"],
+    standalone: false
 })
 export class MulticastTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;

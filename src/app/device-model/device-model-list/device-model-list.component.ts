@@ -6,9 +6,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-device-model-list",
-  templateUrl: "./device-model-list.component.html",
-  styleUrls: ["./device-model-list.component.scss"],
+    selector: "app-device-model-list",
+    templateUrl: "./device-model-list.component.html",
+    styleUrls: ["./device-model-list.component.scss"],
+    standalone: false
 })
 export class DeviceModelListComponent implements OnInit {
   canEdit: boolean;

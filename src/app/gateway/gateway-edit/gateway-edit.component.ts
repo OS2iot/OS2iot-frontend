@@ -21,9 +21,10 @@ interface DropdownOption {
 }
 
 @Component({
-  selector: "app-gateway-edit",
-  templateUrl: "./gateway-edit.component.html",
-  styleUrls: ["./gateway-edit.component.scss"],
+    selector: "app-gateway-edit",
+    templateUrl: "./gateway-edit.component.html",
+    styleUrls: ["./gateway-edit.component.scss"],
+    standalone: false
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
   public backButton: BackButton = { label: "", routerLink: ["gateways"] };

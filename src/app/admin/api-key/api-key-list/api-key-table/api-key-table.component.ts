@@ -13,9 +13,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: "app-api-key-table",
-  templateUrl: "./api-key-table.component.html",
-  styleUrls: ["./api-key-table.component.scss"],
+    selector: "app-api-key-table",
+    templateUrl: "./api-key-table.component.html",
+    styleUrls: ["./api-key-table.component.scss"],
+    standalone: false
 })
 export class ApiKeyTableComponent implements AfterViewInit {
   @Input() organisationId: number;

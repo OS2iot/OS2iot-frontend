@@ -3,11 +3,10 @@ import { Component, Input, OnInit } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-basic-information-box",
-  standalone: true,
-  imports: [MatIconModule, NgStyle],
-  templateUrl: "./basic-information-box.component.html",
-  styleUrl: "./basic-information-box.component.scss",
+    selector: "app-basic-information-box",
+    imports: [MatIconModule, NgStyle],
+    templateUrl: "./basic-information-box.component.html",
+    styleUrl: "./basic-information-box.component.scss"
 })
 export class BasicInformationBoxComponent implements OnInit {
   @Input() type: "default" | "warning" | "stable";

@@ -19,9 +19,10 @@ import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-
 import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
-  selector: "app-iot-device",
-  templateUrl: "./iot-device-detail.component.html",
-  styleUrls: ["./iot-device-detail.component.scss"],
+    selector: "app-iot-device",
+    templateUrl: "./iot-device-detail.component.html",
+    styleUrls: ["./iot-device-detail.component.scss"],
+    standalone: false
 })
 export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
   public navTabs: any[] = [

@@ -4,9 +4,10 @@ import { Chart, ChartConfiguration } from "chart.js";
 const canvasId = "someGraph";
 
 @Component({
-  selector: "app-graph",
-  templateUrl: "./graph.component.html",
-  styleUrls: ["./graph.component.scss"],
+    selector: "app-graph",
+    templateUrl: "./graph.component.html",
+    styleUrls: ["./graph.component.scss"],
+    standalone: false
 })
 export class GraphComponent implements OnChanges {
   @Input() data: ChartConfiguration["data"];

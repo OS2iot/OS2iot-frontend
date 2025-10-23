@@ -5,6 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-dynamic-img",
   templateUrl: "./dynamic-img.component.html",
   styleUrls: ["./dynamic-img.component.scss"],
+  standalone: false,
 })
 export class DynamicImgComponent implements OnInit {
   @Input() image: string;

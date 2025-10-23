@@ -31,9 +31,10 @@ import { OpenDataDkMailDialogComponent } from "./opendatadk-mail-dialog/opendata
 import { OpenDataDkWarningDialogComponent } from "./opendatadk-warning-dialog/opendatadk-warning-dialog";
 
 @Component({
-  selector: "app-opendatadk-edit",
-  templateUrl: "./opendatadk-edit.component.html",
-  styleUrls: ["./opendatadk-edit.component.scss"],
+    selector: "app-opendatadk-edit",
+    templateUrl: "./opendatadk-edit.component.html",
+    styleUrls: ["./opendatadk-edit.component.scss"],
+    standalone: false
 })
 export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   faQuestionCircle = faQuestionCircle;

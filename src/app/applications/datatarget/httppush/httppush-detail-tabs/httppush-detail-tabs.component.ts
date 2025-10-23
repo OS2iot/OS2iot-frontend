@@ -9,9 +9,10 @@ import { DataTargetType } from "@shared/enums/datatarget-type";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-httppush-detail-tabs",
-  templateUrl: "./httppush-detail-tabs.component.html",
-  styleUrl: "./httppush-detail-tabs.component.scss",
+    selector: "app-httppush-detail-tabs",
+    templateUrl: "./httppush-detail-tabs.component.html",
+    styleUrl: "./httppush-detail-tabs.component.scss",
+    standalone: false
 })
 export class HttppushDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
   dataTargetType = DataTargetType;

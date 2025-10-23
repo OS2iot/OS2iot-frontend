@@ -18,9 +18,10 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-awaiting-users-table",
-  templateUrl: "./awaiting-users-table.component.html",
-  styleUrls: ["./awaiting-users-table.component.scss"],
+    selector: "app-awaiting-users-table",
+    templateUrl: "./awaiting-users-table.component.html",
+    styleUrls: ["./awaiting-users-table.component.scss"],
+    standalone: false
 })
 export class AwaitingUsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "email", "menu"];

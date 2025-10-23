@@ -6,9 +6,10 @@ import { AuthenticationType } from "@shared/enums/authentication-type";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: "app-mqtt-device-edit",
-  templateUrl: "./mqtt-device-edit.component.html",
-  styleUrls: ["./mqtt-device-edit.component.scss"],
+    selector: "app-mqtt-device-edit",
+    templateUrl: "./mqtt-device-edit.component.html",
+    styleUrls: ["./mqtt-device-edit.component.scss"],
+    standalone: false
 })
 export class MqttDeviceEditComponent implements OnInit {
   @Input() iotDevice: IotDevice;

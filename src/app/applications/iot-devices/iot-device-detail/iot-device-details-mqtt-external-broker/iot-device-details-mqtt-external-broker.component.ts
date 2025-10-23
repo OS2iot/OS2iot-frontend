@@ -3,9 +3,10 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { AuthenticationType } from "@shared/enums/authentication-type";
 
 @Component({
-  selector: "app-iot-device-details-mqtt-external-broker",
-  templateUrl: "./iot-device-details-mqtt-external-broker.component.html",
-  styleUrls: ["./iot-device-details-mqtt-external-broker.component.scss"],
+    selector: "app-iot-device-details-mqtt-external-broker",
+    templateUrl: "./iot-device-details-mqtt-external-broker.component.html",
+    styleUrls: ["./iot-device-details-mqtt-external-broker.component.scss"],
+    standalone: false
 })
 export class IotDeviceDetailsMqttExternalBrokerComponent implements OnInit {
   @Input() device: IotDevice;

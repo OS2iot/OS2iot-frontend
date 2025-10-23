@@ -19,9 +19,10 @@ import { takeUntil } from "rxjs/operators";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-  selector: "app-permission-edit",
-  templateUrl: "./permission-edit.component.html",
-  styleUrls: ["./permission-edit.component.scss"],
+    selector: "app-permission-edit",
+    templateUrl: "./permission-edit.component.html",
+    styleUrls: ["./permission-edit.component.scss"],
+    standalone: false
 })
 export class PermissionEditComponent implements OnInit, OnDestroy {
   permission = new PermissionRequest();

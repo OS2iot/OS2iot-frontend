@@ -13,9 +13,10 @@ import { ReplaySubject, Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: "app-user-page",
-  templateUrl: "./user-page.component.html",
-  styleUrls: ["./user-page.component.scss"],
+    selector: "app-user-page",
+    templateUrl: "./user-page.component.html",
+    styleUrls: ["./user-page.component.scss"],
+    standalone: false
 })
 export class UserPageComponent implements OnInit {
   public updateUserOrgs: UpdateUserOrgsDto = new UpdateUserOrgsDto();

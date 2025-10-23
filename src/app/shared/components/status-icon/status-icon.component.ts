@@ -5,11 +5,10 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-status-icon",
-  templateUrl: "./status-icon.component.html",
-  styleUrls: ["./status-icon.component.scss"],
-  standalone: true,
-  imports: [MatIconModule, MatTooltipModule, TranslatePipe],
+    selector: "app-status-icon",
+    templateUrl: "./status-icon.component.html",
+    styleUrls: ["./status-icon.component.scss"],
+    imports: [MatIconModule, MatTooltipModule, TranslatePipe]
 })
 export class StatusIconComponent {
   @Input() iconType: "alert" | "stable" = "stable";

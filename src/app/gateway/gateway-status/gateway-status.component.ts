@@ -21,9 +21,10 @@ interface TimeColumn {
 }
 
 @Component({
-  selector: "app-gateway-status",
-  templateUrl: "./gateway-status.component.html",
-  styleUrls: ["./gateway-status.component.scss"],
+    selector: "app-gateway-status",
+    templateUrl: "./gateway-status.component.html",
+    styleUrls: ["./gateway-status.component.scss"],
+    standalone: false
 })
 export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   @Input() organisationChangeSubject: Subject<number>;

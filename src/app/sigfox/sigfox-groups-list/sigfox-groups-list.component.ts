@@ -10,9 +10,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-sigfox-groups-list",
-  templateUrl: "./sigfox-groups-list.component.html",
-  styleUrls: ["./sigfox-groups-list.component.scss"],
+    selector: "app-sigfox-groups-list",
+    templateUrl: "./sigfox-groups-list.component.html",
+    styleUrls: ["./sigfox-groups-list.component.scss"],
+    standalone: false
 })
 export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
   faDatabase = faDatabase;

@@ -10,9 +10,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-permission-list",
-  templateUrl: "./permission-list.component.html",
-  styleUrls: ["./permission-list.component.scss"],
+    selector: "app-permission-list",
+    templateUrl: "./permission-list.component.html",
+    styleUrls: ["./permission-list.component.scss"],
+    standalone: false
 })
 export class PermissionListComponent implements OnInit, OnChanges {
   isLoadingResults = true;

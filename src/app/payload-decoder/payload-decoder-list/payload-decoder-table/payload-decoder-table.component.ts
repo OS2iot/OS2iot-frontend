@@ -16,9 +16,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-  selector: "app-payload-decoder-table",
-  templateUrl: "./payload-decoder-table.component.html",
-  styleUrls: ["./payload-decoder-table.component.scss"],
+    selector: "app-payload-decoder-table",
+    templateUrl: "./payload-decoder-table.component.html",
+    styleUrls: ["./payload-decoder-table.component.scss"],
+    standalone: false
 })
 export class PayloadDecoderTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;

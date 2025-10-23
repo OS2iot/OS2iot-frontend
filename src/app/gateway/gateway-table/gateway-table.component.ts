@@ -121,10 +121,11 @@ const columnDefinitions: TableColumn[] = [
 ];
 
 @Component({
-  selector: "app-gateway-table",
-  templateUrl: "./gateway-table.component.html",
-  styleUrls: ["./gateway-table.component.scss"],
-  encapsulation: ViewEncapsulation.None,
+    selector: "app-gateway-table",
+    templateUrl: "./gateway-table.component.html",
+    styleUrls: ["./gateway-table.component.scss"],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   @Input() organisationChangeSubject: Subject<any>;

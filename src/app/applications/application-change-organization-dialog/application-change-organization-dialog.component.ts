@@ -14,9 +14,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { ReplaySubject, Subscription } from "rxjs";
 
 @Component({
-  selector: "app-change-organization-dialog",
-  templateUrl: "./application-change-organization-dialog.component.html",
-  styleUrls: ["./application-change-organization-dialog.component.scss"],
+    selector: "app-change-organization-dialog",
+    templateUrl: "./application-change-organization-dialog.component.html",
+    styleUrls: ["./application-change-organization-dialog.component.scss"],
+    standalone: false
 })
 export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   public applicationsSubscription: Subscription;

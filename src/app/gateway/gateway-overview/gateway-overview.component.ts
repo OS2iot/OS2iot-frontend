@@ -12,9 +12,10 @@ import { GatewayService } from "@app/gateway/gateway.service";
 import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
-  selector: "app-gateway-list",
-  templateUrl: "./gateway-overview.component.html",
-  styleUrls: ["./gateway-overview.component.scss"],
+    selector: "app-gateway-list",
+    templateUrl: "./gateway-overview.component.html",
+    styleUrls: ["./gateway-overview.component.scss"],
+    standalone: false
 })
 export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
   public navTabs: any[] = [

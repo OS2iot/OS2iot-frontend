@@ -15,9 +15,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-sigfox-groups-edit",
-  templateUrl: "./sigfox-groups-edit.component.html",
-  styleUrls: ["./sigfox-groups-edit.component.scss"],
+    selector: "app-sigfox-groups-edit",
+    templateUrl: "./sigfox-groups-edit.component.html",
+    styleUrls: ["./sigfox-groups-edit.component.scss"],
+    standalone: false
 })
 export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   sigfoxGroupId: number;

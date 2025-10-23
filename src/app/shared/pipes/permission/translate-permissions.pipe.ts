@@ -3,7 +3,8 @@ import { PermissionTypes } from "@app/admin/permission/permission.model";
 import { TranslateService } from "@ngx-translate/core";
 
 @Pipe({
-  name: "translatePermissions",
+    name: "translatePermissions",
+    standalone: false
 })
 export class TranslatePermissionsPipe implements PipeTransform {
   constructor(private translate: TranslateService) {}

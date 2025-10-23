@@ -5,9 +5,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-organisation-list",
-  templateUrl: "./organisation-list.component.html",
-  styleUrls: ["./organisation-list.component.scss"],
+    selector: "app-organisation-list",
+    templateUrl: "./organisation-list.component.html",
+    styleUrls: ["./organisation-list.component.scss"],
+    standalone: false
 })
 export class OrganisationListComponent implements OnInit {
   canEdit: boolean;

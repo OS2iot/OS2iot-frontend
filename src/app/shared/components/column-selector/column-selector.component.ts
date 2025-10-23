@@ -7,9 +7,10 @@ import { TableColumn } from "@shared/types/table.type";
 import { CookieService } from "ngx-cookie-service";
 
 @Component({
-  selector: "app-column-selector",
-  templateUrl: "./column-selector.component.html",
-  styleUrls: ["./column-selector.component.scss"],
+    selector: "app-column-selector",
+    templateUrl: "./column-selector.component.html",
+    styleUrls: ["./column-selector.component.scss"],
+    standalone: false
 })
 export class ColumnSelectorComponent implements AfterContentInit {
   @Input() localStorageKey: string;

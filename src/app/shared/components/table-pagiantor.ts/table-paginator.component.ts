@@ -14,11 +14,10 @@ export interface Option {
 }
 
 @Component({
-  selector: "app-table-paginator",
-  templateUrl: "./table-paginator.component.html",
-  styleUrls: ["./table-paginator.component.scss"],
-  standalone: true,
-  imports: [NgFor, MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatButtonModule, NgClass],
+    selector: "app-table-paginator",
+    templateUrl: "./table-paginator.component.html",
+    styleUrls: ["./table-paginator.component.scss"],
+    imports: [NgFor, MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatButtonModule, NgClass]
 })
 export class TablePaginatorComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {}

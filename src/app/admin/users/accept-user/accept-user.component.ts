@@ -17,9 +17,10 @@ import { PermissionService } from "@app/admin/permission/permission.service";
 import { UntypedFormControl } from "@angular/forms";
 
 @Component({
-  selector: "app-accept-user",
-  templateUrl: "./accept-user.component.html",
-  styleUrls: ["./accept-user.component.scss"],
+    selector: "app-accept-user",
+    templateUrl: "./accept-user.component.html",
+    styleUrls: ["./accept-user.component.scss"],
+    standalone: false
 })
 export class AcceptUserComponent implements OnInit, OnDestroy {
   public backButtonTitle: string;

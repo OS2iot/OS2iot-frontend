@@ -13,9 +13,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { UserResponse } from "./../admin/users/user.model";
 
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"],
+    selector: "app-navbar",
+    templateUrl: "./navbar.component.html",
+    styleUrls: ["./navbar.component.scss"],
+    standalone: false
 })
 export class NavbarComponent implements OnInit {
   public organisations: Organisation[];

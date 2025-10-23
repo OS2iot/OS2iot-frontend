@@ -30,9 +30,10 @@ interface DropdownOption {
 }
 
 @Component({
-  selector: "app-form-body-application",
-  templateUrl: "./form-body-application.component.html",
-  styleUrls: ["./form-body-application.component.scss"],
+    selector: "app-form-body-application",
+    templateUrl: "./form-body-application.component.html",
+    styleUrls: ["./form-body-application.component.scss"],
+    standalone: false
 })
 export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   @Input() submitButton: string;

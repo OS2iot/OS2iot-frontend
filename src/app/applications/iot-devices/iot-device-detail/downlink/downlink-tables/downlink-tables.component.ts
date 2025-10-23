@@ -10,9 +10,10 @@ import { DownlinkDialogComponent } from "../downlink-dialog/downlink-dialog.comp
 import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
-  selector: "app-downlink-tables",
-  templateUrl: "./downlink-tables.component.html",
-  styleUrls: ["./downlink-tables.component.scss"],
+    selector: "app-downlink-tables",
+    templateUrl: "./downlink-tables.component.html",
+    styleUrls: ["./downlink-tables.component.scss"],
+    standalone: false
 })
 export class DownlinkTablesComponent implements OnInit {
   @Input() device: IotDevice;

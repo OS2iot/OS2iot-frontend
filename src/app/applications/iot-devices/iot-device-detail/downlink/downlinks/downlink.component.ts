@@ -11,9 +11,10 @@ import { Downlink } from "../downlink.model";
 import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
-  selector: "app-downlink",
-  templateUrl: "./downlink.component.html",
-  styleUrls: ["./downlink.component.scss"],
+    selector: "app-downlink",
+    templateUrl: "./downlink.component.html",
+    styleUrls: ["./downlink.component.scss"],
+    standalone: false
 })
 export class DownlinkComponent implements OnInit {
   @Input() device: IotDevice;

@@ -16,9 +16,10 @@ import { UntypedFormControl } from "@angular/forms";
 import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: "app-multicast-edit",
-  templateUrl: "./multicast-edit.component.html",
-  styleUrls: ["./multicast-edit.component.scss"],
+    selector: "app-multicast-edit",
+    templateUrl: "./multicast-edit.component.html",
+    styleUrls: ["./multicast-edit.component.scss"],
+    standalone: false
 })
 export class MulticastEditComponent implements OnInit, OnDestroy {
   public title: string;

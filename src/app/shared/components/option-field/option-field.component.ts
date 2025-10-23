@@ -2,11 +2,10 @@ import { NgStyle } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-option-field",
-  templateUrl: "./option-field.component.html",
-  styleUrls: ["./option-field.component.scss"],
-  standalone: true,
-  imports: [NgStyle],
+    selector: "app-option-field",
+    templateUrl: "./option-field.component.html",
+    styleUrls: ["./option-field.component.scss"],
+    imports: [NgStyle]
 })
 export class OptionFieldComponent implements OnInit {
   @Input() title = "";

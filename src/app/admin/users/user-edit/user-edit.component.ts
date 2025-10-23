@@ -14,9 +14,10 @@ import { PermissionService } from "@app/admin/permission/permission.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: "app-user-edit",
-  templateUrl: "./user-edit.component.html",
-  styleUrls: ["./user-edit.component.scss"],
+    selector: "app-user-edit",
+    templateUrl: "./user-edit.component.html",
+    styleUrls: ["./user-edit.component.scss"],
+    standalone: false
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   public user = new UserRequest();

@@ -14,9 +14,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-  selector: "app-user-detail",
-  templateUrl: "./user-detail.component.html",
-  styleUrls: ["./user-detail.component.scss"],
+    selector: "app-user-detail",
+    templateUrl: "./user-detail.component.html",
+    styleUrls: ["./user-detail.component.scss"],
+    standalone: false
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   isLoadingResults = true;

@@ -5,9 +5,10 @@ import { WelcomeDialogModel } from "@shared/models/dialog.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-  selector: "app-welcome-dialog",
-  templateUrl: "./welcome-dialog.component.html",
-  styleUrls: ["./welcome-dialog.component.scss"],
+    selector: "app-welcome-dialog",
+    templateUrl: "./welcome-dialog.component.html",
+    styleUrls: ["./welcome-dialog.component.scss"],
+    standalone: false
 })
 export class WelcomeDialogComponent implements OnInit {
   dontShowAgain = false;
