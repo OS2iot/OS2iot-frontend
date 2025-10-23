@@ -5,9 +5,13 @@
 ></app-column-selector>
 
 <div class="mat-elevation-z8 overflow-auto">
-  <div *ngIf="isLoadingResults" class="loading-shade">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      @if (isLoadingResults) {
+        <mat-spinner></mat-spinner>
+      }
+    </div>
+  }
   <table
     (matSortChange)="announceSortChange($event)"
     [dataSource]="data"
@@ -268,45 +272,45 @@
         {{ "LORA-GATEWAY-TABLE.STATUS" | translate }}
       </th>
       <td *matCellDef="let gateway" mat-cell>
-        <ng-container *ngIf="gatewayStatus(gateway); then statusOk; else statusError"></ng-container>
-        <ng-template #statusOk>
+        @if (gatewayStatus(gateway)) {
           <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
-        </ng-template>
-        <ng-template #statusError>
-          <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
-        </ng-template>
+        } @else {
+        <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
+      }
       </td>
     </ng-container>
 
     <ng-container matColumnDef="menu">
       <th *matHeaderCellDef mat-header-cell></th>
       <td *matCellDef="let gateway" class="overflowVisible" mat-cell>
-        <div *ngIf="gateway.canEdit" class="dropdown">
-          <a
-            [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
-            aria-expanded="false"
-            class="applicationRow__edit dropdown-toggle"
-            data-toggle="dropdown"
-            href="#"
-            id="tableRowDropdown-{{ gateway.id }}"
-            role="button"
-          ></a>
-          <ul attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}" class="dropdown-menu dropdown-menu--table">
-            <li class="dropdown-item">
-              <a [routerLink]="['../gateway-edit', gateway.gatewayId]" routerLinkActive="active">{{
-                  "GEN.EDIT" | translate
-                }}</a>
-            </li>
-            <li class="dropdown-item">
-              <a (click)="onOpenChangeOrganizationDialog(gateway.id)" routerLinkActive="active">{{
-                  "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate
-                }}</a>
-            </li>
-            <li class="dropdown-item">
-              <a (click)="clickDelete(gateway)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
-            </li>
-          </ul>
-        </div>
+        @if (gateway.canEdit) {
+          <div class="dropdown">
+            <a
+              [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
+              aria-expanded="false"
+              class="applicationRow__edit dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              id="tableRowDropdown-{{ gateway.id }}"
+              role="button"
+            ></a>
+            <ul attr.aria-labelledby="tableRowDropdown-{{ gateway.id }}" class="dropdown-menu dropdown-menu--table">
+              <li class="dropdown-item">
+                <a [routerLink]="['../gateway-edit', gateway.gatewayId]" routerLinkActive="active">{{
+                    "GEN.EDIT" | translate
+                  }}</a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="onOpenChangeOrganizationDialog(gateway.id)" routerLinkActive="active">{{
+                    "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate
+                  }}</a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="clickDelete(gateway)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        }
       </td>
     </ng-container>
 

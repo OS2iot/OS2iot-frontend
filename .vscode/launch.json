@@ -1,6 +1,7 @@
 {
   "version": "0.2.0",
-  "configurations": [{
+  "configurations": [
+    {
       "type": "firefox",
       "request": "launch",
       "reAttach": true,
@@ -14,6 +15,6 @@
       "request": "launch",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
-    },
+    }
   ]
 }

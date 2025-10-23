@@ -9,10 +9,10 @@ import { SigfoxGroup } from "@shared/models/sigfox-group.model";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: "app-sigfox-device-type-table",
-    templateUrl: "./sigfox-device-type-table.component.html",
-    styleUrls: ["./sigfox-device-type-table.component.scss"],
-    standalone: false
+  selector: "app-sigfox-device-type-table",
+  templateUrl: "./sigfox-device-type-table.component.html",
+  styleUrls: ["./sigfox-device-type-table.component.scss"],
+  standalone: false,
 })
 export class SigfoxDeviceTypeTableComponent implements OnInit, OnChanges {
   @Input() sigfoxDevices: SigfoxDeviceType[];

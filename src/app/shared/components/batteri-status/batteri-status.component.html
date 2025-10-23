@@ -1,9 +1,14 @@
-<div *ngIf="isValid(); else noBatteryStatus" class="d-flex align-items-center">
-  <span class="pr-3"> {{ percentage }} %</span>
-  <div class="percentage-box" *ngFor="let item of arrayColor" [ngStyle]="{ 'background-color': item.color }">
-    <ng-template [ngIf]="item.full == false">
-      <div [ngStyle]="{ 'background-color': color, width: item.width, height: '15px' }"></div>
-    </ng-template>
+@if (isValid()) {
+  <div class="d-flex align-items-center">
+    <span class="pr-3"> {{ percentage }} %</span>
+    @for (item of arrayColor; track item) {
+      <div [ngStyle]="{ 'background-color': item.color }" class="percentage-box">
+        @if (item.full == false) {
+          <div [ngStyle]="{ 'background-color': color, width: item.width, height: '15px' }"></div>
+        }
+      </div>
+    }
   </div>
-</div>
-<ng-template #noBatteryStatus>{{ "BATTERY.NOT_AVAILABLE" | translate }}</ng-template>
+} @else {
+  {{ "BATTERY.NOT_AVAILABLE" | translate }}
+}

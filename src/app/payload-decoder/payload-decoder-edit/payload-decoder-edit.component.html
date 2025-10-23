@@ -1,14 +1,18 @@
 <app-top-bar [backButton]="backButton" [canEdit]="canEdit" [subPage]="true" [title]="title"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
-  <div *ngIf="errorMessages" class="jumbotron">
-    <div class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </ul>
+  @if (errorMessages) {
+    <div class="jumbotron">
+      <div class="error-messages p-3">
+        <ul class="mb-0">
+          @for (error of errorMessages; track error) {
+            <li>
+              {{ error | translate }}
+            </li>
+          }
+        </ul>
+      </div>
     </div>
-  </div>
+  }
   <div class="jumbotron">
     <div class="row">
       <div class="col-6">
@@ -36,18 +40,22 @@
           <mat-form-field appearance="outline">
             <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-APPLICATION" | translate }}</mat-label>
             <mat-select (selectionChange)="getDevices($event)">
-              <mat-option *ngFor="let applicationEl of applications" [value]="applicationEl.id">
-                {{ applicationEl.name }}
-              </mat-option>
+              @for (applicationEl of applications; track applicationEl) {
+                <mat-option [value]="applicationEl.id">
+                  {{ applicationEl.name }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <div class="form-group">
             <mat-form-field appearance="outline">
               <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-DEVICE" | translate }}</mat-label>
               <mat-select (selectionChange)="getDevice($event)" [disabled]="!iotDevices">
-                <mat-option *ngFor="let iotDeviceEl of iotDevices" [value]="iotDeviceEl.id">
-                  {{ iotDeviceEl.name }}
-                </mat-option>
+                @for (iotDeviceEl of iotDevices; track iotDeviceEl) {
+                  <mat-option [value]="iotDeviceEl.id">
+                    {{ iotDeviceEl.name }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>

@@ -5,5 +5,5 @@
   {{ data.message }}
 </div>
 <div class="snackbar-button-div-style">
-  <button class="button-style" (click)="snackBarRef.dismiss()">{{ data.buttonText }}</button>
+  <button (click)="snackBarRef.dismiss()" class="button-style">{{ data.buttonText }}</button>
 </div>

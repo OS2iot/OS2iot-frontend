@@ -9,10 +9,10 @@ import { DatatargetDetail } from "./datatarget-detail";
 import { DatatargetDetailTypeSelectorDirective } from "./datatarget-detail-type-selector.directive";
 
 @Component({
-    selector: "app-datatarget-detail",
-    templateUrl: "./datatarget-detail.component.html",
-    styleUrls: ["./datatarget-detail.component.scss"],
-    standalone: false
+  selector: "app-datatarget-detail",
+  templateUrl: "./datatarget-detail.component.html",
+  styleUrls: ["./datatarget-detail.component.scss"],
+  standalone: false,
 })
 export class DatatargetDetailComponent implements OnDestroy {
   @ViewChild(DatatargetDetailTypeSelectorDirective, { static: true })

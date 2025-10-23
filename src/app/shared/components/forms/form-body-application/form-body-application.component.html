@@ -1,130 +1,138 @@
-<form (ngSubmit)="onSubmit()" #applicationForm="ngForm" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{ error | translate }}
-      </li>
-    </ul>
-  </div>
+<form #applicationForm="ngForm" (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
   <div class="row">
     <div class="form-group mt-3">
       <label class="form-label" for="name">{{ "GEN.NAME" | translate }}*</label>
 
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'QUESTION.APPLICATION.NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="application.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'QUESTION.APPLICATION.NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="description">{{ "GEN.DESCRIPTION" | translate }}</label>
       <textarea
-        id="description"
-        name="description"
-        [placeholder]="'QUESTION.APPLICATION.DESCRIPTION-PLACEHOLDER' | translate"
-        [maxLength]="1024"
-        [rows]="6"
-        class="form-control"
         [(ngModel)]="application.description"
+        [maxLength]="1024"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('description'),
           'is-valid': formFailedSubmit && !errorFields.includes('description')
         }"
+        [placeholder]="'QUESTION.APPLICATION.DESCRIPTION-PLACEHOLDER' | translate"
+        [rows]="6"
+        class="form-control"
+        id="description"
+        name="description"
       ></textarea>
     </div>
 
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="userGroup">{{ "QUESTION.APPLICATION.ADD-PERMISSION" | translate }}</label>
       <mat-select
-        id="userGroup"
-        class="form-control"
-        [formControl]="permissionMultiCtrl"
-        [multiple]="true"
-        panelClass="overflow-x-hidden"
         [(value)]="application.permissionIds"
         [compareWith]="compare"
+        [formControl]="permissionMultiCtrl"
+        [multiple]="true"
+        class="form-control"
+        id="userGroup"
+        panelClass="overflow-x-hidden"
       >
         <app-mat-select-search
-          [initialValues]="this.application.permissionIds"
           [formControl]="permissionMultiFilterCtrl"
+          [initialValues]="this.application.permissionIds"
         ></app-mat-select-search>
-        <mat-option *ngFor="let permission of filteredPermissionsMulti | async" [value]="permission.id">
-          {{ permission.name }}
-        </mat-option>
+        @for (permission of filteredPermissionsMulti | async; track permission) {
+          <mat-option [value]="permission.id">
+            {{ permission.name }}
+          </mat-option>
+        }
       </mat-select>
       <mat-hint>{{ "QUESTION.APPLICATION.PERMISSION-HINT" | translate }}</mat-hint>
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="application.statusOptions">{{
-        "APPLICATION.METADATA-FIELD.STATUS" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.STATUS" | translate
+        }}</label>
       <mat-select
-        class="form-control"
-        id="application.statusOptions"
-        name="application.statusOptions"
         [(ngModel)]="application.status"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.status'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.status')
         }"
+        class="form-control"
+        id="application.statusOptions"
+        name="application.statusOptions"
       >
-        <mat-option *ngFor="let statusOption of statuses" [value]="statusOption.value">
-          {{ statusOption.label }}
-        </mat-option>
+        @for (statusOption of statuses; track statusOption) {
+          <mat-option [value]="statusOption.value">
+            {{ statusOption.label }}
+          </mat-option>
+        }
       </mat-select>
     </div>
 
     <div class="form-group mt-3 flexDirectionColumn">
       <label class="form-label" for="application.startDate">{{
-        "APPLICATION.METADATA-FIELD.START-DATE" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.START-DATE" | translate
+        }}</label>
       <mat-form-field appearance="outline" id="application.startDate">
         <mat-label>{{ "QUESTION.APPLICATION.START-DATE-PLACEHOLDER" | translate }}</mat-label>
         <input
-          matInput
-          [max]="serializedEndDate.value"
-          [matDatepicker]="startDatePicker"
           [formControl]="serializedStartDate"
+          [matDatepicker]="startDatePicker"
+          [max]="serializedEndDate.value"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('application.startDate'),
             'is-valid': formFailedSubmit && !errorFields.includes('application.startDate')
           }"
+          matInput
         />
-        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker panelClass="datepicker-table-fix" #startDatePicker></mat-datepicker>
+        <mat-datepicker-toggle [for]="startDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker panelClass="datepicker-table-fix"></mat-datepicker>
         <mat-hint>{{ "QUESTION.APPLICATION.DATE-HINT" | translate }}</mat-hint>
       </mat-form-field>
     </div>
 
     <div class="form-group mt-3 flexDirectionColumn">
       <label class="form-label" for="application.endDate">{{
-        "APPLICATION.METADATA-FIELD.END-DATE" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.END-DATE" | translate
+        }}</label>
       <mat-form-field appearance="outline" id="application.endDate">
         <mat-label>{{ "QUESTION.APPLICATION.END-DATE-PLACEHOLDER" | translate }}</mat-label>
         <input
-          matInput
-          [min]="serializedStartDate.value"
-          [matDatepicker]="endDatePicker"
           [formControl]="serializedEndDate"
+          [matDatepicker]="endDatePicker"
+          [min]="serializedStartDate.value"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('application.endDate'),
             'is-valid': formFailedSubmit && !errorFields.includes('application.endDate')
           }"
+          matInput
         />
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker panelClass="datepicker-table-fix" #endDatePicker></mat-datepicker>
+        <mat-datepicker-toggle [for]="endDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker panelClass="datepicker-table-fix"></mat-datepicker>
         <mat-hint>{{ "QUESTION.APPLICATION.DATE-HINT" | translate }}</mat-hint>
       </mat-form-field>
     </div>
@@ -132,170 +140,175 @@
     <div class="form-group mt-3">
       <label class="form-label" for="category">{{ "APPLICATION.METADATA-FIELD.CATEGORY" | translate }}</label>
       <input
-        type="text"
-        class="form-control"
-        id="category"
-        name="category"
-        [placeholder]="'QUESTION.APPLICATION.CATEGORY-PLACEHOLDER' | translate"
-        maxlength="100"
         [(ngModel)]="application.category"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.category'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.category')
         }"
+        [placeholder]="'QUESTION.APPLICATION.CATEGORY-PLACEHOLDER' | translate"
+        class="form-control"
+        id="category"
+        maxlength="100"
+        name="category"
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="owner">{{ "APPLICATION.METADATA-FIELD.OWNER" | translate }}</label>
       <input
-        type="text"
-        class="form-control"
-        id="owner"
-        name="owner"
-        [placeholder]="'QUESTION.APPLICATION.OWNER-PLACEHOLDER' | translate"
-        maxlength="100"
         [(ngModel)]="application.owner"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.owner'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.owner')
         }"
+        [placeholder]="'QUESTION.APPLICATION.OWNER-PLACEHOLDER' | translate"
+        class="form-control"
+        id="owner"
+        maxlength="100"
+        name="owner"
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="contactPerson">{{
-        "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate
+        }}</label>
       <input
-        type="text"
-        class="form-control"
-        id="contactPerson"
-        name="contactPerson"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate"
-        maxlength="100"
         [(ngModel)]="application.contactPerson"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.contactPerson'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.contactPerson')
         }"
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate"
+        class="form-control"
+        id="contactPerson"
+        maxlength="100"
+        name="contactPerson"
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="contactEmail">{{ "APPLICATION.METADATA-FIELD.CONTACT-EMAIL" | translate }}</label>
       <input
-        type="email"
-        class="form-control"
-        id="contactEmail"
-        name="contactEmail"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate"
-        maxlength="50"
-        [email]="true"
         [(ngModel)]="application.contactEmail"
+        [email]="true"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.contactEmail'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.contactEmail')
         }"
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate"
+        class="form-control"
+        id="contactEmail"
+        maxlength="50"
+        name="contactEmail"
+        type="email"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="contactPhone">{{ "APPLICATION.METADATA-FIELD.CONTACT-PHONE" | translate }}</label>
       <input
-        type="text"
-        class="form-control"
-        id="contactPhone"
-        name="contactPhone"
         [formControl]="phoneCtrl"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate"
-        maxlength="12"
         [ngClass]="{
           'is-invalid': application.contactPhone && phoneCtrl.invalid,
           'is-valid': !phoneCtrl.invalid
         }"
+        [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate"
+        class="form-control"
+        id="contactPhone"
+        maxlength="12"
+        name="contactPhone"
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="application.personalData">{{
-        "APPLICATION.METADATA-FIELD.PERSONAL-DATA" | translate
-      }}</label>
-      <br />
+          "APPLICATION.METADATA-FIELD.PERSONAL-DATA" | translate
+        }}</label>
+      <br/>
       <mat-checkbox
+        [(ngModel)]="application.personalData"
         id="application.personalData"
         name="application.personalData"
-        [(ngModel)]="application.personalData"
       >
         <mat-label
-          for="application.personalData"
           class="form-check-label margin-top-25px"
+          for="application.personalData"
           style="white-space: initial"
-          >{{ "QUESTION.APPLICATION.PERSONAL-DATA-PLACEHOLDER" | translate }}</mat-label
+        >{{ "QUESTION.APPLICATION.PERSONAL-DATA-PLACEHOLDER" | translate }}
+        </mat-label
         >
       </mat-checkbox>
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="application.hardware">{{
-        "APPLICATION.METADATA-FIELD.HARDWARE" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.HARDWARE" | translate
+        }}</label>
       <textarea
-        id="application.hardware"
-        name="application.hardware"
-        [placeholder]="'QUESTION.APPLICATION.HARDWARE-PLACEHOLDER' | translate"
-        [maxLength]="1024"
-        [rows]="6"
-        class="form-control"
         [(ngModel)]="application.hardware"
+        [maxLength]="1024"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.hardware'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.hardware')
         }"
+        [placeholder]="'QUESTION.APPLICATION.HARDWARE-PLACEHOLDER' | translate"
+        [rows]="6"
+        class="form-control"
+        id="application.hardware"
+        name="application.hardware"
       ></textarea>
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="application.controlledProperty">{{
-        "APPLICATION.METADATA-FIELD.CONTROLLED-PROPERTY" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.CONTROLLED-PROPERTY" | translate
+        }}</label>
       <mat-select
-        class="form-control"
-        name="application.controlledProperty"
-        id="application.controlledProperty"
-        multiple="true"
         [(ngModel)]="application.controlledProperties"
-        [placeholder]="'QUESTION.APPLICATION.CONTROLLED-PROPERTY-PLACEHOLDER' | translate"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.controlledProperty'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.controlledProperty')
         }"
+        [placeholder]="'QUESTION.APPLICATION.CONTROLLED-PROPERTY-PLACEHOLDER' | translate"
+        class="form-control"
+        id="application.controlledProperty"
+        multiple="true"
+        name="application.controlledProperty"
       >
-        <mat-option *ngFor="let ctrlProperty of controlledProperties" [value]="ctrlProperty">
-          {{ ctrlProperty }}
-        </mat-option>
+        @for (ctrlProperty of controlledProperties; track ctrlProperty) {
+          <mat-option [value]="ctrlProperty">
+            {{ ctrlProperty }}
+          </mat-option>
+        }
       </mat-select>
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="application.deviceType">{{
-        "APPLICATION.METADATA-FIELD.DEVICE-TYPE" | translate
-      }}</label>
+          "APPLICATION.METADATA-FIELD.DEVICE-TYPE" | translate
+        }}</label>
       <mat-select
-        class="form-control"
-        name="application.deviceType"
-        id="application.deviceType"
-        multiple="true"
         [(ngModel)]="application.deviceTypes"
-        [placeholder]="'QUESTION.APPLICATION.DEVICE-TYPE-PLACEHOLDER' | translate"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('application.deviceType'),
           'is-valid': formFailedSubmit && !errorFields.includes('application.deviceType')
         }"
+        [placeholder]="'QUESTION.APPLICATION.DEVICE-TYPE-PLACEHOLDER' | translate"
+        class="form-control"
+        id="application.deviceType"
+        multiple="true"
+        name="application.deviceType"
       >
-        <mat-option *ngFor="let deviceType of deviceTypes" [value]="deviceType.value">
-          {{ deviceType.label }}
-        </mat-option>
+        @for (deviceType of deviceTypes; track deviceType) {
+          <mat-option [value]="deviceType.value">
+            {{ deviceType.label }}
+          </mat-option>
+        }
       </mat-select>
     </div>
   </div>

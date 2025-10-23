@@ -3,10 +3,10 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
 
 @Component({
-    selector: "app-iot-device-downlink-tab",
-    templateUrl: "./iot-device-downlink-tab.component.html",
-    styleUrls: ["./iot-device-downlink-tab.component.scss"],
-    standalone: false
+  selector: "app-iot-device-downlink-tab",
+  templateUrl: "./iot-device-downlink-tab.component.html",
+  styleUrls: ["./iot-device-downlink-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDownlinkTabComponent implements OnInit {
   device: IotDevice;

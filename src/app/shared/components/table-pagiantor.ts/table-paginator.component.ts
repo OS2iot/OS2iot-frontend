@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { AfterViewChecked, Component, Input, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
@@ -14,14 +14,22 @@ export interface Option {
 }
 
 @Component({
-    selector: "app-table-paginator",
-    templateUrl: "./table-paginator.component.html",
-    styleUrls: ["./table-paginator.component.scss"],
-    imports: [NgFor, MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatButtonModule, NgClass]
+  selector: "app-table-paginator",
+  templateUrl: "./table-paginator.component.html",
+  styleUrls: ["./table-paginator.component.scss"],
+  imports: [MatIconModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatButtonModule, NgClass],
 })
 export class TablePaginatorComponent implements OnInit, AfterViewChecked {
-  ngOnInit(): void {}
   @Input() paginator: MatPaginator;
+  options: Option[] = [
+    { value: 25, label: "25 pr. side" },
+    { value: 50, label: "50 pr. side" },
+    { value: 100, label: "100 pr. side" },
+  ];
+  selected: number = 25;
+  currentPage: number = 1;
+  numberOfPages: number = 1;
+  hasNextPage: boolean = false;
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
@@ -42,16 +50,8 @@ export class TablePaginatorComponent implements OnInit, AfterViewChecked {
       {}
     );
   }
-  options: Option[] = [
-    { value: 25, label: "25 pr. side" },
-    { value: 50, label: "50 pr. side" },
-    { value: 100, label: "100 pr. side" },
-  ];
-  selected: number = 25;
-  currentPage: number = 1;
-  numberOfPages: number = 1;
 
-  hasNextPage: boolean = false;
+  ngOnInit(): void {}
 
   ngAfterViewChecked() {
     if (this.paginator && this.paginator.getNumberOfPages()) {

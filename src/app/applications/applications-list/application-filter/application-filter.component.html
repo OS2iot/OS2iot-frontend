@@ -2,10 +2,12 @@
   <div class="filter-selector-container">
     <div class="filter-title">{{ "APPLICATION-FILTER.STATUS" | translate }}</div>
     <mat-form-field appearance="outline">
-      <mat-select class="withoutArrow" [(value)]="state" placeholder="test" (selectionChange)="onStatusCheck($event)">
-        <mat-option *ngFor="let option of statusOptions" [value]="option.value">
-          {{ option.label | translate }}
-        </mat-option>
+      <mat-select (selectionChange)="onStatusCheck($event)" [(value)]="state" class="withoutArrow" placeholder="test">
+        @for (option of statusOptions; track option) {
+          <mat-option [value]="option.value">
+            {{ option.label | translate }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
@@ -13,10 +15,12 @@
   <div class="filter-selector-container">
     <div class="filter-title">{{ "APPLICATION-FILTER.STATE" | translate }}</div>
     <mat-form-field appearance="outline">
-      <mat-select class="withoutArrow" [(value)]="status" (selectionChange)="onStatus($event)">
-        <mat-option *ngFor="let option of stateOptions" [value]="option.value">
-          {{ option.label | translate }}
-        </mat-option>
+      <mat-select (selectionChange)="onStatus($event)" [(value)]="status" class="withoutArrow">
+        @for (option of stateOptions; track option) {
+          <mat-option [value]="option.value">
+            {{ option.label | translate }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
@@ -24,21 +28,23 @@
   <div class="filter-selector-container">
     <div class="filter-title">{{ "APPLICATION-FILTER.OWNER" | translate }}</div>
     <mat-form-field appearance="outline">
-      <mat-select class="withoutArrow" [(value)]="owner" (selectionChange)="onOwner($event)">
+      <mat-select (selectionChange)="onOwner($event)" [(value)]="owner" class="withoutArrow">
         <mat-option [value]="owner">
           {{ "APPLICATION-FILTER.ALL" | translate }}
         </mat-option>
-        <mat-option *ngFor="let option of ownerOptions" [value]="option.value">
-          {{ option.label }}
-        </mat-option>
+        @for (option of ownerOptions; track option) {
+          <mat-option [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
 
   <div class="spacer"></div>
-  <button class="filter-button" mat-flat-button (click)="onButtonClick()">
+  <button (click)="onButtonClick()" class="filter-button" mat-flat-button>
     <div class="filter-icon-container">
-      <img ngSrc="../../../../assets/images/sliders.svg" width="18" height="16" priority />
+      <img height="16" ngSrc="../../../../assets/images/sliders.svg" priority width="18"/>
       <div class="filter-label">
         {{ "APPLICATION-FILTER.RESET-FILTER" | translate }}
       </div>

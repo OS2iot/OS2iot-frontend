@@ -10,10 +10,10 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 
 @Component({
-    selector: "app-general-details",
-    templateUrl: "./general-details.component.html",
-    styleUrls: ["./general-details.component.scss"],
-    standalone: false
+  selector: "app-general-details",
+  templateUrl: "./general-details.component.html",
+  styleUrls: ["./general-details.component.scss"],
+  standalone: false,
 })
 export class GeneralDetailsComponent implements OnInit {
   @Input() data:

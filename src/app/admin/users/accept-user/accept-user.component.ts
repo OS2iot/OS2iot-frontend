@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import {
   PermissionRequestAcceptUser,
+  PermissionResponse,
   PermissionType,
   PermissionTypes,
-  PermissionResponse,
 } from "@app/admin/permission/permission.model";
 import { TranslateService } from "@ngx-translate/core";
 import { ErrorMessageService } from "@shared/error-message.service";
@@ -17,10 +17,10 @@ import { PermissionService } from "@app/admin/permission/permission.service";
 import { UntypedFormControl } from "@angular/forms";
 
 @Component({
-    selector: "app-accept-user",
-    templateUrl: "./accept-user.component.html",
-    styleUrls: ["./accept-user.component.scss"],
-    standalone: false
+  selector: "app-accept-user",
+  templateUrl: "./accept-user.component.html",
+  styleUrls: ["./accept-user.component.scss"],
+  standalone: false,
 })
 export class AcceptUserComponent implements OnInit, OnDestroy {
   public backButtonTitle: string;
@@ -70,6 +70,27 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
     this.getPermissionsForOrg(this.organizationId);
   }
 
+  routeBack(): void {
+    this.location.back();
+  }
+
+  onSubmit(): void {
+    this.permissionService.createPermissionAcceptUser(this.permission).subscribe(
+      () => {
+        this.routeBack();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.showError(error);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+    this.permissionsForOrgSubscription?.unsubscribe();
+  }
+
   private getUser(id: number) {
     this.subscription = this.userService.getOne(id, false).subscribe(response => {
       this.user = response;
@@ -95,26 +116,5 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
     const result = this.errorMessageService.handleErrorMessageWithFields(err);
     this.errorFields = result.errorFields;
     this.errorMessages = result.errorMessages;
-  }
-
-  routeBack(): void {
-    this.location.back();
-  }
-
-  onSubmit(): void {
-    this.permissionService.createPermissionAcceptUser(this.permission).subscribe(
-      () => {
-        this.routeBack();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.showError(error);
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscription?.unsubscribe();
-    this.permissionsForOrgSubscription?.unsubscribe();
   }
 }

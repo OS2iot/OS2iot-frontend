@@ -1,12 +1,12 @@
 <h3>{{ "IOTDEVICE.DEVICEMODEL" | translate }}</h3>
-<ngx-monaco-editor
-  *ngIf="deviceModel; else noDeviceModel"
-  class="middle-editor"
-  [options]="editorJsonOutpuOptions"
-  [(ngModel)]="deviceModel"
-  [ngModelOptions]="{ standalone: true }"
->
-</ngx-monaco-editor>
-<ng-template #noDeviceModel>
+@if (deviceModel) {
+  <ngx-monaco-editor
+    [(ngModel)]="deviceModel"
+    [ngModelOptions]="{ standalone: true }"
+    [options]="editorJsonOutpuOptions"
+    class="middle-editor"
+  >
+  </ngx-monaco-editor>
+} @else {
   <p class="mt-3">{{ "IOTDEVICE.DEVICEMODEL-ERROR" | translate }}</p>
-</ng-template>
+}

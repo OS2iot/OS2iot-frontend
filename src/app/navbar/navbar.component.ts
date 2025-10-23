@@ -13,10 +13,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { UserResponse } from "./../admin/users/user.model";
 
 @Component({
-    selector: "app-navbar",
-    templateUrl: "./navbar.component.html",
-    styleUrls: ["./navbar.component.scss"],
-    standalone: false
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
+  standalone: false,
 })
 export class NavbarComponent implements OnInit {
   public organisations: Organisation[];
@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
   userInfo: CurrentUserInfoResponse;
   faSignInAlt = faSignInAlt;
   imagePath = "../../assets/images/os2iot.png ";
+  @Output() navToggle = new EventEmitter<boolean>();
 
   constructor(
     private authService: AuthService,
@@ -51,8 +52,6 @@ export class NavbarComponent implements OnInit {
 
     translate.use("da");
   }
-
-  @Output() navToggle = new EventEmitter<boolean>();
 
   isLoggedIn() {
     return this.authService.isLoggedIn();

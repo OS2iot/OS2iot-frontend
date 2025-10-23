@@ -17,16 +17,14 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-sigfox-device-types-edit",
-    templateUrl: "./sigfox-device-types-edit.component.html",
-    styleUrls: ["./sigfox-device-types-edit.component.scss"],
-    standalone: false
+  selector: "app-sigfox-device-types-edit",
+  templateUrl: "./sigfox-device-types-edit.component.html",
+  styleUrls: ["./sigfox-device-types-edit.component.scss"],
+  standalone: false,
 })
 export class SigfoxDeviceTypesEditComponent implements OnInit {
   sigfoxDeviceType = new SigfoxDeviceType();
   public sigfoxGroup: SigfoxGroup;
-  private sigfoxGroupId: number;
-  private deviceTypeId: string;
   public sigfoxContracts: SigfoxContract[];
   public errorMessages: string[];
   public errorFields: string[];
@@ -38,6 +36,8 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   public canEdit = false;
   organizationId: number;
   subscription: Subscription;
+  private sigfoxGroupId: number;
+  private deviceTypeId: string;
 
   constructor(
     private translate: TranslateService,
@@ -68,6 +68,18 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     }
     this.getContracts(this.sigfoxGroupId);
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
+  }
+
+  onSubmit(): void {
+    if (this.sigfoxDeviceType.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
   }
 
   private getContracts(groupId: number) {
@@ -107,23 +119,11 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
-    if (this.sigfoxDeviceType.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  }
-
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessages = [];
     const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorMessages.errorFields;
     this.errorMessages = errorMessages.errorMessages;
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

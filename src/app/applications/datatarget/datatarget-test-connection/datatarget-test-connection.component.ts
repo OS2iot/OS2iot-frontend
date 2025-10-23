@@ -14,10 +14,10 @@ import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-datatarget-test-connection",
-    templateUrl: "./datatarget-test-connection.component.html",
-    styleUrl: "./datatarget-test-connection.component.scss",
-    standalone: false
+  selector: "app-datatarget-test-connection",
+  templateUrl: "./datatarget-test-connection.component.html",
+  styleUrl: "./datatarget-test-connection.component.scss",
+  standalone: false,
 })
 export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
   editorJsonOutputOptions = {

@@ -1,22 +1,24 @@
-@if(isGlobalAdmin || isUserAdmin){
+@if (isGlobalAdmin || isUserAdmin) {
 
-<div class="nav-bar-title">{{ "NAV.TITLES.ADMINISTRATION" | translate }}</div>
+  <div class="nav-bar-title">{{ "NAV.TITLES.ADMINISTRATION" | translate }}</div>
 
-<ul class="navbar-nav flex-column">
-  <li class="nav-item">
-    <a routerLink="/admin/users" routerLinkActive="active">
-      {{ "NAV.USERS" | translate }}
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/admin/permissions" routerLinkActive="active">
-      {{ "NAV.PERMISSIONS" | translate }}
-    </a>
-  </li>
-  <li class="nav-item" *ngIf="isGlobalAdmin">
-    <a routerLink="/admin/organisations" routerLinkActive="active">
-      {{ "NAV.ORGANISATIONS" | translate }}
-    </a>
-  </li>
-</ul>
+  <ul class="navbar-nav flex-column">
+    <li class="nav-item">
+      <a routerLink="/admin/users" routerLinkActive="active">
+        {{ "NAV.USERS" | translate }}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/admin/permissions" routerLinkActive="active">
+        {{ "NAV.PERMISSIONS" | translate }}
+      </a>
+    </li>
+    @if (isGlobalAdmin) {
+      <li class="nav-item">
+        <a routerLink="/admin/organisations" routerLinkActive="active">
+          {{ "NAV.ORGANISATIONS" | translate }}
+        </a>
+      </li>
+    }
+  </ul>
 }

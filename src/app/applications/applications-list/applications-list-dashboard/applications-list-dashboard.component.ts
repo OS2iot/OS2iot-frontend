@@ -8,10 +8,10 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { BasicInformationBoxComponent } from "../../../shared/components/basic-information-box/basic-information-box.component";
 
 @Component({
-    selector: "app-applications-list-dashboard",
-    imports: [BasicInformationBoxComponent, TranslatePipe],
-    templateUrl: "./applications-list-dashboard.component.html",
-    styleUrl: "./applications-list-dashboard.component.scss"
+  selector: "app-applications-list-dashboard",
+  imports: [BasicInformationBoxComponent, TranslatePipe],
+  templateUrl: "./applications-list-dashboard.component.html",
+  styleUrl: "./applications-list-dashboard.component.scss",
 })
 export class ApplicationsListDashboardComponent implements OnInit {
   total: number = 0;

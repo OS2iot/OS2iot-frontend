@@ -1,7 +1,11 @@
 <div class="mat-elevation-z8">
-  <div *ngIf="isLoadingResults" class="loading-shade">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      @if (isLoadingResults) {
+        <mat-spinner></mat-spinner>
+      }
+    </div>
+  }
   <table [dataSource]="data" mat-table matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -19,13 +23,14 @@
         {{ "API-KEY.PERMISSIONS" | translate }}
       </th>
       <td *matCellDef="let element" mat-cell>
-        <ng-container *ngIf="element.permissions; else noUsers">
-          <ng-container *ngFor="let pm of element.permissions">
+        @if (element.permissions) {
+          @for (pm of element.permissions; track pm) {
             <span>{{ pm.name }}</span>
             <br/>
-          </ng-container>
-        </ng-container>
-        <ng-template #noUsers>{{ "NoUsersAdded" | translate }}</ng-template>
+          }
+        } @else {
+        {{ "NoUsersAdded" | translate }}
+      }
       </td>
     </ng-container>
 
@@ -64,27 +69,30 @@
     <ng-container matColumnDef="menu">
       <th *matHeaderCellDef mat-header-cell></th>
       <td *matCellDef="let element" mat-cell>
-        <div *ngIf="canAccess(element)" class="dropdown">
-          <a
-            [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
-            aria-expanded="false"
-            class="applicationRow__edit dropdown-toggle"
-            data-toggle="dropdown"
-            href="#"
-            id="tableRowDropdown-{{ element.id }}"
-            role="button"
-          ></a>
-          <ul attr.aria-labelledby="tableRowDropdown-{{ element.id }}" class="dropdown-menu dropdown-menu--table">
-            <li class="dropdown-item">
-              <a [routerLink]="[element.id, 'edit-api-key']" routerLinkActive="active"
-              >{{ "ORGANISATION-TABLE-ROW.EDIT" | translate }}
-              </a>
-            </li>
-            <li class="dropdown-item">
-              <a (click)="deleteApiKey(element.id)" [routerLink]="[]">{{ "API-KEY.TABLE-ROW.DELETE" | translate }} </a>
-            </li>
-          </ul>
-        </div>
+        @if (canAccess(element)) {
+          <div class="dropdown">
+            <a
+              [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
+              aria-expanded="false"
+              class="applicationRow__edit dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              id="tableRowDropdown-{{ element.id }}"
+              role="button"
+            ></a>
+            <ul attr.aria-labelledby="tableRowDropdown-{{ element.id }}" class="dropdown-menu dropdown-menu--table">
+              <li class="dropdown-item">
+                <a [routerLink]="[element.id, 'edit-api-key']" routerLinkActive="active"
+                >{{ "ORGANISATION-TABLE-ROW.EDIT" | translate }}
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="deleteApiKey(element.id)"
+                   [routerLink]="[]">{{ "API-KEY.TABLE-ROW.DELETE" | translate }} </a>
+              </li>
+            </ul>
+          </div>
+        }
       </td>
     </ng-container>
 

@@ -11,10 +11,10 @@ import { ReplaySubject, Subscription } from "rxjs";
 import { UpdateGatewayOrganization } from "../gateway.model";
 
 @Component({
-    selector: "app-gateway-change-organization-dialog",
-    templateUrl: "./gateway-change-organization-dialog.component.html",
-    styleUrls: ["./gateway-change-organization-dialog.component.scss"],
-    standalone: false
+  selector: "app-gateway-change-organization-dialog",
+  templateUrl: "./gateway-change-organization-dialog.component.html",
+  styleUrls: ["./gateway-change-organization-dialog.component.scss"],
+  standalone: false,
 })
 export class GatewayChangeOrganizationDialogComponent implements OnInit {
   public gatewaysSubscription: Subscription;

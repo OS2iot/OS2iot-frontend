@@ -1,30 +1,30 @@
 <td>
   <div class="row px-2">
     <input
-      type="text"
-      id="keyValuePairKey"
-      name="keyValuePairKey"
-      maxLength="100"
-      [placeholder]="'GEN.KEY' | translate"
-      class="form-control border-bottom-i-1"
       [(ngModel)]="pair.key"
       [ngClass]="{
         'is-invalid': errorFieldId && errorFieldId === pair.key,
         'is-valid': errorFieldId && errorFieldId !== pair.key
       }"
+      [placeholder]="'GEN.KEY' | translate"
+      class="form-control border-bottom-i-1"
+      id="keyValuePairKey"
+      maxLength="100"
+      name="keyValuePairKey"
+      type="text"
     />
   </div>
 </td>
 <td>
   <div class="row px-2">
     <input
-      type="text"
-      id="keyValuePairValue"
-      name="keyValuePairValue"
-      maxLength="100"
+      [(ngModel)]="pair.value"
       [placeholder]="'GEN.VALUE' | translate"
       class="form-control border-bottom-i-1"
-      [(ngModel)]="pair.value"
+      id="keyValuePairValue"
+      maxLength="100"
+      name="keyValuePairValue"
+      type="text"
     />
   </div>
 </td>

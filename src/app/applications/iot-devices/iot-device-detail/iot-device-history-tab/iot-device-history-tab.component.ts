@@ -14,10 +14,10 @@ import { IoTDeviceService } from "@applications/iot-devices/iot-device.service";
 const dataRateColors = ["#F57A2F", "#FFA620", "#F6CE06", "#FFEB3B", "#CDDC39", "#93E528", "#72D144", "#56B257"];
 
 @Component({
-    selector: "app-iot-device-history-tab",
-    templateUrl: "./iot-device-history-tab.component.html",
-    styleUrls: ["./iot-device-history-tab.component.scss"],
-    standalone: false
+  selector: "app-iot-device-history-tab",
+  templateUrl: "./iot-device-history-tab.component.html",
+  styleUrls: ["./iot-device-history-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceHistoryTabComponent implements OnInit {
   device: IotDevice;

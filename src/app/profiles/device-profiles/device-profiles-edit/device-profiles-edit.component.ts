@@ -13,10 +13,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { AdrAlgorithm } from "@app/network-server/adr-algorithm.model";
 
 @Component({
-    selector: "app-device-profiles-edit",
-    templateUrl: "./device-profiles-edit.component.html",
-    styleUrls: ["./device-profiles-edit.component.scss"],
-    standalone: false
+  selector: "app-device-profiles-edit",
+  templateUrl: "./device-profiles-edit.component.html",
+  styleUrls: ["./device-profiles-edit.component.scss"],
+  standalone: false,
 })
 export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;
@@ -110,6 +110,29 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  routeBack(): void {
+    this.location.back();
+  }
+
+  public compare(o1: any, o2: any): boolean {
+    return o1 === o2;
+  }
+
+  onSubmit(): void {
+    if (this.deviceProfile.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   private create(): void {
     this.deviceProfileService.post(this.deviceProfile).subscribe(
       response => {
@@ -133,14 +156,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  routeBack(): void {
-    this.location.back();
-  }
-
-  public compare(o1: any, o2: any): boolean {
-    return o1 === o2;
-  }
-
   private showError(error: HttpErrorResponse) {
     if (error.status == 403) {
       this.errorMessages = ["Forbudt"];
@@ -148,21 +163,6 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
       const errors = this.errorMessageService.handleErrorMessageWithFields(error);
       this.errorFields = errors?.errorFields;
       this.errorMessages = errors?.errorMessages;
-    }
-  }
-
-  onSubmit(): void {
-    if (this.deviceProfile.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.subscription) {
-      this.subscription.unsubscribe();
     }
   }
 }

@@ -16,10 +16,10 @@ import { Datatarget, DatatargetData } from "../datatarget.model";
 import { DatatargetService } from "../datatarget.service";
 
 @Component({
-    selector: "app-datatarget-table",
-    templateUrl: "./datatarget-table.component.html",
-    styleUrls: ["./datatarget-table.component.scss"],
-    standalone: false
+  selector: "app-datatarget-table",
+  templateUrl: "./datatarget-table.component.html",
+  styleUrls: ["./datatarget-table.component.scss"],
+  standalone: false,
 })
 export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;

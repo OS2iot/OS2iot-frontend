@@ -3,8 +3,8 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { DeviceType } from "@shared/enums/device-type";
 
 @Pipe({
-    name: "filterDevices",
-    standalone: false
+  name: "filterDevices",
+  standalone: false,
 })
 export class FilterDevicesPipe implements PipeTransform {
   transform(value: IotDevice[] | undefined, ..._: unknown[]): IotDevice[] {

@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, inject, waitForAsync } from "@angular/core/testing";
+import { inject, TestBed } from "@angular/core/testing";
 import { DatatargetTypesService } from "./datatarget-types.service";
 
 describe("Service: DatatargetTypesService", () => {

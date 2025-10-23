@@ -1,19 +1,18 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, OnChanges, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { PermissionResponse } from "../permission.model";
 import { Subscription } from "rxjs";
 import { PermissionService } from "../permission.service";
-import { Sort } from "@shared/models/sort.model";
 import { environment } from "@environments/environment";
 import { Title } from "@angular/platform-browser";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-permission-list",
-    templateUrl: "./permission-list.component.html",
-    styleUrls: ["./permission-list.component.scss"],
-    standalone: false
+  selector: "app-permission-list",
+  templateUrl: "./permission-list.component.html",
+  styleUrls: ["./permission-list.component.scss"],
+  standalone: false,
 })
 export class PermissionListComponent implements OnInit, OnChanges {
   isLoadingResults = true;

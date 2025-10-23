@@ -1,13 +1,17 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{ error | translate }}
-      </li>
-    </ul>
-  </div>
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
@@ -41,9 +45,11 @@
         class="form-control"
         name="permissions"
       >
-        <mat-option *ngFor="let permission of permissions" [value]="permission.id">
-          {{ permission.name }}
-        </mat-option>
+        @for (permission of permissions; track permission) {
+          <mat-option [value]="permission.id">
+            {{ permission.name }}
+          </mat-option>
+        }
       </mat-select>
     </div>
   </div>

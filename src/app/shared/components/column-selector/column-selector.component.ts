@@ -7,10 +7,10 @@ import { TableColumn } from "@shared/types/table.type";
 import { CookieService } from "ngx-cookie-service";
 
 @Component({
-    selector: "app-column-selector",
-    templateUrl: "./column-selector.component.html",
-    styleUrls: ["./column-selector.component.scss"],
-    standalone: false
+  selector: "app-column-selector",
+  templateUrl: "./column-selector.component.html",
+  styleUrls: ["./column-selector.component.scss"],
+  standalone: false,
 })
 export class ColumnSelectorComponent implements AfterContentInit {
   @Input() localStorageKey: string;
@@ -23,14 +23,6 @@ export class ColumnSelectorComponent implements AfterContentInit {
   cogIcon = faCog;
 
   _cookieService: CookieService;
-  _displayedColumns: string[];
-  @Input() set displayedColumns(val: string[]) {
-    this.displayedColumnsChange.emit(val);
-    this._displayedColumns = val;
-  }
-  get displayedColumns() {
-    return this._displayedColumns;
-  }
   @Output() displayedColumnsChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor(
@@ -44,6 +36,17 @@ export class ColumnSelectorComponent implements AfterContentInit {
       {}
     );
     this._cookieService = cookieService;
+  }
+
+  _displayedColumns: string[];
+
+  get displayedColumns() {
+    return this._displayedColumns;
+  }
+
+  @Input() set displayedColumns(val: string[]) {
+    this.displayedColumnsChange.emit(val);
+    this._displayedColumns = val;
   }
 
   ngAfterContentInit(): void {

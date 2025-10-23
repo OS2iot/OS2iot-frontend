@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: "gatewayStatusTooltip",
-    standalone: false
+  name: "gatewayStatusTooltip",
+  standalone: false,
 })
 /**
  * Separate pipe to format text to avoid renders if none of the values

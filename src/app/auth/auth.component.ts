@@ -9,10 +9,10 @@ import { LoggedInService } from "@shared/services/loggedin.service";
 import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 
 @Component({
-    selector: "app-auth",
-    templateUrl: "./auth.component.html",
-    styleUrls: ["./auth.component.scss"],
-    standalone: false
+  selector: "app-auth",
+  templateUrl: "./auth.component.html",
+  styleUrls: ["./auth.component.scss"],
+  standalone: false,
 })
 export class AuthComponent implements OnInit {
   public errorMessage: string;

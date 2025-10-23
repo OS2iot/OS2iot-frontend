@@ -15,10 +15,10 @@ import moment from "moment";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-application-map",
-    imports: [MatCheckboxModule, SharedModule, FormsModule],
-    templateUrl: "./application-map.component.html",
-    styleUrls: ["./application-map.component.scss"]
+  selector: "app-application-map",
+  imports: [MatCheckboxModule, SharedModule, FormsModule],
+  templateUrl: "./application-map.component.html",
+  styleUrls: ["./application-map.component.scss"],
 })
 export class ApplicationMapComponent implements OnInit, OnDestroy {
   public devices: IotDevice[] = [];

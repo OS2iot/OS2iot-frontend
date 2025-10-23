@@ -19,10 +19,10 @@ import { BulkImport } from "./bulk-import.model";
 import { BulkMapping } from "./bulk-mapping";
 
 @Component({
-    selector: "app-bulk-import",
-    templateUrl: "./bulk-import.component.html",
-    styleUrls: ["./bulk-import.component.scss"],
-    standalone: false
+  selector: "app-bulk-import",
+  templateUrl: "./bulk-import.component.html",
+  styleUrls: ["./bulk-import.component.scss"],
+  standalone: false,
 })
 export class BulkImportComponent implements OnInit {
   displayedColumns: string[] = ["name", "type", "importStatus", "errorMessages"];
@@ -56,8 +56,8 @@ export class BulkImportComponent implements OnInit {
     },
   ];
   download$: Observable<Download>;
-  private bulkMapper = new BulkMapping();
   public backButtonTitle: string;
+  private bulkMapper = new BulkMapping();
   private applicationId;
 
   constructor(
@@ -129,6 +129,23 @@ export class BulkImportComponent implements OnInit {
     };
   }
 
+  addIoTDevice() {
+    // Subscribe to subject in service, Emit the index of next item in the array to be previous
+    // The emit will activate the subscription which should call the updateIoTDevice
+    const { newDevices, updatedDevices } = this.splitDevices();
+
+    this.postBulkImportPayload(
+      newDevices,
+      this.bulkImportService.nextCreateIotDeviceBatchIndex$,
+      this.iotDeviceService.createIoTDevices.bind(this.iotDeviceService)
+    );
+    this.postBulkImportPayload(
+      updatedDevices,
+      this.bulkImportService.nextUpdateDeviceBatchIndex$,
+      this.iotDeviceService.updateIoTDevices.bind(this.iotDeviceService)
+    );
+  }
+
   private validateFile(name: string) {
     const ext = name.substring(name.lastIndexOf(".") + 1);
     if (ext.toLowerCase() === "csv") {
@@ -149,23 +166,6 @@ export class BulkImportComponent implements OnInit {
         });
       }
     });
-  }
-
-  addIoTDevice() {
-    // Subscribe to subject in service, Emit the index of next item in the array to be previous
-    // The emit will activate the subscription which should call the updateIoTDevice
-    const { newDevices, updatedDevices } = this.splitDevices();
-
-    this.postBulkImportPayload(
-      newDevices,
-      this.bulkImportService.nextCreateIotDeviceBatchIndex$,
-      this.iotDeviceService.createIoTDevices.bind(this.iotDeviceService)
-    );
-    this.postBulkImportPayload(
-      updatedDevices,
-      this.bulkImportService.nextUpdateDeviceBatchIndex$,
-      this.iotDeviceService.updateIoTDevices.bind(this.iotDeviceService)
-    );
   }
 
   private postBulkImportPayload(

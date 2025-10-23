@@ -16,30 +16,30 @@ import { UntypedFormControl } from "@angular/forms";
 import { takeUntil } from "rxjs/operators";
 
 @Component({
-    selector: "app-multicast-edit",
-    templateUrl: "./multicast-edit.component.html",
-    styleUrls: ["./multicast-edit.component.scss"],
-    standalone: false
+  selector: "app-multicast-edit",
+  templateUrl: "./multicast-edit.component.html",
+  styleUrls: ["./multicast-edit.component.scss"],
+  standalone: false,
 })
 export class MulticastEditComponent implements OnInit, OnDestroy {
   public title: string;
   public multicastId: number;
   public errorMessages: unknown;
-  private multicastSubscription: Subscription;
   public searchDevices: UntypedFormControl = new UntypedFormControl();
   public errorFields: string[];
   public iotDevices: IotDevice[] = [];
   @Input() submitButton: string;
   public backButtonTitle: string;
   public multicast: Multicast = new Multicast();
-  private applicationId: number;
-  private onDestroy = new Subject<void>();
   public formFailedSubmit = false;
   public multicastTypes: string[] = Object.values(MulticastType);
   // Class-B: { public periodicities: number[] = [2, 4, 8, 16, 32, 64, 128]; // used for classB if it has to be used in the future }
   public deviceCtrl: UntypedFormControl = new UntypedFormControl();
   public deviceFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredDevicesMulti: ReplaySubject<IotDevice[]> = new ReplaySubject<IotDevice[]>(1);
+  private multicastSubscription: Subscription;
+  private applicationId: number;
+  private onDestroy = new Subject<void>();
 
   constructor(
     private translate: TranslateService,
@@ -80,24 +80,6 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  private filterDevicesMulti() {
-    if (!this.iotDevices) {
-      return;
-    }
-    // get the search keyword
-    let search = this.deviceFilterCtrl?.value?.trim();
-    if (!search) {
-      this.filteredDevicesMulti.next(this.iotDevices.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    const filtered = this.iotDevices.filter(device => {
-      return device.name.toLocaleLowerCase().indexOf(search) > -1;
-    });
-    this.filteredDevicesMulti.next(filtered);
-  }
-
   onSubmit(): void {
     if (this.multicastId) {
       // if already created, only update
@@ -122,13 +104,6 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  // only if classB can be used
-  // showPeriodicity(): boolean {
-  //   if (this.multicast.groupType === MulticastType.ClassB) {
-  //     return true;
-  //   } else return false;
-  // }
-
   updateMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
@@ -145,6 +120,14 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  // only if classB can be used
+  // showPeriodicity(): boolean {
+  //   if (this.multicast.groupType === MulticastType.ClassB) {
+  //     return true;
+  //   } else return false;
+  // }
+
   createMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
@@ -161,6 +144,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   public compare(o1: IotDevice | undefined, o2: IotDevice | undefined): boolean {
     return o1?.id === o2?.id;
   }
@@ -168,6 +152,7 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   selectAll() {
     this.multicast.iotDevices = this.iotDevices;
   }
+
   unSelectAll() {
     this.multicast.iotDevices = [];
   }
@@ -175,21 +160,43 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
   routeBack(): void {
     this.router.navigate(["applications", this.applicationId.toString()]);
   }
+
   keyPressHexadecimal(event) {
     keyPressedHex(event);
   }
-  private resetErrors() {
-    this.errorFields = [];
-    this.errorMessages = undefined;
-    this.formFailedSubmit = false;
-  }
+
   handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errors.errorFields;
     this.errorMessages = errors.errorMessages;
     this.scrollToTopService.scrollToTop();
   }
+
   ngOnDestroy(): void {
     this.multicastSubscription?.unsubscribe();
+  }
+
+  private filterDevicesMulti() {
+    if (!this.iotDevices) {
+      return;
+    }
+    // get the search keyword
+    let search = this.deviceFilterCtrl?.value?.trim();
+    if (!search) {
+      this.filteredDevicesMulti.next(this.iotDevices.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    const filtered = this.iotDevices.filter(device => {
+      return device.name.toLocaleLowerCase().indexOf(search) > -1;
+    });
+    this.filteredDevicesMulti.next(filtered);
+  }
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
   }
 }

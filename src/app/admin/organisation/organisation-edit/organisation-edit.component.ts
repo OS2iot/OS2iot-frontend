@@ -11,10 +11,10 @@ import { BackButton } from "@shared/models/back-button.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
 @Component({
-    selector: "app-organisation-edit",
-    templateUrl: "./organisation-edit.component.html",
-    styleUrls: ["./organisation-edit.component.scss"],
-    standalone: false
+  selector: "app-organisation-edit",
+  templateUrl: "./organisation-edit.component.html",
+  styleUrls: ["./organisation-edit.component.scss"],
+  standalone: false,
 })
 export class OrganisationEditComponent implements OnInit {
   organisation = new Organisation();
@@ -54,6 +54,18 @@ export class OrganisationEditComponent implements OnInit {
     this.backButton.routerLink = ["admin", "organisations", organizationId];
   }
 
+  onSubmit(): void {
+    if (this.organisation.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
   private getOrganisation(id: number) {
     this.subscription = this.organisationService.getOne(id).subscribe(response => {
       this.organisation = response;
@@ -85,14 +97,6 @@ export class OrganisationEditComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
-    if (this.organisation.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  }
-
   private showError(error: HttpErrorResponse) {
     this.errorFields = [];
     this.errorMessage = "";
@@ -100,9 +104,5 @@ export class OrganisationEditComponent implements OnInit {
     this.errorMessage = error.error.message;
     this.errorFields.push("name");
     this.formFailedSubmit = true;
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

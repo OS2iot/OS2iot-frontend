@@ -1,81 +1,94 @@
-<app-form-header [backButton]="backButton" [title]="title"> </app-form-header>
-<div
-  *ngIf="deviceProfile.internalOrganizationName || deviceProfile.createdAt"
-  class="jumbotron os2-form mt-3 px-md-5 py-md-4"
->
-  <h3>{{ "PROFILES.DEVICE_PROFILE.DETAILS" | translate }}</h3>
-  <p>
-    <strong *ngIf="deviceProfile.internalOrganizationName">{{
-      "PROFILES.DEVICE_PROFILE.ORGANIZATION" | translate
-    }}</strong
-    >{{ deviceProfile.internalOrganizationName }}
-  </p>
-  <app-general-details [data]="deviceProfile"></app-general-details>
-</div>
-<form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <div *ngIf="errorMessages">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </div>
-      <li *ngIf="errorMessage">
-        {{ errorMessage | translate }}
-      </li>
-    </ul>
+<app-form-header [backButton]="backButton" [title]="title"></app-form-header>
+@if (deviceProfile.internalOrganizationName || deviceProfile.createdAt) {
+  <div
+    class="jumbotron os2-form mt-3 px-md-5 py-md-4"
+  >
+    <h3>{{ "PROFILES.DEVICE_PROFILE.DETAILS" | translate }}</h3>
+    <p>
+      @if (deviceProfile.internalOrganizationName) {
+        <strong>{{
+            "PROFILES.DEVICE_PROFILE.ORGANIZATION" | translate
+          }}</strong
+        >
+      }{{ deviceProfile.internalOrganizationName }}
+    </p>
+    <app-general-details [data]="deviceProfile"></app-general-details>
   </div>
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+}
+<form (ngSubmit)="onSubmit()" class="os2-form mt-3 px-md-5 py-md-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @if (errorMessages) {
+          <div>
+            @for (error of errorMessages; track error) {
+              <li>
+                {{ error | translate }}
+              </li>
+            }
+          </div>
+        } @if (errorMessage) {
+        <li>
+          {{ errorMessage | translate }}
+        </li>
+      }
+      </ul>
+    </div>
+  }
+  <mat-tab-group animationDuration="0ms" mat-align-tabs="start" mat-stretch-tabs="false">
     <mat-tab label="Generelt">
       <div class="input-container col-xs-12 form-group">
-        <label for="name" class="form-label asterisk-if-mandatory">{{
-          "PROFILES.DEVICE_PROFILE.NAME" | translate
-        }}</label>
+        <label class="form-label asterisk-if-mandatory" for="name">{{
+            "PROFILES.DEVICE_PROFILE.NAME" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="name"
-          name="name"
+          [(ngModel)]="deviceProfile.name"
           [disabled]="!deviceProfile.canEdit"
           [placeholder]="'PROFILES.DEVICE_PROFILE.NAME_PLACEHOLDER' | translate"
+          class="form-control"
+          id="name"
           maxlength="50"
+          name="name"
           required
-          [(ngModel)]="deviceProfile.name"
+          type="text"
         />
       </div>
 
-      <div class="input-container col-xs-12 form-group" *ngIf="deviceProfile.id">
-        <label for="id" class="form-label asterisk-if-mandatory">{{ "PROFILES.DEVICE_PROFILE.ID" | translate }}</label>
-        <input
-          type="text"
-          class="form-control"
-          id="id"
-          name="id"
-          [disabled]="!deviceProfile.canEdit"
-          [placeholder]="'PROFILES.DEVICE_PROFILE.ID_PLACEHOLDER' | translate"
-          maxlength="50"
-          required
-          disabled
-          [ngModel]="deviceProfile.id"
-        />
-      </div>
+      @if (deviceProfile.id) {
+        <div class="input-container col-xs-12 form-group">
+          <label class="form-label asterisk-if-mandatory"
+                 for="id">{{ "PROFILES.DEVICE_PROFILE.ID" | translate }}</label>
+          <input
+            [disabled]="!deviceProfile.canEdit"
+            [ngModel]="deviceProfile.id"
+            [placeholder]="'PROFILES.DEVICE_PROFILE.ID_PLACEHOLDER' | translate"
+            class="form-control"
+            disabled
+            id="id"
+            maxlength="50"
+            name="id"
+            required
+            type="text"
+          />
+        </div>
+      }
 
       <div class="input-container col-xs-12 form-group">
-        <label for="macVersion" class="form-label asterisk-if-mandatory">{{
-          "PROFILES.DEVICE_PROFILE.MACVERSION" | translate
-        }}</label>
+        <label class="form-label asterisk-if-mandatory" for="macVersion">{{
+            "PROFILES.DEVICE_PROFILE.MACVERSION" | translate
+          }}</label>
         <!-- <input type="text" class="form-control" id="macVersion" name="macVersion"
-                    [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" maxlength="50" required
-                    [(ngModel)]="deviceProfile.macVersion"> -->
+        [placeholder]="'PROFILES.DEVICE_PROFILE.MACVERSION_PLACEHOLDER' | translate" maxlength="50" required
+        [(ngModel)]="deviceProfile.macVersion"> -->
         <mat-form-field appearance="outline">
           <mat-select
+            (selectionChange)="shownRegParameters($event.value)"
+            [(value)]="deviceProfile.macVersion"
+            [compareWith]="compare"
             [disabled]="!deviceProfile.canEdit"
             matNativeControl
-            required
-            [compareWith]="compare"
             name="macVersion"
-            [(value)]="deviceProfile.macVersion"
-            (selectionChange)="shownRegParameters($event.value)"
+            required
           >
             <mat-option [value]="0">1.0.0</mat-option>
             <mat-option [value]="1">1.0.1</mat-option>
@@ -88,20 +101,22 @@
       </div>
       <div class="input-container col-xs-12 form-group">
         <label class="form-label asterisk-if-mandatory">{{
-          "PROFILES.DEVICE_PROFILE.REGPARAMSREVISION" | translate
-        }}</label>
+            "PROFILES.DEVICE_PROFILE.REGPARAMSREVISION" | translate
+          }}</label>
         <mat-form-field appearance="outline">
           <mat-select
-            matNativeControl
-            required
-            name="regParamsRevision"
-            [disabled]="!deviceProfile.canEdit"
             [(value)]="deviceProfile.regParamsRevision"
             [compareWith]="compare"
+            [disabled]="!deviceProfile.canEdit"
+            matNativeControl
+            name="regParamsRevision"
+            required
           >
-            <mat-option *ngFor="let type of revision | keyvalue" [value]="type.value">
-              {{ type.key }}
-            </mat-option>
+            @for (type of revision | keyvalue; track type) {
+              <mat-option [value]="type.value">
+                {{ type.key }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
@@ -110,159 +125,162 @@
         <label class="form-label asterisk-if-mandatory">{{ "PROFILES.DEVICE_PROFILE.ADRALGORITHM" | translate }}</label>
         <mat-form-field appearance="outline">
           <mat-select
-            matNativeControl
-            required
-            name="adrAlgorithmID"
-            [disabled]="!deviceProfile.canEdit"
             [(value)]="deviceProfile.adrAlgorithmID"
             [compareWith]="compare"
+            [disabled]="!deviceProfile.canEdit"
+            matNativeControl
+            name="adrAlgorithmID"
+            required
           >
-            <mat-option *ngFor="let adr of adrAlgorithms" [value]="adr.id">{{ adr.name }}</mat-option>
+            @for (adr of adrAlgorithms; track adr) {
+              <mat-option [value]="adr.id">{{ adr.name }}</mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
 
       <div class="input-container col-xs-12 form-group">
-        <label for="devStatusReqFreq" class="form-label">{{
-          "PROFILES.DEVICE_PROFILE.DEVSTATUSREQFREQ" | translate
-        }}</label>
+        <label class="form-label" for="devStatusReqFreq">{{
+            "PROFILES.DEVICE_PROFILE.DEVSTATUSREQFREQ" | translate
+          }}</label>
         <input
-          type="number"
-          class="form-control"
-          id="devStatusReqFreq"
-          name="devStatusReqFreq"
+          [(ngModel)]="deviceProfile.devStatusReqFreq"
           [disabled]="!deviceProfile.canEdit"
           [placeholder]="'PROFILES.DEVICE_PROFILE.DEVSTATUSREQFREQ_PLACEHOLDER' | translate"
+          class="form-control"
+          id="devStatusReqFreq"
           maxlength="50"
           min="1"
+          name="devStatusReqFreq"
           required
-          [(ngModel)]="deviceProfile.devStatusReqFreq"
+          type="number"
         />
       </div>
 
-      <div class="col-xs-12 form-group mt-3" *ngIf="deviceProfile.internalOrganizationName">
-        <label for="geolocMinBufferSize" class="form-label">
-          {{ "PROFILES.DEVICE_PROFILE.ORGANIZATION" | translate }}
-        </label>
-        {{ deviceProfile.internalOrganizationName }}
-      </div>
+      @if (deviceProfile.internalOrganizationName) {
+        <div class="col-xs-12 form-group mt-3">
+          <label class="form-label" for="geolocMinBufferSize">
+            {{ "PROFILES.DEVICE_PROFILE.ORGANIZATION" | translate }}
+          </label>
+          {{ deviceProfile.internalOrganizationName }}
+        </div>
+      }
     </mat-tab>
     <mat-tab label="{{ 'PROFILES.DEVICE_PROFILE.OTAA-ABP' | translate }}">
-      <mat-checkbox [(ngModel)]="deviceProfile.supportsJoin" name="supportsJoin" [disabled]="!deviceProfile.canEdit">
+      <mat-checkbox [(ngModel)]="deviceProfile.supportsJoin" [disabled]="!deviceProfile.canEdit" name="supportsJoin">
         {{ "PROFILES.DEVICE_PROFILE.OTAA-ACTIVATE" | translate }}
       </mat-checkbox>
 
-      <ng-container *ngIf="!deviceProfile.supportsJoin">
+      @if (!deviceProfile.supportsJoin) {
         <div class="col-xs-12 form-group">
-          <label for="rxDelay1" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.RXDELAY1" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="rxDelay1">{{
+              "PROFILES.DEVICE_PROFILE.RXDELAY1" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="rxDelay1"
-            name="rxDelay1"
+            [(ngModel)]="deviceProfile.rxDelay1"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.RXDELAY1_PLACEHOLDER' | translate"
+            class="form-control"
+            id="rxDelay1"
             maxlength="50"
             min="0"
+            name="rxDelay1"
             required
-            [(ngModel)]="deviceProfile.rxDelay1"
+            type="number"
           />
         </div>
         <div class="col-xs-12 form-group">
-          <label for="rxDROffset1" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.RXDROFFSET1" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="rxDROffset1">{{
+              "PROFILES.DEVICE_PROFILE.RXDROFFSET1" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="rxDROffset1"
-            name="rxDROffset1"
+            [(ngModel)]="deviceProfile.rxDROffset1"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.RXDROFFSET1_PLACEHOLDER' | translate"
+            class="form-control"
+            id="rxDROffset1"
             maxlength="50"
             min="0"
+            name="rxDROffset1"
             required
-            [(ngModel)]="deviceProfile.rxDROffset1"
+            type="number"
           />
         </div>
         <div class="col-xs-12 form-group">
-          <label for="rxDataRate2" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.RXDATARATE2" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="rxDataRate2">{{
+              "PROFILES.DEVICE_PROFILE.RXDATARATE2" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="rxDataRate2"
-            name="rxDataRate2"
+            [(ngModel)]="deviceProfile.rxDataRate2"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.RXDATARATE2_PLACEHOLDER' | translate"
+            class="form-control"
+            id="rxDataRate2"
             maxlength="50"
             min="0"
+            name="rxDataRate2"
             required
-            [(ngModel)]="deviceProfile.rxDataRate2"
+            type="number"
           />
         </div>
         <div class="col-xs-12 form-group">
-          <label for="rxFreq2" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.RXFREQ2" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="rxFreq2">{{
+              "PROFILES.DEVICE_PROFILE.RXFREQ2" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="rxFreq2"
-            name="rxFreq2"
+            [(ngModel)]="deviceProfile.rxFreq2"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.RXFREQ2_PLACEHOLDER' | translate"
+            class="form-control"
+            id="rxFreq2"
             maxlength="50"
             min="0"
+            name="rxFreq2"
             required
-            [(ngModel)]="deviceProfile.rxFreq2"
+            type="number"
           />
         </div>
-      </ng-container>
+      }
     </mat-tab>
     <mat-tab label="Class B">
       <mat-checkbox
         [(ngModel)]="deviceProfile.supportsClassB"
-        name="supportsClassB"
         [disabled]="!deviceProfile.canEdit"
+        name="supportsClassB"
       >
         {{ "PROFILES.DEVICE_PROFILE.SUPPORTSCLASSB_ACTIVATE" | translate }}
       </mat-checkbox>
 
-      <ng-container *ngIf="deviceProfile.supportsClassB">
+      @if (deviceProfile.supportsClassB) {
         <div class="col-xs-12 form-group">
-          <label for="classBTimeout" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="classBTimeout">{{
+              "PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="classBTimeout"
-            name="classBTimeout"
+            [(ngModel)]="deviceProfile.classBTimeout"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSBTIMEOUT_PLACEHOLDER' | translate"
+            class="form-control"
+            id="classBTimeout"
             maxlength="50"
             min="0"
+            name="classBTimeout"
             required
-            [(ngModel)]="deviceProfile.classBTimeout"
+            type="number"
           />
         </div>
-
         <div class="input-container col-xs-12 form-group mt-3">
-          <label for="pingSlotPeriod" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="pingSlotPeriod">{{
+              "PROFILES.DEVICE_PROFILE.PINGSLOTPERIOD" | translate
+            }}</label>
           <mat-form-field appearance="outline">
             <select
-              matNativeControl
-              required
-              name="pingSlotPeriod"
-              [disabled]="!deviceProfile.canEdit"
               [(ngModel)]="deviceProfile.pingSlotPeriod"
+              [disabled]="!deviceProfile.canEdit"
               [value]="deviceProfile.pingSlotPeriod"
+              matNativeControl
+              name="pingSlotPeriod"
+              required
             >
               <option value="0">Every second</option>
               <option value="1">Every 2 seconds</option>
@@ -275,67 +293,65 @@
             </select>
           </mat-form-field>
         </div>
-
         <div class="col-xs-12 form-group">
-          <label for="pingSlotDR" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.PINGSLOTDR" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="pingSlotDR">{{
+              "PROFILES.DEVICE_PROFILE.PINGSLOTDR" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="pingSlotDR"
-            name="pingSlotDR"
+            [(ngModel)]="deviceProfile.pingSlotDR"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTDR_PLACEHOLDER' | translate"
+            class="form-control"
+            id="pingSlotDR"
             maxlength="50"
             min="0"
+            name="pingSlotDR"
             required
-            [(ngModel)]="deviceProfile.pingSlotDR"
+            type="number"
           />
         </div>
-
         <div class="col-xs-12 form-group">
-          <label for="pingSlotFreq" class="form-label asterisk-if-mandatory">{{
-            "PROFILES.DEVICE_PROFILE.PINGSLOTFREQ" | translate
-          }}</label>
+          <label class="form-label asterisk-if-mandatory" for="pingSlotFreq">{{
+              "PROFILES.DEVICE_PROFILE.PINGSLOTFREQ" | translate
+            }}</label>
           <input
-            type="number"
-            class="form-control"
-            id="pingSlotFreq"
-            name="pingSlotFreq"
+            [(ngModel)]="deviceProfile.pingSlotFreq"
             [disabled]="!deviceProfile.canEdit"
             [placeholder]="'PROFILES.DEVICE_PROFILE.PINGSLOTFREQ_PLACEHOLDER' | translate"
+            class="form-control"
+            id="pingSlotFreq"
             maxlength="50"
             min="0"
+            name="pingSlotFreq"
             required
-            [(ngModel)]="deviceProfile.pingSlotFreq"
+            type="number"
           />
         </div>
-      </ng-container>
+      }
     </mat-tab>
     <mat-tab label="Class C">
       <mat-checkbox
         [(ngModel)]="deviceProfile.supportsClassC"
-        name="supportsClassC"
         [disabled]="!deviceProfile.canEdit"
+        name="supportsClassC"
       >
         {{ "PROFILES.DEVICE_PROFILE.SUPPORTSCLASSC_ACTIVATE" | translate }}
       </mat-checkbox>
       <div class="col-xs-12 form-group">
-        <label for="classCTimeout" class="form-label asterisk-if-mandatory">{{
-          "PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT" | translate
-        }}</label>
+        <label class="form-label asterisk-if-mandatory" for="classCTimeout">{{
+            "PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT" | translate
+          }}</label>
         <input
-          type="number"
-          class="form-control"
-          id="classCTimeout"
-          name="classCTimeout"
+          [(ngModel)]="deviceProfile.classCTimeout"
           [disabled]="!deviceProfile.canEdit"
           [placeholder]="'PROFILES.DEVICE_PROFILE.CLASSCTIMEOUT_PLACEHOLDER' | translate"
+          class="form-control"
+          id="classCTimeout"
           maxlength="50"
           min="0"
+          name="classCTimeout"
           required
-          [(ngModel)]="deviceProfile.classCTimeout"
+          type="number"
         />
       </div>
     </mat-tab>
@@ -343,10 +359,10 @@
   <div class="row mt-5">
     <div class="col-xs-12">
       <div class="float-right">
-        <button type="button" class="btn btn-secondary" (click)="routeBack()">
+        <button (click)="routeBack()" class="btn btn-secondary" type="button">
           {{ "GEN.CANCEL" | translate }}
         </button>
-        <button type="submit" class="btn btn-primary ml-3" [disabled]="!deviceProfile.canEdit">
+        <button [disabled]="!deviceProfile.canEdit" class="btn btn-primary ml-3" type="submit">
           {{ "GEN.SAVE" | translate }}
         </button>
       </div>

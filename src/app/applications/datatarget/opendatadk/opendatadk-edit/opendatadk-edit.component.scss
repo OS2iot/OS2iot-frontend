@@ -8,14 +8,18 @@
     width: fit-content;
     padding-right: 12px;
   }
+
   .form-info-icon {
     margin-left: 5px;
     cursor: pointer;
   }
+
   mat-expansion-panel {
     box-shadow: none !important;
+
     ol {
       padding-left: 20px;
+
       li {
         font-family: $font-name, system;
         display: list-item;

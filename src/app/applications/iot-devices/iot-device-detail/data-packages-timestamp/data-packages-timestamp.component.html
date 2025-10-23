@@ -8,14 +8,18 @@
   </mat-expansion-panel-header>
   <div class="timestamps-container">
     <div>
-      <p *ngFor="let metadata of sortedMetadata; let i = index">
-        <strong>{{ i + 1 }}</strong>
-      </p>
+      @for (metadata of sortedMetadata; track metadata; let i = $index) {
+        <p>
+          <strong>{{ i + 1 }}</strong>
+        </p>
+      }
     </div>
     <div>
-      <p *ngFor="let metadata of sortedMetadata; let i = index">
-        {{ metadata.sentTime | tableDateWithSecondsPipe }}
-      </p>
+      @for (metadata of sortedMetadata; track metadata; let i = $index) {
+        <p>
+          {{ metadata.sentTime | tableDateWithSecondsPipe }}
+        </p>
+      }
     </div>
   </div>
 </mat-expansion-panel>

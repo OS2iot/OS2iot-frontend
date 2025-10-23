@@ -15,10 +15,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-permission-detail",
-    templateUrl: "./permission-detail.component.html",
-    styleUrls: ["./permission-detail.component.scss"],
-    standalone: false
+  selector: "app-permission-detail",
+  templateUrl: "./permission-detail.component.html",
+  styleUrls: ["./permission-detail.component.scss"],
+  standalone: false,
 })
 export class PermissionDetailComponent implements OnInit, OnChanges {
   isLoadingResults = true;
@@ -83,20 +83,6 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
     this.getPermission(this.id);
   }
 
-  private getPermission(id: number) {
-    this.subscription = this.permissionService.getPermission(id).subscribe(response => {
-      this.permission = response;
-      this.users = response.users;
-      this.showApplicationTable = this.meService.hasPermissions(
-        response,
-        PermissionType.Read,
-        PermissionType.OrganizationApplicationAdmin,
-        PermissionType.GlobalAdmin
-      );
-      this.isLoadingResults = false;
-    });
-  }
-
   onDeletePermission() {
     this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
@@ -111,5 +97,19 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
 
   onEditPermission() {
     this.router.navigate(["edit-permission"], { relativeTo: this.route });
+  }
+
+  private getPermission(id: number) {
+    this.subscription = this.permissionService.getPermission(id).subscribe(response => {
+      this.permission = response;
+      this.users = response.users;
+      this.showApplicationTable = this.meService.hasPermissions(
+        response,
+        PermissionType.Read,
+        PermissionType.OrganizationApplicationAdmin,
+        PermissionType.GlobalAdmin
+      );
+      this.isLoadingResults = false;
+    });
   }
 }

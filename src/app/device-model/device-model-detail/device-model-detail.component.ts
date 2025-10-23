@@ -1,4 +1,3 @@
-import { Location } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -12,10 +11,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-device-model-detail",
-    templateUrl: "./device-model-detail.component.html",
-    styleUrls: ["./device-model-detail.component.scss"],
-    standalone: false
+  selector: "app-device-model-detail",
+  templateUrl: "./device-model-detail.component.html",
+  styleUrls: ["./device-model-detail.component.scss"],
+  standalone: false,
 })
 export class DeviceModelDetailComponent implements OnInit, OnDestroy {
   deviceModel: DeviceModel;
@@ -68,12 +67,6 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getDeviceModel(id: number) {
-    this.deviceModelService.get(id).subscribe(response => {
-      this.deviceModel = response;
-    });
-  }
-
   public clickDelete() {
     this.deleteDialogSubscription = this.deleteDialogservice.showSimpleDialog().subscribe(response => {
       if (response) {
@@ -96,5 +89,11 @@ export class DeviceModelDetailComponent implements OnInit, OnDestroy {
     if (this.deleteDialogSubscription) {
       this.deleteDialogSubscription.unsubscribe();
     }
+  }
+
+  private getDeviceModel(id: number) {
+    this.deviceModelService.get(id).subscribe(response => {
+      this.deviceModel = response;
+    });
   }
 }

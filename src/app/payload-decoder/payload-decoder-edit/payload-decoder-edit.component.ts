@@ -25,10 +25,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-payload-decoder-edit",
-    templateUrl: "./payload-decoder-edit.component.html",
-    styleUrls: ["./payload-decoder-edit.component.scss"],
-    standalone: false
+  selector: "app-payload-decoder-edit",
+  templateUrl: "./payload-decoder-edit.component.html",
+  styleUrls: ["./payload-decoder-edit.component.scss"],
+  standalone: false,
 })
 export class PayloadDecoderEditComponent implements OnInit {
   faExchangeAlt = faExchangeAlt;
@@ -147,13 +147,6 @@ export class PayloadDecoderEditComponent implements OnInit {
     }
   }
 
-  private getPayloadDecoder(id: number) {
-    this.subscription = this.payloadDecoderService.getOne(id).subscribe(response => {
-      this.payloadDecoder = response;
-      this.payloadDecoderBody = response.decodingFunction;
-    });
-  }
-
   testPayloadFunction() {
     this.errorMessages = null;
     this.testPayloadDecoder.code = this.payloadDecoderBody;
@@ -187,10 +180,6 @@ export class PayloadDecoderEditComponent implements OnInit {
         this.showError(error);
       }
     );
-  }
-
-  private isMetadataDefaultOrEmpty() {
-    return this.metadata.trim() === "" || this.metadata.split("\n").every(x => x.trim().startsWith("//"));
   }
 
   getCurrentOrganisationId(): number {
@@ -257,6 +246,30 @@ export class PayloadDecoderEditComponent implements OnInit {
     this.saveSnackService.showSavedSnack();
   }
 
+  onSubmit(): void {
+    this.payloadDecoder.decodingFunction = this.payloadDecoderBody;
+    if (this.payloadDecoder.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
+  private getPayloadDecoder(id: number) {
+    this.subscription = this.payloadDecoderService.getOne(id).subscribe(response => {
+      this.payloadDecoder = response;
+      this.payloadDecoderBody = response.decodingFunction;
+    });
+  }
+
+  private isMetadataDefaultOrEmpty() {
+    return this.metadata.trim() === "" || this.metadata.split("\n").every(x => x.trim().startsWith("//"));
+  }
+
   private create(): void {
     this.payloadDecoderService.post(this.payloadDecoder).subscribe(
       response => {
@@ -281,24 +294,11 @@ export class PayloadDecoderEditComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
-    this.payloadDecoder.decodingFunction = this.payloadDecoderBody;
-    if (this.payloadDecoder.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  }
-
   private showError(error: HttpErrorResponse) {
     const errorResponse = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorResponse.errorFields;
     this.errorMessages = errorResponse.errorMessages;
     this.formFailedSubmit = true;
     this.scrollToTopService.scrollToTop();
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

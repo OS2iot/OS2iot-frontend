@@ -14,10 +14,10 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
 @Component({
-    selector: "app-device-model-table",
-    templateUrl: "./device-model-table.component.html",
-    styleUrls: ["./device-model-table.component.scss"],
-    standalone: false
+  selector: "app-device-model-table",
+  templateUrl: "./device-model-table.component.html",
+  styleUrls: ["./device-model-table.component.scss"],
+  standalone: false,
 })
 export class DeviceModelTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

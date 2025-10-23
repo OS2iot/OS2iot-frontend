@@ -15,10 +15,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-sigfox-groups-edit",
-    templateUrl: "./sigfox-groups-edit.component.html",
-    styleUrls: ["./sigfox-groups-edit.component.scss"],
-    standalone: false
+  selector: "app-sigfox-groups-edit",
+  templateUrl: "./sigfox-groups-edit.component.html",
+  styleUrls: ["./sigfox-groups-edit.component.scss"],
+  standalone: false,
 })
 export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   sigfoxGroupId: number;
@@ -70,6 +70,31 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     );
   }
 
+  routeBack(): void {
+    this.location.back();
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+
+    this.sigfoxService.getGroup(this.sigfoxGroupId).subscribe((response: any) => {
+      if (response) {
+        this.update();
+      } else {
+        this.create();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   private create(): void {
     this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe(
       response => {
@@ -93,35 +118,10 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  routeBack(): void {
-    this.location.back();
-  }
-
   private showError(error: HttpErrorResponse) {
     const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorMessages = errorMessages.errorMessages;
     this.errorFields = errorMessages.errorFields;
     this.formFailedSubmit = true;
-  }
-
-  onSubmit(form: NgForm) {
-    if (!form.valid) {
-      return;
-    }
-
-    this.sigfoxService.getGroup(this.sigfoxGroupId).subscribe((response: any) => {
-      if (response) {
-        this.update();
-      } else {
-        this.create();
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }

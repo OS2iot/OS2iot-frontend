@@ -12,7 +12,6 @@ import { PermissionService } from "@app/admin/permission/permission.service";
 import { Location } from "@angular/common";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { DropdownButton } from "@shared/models/dropdown-button.model";
-import { ApplicationService } from "@applications/application.service";
 import { environment } from "@environments/environment";
 import { Title } from "@angular/platform-browser";
 import { MeService } from "@shared/services/me.service";
@@ -21,10 +20,10 @@ import { ErrorMessageService } from "@shared/error-message.service";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-    selector: "app-organisation-detail",
-    templateUrl: "./organisation-detail.component.html",
-    styleUrls: ["./organisation-detail.component.scss"],
-    standalone: false
+  selector: "app-organisation-detail",
+  templateUrl: "./organisation-detail.component.html",
+  styleUrls: ["./organisation-detail.component.scss"],
+  standalone: false,
 })
 export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy {
   isLoadingResults = true;
@@ -34,11 +33,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
-  private applicationsSubscription: Subscription;
-  private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public errorMessages: string[];
-
   organisation: OrganisationResponse;
   public backButton: BackButton = {
     label: "",
@@ -48,6 +44,8 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
   subscription: Subscription;
   permissions: PermissionResponse[];
   canEdit: boolean;
+  private applicationsSubscription: Subscription;
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     public translate: TranslateService,
@@ -94,13 +92,6 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
     }
   }
 
-  private getOrganisation(id: number) {
-    this.subscription = this.organisationService.getOne(id).subscribe(response => {
-      this.organisation = response;
-      this.permissions = response.permissions;
-    });
-  }
-
   clickDelete() {
     this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
@@ -126,6 +117,13 @@ export class OrganisationDetailComponent implements OnInit, OnChanges, OnDestroy
           }
         });
       }
+    });
+  }
+
+  private getOrganisation(id: number) {
+    this.subscription = this.organisationService.getOne(id).subscribe(response => {
+      this.organisation = response;
+      this.permissions = response.permissions;
     });
   }
 }

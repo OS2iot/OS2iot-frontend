@@ -4,10 +4,10 @@ import { DeviceProfileService } from "@profiles/device-profiles/device-profile.s
 import { Subscription } from "rxjs";
 
 @Component({
-    selector: "app-iot-device-detail-lorawan",
-    templateUrl: "./iot-device-detail-lorawan.component.html",
-    styleUrls: ["./iot-device-detail-lorawan.component.scss"],
-    standalone: false
+  selector: "app-iot-device-detail-lorawan",
+  templateUrl: "./iot-device-detail-lorawan.component.html",
+  styleUrls: ["./iot-device-detail-lorawan.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDetailLorawanComponent implements OnInit {
   @Input() device: IotDevice;

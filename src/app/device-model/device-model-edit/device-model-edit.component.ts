@@ -16,10 +16,10 @@ import { SupportedProtocol } from "../Enums/supported-protocol.enum";
 import { SupportedUnit } from "../supported-unit.model";
 
 @Component({
-    selector: "app-device-model-edit",
-    templateUrl: "./device-model-edit.component.html",
-    styleUrls: ["./device-model-edit.component.scss"],
-    standalone: false
+  selector: "app-device-model-edit",
+  templateUrl: "./device-model-edit.component.html",
+  styleUrls: ["./device-model-edit.component.scss"],
+  standalone: false,
 })
 export class DeviceModelEditComponent implements OnInit {
   public errorMessages: string[];
@@ -69,12 +69,6 @@ export class DeviceModelEditComponent implements OnInit {
     return o1 === o2;
   }
 
-  private getDeviceModel(id: number) {
-    this.deviceModelService.get(id).subscribe(response => {
-      this.deviceModel = response;
-    });
-  }
-
   createDeviceModel() {
     this.deviceModelService.create(this.deviceModel).subscribe(
       response => {
@@ -117,5 +111,11 @@ export class DeviceModelEditComponent implements OnInit {
 
   routeBack(): void {
     this.location.back();
+  }
+
+  private getDeviceModel(id: number) {
+    this.deviceModelService.get(id).subscribe(response => {
+      this.deviceModel = response;
+    });
   }
 }

@@ -7,33 +7,38 @@
         <h1>
           {{ "NEW_USER.FIRST_LOGIN" | translate }}
         </h1>
-        <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
-          <div *ngIf="errorMessages || errorMessage" class="error-messages p-3">
-            <ul class="mb-0">
-              <li *ngFor="let error of errorMessages">
-                {{ error | translate }}
-              </li>
-              <li *ngIf="errorMessage">
-                {{ errorMessage | translate }}
-              </li>
-            </ul>
-          </div>
+        <form #newUserForm="ngForm" (ngSubmit)="onSubmit()">
+          @if (errorMessages || errorMessage) {
+            <div class="error-messages p-3">
+              <ul class="mb-0">
+                @for (error of errorMessages; track error) {
+                  <li>
+                    {{ error | translate }}
+                  </li>
+                } @if (errorMessage) {
+                <li>
+                  {{ errorMessage | translate }}
+                </li>
+              }
+              </ul>
+            </div>
+          }
           <div class="form-group mt-3">
             <label class="form-label" for="createNewKombitUserDto.email">{{ "USERS.EMAIL" | translate }}</label
             >*
 
             <input
-              type="email"
-              class="form-control"
-              id="email"
-              maxlength="50"
-              required
-              name="email"
               [(ngModel)]="createNewKombitUserFromFrontend.email"
               [ngClass]="{
                 'is-invalid': formFailedSubmit && errorFields.includes('email'),
                 'is-valid': formFailedSubmit && !errorFields.includes('email')
               }"
+              class="form-control"
+              id="email"
+              maxlength="50"
+              name="email"
+              required
+              type="email"
             />
           </div>
 
@@ -41,20 +46,22 @@
             <label class="form-label" for="new-organisations">{{ "NAV.ORGANISATIONS" | translate }}</label
             >*
             <mat-select
-              class="form-control"
-              [placeholder]="'NAV.ORGANISATIONS' | translate"
-              [multiple]="true"
-              name="new-organisations"
-              [compareWith]="compare"
               [(ngModel)]="createNewKombitUserFromFrontend.requestedOrganizations"
-              panelClass="overflow-x-hidden"
+              [compareWith]="compare"
+              [multiple]="true"
+              [placeholder]="'NAV.ORGANISATIONS' | translate"
               aria-required="true"
+              class="form-control"
+              name="new-organisations"
+              panelClass="overflow-x-hidden"
             >
               <app-mat-select-search
                 [formControl]="organisationsFilterCtrl"
               ></app-mat-select-search>
 
-              <mat-option *ngFor="let org of filteredOrganisations | async" [value]="org">{{ org.name }}</mat-option>
+              @for (org of filteredOrganisations | async; track org) {
+                <mat-option [value]="org">{{ org.name }}</mat-option>
+              }
             </mat-select>
           </div>
           <div class="form-group mt-3">

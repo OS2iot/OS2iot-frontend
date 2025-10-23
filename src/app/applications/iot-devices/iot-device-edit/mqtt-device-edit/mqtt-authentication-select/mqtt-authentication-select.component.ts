@@ -4,21 +4,20 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { MqttSharedSettings } from "@shared/models/mqtt-shared-settings.model";
 
 @Component({
-    selector: "app-mqtt-authentication-select",
-    templateUrl: "./mqtt-authentication-select.component.html",
-    styleUrls: ["./mqtt-authentication-select.component.scss"],
-    standalone: false
+  selector: "app-mqtt-authentication-select",
+  templateUrl: "./mqtt-authentication-select.component.html",
+  styleUrls: ["./mqtt-authentication-select.component.scss"],
+  standalone: false,
 })
 export class MqttAuthenticationSelectComponent implements OnInit {
   @Input() settings: MqttSharedSettings;
   @Input() editMode: boolean = false;
   @Input() formFailedSubmit: boolean = false;
   @Input() errorFields: string[];
+  protected readonly AuthenticationType = AuthenticationType;
+  protected readonly faQuestionCircle = faQuestionCircle;
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  protected readonly AuthenticationType = AuthenticationType;
-  protected readonly faQuestionCircle = faQuestionCircle;
 }

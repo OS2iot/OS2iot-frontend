@@ -8,16 +8,12 @@ import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dia
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-    selector: "app-fiware-detail-tabs",
-    templateUrl: "./fiware-detail-tabs.component.html",
-    styleUrl: "./fiware-detail-tabs.component.scss",
-    standalone: false
+  selector: "app-fiware-detail-tabs",
+  templateUrl: "./fiware-detail-tabs.component.html",
+  styleUrl: "./fiware-detail-tabs.component.scss",
+  standalone: false,
 })
 export class FiwareDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
-  protected override getDetailsLink() {
-    return "fiware-detail";
-  }
-
   constructor(
     route: ActivatedRoute,
     router: Router,
@@ -32,5 +28,9 @@ export class FiwareDetailTabsComponent extends DatatargetDetailTabsCommon implem
 
   ngOnDestroy(): void {
     super.onDestroy();
+  }
+
+  protected override getDetailsLink() {
+    return "fiware-detail";
   }
 }

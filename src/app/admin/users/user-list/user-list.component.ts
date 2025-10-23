@@ -3,14 +3,13 @@ import { Title } from "@angular/platform-browser";
 import { TranslateService } from "@ngx-translate/core";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { MeService } from "@shared/services/me.service";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { Router } from "@angular/router";
 
 @Component({
-    selector: "app-user-list",
-    templateUrl: "./user-list.component.html",
-    styleUrls: ["./user-list.component.scss"],
-    standalone: false
+  selector: "app-user-list",
+  templateUrl: "./user-list.component.html",
+  styleUrls: ["./user-list.component.scss"],
+  standalone: false,
 })
 export class UserListComponent implements OnInit {
   public navTabs: any[] = [

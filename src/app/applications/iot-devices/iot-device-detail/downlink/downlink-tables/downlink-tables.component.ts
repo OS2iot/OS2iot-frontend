@@ -10,10 +10,10 @@ import { DownlinkDialogComponent } from "../downlink-dialog/downlink-dialog.comp
 import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
-    selector: "app-downlink-tables",
-    templateUrl: "./downlink-tables.component.html",
-    styleUrls: ["./downlink-tables.component.scss"],
-    standalone: false
+  selector: "app-downlink-tables",
+  templateUrl: "./downlink-tables.component.html",
+  styleUrls: ["./downlink-tables.component.scss"],
+  standalone: false,
 })
 export class DownlinkTablesComponent implements OnInit {
   @Input() device: IotDevice;
@@ -85,10 +85,6 @@ export class DownlinkTablesComponent implements OnInit {
     this.openDownlinkDialog();
   }
 
-  private handleError(error: HttpErrorResponse) {
-    this.errorMessages = this.errorMessageService.handleErrorMessage(error);
-  }
-
   openDownlinkDialog() {
     const dialog = this.dialog.open(DownlinkDialogComponent, {
       width: "300px",
@@ -129,5 +125,9 @@ export class DownlinkTablesComponent implements OnInit {
 
   isAcknowledged(downlink: DownlinkQueueDto) {
     return !downlink.acknowledged ? this.translate.instant("false") : this.translate.instant("true");
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    this.errorMessages = this.errorMessageService.handleErrorMessage(error);
   }
 }

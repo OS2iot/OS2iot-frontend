@@ -18,20 +18,20 @@ import { DownlinkService } from "@shared/services/downlink.service";
 import { Downlink } from "@applications/iot-devices/iot-device-detail/downlink/downlink.model";
 
 @Component({
-    selector: "app-multicast-detail",
-    templateUrl: "./multicast-detail.component.html",
-    styleUrls: ["./multicast-detail.component.scss"],
-    standalone: false
+  selector: "app-multicast-detail",
+  templateUrl: "./multicast-detail.component.html",
+  styleUrls: ["./multicast-detail.component.scss"],
+  standalone: false,
 })
 export class MulticastDetailComponent implements OnInit, OnDestroy {
   public multicast: Multicast;
   public backButton: BackButton = { label: "", routerLink: undefined };
-  private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public formFailedSubmit = false;
-  private applicationId: number;
   public downlink = new Downlink();
   @Input() errorMessages: string[];
+  private deleteDialogSubscription: Subscription;
+  private applicationId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -98,12 +98,6 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
     keyPressedHex(event);
   }
 
-  private handleError(error: HttpErrorResponse) {
-    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-    this.errorMessages = errors.errorFields;
-    this.errorMessages = errors.errorMessages;
-  }
-
   clickDownlink() {
     if (this.multicast.iotDevices.length > 0) {
       if (this.validateHex(this.downlink.data)) {
@@ -119,6 +113,7 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
       this.downlinkService.showSendDownlinkFailNoDevices();
     }
   }
+
   openDownlinkDialog() {
     const dialog = this.dialog.open(DownlinkDialogComponent, {});
 
@@ -127,6 +122,22 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
         this.startDownlink();
       }
     });
+  }
+
+  addToErrorMessage(text: string) {
+    this.translate.get([text]).subscribe(translations => {
+      this.errorMessages.push(translations[text]);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.deleteDialogSubscription?.unsubscribe();
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorMessages = errors.errorFields;
+    this.errorMessages = errors.errorMessages;
   }
 
   private startDownlink() {
@@ -150,15 +161,5 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
       this.addToErrorMessage("MULTICAST.DOWNLINK.NO-PORT-OR-PAYLOAD");
       return false;
     }
-  }
-
-  addToErrorMessage(text: string) {
-    this.translate.get([text]).subscribe(translations => {
-      this.errorMessages.push(translations[text]);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.deleteDialogSubscription?.unsubscribe();
   }
 }

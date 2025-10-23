@@ -2,18 +2,19 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="jumbotron">
-        <div *ngIf="applicationService.canEdit; else readOnly">
-          <app-top-bar-table
-            [component]="true"
-            [title]="'APPLICATION.MULTICAST-SHOW' | translate"
-            [ctaLabelPrimary]="'FORM.CREATE-NEW-MULTICAST' | translate"
-            [ctaRouterLinkPrimary]="'../multicast-edit'"
-          >
-          </app-top-bar-table>
-        </div>
-        <ng-template #readOnly>
-          <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"> </app-top-bar-table>
-        </ng-template>
+        @if (applicationService.canEdit) {
+          <div>
+            <app-top-bar-table
+              [component]="true"
+              [ctaLabelPrimary]="'FORM.CREATE-NEW-MULTICAST' | translate"
+              [ctaRouterLinkPrimary]="'../multicast-edit'"
+              [title]="'APPLICATION.MULTICAST-SHOW' | translate"
+            >
+            </app-top-bar-table>
+          </div>
+        } @else {
+        <app-top-bar-table [component]="true" [title]="'APPLICATION.ATTACHED-IOT' | translate"></app-top-bar-table>
+      }
         <app-multicast-table></app-multicast-table>
       </div>
     </div>

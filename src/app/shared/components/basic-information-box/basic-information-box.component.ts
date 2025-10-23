@@ -3,10 +3,10 @@ import { Component, Input, OnInit } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-    selector: "app-basic-information-box",
-    imports: [MatIconModule, NgStyle],
-    templateUrl: "./basic-information-box.component.html",
-    styleUrl: "./basic-information-box.component.scss"
+  selector: "app-basic-information-box",
+  imports: [MatIconModule, NgStyle],
+  templateUrl: "./basic-information-box.component.html",
+  styleUrl: "./basic-information-box.component.scss",
 })
 export class BasicInformationBoxComponent implements OnInit {
   @Input() type: "default" | "warning" | "stable";
@@ -16,6 +16,7 @@ export class BasicInformationBoxComponent implements OnInit {
   @Input() countOf: number;
   @Input() description: string;
   @Input() matSVGSrc: string;
+  currentStyles: Record<string, string>[] = [];
 
   ngOnInit(): void {
     let color: string = "";
@@ -41,5 +42,4 @@ export class BasicInformationBoxComponent implements OnInit {
       width: this.width.toString() + "px",
     };
   }
-  currentStyles: Record<string, string>[] = [];
 }

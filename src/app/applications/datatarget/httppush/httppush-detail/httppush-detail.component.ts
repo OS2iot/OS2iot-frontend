@@ -10,10 +10,10 @@ import { Datatarget } from "../../datatarget.model";
 import { DatatargetService } from "../../datatarget.service";
 
 @Component({
-    selector: "app-httppush-detail",
-    templateUrl: "./httppush-detail.component.html",
-    styleUrls: ["./httppush-detail.component.scss"],
-    standalone: false
+  selector: "app-httppush-detail",
+  templateUrl: "./httppush-detail.component.html",
+  styleUrls: ["./httppush-detail.component.scss"],
+  standalone: false,
 })
 export class HttppushDetailComponent implements DatatargetDetail, OnDestroy {
   dataTargetType = DataTargetType;

@@ -21,10 +21,10 @@ import "proj4leaflet";
 import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
 
 @Component({
-    selector: "app-map",
-    templateUrl: "./map.component.html",
-    styleUrls: ["./map.component.scss"],
-    standalone: false
+  selector: "app-map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.scss"],
+  standalone: false,
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   public mapId;

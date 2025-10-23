@@ -19,11 +19,11 @@ import { Counter, Tab } from "@shared/components/basic-tab-switch/basic-tab-swit
 const welcomeDialogId = "welcome-dialog";
 
 @Component({
-    providers: [NavbarComponent],
-    selector: "app-applications-list",
-    templateUrl: "./applications-list.component.html",
-    styleUrls: ["./applications-list.component.scss"],
-    standalone: false
+  providers: [NavbarComponent],
+  selector: "app-applications-list",
+  templateUrl: "./applications-list.component.html",
+  styleUrls: ["./applications-list.component.scss"],
+  standalone: false,
 })
 export class ApplicationsListComponent implements OnInit {
   currentSubPath: string = "";

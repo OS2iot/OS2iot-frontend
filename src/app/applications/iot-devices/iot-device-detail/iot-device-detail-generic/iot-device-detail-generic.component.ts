@@ -9,10 +9,10 @@ import { KeyValue } from "@shared/types/tuple.type";
 import { DeviceType } from "@shared/enums/device-type";
 
 @Component({
-    selector: "app-iot-device-detail-generic",
-    templateUrl: "./iot-device-detail-generic.component.html",
-    styleUrls: ["./iot-device-detail-generic.component.scss"],
-    standalone: false
+  selector: "app-iot-device-detail-generic",
+  templateUrl: "./iot-device-detail-generic.component.html",
+  styleUrls: ["./iot-device-detail-generic.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDestroy {
   batteryStatusColor = "green";
@@ -24,7 +24,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   deleteDevice = new EventEmitter();
   baseUrl: string = environment.baseUrl;
   httpDeviceUrl: string;
-
+  protected readonly DeviceType = DeviceType;
   private readonly CHIRPSTACK_BATTERY_NOT_AVAILIBLE = 255;
 
   constructor(
@@ -46,6 +46,7 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   routeBack(): void {
     this.location.back();
   }
+
   getCoordinates() {
     return {
       longitude: this.longitude,
@@ -55,6 +56,8 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
       useGeolocation: false,
     };
   }
+
+  ngOnDestroy(): void {}
 
   private getBatteryProcentage(): number {
     if (this.device?.lorawanSettings?.deviceStatusBattery === this.CHIRPSTACK_BATTERY_NOT_AVAILIBLE) {
@@ -66,8 +69,4 @@ export class IotDeviceDetailGenericComponent implements OnInit, OnChanges, OnDes
   private getGenericHttpDeviceUrl(): string {
     return `${this.baseUrl}receive-data?apiKey=${this.device.apiKey}`;
   }
-
-  ngOnDestroy(): void {}
-
-  protected readonly DeviceType = DeviceType;
 }

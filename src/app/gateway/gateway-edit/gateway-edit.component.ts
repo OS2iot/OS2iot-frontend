@@ -21,10 +21,10 @@ interface DropdownOption {
 }
 
 @Component({
-    selector: "app-gateway-edit",
-    templateUrl: "./gateway-edit.component.html",
-    styleUrls: ["./gateway-edit.component.scss"],
-    standalone: false
+  selector: "app-gateway-edit",
+  templateUrl: "./gateway-edit.component.html",
+  styleUrls: ["./gateway-edit.component.scss"],
+  standalone: false,
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
   public backButton: BackButton = { label: "", routerLink: ["gateways"] };
@@ -37,12 +37,10 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   public errorFields: string[];
   public formFailedSubmit = false;
   public editMode = false;
-  private gatewayId: string;
-
   gateway = new Gateway();
-
   placements: DropdownOption[] = [];
   statuses: DropdownOption[] = [];
+  private gatewayId: string;
 
   constructor(
     private route: ActivatedRoute,

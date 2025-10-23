@@ -103,11 +103,11 @@ const columnDefinitions: TableColumn[] = [
 ];
 
 @Component({
-    selector: "app-iot-devices-table",
-    templateUrl: "./iot-devices-table.component.html",
-    styleUrls: ["./iot-devices-table.component.scss"],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: "app-iot-devices-table",
+  templateUrl: "./iot-devices-table.component.html",
+  styleUrls: ["./iot-devices-table.component.scss"],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class IotDevicesTableComponent implements AfterViewInit, OnInit {
   @Input() applicationId: number;

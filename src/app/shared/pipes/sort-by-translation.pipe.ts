@@ -3,8 +3,8 @@ import { TranslateService } from "@ngx-translate/core";
 import { sortBySelector } from "@shared/helpers/array.helper";
 
 @Pipe({
-    name: "sortByTranslation",
-    standalone: false
+  name: "sortByTranslation",
+  standalone: false,
 })
 export class SortByTranslationPipe implements PipeTransform {
   constructor(private translate: TranslateService) {}

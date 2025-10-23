@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { DatePipe } from "@angular/common";
 
 @Pipe({
-    name: "dkTime",
-    standalone: false
+  name: "dkTime",
+  standalone: false,
 })
 export class CustomDatePipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -12,8 +12,8 @@ export class CustomDatePipe extends DatePipe implements PipeTransform {
 }
 
 @Pipe({
-    name: "dkTimeWithSeconds",
-    standalone: false
+  name: "dkTimeWithSeconds",
+  standalone: false,
 })
 export class CustomDatePipeWithSeconds extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -22,8 +22,8 @@ export class CustomDatePipeWithSeconds extends DatePipe implements PipeTransform
 }
 
 @Pipe({
-    name: "dkTimeWithSecondsNoPrefix",
-    standalone: false
+  name: "dkTimeWithSecondsNoPrefix",
+  standalone: false,
 })
 export class CustomDatePipeWithSecondsNoPrefix extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -32,8 +32,8 @@ export class CustomDatePipeWithSecondsNoPrefix extends DatePipe implements PipeT
 }
 
 @Pipe({
-    name: "tableDatePipe",
-    standalone: false
+  name: "tableDatePipe",
+  standalone: false,
 })
 export class CustomTableDatePipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -42,8 +42,8 @@ export class CustomTableDatePipe extends DatePipe implements PipeTransform {
 }
 
 @Pipe({
-    name: "tableDateWithSecondsPipe",
-    standalone: false
+  name: "tableDateWithSecondsPipe",
+  standalone: false,
 })
 export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -52,8 +52,8 @@ export class CustomTableDateWithSecondsPipe extends DatePipe implements PipeTran
 }
 
 @Pipe({
-    name: "dateOnly",
-    standalone: false
+  name: "dateOnly",
+  standalone: false,
 })
 export class DateOnlyPipe extends DatePipe implements PipeTransform {
   transform(value: any, args?: any): any {

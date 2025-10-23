@@ -5,13 +5,15 @@
         {{ deviceProfile.name }}
       </a>
     </div>
-    <div class="col-3 pull-right d-flex align-items-center justify-content-end" *ngIf="deviceProfile.canEdit">
-      <a (click)="onDeleteDeviceProfile()">
-        <div class="icon-list-wrapper text-center">
-          <fa-icon [icon]="faTimesCircle" class="icon--primary icon--medium"></fa-icon>
-          <label class="label label--icon">{{ "PROFILES.DEVICE_PROFILE.DELETE-FROM-LIST" | translate }}</label>
-        </div>
-      </a>
-    </div>
+    @if (deviceProfile.canEdit) {
+      <div class="col-3 pull-right d-flex align-items-center justify-content-end">
+        <a (click)="onDeleteDeviceProfile()">
+          <div class="icon-list-wrapper text-center">
+            <fa-icon [icon]="faTimesCircle" class="icon--primary icon--medium"></fa-icon>
+            <label class="label label--icon">{{ "PROFILES.DEVICE_PROFILE.DELETE-FROM-LIST" | translate }}</label>
+          </div>
+        </a>
+      </div>
+    }
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { HttpEvent, HttpEventType, HttpProgressEvent, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { distinctUntilChanged, scan, map, tap } from "rxjs/operators";
+import { distinctUntilChanged, scan } from "rxjs/operators";
 
 function isHttpResponse<T>(event: HttpEvent<T>): event is HttpResponse<T> {
   return event.type === HttpEventType.Response;

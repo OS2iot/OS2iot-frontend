@@ -1,4 +1,4 @@
-import { NgFor, NgOptimizedImage } from "@angular/common";
+import { NgOptimizedImage } from "@angular/common";
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
@@ -14,20 +14,19 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { ApplicationsFilterService } from "./applications-filter.service";
 
 @Component({
-    selector: "app-application-filter",
-    imports: [
-        NgFor,
-        NgOptimizedImage,
-        MatIconModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatButtonModule,
-        TranslatePipe,
-    ],
-    templateUrl: "./application-filter.component.html",
-    styleUrl: "./application-filter.component.scss",
-    encapsulation: ViewEncapsulation.ShadowDom
+  selector: "app-application-filter",
+  imports: [
+    NgOptimizedImage,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+    TranslatePipe,
+  ],
+  templateUrl: "./application-filter.component.html",
+  styleUrl: "./application-filter.component.scss",
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class ApplicationFilterComponent implements OnInit {
   stateOptions: { label: string; value: ApplicationStatus | "All" }[] = [

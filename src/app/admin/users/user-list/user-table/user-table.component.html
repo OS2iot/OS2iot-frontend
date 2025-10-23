@@ -1,7 +1,11 @@
 <div class="mat-elevation-z8">
-  <div *ngIf="isLoadingResults" class="loading-shade">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      @if (isLoadingResults) {
+        <mat-spinner></mat-spinner>
+      }
+    </div>
+  }
   <table [dataSource]="data" mat-table matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -65,12 +69,13 @@
         {{ "USERS.LOGIN" | translate }}
       </th>
       <td *matCellDef="let element" mat-cell>
-        <div *ngIf="element.lastLogin; else noLogin">
-          <P> {{ element.lastLogin | tableDatePipe }}</P>
-        </div>
-        <ng-template #noLogin>
-          <P>Ikke logget på endnu</P>
-        </ng-template>
+        @if (element.lastLogin) {
+          <div>
+            <P> {{ element.lastLogin | tableDatePipe }}</P>
+          </div>
+        } @else {
+        <P>Ikke logget på endnu</P>
+      }
       </td>
     </ng-container>
 

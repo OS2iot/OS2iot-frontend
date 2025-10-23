@@ -3,10 +3,10 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-details-service";
 
 @Component({
-    selector: "app-iot-device-details-tab",
-    templateUrl: "./iot-device-details-tab.component.html",
-    styleUrls: ["./iot-device-details-tab.component.scss"],
-    standalone: false
+  selector: "app-iot-device-details-tab",
+  templateUrl: "./iot-device-details-tab.component.html",
+  styleUrls: ["./iot-device-details-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDetailsTabComponent implements OnInit {
   device: IotDevice;

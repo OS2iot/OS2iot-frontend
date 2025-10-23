@@ -5,27 +5,33 @@
         <div class="d-flex align-items-start justify-content-between">
           <h3>{{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}</h3>
           <div class="spinner-placeholder">
-            <div *ngIf="loading">
-              <app-loading-spinner></app-loading-spinner>
-            </div>
+            @if (loading) {
+              <div>
+                <app-loading-spinner></app-loading-spinner>
+              </div>
+            }
           </div>
         </div>
-        <div *ngIf="dataTarget.type === DataTargetType.MQTT">
-          <button (click)="pingDataTarget()" class="mt-3 btn btn-primary">
-            {{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}
-          </button>
-          <p class="mt-2">{{ "DATATARGET.TEST_CONNECTION.SEND-PING-TO-DATATARGET" | translate }}</p>
-          <mat-divider></mat-divider>
-        </div>
+        @if (dataTarget.type === DataTargetType.MQTT) {
+          <div>
+            <button (click)="pingDataTarget()" class="mt-3 btn btn-primary">
+              {{ "DATATARGET.TEST_CONNECTION.TEST-CONNECTION" | translate }}
+            </button>
+            <p class="mt-2">{{ "DATATARGET.TEST_CONNECTION.SEND-PING-TO-DATATARGET" | translate }}</p>
+            <mat-divider></mat-divider>
+          </div>
+        }
         <p class="mt-3 font-weight-bold">{{ "DATATARGET.TEST_CONNECTION.SEND-LATEST-PACKAGE" | translate }}</p>
         <mat-select
           (selectionChange)="getLastPackage($event)"
           [placeholder]="'DATATARGET.TEST_CONNECTION.CHOOSE-IOT-DEVICE' | translate"
           class="mt-3 form-control"
         >
-          <mat-option *ngFor="let iotDevice of iotDevices" [value]="iotDevice.id">
-            {{ iotDevice.name }}
-          </mat-option>
+          @for (iotDevice of iotDevices; track iotDevice) {
+            <mat-option [value]="iotDevice.id">
+              {{ iotDevice.name }}
+            </mat-option>
+          }
         </mat-select>
         <mat-select
           [(value)]="payloadDecoderId"
@@ -35,9 +41,11 @@
           <mat-option [value]="0">
             {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
           </mat-option>
-          <mat-option *ngFor="let payloadDecoder of payloadDecoders" [value]="payloadDecoder.id">
-            {{ payloadDecoder.name }}
-          </mat-option>
+          @for (payloadDecoder of payloadDecoders; track payloadDecoder) {
+            <mat-option [value]="payloadDecoder.id">
+              {{ payloadDecoder.name }}
+            </mat-option>
+          }
         </mat-select>
         <button (click)="pingDataTarget(payloadData)" [disabled]="!payloadData" class="mt-3 btn btn-primary">
           {{ "DATATARGET.TEST_CONNECTION.SEND-DATA-PACKAGE" | translate }}

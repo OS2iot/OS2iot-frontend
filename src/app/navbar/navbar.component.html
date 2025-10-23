@@ -3,62 +3,64 @@
   aria-expanded="false"
   class="navbar-container navbar navbar-expand-md navbar-light d-md-flex align-items-md-start flex-md-column p-3 no-shadow"
 >
-  <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo" />
+  <img [src]="imagePath" alt="OS2IoT-logo" class="img-logo"/>
 
-  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="collapse navbar-collapse flex-grow-0" id="navbar-login">
-    <ul class="navbar-nav flex-column">
-      <li class="nav-item">
-        <a [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth" routerLink="/auth">
-          {{ "NAV.LOGIN" | translate }}
-        </a>
-        <fa-icon [icon]="faSignInAlt" class="navbar-icon"></fa-icon>
-      </li>
-    </ul>
-  </div>
-
-  <ng-template #loggedInBlock>
-    <div class="navbar-header">
-      <button
-        (click)="isCollapsed = !isCollapsed"
-        aria-controls="navbar"
-        aria-label="Toggle navigation"
-        class="navbar-toggler collapsed"
-        data-target="#navbar"
-        type="button"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  @if (!isLoggedIn()) {
+    <div class="collapse navbar-collapse flex-grow-0" id="navbar-login">
+      <ul class="navbar-nav flex-column">
+        <li class="nav-item">
+          <a [routerLinkActive]="['active']" class="nav-link pl-5 position-relative rounded" id="auth"
+             routerLink="/auth">
+            {{ "NAV.LOGIN" | translate }}
+          </a>
+          <fa-icon [icon]="faSignInAlt" class="navbar-icon"></fa-icon>
+        </li>
+      </ul>
     </div>
-    <div
-      [attr.aria-expanded]="!isCollapsed"
-      [ngClass]="{ collapse: !isCollapsed }"
-      class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
-      id="navbar"
+  } @else {
+  <div class="navbar-header">
+    <button
+      (click)="isCollapsed = !isCollapsed"
+      aria-controls="navbar"
+      aria-label="Toggle navigation"
+      class="navbar-toggler collapsed"
+      data-target="#navbar"
+      type="button"
     >
-      <ul (click)="isCollapsed = !isCollapsed" class="navbar-nav d-flex flex-column h-100">
-        <div *ngIf="hasSomePermissions()" class="flex-column mb-1">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+  <div
+    [attr.aria-expanded]="!isCollapsed"
+    [ngClass]="{ collapse: !isCollapsed }"
+    class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
+    id="navbar"
+  >
+    <ul (click)="isCollapsed = !isCollapsed" class="navbar-nav d-flex flex-column h-100">
+      @if (hasSomePermissions()) {
+        <div class="flex-column mb-1">
           <li class="nav-item">
             <mat-form-field appearance="outline">
               <mat-select (selectionChange)="onChange($event.value)" [value]="selected">
                 <mat-select-trigger>
                   <div class="nav-bar-selector-trigger">
                     <div class="nav-bar-selector-building-icon">
-                      <img height="20" src="assets/images/building.svg" width="20" />
+                      <img height="20" src="assets/images/building.svg" width="20"/>
                     </div>
                     {{ getOrgName(selected) }}
                   </div>
                 </mat-select-trigger>
-                <mat-option *ngFor="let org of organisations" [value]="org.id">
-                  {{ org.name }}
-                </mat-option>
+                @for (org of organisations; track org) {
+                  <mat-option [value]="org.id">
+                    {{ org.name }}
+                  </mat-option>
+                }
               </mat-select>
-
               <div class="custom-dropdown-icon" matSuffix>
-                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11" />
-                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11" />
+                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11"/>
+                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11"/>
               </div>
             </mat-form-field>
-
             <ul class="navbar-nav flex-column mb-2">
               <li class="nav-item">
                 <a id="applications" routerLink="/applications" routerLinkActive="active">
@@ -70,20 +72,22 @@
                   {{ "NAV.SIGFOX-ADMIN" | translate }}
                 </a>
               </li>
-              <div *ngIf="!isOnlyGatewayAdmin">
-                <li>
-                  <a routerLink="/device-model" routerLinkActive="active">
-                    {{ "NAV.DEVICE-MODEL" | translate }}
-                  </a>
-                </li>
-              </div>
-              <li *ngIf="userResponse && (isUserAdmin || isGlobalAdmin)" class="nav-item">
+              @if (!isOnlyGatewayAdmin) {
+                <div>
+                  <li>
+                    <a routerLink="/device-model" routerLinkActive="active">
+                      {{ "NAV.DEVICE-MODEL" | translate }}
+                    </a>
+                  </li>
+                </div>
+              } @if (userResponse && (isUserAdmin || isGlobalAdmin)) {
+              <li class="nav-item">
                 <a routerLink="/admin/api-key" routerLinkActive="active">
                   {{ "NAV.API-KEY" | translate }}
                 </a>
               </li>
+            }
             </ul>
-
             <mat-divider class="m-1 mt-3"></mat-divider>
           </li>
           <div class="nav-bar-title">{{ "NAV.TITLES.LORAWAN" | translate }}</div>
@@ -101,7 +105,6 @@
               </li>
             </ul>
           </li>
-
           <div class="nav-bar-title">{{ "NAV.TITLES.SYSTEM" | translate }}</div>
           <li>
             <a routerLink="/device-model" routerLinkActive="active">
@@ -117,14 +120,15 @@
               </li>
             </ul>
           </li>
-
           <li class="nav-item">
             <app-administration [orgId]="selected"></app-administration>
           </li>
         </div>
-      </ul>
-    </div>
-  </ng-template>
+      }
+    </ul>
+  </div>
+}
+
 </nav>
 
 <div (click)="toggleNavbar()" [class.nav-visible-button]="isVisible" class="toggle-button">

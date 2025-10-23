@@ -27,10 +27,10 @@ import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
 @Component({
-    selector: "app-fiware-edit",
-    templateUrl: "./fiware-edit.component.html",
-    styleUrls: ["./fiware-edit.component.scss"],
-    standalone: false
+  selector: "app-fiware-edit",
+  templateUrl: "./fiware-edit.component.html",
+  styleUrls: ["./fiware-edit.component.scss"],
+  standalone: false,
 })
 export class FiwareEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public multiPage = false;

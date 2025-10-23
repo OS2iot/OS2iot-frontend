@@ -26,10 +26,10 @@ import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-
 import { PayloadDeviceDatatargetGetManyResponse } from "@payload-decoder/payload-device-data.model";
 
 @Component({
-    selector: "app-iot-device-edit",
-    templateUrl: "./iot-device-edit.component.html",
-    styleUrls: ["./iot-device-edit.component.scss"],
-    standalone: false
+  selector: "app-iot-device-edit",
+  templateUrl: "./iot-device-edit.component.html",
+  styleUrls: ["./iot-device-edit.component.scss"],
+  standalone: false,
 })
 export class IotDeviceEditComponent implements OnInit, OnDestroy {
   @Input() isDeviceCopy: boolean = false;
@@ -38,7 +38,6 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   public errorFields: string[];
   public formFailedSubmit = false;
   public application: Application;
-  private deviceId: number;
   public disableChoseApplication = true;
   public loraDevice = DeviceType.LORAWAN;
   public sigfoxDevice = DeviceType.SIGFOX;
@@ -50,10 +49,11 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   metadataTags: { key?: string; value?: string }[] = [];
   errorMetadataFieldId: string | undefined;
   public deviceSubscription: Subscription;
+  canEdit: boolean;
+  private deviceId: number;
   private applicationsSubscription: Subscription;
   private deviceProfileSubscription: Subscription;
   private devicesProfileSubscription: Subscription;
-  canEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -245,86 +245,12 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  private handleMetadataError(invalidKey: string) {
-    this.handleError({
-      error: {
-        message: [
-          {
-            field: "metadata",
-            message: "MESSAGE.DUPLICATE-METADATA-KEY",
-          },
-        ],
-      },
-    });
-    this.errorMetadataFieldId = invalidKey;
-    this.formFailedSubmit = true;
-  }
-
   setActivationType() {
     if (this.OTAA) {
       this.iotDevice.lorawanSettings.activationType = ActivationType.OTAA;
     } else {
       this.iotDevice.lorawanSettings.activationType = ActivationType.ABP;
     }
-  }
-
-  private adjustModelBasedOnType() {
-    if (this.iotDevice.deviceModelId === 0) {
-      this.iotDevice.deviceModelId = null;
-    }
-    switch (this.iotDevice.type) {
-      case DeviceType.GENERIC_HTTP: {
-        this.iotDevice.lorawanSettings = undefined;
-        this.iotDevice.sigfoxSettings = undefined;
-        break;
-      }
-      case DeviceType.LORAWAN: {
-        this.setActivationType();
-        this.iotDevice.sigfoxSettings = undefined;
-        if (this.iotDevice.lorawanSettings.devEUI) {
-          this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.toLowerCase();
-        }
-        break;
-      }
-      case DeviceType.SIGFOX: {
-        this.iotDevice.lorawanSettings = undefined;
-        if (this.iotDevice.sigfoxSettings.endProductCertificate) {
-          this.iotDevice.sigfoxSettings.prototype = false;
-        }
-        break;
-      }
-    }
-  }
-
-  private isMetadataSet(): boolean {
-    return this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value);
-  }
-
-  private validateMetadata(): string | undefined {
-    const seen = new Set();
-
-    for (const tag of this.metadataTags) {
-      if (seen.size === seen.add(tag.key).size) {
-        return tag.key;
-      }
-    }
-  }
-
-  private setMetadata(): void {
-    if (this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value)) {
-      const metadata: Record<string, string> = {};
-      this.metadataTags.forEach(tag => {
-        if (!tag.key) {
-          return;
-        }
-        metadata[tag.key] = tag.value;
-      });
-      this.iotDevice.metadata = JSON.stringify(metadata);
-    }
-  }
-
-  private navigateToDeviceDetails(device: IotDevice) {
-    this.router.navigate(["applications/" + this.iotDevice.applicationId + "/iot-device/" + device.id + "/details"]);
   }
 
   postIoTDevice() {
@@ -419,5 +345,79 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     if (this.devicesProfileSubscription) {
       this.devicesProfileSubscription.unsubscribe();
     }
+  }
+
+  private handleMetadataError(invalidKey: string) {
+    this.handleError({
+      error: {
+        message: [
+          {
+            field: "metadata",
+            message: "MESSAGE.DUPLICATE-METADATA-KEY",
+          },
+        ],
+      },
+    });
+    this.errorMetadataFieldId = invalidKey;
+    this.formFailedSubmit = true;
+  }
+
+  private adjustModelBasedOnType() {
+    if (this.iotDevice.deviceModelId === 0) {
+      this.iotDevice.deviceModelId = null;
+    }
+    switch (this.iotDevice.type) {
+      case DeviceType.GENERIC_HTTP: {
+        this.iotDevice.lorawanSettings = undefined;
+        this.iotDevice.sigfoxSettings = undefined;
+        break;
+      }
+      case DeviceType.LORAWAN: {
+        this.setActivationType();
+        this.iotDevice.sigfoxSettings = undefined;
+        if (this.iotDevice.lorawanSettings.devEUI) {
+          this.iotDevice.lorawanSettings.devEUI = this.iotDevice.lorawanSettings.devEUI.toLowerCase();
+        }
+        break;
+      }
+      case DeviceType.SIGFOX: {
+        this.iotDevice.lorawanSettings = undefined;
+        if (this.iotDevice.sigfoxSettings.endProductCertificate) {
+          this.iotDevice.sigfoxSettings.prototype = false;
+        }
+        break;
+      }
+    }
+  }
+
+  private isMetadataSet(): boolean {
+    return this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value);
+  }
+
+  private validateMetadata(): string | undefined {
+    const seen = new Set();
+
+    for (const tag of this.metadataTags) {
+      if (seen.size === seen.add(tag.key).size) {
+        return tag.key;
+      }
+    }
+  }
+
+  private setMetadata(): void {
+    if (this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value)) {
+      const metadata: Record<string, string> = {};
+      this.metadataTags.forEach(tag => {
+        if (!tag.key) {
+          return;
+        }
+        metadata[tag.key] = tag.value;
+      });
+      this.iotDevice.metadata = JSON.stringify(metadata);
+    }
+  }
+
+  private navigateToDeviceDetails(device: IotDevice) {
+    this.router.navigate(["applications/" + this.iotDevice.applicationId + "/iot-device/" + device.id + "/details"]);
   }
 }

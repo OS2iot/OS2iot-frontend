@@ -1,83 +1,90 @@
-<ng-template #noGatewayStatusData>
-  <ng-container *ngIf="!isLoadingResults">
-    <p>{{ "GEN.NO-DATA" | translate }}</p>
-  </ng-container>
-</ng-template>
-
 <div class="d-flex mb-3">
-  <h3 *ngIf="title" class="title">{{ title }}</h3>
-  <mat-select class="form-control ml-auto status-interval" name="statusIntervals" [(ngModel)]="selectedStatusInterval">
-    <mat-option
-      *ngFor="let interval of statusIntervals"
-      [value]="interval"
-      (onSelectionChange)="onSelectInterval($event)"
-    >
-      {{ "LORA-GATEWAY-STATUS.INTERVAL." + interval | translate }}
-    </mat-option>
+  @if (title) {
+    <h3 class="title">{{ title }}</h3>
+  }
+  <mat-select [(ngModel)]="selectedStatusInterval" class="form-control ml-auto status-interval" name="statusIntervals">
+    @for (interval of statusIntervals; track interval) {
+      <mat-option
+        (onSelectionChange)="onSelectInterval($event)"
+        [value]="interval"
+      >
+        {{ "LORA-GATEWAY-STATUS.INTERVAL." + interval | translate }}
+      </mat-option>
+    }
   </mat-select>
 </div>
 <div class="overflow-auto">
-  <div class="loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      @if (isLoadingResults) {
+        <mat-spinner></mat-spinner>
+      }
+    </div>
+  } @if (dataSource?.data.length && timeColumns.length) {
   <table
     #gatewayStatus
-    mat-table
     [dataSource]="dataSource"
     class="status-table"
-    *ngIf="dataSource?.data.length && timeColumns.length; else noGatewayStatusData"
+    mat-table
   >
     <!-- Gateway name is the first column -->
-    <ng-container matColumnDef="gatewayName" [sticky]="true">
-      <td mat-cell *matCellDef="let element">
-        <a
-          [routerLink]="'/gateways/gateway-detail/' + element.id"
-          routerLinkActive="active"
-          *ngIf="shouldLinkToDetails"
+    <ng-container [sticky]="true" matColumnDef="gatewayName">
+      <td *matCellDef="let element" mat-cell>
+        @if (shouldLinkToDetails) {
+          <a
+            [routerLink]="'/gateways/gateway-detail/' + element.id"
+            routerLinkActive="active"
           >{{ element.name }}</a
-        >
-        <span class="text--semibold" *ngIf="!shouldLinkToDetails">{{ element.name }}</span>
+          >
+        } @if (!shouldLinkToDetails) {
+        <span class="text--semibold">{{ element.name }}</span>
+      }
       </td>
-      <td mat-footer-cell *matFooterCellDef class="text--semibold">
+      <td *matFooterCellDef class="text--semibold" mat-footer-cell>
         {{ "GEN.DATE" | translate }}
-        <br />
+        <br/>
         {{ "LORA-GATEWAY-STATUS.TIMESTAMP" | translate }}
       </td>
     </ng-container>
-
     <!-- Timestamp columns which are dynamically generated -->
-    <ng-container *ngFor="let time of timeColumns; let index = index" matColumnDef="{{ time.exactTimestamp }}">
-      <td
-        mat-cell
-        *matCellDef="let gateway"
-        [matTooltip]="
+    @for (time of timeColumns; track time; let index = $index) {
+      <ng-container matColumnDef="{{ time.exactTimestamp }}">
+        <td
+          *matCellDef="let gateway"
+          [matTooltipClass]="'status-tooltip'"
+          [matTooltip]="
           !!gateway.statusTimestamps.length
             | gatewayStatusTooltip : neverSeenText : timestampText : time.tooltip : nameText : gateway.name
         "
-        [matTooltipClass]="'status-tooltip'"
-        [ngClass]="gateway.statusTimestamps | gatewayStatusClass : time.exactTimestamp"
-      ></td>
-      <td
-        mat-footer-cell
-        *matFooterCellDef="let gateway"
-        [ngClass]="{ invisible: index % visibleFooterTimeInterval, 'text-center': true, 'text-nowrap': true }"
-      >
-        {{ time.datePart }}
-        <br />
-        {{ time.timePart }}
-      </td>
-    </ng-container>
-
+          [ngClass]="gateway.statusTimestamps | gatewayStatusClass : time.exactTimestamp"
+          mat-cell
+        ></td>
+        <td
+          *matFooterCellDef="let gateway"
+          [ngClass]="{ invisible: index % visibleFooterTimeInterval, 'text-center': true, 'text-nowrap': true }"
+          mat-footer-cell
+        >
+          {{ time.datePart }}
+          <br/>
+          {{ time.timePart }}
+        </td>
+      </ng-container>
+    }
     <!-- The columns for a row must be an array of simple types (string, number, ...) -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+    <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
   </table>
+} @else {
+  @if (!isLoadingResults) {
+    <p>{{ "GEN.NO-DATA" | translate }}</p>
+  }
+}
 </div>
 <mat-paginator
+  [length]="resultsLength"
   [ngClass]="paginatorClass"
   [pageSizeOptions]="pageSizeOptions"
   [pageSize]="pageSize"
-  [length]="resultsLength"
   showFirstLastButtons
 >
 </mat-paginator>

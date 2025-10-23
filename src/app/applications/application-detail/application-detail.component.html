@@ -1,84 +1,92 @@
-<div *ngIf="application">
-  <app-top-bar
-    [data]="application"
-    [backButton]="backButton"
-    [subPage]="true"
-    [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton"
-    (deleteSelectedInDropdown)="onDeleteApplication()"
-    [canEdit]="canEdit"
-  >
-  </app-top-bar>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-7 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
-          <div *ngIf="errorMessage" class="error-messages p-3 my-3">
-            {{ errorMessage | translate }}
-          </div>
-          <h3>{{ "APPLICATION.DETAILS" | translate }}</h3>
-          <app-general-details [data]="application"></app-general-details>
-          <p *ngIf="application.description">
-            <strong>{{ "APPLICATION.DESCRIPTION" | translate }}</strong>
-          </p>
-          <pre><p>{{application.description}}</p></pre>
-          <app-metadata-details
-            [permissions]="application.permissions"
-            [status]="application.status"
-            [startDate]="application.startDate"
-            [endDate]="application.endDate"
-            [category]="application.category"
-            [owner]="application.owner"
-            [contactPerson]="application.contactPerson"
-            [contactEmail]="application.contactEmail"
-            [contactPhone]="application.contactPhone"
-            [personalData]="application.personalData"
-            [hardware]="application.hardware"
-            [controlledProperties]="application.controlledProperties"
-            [deviceTypes]="application.deviceTypes"
-          ></app-metadata-details>
-        </div>
-      </div>
-      <div class="col-md-5 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
-          <div class="thirty-height" *ngIf="devices && gateways">
-            <app-map
-              [coordinateList]="coordinateList"
-              [isFromApplication]="true"
-              [applicationId]="application.id"
-            ></app-map>
-          </div>
-          <div class="col d-flex markerDescriptionDiv">
-            <div class="col d-flex">
-              <img alt="IoTDeviceMarker" class="marker" src="{{ greyMarker }}" />
-              <p>&nbsp; IoT-Enhed</p>
-            </div>
-            <div class="col d-flex">
-              <img alt="InactiveGatewayMarker" class="marker" src="{{ redMarker }}" />
-              <p>&nbsp; Inaktiv gateway</p>
-            </div>
-            <div class="col d-flex">
-              <img alt="ActiveGatewayMarker" class="marker" src="{{ greenMarker }}" />
-              <p>&nbsp; Aktiv gateway</p>
-            </div>
+@if (application) {
+  <div>
+    <app-top-bar
+      (deleteSelectedInDropdown)="onDeleteApplication()"
+      [addDetailDowndown]="true"
+      [backButton]="backButton"
+      [canEdit]="canEdit"
+      [data]="application"
+      [dropDownButton]="dropdownButton"
+      [subPage]="true"
+    >
+    </app-top-bar>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-7 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
+            @if (errorMessage) {
+              <div class="error-messages p-3 my-3">
+                {{ errorMessage | translate }}
+              </div>
+            }
+            <h3>{{ "APPLICATION.DETAILS" | translate }}</h3>
+            <app-general-details [data]="application"></app-general-details>
+            @if (application.description) {
+              <p>
+                <strong>{{ "APPLICATION.DESCRIPTION" | translate }}</strong>
+              </p>
+            }
+            <pre><p>{{ application.description }}</p></pre>
+            <app-metadata-details
+              [category]="application.category"
+              [contactEmail]="application.contactEmail"
+              [contactPerson]="application.contactPerson"
+              [contactPhone]="application.contactPhone"
+              [controlledProperties]="application.controlledProperties"
+              [deviceTypes]="application.deviceTypes"
+              [endDate]="application.endDate"
+              [hardware]="application.hardware"
+              [owner]="application.owner"
+              [permissions]="application.permissions"
+              [personalData]="application.personalData"
+              [startDate]="application.startDate"
+              [status]="application.status"
+            ></app-metadata-details>
           </div>
         </div>
+        <div class="col-md-5 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
+            @if (devices && gateways) {
+              <div class="thirty-height">
+                <app-map
+                  [applicationId]="application.id"
+                  [coordinateList]="coordinateList"
+                  [isFromApplication]="true"
+                ></app-map>
+              </div>
+            }
+            <div class="col d-flex markerDescriptionDiv">
+              <div class="col d-flex">
+                <img alt="IoTDeviceMarker" class="marker" src="{{ greyMarker }}"/>
+                <p>&nbsp; IoT-Enhed</p>
+              </div>
+              <div class="col d-flex">
+                <img alt="InactiveGatewayMarker" class="marker" src="{{ redMarker }}"/>
+                <p>&nbsp; Inaktiv gateway</p>
+              </div>
+              <div class="col d-flex">
+                <img alt="ActiveGatewayMarker" class="marker" src="{{ greenMarker }}"/>
+                <p>&nbsp; Aktiv gateway</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <nav [tabPanel]="tabPanel" mat-tab-nav-bar>
+        @for (link of navTabs; track link) {
+          <a
+            #rla="routerLinkActive"
+            [active]="rla.isActive"
+            [routerLink]="link.link"
+            mat-tab-link
+            routerLinkActive
+          >{{ link.label | translate }}</a
+          >
+        }
+      </nav>
+      <mat-divider></mat-divider>
+      <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+      <router-outlet></router-outlet>
     </div>
-
-    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-      <a
-        mat-tab-link
-        *ngFor="let link of navTabs"
-        [routerLink]="link.link"
-        routerLinkActive
-        #rla="routerLinkActive"
-        [active]="rla.isActive"
-        >{{ link.label | translate }}</a
-      >
-    </nav>
-    <mat-divider></mat-divider>
-    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-    <router-outlet></router-outlet>
   </div>
-</div>
+}

@@ -4,19 +4,18 @@ import { AuthenticationType } from "@shared/enums/authentication-type";
 import { simpleDownload } from "@shared/helpers/download.helper";
 
 @Component({
-    selector: "app-iot-device-details-mqtt-internal-broker",
-    templateUrl: "./iot-device-details-mqtt-internal-broker.component.html",
-    styleUrls: ["./iot-device-details-mqtt-internal-broker.component.scss"],
-    standalone: false
+  selector: "app-iot-device-details-mqtt-internal-broker",
+  templateUrl: "./iot-device-details-mqtt-internal-broker.component.html",
+  styleUrls: ["./iot-device-details-mqtt-internal-broker.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDetailsMqttInternalBrokerComponent implements OnInit {
   @Input() device: IotDevice;
+  protected readonly AuthenticationType = AuthenticationType;
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  protected readonly AuthenticationType = AuthenticationType;
 
   downloadCaCertificate(caCertificate: string, filename: string) {
     simpleDownload(caCertificate, filename);

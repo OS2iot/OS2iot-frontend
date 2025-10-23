@@ -19,10 +19,10 @@ import { IoTDeviceChangeApplicationDialogComponent } from "../iot-device-change-
 import { IoTDeviceApplicationDialogModel } from "@shared/models/dialog.model";
 
 @Component({
-    selector: "app-iot-device",
-    templateUrl: "./iot-device-detail.component.html",
-    styleUrls: ["./iot-device-detail.component.scss"],
-    standalone: false
+  selector: "app-iot-device",
+  templateUrl: "./iot-device-detail.component.html",
+  styleUrls: ["./iot-device-detail.component.scss"],
+  standalone: false,
 })
 export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
   public navTabs: any[] = [
@@ -54,9 +54,9 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
 
   public iotDeviceSubscription: Subscription;
   public errorMessages: string[];
-  private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   public canEdit = false;
+  private deleteDialogSubscription: Subscription;
   private copyDeviceButtonId = "COPY-DEVICE";
 
   private resetApiKeyId = "RESET-API-KEY";
@@ -106,7 +106,7 @@ export class IoTDeviceDetailComponent implements OnInit, OnDestroy {
         "IOTDEVICE-TABLE-ROW.RESET-API-KEY",
         "IOTDEVICE.GENERIC_HTTP.RESET-API-KEY",
         "GEN.CANCEL",
-        "GEN.BACK"
+        "GEN.BACK",
       ])
       .subscribe(translations => {
         this.backButton.label = translations["GEN.BACK"];

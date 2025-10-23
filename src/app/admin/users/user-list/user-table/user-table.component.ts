@@ -11,10 +11,10 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { MeService } from "@shared/services/me.service";
 
 @Component({
-    selector: "app-user-table",
-    templateUrl: "./user-table.component.html",
-    styleUrls: ["./user-table.component.scss"],
-    standalone: false
+  selector: "app-user-table",
+  templateUrl: "./user-table.component.html",
+  styleUrls: ["./user-table.component.scss"],
+  standalone: false,
 })
 export class UserTableComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "email", "global", "status", "expiresOn", "lastLogin", "menu"];

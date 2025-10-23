@@ -11,10 +11,10 @@ import { Downlink } from "../downlink.model";
 import { DownlinkQueueDto } from "../downlink-queue-dto";
 
 @Component({
-    selector: "app-downlink",
-    templateUrl: "./downlink.component.html",
-    styleUrls: ["./downlink.component.scss"],
-    standalone: false
+  selector: "app-downlink",
+  templateUrl: "./downlink.component.html",
+  styleUrls: ["./downlink.component.scss"],
+  standalone: false,
 })
 export class DownlinkComponent implements OnInit {
   @Input() device: IotDevice;
@@ -58,6 +58,20 @@ export class DownlinkComponent implements OnInit {
     }
   }
 
+  addToErrorMessage(text: string) {
+    this.translate.get([text]).subscribe(translations => {
+      this.errorMessages.push(translations[text]);
+    });
+  }
+
+  getMaxDownloadLength(): number {
+    if (this.device.type === DeviceType.SIGFOX) {
+      return 16;
+    } else {
+      return 256;
+    }
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error?.error?.chirpstackError?.error == "f_port must be > 0") {
       this.errorMessages = ["port must be > 0"];
@@ -97,19 +111,5 @@ export class DownlinkComponent implements OnInit {
       validator = false;
     }
     return validator;
-  }
-
-  addToErrorMessage(text: string) {
-    this.translate.get([text]).subscribe(translations => {
-      this.errorMessages.push(translations[text]);
-    });
-  }
-
-  getMaxDownloadLength(): number {
-    if (this.device.type === DeviceType.SIGFOX) {
-      return 16;
-    } else {
-      return 256;
-    }
   }
 }

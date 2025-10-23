@@ -5,10 +5,10 @@ import { DatatargetTypeDescriptor } from "../datatarget.model";
 import { DatatargetTypesService } from "../datatarget-types.service";
 
 @Component({
-    selector: "app-datatarget-new",
-    templateUrl: "./datatarget-new.component.html",
-    styleUrls: ["./datatarget-new.component.scss"],
-    standalone: false
+  selector: "app-datatarget-new",
+  templateUrl: "./datatarget-new.component.html",
+  styleUrls: ["./datatarget-new.component.scss"],
+  standalone: false,
 })
 export class DatatargetNewComponent implements OnInit {
   public title = "";

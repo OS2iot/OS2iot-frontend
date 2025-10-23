@@ -23,10 +23,10 @@ export interface Tab {
 }
 
 @Component({
-    selector: "app-basic-tab-switch",
-    imports: [MatButtonModule, NgClass, MatIcon],
-    templateUrl: "./basic-tab-switch.component.html",
-    styleUrl: "./basic-tab-switch.component.scss"
+  selector: "app-basic-tab-switch",
+  imports: [MatButtonModule, NgClass, MatIcon],
+  templateUrl: "./basic-tab-switch.component.html",
+  styleUrl: "./basic-tab-switch.component.scss",
 })
 export class BasicTabSwitchComponent {
   @Input() currentUrl: string;

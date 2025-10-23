@@ -51,7 +51,7 @@ export function tokenGetter() {
     ProfilesModule,
     TranslateModule.forRoot({
       fallbackLang: "da",
-      loader: provideTranslateHttpLoader({prefix:"./assets/i18n/", suffix:".json"}),
+      loader: provideTranslateHttpLoader({ prefix: "./assets/i18n/", suffix: ".json" }),
     }),
     NgbModule,
     NgIf,
@@ -86,7 +86,7 @@ export function tokenGetter() {
     provideHttpClient(withInterceptorsFromDi()),
     provideTranslateService({
       fallbackLang: "da",
-      loader: provideTranslateHttpLoader({prefix:"./assets/i18n/", suffix:".json"}),
+      loader: provideTranslateHttpLoader({ prefix: "./assets/i18n/", suffix: ".json" }),
     }),
   ],
 })

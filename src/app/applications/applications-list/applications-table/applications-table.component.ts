@@ -123,11 +123,11 @@ const columnDefinitions: TableColumn[] = [
 ];
 
 @Component({
-    selector: "app-applications-table",
-    styleUrls: ["./applications-table.component.scss"],
-    templateUrl: "./applications-table.component.html",
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: "app-applications-table",
+  styleUrls: ["./applications-table.component.scss"],
+  templateUrl: "./applications-table.component.html",
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   @Input() organizationId: number;

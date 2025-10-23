@@ -20,10 +20,10 @@ import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-    selector: "app-iot-device-change-application-dialog",
-    templateUrl: "./iot-device-change-application-dialog.component.html",
-    styleUrls: ["./iot-device-change-application-dialog.component.scss"],
-    standalone: false
+  selector: "app-iot-device-change-application-dialog",
+  templateUrl: "./iot-device-change-application-dialog.component.html",
+  styleUrls: ["./iot-device-change-application-dialog.component.scss"],
+  standalone: false,
 })
 export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDestroy {
   public iotDevice: IotDevice;

@@ -6,6 +6,7 @@ $multiple-check-width: 33px;
 .mat-select-search-hidden {
   visibility: hidden;
 }
+
 .mat-select-search-inner {
   position: absolute;
   top: 0;
@@ -13,6 +14,7 @@ $multiple-check-width: 33px;
   border-bottom: 1px solid #cccccc;
   background: white;
   z-index: 100;
+
   &.mat-select-search-inner-multiple {
     width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width + $multiple-check-width});
   }
@@ -36,6 +38,7 @@ $multiple-check-width: 33px;
 .mat-select-search-no-entries-found {
   padding: $mat-menu-side-padding;
 }
+
 .mat-select-search-clear {
   position: absolute;
   right: 0;
