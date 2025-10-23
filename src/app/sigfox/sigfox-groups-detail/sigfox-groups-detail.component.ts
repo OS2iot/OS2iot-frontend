@@ -35,25 +35,25 @@ export class SigfoxGroupsDetailComponent implements OnInit {
   }
 
   getSigFoxDevices() {
-    this.sigfoxService.getDeviceTypes(this.sigfoxGroupId).subscribe(
-      response => {
+    this.sigfoxService.getDeviceTypes(this.sigfoxGroupId).subscribe({
+      next: response => {
         this.sigfoxDevices = response.data;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   getSigFoxGroup(id: number) {
-    this.sigfoxService.getGroup(id, {}).subscribe(
-      response => {
+    this.sigfoxService.getGroup(id, {}).subscribe({
+      next: response => {
         this.sigfoxGroup = response;
       },
-      error => {
+      error: error => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 }

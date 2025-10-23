@@ -75,15 +75,15 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.permissionService.createPermissionAcceptUser(this.permission).subscribe(
-      () => {
+    this.permissionService.createPermissionAcceptUser(this.permission).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   ngOnDestroy() {
@@ -100,16 +100,16 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   private getPermissionsForOrg(orgId: number) {
     this.permissionsForOrgSubscription = this.permissionService
       .getPermissions(undefined, undefined, undefined, undefined, undefined, orgId)
-      .subscribe(
-        permissionsResponse => {
+      .subscribe({
+        next: permissionsResponse => {
           this.permissions = permissionsResponse.data.filter(x => x.organization?.id === this.organizationId);
           this.permissionsCtrl.setValue(this.permissions);
           this.organizationName = permissionsResponse.data[0]?.organization?.name;
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.showError(error);
-        }
-      );
+        },
+      });
   }
 
   private showError(err: HttpErrorResponse) {

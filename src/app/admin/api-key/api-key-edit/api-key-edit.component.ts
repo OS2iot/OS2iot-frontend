@@ -84,14 +84,14 @@ export class ApiKeyEditComponent implements OnInit {
   private getPermissions() {
     this.permissionService
       .getPermissions(undefined, undefined, undefined, undefined, undefined, this.organizationId)
-      .subscribe(
-        permissionsResponse => {
+      .subscribe({
+        next: permissionsResponse => {
           this.permissions = permissionsResponse.data.filter(x => x.organization?.id === this.organizationId);
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.showError(error);
-        }
-      );
+        },
+      });
   }
 
   private getApiKey(id: number) {
@@ -107,17 +107,17 @@ export class ApiKeyEditComponent implements OnInit {
 
   private create(): void {
     this.apiKeyRequest.expiresOn = this.serializedExpirationDate.value;
-    this.apiKeyService.create(this.apiKeyRequest).subscribe(
-      () => this.routeBack(),
-      err => this.showError(err)
-    );
+    this.apiKeyService.create(this.apiKeyRequest).subscribe({
+      next: () => this.routeBack(),
+      error: err => this.showError(err),
+    });
   }
 
   private update(): void {
     this.apiKeyRequest.expiresOn = this.serializedExpirationDate.value;
-    this.apiKeyService.update(this.apiKeyRequest, this.id).subscribe(
-      () => this.routeBack(),
-      err => this.showError(err)
-    );
+    this.apiKeyService.update(this.apiKeyRequest, this.id).subscribe({
+      next: () => this.routeBack(),
+      error: err => this.showError(err),
+    });
   }
 }

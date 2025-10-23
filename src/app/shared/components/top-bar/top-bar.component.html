@@ -63,7 +63,7 @@
     } @if (data || subPage === true) {
     <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
     <a (click)="routeTo()" [routerLink]="[]" class="back-button">{{ backButton.label }}</a>
-    <h3 class="pl-md-3">{{ subTitle || staticTitle }}</h3>
+    <h3 class="ps-md-3">{{ subTitle || staticTitle }}</h3>
   } @if (title) {
     <div class="page-title">{{ title || staticTitle }}</div>
   }

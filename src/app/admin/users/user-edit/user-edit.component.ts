@@ -118,26 +118,26 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   private create(): void {
     this.user.expiresOn = this.serializedExpirationDate.value;
-    this.userService.post(this.user).subscribe(
-      () => {
+    this.userService.post(this.user).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
     this.user.expiresOn = this.serializedExpirationDate.value;
-    this.userService.put(this.user, this.id).subscribe(
-      response => {
+    this.userService.put(this.user, this.id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

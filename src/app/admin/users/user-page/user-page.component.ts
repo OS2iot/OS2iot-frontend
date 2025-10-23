@@ -25,7 +25,7 @@ export class UserPageComponent implements OnInit {
   public formFailedSubmit = false;
   public backButtonTitle: string;
   public errorFields: string[];
-  public errorMessages: unknown;
+  public errorMessages: any[];
   public title: string;
   public awaitingConfirmation: boolean;
   public requestOrganizationsList: Organisation[];
@@ -144,17 +144,17 @@ export class UserPageComponent implements OnInit {
 
       this.resetErrors();
       this.mapToDto(this.updateUserOrgsFromFrontend);
-      this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
-        () => {
+      this.userService.updateUserOrgs(this.updateUserOrgs).subscribe({
+        next: () => {
           window.location.reload();
           this.pressed = false;
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
           this.pressed = false;
-        }
-      );
+        },
+      });
     }
   }
 

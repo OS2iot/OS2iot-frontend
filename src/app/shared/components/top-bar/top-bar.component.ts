@@ -140,7 +140,7 @@ export class TopBarComponent implements OnInit {
     this.deleteSelectedInDropdown.emit();
   }
 
-  onClickExtraDropdownOption(id: string) {
+  onClickExtraDropdownOption(id: string | number) {
     this.extraDropdownOptions.emit(id);
     const extraDropdownOption = this.dropDownButton.extraOptions.find(opt => opt.id === id);
 

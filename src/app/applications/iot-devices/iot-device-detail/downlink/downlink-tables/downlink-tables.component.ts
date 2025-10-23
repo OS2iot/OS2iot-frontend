@@ -50,30 +50,30 @@ export class DownlinkTablesComponent implements OnInit {
 
   getDownlinksQueue() {
     this.isLoadingResults = true;
-    this.downlinkService.getDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   getHistoricalDownlinksQueue() {
     this.isLoadingResults = true;
-    this.downlinkService.getHistoricalDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getHistoricalDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkHistoryQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   handleReload() {
@@ -93,8 +93,8 @@ export class DownlinkTablesComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result === true) {
-        this.downlinkService.flushQueue(this.device.id).subscribe(
-          response => {
+        this.downlinkService.flushQueue(this.device.id).subscribe({
+          next: response => {
             this.snackBar.open(
               this.translate.instant("IOTDEVICE.DOWNLINK.QUEUE-FLUSHED"),
               this.translate.instant("DIALOG.OK"),
@@ -104,10 +104,10 @@ export class DownlinkTablesComponent implements OnInit {
             );
             this.getDownlinksQueue();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       }
     });
   }

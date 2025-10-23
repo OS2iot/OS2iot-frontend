@@ -97,26 +97,26 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.sigfoxService.postDeviceType(this.sigfoxDeviceType).subscribe(
-      response => {
+    this.sigfoxService.postDeviceType(this.sigfoxDeviceType).subscribe({
+      next: response => {
         console.log(response);
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.sigfoxService.putDeviceType(this.sigfoxDeviceType).subscribe(
-      response => {
+    this.sigfoxService.putDeviceType(this.sigfoxDeviceType).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

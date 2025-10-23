@@ -73,28 +73,28 @@ export class OrganisationEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.organisationService.post(this.organisation).subscribe(
-      response => {
+    this.organisationService.post(this.organisation).subscribe({
+      next: response => {
         console.log(response);
         this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.organisationService.put(this.organisation, this.id).subscribe(
-      response => {
+    this.organisationService.put(this.organisation, this.id).subscribe({
+      next: () => {
         this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

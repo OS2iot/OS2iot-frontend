@@ -24,7 +24,7 @@ import { takeUntil } from "rxjs/operators";
 export class MulticastEditComponent implements OnInit, OnDestroy {
   public title: string;
   public multicastId: number;
-  public errorMessages: unknown;
+  public errorMessages: any[];
   public searchDevices: UntypedFormControl = new UntypedFormControl();
   public errorFields: string[];
   public iotDevices: IotDevice[] = [];
@@ -108,41 +108,34 @@ export class MulticastEditComponent implements OnInit, OnDestroy {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
 
-    this.multicastService.update(this.multicast).subscribe(
-      () => {
+    this.multicastService.update(this.multicast).subscribe({
+      next: () => {
         this.snackService.showUpdatedSnack();
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.snackService.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
-
-  // only if classB can be used
-  // showPeriodicity(): boolean {
-  //   if (this.multicast.groupType === MulticastType.ClassB) {
-  //     return true;
-  //   } else return false;
-  // }
 
   createMulticast(): void {
     this.resetErrors();
     this.multicast.applicationID = this.applicationId;
 
-    this.multicastService.create(this.multicast).subscribe(
-      () => {
+    this.multicastService.create(this.multicast).subscribe({
+      next: () => {
         this.snackService.showSavedSnack();
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.snackService.showFailSnack();
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   public compare(o1: IotDevice | undefined, o2: IotDevice | undefined): boolean {

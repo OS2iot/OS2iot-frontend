@@ -59,15 +59,15 @@ export class NewUserComponent implements OnInit {
 
     const createNewKombitUserDTO = this.mapToDto(this.createNewKombitUserFromFrontend);
 
-    this.userService.updateNewKombit(createNewKombitUserDTO).subscribe(
-      () => {
+    this.userService.updateNewKombit(createNewKombitUserDTO).subscribe({
+      next: () => {
         this.router.navigate(["/applications"]);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   public compare(o1: Organisation | undefined, o2: Organisation | undefined): boolean {

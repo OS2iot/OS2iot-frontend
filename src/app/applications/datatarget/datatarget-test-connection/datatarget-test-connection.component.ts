@@ -108,8 +108,8 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
         payloadDecoderId: this.payloadDecoderId,
         dataPackage: dataPackage,
       })
-      .subscribe(
-        response => {
+      .subscribe({
+        next: response => {
           this.testResponse = response?.result
             ? JSON.stringify(response.result, null, 2)
             : this.dataTarget.type === DataTargetType.MQTT
@@ -118,12 +118,12 @@ export class DatatargetTestConnectionComponent implements OnInit, OnDestroy {
           this.decodedData = response?.decodedPayload ? JSON.stringify(response.decodedPayload, null, 2) : "";
           this.loading = false;
         },
-        error => {
+        error: error => {
           this.loading = false;
           this.decodedData = JSON.stringify(error.error, null, 2);
           this.testResponse = "";
-        }
-      );
+        },
+      });
   }
 
   private getDatatarget() {

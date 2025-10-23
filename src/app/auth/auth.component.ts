@@ -68,17 +68,17 @@ export class AuthComponent implements OnInit {
     const password = form.value.password;
 
     this.isLoading = true;
-    this.authService.login(username, password).subscribe(
-      (x: any) => {
+    this.authService.login(username, password).subscribe({
+      next: (x: any) => {
         if (x.accessToken) {
           this.success();
         } else {
           this.fail();
         }
       },
-      err => {
+      error: err => {
         console.log(err);
-      }
-    );
+      },
+    });
   }
 }

@@ -192,43 +192,43 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
   }
 
   private getOrganizations() {
-    this.organisationSubscription = this.organisationService.getMultiple(1000, 0, "name", "asc").subscribe(
-      orgs => {
+    this.organisationSubscription = this.organisationService.getMultiple(1000, 0, "name", "asc").subscribe({
+      next: orgs => {
         this.organisations = orgs.data;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private getUsers() {
-    this.userSubscription = this.userService.getMultiple(1000, 0, "name", "asc").subscribe(
-      users => {
+    this.userSubscription = this.userService.getMultiple(1000, 0, "name", "asc").subscribe({
+      next: users => {
         this.users = users.data;
         this.filteredUsersMulti.next(this.users.slice());
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private getApplications(organizationId: number) {
-    this.applicationSubscription = this.applicationService.getApplicationsByOrganizationId(organizationId).subscribe(
-      res => {
+    this.applicationSubscription = this.applicationService.getApplicationsByOrganizationId(organizationId).subscribe({
+      next: res => {
         this.applications = res.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
         this.filteredApplicationsMulti.next(this.applications.slice());
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private getPermission(id: number) {
-    this.subscription = this.permissionService.getPermission(id).subscribe(
-      response => {
+    this.subscription = this.permissionService.getPermission(id).subscribe({
+      next: response => {
         this.permission.name = response.name;
         this.permission.levels = response.type;
         this.permissionLevelsCtrl.setValue(this.permission.levels);
@@ -250,32 +250,32 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
           this.applicationMultiCtrl.setValue(this.permission.applicationIds);
         }
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private create(): void {
-    this.permissionService.createPermission(this.permission).subscribe(
-      _response => {
+    this.permissionService.createPermission(this.permission).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.permissionService.updatePermission(this.permission, this.id).subscribe(
-      () => {
+    this.permissionService.updatePermission(this.permission, this.id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private buildAllowedLevels(): void {

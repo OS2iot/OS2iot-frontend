@@ -7,11 +7,11 @@
   background-color: $color-bg-normal;
 
   &--m-right {
-    @extend .mr-md-2;
+    @extend .me-md-2;
   }
 
   &--m-left {
-    @extend .ml-md-2;
+    @extend .ms-md-2;
   }
 
   &--full-width {
@@ -19,7 +19,7 @@
   }
 
   h3 {
-    @extend .pr-5;
+    @extend .pe-5;
     @extend .mb-4;
     display: block;
     margin: 0;

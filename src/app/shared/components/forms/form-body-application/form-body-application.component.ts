@@ -185,26 +185,26 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   }
 
   updateApplication(id: number): void {
-    this.applicationService.updateApplication(this.application, id).subscribe(
-      response => {
+    this.applicationService.updateApplication(this.application, id).subscribe({
+      next: response => {
         console.log(response);
         this.router.navigateByUrl("/applications");
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   postApplication(): void {
-    this.applicationService.createApplication(this.application).subscribe(
-      () => {
+    this.applicationService.createApplication(this.application).subscribe({
+      next: () => {
         this.router.navigateByUrl("/applications");
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   externalError(error: Pick<HttpErrorResponse, "error">) {

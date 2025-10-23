@@ -180,19 +180,19 @@ export class BulkImportComponent implements OnInit {
     let batchIndex = 0;
 
     // takeWhile() will unsubscribe once the condition is false
-    batchIndex$.pipe(takeWhile(() => batchIndex in bulkDevices)).subscribe(
-      () => {
+    batchIndex$.pipe(takeWhile(() => batchIndex in bulkDevices)).subscribe({
+      next: () => {
         const requestItems = bulkDevices[batchIndex];
         const devices: IotDeviceImportRequest = {
           data: requestItems.map(bulkResult => bulkResult.device),
         };
-        importDevices(devices).subscribe(
-          response => {
+        importDevices(devices).subscribe({
+        next:  response => {
             this.onSuccessfulImport(response, requestItems);
             ++batchIndex;
             batchIndex$.next();
           },
-          (error: HttpErrorResponse) => {
+        error:  (error: HttpErrorResponse) => {
             requestItems.forEach(item => {
               item.errorMessages = this.errorMessageService.handleErrorMessageWithFields(error).errorMessages;
               item.importStatus = "Failed";
@@ -201,16 +201,16 @@ export class BulkImportComponent implements OnInit {
             ++batchIndex;
             batchIndex$.next();
           }
-        );
+        });
       },
-      (_error: HttpErrorResponse) => {
+      error: (_error: HttpErrorResponse) => {
         // Should not happen
       },
-      () => {
+      complete: () => {
         // Process any devices whose status hasn't been set and mark them as errors.
         this.onCompleteImport(bulkDevices);
-      }
-    );
+      },
+    });
 
     // Trigger our listener
     batchIndex$.next();

@@ -2,7 +2,7 @@
   <div class="col-md-6 d-flex align-items-stretch">
     <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
       <h3>{{ "IOTDEVICE.DETAIL" | translate }}</h3>
-      <p class="mr-1">
+      <p class="me-1">
         <strong>{{ "IOT-TABLE.APPLICATION" | translate }}</strong
         >{{ device.application.name }}
       </p>
@@ -11,7 +11,7 @@
       @if (device.type === DeviceType.LORAWAN) {
         <mat-divider></mat-divider>
         <div class="d-flex align-items-center">
-          <p class="mr-1">
+          <p class="me-1">
             <strong>{{ "IOT-TABLE.BATTERY" | translate }}</strong>
           </p>
           <app-batteri-status [color]="batteryStatusColor" [percentage]="batteryStatusPercentage"></app-batteri-status>

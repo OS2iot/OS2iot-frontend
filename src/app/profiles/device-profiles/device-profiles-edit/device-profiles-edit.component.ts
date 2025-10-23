@@ -61,16 +61,16 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   getDeviceProfile(id: string) {
-    this.subscription = this.deviceProfileService.getOne(id).subscribe(
-      response => {
+    this.subscription = this.deviceProfileService.getOne(id).subscribe({
+      next: response => {
         this.deviceProfile = response.deviceProfile;
         this.canEdit();
         this.shownRegParameters(this.deviceProfile.macVersion);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   shownRegParameters(data: number) {
@@ -134,26 +134,26 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   private create(): void {
-    this.deviceProfileService.post(this.deviceProfile).subscribe(
-      response => {
+    this.deviceProfileService.post(this.deviceProfile).subscribe({
+      next: response => {
         console.log(response);
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.deviceProfileService.put(this.deviceProfile).subscribe(
-      response => {
+    this.deviceProfileService.put(this.deviceProfile).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

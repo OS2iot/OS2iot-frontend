@@ -209,32 +209,32 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
 
   private updateDatatarget(): void {
     this.activeApiCalls += 1;
-    this.datatargetService.update(this.datatarget).subscribe(
-      (response: Datatarget) => {
+    this.datatargetService.update(this.datatarget).subscribe({
+      next: (response: Datatarget) => {
         this.datatarget = response;
         this.countToRedirect();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   private createDatatarget(): void {
     this.datatarget.applicationId = this.applicationId;
-    this.datatargetService.create(this.datatarget).subscribe(
-      (response: Datatarget) => {
+    this.datatargetService.create(this.datatarget).subscribe({
+      next: (response: Datatarget) => {
         this.datatargetId = response.id;
         this.datatarget = response;
         this.snackService.showSavedSnack();
         this.routeToCreatedDatatarget();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   private addPayloadDeviceDatatarget() {
@@ -247,23 +247,23 @@ export class MqttEditComponent implements DatatargetEdit, OnInit, OnDestroy {
       this.activeApiCalls += 1;
 
       if (relation.id) {
-        this.payloadDeviceDatatargetService.put(relation).subscribe(
-          () => {
+        this.payloadDeviceDatatargetService.put(relation).subscribe({
+          next: () => {
             this.countToRedirect();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       } else {
-        this.payloadDeviceDatatargetService.post(relation).subscribe(
-          () => {
+        this.payloadDeviceDatatargetService.post(relation).subscribe({
+          next: () => {
             this.countToRedirect();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       }
     });
   }

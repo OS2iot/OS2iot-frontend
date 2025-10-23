@@ -172,14 +172,14 @@ export class PayloadDecoderEditComponent implements OnInit {
       return;
     }
 
-    this.testPayloadDecoderService.post(this.testPayloadDecoder).subscribe(
-      response => {
+    this.testPayloadDecoderService.post(this.testPayloadDecoder).subscribe({
+      next: response => {
         this.codeOutput = JSON.stringify(response, null, 4);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   getCurrentOrganisationId(): number {
@@ -271,27 +271,27 @@ export class PayloadDecoderEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.payloadDecoderService.post(this.payloadDecoder).subscribe(
-      response => {
+    this.payloadDecoderService.post(this.payloadDecoder).subscribe({
+      next: () => {
         this.routeBack();
         this.showSavedSnack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.payloadDecoderService.put(this.payloadDecoder, this.id).subscribe(
-      response => {
+    this.payloadDecoderService.put(this.payloadDecoder, this.id).subscribe({
+      next: () => {
         this.routeBack();
         this.showSavedSnack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

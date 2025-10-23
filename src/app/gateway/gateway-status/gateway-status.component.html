@@ -2,7 +2,7 @@
   @if (title) {
     <h3 class="title">{{ title }}</h3>
   }
-  <mat-select [(ngModel)]="selectedStatusInterval" class="form-control ml-auto status-interval" name="statusIntervals">
+  <mat-select [(ngModel)]="selectedStatusInterval" class="form-control ms-auto status-interval" name="statusIntervals">
     @for (interval of statusIntervals; track interval) {
       <mat-option
         (onSelectionChange)="onSelectInterval($event)"

@@ -39,17 +39,17 @@ export class DownlinkComponent implements OnInit {
   }
 
   getDownlinksQueue() {
-    this.downlinkService.getDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         console.log(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   handleQueueDownlink() {
@@ -82,16 +82,16 @@ export class DownlinkComponent implements OnInit {
 
   private startDownlink() {
     this.errorMessages = [];
-    this.downlinkService.postDownlink(this.downlink, this.device.id).subscribe(
-      response => {
+    this.downlinkService.postDownlink(this.downlink, this.device.id).subscribe({
+      next: () => {
         this.snackBar.open("Element sat i kø", "Downlink", {
           duration: 10000,
         });
       },
-      error => {
+      error: error => {
         this.handleError(error);
-      }
-    );
+      },
+    });
     this.getDownlinksQueue();
   }
 

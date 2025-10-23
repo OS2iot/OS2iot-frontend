@@ -142,14 +142,14 @@ export class MulticastDetailComponent implements OnInit, OnDestroy {
 
   private startDownlink() {
     this.errorMessages = [];
-    this.multicastService.multicastPost(this.downlink, this.multicast.id).subscribe(
-      () => {
+    this.multicastService.multicastPost(this.downlink, this.multicast.id).subscribe({
+      next: () => {
         this.snackService.showInQueueSnack();
       },
-      error => {
+      error: error => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   private validateHex(input: string): boolean {

@@ -25,10 +25,7 @@ export class WelcomeDialogComponent implements OnInit {
   close(): void {
     if (this.dontShowAgain) {
       const userResponse = this.sharedVariableService.getUserInfo();
-      this.userService.hideWelcome(userResponse.user.id).subscribe(
-        _response => {},
-        _error => {}
-      );
+      this.userService.hideWelcome(userResponse.user.id).subscribe();
     }
 
     this.dialog.close();

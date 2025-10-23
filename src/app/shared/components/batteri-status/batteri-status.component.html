@@ -1,6 +1,6 @@
 @if (isValid()) {
   <div class="d-flex align-items-center">
-    <span class="pr-3"> {{ percentage }} %</span>
+    <span class="pe-3"> {{ percentage }} %</span>
     @for (item of arrayColor; track item) {
       <div [ngStyle]="{ 'background-color': item.color }" class="percentage-box">
         @if (item.full == false) {

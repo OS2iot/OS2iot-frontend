@@ -180,7 +180,7 @@ p {
   strong {
     @include h6;
     line-height: none;
-    @extend .mr-3;
+    @extend .me-3;
   }
 }
 

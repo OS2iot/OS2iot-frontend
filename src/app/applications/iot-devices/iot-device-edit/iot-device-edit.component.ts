@@ -141,10 +141,10 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.iotDevice.longitude = device.location.coordinates[0];
         this.iotDevice.latitude = device.location.coordinates[1];
       }
-      this.OTAA = this.iotDevice.lorawanSettings?.OTAAapplicationKey ? true : false;
+      this.OTAA = !!this.iotDevice.lorawanSettings?.OTAAapplicationKey;
       if (device.sigfoxSettings) {
       }
-      if (!device.deviceModelId || device.deviceModelId === null) {
+      if (!device.deviceModelId) {
         this.iotDevice.deviceModelId = 0;
       }
       if (device.metadata) {
@@ -260,33 +260,37 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     }
 
     //First create the device
-    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe((createdDevice: IotDevice) => {
-      if (!this.copyPayloadAndDatatarget) {
-        this.navigateToDeviceDetails(createdDevice);
-        return;
-      }
+    this.iotDeviceService.createIoTDevice(this.iotDevice).subscribe({
+      next: (createdDevice: IotDevice) => {
+        if (!this.copyPayloadAndDatatarget) {
+          this.navigateToDeviceDetails(createdDevice);
+          return;
+        }
 
-      //If it's the copy device flow, then get all datatargets from the device that we want to copy.
-      this.datatargetPayloadService
-        .getByIoTDevice(this.deviceId)
-        .subscribe((result: PayloadDeviceDatatargetGetManyResponse) => {
-          //For each of these datatargets, append the copied device to that datatarget. First we make the observables
-          const appendToDatatargetObservables = result.data.map(element =>
-            this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })
-          );
+        //If it's the copy device flow, then get all datatargets from the device that we want to copy.
+        this.datatargetPayloadService.getByIoTDevice(this.deviceId).subscribe({
+          next: (result: PayloadDeviceDatatargetGetManyResponse) => {
+            //For each of these datatargets, append the copied device to that datatarget. First we make the observables
+            const appendToDatatargetObservables = result.data.map(element =>
+              this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })
+            );
 
-          if (appendToDatatargetObservables.length === 0) {
-            this.navigateToDeviceDetails(createdDevice);
-            return;
-          }
+            if (appendToDatatargetObservables.length === 0) {
+              this.navigateToDeviceDetails(createdDevice);
+              return;
+            }
 
-          //Forkjoin is running all observables in parallel and when all are done it returns.
-          forkJoin(appendToDatatargetObservables).subscribe(
-            () => this.navigateToDeviceDetails(createdDevice),
-            this.formFailedSubmitHandleError
-          );
-        }, this.formFailedSubmitHandleError);
-    }, this.formFailedSubmitHandleError);
+            //Forkjoin is running all observables in parallel and when all are done it returns.
+            forkJoin(appendToDatatargetObservables).subscribe({
+              next: () => this.navigateToDeviceDetails(createdDevice),
+              error: this.formFailedSubmitHandleError,
+            });
+          },
+          error: this.formFailedSubmitHandleError,
+        });
+      },
+      error: this.formFailedSubmitHandleError,
+    });
   }
 
   formFailedSubmitHandleError(error: HttpErrorResponse) {
@@ -296,14 +300,14 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
   updateIoTDevice(id: number) {
     this.iotDevice.applicationId = Number(this.iotDevice.applicationId);
-    this.iotDeviceService.updateIoTDevice(this.iotDevice, id).subscribe(
-      () => {
+    this.iotDeviceService.updateIoTDevice(this.iotDevice, id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.formFailedSubmitHandleError(error);
-      }
-    );
+      },
+    });
   }
 
   routeBack(): void {

@@ -70,14 +70,14 @@ export class DeviceModelEditComponent implements OnInit {
   }
 
   createDeviceModel() {
-    this.deviceModelService.create(this.deviceModel).subscribe(
-      response => {
+    this.deviceModelService.create(this.deviceModel).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   handleNameNull() {
@@ -95,14 +95,14 @@ export class DeviceModelEditComponent implements OnInit {
   }
 
   updateDeviceModel() {
-    this.deviceModelService.update(this.deviceModel, +this.deviceModel.id).subscribe(
-      response => {
+    this.deviceModelService.update(this.deviceModel, +this.deviceModel.id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   onSubmit() {

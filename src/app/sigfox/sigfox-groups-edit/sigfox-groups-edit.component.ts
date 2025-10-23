@@ -60,14 +60,14 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   }
 
   getSigfoxGroup(id: number) {
-    this.subscription = this.sigfoxService.getGroup(id).subscribe(
-      response => {
+    this.subscription = this.sigfoxService.getGroup(id).subscribe({
+      next: response => {
         this.sigfoxGroup = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   routeBack(): void {
@@ -96,26 +96,26 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   }
 
   private create(): void {
-    this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe(
-      response => {
+    this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe({
+      next: response => {
         console.log(response);
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe(
-      response => {
+    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

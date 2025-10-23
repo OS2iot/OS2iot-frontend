@@ -15,7 +15,7 @@
       <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.STARTDOWNLINK" | translate }}</h3>
       @if (device.type === 'LORAWAN') {
         <div>
-          <mat-label class="form-label mr-3">{{ "IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK" | translate }}</mat-label>
+          <mat-label class="form-label me-3">{{ "IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK" | translate }}</mat-label>
           <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
           </mat-slide-toggle>
         </div>

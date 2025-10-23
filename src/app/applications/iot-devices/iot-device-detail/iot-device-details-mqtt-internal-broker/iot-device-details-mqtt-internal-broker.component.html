@@ -22,7 +22,7 @@
   <button [cdkCopyToClipboard]="device.mqttInternalBrokerSettings.caCertificate" class="btn">
     {{ "IOTDEVICE.MQTT.COPY-TO-CLIPBOARD" | translate }}
   </button>
-  <button (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.caCertificate, 'ca.crt')" class="btn ml-2">
+  <button (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.caCertificate, 'ca.crt')" class="btn ms-2">
     {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
   </button>
   <textarea [readOnly]="true" class="form-control mt-1">{{ device.mqttInternalBrokerSettings.caCertificate }}</textarea>
@@ -35,7 +35,7 @@
     </button>
     <button
       (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.deviceCertificate, device.name + '.crt')"
-      class="btn ml-2"
+      class="btn ms-2"
     >
       {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
     </button>
@@ -50,7 +50,7 @@
     </button>
     <button
       (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.deviceCertificateKey, device.name + '.key')"
-      class="btn ml-2"
+      class="btn ms-2"
     >
       {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
     </button>
