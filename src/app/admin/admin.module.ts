@@ -5,7 +5,7 @@ import { AdminRoutingModule } from "./admin-routing.module";
 import { ApplicationsModule } from "@applications/applications.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { FormModule } from "@shared/components/forms/form.module";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
@@ -68,7 +68,7 @@ import { AwaitingUsersTableTabComponent } from "./users/user-list/awaiting-user-
     NGMaterialModule,
     PipesModule,
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     FormsModule,
     ReactiveFormsModule,
     FormModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { ApplicationService } from "@applications/application.service";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { ChirpstackGatewayService } from "@shared/services/chirpstack-gateway.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { BasicInformationBoxComponent } from "../../../shared/components/basic-information-box/basic-information-box.component";
@@ -10,7 +10,7 @@ import { BasicInformationBoxComponent } from "../../../shared/components/basic-i
 @Component({
   selector: "app-applications-list-dashboard",
   standalone: true,
-  imports: [BasicInformationBoxComponent, TranslateModule],
+  imports: [BasicInformationBoxComponent, TranslatePipe],
   templateUrl: "./applications-list-dashboard.component.html",
   styleUrl: "./applications-list-dashboard.component.scss",
 })

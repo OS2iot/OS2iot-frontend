@@ -14,7 +14,7 @@ export class DynamicImgComponent implements OnInit {
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
-    if (this.translate.currentLang === "da") {
+    if (this.translate.getCurrentLang() === "da") {
       this.imagePath = "assets/images/" + this.image + "-danish.png";
     } else {
       this.imagePath = "assets/images/" + this.image + "-english.png";

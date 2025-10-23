@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { Chart, registerables } from "chart.js";
 import { GraphComponent } from "./graph.component";
@@ -10,7 +10,7 @@ Chart.register(...registerables);
 
 @NgModule({
   declarations: [GraphComponent],
-  imports: [CommonModule, NGMaterialModule, TranslateModule],
+  imports: [CommonModule, NGMaterialModule, TranslatePipe],
   exports: [GraphComponent],
 })
 export class GraphModule {}
