@@ -1,5 +1,5 @@
 import { NgIf } from "@angular/common";
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
@@ -41,58 +41,52 @@ export function tokenGetter() {
   return localStorage.getItem("id_token");
 }
 
-@NgModule({
-  declarations: [AppComponent, ErrorPageComponent, NewUserComponent, UserPageComponent],
-  imports: [
-    SharedVariableModule.forRoot(),
-    AuthModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NavbarModule,
-    ProfilesModule,
-    TranslateModule.forRoot({
-      defaultLanguage: "da",
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    NgbModule,
-    NgIf,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NGMaterialModule,
-    GatewayModule,
-    MatSelectSearchModule,
-    SearchModule,
-    SharedModule,
-    HttpClientModule,
-    MatInputModule,
-    MatTooltipModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-      },
-    }),
-    MonacoEditorModule.forRoot(),
-    WelcomeDialogModule,
-    PipesModule,
-  ],
-  bootstrap: [AppComponent],
-  exports: [TranslateModule],
-  providers: [
-    // use these two providers only in dev environment
-    //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
-    //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
-    Title,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
-    { provide: SAVER, useFactory: getSaver },
-    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
-    { provide: CookieService },
-  ],
-})
+@NgModule({ declarations: [AppComponent, ErrorPageComponent, NewUserComponent, UserPageComponent],
+    bootstrap: [AppComponent],
+    exports: [TranslateModule], imports: [SharedVariableModule.forRoot(),
+        AuthModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NavbarModule,
+        ProfilesModule,
+        TranslateModule.forRoot({
+            defaultLanguage: "da",
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
+        NgbModule,
+        NgIf,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NGMaterialModule,
+        GatewayModule,
+        MatSelectSearchModule,
+        SearchModule,
+        SharedModule,
+        MatInputModule,
+        MatTooltipModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter,
+            },
+        }),
+        MonacoEditorModule.forRoot(),
+        WelcomeDialogModule,
+        PipesModule], providers: [
+        // use these two providers only in dev environment
+        //{ provide: ErrorHandler, useClass: GlobalErrorHandler },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+        Title,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true },
+        { provide: SAVER, useFactory: getSaver },
+        { provide: MatPaginatorIntl, useClass: MatPaginatorIntlDa },
+        { provide: CookieService },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
