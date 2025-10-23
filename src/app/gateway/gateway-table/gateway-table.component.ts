@@ -136,7 +136,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
 
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
-  refetchIntervalId: NodeJS.Timeout;
+  refetchIntervalId: ReturnType<typeof setInterval>;
   resultsLength = 0;
   isLoadingResults = true;
   gatewayTableSavedColumns = "gatewayTableSavedColumns";
