@@ -125,8 +125,8 @@
             <span>{{ "IOTDEVICE-TABLE-ROW.NOT-AVAILABLE" | translate }}</span>
           }
         } @else {
-        <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
-      }
+          <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
+        }
       </td>
     </ng-container>
 
@@ -148,8 +148,8 @@
             <span>{{ "IOTDEVICE-TABLE-ROW.NOT-AVAILABLE" | translate }}</span>
           }
         } @else {
-        <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
-      }
+          <span>{{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}</span>
+        }
       </td>
     </ng-container>
 
@@ -175,10 +175,10 @@
             </app-batteri-status>
           </div>
         } @else {
-        <div>
-          {{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}
-        </div>
-      }
+          <div>
+            {{ "IOTDEVICE-TABLE-ROW.NOT-SUPPORTED-SHORT" | translate }}
+          </div>
+        }
       </td>
     </ng-container>
 
@@ -202,8 +202,7 @@
               [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
               aria-expanded="false"
               class="applicationRow__edit dropdown-toggle"
-              data-toggle="dropdown"
-              href="#"
+              data-bs-toggle="dropdown"
               id="tableRowDropdown-{{ iotDevice.id }}"
               role="button"
             ></a>
@@ -219,13 +218,14 @@
                       "IOTDEVICE.CHANGE-APPLICATION.TITLE" | translate
                     }}</a>
                 </li>
-              } @if (iotDevice.type !== deviceTypes.SIGFOX) {
-              <li class="dropdown-item">
-                <a (click)="navigateToCopy(iotDevice.id)" routerLinkActive="active">{{
-                    "IOTDEVICE.COPY-SETTINGS-TO-NEW-DEVICE" | translate
-                  }}</a>
-              </li>
-            }
+              }
+              @if (iotDevice.type !== deviceTypes.SIGFOX) {
+                <li class="dropdown-item">
+                  <a (click)="navigateToCopy(iotDevice.id)" routerLinkActive="active">{{
+                      "IOTDEVICE.COPY-SETTINGS-TO-NEW-DEVICE" | translate
+                    }}</a>
+                </li>
+              }
               <li class="dropdown-item">
                 <a (click)="clickDelete(iotDevice)" [routerLink]="[]">{{ "IOTDEVICE-TABLE-ROW.DELETE" | translate }}</a>
               </li>
