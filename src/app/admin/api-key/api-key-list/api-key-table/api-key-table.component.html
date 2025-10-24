@@ -29,8 +29,8 @@
             <br/>
           }
         } @else {
-        {{ "NoUsersAdded" | translate }}
-      }
+          {{ "NoUsersAdded" | translate }}
+        }
       </td>
     </ng-container>
 
@@ -75,7 +75,7 @@
               [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
               aria-expanded="false"
               class="applicationRow__edit dropdown-toggle"
-              data-toggle="dropdown"
+              data-bs-toggle="dropdown"
               href="#"
               id="tableRowDropdown-{{ element.id }}"
               role="button"
