@@ -4,7 +4,8 @@
       <mat-spinner></mat-spinner>
     }
   </div>
-} @if (errorMessage) {
+}
+@if (errorMessage) {
   <div class="error-messages p-3 m-2">
     {{ errorMessage | translate }}
   </div>
@@ -218,12 +219,13 @@
         <td *matCellDef="let element" mat-cell>
           @if (element?.id | canEditApplication) {
             <div class="dropdown">
+              <!--              TODO: Prevent default -->
               <a
+                (click)="$event.stopPropagation();$event.preventDefault()"
                 [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"
                 aria-expanded="false"
                 class="applicationRow__edit dropdown-toggle"
                 data-bs-toggle="dropdown"
-                href="#"
                 id="tableRowDropdown-{{ element.id }}"
                 role="button"
               ></a>

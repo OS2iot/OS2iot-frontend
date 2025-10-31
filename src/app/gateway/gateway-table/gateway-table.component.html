@@ -4,7 +4,7 @@
   [localStorageKey]="gatewayTableSavedColumns"
 ></app-column-selector>
 
-<div class="mat-elevation-z8 overflow-auto">
+<div class="mat-elevation-z8 ">
   @if (isLoadingResults) {
     <div class="loading-shade">
       @if (isLoadingResults) {
@@ -275,8 +275,8 @@
         @if (gatewayStatus(gateway)) {
           <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
         } @else {
-        <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
-      }
+          <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
+        }
       </td>
     </ng-container>
 
@@ -284,6 +284,7 @@
       <th *matHeaderCellDef mat-header-cell></th>
       <td *matCellDef="let gateway" class="overflowVisible" mat-cell>
         @if (gateway.canEdit) {
+          <!--          TODO: Shinanigans with menu-->
           <div class="dropdown">
             <a
               [attr.aria-label]="'LORA-GATEWAY-TABLE-ROW.SHOW-OPTIONS' | translate"
