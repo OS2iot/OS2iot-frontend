@@ -15,7 +15,6 @@ import { UserMinimalService } from "../users/user-minimal.service";
 })
 export class OrganisationService {
   URL = "organization";
-  URLMINIMAL = "organization/minimal";
   URLMINIMAL_NEWKOMBIT = "kombitCreation/minimal";
 
   constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
