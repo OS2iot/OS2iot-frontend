@@ -59,13 +59,11 @@ export class SigfoxService {
 
   public postDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
     const url = this.SIGFOXDEVICETYPEURL + "?groupId=" + sigfoxGroup.groupId.toString();
-    console.log(url);
     return this.restService.post(url, sigfoxGroup, { observe: "response" });
   }
 
   public putDeviceType(sigfoxGroup: SigfoxDeviceType): Observable<any> {
     const url = this.SIGFOXDEVICETYPEURL + "/" + sigfoxGroup.id + "?groupId=" + sigfoxGroup.groupId;
-    console.log(url);
     return this.restService.put(url, sigfoxGroup);
   }
 }

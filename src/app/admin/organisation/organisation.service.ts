@@ -9,7 +9,6 @@ import {
 } from "./organisation.model";
 import { map, shareReplay } from "rxjs/operators";
 import { UserMinimalService } from "../users/user-minimal.service";
-import { UpdateUserOrgsDto } from "../users/user.model";
 
 @Injectable({
   providedIn: "root",
@@ -39,10 +38,6 @@ export class OrganisationService {
         return response;
       })
     );
-  }
-
-  getMinimal(): Observable<OrganisationGetMinimalResponse> {
-    return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
   getMinimalNoPerm(): Observable<OrganisationGetMinimalResponse> {

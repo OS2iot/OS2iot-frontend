@@ -20,10 +20,6 @@ export class PayloadDeviceDatatargetService {
 
   constructor(private restService: RestService) {}
 
-  get(id: number): Observable<any> {
-    return this.restService.get(this.BASEURL, null, id);
-  }
-
   put(payloadDeviceDatatarget: PayloadDeviceDatatarget): Observable<any> {
     return this.restService.put(this.BASEURL, payloadDeviceDatatarget, payloadDeviceDatatarget.id, {
       observe: "response",
@@ -48,18 +44,5 @@ export class PayloadDeviceDatatargetService {
 
   appendCopiedIoTDevice(id: number, dto: AppendCopiedDeviceDto): Observable<PayloadDeviceDatatargetResponse> {
     return this.restService.put(this.BASEURL + this.APPENDCOPIEDIOTDEVICEURL, dto, id);
-  }
-
-  mapToDatatargetDevicePayload(dto: PayloadDeviceDatatargetGetManyResponse): PayloadDeviceDatatarget[] {
-    const payloadDeviceDatatargetList = [];
-    dto.data.forEach(element => {
-      payloadDeviceDatatargetList.push({
-        id: element.id,
-        iotDeviceIds: element.iotDevices.map(x => x.id),
-        payloadDecoderId: element.payloadDecoder?.id,
-        dataTargetId: element.dataTarget.id,
-      });
-    });
-    return payloadDeviceDatatargetList;
   }
 }
