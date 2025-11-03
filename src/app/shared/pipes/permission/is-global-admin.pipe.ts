@@ -3,6 +3,7 @@ import { PermissionResponse, PermissionType } from "@app/admin/permission/permis
 
 @Pipe({
   name: "isGlobalAdmin",
+  standalone: false,
 })
 export class IsGlobalAdminPipe implements PipeTransform {
   transform(value: PermissionResponse[], ...args: any[]): boolean {

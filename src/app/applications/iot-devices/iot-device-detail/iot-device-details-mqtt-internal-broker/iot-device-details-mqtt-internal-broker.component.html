@@ -11,37 +11,37 @@
   >{{ device.mqttInternalBrokerSettings.mqtttopicname }}
 </p>
 
-<ng-container *ngIf="device.mqttInternalBrokerSettings.authenticationType === AuthenticationType.PASSWORD">
+@if (device.mqttInternalBrokerSettings.authenticationType === AuthenticationType.PASSWORD) {
   <p>
     <strong>{{ "QUESTION.MQTT.USERNAME-LABEL" | translate }}</strong
     >{{ device.mqttInternalBrokerSettings.mqttusername }}
   </p>
-</ng-container>
+}
 <p>
   <strong>{{ "QUESTION.MQTT.CA-CERTIFICATE" | translate }}</strong>
   <button [cdkCopyToClipboard]="device.mqttInternalBrokerSettings.caCertificate" class="btn">
     {{ "IOTDEVICE.MQTT.COPY-TO-CLIPBOARD" | translate }}
   </button>
-  <button class="btn ml-2" (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.caCertificate, 'ca.crt')">
+  <button (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.caCertificate, 'ca.crt')" class="btn ms-2">
     {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
   </button>
-  <textarea class="form-control mt-1" [readOnly]="true">{{ device.mqttInternalBrokerSettings.caCertificate }}</textarea>
+  <textarea [readOnly]="true" class="form-control mt-1">{{ device.mqttInternalBrokerSettings.caCertificate }}</textarea>
 </p>
-<ng-container *ngIf="device.mqttInternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE">
+@if (device.mqttInternalBrokerSettings.authenticationType === AuthenticationType.CERTIFICATE) {
   <p>
     <strong>{{ "QUESTION.MQTT.DEVICE-CERTIFICATE" | translate }}</strong>
     <button [cdkCopyToClipboard]="device.mqttInternalBrokerSettings.deviceCertificate" class="btn">
       {{ "IOTDEVICE.MQTT.COPY-TO-CLIPBOARD" | translate }}
     </button>
     <button
-      class="btn ml-2"
       (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.deviceCertificate, device.name + '.crt')"
+      class="btn ms-2"
     >
       {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
     </button>
-    <textarea class="form-control mt-1" [readOnly]="true">{{
-      device.mqttInternalBrokerSettings.deviceCertificate
-    }}</textarea>
+    <textarea [readOnly]="true" class="form-control mt-1">{{
+        device.mqttInternalBrokerSettings.deviceCertificate
+      }}</textarea>
   </p>
   <p>
     <strong>{{ "QUESTION.MQTT.DEVICE-CERTIFICATE-KEY" | translate }}</strong>
@@ -49,13 +49,13 @@
       {{ "IOTDEVICE.MQTT.COPY-TO-CLIPBOARD" | translate }}
     </button>
     <button
-      class="btn ml-2"
       (click)="downloadCaCertificate(device.mqttInternalBrokerSettings.deviceCertificateKey, device.name + '.key')"
+      class="btn ms-2"
     >
       {{ "IOTDEVICE.MQTT.DOWNLOAD" | translate }}
     </button>
-    <textarea class="form-control mt-1" [readOnly]="true">{{
-      device.mqttInternalBrokerSettings.deviceCertificateKey
-    }}</textarea>
+    <textarea [readOnly]="true" class="form-control mt-1">{{
+        device.mqttInternalBrokerSettings.deviceCertificateKey
+      }}</textarea>
   </p>
-</ng-container>
+}

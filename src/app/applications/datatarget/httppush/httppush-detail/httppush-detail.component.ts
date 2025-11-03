@@ -13,6 +13,7 @@ import { DatatargetService } from "../../datatarget.service";
   selector: "app-httppush-detail",
   templateUrl: "./httppush-detail.component.html",
   styleUrls: ["./httppush-detail.component.scss"],
+  standalone: false,
 })
 export class HttppushDetailComponent implements DatatargetDetail, OnDestroy {
   dataTargetType = DataTargetType;

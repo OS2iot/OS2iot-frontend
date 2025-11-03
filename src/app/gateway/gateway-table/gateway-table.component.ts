@@ -125,6 +125,7 @@ const columnDefinitions: TableColumn[] = [
   templateUrl: "./gateway-table.component.html",
   styleUrls: ["./gateway-table.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
   @Input() organisationChangeSubject: Subject<any>;
@@ -136,7 +137,7 @@ export class GatewayTableComponent implements AfterViewInit, OnDestroy, OnInit {
 
   faExclamationTriangle = faExclamationTriangle;
   faCheckCircle = faCheckCircle;
-  refetchIntervalId: NodeJS.Timeout;
+  refetchIntervalId: ReturnType<typeof setInterval>;
   resultsLength = 0;
   isLoadingResults = true;
   gatewayTableSavedColumns = "gatewayTableSavedColumns";

@@ -1,31 +1,35 @@
 <script src="bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.min.js"></script>
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{ error | translate }}
-      </li>
-    </ul>
-  </div>
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <div class="row mb-5">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="name">{{ "PERMISSION.EDIT.NAME" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'PERMISSION.EDIT.NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="permission.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'PERMISSION.EDIT.NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -34,102 +38,110 @@
     <label class="form-label" for="level">{{ "PERMISSION.EDIT.TYPE" | translate }}</label
     >*
     <mat-select
-      id="level"
-      class="form-control"
-      name="level"
-      required
-      [formControl]="permissionLevelsCtrl"
       [(value)]="permission.levels"
+      [compareWith]="compareLevels"
+      [formControl]="permissionLevelsCtrl"
+      [multiple]="true"
       [ngClass]="{
         'is-invalid': formFailedSubmit && errorFields.includes('level'),
         'is-valid': formFailedSubmit && !errorFields.includes('level')
       }"
       [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
-      [compareWith]="compareLevels"
-      [multiple]="true"
+      class="form-control"
+      id="level"
+      name="level"
+      required
     >
-      <mat-option
-        *ngFor="let level of allowedLevels | sortByTranslation : 'type' : 'asc' : 'PERMISSION-TYPE.'"
-        [value]="level"
-      >
-        {{ "PERMISSION-TYPE." + level.type | translate }}
-      </mat-option>
+      @for (level of allowedLevels | sortByTranslation : 'type' : 'asc' : 'PERMISSION-TYPE.'; track level) {
+        <mat-option
+          [value]="level"
+        >
+          {{ "PERMISSION-TYPE." + level.type | translate }}
+        </mat-option>
+      }
     </mat-select>
   </div>
 
   <div class="form-group mt-3 col-12">
     <label class="form-label" for="user">{{ "PERMISSION.EDIT.USERS" | translate }}</label>
     <mat-select
-      id="userGroup"
-      class="form-control"
-      [formControl]="userMultiCtrl"
-      [multiple]="true"
-      panelClass="overflow-x-hidden"
+      #multiSelect
       [(value)]="permission.userIds"
       [compareWith]="compare"
-      #multiSelect
+      [formControl]="userMultiCtrl"
+      [multiple]="true"
+      class="form-control"
+      id="userGroup"
+      panelClass="overflow-x-hidden"
     >
       <app-mat-select-search
-        [initialValues]="this.permission.userIds"
         [formControl]="userMultiFilterCtrl"
+        [initialValues]="this.permission.userIds"
       ></app-mat-select-search>
-      <mat-option *ngFor="let user of filteredUsersMulti | async" [value]="user.id">
-        {{ getTextForUser(user) }}
-      </mat-option>
+      @for (user of filteredUsersMulti | async; track user) {
+        <mat-option [value]="user.id">
+          {{ getTextForUser(user) }}
+        </mat-option>
+      }
     </mat-select>
   </div>
 
-  <div *ngIf="isNotGlobalAdmin">
-    <div class="form-group mt-3 col-12">
-      <label class="form-label" for="name">{{ "PERMISSION.EDIT.ORG" | translate }}</label
-      >*
-      <select
-        id="organizationId"
-        class="form-select"
-        name="organizationId"
-        [(ngModel)]="permission.organizationId"
-        required
-        [value]="permission.organizationId"
-        [disabled]="isEditMode"
-        [ngClass]="{
+  @if (isNotGlobalAdmin) {
+    <div>
+      <div class="form-group mt-3 col-12">
+        <label class="form-label" for="name">{{ "PERMISSION.EDIT.ORG" | translate }}</label
+        >*
+        <select
+          (ngModelChange)="organizationChanged()"
+          [(ngModel)]="permission.organizationId"
+          [disabled]="isEditMode"
+          [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('organizationId'),
           'is-valid': formFailedSubmit && !errorFields.includes('organizationId')
         }"
-        (ngModelChange)="organizationChanged()"
-      >
-        <option *ngFor="let org of organisations" [ngValue]="org.id" [selected]="org.id === permission.organizationId">
-          {{ org.name }}
-        </option>
-      </select>
+          [value]="permission.organizationId"
+          class="form-select"
+          id="organizationId"
+          name="organizationId"
+          required
+        >
+          @for (org of organisations; track org) {
+            <option [ngValue]="org.id" [selected]="org.id === permission.organizationId">
+              {{ org.name }}
+            </option>
+          }
+        </select>
+      </div>
     </div>
-  </div>
-
-  <div class="form-group mt-3 col-12" *ngIf="isOrganizationApplicationPermission()">
+  } @if (isOrganizationApplicationPermission()) {
+  <div class="form-group mt-3 col-12">
     <label class="form-label" for="name">{{ "PERMISSION.EDIT.APPS" | translate }}</label>
     <div class="col-12">
       <mat-select
-        id="applicationIds"
+        #multiSelect
+        [(value)]="permission.applicationIds"
+        [compareWith]="compare"
         [formControl]="applicationMultiCtrl"
         [multiple]="true"
         class="form-control"
-        panelClass="overflow-x-hidden"
-        [(value)]="permission.applicationIds"
+        id="applicationIds"
         name="applicationIds"
-        #multiSelect
-        [compareWith]="compare"
+        panelClass="overflow-x-hidden"
       >
         <app-mat-select-search
-          [initialValues]="this.permission.applicationIds"
           [formControl]="applicationMultiFilterCtrl"
+          [initialValues]="this.permission.applicationIds"
         ></app-mat-select-search>
-        <mat-option *ngFor="let app of filteredApplicationsMulti | async" [value]="app.id">
-          {{ app.name }}
-        </mat-option>
+        @for (app of filteredApplicationsMulti | async; track app) {
+          <mat-option [value]="app.id">
+            {{ app.name }}
+          </mat-option>
+        }
       </mat-select>
     </div>
   </div>
-
-  <div *ngIf="isReadOrWrite()">
+} @if (isReadOrWrite()) {
+  <div>
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="name">{{ "PERMISSION.EDIT.ADD-APPLICATION-AUTOMATIC" | translate }}</label>
       <div class="row">
@@ -138,14 +150,16 @@
           id="automaticallyAddNewApplications"
           name="automaticallyAddNewApplications"
         >
-          {{ "PERMISSION.EDIT.ADD-APPLICATION-ON-CREATE" | translate }}</mat-slide-toggle
+          {{ "PERMISSION.EDIT.ADD-APPLICATION-ON-CREATE" | translate }}
+        </mat-slide-toggle
         >
       </div>
     </div>
   </div>
+}
 
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ "GEN.CANCEL" | translate }}</button>
-    <button class="btn btn-primary ml-2" type="submit">{{ "PERMISSION.SAVE" | translate }}</button>
+    <button class="btn btn-primary ms-2" type="submit">{{ "PERMISSION.SAVE" | translate }}</button>
   </div>
 </form>

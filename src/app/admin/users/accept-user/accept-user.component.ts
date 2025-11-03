@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import {
   PermissionRequestAcceptUser,
+  PermissionResponse,
   PermissionType,
   PermissionTypes,
-  PermissionResponse,
 } from "@app/admin/permission/permission.model";
 import { TranslateService } from "@ngx-translate/core";
 import { ErrorMessageService } from "@shared/error-message.service";
@@ -20,6 +20,7 @@ import { UntypedFormControl } from "@angular/forms";
   selector: "app-accept-user",
   templateUrl: "./accept-user.component.html",
   styleUrls: ["./accept-user.component.scss"],
+  standalone: false,
 })
 export class AcceptUserComponent implements OnInit, OnDestroy {
   public backButtonTitle: string;
@@ -69,6 +70,27 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
     this.getPermissionsForOrg(this.organizationId);
   }
 
+  routeBack(): void {
+    this.location.back();
+  }
+
+  onSubmit(): void {
+    this.permissionService.createPermissionAcceptUser(this.permission).subscribe({
+      next: () => {
+        this.routeBack();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        this.showError(error);
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+    this.permissionsForOrgSubscription?.unsubscribe();
+  }
+
   private getUser(id: number) {
     this.subscription = this.userService.getOne(id).subscribe(response => {
       this.user = response;
@@ -78,42 +100,21 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   private getPermissionsForOrg(orgId: number) {
     this.permissionsForOrgSubscription = this.permissionService
       .getPermissions(undefined, undefined, undefined, undefined, undefined, orgId)
-      .subscribe(
-        permissionsResponse => {
+      .subscribe({
+        next: permissionsResponse => {
           this.permissions = permissionsResponse.data.filter(x => x.organization?.id === this.organizationId);
           this.permissionsCtrl.setValue(this.permissions);
           this.organizationName = permissionsResponse.data[0]?.organization?.name;
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.showError(error);
-        }
-      );
+        },
+      });
   }
 
   private showError(err: HttpErrorResponse) {
     const result = this.errorMessageService.handleErrorMessageWithFields(err);
     this.errorFields = result.errorFields;
     this.errorMessages = result.errorMessages;
-  }
-
-  routeBack(): void {
-    this.location.back();
-  }
-
-  onSubmit(): void {
-    this.permissionService.createPermissionAcceptUser(this.permission).subscribe(
-      () => {
-        this.routeBack();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.showError(error);
-      }
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscription?.unsubscribe();
-    this.permissionsForOrgSubscription?.unsubscribe();
   }
 }

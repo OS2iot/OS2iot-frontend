@@ -1,4 +1,4 @@
-<app-top-bar backButtonTitle="{{ 'NAV.DATATARGET' | translate }}" title="{{ title | translate }}" [canEdit]="canEdit">
+<app-top-bar [canEdit]="canEdit" backButtonTitle="{{ 'NAV.DATATARGET' | translate }}" title="{{ title | translate }}">
 </app-top-bar>
 
 <!-- Foldable intro-texts -->
@@ -14,16 +14,16 @@
     </mat-expansion-panel-header>
     <p>
       {{ "OPENDATADK.INTRO.GUIDE1" | translate }}
-      <br /><br />
+      <br/><br/>
       {{ "OPENDATADK.INTRO.GUIDE2" | translate }}
-      <br /><br />
+      <br/><br/>
       {{ "OPENDATADK.INTRO.GUIDE3" | translate }}
-      <br /><br />
+      <br/><br/>
       {{ "OPENDATADK.INTRO.GUIDE4" | translate }}
       <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.da">{{
-        "OPENDATADK.INTRO.GUIDE5" | translate
-      }}</a>
-      <br /><br />
+          "OPENDATADK.INTRO.GUIDE5" | translate
+        }}</a>
+      <br/><br/>
     </p>
   </mat-expansion-panel>
   <mat-divider></mat-divider>
@@ -58,14 +58,18 @@
   </mat-expansion-panel>
 </div>
 
-<form (ngSubmit)="onSubmit()" #datatargetForm="ngForm" class="os2-form p-3 mt-4">
+<form #datatargetForm="ngForm" (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
   <h3>{{ (datatargetId ? "FORM.EDIT-DATATARGET" : "FORM.CREATE-NEW-DATATARGET") | translate }}</h3>
 
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">{{ error | translate }}</li>
-    </ul>
-  </div>
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>{{ error | translate }}</li>
+        }
+      </ul>
+    </div>
+  }
 
   <!-- Name of data target -->
   <div class="row mb-2 mt-4">
@@ -73,26 +77,26 @@
       <label class="form-label" for="name"> {{ "QUESTION.GIVE-DATATARGET-NAME" | translate }}* </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        class="form-info-icon"
         [matTooltip]="'QUESTION.GIVE-DATATARGET-NAME-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
         matTooltipPosition="above"
         matTooltipShowDelay="600"
-        matTooltipHideDelay="2000"
       >
       </fa-icon>
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="datatarget.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -105,26 +109,26 @@
       </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        class="form-info-icon"
         [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
         matTooltipPosition="above"
         matTooltipShowDelay="600"
-        matTooltipHideDelay="2000"
       >
       </fa-icon>
       <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.name"
-        name="openDataDkDataset.name"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate"
-        maxlength="120"
-        required
         [(ngModel)]="datatarget.openDataDkDataset.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.name'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.name')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.name"
+        maxlength="120"
+        name="openDataDkDataset.name"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -137,26 +141,26 @@
       </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        class="form-info-icon"
         [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
         matTooltipPosition="above"
         matTooltipShowDelay="600"
-        matTooltipHideDelay="2000"
       >
       </fa-icon>
       <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.resourceTitle"
-        name="openDataDkDataset.resourceTitle"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate"
-        maxlength="120"
-        required
         [(ngModel)]="datatarget.openDataDkDataset.resourceTitle"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.resourceTitle'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.resourceTitle')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-RESOURCETITLE-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.resourceTitle"
+        maxlength="120"
+        name="openDataDkDataset.resourceTitle"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -168,17 +172,17 @@
         {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION" | translate }}*
       </label>
       <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.description"
-        name="openDataDkDataset.description"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate"
-        required
         [(ngModel)]="datatarget.openDataDkDataset.description"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.description'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.description')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DESCRIPTION-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.description"
+        name="openDataDkDataset.description"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -191,25 +195,25 @@
       </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        class="form-info-icon"
         [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
         matTooltipPosition="above"
         matTooltipShowDelay="600"
-        matTooltipHideDelay="2000"
       >
       </fa-icon>
       <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.authorName"
-        name="openDataDkDataset.authorName"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate"
-        required
         [(ngModel)]="datatarget.openDataDkDataset.authorName"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.authorName'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.authorName')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.authorName"
+        name="openDataDkDataset.authorName"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -221,17 +225,17 @@
         {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL" | translate }}*
       </label>
       <input
-        type="text"
-        class="form-control"
-        id="openDataDkDataset.authorEmail"
-        name="openDataDkDataset.authorEmail"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate"
-        required
         [(ngModel)]="datatarget.openDataDkDataset.authorEmail"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.authorEmail'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.authorEmail')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-AUTHOR-EMAIL-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.authorEmail"
+        name="openDataDkDataset.authorEmail"
+        required
+        type="text"
       />
     </div>
   </div>
@@ -243,19 +247,21 @@
         {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS" | translate }}
       </label>
       <mat-select
-        multiple
-        required
-        id="openDataDkDataset.keywords"
-        name="openDataDkDataset.keywords"
         [(value)]="datatarget.openDataDkDataset.keywords"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
-        class="form-control"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.keywords'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.keywords')
         }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.keywords"
+        multiple
+        name="openDataDkDataset.keywords"
+        required
       >
-        <mat-option *ngFor="let kw of selectableKeyword" [value]="kw">{{ kw }}</mat-option>
+        @for (kw of selectableKeyword; track kw) {
+          <mat-option [value]="kw">{{ kw }}</mat-option>
+        }
       </mat-select>
     </div>
   </div>
@@ -275,76 +281,86 @@
   </div>
 
   <!-- For new data-targets, we show the notification about auto-pairing with payload-decoders -->
-  <h6 *ngIf="datatargetId === 0" class="mt-3">{{ "QUESTION.DATATARGET.RELATIONS" | translate }}</h6>
+  @if (datatargetId === 0) {
+    <h6 class="mt-3">{{ "QUESTION.DATATARGET.RELATIONS" | translate }}</h6>
+  }
 
   <!-- For existing data-targets, we show list of payload-decoders and button etc. for adding new -->
   <!-- TODO: Seems we have the exact same thing on HTTP, OpenDataDK, Fireware and MQTT... Why not make it a separate, re-usable component!? -->
-  <div *ngIf="datatargetId > 0" class="container row" class="mt-3">
-    <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">
-      {{ "QUESTION.ADD-RELATIONS" | translate }}
-    </a>
-    <ng-container *ngIf="devices && payloadDecoders && payloadDeviceDatatarget?.length > 0">
-      <table class="table table-striped table-bordered">
-        <tbody>
-          <tr *ngFor="let element of payloadDeviceDatatarget; let i = index" [attr.data-index]="i">
-            <td>
-              <div class="row">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
-                  <mat-select
-                    multiple
-                    name="devices"
-                    [compareWith]="payloadDevicesDropdownCompare"
-                    [(value)]="element.iotDeviceIds"
-                  >
-                    <mat-option disabled="disabled" class="filter-option">
-                      <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAllDevices(i)">
-                        {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
-                      </button>
-                      <button mat-raised-button class="mat-primary fill text-sm" (click)="deSelectAllDevices(i)">
-                        {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
-                      </button>
-                    </mat-option>
-                    <mat-option *ngFor="let device of devices" [value]="device.id">{{ device.name }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </td>
-            <td>
-              <div class="row">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
-                  <mat-select matNativeControl name="payloadDecoderId" [(value)]="element.payloadDecoderId">
-                    <mat-option [value]="0">
-                      {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
-                    </mat-option>
-                    <mat-option *ngFor="let payloadDecoder of payloadDecoders" [value]="payloadDecoder.id">
-                      {{ payloadDecoder.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </td>
-            <td>
-              <a (click)="openDeleteDialog(i)">
-                <div class="text-center m-2">
-                  <fa-icon [icon]="faTimesCircle"></fa-icon>
-                  <p>{{ "DATATARGET.DELETE" | translate }}</p>
+  @if (datatargetId > 0) {
+    <div class="container row" class="mt-3">
+      <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">
+        {{ "QUESTION.ADD-RELATIONS" | translate }}
+      </a>
+      @if (devices && payloadDecoders && payloadDeviceDatatarget?.length > 0) {
+        <table class="table table-striped table-bordered">
+          <tbody>
+          @for (element of payloadDeviceDatatarget; track element; let i = $index) {
+            <tr [attr.data-index]="i">
+              <td>
+                <div class="row">
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
+                    <mat-select
+                      [(value)]="element.iotDeviceIds"
+                      [compareWith]="payloadDevicesDropdownCompare"
+                      multiple
+                      name="devices"
+                    >
+                      <mat-option class="filter-option" disabled="disabled">
+                        <button (click)="selectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
+                          {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
+                        </button>
+                        <button (click)="deSelectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
+                          {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
+                        </button>
+                      </mat-option>
+                      @for (device of devices; track device) {
+                        <mat-option [value]="device.id">{{ device.name }}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
-  </div>
+              </td>
+              <td>
+                <div class="row">
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
+                    <mat-select [(value)]="element.payloadDecoderId" matNativeControl name="payloadDecoderId">
+                      <mat-option [value]="0">
+                        {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
+                      </mat-option>
+                      @for (payloadDecoder of payloadDecoders; track payloadDecoder) {
+                        <mat-option [value]="payloadDecoder.id">
+                          {{ payloadDecoder.name }}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <a (click)="openDeleteDialog(i)">
+                  <div class="text-center m-2">
+                    <fa-icon [icon]="faTimesCircle"></fa-icon>
+                    <p>{{ "DATATARGET.DELETE" | translate }}</p>
+                  </div>
+                </a>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      }
+    </div>
+  }
 
   <!-- Save and back-buttons -->
   <div class="form-group mt-5">
     <button (click)="routeToDatatargets()" class="btn btn-light" type="button">
       {{ "GEN.BACK" | translate }}
     </button>
-    <button [disabled]="!datatarget?.openDataDkDataset?.acceptTerms" class="btn btn-primary ml-2" type="submit">
+    <button [disabled]="!datatarget?.openDataDkDataset?.acceptTerms" class="btn btn-primary ms-2" type="submit">
       {{ "DATATARGET.SAVE" | translate }}
     </button>
   </div>

@@ -1,5 +1,9 @@
-<div *ngIf="alertService.alerts.length">
-  <h2>Messages</h2>
-  <button class="clear" (click)="alertService.clear()">clear</button>
-  <div *ngFor="let alert of alertService.alerts">{{ alert }}</div>
-</div>
+@if (alertService.alerts.length) {
+  <div>
+    <h2>Messages</h2>
+    <button (click)="alertService.clear()" class="clear">clear</button>
+    @for (alert of alertService.alerts; track alert) {
+      <div>{{ alert }}</div>
+    }
+  </div>
+}

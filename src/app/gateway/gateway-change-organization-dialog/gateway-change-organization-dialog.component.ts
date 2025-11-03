@@ -14,6 +14,7 @@ import { UpdateGatewayOrganization } from "../gateway.model";
   selector: "app-gateway-change-organization-dialog",
   templateUrl: "./gateway-change-organization-dialog.component.html",
   styleUrls: ["./gateway-change-organization-dialog.component.scss"],
+  standalone: false,
 })
 export class GatewayChangeOrganizationDialogComponent implements OnInit {
   public gatewaysSubscription: Subscription;

@@ -12,6 +12,7 @@ import { DatatargetService } from "../../datatarget.service";
   selector: "app-mqtt-detail",
   templateUrl: "./mqtt-detail.component.html",
   styleUrls: ["./mqtt-detail.component.scss"],
+  standalone: false,
 })
 export class MqttDetailComponent implements DatatargetDetail, OnDestroy {
   arrowsAltH = faArrowsAltH;

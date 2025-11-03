@@ -1,61 +1,67 @@
-<div *ngIf="user">
-  <app-top-bar [backButtonTitle]="backButtonTitle" [title]="title"></app-top-bar>
-
-  <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-    <div *ngIf="errorMessages" class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </ul>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="jumbotron">
-            <h3>
-              {{ "USERS.ACCEPT-USER.QUESTION-ACCEPT" | translate }}
-              {{ user.name }}
-              <ng-container *ngIf="organizationName">
-                {{ "USERS.ACCEPT-USER.IN-ORGANIZATION" | translate }}
-                {{ organizationName }}
-              </ng-container>
-            </h3>
-            <mat-divider></mat-divider>
-
-            <div class="form-group mt-3 col-12">
-              <label class="form-label" for="level">{{ "PERMISSION.EDIT.TYPE" | translate }}</label
-              >*
-              <mat-select
-                id="permissionIds"
-                class="form-control"
-                name="permissionIds"
-                required
-                [formControl]="permissionsCtrl"
-                [(value)]="permission.permissionIds"
-                [ngClass]="{
+@if (user) {
+  <div>
+    <app-top-bar [backButtonTitle]="backButtonTitle" [title]="title"></app-top-bar>
+    <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+      @if (errorMessages) {
+        <div class="error-messages p-3">
+          <ul class="mb-0">
+            @for (error of errorMessages; track error) {
+              <li>
+                {{ error | translate }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="jumbotron">
+              <h3>
+                {{ "USERS.ACCEPT-USER.QUESTION-ACCEPT" | translate }}
+                {{ user.name }}
+                @if (organizationName) {
+                  {{ "USERS.ACCEPT-USER.IN-ORGANIZATION" | translate }}
+                  {{ organizationName }}
+                }
+              </h3>
+              <mat-divider></mat-divider>
+              <div class="form-group mt-3 col-12">
+                <label class="form-label" for="level">{{ "PERMISSION.EDIT.TYPE" | translate }}</label
+                >*
+                <mat-select
+                  [(value)]="permission.permissionIds"
+                  [formControl]="permissionsCtrl"
+                  [multiple]="true"
+                  [ngClass]="{
                   'is-invalid': formFailedSubmit && errorFields.includes('permissionIds'),
                   'is-valid': formFailedSubmit && !errorFields.includes('permissionIds')
                 }"
-                [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
-                [multiple]="true"
-              >
-                <mat-option *ngFor="let permission of permissions" [value]="permission.id">
-                  {{ permission.name }}
-                </mat-option>
-              </mat-select>
-            </div>
-            <div class="form-group mt-5">
-              <button (click)="routeBack()" class="btn btn-secondary" type="button">
-                {{ "GEN.CANCEL" | translate }}
-              </button>
-              <button class="btn btn-primary ml-2" type="submit">
-                {{ "USERS.ACCEPT-USER.ACCEPT" | translate }}
-              </button>
+                  [placeholder]="'PERMISSION.EDIT.TYPE-PLACEHOLDER' | translate"
+                  class="form-control"
+                  id="permissionIds"
+                  name="permissionIds"
+                  required
+                >
+                  @for (permission of permissions; track permission) {
+                    <mat-option [value]="permission.id">
+                      {{ permission.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </div>
+              <div class="form-group mt-5">
+                <button (click)="routeBack()" class="btn btn-secondary" type="button">
+                  {{ "GEN.CANCEL" | translate }}
+                </button>
+                <button class="btn btn-primary ms-2" type="submit">
+                  {{ "USERS.ACCEPT-USER.ACCEPT" | translate }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+}

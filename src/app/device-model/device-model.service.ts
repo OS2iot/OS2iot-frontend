@@ -3,7 +3,6 @@ import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 import { GetPayloadDecoderParameters } from "@payload-decoder/payload-decoder.model";
 import { RestService } from "@shared/services/rest.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { buildDriverProvider } from "protractor/built/driverProviders";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { DeviceModel, DeviceModelBody, DeviceModelRequest, DeviceModelResponse } from "./device.model";

@@ -13,6 +13,7 @@ import { DownlinkQueueDto } from "../downlink-queue-dto";
   selector: "app-downlink-tables",
   templateUrl: "./downlink-tables.component.html",
   styleUrls: ["./downlink-tables.component.scss"],
+  standalone: false,
 })
 export class DownlinkTablesComponent implements OnInit {
   @Input() device: IotDevice;
@@ -49,30 +50,30 @@ export class DownlinkTablesComponent implements OnInit {
 
   getDownlinksQueue() {
     this.isLoadingResults = true;
-    this.downlinkService.getDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   getHistoricalDownlinksQueue() {
     this.isLoadingResults = true;
-    this.downlinkService.getHistoricalDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getHistoricalDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkHistoryQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   handleReload() {
@@ -84,10 +85,6 @@ export class DownlinkTablesComponent implements OnInit {
     this.openDownlinkDialog();
   }
 
-  private handleError(error: HttpErrorResponse) {
-    this.errorMessages = this.errorMessageService.handleErrorMessage(error);
-  }
-
   openDownlinkDialog() {
     const dialog = this.dialog.open(DownlinkDialogComponent, {
       width: "300px",
@@ -96,8 +93,8 @@ export class DownlinkTablesComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result === true) {
-        this.downlinkService.flushQueue(this.device.id).subscribe(
-          response => {
+        this.downlinkService.flushQueue(this.device.id).subscribe({
+          next: response => {
             this.snackBar.open(
               this.translate.instant("IOTDEVICE.DOWNLINK.QUEUE-FLUSHED"),
               this.translate.instant("DIALOG.OK"),
@@ -107,10 +104,10 @@ export class DownlinkTablesComponent implements OnInit {
             );
             this.getDownlinksQueue();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       }
     });
   }
@@ -128,5 +125,9 @@ export class DownlinkTablesComponent implements OnInit {
 
   isAcknowledged(downlink: DownlinkQueueDto) {
     return !downlink.acknowledged ? this.translate.instant("false") : this.translate.instant("true");
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    this.errorMessages = this.errorMessageService.handleErrorMessage(error);
   }
 }

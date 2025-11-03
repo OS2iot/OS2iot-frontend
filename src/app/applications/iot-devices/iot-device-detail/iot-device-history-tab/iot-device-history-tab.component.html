@@ -1,42 +1,44 @@
-<ng-container *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else historyNotSupported">
+@if (device.type === 'LORAWAN' || device.type === 'SIGFOX') {
   <div class="container-fluid mt-4">
     <div class="row">
       <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
-        <app-graph
-          *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'"
-          [data]="rssiChartData"
-          [type]="'line'"
-          [title]="'IOTDEVICE.HISTORY-TAB.RSSI' | translate"
-        >
-        </app-graph>
+        @if (device.type === 'SIGFOX' || device.type === 'LORAWAN') {
+          <app-graph
+            [data]="rssiChartData"
+            [title]="'IOTDEVICE.HISTORY-TAB.RSSI' | translate"
+            [type]="'line'"
+          >
+          </app-graph>
+        }
       </div>
       <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
-        <app-graph
-          *ngIf="device.type === 'SIGFOX' || device.type === 'LORAWAN'"
-          [data]="snrChartData"
-          [type]="'line'"
-          [title]="'IOTDEVICE.HISTORY-TAB.SNR' | translate"
-        >
-        </app-graph>
+        @if (device.type === 'SIGFOX' || device.type === 'LORAWAN') {
+          <app-graph
+            [data]="snrChartData"
+            [title]="'IOTDEVICE.HISTORY-TAB.SNR' | translate"
+            [type]="'line'"
+          >
+          </app-graph>
+        }
       </div>
     </div>
     <div class="row mb-4">
       <div class="col-md-6 d-flex align-items-stretch">
-        <app-graph
-          *ngIf="device.type === 'LORAWAN'"
-          [data]="dataRateChartData"
-          [type]="'bar'"
-          [options]="dataRateChartOptions"
-          [title]="'IOTDEVICE.HISTORY-TAB.DATA-RATE' | translate"
-        ></app-graph>
+        @if (device.type === 'LORAWAN') {
+          <app-graph
+            [data]="dataRateChartData"
+            [options]="dataRateChartOptions"
+            [title]="'IOTDEVICE.HISTORY-TAB.DATA-RATE' | translate"
+            [type]="'bar'"
+          ></app-graph>
+        }
       </div>
     </div>
   </div>
-</ng-container>
-<ng-template #historyNotSupported>
+} @else {
   <div class="jumbotron jumbotron--full-width">
     <p class="my-2 mx-3">
       {{ "IOTDEVICE.HISTORY-TAB.HISTORY-NOT-SUPPORTED" | translate }}
     </p>
   </div>
-</ng-template>
+}

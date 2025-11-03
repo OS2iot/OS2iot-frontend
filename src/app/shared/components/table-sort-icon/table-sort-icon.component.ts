@@ -5,7 +5,6 @@ import { MatIcon } from "@angular/material/icon";
   selector: "app-table-sort-icon",
   templateUrl: "./table-sort-icon.component.html",
   styleUrls: ["./table-sort-icon.component.scss"],
-  standalone: true,
   imports: [MatIcon],
 })
 export class TableSortIconComponent {

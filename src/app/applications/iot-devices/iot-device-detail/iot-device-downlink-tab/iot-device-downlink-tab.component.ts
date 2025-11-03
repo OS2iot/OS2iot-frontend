@@ -6,6 +6,7 @@ import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-de
   selector: "app-iot-device-downlink-tab",
   templateUrl: "./iot-device-downlink-tab.component.html",
   styleUrls: ["./iot-device-downlink-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDownlinkTabComponent implements OnInit {
   device: IotDevice;

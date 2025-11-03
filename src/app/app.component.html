@@ -1,7 +1,9 @@
-<div *ngIf="isLoggedIn">
-  <app-navbar (navToggle)="onNavToggle($event)"></app-navbar>
-</div>
-<div id="content" [class.nav-visible]="isNavVisible">
+@if (isLoggedIn) {
+  <div>
+    <app-navbar (navToggle)="onNavToggle($event)"></app-navbar>
+  </div>
+}
+<div [class.nav-visible]="isNavVisible" id="content">
   <div id="mainBody">
     <router-outlet></router-outlet>
   </div>

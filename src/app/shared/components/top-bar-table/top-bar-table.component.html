@@ -1,48 +1,52 @@
 <div class="row sub-bar-wrapper no-margin">
   <div class="col-12 d-flex sub-bar align-items-center buttonMarginBottom">
-    <h3 *ngIf="title" class="mb-0">{{ title }}</h3>
-    <div class="ml-auto d-flex">
+    @if (title) {
+      <h3 class="mb-0">{{ title }}</h3>
+    }
+    <div class="ms-auto d-flex">
       <div>
+        @if (ctaActionButtonOnClick) {
+          <button
+            (click)="ctaActionButtonOnClick()"
+            [attr.aria-label]="ctaActionButtonLabel"
+            class="btn btn-secondary"
+            type="button"
+          >
+            {{ ctaActionButtonLabel }}
+          </button>
+        } @if (ctaRouterLinkSecondary) {
         <button
-          *ngIf="ctaActionButtonOnClick"
-          (click)="ctaActionButtonOnClick()"
-          class="btn btn-secondary"
-          type="button"
-          [attr.aria-label]="ctaActionButtonLabel"
-        >
-          {{ ctaActionButtonLabel }}
-        </button>
-        <button
-          *ngIf="ctaRouterLinkSecondary"
-          [routerLink]="ctaRouterLinkSecondary"
-          routerLinkActive="active"
-          class="btn btn-secondary"
-          type="button"
           [attr.aria-label]="ctaLabelSecondary"
+          [routerLink]="ctaRouterLinkSecondary"
+          class="btn btn-secondary"
+          routerLinkActive="active"
+          type="button"
         >
           {{ ctaLabelSecondary }}
         </button>
-
+      } @if (ctaRouterLinkPrimary) {
         <button
-          *ngIf="ctaRouterLinkPrimary"
-          [routerLink]="ctaRouterLinkPrimary"
-          routerLinkActive="active"
-          class="btn btn-primary"
-          type="button"
           [attr.aria-label]="ctaLabelPrimary"
+          [routerLink]="ctaRouterLinkPrimary"
+          class="btn btn-primary"
+          routerLinkActive="active"
+          type="button"
         >
           {{ ctaLabelPrimary }}
         </button>
-
-        <mat-form-field appearance="outline" *ngIf="addDropdown">
+      } @if (addDropdown) {
+        <mat-form-field appearance="outline">
           <mat-label>{{ dropdownLabel }}</mat-label>
-          <mat-select [placeholder]="dropdownLabel" [(value)]="selectedOpt">
+          <mat-select [(value)]="selectedOpt" [placeholder]="dropdownLabel">
             <mat-option (click)="setOptionToNull()">--{{ dropdownDefaultOption }}--</mat-option>
-            <mat-option *ngFor="let option of options" [value]="option.id" (click)="setOptionToParent()">
-              {{ option.name }}
-            </mat-option>
+            @for (option of options; track option) {
+              <mat-option (click)="setOptionToParent()" [value]="option.id">
+                {{ option.name }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
+      }
       </div>
     </div>
   </div>

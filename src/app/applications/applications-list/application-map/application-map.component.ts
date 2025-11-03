@@ -16,7 +16,6 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-application-map",
-  standalone: true,
   imports: [MatCheckboxModule, SharedModule, FormsModule],
   templateUrl: "./application-map.component.html",
   styleUrls: ["./application-map.component.scss"],

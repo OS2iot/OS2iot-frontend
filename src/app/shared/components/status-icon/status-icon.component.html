@@ -1,5 +1,7 @@
-@switch (iconType) { @case ("stable") {
-<mat-icon matTooltip="{{ 'STATUS-ICON-TOOLTIP.STABLE' | translate }}" svgIcon="stable-icon" class="icon"></mat-icon>
-} @case ("alert") {
-<mat-icon matTooltip="{{ 'STATUS-ICON-TOOLTIP.ALERT' | translate }}" svgIcon="alert-icon" class="icon"></mat-icon>
-} }
+@switch (iconType) {
+  @case ("stable") {
+    <mat-icon class="icon" matTooltip="{{ 'STATUS-ICON-TOOLTIP.STABLE' | translate }}" svgIcon="stable-icon"></mat-icon>
+  } @case ("alert") {
+    <mat-icon class="icon" matTooltip="{{ 'STATUS-ICON-TOOLTIP.ALERT' | translate }}" svgIcon="alert-icon"></mat-icon>
+  }
+}

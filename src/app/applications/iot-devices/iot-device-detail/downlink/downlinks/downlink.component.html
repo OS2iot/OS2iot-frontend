@@ -1,66 +1,77 @@
 <div class="jumbotron jumbotron--full-width">
-  <div *ngIf="device.type === 'LORAWAN' || device.type === 'SIGFOX'; else notImplemented">
-    <div *ngIf="errorMessages && errorMessages?.length !== 0" class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </ul>
+  @if (device.type === 'LORAWAN' || device.type === 'SIGFOX') {
+    <div>
+      @if (errorMessages && errorMessages?.length !== 0) {
+        <div class="error-messages p-3">
+          <ul class="mb-0">
+            @for (error of errorMessages; track error) {
+              <li>
+                {{ error | translate }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.STARTDOWNLINK" | translate }}</h3>
+      @if (device.type === 'LORAWAN') {
+        <div>
+          <mat-label class="form-label me-3">{{ "IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK" | translate }}</mat-label>
+          <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
+          </mat-slide-toggle>
+        </div>
+      } @if (device.type === 'LORAWAN') {
+      <div class="mt-2 col-6">
+        <label class="form-label asterisk-if-mandatory" for="port">{{ "IOTDEVICE.DOWNLINK.PORT" | translate }}</label>
+        <input
+          [(ngModel)]="downlink.port"
+          class="form-control"
+          id="port"
+          maxlength="50"
+          min="0"
+          name="port"
+          required
+          type="port"
+        />
+      </div>
+    }
+      <div class="mt-2 col-6">
+        <label class="form-label asterisk-if-mandatory"
+               for="data">{{ "IOTDEVICE.DOWNLINK.PAYLOAD" | translate }}</label>
+        <input
+          [(ngModel)]="downlink.data"
+          [maxlength]="getMaxDownloadLength()"
+          class="form-control"
+          id="data"
+          name="data"
+          pattern="[a-fA-F\d]+"
+          placeholder="{{ 'IOTDEVICE.DOWNLINK.PAYLOAD' | translate }}"
+          required
+          type="data"
+        />
+      </div>
+      @if (device.type === 'SIGFOX') {
+        <div class="mt-1">
+          <p>{{ "IOTDEVICE.DOWNLINK.SIGFOX-PAYLOAD-LENGTH" | translate }}</p>
+        </div>
+      }
+      <div class="mt-5">
+        <button (click)="handleQueueDownlink()" class="btn btn-secondary" type="button">
+          {{ "IOTDEVICE.DOWNLINK.START" | translate }}
+        </button>
+      </div>
     </div>
-    <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.STARTDOWNLINK" | translate }}</h3>
-    <div *ngIf="device.type === 'LORAWAN'">
-      <mat-label class="form-label mr-3">{{ "IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK" | translate }}</mat-label>
-      <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
-      </mat-slide-toggle>
-    </div>
-    <div class="mt-2 col-6" *ngIf="device.type === 'LORAWAN'">
-      <label for="port" class="form-label asterisk-if-mandatory">{{ "IOTDEVICE.DOWNLINK.PORT" | translate }}</label>
-      <input
-        type="port"
-        class="form-control"
-        id="port"
-        name="port"
-        maxlength="50"
-        min="0"
-        required
-        [(ngModel)]="downlink.port"
-      />
-    </div>
-    <div class="mt-2 col-6">
-      <label for="data" class="form-label asterisk-if-mandatory">{{ "IOTDEVICE.DOWNLINK.PAYLOAD" | translate }}</label>
-      <input
-        type="data"
-        class="form-control"
-        placeholder="{{ 'IOTDEVICE.DOWNLINK.PAYLOAD' | translate }}"
-        id="data"
-        name="data"
-        pattern="[a-fA-F\d]+"
-        [maxlength]="getMaxDownloadLength()"
-        required
-        [(ngModel)]="downlink.data"
-      />
-    </div>
-    <div *ngIf="device.type === 'SIGFOX'" class="mt-1">
-      <p>{{ "IOTDEVICE.DOWNLINK.SIGFOX-PAYLOAD-LENGTH" | translate }}</p>
-    </div>
-    <div class="mt-5">
-      <button (click)="handleQueueDownlink()" class="btn btn-secondary" type="button">
-        {{ "IOTDEVICE.DOWNLINK.START" | translate }}
-      </button>
-    </div>
+  } @else {
+  <div class="my-2 mx-3">
+    <p>
+      {{ "IOTDEVICE.DOWNLINK.NOTIMPLEMENTED" | translate }}
+    </p>
   </div>
+}
 
-  <ng-template #notImplemented>
-    <div class="my-2 mx-3">
-      <p>
-        {{ "IOTDEVICE.DOWNLINK.NOTIMPLEMENTED" | translate }}
-      </p>
-    </div>
-  </ng-template>
 </div>
 
 <app-downlink-tables
   [device]="device"
-  [errorMessages]="errorMessages"
   [downlinkQueue]="downlinkQueue"
+  [errorMessages]="errorMessages"
 ></app-downlink-tables>

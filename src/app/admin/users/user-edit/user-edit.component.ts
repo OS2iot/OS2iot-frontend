@@ -17,6 +17,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   selector: "app-user-edit",
   templateUrl: "./user-edit.component.html",
   styleUrls: ["./user-edit.component.scss"],
+  standalone: false,
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   public user = new UserRequest();
@@ -117,26 +118,26 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   private create(): void {
     this.user.expiresOn = this.serializedExpirationDate.value;
-    this.userService.post(this.user).subscribe(
-      () => {
+    this.userService.post(this.user).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
     this.user.expiresOn = this.serializedExpirationDate.value;
-    this.userService.put(this.user, this.id).subscribe(
-      response => {
+    this.userService.put(this.user, this.id).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {

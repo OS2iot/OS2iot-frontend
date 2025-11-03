@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormModule } from "@shared/components/forms/form.module";
 import { PipesModule } from "@shared/pipes/pipes.module";
@@ -60,7 +60,7 @@ import { MonacoEditorModule } from "ngx-monaco-editor-v2";
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     FormModule,
     NGMaterialModule,
     FontAwesomeModule,

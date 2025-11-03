@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { catchError, shareReplay, tap } from "rxjs/operators";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "@environments/environment";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import moment from "moment";
 import { RestService } from "@shared/services/rest.service";
 import { Observable, of } from "rxjs";

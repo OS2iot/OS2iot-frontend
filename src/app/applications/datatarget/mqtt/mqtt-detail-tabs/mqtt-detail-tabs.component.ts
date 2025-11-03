@@ -11,12 +11,9 @@ import { MeService } from "@shared/services/me.service";
   selector: "app-mqtt-detail-tabs",
   templateUrl: "./mqtt-detail-tabs.component.html",
   styleUrl: "./mqtt-detail-tabs.component.scss",
+  standalone: false,
 })
 export class MqttDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
-  protected override getDetailsLink() {
-    return "mqtt-detail";
-  }
-
   constructor(
     route: ActivatedRoute,
     router: Router,
@@ -31,5 +28,9 @@ export class MqttDetailTabsComponent extends DatatargetDetailTabsCommon implemen
 
   ngOnDestroy(): void {
     super.onDestroy();
+  }
+
+  protected override getDetailsLink() {
+    return "mqtt-detail";
   }
 }

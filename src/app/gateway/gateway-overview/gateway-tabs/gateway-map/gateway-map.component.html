@@ -1,3 +1,5 @@
-<div class="jumbotron--table sixty-height" *ngIf="gateways">
-  <app-map [coordinateList]="coordinateList"> </app-map>
-</div>
+@if (gateways) {
+  <div class="jumbotron--table sixty-height">
+    <app-map [coordinateList]="coordinateList"></app-map>
+  </div>
+}

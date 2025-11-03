@@ -4,10 +4,10 @@ import { ProfilesListComponent } from "./profiles-list/profiles-list.component";
 import { ProfilesRoutingModule } from "./profiles-routing.module";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "@shared/shared.module";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { FormModule } from "@shared/components/forms/form.module";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { DirectivesModule } from "@shared/directives/directives.module";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
@@ -30,7 +30,7 @@ import { DeviceProfilesListComponent } from "./device-profiles/device-profiles-l
     RouterModule,
     SharedModule,
     FormModule,
-    TranslateModule,
+    TranslatePipe,
     FontAwesomeModule,
     DirectivesModule,
     CommonModule,

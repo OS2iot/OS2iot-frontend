@@ -1,58 +1,62 @@
-<div *ngIf="user">
-  <app-top-bar
-    [addDetailDowndown]="true"
-    [backButton]="backButton"
-    [canEdit]="canEdit"
-    [data]="user"
-    [dropDownButton]="dropdownButton"
-    [subPage]="true"
-  ></app-top-bar>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron">
-          <h3>{{ "USERS.DETAIL.HEADLINE" | translate }}</h3>
-          <p>
-            <strong>{{ "USERS.DETAIL.EMAIL" | translate }}</strong
-            >{{ user.email }}
-          </p>
-          <app-general-details [data]="user"></app-general-details>
-          <p [ngClass]="user.active | activeDeactive">
-            <strong>{{ "USERS.DETAIL.STATUS" | translate }}</strong
-            >{{ user.active | activeDeactive }}
-          </p>
-          <p *ngIf="user.expiresOn">
-            <strong>{{ "API-KEY.EXPIRES-ON" | translate }}</strong>
-            {{ (user.expiresOn) | dateOnly }}
-          </p>
-          <P *ngIf="user.lastLogin; else noLogin">
-            <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
-            >{{ user?.lastLogin | dkTime }}</P
-          >
-          <ng-template #noLogin>
+@if (user) {
+  <div>
+    <app-top-bar
+      [addDetailDowndown]="true"
+      [backButton]="backButton"
+      [canEdit]="canEdit"
+      [data]="user"
+      [dropDownButton]="dropdownButton"
+      [subPage]="true"
+    ></app-top-bar>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h3>{{ "USERS.DETAIL.HEADLINE" | translate }}</h3>
+            <p>
+              <strong>{{ "USERS.DETAIL.EMAIL" | translate }}</strong
+              >{{ user.email }}
+            </p>
+            <app-general-details [data]="user"></app-general-details>
+            <p [ngClass]="user.active | activeDeactive">
+              <strong>{{ "USERS.DETAIL.STATUS" | translate }}</strong
+              >{{ user.active | activeDeactive }}
+            </p>
+            @if (user.expiresOn) {
+              <p>
+                <strong>{{ "API-KEY.EXPIRES-ON" | translate }}</strong>
+                {{ (user.expiresOn) | dateOnly }}
+              </p>
+            } @if (user.lastLogin) {
+            <P>
+              <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
+              >{{ user?.lastLogin | dkTime }}</P
+            >
+          } @else {
             <p>
               <strong>{{ "USERS.DETAIL.LAST-LOGIN" | translate }}</strong
               >{{ "USERS.DETAIL.NO-LOGIN" | translate }}
             </p>
-          </ng-template>
-          <p>
-            <strong>{{ "USERS.DETAIL.GLOBALADMIN" | translate }}</strong>
-            {{
-              ((user.permissions | isGlobalAdmin) ? "USERS.GLOBAL_ADMIN.TRUE" : "USERS.GLOBAL_ADMIN.FALSE") | translate
-            }}
-          </p>
+          }
+            <p>
+              <strong>{{ "USERS.DETAIL.GLOBALADMIN" | translate }}</strong>
+              {{
+                ((user.permissions | isGlobalAdmin) ? "USERS.GLOBAL_ADMIN.TRUE" : "USERS.GLOBAL_ADMIN.FALSE") | translate
+              }}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron">
-          <h3 class="">
-            {{ "USERS.DETAIL.PERMISSIONS" | translate }}
-          </h3>
-          <app-permission-tabel [userId]="user?.id"></app-permission-tabel>
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h3 class="">
+              {{ "USERS.DETAIL.PERMISSIONS" | translate }}
+            </h3>
+            <app-permission-tabel [userId]="user?.id"></app-permission-tabel>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}

@@ -25,6 +25,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .marker-cluster-small {
   background-color: rgba(181, 226, 140, 0.6);
 }
+
 .marker-cluster-small div {
   background-color: rgba(110, 204, 57, 0.6);
 }
@@ -32,6 +33,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .marker-cluster-medium {
   background-color: rgba(241, 211, 87, 0.6);
 }
+
 .marker-cluster-medium div {
   background-color: rgba(240, 194, 12, 0.6);
 }
@@ -39,6 +41,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .marker-cluster-large {
   background-color: rgba(253, 156, 115, 0.6);
 }
+
 .marker-cluster-large div {
   background-color: rgba(241, 128, 23, 0.6);
 }
@@ -47,6 +50,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .leaflet-oldie .marker-cluster-small {
   background-color: rgb(181, 226, 140);
 }
+
 .leaflet-oldie .marker-cluster-small div {
   background-color: rgb(110, 204, 57);
 }
@@ -54,6 +58,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .leaflet-oldie .marker-cluster-medium {
   background-color: rgb(241, 211, 87);
 }
+
 .leaflet-oldie .marker-cluster-medium div {
   background-color: rgb(240, 194, 12);
 }
@@ -61,6 +66,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
 .leaflet-oldie .marker-cluster-large {
   background-color: rgb(253, 156, 115);
 }
+
 .leaflet-oldie .marker-cluster-large div {
   background-color: rgb(241, 128, 23);
 }
@@ -69,6 +75,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
   background-clip: padding-box;
   border-radius: 20px;
 }
+
 .marker-cluster div {
   width: 30px;
   height: 30px;
@@ -79,6 +86,7 @@ app-gateway-edit app-map .leaflet-control-geosearch form input {
   border-radius: 15px;
   font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
+
 .marker-cluster span {
   line-height: 30px;
 }

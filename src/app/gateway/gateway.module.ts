@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { GraphModule } from "@app/graph/graph.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormModule } from "@shared/components/forms/form.module";
 import { TableSortIconComponent } from "@shared/components/table-sort-icon/table-sort-icon.component";
@@ -58,7 +58,7 @@ const gatewayRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     FormModule,
     FormsModule,
     FontAwesomeModule,

@@ -1,13 +1,7 @@
-<ng-template #emptySearchForm>
-  <mat-form-field class="search-form--full-width invisible">
-    <input matInput/>
-  </mat-form-field>
-</ng-template>
-
 <div class="top-main-container">
   <!-- Search  -->
   <form class="search-form">
-    <ng-container *ngIf="hasEmail() && hasAnyPermission(); else emptySearchForm">
+    @if (hasEmail() && hasAnyPermission()) {
       <div class="custom-search-field">
         <mat-icon class="icon" svgIcon="search-icon"></mat-icon>
         <input
@@ -21,16 +15,22 @@
           type="text"
         />
       </div>
-    </ng-container>
+    } @else {
+      <mat-form-field class="search-form--full-width invisible">
+        <input matInput/>
+      </mat-form-field>
+    }
   </form>
 
   <button [matMenuTriggerFor]="menu" class="profile-button" id="userDropdown">
     <div class="user-information-container">
       <div class="name-and-title-container">
         <div class="name-container">{{ getUsername() }}</div>
-        <div *ngIf="meService.hasGlobalAdmin()"
-             class="title-container">{{ 'PERMISSION-TYPE.GlobalAdmin' | translate }}
-        </div>
+        @if (meService.hasGlobalAdmin()) {
+          <div
+            class="title-container">{{ 'PERMISSION-TYPE.GlobalAdmin' | translate }}
+          </div>
+        }
       </div>
       <div>
         <mat-icon class="angle-down-icon" svgIcon="angle-down"></mat-icon>
@@ -41,7 +41,9 @@
     <button class="userName" mat-menu-item>
       <div class="userNameFont">{{ getUsername() }}</div>
     </button>
-    <a *ngIf="hasEmail()" mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
+    @if (hasEmail()) {
+      <a mat-menu-item routerLink="/user-page">{{ "USER_PAGE.USER_PAGE" | translate }} </a>
+    }
     <a
       (click)="onLogout()"
       [attr.href]="getKombitLogoutUrl() ? getKombitLogoutUrl() : null"
@@ -55,63 +57,70 @@
 <div class="bottom-main-container">
   <!-- Breadcrumb -->
   <nav>
-    <ng-template [ngIf]="backButtonTitle">
+    @if (backButtonTitle) {
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
       <a (click)="routeTo()" [routerLink]="[]" class="back-button">{{ backButtonTitle }}</a>
-    </ng-template>
-    <ng-template [ngIf]="data || subPage === true">
+    }
+    @if (data || subPage === true) {
       <fa-icon [icon]="faChevronLeft" class="icon--primary mb-1"></fa-icon>
       <a (click)="routeTo()" [routerLink]="[]" class="back-button">{{ backButton.label }}</a>
-      <h3 class="pl-md-3">{{ subTitle || staticTitle }}</h3>
-    </ng-template>
-    <ng-template [ngIf]="title">
+      <h3 class="ps-md-3">{{ subTitle || staticTitle }}</h3>
+    }
+    @if (title) {
       <div class="page-title">{{ title || staticTitle }}</div>
-    </ng-template>
+    }
   </nav>
 
   <!-- action buttons start -->
 
-  <div *ngIf="dropDownButton && addDetailDowndown === true && canEdit">
-    <button
-      aria-expanded="false"
-      aria-haspopup="true"
-      class="btn btn-primary dropdown-toggle"
-      data-toggle="dropdown"
-      id="dropdown-{{ data?.name }}"
-      type="button"
-    >
-      {{ dropDownButton.label }} <span class="caret"></span>
-    </button>
-    <ul attr.aria-labelledby="dropdown-{{ data?.name }}" class="dropdown-menu">
-      <li class="dropdown-item">
-        <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
-      </li>
-      <ng-container *ngIf="dropDownButton.extraOptions?.length > 0">
-        <li *ngFor="let option of dropDownButton.extraOptions" class="dropdown-item">
-          <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+  @if (dropDownButton && addDetailDowndown === true && canEdit) {
+    <div class="dropdown">
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="btn btn-primary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        id="dropdown-{{ data?.name }}"
+        type="button"
+      >
+        {{ dropDownButton.label }} <span class="caret"></span>
+      </button>
+      <ul attr.aria-labelledby="dropdown-{{ data?.name }}" class="dropdown-menu">
+        <li class="dropdown-item">
+          <a [routerLink]="dropDownButton.editRouterLink">{{ "TOPBAR.DROPDOWN.EDIT" | translate }} </a>
         </li>
-      </ng-container>
-      <li *ngIf="dropDownButton.isErasable === true" class="dropdown-item">
-        <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
-      </li>
-    </ul>
-  </div>
+        @if (dropDownButton.extraOptions?.length > 0) {
+          @for (option of dropDownButton.extraOptions; track option) {
+            <li class="dropdown-item">
+              <a (click)="onClickExtraDropdownOption(option.id)">{{ option.label }}</a>
+            </li>
+          }
+        }
+        @if (dropDownButton.isErasable === true) {
+          <li class="dropdown-item">
+            <a (click)="onClickDelete()">{{ "TOPBAR.DROPDOWN.DELETE" | translate }} </a>
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <!-- action buttons -->
 
-  <button
-    *ngIf="ctaRouterLink && ctaRouterLink != '' && canEdit"
-    [attr.aria-label]="ctaLabel"
-    [routerLink]="ctaRouterLink"
-    class="create-application"
-    routerLinkActive="active"
-    type="button"
-  >
-    <mat-icon class="plus-circle-icon" svgIcon="plus-circle"></mat-icon>
-    <div class="create-application-button-label">
-      {{ ctaLabel }}
-    </div>
-  </button>
+  @if (ctaRouterLink && ctaRouterLink != '' && canEdit) {
+    <button
+      [attr.aria-label]="ctaLabel"
+      [routerLink]="ctaRouterLink"
+      class="create-application"
+      routerLinkActive="active"
+      type="button"
+    >
+      <mat-icon class="plus-circle-icon" svgIcon="plus-circle"></mat-icon>
+      <div class="create-application-button-label">
+        {{ ctaLabel }}
+      </div>
+    </button>
+  }
 </div>
 
 <!-- action buttons end -->

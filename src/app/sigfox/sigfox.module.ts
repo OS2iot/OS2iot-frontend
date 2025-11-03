@@ -4,7 +4,7 @@ import { SigfoxRoutingModule } from "./sigfox-routing.module";
 import { FormModule } from "@shared/components/forms/form.module";
 import { FormsModule } from "@angular/forms";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { SharedModule } from "@shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
@@ -31,7 +31,7 @@ import { PipesModule } from "@shared/pipes/pipes.module";
     FormsModule,
     FormModule,
     NGMaterialModule,
-    TranslateModule,
+    TranslatePipe,
     SharedModule,
     FontAwesomeModule,
     PipesModule,

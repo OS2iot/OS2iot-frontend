@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { MatPaginatorIntl } from "@angular/material/paginator";
-import { RouterEvent } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 
 const ITEMS_PER_PAGE = "PAGINATOR.ITEM_PER_PAGE";
@@ -12,16 +11,17 @@ const OF = "PAGINATOR.OF";
 
 @Injectable()
 export class MatPaginatorIntlDa extends MatPaginatorIntl {
+  ofLabel: string;
+
   public constructor(private translate: TranslateService) {
     super();
 
-    this.translate.onLangChange.subscribe((e: Event | RouterEvent) => {
+    this.translate.onLangChange.subscribe(() => {
       this.getAndInitTranslations();
     });
 
     this.getAndInitTranslations();
   }
-  ofLabel: string;
 
   public getRangeLabel = (page: number, pageSize: number, length: number): string => {
     if (length === 0 || pageSize === 0) {

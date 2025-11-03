@@ -17,6 +17,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-user-detail",
   templateUrl: "./user-detail.component.html",
   styleUrls: ["./user-detail.component.scss"],
+  standalone: false,
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
@@ -24,8 +25,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   public pageTotal: number;
   public pageOffset = 0;
   public applications: Application[];
-  private applicationsSubscription: Subscription;
-
   organisation: OrganisationResponse;
   user: UserResponse;
   public backButton: BackButton = {
@@ -46,6 +45,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   id: number;
   subscription: Subscription;
   canEdit: boolean;
+  private applicationsSubscription: Subscription;
 
   constructor(
     public translate: TranslateService,
@@ -73,13 +73,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.UserAdministrationWrite);
   }
 
-  private getUser(id: number) {
-    this.subscription = this.userService.getOne(id).subscribe(response => {
-      this.user = response;
-      this.isLoadingResults = false;
-    });
-  }
-
   onEditUser() {
     this.router.navigate(["edit-user"], { relativeTo: this.route });
   }
@@ -89,5 +82,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
     }
+  }
+
+  private getUser(id: number) {
+    this.subscription = this.userService.getOne(id).subscribe(response => {
+      this.user = response;
+      this.isLoadingResults = false;
+    });
   }
 }

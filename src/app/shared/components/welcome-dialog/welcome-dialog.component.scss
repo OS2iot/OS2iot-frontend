@@ -12,6 +12,7 @@ $spacing: 3rem;
     color: $color-white-001;
     margin-bottom: 0 !important;
   }
+
   p {
     color: $color-white-001;
   }
@@ -24,18 +25,22 @@ $spacing: 3rem;
         color: $color-white-001;
         font-size: 1.5rem;
       }
+
       margin-bottom: 1rem !important;
     }
 
     color: $color-white-001;
     margin-bottom: 0 !important;
     margin-top: 0 !important;
+
     &:nth-child(odd) {
       margin-top: 1.5rem !important;
     }
+
     a {
       color: $color-white-001;
       border-bottom: 1px $color-white-001 solid;
+
       &:hover,
       :visited {
         color: darken($color-primary, 10%);

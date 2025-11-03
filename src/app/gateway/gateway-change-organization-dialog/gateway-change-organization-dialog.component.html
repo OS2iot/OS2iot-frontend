@@ -2,25 +2,27 @@
   <h1 mat-dialog-title>{{ "GATEWAY.CHANGE-ORGANIZATION.TITLE" | translate }}</h1>
   <div mat-dialog-content>
     <label class="form-label" for="organizationSelect">{{
-      "GATEWAY.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
-    }}</label>
+        "GATEWAY.CHANGE-ORGANIZATION.CHOOSE-ORGANIZATION" | translate
+      }}</label>
     <mat-select
-      id="organizationSelect"
-      class="form-control"
-      panelClass="overflow-x-hidden"
       [(value)]="gateway.organizationId"
       [compareWith]="compare"
+      class="form-control"
+      id="organizationSelect"
+      panelClass="overflow-x-hidden"
     >
-      <mat-option *ngFor="let organization of filteredOrganizations | async" [value]="organization.id">
-        {{ organization.name }}
-      </mat-option>
+      @for (organization of filteredOrganizations | async; track organization) {
+        <mat-option [value]="organization.id">
+          {{ organization.name }}
+        </mat-option>
+      }
     </mat-select>
   </div>
-  <div mat-dialog-actions class="d-flex flex-row mat-dialog-actions">
+  <div class="d-flex flex-row mat-dialog-actions" mat-dialog-actions>
     <button (click)="onSubmit()" class="btn btn-primary">
       {{ "GEN.SAVE" | translate }}
     </button>
-    <button mat-dialog-close [mat-dialog-close]="false" class="btn btn-secondary ml-2">
+    <button [mat-dialog-close]="false" class="btn btn-secondary ms-2" mat-dialog-close>
       {{ "GEN.CANCEL" | translate }}
     </button>
   </div>

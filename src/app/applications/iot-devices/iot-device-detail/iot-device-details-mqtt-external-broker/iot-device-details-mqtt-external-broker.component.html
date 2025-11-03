@@ -10,29 +10,26 @@
   <strong>{{ "IOTDEVICE.MQTT.TOPIC_NAME" | translate }}</strong
   >{{ device.mqttExternalBrokerSettings.mqtttopicname }}
 </p>
-<ng-container
-  *ngIf="device.mqttExternalBrokerSettings.authenticationType === AuthenticationType.PASSWORD; else certificate"
->
+@if (device.mqttExternalBrokerSettings.authenticationType === AuthenticationType.PASSWORD) {
   <p>
     <strong>{{ "QUESTION.MQTT.USERNAME-LABEL" | translate }}</strong
     >{{ device.mqttExternalBrokerSettings.mqttusername }}
   </p>
-</ng-container>
-<ng-template #certificate>
+} @else {
   <p>
     <strong>{{ "QUESTION.MQTT.CA-CERTIFICATE" | translate }}</strong
-    ><textarea class="form-control" [readOnly]="true">{{ device.mqttExternalBrokerSettings.caCertificate }}</textarea>
+    ><textarea [readOnly]="true" class="form-control">{{ device.mqttExternalBrokerSettings.caCertificate }}</textarea>
   </p>
   <p>
     <strong>{{ "QUESTION.MQTT.DEVICE-CERTIFICATE" | translate }}</strong
-    ><textarea class="form-control" [readOnly]="true">{{
+    ><textarea [readOnly]="true" class="form-control">{{
       device.mqttExternalBrokerSettings.deviceCertificate
     }}</textarea>
   </p>
   <p>
     <strong>{{ "QUESTION.MQTT.DEVICE-CERTIFICATE-KEY" | translate }}</strong
-    ><textarea class="form-control" [readOnly]="true">{{
+    ><textarea [readOnly]="true" class="form-control">{{
       device.mqttExternalBrokerSettings.deviceCertificateKey
     }}</textarea>
   </p>
-</ng-template>
+}

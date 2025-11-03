@@ -1,32 +1,33 @@
 <app-top-bar
-  [pageLimit]="pageLimit"
-  [title]="'NAV.LORA-GATEWAYS' | translate"
+  [canEdit]="canEdit"
   [ctaLabel]="'FORM.CREATE-NEW-LORA-GATEWAY' | translate"
   [ctaRouterLink]="'gateway-edit'"
-  [canEdit]="canEdit"
+  [pageLimit]="pageLimit"
+  [title]="'NAV.LORA-GATEWAYS' | translate"
 >
 </app-top-bar>
 <div class="container-fluid">
   <div class="jumbotron">
     <app-top-bar-table
-      [component]="true"
-      [addDropdown]="true"
-      [options]="organisations"
-      [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate"
       (updateSelectedOpt)="setOrgIdFilter($event)"
+      [addDropdown]="true"
+      [component]="true"
       [dropdownDefaultOption]="'GATEWAY.DROPDOWNDEFAULT' | translate"
+      [dropdownLabel]="'GATEWAY.DROPDOWNFILTER' | translate"
+      [options]="organisations"
     >
     </app-top-bar-table>
-    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-      <a
-        mat-tab-link
-        *ngFor="let link of navTabs"
-        [routerLink]="link.link"
-        routerLinkActive
-        #rla="routerLinkActive"
-        [active]="rla.isActive"
+    <nav [tabPanel]="tabPanel" mat-tab-nav-bar>
+      @for (link of navTabs; track link) {
+        <a
+          #rla="routerLinkActive"
+          [active]="rla.isActive"
+          [routerLink]="link.link"
+          mat-tab-link
+          routerLinkActive
         >{{ link.label | translate }}</a
-      >
+        >
+      }
     </nav>
     <mat-divider></mat-divider>
     <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

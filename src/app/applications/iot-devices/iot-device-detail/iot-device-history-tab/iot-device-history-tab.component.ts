@@ -17,6 +17,7 @@ const dataRateColors = ["#F57A2F", "#FFA620", "#F6CE06", "#FFEB3B", "#CDDC39", "
   selector: "app-iot-device-history-tab",
   templateUrl: "./iot-device-history-tab.component.html",
   styleUrls: ["./iot-device-history-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceHistoryTabComponent implements OnInit {
   device: IotDevice;

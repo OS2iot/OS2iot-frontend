@@ -2,39 +2,44 @@
 </app-top-bar>
 <div class="row">
   <div class="col-12">
-    <mat-progress-bar
-      *ngIf="download$ | async as download"
-      [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
-      [value]="download.progress"
-      class="mb-5"
-    >
-    </mat-progress-bar>
+    @if (download$ | async; as download) {
+      <mat-progress-bar
+        [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
+        [value]="download.progress"
+        class="mb-5"
+      >
+      </mat-progress-bar>
+    }
   </div>
-  <div *ngIf="fileFormatErrorMessage" class="error-messages p-3 col-md-10 offset-md-1 mb-5">
-    <ul class="mb-0">
-      {{
-        "APPLICATION.BULK.FILEFORMATERRORMESSAGE" | translate
-      }}
-    </ul>
-  </div>
+  @if (fileFormatErrorMessage) {
+    <div class="error-messages p-3 col-md-10 offset-md-1 mb-5">
+      <ul class="mb-0">
+        {{
+          "APPLICATION.BULK.FILEFORMATERRORMESSAGE" | translate
+        }}
+      </ul>
+    </div>
+  }
   <div class="col-12">
-    <div class="btn-group float-md-right dropdown">
+    <div class="btn-group float-md-end dropdown">
       <button
-        type="button"
-        class="btn btn-primary dropdown-toggle"
-        data-toggle="dropdown"
-        aria-haspopup="true"
         aria-expanded="false"
+        aria-haspopup="true"
+        class="btn btn-primary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        type="button"
       >
         {{ "APPLICATION.BULK.DOWNLOAD" | translate }} <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" attr.aria-labelledby="tableRowDropdown-{{ 'APPLICATION.BULK.DOWNLOAD' | translate }}">
-        <li class="dropdown-item" *ngFor="let sample of samples">
-          <a class="a" (click)="download(sample)">
-            <fa-icon [icon]="faDownload"></fa-icon>
-            {{ sample.name }}
-          </a>
-        </li>
+      <ul attr.aria-labelledby="tableRowDropdown-{{ 'APPLICATION.BULK.DOWNLOAD' | translate }}" class="dropdown-menu">
+        @for (sample of samples; track sample) {
+          <li class="dropdown-item">
+            <a (click)="download(sample)" class="a">
+              <fa-icon [icon]="faDownload"></fa-icon>
+              {{ sample.name }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </div>
@@ -42,67 +47,73 @@
 <div class="row m-3">
   <div class="col-md-6 offset-md-3 mb-5">
     <div
-      class="choose-file"
-      attr.data-content="{{ 'APPLICATION.BULK.DROPFILE' | translate }}"
       (click)="fileInput.click()"
-      appDragDrop
       (onFileDropped)="handleDropedFile($event)"
+      appDragDrop
+      attr.data-content="{{ 'APPLICATION.BULK.DROPFILE' | translate }}"
+      class="choose-file"
     >
       <input
-        hidden
-        accept=".csv"
-        type="file"
-        ngf-max-size="20MB"
         #fileInput
         (change)="handleDropedFile($event.target.files)"
+        accept=".csv"
+        hidden
+        ngf-max-size="20MB"
+        type="file"
       />
     </div>
-    <div class="files-list" *ngFor="let file of files; let i = index">
-      <p>{{ file }}</p>
-      <button class="delete-file" (click)="deleteAttachment(i)">
-        <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
-    </div>
+    @for (file of files; track file; let i = $index) {
+      <div class="files-list">
+        <p>{{ file }}</p>
+        <button (click)="deleteAttachment(i)" class="delete-file">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
+    }
   </div>
   <div class="col-md-6 offset-md-3 mb-5 d-flex justify-content-center">
     <button (click)="addIoTDevice()" class="btn btn-primary">Overfør data</button>
   </div>
   <div class="col-md-6 mb-5">
-    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    @if (isLoading) {
+      <app-loading-spinner></app-loading-spinner>
+    }
   </div>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="bulkImportResult" class="mat-elevation-z8">
+    <table [dataSource]="bulkImportResult" class="mat-elevation-z8" mat-table>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.NAME" | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.device?.name }}</td>
+        <th *matHeaderCellDef mat-header-cell>{{ "APPLICATION.BULK.NAME" | translate }}</th>
+        <td *matCellDef="let element" mat-cell>{{ element.device?.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.TYPE" | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ "IOT-DEVICE-TYPES." + element.device?.type | translate }}</td>
+        <th *matHeaderCellDef mat-header-cell>{{ "APPLICATION.BULK.TYPE" | translate }}</th>
+        <td *matCellDef="let element" mat-cell>{{ "IOT-DEVICE-TYPES." + element.device?.type | translate }}</td>
       </ng-container>
 
       <ng-container matColumnDef="importStatus">
-        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.IMPORTSTATUS" | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.importStatus }}</td>
+        <th *matHeaderCellDef mat-header-cell>{{ "APPLICATION.BULK.IMPORTSTATUS" | translate }}</th>
+        <td *matCellDef="let element" mat-cell>{{ element.importStatus }}</td>
       </ng-container>
 
       <ng-container matColumnDef="errorMessages">
-        <th mat-header-cell *matHeaderCellDef>{{ "APPLICATION.BULK.ERROR" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
+        <th *matHeaderCellDef mat-header-cell>{{ "APPLICATION.BULK.ERROR" | translate }}</th>
+        <td *matCellDef="let element" mat-cell>
           <ul class="mb-0">
-            <li *ngFor="let error of element.errorMessages">
-              {{ error | translate }}
-            </li>
+            @for (error of element.errorMessages; track error) {
+              <li>
+                {{ error | translate }}
+              </li>
+            }
           </ul>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
     </table>
   </div>
 </div>
 <!-- <div class="col-md-6 offset-md-3 mb-5">
-    <p>{{ 'APPLICATION.BULK.EMPTY' | translate }}</p>
+<p>{{ 'APPLICATION.BULK.EMPTY' | translate }}</p>
 </div> -->

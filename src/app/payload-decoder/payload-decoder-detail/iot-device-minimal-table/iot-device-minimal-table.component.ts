@@ -6,7 +6,7 @@ import { IoTDeviceService } from "@applications/iot-devices/iot-device.service";
 import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { Observable, of as observableOf } from "rxjs";
-import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
 import { environment } from "@environments/environment";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
@@ -15,6 +15,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
   selector: "app-iot-device-minimal-table",
   templateUrl: "./iot-device-minimal-table.component.html",
   styleUrls: ["./iot-device-minimal-table.component.scss"],
+  standalone: false,
 })
 export class IoTDeviceMinimalTableComponent implements AfterViewInit {
   @Input() public payloadDecoder: PayloadDecoder;

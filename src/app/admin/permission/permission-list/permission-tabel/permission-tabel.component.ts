@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, Input } from "@angular/core";
+import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Router } from "@angular/router";
@@ -7,7 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { MeService } from "@shared/services/me.service";
 import { merge, Observable, of as observableOf } from "rxjs";
-import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { PermissionGetManyResponse, PermissionResponse, PermissionType } from "../../permission.model";
 import { PermissionService } from "../../permission.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
@@ -17,6 +17,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
   selector: "app-permission-tabel",
   templateUrl: "./permission-tabel.component.html",
   styleUrls: ["./permission-tabel.component.scss"],
+  standalone: false,
 })
 export class PermissionTabelComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "organisations", "members", "type", "menu"];

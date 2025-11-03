@@ -17,10 +17,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import {
   DateAdapter,
-  MatNativeDateModule,
-  MatRippleModule,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  MatRippleModule,
 } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatDialogModule } from "@angular/material/dialog";

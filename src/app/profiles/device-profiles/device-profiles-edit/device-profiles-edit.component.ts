@@ -16,6 +16,7 @@ import { AdrAlgorithm } from "@app/network-server/adr-algorithm.model";
   selector: "app-device-profiles-edit",
   templateUrl: "./device-profiles-edit.component.html",
   styleUrls: ["./device-profiles-edit.component.scss"],
+  standalone: false,
 })
 export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   id: string;
@@ -60,16 +61,16 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
   }
 
   getDeviceProfile(id: string) {
-    this.subscription = this.deviceProfileService.getOne(id).subscribe(
-      response => {
+    this.subscription = this.deviceProfileService.getOne(id).subscribe({
+      next: response => {
         this.deviceProfile = response.deviceProfile;
         this.canEdit();
         this.shownRegParameters(this.deviceProfile.macVersion);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   shownRegParameters(data: number) {
@@ -109,45 +110,12 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  private create(): void {
-    this.deviceProfileService.post(this.deviceProfile).subscribe(
-      response => {
-        console.log(response);
-        this.routeBack();
-      },
-      (error: HttpErrorResponse) => {
-        this.showError(error);
-      }
-    );
-  }
-
-  private update(): void {
-    this.deviceProfileService.put(this.deviceProfile).subscribe(
-      response => {
-        this.routeBack();
-      },
-      error => {
-        this.showError(error);
-      }
-    );
-  }
-
   routeBack(): void {
     this.location.back();
   }
 
   public compare(o1: any, o2: any): boolean {
     return o1 === o2;
-  }
-
-  private showError(error: HttpErrorResponse) {
-    if (error.status == 403) {
-      this.errorMessages = ["Forbudt"];
-    } else {
-      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
-      this.errorFields = errors?.errorFields;
-      this.errorMessages = errors?.errorMessages;
-    }
   }
 
   onSubmit(): void {
@@ -162,6 +130,39 @@ export class DeviceProfilesEditComponent implements OnInit, OnDestroy {
     // prevent memory leak by unsubscribing
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+  }
+
+  private create(): void {
+    this.deviceProfileService.post(this.deviceProfile).subscribe({
+      next: response => {
+        console.log(response);
+        this.routeBack();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.showError(error);
+      },
+    });
+  }
+
+  private update(): void {
+    this.deviceProfileService.put(this.deviceProfile).subscribe({
+      next: () => {
+        this.routeBack();
+      },
+      error: error => {
+        this.showError(error);
+      },
+    });
+  }
+
+  private showError(error: HttpErrorResponse) {
+    if (error.status == 403) {
+      this.errorMessages = ["Forbudt"];
+    } else {
+      const errors = this.errorMessageService.handleErrorMessageWithFields(error);
+      this.errorFields = errors?.errorFields;
+      this.errorMessages = errors?.errorMessages;
     }
   }
 }

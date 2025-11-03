@@ -5,6 +5,7 @@ import { LatestReceivedMessage } from "@applications/iot-devices/latestReceivedM
   selector: "app-data-package",
   templateUrl: "./data-package.component.html",
   styleUrls: ["./data-package.component.scss"],
+  standalone: false,
 })
 export class DataPackageComponent implements OnInit {
   @Input() latestReceivedMessage: LatestReceivedMessage;

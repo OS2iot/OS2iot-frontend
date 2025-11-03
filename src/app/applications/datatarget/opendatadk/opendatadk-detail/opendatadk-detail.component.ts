@@ -5,6 +5,7 @@ import { OpenDataDkDataset } from "../opendatadk-dataset.model";
   selector: "app-opendatadk-detail",
   templateUrl: "./opendatadk-detail.component.html",
   styleUrls: ["./opendatadk-detail.component.scss"],
+  standalone: false,
 })
 export class OpendatadkDetailComponent implements OnInit {
   @Input() openDataDkDataset: OpenDataDkDataset;

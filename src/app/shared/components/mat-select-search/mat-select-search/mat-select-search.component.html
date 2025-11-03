@@ -1,20 +1,24 @@
-<input matInput class="mat-select-search-input mat-select-search-hidden" />
+<input class="mat-select-search-input mat-select-search-hidden" matInput/>
 
-<div class="mat-select-search-inner" [ngClass]="{ 'mat-select-search-inner-multiple': matSelect.multiple }">
+<div [ngClass]="{ 'mat-select-search-inner-multiple': matSelect.multiple }" class="mat-select-search-inner">
   <input
-    matInput
-    class="mat-select-search-input"
     #searchSelectInput
-    (keydown)="_handleKeydown($event)"
-    (input)="onInputChange($event.target.value)"
     (blur)="onBlur($event.target.value)"
+    (input)="onInputChange($event.target.value)"
+    (keydown)="_handleKeydown($event)"
+    class="mat-select-search-input"
+    matInput
     placeholder="placeholderLabel"
   />
-  <button mat-icon-button *ngIf="value" aria-label="Clear" (click)="_reset(true)" class="mat-select-search-clear">
-    <mat-icon>close</mat-icon>
-  </button>
+  @if (value) {
+    <button (click)="_reset(true)" aria-label="Clear" class="mat-select-search-clear" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  }
 </div>
 
-<div *ngIf="noEntriesFoundLabel && value && _options?.length === 0" class="mat-select-search-no-entries-found">
-  {{ noEntriesFoundLabel }}
-</div>
+@if (noEntriesFoundLabel && value && _options?.length === 0) {
+  <div class="mat-select-search-no-entries-found">
+    {{ noEntriesFoundLabel }}
+  </div>
+}

@@ -1,27 +1,29 @@
 <div class="select-container">
   <mat-select
+    #Selector
+    (selectionChange)="handleColumnSelection($event)"
+    [(value)]="optionalColumnsSelected"
+    [disableOptionCentering]="true"
+    [hidden]="false"
+    [placeholder]="'TABLE.COLUMNS' | translate"
     class="form-control table-select"
     multiple="true"
-    [(value)]="optionalColumnsSelected"
-    (selectionChange)="handleColumnSelection($event)"
     panelClass="tall"
-    [hidden]="false"
-    [disableOptionCentering]="true"
-    #Selector
-    [placeholder]="'TABLE.COLUMNS' | translate"
   >
-    <button mat-raised-button class="mat-primary fill text-sm choose-all" (click)="selectAll()">
+    <button (click)="selectAll()" class="mat-primary fill text-sm choose-all" mat-raised-button>
       {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
     </button>
-    <button mat-raised-button class="mat-primary fill text-sm deselect-all" (click)="deSelectAll()">
+    <button (click)="deSelectAll()" class="mat-primary fill text-sm deselect-all" mat-raised-button>
       {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
     </button>
 
-    <mat-option *ngFor="let option of optionalColumnOptions" [value]="option.id">
-      {{ option.display | translate }}
-    </mat-option>
+    @for (option of optionalColumnOptions; track option) {
+      <mat-option [value]="option.id">
+        {{ option.display | translate }}
+      </mat-option>
+    }
   </mat-select>
-  <button mat-icon-button type="button" class="button-margin" (click)="Selector.open()">
-    <mat-icon svgIcon="table-tool" class="cog-icon"></mat-icon>
+  <button (click)="Selector.open()" class="button-margin" mat-icon-button type="button">
+    <mat-icon class="cog-icon" svgIcon="table-tool"></mat-icon>
   </button>
 </div>

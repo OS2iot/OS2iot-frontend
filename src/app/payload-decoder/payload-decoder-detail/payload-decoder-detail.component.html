@@ -1,16 +1,17 @@
 <div>
-  <app-top-bar
-    *ngIf="payloadDecoder"
-    [data]="payloadDecoder"
-    [backButton]="backButton"
-    [subPage]="true"
-    [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton"
-    (deleteSelectedInDropdown)="onDeletePayload()"
-    [canEdit]="payloadDecoder?.canEdit"
-  >
-  </app-top-bar>
-  <div *ngIf="payloadDecoder">
+  @if (payloadDecoder) {
+    <app-top-bar
+      (deleteSelectedInDropdown)="onDeletePayload()"
+      [addDetailDowndown]="true"
+      [backButton]="backButton"
+      [canEdit]="payloadDecoder?.canEdit"
+      [data]="payloadDecoder"
+      [dropDownButton]="dropdownButton"
+      [subPage]="true"
+    >
+    </app-top-bar>
+  } @if (payloadDecoder) {
+  <div>
     <div class="jumbotron">
       <div class="row">
         <div class="col-xs-12">
@@ -28,10 +29,10 @@
         <div class="col-xs-12">
           <h3>{{ "PAYLOAD-DECODER.DECODINGFUNCTION" | translate }}</h3>
           <ngx-monaco-editor
-            class="big-editor"
-            [options]="editorJsonOutpuOptions"
             [(ngModel)]="payloadDecoder.decodingFunction"
             [ngModelOptions]="{ standalone: true }"
+            [options]="editorJsonOutpuOptions"
+            class="big-editor"
           >
           </ngx-monaco-editor>
         </div>
@@ -46,4 +47,5 @@
       </div>
     </div>
   </div>
+}
 </div>

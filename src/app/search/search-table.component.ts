@@ -17,29 +17,26 @@ import { SearchService } from "./search.service";
   selector: "app-search-table",
   templateUrl: "./search-table.component.html",
   styleUrls: ["./search-table.component.scss"],
+  standalone: false,
 })
 export class SearchTableComponent implements OnChanges, OnInit {
-  private readonly faBroadcastTower = faBroadcastTower;
-  private readonly faLayerGroup = faLayerGroup;
-  private readonly faMicrochip = faMicrochip;
-
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @Input() searchText: string;
-
   displayedColumns: string[] = ["icon", "type", "name", "id", "org"];
   dataSource: MatTableDataSource<SearchResultDto>;
   public pageSize = environment.tablePageSize;
   public pageSizeOptions = DefaultPageSizeOptions;
-
   isLoadingResults = true;
   subscription: Subscription;
   isFetching = true;
-
   searchResults: SearchResultDto[];
   pageTotal: number;
   pageOffset = 0;
   pageEvent: PageEvent;
+  private readonly faBroadcastTower = faBroadcastTower;
+  private readonly faLayerGroup = faLayerGroup;
+  private readonly faMicrochip = faMicrochip;
 
   constructor(
     private globalService: SharedVariableService,

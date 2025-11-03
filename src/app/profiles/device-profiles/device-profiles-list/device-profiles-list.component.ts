@@ -1,8 +1,8 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { DeviceProfile } from "../device-profile.model";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DeviceProfileService } from "../device-profile.service";
 import { MeService } from "@shared/services/me.service";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
@@ -14,6 +14,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-device-profiles-list",
   templateUrl: "./device-profiles-list.component.html",
   styleUrls: ["./device-profiles-list.component.scss"],
+  standalone: false,
 })
 export class DeviceProfilesListComponent implements OnInit, OnDestroy {
   deviceProfiles: DeviceProfile[];

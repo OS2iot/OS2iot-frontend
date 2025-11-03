@@ -5,6 +5,7 @@ import { Observable, Subscription } from "rxjs";
 import { Application } from "@applications/application.model";
 import { DeviceType } from "@shared/enums/device-type";
 import { TranslateService } from "@ngx-translate/core";
+
 @Injectable({
   providedIn: "root",
 })

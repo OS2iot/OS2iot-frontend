@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FiwareDetailTabsComponent } from './fiware-detail-tabs.component';
+import { FiwareDetailTabsComponent } from "./fiware-detail-tabs.component";
 
-describe('FiwireDetailTabsComponent', () => {
+describe("FiwireDetailTabsComponent", () => {
   let component: FiwareDetailTabsComponent;
   let fixture: ComponentFixture<FiwareDetailTabsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FiwareDetailTabsComponent]
-    })
-    .compileComponents();
-    
+      imports: [FiwareDetailTabsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FiwareDetailTabsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

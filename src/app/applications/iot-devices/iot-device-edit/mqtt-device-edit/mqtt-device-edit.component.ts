@@ -9,6 +9,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
   selector: "app-mqtt-device-edit",
   templateUrl: "./mqtt-device-edit.component.html",
   styleUrls: ["./mqtt-device-edit.component.scss"],
+  standalone: false,
 })
 export class MqttDeviceEditComponent implements OnInit {
   @Input() iotDevice: IotDevice;
@@ -16,6 +17,9 @@ export class MqttDeviceEditComponent implements OnInit {
   @Input() errorFields: string[];
   @Input() editMode: boolean = false;
   public mqttDeviceTypes = [DeviceType.MQTT_INTERNAL_BROKER, DeviceType.MQTT_EXTERNAL_BROKER];
+  protected readonly DeviceType = DeviceType;
+  protected readonly AuthenticationType = AuthenticationType;
+  protected readonly faQuestionCircle = faQuestionCircle;
 
   constructor(public translate: TranslateService) {}
 
@@ -25,8 +29,4 @@ export class MqttDeviceEditComponent implements OnInit {
       this.editMode = true;
     }
   }
-
-  protected readonly DeviceType = DeviceType;
-  protected readonly AuthenticationType = AuthenticationType;
-  protected readonly faQuestionCircle = faQuestionCircle;
 }

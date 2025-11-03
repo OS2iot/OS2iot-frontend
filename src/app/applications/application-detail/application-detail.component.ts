@@ -25,6 +25,7 @@ import moment from "moment/moment";
   selector: "app-application",
   templateUrl: "./application-detail.component.html",
   styleUrls: ["./application-detail.component.scss"],
+  standalone: false,
 })
 export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() deleteApplication = new EventEmitter();

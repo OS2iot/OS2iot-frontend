@@ -1,39 +1,43 @@
-<app-top-bar backButtonTitle="{{ backButtonTitle }}" title="{{ title }}"> </app-top-bar>
+<app-top-bar backButtonTitle="{{ backButtonTitle }}" title="{{ title }}"></app-top-bar>
 
 <div class="data-component">
-  <div *ngFor="let dataTargetType of avaiableDataTargetTypes">
-    <mat-card>
-      <img
-        *ngIf="dataTargetType.icon"
-        mat-card-image
-        src="{{ dataTargetType.icon }}"
-        alt=""
-        onerror="this.style.display='none'"
-      />
-      <div *ngIf="!dataTargetType.icon" class="img-placeholder"></div>
-
-      <mat-card-header>
-        <mat-card-title>
-          <br />
-          {{ dataTargetType.name | translate }}
-        </mat-card-title>
-        <mat-card-subtitle style="margin-top: 3px">
-          {{ dataTargetType.provider }}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        {{ dataTargetType.description | translate }}
-      </mat-card-content>
-
-      <mat-divider></mat-divider>
-      <mat-card-actions align="end">
-        <button *ngIf="dataTargetType.readMoreUrl" (click)="showReadMe(dataTargetType)" mat-button>
-          {{ "DATATARGET.READMORE" | translate }}
-        </button>
-        <button mat-button color="primary" (click)="createNewOf(dataTargetType)">
-          {{ "DATATARGET.CREATE" | translate }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+  @for (dataTargetType of avaiableDataTargetTypes; track dataTargetType) {
+    <div>
+      <mat-card>
+        @if (dataTargetType.icon) {
+          <img
+            alt=""
+            mat-card-image
+            onerror="this.style.display='none'"
+            src="{{ dataTargetType.icon }}"
+          />
+        } @if (!dataTargetType.icon) {
+        <div class="img-placeholder"></div>
+      }
+        <mat-card-header>
+          <mat-card-title>
+            <br/>
+            {{ dataTargetType.name | translate }}
+          </mat-card-title>
+          <mat-card-subtitle style="margin-top: 3px">
+            {{ dataTargetType.provider }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          {{ dataTargetType.description | translate }}
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="end">
+          @if (dataTargetType.readMoreUrl) {
+            <button (click)="showReadMe(dataTargetType)" mat-button>
+              {{ "DATATARGET.READMORE" | translate }}
+            </button>
+          }
+          <button (click)="createNewOf(dataTargetType)" color="primary" mat-button>
+            {{ "DATATARGET.CREATE" | translate }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  }
 </div>

@@ -12,13 +12,10 @@ import { MeService } from "@shared/services/me.service";
   selector: "app-httppush-detail-tabs",
   templateUrl: "./httppush-detail-tabs.component.html",
   styleUrl: "./httppush-detail-tabs.component.scss",
+  standalone: false,
 })
 export class HttppushDetailTabsComponent extends DatatargetDetailTabsCommon implements OnDestroy {
   dataTargetType = DataTargetType;
-
-  protected override getDetailsLink() {
-    return "httppush-detail";
-  }
 
   constructor(
     route: ActivatedRoute,
@@ -34,5 +31,9 @@ export class HttppushDetailTabsComponent extends DatatargetDetailTabsCommon impl
 
   ngOnDestroy(): void {
     super.onDestroy();
+  }
+
+  protected override getDetailsLink() {
+    return "httppush-detail";
   }
 }

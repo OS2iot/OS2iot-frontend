@@ -3,10 +3,10 @@ import { RestService } from "../../shared/services/rest.service";
 import { Observable } from "rxjs";
 import {
   PermissionGetManyResponse,
-  PermissionResponse,
+  PermissionGetManySlimResponse,
   PermissionRequest,
   PermissionRequestAcceptUser,
-  PermissionGetManySlimResponse,
+  PermissionResponse,
 } from "./permission.model";
 import { map } from "rxjs/operators";
 import { UserMinimalService } from "../users/user-minimal.service";

@@ -1,47 +1,51 @@
 <app-form-header [backButton]="backButton" [title]="title"></app-form-header>
 <form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{ error | translate }}
-      </li>
-    </ul>
-  </div>
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <div class="row">
     <div class="form-group mt-3">
       <label class="form-label" for="name">{{ "QUESTION-LORA-GATEWAY.NAME" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'QUESTION-LORA-GATEWAY.NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="gateway.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'QUESTION-LORA-GATEWAY.NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
 
     <div class="form-group mt-3">
       <label class="form-label" for="description">{{ "QUESTION-LORA-GATEWAY.DESCRIPTION" | translate }}</label>
       <textarea
-        id="description"
-        name="description"
-        [placeholder]="'QUESTION-LORA-GATEWAY.DESCRIPTION-PLACEHOLDER' | translate"
-        [maxLength]="1024"
-        [rows]="6"
-        class="form-control"
         [(ngModel)]="gateway.description"
+        [maxLength]="1024"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('description'),
           'is-valid': formFailedSubmit && !errorFields.includes('description')
         }"
+        [placeholder]="'QUESTION-LORA-GATEWAY.DESCRIPTION-PLACEHOLDER' | translate"
+        [rows]="6"
+        class="form-control"
+        id="description"
+        name="description"
       ></textarea>
     </div>
 
@@ -49,28 +53,30 @@
       <label class="form-label" for="gatewayId">{{ "QUESTION-LORA-GATEWAY.GATEWAYID" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="gatewayId"
-        name="gatewayId"
-        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate"
-        required
         [(ngModel)]="gateway.gatewayId"
-        [readonly]="editMode"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('gatewayId'),
           'is-valid': formFailedSubmit && !errorFields.includes('gatewayId')
         }"
+        [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAYID-PLACEHOLDER' | translate"
+        [readonly]="editMode"
+        class="form-control"
+        id="gatewayId"
+        name="gatewayId"
+        required
+        type="text"
       />
     </div>
 
-    <div class="row thirty-height" *ngIf="gateway.location">
-      <app-map
-        [coordinates]="getCoordinates()"
-        (updateCoordinates)="updateCoordinates($event)"
-        [isFromCreation]="true"
-      ></app-map>
-    </div>
+    @if (gateway.location) {
+      <div class="row thirty-height">
+        <app-map
+          (updateCoordinates)="updateCoordinates($event)"
+          [coordinates]="getCoordinates()"
+          [isFromCreation]="true"
+        ></app-map>
+      </div>
+    }
 
     <div>
       <p class="label">{{ "DBLCLICKINFO" | translate }}</p>
@@ -81,343 +87,353 @@
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="location.latitude">{{ "GATEWAY.LATITUDE" | translate }}</label>
         <input
-          type="number"
-          class="form-control"
-          id="location.latitude"
-          name="location.latitude"
-          [placeholder]="'00'"
-          required
-          [(ngModel)]="gateway.location.latitude"
-          step=".000001"
-          min="-180"
-          max="180"
-          maxlength="12"
           (keyup)="onCoordinateKey($event)"
+          [(ngModel)]="gateway.location.latitude"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('latitude'),
             'is-valid': formFailedSubmit && !errorFields.includes('latitude')
           }"
+          [placeholder]="'00'"
+          class="form-control"
+          id="location.latitude"
+          max="180"
+          maxlength="12"
+          min="-180"
+          name="location.latitude"
+          required
+          step=".000001"
+          type="number"
         />
       </div>
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="longitude">{{ "GATEWAY.LONGITUDE" | translate }}</label>
         <input
-          type="number"
-          class="form-control"
-          id="longitude"
-          name="longitude"
-          [placeholder]="'00'"
-          required
-          [(ngModel)]="gateway.location.longitude"
-          step=".000001"
-          min="-180"
-          max="180"
-          maxlength="12"
           (keyup)="onCoordinateKey($event)"
+          [(ngModel)]="gateway.location.longitude"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('longitude'),
             'is-valid': formFailedSubmit && !errorFields.includes('longitude')
           }"
+          [placeholder]="'00'"
+          class="form-control"
+          id="longitude"
+          max="180"
+          maxlength="12"
+          min="-180"
+          name="longitude"
+          required
+          step=".000001"
+          type="number"
         />
       </div>
 
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="altitude">{{ "GATEWAY.ALTITUDE" | translate }}</label>
         <input
-          type="number"
-          class="form-control"
-          id="altitude"
-          name="altitude"
-          [placeholder]="00"
-          required
-          [(ngModel)]="gateway.location.altitude"
-          step=".000001"
-          min="-180"
-          max="180"
-          maxlength="9"
           (keyup)="onCoordinateKey($event)"
+          [(ngModel)]="gateway.location.altitude"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('altitude'),
             'is-valid': formFailedSubmit && !errorFields.includes('altitude')
           }"
+          [placeholder]="00"
+          class="form-control"
+          id="altitude"
+          max="180"
+          maxlength="9"
+          min="-180"
+          name="altitude"
+          required
+          step=".000001"
+          type="number"
         />
       </div>
       <div class="form-group mt-3 col-6">
         <label class="form-label" for="placement">{{ "GATEWAY.PLACEMENT-LABEL" | translate }}</label>
         <mat-select
-          class="form-control"
-          id="placement"
-          name="gateway.placementOptions"
           [(ngModel)]="gateway.placement"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('placement'),
             'is-valid': formFailedSubmit && !errorFields.includes('placement')
           }"
+          class="form-control"
+          id="placement"
+          name="gateway.placementOptions"
         >
-          <mat-option *ngFor="let placementOption of placements" [value]="placementOption.value">
-            {{ placementOption.label }}
-          </mat-option>
+          @for (placementOption of placements; track placementOption) {
+            <mat-option [value]="placementOption.value">
+              {{ placementOption.label }}
+            </mat-option>
+          }
         </mat-select>
       </div>
       <h3 class="h3">{{ "QUESTION.METADATA" | translate }}</h3>
       <div class="form-group">
         <label class="form-label" for="modelName">{{ "QUESTION-LORA-GATEWAY.MODEL-NAME" | translate }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="modelName"
-          name="modelName"
-          [placeholder]="'QUESTION-LORA-GATEWAY.MODEL-NAME-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.modelName"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('modelName'),
             'is-valid': formFailedSubmit && !errorFields.includes('modelName')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.MODEL-NAME-PLACEHOLDER' | translate"
+          class="form-control"
+          id="modelName"
+          name="modelName"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="antennaType">{{ "QUESTION-LORA-GATEWAY.ANTENNA-TYPE" | translate }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="antennaType"
-          name="antennaType"
-          [placeholder]="'QUESTION-LORA-GATEWAY.ANTENNA-TYPE-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.antennaType"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('antennaType'),
             'is-valid': formFailedSubmit && !errorFields.includes('antennaType')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.ANTENNA-TYPE-PLACEHOLDER' | translate"
+          class="form-control"
+          id="antennaType"
+          name="antennaType"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="status">{{ "GATEWAY.STATUS-NAME" | translate }}</label>
         <mat-select
-          class="form-control"
-          id="status"
-          name="gateway.statusOptions"
           [(ngModel)]="gateway.status"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('status'),
             'is-valid': formFailedSubmit && !errorFields.includes('status')
           }"
+          class="form-control"
+          id="status"
+          name="gateway.statusOptions"
         >
-          <mat-option *ngFor="let statusOption of statuses" [value]="statusOption.value">
-            {{ statusOption.label }}
-          </mat-option>
+          @for (statusOption of statuses; track statusOption) {
+            <mat-option [value]="statusOption.value">
+              {{ statusOption.label }}
+            </mat-option>
+          }
         </mat-select>
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="tagsString">{{ "QUESTION-LORA-GATEWAY.METADATA" | translate }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="tagsString"
-          name="tagsString"
-          [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"
-          required
           [(ngModel)]="gateway.tagsString"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('tagsString'),
             'is-valid': formFailedSubmit && !errorFields.includes('tagsString')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.METADATA-PLACEHOLDER' | translate"
+          class="form-control"
+          id="tagsString"
+          name="tagsString"
+          required
+          type="text"
         />
       </div>
       <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.CONTACT" | translate }}</h3>
       <div class="form-group">
         <label class="form-label" for="gatewayResponsible">{{
-          "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE" | translate
-        }}</label>
+            "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="gatewayResponsible"
-          name="gatewayResponsible"
-          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.gatewayResponsibleName"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('gatewayResponsibleName'),
             'is-valid': formFailedSubmit && !errorFields.includes('gatewayResponsibleName')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-PLACEHOLDER' | translate"
+          class="form-control"
+          id="gatewayResponsible"
+          name="gatewayResponsible"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="gatewayResponsibleEmail">{{
-          "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT" | translate
-        }}</label>
+            "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="gatewayResponsibleEmail"
-          name="gatewayResponsibleEmail"
-          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.gatewayResponsibleEmail"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('gatewayResponsibleEmail'),
             'is-valid': formFailedSubmit && !errorFields.includes('gatewayResponsibleEmail')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-PLACEHOLDER' | translate"
+          class="form-control"
+          id="gatewayResponsibleEmail"
+          name="gatewayResponsibleEmail"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="gatewayResponsiblePhoneNumber">{{
-          "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-NUMBER" | translate
-        }}</label>
+            "QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-NUMBER" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="gatewayResponsiblePhoneNumber"
-          name="gatewayResponsiblePhoneNumber"
-          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-NUMBER-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.gatewayResponsiblePhoneNumber"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('gatewayResponsiblePhoneNumber'),
             'is-valid': formFailedSubmit && !errorFields.includes('gatewayResponsiblePhoneNumber')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.GATEWAY-RESPONSIBLE-CONTACT-NUMBER-PLACEHOLDER' | translate"
+          class="form-control"
+          id="gatewayResponsiblePhoneNumber"
+          name="gatewayResponsiblePhoneNumber"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="operationalResponsibleName">{{
-          "QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE" | translate
-        }}</label>
+            "QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="operationalResponsibleName"
-          name="operationalResponsibleName"
-          [placeholder]="'QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.operationalResponsibleName"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('operationalResponsibleName'),
             'is-valid': formFailedSubmit && !errorFields.includes('operationalResponsibleName')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-PLACEHOLDER' | translate"
+          class="form-control"
+          id="operationalResponsibleName"
+          name="operationalResponsibleName"
+          type="text"
         />
       </div>
       <div class="form-group mt-3">
         <label class="form-label" for="operationalResponsibleEmail">{{
-          "QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-CONTACT" | translate
-        }}</label>
+            "QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-CONTACT" | translate
+          }}</label>
         <input
-          type="text"
-          class="form-control"
-          id="operationalResponsibleEmail"
-          name="operationalResponsibleEmail"
-          [placeholder]="'QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER' | translate"
           [(ngModel)]="gateway.operationalResponsibleEmail"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('operationalResponsibleEmail'),
             'is-valid': formFailedSubmit && !errorFields.includes('operationalResponsibleEmail')
           }"
+          [placeholder]="'QUESTION-LORA-GATEWAY.OPERATION-RESPONSIBLE-CONTACT-PLACEHOLDER' | translate"
+          class="form-control"
+          id="operationalResponsibleEmail"
+          name="operationalResponsibleEmail"
+          type="text"
         />
       </div>
       <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.ALARMS" | translate }}</h3>
       <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.SET-ALARMS" | translate }}</label>
       <div class="row mt-3">
         <mat-slide-toggle [(ngModel)]="gateway.notifyOffline" id="notifyOffline" name="notifyOffline">
-          {{ "GEN.OFFLINE" | translate }}</mat-slide-toggle
+          {{ "GEN.OFFLINE" | translate }}
+        </mat-slide-toggle
         >
       </div>
-      <div *ngIf="gateway.notifyOffline">
-        <div class="form-group mt-3">
-          <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.HOW-MANY-MINUTES" | translate }}</label>
-        </div>
-
-        <div class="form-group mt-3">
-          <label class="form-label" for="offlineAlarmThresholdMinutes">{{
-            "QUESTION-LORA-GATEWAY.AMOUNT-OF-MINUTES" | translate
-          }}</label>
-          <input
-            type="number"
-            class="form-control"
-            id="offlineAlarmThresholdMinutes"
-            name="offlineAlarmThresholdMinutes"
-            [(ngModel)]="gateway.offlineAlarmThresholdMinutes"
-            step="1"
-            maxlength="9"
-            (keyup)="onCoordinateKey($event)"
-            [ngClass]="{
+      @if (gateway.notifyOffline) {
+        <div>
+          <div class="form-group mt-3">
+            <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.HOW-MANY-MINUTES" | translate }}</label>
+          </div>
+          <div class="form-group mt-3">
+            <label class="form-label" for="offlineAlarmThresholdMinutes">{{
+                "QUESTION-LORA-GATEWAY.AMOUNT-OF-MINUTES" | translate
+              }}</label>
+            <input
+              (keyup)="onCoordinateKey($event)"
+              [(ngModel)]="gateway.offlineAlarmThresholdMinutes"
+              [ngClass]="{
               'is-invalid': formFailedSubmit && errorFields.includes('offlineAlarmThresholdMinutes'),
               'is-valid': formFailedSubmit && !errorFields.includes('offlineAlarmThresholdMinutes')
             }"
-          />
+              class="form-control"
+              id="offlineAlarmThresholdMinutes"
+              maxlength="9"
+              name="offlineAlarmThresholdMinutes"
+              step="1"
+              type="number"
+            />
+          </div>
         </div>
-      </div>
+      }
       <div class="row mt-3">
         <mat-slide-toggle
           [(ngModel)]="gateway.notifyUnusualPackages"
           id="notifyUnusualPackages"
           name="notifyUnusualPackages"
         >
-          {{ "QUESTION-LORA-GATEWAY.UNUSUAL-PACKAGES" | translate }}</mat-slide-toggle
+          {{ "QUESTION-LORA-GATEWAY.UNUSUAL-PACKAGES" | translate }}
+        </mat-slide-toggle
         >
       </div>
-      <div *ngIf="gateway.notifyUnusualPackages">
-        <div class="form-group mt-3">
-          <label for="minimumPackages">{{ "QUESTION-LORA-GATEWAY.SET-INTERVAL" | translate }}</label>
-        </div>
-        <div class="row d-flex">
-          <div class="form-group mt-3 col-6">
-            <label class="form-label" for="minimumPackages">{{
-              "QUESTION-LORA-GATEWAY.MINIMUM-AMOUNT" | translate
-            }}</label>
-            <input
-              type="number"
-              class="form-control"
-              id="minimumPackages"
-              name="minimumPackages"
-              required
-              [(ngModel)]="gateway.minimumPackages"
-              step="1"
-              maxlength="9"
-              (keyup)="onCoordinateKey($event)"
-              [ngClass]="{
+      @if (gateway.notifyUnusualPackages) {
+        <div>
+          <div class="form-group mt-3">
+            <label for="minimumPackages">{{ "QUESTION-LORA-GATEWAY.SET-INTERVAL" | translate }}</label>
+          </div>
+          <div class="row d-flex">
+            <div class="form-group mt-3 col-6">
+              <label class="form-label" for="minimumPackages">{{
+                  "QUESTION-LORA-GATEWAY.MINIMUM-AMOUNT" | translate
+                }}</label>
+              <input
+                (keyup)="onCoordinateKey($event)"
+                [(ngModel)]="gateway.minimumPackages"
+                [ngClass]="{
                 'is-invalid': formFailedSubmit && errorFields.includes('minimumPackages'),
                 'is-valid': formFailedSubmit && !errorFields.includes('minimumPackages')
               }"
-            />
-          </div>
-          <div class="form-group mt-3 col-6">
-            <label class="form-label" for="maximumPackages">{{
-              "QUESTION-LORA-GATEWAY.MAXIMUM-AMOUNT" | translate
-            }}</label>
-            <input
-              type="number"
-              class="form-control"
-              id="maximumPackages"
-              name="maximumPackages"
-              required
-              [(ngModel)]="gateway.maximumPackages"
-              step="1"
-              maxlength="9"
-              (keyup)="onCoordinateKey($event)"
-              [ngClass]="{
+                class="form-control"
+                id="minimumPackages"
+                maxlength="9"
+                name="minimumPackages"
+                required
+                step="1"
+                type="number"
+              />
+            </div>
+            <div class="form-group mt-3 col-6">
+              <label class="form-label" for="maximumPackages">{{
+                  "QUESTION-LORA-GATEWAY.MAXIMUM-AMOUNT" | translate
+                }}</label>
+              <input
+                (keyup)="onCoordinateKey($event)"
+                [(ngModel)]="gateway.maximumPackages"
+                [ngClass]="{
                 'is-invalid': formFailedSubmit && errorFields.includes('maximumPackages'),
                 'is-valid': formFailedSubmit && !errorFields.includes('maximumPackages')
               }"
-            />
+                class="form-control"
+                id="maximumPackages"
+                maxlength="9"
+                name="maximumPackages"
+                required
+                step="1"
+                type="number"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="gateway.notifyOffline || gateway.notifyUnusualPackages" class="form-group mt-3">
+      } @if (gateway.notifyOffline || gateway.notifyUnusualPackages) {
+      <div class="form-group mt-3">
         <label class="form-label" for="alarmMail">{{ "QUESTION-LORA-GATEWAY.SET-EMAIL" | translate }}*</label>
         <input
-          type="text"
-          class="form-control"
-          id="alarmMail"
-          name="alarmMail"
-          [placeholder]="'USERS.EMAIL' | translate"
           [(ngModel)]="gateway.alarmMail"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('alarmMail'),
             'is-valid': formFailedSubmit && !errorFields.includes('alarmMail')
           }"
+          [placeholder]="'USERS.EMAIL' | translate"
+          class="form-control"
+          id="alarmMail"
+          name="alarmMail"
+          type="text"
         />
       </div>
+    }
     </div>
   </div>
 
   <div class="form-group mt-5">
     <button (click)="routeBack()" class="btn btn-secondary" type="button">{{ "GEN.CANCEL" | translate }}</button>
-    <button class="btn btn-primary ml-2" type="submit">{{ submitButton }}</button>
+    <button class="btn btn-primary ms-2" type="submit">{{ submitButton }}</button>
   </div>
 </form>
 <!-- test app-form-iot--gateway -->

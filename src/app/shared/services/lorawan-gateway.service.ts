@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import {
   AllGatewayStatusResponse,
+  GatewayStatus,
   GetAllGatewayStatusParameters,
   GetGatewayStatusParameters,
-  GatewayStatus,
 } from "@app/gateway/gateway.model";
 import { Observable } from "rxjs";
 import { RestService } from "./rest.service";

@@ -24,10 +24,10 @@ a {
   font-weight: $font-weight-bold;
   color: $color-primary;
   @include fluid-type(
-    $min_width,
-    $max_width,
-    $mod_1 * $mod_1 * $mod_1 * $min_font,
-    $mod_2 * $mod_2 * $mod_2 * $min_font
+      $min_width,
+      $max_width,
+      $mod_1 * $mod_1 * $mod_1 * $min_font,
+      $mod_2 * $mod_2 * $mod_2 * $min_font
   );
 }
 
@@ -39,10 +39,10 @@ a {
   font-weight: $font-weight-normal;
   color: $color-text;
   @include fluid-type(
-    $min_width,
-    $max_width,
-    $mod_1 * $mod_1 * $mod_1 * $min_font,
-    $mod_2 * $mod_2 * $mod_2 * $min_font
+      $min_width,
+      $max_width,
+      $mod_1 * $mod_1 * $mod_1 * $min_font,
+      $mod_2 * $mod_2 * $mod_2 * $min_font
   );
 
   p {
@@ -180,7 +180,7 @@ p {
   strong {
     @include h6;
     line-height: none;
-    @extend .mr-3;
+    @extend .me-3;
   }
 }
 

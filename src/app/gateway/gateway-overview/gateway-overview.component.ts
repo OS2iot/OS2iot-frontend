@@ -15,6 +15,7 @@ import { NavigationEnd, Router } from "@angular/router";
   selector: "app-gateway-list",
   templateUrl: "./gateway-overview.component.html",
   styleUrls: ["./gateway-overview.component.scss"],
+  standalone: false,
 })
 export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
   public navTabs: any[] = [
@@ -35,13 +36,11 @@ export class GatewayOverviewComponent implements OnInit, OnChanges, OnDestroy {
     },
   ];
   public pageLimit = environment.tablePageSize;
-  private gatewaySubscription: Subscription;
-
   organisations: Organisation[];
-
+  canEdit: boolean;
+  private gatewaySubscription: Subscription;
   private deleteDialogSubscription: Subscription;
   private routerSubscription: Subscription;
-  canEdit: boolean;
 
   constructor(
     public translate: TranslateService,

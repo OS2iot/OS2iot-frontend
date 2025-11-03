@@ -1,36 +1,68 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "sourceMap": true,
-        "declaration": false,
-        "downlevelIteration": true,
-        "experimentalDecorators": true,
-        "module": "es2020",
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "target": "es2022",
-        "lib": ["es2018", "dom"],
-        "allowSyntheticDefaultImports": true,
-        "typeRoots": ["node_modules/@types"],
-        "paths": {
-            "@shared-material": ["src/app/shared/modules/material.module"],
-            "@shared/*": ["src/app/shared/*"],
-            "@admin/*": ["src/app/admin"],
-            "@applications/*": ["src/app/applications/*"],
-            "@auth/*": ["src/app/auth/*"],
-            "@navbar/*": ["src/app/navbar/*"],
-            "@payload-decoder/*": ["src/app/payload-decoder/*"],
-            "@profiles/*": ["src/app/profiles/*"],
-            "@sigfox/*": ["src/app/sigfox/*"],
-            "@environments/*": ["src/environments/*"],
-            "@app/*": ["src/app/*"],
-            "timers": ["node_modules/timers-browserify"]
-        }
-    },
-    "angularCompilerOptions": {
-        "fullTemplateTypeCheck": true,
-        "strictInjectionParameters": true
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "es2022",
+    "lib": [
+      "es2018",
+      "dom",
+      "ESNext"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@shared-material": [
+        "src/app/shared/modules/material.module"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@admin/*": [
+        "src/app/admin"
+      ],
+      "@applications/*": [
+        "src/app/applications/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@navbar/*": [
+        "src/app/navbar/*"
+      ],
+      "@payload-decoder/*": [
+        "src/app/payload-decoder/*"
+      ],
+      "@profiles/*": [
+        "src/app/profiles/*"
+      ],
+      "@sigfox/*": [
+        "src/app/sigfox/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "timers": [
+        "node_modules/timers-browserify"
+      ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }

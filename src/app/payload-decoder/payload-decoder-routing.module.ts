@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { PayloadDecoderDetailComponent } from "./payload-decoder-detail/payload-decoder-detail.component";
 import { PayloadDecoderEditComponent } from "./payload-decoder-edit/payload-decoder-edit.component";

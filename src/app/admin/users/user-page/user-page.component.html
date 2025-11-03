@@ -1,62 +1,75 @@
 <app-top-bar [backButtonTitle]="backButtonTitle" [title]="title"></app-top-bar>
 
-<div *ngIf="userInfo.user.email" class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="jumbotron">
-        <h1 *ngIf="awaitingConfirmation">
-          {{ "USER_PAGE.AWAITING_CONFIRMATION" | translate }}
-        </h1>
-        <mat-divider *ngIf="awaitingConfirmation"></mat-divider>
-        <h3 class="newOrganisationsHeadLine">
-          {{ "USER_PAGE.APPLY_ORGANISATIONS" | translate }}
-        </h3>
-        <div>
-          <h4>{{ "USER_PAGE.APPLIED_ORGANISATIONS" | translate }}</h4>
-          <p *ngFor="let org of requestedUserOrganizations">
-            {{ org.name }}
-          </p>
-          <p class="noOrgs" *ngIf="checkForNoUserOrganizations">
-            {{ "USER_PAGE.NO_APPLIED_ORGS" | translate }}
-          </p>
-          <h6 class="mt-5">
-            {{ "USER_PAGE.QUESTION_APPLY_ORGANISATIONS" | translate }}
-          </h6>
+@if (userInfo.user.email) {
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          @if (awaitingConfirmation) {
+            <h1>
+              {{ "USER_PAGE.AWAITING_CONFIRMATION" | translate }}
+            </h1>
+          } @if (awaitingConfirmation) {
+          <mat-divider></mat-divider>
+        }
+          <h3 class="newOrganisationsHeadLine">
+            {{ "USER_PAGE.APPLY_ORGANISATIONS" | translate }}
+          </h3>
+          <div>
+            <h4>{{ "USER_PAGE.APPLIED_ORGANISATIONS" | translate }}</h4>
+            @for (org of requestedUserOrganizations; track org) {
+              <p>
+                {{ org.name }}
+              </p>
+            } @if (checkForNoUserOrganizations) {
+            <p class="noOrgs">
+              {{ "USER_PAGE.NO_APPLIED_ORGS" | translate }}
+            </p>
+          }
+            <h6 class="mt-5">
+              {{ "USER_PAGE.QUESTION_APPLY_ORGANISATIONS" | translate }}
+            </h6>
+          </div>
+          <form #applyOrgsForm="ngForm" (ngSubmit)="onSubmit()">
+            @if (errorMessages) {
+              <div class="error-messages p-3">
+                <ul class="mb-0">
+                  @for (error of errorMessages; track error) {
+                    <li>
+                      {{ error | translate }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+            <div class="form-group mt-3 mb-5">
+              <mat-select
+                [(ngModel)]="updateUserOrgsFromFrontend.requestedOrganizations"
+                [compareWith]="compare"
+                [placeholder]="(!checkForRemainingOrganizations ? 'USER_PAGE.NO_ORGS' : 'NAV.ORGANISATIONS') | translate"
+                aria-required="true"
+                class="form-control"
+                multiple
+                name="organizations"
+                panelClass="overflow-x-hidden"
+              >
+                <app-mat-select-search [formControl]="organisationsFilterCtrl"></app-mat-select-search>
+                @for (org of filteredOrganisations | async | sortBy : 'name'; track org) {
+                  <mat-option [value]="org">{{
+                      org.name
+                    }}
+                  </mat-option>
+                }
+              </mat-select>
+            </div>
+            <div class="form-group mt-3">
+              <button class="btn btn-primary" type="submit">
+                {{ "USERS.SAVE" | translate }}
+              </button>
+            </div>
+          </form>
         </div>
-
-        <form (ngSubmit)="onSubmit()" #applyOrgsForm="ngForm">
-          <div *ngIf="errorMessages" class="error-messages p-3">
-            <ul class="mb-0">
-              <li *ngFor="let error of errorMessages">
-                {{ error | translate }}
-              </li>
-            </ul>
-          </div>
-          <div class="form-group mt-3 mb-5">
-            <mat-select
-              class="form-control"
-              [placeholder]="(!checkForRemainingOrganizations ? 'USER_PAGE.NO_ORGS' : 'NAV.ORGANISATIONS') | translate"
-              multiple
-              name="organizations"
-              [compareWith]="compare"
-              [(ngModel)]="updateUserOrgsFromFrontend.requestedOrganizations"
-              panelClass="overflow-x-hidden"
-              aria-required="true"
-            >
-              <app-mat-select-search [formControl]="organisationsFilterCtrl"></app-mat-select-search>
-
-              <mat-option *ngFor="let org of filteredOrganisations | async | sortBy : 'name'" [value]="org">{{
-                org.name
-              }}</mat-option>
-            </mat-select>
-          </div>
-          <div class="form-group mt-3">
-            <button class="btn btn-primary" type="submit">
-              {{ "USERS.SAVE" | translate }}
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
-</div>
+}

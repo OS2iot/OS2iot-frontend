@@ -3,9 +3,9 @@ import { RestService } from "../../shared/services/rest.service";
 import { Observable } from "rxjs";
 import {
   Organisation,
-  OrganisationResponse,
   OrganisationGetManyResponse,
   OrganisationGetMinimalResponse,
+  OrganisationResponse,
 } from "./organisation.model";
 import { map, shareReplay } from "rxjs/operators";
 import { UserMinimalService } from "../users/user-minimal.service";

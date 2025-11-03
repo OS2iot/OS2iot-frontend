@@ -8,6 +8,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-profiles-list",
   templateUrl: "./profiles-list.component.html",
   styleUrls: ["./profiles-list.component.scss"],
+  standalone: false,
 })
 export class ProfilesListComponent implements OnInit {
   canEdit: boolean;

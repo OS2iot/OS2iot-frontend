@@ -28,6 +28,7 @@ import { MeService } from "@shared/services/me.service";
   selector: "app-top-bar",
   templateUrl: "./top-bar.component.html",
   styleUrls: ["./top-bar.component.scss"],
+  standalone: false,
 })
 export class TopBarComponent implements OnInit {
   @Input() data:
@@ -139,7 +140,7 @@ export class TopBarComponent implements OnInit {
     this.deleteSelectedInDropdown.emit();
   }
 
-  onClickExtraDropdownOption(id: string) {
+  onClickExtraDropdownOption(id: string | number) {
     this.extraDropdownOptions.emit(id);
     const extraDropdownOption = this.dropDownButton.extraOptions.find(opt => opt.id === id);
 

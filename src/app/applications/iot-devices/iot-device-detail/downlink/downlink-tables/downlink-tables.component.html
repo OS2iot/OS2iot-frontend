@@ -1,145 +1,142 @@
-<div *ngIf="device.type === 'LORAWAN'" class="jumbotron jumbotron--full-width">
-  <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.DOWNLINKQUEUE" | translate }}</h3>
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="downlinkQueue">
-      <div class="loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      </div>
-      <!-- Created At Column -->
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "IOTDEVICE.CREATED" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.createdAt | dkTimeWithSecondsNoPrefix }}
-        </td>
-      </ng-container>
-
-      <!-- fCntDown Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>{{ "USERS.STATUS" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ getStatus(element) }}
-        </td>
-      </ng-container>
-
-      <!-- Payload Column -->
-      <ng-container matColumnDef="payload">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.DOWNLINK.PAYLOADTITLE" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.payload }}
-        </td>
-      </ng-container>
-
-      <!-- Port Column -->
-      <ng-container matColumnDef="port">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.MQTT.PORT" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.port }}
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+@if (device.type === 'LORAWAN') {
+  <div class="jumbotron jumbotron--full-width">
+    <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.DOWNLINKQUEUE" | translate }}</h3>
+    <div class="mat-elevation-z8">
+      <table [dataSource]="downlinkQueue" mat-table>
+        @if (isLoadingResults) {
+          <div class="loading-shade">
+            @if (isLoadingResults) {
+              <mat-spinner></mat-spinner>
+            }
+          </div>
+        }
+        <!-- Created At Column -->
+        <ng-container matColumnDef="createdAt">
+          <th *matHeaderCellDef mat-header-cell>
+            {{ "IOTDEVICE.CREATED" | translate }}
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.createdAt | dkTimeWithSecondsNoPrefix }}
+          </td>
+        </ng-container>
+        <!-- fCntDown Column -->
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef mat-header-cell>{{ "USERS.STATUS" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ getStatus(element) }}
+          </td>
+        </ng-container>
+        <!-- Payload Column -->
+        <ng-container matColumnDef="payload">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.PAYLOADTITLE" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.payload }}
+          </td>
+        </ng-container>
+        <!-- Port Column -->
+        <ng-container matColumnDef="port">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.MQTT.PORT" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.port }}
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+    </div>
+    <div class="mt-5 buttons">
+      <button (click)="handleFlushQueue()" class="btn btn-secondary" type="button">
+        {{ "IOTDEVICE.DOWNLINK.FLUSH-QUEUE" | translate }}
+      </button>
+      <button (click)="handleReload()" class="btn btn-secondary" type="button">
+        {{ "IOTDEVICE.DOWNLINK.RELOAD" | translate }}
+      </button>
+    </div>
   </div>
-  <div class="mt-5 buttons">
-    <button (click)="handleFlushQueue()" class="btn btn-secondary" type="button">
-      {{ "IOTDEVICE.DOWNLINK.FLUSH-QUEUE" | translate }}
-    </button>
-
-    <button (click)="handleReload()" class="btn btn-secondary" type="button">
-      {{ "IOTDEVICE.DOWNLINK.RELOAD" | translate }}
-    </button>
+} @if (device.type === 'LORAWAN') {
+  <div class="jumbotron jumbotron--full-width">
+    <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.HISTORICQUEUE" | translate }}</h3>
+    <div class="mat-elevation-z8">
+      <table [dataSource]="downlinkHistoryQueue" mat-table>
+        @if (isLoadingResults) {
+          <div class="loading-shade">
+            @if (isLoadingResults) {
+              <mat-spinner></mat-spinner>
+            }
+          </div>
+        }
+        <!-- Created At Column -->
+        <ng-container matColumnDef="createdAt">
+          <th *matHeaderCellDef mat-header-cell>
+            {{ "IOTDEVICE.CREATED" | translate }}
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.createdAt | dkTimeWithSecondsNoPrefix }}
+          </td>
+        </ng-container>
+        <!-- Send At Column -->
+        <ng-container matColumnDef="sendAt">
+          <th *matHeaderCellDef mat-header-cell>
+            {{ "IOTDEVICE.DOWNLINK.SENDAT" | translate }}
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.sendAt | dkTimeWithSecondsNoPrefix }}
+          </td>
+        </ng-container>
+        <!-- AcknowledgedAt Column -->
+        <ng-container matColumnDef="acknowledgedAt">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.RECEIVEDAT" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{
+              element.acknowledgedAt
+                ? (element.acknowledgedAt | dkTimeWithSecondsNoPrefix)
+                : ("IOTDEVICE.DOWNLINK.NOT-RECEIVED" | translate)
+            }}
+          </td>
+        </ng-container>
+        <!-- fCntDown Column -->
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef mat-header-cell>{{ "USERS.STATUS" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ getStatus(element) }}
+          </td>
+        </ng-container>
+        <!-- fCntDown Column -->
+        <ng-container matColumnDef="fCntDown">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.FRAMECOUNTER" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.fCntDown }}
+          </td>
+        </ng-container>
+        <!-- Acknowledged Column -->
+        <ng-container matColumnDef="acknowledged">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.CONFIRMED" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ isAcknowledged(element) }}
+          </td>
+        </ng-container>
+        <!-- Payload Column -->
+        <ng-container matColumnDef="payload">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.PAYLOADTITLE" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.payload }}
+          </td>
+        </ng-container>
+        <!-- Port Column -->
+        <ng-container matColumnDef="port">
+          <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.MQTT.PORT" | translate }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.port }}
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumnsHistory" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumnsHistory" mat-row></tr>
+      </table>
+    </div>
+    <div class="mt-5 buttons">
+      <button (click)="handleReload()" class="btn btn-secondary" type="button">
+        {{ "IOTDEVICE.DOWNLINK.RELOAD" | translate }}
+      </button>
+    </div>
   </div>
-</div>
-
-<div *ngIf="device.type === 'LORAWAN'" class="jumbotron jumbotron--full-width">
-  <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.HISTORICQUEUE" | translate }}</h3>
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="downlinkHistoryQueue">
-      <div class="loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      </div>
-      <!-- Created At Column -->
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "IOTDEVICE.CREATED" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.createdAt | dkTimeWithSecondsNoPrefix }}
-        </td>
-      </ng-container>
-
-      <!-- Send At Column -->
-      <ng-container matColumnDef="sendAt">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "IOTDEVICE.DOWNLINK.SENDAT" | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.sendAt | dkTimeWithSecondsNoPrefix }}
-        </td>
-      </ng-container>
-
-      <!-- AcknowledgedAt Column -->
-      <ng-container matColumnDef="acknowledgedAt">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.DOWNLINK.RECEIVEDAT" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{
-            element.acknowledgedAt
-              ? (element.acknowledgedAt | dkTimeWithSecondsNoPrefix)
-              : ("IOTDEVICE.DOWNLINK.NOT-RECEIVED" | translate)
-          }}
-        </td>
-      </ng-container>
-
-      <!-- fCntDown Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>{{ "USERS.STATUS" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ getStatus(element) }}
-        </td>
-      </ng-container>
-
-      <!-- fCntDown Column -->
-      <ng-container matColumnDef="fCntDown">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.DOWNLINK.FRAMECOUNTER" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.fCntDown }}
-        </td>
-      </ng-container>
-
-      <!-- Acknowledged Column -->
-      <ng-container matColumnDef="acknowledged">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.DOWNLINK.CONFIRMED" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ isAcknowledged(element) }}
-        </td>
-      </ng-container>
-
-      <!-- Payload Column -->
-      <ng-container matColumnDef="payload">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.DOWNLINK.PAYLOADTITLE" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.payload }}
-        </td>
-      </ng-container>
-
-      <!-- Port Column -->
-      <ng-container matColumnDef="port">
-        <th mat-header-cell *matHeaderCellDef>{{ "IOTDEVICE.MQTT.PORT" | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.port }}
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsHistory"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsHistory"></tr>
-    </table>
-  </div>
-  <div class="mt-5 buttons">
-    <button (click)="handleReload()" class="btn btn-secondary" type="button">
-      {{ "IOTDEVICE.DOWNLINK.RELOAD" | translate }}
-    </button>
-  </div>
-</div>
+}

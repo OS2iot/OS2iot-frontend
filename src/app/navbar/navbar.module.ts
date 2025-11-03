@@ -11,7 +11,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { InlineSVGModule } from "ng-inline-svg-2";
 import { RestService } from "../shared/services/rest.service";
@@ -23,7 +23,7 @@ import { AdministrationComponent } from "./administration/administration.compone
     CommonModule,
     SharedModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     FontAwesomeModule,
     NGMaterialModule,
     InlineSVGModule,

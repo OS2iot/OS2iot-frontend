@@ -5,6 +5,7 @@ import { KeyValue } from "@shared/types/tuple.type";
   selector: "app-form-key-value-list",
   templateUrl: "./form-key-value-list.component.html",
   styleUrls: ["./form-key-value-list.component.scss"],
+  standalone: false,
 })
 export class FormKeyValueListComponent implements OnInit {
   @Input() tags: KeyValue[] = [{}];

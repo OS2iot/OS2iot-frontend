@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Location } from "@angular/common";
 import { BackButton } from "@shared/models/back-button.model";
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
   selector: "app-form-header",
   templateUrl: "./form-header.component.html",
   styleUrls: ["./form-header.component.scss"],
+  standalone: false,
 })
 export class FormHeaderComponent implements OnInit {
   @Input() backButton: BackButton;

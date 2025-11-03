@@ -7,6 +7,7 @@ const canvasId = "someGraph";
   selector: "app-graph",
   templateUrl: "./graph.component.html",
   styleUrls: ["./graph.component.scss"],
+  standalone: false,
 })
 export class GraphComponent implements OnChanges {
   @Input() data: ChartConfiguration["data"];

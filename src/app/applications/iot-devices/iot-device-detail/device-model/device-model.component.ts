@@ -6,6 +6,7 @@ import { IotDevice } from "@applications/iot-devices/iot-device.model";
   selector: "app-device-model",
   templateUrl: "./device-model.component.html",
   styleUrls: ["./device-model.component.scss"],
+  standalone: false,
 })
 export class DeviceModelComponent implements OnInit, OnChanges {
   @Input() device: IotDevice;

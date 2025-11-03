@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
   selector: "app-iot-device-detail-lorawan",
   templateUrl: "./iot-device-detail-lorawan.component.html",
   styleUrls: ["./iot-device-detail-lorawan.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDetailLorawanComponent implements OnInit {
   @Input() device: IotDevice;

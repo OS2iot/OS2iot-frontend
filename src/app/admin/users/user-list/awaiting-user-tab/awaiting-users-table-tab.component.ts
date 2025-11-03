@@ -5,6 +5,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   selector: "app-awaiting-user-tab",
   templateUrl: "./awaiting-users-table-tab.component.html",
   styleUrls: ["./awaiting-users-table-tab.component.scss"],
+  standalone: false,
 })
 export class AwaitingUsersTableTabComponent implements OnInit {
   organizationId: number;

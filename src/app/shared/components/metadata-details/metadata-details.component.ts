@@ -10,6 +10,7 @@ import { ControlledProperty } from "@shared/models/controlled-property.model";
   selector: "app-metadata-details",
   templateUrl: "./metadata-details.component.html",
   styleUrls: ["./metadata-details.component.scss"],
+  standalone: false,
 })
 export class MetadataDetailsComponent implements OnInit {
   @Input() permissions?: PermissionResponse[];

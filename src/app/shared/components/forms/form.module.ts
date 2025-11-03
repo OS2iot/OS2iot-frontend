@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormBodyApplicationComponent } from "./form-body-application/form-body-application.component";
 import { FormHeaderComponent } from "./form-header/form-header.component";
@@ -24,7 +24,7 @@ import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule,
+    TranslatePipe,
     NGMaterialModule,
     MatSelectSearchModule,
   ],

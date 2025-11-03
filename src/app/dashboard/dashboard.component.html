@@ -35,33 +35,35 @@
                     <strong>{{ "DASHBOARD.SUB-HEADER-1" | translate }}</strong>
                   </p>
                   <p>
-                    {{ "DASHBOARD.WELCOME-MESSAGE" | translate
+                    {{
+                      "DASHBOARD.WELCOME-MESSAGE" | translate
                     }}<span
-                      ><a href="https://OS2iot.os2.eu" target="_blank">{{ "DASHBOARD.LINK-1" | translate }}</a></span
-                    >{{ "DASHBOARD.WELCOME-MESSAGE-3" | translate }}
+                  ><a href="https://OS2iot.os2.eu" target="_blank">{{ "DASHBOARD.LINK-1" | translate }}</a></span
+                  >{{ "DASHBOARD.WELCOME-MESSAGE-3" | translate }}
                   </p>
                   <p>
                     <strong>{{ "DASHBOARD.SUB-HEADER-2" | translate }}</strong>
                   </p>
                   <p>
-                    {{ "DASHBOARD.WELCOME-MESSAGE-2" | translate
+                    {{
+                      "DASHBOARD.WELCOME-MESSAGE-2" | translate
                     }}<span
-                      ><a href="https://os2.eu/produkt/os2iot" target="_blank">{{
-                        "DASHBOARD.LINK-2" | translate
-                      }}</a></span
-                    >
+                  ><a href="https://os2.eu/produkt/os2iot" target="_blank">{{
+                      "DASHBOARD.LINK-2" | translate
+                    }}</a></span
+                  >
                   </p>
                 </div>
               </div>
             </span>
           </h1>
-          <div class="row my-5" *ngIf="isGlobalAdmin">
+          <div *ngIf="isGlobalAdmin" class="row my-5">
             <div class="col-12 d-flex justify-content-center">
               <a
                 [routerLink]="['/admin/organisations']"
-                routerLinkActive="router-link-active"
                 class="btn btn-primary btn--animated"
-                >{{ "DASHBOARD.BUTTON" | translate }}</a
+                routerLinkActive="router-link-active"
+              >{{ "DASHBOARD.BUTTON" | translate }}</a
               >
             </div>
           </div>

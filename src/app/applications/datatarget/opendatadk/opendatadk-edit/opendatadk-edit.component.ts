@@ -34,6 +34,7 @@ import { OpenDataDkWarningDialogComponent } from "./opendatadk-warning-dialog/op
   selector: "app-opendatadk-edit",
   templateUrl: "./opendatadk-edit.component.html",
   styleUrls: ["./opendatadk-edit.component.scss"],
+  standalone: false,
 })
 export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
   faQuestionCircle = faQuestionCircle;
@@ -204,20 +205,20 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
 
   private updateDatatarget() {
     this.subscriptions.push(
-      this.datatargetService.update(this.datatarget).subscribe(
-        (response: Datatarget) => {
+      this.datatargetService.update(this.datatarget).subscribe({
+        next: (response: Datatarget) => {
           this.datatarget = response;
           if (this.datatarget.openDataDkDataset != null) {
             this.datatarget.openDataDkDataset.acceptTerms = true;
           }
           this.countToRedirect();
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.checkDataTargetModelOpendatadkdatasaet();
           this.handleError(error);
           this.formFailedSubmit = true;
-        }
-      )
+        },
+      })
     );
   }
 
@@ -228,17 +229,17 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
       }
       if (relation.id) {
         this.subscriptions.push(
-          this.payloadDeviceDataTargetService.put(relation).subscribe(
-            () => this.countToRedirect(),
-            error => this.handleError(error)
-          )
+          this.payloadDeviceDataTargetService.put(relation).subscribe({
+            next: () => this.countToRedirect(),
+            error: error => this.handleError(error),
+          })
         );
       } else {
         this.subscriptions.push(
-          this.payloadDeviceDataTargetService.post(relation).subscribe(
-            () => this.countToRedirect(),
-            error => this.handleError(error)
-          )
+          this.payloadDeviceDataTargetService.post(relation).subscribe({
+            next: () => this.countToRedirect(),
+            error: error => this.handleError(error),
+          })
         );
       }
     });
@@ -258,8 +259,8 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     this.pendingRequestsCounter = 0;
     this.datatarget.applicationId = this.applicationId;
     this.subscriptions.push(
-      this.datatargetService.create(this.datatarget).subscribe(
-        (response: Datatarget) => {
+      this.datatargetService.create(this.datatarget).subscribe({
+        next: (response: Datatarget) => {
           this.datatargetId = response.id;
           this.datatarget = response;
           if (this.datatarget.openDataDkDataset != null) {
@@ -268,12 +269,12 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
           this.saveSnackService.showSavedSnack();
           this.showMailOrRedirect();
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.checkDataTargetModelOpendatadkdatasaet();
           this.handleError(error);
           this.formFailedSubmit = true;
-        }
-      )
+        },
+      })
     );
   }
 
