@@ -16,24 +16,26 @@
       @if (device.type === 'LORAWAN') {
         <div>
           <mat-label class="form-label me-3">{{ "IOTDEVICE.DOWNLINK.CONFIRMEDDOWNLINK" | translate }}</mat-label>
-          <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" id="confirmedDownlink" name="confirmedDownlink">
+          <mat-slide-toggle [(ngModel)]="downlink.confirmedDownlink" color="" id="confirmedDownlink"
+                            name="confirmedDownlink">
           </mat-slide-toggle>
         </div>
-      } @if (device.type === 'LORAWAN') {
-      <div class="mt-2 col-6">
-        <label class="form-label asterisk-if-mandatory" for="port">{{ "IOTDEVICE.DOWNLINK.PORT" | translate }}</label>
-        <input
-          [(ngModel)]="downlink.port"
-          class="form-control"
-          id="port"
-          maxlength="50"
-          min="0"
-          name="port"
-          required
-          type="port"
-        />
-      </div>
-    }
+      }
+      @if (device.type === 'LORAWAN') {
+        <div class="mt-2 col-6">
+          <label class="form-label asterisk-if-mandatory" for="port">{{ "IOTDEVICE.DOWNLINK.PORT" | translate }}</label>
+          <input
+            [(ngModel)]="downlink.port"
+            class="form-control"
+            id="port"
+            maxlength="50"
+            min="0"
+            name="port"
+            required
+            type="port"
+          />
+        </div>
+      }
       <div class="mt-2 col-6">
         <label class="form-label asterisk-if-mandatory"
                for="data">{{ "IOTDEVICE.DOWNLINK.PAYLOAD" | translate }}</label>
@@ -61,12 +63,12 @@
       </div>
     </div>
   } @else {
-  <div class="my-2 mx-3">
-    <p>
-      {{ "IOTDEVICE.DOWNLINK.NOTIMPLEMENTED" | translate }}
-    </p>
-  </div>
-}
+    <div class="my-2 mx-3">
+      <p>
+        {{ "IOTDEVICE.DOWNLINK.NOTIMPLEMENTED" | translate }}
+      </p>
+    </div>
+  }
 
 </div>
 

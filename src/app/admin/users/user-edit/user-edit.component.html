@@ -7,11 +7,12 @@
           <li>
             {{ error | translate }}
           </li>
-        } @if (errorMessage) {
-        <li>
-          {{ errorMessage | translate }}
-        </li>
-      }
+        }
+        @if (errorMessage) {
+          <li>
+            {{ errorMessage | translate }}
+          </li>
+        }
       </ul>
     </div>
   }
@@ -121,14 +122,14 @@
   </div>
 
   <div class="row mb-5">
-    <mat-slide-toggle [(ngModel)]="user.active" id="active" name="active">
+    <mat-slide-toggle [(ngModel)]="user.active" color="" id="active" name="active">
       {{ "USERS.FORM.ACTIVE" | translate }}
     </mat-slide-toggle
     >
   </div>
   @if (isGlobalAdmin) {
     <div class="row mb-3">
-      <mat-slide-toggle [(ngModel)]="user.globalAdmin" id="globalAdmin" name="globalAdmin">
+      <mat-slide-toggle [(ngModel)]="user.globalAdmin" color="" id="globalAdmin" name="globalAdmin">
         {{ "USERS.FORM.GLOBAL-ADMIN" | translate }}
       </mat-slide-toggle
       >
