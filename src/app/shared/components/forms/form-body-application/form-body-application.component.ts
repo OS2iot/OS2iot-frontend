@@ -33,6 +33,7 @@ interface DropdownOption {
   selector: "app-form-body-application",
   templateUrl: "./form-body-application.component.html",
   styleUrls: ["./form-body-application.component.scss"],
+  standalone: false,
 })
 export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   @Input() submitButton: string;
@@ -42,8 +43,6 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   public errorMessages: string[];
   public errorFields: string[];
   public formFailedSubmit = false;
-  private id: number;
-
   application = new ApplicationRequest();
   model = new User();
   statuses: DropdownOption[] = [];
@@ -52,13 +51,12 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   phoneCtrl: UntypedFormControl;
   controlledProperties = Object.values(ControlledPropertyTypes);
   deviceTypes: DropdownOption[] = [];
-
   permissionsSubscription: Subscription;
   public permissions: PermissionResponse[];
   public permissionMultiCtrl: UntypedFormControl = new UntypedFormControl();
   public permissionMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
   public filteredPermissionsMulti: ReplaySubject<PermissionResponse[]> = new ReplaySubject<PermissionResponse[]>(1);
-
+  private id: number;
   private _onDestroy = new Subject<void>();
 
   constructor(
@@ -186,49 +184,27 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  private buildErrorMessage(message: string): Pick<HttpErrorResponse, "error"> {
-    return {
-      error: {
-        message,
-      },
-    };
-  }
-
   updateApplication(id: number): void {
-    this.applicationService.updateApplication(this.application, id).subscribe(
-      response => {
+    this.applicationService.updateApplication(this.application, id).subscribe({
+      next: response => {
         console.log(response);
         this.router.navigateByUrl("/applications");
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
+      },
+    });
   }
 
   postApplication(): void {
-    this.applicationService.createApplication(this.application).subscribe(
-      () => {
+    this.applicationService.createApplication(this.application).subscribe({
+      next: () => {
         this.router.navigateByUrl("/applications");
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
-      }
-    );
-  }
-
-  private handleError(error: Pick<HttpErrorResponse, "error">, errorField?: string) {
-    this.errorFields = [];
-    this.errorMessages = [];
-
-    // Temp fix till we standardise backend error handling
-    if (error.error?.message[0]?.property) {
-      this.externalError(error);
-    } else {
-      this.backendError(error, errorField);
-    }
-
-    this.formFailedSubmit = true;
+      },
+    });
   }
 
   externalError(error: Pick<HttpErrorResponse, "error">) {
@@ -292,5 +268,27 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     }
     this._onDestroy.next();
     this._onDestroy.complete();
+  }
+
+  private buildErrorMessage(message: string): Pick<HttpErrorResponse, "error"> {
+    return {
+      error: {
+        message,
+      },
+    };
+  }
+
+  private handleError(error: Pick<HttpErrorResponse, "error">, errorField?: string) {
+    this.errorFields = [];
+    this.errorMessages = [];
+
+    // Temp fix till we standardise backend error handling
+    if (error.error?.message[0]?.property) {
+      this.externalError(error);
+    } else {
+      this.backendError(error, errorField);
+    }
+
+    this.formFailedSubmit = true;
   }
 }

@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Subscription, Subject } from "rxjs";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Subject, Subscription } from "rxjs";
 import { ChirpstackGatewayService } from "src/app/shared/services/chirpstack-gateway.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { BackButton } from "@shared/models/back-button.model";
-import { Gateway, GatewayStats, GatewayResponse } from "../gateway.model";
+import { Gateway, GatewayResponse, GatewayStats } from "../gateway.model";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { MeService } from "@shared/services/me.service";
 import { environment } from "@environments/environment";
@@ -24,28 +24,27 @@ import { GatewayDialogModel } from "@shared/models/dialog.model";
   selector: "app-gateway-detail",
   templateUrl: "./gateway-detail.component.html",
   styleUrls: ["./gateway-detail.component.scss"],
+  standalone: false,
 })
 export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ["rxPacketsReceived", "txPacketsEmitted", "txPacketsReceived"];
-  private gatewayStats: GatewayStats[];
   public pageSize = environment.tablePageSize;
   public pageSizeOptions = DefaultPageSizeOptions;
   public dataSource = new MatTableDataSource<GatewayStats>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public resultLength = 0;
-
   public gatewaySubscription: Subscription;
   public gateway: Gateway;
   public backButton: BackButton = { label: "", routerLink: "/gateways/list" };
   gatewayId: string;
-
-  private deleteDialogSubscription: Subscription;
   public dropdownButton: DropdownButton;
   isLoadingResults = true;
   canEdit: boolean;
   isGatewayStatusVisibleSubject = new Subject<void>();
   receivedGraphData: ChartConfiguration["data"] = { datasets: [] };
   sentGraphData: ChartConfiguration["data"] = { datasets: [] };
+  private gatewayStats: GatewayStats[];
+  private deleteDialogSubscription: Subscription;
 
   constructor(
     private gatewayService: ChirpstackGatewayService,
@@ -143,6 +142,38 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
+  onDeleteGateway() {
+    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
+      if (response) {
+        this.gatewayService.delete(this.gateway.gatewayId).subscribe(response => {
+          if (response.ok && response.body.success === true) {
+            this.router.navigate(["gateways"]);
+          }
+        });
+      } else {
+        console.log(response);
+      }
+    });
+  }
+
+  onOpenChangeOrganizationDialog() {
+    this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
+      data: {
+        gatewayDbId: this.gateway.id,
+        organizationId: this.gateway.organizationId,
+      } as GatewayDialogModel,
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.gatewaySubscription) {
+      this.gatewaySubscription.unsubscribe();
+    }
+    if (this.deleteDialogSubscription) {
+      this.deleteDialogSubscription.unsubscribe();
+    }
+  }
+
   private buildGraphs() {
     const { receivedDatasets, sentDatasets, labels } = this.gatewayStats
       .slice()
@@ -185,37 +216,5 @@ export class GatewayDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
     this.receivedGraphData = { datasets: receivedDatasets, labels };
     this.sentGraphData = { datasets: sentDatasets, labels };
-  }
-
-  onDeleteGateway() {
-    this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
-      if (response) {
-        this.gatewayService.delete(this.gateway.gatewayId).subscribe(response => {
-          if (response.ok && response.body.success === true) {
-            this.router.navigate(["gateways"]);
-          }
-        });
-      } else {
-        console.log(response);
-      }
-    });
-  }
-
-  onOpenChangeOrganizationDialog() {
-    this.changeOrganizationDialog.open(GatewayChangeOrganizationDialogComponent, {
-      data: {
-        gatewayDbId: this.gateway.id,
-        organizationId: this.gateway.organizationId,
-      } as GatewayDialogModel,
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.gatewaySubscription) {
-      this.gatewaySubscription.unsubscribe();
-    }
-    if (this.deleteDialogSubscription) {
-      this.deleteDialogSubscription.unsubscribe();
-    }
   }
 }

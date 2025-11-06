@@ -1,31 +1,35 @@
 <app-top-bar [backButtonTitle]="backButtonTitle" [title]="title"></app-top-bar>
 
-<form (ngSubmit)="onSubmit()" #multicastForm="ngForm" class="os2-form p-3 mt-4">
-  <div *ngIf="errorMessages" class="error-messages p-3">
-    <ul class="mb-0">
-      <li *ngFor="let error of errorMessages">
-        {{ error | translate }}
-      </li>
-    </ul>
-  </div>
+<form #multicastForm="ngForm" (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
 
   <div class="row">
     <div class="form-group mt-3">
       <label class="form-label" for="name">{{ "QUESTION.GIVE-MULTICAST-NAME" | translate }}</label
       >*
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        [placeholder]="'QUESTION.MULTICAST-NAME-PLACEHOLDER' | translate"
-        maxlength="50"
-        required
         [(ngModel)]="multicast.name"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('name'),
           'is-valid': formFailedSubmit && !errorFields.includes('name')
         }"
+        [placeholder]="'QUESTION.MULTICAST-NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
       />
     </div>
 
@@ -33,20 +37,20 @@
       <label class="form-label" for="mcAddr">{{ "QUESTION.GIVE-MULTICAST-ADDRESS" | translate }}</label
       >*
       <input
-        type="text"
-        [placeholder]="'QUESTION.MULTICAST-ADDRESS-PLACEHOLDER' | translate"
-        [minLength]="8"
-        [maxLength]="8"
-        required
-        class="form-control"
-        id="mcAddr"
-        name="mcAddr"
+        (keypress)="keyPressHexadecimal($event)"
         [(ngModel)]="multicast.mcAddr"
+        [maxLength]="8"
+        [minLength]="8"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mcAddr'),
           'is-valid': formFailedSubmit && !errorFields.includes('mcAddr')
         }"
-        (keypress)="keyPressHexadecimal($event)"
+        [placeholder]="'QUESTION.MULTICAST-ADDRESS-PLACEHOLDER' | translate"
+        class="form-control"
+        id="mcAddr"
+        name="mcAddr"
+        required
+        type="text"
       />
       <label>
         {{ "QUESTION.MULTICAST.HINT-8-HEXA" | translate }}
@@ -57,19 +61,19 @@
       <label class="form-label" for="mcNwkSKey">{{ "QUESTION.GIVE-MULTICAST-NETWORK-KEY" | translate }}</label
       >*
       <input
-        type="text"
-        [placeholder]="'QUESTION.MULTICAST-NETWORK-KEY-PLACEHOLDER' | translate"
-        [maxLength]="32"
-        required
-        class="form-control"
-        id="mcNwkSKey"
-        name="mcNwkSKey"
+        (keypress)="keyPressHexadecimal($event)"
         [(ngModel)]="multicast.mcNwkSKey"
+        [maxLength]="32"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mcNwkSKey'),
           'is-valid': formFailedSubmit && !errorFields.includes('mcNwkSKey')
         }"
-        (keypress)="keyPressHexadecimal($event)"
+        [placeholder]="'QUESTION.MULTICAST-NETWORK-KEY-PLACEHOLDER' | translate"
+        class="form-control"
+        id="mcNwkSKey"
+        name="mcNwkSKey"
+        required
+        type="text"
       />
       <label>
         {{ "QUESTION.MULTICAST.HINT-32-HEXA" | translate }}
@@ -80,19 +84,19 @@
       <label class="form-label" for="mcAppSKey">{{ "QUESTION.GIVE-MULTICAST-APPLICATION-KEY" | translate }}</label
       >*
       <input
-        type="text"
-        [placeholder]="'QUESTION.MULTICAST-APPLICATION-KEY-PLACEHOLDER' | translate"
-        [maxLength]="32"
-        required
-        class="form-control"
-        id="mcAppSKey"
-        name="mcAppSKey"
+        (keypress)="keyPressHexadecimal($event)"
         [(ngModel)]="multicast.mcAppSKey"
+        [maxLength]="32"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('mcAppSKey'),
           'is-valid': formFailedSubmit && !errorFields.includes('mcAppSKey')
         }"
-        (keypress)="keyPressHexadecimal($event)"
+        [placeholder]="'QUESTION.MULTICAST-APPLICATION-KEY-PLACEHOLDER' | translate"
+        class="form-control"
+        id="mcAppSKey"
+        name="mcAppSKey"
+        required
+        type="text"
       />
       <label>
         {{ "QUESTION.MULTICAST.HINT-32-HEXA" | translate }}
@@ -103,17 +107,17 @@
       <label class="form-label" for="fCnt">{{ "QUESTION.GIVE-MULTICAST-FRAMECOUNTER" | translate }}</label
       >*
       <input
-        type="number"
-        [placeholder]="multicast.fCnt"
-        required
-        class="form-control"
-        id="fCnt"
-        name="fCnt"
         [(ngModel)]="multicast.fCnt"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('fCnt'),
           'is-valid': formFailedSubmit && !errorFields.includes('fCnt')
         }"
+        [placeholder]="multicast.fCnt"
+        class="form-control"
+        id="fCnt"
+        name="fCnt"
+        required
+        type="number"
       />
     </div>
 
@@ -121,17 +125,17 @@
       <label class="form-label" for="dr">{{ "QUESTION.GIVE-MULTICAST-DATARATE" | translate }}</label
       >*
       <input
-        type="number"
-        [placeholder]="multicast.dr"
-        required
-        class="form-control"
-        id="dr"
-        name="dr"
         [(ngModel)]="multicast.dr"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('dr'),
           'is-valid': formFailedSubmit && !errorFields.includes('dr')
         }"
+        [placeholder]="multicast.dr"
+        class="form-control"
+        id="dr"
+        name="dr"
+        required
+        type="number"
       />
       <label>
         {{ "QUESTION.MULTICAST.HINT-DATA-RATE" | translate }}
@@ -142,17 +146,17 @@
       <label class="form-label" for="frequency">{{ "QUESTION.GIVE-MULTICAST-FREQUENCY" | translate }}</label
       >*
       <input
-        type="number"
-        [placeholder]="multicast.frequency"
-        required
-        class="form-control"
-        id="frequency"
-        name="frequency"
         [(ngModel)]="multicast.frequency"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('frequency'),
           'is-valid': formFailedSubmit && !errorFields.includes('frequency')
         }"
+        [placeholder]="multicast.frequency"
+        class="form-control"
+        id="frequency"
+        name="frequency"
+        required
+        type="number"
       />
       <label>
         {{ "QUESTION.MULTICAST.HINT-FREQUENCY" | translate }}
@@ -163,31 +167,33 @@
       <label class="form-label" for="groupType">{{ "QUESTION.MULTICAST-GROUPTYPE-PLACEHOLDER" | translate }}</label
       >*
       <mat-select
-        class="form-control"
-        name="groupType"
         [(ngModel)]="multicast.groupType"
-        required
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('groupType'),
           'is-valid': formFailedSubmit && !errorFields.includes('groupType')
         }"
+        class="form-control"
+        name="groupType"
+        required
       >
-        <mat-option *ngFor="let multicastType of multicastTypes" [value]="multicastType">
-          {{ multicastType }}
-        </mat-option>
+        @for (multicastType of multicastTypes; track multicastType) {
+          <mat-option [value]="multicastType">
+            {{ multicastType }}
+          </mat-option>
+        }
       </mat-select>
     </div>
 
     <!-- only if classB can be used -->
     <!-- <div *ngIf="showPeriodicity()" class="form-group mt-3">
-        <label class="form-label" for="periodicity">{{'QUESTION.MULTICAST-PERIODICITY-PLACEHOLDER' | translate}}</label>
-        <mat-select class="form-control" name="periodicity" [(ngModel)]="multicast.periodicity" required
-          [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('periodicity'), 'is-valid' : formFailedSubmit && !errorFields.includes('periodicity')}">
-          <mat-option *ngFor="let periodicity of periodicities" [value]="periodicity">
-            {{periodicity}}
-          </mat-option>
-        </mat-select>
-      </div> -->
+    <label class="form-label" for="periodicity">{{'QUESTION.MULTICAST-PERIODICITY-PLACEHOLDER' | translate}}</label>
+    <mat-select class="form-control" name="periodicity" [(ngModel)]="multicast.periodicity" required
+      [ngClass]="{'is-invalid' : formFailedSubmit && errorFields.includes('periodicity'), 'is-valid' : formFailedSubmit && !errorFields.includes('periodicity')}">
+      <mat-option *ngFor="let periodicity of periodicities" [value]="periodicity">
+        {{periodicity}}
+      </mat-option>
+    </mat-select>
+  </div> -->
   </div>
 
   <div class="form-group mt-3 col-12">
@@ -197,27 +203,30 @@
       <!-- <mat-form-field appearance="outline"> -->
       <!-- <mat-label>{{ "QUESTION.MULTICAST.SELECT-DEVICES" | translate }}</mat-label> -->
       <mat-select
-        id="userGroup"
-        class="form-control"
-        [formControl]="deviceCtrl"
-        [multiple]="true"
-        panelClass="overflow-x-hidden"
         [(value)]="multicast.iotDevices"
         [compareWith]="compare"
+        [formControl]="deviceCtrl"
+        [multiple]="true"
+        class="form-control"
+        id="userGroup"
+        panelClass="overflow-x-hidden"
       >
         <app-mat-select-search [formControl]="deviceFilterCtrl"></app-mat-select-search>
 
-        <button mat-raised-button class="mat-primary fill text-sm choose-all" (click)="selectAll()">
+        <button (click)="selectAll()" class="mat-primary fill text-sm choose-all" mat-raised-button>
           {{ "QUESTION.MULTICAST.SELECTALLDEVICES" | translate }}
         </button>
-        <button mat-raised-button class="mat-primary fill text-sm deselect-all" (click)="unSelectAll()">
+        <button (click)="unSelectAll()" class="mat-primary fill text-sm deselect-all" mat-raised-button>
           {{ "QUESTION.MULTICAST.DESELECTALLDEVICES" | translate }}
         </button>
         <label class="onlyLorawan">{{ "QUESTION.MULTICAST.ONLY-LORAWAN" | translate }}</label>
 
-        <mat-option *ngFor="let device of filteredDevicesMulti | async | filterDevices" [value]="device">{{
-          device.name
-        }}</mat-option>
+        @for (device of filteredDevicesMulti | async | filterDevices; track device) {
+          <mat-option [value]="device">{{
+              device.name
+            }}
+          </mat-option>
+        }
       </mat-select>
       <!-- </mat-form-field> -->
     </div>
@@ -226,7 +235,7 @@
     <button (click)="routeBack()" class="btn btn-secondary" type="button">
       {{ "GEN.CANCEL" | translate }}
     </button>
-    <button class="btn btn-primary ml-2" type="submit">
+    <button class="btn btn-primary ms-2" type="submit">
       {{ submitButton }}
     </button>
   </div>

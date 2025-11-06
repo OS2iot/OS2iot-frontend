@@ -1,54 +1,57 @@
-<div *ngIf="permission">
-  <app-top-bar
-    [data]="permission"
-    [backButton]="backButton"
-    [subPage]="true"
-    [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton"
-    (deleteSelectedInDropdown)="onDeletePermission()"
-    [canEdit]="canEdit"
-  >
-  </app-top-bar>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron">
-          <h3>{{ "PERMISSION.DETAIL.HEADLINE" | translate }}</h3>
-          <app-general-details [data]="permission"></app-general-details>
-          <p>
-            <strong>{{ "PERMISSION.DETAIL.TYPE" | translate }}</strong
-            >{{ permission.type | translatePermissions }}
-          </p>
-          <p>
-            <strong>{{ "PERMISSION.DETAIL.ORG" | translate }}</strong>
-            {{ permission.organization?.name }}
-          </p>
+@if (permission) {
+  <div>
+    <app-top-bar
+      (deleteSelectedInDropdown)="onDeletePermission()"
+      [addDetailDowndown]="true"
+      [backButton]="backButton"
+      [canEdit]="canEdit"
+      [data]="permission"
+      [dropDownButton]="dropdownButton"
+      [subPage]="true"
+    >
+    </app-top-bar>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h3>{{ "PERMISSION.DETAIL.HEADLINE" | translate }}</h3>
+            <app-general-details [data]="permission"></app-general-details>
+            <p>
+              <strong>{{ "PERMISSION.DETAIL.TYPE" | translate }}</strong
+              >{{ permission.type | translatePermissions }}
+            </p>
+            <p>
+              <strong>{{ "PERMISSION.DETAIL.ORG" | translate }}</strong>
+              {{ permission.organization?.name }}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="jumbotron">
-          <h3>
-            {{ "PERMISSION.DETAIL.USERS" | translate }}
-          </h3>
-          <app-user-table [permissionId]="id" [canSort]="false"></app-user-table>
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h3>
+              {{ "PERMISSION.DETAIL.USERS" | translate }}
+            </h3>
+            <app-user-table [canSort]="false" [permissionId]="id"></app-user-table>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row" *ngIf="showApplicationTable">
-      <div class="col-12">
-        <div class="jumbotron">
-          <h3>
-            {{ "PERMISSION.DETAIL.APPLICATIONS" | translate }}
-          </h3>
-
-          <app-applications-table
-            [permissionId]="id"
-            [organizationId]="permission.organization?.id"
-          ></app-applications-table>
+      @if (showApplicationTable) {
+        <div class="row">
+          <div class="col-12">
+            <div class="jumbotron">
+              <h3>
+                {{ "PERMISSION.DETAIL.APPLICATIONS" | translate }}
+              </h3>
+              <app-applications-table
+                [organizationId]="permission.organization?.id"
+                [permissionId]="id"
+              ></app-applications-table>
+            </div>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
-</div>
+}

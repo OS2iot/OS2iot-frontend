@@ -24,6 +24,7 @@ interface DropdownOption {
   selector: "app-gateway-edit",
   templateUrl: "./gateway-edit.component.html",
   styleUrls: ["./gateway-edit.component.scss"],
+  standalone: false,
 })
 export class GatewayEditComponent implements OnInit, OnDestroy {
   public backButton: BackButton = { label: "", routerLink: ["gateways"] };
@@ -36,12 +37,10 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
   public errorFields: string[];
   public formFailedSubmit = false;
   public editMode = false;
-  private gatewayId: string;
-
   gateway = new Gateway();
-
   placements: DropdownOption[] = [];
   statuses: DropdownOption[] = [];
+  private gatewayId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -103,29 +102,29 @@ export class GatewayEditComponent implements OnInit, OnDestroy {
 
   createGateway(): void {
     this.gateway.gatewayId = this.gateway.gatewayId?.replace(/[^0-9A-Fa-f]/g, "");
-    this.loraGatewayService.post(this.gateway).subscribe(
-      response => {
+    this.loraGatewayService.post(this.gateway).subscribe({
+      next: () => {
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   updateGateway(): void {
     // Gateway ID not allowed in update.
     this.gateway.gatewayId = undefined;
-    this.loraGatewayService.put(this.gateway, this.gatewayId).subscribe(
-      response => {
+    this.loraGatewayService.put(this.gateway, this.gatewayId).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   onSubmit(): void {

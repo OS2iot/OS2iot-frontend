@@ -7,7 +7,7 @@ import { GraphModule } from "@app/graph/graph.module";
 import { IotDeviceDetailsMqttExternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-external-broker/iot-device-details-mqtt-external-broker.component";
 import { IotDeviceDetailsMqttInternalBrokerComponent } from "@applications/iot-devices/iot-device-detail/iot-device-details-mqtt-internal-broker/iot-device-details-mqtt-internal-broker.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { FormModule } from "@shared/components/forms/form.module";
 import { TableSortIconComponent } from "@shared/components/table-sort-icon/table-sort-icon.component";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
@@ -71,7 +71,7 @@ import { IotDeviceCopyComponent } from "./iot-device-copy/iot-device-copy.compon
     SharedModule,
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     FormModule,
     NGMaterialModule,
     FormsModule,

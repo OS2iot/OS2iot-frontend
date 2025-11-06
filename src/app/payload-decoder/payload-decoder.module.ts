@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { RouterModule } from "@angular/router";
 import { PayloadDecoderRoutingModule } from "./payload-decoder-routing.module";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FormModule } from "@shared/components/forms/form.module";
 import { PayloadDecoderDetailComponent } from "./payload-decoder-detail/payload-decoder-detail.component";
 import { PayloadDecoderEditComponent } from "./payload-decoder-edit/payload-decoder-edit.component";
@@ -37,7 +37,7 @@ import { IoTDeviceMinimalTableComponent } from "./payload-decoder-detail/iot-dev
   ],
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     RouterModule,
     FormsModule,
     PayloadDecoderRoutingModule,

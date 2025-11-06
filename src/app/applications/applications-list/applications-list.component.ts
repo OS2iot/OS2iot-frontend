@@ -23,6 +23,7 @@ const welcomeDialogId = "welcome-dialog";
   selector: "app-applications-list",
   templateUrl: "./applications-list.component.html",
   styleUrls: ["./applications-list.component.scss"],
+  standalone: false,
 })
 export class ApplicationsListComponent implements OnInit {
   currentSubPath: string = "";

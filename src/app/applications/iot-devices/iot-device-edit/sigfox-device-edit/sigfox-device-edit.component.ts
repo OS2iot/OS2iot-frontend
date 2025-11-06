@@ -6,21 +6,23 @@ import { SigfoxService } from "@shared/services/sigfox.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { SigfoxDeviceType, SigfoxDeviceTypeResponse } from "@shared/models/sigfox-device-type.model";
 import { SigfoxDevice, SigfoxDevicesResponse } from "@app/sigfox/sigfox-device.model";
+
 @Component({
   selector: "app-sigfox-device-edit",
   templateUrl: "./sigfox-device-edit.component.html",
   styleUrls: ["./sigfox-device-edit.component.scss"],
+  standalone: false,
 })
 export class SigfoxDeviceEditComponent implements OnInit {
   @Input() iotDevice: IotDevice;
   @Input() errorFields: string[];
   @Input() formFailedSubmit = false;
   public errorMessages: any;
-  private organizationId: number;
   public sigfoxGroups: SigfoxGroup[] = [];
   public sigfoxDevices: SigfoxDevice[];
   public sigfoxDeviceTypes: SigfoxDeviceType[] = [];
   public editMode = false;
+  private organizationId: number;
 
   constructor(
     public translate: TranslateService,

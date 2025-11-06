@@ -1,57 +1,63 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 offset-md-3 mt-5">
-    <div *ngIf="errorMessages" class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="isLoading">
+    @if (errorMessages) {
+      <div class="error-messages p-3">
+        <ul class="mb-0">
+          @for (error of errorMessages; track error) {
+            <li>
+              {{ error | translate }}
+            </li>
+          }
+        </ul>
+      </div>
+    } @if (isLoading) {
+    <div>
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <form class="p-5 jumbotron" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+  } @if (!isLoading) {
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="p-5 jumbotron">
       <div class="form-group col-8">
         <label for="email">{{ "AUTH.EMAIL" | translate }}</label>
         <input
-          type="username"
-          id="username"
-          class="form-control"
-          ngModel
-          name="username"
-          required
-          email
-          autofocus
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('username'),
             'is-valid': formFailedSubmit && !errorFields.includes('username')
           }"
+          autofocus
+          class="form-control"
+          email
+          id="username"
+          name="username"
+          ngModel
+          required
+          type="username"
         />
       </div>
       <div class="form-group col-8">
         <label for="password">{{ "AUTH.PASSWORD" | translate }}</label>
         <input
-          type="password"
-          id="password"
-          class="form-control"
-          ngModel
-          name="password"
-          required
-          minlength="6"
           [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('password'),
             'is-valid': formFailedSubmit && !errorFields.includes('password')
           }"
+          class="form-control"
+          id="password"
+          minlength="6"
+          name="password"
+          ngModel
+          required
+          type="password"
         />
       </div>
       <div class="row">
         <div class="mt-5 col-md-3">
-          <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{ "Login" }}</button>
+          <button [disabled]="!authForm.valid" class="btn btn-primary" type="submit">{{ "Login" }}</button>
         </div>
         <div class="mt-5 col-md-6">
           <a class="btn btn-secondary" href="{{ getKombitLoginUrl() }}">{{ "AUTH.KOMBIT-BUTTON" | translate }}</a>
         </div>
       </div>
     </form>
+  }
   </div>
 </div>

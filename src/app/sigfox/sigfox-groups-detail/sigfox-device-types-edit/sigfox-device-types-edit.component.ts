@@ -20,12 +20,11 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-sigfox-device-types-edit",
   templateUrl: "./sigfox-device-types-edit.component.html",
   styleUrls: ["./sigfox-device-types-edit.component.scss"],
+  standalone: false,
 })
 export class SigfoxDeviceTypesEditComponent implements OnInit {
   sigfoxDeviceType = new SigfoxDeviceType();
   public sigfoxGroup: SigfoxGroup;
-  private sigfoxGroupId: number;
-  private deviceTypeId: string;
   public sigfoxContracts: SigfoxContract[];
   public errorMessages: string[];
   public errorFields: string[];
@@ -37,6 +36,8 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   public canEdit = false;
   organizationId: number;
   subscription: Subscription;
+  private sigfoxGroupId: number;
+  private deviceTypeId: string;
 
   constructor(
     private translate: TranslateService,
@@ -69,6 +70,18 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     this.canEdit = this.meService.hasAccessToTargetOrganization(OrganizationAccessScope.ApplicationWrite);
   }
 
+  onSubmit(): void {
+    if (this.sigfoxDeviceType.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
   private getContracts(groupId: number) {
     this.sigfoxService.getContracts(groupId).subscribe((response: any) => {
       this.sigfoxContracts = response;
@@ -84,34 +97,26 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.sigfoxService.postDeviceType(this.sigfoxDeviceType).subscribe(
-      response => {
+    this.sigfoxService.postDeviceType(this.sigfoxDeviceType).subscribe({
+      next: response => {
         console.log(response);
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.sigfoxService.putDeviceType(this.sigfoxDeviceType).subscribe(
-      response => {
+    this.sigfoxService.putDeviceType(this.sigfoxDeviceType).subscribe({
+      next: () => {
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
-  }
-
-  onSubmit(): void {
-    if (this.sigfoxDeviceType.id) {
-      this.update();
-    } else {
-      this.create();
-    }
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {
@@ -120,9 +125,5 @@ export class SigfoxDeviceTypesEditComponent implements OnInit {
     const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errorMessages.errorFields;
     this.errorMessages = errorMessages.errorMessages;
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

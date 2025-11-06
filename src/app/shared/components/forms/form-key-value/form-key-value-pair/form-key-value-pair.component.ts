@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
@@ -11,6 +11,7 @@ import { KeyValue } from "@shared/types/tuple.type";
   selector: "tr[app-form-key-value-pair]",
   templateUrl: "./form-key-value-pair.component.html",
   styleUrls: ["./form-key-value-pair.component.scss"],
+  standalone: false,
 })
 export class FormKeyValuePairComponent implements OnInit {
   @Input() id: number;

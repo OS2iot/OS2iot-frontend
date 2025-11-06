@@ -14,6 +14,7 @@ import { DownlinkQueueDto } from "../downlink-queue-dto";
   selector: "app-downlink",
   templateUrl: "./downlink.component.html",
   styleUrls: ["./downlink.component.scss"],
+  standalone: false,
 })
 export class DownlinkComponent implements OnInit {
   @Input() device: IotDevice;
@@ -38,22 +39,36 @@ export class DownlinkComponent implements OnInit {
   }
 
   getDownlinksQueue() {
-    this.downlinkService.getDownlinkQueue(this.device.id).subscribe(
-      (response: DownlinkQueueDto[]) => {
+    this.downlinkService.getDownlinkQueue(this.device.id).subscribe({
+      next: (response: DownlinkQueueDto[]) => {
         this.downlinkQueue = response;
         this.isLoadingResults = false;
       },
-      error => {
+      error: error => {
         this.handleError(error);
         console.log(error);
         this.isLoadingResults = false;
-      }
-    );
+      },
+    });
   }
 
   handleQueueDownlink() {
     if (this.validateHex(this.downlink.data)) {
       this.startDownlink();
+    }
+  }
+
+  addToErrorMessage(text: string) {
+    this.translate.get([text]).subscribe(translations => {
+      this.errorMessages.push(translations[text]);
+    });
+  }
+
+  getMaxDownloadLength(): number {
+    if (this.device.type === DeviceType.SIGFOX) {
+      return 16;
+    } else {
+      return 256;
     }
   }
 
@@ -67,16 +82,16 @@ export class DownlinkComponent implements OnInit {
 
   private startDownlink() {
     this.errorMessages = [];
-    this.downlinkService.postDownlink(this.downlink, this.device.id).subscribe(
-      response => {
+    this.downlinkService.postDownlink(this.downlink, this.device.id).subscribe({
+      next: () => {
         this.snackBar.open("Element sat i kø", "Downlink", {
           duration: 10000,
         });
       },
-      error => {
+      error: error => {
         this.handleError(error);
-      }
-    );
+      },
+    });
     this.getDownlinksQueue();
   }
 
@@ -96,19 +111,5 @@ export class DownlinkComponent implements OnInit {
       validator = false;
     }
     return validator;
-  }
-
-  addToErrorMessage(text: string) {
-    this.translate.get([text]).subscribe(translations => {
-      this.errorMessages.push(translations[text]);
-    });
-  }
-
-  getMaxDownloadLength(): number {
-    if (this.device.type === DeviceType.SIGFOX) {
-      return 16;
-    } else {
-      return 256;
-    }
   }
 }

@@ -7,6 +7,7 @@ import { DownlinkComponent } from "../downlinks/downlink.component";
   selector: "app-downlink-dialog",
   templateUrl: "./downlink-dialog.component.html",
   styleUrls: ["./downlink-dialog.component.scss"],
+  standalone: false,
 })
 export class DownlinkDialogComponent implements OnInit {
   constructor(private translate: TranslateService, public dialog: MatDialogRef<DownlinkComponent>) {}

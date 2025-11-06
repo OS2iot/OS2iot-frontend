@@ -24,7 +24,6 @@ export interface Tab {
 
 @Component({
   selector: "app-basic-tab-switch",
-  standalone: true,
   imports: [MatButtonModule, NgClass, MatIcon],
   templateUrl: "./basic-tab-switch.component.html",
   styleUrl: "./basic-tab-switch.component.scss",

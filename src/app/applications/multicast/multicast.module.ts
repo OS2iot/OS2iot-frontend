@@ -5,7 +5,7 @@ import { MulticastDetailComponent } from "./multicast-detail/multicast-detail.co
 import { MulticastEditComponent } from "./multicast-edit/multicast-edit.component";
 import { MulticastTableComponent } from "./multicast-table/multicast-table.component";
 import { RouterModule } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { NGMaterialModule } from "@shared/Modules/materiale.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -18,7 +18,7 @@ import { MulticastTabComponent } from "./multicast-tab/multicast-tab.component";
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     NGMaterialModule,
     FontAwesomeModule,
     ReactiveFormsModule,

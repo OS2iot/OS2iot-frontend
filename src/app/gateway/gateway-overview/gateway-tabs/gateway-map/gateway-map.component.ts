@@ -10,6 +10,7 @@ import { MeService } from "@shared/services/me.service";
   selector: "app-gateway-map",
   templateUrl: "./gateway-map.component.html",
   styleUrls: ["./gateway-map.component.scss"],
+  standalone: false,
 })
 export class GatewayMapComponent implements OnInit, OnDestroy, AfterViewInit {
   public gateways: Gateway[];

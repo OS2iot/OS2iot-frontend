@@ -6,6 +6,7 @@ import { IotDeviceDetailsService } from "@applications/iot-devices/iot-device-de
   selector: "app-iot-device-data-packets-tab",
   templateUrl: "./iot-device-data-packets-tab.component.html",
   styleUrls: ["./iot-device-data-packets-tab.component.scss"],
+  standalone: false,
 })
 export class IotDeviceDataPacketsTabComponent implements OnInit {
   device: IotDevice;

@@ -33,6 +33,7 @@ import { MatSelect } from "@angular/material/select";
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 /**
  * Custom search/filter dropdown for select. This is not supported by Angular as of yet.
@@ -50,32 +51,29 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Reference to the search input field */
   @ViewChild("searchSelectInput", { static: false, read: ElementRef })
   searchSelectInput: ElementRef<HTMLInputElement>;
+  /** Reference to the MatSelect options */
+  public _options: QueryList<MatOption>;
+  /** Previously selected values when using <mat-select [multiple]="true">*/
+  private previousSelectedValues: any[];
+  /** Whether the backdrop class has been set */
+  private overlayClassSet = false;
+  /** Event that emits when the current value changes */
+  private change = new EventEmitter<string>();
+  /** Subject that emits when the component has been destroyed. */
+  private _onDestroy = new Subject<void>();
+
+  constructor(@Inject(MatSelect) public matSelect: MatSelect, private changeDetectorRef: ChangeDetectorRef) {}
+
+  private _value: string;
 
   /** Current search value */
   get value(): string {
     return this._value;
   }
-  private _value: string;
 
   onChange: Function = (_: any) => {};
+
   onTouched: Function = (_: any) => {};
-
-  /** Reference to the MatSelect options */
-  public _options: QueryList<MatOption>;
-
-  /** Previously selected values when using <mat-select [multiple]="true">*/
-  private previousSelectedValues: any[];
-
-  /** Whether the backdrop class has been set */
-  private overlayClassSet = false;
-
-  /** Event that emits when the current value changes */
-  private change = new EventEmitter<string>();
-
-  /** Subject that emits when the component has been destroyed. */
-  private _onDestroy = new Subject<void>();
-
-  constructor(@Inject(MatSelect) public matSelect: MatSelect, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     // set custom panel class

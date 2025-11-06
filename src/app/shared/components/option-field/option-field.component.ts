@@ -5,12 +5,12 @@ import { Component, Input, OnInit } from "@angular/core";
   selector: "app-option-field",
   templateUrl: "./option-field.component.html",
   styleUrls: ["./option-field.component.scss"],
-  standalone: true,
   imports: [NgStyle],
 })
 export class OptionFieldComponent implements OnInit {
   @Input() title = "";
   @Input() type: "default" | "warning" | "alert" = "default";
+  boxStyles: Record<string, string> = {};
 
   ngOnInit(): void {
     let color;
@@ -31,6 +31,4 @@ export class OptionFieldComponent implements OnInit {
       "background-color": color,
     };
   }
-
-  boxStyles: Record<string, string> = {};
 }

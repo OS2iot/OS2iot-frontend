@@ -24,6 +24,7 @@ import { MapCoordinates, MarkerInfo } from "./map-coordinates.model";
   selector: "app-map",
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
+  standalone: false,
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   public mapId;

@@ -16,6 +16,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
   selector: "app-api-key-table",
   templateUrl: "./api-key-table.component.html",
   styleUrls: ["./api-key-table.component.scss"],
+  standalone: false,
 })
 export class ApiKeyTableComponent implements AfterViewInit {
   @Input() organisationId: number;

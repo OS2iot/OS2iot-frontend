@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
 import { SigfoxGroupsEditComponent } from "./sigfox-groups-edit/sigfox-groups-edit.component";

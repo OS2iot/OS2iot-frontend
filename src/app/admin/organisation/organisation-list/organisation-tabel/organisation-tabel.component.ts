@@ -6,7 +6,7 @@ import { MatSort } from "@angular/material/sort";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { environment } from "@environments/environment";
-import { startWith, switchMap, map, catchError } from "rxjs/operators";
+import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 import { ErrorMessageService } from "@shared/error-message.service";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -15,6 +15,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   selector: "app-organisation-tabel",
   templateUrl: "./organisation-tabel.component.html",
   styleUrls: ["./organisation-tabel.component.scss"],
+  standalone: false,
 })
 export class OrganisationTabelComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "applications", "menu"];

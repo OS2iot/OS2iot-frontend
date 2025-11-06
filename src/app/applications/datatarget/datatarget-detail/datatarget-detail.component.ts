@@ -12,6 +12,7 @@ import { DatatargetDetailTypeSelectorDirective } from "./datatarget-detail-type-
   selector: "app-datatarget-detail",
   templateUrl: "./datatarget-detail.component.html",
   styleUrls: ["./datatarget-detail.component.scss"],
+  standalone: false,
 })
 export class DatatargetDetailComponent implements OnDestroy {
   @ViewChild(DatatargetDetailTypeSelectorDirective, { static: true })

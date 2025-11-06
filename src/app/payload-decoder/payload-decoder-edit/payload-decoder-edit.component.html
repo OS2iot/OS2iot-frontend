@@ -1,14 +1,18 @@
 <app-top-bar [backButton]="backButton" [canEdit]="canEdit" [subPage]="true" [title]="title"></app-top-bar>
 <form (ngSubmit)="onSubmit()" class="p-3 mt-4">
-  <div *ngIf="errorMessages" class="jumbotron">
-    <div class="error-messages p-3">
-      <ul class="mb-0">
-        <li *ngFor="let error of errorMessages">
-          {{ error | translate }}
-        </li>
-      </ul>
+  @if (errorMessages) {
+    <div class="jumbotron">
+      <div class="error-messages p-3">
+        <ul class="mb-0">
+          @for (error of errorMessages; track error) {
+            <li>
+              {{ error | translate }}
+            </li>
+          }
+        </ul>
+      </div>
     </div>
-  </div>
+  }
   <div class="jumbotron">
     <div class="row">
       <div class="col-6">
@@ -36,18 +40,22 @@
           <mat-form-field appearance="outline">
             <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-APPLICATION" | translate }}</mat-label>
             <mat-select (selectionChange)="getDevices($event)">
-              <mat-option *ngFor="let applicationEl of applications" [value]="applicationEl.id">
-                {{ applicationEl.name }}
-              </mat-option>
+              @for (applicationEl of applications; track applicationEl) {
+                <mat-option [value]="applicationEl.id">
+                  {{ applicationEl.name }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <div class="form-group">
             <mat-form-field appearance="outline">
               <mat-label>{{ "QUESTION.GIVE-PAYLOADDECODER-CHOOSE-DEVICE" | translate }}</mat-label>
               <mat-select (selectionChange)="getDevice($event)" [disabled]="!iotDevices">
-                <mat-option *ngFor="let iotDeviceEl of iotDevices" [value]="iotDeviceEl.id">
-                  {{ iotDeviceEl.name }}
-                </mat-option>
+                @for (iotDeviceEl of iotDevices; track iotDeviceEl) {
+                  <mat-option [value]="iotDeviceEl.id">
+                    {{ iotDeviceEl.name }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -102,7 +110,7 @@
         </div>
         <div (click)="testPayloadFunction()" class="btn btn-secondary my-3">
           <div class="d-flex mx-3">
-            <div class="mr-3">{{ "QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON" | translate }}</div>
+            <div class="me-3">{{ "QUESTION.GIVE-PAYLOADDECODER-TESTBUTTON" | translate }}</div>
             <fa-icon [icon]="faExchangeAlt" class=""></fa-icon>
           </div>
         </div>
@@ -127,7 +135,7 @@
         <button (click)="routeBack()" class="btn btn-secondary" type="button">
           {{ "GEN.CANCEL" | translate }}
         </button>
-        <button class="btn btn-primary ml-2" type="submit">{{ "PAYLOAD-DECODER.SAVE" | translate }}</button>
+        <button class="btn btn-primary ms-2" type="submit">{{ "PAYLOAD-DECODER.SAVE" | translate }}</button>
       </div>
     </div>
   </div>

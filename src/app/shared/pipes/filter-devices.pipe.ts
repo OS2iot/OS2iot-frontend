@@ -4,6 +4,7 @@ import { DeviceType } from "@shared/enums/device-type";
 
 @Pipe({
   name: "filterDevices",
+  standalone: false,
 })
 export class FilterDevicesPipe implements PipeTransform {
   transform(value: IotDevice[] | undefined, ..._: unknown[]): IotDevice[] {

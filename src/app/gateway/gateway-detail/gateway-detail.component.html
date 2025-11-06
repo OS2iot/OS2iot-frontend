@@ -1,172 +1,190 @@
-<div *ngIf="gateway">
-  <app-top-bar
-    [data]="gateway"
-    [backButton]="backButton"
-    [subPage]="true"
-    [addDetailDowndown]="true"
-    [dropDownButton]="dropdownButton"
-    (deleteSelectedInDropdown)="onDeleteGateway()"
-    [canEdit]="canEdit"
-  ></app-top-bar>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
-          <h3>{{ "GATEWAY.DETAILS" | translate }}</h3>
-          <p>
-            <strong>{{ "GATEWAY.ID" | translate }}</strong
-            >{{ gateway.gatewayId }}
-          </p>
-          <p>
-            <strong>{{ "GATEWAY.ORGANIZATION" | translate }}</strong
-            >{{ gateway.organizationName }}
-          </p>
-          <app-general-details [data]="gateway"></app-general-details>
-          <p>
-            <strong>{{ "GATEWAY.TAGS" | translate }}</strong
-            >{{ gateway.tagsString }}
-          </p>
-          <p *ngIf="gateway.placement">
-            <strong>{{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}</strong
-            >{{ "GATEWAY.PLACEMENT." + gateway.placement | translate }}
-          </p>
-          <p *ngIf="gateway.modelName">
-            <strong>{{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}</strong
-            >{{ gateway.modelName }}
-          </p>
-          <p *ngIf="gateway.antennaType">
-            <strong>{{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}</strong
-            >{{ gateway.antennaType }}
-          </p>
-          <p *ngIf="gateway.status">
-            <strong>{{ "LORA-GATEWAY-TABLE.STATUS" | translate }}</strong
-            >{{ "GATEWAY.STATUS." + gateway.status | translate }}
-          </p>
-          <p *ngIf="gateway.gatewayResponsibleName">
-            <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}</strong
-            >{{ gateway.gatewayResponsibleName }}
-          </p>
-          <p *ngIf="gateway.gatewayResponsibleEmail">
-            <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}</strong
-            >{{ gateway.gatewayResponsibleEmail }}
-          </p>
-          <p *ngIf="gateway.gatewayResponsiblePhoneNumber">
-            <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}</strong
-            >{{ gateway.gatewayResponsiblePhoneNumber }}
-          </p>
-          <p *ngIf="gateway.operationalResponsibleName">
-            <strong>{{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}</strong
-            >{{ gateway.operationalResponsibleName }}
-          </p>
-          <p *ngIf="gateway.operationalResponsibleEmail">
-            <strong>{{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}</strong
-            >{{ gateway.operationalResponsibleEmail }}
-          </p>
-          <p *ngIf="gateway.description">
-            <strong>{{ "GATEWAY.DESCRIPTION" | translate }}</strong>
-          </p>
-          <pre><p>{{gateway.description}}</p></pre>
-        </div>
-      </div>
-      <div class="col-md-6 d-flex align-items-stretch">
-        <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
-          <div *ngIf="gateway.location; else locationElseBlock">
-            <h3>{{ "GATEWAY.LOCATION" | translate }}</h3>
-            <div class="thirty-height">
-              <app-map [coordinates]="getCoordinates()"></app-map>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                <p>
-                  <strong>{{ "GATEWAY.LATITUDE" | translate }}</strong>
-                  {{ gateway.location.latitude | number : "2.1-9" }}
-                </p>
-              </div>
-              <div class="col-4">
-                <p>
-                  <strong>{{ "GATEWAY.LONGITUDE" | translate }}</strong>
-                  {{ gateway.location?.longitude | number : "2.1-9" }}
-                </p>
-              </div>
-              <div class="col-4">
-                <p>
-                  <strong>{{ "GATEWAY.ALTITUDE" | translate }}</strong>
-                  {{ gateway.location.altitude | number : "2.1-9" }}
-                </p>
-              </div>
-            </div>
+@if (gateway) {
+  <div>
+    <app-top-bar
+      (deleteSelectedInDropdown)="onDeleteGateway()"
+      [addDetailDowndown]="true"
+      [backButton]="backButton"
+      [canEdit]="canEdit"
+      [data]="gateway"
+      [dropDownButton]="dropdownButton"
+      [subPage]="true"
+    ></app-top-bar>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
+            <h3>{{ "GATEWAY.DETAILS" | translate }}</h3>
+            <p>
+              <strong>{{ "GATEWAY.ID" | translate }}</strong
+              >{{ gateway.gatewayId }}
+            </p>
+            <p>
+              <strong>{{ "GATEWAY.ORGANIZATION" | translate }}</strong
+              >{{ gateway.organizationName }}
+            </p>
+            <app-general-details [data]="gateway"></app-general-details>
+            <p>
+              <strong>{{ "GATEWAY.TAGS" | translate }}</strong
+              >{{ gateway.tagsString }}
+            </p>
+            @if (gateway.placement) {
+              <p>
+                <strong>{{ "LORA-GATEWAY-TABLE.PLACEMENT" | translate }}</strong
+                >{{ "GATEWAY.PLACEMENT." + gateway.placement | translate }}
+              </p>
+            } @if (gateway.modelName) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.MODEL-NAME" | translate }}</strong
+              >{{ gateway.modelName }}
+            </p>
+          } @if (gateway.antennaType) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.ANTENNA-TYPE" | translate }}</strong
+              >{{ gateway.antennaType }}
+            </p>
+          } @if (gateway.status) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.STATUS" | translate }}</strong
+              >{{ "GATEWAY.STATUS." + gateway.status | translate }}
+            </p>
+          } @if (gateway.gatewayResponsibleName) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-NAME" | translate }}</strong
+              >{{ gateway.gatewayResponsibleName }}
+            </p>
+          } @if (gateway.gatewayResponsibleEmail) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-EMAIL" | translate }}</strong
+              >{{ gateway.gatewayResponsibleEmail }}
+            </p>
+          } @if (gateway.gatewayResponsiblePhoneNumber) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.RESPONSIBLE-PHONE-NUMBER" | translate }}</strong
+              >{{ gateway.gatewayResponsiblePhoneNumber }}
+            </p>
+          } @if (gateway.operationalResponsibleName) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.OPERATIONAL-NAME" | translate }}</strong
+              >{{ gateway.operationalResponsibleName }}
+            </p>
+          } @if (gateway.operationalResponsibleEmail) {
+            <p>
+              <strong>{{ "LORA-GATEWAY-TABLE.OPERATIONAL-EMAIL" | translate }}</strong
+              >{{ gateway.operationalResponsibleEmail }}
+            </p>
+          } @if (gateway.description) {
+            <p>
+              <strong>{{ "GATEWAY.DESCRIPTION" | translate }}</strong>
+            </p>
+          }
+            <pre><p>{{ gateway.description }}</p></pre>
           </div>
-          <ng-template #locationElseBlock>
+        </div>
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-left jumbotron--full-width width100percent">
+            @if (gateway.location) {
+              <div>
+                <h3>{{ "GATEWAY.LOCATION" | translate }}</h3>
+                <div class="thirty-height">
+                  <app-map [coordinates]="getCoordinates()"></app-map>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <p>
+                      <strong>{{ "GATEWAY.LATITUDE" | translate }}</strong>
+                      {{ gateway.location.latitude | number : "2.1-9" }}
+                    </p>
+                  </div>
+                  <div class="col-4">
+                    <p>
+                      <strong>{{ "GATEWAY.LONGITUDE" | translate }}</strong>
+                      {{ gateway.location?.longitude | number : "2.1-9" }}
+                    </p>
+                  </div>
+                  <div class="col-4">
+                    <p>
+                      <strong>{{ "GATEWAY.ALTITUDE" | translate }}</strong>
+                      {{ gateway.location.altitude | number : "2.1-9" }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            } @else {
             <p class="mb-5">{{ "GATEWAY.NOLOCATION" | translate }}</p>
-          </ng-template>
+          }
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="jumbotron">
         <app-gateway-status
-          [isVisibleSubject]="isGatewayStatusVisibleSubject"
           [gatewayId]="gatewayId"
-          paginatorClass="d-none"
+          [isVisibleSubject]="isGatewayStatusVisibleSubject"
           [shouldLinkToDetails]="false"
           [title]="'GATEWAY.ONLINE-STATUS' | translate"
+          paginatorClass="d-none"
         >
         </app-gateway-status>
       </div>
 
       <div class="jumbotron">
         <h3>{{ "GATEWAY.DATA-PACKETS" | translate }}</h3>
-        <div class="loading-shade" *ngIf="isLoadingResults">
-          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-        </div>
+        @if (isLoadingResults) {
+          <div class="loading-shade">
+            @if (isLoadingResults) {
+              <mat-spinner></mat-spinner>
+            }
+          </div>
+        }
 
         <div class="row mb-4">
           <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
             <app-graph
               [data]="receivedGraphData"
-              [type]="'line'"
+              [graphCardClass]="'shadow-none ps-0'"
+              [graphHeaderClass]="'mat-card-header-text-ms-0'"
               [title]="'GATEWAY.STATS-RXPACKETSRECEIVED' | translate"
-              [graphCardClass]="'shadow-none pl-0'"
-              [graphHeaderClass]="'mat-card-header-text-ml-0'"
+              [type]="'line'"
             >
             </app-graph>
           </div>
           <div class="col-md-6 d-flex align-items-stretch mt-1 mb-4">
             <app-graph
               [data]="sentGraphData"
-              [type]="'line'"
+              [graphCardClass]="'shadow-none ps-0'"
+              [graphHeaderClass]="'mat-card-header-text-ms-0'"
               [title]="'GATEWAY.STATS-TXPACKETSEMITTED' | translate"
-              [graphCardClass]="'shadow-none pl-0'"
-              [graphHeaderClass]="'mat-card-header-text-ml-0'"
+              [type]="'line'"
             >
             </app-graph>
           </div>
         </div>
 
-        <table mat-table [dataSource]="dataSource">
+        <table [dataSource]="dataSource" mat-table>
           <ng-container matColumnDef="rxPacketsReceived">
-            <th mat-header-cell *matHeaderCellDef>
+            <th *matHeaderCellDef mat-header-cell>
               {{ "GATEWAY.STATS-RXPACKETSRECEIVED" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">{{ element.rxPacketsReceived }}</td>
+            <td *matCellDef="let element" mat-cell>{{ element.rxPacketsReceived }}</td>
           </ng-container>
 
           <ng-container matColumnDef="txPacketsEmitted">
-            <th mat-header-cell *matHeaderCellDef>{{ "GATEWAY.STATS-TXPACKETSEMITTED" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.txPacketsEmitted }}</td>
+            <th *matHeaderCellDef mat-header-cell>{{ "GATEWAY.STATS-TXPACKETSEMITTED" | translate }}</th>
+            <td *matCellDef="let element" mat-cell>{{ element.txPacketsEmitted }}</td>
           </ng-container>
 
           <ng-container matColumnDef="txPacketsReceived">
-            <th mat-header-cell *matHeaderCellDef>{{ "GATEWAY.STATS-TIMESTAMP" | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.timestamp | date }}</td>
+            <th *matHeaderCellDef mat-header-cell>{{ "GATEWAY.STATS-TIMESTAMP" | translate }}</th>
+            <td *matCellDef="let element" mat-cell>{{ element.timestamp | date }}</td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
         </table>
         <mat-paginator
           [length]="resultLength"

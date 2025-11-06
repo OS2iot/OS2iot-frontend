@@ -36,7 +36,7 @@
 @import "assets/scss/setup/variables";
 @import "assets/scss/setup/material-theme";
 
-@import "~leaflet/dist/leaflet.css";
+@import "leaflet/dist/leaflet.css";
 
 @import "./app/shared/styles/leaflet-styles.scss";
 
@@ -116,8 +116,9 @@ app-welcome-dialog .hide-checkbox .mdc-checkbox {
   .mdc-checkbox__native-control:enabled:focus:focus:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
     border-color: $color-white-001 !important;
   }
+
   .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate="true"])
-    ~ .mdc-checkbox__background {
+  ~ .mdc-checkbox__background {
     border-color: $color-white-001 !important;
   }
 }

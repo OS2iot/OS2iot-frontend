@@ -9,6 +9,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-api-key-list",
   templateUrl: "./api-key-list.component.html",
   styleUrls: ["./api-key-list.component.scss"],
+  standalone: false,
 })
 export class ApiKeyListComponent implements OnInit {
   @Input() organisationId: number;

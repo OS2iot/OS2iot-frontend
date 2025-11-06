@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { UntypedFormControl } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Organisation } from "@app/admin/organisation/organisation.model";
 import { OrganisationService } from "@app/admin/organisation/organisation.service";
-import { PermissionResponse, PermissionsSlimDto } from "@app/admin/permission/permission.model";
+import { PermissionsSlimDto } from "@app/admin/permission/permission.model";
 import { PermissionService } from "@app/admin/permission/permission.service";
 import { Application, UpdateApplicationOrganization } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
@@ -17,6 +16,7 @@ import { ReplaySubject, Subscription } from "rxjs";
   selector: "app-change-organization-dialog",
   templateUrl: "./application-change-organization-dialog.component.html",
   styleUrls: ["./application-change-organization-dialog.component.scss"],
+  standalone: false,
 })
 export class ApplicationChangeOrganizationDialogComponent implements OnInit {
   public applicationsSubscription: Subscription;

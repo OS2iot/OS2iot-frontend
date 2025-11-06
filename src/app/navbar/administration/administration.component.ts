@@ -8,6 +8,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   selector: "app-administration",
   templateUrl: "./administration.component.html",
   styleUrls: ["./administration.component.scss"],
+  standalone: false,
 })
 export class AdministrationComponent implements OnInit {
   public user: UserResponse;

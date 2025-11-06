@@ -1,5 +1,3 @@
-import { SigfoxGroup } from "./sigfox-group.model";
-
 export class SigfoxDeviceType {
   id: string;
   name: string;

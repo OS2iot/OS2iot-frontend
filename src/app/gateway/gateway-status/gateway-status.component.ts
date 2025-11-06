@@ -9,7 +9,7 @@ import { LoRaWANGatewayService } from "@shared/services/lorawan-gateway.service"
 import moment from "moment";
 import { Observable, Subject, Subscription } from "rxjs";
 import { GatewayStatusInterval, gatewayStatusIntervalToDate } from "../enums/gateway-status-interval.enum";
-import { GatewayStatus, AllGatewayStatusResponse } from "../gateway.model";
+import { AllGatewayStatusResponse, GatewayStatus } from "../gateway.model";
 import { map } from "rxjs/operators";
 import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
 
@@ -24,6 +24,7 @@ interface TimeColumn {
   selector: "app-gateway-status",
   templateUrl: "./gateway-status.component.html",
   styleUrls: ["./gateway-status.component.scss"],
+  standalone: false,
 })
 export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   @Input() organisationChangeSubject: Subject<number>;
@@ -32,9 +33,6 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   @Input() title: string;
   @Input() gatewayId: string;
   @Input() shouldLinkToDetails = true;
-
-  private gatewayStatusSubscription: Subscription;
-  private readonly columnGatewayName = "gatewayName";
   dataSource: MatTableDataSource<GatewayStatus>;
   /**
    * List of pre-processed timestamps for performance
@@ -56,8 +54,9 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
   isDirty = true;
   statusIntervals: GatewayStatusInterval[];
   selectedStatusInterval = GatewayStatusInterval.DAY;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  private gatewayStatusSubscription: Subscription;
+  private readonly columnGatewayName = "gatewayName";
 
   constructor(private translate: TranslateService, private lorawanGatewayService: LoRaWANGatewayService) {}
 
@@ -85,6 +84,17 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
     });
 
     this.statusIntervals = recordToEntries(GatewayStatusInterval).map(interval => interval.value);
+  }
+
+  onSelectInterval({ isUserInput, source: { value: newInterval } }: MatOptionSelectionChange) {
+    if (isUserInput && newInterval !== this.selectedStatusInterval && !this.isLoadingResults) {
+      this.subscribeToGetAllGatewayStatus(this.organizationId, newInterval);
+    }
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak by unsubscribing
+    this.gatewayStatusSubscription?.unsubscribe();
   }
 
   private getGatewayStatus(
@@ -218,16 +228,5 @@ export class GatewayStatusComponent implements AfterContentInit, OnDestroy {
 
   private clamp(value: number, min: number, max: number) {
     return Math.max(min, Math.min(max, value));
-  }
-
-  onSelectInterval({ isUserInput, source: { value: newInterval } }: MatOptionSelectionChange) {
-    if (isUserInput && newInterval !== this.selectedStatusInterval && !this.isLoadingResults) {
-      this.subscribeToGetAllGatewayStatus(this.organizationId, newInterval);
-    }
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    this.gatewayStatusSubscription?.unsubscribe();
   }
 }

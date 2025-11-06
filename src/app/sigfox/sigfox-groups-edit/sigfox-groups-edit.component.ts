@@ -18,6 +18,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-sigfox-groups-edit",
   templateUrl: "./sigfox-groups-edit.component.html",
   styleUrls: ["./sigfox-groups-edit.component.scss"],
+  standalone: false,
 })
 export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   sigfoxGroupId: number;
@@ -59,48 +60,18 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
   }
 
   getSigfoxGroup(id: number) {
-    this.subscription = this.sigfoxService.getGroup(id).subscribe(
-      response => {
+    this.subscription = this.sigfoxService.getGroup(id).subscribe({
+      next: response => {
         this.sigfoxGroup = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-      }
-    );
-  }
-
-  private create(): void {
-    this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe(
-      response => {
-        console.log(response);
-        this.routeBack();
       },
-      (error: HttpErrorResponse) => {
-        this.showError(error);
-      }
-    );
-  }
-
-  private update(): void {
-    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe(
-      response => {
-        this.routeBack();
-      },
-      error => {
-        this.showError(error);
-      }
-    );
+    });
   }
 
   routeBack(): void {
     this.location.back();
-  }
-
-  private showError(error: HttpErrorResponse) {
-    const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
-    this.errorMessages = errorMessages.errorMessages;
-    this.errorFields = errorMessages.errorFields;
-    this.formFailedSubmit = true;
   }
 
   onSubmit(form: NgForm) {
@@ -122,5 +93,35 @@ export class SigfoxGroupsEditComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  private create(): void {
+    this.sigfoxService.createGroupConnection(this.sigfoxGroup).subscribe({
+      next: response => {
+        console.log(response);
+        this.routeBack();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.showError(error);
+      },
+    });
+  }
+
+  private update(): void {
+    this.sigfoxService.updateGroupConnection(this.sigfoxGroup, this.sigfoxGroup.id).subscribe({
+      next: () => {
+        this.routeBack();
+      },
+      error: error => {
+        this.showError(error);
+      },
+    });
+  }
+
+  private showError(error: HttpErrorResponse) {
+    const errorMessages: ErrorMessage = this.errorMessageService.handleErrorMessageWithFields(error);
+    this.errorMessages = errorMessages.errorMessages;
+    this.errorFields = errorMessages.errorFields;
+    this.formFailedSubmit = true;
   }
 }

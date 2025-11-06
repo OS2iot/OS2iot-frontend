@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { PayloadDecoderService } from "@app/payload-decoder/payload-decoder.service";
 import { BackButton } from "@shared/models/back-button.model";
-import { PayloadDecoder, PayloadDecoderBodyResponse } from "@payload-decoder/payload-decoder.model";
+import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
 import { MeService } from "@shared/services/me.service";
 import { DropdownButton } from "@shared/models/dropdown-button.model";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
@@ -14,6 +14,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-payload-decoder-detail",
   templateUrl: "./payload-decoder-detail.component.html",
   styleUrls: ["./payload-decoder-detail.component.scss"],
+  standalone: false,
 })
 export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
   payloadDecoder: PayloadDecoder;
@@ -62,20 +63,6 @@ export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  private canEdit() {
-    this.payloadDecoder.canEdit = this.meService.hasAccessToTargetOrganization(
-      OrganizationAccessScope.ApplicationWrite,
-      this.payloadDecoder?.organizationId
-    );
-  }
-
-  private getPayloadDecoder(id: number) {
-    this.subscription = this.payloadDecoderService.getOne(id).subscribe(response => {
-      this.payloadDecoder = response;
-      this.canEdit();
-    });
-  }
-
   onDeletePayload() {
     const id = this.payloadDecoder.id;
     this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
@@ -103,5 +90,19 @@ export class PayloadDecoderDetailComponent implements OnInit, OnDestroy {
     if (this.deleteDialogSubscription) {
       this.deleteDialogSubscription.unsubscribe();
     }
+  }
+
+  private canEdit() {
+    this.payloadDecoder.canEdit = this.meService.hasAccessToTargetOrganization(
+      OrganizationAccessScope.ApplicationWrite,
+      this.payloadDecoder?.organizationId
+    );
+  }
+
+  private getPayloadDecoder(id: number) {
+    this.subscription = this.payloadDecoderService.getOne(id).subscribe(response => {
+      this.payloadDecoder = response;
+      this.canEdit();
+    });
   }
 }

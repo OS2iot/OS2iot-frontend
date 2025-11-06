@@ -1,54 +1,71 @@
-<p *ngIf="permissions.length !== 0">
-  <strong>{{ "APPLICATION.METADATA-FIELD.PERMISSIONS" | translate }}</strong>
-</p>
-<ul *ngIf="permissions.length !== 0">
-  <li *ngFor="let permission of permissions">{{ permission.name }}</li>
-</ul>
-<p *ngIf="status && status !== ApplicationStatus.NONE">
-  <strong>{{ "APPLICATION.METADATA-FIELD.STATUS" | translate }}</strong
-  >{{ "APPLICATION.STATUS." + status | translate }}
-</p>
-<p *ngIf="startDate">
-  <strong>{{ "APPLICATION.METADATA-FIELD.START-DATE" | translate }}</strong
-  >{{ startDate | dateOnly }}
-</p>
-<p *ngIf="endDate">
-  <strong>{{ "APPLICATION.METADATA-FIELD.END-DATE" | translate }}</strong
-  >{{ endDate | dateOnly }}
-</p>
-<p *ngIf="category">
-  <strong>{{ "APPLICATION.METADATA-FIELD.CATEGORY" | translate }}</strong
-  >{{ category }}
-</p>
-<p *ngIf="owner">
-  <strong>{{ "APPLICATION.METADATA-FIELD.OWNER" | translate }}</strong
-  >{{ owner }}
-</p>
-<p *ngIf="contactPerson">
-  <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate }}</strong
-  >{{ contactPerson }}
-</p>
-<p *ngIf="contactEmail">
-  <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-EMAIL" | translate }}</strong
-  >{{ contactEmail }}
-</p>
-<p *ngIf="contactPhone">
-  <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PHONE" | translate }}</strong
-  >{{ contactPhone }}
-</p>
+@if (permissions.length !== 0) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.PERMISSIONS" | translate }}</strong>
+  </p>
+} @if (permissions.length !== 0) {
+  <ul>
+    @for (permission of permissions; track permission) {
+      <li>{{ permission.name }}</li>
+    }
+  </ul>
+} @if (status && status !== ApplicationStatus.NONE) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.STATUS" | translate }}</strong
+    >{{ "APPLICATION.STATUS." + status | translate }}
+  </p>
+} @if (startDate) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.START-DATE" | translate }}</strong
+    >{{ startDate | dateOnly }}
+  </p>
+} @if (endDate) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.END-DATE" | translate }}</strong
+    >{{ endDate | dateOnly }}
+  </p>
+} @if (category) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CATEGORY" | translate }}</strong
+    >{{ category }}
+  </p>
+} @if (owner) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.OWNER" | translate }}</strong
+    >{{ owner }}
+  </p>
+} @if (contactPerson) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate }}</strong
+    >{{ contactPerson }}
+  </p>
+} @if (contactEmail) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-EMAIL" | translate }}</strong
+    >{{ contactEmail }}
+  </p>
+} @if (contactPhone) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PHONE" | translate }}</strong
+    >{{ contactPhone }}
+  </p>
+}
 <p>
   <strong>{{ "APPLICATION.METADATA-FIELD.PERSONAL-DATA" | translate }}</strong
   >{{ (personalData ? true.toString() : false.toString()) | translate }}
 </p>
-<p *ngIf="hardware">
-  <strong>{{ "APPLICATION.METADATA-FIELD.HARDWARE" | translate }}</strong
-  >{{ hardware }}
-</p>
-<p *ngIf="controlledProperties?.length">
-  <strong>{{ "APPLICATION.METADATA-FIELD.CONTROLLED-PROPERTY" | translate }}</strong
-  >{{ controlledPropertyText }}
-</p>
-<p *ngIf="deviceTypes?.length">
-  <strong>{{ "APPLICATION.METADATA-FIELD.DEVICE-TYPE" | translate }}</strong
-  >{{ deviceTypeText }}
-</p>
+@if (hardware) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.HARDWARE" | translate }}</strong
+    >{{ hardware }}
+  </p>
+} @if (controlledProperties?.length) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTROLLED-PROPERTY" | translate }}</strong
+    >{{ controlledPropertyText }}
+  </p>
+} @if (deviceTypes?.length) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.DEVICE-TYPE" | translate }}</strong
+    >{{ deviceTypeText }}
+  </p>
+}

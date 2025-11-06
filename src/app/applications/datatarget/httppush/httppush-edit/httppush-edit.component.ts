@@ -29,6 +29,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-httppush-edit",
   templateUrl: "./httppush-edit.component.html",
   styleUrls: ["./httppush-edit.component.scss"],
+  standalone: false,
 })
 export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy {
   public multiPage = false;
@@ -149,16 +150,16 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
   updateDatatarget() {
     this.resetErrors();
     this.counter = 1 + (this.payloadDeviceDatatarget?.length ?? 0);
-    this.datatargetService.update(this.datatarget).subscribe(
-      (response: Datatarget) => {
+    this.datatargetService.update(this.datatarget).subscribe({
+      next: (response: Datatarget) => {
         this.datatarget = response;
         this.countToRedirect();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   addPayloadDeviceDatatarget() {
@@ -169,23 +170,23 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
     });
     this.payloadDeviceDatatarget.forEach(relation => {
       if (relation.id) {
-        this.payloadDeviceDataTargetService.put(relation).subscribe(
-          response => {
+        this.payloadDeviceDataTargetService.put(relation).subscribe({
+          next: () => {
             this.countToRedirect();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       } else {
-        this.payloadDeviceDataTargetService.post(relation).subscribe(
-          (res: any) => {
+        this.payloadDeviceDataTargetService.post(relation).subscribe({
+          next: () => {
             this.countToRedirect();
           },
-          error => {
+          error: error => {
             this.handleError(error);
-          }
-        );
+          },
+        });
       }
     });
   }
@@ -209,18 +210,18 @@ export class HttppushEditComponent implements DatatargetEdit, OnInit, OnDestroy 
   createDatatarget() {
     this.resetErrors();
     this.datatarget.applicationId = this.applicationId;
-    this.datatargetService.create(this.datatarget).subscribe(
-      (response: Datatarget) => {
+    this.datatargetService.create(this.datatarget).subscribe({
+      next: (response: Datatarget) => {
         this.datatargetid = response.id;
         this.datatarget = response;
         this.showSavedSnack();
         this.routeToCreatedDatatarget();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.handleError(error);
         this.formFailedSubmit = true;
-      }
-    );
+      },
+    });
   }
 
   getDevices(): void {

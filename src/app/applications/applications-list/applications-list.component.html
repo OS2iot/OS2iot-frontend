@@ -20,21 +20,25 @@
 >
 </app-top-bar>
 <div class="main-page d-flex flex-column">
-  <ng-container *ngIf="!isLoadingResults">
-    <ng-container *ngIf="hasSomePermission" ; else noPermissions>
-      <app-application-filter/>
-      <app-applications-list-dashboard/>
-      <div class="switch-content-container">
-        <app-basic-tab-switch (tabClicked)="onTapClicked($event)" [currentUrl]="currentPath" [tabs]="tabs">
-        </app-basic-tab-switch>
-        @if (currentPath === mapRoute) {
-          <app-application-map></app-application-map>
+  @if (!isLoadingResults) {
+    @if (hasSomePermission) {
+      <ng-container ; else noPermissions>
+        <app-application-filter/>
+        <app-applications-list-dashboard/>
+        <div class="switch-content-container">
+          <app-basic-tab-switch (tabClicked)="onTapClicked($event)" [currentUrl]="currentPath" [tabs]="tabs">
+          </app-basic-tab-switch>
+          @if (currentPath === mapRoute) {
+            <app-application-map></app-application-map>
+          } @if (currentPath === listRoute) {
+          @if (organizationId) {
+            <app-applications-table [organizationId]="organizationId"></app-applications-table>
+          }
         }
-        @if (currentPath === listRoute) {
-          <app-applications-table [organizationId]="organizationId" *ngIf="organizationId"></app-applications-table>
-        }
-      </div>
-    </ng-container>
-  </ng-container>
-  <mat-spinner *ngIf="isLoadingResults" ngClass="align-self-center"></mat-spinner>
+        </div>
+      </ng-container>
+    }
+  } @if (isLoadingResults) {
+  <mat-spinner ngClass="align-self-center"></mat-spinner>
+}
 </div>

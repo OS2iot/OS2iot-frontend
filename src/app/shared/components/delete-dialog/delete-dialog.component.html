@@ -1,25 +1,32 @@
-<h1 mat-dialog-title *ngIf="dialogModel.showAccept && dialogModel.showCancel">{{ "DIALOG.SAVE.TITLE" | translate }}</h1>
-<h1 mat-dialog-title *ngIf="dialogModel.showOk">{{ dialogModel.infoTitle | translate }}</h1>
+@if (dialogModel.showAccept && dialogModel.showCancel) {
+  <h1 mat-dialog-title>{{ "DIALOG.SAVE.TITLE" | translate }}</h1>
+} @if (dialogModel.showOk) {
+  <h1 mat-dialog-title>{{ dialogModel.infoTitle | translate }}</h1>
+}
 <div mat-dialog-content>
   {{ dialogModel.message | translate }}
 </div>
-<div mat-dialog-actions class="d-flex flex-row-reverse">
-  <button *ngIf="dialogModel.showCancel" click="close()" mat-dialog-close class="btn btn-primary ml-2">
-    {{ dialogModel.cancelText || "DIALOG.CLOSE" | translate }}
-  </button>
-  <button *ngIf="dialogModel.showAccept" [mat-dialog-close]="true" mat-dialog-close class="btn btn-secondary ml-2">
+<div class="d-flex flex-row-reverse" mat-dialog-actions>
+  @if (dialogModel.showCancel) {
+    <button class="btn btn-primary ms-2" click="close()" mat-dialog-close>
+      {{ dialogModel.cancelText || "DIALOG.CLOSE" | translate }}
+    </button>
+  } @if (dialogModel.showAccept) {
+  <button [mat-dialog-close]="true" class="btn btn-secondary ms-2" mat-dialog-close>
     {{ dialogModel.acceptText || "DIALOG.DIALOG-CONFIRM" | translate }}
   </button>
-  <button *ngIf="dialogModel.showOk" click="close()" mat-dialog-close class="btn btn-primary ml-2">
+} @if (dialogModel.showOk) {
+  <button class="btn btn-primary ms-2" click="close()" mat-dialog-close>
     {{ "DIALOG.OK" | translate }}
   </button>
+} @if (dialogModel.showReject) {
   <button
-    *ngIf="dialogModel.showReject"
-    click="close()"
     [mat-dialog-close]="true"
+    class="btn btn-secondary ms-2"
+    click="close()"
     mat-dialog-close
-    class="btn btn-secondary ml-2"
   >
     {{ "DIALOG.DIALOG-REJECT" | translate }}
   </button>
+}
 </div>

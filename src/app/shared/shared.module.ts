@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SearchModule } from "@app/search/search.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateDirective, TranslatePipe } from "@ngx-translate/core";
 import { AlertComponent } from "./components/alert/alert.component";
 import { BatteriStatusComponent } from "./components/batteri-status/batteri-status.component";
 import { ColumnSelectorComponent } from "./components/column-selector/column-selector.component";
@@ -40,7 +40,8 @@ import { PipesModule } from "./pipes/pipes.module";
   imports: [
     DirectivesModule,
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
+    TranslateDirective,
     RouterModule,
     FormsModule,
     NGMaterialModule,
@@ -51,7 +52,8 @@ import { PipesModule } from "./pipes/pipes.module";
   ],
   exports: [
     AlertComponent,
-    TranslateModule,
+    TranslatePipe,
+    TranslateDirective,
     LoadingSpinnerComponent,
     BatteriStatusComponent,
     MapComponent,

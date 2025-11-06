@@ -12,9 +12,11 @@ $cellFontSize: 0.9rem;
   .online {
     background-color: $online;
   }
+
   .offline {
     background-color: $offline;
   }
+
   .never-seen {
     background-color: $neverSeen;
   }
@@ -26,6 +28,7 @@ $cellFontSize: 0.9rem;
 
     > td {
       font-size: $cellFontSize;
+
       &:hover {
         transition: $transition-short;
         filter: brightness(0.65);
@@ -71,9 +74,11 @@ $cellFontSize: 0.9rem;
     &.online {
       background-color: $online;
     }
+
     &.offline {
       background-color: $offline;
     }
+
     &.never-seen {
       background-color: $neverSeen;
     }

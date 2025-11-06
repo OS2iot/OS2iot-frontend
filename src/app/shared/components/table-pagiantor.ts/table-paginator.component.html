@@ -1,22 +1,24 @@
 <div class="main-container">
   <div class="select-container">
     <mat-form-field appearance="outline">
-      <mat-select [(value)]="selected" (selectionChange)="onSelected($event)">
+      <mat-select (selectionChange)="onSelected($event)" [(value)]="selected">
         <option value=""></option>
-        <mat-option *ngFor="let option of options" [value]="option.value">
-          {{ option.label }}
-        </mat-option>
+        @for (option of options; track option) {
+          <mat-option [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
     <mat-icon class="icon-arrow-down" svgIcon="down-angle"></mat-icon>
   </div>
   <div class="button-container">
     <button
-      [ngClass]="currentPage <= 1 ? 'inactive-color' : 'active-color'"
-      [disabled]="currentPage <= 1"
-      mat-button
-      class="arrow-button"
       (click)="onLeft()"
+      [disabled]="currentPage <= 1"
+      [ngClass]="currentPage <= 1 ? 'inactive-color' : 'active-color'"
+      class="arrow-button"
+      mat-button
     >
       <mat-icon class="icon-arrow-left" svgIcon="left-angle"></mat-icon>
     </button>
@@ -24,11 +26,11 @@
       {{ currentPage + " / " + numberOfPages }}
     </div>
     <button
-      [ngClass]="!hasNextPage ? 'inactive-color' : 'active-color'"
-      [disabled]="!hasNextPage"
-      mat-button
-      class="arrow-button"
       (click)="onRight()"
+      [disabled]="!hasNextPage"
+      [ngClass]="!hasNextPage ? 'inactive-color' : 'active-color'"
+      class="arrow-button"
+      mat-button
     >
       <mat-icon class="icon-arrow-right" svgIcon="right-angle"></mat-icon>
     </button>

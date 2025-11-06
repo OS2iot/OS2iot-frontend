@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import {
   IotDevice,
-  IoTDevicesMinimalResponse,
-  IotDevicesImportResponse,
   IotDeviceImportRequest,
+  IotDevicesImportResponse,
+  IoTDevicesMinimalResponse,
   IoTDeviceStatsResponse,
   UpdateIoTDeviceApplication,
 } from "./iot-device.model";

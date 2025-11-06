@@ -14,6 +14,7 @@ import { DatatargetLogService } from "./datatarget-log.service";
   selector: "app-datatarget-log",
   templateUrl: "./datatarget-log.component.html",
   styleUrl: "./datatarget-log.component.scss",
+  standalone: false,
 })
 export class DatatargetLogComponent implements OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

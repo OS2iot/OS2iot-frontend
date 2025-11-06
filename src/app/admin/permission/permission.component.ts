@@ -5,6 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-permission",
   templateUrl: "./permission.component.html",
   styleUrls: ["./permission.component.scss"],
+  standalone: false,
 })
 export class PermissionComponent implements OnInit {
   constructor(public translate: TranslateService) {

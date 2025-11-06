@@ -14,6 +14,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   selector: "app-organisation-edit",
   templateUrl: "./organisation-edit.component.html",
   styleUrls: ["./organisation-edit.component.scss"],
+  standalone: false,
 })
 export class OrganisationEditComponent implements OnInit {
   organisation = new Organisation();
@@ -53,6 +54,18 @@ export class OrganisationEditComponent implements OnInit {
     this.backButton.routerLink = ["admin", "organisations", organizationId];
   }
 
+  onSubmit(): void {
+    if (this.organisation.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  }
+
+  routeBack(): void {
+    this.location.back();
+  }
+
   private getOrganisation(id: number) {
     this.subscription = this.organisationService.getOne(id).subscribe(response => {
       this.organisation = response;
@@ -60,36 +73,28 @@ export class OrganisationEditComponent implements OnInit {
   }
 
   private create(): void {
-    this.organisationService.post(this.organisation).subscribe(
-      response => {
+    this.organisationService.post(this.organisation).subscribe({
+      next: response => {
         console.log(response);
         this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.showError(error);
-      }
-    );
+      },
+    });
   }
 
   private update(): void {
-    this.organisationService.put(this.organisation, this.id).subscribe(
-      response => {
+    this.organisationService.put(this.organisation, this.id).subscribe({
+      next: () => {
         this.sharedVariableService.setOrganizationInfo();
         this.routeBack();
       },
-      error => {
+      error: error => {
         this.showError(error);
-      }
-    );
-  }
-
-  onSubmit(): void {
-    if (this.organisation.id) {
-      this.update();
-    } else {
-      this.create();
-    }
+      },
+    });
   }
 
   private showError(error: HttpErrorResponse) {
@@ -99,9 +104,5 @@ export class OrganisationEditComponent implements OnInit {
     this.errorMessage = error.error.message;
     this.errorFields.push("name");
     this.formFailedSubmit = true;
-  }
-
-  routeBack(): void {
-    this.location.back();
   }
 }

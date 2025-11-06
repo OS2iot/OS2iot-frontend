@@ -1,6 +1,6 @@
 <div class="main-container">
   @for (tab of tabs; track tab.title; ) {
-    <div [ngClass]="currentUrl === tab.uri ? 'active-tab' : 'inactive-tab'" class="tab-base" (click)="onClick(tab.uri)">
+    <div (click)="onClick(tab.uri)" [ngClass]="currentUrl === tab.uri ? 'active-tab' : 'inactive-tab'" class="tab-base">
       @if (tab.icon) {
         <mat-icon
           [ngClass]="currentUrl === tab.uri ? 'active-tab-icon' : 'inactive-tab-icon'"

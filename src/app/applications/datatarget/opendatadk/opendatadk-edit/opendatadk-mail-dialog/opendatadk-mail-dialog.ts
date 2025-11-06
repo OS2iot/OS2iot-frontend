@@ -7,6 +7,7 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   selector: "app-opendatadk-mail-dialog",
   templateUrl: "./opendatadk-mail-dialog.html",
   styleUrls: ["./opendatadk-mail-dialog.scss"],
+  standalone: false,
 })
 export class OpenDataDkMailDialogComponent {
   sendAttempted: boolean = false;

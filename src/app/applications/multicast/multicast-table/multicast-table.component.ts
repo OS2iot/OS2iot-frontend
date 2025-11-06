@@ -7,7 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { DeleteDialogService } from "@shared/components/delete-dialog/delete-dialog.service";
 import { MeService } from "@shared/services/me.service";
 import { SnackService } from "@shared/services/snack.service";
-import { merge, Observable, Subscription, of as observableOf } from "rxjs";
+import { merge, Observable, of as observableOf, Subscription } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { Multicast, MulticastData } from "../multicast.model";
 import { MulticastService } from "../multicast.service";
@@ -18,6 +18,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
   selector: "app-multicast-table",
   templateUrl: "./multicast-table.component.html",
   styleUrls: ["./multicast-table.component.scss"],
+  standalone: false,
 })
 export class MulticastTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -4,6 +4,7 @@ import { Component, OnInit } from "@angular/core";
   selector: "app-gateways",
   templateUrl: "./gateways.component.html",
   styleUrls: ["./gateways.component.scss"],
+  standalone: false,
 })
 export class GatewaysComponent implements OnInit {
   constructor() {}

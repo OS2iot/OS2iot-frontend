@@ -21,6 +21,7 @@ import { MeService } from "@shared/services/me.service";
   selector: "app-awaiting-users-table",
   templateUrl: "./awaiting-users-table.component.html",
   styleUrls: ["./awaiting-users-table.component.scss"],
+  standalone: false,
 })
 export class AwaitingUsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = ["name", "email", "menu"];

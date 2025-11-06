@@ -13,6 +13,7 @@ import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
   selector: "app-general-details",
   templateUrl: "./general-details.component.html",
   styleUrls: ["./general-details.component.scss"],
+  standalone: false,
 })
 export class GeneralDetailsComponent implements OnInit {
   @Input() data:

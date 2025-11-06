@@ -5,6 +5,7 @@ import { GatewayService } from "@app/gateway/gateway.service";
   selector: "app-gateway-list",
   templateUrl: "./gateway-list.component.html",
   styleUrls: ["./gateway-list.component.scss"],
+  standalone: false,
 })
 export class GatewayListComponent implements AfterViewInit {
   constructor(public gatewayService: GatewayService) {}

@@ -1,15 +1,23 @@
 @use "@angular/material" as mat;
 @import "variables";
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
+
+
+:root {
+  @include mat.slide-toggle-overrides((
+    selected-icon-color: white,
+  ));
+}
 
 /* ======== angular material custom theme ======== */
-$OS2IoT-primary: mat.define-palette(mat.$orange-palette);
-$OS2IoT-accent: mat.define-palette(mat.$deep-orange-palette, 100, 500, A100);
-$OS2IoT-warn: mat.define-palette(mat.$red-palette);
+$OS2IoT-primary: mat.m2-define-palette(mat.$m2-orange-palette);
+$OS2IoT-accent: mat.m2-define-palette(mat.$m2-deep-orange-palette, 100, 500, A100);
+$OS2IoT-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Light theme
-$OS2IoT-theme: mat.define-light-theme(
+$OS2IoT-theme: mat.m2-define-light-theme(
     (
       color: (
         theme-type: light,
@@ -21,13 +29,13 @@ $OS2IoT-theme: mat.define-light-theme(
 );
 
 // Dark theme
-$OS2IoT-theme: mat.define-dark-theme(
+$OS2IoT-theme: mat.m2-define-dark-theme(
     (
       color: (
         theme-type: dark,
         primary: $OS2IoT-primary,
         accent: $OS2IoT-accent,
-        warn: $OS2IoT-warn,
+        warn: $OS2IoT-warn
       ),
     )
 );
@@ -42,20 +50,21 @@ $OS2IoT-theme: mat.define-dark-theme(
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$OS2IoT-frontend-primary: mat.define-palette(mat.$deep-orange-palette);
+$OS2IoT-frontend-primary: mat.m2-define-palette(mat.$m2-deep-orange-palette);
 //$OS2IoT-frontend-accent: mat-palette($mat-pink, A200, A100, A400);
-$OS2IoT-frontend-accent: mat.define-palette(mat.$deep-orange-palette, A200, A100, A400);
+$OS2IoT-frontend-accent: mat.m2-define-palette(mat.$m2-deep-orange-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$OS2IoT-frontend-warn: mat.define-palette(mat.$red-palette);
+$OS2IoT-frontend-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$OS2IoT-frontend-theme: mat.define-light-theme(
+$OS2IoT-frontend-theme: mat.m2-define-light-theme(
     (
       color: (
         theme-type: light,

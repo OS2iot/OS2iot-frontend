@@ -1,8 +1,7 @@
-import { merge, of as observableOf } from "rxjs";
+import { merge, of as observableOf, Subscription } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { PayloadDecoder } from "src/app/payload-decoder/payload-decoder.model";
-import { Subscription } from "rxjs";
 import { PayloadDecoderService } from "@app/payload-decoder/payload-decoder.service";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -19,6 +18,7 @@ import { DefaultPageSizeOptions } from "@shared/constants/page.constants";
   selector: "app-payload-decoder-table",
   templateUrl: "./payload-decoder-table.component.html",
   styleUrls: ["./payload-decoder-table.component.scss"],
+  standalone: false,
 })
 export class PayloadDecoderTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -98,14 +98,6 @@ export class PayloadDecoderTableComponent implements OnInit, AfterViewInit, OnDe
     this.refresh();
   }
 
-  private refresh() {
-    this.paginator.page.emit({
-      pageIndex: this.paginator.pageIndex,
-      pageSize: this.paginator.pageSize,
-      length: this.resultsLength,
-    });
-  }
-
   clickDelete(element: any) {
     this.deleteDialogSubscription = this.deleteDialogService.showSimpleDialog().subscribe(response => {
       if (response) {
@@ -128,5 +120,13 @@ export class PayloadDecoderTableComponent implements OnInit, AfterViewInit, OnDe
     if (this.deleteDialogSubscription) {
       this.deleteDialogSubscription.unsubscribe();
     }
+  }
+
+  private refresh() {
+    this.paginator.page.emit({
+      pageIndex: this.paginator.pageIndex,
+      pageSize: this.paginator.pageSize,
+      length: this.resultsLength,
+    });
   }
 }

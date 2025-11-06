@@ -9,7 +9,7 @@ table {
   // border-radius: .25rem;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03),
-    0px 0px 1px rgba(0, 0, 0, 0.22);
+  0px 0px 1px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14), 0px 1px 13px rgba(0, 0, 0, 0.03), 0px 0px 1px rgba(0, 0, 0, 0.22);
   // border: $grey-border solid 1px;
 
@@ -37,7 +37,7 @@ table {
 
 .dropdown {
   .applicationRow__edit {
-    width: 10px;
+    width: 20px;
     height: 20px;
     background-image: radial-gradient(circle, $black 2px, transparent 1px);
     background-size: 100% 33.33%;
@@ -50,9 +50,10 @@ table {
 
   .dropdown-menu {
     &--table {
-      min-width: 90px !important;
+      min-width: fit-content !important;
       left: -35px !important;
     }
+
     li {
       padding: 0;
       margin: 0;
@@ -69,7 +70,7 @@ table {
 
         &:hover,
         &:active {
-          color: $black;
+          color: white;
           text-decoration: none;
           background-color: $color-primary;
         }

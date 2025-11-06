@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { RestService } from "@shared/services/rest.service";
-import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { TestPayloadDecoder } from "./test-payload-decoder.model";
 
 @Injectable({

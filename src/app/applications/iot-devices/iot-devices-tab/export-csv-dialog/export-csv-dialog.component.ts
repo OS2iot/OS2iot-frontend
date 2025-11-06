@@ -6,6 +6,7 @@ import { DialogModel } from "@shared/models/dialog.model";
   selector: "export-csv-dialog",
   templateUrl: "./export-csv-dialog.component.html",
   styleUrls: ["./export-csv-dialog.component.scss"],
+  standalone: false,
 })
 export class ExportCsvDialogComponent implements OnInit {
   constructor(

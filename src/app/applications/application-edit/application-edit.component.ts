@@ -7,6 +7,7 @@ import { BackButton } from "@shared/models/back-button.model";
   selector: "app-application-edit",
   templateUrl: "./application-edit.component.html",
   styleUrls: ["./application-edit.component.scss"],
+  standalone: false,
 })
 export class ApplicationEditComponent implements OnInit {
   public backButton: BackButton = { label: "", routerLink: "applications" };

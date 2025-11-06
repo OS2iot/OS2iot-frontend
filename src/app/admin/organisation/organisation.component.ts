@@ -5,6 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-organisation",
   templateUrl: "./organisation.component.html",
   styleUrls: ["./organisation.component.scss"],
+  standalone: false,
 })
 export class OrganisationComponent implements OnInit {
   constructor(public translate: TranslateService) {

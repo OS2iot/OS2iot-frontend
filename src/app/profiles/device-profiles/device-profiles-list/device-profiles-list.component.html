@@ -1,14 +1,16 @@
 <app-top-bar-table
-  [title]="'PROFILES.DEVICE_PROFILE.HEADLINE' | translate"
   [ctaLabelPrimary]="'PROFILES.DEVICE_PROFILE.CREATE-NEW-DEVICE-PROFILE' | translate"
   [ctaRouterLinkPrimary]="canCreate() ? 'device-profile/new-device-profile' : null"
+  [title]="'PROFILES.DEVICE_PROFILE.HEADLINE' | translate"
 ></app-top-bar-table>
-<div *ngIf="errorMessages" class="error-messages p-3 my-2">
-  {{ errorMessages | translate }}
-</div>
-<app-device-profiles-item
-  *ngFor="let deviceProfile of deviceProfiles; let i = index"
-  (deleteDeviceProfile)="deleteDeviceProfile($event)"
-  [deviceProfile]="deviceProfile"
->
-</app-device-profiles-item>
+@if (errorMessages) {
+  <div class="error-messages p-3 my-2">
+    {{ errorMessages | translate }}
+  </div>
+} @for (deviceProfile of deviceProfiles; track deviceProfile; let i = $index) {
+  <app-device-profiles-item
+    (deleteDeviceProfile)="deleteDeviceProfile($event)"
+    [deviceProfile]="deviceProfile"
+  >
+  </app-device-profiles-item>
+}

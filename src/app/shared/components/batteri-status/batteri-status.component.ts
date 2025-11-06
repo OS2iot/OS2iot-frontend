@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from "@angular/core";
   selector: "app-batteri-status",
   templateUrl: "./batteri-status.component.html",
   styleUrls: ["./batteri-status.component.scss"],
+  standalone: false,
 })
 export class BatteriStatusComponent implements OnInit {
   @Input() public color: string;

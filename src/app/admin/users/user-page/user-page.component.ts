@@ -16,6 +16,7 @@ import { takeUntil } from "rxjs/operators";
   selector: "app-user-page",
   templateUrl: "./user-page.component.html",
   styleUrls: ["./user-page.component.scss"],
+  standalone: false,
 })
 export class UserPageComponent implements OnInit {
   public updateUserOrgs: UpdateUserOrgsDto = new UpdateUserOrgsDto();
@@ -24,7 +25,7 @@ export class UserPageComponent implements OnInit {
   public formFailedSubmit = false;
   public backButtonTitle: string;
   public errorFields: string[];
-  public errorMessages: unknown;
+  public errorMessages: any[];
   public title: string;
   public awaitingConfirmation: boolean;
   public requestOrganizationsList: Organisation[];
@@ -78,23 +79,6 @@ export class UserPageComponent implements OnInit {
     this.organisationsFilterCtrl.valueChanges.pipe(takeUntil(this.onDestroy)).subscribe(() => {
       this.filterOrganisations();
     });
-  }
-  private filterOrganisations() {
-    if (!this.requestOrganizationsList) {
-      return;
-    }
-    // get the search keyword
-    let search = this.organisationsFilterCtrl?.value?.trim();
-    if (!search) {
-      this.filteredOrganisations.next(this.requestOrganizationsList.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    const filtered = this.requestOrganizationsList.filter(org => {
-      return org.name.toLocaleLowerCase().indexOf(search) > -1;
-    });
-    this.filteredOrganisations.next(filtered);
   }
 
   public compareRequestedAndAlreadyJoinedOrganizations(
@@ -160,27 +144,47 @@ export class UserPageComponent implements OnInit {
 
       this.resetErrors();
       this.mapToDto(this.updateUserOrgsFromFrontend);
-      this.userService.updateUserOrgs(this.updateUserOrgs).subscribe(
-        () => {
+      this.userService.updateUserOrgs(this.updateUserOrgs).subscribe({
+        next: () => {
           window.location.reload();
           this.pressed = false;
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.handleError(error);
           this.formFailedSubmit = true;
           this.pressed = false;
-        }
-      );
+        },
+      });
     }
   }
-  private resetErrors() {
-    this.errorFields = [];
-    this.errorMessages = undefined;
-    this.formFailedSubmit = false;
-  }
+
   handleError(error: HttpErrorResponse) {
     const errors = this.errorMessageService.handleErrorMessageWithFields(error);
     this.errorFields = errors.errorFields;
     this.errorMessages = errors.errorMessages;
+  }
+
+  private filterOrganisations() {
+    if (!this.requestOrganizationsList) {
+      return;
+    }
+    // get the search keyword
+    let search = this.organisationsFilterCtrl?.value?.trim();
+    if (!search) {
+      this.filteredOrganisations.next(this.requestOrganizationsList.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    const filtered = this.requestOrganizationsList.filter(org => {
+      return org.name.toLocaleLowerCase().indexOf(search) > -1;
+    });
+    this.filteredOrganisations.next(filtered);
+  }
+
+  private resetErrors() {
+    this.errorFields = [];
+    this.errorMessages = undefined;
+    this.formFailedSubmit = false;
   }
 }

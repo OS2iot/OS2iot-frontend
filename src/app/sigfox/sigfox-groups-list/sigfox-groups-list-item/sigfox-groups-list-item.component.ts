@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { faEdit, faPen, faToolbox } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faToolbox } from "@fortawesome/free-solid-svg-icons";
 import { SigfoxGroup } from "@shared/models/sigfox-group.model";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
@@ -9,6 +9,7 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-sigfox-groups-list-item",
   templateUrl: "./sigfox-groups-list-item.component.html",
   styleUrls: ["./sigfox-groups-list-item.component.scss"],
+  standalone: false,
 })
 export class SigfoxGroupsListItemComponent implements OnInit {
   faToolbox = faToolbox;

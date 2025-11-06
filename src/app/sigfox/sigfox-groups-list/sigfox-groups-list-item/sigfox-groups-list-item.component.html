@@ -6,10 +6,12 @@
         {{ sigfoxGroup.sigfoxGroupData.name }}
       </a>
     </div>
-    <div class="col-3" *ngIf="canEdit">
-      <a class="d-flex justify-content-center align-items-center" [routerLink]="[sigfoxGroup.id, 'edit-group']">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </a>
-    </div>
+    @if (canEdit) {
+      <div class="col-3">
+        <a [routerLink]="[sigfoxGroup.id, 'edit-group']" class="d-flex justify-content-center align-items-center">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </a>
+      </div>
+    }
   </div>
 </div>

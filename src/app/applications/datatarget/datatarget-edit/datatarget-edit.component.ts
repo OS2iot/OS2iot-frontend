@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, Type, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, Type, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DataTargetType } from "@shared/enums/datatarget-type";
 import { DatatargetTypesService } from "../datatarget-types.service";
@@ -11,6 +11,7 @@ import { DatatargetEditTypeSelectorDirective } from "./datatarget-edit-type-sele
   selector: "app-datatarget-edit",
   templateUrl: "./datatarget-edit.component.html",
   styleUrls: ["./datatarget-edit.component.scss"],
+  standalone: false,
 })
 export class DatatargetEditComponent implements OnInit, OnDestroy {
   @ViewChild(DatatargetEditTypeSelectorDirective, { static: true })

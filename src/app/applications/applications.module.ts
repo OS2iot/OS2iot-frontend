@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { BasicInformationBoxComponent } from "@shared/components/basic-information-box/basic-information-box.component";
 import { FormModule } from "@shared/components/forms/form.module";
 import { OptionFieldComponent } from "@shared/components/option-field/option-field.component";
@@ -44,7 +44,7 @@ import { BasicTabSwitchComponent } from "@shared/components/basic-tab-switch/bas
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule,
+    TranslatePipe,
     IotDevicesModule,
     DatatargetModule,
     DirectivesModule,

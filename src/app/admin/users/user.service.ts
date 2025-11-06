@@ -5,12 +5,12 @@ import { map } from "rxjs/operators";
 import { Organisation } from "../organisation/organisation.model";
 import { UserMinimalService } from "./user-minimal.service";
 import {
-  UserResponse,
-  UserRequest,
-  UserGetManyResponse,
   CreateNewKombitUserDto,
-  UpdateUserOrgsDto,
   RejectUserDto,
+  UpdateUserOrgsDto,
+  UserGetManyResponse,
+  UserRequest,
+  UserResponse,
 } from "./user.model";
 
 @Injectable({

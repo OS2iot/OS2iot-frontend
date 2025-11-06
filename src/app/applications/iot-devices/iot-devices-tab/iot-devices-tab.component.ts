@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ApplicationService } from "@applications/application.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ExportCsvDialogComponent } from "@applications/iot-devices/iot-devices-tab/export-csv-dialog/export-csv-dialog.component";
-import { RestService } from "@shared/services/rest.service";
 import { Download } from "@shared/helpers/download.helper";
 import { DownloadService } from "@shared/services/download.service";
 import { environment } from "@environments/environment";
@@ -12,6 +11,7 @@ import { Observable } from "rxjs";
   selector: "app-iot-devices-tab",
   templateUrl: "./iot-devices-tab.component.html",
   styleUrls: ["./iot-devices-tab.component.scss"],
+  standalone: false,
 })
 export class IotDevicesTabComponent implements OnInit {
   download$: Observable<Download>;
@@ -22,12 +22,13 @@ export class IotDevicesTabComponent implements OnInit {
     private dialog: MatDialog,
     private downloader: DownloadService
   ) {}
-  ngOnInit(): void {
-    this.applicationId = this.applicationService.id;
-  }
 
   get openDialogFunc() {
     return this.openExportCsvDialog.bind(this);
+  }
+
+  ngOnInit(): void {
+    this.applicationId = this.applicationService.id;
   }
 
   public openExportCsvDialog() {

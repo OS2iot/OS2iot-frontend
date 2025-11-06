@@ -5,7 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { SigfoxGroup } from "@shared/models/sigfox-group.model";
 import { SigfoxService } from "@shared/services/sigfox.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 
@@ -13,13 +13,14 @@ import { OrganizationAccessScope } from "@shared/enums/access-scopes";
   selector: "app-sigfox-groups-list",
   templateUrl: "./sigfox-groups-list.component.html",
   styleUrls: ["./sigfox-groups-list.component.scss"],
+  standalone: false,
 })
 export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
   faDatabase = faDatabase;
   faToolbox = faToolbox;
   subscription: Subscription;
 
-  public sigfoxGroups: Observable<SigfoxGroup[]>;
+  public sigfoxGroups: SigfoxGroup[];
   canEdit: boolean;
 
   constructor(
@@ -41,14 +42,14 @@ export class SigfoxGroupsListComponent implements OnInit, OnDestroy {
   }
 
   getSigFoxGroups() {
-    this.sigfoxService.getGroups(this.getCurrentOrganisationId()).subscribe(
-      response => {
+    this.sigfoxService.getGroups(this.getCurrentOrganisationId()).subscribe({
+      next: response => {
         this.sigfoxGroups = response.data;
       },
-      error => {
+      error: error => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   getCurrentOrganisationId(): number {

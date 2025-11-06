@@ -1,96 +1,120 @@
-<div *ngIf="datatarget" class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 d-flex align-items-stretch">
-      <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
-        <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
-        <app-general-details [data]="datatarget"></app-general-details>
-        <p *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
-          <strong>{{ "DATATARGET.LATEST_MESSAGE" | translate }}</strong>{{ datatarget.lastMessageDate | dkTime }}
-        </p>
-        <mat-divider></mat-divider>
-        <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
-          <p>
-            <strong>{{ "DATATARGET.URL" | translate }}</strong>{{ datatarget.url }}
-          </p>
-          <p>
-            <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong>{{ datatarget.timeout }}
-          </p>
-        </span>
-        <p>
-          <strong>{{ "DATATARGET.TYPE" | translate }}</strong>{{ "DATATARGET." + datatarget.type + ".TYPE" | translate
-          }}
-        </p>
-        <span *ngIf="datatarget.type !== dataTargetType.OPENDATADK">
+@if (datatarget) {
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
+          <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
+          <app-general-details [data]="datatarget"></app-general-details>
+          @if (datatarget.type !== dataTargetType.OPENDATADK) {
+            <p>
+              <strong>{{ "DATATARGET.LATEST_MESSAGE" | translate }}</strong>{{ datatarget.lastMessageDate | dkTime }}
+            </p>
+          }
           <mat-divider></mat-divider>
+          @if (datatarget.type !== dataTargetType.OPENDATADK) {
+            <span>
+              <p>
+                <strong>{{ "DATATARGET.URL" | translate }}</strong>{{ datatarget.url }}
+              </p>
+              <p>
+                <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong>{{ datatarget.timeout }}
+              </p>
+            </span>
+          }
           <p>
-            <strong>{{ "DATATARGET.AUTHORIZATIONHEADER" | translate }}</strong>
+            <strong>{{ "DATATARGET.TYPE" | translate }}</strong>{{
+              "DATATARGET." + datatarget.type + ".TYPE" | translate
+            }}
           </p>
-          <code>
-              <pre *ngIf="datatarget.authorizationHeader; else showNoAuthText">{{
-                datatarget.authorizationHeader
-              }}</pre>
-            </code>
-          <ng-template #showNoAuthText>
-            <p>{{ "DATATARGET.NO-AUTHORIZATIONHEADER" | translate }}</p>
-          </ng-template>
-        </span>
-      </div>
-    </div>
-    <div *ngIf="datatarget.type === dataTargetType.OPENDATADK" class="col-md-6 d-flex align-items-stretch">
-      <div class="jumbotron jumbotron--m-left jumbotron--full-width">
-        <h3>{{ "DATATARGET.OPENDATA-DK.TYPE" | translate }}</h3>
-        <div *ngIf="datatarget.setToOpendataDk; else noOpendataDk">
-          <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
+          @if (datatarget.type !== dataTargetType.OPENDATADK) {
+            <span>
+              <mat-divider></mat-divider>
+              <p>
+                <strong>{{ "DATATARGET.AUTHORIZATIONHEADER" | translate }}</strong>
+              </p>
+              <code>
+                @if (datatarget.authorizationHeader) {
+                  <pre>{{
+                      datatarget.authorizationHeader
+                    }}</pre>
+                } @else {
+                <p>{{ "DATATARGET.NO-AUTHORIZATIONHEADER" | translate }}</p>
+              }
+              </code>
+            </span>
+          }
         </div>
-        <ng-template #noOpendataDk>
-          <p>{{ "DATATARGET.NO-OPENDATA-DK" | translate }}</p>
-        </ng-template>
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <div class="jumbotron">
-        <div class="form-group">
-          <h3>{{ "DATATARGET.RELATIONS" | translate }}</h3>
-          <div *ngIf="dataTargetRelations?.length === 0">
-            <p>{{ "DATATARGET.NO-RELATIONS" | translate }}</p>
-          </div>
-          <div *ngIf="dataTargetRelations">
-            <div *ngFor="let relation of dataTargetRelations">
-              <div class="row">
-                <div class="col-md-4 d-flex align-items-center">
-                  <p>
-                    <strong>{{ "DATATARGET.PAYLOADEDECODER" | translate }}</strong><span
-                      *ngIf="relation.payloadDecoder; else noDecoder">
-                      <a [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{
-                        relation.payloadDecoder.name
-                        }}</a>
-                    </span>
-                    <ng-template #noDecoder>{{ "DATATARGET.NO-PAYLOADDECODER" | translate }}</ng-template>
-                  </p>
-                </div>
-                <div class="col-md-1 d-flex align-items-center justify-content-center">
-                  <fa-icon [icon]="arrowsAltH" class="icon--primary icon--medium icon--disabled"></fa-icon>
-                </div>
-                <div class="col-md-7 d-flex align-items-center">
-                  <p>
-                    <strong>{{ "DATATARGET.IOTDEVICE" | translate }}</strong>
-                    <span *ngFor="let device of relation.iotDevices; let first = first">
-                      <ng-container *ngIf="!first">, </ng-container>
-                      <a [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{
-                        device.name
-                        }}</a>
-                    </span>
-                  </p>
-                </div>
-                <mat-divider></mat-divider>
+      @if (datatarget.type === dataTargetType.OPENDATADK) {
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="jumbotron jumbotron--m-left jumbotron--full-width">
+            <h3>{{ "DATATARGET.OPENDATA-DK.TYPE" | translate }}</h3>
+            @if (datatarget.setToOpendataDk) {
+              <div>
+                <app-opendatadk-detail [openDataDkDataset]="datatarget.openDataDkDataset"></app-opendatadk-detail>
               </div>
+            } @else {
+            <p>{{ "DATATARGET.NO-OPENDATA-DK" | translate }}</p>
+          }
+          </div>
+        </div>
+      }
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          <div class="form-group">
+            <h3>{{ "DATATARGET.RELATIONS" | translate }}</h3>
+            @if (dataTargetRelations?.length === 0) {
+              <div>
+                <p>{{ "DATATARGET.NO-RELATIONS" | translate }}</p>
+              </div>
+            } @if (dataTargetRelations) {
+            <div>
+              @for (relation of dataTargetRelations; track relation) {
+                <div>
+                  <div class="row">
+                    <div class="col-md-4 d-flex align-items-center">
+                      <p>
+                        <strong>{{ "DATATARGET.PAYLOADEDECODER" | translate }}</strong>@if (relation.payloadDecoder) {
+                        <span
+                        >
+                            <a [routerLink]="['/payload-decoder/payload-decoder-detail/', relation.payloadDecoder.id]">{{
+                                relation.payloadDecoder.name
+                              }}</a>
+                          </span>
+                      } @else {
+                        {{ "DATATARGET.NO-PAYLOADDECODER" | translate }}
+                      }
+                      </p>
+                    </div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-center">
+                      <fa-icon [icon]="arrowsAltH" class="icon--primary icon--medium icon--disabled"></fa-icon>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                      <p>
+                        <strong>{{ "DATATARGET.IOTDEVICE" | translate }}</strong>
+                        @for (device of relation.iotDevices; track device; let first = $first) {
+                          <span>
+                            @if (!first) {
+                              ,
+                            }
+                            <a [routerLink]="['/applications', device.application.id, 'iot-device', device.id]">{{
+                                device.name
+                              }}</a>
+                          </span>
+                        }
+                      </p>
+                    </div>
+                    <mat-divider></mat-divider>
+                  </div>
+                </div>
+              }
             </div>
+          }
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}
