@@ -4,6 +4,13 @@
 @include mat.elevation-classes();
 @include mat.app-background();
 
+
+:root {
+  @include mat.slide-toggle-overrides((
+    selected-icon-color: white,
+  ));
+}
+
 /* ======== angular material custom theme ======== */
 $OS2IoT-primary: mat.m2-define-palette(mat.$m2-orange-palette);
 $OS2IoT-accent: mat.m2-define-palette(mat.$m2-deep-orange-palette, 100, 500, A100);
@@ -28,7 +35,7 @@ $OS2IoT-theme: mat.m2-define-dark-theme(
         theme-type: dark,
         primary: $OS2IoT-primary,
         accent: $OS2IoT-accent,
-        warn: $OS2IoT-warn,
+        warn: $OS2IoT-warn
       ),
     )
 );

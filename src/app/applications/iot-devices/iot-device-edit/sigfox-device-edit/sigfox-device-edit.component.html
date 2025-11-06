@@ -31,6 +31,7 @@
         <div class="form-group mt-3 col-12">
           <mat-slide-toggle
             [(ngModel)]="iotDevice.sigfoxSettings.connectToExistingDeviceInBackend"
+            color=""
             id="connectToExistingDeviceInBackend"
             name="registeredAtSigfox"
           >
@@ -38,147 +39,151 @@
           </mat-slide-toggle
           >
         </div>
-      } @if (!iotDevice.sigfoxSettings.connectToExistingDeviceInBackend || editMode) {
-      <div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="deviceTypeId">{{ "QUESTION.SIGFOX.DEVICETYPEID" | translate }}*</label>
-          <select
-            [(ngModel)]="iotDevice.sigfoxSettings.deviceTypeId"
-            [ngClass]="{
+      }
+      @if (!iotDevice.sigfoxSettings.connectToExistingDeviceInBackend || editMode) {
+        <div>
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="deviceTypeId">{{ "QUESTION.SIGFOX.DEVICETYPEID" | translate }}*</label>
+            <select
+              [(ngModel)]="iotDevice.sigfoxSettings.deviceTypeId"
+              [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('deviceTypeId'),
             'is-valid': formFailedSubmit && !errorFields.includes('deviceTypeId')
           }"
-            [value]="iotDevice.sigfoxSettings.deviceTypeId"
-            class="form-select"
-            id="deviceTypeId"
-            name="deviceTypeId"
-            required
-          >
-            @for (deviceType of sigfoxDeviceTypes; track deviceType) {
-              <option [value]="deviceType.id">
-                {{ deviceType.name }}
-              </option>
-            }
-          </select>
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="pac">{{ "QUESTION.SIGFOX.PAC" | translate }}*</label>
-          <input
-            [(ngModel)]="iotDevice.sigfoxSettings.pac"
-            [disabled]="editMode"
-            [ngClass]="{
+              [value]="iotDevice.sigfoxSettings.deviceTypeId"
+              class="form-select"
+              id="deviceTypeId"
+              name="deviceTypeId"
+              required
+            >
+              @for (deviceType of sigfoxDeviceTypes; track deviceType) {
+                <option [value]="deviceType.id">
+                  {{ deviceType.name }}
+                </option>
+              }
+            </select>
+          </div>
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="pac">{{ "QUESTION.SIGFOX.PAC" | translate }}*</label>
+            <input
+              [(ngModel)]="iotDevice.sigfoxSettings.pac"
+              [disabled]="editMode"
+              [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('pac'),
             'is-valid': formFailedSubmit && !errorFields.includes('pac')
           }"
-            [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate"
-            class="form-control"
-            id="pac"
-            maxLength="16"
-            name="pac"
-            type="text"
-          />
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="deviceId">{{ "QUESTION.SIGFOX.DEVICEID" | translate }}*</label>
-          <input
-            [(ngModel)]="iotDevice.sigfoxSettings.deviceId"
-            [disabled]="editMode"
-            [ngClass]="{
+              [placeholder]="'QUESTION.SIGFOX.PAC-PLACEHOLDER' | translate"
+              class="form-control"
+              id="pac"
+              maxLength="16"
+              name="pac"
+              type="text"
+            />
+          </div>
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="deviceId">{{ "QUESTION.SIGFOX.DEVICEID" | translate }}*</label>
+            <input
+              [(ngModel)]="iotDevice.sigfoxSettings.deviceId"
+              [disabled]="editMode"
+              [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('deviceId'),
             'is-valid': formFailedSubmit && !errorFields.includes('deviceId')
           }"
-            [placeholder]="'QUESTION.SIGFOX.DEVICEID-PLACEHOLDER' | translate"
-            class="form-control"
-            id="deviceId"
-            maxLength="8"
-            name="deviceId"
-            type="text"
-          />
-        </div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="endProductCertificate"
-          >{{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE" | translate }}*</label
-          >
-          <input
-            [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
-            [disabled]="editMode"
-            [ngClass]="{
+              [placeholder]="'QUESTION.SIGFOX.DEVICEID-PLACEHOLDER' | translate"
+              class="form-control"
+              id="deviceId"
+              maxLength="8"
+              name="deviceId"
+              type="text"
+            />
+          </div>
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="endProductCertificate"
+            >{{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE" | translate }}*</label
+            >
+            <input
+              [(ngModel)]="iotDevice.sigfoxSettings.endProductCertificate"
+              [disabled]="editMode"
+              [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('endProductCertificate'),
             'is-valid': formFailedSubmit && !errorFields.includes('endProductCertificate')
           }"
-            [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate"
-            class="form-control"
-            id="endProductCertificate"
-            maxLength="16"
-            name="endProductCertificate"
-            type="text"
-          />
-        </div>
-        <div class="form-group mt-3 col-12">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <h4>{{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TITLE" | translate }}</h4>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="form-group mt-3 col-12">
-              <a
-                href="https://partners.sigfox.com/search/products?or[categories][0]=device&q=&limit=12&page=0"
-                target="_blank"
-              >
-                {{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TEXT" | translate }}
-              </a>
-            </div>
-            @if (!iotDevice.sigfoxSettings.endProductCertificate) {
+              [placeholder]="'QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-PLACEHOLDER' | translate"
+              class="form-control"
+              id="endProductCertificate"
+              maxLength="16"
+              name="endProductCertificate"
+              type="text"
+            />
+          </div>
+          <div class="form-group mt-3 col-12">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h4>{{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TITLE" | translate }}</h4>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
               <div class="form-group mt-3 col-12">
-                <label class="form-label" for="endProductCertificate"
-                >{{ "QUESTION.SIGFOX.PROTOTYPE-TITLE" | translate }}*</label
+                <a
+                  href="https://partners.sigfox.com/search/products?or[categories][0]=device&q=&limit=12&page=0"
+                  target="_blank"
                 >
-                <div>
-                  <mat-slide-toggle
-                    [(ngModel)]="iotDevice.sigfoxSettings.prototype"
-                    [disabled]="editMode"
-                    id="prototype"
-                    name="prototype"
-                  >
-                    {{ "QUESTION.SIGFOX.PROTOTYPE" | translate }}
-                  </mat-slide-toggle
-                  >
-                </div>
+                  {{ "QUESTION.SIGFOX.ENDPRODUCTCERTIFICATE-HELP-TEXT" | translate }}
+                </a>
               </div>
-            }
-          </mat-expansion-panel>
+              @if (!iotDevice.sigfoxSettings.endProductCertificate) {
+                <div class="form-group mt-3 col-12">
+                  <label class="form-label" for="endProductCertificate"
+                  >{{ "QUESTION.SIGFOX.PROTOTYPE-TITLE" | translate }}*</label
+                  >
+                  <div>
+                    <mat-slide-toggle
+                      [(ngModel)]="iotDevice.sigfoxSettings.prototype"
+                      [disabled]="editMode"
+                      color=""
+                      id="prototype"
+                      name="prototype"
+                    >
+                      {{ "QUESTION.SIGFOX.PROTOTYPE" | translate }}
+                    </mat-slide-toggle
+                    >
+                  </div>
+                </div>
+              }
+            </mat-expansion-panel>
+          </div>
         </div>
-      </div>
-    } @if (iotDevice.sigfoxSettings.connectToExistingDeviceInBackend && !editMode) {
-      <div>
-        <div class="form-group mt-3 col-12">
-          <label class="form-label" for="deviceId">{{ "QUESTION.SIGFOX.DEVICEID" | translate }}*</label>
-          <select
-            [(ngModel)]="iotDevice.sigfoxSettings.deviceId"
-            [ngClass]="{
+      }
+      @if (iotDevice.sigfoxSettings.connectToExistingDeviceInBackend && !editMode) {
+        <div>
+          <div class="form-group mt-3 col-12">
+            <label class="form-label" for="deviceId">{{ "QUESTION.SIGFOX.DEVICEID" | translate }}*</label>
+            <select
+              [(ngModel)]="iotDevice.sigfoxSettings.deviceId"
+              [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('deviceId'),
             'is-valid': formFailedSubmit && !errorFields.includes('deviceId')
           }"
-            [value]="iotDevice.sigfoxSettings.deviceId"
-            class="form-select"
-            id="deviceId"
-            name="deviceId"
-            required
-          >
-            @for (element of sigfoxDevices; track element) {
-              <option [value]="element.id">
-                {{ element.name }} ({{ element.id }})
-              </option>
-            }
-          </select>
+              [value]="iotDevice.sigfoxSettings.deviceId"
+              class="form-select"
+              id="deviceId"
+              name="deviceId"
+              required
+            >
+              @for (element of sigfoxDevices; track element) {
+                <option [value]="element.id">
+                  {{ element.name }} ({{ element.id }})
+                </option>
+              }
+            </select>
+          </div>
         </div>
-      </div>
-    } @if (!iotDevice.sigfoxSettings.groupId) {
-      <div>
-        <h3>{{ "QUESTION.SIGFOX.SELECTGROUPFIRST" | translate }}</h3>
-      </div>
-    }
+      }
+      @if (!iotDevice.sigfoxSettings.groupId) {
+        <div>
+          <h3>{{ "QUESTION.SIGFOX.SELECTGROUPFIRST" | translate }}</h3>
+        </div>
+      }
       <div class="form-group mt-3 col-12">
         {{ "QUESTION.SIGFOX.DISCLAIMER" | translate }}
         <a href="https://support.sigfox.com/docs/unsubscribe-a-device" target="_blank">

@@ -322,7 +322,7 @@
       <h3 class="h3">{{ "QUESTION-LORA-GATEWAY.ALARMS" | translate }}</h3>
       <label for="notifyOffline">{{ "QUESTION-LORA-GATEWAY.SET-ALARMS" | translate }}</label>
       <div class="row mt-3">
-        <mat-slide-toggle [(ngModel)]="gateway.notifyOffline" id="notifyOffline" name="notifyOffline">
+        <mat-slide-toggle [(ngModel)]="gateway.notifyOffline" color="" id="notifyOffline" name="notifyOffline">
           {{ "GEN.OFFLINE" | translate }}
         </mat-slide-toggle
         >
@@ -356,6 +356,7 @@
       <div class="row mt-3">
         <mat-slide-toggle
           [(ngModel)]="gateway.notifyUnusualPackages"
+          color=""
           id="notifyUnusualPackages"
           name="notifyUnusualPackages"
         >
@@ -411,23 +412,24 @@
             </div>
           </div>
         </div>
-      } @if (gateway.notifyOffline || gateway.notifyUnusualPackages) {
-      <div class="form-group mt-3">
-        <label class="form-label" for="alarmMail">{{ "QUESTION-LORA-GATEWAY.SET-EMAIL" | translate }}*</label>
-        <input
-          [(ngModel)]="gateway.alarmMail"
-          [ngClass]="{
+      }
+      @if (gateway.notifyOffline || gateway.notifyUnusualPackages) {
+        <div class="form-group mt-3">
+          <label class="form-label" for="alarmMail">{{ "QUESTION-LORA-GATEWAY.SET-EMAIL" | translate }}*</label>
+          <input
+            [(ngModel)]="gateway.alarmMail"
+            [ngClass]="{
             'is-invalid': formFailedSubmit && errorFields.includes('alarmMail'),
             'is-valid': formFailedSubmit && !errorFields.includes('alarmMail')
           }"
-          [placeholder]="'USERS.EMAIL' | translate"
-          class="form-control"
-          id="alarmMail"
-          name="alarmMail"
-          type="text"
-        />
-      </div>
-    }
+            [placeholder]="'USERS.EMAIL' | translate"
+            class="form-control"
+            id="alarmMail"
+            name="alarmMail"
+            type="text"
+          />
+        </div>
+      }
     </div>
   </div>
 
