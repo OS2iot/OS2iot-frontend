@@ -19,6 +19,11 @@
 </p>
 
 <p>
+  <strong>{{ "OPENDATADK.DETAILS.TAGS" | translate }}</strong>
+  {{ openDataDkDataset.keywordTags ?? ("OPENDATADK.DETAILS.NA" | translate) }}
+</p>
+
+<p>
   <strong>{{ "OPENDATADK.DETAILS.AUTHORNAME" | translate }}</strong>
   {{ openDataDkDataset.authorName }}
 </p>
@@ -26,6 +31,21 @@
 <p>
   <strong>{{ "OPENDATADK.DETAILS.AUTHOREMAIL" | translate }}</strong>
   {{ openDataDkDataset.authorEmail }}
+</p>
+
+<p>
+  <strong>{{ "OPENDATADK.DETAILS.UPDATE-FREQUENCY" | translate }}</strong>
+  {{ openDataDkDataset.updateFrequency ? ("OPENDATADK.QUESTION.UPDATE-FREQUENCY-OPTIONS." + openDataDkDataset.updateFrequency | translate) : ("OPENDATADK.DETAILS.NA" | translate) }}
+</p>
+
+<p>
+  <strong>{{ "OPENDATADK.DETAILS.DOCUMENTATION-URL" | translate }}</strong>
+  {{ openDataDkDataset.documentationUrl ?? ("OPENDATADK.DETAILS.NA" | translate) }}
+</p>
+
+<p>
+  <strong>{{ "OPENDATADK.DETAILS.DATA-DIRECTORY" | translate }}</strong>
+  {{ openDataDkDataset.dataDirectory | yesNo }}
 </p>
 
 <p>
