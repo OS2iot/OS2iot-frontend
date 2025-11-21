@@ -239,15 +239,15 @@
     </div>
   </div>
 
-  <!-- Keywords -->
+  <!-- Theme -->
   <div class="row mb-2">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="openDataDkDataset.keywords">
-        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS" | translate }}
+        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME" | translate }}
       </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-INFO' | translate"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME-INFO' | translate"
         class="form-info-icon"
         matTooltipHideDelay="2000"
         matTooltipPosition="above"
@@ -259,7 +259,7 @@
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.keywords'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.keywords')
         }"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME-PLACEHOLDER' | translate"
         class="form-control"
         id="openDataDkDataset.keywords"
         multiple
@@ -277,11 +277,11 @@
   <div class="row mb-2">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="openDataDkDataset.keyWordTags">
-        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-FREE" | translate }}
+        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS" | translate }}
       </label>
       <fa-icon
         [icon]="faQuestionCircle"
-        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-FREE-INFO' | translate"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS-INFO' | translate"
         class="form-info-icon"
         matTooltipHideDelay="2000"
         matTooltipPosition="above"
@@ -293,7 +293,7 @@
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.keywordTags'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.keywordTags')
         }"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-FREE-PLACEHOLDER' | translate"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS-PLACEHOLDER' | translate"
         class="form-control"
         id="openDataDkDataset.keyWordTags"
         name="openDataDkDataset.keyWordTags"
@@ -377,7 +377,7 @@
       <mat-checkbox [(ngModel)]="datatarget.openDataDkDataset.acceptTerms" name="acceptTerms">
         <p>
           {{ "OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE" | translate }}
-          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da">
+          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da" target="_blank">
             {{ "OPENDATADK.QUESTION.TERMS-AND-CONDITIONS" | translate }}
           </a>
         </p>
