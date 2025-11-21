@@ -15,7 +15,6 @@ import { UserMinimalService } from "../users/user-minimal.service";
 })
 export class OrganisationService {
   URL = "organization";
-  URLMINIMAL = "organization/minimal";
   URLMINIMAL_NEWKOMBIT = "kombitCreation/minimal";
 
   constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
@@ -38,10 +37,6 @@ export class OrganisationService {
         return response;
       })
     );
-  }
-
-  getMinimal(): Observable<OrganisationGetMinimalResponse> {
-    return this.restService.get(this.URLMINIMAL, {}).pipe(shareReplay(1));
   }
 
   getMinimalNoPerm(): Observable<OrganisationGetMinimalResponse> {

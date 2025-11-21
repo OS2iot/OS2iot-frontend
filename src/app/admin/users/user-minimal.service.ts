@@ -7,15 +7,10 @@ import { UserMinimal, UserMinimalResponse } from "./user-minimal.model";
   providedIn: "root",
 })
 export class UserMinimalService {
-  URL = "user/minimal";
   URL_NEW_KOMBIT = "kombitCreation/minimalUsers";
   private userMinimalList: UserMinimal[];
 
   constructor(private restService: RestService) {}
-
-  getUserMinimalRest(): Observable<UserMinimalResponse> {
-    return this.restService.get(this.URL);
-  }
 
   getUserMinimalRestNewKombit(): Observable<UserMinimalResponse> {
     return this.restService.get(this.URL_NEW_KOMBIT);

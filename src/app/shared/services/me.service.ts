@@ -8,7 +8,6 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   providedIn: "root",
 })
 export class MeService {
-  private user: UserResponse;
 
   constructor(private sharedVariableService: SharedVariableService) {}
 

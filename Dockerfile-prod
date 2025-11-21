@@ -25,11 +25,11 @@ COPY . /app
 # Build the project and copy the files
 RUN npm run ng build -- --deploy-url=/ --c production
 
-FROM bitnami/nginx:latest
+FROM bitnamilegacy/nginx:latest
 
 #!/bin/sh
 
-COPY ./.nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/frontend.conf
+COPY ./.nginx/nginx.conf /opt/bitnamilegacy/nginx/conf/server_blocks/frontend.conf
 
 ## Remove default nginx index page
 # RUN rm -rf /app/*

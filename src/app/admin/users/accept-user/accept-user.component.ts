@@ -92,7 +92,7 @@ export class AcceptUserComponent implements OnInit, OnDestroy {
   }
 
   private getUser(id: number) {
-    this.subscription = this.userService.getOne(id, false).subscribe(response => {
+    this.subscription = this.userService.getOne(id).subscribe(response => {
       this.user = response;
     });
   }

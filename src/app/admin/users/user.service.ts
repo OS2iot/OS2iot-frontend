@@ -32,8 +32,8 @@ export class UserService {
     });
   }
 
-  getOne(id: number, extendedInfo = false): Observable<UserResponse> {
-    return this.restService.get(this.URL, { extendedInfo }, id).pipe(
+  getOne(id: number): Observable<UserResponse> {
+    return this.restService.get(this.URL, undefined, id).pipe(
       map((response: UserResponse) => {
         response.createdByName = this.userMinimalService.getUserNameFrom(response.createdBy);
         response.updatedByName = this.userMinimalService.getUserNameFrom(response.updatedBy);
