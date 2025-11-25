@@ -146,8 +146,7 @@
         matTooltipHideDelay="2000"
         matTooltipPosition="above"
         matTooltipShowDelay="600"
-      >
-      </fa-icon>
+      />
       <input
         [(ngModel)]="datatarget.openDataDkDataset.resourceTitle"
         [ngClass]="{
@@ -240,19 +239,27 @@
     </div>
   </div>
 
-  <!-- Keywords -->
+  <!-- Theme -->
   <div class="row mb-2">
     <div class="form-group mt-3 col-12">
       <label class="form-label" for="openDataDkDataset.keywords">
-        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS" | translate }}
+        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME" | translate }}
       </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+      />
       <mat-select
         [(value)]="datatarget.openDataDkDataset.keywords"
         [ngClass]="{
           'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.keywords'),
           'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.keywords')
         }"
-        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-KEYWORDS-PLACEHOLDER' | translate"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-THEME-PLACEHOLDER' | translate"
         class="form-control"
         id="openDataDkDataset.keywords"
         multiple
@@ -266,13 +273,111 @@
     </div>
   </div>
 
+  <!-- Keywords tags -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.keyWordTags">
+        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS" | translate }}
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+      />
+      <input
+        [(ngModel)]="datatarget.openDataDkDataset.keywordTags"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.keywordTags'),
+          'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.keywordTags')
+        }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-TAGS-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.keyWordTags"
+        name="openDataDkDataset.keyWordTags"
+        type="text"
+      />
+    </div>
+  </div>
+
+  <!-- Update frequency -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.updateFrequency">
+        {{ "OPENDATADK.QUESTION.GIVE-UPDATE-FREQUENCY" | translate }}
+      </label>
+      <mat-select
+        [(value)]="datatarget.openDataDkDataset.updateFrequency"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.updateFrequency'),
+          'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.updateFrequency')
+        }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-UPDATE-FREQUENCY-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.updateFrequency"
+      >
+        @for (frequency of selectableUpdateFrequencies; track frequency) {
+          <mat-option
+            [value]="frequency">{{ "OPENDATADK.QUESTION.UPDATE-FREQUENCY-OPTIONS." + frequency | translate }}
+          </mat-option>
+        }
+      </mat-select>
+    </div>
+  </div>
+
+  <!-- Documentation url -->
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="openDataDkDataset.documentationUrl">
+        {{ "OPENDATADK.QUESTION.GIVE-OPENDATADK-DOCUMENTATION-URL" | translate }}
+      </label>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        [matTooltip]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DOCUMENTATION-URL-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+      />
+      <input
+        [(ngModel)]="datatarget.openDataDkDataset.documentationUrl"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('openDataDkDataset.documentationUrl'),
+          'is-valid': formFailedSubmit && !errorFields.includes('openDataDkDataset.documentationUrl')
+        }"
+        [placeholder]="'OPENDATADK.QUESTION.GIVE-OPENDATADK-DOCUMENTATION-URL-PLACEHOLDER' | translate"
+        class="form-control"
+        id="openDataDkDataset.documentationUrl"
+        name="openDataDkDataset.documentationUrl"
+        type="text"
+      />
+    </div>
+  </div>
+
+  <!-- Datavejviser checkmark -->
+  <div class="row mt-3">
+    <div class="col-12">
+      <mat-checkbox [(ngModel)]="datatarget.openDataDkDataset.dataDirectory" name="openDataDkDataset.dataDirectory">
+        <p>
+          {{ "OPENDATADK.QUESTION.DATA-DIRECTORY-DESCRIPTION" | translate }}
+          <a
+            href="https://datavejviser.dk/om-datavejviser#vilkaar-for-anvendelse-af-data-og-datasaetbeskrivelser-i-datavejviseren">
+            Datavejviser
+          </a>
+        </p>
+      </mat-checkbox>
+    </div>
+  </div>
+
   <!-- Terms and conditions checkmark -->
   <div class="row mt-3">
     <div class="col-12">
       <mat-checkbox [(ngModel)]="datatarget.openDataDkDataset.acceptTerms" name="acceptTerms">
         <p>
           {{ "OPENDATADK.QUESTION.ACCEPT-TERMS-PART-ONE" | translate }}
-          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da">
+          <a href=" https://creativecommons.org/publicdomain/zero/1.0/deed.da" target="_blank">
             {{ "OPENDATADK.QUESTION.TERMS-AND-CONDITIONS" | translate }}
           </a>
         </p>
@@ -295,60 +400,60 @@
       @if (devices && payloadDecoders && payloadDeviceDatatarget?.length > 0) {
         <table class="table table-striped table-bordered">
           <tbody>
-          @for (element of payloadDeviceDatatarget; track element; let i = $index) {
-            <tr [attr.data-index]="i">
-              <td>
-                <div class="row">
-                  <mat-form-field appearance="fill">
-                    <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
-                    <mat-select
-                      [(value)]="element.iotDeviceIds"
-                      [compareWith]="payloadDevicesDropdownCompare"
-                      multiple
-                      name="devices"
-                    >
-                      <mat-option class="filter-option" disabled="disabled">
-                        <button (click)="selectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
-                          {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
-                        </button>
-                        <button (click)="deSelectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
-                          {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
-                        </button>
-                      </mat-option>
-                      @for (device of devices; track device) {
-                        <mat-option [value]="device.id">{{ device.name }}</mat-option>
-                      }
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="row">
-                  <mat-form-field appearance="fill">
-                    <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
-                    <mat-select [(value)]="element.payloadDecoderId" matNativeControl name="payloadDecoderId">
-                      <mat-option [value]="0">
-                        {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
-                      </mat-option>
-                      @for (payloadDecoder of payloadDecoders; track payloadDecoder) {
-                        <mat-option [value]="payloadDecoder.id">
-                          {{ payloadDecoder.name }}
+            @for (element of payloadDeviceDatatarget; track element; let i = $index) {
+              <tr [attr.data-index]="i">
+                <td>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label>{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</mat-label>
+                      <mat-select
+                        [(value)]="element.iotDeviceIds"
+                        [compareWith]="payloadDevicesDropdownCompare"
+                        multiple
+                        name="devices"
+                      >
+                        <mat-option class="filter-option" disabled="disabled">
+                          <button (click)="selectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
+                            {{ "QUESTION.DATATARGET.SELECTALLDEVICES" | translate }}
+                          </button>
+                          <button (click)="deSelectAllDevices(i)" class="mat-primary fill text-sm" mat-raised-button>
+                            {{ "QUESTION.DATATARGET.DESELECTALLDEVICES" | translate }}
+                          </button>
                         </mat-option>
-                      }
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <a (click)="openDeleteDialog(i)">
-                  <div class="text-center m-2">
-                    <fa-icon [icon]="faTimesCircle"></fa-icon>
-                    <p>{{ "DATATARGET.DELETE" | translate }}</p>
+                        @for (device of devices; track device) {
+                          <mat-option [value]="device.id">{{ device.name }}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
                   </div>
-                </a>
-              </td>
-            </tr>
-          }
+                </td>
+                <td>
+                  <div class="row">
+                    <mat-form-field appearance="fill">
+                      <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
+                      <mat-select [(value)]="element.payloadDecoderId" matNativeControl name="payloadDecoderId">
+                        <mat-option [value]="0">
+                          {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
+                        </mat-option>
+                        @for (payloadDecoder of payloadDecoders; track payloadDecoder) {
+                          <mat-option [value]="payloadDecoder.id">
+                            {{ payloadDecoder.name }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </td>
+                <td>
+                  <a (click)="openDeleteDialog(i)">
+                    <div class="text-center m-2">
+                      <fa-icon [icon]="faTimesCircle"></fa-icon>
+                      <p>{{ "DATATARGET.DELETE" | translate }}</p>
+                    </div>
+                  </a>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       }

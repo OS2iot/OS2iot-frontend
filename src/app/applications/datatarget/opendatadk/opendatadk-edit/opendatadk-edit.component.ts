@@ -59,6 +59,39 @@ export class OpendatadkEditComponent implements DatatargetEdit, OnDestroy {
     "Økonomi og finanser",
   ];
 
+  selectableUpdateFrequencies = [
+    "CONT",
+    "1MIN",
+    "5MIN",
+    "10MIN",
+    "15MIN",
+    "TRIHOURLY",
+    "30MIN",
+    "HOURLY",
+    "BIHOURLY",
+    "12HRS",
+    "DAILY",
+    "WEEKLY",
+    "BIWEEKLY",
+    "MONTHLY",
+    "BIMONTHLY",
+    "QUARTERLY",
+    "ANNUAL",
+    "NEVER",
+    "UNKNOWN",
+    "OTHER",
+    // Unused options from specificaion
+    // "TRIENNIAL",
+    // "QUADRENNIAL",
+    // "QUINQUENNIAL",
+    // "AS_NEEDED",
+    // "NOT_PLANNED",
+    // "TRIDECENNIAL",
+    // "BIDECENNIAL",
+    // "DECENNIAL",
+    // "BIENNIAL",
+  ];
+
   errorMessages: any[];
   errorFields: string[];
 
