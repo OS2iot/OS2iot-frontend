@@ -29,7 +29,7 @@ FROM bitnamilegacy/nginx:latest
 
 #!/bin/sh
 
-COPY ./.nginx/nginx.conf /opt/bitnamilegacy/nginx/conf/server_blocks/frontend.conf
+COPY ./.nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/frontend.conf
 
 ## Remove default nginx index page
 # RUN rm -rf /app/*
@@ -42,7 +42,7 @@ USER 0
 # Install envsubst
 RUN apt-get update && apt-get install -y gettext-base
 # Make sure we have write access to the env.js file without using the root user
-RUN chown 1001 /app/assets/env.js
+RUN chown 1001 /app/browser/assets/env.js
 # Revert to the original non-root user
 USER 1001
 
@@ -50,4 +50,4 @@ EXPOSE 8080
 EXPOSE 8081
 
 # Substiture placeholders in env.template.js using environment variables overwrite env.js
-CMD ["/bin/sh",  "-c",  "envsubst < /app/assets/env.template.js > /app/assets/env.js && exec nginx -g 'daemon off;'"]
+CMD ["/bin/sh",  "-c",  "envsubst < /app/browser/assets/env.template.js > /app/browser/assets/env.js && exec nginx -g 'daemon off;'"]
