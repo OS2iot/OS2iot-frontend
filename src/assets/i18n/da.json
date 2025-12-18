@@ -394,6 +394,22 @@
         "NEVER": "Aldrig",
         "UNKNOWN": "Ukendt",
         "OTHER": "Andet"
+      },
+      "THEME-OPTIONS": {
+        "SOCI": "Befolkning og samfund",
+        "ENER": "Energi",
+        "INTR": "Internationale spørgsmål",
+        "AGRI": "Landbrug, fiskeri, skovbrug og fødevarer",
+        "OP_DATPRO": "Midlertidige data",
+        "ENVI": "Miljø",
+        "GOVE": "Regeringen og den offentlige sektor",
+        "REGI": "Regioner og byer",
+        "JUST": "Retfærdighed, retssystem og offentlig sikkerhed",
+        "HEAL": "Sundhed",
+        "TRAN": "Transport",
+        "EDUC": "Uddannelse, kultur og sport",
+        "TECH": "Videnskab og teknologi",
+        "ECON": "Økonomi og finanser"
       }
     },
     "DETAILS": {

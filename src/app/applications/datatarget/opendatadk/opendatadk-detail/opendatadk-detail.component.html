@@ -15,7 +15,7 @@
 
 <p>
   <strong>{{ "OPENDATADK.DETAILS.KEYWORDS" | translate }}</strong>
-  {{ openDataDkDataset.keywords ? openDataDkDataset.keywords : ("OPENDATADK.DETAILS.NA" | translate) }}
+  {{ openDataDkDataset.keywords?.length > 0 ? themeText : ("OPENDATADK.DETAILS.NA" | translate) }}
 </p>
 
 <p>

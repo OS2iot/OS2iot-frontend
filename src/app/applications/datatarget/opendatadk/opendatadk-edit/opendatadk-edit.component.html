@@ -266,8 +266,8 @@
         name="openDataDkDataset.keywords"
         required
       >
-        @for (kw of selectableKeyword; track kw) {
-          <mat-option [value]="kw">{{ kw }}</mat-option>
+        @for (kw of selectableTheme; track kw) {
+          <mat-option [value]="kw">{{ "OPENDATADK.QUESTION.THEME-OPTIONS." + kw | translate }}</mat-option>
         }
       </mat-select>
     </div>
