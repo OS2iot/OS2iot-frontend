@@ -266,8 +266,8 @@
         name="openDataDkDataset.keywords"
         required
       >
-        @for (kw of selectableKeyword; track kw) {
-          <mat-option [value]="kw">{{ kw }}</mat-option>
+        @for (kw of selectableTheme; track kw) {
+          <mat-option [value]="kw">{{ "OPENDATADK.QUESTION.THEME-OPTIONS." + kw | translate }}</mat-option>
         }
       </mat-select>
     </div>
@@ -366,6 +366,14 @@
             href="https://datavejviser.dk/om-datavejviser#vilkaar-for-anvendelse-af-data-og-datasaetbeskrivelser-i-datavejviseren">
             Datavejviser
           </a>
+          <fa-icon
+            [icon]="faQuestionCircle"
+            [matTooltip]="'OPENDATADK.QUESTION.DATA-DIRECTORY-DESCRIPTION-INFO' | translate"
+            class="form-info-icon"
+            matTooltipHideDelay="2000"
+            matTooltipPosition="above"
+            matTooltipShowDelay="600"
+          />
         </p>
       </mat-checkbox>
     </div>

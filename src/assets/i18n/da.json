@@ -358,7 +358,7 @@
       "GIVE-OPENDATADK-THEME-INFO": "Ved hjælp af emneord inddeles datasæt i kategorier, som dataanvendere kan søge i. Der er i alt 14 emneord, og der kan vælges flere til det samme datatarget.",
       "GIVE-OPENDATADK-TAGS": "Angiv nøgleord",
       "GIVE-OPENDATADK-TAGS-PLACEHOLDER": "Angiv nøgleord",
-      "GIVE-OPENDATADK-TAGS-INFO": "Nøgleord er det samme som tags og øger muligheden for at finde dataene via fritekst-søgning. Giv dataene så mange nøgleord som muligt. Husk, det skal give mening for en ekstern bruger.",
+      "GIVE-OPENDATADK-TAGS-INFO": "Nøgleord skal adskilles med komma. Nøgleord er det samme som tags og øger muligheden for at finde dataene via fritekst-søgning. Giv dataene så mange nøgleord som muligt. Husk, det skal give mening for en ekstern bruger.",
       "GIVE-OPENDATADK-AUTHORNAME": "Dataejer",
       "GIVE-OPENDATADK-AUTHORNAME-PLACEHOLDER": "Jens Jensen",
       "GIVE-OPENDATADK-AUTHORNAME-INFO": "Ansvarlig afdeling eller person",
@@ -369,7 +369,8 @@
       "GIVE-OPENDATADK-DOCUMENTATION-URL": "Link til dokumentation",
       "GIVE-OPENDATADK-DOCUMENTATION-URL-PLACEHOLDER": "Angiv url til dokumentation",
       "GIVE-OPENDATADK-DOCUMENTATION-URL-INFO": "Det kan f.eks. være et link til et parsing skema af dataen.",
-      "DATA-DIRECTORY-DESCRIPTION": "Skal dataen sendes videre til ",
+      "DATA-DIRECTORY-DESCRIPTION": "Jeg accepterer hermed, at datasættets metadata vises på ",
+      "DATA-DIRECTORY-DESCRIPTION-INFO": "Datavejviser er et nationalt overblik over åbne offentlige data. Slår I visning til, vises jeres metadata automatisk på Datavejviser og giver større synlighed.",
       "ACCEPT-TERMS-PART-ONE": "Jeg accepterer hermed, at datasættet udgives under en",
       "TERMS-AND-CONDITIONS": "Creative Commons CC0 1.0 Universel (CC0 1.0) licens",
       "UPDATE-FREQUENCY-OPTIONS": {
@@ -393,6 +394,22 @@
         "NEVER": "Aldrig",
         "UNKNOWN": "Ukendt",
         "OTHER": "Andet"
+      },
+      "THEME-OPTIONS": {
+        "SOCI": "Befolkning og samfund",
+        "ENER": "Energi",
+        "INTR": "Internationale spørgsmål",
+        "AGRI": "Landbrug, fiskeri, skovbrug og fødevarer",
+        "OP_DATPRO": "Midlertidige data",
+        "ENVI": "Miljø",
+        "GOVE": "Regeringen og den offentlige sektor",
+        "REGI": "Regioner og byer",
+        "JUST": "Retfærdighed, retssystem og offentlig sikkerhed",
+        "HEAL": "Sundhed",
+        "TRAN": "Transport",
+        "EDUC": "Uddannelse, kultur og sport",
+        "TECH": "Videnskab og teknologi",
+        "ECON": "Økonomi og finanser"
       }
     },
     "DETAILS": {
