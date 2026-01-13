@@ -25,26 +25,26 @@ COPY . /app
 # Build the project and copy the files
 RUN npm run ng build -- --deploy-url=/ --c production
 
-FROM bitnamilegacy/nginx:latest
+FROM nginx:alpine
 
-#!/bin/sh
+# Copy custom nginx configuration
+COPY ./.nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY ./.nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/frontend.conf
-
-## Remove default nginx index page
-# RUN rm -rf /app/*
-
-# Copy from the stahg 1
+# Copy from the stage 1
 COPY --from=builder /app/dist/OS2IoT-frontend /app
 
-## Change user to perform privileged actions
-USER 0
-# Install envsubst
-RUN apt-get update && apt-get install -y gettext-base
-# Make sure we have write access to the env.js file without using the root user
-RUN chown 1001 /app/browser/assets/env.js
-# Revert to the original non-root user
-USER 1001
+# Install gettext for envsubst
+RUN apk add --no-cache gettext
+
+# Setup for non-root execution
+RUN chown -R 101:101 /app && \
+    chown -R 101:101 /var/cache/nginx && \
+    chown -R 101:101 /var/log/nginx && \
+    touch /var/run/nginx.pid && \
+    chown 101:101 /var/run/nginx.pid
+
+# Switch to non-root user (nginx user = UID 101 on Alpine)
+USER 101
 
 EXPOSE 8080
 EXPOSE 8081
