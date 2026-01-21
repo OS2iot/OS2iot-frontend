@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:20-alpine as DEV
+FROM node:20-alpine AS dev
 
 # removed this for now
 # install chrome for protractor tests
@@ -12,7 +12,7 @@ FROM node:20-alpine as DEV
 WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY package.json /app/package.json
@@ -23,9 +23,9 @@ RUN npm install -g @angular/cli@20.3.7
 COPY . /app
 
 # start app
-CMD ng serve --host 0.0.0.0
+CMD [ "ng", "serve", "--host", "0.0.0.0" ]
 
 
-FROM DEV as PROD
-CMD ng serve --host 0.0.0.0 --configuration=production
+FROM dev AS prod
+CMD [ "ng", "serve", "--host", "0.0.0.0", "--configuration=production" ]
 
