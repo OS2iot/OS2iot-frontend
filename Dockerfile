@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:20-alpine as DEV
+FROM node:20-alpine AS DEV
 
 # removed this for now
 # install chrome for protractor tests
@@ -12,7 +12,7 @@ FROM node:20-alpine as DEV
 WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY package.json /app/package.json
