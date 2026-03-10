@@ -53,9 +53,11 @@
         <div class="mt-5 col-md-3">
           <button [disabled]="!authForm.valid" class="btn btn-primary" type="submit">{{ "Login" }}</button>
         </div>
-        <div class="mt-5 col-md-6">
-          <a class="btn btn-secondary" href="{{ getKombitLoginUrl() }}">{{ "AUTH.KOMBIT-BUTTON" | translate }}</a>
-        </div>
+        @if (enableKombit) {
+          <div class="mt-5 col-md-6">
+            <a class="btn btn-secondary" href="{{ getKombitLoginUrl() }}">{{ "AUTH.KOMBIT-BUTTON" | translate }}</a>
+          </div>
+        }
       </div>
     </form>
   }
