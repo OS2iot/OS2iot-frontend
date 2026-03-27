@@ -10,6 +10,9 @@ import { FormHeaderComponent } from "./form-header/form-header.component";
 import { FormKeyValuePairComponent } from "./form-key-value/form-key-value-pair/form-key-value-pair.component";
 import { FormKeyValueListComponent } from "./form-key-value/form-key-value-list/form-key-value-list.component";
 import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-select-search.module";
+import { ContactPersonEditComponent } from "@app/contact-person/contact-person-edit.component";
+import { ContactPersonListEditComponent } from "@app/contact-person/contact-person-list-edit.component";
+import { StatusIconComponent } from "@shared/components/status-icon/status-icon.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-
     TranslatePipe,
     NGMaterialModule,
     MatSelectSearchModule,
+    ContactPersonEditComponent,
+    ContactPersonListEditComponent,
+    StatusIconComponent,
   ],
   exports: [FormHeaderComponent, FormBodyApplicationComponent, FormKeyValuePairComponent, FormKeyValueListComponent],
   providers: [],

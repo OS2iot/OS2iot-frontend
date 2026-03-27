@@ -1,0 +1,18 @@
+<div class="contact-persons">
+  @for (contactPerson of contactPersons; track contactPerson) {
+    <contact-person-edit [contactPerson]="contactPerson"
+                         [errorMessages]="errorMessages?.[$index]"
+                         [index]="$index"
+                         [removeContactPerson]="removeContactPerson($index, contactPerson)"/>
+  }
+
+  <div class="contact-person add mb-2">
+    <div class="row g-3">
+      <div class="col-12">
+        <button class="btn btn-secondary" type="button" (click)="addContactPerson()">
+          {{ "APPLICATION.METADATA-FIELD.CONTACT-PERSONS-ACTION-ADD" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

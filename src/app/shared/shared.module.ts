@@ -22,6 +22,7 @@ import { TopBarComponent } from "./components/top-bar/top-bar.component";
 import { DirectivesModule } from "./directives/directives.module";
 import { NGMaterialModule } from "./Modules/materiale.module";
 import { PipesModule } from "./pipes/pipes.module";
+import { ContactPersonListComponent } from "@app/contact-person/contact-person-list.component";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PipesModule } from "./pipes/pipes.module";
     PipesModule,
     SearchModule,
     MatIconModule,
+    ContactPersonListComponent,
   ],
   exports: [
     AlertComponent,
