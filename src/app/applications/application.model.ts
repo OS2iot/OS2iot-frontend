@@ -7,6 +7,8 @@ import { Organisation } from "../admin/organisation/organisation.model";
 import { ApplicationStatus } from "./enums/status.enum";
 import { IotDevice } from "./iot-devices/iot-device.model";
 import { ApplicationDeviceType } from "./models/application-device-type.model";
+import { KeyValue } from "@shared/types/tuple.type";
+import { Metadata } from "@shared/types/metadata";
 
 export type ApplicationWithStatus = Application & { statusCheck: "stable" | "alert" };
 
@@ -37,6 +39,7 @@ export class Application {
   public permissions: PermissionResponse[];
   public permissionIds: number[];
   public dataTargets: Datatarget[];
+  public metadata?: Metadata;
 }
 
 export class ApplicationRequest {
@@ -56,6 +59,7 @@ export class ApplicationRequest {
   public controlledProperties?: ControlledPropertyTypes[];
   public deviceTypes?: ApplicationDeviceTypeUnion[];
   public permissionIds: number[];
+  public metadata?: Metadata;
 }
 
 export interface ApplicationData {

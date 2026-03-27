@@ -16,6 +16,9 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
 import { ReplaySubject, Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { keyValueListToMetadata, metadataToKeyValueList } from "@shared/helpers/metadata.helper";
+import { TranslatableError } from "@shared/translatable-error";
+import { addWarning } from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 
 export class User {
   public name: string;
@@ -58,6 +61,8 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   public filteredPermissionsMulti: ReplaySubject<PermissionResponse[]> = new ReplaySubject<PermissionResponse[]>(1);
   private id: number;
   private _onDestroy = new Subject<void>();
+  metadataTags: { key?: string; value?: string }[] = [];
+  errorMetadataFieldId: string | undefined;
 
   constructor(
     private restService: RestService,
@@ -157,6 +162,9 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.deviceTypes = application.deviceTypes.map(deviceType => deviceType.type);
         this.application.permissionIds = application.permissionIds;
         this.permissionMultiCtrl.setValue(this.application.permissionIds);
+        if (application.metadata) {
+          this.metadataTags = metadataToKeyValueList(application.metadata) ?? [];
+        }
 
         this.fillDefaultMetadata();
       });
@@ -176,6 +184,18 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     this.application.startDate = this.serializedStartDate.value?.toISOString();
     this.application.endDate = this.serializedEndDate.value?.toISOString();
     this.application.contactPhone = this.phoneCtrl.value ? this.phoneCtrl.value : null;
+
+    try {
+      this.application.metadata = keyValueListToMetadata(this.metadataTags);
+    } catch (error) {
+      let message = error.message;
+      if (error instanceof TranslatableError) {
+        // @todo Can we safely use `instant` here?
+        message = this.translate.instant(message, error.context);
+      }
+      this.handleError(this.buildErrorMessage(message), "application.metadata");
+      return;
+    }
 
     if (this.id) {
       this.updateApplication(this.id);

@@ -69,3 +69,16 @@
     >{{ deviceTypeText }}
   </p>
 }
+
+@if (metadata) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.METADATA" | translate }}</strong
+    >
+  </p>
+  @for (key of Object.keys(metadata); track key; let i = $index) {
+    <p>
+      <strong>{{ i + 1 }}: {{ key }}</strong>
+      <span>{{ metadata[key] }}</span>
+    </p>
+  }
+}
