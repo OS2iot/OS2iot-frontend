@@ -42,6 +42,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   public loraDevice = DeviceType.LORAWAN;
   public sigfoxDevice = DeviceType.SIGFOX;
   public deviceProfiles: DeviceProfile[];
+  public isLoRaWAN11 = false;
   public deviceModels: DeviceModel[];
   iotDevice = new IotDevice();
   editmode = false;
@@ -142,6 +143,9 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
         this.iotDevice.latitude = device.location.coordinates[1];
       }
       this.OTAA = !!this.iotDevice.lorawanSettings?.OTAAapplicationKey;
+      if (this.iotDevice.lorawanSettings?.deviceProfileID) {
+        this.getDeviceProfile(this.iotDevice.lorawanSettings.deviceProfileID);
+      }
       if (device.sigfoxSettings) {
       }
       if (!device.deviceModelId) {
@@ -198,6 +202,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
   getDeviceProfile(deviceProfileId: string) {
     this.deviceProfileSubscription = this.deviceProfileService.getOne(deviceProfileId).subscribe(response => {
       this.OTAA = response.deviceProfile.supportsJoin;
+      this.isLoRaWAN11 = (response.deviceProfile.macVersion as number) >= 5;
     });
   }
 
