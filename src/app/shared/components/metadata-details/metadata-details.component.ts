@@ -5,6 +5,7 @@ import { ApplicationDeviceType } from "@applications/models/application-device-t
 import { TranslateService } from "@ngx-translate/core";
 import { toPascalKebabCase } from "@shared/helpers/string.helper";
 import { ControlledProperty } from "@shared/models/controlled-property.model";
+import { Metadata } from "@shared/types/metadata";
 
 @Component({
   selector: "app-metadata-details",
@@ -26,6 +27,7 @@ export class MetadataDetailsComponent implements OnInit {
   @Input() hardware?: string;
   @Input() controlledProperties?: ControlledProperty[];
   @Input() deviceTypes?: ApplicationDeviceType[];
+  @Input() metadata?: Metadata;
   controlledPropertyText: string;
   deviceTypeText: string;
 
@@ -48,4 +50,6 @@ export class MetadataDetailsComponent implements OnInit {
         .join(", ");
     });
   }
+
+  protected readonly Object = Object;
 }
