@@ -22,6 +22,7 @@ export class AuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   isKombit = false;
+  enableKombit = environment.enableKombit;
   error: string = null;
 
   constructor(

@@ -6,4 +6,5 @@
   window["env"].TABLE_PAGE_SIZE = "${TABLE_PAGE_SIZE}";
   window["env"].DAF_USERNAME = "${DAF_USERNAME}";
   window["env"].DAF_PASSWORD = "${DAF_PASSWORD}";
+  window["env"].ENABLE_KOMBIT = "${ENABLE_KOMBIT}";
 })(this);

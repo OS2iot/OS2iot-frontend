@@ -6,4 +6,5 @@
   window["env"].TABLE_PAGE_SIZE = 25; // For local testing
   window["env"].DAF_USERNAME = "";
   window["env"].DAF_PASSWORD = "";
+  window["env"].ENABLE_KOMBIT = true;
 })(this);

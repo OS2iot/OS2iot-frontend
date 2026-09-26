@@ -63,27 +63,31 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllowedOrganizations();
-    this.organisations.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
+    if (this.organisations?.length > 0) {
+      this.organisations.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
+    }
     this.selected = this.sharedVariableService.getSelectedOrganisationId();
     this.navToggle.emit(this.isVisible);
   }
 
   getAllowedOrganizations() {
     const userInfo = this.sharedVariableService.getUserInfo();
-    this.organisations = userInfo.organizations;
-    this.userResponse = userInfo.user;
+    this.organisations = userInfo?.organizations ?? [];
+    this.userResponse = userInfo?.user;
     this.sharedVariableService.getSelectedOrganisationId();
     if (
-      (this.sharedVariableService.getSelectedOrganisationId() === 0 && userInfo.organizations.length > 0) ||
-      !userInfo.organizations.some(x => x.id === this.sharedVariableService.getSelectedOrganisationId())
+      (this.sharedVariableService.getSelectedOrganisationId() === 0 && this.organisations.length > 0) ||
+      (this.organisations.length > 0 && !this.organisations.some(x => x.id === this.sharedVariableService.getSelectedOrganisationId()))
     ) {
-      this.setSelectedOrganisation(userInfo.organizations[0]?.id);
+      this.setSelectedOrganisation(this.organisations[0]?.id);
     }
-    this.setLocalPermissionCheck(userInfo.organizations[0]?.id);
+    if (this.organisations.length > 0) {
+      this.setLocalPermissionCheck(this.organisations[0]?.id);
+    }
   }
 
   getOrgName(id: number) {
-    return this.organisations.find(org => org.id === id).name ?? "";
+    return this.organisations?.find(org => org.id === id)?.name ?? "";
   }
 
   public onChange(organizationId: string) {
@@ -113,8 +117,8 @@ export class NavbarComponent implements OnInit {
       orgId
     );
     this.isGlobalAdmin = this.meService.hasGlobalAdmin();
-    this.isOnlyGatewayAdmin = this.userResponse.permissions.every(({ type: pmTypes }) =>
+    this.isOnlyGatewayAdmin = this.userResponse?.permissions?.every(({ type: pmTypes }) =>
       pmTypes.some(pmType => pmType.type === PermissionType.OrganizationGatewayAdmin)
-    );
+    ) ?? false;
   }
 }
