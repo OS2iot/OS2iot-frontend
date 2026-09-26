@@ -11,6 +11,12 @@
     <strong>{{ "IOTDEVICE.LORA.OTAAAPPLICATIONKEY" | translate }}</strong
     >{{ device.lorawanSettings?.OTAAapplicationKey }}
   </p>
+  @if (device.lorawanSettings?.OTAAnetworkKey) {
+    <p>
+      <strong>NwkKey (LoRaWAN 1.1.x): </strong
+      >{{ device.lorawanSettings?.OTAAnetworkKey }}
+    </p>
+  }
 } @if (!OTAA) {
   <p>
     <strong>{{ "IOTDEVICE.LORA.DEVADDR" | translate }}</strong
