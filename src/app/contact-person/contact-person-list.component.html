@@ -1,0 +1,24 @@
+<div class="contact-persons">
+  @for (person of contactPersons; track person) {
+    <div class="contact-person mb-4">
+      <div class="row">
+        <div class="col-md-6">
+          {{ person.name }}
+        </div>
+        <div class="col-md-6">
+          {{ person.role }}
+        </div>
+        <div class="col-md-6">
+          @if (person.email) {
+          <a href="mailto:{{ person.email }}">{{ person.email }}</a>
+          }
+        </div>
+        <div class="col-md-6">
+          @if (person.phone) {
+          <a href="tel:{{ person.phone }}">{{ person.phone }}</a>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

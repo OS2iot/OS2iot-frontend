@@ -33,7 +33,9 @@
     <strong>{{ "APPLICATION.METADATA-FIELD.OWNER" | translate }}</strong
     >{{ owner }}
   </p>
-} @if (contactPerson) {
+}
+
+@if (contactPerson) {
   <p>
     <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate }}</strong
     >{{ contactPerson }}
@@ -49,6 +51,15 @@
     >{{ contactPhone }}
   </p>
 }
+
+@if (contactPersons.length > 0) {
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSONS" | translate }}</strong
+    >
+  </p>
+  <contact-person-list [contactPersons]="contactPersons"/>
+}
+
 <p>
   <strong>{{ "APPLICATION.METADATA-FIELD.PERSONAL-DATA" | translate }}</strong
   >{{ (personalData ? true.toString() : false.toString()) | translate }}

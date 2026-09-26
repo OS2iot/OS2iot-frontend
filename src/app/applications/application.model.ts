@@ -7,6 +7,7 @@ import { Organisation } from "../admin/organisation/organisation.model";
 import { ApplicationStatus } from "./enums/status.enum";
 import { IotDevice } from "./iot-devices/iot-device.model";
 import { ApplicationDeviceType } from "./models/application-device-type.model";
+import { ContactPerson } from "../contact-person/contact-person.model";
 
 export type ApplicationWithStatus = Application & { statusCheck: "stable" | "alert" };
 
@@ -30,6 +31,7 @@ export class Application {
   public contactPerson?: string;
   public contactEmail?: string;
   public contactPhone?: string;
+  public contactPersons?: ContactPerson[];
   public personalData?: boolean;
   public hardware?: string;
   public controlledProperties?: ControlledProperty[];
@@ -51,6 +53,7 @@ export class ApplicationRequest {
   public contactPerson?: string;
   public contactEmail?: string;
   public contactPhone?: string;
+  public contactPersons?: ContactPerson[] = [];
   public personalData?: boolean;
   public hardware?: string;
   public controlledProperties?: ControlledPropertyTypes[];

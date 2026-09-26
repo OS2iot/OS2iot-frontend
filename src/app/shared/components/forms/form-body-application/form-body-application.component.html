@@ -171,58 +171,74 @@
       />
     </div>
 
+    <!-- Show deprecated contact person fields only if some are not empty -->
+    @if (application.contactPerson || application.contactEmail || application.contactPhone) {
+      <div class="form-group mt-3">
+        <label class="form-label" for="contactPerson">{{
+            "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate
+          }}</label>
+        <input
+          [(ngModel)]="application.contactPerson"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('application.contactPerson'),
+            'is-valid': formFailedSubmit && !errorFields.includes('application.contactPerson')
+          }"
+          [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate"
+          class="form-control"
+          id="contactPerson"
+          maxlength="100"
+          name="contactPerson"
+          type="text"
+        />
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="form-label" for="contactEmail">{{ "APPLICATION.METADATA-FIELD.CONTACT-EMAIL" | translate }}</label>
+        <input
+          [(ngModel)]="application.contactEmail"
+          [email]="true"
+          [ngClass]="{
+            'is-invalid': formFailedSubmit && errorFields.includes('application.contactEmail'),
+            'is-valid': formFailedSubmit && !errorFields.includes('application.contactEmail')
+          }"
+          [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate"
+          class="form-control"
+          id="contactEmail"
+          maxlength="50"
+          name="contactEmail"
+          type="email"
+        />
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="form-label" for="contactPhone">{{ "APPLICATION.METADATA-FIELD.CONTACT-PHONE" | translate }}</label>
+        <input
+          [formControl]="phoneCtrl"
+          [ngClass]="{
+            'is-invalid': application.contactPhone && phoneCtrl.invalid,
+            'is-valid': !phoneCtrl.invalid
+          }"
+          [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate"
+          class="form-control"
+          id="contactPhone"
+          maxlength="12"
+          name="contactPhone"
+          type="text"
+        />
+      </div>
+
+      <div class="deprecation-warning">
+        <app-status-icon [iconType]="'alert'"/>
+        {{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-DEPRECATIONS" | translate }}
+      </div>
+    }
+
     <div class="form-group mt-3">
-      <label class="form-label" for="contactPerson">{{
-          "APPLICATION.METADATA-FIELD.CONTACT-PERSON" | translate
+      <label class="form-label">{{
+          "APPLICATION.METADATA-FIELD.CONTACT-PERSONS" | translate
         }}</label>
-      <input
-        [(ngModel)]="application.contactPerson"
-        [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('application.contactPerson'),
-          'is-valid': formFailedSubmit && !errorFields.includes('application.contactPerson')
-        }"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PERSON-PLACEHOLDER' | translate"
-        class="form-control"
-        id="contactPerson"
-        maxlength="100"
-        name="contactPerson"
-        type="text"
-      />
-    </div>
-
-    <div class="form-group mt-3">
-      <label class="form-label" for="contactEmail">{{ "APPLICATION.METADATA-FIELD.CONTACT-EMAIL" | translate }}</label>
-      <input
-        [(ngModel)]="application.contactEmail"
-        [email]="true"
-        [ngClass]="{
-          'is-invalid': formFailedSubmit && errorFields.includes('application.contactEmail'),
-          'is-valid': formFailedSubmit && !errorFields.includes('application.contactEmail')
-        }"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-EMAIL-PLACEHOLDER' | translate"
-        class="form-control"
-        id="contactEmail"
-        maxlength="50"
-        name="contactEmail"
-        type="email"
-      />
-    </div>
-
-    <div class="form-group mt-3">
-      <label class="form-label" for="contactPhone">{{ "APPLICATION.METADATA-FIELD.CONTACT-PHONE" | translate }}</label>
-      <input
-        [formControl]="phoneCtrl"
-        [ngClass]="{
-          'is-invalid': application.contactPhone && phoneCtrl.invalid,
-          'is-valid': !phoneCtrl.invalid
-        }"
-        [placeholder]="'QUESTION.APPLICATION.CONTACT-PHONE-PLACEHOLDER' | translate"
-        class="form-control"
-        id="contactPhone"
-        maxlength="12"
-        name="contactPhone"
-        type="text"
-      />
+      <contact-person-list-edit [contactPersons]="application.contactPersons"
+                                [errorMessages]="externalErrorMessages?.['contactPersons'] ?? {}"/>
     </div>
 
     <div class="form-group mt-3">

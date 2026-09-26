@@ -5,6 +5,7 @@ import { ApplicationDeviceType } from "@applications/models/application-device-t
 import { TranslateService } from "@ngx-translate/core";
 import { toPascalKebabCase } from "@shared/helpers/string.helper";
 import { ControlledProperty } from "@shared/models/controlled-property.model";
+import { ContactPerson } from "@app/contact-person/contact-person.model";
 
 @Component({
   selector: "app-metadata-details",
@@ -22,6 +23,7 @@ export class MetadataDetailsComponent implements OnInit {
   @Input() contactPerson?: string;
   @Input() contactEmail?: string;
   @Input() contactPhone?: string;
+  @Input() contactPersons: ContactPerson[];
   @Input() personalData?: boolean;
   @Input() hardware?: string;
   @Input() controlledProperties?: ControlledProperty[];

@@ -39,9 +39,31 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   @Input() submitButton: string;
   public payLoad = "";
   public applicationsSubscription: Subscription;
-  public errorMessage: string;
   public errorMessages: string[];
   public errorFields: string[];
+  /**
+   * External error messages, e.g.
+   *
+   * {
+   *   "name": [
+   *     "name must be longer than or equal to 1 characters"
+   *   ],
+   *   "contactPersons": {
+   *     "1": {
+   *       "name": [
+   *         "name should not be empty"
+   *       ],
+   *       "email": [
+   *         "email must be an email"
+   *       ],
+   *       "phone": [
+   *         "phone must be a valid phone number"
+   *       ]
+   *     }
+   *   }
+   * }
+   */
+  public externalErrorMessages: object;
   public formFailedSubmit = false;
   application = new ApplicationRequest();
   model = new User();
@@ -150,6 +172,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.contactPerson = application.contactPerson;
         this.application.contactEmail = application.contactEmail;
         this.application.contactPhone = application.contactPhone;
+        this.application.contactPersons = application.contactPersons ?? [];
         this.phoneCtrl.setValue(application.contactPhone);
         this.application.personalData = application.personalData;
         this.application.hardware = application.hardware;
@@ -207,10 +230,31 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     });
   }
 
+  setExternalErrorMessages(errorMessages: object, path: string[], err: any): void {
+    if (err.children && err.children.length > 0) {
+      errorMessages[err.property] = {};
+      err.children.forEach((child: any) =>
+        this.setExternalErrorMessages(errorMessages[err.property], path.concat(err.property), child)
+      );
+    } else if (err.constraints) {
+      const key = path.concat(err.property).join(".");
+      const messages: string[] = Object.values(err.constraints);
+      errorMessages[err.property] = messages;
+
+      if (path.length > 0) {
+        this.errorFields.push(key);
+        this.errorMessages = this.errorMessages.concat(messages);
+      }
+    }
+  }
+
   externalError(error: Pick<HttpErrorResponse, "error">) {
     error.error.message.forEach(err => {
-      this.errorFields.push(err.property);
-      this.errorMessages = this.errorMessages.concat(Object.values(err.constraints));
+      if (err.constraints) {
+        this.errorFields.push(err.property);
+        this.errorMessages = this.errorMessages.concat(Object.values(err.constraints));
+      }
+      this.setExternalErrorMessages(this.externalErrorMessages, [], err);
     });
     this.formFailedSubmit = true;
   }
@@ -281,6 +325,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
   private handleError(error: Pick<HttpErrorResponse, "error">, errorField?: string) {
     this.errorFields = [];
     this.errorMessages = [];
+    this.externalErrorMessages = {};
 
     // Temp fix till we standardise backend error handling
     if (error.error?.message[0]?.property) {

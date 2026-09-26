@@ -1,0 +1,78 @@
+<div class="contact-person mb-4">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <label class="form-label visually-hidden"
+                 [for]="'contact-person-name-'+index">{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-NAME" | translate }}</label>
+          <input class="form-control"
+                 [id]="'contact-person-name-'+index"
+                 type="text"
+                 required
+                 [(ngModel)]="contactPerson.name"
+                 [ngClass]="{
+               'is-invalid': errorMessages && 'name' in errorMessages,
+               'is-valid': errorMessages && !('name' in errorMessages),
+             }"
+                 [placeholder]="'APPLICATION.METADATA-FIELD.CONTACT-PERSONS-NAME-PLACEHOLDER' | translate"
+                 autocomplete="off"/>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label visually-hidden"
+                 [for]="'contact-person-role-'+index">{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-ROLE" | translate }}</label>
+          <input class="form-control"
+                 [id]="'contact-person-role-'+index"
+                 type="text"
+                 [(ngModel)]="contactPerson.role"
+                 [ngClass]="{
+          'is-invalid': errorMessages && 'role' in errorMessages,
+          'is-valid': errorMessages && !('role' in errorMessages),
+        }"
+                 [placeholder]="'APPLICATION.METADATA-FIELD.CONTACT-PERSONS-ROLE-PLACEHOLDER' | translate"
+                 autocomplete="off"/>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label visually-hidden"
+                 [for]="'contact-person-email-'+index">{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-EMAIL" | translate }}</label>
+          <input class="form-control"
+                 [id]="'contact-person-email-'+index"
+                 type="email"
+                 required
+                 [(ngModel)]="contactPerson.email"
+                 [ngClass]="{
+               'is-invalid': errorMessages && 'email' in errorMessages,
+               'is-valid': errorMessages && !('email' in errorMessages),
+             }"
+                 [placeholder]="'APPLICATION.METADATA-FIELD.CONTACT-PERSONS-EMAIL-PLACEHOLDER' | translate"
+                 autocomplete="off"/>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label visually-hidden"
+                 [for]="'contact-person-phone-'+index">{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-PHONE" | translate }}</label>
+          <input class="form-control"
+                 [id]="'contact-person-phone-'+index"
+                 type="tel"
+                 required
+                 [(ngModel)]="contactPerson.phone"
+                 [ngClass]="{
+               'is-invalid': errorMessages && 'phone' in errorMessages,
+               'is-valid': errorMessages && !('phone' in errorMessages),
+             }"
+                 [placeholder]="'APPLICATION.METADATA-FIELD.CONTACT-PERSONS-PHONE-PLACEHOLDER' | translate"
+                 autocomplete="off"/>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-2">
+      <button class="btn btn-outline-danger" type="button" (click)="removeContactPerson()">
+        <fa-icon [icon]="faTimesCircle"></fa-icon>
+        {{ "GEN.DELETE" | translate}}
+      </button>
+    </div>
+  </div>
+</div>

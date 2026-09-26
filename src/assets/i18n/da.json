@@ -21,7 +21,9 @@
     "LOG": "Log",
     "MESSAGE": "Besked",
     "DEVICE": "Enhed",
-    "NO-DATA": "Der er ingen data at vise"
+    "NO-DATA": "Der er ingen data at vise",
+    "YES": "Ja",
+    "NO": "Nej"
   },
   "NAV": {
     "APPLICATIONS": "Applikationer",
@@ -154,10 +156,24 @@
       "CONTACT-PERSON": "Kontaktperson",
       "CONTACT-EMAIL": "Kontaktmail",
       "CONTACT-PHONE": "Kontakttelefon",
+      "CONTACT-PERSON-DEPRECATIONS": "Bemærk: Felterne \"Kontaktperson\", \"Kontaktmail\" og \"Kontakttelefon\" er under udfasning. Brug i stedet \"Kontaktpersoner\".",
       "PERSONAL-DATA": "Persondata",
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
-      "DEVICE-TYPE": "Forbindelsesteknologi"
+      "DEVICE-TYPE": "Forbindelsesteknologi",
+      "CONTACT-PERSONS": "Kontaktpersoner",
+      "CONTACT-PERSON-NAME": "Navn",
+      "CONTACT-PERSON-EMAIL": "E-mail",
+      "CONTACT-PERSON-PHONE": "Telefon",
+      "CONTACT-PERSON-ROLE": "Rolle",
+
+      "CONTACT-PERSONS-NAME-PLACEHOLDER": "Navn",
+      "CONTACT-PERSONS-EMAIL-PLACEHOLDER": "E-mail",
+      "CONTACT-PERSONS-PHONE-PLACEHOLDER": "Telefon",
+      "CONTACT-PERSONS-ROLE-PLACEHOLDER": "Rolle",
+
+      "CONTACT-PERSONS-ACTION-ADD": "Tilføj kontaktperson",
+      "CONTACT-PERSONS-DELETE-CONFIRM": "Er du sikker på at du vil slette {{name}} som kontaktperson?"
     },
     "CHANGE-ORGANIZATION": {
       "TITLE": "Skift organisation",
