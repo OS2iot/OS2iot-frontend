@@ -5,9 +5,9 @@ import { UserResponse } from "@app/admin/users/user.model";
 import { DeviceModel } from "@app/device-model/device.model";
 import { Gateway } from "@app/gateway/gateway.model";
 import { Application } from "@applications/application.model";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { PayloadDecoder } from "@payload-decoder/payload-decoder.model";
+import { Datatarget } from "@app/datatarget/datatarget-models/datatarget.model";
 
 @Component({
   selector: "app-general-details",

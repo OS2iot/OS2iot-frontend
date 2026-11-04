@@ -1,0 +1,101 @@
+<app-top-bar [canEdit]="canEdit" backButtonTitle="{{ backButtonTitle }}" title="{{ title }}"></app-top-bar>
+
+<form #datatargetForm="ngForm" (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
+  <div class="row mb-2">
+    <div class="form-group col-12">
+      <label class="form-label" for="name">{{ "QUESTION.GIVE-DATATARGET-NAME" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="url">{{ "QUESTION.GIVE-DATATARGET-URL" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.url"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('url'),
+          'is-valid': formFailedSubmit && !errorFields.includes('url')
+        }"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-URL-PLACEHOLDER' | translate"
+        class="form-control"
+        id="url"
+        name="url"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="timeout">{{ "QUESTION.GIVE-DATATARGET-TIMEOUT" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.timeout"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('timeout'),
+          'is-valid': formFailedSubmit && !errorFields.includes('timeout')
+        }"
+        class="form-control"
+        id="timeout"
+        max="100000"
+        maxlength="7"
+        min="0"
+        name="timeout"
+        required
+        step="1"
+        type="number"
+      />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="authorizationHeader">{{
+          "QUESTION.GIVE-DATATARGET-AUTHORIZATIONHEADER" | translate
+        }}</label>
+      <input
+        [(ngModel)]="datatarget.authorizationHeader"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('authorizationHeader'),
+          'is-valid': formFailedSubmit && !errorFields.includes('authorizationHeader')
+        }"
+        class="form-control"
+        id="authorizationHeader"
+        name="authorizationHeader"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="form-group mt-5">
+    <button (click)="routeToDatatargets()" class="btn btn-light" type="button">{{ "GEN.BACK" | translate }}</button>
+    <button class="btn btn-primary ms-2" type="submit">{{ submitButton }}</button>
+  </div>
+</form>

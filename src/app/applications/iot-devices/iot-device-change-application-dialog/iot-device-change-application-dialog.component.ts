@@ -14,10 +14,8 @@ import { IotDevice, UpdateIoTDeviceApplication } from "../iot-device.model";
 import { IoTDeviceService } from "../iot-device.service";
 import { PayloadDecoder, PayloadDecoderMappedResponse } from "@payload-decoder/payload-decoder.model";
 import { PayloadDecoderService } from "@payload-decoder/payload-decoder.service";
-import { DatatargetService } from "@applications/datatarget/datatarget.service";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
-import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { Datatarget } from "@app/datatarget/datatarget-models/datatarget.model";
 
 @Component({
   selector: "app-iot-device-change-application-dialog",
@@ -28,6 +26,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDestroy {
   public iotDevice: IotDevice;
   public iotDeviceUpdate: UpdateIoTDeviceApplication;
+  public organizationId: number;
   public organizations: ReplaySubject<Organisation[]> = new ReplaySubject<Organisation[]>(1);
   public applications: Application[];
   public filteredApplications: ReplaySubject<Application[]> = new ReplaySubject<Application[]>(1);
@@ -45,8 +44,6 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
     private organizationService: OrganisationService,
     private deviceModelService: DeviceModelService,
     private payloadDecoderService: PayloadDecoderService,
-    private dateTargetService: DatatargetService,
-    private payloadDeviceDatatargetService: PayloadDeviceDatatargetService,
     private snackBar: MatSnackBar,
     private dialog: MatDialogRef<IoTDeviceChangeApplicationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogModel: IoTDeviceApplicationDialogModel
@@ -57,9 +54,8 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
     this.iotDeviceUpdate = {
       deviceModelId: this.dialogModel.deviceId,
       applicationId: 0,
-      organizationId: 0,
-      dataTargetToPayloadDecoderIds: [],
     };
+    this.organizationId = 0;
 
     this.getIoTDeviceAndDefaultData(this.dialogModel.deviceId);
   }
@@ -75,30 +71,14 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
       this.getApplications();
       this.getPayloadDecoders();
 
-      this.getDataTargets(this.iotDevice.application.id);
       this.getDeviceModels(this.iotDevice.application.belongsTo.id);
 
       this.iotDeviceUpdate.deviceModelId = this.iotDevice.deviceModel.id;
       this.iotDeviceUpdate.applicationId = this.iotDevice.application.id;
-      this.iotDeviceUpdate.organizationId = this.iotDevice.application.belongsTo.id;
-
-      this.getIoTDeviceCurrentDataTargetsAndPayloadDecoders(this.dialogModel.deviceId);
+      this.organizationId = this.iotDevice.application.belongsTo.id;
     });
 
     this.subscriptions.push(iotDevicesSubscription);
-  }
-
-  getIoTDeviceCurrentDataTargetsAndPayloadDecoders(id: number): void {
-    const payloadDeviceDatatargetSubscription = this.payloadDeviceDatatargetService
-      .getByIoTDevice(id)
-      .subscribe(dataTargetsAndPayloadDecoders => {
-        const dataTargetsAndPayloadIds = dataTargetsAndPayloadDecoders.data.map(val => {
-          return { dataTargetId: val.dataTarget.id, payloadDecoderId: val.payloadDecoder?.id };
-        });
-        this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.push(...dataTargetsAndPayloadIds);
-      });
-
-    this.subscriptions.push(payloadDeviceDatatargetSubscription);
   }
 
   getOrganizations() {
@@ -132,16 +112,6 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
     this.subscriptions.push(payloadDecoderSubscription);
   }
 
-  getDataTargets(applicationId: number) {
-    const dataTargetSubscription = this.dateTargetService
-      .getByApplicationId(1000, 0, applicationId)
-      .subscribe(response => {
-        this.dataTargets = response.data;
-      });
-
-    this.subscriptions.push(dataTargetSubscription);
-  }
-
   getDeviceModels(organizationId: number) {
     const deviceModelSubscription = this.deviceModelService
       .getMultiple(1000, 0, "asc", "id", organizationId)
@@ -152,31 +122,12 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
     this.subscriptions.push(deviceModelSubscription);
   }
 
-  public addRow() {
-    this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.push({
-      dataTargetId: null,
-      payloadDecoderId: null,
-    });
-  }
-
-  public deleteRow(index) {
-    this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.splice(index, 1);
-  }
-
   onOrganizationChange() {
-    this.filteredApplications.next(
-      this.applications.filter(app => app.belongsTo.id === this.iotDeviceUpdate.organizationId)
-    );
+    this.filteredApplications.next(this.applications.filter(app => app.belongsTo.id === this.organizationId));
     this.iotDeviceUpdate.applicationId = 0;
     this.iotDeviceUpdate.deviceModelId = 0;
-    this.iotDeviceUpdate.dataTargetToPayloadDecoderIds = [];
     this.dataTargets = [];
-    this.getDeviceModels(this.iotDeviceUpdate.organizationId);
-  }
-
-  onApplicationChange() {
-    this.getDataTargets(this.iotDeviceUpdate.applicationId);
-    this.iotDeviceUpdate.dataTargetToPayloadDecoderIds = [];
+    this.getDeviceModels(this.organizationId);
   }
 
   public compare(o1: any, o2: any): boolean {
@@ -184,13 +135,7 @@ export class IoTDeviceChangeApplicationDialogComponent implements OnInit, OnDest
   }
 
   onSubmit() {
-    if (
-      !this.iotDeviceUpdate.applicationId ||
-      !this.iotDeviceUpdate.organizationId ||
-      this.iotDeviceUpdate.deviceModelId == null ||
-      this.iotDeviceUpdate.dataTargetToPayloadDecoderIds.some(val => !val.dataTargetId)
-    )
-      return;
+    if (!this.iotDeviceUpdate.applicationId || this.iotDeviceUpdate.deviceModelId == null) return;
 
     const iotDevicesSubscription = this.iotDeviceService
       .changeIoTDeviceApplication(this.iotDevice.id, this.iotDeviceUpdate)

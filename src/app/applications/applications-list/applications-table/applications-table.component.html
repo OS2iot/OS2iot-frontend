@@ -133,7 +133,7 @@
           <app-table-sort-icon [sortDirection]="getSortDirection('dataTargets')"/>
         </th>
         <td *matCellDef="let application" mat-cell>
-          {{ application?.dataTargets?.length ?? 0 }}
+          {{ getDataTargetConnectionCount(application) }}
         </td>
       </ng-container>
 
@@ -147,7 +147,7 @@
           <app-table-sort-icon [sortDirection]="getSortDirection('openDataDkEnabled')"/>
         </th>
         <td *matCellDef="let application" mat-cell>
-          {{ isOpenDataDK(application.dataTargets) | yesNo }}
+          {{ isOpenDataDK(application?.connections) | yesNo }}
         </td>
       </ng-container>
 
@@ -219,7 +219,6 @@
         <td *matCellDef="let element" mat-cell>
           @if (element?.id | canEditApplication) {
             <div class="dropdown">
-              <!--              TODO: Prevent default -->
               <a
                 (click)="$event.stopPropagation();$event.preventDefault()"
                 [attr.aria-label]="'APPLICATION-TABLE-ROW.SHOW-OPTIONS' | translate"

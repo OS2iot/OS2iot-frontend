@@ -25,10 +25,11 @@ import { ApplicationsTableComponent } from "./applications-list/applications-tab
 import { ApplicaitonsRoutingModule } from "./applications-routing.module";
 import { ApplicationsComponent } from "./applications.component";
 import { BulkImportComponent } from "./bulk-import/bulk-import.component";
-import { DatatargetModule } from "./datatarget/datatarget.module";
 import { IotDevicesModule } from "./iot-devices/iot-devices.module";
 import { MulticastModule } from "./multicast/multicast.module";
 import { BasicTabSwitchComponent } from "@shared/components/basic-tab-switch/basic-tab-switch.component";
+import { DatatargetTabComponent } from "@applications/datatarget/datatarget-tab/datatarget-tab.component";
+import { DataTargetConnectionTableComponent } from "@applications/datatarget/datatarget-connection-table/datatarget-connection-table.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { BasicTabSwitchComponent } from "@shared/components/basic-tab-switch/bas
     BulkImportComponent,
     ApplicationsTableComponent,
     ApplicationChangeOrganizationDialogComponent,
+    DatatargetTabComponent,
+    DataTargetConnectionTableComponent,
   ],
   exports: [ApplicaitonsRoutingModule, ApplicationsComponent, ApplicationsTableComponent],
   imports: [
@@ -46,7 +49,6 @@ import { BasicTabSwitchComponent } from "@shared/components/basic-tab-switch/bas
     RouterModule,
     TranslatePipe,
     IotDevicesModule,
-    DatatargetModule,
     DirectivesModule,
     FormModule,
     SharedModule,

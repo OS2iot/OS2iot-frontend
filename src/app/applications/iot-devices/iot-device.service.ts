@@ -18,7 +18,10 @@ import { UserMinimalService } from "@app/admin/users/user-minimal.service";
 export class IoTDeviceService {
   private BASEURL = "iot-device";
 
-  constructor(private restService: RestService, private userMinimalService: UserMinimalService) {}
+  constructor(
+    private restService: RestService,
+    private userMinimalService: UserMinimalService
+  ) {}
 
   createIoTDevice(body: IotDevice): Observable<IotDevice> {
     return this.restService.post(this.BASEURL, body);
@@ -47,6 +50,7 @@ export class IoTDeviceService {
           location: response.location,
           commentOnLocation: response.commentOnLocation,
           comment: response.comment,
+          connections: response.connections,
           type: response.type,
           receivedMessagesMetadata: response.receivedMessagesMetadata,
           metadata: response.metadata,

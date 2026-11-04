@@ -58,5 +58,6 @@ export enum PermissionType {
   OrganizationUserAdmin = "OrganizationUserAdmin",
   OrganizationGatewayAdmin = "OrganizationGatewayAdmin",
   OrganizationApplicationAdmin = "OrganizationApplicationAdmin",
+  OrganizationDataTargetAdmin = "OrganizationDataTargetAdmin",
   Read = "Read",
 }
