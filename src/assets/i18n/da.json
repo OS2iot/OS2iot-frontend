@@ -26,6 +26,7 @@
   "NAV": {
     "APPLICATIONS": "Applikationer",
     "APPLICATION": "Applikation",
+    "DATA-TARGETS": "Datatargets",
     "ALL-IOT-DEVICES": "Alle IoT enheder",
     "LORA-GATEWAYS": "Gateways",
     "DATATARGET": "Datatarget",
@@ -238,9 +239,12 @@
     "SHOW-OPTIONS": "Håndter datatarget",
     "DELETE": "Slet",
     "RELATIONS": "Tilknyttede IoT enheder og payload decoders",
+    "APPLICATION-RELATIONS": "Applikationer som anvender datatarget",
     "PAYLOADEDECODER": "Payload decoder",
     "NO-PAYLOADDECODER": "Ingen payload decoder",
     "IOTDEVICE": "IoT enhed(er)",
+    "DEVICES": "Enheder",
+    "IS-DEFAULT": "Automatisk tilknyttelse",
     "NO-RELATIONS": "ingen tilknyttede relationer",
     "TENANT": "Tenant",
     "NO-TENANT": "Ingen Tenant angivet",
@@ -258,6 +262,7 @@
     "24H_STATUS": "Status (24 timer)",
     "ADD-TO-OPENDATADK": "Send data til OpenDataDK",
     "SEE-RESULT-IN-LOG": "// Se resultatet i loggen.",
+    "APPLICATION": "Application",
     "OPENDATA-DK": {
       "TYPE": "OpenDataDK",
       "NAME": "Open Data DK",
@@ -296,6 +301,7 @@
       "TEST-CONNECTION": "Test forbindelse",
       "SEND-PING-TO-DATATARGET": "Forsøg at forbinde til datatarget",
       "SEND-LATEST-PACKAGE": "Send seneste datapakke",
+      "CHOOSE-APPLICATION": "Vælg applikation",
       "CHOOSE-IOT-DEVICE": "Vælg IoT-enhed",
       "CHOOSE-PAYLOAD-DECODER": "Vælg payload decoder",
       "SEND-DATA-PACKAGE": "Send datapakke",
@@ -699,6 +705,7 @@
     "OrganizationUserAdmin": "Brugeradministrator",
     "OrganizationGatewayAdmin": "Gateway administrator",
     "OrganizationApplicationAdmin": "Applikationsadministrator",
+    "OrganizationDataTargetAdmin": "Datatarget administrator",
     "Read": "Læserettigheder"
   },
   "FORM": {
@@ -728,10 +735,12 @@
     "EDIT-USERS": "Redigér bruger",
     "EDIT-DEVICE-PROFILE": "Redigér device profil",
     "EDIT-API-KEY": "Redigér API nøgle",
-    "ADD-METADATA-ROW": "Tilføj metadata række"
+    "ADD-METADATA-ROW": "Tilføj metadata række",
+    "ADD-NEW-CONNECTION": "Tilknyt data target"
   },
   "QUESTION": {
     "CREATE-IOT-DEVICE": "IoT-enhed",
+    "CREATE-DATATARGET-CONNECTION": "Datatarget tilslutning",
     "DEVICE-MODEL-SELECT": "Tilknyt en device model til enheden",
     "DEVICE-MODEL-SELECT-NON": "Ingen device model valgt",
     "TRANSMISSION-PROTOCOL": "Vælg transmissionsprotokol",
@@ -811,6 +820,8 @@
     "ADD-RELATIONS": "Tilføj IoT enhed og payload decoder",
     "METADATA": "Metadata",
     "DATATARGET": {
+      "SELECT-DATATARGET": "Vælg datatarget",
+      "CONNECT-NEW-DEVICES-AUTOMATICALLY": "Automatisk tilslut nye enheder til samme datatarget og payload decoder",
       "SELECT-PAYLOADDECODER": "Vælg payload decoder",
       "NO-PAYLOAD-DECODER-SELECTED": "Ingen payload decoder valgt",
       "SELECT-DEVICES": "Vælg enheder",

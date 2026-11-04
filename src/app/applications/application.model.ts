@@ -1,12 +1,12 @@
 import { PermissionResponse } from "@app/admin/permission/permission.model";
 import { ControlledPropertyTypes } from "@app/device-model/Enums/controlled-propperty.enum";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { ApplicationDeviceTypeUnion } from "@shared/enums/device-type";
 import { ControlledProperty } from "@shared/models/controlled-property.model";
 import { Organisation } from "../admin/organisation/organisation.model";
 import { ApplicationStatus } from "./enums/status.enum";
 import { IotDevice } from "./iot-devices/iot-device.model";
 import { ApplicationDeviceType } from "./models/application-device-type.model";
+import { DataTargetConnection } from "@payload-decoder/payload-device-data.model";
 
 export type ApplicationWithStatus = Application & { statusCheck: "stable" | "alert" };
 
@@ -36,7 +36,7 @@ export class Application {
   public deviceTypes?: ApplicationDeviceType[];
   public permissions: PermissionResponse[];
   public permissionIds: number[];
-  public dataTargets: Datatarget[];
+  public connections: DataTargetConnection[];
 }
 
 export class ApplicationRequest {

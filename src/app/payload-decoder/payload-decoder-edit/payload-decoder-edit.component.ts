@@ -188,7 +188,7 @@ export class PayloadDecoderEditComponent implements OnInit {
 
   getApplications(orgId?: number): void {
     this.applicationsSubscription = this.applicationService
-      .getApplications(null, null, null, null, orgId ? orgId : this.getCurrentOrganisationId())
+      .getApplications(1000, 0, "asc", "id", orgId ? orgId : this.getCurrentOrganisationId())
       .subscribe(applications => {
         this.applications = applications.data.sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
       });

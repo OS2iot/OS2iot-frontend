@@ -51,6 +51,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
     { type: PermissionType.OrganizationUserAdmin },
     { type: PermissionType.OrganizationApplicationAdmin },
     { type: PermissionType.OrganizationGatewayAdmin },
+    { type: PermissionType.OrganizationDataTargetAdmin },
     { type: PermissionType.Read },
   ];
 
@@ -283,6 +284,7 @@ export class PermissionEditComponent implements OnInit, OnDestroy {
       { type: PermissionType.OrganizationUserAdmin },
       { type: PermissionType.OrganizationApplicationAdmin },
       { type: PermissionType.OrganizationGatewayAdmin },
+      { type: PermissionType.OrganizationDataTargetAdmin },
       { type: PermissionType.Read },
     ];
   }

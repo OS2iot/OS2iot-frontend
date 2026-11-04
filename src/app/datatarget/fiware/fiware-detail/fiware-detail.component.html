@@ -1,0 +1,122 @@
+@if (datatarget) {
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-stretch">
+        <div class="jumbotron jumbotron--m-right jumbotron--full-width width100percent">
+          <h3>{{ "DATATARGET.DETAILS" | translate }}</h3>
+          <app-general-details [data]="datatarget"></app-general-details>
+          <p>
+            <strong>{{ "DATATARGET.LATEST_MESSAGE" | translate }}</strong>{{ datatarget.lastMessageDate | dkTime }}
+          </p>
+          <mat-divider></mat-divider>
+          <p><strong>Context Broker</strong>{{ datatarget.url }}</p>
+          <p>
+            <strong>{{ "DATATARGET.TIMEOUT" | translate }}</strong>{{ datatarget.timeout }}
+          </p>
+          <p>
+            <strong>{{ "DATATARGET.TYPE" | translate }}</strong>{{
+              "DATATARGET." + datatarget.type + ".TYPE" | translate
+            }}
+          </p>
+          <mat-divider></mat-divider>
+          <p>
+            <strong>{{ "DATATARGET.TENANT" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.tenant) {
+              <pre>{{ datatarget.tenant }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-TENANT" | translate }}</p>
+            }
+          </code>
+          <p>
+            <strong>{{ "DATATARGET.CONTEXT" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.context) {
+              <pre>{{ datatarget.context }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-CONTEXT" | translate }}</p>
+            }
+          </code>
+          <p>
+            <strong>{{ "DATATARGET.AUTHORIZATIONHEADER" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.authorizationHeader) {
+              <pre>{{ datatarget.authorizationHeader }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-AUTHORIZATIONHEADER" | translate }}</p>
+            }
+          </code>
+          <p>
+            <strong>{{ "DATATARGET.TOKENENDPOINT" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.tokenEndpoint) {
+              <pre>{{ datatarget.tokenEndpoint }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-TOKENENDPOINT" | translate }}</p>
+            }
+          </code>
+          <p>
+            <strong>{{ "DATATARGET.CLIENTID" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.clientId) {
+              <pre>{{ datatarget.clientId }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-CLIENTID" | translate }}</p>
+            }
+          </code>
+          <p>
+            <strong>{{ "DATATARGET.CLIENTSECRET" | translate }}</strong>
+          </p>
+          <code>
+            @if (datatarget.clientSecret) {
+              <pre>{{ "".padStart(20, "*") }}</pre>
+            } @else {
+              <p>{{ "DATATARGET.NO-CLIENTSECRET" | translate }}</p>
+            }
+          </code>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <div class="form-group">
+              <h3>{{ "DATATARGET.APPLICATION-RELATIONS" | translate }}</h3>
+              @if (applications?.length === 0) {
+                <div>
+                  <p>{{ "DATATARGET.NO-RELATIONS" | translate }}</p>
+                </div>
+              }
+              @if (applications) {
+                <div>
+                  @for (application of applications; track application) {
+                    <div>
+                      <div class="row">
+
+                        <div class="col-md-4 d-flex align-items-center">
+                          <p>
+                            <strong>{{ "DATATARGET.APPLICATION" | translate }}</strong>
+                            <span>
+                            <a [routerLink]="['/applications', application.id, 'data-targets']">
+                              {{ application.name }}
+                            </a>
+                          </span>
+                          </p>
+                        </div>
+                        <mat-divider></mat-divider>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -14,7 +14,6 @@ import { Router } from "@angular/router";
 import { ApplicationChangeOrganizationDialogComponent } from "@applications/application-change-organization-dialog/application-change-organization-dialog.component";
 import { Application, ApplicationData } from "@applications/application.model";
 import { ApplicationService } from "@applications/application.service";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { ApplicationDeviceType } from "@applications/models/application-device-type.model";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { TranslateService } from "@ngx-translate/core";
@@ -27,6 +26,7 @@ import { TableColumn } from "@shared/types/table.type";
 import { merge, Observable, of as observableOf } from "rxjs";
 import { catchError, map, startWith, switchMap } from "rxjs/operators";
 import { ApplicationsFilterService } from "../application-filter/applications-filter.service";
+import { DataTargetConnection } from "@payload-decoder/payload-device-data.model";
 
 const columnDefinitions: TableColumn[] = [
   {
@@ -148,6 +148,7 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   protected columnDefinitions = columnDefinitions;
+  protected readonly Application = Application;
 
   constructor(
     public translate: TranslateService,
@@ -278,6 +279,12 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     return value.map(p => p.type).join(", ");
   }
 
+  isOpenDataDK(dataTargets: DataTargetConnection[]): boolean {
+    const result = (dataTargets ?? []).find(c => c.dataTarget?.type === "OPENDATADK");
+
+    return !!result;
+  }
+
   mapDeviceTypes(value: ApplicationDeviceType[]) {
     const deviceTypeTranslationPrefix = "IOT-DEVICE-TYPES.";
     const deviceTypeTranslationKeys = ApplicationDeviceTypeEntries.map(x => `${deviceTypeTranslationPrefix}${x.key}`);
@@ -292,10 +299,8 @@ export class ApplicationsTableComponent implements AfterViewInit, OnInit {
     return result.length ? result.join(", ") : "-";
   }
 
-  isOpenDataDK(dataTargets: Datatarget[]): boolean {
-    const result = dataTargets.find(t => t.type === "OPENDATADK");
-
-    return !!result;
+  getDataTargetConnectionCount(application: Application) {
+    return application.connections?.length ?? 0;
   }
 
   onOpenChangeOrganizationDialog(id: number) {

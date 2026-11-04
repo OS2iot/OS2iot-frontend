@@ -1,0 +1,90 @@
+<div class="mat-elevation-z8">
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+  <table
+    [dataSource]="connections"
+    mat-table
+    matSort
+    matSortActive="name"
+    matSortDirection="asc"
+    matSortDisableClear
+  >
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET-TABLE.NAME" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        <a [routerLink]="['/datatargets', element.dataTarget.id]" routerLinkActive="active">
+          {{ element.dataTarget.name }}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payload-decoder">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET.PAYLOADEDECODER" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        <a [routerLink]="['/payload-decoder/payload-decoder-detail', element.payloadDecoder.id]">
+          {{ element.payloadDecoder.name }}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="devices">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET.DEVICES" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.iotDevices.length }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isDefault">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET.IS-DEFAULT" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.defaultConnection | yesNo }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="menu">
+      <th *matHeaderCellDef class="col-1" mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell>
+        @if (canEdit) {
+          <div class="dropdown">
+            <a [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate" aria-expanded="false"
+               class="applicationRow__edit dropdown-toggle"
+               data-bs-toggle="dropdown"
+               href="#" id="tableRowDropdown-{{ element.id }}"
+               role="button"></a>
+            <ul attr.aria-labelledby="tableRowDropdown-{{ element.id }}" class="dropdown-menu dropdown-menu--table">
+              <li class="dropdown-item">
+                <a [routerLink]="['../datatarget-edit-connection', element.id]" routerLinkActive="active">{{
+                    "GEN.EDIT" | translate
+                  }}</a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="deleteConnection(element)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        }
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+  </table>
+  <mat-paginator
+    [length]="resultsLength"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageSize]="pageSize"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

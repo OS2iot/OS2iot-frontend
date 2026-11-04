@@ -1,0 +1,89 @@
+<div class="mat-elevation-z8">
+  @if (isLoadingResults) {
+    <div class="loading-shade">
+      @if (isLoadingResults) {
+        <mat-spinner></mat-spinner>
+      }
+    </div>
+  }
+  <table [dataSource]="dataSource" mat-table matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET-TABLE.NAME" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        <a [routerLink]="['../datatargets', element.id]" class="application-link" routerLinkActive="active">{{
+            element.name
+          }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        {{ "DATATARGET-TABLE.TYPE" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        {{ "DATATARGET." + element.type + ".TYPE" | translate }}
+      </td>
+    </ng-container>
+
+    <!-- 24h Status Column -->
+    <ng-container matColumnDef="24h_status">
+      <th *matHeaderCellDef mat-header-cell>
+        {{ "DATATARGET.24H_STATUS" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        @if (!element.hasRecentErrors) {
+          <fa-icon [icon]="faCheckCircle" class="fa-ok"></fa-icon>
+        }
+        @if (element.hasRecentErrors) {
+          <fa-icon [icon]="faExclamationTriangle" class="fa-error"></fa-icon>
+        }
+      </td>
+    </ng-container>
+
+    <!-- Iot device count -->
+    <ng-container matColumnDef="Iot_devices">
+      <th *matHeaderCellDef mat-header-cell>
+        {{ "DATATARGET.DEVICES" | translate }}
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        {{ getIotDeviceCount(element) }}
+      </td>
+    </ng-container>
+
+    <!-- Menu Column -->
+    <ng-container matColumnDef="menu">
+      <th *matHeaderCellDef class="col-1" mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell>
+        @if (canEdit) {
+          <div class="dropdown">
+            <a [attr.aria-label]="'DATATARGET-TABLE-ROW.SHOW-OPTIONS' | translate" aria-expanded="false"
+               class="applicationRow__edit dropdown-toggle"
+               data-bs-toggle="dropdown"
+               href="#" id="tableRowDropdown-{{ element.id }}"
+               role="button"></a>
+            <ul attr.aria-labelledby="tableRowDropdown-{{ element.id }}" class="dropdown-menu dropdown-menu--table">
+              <li class="dropdown-item">
+                <a [routerLink]="['./datatarget-edit', element.id]" routerLinkActive="active">{{
+                    "GEN.EDIT" | translate
+                  }}</a>
+              </li>
+              <li class="dropdown-item">
+                <a (click)="deleteDatatarget(element)" [routerLink]="[]">{{ "GEN.DELETE" | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        }
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+  </table>
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

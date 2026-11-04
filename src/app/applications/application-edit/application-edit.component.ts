@@ -11,13 +11,14 @@ import { BackButton } from "@shared/models/back-button.model";
 })
 export class ApplicationEditComponent implements OnInit {
   public backButton: BackButton = { label: "", routerLink: "applications" };
-  public multiPage = false;
   public title = "";
-  public sectionTitle = "";
   public submitButton = "";
   private applicaitonId: string;
 
-  constructor(public translate: TranslateService, private route: ActivatedRoute) {
+  constructor(
+    public translate: TranslateService,
+    private route: ActivatedRoute
+  ) {
     translate.use("da");
   }
 

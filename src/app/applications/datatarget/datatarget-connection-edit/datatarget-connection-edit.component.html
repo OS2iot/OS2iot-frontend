@@ -1,0 +1,95 @@
+<app-top-bar
+  [canEdit]="canEdit"
+  backButtonTitle="{{ 'NAV.APPLICATION' | translate }}"
+  title="{{ 'QUESTION.CREATE-DATATARGET-CONNECTION' | translate }}"
+>
+</app-top-bar>
+
+<form (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="dataTarget">{{ "QUESTION.DATATARGET.SELECT-DATATARGET" | translate }}</label>*
+    <div class="mt-3 col-12">
+      <mat-select
+        [(ngModel)]="connection.dataTargetId"
+        [placeholder]="'QUESTION.DATATARGET.SELECT-DATATARGET' | translate"
+        class="form-control"
+        id="dataTarget"
+        name="dataTarget"
+        required>
+        @for (dataTarget of dataTargets; track dataTarget.id) {
+          <mat-option [value]="dataTarget.id">
+            {{ dataTarget.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </div>
+  </div>
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="payloadDecoder">{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</label>*
+    <div class="mt-3 col-12">
+      <mat-select
+        [(ngModel)]="connection.payloadDecoderId"
+        [placeholder]="'QUESTION.DATATARGET.SELECT-PAYLOADDECODER' | translate"
+        class="form-control"
+        id="payloadDecoder"
+        name="payloadDecoder"
+        required
+      >
+        @for (payloadDecoder of payloadDecoders; track payloadDecoder.id) {
+          <mat-option [value]="payloadDecoder.id">
+            {{ payloadDecoder.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="form-group mt-3 col-12">
+    <div class="mt-3 col-12">
+      <mat-slide-toggle [(ngModel)]="connection.defaultConnection" color="" id="active" name="active">
+        {{ "QUESTION.DATATARGET.CONNECT-NEW-DEVICES-AUTOMATICALLY" | translate }}
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="form-group mt-3 col-12">
+    <label class="form-label" for="devices">{{ "QUESTION.DATATARGET.SELECT-DEVICES" | translate }}</label>*
+    <div class="mt-3 col-12">
+      <mat-select
+        [(ngModel)]="connection.iotDeviceIds"
+        [placeholder]="'QUESTION.DATATARGET.SELECT-DEVICES' | translate"
+        class="form-control"
+        id="devices"
+        multiple
+        name="devices"
+        required
+      >
+        @for (iotDevice of iotDevices; track iotDevice.id) {
+          <mat-option [value]="iotDevice.id">
+            {{ iotDevice.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="form-group mt-5">
+    <button (click)="routeBack()" class="btn btn-secondary" type="button">
+      {{ "GEN.CANCEL" | translate }}
+    </button>
+    <button class="btn btn-primary ms-2" type="submit">
+      {{ "GEN.SAVE" | translate }}
+    </button>
+  </div>
+</form>

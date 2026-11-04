@@ -22,8 +22,8 @@ import { IotDevice } from "../iot-device.model";
 import { IoTDeviceService } from "../iot-device.service";
 import { MeService } from "@shared/services/me.service";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
-import { PayloadDeviceDatatargetService } from "@payload-decoder/payload-device-datatarget.service";
-import { PayloadDeviceDatatargetGetManyResponse } from "@payload-decoder/payload-device-data.model";
+import { DatatargetConnectionService } from "@payload-decoder/datatarget-connection.service";
+import { DataTargetConnectionGetManyResponse } from "@payload-decoder/payload-device-data.model";
 
 @Component({
   selector: "app-iot-device-edit",
@@ -62,7 +62,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
     private deviceProfileService: DeviceProfileService,
     private applicationService: ApplicationService,
     private iotDeviceService: IoTDeviceService,
-    private datatargetPayloadService: PayloadDeviceDatatargetService,
+    private datatargetPayloadService: DatatargetConnectionService,
     private location: Location,
     private shareVariable: SharedVariableService,
     private deviceModelService: DeviceModelService,
@@ -269,7 +269,7 @@ export class IotDeviceEditComponent implements OnInit, OnDestroy {
 
         //If it's the copy device flow, then get all datatargets from the device that we want to copy.
         this.datatargetPayloadService.getByIoTDevice(this.deviceId).subscribe({
-          next: (result: PayloadDeviceDatatargetGetManyResponse) => {
+          next: (result: DataTargetConnectionGetManyResponse) => {
             //For each of these datatargets, append the copied device to that datatarget. First we make the observables
             const appendToDatatargetObservables = result.data.map(element =>
               this.datatargetPayloadService.appendCopiedIoTDevice(element.id, { deviceId: createdDevice.id })

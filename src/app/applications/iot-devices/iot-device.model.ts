@@ -8,6 +8,7 @@ import { ReceivedMessageMetadata } from "@shared/models/received-message-metadat
 import { LatestReceivedMessage } from "./latestReceivedMessage.model";
 import { MqttInternalBrokerSettings } from "@shared/models/mqtt-broker-settings.model";
 import { MqttExternalBrokerSettings } from "@shared/models/mqtt-subscriber-settings.model";
+import { DataTargetConnection } from "@payload-decoder/payload-device-data.model";
 
 export class IotDevice {
   name: string;
@@ -15,6 +16,7 @@ export class IotDevice {
   location: JsonLocation;
   commentOnLocation: string;
   comment: string;
+  connections: DataTargetConnection[];
   type: DeviceType = DeviceType.LORAWAN;
   receivedMessagesMetadata: ReceivedMessageMetadata[];
   metadata?: string;
@@ -90,7 +92,5 @@ export class IoTDeviceStatsResponse {
 
 export class UpdateIoTDeviceApplication {
   public deviceModelId: number;
-  public organizationId: number;
   public applicationId: number;
-  public dataTargetToPayloadDecoderIds: { dataTargetId: number; payloadDecoderId: number }[];
 }

@@ -31,6 +31,6 @@ jobs:
         with:
           node-version: 24
       - name: Install packages
-        run: "npm ci"
+        run: "npm i"
       - name: Build source
         run: "npm run build"
