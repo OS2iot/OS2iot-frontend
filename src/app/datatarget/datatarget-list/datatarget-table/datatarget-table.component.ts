@@ -110,7 +110,7 @@ export class DatatargetTableComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   getIotDeviceCount(dataTarget: Datatarget) {
-    return dataTarget.connections?.flatMap(c => c.iotDevices)?.length ?? 0;
+    return dataTarget.iotDevicesCount ?? 0;
   }
 
   ngOnDestroy() {

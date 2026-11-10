@@ -27,4 +27,5 @@ export class DatatargetResponse {
   updatedBy: number;
   lastMessageDate?: Date;
   hasRecentErrors?: boolean;
+  iotDevicesCount: number;
 }

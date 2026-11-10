@@ -1,6 +1,5 @@
 import { DataTargetType } from "@shared/enums/datatarget-type";
 import { OpenDataDkDataset } from "@app/datatarget/opendatadk/opendatadk-dataset.model";
-import { DataTargetConnection } from "@payload-decoder/payload-device-data.model";
 
 export class Datatarget {
   id: number;
@@ -31,7 +30,7 @@ export class Datatarget {
   updatedByName: string;
   lastMessageDate?: Date;
   hasRecentErrors?: boolean;
-  connections?: DataTargetConnection[];
+  iotDevicesCount: number;
 }
 
 export class DatatargetData {
