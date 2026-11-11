@@ -37,7 +37,11 @@ export class UserTableComponent implements AfterViewInit {
   @Input() canSort = true;
   isGlobalAdmin: boolean;
 
-  constructor(public translate: TranslateService, private userService: UserService, private meService: MeService) {
+  constructor(
+    public translate: TranslateService,
+    private userService: UserService,
+    private meService: MeService
+  ) {
     this.isGlobalAdmin = this.meService.hasGlobalAdmin();
   }
 

@@ -8,8 +8,6 @@ import { PermissionResponse } from "@app/admin/permission/permission.model";
 import { UserResponse } from "@app/admin/users/user.model";
 import { Gateway } from "@app/gateway/gateway.model";
 import { Application } from "@applications/application.model";
-import { DatatargetResponse } from "@applications/datatarget/datatarget-response.model";
-import { Datatarget } from "@applications/datatarget/datatarget.model";
 import { IotDevice } from "@applications/iot-devices/iot-device.model";
 import { AuthService } from "@auth/auth.service";
 import { environment } from "@environments/environment";
@@ -23,6 +21,8 @@ import { Sort } from "@shared/models/sort.model";
 import { LoggedInService } from "@shared/services/loggedin.service";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 import { MeService } from "@shared/services/me.service";
+import { DatatargetResponse } from "@app/datatarget/datatarget-models/datatarget-response.model";
+import { Datatarget } from "@app/datatarget/datatarget-models/datatarget.model";
 
 @Component({
   selector: "app-top-bar",

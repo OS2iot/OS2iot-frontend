@@ -94,6 +94,7 @@ export class BulkMapping {
       location: undefined,
       commentOnLocation: data.commentOnLocation,
       comment: data.comment,
+      connections: [],
       type: DeviceType.GENERIC_HTTP,
       receivedMessagesMetadata: undefined,
       metadata: undefined,

@@ -18,116 +18,126 @@
       </ul>
     </div>
   } @else {
-  <div class="navbar-header">
-    <button
-      (click)="isCollapsed = !isCollapsed"
-      aria-controls="navbar"
-      aria-label="Toggle navigation"
-      class="navbar-toggler collapsed"
-      data-target="#navbar"
-      type="button"
+    <div class="navbar-header">
+      <button
+        (click)="isCollapsed = !isCollapsed"
+        aria-controls="navbar"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        data-target="#navbar"
+        type="button"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div
+      [attr.aria-expanded]="!isCollapsed"
+      [ngClass]="{ collapse: !isCollapsed }"
+      class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
+      id="navbar"
     >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-  <div
-    [attr.aria-expanded]="!isCollapsed"
-    [ngClass]="{ collapse: !isCollapsed }"
-    class="navbar-collapse collapse overflow-auto flex-grow-0 h-100"
-    id="navbar"
-  >
-    <ul (click)="isCollapsed = !isCollapsed" class="navbar-nav d-flex flex-column h-100">
-      @if (hasSomePermissions()) {
-        <div class="flex-column mb-1">
-          <li class="nav-item">
-            <mat-form-field appearance="outline">
-              <mat-select (selectionChange)="onChange($event.value)" [value]="selected">
-                <mat-select-trigger>
-                  <div class="nav-bar-selector-trigger">
-                    <div class="nav-bar-selector-building-icon">
-                      <img height="20" src="assets/images/building.svg" width="20"/>
+      <ul (click)="isCollapsed = !isCollapsed" class="navbar-nav d-flex flex-column h-100">
+        @if (hasSomePermissions()) {
+          <div class="flex-column mb-1">
+            <li class="nav-item">
+              <mat-form-field appearance="outline">
+                <mat-select (selectionChange)="onChange($event.value)" [value]="selected">
+                  <mat-select-trigger>
+                    <div class="nav-bar-selector-trigger">
+                      <div class="nav-bar-selector-building-icon">
+                        <img height="20" src="assets/images/building.svg" width="20"/>
+                      </div>
+                      {{ getOrgName(selected) }}
                     </div>
-                    {{ getOrgName(selected) }}
+                  </mat-select-trigger>
+                  @for (org of organisations; track org) {
+                    <mat-option [value]="org.id">
+                      {{ org.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+                <div class="custom-dropdown-icon" matSuffix>
+                  <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11"/>
+                  <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11"/>
+                </div>
+              </mat-form-field>
+              <ul class="navbar-nav flex-column mb-2">
+                <li class="nav-item">
+                  <a id="applications" routerLink="/applications" routerLinkActive="active">
+                    {{ "NAV.APPLICATIONS" | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/sigfox" routerLinkActive="active">
+                    {{ "NAV.SIGFOX-ADMIN" | translate }}
+                  </a>
+                </li>
+                @if (!isOnlyGatewayAdmin) {
+                  <div>
+                    <li>
+                      <a routerLink="/device-model" routerLinkActive="active">
+                        {{ "NAV.DEVICE-MODEL" | translate }}
+                      </a>
+                    </li>
                   </div>
-                </mat-select-trigger>
-                @for (org of organisations; track org) {
-                  <mat-option [value]="org.id">
-                    {{ org.name }}
-                  </mat-option>
                 }
-              </mat-select>
-              <div class="custom-dropdown-icon" matSuffix>
-                <img class="dropdown-up" height="7" src="assets/images/angle-up.svg" width="11"/>
-                <img class="dropdown-down" height="7" src="assets/images/angle-down.svg" width="11"/>
-              </div>
-            </mat-form-field>
-            <ul class="navbar-nav flex-column mb-2">
-              <li class="nav-item">
-                <a id="applications" routerLink="/applications" routerLinkActive="active">
-                  {{ "NAV.APPLICATIONS" | translate }}
-                </a>
-              </li>
-              <li>
-                <a routerLink="/sigfox" routerLinkActive="active">
-                  {{ "NAV.SIGFOX-ADMIN" | translate }}
-                </a>
-              </li>
-              @if (!isOnlyGatewayAdmin) {
-                <div>
-                  <li>
-                    <a routerLink="/device-model" routerLinkActive="active">
-                      {{ "NAV.DEVICE-MODEL" | translate }}
+                @if (userResponse && (isUserAdmin || isGlobalAdmin)) {
+                  <li class="nav-item">
+                    <a routerLink="/admin/api-key" routerLinkActive="active">
+                      {{ "NAV.API-KEY" | translate }}
                     </a>
                   </li>
-                </div>
-              } @if (userResponse && (isUserAdmin || isGlobalAdmin)) {
-              <li class="nav-item">
-                <a routerLink="/admin/api-key" routerLinkActive="active">
-                  {{ "NAV.API-KEY" | translate }}
-                </a>
-              </li>
-            }
-            </ul>
-            <mat-divider class="m-1 mt-3"></mat-divider>
-          </li>
-          <div class="nav-bar-title">{{ "NAV.TITLES.LORAWAN" | translate }}</div>
-          <li class="nav-item">
-            <ul class="navbar-nav flex-column">
-              <li class="nav-item">
-                <a [routerLinkActive]="['active']" id="myLoraGateway" routerLink="/gateways">
-                  {{ "NAV.LORA-GATEWAYS" | translate }}
-                </a>
-              </li>
-              <li class="nav-item">
-                <a [routerLinkActive]="['active']" id="profiles" routerLink="/profiles">
-                  {{ "NAV.PROFILES" | translate }}
-                </a>
-              </li>
-            </ul>
-          </li>
-          <div class="nav-bar-title">{{ "NAV.TITLES.SYSTEM" | translate }}</div>
-          <li>
-            <a routerLink="/device-model" routerLinkActive="active">
-              {{ "NAV.DEVICE-MODEL" | translate }}
-            </a>
-          </li>
-          <li class="nav-item">
-            <ul class="navbar-nav flex-column">
-              <li class="nav-item">
-                <a [routerLinkActive]="['active']" id="payload-decoder" routerLink="/payload-decoder">
-                  {{ "NAV.PAYLOAD-DECODER" | translate }}
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <app-administration [orgId]="selected"></app-administration>
-          </li>
-        </div>
-      }
-    </ul>
-  </div>
-}
+                }
+              </ul>
+              <mat-divider class="m-1 mt-3"></mat-divider>
+            </li>
+            <div class="nav-bar-title">{{ "NAV.TITLES.LORAWAN" | translate }}</div>
+            <li class="nav-item">
+              <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                  <a [routerLinkActive]="['active']" id="myLoraGateway" routerLink="/gateways">
+                    {{ "NAV.LORA-GATEWAYS" | translate }}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a [routerLinkActive]="['active']" id="profiles" routerLink="/profiles">
+                    {{ "NAV.PROFILES" | translate }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <div class="nav-bar-title">{{ "NAV.TITLES.SYSTEM" | translate }}</div>
+            <li>
+              <a routerLink="/device-model" routerLinkActive="active">
+                {{ "NAV.DEVICE-MODEL" | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                  <a [routerLinkActive]="['active']" id="payload-decoder" routerLink="/payload-decoder">
+                    {{ "NAV.PAYLOAD-DECODER" | translate }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                  <a [routerLinkActive]="['active']" id="data-targets" routerLink="/datatargets">
+                    {{ "NAV.DATA-TARGETS" | translate }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <app-administration [orgId]="selected"></app-administration>
+            </li>
+          </div>
+        }
+      </ul>
+    </div>
+  }
 
 </nav>
 

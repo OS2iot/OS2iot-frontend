@@ -34,6 +34,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "datatargets",
+    loadChildren: () => import("./datatarget/datatarget.module").then(m => m.DatatargetModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: "sigfox",
     loadChildren: () => import("./sigfox/sigfox.module").then(m => m.SigfoxModule),
     canActivate: [AuthGuard],

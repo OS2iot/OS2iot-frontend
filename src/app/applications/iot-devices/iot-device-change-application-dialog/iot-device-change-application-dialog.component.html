@@ -6,7 +6,7 @@
       }}</label>
     <mat-select
       (selectionChange)="onOrganizationChange()"
-      [(value)]="iotDeviceUpdate.organizationId"
+      [(value)]="organizationId"
       [compareWith]="compare"
       class="form-control"
       id="organizationSelect"
@@ -22,7 +22,6 @@
         "IOTDEVICE.CHANGE-APPLICATION.CHOOSE-APPLICATION" | translate
       }}</label>
     <mat-select
-      (selectionChange)="onApplicationChange()"
       [(value)]="iotDeviceUpdate.applicationId"
       [compareWith]="compare"
       class="form-control"
@@ -54,64 +53,6 @@
         </mat-option>
       }
     </mat-select>
-  </div>
-
-  <div class="container row" class="mt-3" mat-dialog-content>
-    <a (click)="addRow()" class="btn btn-secondary my-2 mb-3 mt-3">{{
-        "IOTDEVICE.CHANGE-APPLICATION.CHOOSE-DATA-TARGET" | translate
-      }}</a>
-    @if (payloadDecoders && iotDeviceUpdate.dataTargetToPayloadDecoderIds?.length > 0) {
-      <table class="table table-striped table-bordered">
-        <tbody>
-        @for (element of iotDeviceUpdate.dataTargetToPayloadDecoderIds; track element; let i = $index) {
-          <tr
-            [attr.data-index]="i"
-          >
-            <td>
-              <div class="row">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ "IOTDEVICE.CHANGE-APPLICATION.ADD-DATA-TARGET" | translate }}</mat-label>
-                  <mat-select [(value)]="element.dataTargetId" name="dataTarget">
-                    @for (dataTarget of dataTargets; track dataTarget) {
-                      <mat-option [value]="dataTarget.id">{{
-                          dataTarget.name
-                        }}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </td>
-            <td>
-              <div class="row">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ "QUESTION.DATATARGET.SELECT-PAYLOADDECODER" | translate }}</mat-label>
-                  <mat-select [(value)]="element.payloadDecoderId" matNativeControl name="payloadDecoder">
-                    <mat-option [value]="0">
-                      {{ "QUESTION.DATATARGET.NO-PAYLOAD-DECODER-SELECTED" | translate }}
-                    </mat-option>
-                    @for (payloadDecoder of payloadDecoders; track payloadDecoder) {
-                      <mat-option [value]="payloadDecoder.id">
-                        {{ payloadDecoder.name }}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </td>
-            <td>
-              <a (click)="deleteRow(i)">
-                <div class="text-center m-2">
-                  <fa-icon [icon]="faTimesCircle"></fa-icon>
-                  <p>{{ "DATATARGET.DELETE" | translate }}</p>
-                </div>
-              </a>
-            </td>
-          </tr>
-        }
-        </tbody>
-      </table>
-    }
   </div>
 
   <div class="d-flex flex-row mat-dialog-actions" mat-dialog-actions>

@@ -1,0 +1,205 @@
+<app-top-bar backButtonTitle="{{ 'NAV.DATATARGET' | translate }}" title="{{ 'FORM.EDIT-DATATARGET' | translate }}">
+</app-top-bar>
+
+<form #datatargetForm="ngForm" (ngSubmit)="onSubmit()" class="os2-form p-3 mt-4">
+  @if (errorMessages) {
+    <div class="error-messages p-3">
+      <ul class="mb-0">
+        @for (error of errorMessages; track error) {
+          <li>
+            {{ error | translate }}
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="name">{{ "QUESTION.GIVE-DATATARGET-NAME" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.name"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('name'),
+          'is-valid': formFailedSubmit && !errorFields.includes('name')
+        }"
+        [placeholder]="'QUESTION.GIVE-DATATARGET-NAME-PLACEHOLDER' | translate"
+        class="form-control"
+        id="name"
+        maxlength="50"
+        name="name"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="url">{{ "QUESTION.DATATARGET.MQTT.GIVE-URL" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.url"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('url'),
+          'is-valid': formFailedSubmit && !errorFields.includes('url')
+        }"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-URL-PLACEHOLDER' | translate"
+        class="form-control"
+        id="url"
+        name="url"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqtt-port">{{ "QUESTION.DATATARGET.MQTT.GIVE-PORT" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.mqttPort"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttPort'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttPort')
+        }"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-PORT-PLACEHOLDER' | translate"
+        [required]="true"
+        class="form-control"
+        id="mqtt-port"
+        max="65535"
+        min="1025"
+        name="mqtt-port"
+        step="1"
+        type="number"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqtt-qos">{{ "QUESTION.DATATARGET.MQTT.GIVE-QOS" | translate }}</label
+      >*
+      <fa-icon
+        [icon]="faQuestionCircle"
+        [matTooltip]="'QUESTION.DATATARGET.MQTT.GIVE-QOS-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+      ></fa-icon>
+      <input
+        [(ngModel)]="datatarget.mqttQos"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttQos'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttQos')
+        }"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-QOS-PLACEHOLDER' | translate"
+        [required]="true"
+        class="form-control"
+        id="mqtt-qos"
+        max="2"
+        min="0"
+        name="mqtt-qos"
+        step="1"
+        type="number"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqtt-topic">{{ "QUESTION.DATATARGET.MQTT.GIVE-TOPIC" | translate }}</label
+      >*
+      <fa-icon
+        [icon]="faQuestionCircle"
+        [matTooltip]="'QUESTION.DATATARGET.MQTT.GIVE-TOPIC-INFO' | translate"
+        class="form-info-icon"
+        matTooltipHideDelay="2000"
+        matTooltipPosition="above"
+        matTooltipShowDelay="600"
+      ></fa-icon>
+      <input
+        [(ngModel)]="datatarget.mqttTopic"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttTopic'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttTopic')
+        }"
+        [placeholder]="'QUESTION.DATATARGET.MQTT.GIVE-TOPIC-PLACEHOLDER' | translate"
+        class="form-control"
+        id="mqtt-topic"
+        name="mqtt-topic"
+        required
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqttUsername">{{ "QUESTION.DATATARGET.MQTT.GIVE-USERNAME" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.mqttUsername"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttUsername'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttUsername')
+        }"
+        [required]="true"
+        class="form-control"
+        id="mqttUsername"
+        name="mqttUsername"
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="mqttPassword">{{ "QUESTION.DATATARGET.MQTT.GIVE-PASSWORD" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.mqttPassword"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('mqttPassword'),
+          'is-valid': formFailedSubmit && !errorFields.includes('mqttPassword')
+        }"
+        [required]="true"
+        class="form-control"
+        id="mqttPassword"
+        name="mqttPassword"
+        type="password"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="form-group mt-3 col-12">
+      <label class="form-label" for="timeout">{{ "QUESTION.GIVE-DATATARGET-TIMEOUT" | translate }}</label
+      >*
+      <input
+        [(ngModel)]="datatarget.timeout"
+        [ngClass]="{
+          'is-invalid': formFailedSubmit && errorFields.includes('timeout'),
+          'is-valid': formFailedSubmit && !errorFields.includes('timeout')
+        }"
+        class="form-control"
+        id="timeout"
+        max="100000"
+        maxlength="7"
+        min="0"
+        name="timeout"
+        required
+        step="1"
+        type="number"
+      />
+    </div>
+  </div>
+
+  <div class="form-group mt-5">
+    <button (click)="routeToDatatargets()" class="btn btn-light" type="button">{{ "GEN.BACK" | translate }}</button>
+    <button class="btn btn-primary ms-2" type="submit">{{ "DATATARGET.SAVE" | translate }}</button>
+  </div>
+</form>

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { PermissionResponse, PermissionType, PermissionTypes } from "@app/admin/permission/permission.model";
-import { UserResponse } from "@app/admin/users/user.model";
 import { OrganizationAccessScope } from "@shared/enums/access-scopes";
 import { SharedVariableService } from "@shared/shared-variable/shared-variable.service";
 
@@ -8,7 +7,6 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
   providedIn: "root",
 })
 export class MeService {
-
   constructor(private sharedVariableService: SharedVariableService) {}
 
   hasAccessToTargetOrganization(
@@ -38,11 +36,13 @@ export class MeService {
       case OrganizationAccessScope.UserAdministrationWrite:
         canWriteCallback = this.canWriteUserInTargetOrganization.bind(this);
         break;
+      case OrganizationAccessScope.DataTargetWrite:
+        canWriteCallback = this.canWriteDataTargetInTargetOrganization.bind(this);
+        break;
       default:
         // Should never happen
         return false;
     }
-
     return permissions.some(
       permission =>
         this.hasPermissions(permission, PermissionType.GlobalAdmin) ||
@@ -60,6 +60,11 @@ export class MeService {
 
   hasNotTargetPermissions(response: PermissionResponse, ...targetPermissions: PermissionType[]) {
     return response.type.every(({ type }) => !targetPermissions.includes(type));
+  }
+
+  hasGlobalAdmin() {
+    const userInfo = this.sharedVariableService.getUserInfo();
+    return userInfo.user.permissions.some(permission => this.hasPermissions(permission, PermissionType.GlobalAdmin));
   }
 
   private canWriteApplicationInTargetOrganization(
@@ -80,8 +85,7 @@ export class MeService {
     return this.hasPermissions(permission, PermissionType.OrganizationUserAdmin);
   }
 
-  hasGlobalAdmin() {
-    const userInfo = this.sharedVariableService.getUserInfo();
-    return userInfo.user.permissions.some(permission => this.hasPermissions(permission, PermissionType.GlobalAdmin));
+  private canWriteDataTargetInTargetOrganization(permission: PermissionResponse): boolean {
+    return this.hasPermissions(permission, PermissionType.OrganizationDataTargetAdmin);
   }
 }
