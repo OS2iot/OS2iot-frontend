@@ -79,7 +79,7 @@ export class DatatargetConnectionEditComponent implements OnInit, OnDestroy {
       this.connection = {
         id: connection.id,
         iotDeviceIds: connection.iotDevices.map(d => d.id),
-        payloadDecoderId: connection.payloadDecoder.id,
+        payloadDecoderId: connection.payloadDecoder?.id,
         dataTargetId: connection.dataTarget.id,
         defaultConnection: connection.defaultConnection,
         applicationId: connection.application.id,

@@ -6,7 +6,7 @@ import { Application } from "@applications/application.model";
 export class PayloadDeviceDatatarget {
   id: number;
   iotDeviceIds: number[];
-  payloadDecoderId: number;
+  payloadDecoderId?: number;
   dataTargetId: number;
   applicationId: number;
   defaultConnection: boolean = false;
@@ -20,7 +20,7 @@ export interface DataTargetConnectionGetManyResponse {
 export interface DataTargetConnectionResponse {
   id: number;
   iotDevices: IotDevice[];
-  payloadDecoder: PayloadDecoder;
+  payloadDecoder?: PayloadDecoder;
   dataTarget: Datatarget;
   application: Application;
   defaultConnection: boolean;
@@ -33,7 +33,7 @@ export class AppendCopiedDeviceDto {
 export class DataTargetConnection implements DataTargetConnectionResponse {
   id: number;
   iotDevices: IotDevice[];
-  payloadDecoder: PayloadDecoder;
+  payloadDecoder?: PayloadDecoder;
   dataTarget: Datatarget;
   application: Application;
   defaultConnection: boolean;
