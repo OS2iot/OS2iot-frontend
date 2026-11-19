@@ -155,6 +155,13 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
 
   bindApplication(id: number): void {
     this.applicationsSubscription = this.applicationService.getApplication(id).subscribe(application => {
+      if (
+        !application.belongsTo ||
+        application.belongsTo.id !== this.sharedVariableService.getSelectedOrganisationId()
+      ) {
+        this.router.navigate(["applications"]);
+        return;
+      }
       this.application = application;
       this.cdr.detectChanges();
     });
@@ -171,7 +178,7 @@ export class ApplicationDetailComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnDestroy() {
-    this.gatewaysSubscription.unsubscribe();
+    this.gatewaysSubscription?.unsubscribe();
     this.deviceSubscription?.unsubscribe();
     if (this.applicationsSubscription) {
       this.applicationsSubscription.unsubscribe();
