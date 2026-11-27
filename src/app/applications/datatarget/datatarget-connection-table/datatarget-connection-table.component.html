@@ -29,7 +29,7 @@
       </th>
       <td *matCellDef="let element" mat-cell>
         <a [routerLink]="['/payload-decoder/payload-decoder-detail', element.payloadDecoder.id]">
-          {{ element.payloadDecoder.name }}
+          {{ element.payloadDecoder?.name ?? '-' }}
         </a>
       </td>
     </ng-container>
