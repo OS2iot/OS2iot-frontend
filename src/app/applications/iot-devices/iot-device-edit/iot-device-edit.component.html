@@ -303,6 +303,24 @@
               type="text"
             />
           </div>
+          @if (isLoRaWAN11) {
+            <div class="form-group mt-5">
+              <label class="form-label" for="OTAAnetworkKey">NwkKey (LoRaWAN 1.1.x root network key)*</label>
+              <input
+                [(ngModel)]="iotDevice.lorawanSettings.OTAAnetworkKey"
+                [ngClass]="{
+                'is-invalid': formFailedSubmit && errorFields.includes('OTAAnetworkKey'),
+                'is-valid': formFailedSubmit && !errorFields.includes('OTAAnetworkKey')
+              }"
+                placeholder="00112233445566778899AABBCCDDEEFF"
+                class="form-control"
+                id="OTAAnetworkKey"
+                maxLength="32"
+                name="OTAAnetworkKey"
+                type="text"
+              />
+            </div>
+          }
         } @if (!OTAA) {
         <h3>{{ "QUESTION.ABP" | translate }}</h3>
         <p>{{ "QUESTION.OTAA-ABP-CONFIG-HELP" | translate }}</p>
